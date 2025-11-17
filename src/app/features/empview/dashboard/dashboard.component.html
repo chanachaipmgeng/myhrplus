@@ -1,0 +1,160 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>Employee Dashboard</h1>
+    <p class="welcome-text" *ngIf="employeeProfile">
+      Welcome, {{ employeeProfile.name }}!
+    </p>
+  </div>
+
+  <div class="dashboard-content" *ngIf="!loading; else loadingTemplate">
+    <!-- Quick Links -->
+    <mat-card class="quick-links-card">
+      <mat-card-header>
+        <mat-card-title>Quick Links</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="quick-links-grid">
+          <button
+            mat-raised-button
+            *ngFor="let link of quickLinks"
+            [color]="link.color"
+            (click)="navigateTo(link.route)"
+            class="quick-link-button">
+            <mat-icon>{{ link.icon }}</mat-icon>
+            <span>{{ link.label }}</span>
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Leave Balance -->
+    <mat-card class="leave-balance-card" *ngIf="leaveBalances.length > 0">
+      <mat-card-header>
+        <mat-card-title>Leave Balance</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="leave-balance-summary">
+          <div class="total-balance">
+            <span class="balance-label">Total Available</span>
+            <span class="balance-value">{{ getTotalLeaveBalance() }} days</span>
+          </div>
+        </div>
+        <div class="leave-types">
+          <div class="leave-type-item" *ngFor="let balance of leaveBalances">
+            <div class="leave-type-info">
+              <span class="leave-type-name">{{ balance.leaveTypeName }}</span>
+              <span class="leave-type-detail">
+                {{ balance.balance }} / {{ balance.total }} {{ balance.unit }}
+              </span>
+            </div>
+            <mat-progress-bar
+              mode="determinate"
+              [value]="(balance.balance / balance.total) * 100"
+              class="leave-progress">
+            </mat-progress-bar>
+          </div>
+        </div>
+        <div class="leave-actions">
+          <button mat-button color="primary" (click)="navigateTo('/ta/leave')">
+            <mat-icon>event</mat-icon>
+            Request Leave
+          </button>
+          <button mat-button (click)="navigateTo('/ta/leave-history')">
+            <mat-icon>history</mat-icon>
+            View History
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Recent Payslips -->
+    <mat-card class="payslip-card" *ngIf="recentPayslips.length > 0">
+      <mat-card-header>
+        <mat-card-title>Recent Payslips</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="payslip-list">
+          <div class="payslip-item" *ngFor="let payslip of recentPayslips">
+            <div class="payslip-info">
+              <div class="payslip-period">
+                {{ payslip.periodMonth }}/{{ payslip.periodYear }}
+              </div>
+              <div class="payslip-amount">
+                <span class="amount-label">Net Salary</span>
+                <span class="amount-value">{{ payslip.netSalary | number:'1.2-2' }} ฿</span>
+              </div>
+              <div class="payslip-date">
+                Payment Date: {{ payslip.paymentDate | dateFormat:'short' }}
+              </div>
+            </div>
+            <div class="payslip-actions">
+              <button mat-icon-button (click)="navigateTo('/payroll/payslip/' + payslip.periodYear + '/' + payslip.periodMonth)">
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button mat-icon-button (click)="downloadPayslip(payslip)">
+                <mat-icon>download</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="payslip-actions-footer">
+          <button mat-button color="primary" (click)="navigateTo('/payroll/payslip')">
+            View All Payslips
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Employee Information -->
+    <mat-card class="employee-info-card" *ngIf="employeeProfile">
+      <mat-card-header>
+        <mat-card-title>Employee Information</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="employee-info-grid">
+          <div class="info-item">
+            <mat-icon>badge</mat-icon>
+            <div class="info-content">
+              <span class="info-label">Employee ID</span>
+              <span class="info-value">{{ employeeProfile.employeeId }}</span>
+            </div>
+          </div>
+          <div class="info-item" *ngIf="employeeProfile.position">
+            <mat-icon>work</mat-icon>
+            <div class="info-content">
+              <span class="info-label">Position</span>
+              <span class="info-value">{{ employeeProfile.position }}</span>
+            </div>
+          </div>
+          <div class="info-item" *ngIf="employeeProfile.department">
+            <mat-icon>business</mat-icon>
+            <div class="info-content">
+              <span class="info-label">Department</span>
+              <span class="info-value">{{ employeeProfile.department }}</span>
+            </div>
+          </div>
+          <div class="info-item" *ngIf="employeeProfile.division">
+            <mat-icon>account_tree</mat-icon>
+            <div class="info-content">
+              <span class="info-label">Division</span>
+              <span class="info-value">{{ employeeProfile.division }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="employee-actions">
+          <button mat-button color="primary" (click)="navigateTo('/personal/profile')">
+            <mat-icon>edit</mat-icon>
+            View Full Profile
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <ng-template #loadingTemplate>
+    <div class="loading-container">
+      <mat-spinner></mat-spinner>
+      <p>Loading dashboard...</p>
+    </div>
+  </ng-template>
+</div>

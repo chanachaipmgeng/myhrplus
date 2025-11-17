@@ -1,0 +1,100 @@
+<div class="leave-management-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Leave Management</mat-card-title>
+      <div class="header-actions">
+        <button mat-raised-button color="primary" (click)="requestLeave()">
+          <mat-icon>add</mat-icon>
+          Request Leave
+        </button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-tab-group [(selectedIndex)]="activeTab">
+        <mat-tab label="Leave Balance">
+          <div class="tab-content">
+            <div *ngIf="loading; else balanceContent" class="loading-container">
+              <mat-spinner></mat-spinner>
+            </div>
+
+            <ng-template #balanceContent>
+              <div class="leave-balance-list" *ngIf="leaveBalances.length > 0; else noBalance">
+                <div class="leave-balance-item" *ngFor="let balance of leaveBalances">
+                  <div class="balance-header">
+                    <h3>{{ balance.leaveTypeName }}</h3>
+                    <span class="balance-badge">
+                      {{ balance.balance }} {{ balance.unit }} available
+                    </span>
+                  </div>
+                  <div class="balance-details">
+                    <div class="balance-stat">
+                      <span class="stat-label">Total:</span>
+                      <span class="stat-value">{{ balance.total }} {{ balance.unit }}</span>
+                    </div>
+                    <div class="balance-stat">
+                      <span class="stat-label">Used:</span>
+                      <span class="stat-value">{{ balance.used }} {{ balance.unit }}</span>
+                    </div>
+                    <div class="balance-stat">
+                      <span class="stat-label">Remaining:</span>
+                      <span class="stat-value highlight">{{ balance.balance }} {{ balance.unit }}</span>
+                    </div>
+                  </div>
+                  <mat-progress-bar
+                    mode="determinate"
+                    [value]="(balance.balance / balance.total) * 100"
+                    class="balance-progress">
+                  </mat-progress-bar>
+                </div>
+              </div>
+
+              <ng-template #noBalance>
+                <div class="no-data">
+                  <mat-icon>info</mat-icon>
+                  <p>No leave balance information available</p>
+                </div>
+              </ng-template>
+            </ng-template>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Leave History">
+          <div class="tab-content">
+            <div class="history-controls">
+              <mat-form-field appearance="outline">
+                <mat-label>Year</mat-label>
+                <mat-select [value]="selectedYear" (selectionChange)="onYearChange($event.value)">
+                  <mat-option *ngFor="let year of getYearOptions()" [value]="year">
+                    {{ year }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div *ngIf="loading; else historyContent" class="loading-container">
+              <mat-spinner></mat-spinner>
+            </div>
+
+            <ng-template #historyContent>
+              <div class="leave-history-list" *ngIf="leaveHistory.length > 0; else noHistory">
+                <app-data-table
+                  [columns]="historyColumns"
+                  [data]="leaveHistory"
+                  [pageSize]="10">
+                </app-data-table>
+              </div>
+
+              <ng-template #noHistory>
+                <div class="no-data">
+                  <mat-icon>history</mat-icon>
+                  <p>No leave history for {{ selectedYear }}</p>
+                </div>
+              </ng-template>
+            </ng-template>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div>
+

@@ -1,0 +1,167 @@
+<div class="payslip-viewer-container">
+  <mat-card *ngIf="!selectedPayslip">
+    <mat-card-header>
+      <mat-card-title>Payslip History</mat-card-title>
+      <div class="header-controls">
+        <mat-form-field appearance="outline">
+          <mat-label>Year</mat-label>
+          <mat-select [value]="selectedYear" (selectionChange)="onYearChange($event.value)">
+            <mat-option *ngFor="let year of getYearOptions()" [value]="year">
+              {{ year }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="loading; else payslipList" class="loading-container">
+        <mat-spinner></mat-spinner>
+      </div>
+
+      <ng-template #payslipList>
+        <div class="payslip-list" *ngIf="payslips.length > 0; else noPayslips">
+          <div class="payslip-item" *ngFor="let payslip of payslips">
+            <div class="payslip-info">
+              <div class="payslip-period">
+                <mat-icon>calendar_today</mat-icon>
+                <span>{{ getMonthName(payslip.periodMonth) }} {{ payslip.periodYear }}</span>
+              </div>
+              <div class="payslip-details">
+                <div class="detail-item">
+                  <span class="detail-label">Payment Date:</span>
+                  <span class="detail-value">{{ payslip.paymentDate | dateFormat:'short' }}</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Gross Salary:</span>
+                  <span class="detail-value">{{ payslip.grossSalary | number:'1.2-2' }} ฿</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Net Salary:</span>
+                  <span class="detail-value highlight">{{ payslip.netSalary | number:'1.2-2' }} ฿</span>
+                </div>
+              </div>
+            </div>
+            <div class="payslip-actions">
+              <button mat-icon-button (click)="viewPayslip(payslip)" matTooltip="View Payslip">
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button mat-icon-button (click)="downloadPayslip(payslip)" matTooltip="Download PDF">
+                <mat-icon>download</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <ng-template #noPayslips>
+          <div class="no-data">
+            <mat-icon>receipt</mat-icon>
+            <p>No payslips available for {{ selectedYear }}</p>
+          </div>
+        </ng-template>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Payslip Detail View -->
+  <mat-card *ngIf="selectedPayslip">
+    <mat-card-header>
+      <mat-card-title>
+        Payslip - {{ getMonthName(selectedPayslip.periodMonth) }} {{ selectedPayslip.periodYear }}
+      </mat-card-title>
+      <div class="header-actions">
+        <button mat-icon-button (click)="backToList()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <button mat-icon-button (click)="downloadPayslip(selectedPayslip)" matTooltip="Download PDF">
+          <mat-icon>download</mat-icon>
+        </button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="payslip-detail" *ngIf="!loading; else loadingTemplate">
+        <div class="payslip-header">
+          <div class="payslip-info-section">
+            <div class="info-item">
+              <span class="info-label">Payment Date:</span>
+              <span class="info-value">{{ selectedPayslip.paymentDate | dateFormat:'long' }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Period:</span>
+              <span class="info-value">{{ getMonthName(selectedPayslip.periodMonth) }} {{ selectedPayslip.periodYear }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="payslip-summary">
+          <div class="summary-card earnings">
+            <h3>Earnings</h3>
+            <div class="summary-amount">
+              <span class="amount-label">Gross Salary</span>
+              <span class="amount-value">{{ selectedPayslip.grossSalary | number:'1.2-2' }} ฿</span>
+            </div>
+            <div class="earnings-list" *ngIf="selectedPayslip.earnings && selectedPayslip.earnings.length > 0">
+              <div class="summary-item" *ngFor="let earning of selectedPayslip.earnings">
+                <span>{{ earning.description }}</span>
+                <span>{{ earning.amount | number:'1.2-2' }} ฿</span>
+              </div>
+            </div>
+            <div class="summary-item" *ngIf="selectedPayslip.allowances">
+              <span>Allowances</span>
+              <span>{{ selectedPayslip.allowances | number:'1.2-2' }} ฿</span>
+            </div>
+          </div>
+
+          <div class="summary-card deductions">
+            <h3>Deductions</h3>
+            <div class="deductions-list" *ngIf="selectedPayslip.deductionsList && selectedPayslip.deductionsList.length > 0">
+              <div class="summary-item" *ngFor="let deduction of selectedPayslip.deductionsList">
+                <span>{{ deduction.description }}</span>
+                <span>{{ deduction.amount | number:'1.2-2' }} ฿</span>
+              </div>
+            </div>
+            <div class="summary-item" *ngIf="selectedPayslip.tax">
+              <span>Tax</span>
+              <span>{{ selectedPayslip.tax | number:'1.2-2' }} ฿</span>
+            </div>
+            <div class="summary-item" *ngIf="selectedPayslip.socialSecurity">
+              <span>Social Security</span>
+              <span>{{ selectedPayslip.socialSecurity | number:'1.2-2' }} ฿</span>
+            </div>
+            <div class="summary-item" *ngIf="selectedPayslip.providentFund">
+              <span>Provident Fund</span>
+              <span>{{ selectedPayslip.providentFund | number:'1.2-2' }} ฿</span>
+            </div>
+            <div class="summary-item total" *ngIf="selectedPayslip.deductions">
+              <span>Total Deductions</span>
+              <span>{{ selectedPayslip.deductions | number:'1.2-2' }} ฿</span>
+            </div>
+          </div>
+
+          <div class="summary-card net-salary">
+            <h3>Net Salary</h3>
+            <div class="summary-amount">
+              <span class="amount-value large">{{ selectedPayslip.netSalary | number:'1.2-2' }} ฿</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="payslip-actions-footer">
+          <button mat-raised-button color="primary" (click)="downloadPayslip(selectedPayslip)">
+            <mat-icon>download</mat-icon>
+            Download PDF
+          </button>
+          <button mat-button (click)="backToList()">
+            Back to List
+          </button>
+        </div>
+      </div>
+
+      <ng-template #loadingTemplate>
+        <div class="loading-container">
+          <mat-spinner></mat-spinner>
+        </div>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+</div>
+

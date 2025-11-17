@@ -1,0 +1,58 @@
+.unauthorized-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.unauthorized-card {
+  max-width: 500px;
+  width: 100%;
+}
+
+.error-content {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.error-icon {
+  font-size: 80px;
+  width: 80px;
+  height: 80px;
+  color: #f44336;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 72px;
+  margin: 0;
+  color: #333;
+}
+
+h2 {
+  font-size: 24px;
+  margin: 10px 0;
+  color: #666;
+}
+
+p {
+  font-size: 16px;
+  color: #999;
+  margin-bottom: 30px;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+button {
+  mat-icon {
+    margin-right: 8px;
+  }
+}
+

@@ -1,0 +1,31 @@
+<mat-nav-list>
+  <ng-container *ngFor="let item of menuItems">
+    <a
+      mat-list-item
+      [routerLink]="item.route"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: false}"
+      *ngIf="!hasChildren(item)">
+      <mat-icon matListItemIcon>{{ item.icon || 'folder' }}</mat-icon>
+      <span matListItemTitle>{{ item.edesc || item.name }}</span>
+    </a>
+    
+    <mat-expansion-panel *ngIf="hasChildren(item)" class="menu-group">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>{{ item.icon || 'folder' }}</mat-icon>
+          <span>{{ item.edesc || item.name }}</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <a
+        mat-list-item
+        *ngFor="let child of item.children"
+        [routerLink]="child.route"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: false}">
+        <mat-icon matListItemIcon>{{ child.icon || 'folder' }}</mat-icon>
+        <span matListItemTitle>{{ child.edesc || child.name }}</span>
+      </a>
+    </mat-expansion-panel>
+  </ng-container>
+</mat-nav-list>

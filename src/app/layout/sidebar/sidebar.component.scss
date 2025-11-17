@@ -1,0 +1,27 @@
+mat-nav-list {
+  padding-top: 0;
+}
+
+a[mat-list-item] {
+  &.active {
+    background-color: rgba(63, 81, 181, 0.1);
+    color: #3f51b5;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+.menu-group {
+  box-shadow: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  
+  ::ng-deep .mat-expansion-panel-header {
+    padding: 0 16px;
+  }
+
+  mat-icon {
+    margin-right: 16px;
+  }
+}

@@ -1,0 +1,25 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.app-title {
+  margin-left: 16px;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.user-info {
+  padding: 16px;
+  min-width: 200px;
+}
+
+.user-name {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.user-email {
+  font-size: 0.875rem;
+  color: #666;
+}
+

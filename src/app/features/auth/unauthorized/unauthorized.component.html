@@ -1,0 +1,23 @@
+<div class="unauthorized-container">
+  <mat-card class="unauthorized-card">
+    <mat-card-content>
+      <div class="error-content">
+        <mat-icon class="error-icon">lock</mat-icon>
+        <h1>403</h1>
+        <h2>Access Denied</h2>
+        <p>You do not have permission to access this resource.</p>
+        <div class="actions">
+          <button mat-raised-button color="primary" (click)="goHome()">
+            <mat-icon>home</mat-icon>
+            Go to Dashboard
+          </button>
+          <button mat-button (click)="goBack()">
+            <mat-icon>arrow_back</mat-icon>
+            Go Back
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+

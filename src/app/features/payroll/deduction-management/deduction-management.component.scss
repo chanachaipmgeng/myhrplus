@@ -1,0 +1,178 @@
+.deduction-management-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-controls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.tab-content {
+  padding: 24px 0;
+}
+
+.deduction-summary {
+  margin-bottom: 24px;
+}
+
+.summary-card {
+  padding: 20px;
+  background-color: #e3f2fd;
+  border-radius: 4px;
+  border: 1px solid #3f51b5;
+
+  h3 {
+    margin: 0 0 16px 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #666;
+  }
+}
+
+.summary-amount {
+  margin-bottom: 12px;
+}
+
+.amount-value {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #3f51b5;
+}
+
+.summary-detail {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.deductions-list {
+  margin-top: 20px;
+}
+
+.deduction-item {
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background-color: #fafafa;
+  margin-bottom: 16px;
+}
+
+.deduction-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.deduction-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  mat-icon {
+    color: #3f51b5;
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+  }
+
+  h4 {
+    margin: 0 4px 0 0;
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+
+  .deduction-type {
+    font-size: 0.875rem;
+    color: #666;
+  }
+}
+
+.deduction-amount {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+
+  .amount {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #f44336;
+  }
+
+  .frequency {
+    font-size: 0.875rem;
+    color: #666;
+  }
+}
+
+.deduction-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.detail-item {
+  display: flex;
+  gap: 8px;
+
+  .label {
+    font-weight: 500;
+    color: #666;
+  }
+}
+
+.no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #999;
+
+  mat-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+    color: #ccc;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .deduction-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .deduction-amount {
+    align-items: flex-start;
+  }
+
+  .deduction-details {
+    grid-template-columns: 1fr;
+  }
+}
+

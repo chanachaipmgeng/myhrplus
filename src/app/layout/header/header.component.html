@@ -1,0 +1,33 @@
+<mat-toolbar color="primary">
+  <button
+    mat-icon-button
+    (click)="toggleSidenav.emit()"
+    *ngIf="true">
+    <mat-icon>menu</mat-icon>
+  </button>
+  
+  <span class="app-title">HR System</span>
+  
+  <span class="spacer"></span>
+  
+  <button mat-icon-button [matMenuTriggerFor]="userMenu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  
+  <mat-menu #userMenu="matMenu">
+    <div class="user-info" *ngIf="authService.currentUser$ | async as user">
+      <div class="user-name">{{ user.name }}</div>
+      <div class="user-email">{{ user.email || user.username }}</div>
+    </div>
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="onProfile()">
+      <mat-icon>person</mat-icon>
+      <span>Profile</span>
+    </button>
+    <button mat-menu-item (click)="onLogout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
+

@@ -1,0 +1,118 @@
+<div class="time-attendance-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Time Attendance</mat-card-title>
+      <div class="header-actions">
+        <button mat-raised-button color="primary" (click)="requestTimeEdit()">
+          <mat-icon>edit</mat-icon>
+          Request Time Edit
+        </button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-tab-group [(selectedIndex)]="activeTab">
+        <mat-tab label="Attendance Record">
+          <div class="tab-content">
+            <div class="controls">
+              <mat-form-field appearance="outline">
+                <mat-label>Month</mat-label>
+                <mat-select [value]="selectedMonth" (selectionChange)="selectedMonth = $event.value; onMonthYearChange()">
+                  <mat-option *ngFor="let month of getMonthOptions()" [value]="month">
+                    {{ month }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Year</mat-label>
+                <mat-select [value]="selectedYear" (selectionChange)="selectedYear = $event.value; onMonthYearChange()">
+                  <mat-option *ngFor="let year of getYearOptions()" [value]="year">
+                    {{ year }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div *ngIf="loading; else attendanceContent" class="loading-container">
+              <mat-spinner></mat-spinner>
+            </div>
+
+            <ng-template #attendanceContent>
+              <div class="attendance-list" *ngIf="timeAttendance.length > 0; else noAttendance">
+                <app-data-table
+                  [columns]="attendanceColumns"
+                  [data]="timeAttendance"
+                  [pageSize]="15">
+                </app-data-table>
+              </div>
+
+              <ng-template #noAttendance>
+                <div class="no-data">
+                  <mat-icon>access_time</mat-icon>
+                  <p>No attendance records for {{ selectedMonth }}/{{ selectedYear }}</p>
+                </div>
+              </ng-template>
+            </ng-template>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Shift Schedule">
+          <div class="tab-content">
+            <div class="controls">
+              <mat-form-field appearance="outline">
+                <mat-label>Month</mat-label>
+                <mat-select [value]="selectedMonth" (selectionChange)="selectedMonth = $event.value; onMonthYearChange()">
+                  <mat-option *ngFor="let month of getMonthOptions()" [value]="month">
+                    {{ month }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Year</mat-label>
+                <mat-select [value]="selectedYear" (selectionChange)="selectedYear = $event.value; onMonthYearChange()">
+                  <mat-option *ngFor="let year of getYearOptions()" [value]="year">
+                    {{ year }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div *ngIf="loading; else shiftContent" class="loading-container">
+              <mat-spinner></mat-spinner>
+            </div>
+
+            <ng-template #shiftContent>
+              <div class="shift-list" *ngIf="shiftSchedule.length > 0; else noShift">
+                <div class="shift-item" *ngFor="let shift of shiftSchedule">
+                  <div class="shift-date">
+                    <mat-icon>calendar_today</mat-icon>
+                    <span>{{ shift.date | dateFormat:'short' }}</span>
+                  </div>
+                  <div class="shift-details">
+                    <div class="shift-info">
+                      <span class="shift-label">Shift:</span>
+                      <span class="shift-value">{{ shift.shiftName || shift.shiftId }}</span>
+                    </div>
+                    <div class="shift-info" *ngIf="shift.startTime">
+                      <span class="shift-label">Time:</span>
+                      <span class="shift-value">{{ shift.startTime }} - {{ shift.endTime }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <ng-template #noShift>
+                <div class="no-data">
+                  <mat-icon>schedule</mat-icon>
+                  <p>No shift schedule for {{ selectedMonth }}/{{ selectedYear }}</p>
+                </div>
+              </ng-template>
+            </ng-template>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div>
+

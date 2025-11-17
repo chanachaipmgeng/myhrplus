@@ -1,0 +1,26 @@
+<div class="file-upload-container">
+  <input
+    #fileInput
+    type="file"
+    [accept]="accept"
+    [multiple]="multiple"
+    (change)="onFileSelected($event)"
+    style="display: none">
+  
+  <button mat-raised-button color="primary" (click)="triggerFileInput()">
+    <mat-icon>cloud_upload</mat-icon>
+    Choose File{{ multiple ? 's' : '' }}
+  </button>
+
+  <div class="file-list" *ngIf="selectedFiles.length > 0">
+    <div class="file-item" *ngFor="let file of selectedFiles; let i = index">
+      <mat-icon>description</mat-icon>
+      <span class="file-name">{{ file.name }}</span>
+      <span class="file-size">({{ getFileSize(file.size) }})</span>
+      <button mat-icon-button (click)="removeFile(i)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+

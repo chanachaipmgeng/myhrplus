@@ -1,0 +1,88 @@
+<div class="personal-info-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Personal Information</mat-card-title>
+      <div class="header-actions">
+        <button mat-icon-button (click)="editProfile()" matTooltip="Edit Profile">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="loading; else profileContent" class="loading-container">
+        <mat-spinner></mat-spinner>
+      </div>
+
+      <ng-template #profileContent>
+        <div class="profile-content" *ngIf="employeeProfile">
+          <div class="profile-header">
+            <div class="profile-picture" *ngIf="employeeProfile.picture">
+              <img [src]="employeeProfile.picture" [alt]="employeeProfile.name">
+            </div>
+            <div class="profile-picture-placeholder" *ngIf="!employeeProfile.picture">
+              <mat-icon>person</mat-icon>
+            </div>
+            <div class="profile-name">
+              <h2>{{ employeeProfile.name }}</h2>
+              <p class="employee-id">ID: {{ employeeProfile.employeeId }}</p>
+            </div>
+          </div>
+
+          <mat-tab-group [(selectedIndex)]="activeTab">
+            <mat-tab label="Basic Information">
+              <div class="tab-content">
+                <div class="info-section">
+                  <div class="info-row">
+                    <span class="info-label">Employee ID:</span>
+                    <span class="info-value">{{ employeeProfile.employeeId }}</span>
+                  </div>
+                  <div class="info-row" *ngIf="employeeProfile.email">
+                    <span class="info-label">Email:</span>
+                    <span class="info-value">{{ employeeProfile.email }}</span>
+                  </div>
+                  <div class="info-row" *ngIf="employeeProfile.phone">
+                    <span class="info-label">Phone:</span>
+                    <span class="info-value">{{ employeeProfile.phone }}</span>
+                  </div>
+                  <div class="info-row" *ngIf="employeeProfile.position">
+                    <span class="info-label">Position:</span>
+                    <span class="info-value">{{ employeeProfile.position }}</span>
+                  </div>
+                  <div class="info-row" *ngIf="employeeProfile.department">
+                    <span class="info-label">Department:</span>
+                    <span class="info-value">{{ employeeProfile.department }}</span>
+                  </div>
+                  <div class="info-row" *ngIf="employeeProfile.division">
+                    <span class="info-label">Division:</span>
+                    <span class="info-value">{{ employeeProfile.division }}</span>
+                  </div>
+                  <div class="info-row" *ngIf="employeeProfile.joinDate">
+                    <span class="info-label">Join Date:</span>
+                    <span class="info-value">{{ employeeProfile.joinDate | dateFormat:'long' }}</span>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+
+            <mat-tab label="Work History">
+              <div class="tab-content">
+                <p>Work history information will be displayed here.</p>
+              </div>
+            </mat-tab>
+
+            <mat-tab label="Documents">
+              <div class="tab-content">
+                <p>Employee documents will be displayed here.</p>
+                <button mat-raised-button color="primary" (click)="navigateToDocuments()">
+                  <mat-icon>folder</mat-icon>
+                  View All Documents
+                </button>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+</div>
+
