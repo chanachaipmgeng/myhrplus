@@ -1,0 +1,99 @@
+<div class="candidate-details-container">
+  <mat-card *ngIf="candidate">
+    <mat-card-header>
+      <mat-card-title>{{ candidate.firstName }} {{ candidate.lastName }}</mat-card-title>
+      <mat-card-subtitle>{{ candidate.email }}</mat-card-subtitle>
+      <div class="header-actions">
+        <mat-chip [color]="getStatusColor(candidate.status)">
+          {{ candidate.status }}
+        </mat-chip>
+        <button mat-icon-button (click)="backToCandidates()" matTooltip="Back to Candidates">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="loading; else detailsContent" class="loading-container">
+        <mat-spinner></mat-spinner>
+      </div>
+
+      <ng-template #detailsContent>
+        <div class="candidate-details">
+          <div class="details-section">
+            <h3>Personal Information</h3>
+            <div class="details-grid">
+              <div class="detail-item">
+                <mat-icon>person</mat-icon>
+                <div class="detail-content">
+                  <span class="label">Full Name</span>
+                  <span class="value">{{ candidate.firstName }} {{ candidate.lastName }}</span>
+                </div>
+              </div>
+              <div class="detail-item">
+                <mat-icon>email</mat-icon>
+                <div class="detail-content">
+                  <span class="label">Email</span>
+                  <span class="value">{{ candidate.email }}</span>
+                </div>
+              </div>
+              <div class="detail-item" *ngIf="candidate.phone">
+                <mat-icon>phone</mat-icon>
+                <div class="detail-content">
+                  <span class="label">Phone</span>
+                  <span class="value">{{ candidate.phone }}</span>
+                </div>
+              </div>
+              <div class="detail-item" *ngIf="candidate.positionApplied">
+                <mat-icon>work</mat-icon>
+                <div class="detail-content">
+                  <span class="label">Position Applied</span>
+                  <span class="value">{{ candidate.positionApplied }}</span>
+                </div>
+              </div>
+              <div class="detail-item" *ngIf="candidate.applicationDate">
+                <mat-icon>calendar_today</mat-icon>
+                <div class="detail-content">
+                  <span class="label">Application Date</span>
+                  <span class="value">{{ candidate.applicationDate | dateFormat:'long' }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="details-section" *ngIf="candidate.experience">
+            <h3>Experience</h3>
+            <p [innerHTML]="candidate.experience | safeHtml"></p>
+          </div>
+
+          <div class="details-section" *ngIf="candidate.education">
+            <h3>Education</h3>
+            <p [innerHTML]="candidate.education | safeHtml"></p>
+          </div>
+
+          <div class="details-section" *ngIf="candidate.coverLetter">
+            <h3>Cover Letter</h3>
+            <p [innerHTML]="candidate.coverLetter | safeHtml"></p>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button mat-button (click)="backToCandidates()">
+            <mat-icon>arrow_back</mat-icon>
+            Back to Candidates
+          </button>
+          <button mat-raised-button color="primary" *ngIf="candidate.resumeUrl">
+            <mat-icon>download</mat-icon>
+            Download Resume
+          </button>
+        </div>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+
+  <div *ngIf="!candidate && !loading" class="no-data">
+    <mat-icon>error</mat-icon>
+    <p>Candidate not found</p>
+    <button mat-button (click)="backToCandidates()">Back to Candidates</button>
+  </div>
+</div>
+

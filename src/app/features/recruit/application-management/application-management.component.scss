@@ -1,0 +1,140 @@
+.application-management-container {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.tab-content {
+  padding: 24px 0;
+}
+
+.job-preview {
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  margin-bottom: 24px;
+
+  h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+
+  p {
+    margin: 0 0 16px 0;
+    color: #666;
+  }
+}
+
+.job-meta {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    color: #666;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.form-content {
+  margin-bottom: 24px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.inline-spinner {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.filter-controls {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 16px;
+}
+
+.applications-list {
+  margin-top: 20px;
+  display: grid;
+  gap: 16px;
+}
+
+.application-item {
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background-color: #fafafa;
+}
+
+.application-info {
+  display: grid;
+  gap: 12px;
+}
+
+.info-item {
+  display: flex;
+  gap: 8px;
+
+  .label {
+    font-weight: 500;
+    color: #666;
+    min-width: 140px;
+  }
+}
+
+.no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #999;
+
+  mat-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+    color: #ccc;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .info-item {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+

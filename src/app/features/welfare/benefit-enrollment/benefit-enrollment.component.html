@@ -1,0 +1,122 @@
+<div class="benefit-enrollment-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Benefit Enrollment</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-tab-group [(selectedIndex)]="activeTab">
+        <mat-tab label="Enroll in Benefit">
+          <div class="tab-content">
+            <div *ngIf="benefit" class="benefit-preview">
+              <h3>{{ benefit.benefitName }}</h3>
+              <p>{{ benefit.benefitCode }}</p>
+              <div class="benefit-meta">
+                <span *ngIf="benefit.cost">
+                  <mat-icon>attach_money</mat-icon>
+                  {{ benefit.cost | number:'1.2-2' }} ฿
+                </span>
+                <span *ngIf="benefit.category">
+                  <mat-icon>category</mat-icon>
+                  {{ benefit.category }}
+                </span>
+              </div>
+            </div>
+
+            <form [formGroup]="enrollmentForm" (ngSubmit)="submitEnrollment()">
+              <div class="form-content">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Effective Date</mat-label>
+                  <input matInput [matDatepicker]="effectivePicker" formControlName="effectiveDate">
+                  <mat-datepicker-toggle matSuffix [for]="effectivePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #effectivePicker></mat-datepicker>
+                  <mat-icon matPrefix>event</mat-icon>
+                  <mat-error *ngIf="enrollmentForm.get('effectiveDate')?.hasError('required')">
+                    Effective date is required
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Remarks</mat-label>
+                  <textarea matInput formControlName="remarks" rows="4" placeholder="Optional remarks"></textarea>
+                  <mat-icon matPrefix>notes</mat-icon>
+                </mat-form-field>
+              </div>
+
+              <div class="form-actions">
+                <button mat-button type="button" (click)="navigateToBenefits()">
+                  Cancel
+                </button>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  type="submit"
+                  [disabled]="loading || enrollmentForm.invalid">
+                  <mat-spinner diameter="20" *ngIf="loading" class="inline-spinner"></mat-spinner>
+                  <span *ngIf="!loading">Enroll</span>
+                  <span *ngIf="loading">Enrolling...</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="My Enrollments">
+          <div class="tab-content">
+            <div *ngIf="loading; else enrollmentsContent" class="loading-container">
+              <mat-spinner></mat-spinner>
+            </div>
+
+            <ng-template #enrollmentsContent>
+              <div class="enrollments-list" *ngIf="myEnrollments.length > 0; else noEnrollments">
+                <div class="enrollment-item" *ngFor="let enrollment of myEnrollments">
+                  <div class="enrollment-info">
+                    <div class="info-item">
+                      <span class="label">Benefit ID:</span>
+                      <span>{{ enrollment.benefitId }}</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="label">Enrollment Date:</span>
+                      <span>{{ enrollment.enrollmentDate | dateFormat:'short' }}</span>
+                    </div>
+                    <div class="info-item" *ngIf="enrollment.effectiveDate">
+                      <span class="label">Effective Date:</span>
+                      <span>{{ enrollment.effectiveDate | dateFormat:'short' }}</span>
+                    </div>
+                    <div class="info-item" *ngIf="enrollment.expiryDate">
+                      <span class="label">Expiry Date:</span>
+                      <span>{{ enrollment.expiryDate | dateFormat:'short' }}</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="label">Status:</span>
+                      <mat-chip [color]="getStatusColor(enrollment.status)">
+                        {{ enrollment.status }}
+                      </mat-chip>
+                    </div>
+                    <div class="info-item" *ngIf="enrollment.remarks">
+                      <span class="label">Remarks:</span>
+                      <span>{{ enrollment.remarks }}</span>
+                    </div>
+                  </div>
+                  <div class="enrollment-actions">
+                    <button mat-button color="warn" (click)="cancelEnrollment(enrollment)" *ngIf="enrollment.status === 'pending' || enrollment.status === 'active'">
+                      <mat-icon>cancel</mat-icon>
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <ng-template #noEnrollments>
+                <div class="no-data">
+                  <mat-icon>event_busy</mat-icon>
+                  <p>No enrollments found</p>
+                </div>
+              </ng-template>
+            </ng-template>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div>
+

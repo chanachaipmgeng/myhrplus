@@ -1,0 +1,50 @@
+<div class="benefit-history-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Benefit History</mat-card-title>
+      <div class="header-controls">
+        <mat-form-field appearance="outline">
+          <mat-label>Year</mat-label>
+          <mat-select [value]="selectedYear" (selectionChange)="selectedYear = $event.value; onFilterChange()">
+            <mat-option *ngFor="let year of getYearOptions()" [value]="year">
+              {{ year }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Benefit</mat-label>
+          <mat-select [value]="selectedBenefit" (selectionChange)="selectedBenefit = $event.value; onFilterChange()">
+            <mat-option value="">All Benefits</mat-option>
+            <mat-option *ngFor="let benefit of benefits" [value]="benefit">
+              {{ benefit }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="loading; else historyContent" class="loading-container">
+        <mat-spinner></mat-spinner>
+      </div>
+
+      <ng-template #historyContent>
+        <div class="history-list" *ngIf="benefitHistory.length > 0; else noHistory">
+          <app-data-table
+            [columns]="historyColumns"
+            [data]="benefitHistory"
+            [pageSize]="15">
+          </app-data-table>
+        </div>
+
+        <ng-template #noHistory>
+          <div class="no-data">
+            <mat-icon>history</mat-icon>
+            <p>No benefit history found</p>
+          </div>
+        </ng-template>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+</div>
+
