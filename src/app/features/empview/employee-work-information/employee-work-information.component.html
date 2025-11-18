@@ -1,14 +1,12 @@
-<div class="employee-work-information-container">
-  <div class="glass-card-weak p-6 rounded-lg">
-    <div class="mb-6">
-      <h2 class="text-2xl font-bold text-slate-800 dark:text-slate-100 thai-text">Employee Work Information</h2>
-    </div>
-    
-    <div *ngIf="loading; else content" class="loading-container flex items-center justify-center py-12">
-      <app-spinner size="lg"></app-spinner>
-    </div>
+<app-page-layout
+  title="Employee Work Information"
+  description="ข้อมูลการทำงานของพนักงาน"
+  icon="💼">
+  
+  <app-glass-card padding="p-6" [animate]="'fade-in'">
+    <app-loading *ngIf="loading" message="กำลังโหลดข้อมูล..."></app-loading>
 
-    <ng-template #content>
+    <div *ngIf="!loading">
       <!-- Profile Header -->
       <div class="profile-header mb-6" *ngIf="profileData">
         <div class="profile-picture-section">
@@ -155,6 +153,6 @@
           </div>
         </div>
       </div>
-    </ng-template>
-  </div>
-</div>
+    </div>
+  </app-glass-card>
+</app-page-layout>
