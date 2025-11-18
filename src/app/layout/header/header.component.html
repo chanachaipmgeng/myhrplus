@@ -1,30 +1,32 @@
-<header class="glass-nav bg-white/25 dark:bg-slate-900/25 backdrop-blur-lg border-b border-white/30 dark:border-slate-700/30 shadow-lg transition-all duration-300 flex items-center justify-between px-4 py-3">
-  <div class="flex items-center gap-4">
+<header class="glass-nav bg-white/25 dark:bg-slate-900/25 backdrop-blur-lg border-b border-white/30 dark:border-slate-700/30 shadow-lg transition-all duration-300 flex items-center justify-between px-3 md:px-4 py-2 md:py-3 sticky top-0 z-30">
+  <div class="flex items-center gap-2 md:gap-4 flex-1 min-w-0">
     <app-glass-button
       variant="secondary"
       size="sm"
       (clicked)="toggleSidenav.emit()"
-      [title]="'เมนู'">
+      [title]="'เมนู'"
+      customClass="flex-shrink-0">
       <app-icon name="menu" size="md" color="text-slate-700 dark:text-slate-200"></app-icon>
     </app-glass-button>
 
     <!-- Logo Section -->
-    <div class="flex items-center gap-3">
-      <div class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-indigo-700 shadow-lg">
-        <app-icon name="business_center" size="md" color="text-white"></app-icon>
+    <div class="flex items-center gap-2 md:gap-3 flex-shrink-0 min-w-0">
+      <div class="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-indigo-700 shadow-lg flex-shrink-0">
+        <app-icon name="business_center" size="sm" class="md:hidden" color="text-white"></app-icon>
+        <app-icon name="business_center" size="md" class="hidden md:block" color="text-white"></app-icon>
       </div>
-      <div class="flex flex-col">
-        <span class="app-title thai-text font-semibold text-slate-800 dark:text-slate-100 text-lg leading-tight">
+      <div class="flex flex-col min-w-0 hidden sm:block">
+        <span class="app-title thai-text font-semibold text-slate-800 dark:text-slate-100 text-sm md:text-lg leading-tight truncate">
           ระบบบริหารทรัพยากรบุคคล
         </span>
-        <span class="app-title-en font-medium text-slate-600 dark:text-slate-400 text-xs">
+        <span class="app-title-en font-medium text-slate-600 dark:text-slate-400 text-xs hidden md:block">
           HR System
         </span>
       </div>
     </div>
   </div>
 
-  <div class="flex items-center gap-2">
+  <div class="flex items-center gap-1 md:gap-2 flex-shrink-0">
     <!-- Language Switcher -->
     <div class="relative">
       <app-glass-button
@@ -38,8 +40,9 @@
       <app-glass-card
         *ngIf="showLanguageMenu"
         padding="p-0"
-        customClass="absolute right-0 mt-2 w-48 z-50"
-        variant="strong">
+        customClass="absolute right-0 mt-2 w-48 z-50 shadow-xl"
+        variant="strong"
+        (click)="$event.stopPropagation()">
         <button
           *ngFor="let lang of languages"
           (click)="changeLanguage(lang.value); showLanguageMenu = false"
@@ -79,8 +82,9 @@
       <app-glass-card
         *ngIf="showUserMenu"
         padding="p-0"
-        customClass="absolute right-0 mt-2 w-56 z-50"
-        variant="strong">
+        customClass="absolute right-0 mt-2 w-56 z-50 shadow-xl"
+        variant="strong"
+        (click)="$event.stopPropagation()">
         <div class="user-info px-4 py-3 min-w-[220px] border-b border-gray-200 dark:border-gray-700" *ngIf="authService.currentUser$ | async as user">
           <div class="user-name thai-text font-semibold text-slate-800 dark:text-slate-100 mb-1">
             {{ user.name }}

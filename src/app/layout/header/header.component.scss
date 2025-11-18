@@ -3,10 +3,13 @@
 }
 
 .app-title {
-  font-family: 'Sarabun', sans-serif;
+  font-family: 'Sarabun', 'Kanit', sans-serif;
   font-weight: 600;
   color: #1e293b;
   transition: color 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .dark .app-title {
@@ -14,7 +17,7 @@
 }
 
 .app-title-en {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', 'Poppins', sans-serif;
   font-weight: 500;
   color: #475569;
   transition: color 0.3s ease;
@@ -22,6 +25,20 @@
 
 .dark .app-title-en {
   color: #cbd5e1;
+}
+
+/* Responsive Header */
+@media (max-width: 640px) {
+  header {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .app-title {
+    font-size: 0.875rem;
+  }
 }
 
 .user-info {

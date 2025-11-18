@@ -2,6 +2,7 @@
   background: transparent;
   padding: 1rem;
   margin-top: auto;
+  width: 100%;
 }
 
 .footer-content {
@@ -10,14 +11,31 @@
   align-items: center;
   max-width: 1400px;
   margin: 0 auto;
-  font-size: 0.875rem;
-  font-family: 'Sarabun', 'Inter', sans-serif;
+  width: 100%;
+  font-family: 'Sarabun', 'Inter', 'Kanit', sans-serif;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
-@media (max-width: 768px) {
+/* Responsive Footer */
+@media (max-width: 640px) {
   .footer-content {
     flex-direction: column;
-    gap: 0.5rem;
     text-align: center;
+    gap: 0.25rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .footer-content {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 769px) {
+  .footer-content {
+    flex-direction: row;
+    justify-content: space-between;
   }
 }

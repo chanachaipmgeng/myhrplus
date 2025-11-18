@@ -1,21 +1,111 @@
+.layout-container {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 .sidenav-container {
   height: 100vh;
   background: transparent;
+  position: relative;
 }
 
+/* Sidebar Styles */
 .sidenav {
-  width: 280px;
   background: transparent !important;
+  position: relative;
+  z-index: 30;
+  
+  /* Desktop: Always visible, fixed position */
+  &.sidenav-desktop {
+    position: relative;
+    flex-shrink: 0;
+  }
+  
+  /* Mobile: Fixed overlay */
+  &.sidenav-mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    
+    &.sidenav-open {
+      transform: translateX(0);
+    }
+  }
 }
 
+/* Sidebar Overlay */
+.sidebar-overlay {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Main Wrapper */
+.main-wrapper {
+  min-width: 0; /* Prevent flex overflow */
+  transition: margin-left 0.3s ease-in-out;
+  
+  /* Desktop: Adjust margin when sidebar is open/closed */
+  &.main-wrapper-sidebar-open {
+    margin-left: 0;
+  }
+  
+  &.main-wrapper-sidebar-closed {
+    margin-left: 0;
+  }
+}
+
+/* Main Content */
 .main-content {
-  padding: 1.5rem;
   min-height: calc(100vh - 120px);
   /* Background gradient - aligned with Design System */
   background: linear-gradient(180deg, #faf8f3 0%, #f5f1e8 50%, #ede8d8 100%);
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, padding 0.3s ease;
+  
+  /* Responsive padding */
+  @media (max-width: 640px) {
+    padding: 1rem;
+  }
+  
+  @media (min-width: 641px) and (max-width: 1024px) {
+    padding: 1.5rem;
+  }
+  
+  @media (min-width: 1025px) {
+    padding: 2rem;
+  }
 }
 
 .dark .main-content {
   background: linear-gradient(180deg, #000000 0%, #0a0a0f 33%, #0f172a 66%, #1e293b 100%);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+  .sidenav {
+    width: 280px;
+  }
+}
+
+@media (min-width: 769px) {
+  .sidenav {
+    width: 288px; /* 72 * 4 = 288px */
+  }
+}
+
+@media (min-width: 1024px) {
+  .main-wrapper {
+    max-width: 100%;
+  }
 }

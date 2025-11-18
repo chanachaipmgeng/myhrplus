@@ -1,3 +1,38 @@
+.sidebar-content {
+  /* Custom scrollbar for sidebar */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(148, 163, 184, 0.3);
+    border-radius: 3px;
+    
+    &:hover {
+      background-color: rgba(148, 163, 184, 0.5);
+    }
+  }
+}
+
+.dark .sidebar-content {
+  scrollbar-color: rgba(71, 85, 105, 0.3) transparent;
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(71, 85, 105, 0.3);
+    
+    &:hover {
+      background-color: rgba(71, 85, 105, 0.5);
+    }
+  }
+}
+
 mat-nav-list {
   padding-top: 0;
 }
