@@ -5,34 +5,96 @@ import { map, catchError, tap, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { StorageService } from './storage.service';
+import jwt_decode from 'jwt-decode';
 
 export interface User {
-  id: string;
+  // Core identification
+  id?: string;
   username: string;
+  user?: string;
+  uid?: string;
+  employeeid?: string;
+  actorid?: string;
+  memberid?: string;
+
+  // Personal information
+  name?: string;
+  fullname?: string;
   email?: string;
-  name: string;
-  roles: string[];
-  token?: string;
+
+  // Authentication & Authorization
+  roles?: string[];
+  user_role?: string;
+  role_level?: string;
+  user_level?: string;
   permissions?: string[];
+
+  // Company & Organization
   companyId?: string;
-  employeeId?: string;
+  companyid?: string;
+  companyName?: string;
+  comid?: string;
+  branch?: string;
+  dbName?: string;
+  schema?: string;
+
+  // Work & Position
+  workarea?: string;
+  emp_position?: string;
+  job?: string;
+
+  // Account status
+  accountactive?: string;
+  firstlogin?: string;
+  ad?: string;
+
+  // Language & Localization
+  lang?: string;
+
+  // Application & System
+  app_name?: string;
+  url_myhr?: string;
+  encode?: string;
+  sub?: string;
+  iss?: string;
+
+  // Zeeme integration
+  zmlogin?: string;
+  token_zeeme?: string;
+  zm_user?: string;
+
+  // Token
+  token?: string;
+
+  // Allow additional properties from JWT token
+  [key: string]: any;
 }
 
 export interface LoginRequest {
   username: string;
   password: string;
+  dbName?: string;
   dbcomp?: string;
+  lang?: string;
 }
 
 export interface LoginResponse {
   success: boolean;
-  data: {
+  accessToken?: string;
+  data?: {
     user: User;
     token: string;
     refreshToken?: string;
     expiresIn?: number;
   };
   message?: string;
+}
+
+export interface DatabaseModel {
+  db: string;
+  dbName: string;
+  dbDisplay: string;
+  dbcomp: string;
 }
 
 @Injectable({
@@ -43,10 +105,10 @@ export class AuthService {
   private readonly REFRESH_TOKEN_KEY = 'refresh_token';
   private readonly USER_KEY = 'user_data';
   private readonly TOKEN_EXPIRY_KEY = 'token_expiry';
-  
+
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
-  
+
   private tokenRefreshTimer: any;
 
   constructor(
@@ -58,21 +120,102 @@ export class AuthService {
     this.startTokenRefreshTimer();
   }
 
-  login(credentials: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(
-      `${environment.apiBaseUrl}${environment.apiEndpoints.auth}/login`,
-      credentials
-    ).pipe(
-      tap(response => {
-        if (response.success && response.data) {
-          this.setUser(response.data.user, response.data.token, response.data.refreshToken, response.data.expiresIn);
-          this.startTokenRefreshTimer();
+  login(credentials: LoginRequest): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const body = {
+        username: credentials.username,
+        password: credentials.password,
+        dbName: credentials.dbName || '',
+        dbcomp: credentials.dbcomp || '100',
+        lang: credentials.lang || 'th'
+      };
+
+      this.http.post<any>(
+        `${environment.apiBaseUrl}${environment.apiEndpoints.unsecure}/authen`,
+        body
+      ).subscribe({
+        next: (response) => {
+          // Store token and user data
+          if (response.accessToken) {
+            // Decode JWT token to get user info
+            try {
+              const tokenPayload = jwt_decode<any>(response.accessToken);
+              const user: User = {
+                // Map token payload to User interface
+                id: tokenPayload.uid || tokenPayload.employeeid || tokenPayload.actorid || tokenPayload.sub || credentials.username,
+                username: tokenPayload.username || tokenPayload.user || credentials.username,
+                user: tokenPayload.user || tokenPayload.username,
+                uid: tokenPayload.uid,
+                employeeid: tokenPayload.employeeid,
+                actorid: tokenPayload.actorid,
+                memberid: tokenPayload.memberid,
+                name: tokenPayload.fullname || tokenPayload.name || tokenPayload.username || credentials.username,
+                fullname: tokenPayload.fullname,
+                email: tokenPayload.email,
+                roles: tokenPayload.roles || [],
+                user_role: tokenPayload.user_role,
+                role_level: tokenPayload.role_level,
+                user_level: tokenPayload.user_level,
+                permissions: tokenPayload.permissions,
+                companyId: tokenPayload.companyid || tokenPayload.companyId,
+                companyid: tokenPayload.companyid,
+                companyName: tokenPayload.companyName,
+                comid: tokenPayload.comid,
+                branch: tokenPayload.branch,
+                dbName: tokenPayload.dbName,
+                schema: tokenPayload.schema,
+                workarea: tokenPayload.workarea,
+                emp_position: tokenPayload.emp_position,
+                job: tokenPayload.job,
+                accountactive: tokenPayload.accountactive,
+                firstlogin: tokenPayload.firstlogin,
+                ad: tokenPayload.ad,
+                lang: tokenPayload.lang || 'th',
+                app_name: tokenPayload.app_name,
+                url_myhr: tokenPayload.url_myhr,
+                encode: tokenPayload.encode,
+                sub: tokenPayload.sub,
+                iss: tokenPayload.iss,
+                zmlogin: tokenPayload.zmlogin,
+                token_zeeme: tokenPayload.token_zeeme,
+                zm_user: tokenPayload.zm_user,
+                token: response.accessToken,
+                // Include all other token properties
+                ...tokenPayload
+              };
+
+              // Store in sessionStorage (matching hrplus-std-rd pattern)
+              if (typeof window !== 'undefined' && window.sessionStorage) {
+                sessionStorage.setItem('dbName', credentials.dbName || '');
+                sessionStorage.setItem('userToken', response.accessToken);
+                sessionStorage.setItem('currentUser', JSON.stringify(user));
+              }
+
+              // Also store in our storage service
+              this.storage.setItem(this.TOKEN_KEY, response.accessToken);
+              this.storage.setItem(this.USER_KEY, JSON.stringify(user));
+              this.currentUserSubject.next(user);
+
+              resolve(response);
+            } catch (error) {
+              console.error('Error decoding token:', error);
+              reject(error);
+            }
+          } else {
+            reject(new Error('No access token in response'));
+          }
+        },
+        error: (error) => {
+          console.error('Login error:', error);
+          reject(error);
         }
-      }),
-      catchError(error => {
-        console.error('Login error:', error);
-        return throwError(() => error);
-      })
+      });
+    });
+  }
+
+  getDatabase(): Observable<DatabaseModel[]> {
+    return this.http.get<DatabaseModel[]>(
+      `${environment.apiBaseUrl}${environment.apiEndpoints.unsecure}/system/get-db-list`
     );
   }
 
@@ -85,6 +228,10 @@ export class AuthService {
       });
 
     this.clearSession();
+    // Clear sessionStorage as well
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      sessionStorage.clear();
+    }
     this.router.navigate(['/auth/login']);
   }
 
@@ -146,7 +293,7 @@ export class AuthService {
 
   hasRole(role: string): boolean {
     const user = this.getCurrentUser();
-    return user ? user.roles.includes(role) : false;
+    return user && user.roles ? user.roles.includes(role) : false;
   }
 
   hasAnyRole(roles: string[]): boolean {
@@ -169,12 +316,12 @@ export class AuthService {
       this.storage.setItem(this.REFRESH_TOKEN_KEY, refreshToken);
     }
     this.storage.setItem(this.USER_KEY, JSON.stringify(user));
-    
+
     if (expiresIn) {
       const expiryTime = Date.now() + (expiresIn * 1000);
       this.storage.setItem(this.TOKEN_EXPIRY_KEY, expiryTime.toString());
     }
-    
+
     this.currentUserSubject.next(user);
   }
 
@@ -184,7 +331,7 @@ export class AuthService {
       try {
         const user = JSON.parse(userData);
         const token = this.getToken();
-        
+
         if (token && !this.isTokenExpired(token)) {
           this.currentUserSubject.next(user);
         } else {
@@ -208,11 +355,17 @@ export class AuthService {
     this.storage.removeItem(this.TOKEN_EXPIRY_KEY);
     this.currentUserSubject.next(null);
     this.stopTokenRefreshTimer();
+    // Also clear sessionStorage
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      sessionStorage.removeItem('userToken');
+      sessionStorage.removeItem('currentUser');
+      sessionStorage.removeItem('dbName');
+    }
   }
 
   private isTokenExpired(token: string): boolean {
     try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
+      const payload = jwt_decode<any>(token);
       const exp = payload.exp * 1000;
       return Date.now() >= exp;
     } catch (error) {
@@ -227,7 +380,7 @@ export class AuthService {
 
   private startTokenRefreshTimer(): void {
     this.stopTokenRefreshTimer();
-    
+
     // Refresh token 5 minutes before expiry
     const expiryTime = this.storage.getItem(this.TOKEN_EXPIRY_KEY);
     if (expiryTime) {

@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://demo.myhr.co.th/hr',
+  apiBaseUrl: 'https://hrplus-std.myhr.co.th/hr',
   apiEndpoints: {
     auth: '/restauthen',
     core: '/capi',

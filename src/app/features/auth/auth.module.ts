@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
+import { SyncfusionModule } from '../../shared/syncfusion/syncfusion.module';
 
 import { LoginComponent } from './login/login.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
@@ -16,8 +17,10 @@ import { AuthRoutingModule } from './auth-routing.module';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     RouterModule,
     SharedModule,
+    SyncfusionModule,
     AuthRoutingModule
   ]
 })

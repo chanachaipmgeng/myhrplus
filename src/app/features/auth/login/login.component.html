@@ -1,92 +1,174 @@
-<div class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-all duration-300">
-  <div class="w-full max-w-md animate-fade-in">
-    <div class="glass-card-strong dark:!bg-slate-900/40 dark:border-slate-700/40 p-8 animate-scale-in transition-all duration-300">
-      <!-- Logo/Header Section -->
-      <div class="text-center mb-8">
-        <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-indigo-700 mb-4 shadow-lg">
-          <mat-icon class="!text-white !text-5xl !w-12 !h-12">business_center</mat-icon>
+<section class="bg-gray-50 dark:bg-gray-950">
+  <div class="flex flex-col lg:flex-row mx-auto p-0" style="min-height: 770px;">
+    <!-- Left Side - Feature List -->
+    <div class="w-full order-2 lg:order-1 lg:w-7/12 px-6 py-14 bg-green-600 text-white flex items-center" 
+         style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">
+      <div class="flex flex-wrap mx-0 w-full sm:p-6 xl:p-0 md:p-8 lg:px-6">
+        <div class="hidden xl:block xl:w-1/6"></div>
+        <div class="w-full xl:w-2/3">
+          <h1 class="font-bold xl:text-5xl md:text-4xl text-3xl thai-text mb-4">ยินดีต้อนรับสู่ระบบ HR</h1>
+          <p class="my-6 md:text-lg text-base">ระบบบริหารทรัพยากรบุคคลที่ทันสมัยและครบวงจร พร้อมให้บริการจัดการข้อมูลพนักงาน การเงิน และการทำงานอย่างมีประสิทธิภาพ</p>
+          <ul class="list-none md:text-lg text-base">
+            <li class="flex items-center gap-3 mb-3">
+              <span class="e-icons e-circle-check text-xl" aria-hidden="true"></span>
+              <span>โมดูลครบถ้วน: EMPVIEW, WORKFLOW, COMPANY และอื่นๆ</span>
+            </li>
+            <li class="flex items-center gap-3 mb-3">
+              <span class="e-icons e-circle-check text-xl" aria-hidden="true"></span>
+              <span>รองรับทั้ง Light และ Dark Mode</span>
+            </li>
+            <li class="flex items-center gap-3 mb-3">
+              <span class="e-icons e-circle-check text-xl" aria-hidden="true"></span>
+              <span>ระบบจัดการอัตโนมัติ 100%</span>
+            </li>
+            <li class="flex lg:items-start gap-3 mb-3">
+              <span class="e-icons e-circle-check text-xl" aria-hidden="true"></span>
+              <span>ใช้งานง่าย รองรับการทำงานแบบ Responsive</span>
+            </li>
+          </ul>
         </div>
-        <h1 class="thai-text font-bold text-2xl text-slate-800 dark:text-slate-100 mb-2 transition-colors duration-300">
-          ระบบบริหารทรัพยากรบุคคล
-        </h1>
-        <p class="text-sm text-slate-600 dark:text-slate-400 font-medium transition-colors duration-300">
-          HR System - Secure Login
-        </p>
+        <div class="hidden xl:block xl:w-1/6"></div>
       </div>
+    </div>
 
-      <!-- Login Form -->
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-5">
-        <!-- Username Field -->
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label class="thai-text">ชื่อผู้ใช้</mat-label>
-          <input 
-            matInput 
-            formControlName="username" 
-            required
-            class="glass-input dark:!bg-slate-800/20 dark:!text-slate-200 dark:placeholder-slate-500">
-          <mat-icon matPrefix class="!text-slate-500 dark:!text-slate-400">person</mat-icon>
-          <mat-error *ngIf="loginForm.get('username')?.hasError('required')" class="thai-text">
-            กรุณากรอกชื่อผู้ใช้
-          </mat-error>
-        </mat-form-field>
+    <!-- Right Side - Login Form -->
+    <div class="w-full order-1 lg:order-2 lg:w-5/12">
+      <div class="bg-gray-50 dark:bg-gray-950">
+        <div class="flex items-center justify-center">
+          <div class="w-full max-w-md rounded-lg px-4 py-14 md:px-6 md:py-14">
+            <!-- Logo Section -->
+            <div class="flex justify-center mb-6">
+              <div class="flex items-center gap-2">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center">
+                  <span class="e-icons e-folder text-white text-xl" aria-hidden="true"></span>
+                </div>
+                <h2 class="text-center text-gray-900 dark:text-white text-xl font-semibold thai-text">ระบบ HR</h2>
+              </div>
+            </div>
 
-        <!-- Password Field -->
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label class="thai-text">รหัสผ่าน</mat-label>
-          <input 
-            matInput 
-            type="password" 
-            formControlName="password" 
-            required
-            class="glass-input dark:!bg-slate-800/20 dark:!text-slate-200 dark:placeholder-slate-500">
-          <mat-icon matPrefix class="!text-slate-500 dark:!text-slate-400">lock</mat-icon>
-          <mat-error *ngIf="loginForm.get('password')?.hasError('required')" class="thai-text">
-            กรุณากรอกรหัสผ่าน
-          </mat-error>
-        </mat-form-field>
+            <!-- Title -->
+            <h2 class="text-2xl font-semibold text-gray-900 dark:text-white text-center mb-2 thai-text">เข้าสู่ระบบ</h2>
+            <p class="text-md text-center text-gray-700 dark:text-gray-300 mb-6">กรุณากรอกข้อมูลเพื่อเข้าสู่ระบบ</p>
 
-        <!-- Company Field -->
-        <mat-form-field appearance="outline" class="full-width" *ngIf="companies.length > 0">
-          <mat-label class="thai-text">บริษัท</mat-label>
-          <mat-select 
-            formControlName="dbcomp"
-            class="glass-input dark:!bg-slate-800/20 dark:!text-slate-200">
-            <mat-option *ngFor="let company of companies" [value]="company.id || company.code">
-              {{ company.name || company.code }}
-            </mat-option>
-          </mat-select>
-          <mat-icon matPrefix class="!text-slate-500 dark:!text-slate-400">business</mat-icon>
-        </mat-form-field>
-        
-        <!-- Company Input (fallback if no companies loaded) -->
-        <mat-form-field appearance="outline" class="full-width" *ngIf="companies.length === 0">
-          <mat-label class="thai-text">บริษัท (ถ้ามี)</mat-label>
-          <input 
-            matInput 
-            formControlName="dbcomp"
-            placeholder="Optional"
-            class="glass-input dark:!bg-slate-800/20 dark:!text-slate-200 dark:placeholder-slate-500">
-          <mat-icon matPrefix class="!text-slate-500 dark:!text-slate-400">business</mat-icon>
-        </mat-form-field>
+            <!-- Login Form -->
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="mt-6 mb-6">
+              <!-- Username Field -->
+              <div class="mb-4">
+                <label class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300 thai-text">
+                  ชื่อผู้ใช้ <span class="text-red-500">*</span>
+                </label>
+                <ejs-textbox 
+                  class="e-bigger" 
+                  type="text" 
+                  placeholder="กรุณากรอกชื่อผู้ใช้" 
+                  floatLabelType="Never" 
+                  [(value)]="username"
+                  (valueChange)="onUsernameChange($event)"
+                  (blur)="loginForm.get('username')?.markAsTouched()"
+                  aria-label="enter your username" 
+                  role="textbox">
+                </ejs-textbox>
+                <div *ngIf="!username && loginForm.get('username')?.touched" 
+                     class="mt-1 text-sm text-red-600 dark:text-red-400 thai-text">
+                  กรุณากรอกชื่อผู้ใช้
+                </div>
+              </div>
 
-        <!-- Submit Button -->
-        <button
-          mat-raised-button
-          type="submit"
-          class="full-width glass-button !bg-gradient-to-r !from-blue-500 !to-indigo-600 dark:!from-blue-600 dark:!to-indigo-700 !text-white !font-semibold !py-3 !rounded-lg !shadow-lg hover:!shadow-xl !transition-all !duration-200 hover:!scale-105"
-          [disabled]="loading || loginForm.invalid">
-          <mat-spinner diameter="20" *ngIf="loading" class="inline-spinner !mr-2"></mat-spinner>
-          <span *ngIf="!loading" class="thai-text">เข้าสู่ระบบ</span>
-          <span *ngIf="loading" class="thai-text">กำลังเข้าสู่ระบบ...</span>
-        </button>
-      </form>
+              <!-- Password Field -->
+              <div class="mb-5 relative">
+                <label class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300 thai-text">
+                  รหัสผ่าน <span class="text-red-500">*</span>
+                </label>
+                <ejs-textbox 
+                  class="e-bigger bg-none" 
+                  type="password" 
+                  placeholder="กรุณากรอกรหัสผ่าน" 
+                  floatLabelType="Never" 
+                  [(value)]="password"
+                  (valueChange)="onPasswordChange($event)"
+                  (blur)="loginForm.get('password')?.markAsTouched()"
+                  aria-label="enter your password" 
+                  role="textbox">
+                </ejs-textbox>
+                <div *ngIf="!password && loginForm.get('password')?.touched" 
+                     class="mt-1 text-sm text-red-600 dark:text-red-400 thai-text">
+                  กรุณากรอกรหัสผ่าน
+                </div>
+              </div>
 
-      <!-- Footer Info -->
-      <div class="mt-6 pt-6 border-t border-white/30 dark:border-slate-700/30 text-center transition-colors duration-300">
-        <p class="text-xs text-slate-500 dark:text-slate-400 font-mono transition-colors duration-300">
-          Secure • Modern • Intelligent
-        </p>
+              <!-- Database Selection Field -->
+              <div class="mb-5" *ngIf="dbList.length > 0">
+                <label class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300 thai-text">
+                  ฐานข้อมูล <span class="text-red-500">*</span>
+                </label>
+                <ejs-dropdownlist 
+                  #dbDropdown
+                  [dataSource]="dbDataSource"
+                  [fields]="dbFields"
+                  [(value)]="dbSelected"
+                  (change)="onDbChange($event)"
+                  placeholder="เลือกฐานข้อมูล"
+                  floatLabelType="Never"
+                  class="e-bigger">
+                </ejs-dropdownlist>
+              </div>
+
+              <!-- Remember Me & Forgot Password -->
+              <div class="flex items-center justify-between mb-6">
+                <ejs-checkbox 
+                  cssClass="e-bigger" 
+                  label="จดจำฉัน" 
+                  [(ngModel)]="rememberMe"
+                  [ngModelOptions]="{standalone: true}"
+                  aria-label="remember me" 
+                  role="checkbox">
+                </ejs-checkbox>
+                <a 
+                  href="javascript:void(0);" 
+                  (click)="onForgotPassword()"
+                  class="text-primary-600 dark:text-primary-400 font-medium text-base thai-text" 
+                  aria-label="forgot password" 
+                  role="link" 
+                  style="padding-right: 0 !important;">
+                  ลืมรหัสผ่าน?
+                </a>
+              </div>
+
+              <!-- Error Message -->
+              <div *ngIf="errorMessage" class="mb-4 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
+                <p class="text-sm text-red-600 dark:text-red-400 thai-text">{{ errorMessage }}</p>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="e-bigger mt-6">
+                <button 
+                  ejs-button 
+                  class="w-full e-primary" 
+                  [content]="loading ? 'กำลังเข้าสู่ระบบ...' : 'เข้าสู่ระบบ'"
+                  type="submit" 
+                  [disabled]="loading || !username || !password"
+                  aria-label="sign in" 
+                  role="button">
+                </button>
+              </div>
+            </form>
+
+            <!-- Sign Up Link -->
+            <div>
+              <span class="flex items-center justify-center gap-2">
+                <p class="text-center text-base text-gray-900 dark:text-white thai-text">ยังไม่มีบัญชี?</p>
+                <a 
+                  href="javascript:void(0);" 
+                  class="text-primary-600 dark:text-primary-400 font-medium text-base p-0 thai-text" 
+                  aria-label="sign up" 
+                  role="link">
+                  สมัครสมาชิก
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>

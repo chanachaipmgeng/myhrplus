@@ -1,83 +1,193 @@
-.login-container {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  background: transparent;
-}
+// Syncfusion UI-KIT Login Styles
 
-.full-width {
-  width: 100%;
-}
+::ng-deep {
+  // TextBox Styles
+  .e-textbox-wrapper {
+    .e-input-group {
+      border-radius: 0.5rem;
+      border: 1px solid #d1d5db;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        border-color: #9ca3af;
+      }
+      
+      &.e-input-focus {
+        border-color: #059669;
+        box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+      }
+      
+      .e-input {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        color: #1f2937;
+        
+        &::placeholder {
+          color: #9ca3af;
+        }
+      }
+    }
+  }
 
-.inline-spinner {
-  display: inline-block;
-  margin-right: 0.5rem;
-}
+  // Dark mode for TextBox
+  .dark .e-textbox-wrapper {
+    .e-input-group {
+      border-color: #4b5563;
+      background-color: #1f2937;
+      
+      &:hover {
+        border-color: #6b7280;
+      }
+      
+      &.e-input-focus {
+        border-color: #10b981;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+      }
+      
+      .e-input {
+        color: #f3f4f6;
+        background-color: #1f2937;
+        
+        &::placeholder {
+          color: #6b7280;
+        }
+      }
+    }
+  }
 
-::ng-deep .mat-mdc-form-field {
-  .mat-mdc-text-field-wrapper {
-    background: rgba(255, 255, 255, 0.2) !important;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+  // Button Styles
+  .e-btn.e-primary {
+    background-color: #059669;
+    border-color: #059669;
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.3);
     transition: all 0.3s ease;
+    
+    &:hover:not(:disabled) {
+      background-color: #047857;
+      border-color: #047857;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 
-  .dark & .mat-mdc-text-field-wrapper {
-    background: rgba(15, 23, 42, 0.2) !important;
-    border-color: rgba(51, 65, 85, 0.3);
+  // DropDownList Styles
+  .e-dropdownlist {
+    .e-input-group {
+      border-radius: 0.5rem;
+      border: 1px solid #d1d5db;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        border-color: #9ca3af;
+      }
+      
+      &.e-input-focus {
+        border-color: #059669;
+        box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+      }
+      
+      .e-input {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        color: #1f2937;
+      }
+    }
   }
 
-  .mat-mdc-text-field-wrapper:hover {
-    background: rgba(255, 255, 255, 0.25) !important;
+  // Dark mode for DropDownList
+  .dark .e-dropdownlist {
+    .e-input-group {
+      border-color: #4b5563;
+      background-color: #1f2937;
+      
+      &:hover {
+        border-color: #6b7280;
+      }
+      
+      &.e-input-focus {
+        border-color: #10b981;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+      }
+      
+      .e-input {
+        color: #f3f4f6;
+        background-color: #1f2937;
+      }
+    }
   }
 
-  .dark & .mat-mdc-text-field-wrapper:hover {
-    background: rgba(15, 23, 42, 0.25) !important;
+  // CheckBox Styles
+  .e-checkbox-wrapper {
+    .e-frame {
+      border-radius: 0.25rem;
+      border-color: #d1d5db;
+      
+      &.e-check {
+        background-color: #059669;
+        border-color: #059669;
+      }
+    }
+    
+    label {
+      color: #374151;
+      font-size: 0.875rem;
+      margin-left: 0.5rem;
+    }
   }
 
-  .mat-mdc-text-field-wrapper.mdc-text-field--focused {
-    background: rgba(255, 255, 255, 0.3) !important;
-    border-color: rgba(var(--primary-rgb), 0.5);
-    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
+  // Dark mode for CheckBox
+  .dark .e-checkbox-wrapper {
+    .e-frame {
+      border-color: #4b5563;
+      background-color: #1f2937;
+      
+      &.e-check {
+        background-color: #10b981;
+        border-color: #10b981;
+      }
+    }
+    
+    label {
+      color: #d1d5db;
+    }
   }
 
-  .dark & .mat-mdc-text-field-wrapper.mdc-text-field--focused {
-    background: rgba(15, 23, 42, 0.3) !important;
-    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2);
-  }
-
-  .mat-mdc-form-field-label {
-    font-family: 'Sarabun', 'Inter', sans-serif !important;
-    color: #1e293b !important;
-    transition: color 0.3s ease;
-  }
-
-  .dark & .mat-mdc-form-field-label {
-    color: #f1f5f9 !important;
-  }
-
-  .mat-mdc-input-element {
-    font-family: 'Inter', 'Sarabun', sans-serif !important;
-    color: #1e293b !important;
-    transition: color 0.3s ease;
-  }
-
-  .dark & .mat-mdc-input-element {
-    color: #f1f5f9 !important;
+  // Bigger size for e-bigger class
+  .e-bigger {
+    .e-input-group .e-input {
+      padding: 0.875rem 1.125rem;
+      font-size: 1.0625rem;
+    }
+    
+    .e-btn {
+      padding: 0.875rem 1.75rem;
+      font-size: 1.0625rem;
+    }
   }
 }
 
-::ng-deep .mat-mdc-raised-button {
-  font-family: 'Sarabun', 'Inter', sans-serif !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.5px !important;
+// Thai font support
+.thai-text {
+  font-family: 'Sarabun', 'Inter', sans-serif;
 }
 
-::ng-deep .mat-mdc-raised-button:disabled {
-  opacity: 0.5 !important;
-  cursor: not-allowed !important;
+// Responsive adjustments
+@media (max-width: 1024px) {
+  section {
+    .flex {
+      min-height: auto !important;
+    }
+  }
 }

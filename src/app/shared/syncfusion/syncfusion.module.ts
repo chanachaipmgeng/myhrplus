@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Syncfusion Buttons & Inputs
-import { ButtonModule, ChipListModule } from '@syncfusion/ej2-angular-buttons';
+import { ButtonModule, ChipListModule, CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
 import { SplitButtonModule } from '@syncfusion/ej2-angular-splitbuttons';
 import { TextBoxModule, TextAreaModule, NumericTextBoxModule, MaskedTextBoxModule, SliderModule, UploaderModule, ColorPickerModule, SignatureModule, RatingModule, OtpInputModule } from '@syncfusion/ej2-angular-inputs';
 
@@ -68,7 +68,7 @@ import { ListViewModule } from '@syncfusion/ej2-angular-lists';
 
 /**
  * Syncfusion Module
- * 
+ *
  * This module imports all Syncfusion Angular modules needed for the UI Kit.
  * Import this module in your feature modules to use Syncfusion components.
  */
@@ -77,11 +77,12 @@ import { ListViewModule } from '@syncfusion/ej2-angular-lists';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    
+
     // Buttons & Inputs
     ButtonModule,
     SplitButtonModule,
     ChipListModule,
+    CheckBoxModule,
     TextBoxModule,
     TextAreaModule,
     NumericTextBoxModule,
@@ -92,13 +93,13 @@ import { ListViewModule } from '@syncfusion/ej2-angular-lists';
     SignatureModule,
     RatingModule,
     OtpInputModule,
-    
+
     // Dropdowns
     DropDownListModule,
     AutoCompleteModule,
     MultiSelectModule,
     ComboBoxModule,
-    
+
     // Navigation
     AccordionModule,
     ToolbarModule,
@@ -107,41 +108,41 @@ import { ListViewModule } from '@syncfusion/ej2-angular-lists';
     BreadcrumbModule,
     MenuModule,
     SidebarModule,
-    
+
     // Layouts
     DashboardLayoutModule,
     SplitterModule,
-    
+
     // Data Grids
     GridModule,
     TreeGridModule,
     PivotViewModule,
-    
+
     // Charts
     ChartModule,
     AccumulationChartModule,
-    
+
     // Calendars
     CalendarModule,
     DatePickerModule,
     DateRangePickerModule,
     TimePickerModule,
     DateTimePickerModule,
-    
+
     // Schedule
     ScheduleModule,
-    
+
     // Editors
     RichTextEditorModule,
     DocumentEditorModule,
     PdfViewerModule,
     SpreadsheetModule,
     ImageEditorModule,
-    
+
     // Project Management
     GanttModule,
     KanbanModule,
-    
+
     // Advanced
     DiagramModule,
     QueryBuilderModule,
@@ -151,7 +152,7 @@ import { ListViewModule } from '@syncfusion/ej2-angular-lists';
     MessageModule,
     ChatUIModule,
     AIAssistViewModule,
-    
+
     // Lists
     ListViewModule
   ],
@@ -160,6 +161,7 @@ import { ListViewModule } from '@syncfusion/ej2-angular-lists';
     ButtonModule,
     SplitButtonModule,
     ChipListModule,
+    CheckBoxModule,
     TextBoxModule,
     TextAreaModule,
     NumericTextBoxModule,
@@ -170,13 +172,13 @@ import { ListViewModule } from '@syncfusion/ej2-angular-lists';
     SignatureModule,
     RatingModule,
     OtpInputModule,
-    
+
     // Dropdowns
     DropDownListModule,
     AutoCompleteModule,
     MultiSelectModule,
     ComboBoxModule,
-    
+
     // Navigation
     AccordionModule,
     ToolbarModule,
@@ -185,41 +187,41 @@ import { ListViewModule } from '@syncfusion/ej2-angular-lists';
     BreadcrumbModule,
     MenuModule,
     SidebarModule,
-    
+
     // Layouts
     DashboardLayoutModule,
     SplitterModule,
-    
+
     // Data Grids
     GridModule,
     TreeGridModule,
     PivotViewModule,
-    
+
     // Charts
     ChartModule,
     AccumulationChartModule,
-    
+
     // Calendars
     CalendarModule,
     DatePickerModule,
     DateRangePickerModule,
     TimePickerModule,
     DateTimePickerModule,
-    
+
     // Schedule
     ScheduleModule,
-    
+
     // Editors
     RichTextEditorModule,
     DocumentEditorModule,
     PdfViewerModule,
     SpreadsheetModule,
     ImageEditorModule,
-    
+
     // Project Management
     GanttModule,
     KanbanModule,
-    
+
     // Advanced
     DiagramModule,
     QueryBuilderModule,
@@ -229,7 +231,7 @@ import { ListViewModule } from '@syncfusion/ej2-angular-lists';
     MessageModule,
     ChatUIModule,
     AIAssistViewModule,
-    
+
     // Lists
     ListViewModule
   ]
