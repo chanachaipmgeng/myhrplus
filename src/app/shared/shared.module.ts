@@ -8,7 +8,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
 import { DataTableComponent } from './components/data-table/data-table.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
-import { EmptyStateComponent } from './components/empty-state/empty-state.component';
+// EmptyStateComponent and RatingComponent are now standalone - removed from declarations
 import { ErrorStateComponent } from './components/error-state/error-state.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { StatusBadgeComponent } from './components/status-badge/status-badge.component';
@@ -20,7 +20,6 @@ import { DateRangePickerComponent } from './components/date-range-picker/date-ra
 import { SkeletonLoaderComponent } from './components/skeleton-loader/skeleton-loader.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { FormValidationMessagesComponent } from './components/form-validation-messages/form-validation-messages.component';
-import { RatingComponent } from './components/rating/rating.component';
 import { IconComponent } from './components/icon/icon.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { NotificationComponent } from './components/notification/notification.component';
@@ -37,7 +36,7 @@ const COMPONENTS = [
   DataTableComponent,
   ConfirmDialogComponent,
   FileUploadComponent,
-  EmptyStateComponent,
+  // EmptyStateComponent and RatingComponent are standalone - removed from declarations
   ErrorStateComponent,
   AvatarComponent,
   StatusBadgeComponent,
@@ -49,7 +48,6 @@ const COMPONENTS = [
   SkeletonLoaderComponent,
   ImageUploadComponent,
   FormValidationMessagesComponent,
-  RatingComponent,
   IconComponent,
   SpinnerComponent,
   NotificationComponent

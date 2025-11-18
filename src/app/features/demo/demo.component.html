@@ -1,18 +1,24 @@
-<div class="min-h-screen p-6 md:p-8 lg:p-12">
-  <div class="max-w-7xl mx-auto">
-    <!-- Header -->
-    <div class="mb-8">
-      <h1 class="text-4xl font-bold mb-2 gradient-text">Component Demo Showcase</h1>
-      <p class="text-lg text-slate-600 dark:text-slate-400">
-        ตัวอย่างการใช้งาน Glass Morphism Components จาก Intelligent Video Analytics Platform
-      </p>
-    </div>
+<app-page-layout title="Component Demo Showcase" subtitle="ตัวอย่างการใช้งาน Glass Morphism Components จาก Intelligent Video Analytics Platform">
+  <div class="space-y-12">
+    <!-- Statistics Cards Section -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Statistics Cards</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <app-statistics-card
+          *ngFor="let stat of statistics"
+          [icon]="stat.icon"
+          [label]="stat.label"
+          [value]="stat.value"
+          [suffix]="stat.suffix"
+          [change]="stat.change">
+        </app-statistics-card>
+      </div>
+    </section>
 
     <!-- Glass Cards Section -->
-    <section class="mb-12">
+    <section>
       <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Glass Cards</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Default Glass Card -->
         <app-glass-card variant="default" padding="p-6">
           <h3 class="text-xl font-semibold mb-2 text-slate-800 dark:text-slate-200">Default Glass Card</h3>
           <p class="text-slate-600 dark:text-slate-400">
@@ -20,7 +26,6 @@
           </p>
         </app-glass-card>
 
-        <!-- Strong Glass Card -->
         <app-glass-card variant="strong" padding="p-6">
           <h3 class="text-xl font-semibold mb-2 text-slate-800 dark:text-slate-200">Strong Glass Card</h3>
           <p class="text-slate-600 dark:text-slate-400">
@@ -28,7 +33,6 @@
           </p>
         </app-glass-card>
 
-        <!-- Weak Glass Card -->
         <app-glass-card variant="weak" padding="p-6">
           <h3 class="text-xl font-semibold mb-2 text-slate-800 dark:text-slate-200">Weak Glass Card</h3>
           <p class="text-slate-600 dark:text-slate-400">
@@ -39,11 +43,10 @@
     </section>
 
     <!-- Buttons Section -->
-    <section class="mb-12">
+    <section>
       <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Glass Buttons</h2>
       <app-glass-card padding="p-6">
         <div class="space-y-6">
-          <!-- Button Variants -->
           <div>
             <h3 class="text-lg font-medium mb-4 text-slate-700 dark:text-slate-300">Variants</h3>
             <div class="flex flex-wrap gap-4">
@@ -59,55 +62,32 @@
             </div>
           </div>
 
-          <!-- Button Sizes -->
           <div>
             <h3 class="text-lg font-medium mb-4 text-slate-700 dark:text-slate-300">Sizes</h3>
             <div class="flex flex-wrap items-center gap-4">
-              <app-glass-button variant="primary" size="sm">
-                Small Button
-              </app-glass-button>
-              <app-glass-button variant="primary" size="md">
-                Medium Button
-              </app-glass-button>
-              <app-glass-button variant="primary" size="lg">
-                Large Button
-              </app-glass-button>
+              <app-glass-button variant="primary" size="sm">Small</app-glass-button>
+              <app-glass-button variant="primary" size="md">Medium</app-glass-button>
+              <app-glass-button variant="primary" size="lg">Large</app-glass-button>
             </div>
           </div>
 
-          <!-- Button States -->
           <div>
             <h3 class="text-lg font-medium mb-4 text-slate-700 dark:text-slate-300">States</h3>
             <div class="flex flex-wrap gap-4">
-              <app-glass-button variant="primary">
-                Normal Button
-              </app-glass-button>
-              <app-glass-button variant="primary" [disabled]="true">
-                Disabled Button
-              </app-glass-button>
-              <app-glass-button variant="primary" [loading]="true">
-                Loading Button
-              </app-glass-button>
+              <app-glass-button variant="primary">Normal</app-glass-button>
+              <app-glass-button variant="primary" [disabled]="true">Disabled</app-glass-button>
+              <app-glass-button variant="primary" [loading]="true">Loading</app-glass-button>
             </div>
-          </div>
-
-          <!-- Full Width Button -->
-          <div>
-            <h3 class="text-lg font-medium mb-4 text-slate-700 dark:text-slate-300">Full Width</h3>
-            <app-glass-button variant="primary" [fullWidth]="true">
-              Full Width Button
-            </app-glass-button>
           </div>
         </div>
       </app-glass-card>
     </section>
 
     <!-- Form Inputs Section -->
-    <section class="mb-12">
+    <section>
       <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Glass Inputs</h2>
       <app-glass-card padding="p-6">
         <form [formGroup]="demoForm" (ngSubmit)="onSubmit()" class="space-y-6">
-          <!-- Username Input -->
           <app-glass-input
             label="Username"
             formControlName="username"
@@ -116,7 +96,6 @@
             [errorMessage]="usernameError">
           </app-glass-input>
 
-          <!-- Email Input -->
           <app-glass-input
             label="Email"
             type="email"
@@ -126,7 +105,6 @@
             [errorMessage]="emailError">
           </app-glass-input>
 
-          <!-- Password Input -->
           <app-glass-input
             label="Password"
             type="password"
@@ -137,14 +115,6 @@
             hint="Password must be at least 6 characters">
           </app-glass-input>
 
-          <!-- Description Input -->
-          <app-glass-input
-            label="Description"
-            formControlName="description"
-            placeholder="Enter description (optional)">
-          </app-glass-input>
-
-          <!-- Submit Button -->
           <div class="flex gap-4">
             <app-glass-button type="submit" variant="primary" [disabled]="demoForm.invalid">
               Submit Form
@@ -157,11 +127,173 @@
       </app-glass-card>
     </section>
 
+    <!-- Tabs Section -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Tabs</h2>
+      <app-glass-card padding="p-6">
+        <app-tabs [tabs]="tabs" [activeTab]="activeTab" (activeTabChange)="onTabChange($event)">
+          <div *ngIf="activeTab === 'tab1'" class="p-4">
+            <h3 class="text-lg font-semibold mb-2">Tab 1 Content</h3>
+            <p class="text-slate-600 dark:text-slate-400">This is the content for Tab 1.</p>
+          </div>
+          <div *ngIf="activeTab === 'tab2'" class="p-4">
+            <h3 class="text-lg font-semibold mb-2">Tab 2 Content</h3>
+            <p class="text-slate-600 dark:text-slate-400">This is the content for Tab 2 with badge.</p>
+          </div>
+          <div *ngIf="activeTab === 'tab3'" class="p-4">
+            <h3 class="text-lg font-semibold mb-2">Tab 3 Content</h3>
+            <p class="text-slate-600 dark:text-slate-400">This is the content for Tab 3.</p>
+          </div>
+        </app-tabs>
+      </app-glass-card>
+    </section>
+
+    <!-- Progress Bar Section -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Progress Bars</h2>
+      <app-glass-card padding="p-6">
+        <div class="space-y-6">
+          <app-progress-bar
+            [value]="progressValue"
+            label="Progress"
+            [description]="'Current progress: ' + progressValue + '%'">
+          </app-progress-bar>
+
+          <app-progress-bar
+            [value]="85"
+            label="Success Progress"
+            variant="success"
+            description="Completed successfully">
+          </app-progress-bar>
+
+          <app-progress-bar
+            [value]="45"
+            label="Warning Progress"
+            variant="warning"
+            description="Needs attention">
+          </app-progress-bar>
+
+          <app-progress-bar
+            [value]="20"
+            label="Danger Progress"
+            variant="danger"
+            description="Critical level">
+          </app-progress-bar>
+        </div>
+      </app-glass-card>
+    </section>
+
+    <!-- Rating Section -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Rating</h2>
+      <app-glass-card padding="p-6">
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-lg font-medium mb-4 text-slate-700 dark:text-slate-300">Star Rating</h3>
+            <app-rating
+              [rating]="rating"
+              [showValue]="true"
+              (ratingChange)="onRatingChange($event)">
+            </app-rating>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-medium mb-4 text-slate-700 dark:text-slate-300">Heart Rating</h3>
+            <app-rating
+              [rating]="heartRating"
+              icon="heart"
+              [showValue]="true"
+              (ratingChange)="onHeartRatingChange($event)">
+            </app-rating>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-medium mb-4 text-slate-700 dark:text-slate-300">Readonly Rating</h3>
+            <app-rating [rating]="4" [readonly]="true" [showValue]="true"></app-rating>
+          </div>
+        </div>
+      </app-glass-card>
+    </section>
+
+    <!-- Loading Section -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Loading States</h2>
+      <app-glass-card padding="p-6">
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-lg font-medium mb-4 text-slate-700 dark:text-slate-300">Loading Component</h3>
+            <app-loading [show]="showLoading" message="กำลังโหลดข้อมูล..."></app-loading>
+            <app-glass-button variant="primary" (clicked)="showLoadingDemo()" class="mt-4">
+              Show Loading (3 seconds)
+            </app-glass-button>
+          </div>
+        </div>
+      </app-glass-card>
+    </section>
+
+    <!-- Empty State Section -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Empty States</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <app-empty-state
+          icon="📭"
+          title="ไม่มีข้อมูล"
+          description="ยังไม่มีข้อมูลในส่วนนี้"
+          [action]="emptyStateAction1">
+        </app-empty-state>
+
+        <app-empty-state
+          icon="🔍"
+          title="ไม่พบผลลัพธ์"
+          description="ลองค้นหาด้วยคำอื่น"
+          [action]="emptyStateAction2">
+        </app-empty-state>
+      </div>
+    </section>
+
+    <!-- Modal Section -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Modal</h2>
+      <app-glass-card padding="p-6">
+        <div class="space-y-4">
+          <app-glass-button variant="primary" (clicked)="openModal()">
+            Open Modal
+          </app-glass-button>
+
+          <app-modal
+            [show]="showModal"
+            title="Modal Example"
+            [closable]="true"
+            (closeEvent)="closeModal()"
+            (confirmEvent)="closeModal()">
+            <p class="text-slate-600 dark:text-slate-400">
+              This is a modal dialog example. You can add any content here.
+            </p>
+          </app-modal>
+        </div>
+      </app-glass-card>
+    </section>
+
+    <!-- Tooltip Section -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Tooltips</h2>
+      <app-glass-card padding="p-6">
+        <div class="flex flex-wrap gap-4">
+          <app-tooltip text="This is a tooltip" position="bottom">
+            <app-glass-button variant="primary">Hover me (Bottom)</app-glass-button>
+          </app-tooltip>
+
+          <app-tooltip text="Tooltip on top" position="top">
+            <app-glass-button variant="secondary">Hover me (Top)</app-glass-button>
+          </app-tooltip>
+        </div>
+      </app-glass-card>
+    </section>
+
     <!-- Interactive Demo Section -->
-    <section class="mb-12">
+    <section>
       <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Interactive Demo</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Card Selection -->
         <app-glass-card padding="p-6">
           <h3 class="text-lg font-medium mb-4 text-slate-700 dark:text-slate-300">Card Variant Selection</h3>
           <div class="space-y-4">
@@ -196,7 +328,6 @@
           </div>
         </app-glass-card>
 
-        <!-- Input Demo -->
         <app-glass-card padding="p-6">
           <h3 class="text-lg font-medium mb-4 text-slate-700 dark:text-slate-300">Input Demo</h3>
           <div class="space-y-4">
@@ -214,42 +345,5 @@
         </app-glass-card>
       </div>
     </section>
-
-    <!-- Usage Examples Section -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Usage Examples</h2>
-      <app-glass-card variant="strong" padding="p-6">
-        <div class="space-y-4">
-          <div>
-            <h3 class="text-lg font-medium mb-2 text-slate-700 dark:text-slate-300">Glass Card</h3>
-            <pre class="bg-slate-900 text-slate-100 p-4 rounded-lg overflow-x-auto"><code>&lt;app-glass-card variant="default" padding="p-6"&gt;
-  &lt;h3&gt;Title&lt;/h3&gt;
-  &lt;p&gt;Content here&lt;/p&gt;
-&lt;/app-glass-card&gt;</code></pre>
-          </div>
-
-          <div>
-            <h3 class="text-lg font-medium mb-2 text-slate-700 dark:text-slate-300">Glass Button</h3>
-            <pre class="bg-slate-900 text-slate-100 p-4 rounded-lg overflow-x-auto"><code>&lt;app-glass-button 
-  variant="primary" 
-  size="md"
-  (clicked)="handleClick()"&gt;
-  Click Me
-&lt;/app-glass-button&gt;</code></pre>
-          </div>
-
-          <div>
-            <h3 class="text-lg font-medium mb-2 text-slate-700 dark:text-slate-300">Glass Input</h3>
-            <pre class="bg-slate-900 text-slate-100 p-4 rounded-lg overflow-x-auto"><code>&lt;app-glass-input
-  label="Username"
-  placeholder="Enter username"
-  [required]="true"
-  [errorMessage]="errorMsg"&gt;
-&lt;/app-glass-input&gt;</code></pre>
-          </div>
-        </div>
-      </app-glass-card>
-    </section>
   </div>
-</div>
-
+</app-page-layout>

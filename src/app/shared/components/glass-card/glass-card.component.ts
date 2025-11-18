@@ -25,6 +25,7 @@ export class GlassCardComponent {
   @Input() variant: 'default' | 'strong' | 'weak' = 'default';
   @Input() animate: 'fade-in' | 'slide-up' | 'slide-down' | 'scale-in' | null = null;
   @Input() padding: string = 'p-6';
+  @Input() customClass: string = '';
 
   get cardClass(): string {
     const baseClass = this.variant === 'strong' 
@@ -33,7 +34,7 @@ export class GlassCardComponent {
       ? 'glass-card-weak'
       : 'glass-card';
     
-    return `${baseClass} ${this.padding}`;
+    return `${baseClass} ${this.padding} ${this.customClass}`.trim();
   }
 }
 

@@ -1,153 +1,70 @@
-import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-rating',
-  templateUrl: './rating.component.html',
-  styleUrls: ['./rating.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => RatingComponent),
-      multi: true
-    }
-  ]
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <div class="flex items-center">
+      <div class="flex space-x-1">
+        <button
+          *ngFor="let star of stars; let i = index"
+          type="button"
+          (click)="onStarClick(i + 1)"
+          (mouseenter)="hoveredRating = i + 1"
+          (mouseleave)="hoveredRating = 0"
+          [disabled]="readonly"
+          class="text-2xl transition-colors disabled:cursor-default"
+          [ngClass]="getStarClass(i + 1)">
+          {{ getStarIcon(i + 1) }}
+        </button>
+      </div>
+      <span *ngIf="showValue" class="ml-2 text-sm text-slate-600 dark:text-slate-400">
+        ({{ rating }}/{{ maxRating }})
+      </span>
+    </div>
+  `,
+  styles: []
 })
-export class RatingComponent implements ControlValueAccessor {
-  @Input() maxRating = 5;
-  @Input() currentRating = 0;
-  @Input() readOnly = false;
-  @Input() showLabel = true;
-  @Input() label = 'คะแนน';
-  @Input() size: 'sm' | 'md' | 'lg' = 'md';
-  @Input() icon = 'star';
-  @Input() color = 'primary';
-  @Input() allowHalf = false;
-  @Input() showValue = false;
-  @Input() showTooltip = true;
-
+export class RatingComponent {
+  @Input() rating: number = 0;
+  @Input() maxRating: number = 5;
+  @Input() readonly: boolean = false;
+  @Input() showValue: boolean = false;
+  @Input() icon: 'star' | 'heart' = 'star';
   @Output() ratingChange = new EventEmitter<number>();
 
-  hoveredRating = 0;
-  private _value = 0;
+  hoveredRating: number = 0;
+  stars: number[] = [];
 
-  private onChange = (value: number) => {};
-  private onTouched = () => {};
-
-  get value(): number {
-    return this._value;
+  ngOnInit(): void {
+    this.stars = Array(this.maxRating).fill(0).map((_, i) => i);
   }
 
-  set value(val: number) {
-    this._value = val;
-    this.currentRating = val;
-    this.onChange(val);
-    this.ratingChange.emit(val);
-  }
-
-  writeValue(value: number): void {
-    if (value !== undefined && value !== null) {
-      this._value = value;
-      this.currentRating = value;
+  onStarClick(value: number): void {
+    if (!this.readonly) {
+      this.rating = value;
+      this.ratingChange.emit(value);
     }
   }
 
-  registerOnChange(fn: (value: number) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.readOnly = isDisabled;
-  }
-
-  getStars(): number[] {
-    return Array.from({ length: this.maxRating }, (_, i) => i + 1);
-  }
-
-  onStarClick(rating: number): void {
-    if (this.readOnly) return;
-
-    if (this.allowHalf && this.hoveredRating === rating && this.currentRating === rating) {
-      // Click same star again for half
-      this.value = rating - 0.5;
-    } else {
-      this.value = rating;
+  getStarClass(index: number): string {
+    const isActive = index <= (this.hoveredRating || this.rating);
+    if (this.icon === 'heart') {
+      return isActive
+        ? 'text-red-500 hover:text-red-600'
+        : 'text-slate-300 dark:text-slate-600 hover:text-red-400';
     }
-
-    this.onTouched();
+    return isActive
+      ? 'text-yellow-400 hover:text-yellow-500'
+      : 'text-slate-300 dark:text-slate-600 hover:text-yellow-400';
   }
 
-  onStarHover(rating: number): void {
-    if (this.readOnly) return;
-    this.hoveredRating = rating;
-  }
-
-  onStarLeave(): void {
-    if (this.readOnly) return;
-    this.hoveredRating = 0;
-  }
-
-  getStarClass(star: number): string {
-    const classes: string[] = ['star'];
-
-    if (this.readOnly) {
-      classes.push('read-only');
+  getStarIcon(index: number): string {
+    if (this.icon === 'heart') {
+      return index <= (this.hoveredRating || this.rating) ? '❤️' : '🤍';
     }
-
-    if (this.hoveredRating > 0) {
-      if (star <= this.hoveredRating) {
-        classes.push('hovered');
-      }
-    } else if (star <= this.currentRating) {
-      classes.push('filled');
-    }
-
-    // Half star support
-    if (this.allowHalf && star === Math.ceil(this.currentRating) && this.currentRating % 1 !== 0) {
-      classes.push('half-filled');
-    }
-
-    return classes.join(' ');
-  }
-
-  getStarIcon(star: number): string {
-    if (this.allowHalf && star === Math.ceil(this.currentRating) && this.currentRating % 1 !== 0) {
-      return 'star_half';
-    }
-    return this.icon;
-  }
-
-  getTooltip(rating: number): string {
-    if (!this.showTooltip) return '';
-
-    const tooltips: { [key: number]: string } = {
-      1: 'แย่มาก',
-      2: 'แย่',
-      3: 'ปานกลาง',
-      4: 'ดี',
-      5: 'ดีมาก'
-    };
-
-    return tooltips[rating] || `${rating} ดาว`;
-  }
-
-  getSizeClass(): string {
-    return `size-${this.size}`;
-  }
-
-  getStarColor(star: number): string {
-    if (this.hoveredRating > 0) {
-      if (star <= this.hoveredRating) {
-        return 'text-yellow-400 dark:text-yellow-500';
-      }
-    } else if (star <= this.currentRating) {
-      return 'text-yellow-400 dark:text-yellow-500';
-    }
-    return 'text-gray-300 dark:text-gray-600';
+    return index <= (this.hoveredRating || this.rating) ? '★' : '☆';
   }
 }
-
