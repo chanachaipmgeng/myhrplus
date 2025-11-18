@@ -11,18 +11,11 @@
 .main-content {
   padding: 1.5rem;
   min-height: calc(100vh - 120px);
-  background: transparent;
+  /* Background gradient - aligned with Design System */
+  background: linear-gradient(180deg, #faf8f3 0%, #f5f1e8 50%, #ede8d8 100%);
+  transition: background 0.3s ease;
 }
 
-/* Glassmorphism overlay for content area */
-.main-content::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(245, 247, 250, 0.8) 0%, rgba(195, 207, 226, 0.8) 100%);
-  z-index: -1;
-  pointer-events: none;
+.dark .main-content {
+  background: linear-gradient(180deg, #000000 0%, #0a0a0f 33%, #0f172a 66%, #1e293b 100%);
 }

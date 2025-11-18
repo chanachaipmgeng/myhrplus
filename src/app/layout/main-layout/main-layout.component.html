@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-all duration-300">
+<div class="min-h-screen transition-all duration-300">
   <div class="sidenav-container flex">
     <!-- Sidebar -->
     <aside
@@ -10,14 +10,14 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'">
       <app-sidebar></app-sidebar>
     </aside>
-    
+
     <!-- Overlay for mobile -->
-    <div 
+    <div
       *ngIf="(isHandset$ | async) && sidebarOpen"
       class="fixed inset-0 bg-black/50 z-40"
       (click)="closeSidebar()">
     </div>
-    
+
     <!-- Main Content -->
     <div class="flex-1 min-h-screen flex flex-col">
       <app-header (toggleSidenav)="toggleSidebar()"></app-header>

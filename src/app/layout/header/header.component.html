@@ -1,11 +1,13 @@
 <header class="glass-nav bg-white/25 dark:bg-slate-900/25 backdrop-blur-lg border-b border-white/30 dark:border-slate-700/30 shadow-lg transition-all duration-300 flex items-center justify-between px-4 py-3">
   <div class="flex items-center gap-4">
-    <button
-      (click)="toggleSidenav.emit()"
-      class="p-2 text-slate-700 dark:text-slate-200 hover:bg-white/30 dark:hover:bg-slate-700/30 rounded-lg transition-all duration-200">
+    <app-glass-button
+      variant="secondary"
+      size="sm"
+      (clicked)="toggleSidenav.emit()"
+      [title]="'เมนู'">
       <app-icon name="menu" size="md" color="text-slate-700 dark:text-slate-200"></app-icon>
-    </button>
-    
+    </app-glass-button>
+
     <!-- Logo Section -->
     <div class="flex items-center gap-3">
       <div class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-indigo-700 shadow-lg">
@@ -21,21 +23,24 @@
       </div>
     </div>
   </div>
-  
+
   <div class="flex items-center gap-2">
     <!-- Language Switcher -->
     <div class="relative">
-      <button 
-        (click)="toggleLanguageMenu()"
-        class="p-2 text-slate-700 dark:text-slate-200 hover:bg-white/30 dark:hover:bg-slate-700/30 rounded-lg transition-all duration-200"
+      <app-glass-button
+        variant="secondary"
+        size="sm"
+        (clicked)="toggleLanguageMenu()"
         [title]="'เปลี่ยนภาษา'">
         <app-icon name="language" size="md" color="text-slate-700 dark:text-slate-200"></app-icon>
-      </button>
-      
-      <div 
+      </app-glass-button>
+
+      <app-glass-card
         *ngIf="showLanguageMenu"
-        class="absolute right-0 mt-2 w-48 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
-        <button 
+        padding="p-0"
+        customClass="absolute right-0 mt-2 w-48 z-50"
+        variant="strong">
+        <button
           *ngFor="let lang of languages"
           (click)="changeLanguage(lang.value); showLanguageMenu = false"
           [class.active]="currentLanguage === lang.value"
@@ -46,31 +51,36 @@
           </div>
           <app-icon *ngIf="currentLanguage === lang.value" name="check" size="sm" color="text-blue-500"></app-icon>
         </button>
-      </div>
+      </app-glass-card>
     </div>
-    
+
     <!-- Theme Toggle -->
     <app-theme-toggle></app-theme-toggle>
-    
+
     <!-- Notifications -->
-    <button 
-      class="p-2 text-slate-700 dark:text-slate-200 hover:bg-white/30 dark:hover:bg-slate-700/30 rounded-lg transition-all duration-200 relative"
-      [title]="'การแจ้งเตือน'">
+    <app-glass-button
+      variant="secondary"
+      size="sm"
+      [title]="'การแจ้งเตือน'"
+      customClass="relative">
       <app-icon name="notifications" size="md" color="text-slate-700 dark:text-slate-200"></app-icon>
       <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 dark:bg-red-400 rounded-full"></span>
-    </button>
-    
+    </app-glass-button>
+
     <!-- User Menu -->
     <div class="relative">
-      <button 
-        (click)="toggleUserMenu()"
-        class="p-2 text-slate-700 dark:text-slate-200 hover:bg-white/30 dark:hover:bg-slate-700/30 rounded-lg transition-all duration-200">
+      <app-glass-button
+        variant="secondary"
+        size="sm"
+        (clicked)="toggleUserMenu()">
         <app-icon name="account_circle" size="md" color="text-slate-700 dark:text-slate-200"></app-icon>
-      </button>
-      
-      <div 
+      </app-glass-button>
+
+      <app-glass-card
         *ngIf="showUserMenu"
-        class="absolute right-0 mt-2 w-56 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
+        padding="p-0"
+        customClass="absolute right-0 mt-2 w-56 z-50"
+        variant="strong">
         <div class="user-info px-4 py-3 min-w-[220px] border-b border-gray-200 dark:border-gray-700" *ngIf="authService.currentUser$ | async as user">
           <div class="user-name thai-text font-semibold text-slate-800 dark:text-slate-100 mb-1">
             {{ user.name }}
@@ -80,26 +90,26 @@
           </div>
         </div>
         <div class="py-2">
-          <button 
+          <button
             (click)="onProfile(); showUserMenu = false"
             class="w-full px-4 py-2 text-left text-slate-700 dark:text-slate-200 hover:bg-white/40 dark:hover:bg-slate-700/40 transition-all duration-200 flex items-center gap-3">
             <app-icon name="person" size="sm" color="text-slate-600 dark:text-slate-400"></app-icon>
             <span class="thai-text">โปรไฟล์</span>
           </button>
-          <button 
+          <button
             (click)="onPreferences(); showUserMenu = false"
             class="w-full px-4 py-2 text-left text-slate-700 dark:text-slate-200 hover:bg-white/40 dark:hover:bg-slate-700/40 transition-all duration-200 flex items-center gap-3">
             <app-icon name="settings" size="sm" color="text-slate-600 dark:text-slate-400"></app-icon>
             <span class="thai-text">การตั้งค่า</span>
           </button>
-          <button 
+          <button
             (click)="onLogout(); showUserMenu = false"
             class="w-full px-4 py-2 text-left text-slate-700 dark:text-slate-200 hover:bg-white/40 dark:hover:bg-slate-700/40 transition-all duration-200 flex items-center gap-3">
             <app-icon name="logout" size="sm" color="text-slate-600 dark:text-slate-400"></app-icon>
             <span class="thai-text">ออกจากระบบ</span>
           </button>
         </div>
-      </div>
+      </app-glass-card>
     </div>
   </div>
 </header>
