@@ -11,7 +11,16 @@ interface NestedMenuItem {
   id: string;
   iconCss?: string;
   route?: string;
+  badge?: string;
+  badgeColor?: string;
   child?: NestedMenuItem[];
+}
+
+interface MainModule {
+  id: string;
+  name: string;
+  iconCss: string;
+  menuItems: NestedMenuItem[];
 }
 
 @Component({
@@ -23,7 +32,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
   @ViewChild('listview') listview!: ListViewComponent;
   
   menuItems: MenuItem[] = [];
-  nestedMenuData: NestedMenuItem[] = [];
+  mainModules: MainModule[] = [];
+  selectedModule: string | null = null;
+  selectedModuleData: MainModule | null = null;
   listViewFields: any = {
     id: 'id',
     text: 'text',
@@ -65,7 +76,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
       )
       .subscribe((event: any) => {
         this.activeRoute = event.url;
-        this.updateNestedMenuData();
+        // Update selected module based on current route
+        this.updateSelectedModuleFromRoute();
       });
   }
 
@@ -73,31 +85,111 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.menuService.loadMenu().subscribe(menu => {
       // Menu is already filtered by permissions in MenuService
       this.menuItems = menu;
-      this.updateNestedMenuData();
+      this.groupMenuByModule();
+      // Auto-select first module if available
+      if (this.mainModules.length > 0 && !this.selectedModule) {
+        this.selectModule(this.mainModules[0].id);
+      }
     });
   }
 
-  private updateNestedMenuData(): void {
-    this.nestedMenuData = this.menuItems.map((item, index) => {
-      const nestedItem: NestedMenuItem = {
+  private groupMenuByModule(): void {
+    // Group menu items by module
+    const moduleMap = new Map<string, MainModule>();
+
+    this.menuItems.forEach(item => {
+      const moduleCode = this.getModuleCodeFromRoute(item.route || item.path || '');
+      const moduleId = moduleCode || 'other';
+
+      if (!moduleMap.has(moduleId)) {
+        moduleMap.set(moduleId, {
+          id: moduleId,
+          name: this.getModuleName(moduleCode),
+          iconCss: this.getModuleIcon(moduleCode),
+          menuItems: []
+        });
+      }
+
+      const module = moduleMap.get(moduleId)!;
+      const menuItem: NestedMenuItem = {
         text: item.edesc || item.name || '',
-        id: item.route || `menu-${index}`,
+        id: item.route || `menu-${moduleId}-${module.menuItems.length}`,
         iconCss: this.getIconClass(item.icon || 'folder'),
         route: item.route
       };
 
       // Add children if exists
       if (this.hasChildren(item) && item.children) {
-        nestedItem.child = item.children.map((child, childIndex) => ({
+        menuItem.child = item.children.map((child, childIndex) => ({
           text: child.edesc || child.name || '',
-          id: child.route || `child-${index}-${childIndex}`,
+          id: child.route || `child-${moduleId}-${module.menuItems.length}-${childIndex}`,
           iconCss: this.getIconClass(child.icon || 'folder'),
           route: child.route
         }));
       }
 
-      return nestedItem;
+      module.menuItems.push(menuItem);
     });
+
+    this.mainModules = Array.from(moduleMap.values());
+  }
+
+  private getModuleCodeFromRoute(route: string): string {
+    if (!route) return 'other';
+    
+    // Extract module code from route
+    // Examples: /dashboard -> dashboard, /ta/leave -> ta, /personal/profile -> personal
+    const match = route.match(/\/([^\/]+)/);
+    return match ? match[1] : 'other';
+  }
+
+  private getModuleName(moduleCode: string | null): string {
+    const moduleNames: { [key: string]: string } = {
+      'dashboard': 'Overview',
+      'home': 'Overview',
+      'ta': 'Time Attendance',
+      'personal': 'Personal',
+      'payroll': 'Payroll',
+      'training': 'Training',
+      'welfare': 'Welfare',
+      'recruit': 'Recruitment',
+      'empview': 'Employee View',
+      'other': 'Other'
+    };
+    return moduleNames[moduleCode || 'other'] || moduleCode || 'Other';
+  }
+
+  private getModuleIcon(moduleCode: string | null): string {
+    const moduleIcons: { [key: string]: string } = {
+      'dashboard': 'e-icons e-home',
+      'home': 'e-icons e-home',
+      'ta': 'e-icons e-clock',
+      'personal': 'e-icons e-user',
+      'payroll': 'e-icons e-briefcase',
+      'training': 'e-icons e-book',
+      'welfare': 'e-icons e-favorite',
+      'recruit': 'e-icons e-people',
+      'empview': 'e-icons e-folder',
+      'other': 'e-icons e-folder'
+    };
+    return moduleIcons[moduleCode || 'other'] || 'e-icons e-folder';
+  }
+
+  selectModule(moduleId: string): void {
+    this.selectedModule = moduleId;
+    this.selectedModuleData = this.mainModules.find(m => m.id === moduleId) || null;
+  }
+
+  private updateSelectedModuleFromRoute(): void {
+    if (!this.activeRoute) return;
+    
+    const moduleCode = this.getModuleCodeFromRoute(this.activeRoute);
+    if (moduleCode && moduleCode !== this.selectedModule) {
+      const module = this.mainModules.find(m => m.id === moduleCode);
+      if (module) {
+        this.selectModule(moduleCode);
+      }
+    }
   }
 
   private getIconClass(iconName: string): string {
@@ -121,7 +213,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     return iconMap[iconName.toLowerCase()] || 'e-icons e-folder';
   }
 
-  onListItemSelect(args: any): void {
+  onMenuItemSelect(args: any): void {
     if (args.item && args.item.route) {
       this.router.navigate([args.item.route]);
     }

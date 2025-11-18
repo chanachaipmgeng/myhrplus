@@ -33,63 +33,158 @@
   }
 }
 
-/* Syncfusion Nested ListView Styles */
-::ng-deep .syncfusion-nested-list {
+/* Two-Layer Sidebar Layout */
+.two-layer-sidebar {
+  background: rgba(15, 23, 42, 0.95) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+/* Left Icon Bar */
+.icon-bar {
+  width: 80px;
+  min-width: 80px;
+  background: rgba(15, 23, 42, 0.8) !important;
+  flex-shrink: 0;
+}
+
+.module-icon-btn {
+  position: relative;
+  
+  &.active {
+    background: rgba(59, 130, 246, 0.3) !important;
+    border-left: 3px solid rgb(59, 130, 246);
+    
+    span {
+      color: rgb(59, 130, 246) !important;
+    }
+  }
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+  
+  span {
+    transition: color 0.2s ease;
+  }
+}
+
+/* Right Menu Panel */
+.menu-panel {
+  background: rgba(15, 23, 42, 0.95) !important;
+  min-width: 240px;
+  
+  /* Custom scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(148, 163, 184, 0.3);
+    border-radius: 3px;
+    
+    &:hover {
+      background-color: rgba(148, 163, 184, 0.5);
+    }
+  }
+}
+
+/* Syncfusion Module Menu Styles */
+::ng-deep .syncfusion-module-menu {
   background: transparent !important;
   border: none !important;
   
   .e-list-item {
     background: transparent !important;
     border: none !important;
-    padding: 0.5rem 1rem !important;
-    margin: 0.25rem 0 !important;
+    padding: 0.75rem 1rem !important;
+    margin: 0.125rem 0 !important;
     border-radius: 0.5rem !important;
     transition: all 0.2s ease !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    display: flex !important;
+    align-items: center !important;
     
     &:hover {
-      background: rgba(255, 255, 255, 0.3) !important;
+      background: rgba(255, 255, 255, 0.1) !important;
     }
     
     &.e-active {
-      background: rgba(37, 99, 235, 0.2) !important;
-      color: rgb(37, 99, 235) !important;
+      background: rgba(59, 130, 246, 0.2) !important;
+      color: rgb(59, 130, 246) !important;
     }
   }
   
   .e-list-icon {
     margin-right: 0.75rem !important;
-    font-size: 1rem !important;
+    font-size: 1.125rem !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+  
+  .e-list-item.e-active .e-list-icon {
+    color: rgb(59, 130, 246) !important;
   }
   
   .e-list-text {
     font-family: 'Sarabun', 'Kanit', sans-serif !important;
     font-size: 0.875rem !important;
     font-weight: 500 !important;
+    flex: 1 !important;
+  }
+  
+  /* Badge support */
+  .e-list-badge {
+    margin-left: auto !important;
+    padding: 0.125rem 0.5rem !important;
+    border-radius: 9999px !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    min-width: 1.5rem !important;
+    text-align: center !important;
   }
   
   /* Nested child items */
   .e-list-group-item {
     background: transparent !important;
-    padding-left: 2rem !important;
+    padding-left: 1.5rem !important;
     
     .e-list-item {
-      padding-left: 1.5rem !important;
+      padding-left: 2rem !important;
       font-size: 0.8125rem !important;
+      color: rgba(255, 255, 255, 0.8) !important;
     }
+    
+    .e-list-icon {
+      font-size: 1rem !important;
+    }
+  }
+  
+  /* Separator */
+  .e-list-separator {
+    height: 1px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    margin: 0.5rem 0 !important;
   }
 }
 
-.dark ::ng-deep .syncfusion-nested-list {
-  .e-list-item {
-    &:hover {
-      background: rgba(51, 65, 85, 0.3) !important;
-    }
-    
-    &.e-active {
-      background: rgba(59, 130, 246, 0.3) !important;
-      color: rgb(59, 130, 246) !important;
-    }
-  }
+/* Light mode support */
+:not(.dark) .two-layer-sidebar {
+  background: rgba(30, 41, 59, 0.95) !important;
+}
+
+:not(.dark) .icon-bar {
+  background: rgba(30, 41, 59, 0.8) !important;
+}
+
+:not(.dark) .menu-panel {
+  background: rgba(30, 41, 59, 0.95) !important;
 }
 
 mat-nav-list {

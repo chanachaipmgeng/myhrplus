@@ -1,17 +1,54 @@
-<div class="sidebar-content h-full p-3 md:p-4 overflow-y-auto">
-  <div class="mb-4 md:mb-6">
-    <h2 class="thai-text font-bold text-base md:text-xl text-slate-800 dark:text-slate-100 mb-2 px-2 transition-colors duration-300">เมนูหลัก</h2>
-    <div class="h-px bg-gradient-to-r from-transparent via-white/30 dark:via-slate-700/30 to-transparent transition-colors duration-300"></div>
+<div class="two-layer-sidebar h-full flex">
+  <!-- Left Icon Bar - Module Icons -->
+  <div class="icon-bar flex flex-col items-center py-4 border-r border-white/10 dark:border-slate-700/30">
+    <!-- Logo -->
+    <div class="mb-6">
+      <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-orange-600 dark:from-orange-600 dark:to-orange-700 flex items-center justify-center shadow-lg">
+        <span class="text-white text-xl font-bold">H</span>
+      </div>
+    </div>
+
+    <!-- Module Icons -->
+    <div class="flex flex-col gap-4 flex-1">
+      <button
+        *ngFor="let module of mainModules"
+        [class.active]="selectedModule === module.id"
+        [title]="module.name"
+        (click)="selectModule(module.id)"
+        class="module-icon-btn w-12 h-12 flex items-center justify-center rounded-lg transition-all duration-200 hover:bg-white/10 dark:hover:bg-slate-700/30">
+        <span [class]="module.iconCss" class="text-xl text-white/70 dark:text-slate-300"></span>
+      </button>
+    </div>
   </div>
 
-  <!-- Syncfusion Nested ListView -->
-  <ejs-listview
-    #listview
-    [dataSource]="nestedMenuData"
-    [fields]="listViewFields"
-    [showIcon]="true"
-    [showCheckBox]="false"
-    (select)="onListItemSelect($event)"
-    class="syncfusion-nested-list">
-  </ejs-listview>
+  <!-- Right Menu Panel - Module Menu -->
+  <div class="menu-panel flex-1 overflow-y-auto">
+    <div class="p-4">
+      <!-- Module Header -->
+      <div class="mb-6" *ngIf="selectedModuleData">
+        <h2 class="text-white dark:text-slate-100 text-lg font-semibold mb-1 thai-text">
+          {{ selectedModuleData.name }}
+        </h2>
+        <div class="h-px bg-white/10 dark:bg-slate-700/30 mt-2"></div>
+      </div>
+
+      <!-- Module Menu Items -->
+      <ejs-listview
+        *ngIf="selectedModuleData"
+        #listview
+        [dataSource]="selectedModuleData.menuItems"
+        [fields]="listViewFields"
+        [showIcon]="true"
+        [showCheckBox]="false"
+        (select)="onMenuItemSelect($event)"
+        class="syncfusion-module-menu">
+      </ejs-listview>
+
+      <!-- Empty State -->
+      <div *ngIf="!selectedModuleData" class="flex flex-col items-center justify-center h-full text-white/50 dark:text-slate-400">
+        <span class="e-icons e-folder text-4xl mb-4"></span>
+        <p class="thai-text">เลือกโมดูลเพื่อดูเมนู</p>
+      </div>
+    </div>
+  </div>
 </div>

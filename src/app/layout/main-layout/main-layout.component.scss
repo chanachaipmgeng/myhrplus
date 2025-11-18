@@ -4,17 +4,17 @@
   position: relative;
 }
 
-/* Syncfusion Sidebar Styles */
+/* Syncfusion Sidebar Styles - Two-Layer Design */
 ::ng-deep .syncfusion-sidebar {
-  background: rgba(255, 255, 255, 0.25) !important;
+  background: rgba(15, 23, 42, 0.95) !important;
   backdrop-filter: blur(16px) !important;
   -webkit-backdrop-filter: blur(16px) !important;
-  border-right: 1px solid rgba(255, 255, 255, 0.3) !important;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5) !important;
 }
 
 ::ng-deep .dark .syncfusion-sidebar {
-  background: rgba(15, 23, 42, 0.25) !important;
+  background: rgba(15, 23, 42, 0.95) !important;
   border-right-color: rgba(51, 65, 85, 0.3) !important;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5) !important;
 }
