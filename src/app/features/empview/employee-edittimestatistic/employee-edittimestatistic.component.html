@@ -1,0 +1,87 @@
+<div class="employee-edittimestatistic-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Statistic of Change Requisition</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <!-- Date Selection -->
+      <div class="date-selection">
+        <mat-form-field appearance="outline">
+          <mat-label>Start Date</mat-label>
+          <input matInput [matDatepicker]="startPicker" [(ngModel)]="selectStartDate" readonly>
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>End Date</mat-label>
+          <input matInput [matDatepicker]="endPicker" [(ngModel)]="selectEndDate" readonly>
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="loadData()">Load</button>
+        <button mat-button (click)="showWeek()">Week</button>
+        <button mat-button (click)="showMonth()">Month</button>
+        <button mat-button (click)="prevData()">Prev</button>
+        <button mat-button (click)="nextData()">Next</button>
+        <button mat-button (click)="nowData()">Now</button>
+      </div>
+
+      <!-- Loading -->
+      <div *ngIf="loading" class="loading-container">
+        <mat-spinner></mat-spinner>
+      </div>
+
+      <!-- Data Table -->
+      <div *ngIf="!loading && data && data.length > 0" class="data-table">
+        <table mat-table [dataSource]="data" class="forgetcard-table">
+          <ng-container matColumnDef="dateId">
+            <th mat-header-cell *matHeaderCellDef>Date</th>
+            <td mat-cell *matCellDef="let element">{{ element.dateId }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="forget_in">
+            <th mat-header-cell *matHeaderCellDef>Forget In</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon *ngIf="element.forget_in == '1'" color="warn">warning</mat-icon>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="forget_out">
+            <th mat-header-cell *matHeaderCellDef>Forget Out</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon *ngIf="element.forget_out == '1'" color="warn">warning</mat-icon>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['dateId', 'forget_in', 'forget_out']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['dateId', 'forget_in', 'forget_out']"></tr>
+        </table>
+
+        <!-- Pagination -->
+        <mat-paginator
+          [length]="collectionSize"
+          [pageSize]="pageSize"
+          [pageIndex]="page - 1"
+          (page)="page = $event.pageIndex + 1; loadData()"
+          [pageSizeOptions]="[10, 25, 50, 100]">
+        </mat-paginator>
+      </div>
+
+      <!-- No Data -->
+      <div *ngIf="!loading && noData" class="no-data">
+        <p>No data available</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- Alert Modal -->
+<ng-template #alertModal>
+  <h2 mat-dialog-title>Alert</h2>
+  <mat-dialog-content>{{ msg }}</mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="closeBtnClick()">Close</button>
+  </mat-dialog-actions>
+</ng-template>
+
+

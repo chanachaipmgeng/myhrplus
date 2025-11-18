@@ -1,0 +1,116 @@
+<div class="employee-timestamp-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Working Hour Data</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <!-- Date Selection -->
+      <div class="date-selection">
+        <mat-form-field appearance="outline">
+          <mat-label>Start Date</mat-label>
+          <input matInput [matDatepicker]="startPicker" [(ngModel)]="selectStartDate" readonly>
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>End Date</mat-label>
+          <input matInput [matDatepicker]="endPicker" [(ngModel)]="selectEndDate" readonly>
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="loadData()">Load</button>
+        <button mat-button (click)="showWeek()">Week</button>
+        <button mat-button (click)="showMonth()">Month</button>
+        <button mat-button (click)="prevData()">Prev</button>
+        <button mat-button (click)="nextData()">Next</button>
+        <button mat-button (click)="nowData()">Now</button>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters">
+        <mat-checkbox [(ngModel)]="late" (change)="changeFilter()">Late</mat-checkbox>
+        <mat-checkbox [(ngModel)]="absent" (change)="changeFilter()">Absent</mat-checkbox>
+        <mat-checkbox [(ngModel)]="leave" (change)="changeFilter()">Leave</mat-checkbox>
+        <mat-checkbox [(ngModel)]="overtime" (change)="changeFilter()">Overtime</mat-checkbox>
+      </div>
+
+      <!-- Loading -->
+      <div *ngIf="loading" class="loading-container">
+        <mat-spinner></mat-spinner>
+      </div>
+
+      <!-- Data Table -->
+      <div *ngIf="!loading && dataShow && dataShow.length > 0" class="data-table">
+        <table mat-table [dataSource]="totalData" class="timestamp-table">
+          <ng-container matColumnDef="dateId">
+            <th mat-header-cell *matHeaderCellDef>Date</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.dateId }}<br>
+              <small>{{ convertyyyyMMddTodate(element.dateId || '') }}</small>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="worktime">
+            <th mat-header-cell *matHeaderCellDef>Work Time</th>
+            <td mat-cell *matCellDef="let element">{{ getFormatWorktime(element) }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="punchtime">
+            <th mat-header-cell *matHeaderCellDef>Punch Time</th>
+            <td mat-cell *matCellDef="let element">{{ getPunchtime(element) }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="eventgrp">
+            <th mat-header-cell *matHeaderCellDef>Event</th>
+            <td mat-cell *matCellDef="let element">{{ getEventGrpId(element) }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="lt">
+            <th mat-header-cell *matHeaderCellDef>Late</th>
+            <td mat-cell *matCellDef="let element">{{ element.lt || 0 }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="hour_d">
+            <th mat-header-cell *matHeaderCellDef>Work Hours</th>
+            <td mat-cell *matCellDef="let element">{{ element.hour_d || 0 }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="ac_ot">
+            <th mat-header-cell *matHeaderCellDef>OT</th>
+            <td mat-cell *matCellDef="let element">{{ element.ac_ot || 0 }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['dateId', 'worktime', 'punchtime', 'eventgrp', 'lt', 'hour_d', 'ac_ot']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['dateId', 'worktime', 'punchtime', 'eventgrp', 'lt', 'hour_d', 'ac_ot']"></tr>
+
+          <!-- Total Row -->
+          <tr class="total-row" *ngIf="getTotal()">
+            <td mat-cell><strong>{{ getTotal() }}</strong></td>
+            <td mat-cell></td>
+            <td mat-cell></td>
+            <td mat-cell></td>
+            <td mat-cell><strong>{{ getTotalLate() || 0 }}</strong></td>
+            <td mat-cell><strong>{{ getTotalWork() || 0 }}</strong></td>
+            <td mat-cell><strong>{{ getTotalOtTotal() || 0 }}</strong></td>
+          </tr>
+        </table>
+
+        <!-- Pagination -->
+        <mat-paginator
+          [length]="collectionSize"
+          [pageSize]="pageSize"
+          [pageIndex]="page - 1"
+          (page)="page = $event.pageIndex + 1; getEventPage()"
+          [pageSizeOptions]="[10, 25, 50, 100]">
+        </mat-paginator>
+      </div>
+
+      <!-- No Data -->
+      <div *ngIf="!loading && noData" class="no-data">
+        <p>No data available</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+

@@ -297,6 +297,45 @@ export class AuthService {
     return user && user.roles ? user.roles.includes(role) : false;
   }
 
+  savePassword(
+    oldPass: string,
+    newPass: string,
+    lang: string,
+    ciw: string,
+    cliw: string,
+    niw: string,
+    siw: string
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      // Dynamic import for sha1
+      import('sha1').then((sha1Module) => {
+        const sha1 = sha1Module.default || sha1Module;
+        const body = {
+          password: oldPass,
+          newPassword: typeof sha1 === 'function' ? sha1(newPass) : (sha1 as any)(newPass),
+          lang: lang,
+          niw: niw,
+          ciw: ciw,
+          cliw: cliw,
+          siw: siw
+        };
+
+        this.http
+          .post<any>(`${environment.jbossUrl}${environment.apiEndpoints.employeeView}/user/change-password`, body)
+          .subscribe({
+            next: (response) => {
+              resolve(response);
+            },
+            error: (error) => {
+              reject(error);
+            }
+          });
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  }
+
   hasAnyRole(roles: string[]): boolean {
     return roles.some(role => this.hasRole(role));
   }

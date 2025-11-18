@@ -14,17 +14,17 @@
       </div>
 
       <ng-template #profileContent>
-        <div class="profile-content" *ngIf="employeeProfile">
+        <div class="profile-content" *ngIf="profileData">
           <div class="profile-header">
-            <div class="profile-picture" *ngIf="employeeProfile.picture">
-              <img [src]="employeeProfile.picture" [alt]="employeeProfile.name">
+            <div class="profile-picture" *ngIf="profileData.picture">
+              <img [src]="getPictureUrl()" [alt]="getFullname()">
             </div>
-            <div class="profile-picture-placeholder" *ngIf="!employeeProfile.picture">
+            <div class="profile-picture-placeholder" *ngIf="!profileData.picture">
               <mat-icon>person</mat-icon>
             </div>
             <div class="profile-name">
-              <h2>{{ employeeProfile.name }}</h2>
-              <p class="employee-id">ID: {{ employeeProfile.employeeId }}</p>
+              <h2>{{ getFullname() }}</h2>
+              <p class="employee-id">ID: {{ profileData.employeeId }}</p>
             </div>
           </div>
 
@@ -34,31 +34,31 @@
                 <div class="info-section">
                   <div class="info-row">
                     <span class="info-label">Employee ID:</span>
-                    <span class="info-value">{{ employeeProfile.employeeId }}</span>
+                    <span class="info-value">{{ profileData.employeeId }}</span>
                   </div>
-                  <div class="info-row" *ngIf="employeeProfile.email">
+                  <div class="info-row" *ngIf="profileData.email">
                     <span class="info-label">Email:</span>
-                    <span class="info-value">{{ employeeProfile.email }}</span>
+                    <span class="info-value">{{ profileData.email }}</span>
                   </div>
-                  <div class="info-row" *ngIf="employeeProfile.phone">
+                  <div class="info-row" *ngIf="profileData['phone'] || profileData.mobile || profileData.telNo">
                     <span class="info-label">Phone:</span>
-                    <span class="info-value">{{ employeeProfile.phone }}</span>
+                    <span class="info-value">{{ profileData['phone'] || profileData.mobile || profileData.telNo }}</span>
                   </div>
-                  <div class="info-row" *ngIf="employeeProfile.position">
+                  <div class="info-row" *ngIf="profileData.position">
                     <span class="info-label">Position:</span>
-                    <span class="info-value">{{ employeeProfile.position }}</span>
+                    <span class="info-value">{{ profileData.position?.tdesc || profileData.position?.edesc || '-' }}</span>
                   </div>
-                  <div class="info-row" *ngIf="employeeProfile.department">
+                  <div class="info-row" *ngIf="profileData['department']">
                     <span class="info-label">Department:</span>
-                    <span class="info-value">{{ employeeProfile.department }}</span>
+                    <span class="info-value">{{ profileData['department'] }}</span>
                   </div>
-                  <div class="info-row" *ngIf="employeeProfile.division">
+                  <div class="info-row" *ngIf="profileData['division']">
                     <span class="info-label">Division:</span>
-                    <span class="info-value">{{ employeeProfile.division }}</span>
+                    <span class="info-value">{{ profileData['division'] }}</span>
                   </div>
-                  <div class="info-row" *ngIf="employeeProfile.joinDate">
+                  <div class="info-row" *ngIf="profileData['joinDate'] || profileData.firstHiredate">
                     <span class="info-label">Join Date:</span>
-                    <span class="info-value">{{ employeeProfile.joinDate | dateFormat:'long' }}</span>
+                    <span class="info-value">{{ (profileData['joinDate'] || profileData.firstHiredate) | date:'dd-MM-yyyy' }}</span>
                   </div>
                 </div>
               </div>

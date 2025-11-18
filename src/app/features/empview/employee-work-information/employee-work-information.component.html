@@ -1,0 +1,140 @@
+<div class="employee-work-information-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Employee Work Information</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="loading; else content" class="loading-container">
+        <mat-spinner></mat-spinner>
+      </div>
+
+      <ng-template #content>
+        <!-- Profile Header -->
+        <div class="profile-header" *ngIf="profileData">
+          <div class="profile-picture-section">
+            <img [src]="getPictureUrl()" [alt]="getFullname()" class="profile-picture">
+          </div>
+          <div class="profile-info-section">
+            <h2 class="profile-name">{{ getFullname() }}</h2>
+            <div class="profile-details">
+              <div class="detail-item">
+                <span class="detail-label">Employee ID:</span>
+                <span class="detail-value">{{ profileData.employeeId }}</span>
+              </div>
+              <div class="detail-item" *ngIf="profileData.position">
+                <span class="detail-label">Position:</span>
+                <span class="detail-value">{{ profileData.position?.tdesc || profileData.position?.edesc || '-' }}</span>
+              </div>
+              <div class="detail-item" *ngIf="profileData.email">
+                <span class="detail-label">E-Mail:</span>
+                <span class="detail-value">{{ profileData.email }}</span>
+              </div>
+              <div class="detail-item" *ngIf="empWork && empWork['telExt']">
+                <span class="detail-label">Internal Number:</span>
+                <span class="detail-value">{{ empWork['telExt'] }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabs -->
+        <mat-tab-group [(selectedIndex)]="activeTab" class="mt-4">
+          <!-- Work Information Tab -->
+          <mat-tab label="Work Information">
+            <div class="tab-content" *ngIf="empWork">
+              <div class="info-grid">
+                <div class="info-item">
+                  <label class="info-label">Job Title:</label>
+                  <span class="info-value">{{ empWork['job']?.tdesc || empWork['job']?.edesc || '-' }}</span>
+                </div>
+                <div class="info-item" *ngIf="!empId">
+                  <label class="info-label">PL ID:</label>
+                  <span class="info-value">{{ empWork['pl']?.plId || '-' }}</span>
+                </div>
+                <div class="info-item" *ngIf="!empId">
+                  <label class="info-label">Head Employee ID:</label>
+                  <span class="info-value">{{ empWork['bossId'] || '-' }}</span>
+                </div>
+                <div class="info-item" *ngIf="!empId">
+                  <label class="info-label">Employee Group:</label>
+                  <span class="info-value">{{ empWork['group']?.tdesc || empWork['group']?.edesc || '-' }}</span>
+                </div>
+                <div class="info-item">
+                  <label class="info-label">Position:</label>
+                  <span class="info-value">{{ empWork['position']?.tdesc || empWork['position']?.edesc || '-' }}</span>
+                </div>
+                <div class="info-item">
+                  <label class="info-label">BU1:</label>
+                  <span class="info-value">{{ empWork['bu1']?.tdesc || empWork['bu1']?.edesc || '-' }}</span>
+                </div>
+                <div class="info-item">
+                  <label class="info-label">BU2:</label>
+                  <span class="info-value">{{ empWork['bu2']?.tdesc || empWork['bu2']?.edesc || '-' }}</span>
+                </div>
+                <div class="info-item">
+                  <label class="info-label">BU3:</label>
+                  <span class="info-value">{{ empWork['bu3']?.tdesc || empWork['bu3']?.edesc || '-' }}</span>
+                </div>
+                <div class="info-item">
+                  <label class="info-label">BU4:</label>
+                  <span class="info-value">{{ empWork['bu4']?.tdesc || empWork['bu4']?.edesc || '-' }}</span>
+                </div>
+                <div class="info-item">
+                  <label class="info-label">BU5:</label>
+                  <span class="info-value">{{ empWork['bu5']?.tdesc || empWork['bu5']?.edesc || '-' }}</span>
+                </div>
+                <div class="info-item" *ngIf="!empId">
+                  <label class="info-label">Branch:</label>
+                  <span class="info-value">{{ empWork['branch']?.tdesc || empWork['branch']?.edesc || '-' }}</span>
+                </div>
+                <div class="info-item" *ngIf="!empId">
+                  <label class="info-label">Work Place:</label>
+                  <span class="info-value">{{ empWork['workarea']?.tdesc || empWork['workarea']?.edesc || '-' }}</span>
+                </div>
+                <div class="info-item">
+                  <label class="info-label">Type Employee:</label>
+                  <span class="info-value">{{ empWork['type']?.tdesc || empWork['type']?.edesc || '-' }}</span>
+                </div>
+                <div class="info-item">
+                  <label class="info-label">Shift:</label>
+                  <span class="info-value">{{ empWork['shift']?.tdesc || empWork['shift']?.edesc || '-' }}</span>
+                </div>
+                <div class="info-item" *ngIf="empWork.firstHiredate">
+                  <label class="info-label">First Hire Date:</label>
+                  <span class="info-value">{{ empWork.firstHiredate | date:'dd-MM-yyyy' }}</span>
+                </div>
+                <div class="info-item" *ngIf="empWork.firstHiredate">
+                  <label class="info-label">Working Period:</label>
+                  <span class="info-value">{{ yearGenerate() }} ปี {{ monthGenerate() }} เดือน {{ dateGenerate() }} วัน</span>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+
+          <!-- Movements Tab -->
+          <mat-tab label="Movements" *ngIf="empMove && empMove.length > 0">
+            <div class="tab-content">
+              <mat-table [dataSource]="empMove" class="movements-table">
+                <ng-container matColumnDef="eff_date">
+                  <mat-header-cell *matHeaderCellDef>Effective Date</mat-header-cell>
+                  <mat-cell *matCellDef="let move">{{ move.eff_date | date:'dd-MM-yyyy' }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="adj_type">
+                  <mat-header-cell *matHeaderCellDef>Adjustment Type</mat-header-cell>
+                  <mat-cell *matCellDef="let move">{{ move.adj_type || '-' }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="position">
+                  <mat-header-cell *matHeaderCellDef>Position</mat-header-cell>
+                  <mat-cell *matCellDef="let move">{{ move.emp_position?.tdesc || move.emp_position?.edesc || '-' }}</mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="['eff_date', 'adj_type', 'position']"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: ['eff_date', 'adj_type', 'position']"></mat-row>
+              </mat-table>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+</div>
+

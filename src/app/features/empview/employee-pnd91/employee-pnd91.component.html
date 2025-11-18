@@ -1,27 +1,23 @@
-<div class="payslip-viewer-container">
+<div class="employee-pnd91-container">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>e-Payslip</mat-card-title>
+      <mat-card-title>PND91</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="form-section">
         <mat-form-field appearance="outline">
-          <mat-label>Period</mat-label>
-          <mat-select [(ngModel)]="periodSelect">
-            <mat-option *ngFor="let period of periodList" [value]="period">
-              {{ getMonthName(period.month) }} {{ period.year }}
+          <mat-label>Year</mat-label>
+          <mat-select [(ngModel)]="yearSelected">
+            <mat-option *ngFor="let year of yearList" [value]="year.value">
+              {{ year.value }}
             </mat-option>
           </mat-select>
         </mat-form-field>
 
-        <button mat-raised-button color="primary" (click)="loadPDF()" [disabled]="isLoading || !periodSelect">
+        <button mat-raised-button color="primary" (click)="loadPDF()" [disabled]="isLoading">
           <mat-spinner *ngIf="isLoading" diameter="20" class="inline-spinner"></mat-spinner>
-          <span *ngIf="!isLoading">Load Payslip</span>
+          <span *ngIf="!isLoading">Load PDF</span>
         </button>
-      </div>
-
-      <div *ngIf="msg" class="error-message">
-        <p>{{ msg }}</p>
       </div>
 
       <div *ngIf="pdfSrc" class="pdf-info">
@@ -30,4 +26,5 @@
     </mat-card-content>
   </mat-card>
 </div>
+
 

@@ -1,0 +1,101 @@
+<div class="employee-time-warning-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Punch In/Out Checking Data</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <!-- Date Selection -->
+      <div class="date-selection">
+        <mat-form-field appearance="outline">
+          <mat-label>Start Date</mat-label>
+          <input matInput [matDatepicker]="startPicker" [(ngModel)]="selectStartDate" readonly>
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>End Date</mat-label>
+          <input matInput [matDatepicker]="endPicker" [(ngModel)]="selectEndDate" readonly>
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="loadData()">Load</button>
+        <button mat-button (click)="showWeek()">Week</button>
+        <button mat-button (click)="showMonth()">Month</button>
+        <button mat-button (click)="prevData()">Prev</button>
+        <button mat-button (click)="nextData()">Next</button>
+        <button mat-button (click)="nowData()">Now</button>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters">
+        <mat-checkbox [(ngModel)]="selectall" (change)="selectAll()">Select All</mat-checkbox>
+        <mat-checkbox [(ngModel)]="forgotswipein">Forgot Swipe In</mat-checkbox>
+        <mat-checkbox [(ngModel)]="forgotswipeout">Forgot Swipe Out</mat-checkbox>
+        <mat-checkbox [(ngModel)]="late">Late</mat-checkbox>
+        <mat-checkbox [(ngModel)]="otbefore">OT Before</mat-checkbox>
+        <mat-checkbox [(ngModel)]="otafter">OT After</mat-checkbox>
+        <mat-checkbox [(ngModel)]="leavebeforefinish">Leave Before Finish</mat-checkbox>
+        <mat-checkbox [(ngModel)]="swipecardinholiday">Swipe Card in Holiday</mat-checkbox>
+        <mat-checkbox [(ngModel)]="otoverbefore">OT Over Before</mat-checkbox>
+        <mat-checkbox [(ngModel)]="otoverafter">OT Over After</mat-checkbox>
+        <mat-checkbox [(ngModel)]="otlessbefore">OT Less Before</mat-checkbox>
+        <mat-checkbox [(ngModel)]="otlessafter">OT Less After</mat-checkbox>
+      </div>
+
+      <!-- Loading -->
+      <div *ngIf="loading" class="loading-container">
+        <mat-spinner></mat-spinner>
+      </div>
+
+      <!-- Data Table -->
+      <div *ngIf="!loading && dataShow && dataShow.length > 0" class="data-table">
+        <table mat-table [dataSource]="dataShow" class="warning-table">
+          <ng-container matColumnDef="dateId">
+            <th mat-header-cell *matHeaderCellDef>Date</th>
+            <td mat-cell *matCellDef="let element">{{ element.dateId }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="forgotswipein">
+            <th mat-header-cell *matHeaderCellDef>Forgot Swipe In</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon *ngIf="element.forgotswipein" color="warn">warning</mat-icon>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="forgotswipeout">
+            <th mat-header-cell *matHeaderCellDef>Forgot Swipe Out</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon *ngIf="element.forgotswipeout" color="warn">warning</mat-icon>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="late">
+            <th mat-header-cell *matHeaderCellDef>Late</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon *ngIf="element.late" color="warn">warning</mat-icon>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['dateId', 'forgotswipein', 'forgotswipeout', 'late']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['dateId', 'forgotswipein', 'forgotswipeout', 'late']"></tr>
+        </table>
+
+        <!-- Pagination -->
+        <mat-paginator
+          [length]="collectionSize"
+          [pageSize]="pageSize"
+          [pageIndex]="page - 1"
+          (page)="page = $event.pageIndex + 1"
+          [pageSizeOptions]="[10, 25, 50, 100]">
+        </mat-paginator>
+      </div>
+
+      <!-- No Data -->
+      <div *ngIf="!loading && noData" class="no-data">
+        <p>No data available</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+

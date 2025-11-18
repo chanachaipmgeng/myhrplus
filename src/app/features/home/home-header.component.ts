@@ -1,11 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthService, User } from '../../core/services/auth.service';
-import { EmployeeService } from '../../core/services/employee.service';
+import { EmployeeService, SetCharacter, Role } from '../../core/services/employee.service';
 import { environment } from '../../../environments/environment';
+import jwt_decode from 'jwt-decode';
 
 export interface ConfigModel {
   code: string;
@@ -28,6 +30,11 @@ export interface EmployeeProfile {
   styleUrls: ['./home-header.component.scss']
 })
 export class HomeHeaderComponent implements OnInit, OnDestroy {
+  @ViewChild('settingsModal') settingsModal!: TemplateRef<any>;
+  @ViewChild('alertModal') alertModal!: TemplateRef<any>;
+  @ViewChild('confirmModal') confirmModal!: TemplateRef<any>;
+  @ViewChild('errorModal') errorModal!: TemplateRef<any>;
+
   currentUser: User | null = null;
   empProfile: EmployeeProfile | null = null;
   countNewNote = 0;
@@ -39,6 +46,28 @@ export class HomeHeaderComponent implements OnInit, OnDestroy {
 
   public selectedLanguage: string = 'th';
   public selectedLanguageIcon: string = 'th';
+
+  // Settings Modal Properties
+  activeKeep = 1;
+  setCharacterPass: SetCharacter | undefined;
+  user_level = '';
+  user_role = '';
+  oldPassword = '';
+  password = '';
+  confirmPassword = '';
+  checkPass = false;
+  checkPassword = false;
+  checkNumPassword = false;
+  checkLengthPassword = false;
+  checkSmallPassword = false;
+  validMin = 0;
+  validMax = 0;
+  validAZ = 0;
+  validaz = 0;
+  validNum = 0;
+  validSpecial = 0;
+  checkLang = '';
+  msg = '';
 
   public languages: any[] = [
     {
@@ -85,10 +114,15 @@ export class HomeHeaderComponent implements OnInit, OnDestroy {
     private router: Router,
     private authService: AuthService,
     private employeeService: EmployeeService,
-    private http: HttpClient
+    private http: HttpClient,
+    private dialog: MatDialog
   ) {
     this.currentUser = this.authService.getCurrentUser();
     this.userToken = sessionStorage.getItem('userToken') || null;
+    if (this.currentUser) {
+      this.user_level = this.currentUser.user_level || '';
+      this.user_role = this.currentUser.user_role || '';
+    }
   }
 
   ngOnInit(): void {
@@ -202,9 +236,253 @@ export class HomeHeaderComponent implements OnInit, OnDestroy {
   }
 
   navigateToSettings(): void {
-    // Open settings modal or navigate to settings page
-    // For now, navigate to preferences
-    this.router.navigate(['/personal/preferences']);
+    // Load password settings
+    this.loadPasswordSettings();
+    // Open settings modal
+    this.dialog.open(this.settingsModal, {
+      width: '900px',
+      maxWidth: '95vw',
+      disableClose: false,
+      panelClass: 'settings-modal'
+    });
+  }
+
+  private loadPasswordSettings(): void {
+    this.employeeService.getSetPass()
+      .then((result) => {
+        this.setCharacterPass = result;
+        if (this.setCharacterPass?.role) {
+          this.validMax = this.setCharacterPass.role.passwordMax || 0;
+          this.validMin = this.setCharacterPass.role.passwordMin || 0;
+          this.validAZ = this.setCharacterPass.role.passwordStr || 0;
+          this.validaz = this.setCharacterPass.role.passwordStrsm || 0;
+          this.validNum = this.setCharacterPass.role.passwordNumber || 0;
+          this.validSpecial = this.setCharacterPass.role.passwordSpecial || 0;
+        }
+        // Set default language
+        this.checkLang = result.lang === 'ENG' ? 'ENG' : 'THA';
+      })
+      .catch((reason) => {
+        this.msg = reason.message || 'Error loading password settings';
+        this.dialog.open(this.alertModal, {
+          width: '400px',
+          disableClose: false
+        });
+      });
+  }
+
+  changePass(): void {
+    const M = this.password.match(/([A-Z])/g) ? this.password.match(/([A-Z])/g)!.length : 0;
+    const m = this.password.match(/([a-z])/g) ? this.password.match(/([a-z])/g)!.length : 0;
+    const num = this.password.match(/([0-9])/g) ? this.password.match(/([0-9])/g)!.length : 0;
+    const special = this.password.match(/([@#+$%])/g) ? this.password.match(/([@#+$%])/g)!.length : 0;
+
+    if (this.password.length < this.validMin || this.password.length > this.validMax) {
+      this.checkLengthPassword = true;
+    } else {
+      this.checkLengthPassword = false;
+      if (M < this.validAZ) {
+        this.checkPassword = true;
+      } else {
+        this.checkPassword = false;
+        if (m < this.validaz) {
+          this.checkSmallPassword = true;
+        } else {
+          this.checkSmallPassword = false;
+          this.checkPassword = false;
+          if (num < this.validNum) {
+            this.checkNumPassword = true;
+          } else {
+            this.checkNumPassword = false;
+            if (special < this.validSpecial) {
+              this.checkPassword = true;
+            } else {
+              this.checkPassword = false;
+            }
+          }
+        }
+      }
+    }
+
+    if (this.confirmPassword.length > 0) {
+      if (this.password === this.confirmPassword) {
+        this.checkPass = false;
+      } else {
+        this.checkPass = true;
+      }
+    }
+  }
+
+  savePassword(): void {
+    const M = this.password.match(/([A-Z])/g) ? this.password.match(/([A-Z])/g)!.length : 0;
+    const m = this.password.match(/([a-z])/g) ? this.password.match(/([a-z])/g)!.length : 0;
+    const num = this.password.match(/([0-9])/g) ? this.password.match(/([0-9])/g)!.length : 0;
+    const special = this.password.match(/([@#+$%])/g) ? this.password.match(/([@#+$%])/g)!.length : 0;
+
+    // Hash old password if not first login
+    if (this.currentUser?.firstlogin === 'true') {
+      // First login - use plain password
+      this.callSavePassword(this.oldPassword, M, m, num, special);
+    } else {
+      // Not first login - hash old password
+      import('sha1').then((sha1Module) => {
+        const sha1 = sha1Module.default || sha1Module;
+        const checkoldPassword = typeof sha1 === 'function' 
+          ? sha1(this.oldPassword) 
+          : (sha1 as any)(this.oldPassword);
+        this.callSavePassword(checkoldPassword, M, m, num, special);
+      }).catch((error) => {
+        console.error('Error importing sha1:', error);
+      });
+    }
+  }
+
+  private callSavePassword(oldPasswordHash: string, M: number, m: number, num: number, special: number): void {
+    this.authService
+      .savePassword(
+        oldPasswordHash,
+        this.password,
+        this.checkLang,
+        M.toString(),
+        m.toString(),
+        num.toString(),
+        special.toString()
+      )
+      .then((response) => {
+        if (response['success']) {
+          this.msg = this.selectedLanguage === 'th' ? 'การเปลี่ยนรหัสผ่านสำเร็จ' : 'Change to Password Success';
+          this.dialog.open(this.confirmModal, {
+            width: '400px',
+            disableClose: false
+          });
+          this.loginAfterChangePass();
+        } else {
+          if (this.currentUser?.firstlogin === 'true') {
+            // Retry with hashed password
+            const updatedUser = { ...this.currentUser, firstlogin: 'false' };
+            sessionStorage.setItem('currentUser', JSON.stringify(updatedUser));
+            this.currentUser = updatedUser;
+            // Retry with hashed password
+            import('sha1').then((sha1Module) => {
+              const sha1 = sha1Module.default || sha1Module;
+              const checkoldPassword = typeof sha1 === 'function' 
+                ? sha1(this.oldPassword) 
+                : (sha1 as any)(this.oldPassword);
+              this.callSavePassword(checkoldPassword, M, m, num, special);
+            });
+          } else {
+            this.msg = this.checkConfirm(response.message);
+          }
+        }
+      })
+      .catch((reason) => {
+        console.error('Error saving password:', reason);
+      });
+  }
+
+  private loginAfterChangePass(): void {
+    if (!this.currentUser) return;
+
+    const body = {
+      username: this.currentUser.username,
+      password: this.password,
+      dbName: sessionStorage.getItem('dbName') || '',
+      dbcomp: '100',
+      lang: 'th'
+    };
+
+    this.http.post<any>(`${environment.jbossUrl}/usapi/authen`, body)
+      .subscribe({
+        next: (response: any) => {
+          sessionStorage.setItem('userToken', response.accessToken);
+          const decoded: any = jwt_decode(response.accessToken);
+          sessionStorage.setItem('currentUser', JSON.stringify(decoded));
+          // Update current user
+          this.currentUser = decoded;
+        },
+        error: (error) => {
+          console.error('Error re-login after password change:', error);
+        }
+      });
+  }
+
+  private checkConfirm(status: string): string {
+    let th = '';
+    let en = '';
+    this.msg = status.split(':')[1] || status;
+
+    if (this.msg === '-6') {
+      th = 'รหัสผ่านนี้ถูกใช้ไปแล้ว';
+      en = 'password is used';
+    } else if (this.msg === '-11') {
+      th = 'รหัสผ่านไม่ถูกต้อง';
+      en = 'password invalid';
+    } else if (this.msg === '-7' || this.msg === '-8' || this.msg === '-9' || this.msg === '-10') {
+      th = 'รหัสผ่านมีตัวเลขหรือตัวอักษรน้อยกว่าที่กำหนด';
+      en = 'Not enough number or charactor';
+    } else if (this.msg === '4') {
+      th = 'ลบข้อมูลเรียบร้อย';
+      en = 'Delete data sucessfull';
+    } else if (this.msg === '1' || this.msg === '2') {
+      th = 'แก้ไขข้อมูลเรียบร้อย';
+      en = 'Update data sucessfull';
+    } else if (this.msg === '-1' || this.msg === '-2' || this.msg === '-6') {
+      th = 'เพิ่มข้อมูลไม่ได้';
+      en = "Can't save data";
+    }
+
+    this.msg = this.selectedLanguage === 'th' ? th : en;
+    this.dialog.open(this.errorModal, {
+      width: '400px',
+      disableClose: false
+    });
+    return this.msg;
+  }
+
+  getDesc(status: string): string {
+    if (status === '0') {
+      return this.selectedLanguage === 'th' ? 'รหัสผ่านถูกตั้งใหม่' : 'Password has been reset';
+    } else if (status === '1') {
+      return this.selectedLanguage === 'th' ? 'รหัสผ่านยังไม่หมดอายุ' : 'Never Expired';
+    } else if (status === '2') {
+      return this.selectedLanguage === 'th' ? 'รหัสผ่านหมดอายุตามวันที่' : 'Password expire date';
+    } else if (status === '3') {
+      return this.selectedLanguage === 'th' ? 'รหัสผ่านหมดอายุทันที' : 'Immediately Expired';
+    }
+    return '';
+  }
+
+  closeModal(): void {
+    this.dialog.closeAll();
+  }
+
+  // Helper methods for password validation display
+  hasValidLength(): boolean {
+    return !this.checkLengthPassword && this.password.length >= this.validMin;
+  }
+
+  hasValidUppercase(): boolean {
+    if (!this.password || this.password.length === 0) return false;
+    const match = this.password.match(/([A-Z])/g);
+    return !this.checkPassword && match !== null && match.length >= this.validAZ;
+  }
+
+  hasValidLowercase(): boolean {
+    if (!this.password || this.password.length === 0) return false;
+    const match = this.password.match(/([a-z])/g);
+    return !this.checkSmallPassword && match !== null && match.length >= this.validaz;
+  }
+
+  hasValidNumber(): boolean {
+    if (!this.password || this.password.length === 0) return false;
+    const match = this.password.match(/([0-9])/g);
+    return !this.checkNumPassword && match !== null && match.length >= this.validNum;
+  }
+
+  hasValidSpecial(): boolean {
+    if (!this.password || this.password.length === 0) return false;
+    const match = this.password.match(/([@#+$%])/g);
+    return match !== null && match.length >= this.validSpecial;
   }
 
   navigateToHRManagement(): void {

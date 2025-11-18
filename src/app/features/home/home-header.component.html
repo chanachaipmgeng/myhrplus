@@ -140,3 +140,213 @@
   </div>
 </nav>
 
+<!-- Settings Modal -->
+<ng-template #settingsModal>
+  <div class="profile-modal-container">
+    <div class="text-center">
+      <mat-tab-group [(selectedIndex)]="activeKeep" class="settings-tabs">
+        <!-- User Information Tab -->
+        <mat-tab label="ข้อมูลผู้ใช้">
+          <div class="tab-content">
+            <div class="profile-content" *ngIf="empProfile || currentUser">
+              <mat-card class="profile-card anim-fade-in">
+                <mat-card-content>
+                  <div class="profile-layout">
+                    <div class="profile-avatar-section">
+                      <div class="profile-pic-wrapper">
+                        <img [src]="getProfilePictureUrl()" class="profile-pic" [alt]="getFullname()">
+                      </div>
+                    </div>
+                    <div class="profile-info-section">
+                      <h3 class="profile-name thai-text">{{ getFullname() }}</h3>
+                      <div class="profile-details">
+                        <div class="detail-item">
+                          <span class="detail-label thai-text">กลุ่มผู้ใช้</span>
+                          <span class="detail-value">{{ user_level || '-' }}</span>
+                        </div>
+                        <div class="detail-item">
+                          <span class="detail-label thai-text">บทบาท</span>
+                          <span class="detail-value">{{ user_role || '-' }}</span>
+                        </div>
+                        <div class="detail-item" *ngIf="setCharacterPass">
+                          <span class="detail-label thai-text">รหัสผ่านหมดอายุ</span>
+                          <span class="detail-value">
+                            {{ setCharacterPass.expireDate && setCharacterPass.passwordStatus !== '1' 
+                              ? (setCharacterPass.expireDate | date: 'dd-MM-yyyy') 
+                              : '-' }}
+                          </span>
+                        </div>
+                        <div class="detail-item" *ngIf="setCharacterPass">
+                          <span class="detail-label thai-text">สถานะรหัสผ่าน</span>
+                          <span class="detail-value">
+                            {{ setCharacterPass.passwordStatus ? getDesc(setCharacterPass.passwordStatus) : '-' }}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+        </mat-tab>
+
+        <!-- Password Settings Tab -->
+        <mat-tab label="การตั้งค่า">
+          <div class="tab-content">
+            <mat-card class="settings-card anim-fade-in">
+              <mat-card-content>
+                <div class="settings-layout">
+                  <div class="settings-form-section border-right-form">
+                    <h4 class="form-title thai-text">รหัสผ่านใหม่</h4>
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label class="thai-text">รหัสผ่านเก่า</mat-label>
+                      <input
+                        matInput
+                        type="password"
+                        [(ngModel)]="oldPassword"
+                        id="oldPassword">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label class="thai-text">รหัสผ่านใหม่</mat-label>
+                      <input
+                        matInput
+                        type="password"
+                        [(ngModel)]="password"
+                        id="newPassword"
+                        [class.is-invalid]="checkPassword || checkNumPassword || checkLengthPassword || checkSmallPassword || (checkPass && confirmPassword !== '')"
+                        (ngModelChange)="changePass()">
+                      <mat-error *ngIf="checkPassword || checkNumPassword || checkLengthPassword || checkSmallPassword" class="thai-text">
+                        รหัสผ่านไม่ตรงตามข้อกำหนด
+                      </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label class="thai-text">ยืนยันรหัสผ่าน</mat-label>
+                      <input
+                        matInput
+                        type="password"
+                        [(ngModel)]="confirmPassword"
+                        id="confirmPassword"
+                        [class.is-invalid]="checkPass && confirmPassword !== ''"
+                        (ngModelChange)="changePass()">
+                      <mat-error *ngIf="checkPass && confirmPassword !== ''" class="thai-text">
+                        {{ selectedLanguage === 'th' ? 'รหัสผ่านไม่ตรงกัน' : 'Passwords do not match' }}
+                      </mat-error>
+                    </mat-form-field>
+                    <mat-divider class="my-4"></mat-divider>
+                    <h4 class="form-title thai-text">ภาษา</h4>
+                    <mat-radio-group [(ngModel)]="checkLang" class="radio-group">
+                      <mat-radio-button value="THA" class="radio-option">
+                        <span class="thai-text">ไทย</span>
+                      </mat-radio-button>
+                      <mat-radio-button value="ENG" class="radio-option">
+                        <span>English</span>
+                      </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                  <div class="password-rules-section">
+                    <div class="password-rules">
+                      <h6 class="thai-text">ข้อกำหนดรหัสผ่าน</h6>
+                      <small [class.valid]="hasValidLength()">
+                        <mat-icon>{{ hasValidLength() ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+                        <span class="thai-text">ความยาว {{ validMin }} - {{ validMax }} ตัวอักษร</span>
+                      </small>
+                      <small [class.valid]="hasValidUppercase()">
+                        <mat-icon>{{ hasValidUppercase() ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+                        <span class="thai-text">ตัวอักษรใหญ่ [A-Z] อย่างน้อย {{ validAZ }}</span>
+                      </small>
+                      <small [class.valid]="hasValidLowercase()">
+                        <mat-icon>{{ hasValidLowercase() ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+                        <span class="thai-text">ตัวอักษรเล็ก [a-z] อย่างน้อย {{ validaz }}</span>
+                      </small>
+                      <small [class.valid]="hasValidNumber()">
+                        <mat-icon>{{ hasValidNumber() ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+                        <span class="thai-text">ตัวเลข [0-9] อย่างน้อย {{ validNum }}</span>
+                      </small>
+                      <small [class.valid]="hasValidSpecial()">
+                        <mat-icon>{{ hasValidSpecial() ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+                        <span class="thai-text">อักขระพิเศษ [&#64;#+$%] อย่างน้อย {{ validSpecial }}</span>
+                      </small>
+                      <mat-divider class="my-3"></mat-divider>
+                      <small class="form-text text-muted thai-text">
+                        - รหัสผ่านจะมีผลเมื่อมีการ Login เข้าระบบใหม่
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center mt-4">
+                  <button
+                    [disabled]="checkSmallPassword || checkPass || checkNumPassword || checkLengthPassword || password === '' || confirmPassword === ''"
+                    (click)="savePassword()"
+                    class="btn-save"
+                    mat-raised-button
+                    color="primary">
+                    <mat-icon>save</mat-icon>
+                    <span class="thai-text ml-2">บันทึก</span>
+                  </button>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+    <button type="button" class="btn-close-modal" (click)="closeModal()">
+      &times;
+    </button>
+  </div>
+</ng-template>
+
+<!-- Alert Modal -->
+<ng-template #alertModal>
+  <div class="modal-header">
+    <h5 class="modal-title thai-text">แจ้งเตือน</h5>
+    <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{ msg }}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-info" (click)="closeModal()" mat-button>
+      <span class="thai-text">ตกลง</span>
+    </button>
+  </div>
+</ng-template>
+
+<!-- Confirm Modal -->
+<ng-template #confirmModal>
+  <div class="modal-header">
+    <h5 class="modal-title thai-text">แจ้งเตือน</h5>
+    <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{ msg }}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-info" (click)="closeModal()" mat-button>
+      <span class="thai-text">ตกลง</span>
+    </button>
+  </div>
+</ng-template>
+
+<!-- Error Modal -->
+<ng-template #errorModal>
+  <div class="modal-header">
+    <h5 class="modal-title thai-text">แจ้งเตือน</h5>
+    <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{ msg }}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-info" (click)="closeModal()" mat-button>
+      <span class="thai-text">ตกลง</span>
+    </button>
+  </div>
+</ng-template>

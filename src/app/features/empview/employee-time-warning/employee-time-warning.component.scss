@@ -1,0 +1,45 @@
+.employee-time-warning-container {
+  padding: 20px;
+
+  .date-selection {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+
+    mat-form-field {
+      width: 150px;
+    }
+  }
+
+  .filters {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+  }
+
+  .data-table {
+    overflow-x: auto;
+
+    .warning-table {
+      width: 100%;
+    }
+  }
+
+  .no-data {
+    text-align: center;
+    padding: 60px;
+    color: #666;
+  }
+}
+
+

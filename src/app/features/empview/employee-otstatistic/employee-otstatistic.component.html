@@ -1,0 +1,78 @@
+<div class="employee-otstatistic-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Statistic of OT Requisition</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <!-- Date Selection -->
+      <div class="date-selection">
+        <mat-form-field appearance="outline">
+          <mat-label>Start Date</mat-label>
+          <input matInput [matDatepicker]="startPicker" [(ngModel)]="selectStartDate" readonly>
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>End Date</mat-label>
+          <input matInput [matDatepicker]="endPicker" [(ngModel)]="selectEndDate" readonly>
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="loadData()">Load</button>
+        <button mat-button (click)="showWeek()">Week</button>
+        <button mat-button (click)="showMonth()">Month</button>
+        <button mat-button (click)="prevData()">Next</button>
+        <button mat-button (click)="nextData()">Prev</button>
+        <button mat-button (click)="nowData()">Now</button>
+      </div>
+
+      <!-- Loading -->
+      <div *ngIf="loading" class="loading-container">
+        <mat-spinner></mat-spinner>
+      </div>
+
+      <!-- Data Table -->
+      <div *ngIf="!loading && data && data.length > 0" class="data-table">
+        <table mat-table [dataSource]="data" class="otstatistic-table">
+          <ng-container matColumnDef="end_date">
+            <th mat-header-cell *matHeaderCellDef>End Date</th>
+            <td mat-cell *matCellDef="let element">{{ element.end_date | date:'dd-MM-yyyy' }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="ot_hours">
+            <th mat-header-cell *matHeaderCellDef>OT Hours</th>
+            <td mat-cell *matCellDef="let element">{{ element.ot_hours || 0 }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['end_date', 'ot_hours']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['end_date', 'ot_hours']"></tr>
+        </table>
+
+        <!-- Pagination -->
+        <mat-paginator
+          [length]="collectionSize"
+          [pageSize]="pageSize"
+          [pageIndex]="page - 1"
+          (page)="page = $event.pageIndex + 1; loadData()"
+          [pageSizeOptions]="[10, 25, 50, 100]">
+        </mat-paginator>
+      </div>
+
+      <!-- No Data -->
+      <div *ngIf="!loading && noData" class="no-data">
+        <p>No data available</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- Alert Modal -->
+<ng-template #alertModal>
+  <h2 mat-dialog-title>Alert</h2>
+  <mat-dialog-content>{{ msg }}</mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="closeBtnClick()">Close</button>
+  </mat-dialog-actions>
+</ng-template>
+
+
