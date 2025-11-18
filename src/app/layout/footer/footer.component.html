@@ -1,7 +1,10 @@
-<footer class="footer">
-  <div class="footer-content">
-    <span>&copy; {{ currentYear }} {{ appName }}. All rights reserved.</span>
-    <span>Version {{ version }}</span>
+<footer class="glass-nav !bg-white/20 dark:!bg-slate-900/20 !backdrop-blur-lg border-t border-white/30 dark:border-slate-700/30 shadow-glass-sm mt-auto transition-all duration-300">
+  <div class="footer-content px-6 py-4">
+    <span class="thai-text text-sm text-slate-600 dark:text-slate-400 transition-colors duration-300">
+      &copy; {{ currentYear }} {{ appName }}. สงวนลิขสิทธิ์
+    </span>
+    <span class="text-sm text-slate-500 dark:text-slate-500 font-mono transition-colors duration-300">
+      v{{ version }}
+    </span>
   </div>
 </footer>
-

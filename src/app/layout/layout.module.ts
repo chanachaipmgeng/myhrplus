@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { ThemeToggleComponent } from '../shared/components/theme-toggle/theme-toggle.component';
 
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { HeaderComponent } from './header/header.component';
@@ -18,11 +19,11 @@ import { FooterComponent } from './footer/footer.component';
   imports: [
     CommonModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    ThemeToggleComponent // Standalone component
   ],
   exports: [
     MainLayoutComponent
   ]
 })
 export class LayoutModule { }
-

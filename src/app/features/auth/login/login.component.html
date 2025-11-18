@@ -1,46 +1,78 @@
-<div class="login-container">
-  <mat-card class="login-card">
-    <mat-card-header>
-      <mat-card-title>HR System Login</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+<div class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-all duration-300">
+  <div class="w-full max-w-md animate-fade-in">
+    <div class="glass-card-strong dark:!bg-slate-900/40 dark:border-slate-700/40 p-8 animate-scale-in transition-all duration-300">
+      <!-- Logo/Header Section -->
+      <div class="text-center mb-8">
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-indigo-700 mb-4 shadow-lg">
+          <mat-icon class="!text-white !text-5xl !w-12 !h-12">business_center</mat-icon>
+        </div>
+        <h1 class="thai-text font-bold text-2xl text-slate-800 dark:text-slate-100 mb-2 transition-colors duration-300">
+          ระบบบริหารทรัพยากรบุคคล
+        </h1>
+        <p class="text-sm text-slate-600 dark:text-slate-400 font-medium transition-colors duration-300">
+          HR System - Secure Login
+        </p>
+      </div>
+
+      <!-- Login Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-5">
+        <!-- Username Field -->
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Username</mat-label>
-          <input matInput formControlName="username" required>
-          <mat-icon matPrefix>person</mat-icon>
-          <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
-            Username is required
+          <mat-label class="thai-text">ชื่อผู้ใช้</mat-label>
+          <input 
+            matInput 
+            formControlName="username" 
+            required
+            class="glass-input dark:!bg-slate-800/20 dark:!text-slate-200 dark:placeholder-slate-500">
+          <mat-icon matPrefix class="!text-slate-500 dark:!text-slate-400">person</mat-icon>
+          <mat-error *ngIf="loginForm.get('username')?.hasError('required')" class="thai-text">
+            กรุณากรอกชื่อผู้ใช้
           </mat-error>
         </mat-form-field>
 
+        <!-- Password Field -->
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Password</mat-label>
-          <input matInput type="password" formControlName="password" required>
-          <mat-icon matPrefix>lock</mat-icon>
-          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
-            Password is required
+          <mat-label class="thai-text">รหัสผ่าน</mat-label>
+          <input 
+            matInput 
+            type="password" 
+            formControlName="password" 
+            required
+            class="glass-input dark:!bg-slate-800/20 dark:!text-slate-200 dark:placeholder-slate-500">
+          <mat-icon matPrefix class="!text-slate-500 dark:!text-slate-400">lock</mat-icon>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')" class="thai-text">
+            กรุณากรอกรหัสผ่าน
           </mat-error>
         </mat-form-field>
 
+        <!-- Company Field -->
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Company</mat-label>
-          <input matInput formControlName="dbcomp">
-          <mat-icon matPrefix>business</mat-icon>
+          <mat-label class="thai-text">บริษัท</mat-label>
+          <input 
+            matInput 
+            formControlName="dbcomp"
+            class="glass-input dark:!bg-slate-800/20 dark:!text-slate-200 dark:placeholder-slate-500">
+          <mat-icon matPrefix class="!text-slate-500 dark:!text-slate-400">business</mat-icon>
         </mat-form-field>
 
+        <!-- Submit Button -->
         <button
           mat-raised-button
-          color="primary"
           type="submit"
-          class="full-width"
+          class="full-width glass-button !bg-gradient-to-r !from-blue-500 !to-indigo-600 dark:!from-blue-600 dark:!to-indigo-700 !text-white !font-semibold !py-3 !rounded-lg !shadow-lg hover:!shadow-xl !transition-all !duration-200 hover:!scale-105"
           [disabled]="loading || loginForm.invalid">
-          <mat-spinner diameter="20" *ngIf="loading" class="inline-spinner"></mat-spinner>
-          <span *ngIf="!loading">Login</span>
-          <span *ngIf="loading">Logging in...</span>
+          <mat-spinner diameter="20" *ngIf="loading" class="inline-spinner !mr-2"></mat-spinner>
+          <span *ngIf="!loading" class="thai-text">เข้าสู่ระบบ</span>
+          <span *ngIf="loading" class="thai-text">กำลังเข้าสู่ระบบ...</span>
         </button>
       </form>
-    </mat-card-content>
-  </mat-card>
-</div>
 
+      <!-- Footer Info -->
+      <div class="mt-6 pt-6 border-t border-white/30 dark:border-slate-700/30 text-center transition-colors duration-300">
+        <p class="text-xs text-slate-500 dark:text-slate-400 font-mono transition-colors duration-300">
+          Secure • Modern • Intelligent
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

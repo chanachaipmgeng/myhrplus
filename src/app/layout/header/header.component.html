@@ -1,33 +1,74 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="glass-nav !bg-white/25 dark:!bg-slate-900/25 !backdrop-blur-lg border-b border-white/30 dark:border-slate-700/30 shadow-glass-sm transition-all duration-300">
   <button
     mat-icon-button
     (click)="toggleSidenav.emit()"
+    class="!text-slate-700 dark:!text-slate-200 hover:!bg-white/30 dark:hover:!bg-slate-700/30 transition-all duration-200"
     *ngIf="true">
     <mat-icon>menu</mat-icon>
   </button>
   
-  <span class="app-title">HR System</span>
+  <!-- Logo Section -->
+  <div class="flex items-center gap-3 ml-4">
+    <div class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-indigo-700 shadow-lg">
+      <mat-icon class="!text-white !text-2xl !w-6 !h-6">business_center</mat-icon>
+    </div>
+    <div class="flex flex-col">
+      <span class="app-title thai-text font-semibold text-slate-800 dark:text-slate-100 text-lg leading-tight">
+        ระบบบริหารทรัพยากรบุคคล
+      </span>
+      <span class="app-title-en font-medium text-slate-600 dark:text-slate-400 text-xs">
+        HR System
+      </span>
+    </div>
+  </div>
   
   <span class="spacer"></span>
   
-  <button mat-icon-button [matMenuTriggerFor]="userMenu">
-    <mat-icon>account_circle</mat-icon>
-  </button>
-  
-  <mat-menu #userMenu="matMenu">
-    <div class="user-info" *ngIf="authService.currentUser$ | async as user">
-      <div class="user-name">{{ user.name }}</div>
-      <div class="user-email">{{ user.email || user.username }}</div>
-    </div>
-    <mat-divider></mat-divider>
-    <button mat-menu-item (click)="onProfile()">
-      <mat-icon>person</mat-icon>
-      <span>Profile</span>
+  <div class="flex items-center gap-2 mr-4">
+    <!-- Theme Toggle -->
+    <app-theme-toggle></app-theme-toggle>
+    
+    <!-- Notifications -->
+    <button 
+      mat-icon-button 
+      class="!text-slate-700 dark:!text-slate-200 hover:!bg-white/30 dark:hover:!bg-slate-700/30 transition-all duration-200 relative"
+      matTooltip="การแจ้งเตือน">
+      <mat-icon>notifications</mat-icon>
+      <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 dark:bg-red-400 rounded-full"></span>
     </button>
-    <button mat-menu-item (click)="onLogout()">
-      <mat-icon>logout</mat-icon>
-      <span>Logout</span>
+    
+    <!-- User Menu -->
+    <button 
+      mat-icon-button 
+      [matMenuTriggerFor]="userMenu"
+      class="!text-slate-700 dark:!text-slate-200 hover:!bg-white/30 dark:hover:!bg-slate-700/30 transition-all duration-200">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </div>
+  
+  <mat-menu #userMenu="matMenu" class="glass-card !bg-white/30 dark:!bg-slate-900/30 !backdrop-blur-lg">
+    <div class="user-info px-4 py-3 min-w-[220px]" *ngIf="authService.currentUser$ | async as user">
+      <div class="user-name thai-text font-semibold text-slate-800 dark:text-slate-100 mb-1">
+        {{ user.name }}
+      </div>
+      <div class="user-email text-sm text-slate-600 dark:text-slate-400">
+        {{ user.email || user.username }}
+      </div>
+    </div>
+    <mat-divider class="!my-2 dark:!bg-slate-700"></mat-divider>
+    <button 
+      mat-menu-item 
+      (click)="onProfile()"
+      class="!text-slate-700 dark:!text-slate-200 hover:!bg-white/40 dark:hover:!bg-slate-700/40 transition-all duration-200">
+      <mat-icon class="!text-slate-600 dark:!text-slate-400">person</mat-icon>
+      <span class="thai-text">โปรไฟล์</span>
+    </button>
+    <button 
+      mat-menu-item 
+      (click)="onLogout()"
+      class="!text-slate-700 dark:!text-slate-200 hover:!bg-white/40 dark:hover:!bg-slate-700/40 transition-all duration-200">
+      <mat-icon class="!text-slate-600 dark:!text-slate-400">logout</mat-icon>
+      <span class="thai-text">ออกจากระบบ</span>
     </button>
   </mat-menu>
 </mat-toolbar>
-

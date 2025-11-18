@@ -1,13 +1,28 @@
 .sidenav-container {
   height: 100vh;
+  background: transparent;
 }
 
 .sidenav {
-  width: 250px;
+  width: 280px;
+  background: transparent !important;
 }
 
 .main-content {
-  padding: 20px;
+  padding: 1.5rem;
   min-height: calc(100vh - 120px);
+  background: transparent;
 }
 
+/* Glassmorphism overlay for content area */
+.main-content::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(245, 247, 250, 0.8) 0%, rgba(195, 207, 226, 0.8) 100%);
+  z-index: -1;
+  pointer-events: none;
+}

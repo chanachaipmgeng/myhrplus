@@ -23,4 +23,3 @@ export class HeaderComponent {
     this.router.navigate(['/personal/profile']);
   }
 }
-

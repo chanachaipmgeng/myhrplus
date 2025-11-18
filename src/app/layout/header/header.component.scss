@@ -3,23 +3,93 @@
 }
 
 .app-title {
-  margin-left: 16px;
-  font-size: 1.25rem;
+  font-family: 'Sarabun', sans-serif;
+  font-weight: 600;
+  color: #1e293b;
+  transition: color 0.3s ease;
+}
+
+.dark .app-title {
+  color: #f1f5f9;
+}
+
+.app-title-en {
+  font-family: 'Inter', sans-serif;
   font-weight: 500;
+  color: #475569;
+  transition: color 0.3s ease;
+}
+
+.dark .app-title-en {
+  color: #cbd5e1;
 }
 
 .user-info {
-  padding: 16px;
-  min-width: 200px;
+  padding: 1rem;
+  min-width: 220px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  transition: background 0.3s ease;
+}
+
+.dark .user-info {
+  background: rgba(15, 23, 42, 0.1);
 }
 
 .user-name {
-  font-weight: 500;
-  margin-bottom: 4px;
+  font-family: 'Sarabun', sans-serif;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.25rem;
+  transition: color 0.3s ease;
+}
+
+.dark .user-name {
+  color: #f1f5f9;
 }
 
 .user-email {
   font-size: 0.875rem;
-  color: #666;
+  color: #64748b;
+  font-family: 'Inter', sans-serif;
+  transition: color 0.3s ease;
 }
 
+.dark .user-email {
+  color: #94a3b8;
+}
+
+::ng-deep .mat-mdc-menu-panel {
+  background: rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  border-radius: 1rem !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+  transition: all 0.3s ease;
+}
+
+.dark ::ng-deep .mat-mdc-menu-panel {
+  background: rgba(15, 23, 42, 0.3) !important;
+  border-color: rgba(51, 65, 85, 0.4) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5) !important;
+}
+
+::ng-deep .mat-mdc-menu-item {
+  font-family: 'Sarabun', 'Inter', sans-serif !important;
+  transition: all 0.2s ease !important;
+  color: #1e293b !important;
+}
+
+.dark ::ng-deep .mat-mdc-menu-item {
+  color: #f1f5f9 !important;
+}
+
+::ng-deep .mat-mdc-menu-item:hover {
+  background: rgba(255, 255, 255, 0.4) !important;
+  transform: translateX(4px);
+}
+
+.dark ::ng-deep .mat-mdc-menu-item:hover {
+  background: rgba(51, 65, 85, 0.4) !important;
+}
