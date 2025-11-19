@@ -398,7 +398,55 @@ export class MyCalendarComponent {
 
 ---
 
+## ✅ Image Upload Component Enhancement
+
+### Image Quality Integration ✅
+**ไฟล์**: `src/app/shared/components/image-upload/image-upload.component.ts` (updated)
+
+**สิ่งที่เพิ่ม**:
+- ✅ Integration with Image Quality Utilities
+- ✅ Quality assessment badge display
+- ✅ Quality recommendations display
+- ✅ Configurable quality check (enableQualityCheck, requireQualityCheck, minQuality)
+- ✅ Quality check event emitter
+- ✅ Automatic quality validation with rejection option
+
+**New Config Options**:
+- `enableQualityCheck?: boolean` - Enable image quality assessment
+- `requireQualityCheck?: boolean` - Reject images that don't meet minimum quality
+- `minQuality?: 'excellent' | 'good' | 'fair' | 'poor'` - Minimum required quality
+
+**New Output Event**:
+- `qualityCheck` - Emitted when quality assessment is performed
+
+**การใช้งาน**:
+```typescript
+<app-image-upload
+  [config]="{
+    maxSize: 5,
+    maxFiles: 1,
+    enableQualityCheck: true,
+    requireQualityCheck: false,
+    minQuality: 'good'
+  }"
+  (fileSelect)="onImageSelected($event)"
+  (qualityCheck)="onQualityCheck($event)">
+</app-image-upload>
+```
+
+**Features**:
+- ✅ Automatic brightness calculation
+- ✅ Blur detection (Laplacian operator)
+- ✅ Quality assessment (excellent/good/fair/poor)
+- ✅ Visual quality badges in preview
+- ✅ Recommendations display
+- ✅ Optional quality rejection
+
+**Demo**: `/demo/image-upload` (updated with quality check examples)
+
+---
+
 **Maintainer**: Development Team  
 **Last Updated**: 2024-12-20  
-**Version**: 1.2.0
+**Version**: 1.3.0
 

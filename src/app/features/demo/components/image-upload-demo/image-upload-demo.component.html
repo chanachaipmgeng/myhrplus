@@ -28,6 +28,30 @@
             (fileSelect)="onImageSelected($event)">
           </app-image-upload>
         </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4">With Quality Check (Warning Only)</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
+            เปิดใช้งานการตรวจสอบคุณภาพภาพ แต่ไม่ปฏิเสธภาพคุณภาพต่ำ (แค่แจ้งเตือน)
+          </p>
+          <app-image-upload
+            [config]="configWithQualityCheck"
+            (fileSelect)="onImageSelected($event)"
+            (qualityCheck)="onQualityCheck($event)">
+          </app-image-upload>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4">With Required Quality Check</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
+            เปิดใช้งานการตรวจสอบคุณภาพภาพ และปฏิเสธภาพที่คุณภาพต่ำกว่า 'good'
+          </p>
+          <app-image-upload
+            [config]="configWithRequiredQuality"
+            (fileSelect)="onImageSelected($event)"
+            (qualityCheck)="onQualityCheck($event)">
+          </app-image-upload>
+        </div>
       </div>
     </app-glass-card>
   </section>
@@ -44,12 +68,19 @@
 
     <h3 class="subsection-title">With Configuration</h3>
     <app-code-viewer [code]="withConfigExample" language="html" title="Image Upload with Config"></app-code-viewer>
+
+    <h3 class="subsection-title">With Quality Check</h3>
+    <app-code-viewer [code]="withQualityCheckExample" language="html" title="Image Upload with Quality Check"></app-code-viewer>
+
+    <h3 class="subsection-title">With Required Quality</h3>
+    <app-code-viewer [code]="withRequiredQualityExample" language="html" title="Image Upload with Required Quality"></app-code-viewer>
   </section>
 
   <!-- API Documentation -->
   <section class="demo-section">
     <h2 class="section-title">API Documentation</h2>
     <app-props-table [props]="props" title="Inputs"></app-props-table>
+    <app-props-table [props]="configProps" title="ImageUploadConfig Properties (Quality Check)"></app-props-table>
     <app-props-table [props]="outputs" title="Outputs"></app-props-table>
   </section>
 </div>

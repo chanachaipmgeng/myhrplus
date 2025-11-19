@@ -1,5 +1,11 @@
 import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  createImageData,
+  assessImageQuality,
+  isImageQualitySufficient,
+  ImageQualityAssessment
+} from '../../../core/utils/image-quality.utils';
 
 export interface ImageUploadConfig {
   maxSize?: number; // in MB
@@ -12,6 +18,9 @@ export interface ImageUploadConfig {
   maxHeight?: number;
   enableCrop?: boolean;
   enablePreview?: boolean;
+  enableQualityCheck?: boolean; // Enable image quality assessment
+  requireQualityCheck?: boolean; // Reject images with poor quality
+  minQuality?: 'excellent' | 'good' | 'fair' | 'poor'; // Minimum required quality
 }
 
 export interface UploadedImage {
@@ -23,6 +32,7 @@ export interface UploadedImage {
   type: string;
   width?: number;
   height?: number;
+  qualityAssessment?: ImageQualityAssessment; // Image quality assessment
 }
 
 @Component({
@@ -54,6 +64,7 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
   @Output() fileSelect = new EventEmitter<UploadedImage[]>();
   @Output() fileRemove = new EventEmitter<UploadedImage>();
   @Output() error = new EventEmitter<string>();
+  @Output() qualityCheck = new EventEmitter<{ image: UploadedImage; assessment: ImageQualityAssessment }>();
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
@@ -72,6 +83,15 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
     }
     if (this.config.enablePreview === undefined) {
       this.config.enablePreview = true;
+    }
+    if (this.config.enableQualityCheck === undefined) {
+      this.config.enableQualityCheck = false;
+    }
+    if (this.config.requireQualityCheck === undefined) {
+      this.config.requireQualityCheck = false;
+    }
+    if (!this.config.minQuality) {
+      this.config.minQuality = 'good';
     }
   }
 
@@ -163,6 +183,51 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
       // Get image dimensions
       const dimensions = await this.getImageDimensions(file);
 
+      // Image Quality Assessment
+      let qualityAssessment: ImageQualityAssessment | undefined;
+      if (this.config.enableQualityCheck) {
+        try {
+          const imageData = await createImageData(file);
+          qualityAssessment = assessImageQuality(imageData);
+
+          // Emit quality check event
+          const tempImage: UploadedImage = {
+            file,
+            preview,
+            name: file.name,
+            size: file.size,
+            type: file.type,
+            width: dimensions.width,
+            height: dimensions.height,
+            qualityAssessment
+          };
+          this.qualityCheck.emit({ image: tempImage, assessment: qualityAssessment });
+
+          // Check if quality is sufficient
+          if (this.config.requireQualityCheck) {
+            const qualityOrder = ['poor', 'fair', 'good', 'excellent'];
+            const minQualityIndex = qualityOrder.indexOf(this.config.minQuality!);
+            const actualQualityIndex = qualityOrder.indexOf(qualityAssessment.quality);
+
+            if (actualQualityIndex < minQualityIndex) {
+              const error = `คุณภาพภาพ ${file.name} ไม่เพียงพอ (${qualityAssessment.quality}). ${qualityAssessment.feedback}`;
+              this.errors.push(error);
+              this.error.emit(error);
+              continue;
+            }
+          }
+
+          // Warn if quality is poor but not required
+          if (qualityAssessment.quality === 'poor' || qualityAssessment.quality === 'fair') {
+            const warning = `⚠️ คุณภาพภาพ ${file.name}: ${qualityAssessment.feedback}`;
+            this.errors.push(warning);
+          }
+        } catch (error) {
+          console.warn('Failed to assess image quality:', error);
+          // Continue even if quality check fails
+        }
+      }
+
       const uploadedImage: UploadedImage = {
         file,
         preview,
@@ -170,7 +235,8 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
         size: file.size,
         type: file.type,
         width: dimensions.width,
-        height: dimensions.height
+        height: dimensions.height,
+        qualityAssessment
       };
 
       this.uploadedImages.push(uploadedImage);
@@ -230,6 +296,37 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
 
   get canAddMore(): boolean {
     return this.uploadedImages.length < this.config.maxFiles!;
+  }
+
+  // Quality Assessment Helpers
+  getQualityLabel(quality: 'excellent' | 'good' | 'fair' | 'poor'): string {
+    const labels: Record<string, string> = {
+      'excellent': 'คุณภาพดีมาก',
+      'good': 'คุณภาพดี',
+      'fair': 'คุณภาพปานกลาง',
+      'poor': 'คุณภาพต่ำ'
+    };
+    return labels[quality] || quality;
+  }
+
+  getQualityIcon(quality: 'excellent' | 'good' | 'fair' | 'poor'): string {
+    const icons: Record<string, string> = {
+      'excellent': 'check_circle',
+      'good': 'check',
+      'fair': 'warning',
+      'poor': 'error'
+    };
+    return icons[quality] || 'help';
+  }
+
+  getQualityIconColor(quality: 'excellent' | 'good' | 'fair' | 'poor'): string {
+    const colors: Record<string, string> = {
+      'excellent': 'text-green-600 dark:text-green-400',
+      'good': 'text-blue-600 dark:text-blue-400',
+      'fair': 'text-yellow-600 dark:text-yellow-400',
+      'poor': 'text-red-600 dark:text-red-400'
+    };
+    return colors[quality] || 'text-gray-600 dark:text-gray-400';
   }
 }
 
