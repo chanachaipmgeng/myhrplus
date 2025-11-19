@@ -1,172 +1,141 @@
-<section class="bg-gray-50 dark:bg-gray-950">
-  <div class="flex flex-col lg:flex-row mx-auto p-0" style="min-height: 770px;">
-    <!-- Left Side - Feature List -->
-    <div class="w-full order-2 lg:order-1 lg:w-7/12 px-6 py-14 bg-green-600 text-white flex items-center" 
-         style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">
-      <div class="flex flex-wrap mx-0 w-full sm:p-6 xl:p-0 md:p-8 lg:px-6">
-        <div class="hidden xl:block xl:w-1/6"></div>
-        <div class="w-full xl:w-2/3">
-          <h1 class="font-bold xl:text-5xl md:text-4xl text-3xl thai-text mb-4">ยินดีต้อนรับสู่ระบบ HR</h1>
-          <p class="my-6 md:text-lg text-base">ระบบบริหารทรัพยากรบุคคลที่ทันสมัยและครบวงจร พร้อมให้บริการจัดการข้อมูลพนักงาน การเงิน และการทำงานอย่างมีประสิทธิภาพ</p>
-          <ul class="list-none md:text-lg text-base">
-            <li class="flex items-center gap-3 mb-3">
-              <span class="e-icons e-circle-check text-xl" aria-hidden="true"></span>
-              <span>โมดูลครบถ้วน: EMPVIEW, WORKFLOW, COMPANY และอื่นๆ</span>
-            </li>
-            <li class="flex items-center gap-3 mb-3">
-              <span class="e-icons e-circle-check text-xl" aria-hidden="true"></span>
-              <span>รองรับทั้ง Light และ Dark Mode</span>
-            </li>
-            <li class="flex items-center gap-3 mb-3">
-              <span class="e-icons e-circle-check text-xl" aria-hidden="true"></span>
-              <span>ระบบจัดการอัตโนมัติ 100%</span>
-            </li>
-            <li class="flex lg:items-start gap-3 mb-3">
-              <span class="e-icons e-circle-check text-xl" aria-hidden="true"></span>
-              <span>ใช้งานง่าย รองรับการทำงานแบบ Responsive</span>
-            </li>
-          </ul>
+<section class="login-container">
+  <div class="login-layout">
+    <!-- Left Section - Promotional (40%) -->
+    <div class="login-left-section">
+      <div class="login-left-content">
+        <div class="login-left-pattern"></div>
+        <div class="login-left-text">
+          <h1 class="login-left-title">Unlock the power of AI</h1>
+          <p class="login-left-subtitle">Experience the power of AI with us.</p>
         </div>
-        <div class="hidden xl:block xl:w-1/6"></div>
       </div>
     </div>
 
-    <!-- Right Side - Login Form -->
-    <div class="w-full order-1 lg:order-2 lg:w-5/12">
-      <div class="bg-gray-50 dark:bg-gray-950">
-        <div class="flex items-center justify-center">
-          <div class="w-full max-w-md rounded-lg px-4 py-14 md:px-6 md:py-14">
-            <!-- Logo Section -->
-            <div class="flex justify-center mb-6">
-              <div class="flex items-center gap-2">
-                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center">
-                  <span class="e-icons e-folder text-white text-xl" aria-hidden="true"></span>
-                </div>
-                <h2 class="text-center text-gray-900 dark:text-white text-xl font-semibold thai-text">ระบบ HR</h2>
-              </div>
+    <!-- Right Section - Login Form (60%) -->
+    <div class="login-right-section">
+      <div class="login-right-content">
+        <!-- Logo Section -->
+        <div class="login-logo-section">
+          <div class="login-logo">
+            <div class="login-logo-icon">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 4L20 12L28 12L22 18L24 26L16 20L8 26L10 18L4 12L12 12L16 4Z" fill="#8B5CF6"/>
+              </svg>
             </div>
+            <h1 class="login-logo-text thai-text">ระบบ HR</h1>
+          </div>
+        </div>
 
-            <!-- Title -->
-            <h2 class="text-2xl font-semibold text-gray-900 dark:text-white text-center mb-2 thai-text">เข้าสู่ระบบ</h2>
-            <p class="text-md text-center text-gray-700 dark:text-gray-300 mb-6">กรุณากรอกข้อมูลเพื่อเข้าสู่ระบบ</p>
+        <!-- Tab Navigation -->
+        <div class="login-tabs">
+          <button class="login-tab active thai-text">เข้าสู่ระบบ</button>
+          <button class="login-tab thai-text">สร้างบัญชี</button>
+        </div>
 
-            <!-- Login Form -->
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="mt-6 mb-6">
-              <!-- Username Field -->
-              <div class="mb-4">
-                <label class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300 thai-text">
-                  ชื่อผู้ใช้ <span class="text-red-500">*</span>
-                </label>
-                <ejs-textbox 
-                  class="e-bigger" 
-                  type="text" 
-                  placeholder="กรุณากรอกชื่อผู้ใช้" 
-                  floatLabelType="Never" 
-                  [(value)]="username"
-                  (valueChange)="onUsernameChange($event)"
-                  (blur)="loginForm.get('username')?.markAsTouched()"
-                  aria-label="enter your username" 
-                  role="textbox">
-                </ejs-textbox>
-                <div *ngIf="!username && loginForm.get('username')?.touched" 
-                     class="mt-1 text-sm text-red-600 dark:text-red-400 thai-text">
-                  กรุณากรอกชื่อผู้ใช้
-                </div>
-              </div>
-
-              <!-- Password Field -->
-              <div class="mb-5 relative">
-                <label class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300 thai-text">
-                  รหัสผ่าน <span class="text-red-500">*</span>
-                </label>
-                <ejs-textbox 
-                  class="e-bigger bg-none" 
-                  type="password" 
-                  placeholder="กรุณากรอกรหัสผ่าน" 
-                  floatLabelType="Never" 
-                  [(value)]="password"
-                  (valueChange)="onPasswordChange($event)"
-                  (blur)="loginForm.get('password')?.markAsTouched()"
-                  aria-label="enter your password" 
-                  role="textbox">
-                </ejs-textbox>
-                <div *ngIf="!password && loginForm.get('password')?.touched" 
-                     class="mt-1 text-sm text-red-600 dark:text-red-400 thai-text">
-                  กรุณากรอกรหัสผ่าน
-                </div>
-              </div>
-
-              <!-- Database Selection Field -->
-              <div class="mb-5" *ngIf="dbList.length > 0">
-                <label class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300 thai-text">
-                  ฐานข้อมูล <span class="text-red-500">*</span>
-                </label>
-                <ejs-dropdownlist 
-                  #dbDropdown
-                  [dataSource]="dbDataSource"
-                  [fields]="dbFields"
-                  [(value)]="dbSelected"
-                  (change)="onDbChange($event)"
-                  placeholder="เลือกฐานข้อมูล"
-                  floatLabelType="Never"
-                  class="e-bigger">
-                </ejs-dropdownlist>
-              </div>
-
-              <!-- Remember Me & Forgot Password -->
-              <div class="flex items-center justify-between mb-6">
-                <ejs-checkbox 
-                  cssClass="e-bigger" 
-                  label="จดจำฉัน" 
-                  [(ngModel)]="rememberMe"
-                  [ngModelOptions]="{standalone: true}"
-                  aria-label="remember me" 
-                  role="checkbox">
-                </ejs-checkbox>
-                <a 
-                  href="javascript:void(0);" 
-                  (click)="onForgotPassword()"
-                  class="text-primary-600 dark:text-primary-400 font-medium text-base thai-text" 
-                  aria-label="forgot password" 
-                  role="link" 
-                  style="padding-right: 0 !important;">
-                  ลืมรหัสผ่าน?
-                </a>
-              </div>
-
-              <!-- Error Message -->
-              <div *ngIf="errorMessage" class="mb-4 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
-                <p class="text-sm text-red-600 dark:text-red-400 thai-text">{{ errorMessage }}</p>
-              </div>
-
-              <!-- Submit Button -->
-              <div class="e-bigger mt-6">
-                <button 
-                  ejs-button 
-                  class="w-full e-primary" 
-                  [content]="loading ? 'กำลังเข้าสู่ระบบ...' : 'เข้าสู่ระบบ'"
-                  type="submit" 
-                  [disabled]="loading || !username || !password"
-                  aria-label="sign in" 
-                  role="button">
-                </button>
-              </div>
-            </form>
-
-            <!-- Sign Up Link -->
-            <div>
-              <span class="flex items-center justify-center gap-2">
-                <p class="text-center text-base text-gray-900 dark:text-white thai-text">ยังไม่มีบัญชี?</p>
-                <a 
-                  href="javascript:void(0);" 
-                  class="text-primary-600 dark:text-primary-400 font-medium text-base p-0 thai-text" 
-                  aria-label="sign up" 
-                  role="link">
-                  สมัครสมาชิก
-                </a>
-              </span>
+        <!-- Login Form -->
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+          <!-- Username Field -->
+          <div class="form-field">
+            <ejs-textbox 
+              class="e-bigger login-input" 
+              type="text" 
+              placeholder="ชื่อผู้ใช้หรืออีเมล" 
+              floatLabelType="Never" 
+              [(value)]="username"
+              (valueChange)="onUsernameChange($event)"
+              (blur)="loginForm.get('username')?.markAsTouched()"
+              aria-label="enter your username" 
+              role="textbox">
+            </ejs-textbox>
+            <div *ngIf="!username && loginForm.get('username')?.touched" 
+                 class="form-error thai-text">
+              กรุณากรอกชื่อผู้ใช้
             </div>
           </div>
+
+          <!-- Password Field -->
+          <div class="form-field">
+            <ejs-textbox 
+              class="e-bigger login-input" 
+              type="password" 
+              placeholder="รหัสผ่าน" 
+              floatLabelType="Never" 
+              [(value)]="password"
+              (valueChange)="onPasswordChange($event)"
+              (blur)="loginForm.get('password')?.markAsTouched()"
+              aria-label="enter your password" 
+              role="textbox">
+            </ejs-textbox>
+            <div *ngIf="!password && loginForm.get('password')?.touched" 
+                 class="form-error thai-text">
+              กรุณากรอกรหัสผ่าน
+            </div>
+          </div>
+
+          <!-- Database Selection Field -->
+          <div class="form-field" *ngIf="dbList.length > 0">
+            <ejs-dropdownlist 
+              #dbDropdown
+              [dataSource]="dbDataSource"
+              [fields]="dbFields"
+              [(value)]="dbSelected"
+              (change)="onDbChange($event)"
+              placeholder="เลือกฐานข้อมูล"
+              floatLabelType="Never"
+              class="e-bigger login-input">
+            </ejs-dropdownlist>
+          </div>
+
+          <!-- Remember Me & Forgot Password -->
+          <div class="form-options">
+            <ejs-checkbox 
+              cssClass="e-bigger login-checkbox" 
+              label="จดจำฉัน" 
+              [(ngModel)]="rememberMe"
+              [ngModelOptions]="{standalone: true}"
+              aria-label="remember me" 
+              role="checkbox">
+            </ejs-checkbox>
+            <a 
+              href="javascript:void(0);" 
+              (click)="onForgotPassword()"
+              class="forgot-password-link thai-text" 
+              aria-label="forgot password" 
+              role="link">
+              ลืมรหัสผ่าน?
+            </a>
+          </div>
+
+          <!-- Error Message -->
+          <div *ngIf="errorMessage" class="error-message">
+            <div class="error-message-content">
+              <span class="e-icons e-error" aria-hidden="true"></span>
+              <p class="thai-text">{{ errorMessage }}</p>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="form-submit">
+            <button 
+              ejs-button 
+              class="login-button e-primary" 
+              [content]="loading ? 'กำลังเข้าสู่ระบบ...' : 'เข้าสู่ระบบด้วยระบบ HR'"
+              type="submit" 
+              [disabled]="loading || !username || !password"
+              aria-label="sign in" 
+              role="button">
+            </button>
+          </div>
+        </form>
+
+        <!-- Terms and Conditions -->
+        <div class="login-terms">
+          <p class="login-terms-text thai-text">
+            โดยการสร้างบัญชี คุณยอมรับ
+            <a href="#" class="terms-link">ข้อกำหนดการให้บริการ</a>
+            และ
+            <a href="#" class="terms-link">นโยบายความเป็นส่วนตัวและคุกกี้</a>
+          </p>
         </div>
       </div>
     </div>

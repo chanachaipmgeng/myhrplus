@@ -42,3 +42,4 @@ export class AppraisalHomeComponent implements OnInit {
   }
 }
 
+

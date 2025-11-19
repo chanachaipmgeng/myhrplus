@@ -1,26 +1,322 @@
-// Syncfusion UI-KIT Login Styles
+// Syncfusion UI-KIT Login Styles - Split Layout Design
 
+// Main Container
+.login-container {
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+// Layout - Split into 2 sections
+.login-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+// Left Section - Promotional (40%)
+.login-left-section {
+  width: 40%;
+  background-color: #5243C2;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.login-left-content {
+  position: relative;
+  z-index: 2;
+  padding: 3rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.login-left-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(67, 55, 161, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(67, 55, 161, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(67, 55, 161, 0.2) 0%, transparent 50%);
+  opacity: 1;
+}
+
+.login-left-text {
+  position: relative;
+  z-index: 2;
+}
+
+.login-left-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+}
+
+.login-left-subtitle {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  line-height: 1.5;
+}
+
+// Right Section - Login Form (60%)
+.login-right-section {
+  width: 60%;
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  overflow-y: auto;
+}
+
+.login-right-content {
+  width: 100%;
+  max-width: 480px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Logo Section
+.login-logo-section {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.login-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.login-logo-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.login-logo-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+}
+
+// Tab Navigation
+.login-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #E5E7EB;
+  padding-bottom: 0;
+}
+
+.login-tab {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #6B7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 8px 8px 0 0;
+  
+  &:hover {
+    color: #374151;
+    background-color: #F9FAFB;
+  }
+  
+  &.active {
+    color: #1F2937;
+    background-color: #E5E7EB;
+    border-bottom-color: transparent;
+    font-weight: 600;
+  }
+}
+
+// Form
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0;
+}
+
+.dark .form-label {
+  color: #d1d5db;
+}
+
+.required-asterisk {
+  color: #ef4444;
+}
+
+.form-error {
+  font-size: 0.8125rem;
+  color: #ef4444;
+  margin-top: 0.25rem;
+}
+
+.dark .form-error {
+  color: #f87171;
+}
+
+// Form Options
+.form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -0.5rem;
+}
+
+.forgot-password-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6D28D9;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: #5B21B6;
+    text-decoration: underline;
+  }
+}
+
+.dark .forgot-password-link {
+  color: #818cf8;
+  
+  &:hover {
+    color: #a78bfa;
+  }
+}
+
+// Error Message
+.error-message {
+  margin-top: -0.5rem;
+}
+
+.error-message-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 8px;
+  
+  .e-icons {
+    color: #ef4444;
+    font-size: 1rem;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #dc2626;
+  }
+}
+
+.dark .error-message-content {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
+  
+  p {
+    color: #f87171;
+  }
+}
+
+// Form Submit
+.form-submit {
+  margin-top: 0.5rem;
+}
+
+// Terms and Conditions
+.login-terms {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.login-terms-text {
+  font-size: 0.75rem;
+  color: #6B7280;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.terms-link {
+  color: #6D28D9;
+  text-decoration: none;
+  font-weight: 500;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Syncfusion Components Styling
 ::ng-deep {
   // TextBox Styles
-  .e-textbox-wrapper {
+  .login-input.e-textbox-wrapper {
     .e-input-group {
-      border-radius: 0.5rem;
-      border: 1px solid #d1d5db;
-      transition: all 0.3s ease;
+      border-radius: 8px;
+      border: 1px solid #E5E7EB;
+      background-color: #ffffff;
+      transition: all 0.2s ease;
       
       &:hover {
-        border-color: #9ca3af;
+        border-color: #D1D5DB;
       }
       
       &.e-input-focus {
-        border-color: #059669;
-        box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+        border-color: #6D28D9;
+        box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.1);
+        background-color: #ffffff;
       }
       
       .e-input {
-        padding: 0.75rem 1rem;
-        font-size: 1rem;
+        padding: 0.875rem 1rem;
+        font-size: 0.9375rem;
         color: #1f2937;
+        background-color: transparent;
         
         &::placeholder {
           color: #9ca3af;
@@ -30,23 +326,23 @@
   }
 
   // Dark mode for TextBox
-  .dark .e-textbox-wrapper {
+  .dark .login-input.e-textbox-wrapper {
     .e-input-group {
       border-color: #4b5563;
-      background-color: #1f2937;
+      background-color: rgba(31, 41, 55, 0.5);
       
       &:hover {
         border-color: #6b7280;
       }
       
       &.e-input-focus {
-        border-color: #10b981;
-        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+        border-color: #818cf8;
+        box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.2);
+        background-color: rgba(31, 41, 55, 0.7);
       }
       
       .e-input {
-        color: #f3f4f6;
-        background-color: #1f2937;
+        color: #f9fafb;
         
         &::placeholder {
           color: #6b7280;
@@ -56,87 +352,93 @@
   }
 
   // Button Styles
-  .e-btn.e-primary {
-    background-color: #059669;
-    border-color: #059669;
+  .login-button.e-btn.e-primary {
+    width: 100%;
+    background-color: #6D28D9;
+    border: none;
     color: white;
     font-weight: 600;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    transition: all 0.3s ease;
+    font-size: 0.9375rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
     
     &:hover:not(:disabled) {
-      background-color: #047857;
-      border-color: #047857;
+      background-color: #5B21B6;
       transform: translateY(-1px);
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 6px -1px rgba(109, 40, 217, 0.3);
     }
     
     &:active:not(:disabled) {
       transform: translateY(0);
+      box-shadow: 0 2px 4px -1px rgba(109, 40, 217, 0.2);
     }
     
     &:disabled {
-      opacity: 0.5;
+      opacity: 0.6;
       cursor: not-allowed;
+      transform: none;
     }
   }
 
   // DropDownList Styles
-  .e-dropdownlist {
+  .login-input.e-dropdownlist {
     .e-input-group {
-      border-radius: 0.5rem;
-      border: 1px solid #d1d5db;
-      transition: all 0.3s ease;
+      border-radius: 8px;
+      border: 1px solid #E5E7EB;
+      background-color: #ffffff;
+      transition: all 0.2s ease;
       
       &:hover {
-        border-color: #9ca3af;
+        border-color: #D1D5DB;
       }
       
       &.e-input-focus {
-        border-color: #059669;
-        box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+        border-color: #6D28D9;
+        box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.1);
       }
       
       .e-input {
-        padding: 0.75rem 1rem;
-        font-size: 1rem;
+        padding: 0.875rem 1rem;
+        font-size: 0.9375rem;
         color: #1f2937;
       }
     }
   }
 
   // Dark mode for DropDownList
-  .dark .e-dropdownlist {
+  .dark .login-input.e-dropdownlist {
     .e-input-group {
       border-color: #4b5563;
-      background-color: #1f2937;
+      background-color: rgba(31, 41, 55, 0.5);
       
       &:hover {
         border-color: #6b7280;
       }
       
       &.e-input-focus {
-        border-color: #10b981;
-        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+        border-color: #818cf8;
+        box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.2);
+        background-color: rgba(31, 41, 55, 0.7);
       }
       
       .e-input {
-        color: #f3f4f6;
-        background-color: #1f2937;
+        color: #f9fafb;
       }
     }
   }
 
   // CheckBox Styles
-  .e-checkbox-wrapper {
+  .login-checkbox.e-checkbox-wrapper {
     .e-frame {
-      border-radius: 0.25rem;
-      border-color: #d1d5db;
+      border-radius: 4px;
+      border: 1.5px solid #d1d5db;
+      background-color: #ffffff;
+      transition: all 0.2s ease;
       
       &.e-check {
-        background-color: #059669;
-        border-color: #059669;
+        background-color: #6D28D9;
+        border-color: #6D28D9;
       }
     }
     
@@ -144,18 +446,19 @@
       color: #374151;
       font-size: 0.875rem;
       margin-left: 0.5rem;
+      font-weight: 500;
     }
   }
 
   // Dark mode for CheckBox
-  .dark .e-checkbox-wrapper {
+  .dark .login-checkbox.e-checkbox-wrapper {
     .e-frame {
       border-color: #4b5563;
-      background-color: #1f2937;
+      background-color: rgba(31, 41, 55, 0.5);
       
       &.e-check {
-        background-color: #10b981;
-        border-color: #10b981;
+        background-color: #818cf8;
+        border-color: #818cf8;
       }
     }
     
@@ -167,13 +470,13 @@
   // Bigger size for e-bigger class
   .e-bigger {
     .e-input-group .e-input {
-      padding: 0.875rem 1.125rem;
-      font-size: 1.0625rem;
+      padding: 1rem 1.125rem;
+      font-size: 1rem;
     }
     
     .e-btn {
-      padding: 0.875rem 1.75rem;
-      font-size: 1.0625rem;
+      padding: 1rem 1.75rem;
+      font-size: 1rem;
     }
   }
 }
@@ -185,9 +488,86 @@
 
 // Responsive adjustments
 @media (max-width: 1024px) {
-  section {
-    .flex {
-      min-height: auto !important;
-    }
+  .login-layout {
+    flex-direction: column;
+  }
+  
+  .login-left-section {
+    width: 100%;
+    min-height: 300px;
+    padding: 2rem;
+  }
+  
+  .login-right-section {
+    width: 100%;
+    padding: 2rem;
+  }
+  
+  .login-left-title {
+    font-size: 2rem;
+  }
+  
+  .login-left-subtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .login-left-section {
+    min-height: 250px;
+    padding: 1.5rem;
+  }
+  
+  .login-right-section {
+    padding: 1.5rem;
+  }
+  
+  .login-left-title {
+    font-size: 1.75rem;
+  }
+  
+  .login-left-subtitle {
+    font-size: 0.9375rem;
+  }
+  
+  .login-logo-icon {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .login-logo-text {
+    font-size: 1.25rem;
+  }
+  
+  .login-tabs {
+    margin-bottom: 1.5rem;
+  }
+  
+  .login-tab {
+    font-size: 0.875rem;
+    padding: 0.625rem 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-left-section {
+    min-height: 200px;
+    padding: 1rem;
+  }
+  
+  .login-right-section {
+    padding: 1rem;
+  }
+  
+  .login-left-content {
+    padding: 1rem;
+  }
+  
+  .login-left-title {
+    font-size: 1.5rem;
+  }
+  
+  .login-left-subtitle {
+    font-size: 0.875rem;
   }
 }

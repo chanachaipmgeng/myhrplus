@@ -21,3 +21,4 @@ import { CompanyHomeComponent } from './company-home/company-home.component';
 })
 export class CompanyModule { }
 
+
