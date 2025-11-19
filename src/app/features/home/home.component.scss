@@ -59,6 +59,68 @@
   -webkit-font-smoothing: antialiased;
 }
 
+// Gemini 1.5 Theme - Home Component
+body.theme-gemini {
+  .gemini-title {
+    background: linear-gradient(135deg, 
+      #93c5fd 0%,      /* Light blue */
+      #60a5fa 30%,     /* Medium blue */
+      #3b82f6 60%,     /* Blue */
+      #2563eb 100%     /* Darker blue */
+    ) !important;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% 200%;
+    animation: geminiGradient 3s ease infinite;
+  }
+  
+  // Enhanced glass cards with Gemini effects
+  ::ng-deep app-glass-card {
+    .glass-card {
+      border: 1px solid rgba(59, 130, 246, 0.3) !important;
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(59, 130, 246, 0.2),
+        0 0 40px rgba(59, 130, 246, 0.1) !important;
+      
+      &:hover {
+        box-shadow: 
+          0 20px 40px rgba(0, 0, 0, 0.6),
+          0 0 0 1px rgba(59, 130, 246, 0.4),
+          0 0 60px rgba(59, 130, 246, 0.2) !important;
+        border-color: rgba(96, 165, 250, 0.5) !important;
+      }
+    }
+  }
+  
+  // Menu category cards with Gemini gradient
+  app-glass-card[customClass*="cursor-pointer"] {
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+        transparent 0%,
+        rgba(147, 197, 253, 0.2) 50%,
+        transparent 100%
+      );
+      transition: left 0.5s ease;
+      z-index: 1;
+    }
+    
+    &:hover::before {
+      left: 100%;
+    }
+  }
+}
+
 // Responsive adjustments (if needed beyond Tailwind)
 @media (max-width: 768px) {
   // Most responsive styles are handled by Tailwind classes

@@ -82,6 +82,10 @@ module.exports = {
         'gradient-teal-dark': 'linear-gradient(135deg, #134e4a 0%, #155e75 50%, #14b8a6 100%)',
         'gradient-pink-light': 'linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%)',
         'gradient-pink-dark': 'linear-gradient(135deg, #831843 0%, #9f1239 50%, #ec4899 100%)',
+        // Gemini 1.5 Gradients
+        'gradient-gemini': 'linear-gradient(135deg, #93c5fd 0%, #60a5fa 30%, #3b82f6 60%, #2563eb 100%)',
+        'gradient-gemini-text': 'linear-gradient(135deg, #bfdbfe 0%, #93c5fd 25%, #60a5fa 50%, #3b82f6 75%, #2563eb 100%)',
+        'gradient-gemini-glow': 'radial-gradient(circle, rgba(147, 197, 253, 0.3) 0%, transparent 70%)',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
@@ -89,6 +93,13 @@ module.exports = {
         'slide-down': 'slideDown 0.3s ease-out',
         'scale-in': 'scaleIn 0.2s ease-out',
         'theme-transition': 'themeTransition 0.3s ease-in-out',
+        // Gemini 1.5 Animations
+        'gemini-float': 'geminiFloat 6s ease-in-out infinite',
+        'gemini-pulse': 'geminiPulse 2s ease-in-out infinite',
+        'gemini-shimmer': 'geminiShimmer 3s infinite',
+        'gemini-wave': 'geminiWave 4s ease-in-out infinite',
+        'gemini-gradient': 'geminiGradient 3s ease infinite',
+        'gemini-glow': 'geminiGlow 2s ease-in-out infinite alternate',
       },
       keyframes: {
         fadeIn: {
@@ -110,6 +121,37 @@ module.exports = {
         themeTransition: {
           '0%': { opacity: '0.8' },
           '100%': { opacity: '1' },
+        },
+        // Gemini 1.5 Keyframes
+        geminiFloat: {
+          '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+          '50%': { transform: 'translateY(-20px) rotate(5deg)' },
+        },
+        geminiPulse: {
+          '0%, 100%': { opacity: '0.6', transform: 'scale(1)' },
+          '50%': { opacity: '1', transform: 'scale(1.05)' },
+        },
+        geminiShimmer: {
+          '0%': { backgroundPosition: '-1000px 0' },
+          '100%': { backgroundPosition: '1000px 0' },
+        },
+        geminiWave: {
+          '0%, 100%': { transform: 'translateX(0) translateY(0)' },
+          '25%': { transform: 'translateX(10px) translateY(-10px)' },
+          '50%': { transform: 'translateX(-5px) translateY(5px)' },
+          '75%': { transform: 'translateX(-10px) translateY(-5px)' },
+        },
+        geminiGradient: {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+        },
+        geminiGlow: {
+          'from': {
+            textShadow: '0 0 10px rgba(147, 197, 253, 0.5), 0 0 20px rgba(96, 165, 250, 0.3), 0 0 30px rgba(59, 130, 246, 0.2)',
+          },
+          'to': {
+            textShadow: '0 0 20px rgba(147, 197, 253, 0.8), 0 0 30px rgba(96, 165, 250, 0.5), 0 0 40px rgba(59, 130, 246, 0.3)',
+          },
         },
       },
     },
