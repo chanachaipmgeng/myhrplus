@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     // Initialize theme service
     this.themeService.watchSystemPreference();
-    
+
     // Apply theme class to body
     this.themeService.theme$.subscribe(theme => {
       const body = document.body;
@@ -40,16 +40,14 @@ export class AppComponent implements OnInit {
 
     // Initialize Syncfusion theme service
     this.syncfusionThemeService.initialize();
-    
+
     // Sync dark mode between ThemeService and SyncfusionThemeService
     this.themeService.theme$.subscribe(theme => {
       const isDark = theme.mode === 'dark';
       this.syncfusionThemeService.setDarkMode(isDark, false);
     });
 
-    // Check if user is already logged in
-    if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/home']);
-    }
+    // Don't redirect if user is already on a route
+    // Let the router handle navigation based on current route
   }
 }

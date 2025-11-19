@@ -3,35 +3,32 @@
   <div class="icon-bar flex flex-col items-center py-4 border-r transition-colors duration-300">
     <!-- Logo -->
     <div class="mb-6">
-      <div class="logo-container w-12 h-12 rounded-xl flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 cursor-pointer"
-           [attr.aria-label]="'Home'"
-           role="button"
-           tabindex="0"
-           (click)="navigateToHome()"
-           (keydown.enter)="navigateToHome()">
+      <a routerLink="/home"
+         class="logo-container w-12 h-12 rounded-xl flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 cursor-pointer"
+         [attr.aria-label]="'Home'"
+         role="button"
+         tabindex="0">
         <span class="text-white text-xl font-bold">H</span>
-      </div>
+      </a>
     </div>
 
     <!-- Module Icons -->
     <div class="flex flex-col gap-3 flex-1 w-full px-2">
-      <button
-        *ngFor="let module of mainModules"
-        [class.active]="selectedModule === module.id"
-        [attr.aria-label]="module.name"
-        [attr.aria-current]="selectedModule === module.id ? 'true' : 'false'"
-        [attr.title]="module.name"
-        (click)="selectModule(module.id)"
-        (keydown.enter)="selectModule(module.id)"
-        (keydown.space)="selectModule(module.id); $event.preventDefault()"
-        class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl transition-all duration-300 relative group"
-        type="button">
+      <a *ngFor="let module of mainModules"
+         [routerLink]="getModuleHomeRoute(module.id)"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: false}"
+         [class.active]="selectedModule === module.id"
+         [attr.aria-label]="module.name"
+         [attr.aria-current]="selectedModule === module.id ? 'true' : 'false'"
+         [attr.title]="module.name"
+         class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl transition-all duration-300 relative group">
         <span [class]="module.iconCss" class="text-xl transition-colors duration-300"></span>
         <!-- Active Indicator -->
         <span *ngIf="selectedModule === module.id" class="active-indicator"></span>
         <!-- Tooltip -->
         <span class="module-tooltip">{{ module.name }}</span>
-      </button>
+      </a>
     </div>
   </div>
 
@@ -79,7 +76,7 @@
 
       <!-- Module Menu Items -->
       <ejs-listview
-        *ngIf="!isLoading && selectedModuleData && filteredMenuItems.length > 0"
+        *ngIf="!isLoading && selectedModuleData && filteredMenuItems && filteredMenuItems.length > 0"
         #listview
         [dataSource]="filteredMenuItems"
         [fields]="listViewFields"
@@ -166,22 +163,20 @@
              *ngIf="showUserMenu"
              @slideDown>
           <div class="user-menu-items">
-            <button
-              class="user-menu-item"
-              (click)="navigateToProfile()"
-              [attr.aria-label]="'โปรไฟล์'"
-              type="button">
+            <a routerLink="/personal/profile"
+               class="user-menu-item"
+               (click)="showUserMenu = false"
+               [attr.aria-label]="'โปรไฟล์'">
               <span class="e-icons e-user"></span>
               <span class="thai-text">โปรไฟล์</span>
-            </button>
-            <button
-              class="user-menu-item"
-              (click)="navigateToSettings()"
-              [attr.aria-label]="'ตั้งค่า'"
-              type="button">
+            </a>
+            <a routerLink="/setting/home"
+               class="user-menu-item"
+               (click)="showUserMenu = false"
+               [attr.aria-label]="'ตั้งค่า'">
               <span class="e-icons e-settings"></span>
               <span class="thai-text">ตั้งค่า</span>
-            </button>
+            </a>
             <div class="user-menu-divider"></div>
             <button
               class="user-menu-item text-red-500 dark:text-red-400"

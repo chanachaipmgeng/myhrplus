@@ -373,78 +373,20 @@ export class SidebarComponent implements OnInit, OnDestroy {
         id: 'workflow-home',
         iconCss: 'e-icons e-home',
         route: '/workflow/home'
-      },
-      {
-        text: 'การขอเอกสาร',
-        id: 'workflow-requests',
-        iconCss: 'e-icons e-file',
-        route: '/workflow/requests'
-      },
-      {
-        text: 'เอกสารรออนุมัติ',
-        id: 'workflow-pending',
-        iconCss: 'e-icons e-check',
-        route: '/workflow/pending'
-      },
-      {
-        text: 'ประวัติการขอ',
-        id: 'workflow-history',
-        iconCss: 'e-icons e-history',
-        route: '/workflow/history'
       }
     ];
   }
 
   // Get menu items from TA routing module
   private getTaMenuItems(): NestedMenuItem[] {
+    // ดึงเมนูจาก routing module จริงๆ
+    // ตอนนี้มีแค่ home route
     return [
       {
         text: 'หน้าแรก',
         id: 'ta-home',
         iconCss: 'e-icons e-home',
         route: '/ta/home'
-      },
-      {
-        text: 'คำขอลา',
-        id: 'ta-leave-request',
-        iconCss: 'e-icons e-calendar',
-        route: '/ta/leave-request'
-      },
-      {
-        text: 'คำขอ OT',
-        id: 'ta-overtime-request',
-        iconCss: 'e-icons e-time',
-        route: '/ta/overtime-request'
-      },
-      {
-        text: 'คำขอแก้ไขเวลา',
-        id: 'ta-time-edit-request',
-        iconCss: 'e-icons e-edit',
-        route: '/ta/time-edit-request'
-      },
-      {
-        text: 'คำขอเปลี่ยนกะ',
-        id: 'ta-shift-change-request',
-        iconCss: 'e-icons e-sync',
-        route: '/ta/shift-change-request'
-      },
-      {
-        text: 'คำขอแลกกะ',
-        id: 'ta-exchange-shift-request',
-        iconCss: 'e-icons e-exchange',
-        route: '/ta/exchange-shift-request'
-      },
-      {
-        text: 'อนุมัติ',
-        id: 'ta-manager-approvals',
-        iconCss: 'e-icons e-check',
-        route: '/ta/manager-approvals'
-      },
-      {
-        text: 'รายงาน',
-        id: 'ta-reports',
-        iconCss: 'e-icons e-chart',
-        route: '/ta/reports'
       }
     ];
   }
@@ -457,24 +399,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
         id: 'payroll-home',
         iconCss: 'e-icons e-home',
         route: '/payroll/home'
-      },
-      {
-        text: 'จัดการเงินเดือน',
-        id: 'payroll-salary',
-        iconCss: 'e-icons e-money',
-        route: '/payroll/salary'
-      },
-      {
-        text: 'สลิปเงินเดือน',
-        id: 'payroll-payslip',
-        iconCss: 'e-icons e-receipt',
-        route: '/payroll/payslip'
-      },
-      {
-        text: 'รายงาน',
-        id: 'payroll-reports',
-        iconCss: 'e-icons e-chart',
-        route: '/payroll/reports'
       }
     ];
   }
@@ -486,24 +410,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
         id: 'welfare-home',
         iconCss: 'e-icons e-home',
         route: '/welfare/home'
-      },
-      {
-        text: 'สวัสดิการ',
-        id: 'welfare-benefits',
-        iconCss: 'e-icons e-favorite',
-        route: '/welfare/benefits'
-      },
-      {
-        text: 'ลงทะเบียนสวัสดิการ',
-        id: 'welfare-enrollment',
-        iconCss: 'e-icons e-check',
-        route: '/welfare/enrollment'
-      },
-      {
-        text: 'รายงาน',
-        id: 'welfare-reports',
-        iconCss: 'e-icons e-chart',
-        route: '/welfare/reports'
       }
     ];
   }
@@ -515,36 +421,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
         id: 'training-home',
         iconCss: 'e-icons e-home',
         route: '/training/home'
-      },
-      {
-        text: 'หลักสูตรการฝึกอบรม',
-        id: 'training-catalog',
-        iconCss: 'e-icons e-book',
-        route: '/training/catalog'
-      },
-      {
-        text: 'ลงทะเบียนอบรม',
-        id: 'training-registration',
-        iconCss: 'e-icons e-check',
-        route: '/training/registration'
-      },
-      {
-        text: 'ประวัติการอบรม',
-        id: 'training-history',
-        iconCss: 'e-icons e-history',
-        route: '/training/history'
-      },
-      {
-        text: 'ใบรับรอง',
-        id: 'training-certificates',
-        iconCss: 'e-icons e-file',
-        route: '/training/certificates'
-      },
-      {
-        text: 'รายงาน',
-        id: 'training-reports',
-        iconCss: 'e-icons e-chart',
-        route: '/training/reports'
       }
     ];
   }
@@ -556,30 +432,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
         id: 'recruit-home',
         iconCss: 'e-icons e-home',
         route: '/recruit/home'
-      },
-      {
-        text: 'ประกาศรับสมัคร',
-        id: 'recruit-job-postings',
-        iconCss: 'e-icons e-file',
-        route: '/recruit/job-postings'
-      },
-      {
-        text: 'จัดการผู้สมัคร',
-        id: 'recruit-candidates',
-        iconCss: 'e-icons e-people',
-        route: '/recruit/candidates'
-      },
-      {
-        text: 'นัดสัมภาษณ์',
-        id: 'recruit-interviews',
-        iconCss: 'e-icons e-calendar',
-        route: '/recruit/interviews'
-      },
-      {
-        text: 'รายงาน',
-        id: 'recruit-reports',
-        iconCss: 'e-icons e-chart',
-        route: '/recruit/reports'
       }
     ];
   }
@@ -591,18 +443,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
         id: 'appraisal-home',
         iconCss: 'e-icons e-home',
         route: '/appraisal/home'
-      },
-      {
-        text: 'การประเมินผล',
-        id: 'appraisal-appraisals',
-        iconCss: 'e-icons e-chart',
-        route: '/appraisal/appraisals'
-      },
-      {
-        text: 'รายงาน',
-        id: 'appraisal-reports',
-        iconCss: 'e-icons e-file',
-        route: '/appraisal/reports'
       }
     ];
   }
@@ -614,18 +454,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
         id: 'personal-home',
         iconCss: 'e-icons e-home',
         route: '/personal/home'
-      },
-      {
-        text: 'จัดการข้อมูลพนักงาน',
-        id: 'personal-employees',
-        iconCss: 'e-icons e-user',
-        route: '/personal/employees'
-      },
-      {
-        text: 'โครงสร้างองค์กร',
-        id: 'personal-organization',
-        iconCss: 'e-icons e-briefcase',
-        route: '/personal/organization'
       }
     ];
   }
@@ -637,30 +465,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
         id: 'company-home',
         iconCss: 'e-icons e-home',
         route: '/company/home'
-      },
-      {
-        text: 'ข้อมูลบริษัท',
-        id: 'company-profile',
-        iconCss: 'e-icons e-briefcase',
-        route: '/company/profile'
-      },
-      {
-        text: 'โครงสร้างองค์กร',
-        id: 'company-organization',
-        iconCss: 'e-icons e-organization',
-        route: '/company/organization'
-      },
-      {
-        text: 'แผนก',
-        id: 'company-departments',
-        iconCss: 'e-icons e-folder',
-        route: '/company/departments'
-      },
-      {
-        text: 'ตำแหน่งงาน',
-        id: 'company-positions',
-        iconCss: 'e-icons e-user',
-        route: '/company/positions'
       }
     ];
   }
@@ -672,30 +476,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
         id: 'setting-home',
         iconCss: 'e-icons e-home',
         route: '/setting/home'
-      },
-      {
-        text: 'ตั้งค่าระบบ',
-        id: 'setting-system',
-        iconCss: 'e-icons e-settings',
-        route: '/setting/system'
-      },
-      {
-        text: 'ตั้งค่าผู้ใช้',
-        id: 'setting-users',
-        iconCss: 'e-icons e-user',
-        route: '/setting/users'
-      },
-      {
-        text: 'ตั้งค่าสิทธิ์',
-        id: 'setting-permissions',
-        iconCss: 'e-icons e-lock',
-        route: '/setting/permissions'
-      },
-      {
-        text: 'ตั้งค่าเมนู',
-        id: 'setting-menu',
-        iconCss: 'e-icons e-menu',
-        route: '/setting/menu'
       }
     ];
   }
@@ -739,10 +519,52 @@ export class SidebarComponent implements OnInit, OnDestroy {
     // Clear search when switching modules
     this.searchQuery = '';
     // Filter menu items after module is selected
-    if (this.selectedModuleData) {
-      this.filteredMenuItems = this.selectedModuleData.menuItems;
+    if (this.selectedModuleData && this.selectedModuleData.menuItems) {
+      // Ensure menuItems is an array and all items have required properties
+      this.filteredMenuItems = (this.selectedModuleData.menuItems || []).map(item => ({
+        text: item.text || '',
+        id: item.id || `menu-${Date.now()}-${Math.random()}`,
+        iconCss: item.iconCss || 'e-icons e-folder',
+        route: item.route || '',
+        badge: item.badge,
+        badgeColor: item.badgeColor,
+        child: item.child ? item.child.map(child => ({
+          text: child.text || '',
+          id: child.id || `child-${Date.now()}-${Math.random()}`,
+          iconCss: child.iconCss || 'e-icons e-folder',
+          route: child.route || ''
+        })) : undefined
+      }));
+      // Don't navigate here - let routerLink handle navigation
+      // RouterLink will automatically navigate to the route
     } else {
       this.filteredMenuItems = [];
+    }
+  }
+
+  getModuleHomeRoute(moduleId: string): string {
+    const moduleHomeRoutes: { [key: string]: string } = {
+      'home': '/home',
+      'empview': '/dashboard',
+      'workflow': '/workflow/home',
+      'company': '/company/home',
+      'personal': '/personal/home',
+      'ta': '/ta/home',
+      'payroll': '/payroll/home',
+      'welfare': '/welfare/home',
+      'training': '/training/home',
+      'recruit': '/recruit/home',
+      'appraisal': '/appraisal/home',
+      'setting': '/setting/home'
+    };
+
+    return moduleHomeRoutes[moduleId] || '/home';
+  }
+
+  private navigateToModuleHome(moduleId: string): void {
+    const homeRoute = this.getModuleHomeRoute(moduleId);
+    if (homeRoute) {
+      this.router.navigate([homeRoute]).catch(() => {});
     }
   }
 
@@ -756,18 +578,32 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   private filterMenuItems(): void {
-    if (!this.selectedModuleData) {
+    if (!this.selectedModuleData || !this.selectedModuleData.menuItems) {
       this.filteredMenuItems = [];
       return;
     }
 
     if (!this.searchQuery || this.searchQuery.trim() === '') {
-      this.filteredMenuItems = this.selectedModuleData.menuItems;
+      // Ensure all items have required properties
+      this.filteredMenuItems = (this.selectedModuleData.menuItems || []).map(item => ({
+        text: item.text || '',
+        id: item.id || `menu-${Date.now()}-${Math.random()}`,
+        iconCss: item.iconCss || 'e-icons e-folder',
+        route: item.route || '',
+        badge: item.badge,
+        badgeColor: item.badgeColor,
+        child: item.child ? item.child.map(child => ({
+          text: child.text || '',
+          id: child.id || `child-${Date.now()}-${Math.random()}`,
+          iconCss: child.iconCss || 'e-icons e-folder',
+          route: child.route || ''
+        })) : undefined
+      }));
       return;
     }
 
     const query = this.searchQuery.toLowerCase().trim();
-    this.filteredMenuItems = this.selectedModuleData.menuItems.filter(item => {
+    const filtered = (this.selectedModuleData.menuItems || []).filter(item => {
       // Search in main item text
       const matchesMain = item.text?.toLowerCase().includes(query);
 
@@ -778,6 +614,22 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
       return matchesMain || matchesChild;
     });
+
+    // Ensure all filtered items have required properties
+    this.filteredMenuItems = filtered.map(item => ({
+      text: item.text || '',
+      id: item.id || `menu-${Date.now()}-${Math.random()}`,
+      iconCss: item.iconCss || 'e-icons e-folder',
+      route: item.route || '',
+      badge: item.badge,
+      badgeColor: item.badgeColor,
+      child: item.child ? item.child.map(child => ({
+        text: child.text || '',
+        id: child.id || `child-${Date.now()}-${Math.random()}`,
+        iconCss: child.iconCss || 'e-icons e-folder',
+        route: child.route || ''
+      })) : undefined
+    }));
   }
 
   navigateToHome(): void {
@@ -915,9 +767,30 @@ export class SidebarComponent implements OnInit, OnDestroy {
     const moduleCode = this.getModuleCodeFromRoute(this.activeRoute);
     const moduleId = this.mapRouteToModuleId(moduleCode);
     if (moduleId && moduleId !== this.selectedModule) {
-      const module = this.mainModules.find(m => m.id === moduleId);
-      if (module) {
-        this.selectModule(moduleId);
+      // Update selected module without navigating (routerLink already handled navigation)
+      this.selectedModule = moduleId;
+      this.selectedModuleData = this.mainModules.find(m => m.id === moduleId) || null;
+      // Clear search when switching modules
+      this.searchQuery = '';
+      // Filter menu items after module is selected
+      if (this.selectedModuleData && this.selectedModuleData.menuItems) {
+        // Ensure menuItems is an array and all items have required properties
+        this.filteredMenuItems = (this.selectedModuleData.menuItems || []).map(item => ({
+          text: item.text || '',
+          id: item.id || `menu-${Date.now()}-${Math.random()}`,
+          iconCss: item.iconCss || 'e-icons e-folder',
+          route: item.route || '',
+          badge: item.badge,
+          badgeColor: item.badgeColor,
+          child: item.child ? item.child.map(child => ({
+            text: child.text || '',
+            id: child.id || `child-${Date.now()}-${Math.random()}`,
+            iconCss: child.iconCss || 'e-icons e-folder',
+            route: child.route || ''
+          })) : undefined
+        }));
+      } else {
+        this.filteredMenuItems = [];
       }
     }
   }
