@@ -45,8 +45,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Get return url from route parameters or default to '/dashboard' (EMPVIEW)
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
+    // Get return url from route parameters or default to '/home' (Home Module)
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
 
     // If already logged in, redirect
     if (this.authService.isAuthenticated()) {
@@ -152,11 +152,11 @@ export class LoginComponent implements OnInit {
 
                   if (accountActive) {
                     if (accountActive === 'true') {
-                      // Account is active, proceed to DASHBOARD (EMPVIEW)
+                      // Account is active, proceed to HOME MODULE
                       this.notificationService.showSuccess('Login successful');
                       this.menuService.clearCache();
-                      // Navigate to DASHBOARD (EMPVIEW)
-                      this.router.navigate(['/dashboard']);
+                      // Navigate to HOME MODULE
+                      this.router.navigate(['/home']);
                     } else if (accountActive === 'waiting') {
                       this.loading = false;
                       this.loginForm.patchValue({ password: '' });
@@ -169,17 +169,17 @@ export class LoginComponent implements OnInit {
                       this.notificationService.showError(this.errorMessage);
                     }
                   } else {
-                    // No accountactive field, proceed to DASHBOARD (EMPVIEW)
+                    // No accountactive field, proceed to HOME MODULE
                     this.notificationService.showSuccess('Login successful');
                     this.menuService.clearCache();
-                    this.router.navigate(['/dashboard']);
+                    this.router.navigate(['/home']);
                   }
                 } catch (error) {
                   console.error('Error decoding token:', error);
                   // Proceed anyway
                   this.notificationService.showSuccess('Login successful');
                   this.menuService.clearCache();
-                  this.router.navigate(['/dashboard']);
+                  this.router.navigate(['/home']);
                 }
               })
               .catch((error) => {
@@ -187,7 +187,7 @@ export class LoginComponent implements OnInit {
                 // Proceed anyway if getSetPass fails
                 this.notificationService.showSuccess('Login successful');
                 this.menuService.clearCache();
-                this.router.navigate(['/dashboard']);
+                this.router.navigate(['/home']);
               });
           } else {
             this.loading = false;

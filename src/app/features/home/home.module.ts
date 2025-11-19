@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
+import { LayoutModule } from '../../layout/layout.module';
 import { HomeComponent } from './home.component';
 import { HomeHeaderComponent } from './home-header.component';
 import { HomeRoutingModule } from './home-routing.module';
@@ -25,6 +26,7 @@ import { EmptyStateComponent } from '../../shared/components/empty-state/empty-s
     RouterModule,
     FormsModule,
     SharedModule,
+    LayoutModule,
     HomeRoutingModule,
     // Standalone components
     PageLayoutComponent,

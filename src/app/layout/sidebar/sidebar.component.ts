@@ -55,7 +55,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
     iconCss: 'iconCss',
     child: 'child',
     badge: 'badge',
-    badgeColor: 'badgeColor'
+    badgeColor: 'badgeColor',
+    route: 'route'
   };
   activeRoute: string = '';
   private destroy$ = new Subject<void>();
@@ -151,19 +152,19 @@ export class SidebarComponent implements OnInit, OnDestroy {
         ]
       },
       // 2. Empview - Employee Self Service (ดึงจาก empview-routing.module.ts)
-      {
-        id: 'empview',
-        name: 'Employee Self Service',
-        iconCss: 'e-icons e-user',
-        menuItems: this.getEmpviewMenuItems()
-      },
-      // 3. Workflow - การขอเอกสาร
-      {
-        id: 'workflow',
-        name: 'Workflow',
-        iconCss: 'e-icons e-flow',
-        menuItems: this.getWorkflowMenuItems()
-      },
+      // {
+      //   id: 'empview',
+      //   name: 'Employee Self Service',
+      //   iconCss: 'e-icons e-user',
+      //   menuItems: this.getEmpviewMenuItems()
+      // },
+      // // 3. Workflow - การขอเอกสาร
+      // {
+      //   id: 'workflow',
+      //   name: 'Workflow',
+      //   iconCss: 'e-icons e-flow',
+      //   menuItems: this.getWorkflowMenuItems()
+      // },
       // 4. Company Management (สำหรับ HR)
       {
         id: 'company',
@@ -273,6 +274,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   // Get menu items from empview routing module
+  // Note: empview module is lazy loaded at /dashboard, so routes should be /dashboard/...
   private getEmpviewMenuItems(): NestedMenuItem[] {
     const menuItems: NestedMenuItem[] = [
       {
@@ -285,79 +287,79 @@ export class SidebarComponent implements OnInit, OnDestroy {
         text: 'Employee Profile',
         id: 'empview-profile',
         iconCss: 'e-icons e-user',
-        route: '/employee-profile'
+        route: '/dashboard/employee-profile'
       },
       {
         text: 'Employee Work Information',
         id: 'empview-work-info',
         iconCss: 'e-icons e-briefcase',
-        route: '/employee-work-information'
+        route: '/dashboard/employee-work-information'
       },
       {
         text: 'Working Hour Data',
         id: 'empview-timestamp',
         iconCss: 'e-icons e-clock',
-        route: '/employee-timestamp'
+        route: '/dashboard/employee-timestamp'
       },
       {
         text: 'Punch In/Out Checking',
         id: 'empview-time-warning',
         iconCss: 'e-icons e-warning',
-        route: '/employee-time-warning'
+        route: '/dashboard/employee-time-warning'
       },
       {
         text: 'Raw Data',
         id: 'empview-attendance',
         iconCss: 'e-icons e-list',
-        route: '/employee-attendance'
+        route: '/dashboard/employee-attendance'
       },
       {
         text: 'Privilege Leave',
         id: 'empview-leaverole',
         iconCss: 'e-icons e-calendar',
-        route: '/employee-leaverole'
+        route: '/dashboard/employee-leaverole'
       },
       {
         text: 'OT Statistic',
         id: 'empview-otstatistic',
         iconCss: 'e-icons e-chart',
-        route: '/employee-otstatistic'
+        route: '/dashboard/employee-otstatistic'
       },
       {
         text: 'Leave Statistic',
         id: 'empview-leavestatistic',
         iconCss: 'e-icons e-chart',
-        route: '/employee-leavestatistic'
+        route: '/dashboard/employee-leavestatistic'
       },
       {
         text: 'Change Requisition',
         id: 'empview-edittimestatistic',
         iconCss: 'e-icons e-edit',
-        route: '/employee-edittimestatistic'
+        route: '/dashboard/employee-edittimestatistic'
       },
       {
         text: 'Working History Data',
         id: 'empview-working-history',
         iconCss: 'e-icons e-history',
-        route: '/working-history-data'
+        route: '/dashboard/working-history-data'
       },
       {
         text: 'e-Payslip',
         id: 'empview-payslip',
         iconCss: 'e-icons e-receipt',
-        route: '/employee-payslip'
+        route: '/dashboard/employee-payslip'
       },
       {
         text: '50Twi',
         id: 'empview-twi50',
         iconCss: 'e-icons e-file',
-        route: '/employee-twi50'
+        route: '/dashboard/employee-twi50'
       },
       {
         text: 'PND91',
         id: 'empview-pnd91',
         iconCss: 'e-icons e-file',
-        route: '/employee-pnd91'
+        route: '/dashboard/employee-pnd91'
       }
     ];
     return menuItems;
@@ -942,9 +944,109 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   onMenuItemSelect(args: any): void {
-    if (args.item && args.item.route) {
-      this.router.navigate([args.item.route]);
+    if (!args) {
+      return;
     }
+
+    // Debug: Log the args structure to understand Syncfusion ListView event format
+    // console.log('ListView select args:', args);
+
+    // Syncfusion ListView sends data in different formats:
+    // - args.item (the selected item data)
+    // - args.itemData (alternative property)
+    // - args.text (the text of selected item)
+    const item = args.item || args.itemData || args;
+
+    // Get route from item - check multiple possible locations
+    let route = item.route || item.data?.route || (item.data && item.data.route);
+
+    // If still no route, try to find it in the filteredMenuItems by id or text
+    if (!route) {
+      if (item.id) {
+        const menuItem = this.findMenuItemById(item.id);
+        if (menuItem && menuItem.route) {
+          route = menuItem.route;
+        }
+      } else if (item.text) {
+        const menuItem = this.findMenuItemByText(item.text);
+        if (menuItem && menuItem.route) {
+          route = menuItem.route;
+        }
+      }
+    }
+
+    if (route) {
+      this.navigateToRoute(route);
+    } else {
+      console.warn('No route found for menu item:', item);
+      // Debug: Log full args for troubleshooting
+      console.log('Full args structure:', JSON.stringify(args, null, 2));
+    }
+  }
+
+  private findMenuItemById(id: string): NestedMenuItem | null {
+    if (!this.filteredMenuItems || this.filteredMenuItems.length === 0) {
+      return null;
+    }
+
+    // Search in current filtered items
+    for (const item of this.filteredMenuItems) {
+      if (item.id === id) {
+        return item;
+      }
+      // Search in children if exists
+      if (item.child) {
+        for (const child of item.child) {
+          if (child.id === id) {
+            return child;
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  private findMenuItemByText(text: string): NestedMenuItem | null {
+    if (!this.filteredMenuItems || this.filteredMenuItems.length === 0) {
+      return null;
+    }
+
+    // Search in current filtered items
+    for (const item of this.filteredMenuItems) {
+      if (item.text === text) {
+        return item;
+      }
+      // Search in children if exists
+      if (item.child) {
+        for (const child of item.child) {
+          if (child.text === text) {
+            return child;
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  private navigateToRoute(route: string): void {
+    if (!route) {
+      return;
+    }
+
+    // Navigate to the route
+    this.router.navigate([route]).then(
+      (success) => {
+        if (success) {
+          // Update active route
+          this.activeRoute = route;
+          // Update selected module based on route
+          this.updateSelectedModuleFromRoute();
+        }
+      },
+      (error) => {
+        console.error('Navigation error:', error);
+      }
+    );
   }
 
   ngOnDestroy(): void {
