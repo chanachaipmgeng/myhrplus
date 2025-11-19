@@ -1,0 +1,51 @@
+<div class="demo-page">
+  <div class="demo-header">
+    <h1 class="demo-title">Search Filter Component</h1>
+    <p class="demo-description">
+      Search and filter component with debounced search, filter options, and active filter chips.
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Live Demo</h2>
+    
+    <app-glass-card padding="p-6">
+      <app-search-filter
+        [filters]="filters"
+        (search)="onSearch($event)"
+        (filterChange)="onFilterChange($event)">
+      </app-search-filter>
+    </app-glass-card>
+  </section>
+
+  <!-- Basic Example Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Basic Example</h2>
+    <app-glass-card padding="p-6">
+      <app-search-filter
+        placeholder="ค้นหา..."
+        (search)="onSearch($event)">
+      </app-search-filter>
+    </app-glass-card>
+  </section>
+
+  <!-- Code Examples -->
+  <section class="demo-section">
+    <h2 class="section-title">Code Examples</h2>
+    
+    <h3 class="subsection-title">Basic Usage</h3>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Search Filter"></app-code-viewer>
+
+    <h3 class="subsection-title">With Filters</h3>
+    <app-code-viewer [code]="withFiltersExample" language="html" title="Search Filter with Filters"></app-code-viewer>
+  </section>
+
+  <!-- API Documentation -->
+  <section class="demo-section">
+    <h2 class="section-title">API Documentation</h2>
+    <app-props-table [props]="props" title="Inputs"></app-props-table>
+    <app-props-table [props]="outputs" title="Outputs"></app-props-table>
+  </section>
+</div>
+

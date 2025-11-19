@@ -1,0 +1,102 @@
+<div class="demo-page">
+  <div class="demo-header">
+    <h1 class="demo-title">Spinner Component</h1>
+    <p class="demo-description">
+      Spinner component with different sizes, colors, and optional message. Supports full screen overlay mode.
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Live Demo</h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="demo-preview">
+        <app-spinner message="กำลังโหลดข้อมูล..."></app-spinner>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Sizes Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Sizes</h2>
+    <app-glass-card padding="p-6">
+      <div class="sizes-demo">
+        <div class="size-item">
+          <app-spinner size="sm"></app-spinner>
+          <span>Small</span>
+        </div>
+        <div class="size-item">
+          <app-spinner size="md"></app-spinner>
+          <span>Medium</span>
+        </div>
+        <div class="size-item">
+          <app-spinner size="lg"></app-spinner>
+          <span>Large</span>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- With Message Section -->
+  <section class="demo-section">
+    <h2 class="section-title">With Message</h2>
+    <app-glass-card padding="p-6">
+      <div class="message-demo">
+        <app-spinner message="กำลังโหลดข้อมูล กรุณารอสักครู่..."></app-spinner>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Colors Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Colors</h2>
+    <app-glass-card padding="p-6">
+      <div class="colors-demo">
+        <div class="color-item">
+          <app-spinner color="text-blue-600"></app-spinner>
+          <span>Blue</span>
+        </div>
+        <div class="color-item">
+          <app-spinner color="text-green-600"></app-spinner>
+          <span>Green</span>
+        </div>
+        <div class="color-item">
+          <app-spinner color="text-red-600"></app-spinner>
+          <span>Red</span>
+        </div>
+        <div class="color-item">
+          <app-spinner color="text-purple-600"></app-spinner>
+          <span>Purple</span>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Code Examples -->
+  <section class="demo-section">
+    <h2 class="section-title">Code Examples</h2>
+    
+    <h3 class="subsection-title">Basic Usage</h3>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Spinner"></app-code-viewer>
+
+    <h3 class="subsection-title">Sizes</h3>
+    <app-code-viewer [code]="sizesExample" language="html" title="Spinner Sizes"></app-code-viewer>
+
+    <h3 class="subsection-title">With Message</h3>
+    <app-code-viewer [code]="withMessageExample" language="html" title="Spinner with Message"></app-code-viewer>
+
+    <h3 class="subsection-title">Full Screen</h3>
+    <app-code-viewer [code]="fullScreenExample" language="html" title="Full Screen Spinner"></app-code-viewer>
+
+    <h3 class="subsection-title">Colors</h3>
+    <app-code-viewer [code]="colorsExample" language="html" title="Spinner Colors"></app-code-viewer>
+  </section>
+
+  <!-- API Documentation -->
+  <section class="demo-section">
+    <h2 class="section-title">API Documentation</h2>
+    <app-props-table [props]="props" title="Inputs"></app-props-table>
+  </section>
+</div>
+

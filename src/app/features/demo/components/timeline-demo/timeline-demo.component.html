@@ -1,0 +1,49 @@
+<div class="demo-page">
+  <div class="demo-header">
+    <h1 class="demo-title">Timeline Component</h1>
+    <p class="demo-description">
+      Timeline component for displaying chronological events with icons, dates, and status indicators.
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Live Demo</h2>
+    
+    <app-glass-card padding="p-6">
+      <app-timeline [items]="timelineItems"></app-timeline>
+    </app-glass-card>
+  </section>
+
+  <!-- Horizontal Orientation Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Horizontal Orientation</h2>
+    <app-glass-card padding="p-6">
+      <app-timeline
+        [items]="timelineItems"
+        orientation="horizontal">
+      </app-timeline>
+    </app-glass-card>
+  </section>
+
+  <!-- Code Examples -->
+  <section class="demo-section">
+    <h2 class="section-title">Code Examples</h2>
+    
+    <h3 class="subsection-title">Basic Usage</h3>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Timeline"></app-code-viewer>
+
+    <h3 class="subsection-title">Horizontal Orientation</h3>
+    <app-code-viewer [code]="horizontalExample" language="html" title="Horizontal Timeline"></app-code-viewer>
+
+    <h3 class="subsection-title">Timeline Items</h3>
+    <app-code-viewer [code]="itemsExample" language="typescript" title="Timeline Items Structure"></app-code-viewer>
+  </section>
+
+  <!-- API Documentation -->
+  <section class="demo-section">
+    <h2 class="section-title">API Documentation</h2>
+    <app-props-table [props]="props" title="Inputs"></app-props-table>
+  </section>
+</div>
+

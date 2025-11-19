@@ -3,15 +3,58 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../../shared/shared.module';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { PropsTableComponent } from '../../shared/props-table/props-table.component';
+import { PropsTableComponent, PropDefinition } from '../../shared/props-table/props-table.component';
 
 @Component({
   selector: 'app-spinner-demo',
   standalone: true,
   imports: [CommonModule, SharedModule, GlassCardComponent, CodeViewerComponent, PropsTableComponent],
-  template: `<div class="demo-page"><div class="demo-header"><h1 class="demo-title">Spinner Component</h1><p class="demo-description">Spinner component with sizes.</p></div><section class="demo-section"><h2 class="section-title">Coming Soon</h2><p>Demo content will be added soon.</p></section></div>`,
-  styles: [`.demo-page { padding: 2rem 0; } .demo-title { font-size: 2rem; font-weight: bold; }`]
+  templateUrl: './spinner-demo.component.html',
+  styleUrls: ['./spinner-demo.component.scss']
 })
 export class SpinnerDemoComponent {
-}
+  props: PropDefinition[] = [
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Spinner size',
+      required: false
+    },
+    {
+      name: 'color',
+      type: 'string',
+      default: "'text-primary-600'",
+      description: 'Spinner color CSS class',
+      required: false
+    },
+    {
+      name: 'message',
+      type: 'string',
+      default: 'undefined',
+      description: 'Loading message text',
+      required: false
+    },
+    {
+      name: 'fullScreen',
+      type: 'boolean',
+      default: 'false',
+      description: 'Show as full screen overlay',
+      required: false
+    }
+  ];
 
+  basicExample = `<app-spinner></app-spinner>`;
+
+  sizesExample = `<app-spinner size="sm"></app-spinner>
+<app-spinner size="md"></app-spinner>
+<app-spinner size="lg"></app-spinner>`;
+
+  withMessageExample = `<app-spinner message="กำลังโหลดข้อมูล..."></app-spinner>`;
+
+  fullScreenExample = `<app-spinner [fullScreen]="true" message="กำลังโหลด..."></app-spinner>`;
+
+  colorsExample = `<app-spinner color="text-blue-600"></app-spinner>
+<app-spinner color="text-green-600"></app-spinner>
+<app-spinner color="text-red-600"></app-spinner>`;
+}

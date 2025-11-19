@@ -1,0 +1,88 @@
+<div class="demo-page">
+  <div class="demo-header">
+    <h1 class="demo-title">Page Layout Component</h1>
+    <p class="demo-description">
+      Standard page layout component with header, breadcrumbs, title, description, actions, and content area.
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Live Demo</h2>
+    
+    <app-glass-card padding="p-6">
+      <app-page-layout
+        title="Demo Page"
+        description="This is a demo page layout with breadcrumbs and actions"
+        icon="dashboard"
+        [breadcrumb]="breadcrumb"
+        [actions]="actions">
+        <div class="demo-content">
+          <p class="text-slate-700 dark:text-slate-300">
+            This is the page content area. You can add any content here.
+          </p>
+        </div>
+      </app-page-layout>
+    </app-glass-card>
+  </section>
+
+  <!-- Basic Example Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Basic Example</h2>
+    <app-glass-card padding="p-6">
+      <app-page-layout
+        title="Basic Page"
+        description="Simple page layout without breadcrumbs or actions">
+        <p class="text-slate-700 dark:text-slate-300">Basic page content</p>
+      </app-page-layout>
+    </app-glass-card>
+  </section>
+
+  <!-- With Breadcrumb Section -->
+  <section class="demo-section">
+    <h2 class="section-title">With Breadcrumb</h2>
+    <app-glass-card padding="p-6">
+      <app-page-layout
+        title="Page with Breadcrumb"
+        [breadcrumb]="breadcrumb">
+        <p class="text-slate-700 dark:text-slate-300">Page with breadcrumb navigation</p>
+      </app-page-layout>
+    </app-glass-card>
+  </section>
+
+  <!-- With Actions Section -->
+  <section class="demo-section">
+    <h2 class="section-title">With Actions</h2>
+    <app-glass-card padding="p-6">
+      <app-page-layout
+        title="Page with Actions"
+        [actions]="actions">
+        <p class="text-slate-700 dark:text-slate-300">Page with action buttons</p>
+      </app-page-layout>
+    </app-glass-card>
+  </section>
+
+  <!-- Code Examples -->
+  <section class="demo-section">
+    <h2 class="section-title">Code Examples</h2>
+    
+    <h3 class="subsection-title">Basic Usage</h3>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Page Layout"></app-code-viewer>
+
+    <h3 class="subsection-title">With Breadcrumb</h3>
+    <app-code-viewer [code]="withBreadcrumbExample" language="html" title="Page Layout with Breadcrumb"></app-code-viewer>
+
+    <h3 class="subsection-title">With Actions</h3>
+    <app-code-viewer [code]="withActionsExample" language="html" title="Page Layout with Actions"></app-code-viewer>
+
+    <h3 class="subsection-title">Full Example</h3>
+    <app-code-viewer [code]="fullExample" language="html" title="Full Page Layout"></app-code-viewer>
+  </section>
+
+  <!-- API Documentation -->
+  <section class="demo-section">
+    <h2 class="section-title">API Documentation</h2>
+    <app-props-table [props]="props" title="Inputs"></app-props-table>
+  </section>
+</div>
+

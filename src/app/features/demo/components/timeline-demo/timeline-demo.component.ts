@@ -3,15 +3,100 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../../shared/shared.module';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { PropsTableComponent } from '../../shared/props-table/props-table.component';
+import { PropsTableComponent, PropDefinition } from '../../shared/props-table/props-table.component';
+import { TimelineItem } from '../../../../shared/components/timeline/timeline.component';
 
 @Component({
   selector: 'app-timeline-demo',
   standalone: true,
   imports: [CommonModule, SharedModule, GlassCardComponent, CodeViewerComponent, PropsTableComponent],
-  template: `<div class="demo-page"><div class="demo-header"><h1 class="demo-title">Timeline Component</h1><p class="demo-description">Timeline component for displaying events.</p></div><section class="demo-section"><h2 class="section-title">Coming Soon</h2><p>Demo content will be added soon.</p></section></div>`,
-  styles: [`.demo-page { padding: 2rem 0; } .demo-title { font-size: 2rem; font-weight: bold; }`]
+  templateUrl: './timeline-demo.component.html',
+  styleUrls: ['./timeline-demo.component.scss']
 })
 export class TimelineDemoComponent {
-}
+  timelineItems: TimelineItem[] = [
+    {
+      title: 'สร้างบัญชี',
+      description: 'บัญชีถูกสร้างเรียบร้อยแล้ว',
+      date: new Date('2024-01-15'),
+      icon: 'account_circle',
+      status: 'success'
+    },
+    {
+      title: 'ยืนยันอีเมล',
+      description: 'อีเมลได้รับการยืนยันแล้ว',
+      date: new Date('2024-01-16'),
+      icon: 'email',
+      status: 'success'
+    },
+    {
+      title: 'อัปเดตโปรไฟล์',
+      description: 'กำลังรอการอัปเดต',
+      date: new Date('2024-01-17'),
+      icon: 'edit',
+      status: 'warning'
+    },
+    {
+      title: 'เสร็จสมบูรณ์',
+      description: 'กระบวนการเสร็จสมบูรณ์',
+      date: new Date('2024-01-18'),
+      icon: 'check_circle',
+      status: 'success'
+    }
+  ];
 
+  props: PropDefinition[] = [
+    {
+      name: 'items',
+      type: 'TimelineItem[]',
+      default: '[]',
+      description: 'Array of timeline items',
+      required: true
+    },
+    {
+      name: 'orientation',
+      type: "'vertical' | 'horizontal'",
+      default: "'vertical'",
+      description: 'Timeline orientation',
+      required: false
+    },
+    {
+      name: 'showDates',
+      type: 'boolean',
+      default: 'true',
+      description: 'Show dates',
+      required: false
+    },
+    {
+      name: 'showIcons',
+      type: 'boolean',
+      default: 'true',
+      description: 'Show icons',
+      required: false
+    },
+    {
+      name: 'alternate',
+      type: 'boolean',
+      default: 'false',
+      description: 'Alternate item positions',
+      required: false
+    }
+  ];
+
+  basicExample = `<app-timeline [items]="timelineItems"></app-timeline>`;
+
+  horizontalExample = `<app-timeline
+  [items]="timelineItems"
+  orientation="horizontal">
+</app-timeline>`;
+
+  itemsExample = `timelineItems: TimelineItem[] = [
+  {
+    title: 'Event 1',
+    description: 'Description',
+    date: new Date('2024-01-15'),
+    icon: 'event',
+    status: 'success'
+  }
+];`;
+}

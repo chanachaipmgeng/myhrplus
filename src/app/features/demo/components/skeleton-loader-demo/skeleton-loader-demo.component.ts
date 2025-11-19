@@ -3,15 +3,85 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../../shared/shared.module';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { PropsTableComponent } from '../../shared/props-table/props-table.component';
+import { PropsTableComponent, PropDefinition } from '../../shared/props-table/props-table.component';
 
 @Component({
   selector: 'app-skeleton-loader-demo',
   standalone: true,
   imports: [CommonModule, SharedModule, GlassCardComponent, CodeViewerComponent, PropsTableComponent],
-  template: `<div class="demo-page"><div class="demo-header"><h1 class="demo-title">Skeleton Loader Component</h1><p class="demo-description">Skeleton loading placeholder.</p></div><section class="demo-section"><h2 class="section-title">Coming Soon</h2><p>Demo content will be added soon.</p></section></div>`,
-  styles: [`.demo-page { padding: 2rem 0; } .demo-title { font-size: 2rem; font-weight: bold; }`]
+  templateUrl: './skeleton-loader-demo.component.html',
+  styleUrls: ['./skeleton-loader-demo.component.scss']
 })
 export class SkeletonLoaderDemoComponent {
-}
+  props: PropDefinition[] = [
+    {
+      name: 'type',
+      type: "'text' | 'card' | 'table' | 'list' | 'avatar' | 'custom'",
+      default: "'text'",
+      description: 'Skeleton type',
+      required: false
+    },
+    {
+      name: 'rows',
+      type: 'number',
+      default: '3',
+      description: 'Number of rows (for text/list types)',
+      required: false
+    },
+    {
+      name: 'columns',
+      type: 'number',
+      default: '3',
+      description: 'Number of columns (for table type)',
+      required: false
+    },
+    {
+      name: 'showAvatar',
+      type: 'boolean',
+      default: 'false',
+      description: 'Show avatar skeleton',
+      required: false
+    },
+    {
+      name: 'showTitle',
+      type: 'boolean',
+      default: 'true',
+      description: 'Show title skeleton',
+      required: false
+    },
+    {
+      name: 'animation',
+      type: "'pulse' | 'wave' | 'none'",
+      default: "'pulse'",
+      description: 'Animation type',
+      required: false
+    },
+    {
+      name: 'width',
+      type: 'string',
+      default: "'100%'",
+      description: 'Skeleton width',
+      required: false
+    },
+    {
+      name: 'height',
+      type: 'string',
+      default: "''",
+      description: 'Skeleton height',
+      required: false
+    }
+  ];
 
+  basicExample = `<app-skeleton-loader></app-skeleton-loader>`;
+
+  typesExample = `<app-skeleton-loader type="text"></app-skeleton-loader>
+<app-skeleton-loader type="card"></app-skeleton-loader>
+<app-skeleton-loader type="list"></app-skeleton-loader>`;
+
+  customExample = `<app-skeleton-loader
+  type="text"
+  [rows]="5"
+  [showAvatar]="true"
+  animation="wave">
+</app-skeleton-loader>`;
+}

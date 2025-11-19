@@ -1,0 +1,47 @@
+<div class="demo-page">
+  <div class="demo-header">
+    <h1 class="demo-title">Confirm Dialog Component</h1>
+    <p class="demo-description">
+      Confirmation dialog component for user confirmations with customizable title, message, and button texts.
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Live Demo</h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="demo-preview">
+        <app-glass-button variant="danger" (clicked)="openDialog()">
+          เปิด Confirm Dialog
+        </app-glass-button>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Code Examples -->
+  <section class="demo-section">
+    <h2 class="section-title">Code Examples</h2>
+    
+    <h3 class="subsection-title">Basic Usage</h3>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Confirm Dialog"></app-code-viewer>
+
+    <h3 class="subsection-title">Usage Example</h3>
+    <app-code-viewer [code]="usageExample" language="typescript" title="Complete Usage Example"></app-code-viewer>
+  </section>
+
+  <!-- API Documentation -->
+  <section class="demo-section">
+    <h2 class="section-title">API Documentation</h2>
+    <app-props-table [props]="props" title="Inputs"></app-props-table>
+    <app-props-table [props]="outputs" title="Outputs"></app-props-table>
+  </section>
+
+  <!-- Dialog -->
+  <app-confirm-dialog
+    *ngIf="showDialog"
+    [data]="dialogData"
+    (closed)="onDialogClosed($event)">
+  </app-confirm-dialog>
+</div>
+

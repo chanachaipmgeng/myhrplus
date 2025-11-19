@@ -1,7 +1,7 @@
 # 📚 Components Index - เอกสารอ้างอิง
 
-**อัปเดตล่าสุด**: 2024-12-19  
-**เวอร์ชัน**: 2.0.0
+**อัปเดตล่าสุด**: 2024-12-20  
+**เวอร์ชัน**: 2.1.0
 
 ---
 
@@ -11,10 +11,19 @@
 **เอกสารหลักที่ครอบคลุมทุกอย่าง**
 - Design System
 - Configuration
-- Shared Components (12 components)
+- Shared Components (30+ components)
 - Demo Page
 - Best Practices
 - Troubleshooting
+
+### 1.1. [DEMO_SYSTEM_GUIDE.md](./DEMO_SYSTEM_GUIDE.md) ⭐
+**คู่มือครบถ้วนสำหรับ Demo System**
+- Demo System Overview
+- 32 Demo Components
+- Demo Structure
+- Shared Components (CodeViewer, PropsTable)
+- Template Structure
+- Styling Guidelines
 
 ### 2. [GLASS_MORPHISM_COMPONENTS_ANALYSIS.md](./GLASS_MORPHISM_COMPONENTS_ANALYSIS.md)
 **การวิเคราะห์ Glass Morphism Components**
@@ -95,8 +104,16 @@
 ## 🎯 Quick Links
 
 ### Demo & Examples
-- **Demo Page**: `/demo`
+- **Demo Page**: `/demo` - Complete demo showcase with live examples
 - **Route**: `src/app/features/demo/`
+- **Demo Components**: 32 components with full documentation
+- **Features**:
+  - Live interactive demos
+  - Code examples with syntax highlighting
+  - API documentation (Props tables)
+  - Multiple usage examples
+  - Responsive design
+  - Dark mode & Gemini theme support
 
 ### Configuration Files
 - **Tailwind**: `tailwind.config.js`
@@ -135,6 +152,16 @@ import { SharedModule } from '@shared/shared.module';
 
 ## 🔄 Version History
 
+### v2.1.0 (2024-12-20)
+- ✅ สร้าง Demo System ครบถ้วน (32 components)
+- ✅ เพิ่ม Live Demo sections สำหรับทุก component
+- ✅ เพิ่ม Code Examples พร้อม syntax highlighting
+- ✅ เพิ่ม API Documentation (Props tables)
+- ✅ เพิ่ม Interactive Examples
+- ✅ แยก HTML, SCSS, TS templates สำหรับทุก component
+- ✅ สร้าง CodeViewer และ PropsTable components
+- ✅ เพิ่ม DEMO_SCREENSHOTS_GUIDE.md
+
 ### v2.0.0 (2024-12-19)
 - ✅ เพิ่ม Gemini 1.5 Theme support
 - ✅ อัปเดต Layout components (Header, Sidebar, Footer)
@@ -153,7 +180,7 @@ import { SharedModule } from '@shared/shared.module';
 ---
 
 **Maintainer**: Development Team  
-**Last Updated**: 2024-12-19
+**Last Updated**: 2024-12-20
 
 
 

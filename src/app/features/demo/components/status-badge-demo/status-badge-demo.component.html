@@ -1,0 +1,108 @@
+<div class="demo-page">
+  <div class="demo-header">
+    <h1 class="demo-title">Status Badge Component</h1>
+    <p class="demo-description">
+      Status badge component with predefined status types, variants, sizes, and icons.
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Live Demo</h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="demo-preview">
+        <div class="badges-grid">
+          <app-status-badge
+            *ngFor="let status of statusTypes"
+            [status]="status">
+          </app-status-badge>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Variants Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Variants</h2>
+    <app-glass-card padding="p-6">
+      <div class="variants-demo">
+        <div class="variant-group">
+          <h3 class="text-sm font-semibold mb-2">Filled</h3>
+          <app-status-badge status="pending" variant="filled"></app-status-badge>
+          <app-status-badge status="approved" variant="filled"></app-status-badge>
+          <app-status-badge status="rejected" variant="filled"></app-status-badge>
+        </div>
+        <div class="variant-group">
+          <h3 class="text-sm font-semibold mb-2">Outlined</h3>
+          <app-status-badge status="pending" variant="outlined"></app-status-badge>
+          <app-status-badge status="approved" variant="outlined"></app-status-badge>
+          <app-status-badge status="rejected" variant="outlined"></app-status-badge>
+        </div>
+        <div class="variant-group">
+          <h3 class="text-sm font-semibold mb-2">Soft</h3>
+          <app-status-badge status="pending" variant="soft"></app-status-badge>
+          <app-status-badge status="approved" variant="soft"></app-status-badge>
+          <app-status-badge status="rejected" variant="soft"></app-status-badge>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Sizes Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Sizes</h2>
+    <app-glass-card padding="p-6">
+      <div class="sizes-demo">
+        <div class="size-item">
+          <app-status-badge status="approved" size="sm"></app-status-badge>
+          <span>Small</span>
+        </div>
+        <div class="size-item">
+          <app-status-badge status="approved" size="md"></app-status-badge>
+          <span>Medium</span>
+        </div>
+        <div class="size-item">
+          <app-status-badge status="approved" size="lg"></app-status-badge>
+          <span>Large</span>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Without Icon Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Without Icon</h2>
+    <app-glass-card padding="p-6">
+      <div class="no-icon-demo">
+        <app-status-badge status="pending" [showIcon]="false"></app-status-badge>
+        <app-status-badge status="approved" [showIcon]="false"></app-status-badge>
+        <app-status-badge status="rejected" [showIcon]="false"></app-status-badge>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Code Examples -->
+  <section class="demo-section">
+    <h2 class="section-title">Code Examples</h2>
+    
+    <h3 class="subsection-title">Basic Usage</h3>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Status Badge"></app-code-viewer>
+
+    <h3 class="subsection-title">Variants</h3>
+    <app-code-viewer [code]="variantsExample" language="html" title="Status Badge Variants"></app-code-viewer>
+
+    <h3 class="subsection-title">Sizes</h3>
+    <app-code-viewer [code]="sizesExample" language="html" title="Status Badge Sizes"></app-code-viewer>
+
+    <h3 class="subsection-title">Custom Label</h3>
+    <app-code-viewer [code]="customLabelExample" language="html" title="Custom Label"></app-code-viewer>
+  </section>
+
+  <!-- API Documentation -->
+  <section class="demo-section">
+    <h2 class="section-title">API Documentation</h2>
+    <app-props-table [props]="props" title="Inputs"></app-props-table>
+  </section>
+</div>
+

@@ -1,0 +1,89 @@
+<div class="demo-page">
+  <div class="demo-header">
+    <h1 class="demo-title">Skeleton Loader Component</h1>
+    <p class="demo-description">
+      Skeleton loader component for showing loading placeholders with different types and animations.
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Live Demo</h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="demo-preview">
+        <app-skeleton-loader type="text" [rows]="3"></app-skeleton-loader>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Types Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Types</h2>
+    
+    <div class="space-y-6">
+      <app-glass-card padding="p-6">
+        <h3 class="text-lg font-semibold mb-4">Text</h3>
+        <app-skeleton-loader type="text" [rows]="3"></app-skeleton-loader>
+      </app-glass-card>
+
+      <app-glass-card padding="p-6">
+        <h3 class="text-lg font-semibold mb-4">Card</h3>
+        <app-skeleton-loader type="card"></app-skeleton-loader>
+      </app-glass-card>
+
+      <app-glass-card padding="p-6">
+        <h3 class="text-lg font-semibold mb-4">List</h3>
+        <app-skeleton-loader type="list" [rows]="4" [showAvatar]="true"></app-skeleton-loader>
+      </app-glass-card>
+
+      <app-glass-card padding="p-6">
+        <h3 class="text-lg font-semibold mb-4">Table</h3>
+        <app-skeleton-loader type="table" [rows]="3" [columns]="4"></app-skeleton-loader>
+      </app-glass-card>
+    </div>
+  </section>
+
+  <!-- Animations Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Animations</h2>
+    
+    <div class="space-y-6">
+      <app-glass-card padding="p-6">
+        <h3 class="text-lg font-semibold mb-4">Pulse (Default)</h3>
+        <app-skeleton-loader type="text" animation="pulse" [rows]="3"></app-skeleton-loader>
+      </app-glass-card>
+
+      <app-glass-card padding="p-6">
+        <h3 class="text-lg font-semibold mb-4">Wave</h3>
+        <app-skeleton-loader type="text" animation="wave" [rows]="3"></app-skeleton-loader>
+      </app-glass-card>
+
+      <app-glass-card padding="p-6">
+        <h3 class="text-lg font-semibold mb-4">None</h3>
+        <app-skeleton-loader type="text" animation="none" [rows]="3"></app-skeleton-loader>
+      </app-glass-card>
+    </div>
+  </section>
+
+  <!-- Code Examples -->
+  <section class="demo-section">
+    <h2 class="section-title">Code Examples</h2>
+    
+    <h3 class="subsection-title">Basic Usage</h3>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Skeleton Loader"></app-code-viewer>
+
+    <h3 class="subsection-title">Types</h3>
+    <app-code-viewer [code]="typesExample" language="html" title="Skeleton Loader Types"></app-code-viewer>
+
+    <h3 class="subsection-title">Custom Configuration</h3>
+    <app-code-viewer [code]="customExample" language="html" title="Custom Skeleton Loader"></app-code-viewer>
+  </section>
+
+  <!-- API Documentation -->
+  <section class="demo-section">
+    <h2 class="section-title">API Documentation</h2>
+    <app-props-table [props]="props" title="Inputs"></app-props-table>
+  </section>
+</div>
+

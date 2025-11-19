@@ -2,16 +2,50 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../../shared/shared.module';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
+import { GlassButtonComponent } from '../../../../shared/components/glass-button/glass-button.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { PropsTableComponent } from '../../shared/props-table/props-table.component';
+import { PropsTableComponent, PropDefinition } from '../../shared/props-table/props-table.component';
+import { LoadingService } from '../../../../core/services/loading.service';
 
 @Component({
   selector: 'app-loading-spinner-demo',
   standalone: true,
-  imports: [CommonModule, SharedModule, GlassCardComponent, CodeViewerComponent, PropsTableComponent],
-  template: `<div class="demo-page"><div class="demo-header"><h1 class="demo-title">Loading Spinner Component</h1><p class="demo-description">Loading spinner component.</p></div><section class="demo-section"><h2 class="section-title">Coming Soon</h2><p>Demo content will be added soon.</p></section></div>`,
-  styles: [`.demo-page { padding: 2rem 0; } .demo-title { font-size: 2rem; font-weight: bold; }`]
+  imports: [CommonModule, SharedModule, GlassCardComponent, GlassButtonComponent, CodeViewerComponent, PropsTableComponent],
+  templateUrl: './loading-spinner-demo.component.html',
+  styleUrls: ['./loading-spinner-demo.component.scss']
 })
 export class LoadingSpinnerDemoComponent {
+  props: PropDefinition[] = [
+    {
+      name: 'None',
+      type: '-',
+      default: '-',
+      description: 'Loading Spinner component has no inputs. It uses LoadingService internally.',
+      required: false
+    }
+  ];
+
+  basicExample = `<app-loading-spinner></app-loading-spinner>`;
+
+  serviceExample = `// In component.ts
+import { LoadingService } from '@core/services/loading.service';
+
+constructor(private loadingService: LoadingService) {}
+
+showLoading() {
+  this.loadingService.show();
 }
 
+hideLoading() {
+  this.loadingService.hide();
+}`;
+
+  constructor(private loadingService: LoadingService) {}
+
+  showLoading(): void {
+    this.loadingService.show();
+    setTimeout(() => {
+      this.loadingService.hide();
+    }, 3000);
+  }
+}

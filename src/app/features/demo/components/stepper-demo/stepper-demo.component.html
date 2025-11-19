@@ -1,0 +1,84 @@
+<div class="demo-page">
+  <div class="demo-header">
+    <h1 class="demo-title">Stepper Component</h1>
+    <p class="demo-description">
+      Step-by-step navigation component with horizontal and vertical orientations, optional steps, and completion tracking.
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Live Demo</h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="demo-preview">
+        <app-stepper
+          [steps]="steps"
+          [currentStep]="currentStep"
+          (stepChange)="onStepChange($event)">
+        </app-stepper>
+        
+        <div class="stepper-controls mt-6">
+          <app-glass-button
+            variant="secondary"
+            (clicked)="onPrevious()"
+            [disabled]="currentStep === 0">
+            ก่อนหน้า
+          </app-glass-button>
+          <app-glass-button
+            variant="primary"
+            (clicked)="onNext()"
+            [disabled]="currentStep === steps.length - 1">
+            ถัดไป
+          </app-glass-button>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Vertical Orientation Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Vertical Orientation</h2>
+    <app-glass-card padding="p-6">
+      <app-stepper
+        [steps]="steps"
+        [currentStep]="currentStepVertical"
+        orientation="vertical"
+        (stepChange)="currentStepVertical = $event">
+      </app-stepper>
+    </app-glass-card>
+  </section>
+
+  <!-- With Optional Steps Section -->
+  <section class="demo-section">
+    <h2 class="section-title">With Optional Steps</h2>
+    <app-glass-card padding="p-6">
+      <app-stepper
+        [steps]="stepsWithOptional"
+        [currentStep]="0">
+      </app-stepper>
+    </app-glass-card>
+  </section>
+
+  <!-- Code Examples -->
+  <section class="demo-section">
+    <h2 class="section-title">Code Examples</h2>
+    
+    <h3 class="subsection-title">Basic Usage</h3>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Stepper"></app-code-viewer>
+
+    <h3 class="subsection-title">Vertical Orientation</h3>
+    <app-code-viewer [code]="verticalExample" language="html" title="Vertical Stepper"></app-code-viewer>
+
+    <h3 class="subsection-title">Linear Mode</h3>
+    <app-code-viewer [code]="linearExample" language="html" title="Linear Stepper"></app-code-viewer>
+  </section>
+
+  <!-- API Documentation -->
+  <section class="demo-section">
+    <h2 class="section-title">API Documentation</h2>
+    <app-props-table [props]="props" title="Inputs"></app-props-table>
+    <app-props-table [props]="outputs" title="Outputs"></app-props-table>
+  </section>
+</div>
+

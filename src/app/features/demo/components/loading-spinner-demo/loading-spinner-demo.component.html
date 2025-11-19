@@ -1,0 +1,65 @@
+<div class="demo-page">
+  <div class="demo-header">
+    <h1 class="demo-title">Loading Spinner Component</h1>
+    <p class="demo-description">
+      Global loading spinner component that works with LoadingService for showing/hiding loading state across the application.
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Live Demo</h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="demo-preview">
+        <p class="text-slate-700 dark:text-slate-300 mb-4">
+          คลิกปุ่มด้านล่างเพื่อแสดง loading spinner (จะปิดอัตโนมัติใน 3 วินาที)
+        </p>
+        <app-glass-button variant="primary" (clicked)="showLoading()">
+          แสดง Loading Spinner
+        </app-glass-button>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Usage Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Usage</h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="usage-info">
+        <p class="text-slate-700 dark:text-slate-300 mb-4">
+          Loading Spinner component ใช้ร่วมกับ LoadingService เพื่อควบคุมการแสดง/ซ่อน loading state
+        </p>
+        <ul class="usage-list">
+          <li>เพิ่ม component ใน app component หรือ layout component</li>
+          <li>ใช้ LoadingService.show() เพื่อแสดง loading</li>
+          <li>ใช้ LoadingService.hide() เพื่อซ่อน loading</li>
+          <li>Component จะแสดง/ซ่อนอัตโนมัติตาม state ของ service</li>
+        </ul>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Code Examples -->
+  <section class="demo-section">
+    <h2 class="section-title">Code Examples</h2>
+    
+    <h3 class="subsection-title">Basic Usage</h3>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Loading Spinner"></app-code-viewer>
+
+    <h3 class="subsection-title">Using LoadingService</h3>
+    <app-code-viewer [code]="serviceExample" language="typescript" title="LoadingService Usage"></app-code-viewer>
+  </section>
+
+  <!-- API Documentation -->
+  <section class="demo-section">
+    <h2 class="section-title">API Documentation</h2>
+    <app-glass-card padding="p-6">
+      <p class="text-slate-600 dark:text-slate-400">
+        Loading Spinner component has no inputs or outputs. It uses LoadingService internally to manage loading state.
+      </p>
+    </app-glass-card>
+  </section>
+</div>
+

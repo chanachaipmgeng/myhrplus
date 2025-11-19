@@ -1,11 +1,28 @@
 # 📝 Documentation Changelog
 
-**อัปเดตล่าสุด**: 2024-12-19  
-**เวอร์ชัน**: 2.0.0
+**อัปเดตล่าสุด**: 2024-12-20  
+**เวอร์ชัน**: 2.1.0
 
 ---
 
-## 🆕 เอกสารที่สร้างใหม่ (2024-12-19)
+## 🆕 เอกสารที่สร้างใหม่
+
+### 2024-12-20
+1. **DEMO_SCREENSHOTS_GUIDE.md** ⭐
+   - คู่มือสำหรับเพิ่ม screenshots และ GIFs
+   - Priority list สำหรับ components
+   - Best practices และ implementation guide
+   - Directory structure และ styling guidelines
+
+2. **DEMO_SYSTEM_GUIDE.md** ⭐
+   - คู่มือครบถ้วนสำหรับ Demo System
+   - Demo components overview (32 components)
+   - Demo structure และ features
+   - Shared components (CodeViewer, PropsTable)
+   - Template structure และ styling guidelines
+   - Checklist สำหรับ demo component ใหม่
+
+### 2024-12-19
 
 ### 1. Gemini 1.5 Theme Documentation
 - **ธีม Gemini 1.5** - ธีมสีฟ้าเข้มพร้อม gradient effects
@@ -21,7 +38,30 @@
 
 ---
 
-## 📝 เอกสารที่อัปเดต (2024-12-19)
+## 📝 เอกสารที่อัปเดต
+
+### 2024-12-20
+1. **COMPONENTS_INDEX.md**
+   - ✅ อัปเดต Demo System information
+   - ✅ เพิ่ม demo features และ statistics
+   - ✅ อัปเดต version history (v2.1.0)
+
+2. **DOCUMENTATION_CHANGELOG.md**
+   - ✅ เพิ่มข้อมูลเกี่ยวกับ demo system
+   - ✅ อัปเดต version เป็น 2.1.0
+
+3. **TEMPLATE_AND_COMPONENTS_GUIDE.md**
+   - ✅ อัปเดต Demo Page section
+   - ✅ เพิ่มรายละเอียดเกี่ยวกับ 32 demo components
+   - ✅ เพิ่ม Demo Features และ Structure
+   - ✅ อัปเดต version เป็น 2.1.0
+
+4. **README.md**
+   - ✅ เพิ่ม Demo System section
+   - ✅ อัปเดต UI Components list
+   - ✅ อัปเดต version เป็น 2.1.0
+
+### 2024-12-19
 
 ### 1. README.md ⭐
 **อัปเดตเมื่อ**: 2024-12-19
@@ -62,7 +102,8 @@
 1. **[README.md](./README.md)** ⭐ - Main project documentation
 2. **[TEMPLATE_AND_COMPONENTS_GUIDE.md](./TEMPLATE_AND_COMPONENTS_GUIDE.md)** - Complete components guide
 3. **[COMPONENTS_INDEX.md](./COMPONENTS_INDEX.md)** - Components reference
-4. **[UI_KIT_GUIDE.md](./UI_KIT_GUIDE.md)** - Syncfusion UI-KIT guide
+4. **[DEMO_SYSTEM_GUIDE.md](./DEMO_SYSTEM_GUIDE.md)** ⭐ - Demo system guide
+5. **[UI_KIT_GUIDE.md](./UI_KIT_GUIDE.md)** - Syncfusion UI-KIT guide
 
 ### Design System Documentation
 5. **[GLASSMORPHISM_TEMPLATE_GUIDE.md](./GLASSMORPHISM_TEMPLATE_GUIDE.md)** - Glass Morphism guide
@@ -203,5 +244,5 @@
 ---
 
 **Maintainer**: Development Team  
-**Last Updated**: 2024-12-19  
-**Version**: 2.0.0
+**Last Updated**: 2024-12-20  
+**Version**: 2.1.0

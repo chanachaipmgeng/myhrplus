@@ -36,7 +36,6 @@ import { TimelineDemoComponent } from './components/timeline-demo/timeline-demo.
 import { SearchFilterDemoComponent } from './components/search-filter-demo/search-filter-demo.component';
 import { DateRangePickerDemoComponent } from './components/date-range-picker-demo/date-range-picker-demo.component';
 import { FileUploadDemoComponent } from './components/file-upload-demo/file-upload-demo.component';
-import { ImageUploadDemoComponent } from './components/image-upload-demo/image-upload-demo.component';
 import { SkeletonLoaderDemoComponent } from './components/skeleton-loader-demo/skeleton-loader-demo.component';
 import { FormValidationMessagesDemoComponent } from './components/form-validation-messages-demo/form-validation-messages-demo.component';
 import { LoadingSpinnerDemoComponent } from './components/loading-spinner-demo/loading-spinner-demo.component';
@@ -79,7 +78,6 @@ import { LoadingSpinnerDemoComponent } from './components/loading-spinner-demo/l
     SearchFilterDemoComponent,
     DateRangePickerDemoComponent,
     FileUploadDemoComponent,
-    ImageUploadDemoComponent,
     SkeletonLoaderDemoComponent,
     FormValidationMessagesDemoComponent,
     LoadingSpinnerDemoComponent

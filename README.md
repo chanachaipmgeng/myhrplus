@@ -1,7 +1,7 @@
 # HR System Angular Migration
 
-**เวอร์ชัน**: 2.0.0  
-**อัปเดตล่าสุด**: 2024-12-19
+**เวอร์ชัน**: 2.1.0  
+**อัปเดตล่าสุด**: 2024-12-20
 
 ## 📋 ภาพรวม
 
@@ -71,9 +71,27 @@ this.themeService.setTheme({ color: 'gemini', mode: 'dark' });
 #### UI Components (30+)
 - EmptyState, Loading, StatisticsCard, Tabs, ProgressBar
 - Rating, Tooltip, Modal, PageLayout, DataTable
+- Icon, Avatar, Spinner, ThemeToggle, StatusBadge
+- ErrorState, Breadcrumbs, Stepper, Timeline
+- SearchFilter, DateRangePicker, FileUpload, ImageUpload
+- FormValidationMessages, ConfirmDialog, SkeletonLoader
 - และอื่นๆ...
 
 ดูรายละเอียด: [TEMPLATE_AND_COMPONENTS_GUIDE.md](./TEMPLATE_AND_COMPONENTS_GUIDE.md)
+
+### Demo System
+
+ระบบ Demo ที่ครบถ้วนสำหรับแสดงตัวอย่างการใช้งาน components:
+
+- **32 Demo Components** - ทุก component มี demo page
+- **Live Interactive Demos** - ทดสอบได้จริง
+- **Code Examples** - พร้อม syntax highlighting
+- **API Documentation** - Props tables ครบถ้วน
+- **Multiple Examples** - หลายรูปแบบการใช้งาน
+
+**เข้าดู Demo**: `http://localhost:4200/demo`
+
+ดูรายละเอียด: [COMPONENTS_INDEX.md](./COMPONENTS_INDEX.md)
 
 ## 📁 Project Structure
 

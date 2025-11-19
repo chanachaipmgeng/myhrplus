@@ -1,0 +1,68 @@
+<div class="demo-page">
+  <div class="demo-header">
+    <h1 class="demo-title">Form Validation Messages Component</h1>
+    <p class="demo-description">
+      Form validation messages component that displays error messages for form controls with customizable messages and icons.
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Live Demo</h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="demo-preview space-y-6">
+        <div>
+          <label class="block text-sm font-medium mb-2">Email (Required, Email format)</label>
+          <input
+            type="email"
+            [formControl]="emailControl"
+            class="w-full px-4 py-2 border rounded-lg"
+            placeholder="Enter email">
+          <app-form-validation-messages [control]="emailControl"></app-form-validation-messages>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium mb-2">Password (Required, Min 8 characters)</label>
+          <input
+            type="password"
+            [formControl]="passwordControl"
+            class="w-full px-4 py-2 border rounded-lg"
+            placeholder="Enter password">
+          <app-form-validation-messages [control]="passwordControl"></app-form-validation-messages>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium mb-2">Phone (Required, 10 digits)</label>
+          <input
+            type="tel"
+            [formControl]="phoneControl"
+            class="w-full px-4 py-2 border rounded-lg"
+            placeholder="Enter phone number">
+          <app-form-validation-messages [control]="phoneControl"></app-form-validation-messages>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Code Examples -->
+  <section class="demo-section">
+    <h2 class="section-title">Code Examples</h2>
+    
+    <h3 class="subsection-title">Basic Usage</h3>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Validation Messages"></app-code-viewer>
+
+    <h3 class="subsection-title">With Input</h3>
+    <app-code-viewer [code]="withInputExample" language="html" title="With Input Field"></app-code-viewer>
+
+    <h3 class="subsection-title">Custom Messages</h3>
+    <app-code-viewer [code]="customMessagesExample" language="html" title="Custom Validation Messages"></app-code-viewer>
+  </section>
+
+  <!-- API Documentation -->
+  <section class="demo-section">
+    <h2 class="section-title">API Documentation</h2>
+    <app-props-table [props]="props" title="Inputs"></app-props-table>
+  </section>
+</div>
+

@@ -1,0 +1,155 @@
+<div class="demo-page">
+  <div class="demo-header">
+    <h1 class="demo-title">Avatar Component</h1>
+    <p class="demo-description">
+      Avatar component with image support, initials fallback, status indicators, and badges.
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Live Demo</h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="demo-preview">
+        <div class="avatar-group">
+          <div class="avatar-item">
+            <app-avatar name="John Doe" status="online"></app-avatar>
+            <span>With Name</span>
+          </div>
+          <div class="avatar-item">
+            <app-avatar name="Jane Smith" status="away" [badge]="3"></app-avatar>
+            <span>With Badge</span>
+          </div>
+          <div class="avatar-item">
+            <app-avatar name="Bob Wilson" status="busy" badge="dot"></app-avatar>
+            <span>Dot Badge</span>
+          </div>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Sizes Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Sizes</h2>
+    <app-glass-card padding="p-6">
+      <div class="sizes-demo">
+        <div class="size-item">
+          <app-avatar name="User" size="xs"></app-avatar>
+          <span>xs</span>
+        </div>
+        <div class="size-item">
+          <app-avatar name="User" size="sm"></app-avatar>
+          <span>sm</span>
+        </div>
+        <div class="size-item">
+          <app-avatar name="User" size="md"></app-avatar>
+          <span>md</span>
+        </div>
+        <div class="size-item">
+          <app-avatar name="User" size="lg"></app-avatar>
+          <span>lg</span>
+        </div>
+        <div class="size-item">
+          <app-avatar name="User" size="xl"></app-avatar>
+          <span>xl</span>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Status Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Status Indicators</h2>
+    <app-glass-card padding="p-6">
+      <div class="status-demo">
+        <div class="status-item">
+          <app-avatar name="User" status="online"></app-avatar>
+          <span>Online</span>
+        </div>
+        <div class="status-item">
+          <app-avatar name="User" status="offline"></app-avatar>
+          <span>Offline</span>
+        </div>
+        <div class="status-item">
+          <app-avatar name="User" status="away"></app-avatar>
+          <span>Away</span>
+        </div>
+        <div class="status-item">
+          <app-avatar name="User" status="busy"></app-avatar>
+          <span>Busy</span>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Badges Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Badges</h2>
+    <app-glass-card padding="p-6">
+      <div class="badges-demo">
+        <div class="badge-item">
+          <app-avatar name="User" [badge]="5"></app-avatar>
+          <span>Number Badge</span>
+        </div>
+        <div class="badge-item">
+          <app-avatar name="User" badge="dot"></app-avatar>
+          <span>Dot Badge</span>
+        </div>
+        <div class="badge-item">
+          <app-avatar name="User" [badge]="99"></app-avatar>
+          <span>99+ Badge</span>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Shapes Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Shapes</h2>
+    <app-glass-card padding="p-6">
+      <div class="shapes-demo">
+        <div class="shape-item">
+          <app-avatar name="User" shape="circle"></app-avatar>
+          <span>Circle</span>
+        </div>
+        <div class="shape-item">
+          <app-avatar name="User" shape="rounded"></app-avatar>
+          <span>Rounded</span>
+        </div>
+        <div class="shape-item">
+          <app-avatar name="User" shape="square"></app-avatar>
+          <span>Square</span>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Code Examples -->
+  <section class="demo-section">
+    <h2 class="section-title">Code Examples</h2>
+    
+    <h3 class="subsection-title">Basic Usage</h3>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Avatar"></app-code-viewer>
+
+    <h3 class="subsection-title">Sizes</h3>
+    <app-code-viewer [code]="sizesExample" language="html" title="Avatar Sizes"></app-code-viewer>
+
+    <h3 class="subsection-title">Status</h3>
+    <app-code-viewer [code]="statusExample" language="html" title="Status Indicators"></app-code-viewer>
+
+    <h3 class="subsection-title">Badges</h3>
+    <app-code-viewer [code]="badgeExample" language="html" title="Avatar Badges"></app-code-viewer>
+
+    <h3 class="subsection-title">Shapes</h3>
+    <app-code-viewer [code]="shapesExample" language="html" title="Avatar Shapes"></app-code-viewer>
+  </section>
+
+  <!-- API Documentation -->
+  <section class="demo-section">
+    <h2 class="section-title">API Documentation</h2>
+    <app-props-table [props]="props" title="Inputs"></app-props-table>
+  </section>
+</div>
+

@@ -1,0 +1,39 @@
+<div class="demo-page">
+  <div class="demo-header">
+    <h1 class="demo-title">Date Range Picker Component</h1>
+    <p class="demo-description">
+      Date range picker component with preset options, date validation, and customizable format.
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Live Demo</h2>
+    
+    <app-glass-card padding="p-6">
+      <app-date-range-picker
+        [presets]="presets"
+        (rangeChange)="onRangeChange($event)">
+      </app-date-range-picker>
+    </app-glass-card>
+  </section>
+
+  <!-- Code Examples -->
+  <section class="demo-section">
+    <h2 class="section-title">Code Examples</h2>
+    
+    <h3 class="subsection-title">Basic Usage</h3>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Date Range Picker"></app-code-viewer>
+
+    <h3 class="subsection-title">With Presets</h3>
+    <app-code-viewer [code]="withPresetsExample" language="html" title="Date Range Picker with Presets"></app-code-viewer>
+  </section>
+
+  <!-- API Documentation -->
+  <section class="demo-section">
+    <h2 class="section-title">API Documentation</h2>
+    <app-props-table [props]="props" title="Inputs"></app-props-table>
+    <app-props-table [props]="outputs" title="Outputs"></app-props-table>
+  </section>
+</div>
+

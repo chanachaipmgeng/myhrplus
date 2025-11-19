@@ -1,7 +1,7 @@
 # 🎨 Glass Morphism Template & Components Guide
 
-**อัปเดตล่าสุด**: 2024-12-19  
-**เวอร์ชัน**: 2.0.0
+**อัปเดตล่าสุด**: 2024-12-20  
+**เวอร์ชัน**: 2.1.0
 
 ---
 
@@ -464,21 +464,98 @@ tabs = [
 /demo
 ```
 
-### Features
-หน้า demo แสดง components ทั้งหมดพร้อมตัวอย่างการใช้งาน:
+### Overview
+Demo System เป็นระบบแสดงตัวอย่างการใช้งาน components ทั้งหมด (32 components) พร้อม:
+- ✅ **Live Interactive Demos** - ทดสอบได้จริง
+- ✅ **Code Examples** - พร้อม syntax highlighting
+- ✅ **API Documentation** - Props tables ครบถ้วน
+- ✅ **Multiple Examples** - หลายรูปแบบการใช้งาน
+- ✅ **Responsive Design** - รองรับทุกขนาดหน้าจอ
+- ✅ **Dark Mode Support** - รองรับ dark mode
+- ✅ **Gemini Theme Support** - รองรับ Gemini theme
 
-1. **Statistics Cards** - แสดงสถิติพร้อม change indicators
-2. **Glass Cards** - 3 variants (default, strong, weak)
-3. **Glass Buttons** - ทุก variants, sizes, และ states
-4. **Glass Inputs** - Form integration และ validation
-5. **Tabs** - Tab navigation พร้อม icons และ badges
-6. **Progress Bars** - ทุก variants (primary, success, warning, danger)
-7. **Rating** - Star และ Heart rating
-8. **Loading States** - Loading indicators
-9. **Empty States** - Empty state displays
-10. **Modal** - Modal dialogs
-11. **Tooltips** - Tooltip displays
-12. **Interactive Demos** - Interactive examples
+### Demo Components (32 components)
+
+#### Glass Components (3)
+1. **Glass Card** - Variants, animations, custom classes
+2. **Glass Button** - Variants, sizes, states, events
+3. **Glass Input** - Types, validation, states
+
+#### UI Components (29)
+4. **Icon** - Sizes, colors, common icons
+5. **Avatar** - Sizes, status, badges, shapes
+6. **Spinner** - Sizes, colors, with message
+7. **Theme Toggle** - Mode switching, color picker
+8. **Status Badge** - All status types, variants, sizes
+9. **Page Layout** - Breadcrumbs, actions, header
+10. **Error State** - Error types, retry functionality
+11. **Breadcrumbs** - With icons, custom separator
+12. **Data Table** - Sorting, filtering, pagination
+13. **Stepper** - Horizontal, vertical, optional steps
+14. **Timeline** - Vertical, horizontal, with status
+15. **Search Filter** - Debounced search, filters
+16. **Date Range Picker** - Presets, validation
+17. **File Upload** - Single, multiple, validation
+18. **Image Upload** - Single, multiple, preview
+19. **Form Validation Messages** - Error messages
+20. **Confirm Dialog** - Confirmation dialogs
+21. **Skeleton Loader** - Types, animations
+22. **Loading Spinner** - Service integration
+23. **Modal** - Sizes, events, customization
+24. **Tabs** - Badges, disabled states
+25. **Progress Bar** - Variants, animated
+26. **Rating** - Star/Heart, readonly
+27. **Loading** - With message, conditional
+28. **Empty State** - Icons, sizes, actions
+29. **Notification** - All types (success/error/warning/info)
+30. **Tooltip** - All positions
+31. **Statistics Card** - Change indicators
+32. **Statistics Grid** - Grid layouts
+
+### Demo Features
+
+#### 1. Live Demo Sections
+ทุก component มี live demo ที่สามารถทดสอบได้จริง:
+- Interactive controls
+- Real-time updates
+- State management examples
+
+#### 2. Code Examples
+- Basic usage examples
+- Advanced usage examples
+- Reactive forms integration
+- Event handling examples
+- Customization examples
+
+#### 3. API Documentation
+- Props tables with types
+- Input/Output documentation
+- Required/Optional indicators
+- Default values
+- Descriptions
+
+#### 4. Multiple Examples
+- Different variants
+- Different sizes
+- Different states
+- Different configurations
+
+### Demo Structure
+```
+src/app/features/demo/
+├── demo.component.ts          # Main demo container
+├── demo-routing.module.ts     # Demo routes
+├── demo-index/
+│   └── demo-index.component.ts  # Component index page
+├── components/
+│   ├── glass-card-demo/
+│   ├── glass-button-demo/
+│   ├── icon-demo/
+│   └── ... (32 demo components)
+└── shared/
+    ├── code-viewer/           # Code display component
+    └── props-table/            # Props documentation component
+```
 
 ### Access
 ```
@@ -486,6 +563,12 @@ URL: http://localhost:4200/demo
 ```
 
 **Note**: Route `/demo` ไม่มี AuthGuard เพื่อให้เข้าถึงได้โดยไม่ต้อง login
+
+### Usage
+1. ไปที่ `/demo` เพื่อดู component index
+2. คลิกที่ component ที่ต้องการดู demo
+3. ทดสอบ live demo และดู code examples
+4. อ่าน API documentation สำหรับ props และ events
 
 ---
 

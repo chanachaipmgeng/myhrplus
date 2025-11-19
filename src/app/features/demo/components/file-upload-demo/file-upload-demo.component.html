@@ -1,0 +1,55 @@
+<div class="demo-page">
+  <div class="demo-header">
+    <h1 class="demo-title">File Upload Component</h1>
+    <p class="demo-description">
+      File upload component with drag & drop support, file validation, size limits, and multiple file selection.
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="demo-section">
+    <h2 class="section-title">Live Demo</h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="demo-preview space-y-6">
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Single File Upload</h3>
+          <app-file-upload
+            (fileSelected)="onFileSelected($event)"
+            (error)="onError($event)">
+          </app-file-upload>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Multiple Files Upload</h3>
+          <app-file-upload
+            [multiple]="true"
+            accept=".pdf,.doc,.docx"
+            [maxSize]="5242880"
+            (fileSelected)="onFileSelected($event)"
+            (error)="onError($event)">
+          </app-file-upload>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Code Examples -->
+  <section class="demo-section">
+    <h2 class="section-title">Code Examples</h2>
+    
+    <h3 class="subsection-title">Basic Usage</h3>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic File Upload"></app-code-viewer>
+
+    <h3 class="subsection-title">Multiple Files</h3>
+    <app-code-viewer [code]="multipleExample" language="html" title="Multiple File Upload"></app-code-viewer>
+  </section>
+
+  <!-- API Documentation -->
+  <section class="demo-section">
+    <h2 class="section-title">API Documentation</h2>
+    <app-props-table [props]="props" title="Inputs"></app-props-table>
+    <app-props-table [props]="outputs" title="Outputs"></app-props-table>
+  </section>
+</div>
+

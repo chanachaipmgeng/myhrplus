@@ -1,17 +1,125 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PageLayoutComponent } from '../../../../shared/components/page-layout/page-layout.component';
+import { PageLayoutComponent, BreadcrumbItem, PageAction } from '../../../../shared/components/page-layout/page-layout.component';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { PropsTableComponent } from '../../shared/props-table/props-table.component';
+import { PropsTableComponent, PropDefinition } from '../../shared/props-table/props-table.component';
 
 @Component({
   selector: 'app-page-layout-demo',
   standalone: true,
   imports: [CommonModule, PageLayoutComponent, GlassCardComponent, CodeViewerComponent, PropsTableComponent],
-  template: `<div class="demo-page"><div class="demo-header"><h1 class="demo-title">Page Layout Component</h1><p class="demo-description">Standard page layout with header, breadcrumb, and actions.</p></div><section class="demo-section"><h2 class="section-title">Coming Soon</h2><p>Demo content will be added soon.</p></section></div>`,
-  styles: [`.demo-page { padding: 2rem 0; } .demo-title { font-size: 2rem; font-weight: bold; }`]
+  templateUrl: './page-layout-demo.component.html',
+  styleUrls: ['./page-layout-demo.component.scss']
 })
 export class PageLayoutDemoComponent {
-}
+  breadcrumb: BreadcrumbItem[] = [
+    { label: 'หน้าแรก', link: '/' },
+    { label: 'Demo', link: '/demo' },
+    { label: 'Page Layout' }
+  ];
 
+  actions: PageAction[] = [
+    {
+      label: 'เพิ่มข้อมูล',
+      icon: 'add',
+      variant: 'primary',
+      onClick: () => alert('Add clicked')
+    },
+    {
+      label: 'ส่งออก',
+      icon: 'download',
+      variant: 'secondary',
+      onClick: () => alert('Export clicked')
+    }
+  ];
+
+  props: PropDefinition[] = [
+    {
+      name: 'title',
+      type: 'string',
+      default: "''",
+      description: 'Page title',
+      required: false
+    },
+    {
+      name: 'description',
+      type: 'string',
+      default: 'undefined',
+      description: 'Page description',
+      required: false
+    },
+    {
+      name: 'icon',
+      type: 'string',
+      default: 'undefined',
+      description: 'Page icon',
+      required: false
+    },
+    {
+      name: 'breadcrumb',
+      type: 'BreadcrumbItem[]',
+      default: 'undefined',
+      description: 'Breadcrumb items',
+      required: false
+    },
+    {
+      name: 'actions',
+      type: 'PageAction[]',
+      default: 'undefined',
+      description: 'Page action buttons',
+      required: false
+    },
+    {
+      name: 'showFooter',
+      type: 'boolean',
+      default: 'false',
+      description: 'Show page footer',
+      required: false
+    }
+  ];
+
+  basicExample = `<app-page-layout
+  title="Page Title"
+  description="Page description">
+  <p>Page content goes here</p>
+</app-page-layout>`;
+
+  withBreadcrumbExample = `<app-page-layout
+  title="Page Title"
+  [breadcrumb]="breadcrumb">
+  <p>Content</p>
+</app-page-layout>
+
+// breadcrumb array
+breadcrumb = [
+  { label: 'Home', link: '/' },
+  { label: 'Page' }
+];`;
+
+  withActionsExample = `<app-page-layout
+  title="Page Title"
+  [actions]="actions">
+  <p>Content</p>
+</app-page-layout>
+
+// actions array
+actions = [
+  {
+    label: 'Add',
+    icon: 'add',
+    variant: 'primary',
+    onClick: () => {}
+  }
+];`;
+
+  fullExample = `<app-page-layout
+  title="Page Title"
+  description="Page description"
+  icon="dashboard"
+  [breadcrumb]="breadcrumb"
+  [actions]="actions"
+  [showFooter]="true">
+  <p>Page content</p>
+</app-page-layout>`;
+}
