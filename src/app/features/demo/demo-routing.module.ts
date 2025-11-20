@@ -42,6 +42,7 @@ import { ChartDemoComponent } from './components/chart-demo/chart-demo.component
 import { RichTextEditorDemoComponent } from './components/rich-text-editor-demo/rich-text-editor-demo.component';
 import { QueryBuilderDemoComponent } from './components/query-builder-demo/query-builder-demo.component';
 import { DocumentEditorDemoComponent } from './components/document-editor-demo/document-editor-demo.component';
+import { SpeechToTextDemoComponent } from './components/speech-to-text-demo/speech-to-text-demo.component';
 
 const routes: Routes = [
   {
@@ -211,6 +212,10 @@ const routes: Routes = [
       {
         path: 'document-editor',
         component: DocumentEditorDemoComponent
+      },
+      {
+        path: 'speech-to-text',
+        component: SpeechToTextDemoComponent
       }
     ]
   }
