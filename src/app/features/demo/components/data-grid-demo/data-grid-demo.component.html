@@ -1,0 +1,82 @@
+<div class="data-grid-demo-container">
+  <app-glass-card padding="p-6" customClass="mb-6">
+    <h2 class="text-2xl font-bold mb-4 thai-text">Data Grid Component Demo</h2>
+    <p class="text-slate-600 dark:text-slate-400 mb-6 thai-text">
+      Component สำหรับแสดงข้อมูลแบบตารางจาก Syncfusion พร้อม Glass Morphism styling และ features ครบถ้วน
+    </p>
+
+    <!-- Full Featured Example -->
+    <div class="mb-8">
+      <h3 class="text-xl font-semibold mb-4 thai-text">ตัวอย่างแบบเต็มรูปแบบ</h3>
+      <app-data-grid
+        [dataSource]="gridData"
+        [columns]="columns"
+        [allowPaging]="true"
+        [allowSorting]="true"
+        [allowFiltering]="true"
+        [allowGrouping]="true"
+        [allowSelection]="true"
+        [allowResizing]="true"
+        [allowReordering]="true"
+        [allowExcelExport]="true"
+        [allowPdfExport]="true"
+        [showToolbar]="true"
+        [showColumnChooser]="true"
+        [height]="'600px'"
+        [width]="'100%'"
+        (rowSelected)="onRowSelected($event)"
+        (rowDeselected)="onRowDeselected($event)"
+        (cellSave)="onCellSave($event)"
+        (dataBound)="onDataBound($event)">
+      </app-data-grid>
+    </div>
+
+    <!-- Basic Example -->
+    <div class="mb-8">
+      <h3 class="text-xl font-semibold mb-4 thai-text">ตัวอย่างแบบพื้นฐาน</h3>
+      <app-data-grid
+        [dataSource]="basicData"
+        [columns]="basicColumns"
+        [allowPaging]="true"
+        [allowSorting]="true"
+        [allowFiltering]="true"
+        [allowGrouping]="false"
+        [allowSelection]="false"
+        [showToolbar]="false"
+        [height]="'400px'"
+        [width]="'100%'">
+      </app-data-grid>
+    </div>
+
+    <!-- Usage Example -->
+    <div class="mt-8">
+      <h3 class="text-xl font-semibold mb-4 thai-text">ตัวอย่างการใช้งาน</h3>
+      <pre class="bg-slate-100 dark:bg-slate-800 p-4 rounded-lg overflow-x-auto"><code class="text-sm">// TypeScript
+import {{ '{' }} DataGridColumn {{ '}' }} from '../../shared/components/data-grid/data-grid.component';
+
+columns: DataGridColumn[] = [
+  {{ '{' }} field: 'id', headerText: 'ID', width: 80, type: 'number' {{ '}' }},
+  {{ '{' }} field: 'name', headerText: 'ชื่อ', width: 150, type: 'string' {{ '}' }},
+  {{ '{' }} field: 'email', headerText: 'อีเมล', width: 200, type: 'string' {{ '}' }}
+];
+
+gridData: any[] = [
+  {{ '{' }} id: 1, name: 'John Doe', email: 'john&#64;example.com' {{ '}' }},
+  {{ '{' }} id: 2, name: 'Jane Smith', email: 'jane&#64;example.com' {{ '}' }}
+];
+
+// HTML
+&lt;app-data-grid
+  [dataSource]="gridData"
+  [columns]="columns"
+  [allowPaging]="true"
+  [allowSorting]="true"
+  [allowFiltering]="true"
+  [showToolbar]="true"
+  [height]="'600px'"
+  (rowSelected)="onRowSelected($event)"&gt;
+&lt;/app-data-grid&gt;</code></pre>
+    </div>
+  </app-glass-card>
+</div>
+

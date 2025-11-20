@@ -35,6 +35,7 @@ export class DemoIndexComponent {
     { name: 'Statistics Card', route: 'statistics-card', description: 'Card for displaying statistics with icons', category: 'Data Display', icon: '📊' },
     { name: 'Statistics Grid', route: 'statistics-grid', description: 'Grid layout for statistics cards', category: 'Data Display', icon: '📈' },
     { name: 'Data Table', route: 'data-table', description: 'Advanced data table with sorting and filtering', category: 'Data Display', icon: '📋' },
+    { name: 'Data Grid', route: 'data-grid', description: 'Enterprise data grid with advanced features (Syncfusion)', category: 'Data Display', icon: '📊' },
     { name: 'Pivot Table', route: 'pivot-table', description: 'Pivot table for data analysis (Syncfusion)', category: 'Data Display', icon: '📊' },
     { name: 'Timeline', route: 'timeline', description: 'Timeline component for displaying events', category: 'Data Display', icon: '⏱️' },
     

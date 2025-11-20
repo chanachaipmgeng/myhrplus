@@ -36,6 +36,7 @@ import { FormValidationMessagesDemoComponent } from './components/form-validatio
 import { LoadingSpinnerDemoComponent } from './components/loading-spinner-demo/loading-spinner-demo.component';
 import { CalendarDemoComponent } from './components/calendar-demo/calendar-demo.component';
 import { PivotTableDemoComponent } from './components/pivot-table-demo/pivot-table-demo.component';
+import { DataGridDemoComponent } from './components/data-grid-demo/data-grid-demo.component';
 
 const routes: Routes = [
   {
@@ -181,6 +182,10 @@ const routes: Routes = [
       {
         path: 'pivot-table',
         component: PivotTableDemoComponent
+      },
+      {
+        path: 'data-grid',
+        component: DataGridDemoComponent
       }
     ]
   }

@@ -216,11 +216,21 @@ export class DataGridComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Get selected rows
+   * Get selected rows data
    */
   getSelectedRows(): any[] {
     if (this.grid) {
-      return this.grid.getSelectedRowsData();
+      const selectedElements = this.grid.getSelectedRows();
+      // Convert DOM elements to data objects
+      const selectedData: any[] = [];
+      selectedElements.forEach((element: any) => {
+        // Get row index from element
+        const rowIndex = parseInt(element.getAttribute('aria-rowindex') || '0', 10) - 1;
+        if (rowIndex >= 0 && this.dataSource && this.dataSource[rowIndex]) {
+          selectedData.push(this.dataSource[rowIndex]);
+        }
+      });
+      return selectedData;
     }
     return [];
   }
