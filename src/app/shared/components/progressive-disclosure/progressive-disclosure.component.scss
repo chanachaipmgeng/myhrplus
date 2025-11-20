@@ -1,0 +1,168 @@
+/* ============================================
+   Progressive Disclosure Component Styles
+   ============================================ */
+
+@import '../../../../styles/design-tokens';
+@import '../../../../styles/mixins';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.progressive-disclosure {
+  width: 100%;
+  transition: $transition-all;
+}
+
+.disclosure-header {
+  width: 100%;
+  padding: $spacing-3 $spacing-4;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: $transition-all;
+  min-height: 44px; // Touch target
+  text-align: left;
+  
+  &:hover {
+    background: rgba(var(--primary-rgb), 0.05);
+    
+    .dark & {
+      background: rgba(var(--primary-rgb), 0.1);
+    }
+  }
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+    border-radius: $radius-md;
+  }
+  
+  @include respond-to(md) {
+    min-height: auto;
+  }
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: $spacing-2;
+}
+
+.disclosure-title {
+  font-size: $text-base;
+  font-weight: $font-weight-semibold;
+  color: $gray-900;
+  margin: 0;
+  transition: $transition-colors;
+  
+  .dark & {
+    color: $gray-100;
+  }
+  
+  .disclosure-header:hover & {
+    color: rgb(var(--primary-rgb));
+  }
+}
+
+.disclosure-icon {
+  transition: $transition-all;
+  flex-shrink: 0;
+  
+  &.icon-expanded {
+    transform: rotate(180deg);
+  }
+}
+
+.disclosure-content {
+  overflow: hidden;
+  transition: $transition-all;
+}
+
+.content-inner {
+  padding: $spacing-4;
+  padding-top: $spacing-2;
+}
+
+// Variants
+.variant-default {
+  border-bottom: 1px solid $gray-200;
+  
+  .dark & {
+    border-bottom-color: $gray-700;
+  }
+}
+
+.variant-accordion {
+  @include glass-morphism('weak', 'light');
+  border-radius: $radius-md;
+  margin-bottom: $spacing-2;
+  overflow: hidden;
+  
+  .dark & {
+    @include glass-morphism('weak', 'dark');
+  }
+  
+  .disclosure-header {
+    border-radius: $radius-md $radius-md 0 0;
+  }
+}
+
+.variant-card {
+  @include glass-morphism('default', 'light');
+  border-radius: $radius-lg;
+  padding: $spacing-4;
+  box-shadow: $shadow-md;
+  
+  .dark & {
+    @include glass-morphism('default', 'dark');
+  }
+  
+  .disclosure-header {
+    padding: 0;
+    margin-bottom: $spacing-4;
+  }
+  
+  .content-inner {
+    padding: 0;
+  }
+}
+
+// Responsive
+@include respond-to-down(sm) {
+  .disclosure-header {
+    padding: $spacing-2 $spacing-3;
+  }
+  
+  .disclosure-title {
+    font-size: $text-sm;
+  }
+  
+  .content-inner {
+    padding: $spacing-3;
+    padding-top: $spacing-2;
+  }
+}
+
+// Gemini Theme
+body.theme-gemini {
+  .variant-accordion {
+    @include glass-gemini('weak');
+  }
+  
+  .variant-card {
+    @include glass-gemini('default');
+    @include gemini-border-glow();
+  }
+  
+  .disclosure-header:hover {
+    @include gemini-glow('subtle');
+  }
+}
+

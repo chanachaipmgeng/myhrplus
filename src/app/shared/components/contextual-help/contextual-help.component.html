@@ -1,0 +1,49 @@
+<div 
+  class="contextual-help"
+  [ngClass]="'variant-' + variant"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
+  (click)="toggleTooltip()">
+  
+  <!-- Default Variant -->
+  <div *ngIf="variant === 'default'" class="help-trigger">
+    <app-icon 
+      [name]="icon" 
+      size="sm" 
+      color="text-slate-500 dark:text-slate-400"
+      class="help-icon">
+    </app-icon>
+    <span *ngIf="text" class="help-text thai-text">{{ text }}</span>
+  </div>
+  
+  <!-- Inline Variant -->
+  <div *ngIf="variant === 'inline'" class="help-inline">
+    <span class="help-text thai-text">{{ text }}</span>
+    <app-icon 
+      [name]="icon" 
+      size="sm" 
+      color="text-slate-500 dark:text-slate-400"
+      class="help-icon">
+    </app-icon>
+  </div>
+  
+  <!-- Icon Only Variant -->
+  <div *ngIf="variant === 'icon-only'" class="help-icon-only">
+    <app-icon 
+      [name]="icon" 
+      size="sm" 
+      color="text-slate-500 dark:text-slate-400"
+      class="help-icon">
+    </app-icon>
+  </div>
+  
+</div>
+
+<!-- Tooltip (separate element for proper positioning) -->
+<app-tooltip
+  *ngIf="showTooltip && title"
+  [text]="title"
+  [position]="position"
+  [show]="showTooltip">
+</app-tooltip>
+

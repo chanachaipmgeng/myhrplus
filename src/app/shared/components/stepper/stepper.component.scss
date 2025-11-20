@@ -186,17 +186,120 @@
   border-top-color: rgba(51, 65, 85, 0.3);
 }
 
-@media (max-width: 768px) {
-  .stepper-horizontal .stepper-steps {
+/* ============================================
+   Stepper Component Styles
+   ============================================ */
+
+@import '../../../../styles/design-tokens';
+@import '../../../../styles/mixins';
+
+/* Responsive - Mobile */
+@include respond-to-down(md) {
+  .stepper-horizontal {
+    .stepper-steps {
+      flex-direction: column;
+      gap: $spacing-4;
+    }
+
+    .step-connector {
+      display: none;
+    }
+
+    .step-connector-vertical {
+      display: block;
+      position: absolute;
+      left: 20px;
+      top: 48px;
+      width: 2px;
+      height: calc(100% + 1rem);
+      background: #e2e8f0;
+      
+      .dark & {
+        background: #334155;
+      }
+    }
+
+    .step-content {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: $spacing-3;
+    }
+
+    .step-label {
+      flex: 1;
+    }
+
+    .step-title {
+      font-size: $text-sm;
+    }
+
+    .step-description {
+      font-size: $text-xs;
+    }
+  }
+
+  .stepper-actions {
     flex-direction: column;
+    gap: $spacing-2;
+    margin-top: $spacing-4;
+    
+    button {
+      width: 100%;
+      min-height: 44px; // Touch target
+      justify-content: center;
+    }
   }
 
-  .stepper-horizontal .step-connector {
-    display: none;
+  .step-indicator {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
   }
+}
 
-  .stepper-horizontal .step-connector-vertical {
-    display: block;
+/* Responsive - Tablet */
+@include respond-to-between(md, lg) {
+  .stepper-horizontal {
+    .stepper-steps {
+      gap: $spacing-2;
+    }
+
+    .step-connector {
+      margin: 0 $spacing-2;
+    }
+
+    .step-label {
+      .step-title {
+        font-size: $text-sm;
+      }
+
+      .step-description {
+        display: none; // Hide description on tablet
+      }
+    }
+  }
+}
+
+/* Touch Targets */
+.stepper-step {
+  min-height: 44px; // Touch target
+  padding: $spacing-2;
+  cursor: pointer;
+  
+  @include respond-to(md) {
+    min-height: auto;
+    padding: 0;
+  }
+}
+
+.stepper-actions button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: $spacing-2 $spacing-4;
+  
+  @include respond-to(md) {
+    min-width: auto;
+    min-height: auto;
   }
 }
 

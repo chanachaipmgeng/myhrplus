@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeService, ThemeMode, ThemeColor } from '../../../core/services/theme.service';
 import { SharedModule } from '../../shared.module';
@@ -16,6 +16,9 @@ export class ThemeToggleComponent implements OnInit {
   currentModeIcon = 'light_mode';
   showModeMenu = false;
   showColorMenu = false;
+
+  @ViewChild('modeButton') modeButton?: ElementRef<HTMLButtonElement>;
+  @ViewChild('colorButton') colorButton?: ElementRef<HTMLButtonElement>;
 
   themeColors = [
     { value: 'blue' as ThemeColor, name: 'น้ำเงิน', gradient: 'linear-gradient(135deg, #3b82f6, #2563eb)' },
@@ -70,6 +73,23 @@ export class ThemeToggleComponent implements OnInit {
       case 'auto':
         this.currentModeIcon = 'brightness_auto';
         break;
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.theme-toggle-container')) {
+      this.showModeMenu = false;
+      this.showColorMenu = false;
+    }
+  }
+
+  @HostListener('keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'Escape') {
+      this.showModeMenu = false;
+      this.showColorMenu = false;
     }
   }
 }

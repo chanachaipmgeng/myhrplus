@@ -27,6 +27,8 @@ export class GlassInputComponent implements ControlValueAccessor {
   @Input() errorMessage: string = '';
   @Input() fullWidth: boolean = true;
   @Input() inputId: string = `glass-input-${Math.random().toString(36).substr(2, 9)}`;
+  @Input() ariaLabel?: string;
+  @Input() ariaDescribedBy?: string;
 
   value: string = '';
   hasError: boolean = false;
@@ -36,6 +38,27 @@ export class GlassInputComponent implements ControlValueAccessor {
 
   get containerClass(): string {
     return this.fullWidth ? 'w-full' : '';
+  }
+
+  get errorMessageId(): string {
+    return `${this.inputId}-error`;
+  }
+
+  get hintId(): string {
+    return `${this.inputId}-hint`;
+  }
+
+  get describedByIds(): string {
+    const ids: string[] = [];
+    if (this.ariaDescribedBy) {
+      ids.push(this.ariaDescribedBy);
+    }
+    if (this.hasError && this.errorMessage) {
+      ids.push(this.errorMessageId);
+    } else if (this.hint && !this.hasError) {
+      ids.push(this.hintId);
+    }
+    return ids.join(' ') || undefined || '';
   }
 
   onInput(event: Event): void {

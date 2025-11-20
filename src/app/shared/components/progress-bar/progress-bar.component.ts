@@ -14,6 +14,8 @@ export class ProgressBarComponent {
   @Input() description?: string;
   @Input() showValue: boolean = true;
   @Input() variant: 'primary' | 'success' | 'warning' | 'danger' = 'primary';
+  @Input() ariaLabel?: string;
+  @Input() customAriaValueText?: string;
 
   get progressClass(): string {
     const variants = {
@@ -23,6 +25,17 @@ export class ProgressBarComponent {
       danger: 'bg-red-500'
     };
     return variants[this.variant] || variants.primary;
+  }
+
+  get progressId(): string {
+    return `progress-${Math.random().toString(36).substr(2, 9)}`;
+  }
+
+  get ariaValueText(): string {
+    if (this.customAriaValueText) {
+      return this.customAriaValueText;
+    }
+    return `${this.value}%`;
   }
 }
 

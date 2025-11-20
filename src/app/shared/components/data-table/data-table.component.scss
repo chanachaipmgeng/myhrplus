@@ -1,9 +1,229 @@
+/* ============================================
+   Data Table Component Styles
+   ============================================ */
+
+@import '../../../../styles/design-tokens';
+@import '../../../../styles/mixins';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
 .table-container {
   width: 100%;
   overflow: auto;
+  position: relative;
 }
 
 .data-table {
   width: 100%;
   background: transparent;
+  border-collapse: collapse;
+}
+
+/* Table Header */
+.table-header {
+  padding: $spacing-4;
+  border-bottom: 1px solid $gray-200;
+  
+  .dark & {
+    border-bottom-color: $gray-700;
+  }
+}
+
+/* Search Input */
+.relative {
+  position: relative;
+  width: 100%;
+  max-width: 16rem; // w-64
+}
+
+/* Table Styles */
+.data-table {
+  thead {
+    background: $gray-50;
+    
+    .dark & {
+      background: $gray-900;
+    }
+  }
+  
+  th {
+    padding: $spacing-3 $spacing-6;
+    text-align: left;
+    font-size: $text-xs;
+    font-weight: $font-weight-semibold;
+    color: $gray-700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: $transition-colors;
+    min-width: 100px;
+    
+    .dark & {
+      color: $gray-300;
+    }
+    
+    &:hover {
+      background: $gray-100;
+      
+      .dark & {
+        background: $gray-800;
+      }
+    }
+  }
+  
+  td {
+    padding: $spacing-4 $spacing-6;
+    font-size: $text-sm;
+    color: $gray-900;
+    white-space: nowrap;
+    
+    .dark & {
+      color: $gray-100;
+    }
+  }
+  
+  tbody tr {
+    transition: $transition-colors;
+    
+    &:hover {
+      background: $gray-50;
+      
+      .dark & {
+        background: $gray-700;
+      }
+    }
+  }
+}
+
+/* Action Menu */
+.absolute {
+  position: absolute;
+  right: 0;
+  margin-top: $spacing-2;
+  width: 12rem; // w-48
+  background: white;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-lg;
+  border: 1px solid $gray-200;
+  z-index: 10;
+  
+  .dark & {
+    background: $gray-800;
+    border-color: $gray-700;
+  }
+}
+
+/* Pagination */
+.border-t {
+  border-top: 1px solid $gray-200;
+  padding: $spacing-3 $spacing-4;
+  
+  .dark & {
+    border-top-color: $gray-700;
+  }
+}
+
+/* Buttons - Touch Targets */
+button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: $spacing-2 $spacing-3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: $transition-all;
+  
+  @include respond-to(md) {
+    min-width: auto;
+    min-height: auto;
+    padding: $spacing-1 $spacing-3;
+  }
+}
+
+/* Responsive - Mobile */
+@include respond-to-down(md) {
+  .table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .data-table {
+    min-width: 600px; // Prevent table from being too narrow
+    
+    th, td {
+      padding: $spacing-2 $spacing-3;
+      font-size: $text-xs;
+    }
+  }
+  
+  .table-header {
+    padding: $spacing-3;
+    
+    .relative {
+      max-width: 100%;
+    }
+  }
+  
+  .border-t {
+    flex-direction: column;
+    gap: $spacing-2;
+    padding: $spacing-2;
+    
+    > div {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+  
+  select {
+    min-width: 60px;
+    min-height: 44px;
+  }
+}
+
+/* Responsive - Tablet */
+@include respond-to-between(md, lg) {
+  .data-table {
+    th, td {
+      padding: $spacing-3 $spacing-4;
+    }
+  }
+}
+
+/* Dark Mode */
+.dark {
+  .table-container {
+    background: rgba(15, 23, 42, 0.25);
+  }
+  
+  .data-table {
+    thead {
+      background: $gray-900;
+    }
+  }
+}
+
+/* Gemini Theme */
+body.theme-gemini {
+  .table-container {
+    @include glass-gemini('weak');
+  }
+  
+  .data-table {
+    thead {
+      background: rgba(15, 23, 42, 0.4);
+      border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+    }
+    
+    th:hover {
+      background: rgba(59, 130, 246, 0.1);
+    }
+    
+    tbody tr:hover {
+      background: rgba(59, 130, 246, 0.05);
+    }
+  }
 }

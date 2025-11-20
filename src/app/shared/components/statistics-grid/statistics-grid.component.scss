@@ -40,8 +40,28 @@
 /* Gemini Theme */
 body.theme-gemini {
   .statistics-grid {
-    // Grid layout doesn't need Gemini specific styles
-    // Individual cards will handle Gemini styling
+    position: relative;
+    
+    // Add subtle glow effect on hover
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -$spacing-2;
+      background: linear-gradient(135deg,
+        rgba($gemini-gradient-start, 0.05),
+        rgba($gemini-gradient-mid, 0.05),
+        rgba($gemini-gradient-end, 0.05)
+      );
+      border-radius: $radius-xl;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity $duration-300 $ease-in-out;
+      pointer-events: none;
+    }
+    
+    &:hover::before {
+      opacity: 1;
+    }
   }
 }
 

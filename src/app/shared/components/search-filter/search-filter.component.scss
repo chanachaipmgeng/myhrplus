@@ -115,13 +115,257 @@
   gap: 0.5rem;
 }
 
-@media (max-width: 768px) {
+/* ============================================
+   Search Filter Component Styles
+   ============================================ */
+
+@import '../../../../styles/design-tokens';
+@import '../../../../styles/mixins';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.search-filter-container {
+  transition: $transition-all;
+  width: 100%;
+}
+
+.search-filter-header {
+  display: flex;
+  gap: $spacing-3;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.search-input-wrapper {
+  flex: 1;
+  min-width: 0; // Allow shrinking
+}
+
+.search-input {
+  width: 100%;
+}
+
+.filter-toggle {
+  position: relative;
+  transition: $transition-all;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  
+  &.active {
+    color: rgb(var(--primary-rgb)) !important;
+  }
+  
+  .filter-count {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: $error-500;
+    color: white;
+    border-radius: $radius-full;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: $font-weight-semibold;
+  }
+  
+  @include respond-to(md) {
+    min-width: auto;
+    min-height: auto;
+  }
+}
+
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-2;
+  margin-top: $spacing-3;
+  align-items: center;
+}
+
+.filter-chip {
+  background: rgba(var(--primary-rgb), 0.1) !important;
+  border: 1px solid rgba(var(--primary-rgb), 0.3) !important;
+  color: rgb(var(--primary-rgb)) !important;
+  transition: $transition-all;
+  min-height: 32px;
+  padding: $spacing-1 $spacing-3;
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-1;
+  
+  .dark & {
+    background: rgba(var(--primary-rgb), 0.2) !important;
+    border-color: rgba(var(--primary-rgb), 0.4) !important;
+  }
+  
+  &:hover {
+    background: rgba(var(--primary-rgb), 0.15) !important;
+    
+    .dark & {
+      background: rgba(var(--primary-rgb), 0.3) !important;
+    }
+  }
+  
+  button {
+    min-width: 24px;
+    min-height: 24px;
+    padding: 0.125rem; // 2px (equivalent to spacing-0_5)
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.clear-all-btn {
+  font-size: $text-xs;
+  padding: $spacing-1 $spacing-2;
+  min-width: auto;
+  min-height: 32px;
+  transition: $transition-colors;
+  
+  &:hover {
+    color: rgb(var(--primary-rgb));
+  }
+}
+
+.advanced-filters {
+  padding: $spacing-4;
+  @include glass-morphism('weak', 'light');
+  border-radius: $radius-lg;
+  transition: $transition-all;
+  margin-top: $spacing-4;
+  
+  .dark & {
+    @include glass-morphism('weak', 'dark');
+  }
+}
+
+.filters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: $spacing-4;
+}
+
+.filter-field {
+  width: 100%;
+}
+
+.filter-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+}
+
+.checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+}
+
+/* Responsive - Mobile */
+@include respond-to-down(sm) {
+  .search-filter-header {
+    flex-direction: column;
+    gap: $spacing-2;
+  }
+  
+  .search-input-wrapper {
+    width: 100%;
+  }
+  
+  .filter-toggle {
+    align-self: flex-end;
+  }
+  
   .filters-grid {
     grid-template-columns: 1fr;
+    gap: $spacing-3;
+  }
+  
+  .filter-chips {
+    gap: $spacing-1;
+  }
+  
+  .filter-chip {
+    font-size: $text-xs;
+    padding: $spacing-1 $spacing-2;
+  }
+  
+  .advanced-filters {
+    padding: $spacing-3;
+  }
+}
+
+/* Responsive - Tablet */
+@include respond-to-between(sm, md) {
+  .filters-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-3;
   }
   
   .search-filter-header {
-    flex-direction: column;
+    gap: $spacing-2;
+  }
+}
+
+/* Responsive - Desktop */
+@include respond-to(lg) {
+  .filters-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Touch Targets */
+input[type="text"],
+input[type="date"],
+select {
+  min-height: 44px;
+  padding: $spacing-2 $spacing-3;
+  
+  @include respond-to(md) {
+    min-height: auto;
+  }
+}
+
+button {
+  min-width: 44px;
+  min-height: 44px;
+  
+  @include respond-to(md) {
+    min-width: auto;
+    min-height: auto;
+  }
+}
+
+/* Dark Mode */
+.dark {
+  .advanced-filters {
+    border-color: rgba(51, 65, 85, 0.3);
+  }
+}
+
+/* Gemini Theme */
+body.theme-gemini {
+  .search-filter-container {
+    @include glass-gemini('weak');
+  }
+  
+  .advanced-filters {
+    @include glass-gemini('default');
+  }
+  
+  .filter-toggle.active {
+    @include gemini-glow('subtle');
   }
 }
 

@@ -1,0 +1,38 @@
+<div 
+  class="progressive-disclosure"
+  [ngClass]="['variant-' + variant, { 'is-expanded': isExpanded }]">
+  
+  <!-- Header -->
+  <button
+    (click)="toggle()"
+    class="disclosure-header"
+    [attr.aria-expanded]="isExpanded"
+    [attr.aria-controls]="'content-' + _uniqueId"
+    role="button"
+    tabindex="0">
+    <div class="header-content">
+      <h3 *ngIf="title" class="disclosure-title thai-text">{{ title }}</h3>
+      <app-icon
+        *ngIf="showIcon"
+        [name]="currentIcon"
+        size="sm"
+        color="text-slate-500 dark:text-slate-400"
+        class="disclosure-icon"
+        [ngClass]="{ 'icon-expanded': isExpanded }">
+      </app-icon>
+    </div>
+  </button>
+  
+  <!-- Content -->
+  <div
+    [id]="'content-' + _uniqueId"
+    class="disclosure-content"
+    [attr.aria-hidden]="!isExpanded"
+    [@slideToggle]="isExpanded ? 'expanded' : 'collapsed'"
+    *ngIf="isExpanded">
+    <div class="content-inner">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>
+

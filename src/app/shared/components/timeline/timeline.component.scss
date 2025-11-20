@@ -178,13 +178,121 @@
   flex-shrink: 0;
 }
 
-@media (max-width: 768px) {
-  .timeline-vertical .item-alternate {
-    flex-direction: row;
+/* ============================================
+   Timeline Component Styles
+   ============================================ */
+
+@import '../../../../styles/design-tokens';
+@import '../../../../styles/mixins';
+
+/* Responsive - Mobile */
+@include respond-to-down(md) {
+  .timeline-vertical {
+    .item-alternate {
+      flex-direction: row;
+    }
+
+    .timeline-item {
+      gap: $spacing-3;
+      padding-bottom: $spacing-4;
+    }
+
+    .timeline-dot {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+
+    .timeline-content {
+      padding: $spacing-3;
+      font-size: $text-sm;
+    }
+
+    .timeline-title {
+      font-size: $text-sm;
+    }
+
+    .timeline-description {
+      font-size: $text-xs;
+    }
+
+    .timeline-line {
+      left: 15px;
+      top: 40px;
+    }
   }
 
-  .timeline-horizontal .timeline-item {
-    min-width: 150px;
+  .timeline-horizontal {
+    .timeline-items {
+      padding: $spacing-2 0;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+
+    .timeline-item {
+      min-width: 120px;
+      padding: 0 $spacing-2;
+    }
+
+    .timeline-dot {
+      width: 32px;
+      height: 32px;
+      margin-bottom: $spacing-2;
+    }
+
+    .timeline-content {
+      padding: $spacing-2;
+      font-size: $text-xs;
+    }
+
+    .timeline-title {
+      font-size: $text-xs;
+    }
+
+    .timeline-description {
+      display: none; // Hide description on mobile horizontal
+    }
+  }
+
+  .expand-btn {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Responsive - Tablet */
+@include respond-to-between(md, lg) {
+  .timeline-vertical {
+    .timeline-item {
+      gap: $spacing-4;
+    }
+
+    .timeline-content {
+      padding: $spacing-3 $spacing-4;
+    }
+  }
+
+  .timeline-horizontal {
+    .timeline-item {
+      min-width: 180px;
+    }
+  }
+}
+
+/* Touch Targets */
+.expand-btn {
+  min-width: 44px;
+  min-height: 44px;
+  padding: $spacing-2;
+  cursor: pointer;
+  transition: $transition-all;
+  
+  @include respond-to(md) {
+    min-width: auto;
+    min-height: auto;
   }
 }
 

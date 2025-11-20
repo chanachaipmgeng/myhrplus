@@ -12,8 +12,10 @@ export class TooltipComponent {
   @Input() text: string = '';
   @Input() position: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
   @Input() showOnHover: boolean = true;
+  @Input() ariaDescribedBy?: string;
 
   show: boolean = false;
+  tooltipId: string = `tooltip-${Math.random().toString(36).substr(2, 9)}`;
 
   @HostListener('mouseenter')
   onMouseEnter(): void {

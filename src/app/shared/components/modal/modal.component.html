@@ -1,31 +1,39 @@
 <div
   *ngIf="show"
   class="fixed inset-0 z-50 overflow-y-auto"
+  role="dialog"
+  [attr.aria-modal]="true"
+  [attr.aria-labelledby]="modalTitleId"
+  [attr.aria-describedby]="modalDescriptionId"
   (click)="onBackdropClick()">
   <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
     <!-- Backdrop -->
-    <div class="fixed inset-0 transition-opacity bg-black bg-opacity-50 backdrop-blur-sm"></div>
+    <div class="fixed inset-0 transition-opacity bg-black bg-opacity-50 backdrop-blur-sm" aria-hidden="true"></div>
 
     <!-- Modal Panel -->
     <div
+      #modalPanel
       class="glass-modal inline-block align-bottom rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
       [class]="sizeClass"
+      role="document"
       (click)="$event.stopPropagation()">
       <!-- Header -->
       <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
-        <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">
+        <h3 [id]="modalTitleId" class="text-lg font-semibold text-slate-900 dark:text-slate-100">
           {{ title }}
         </h3>
         <button
           *ngIf="closable"
+          #closeButton
           (click)="close()"
+          [attr.aria-label]="'ปิด'"
           class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
-          ✕
+          <span aria-hidden="true">✕</span>
         </button>
       </div>
 
       <!-- Body -->
-      <div class="px-6 py-4">
+      <div [id]="modalDescriptionId" class="px-6 py-4">
         <ng-content></ng-content>
       </div>
 
@@ -34,12 +42,14 @@
         <app-glass-button
           *ngIf="showCancel"
           variant="secondary"
+          [ariaLabel]="cancelText"
           (clicked)="onCancel()">
           {{ cancelText }}
         </app-glass-button>
         <app-glass-button
           *ngIf="showConfirm"
           [variant]="confirmVariant"
+          [ariaLabel]="confirmText"
           (clicked)="onConfirm()">
           {{ confirmText }}
         </app-glass-button>

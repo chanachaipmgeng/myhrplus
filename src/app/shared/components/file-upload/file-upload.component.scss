@@ -87,3 +87,177 @@
 .dark .file-item button:hover {
   color: #f87171;
 }
+
+/* ============================================
+   File Upload Component Styles
+   ============================================ */
+
+@import '../../../../styles/design-tokens';
+@import '../../../../styles/mixins';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.file-upload-container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+  width: 100%;
+}
+
+/* Upload Button */
+button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: $spacing-2 $spacing-4;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-2;
+  transition: $transition-all;
+  cursor: pointer;
+  
+  @include respond-to(md) {
+    min-width: auto;
+    min-height: auto;
+  }
+}
+
+/* File List */
+.file-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+  margin-top: $spacing-4;
+  width: 100%;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+  padding: $spacing-3 $spacing-4;
+  @include glass-morphism('weak', 'light');
+  border-radius: $radius-md;
+  transition: $transition-all;
+  width: 100%;
+  
+  .dark & {
+    @include glass-morphism('weak', 'dark');
+  }
+  
+  &:hover {
+    @include glass-morphism('default', 'light');
+    transform: translateY(-1px);
+    
+    .dark & {
+      @include glass-morphism('default', 'dark');
+    }
+  }
+}
+
+.file-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: $text-sm;
+  min-width: 0; // Allow text truncation
+}
+
+.file-size {
+  font-size: $text-xs;
+  color: $gray-500;
+  white-space: nowrap;
+  flex-shrink: 0;
+  
+  .dark & {
+    color: $gray-400;
+  }
+}
+
+.file-item button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: $spacing-1;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: $transition-colors;
+  
+  @include respond-to(md) {
+    min-width: 36px;
+    min-height: 36px;
+  }
+}
+
+/* Responsive - Mobile */
+@include respond-to-down(sm) {
+  .file-upload-container {
+    gap: $spacing-3;
+  }
+  
+  button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .file-item {
+    flex-wrap: wrap;
+    padding: $spacing-2 $spacing-3;
+    gap: $spacing-2;
+  }
+  
+  .file-name {
+    width: 100%;
+    order: 1;
+  }
+  
+  .file-size {
+    order: 2;
+    font-size: $text-xs;
+  }
+  
+  .file-item button {
+    order: 3;
+    margin-left: auto;
+  }
+}
+
+/* Responsive - Tablet */
+@include respond-to-between(sm, md) {
+  .file-item {
+    padding: $spacing-2 $spacing-3;
+  }
+  
+  .file-name {
+    font-size: $text-sm;
+  }
+}
+
+/* Dark Mode */
+.dark {
+  .file-item {
+    background: rgba(15, 23, 42, 0.2);
+    border-color: rgba(51, 65, 85, 0.3);
+    
+    &:hover {
+      background: rgba(15, 23, 42, 0.3);
+    }
+  }
+}
+
+/* Gemini Theme */
+body.theme-gemini {
+  .file-item {
+    @include glass-gemini('weak');
+    
+    &:hover {
+      @include glass-gemini('default');
+      @include gemini-glow('subtle');
+    }
+  }
+}

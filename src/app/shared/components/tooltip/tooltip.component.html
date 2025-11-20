@@ -1,7 +1,11 @@
 <div class="relative inline-block">
-  <ng-content></ng-content>
+  <div [attr.aria-describedby]="ariaDescribedBy || (show && text ? tooltipId : null)">
+    <ng-content></ng-content>
+  </div>
   <div
     *ngIf="show && text"
+    [id]="tooltipId"
+    role="tooltip"
     [class]="tooltipClasses"
     class="absolute z-50 px-3 py-2 text-sm text-white rounded-lg shadow-lg pointer-events-none transition-opacity"
     [style.top.px]="position === 'bottom' ? 100 : position === 'top' ? -100 : 0"

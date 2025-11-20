@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -16,6 +16,8 @@ export class GlassButtonComponent {
   @Input() loading: boolean = false;
   @Input() fullWidth: boolean = false;
   @Input() customClass: string = '';
+  @Input() ariaLabel?: string;
+  @Input() ariaDescribedBy?: string;
 
   @Output() clicked = new EventEmitter<MouseEvent>();
 
@@ -44,7 +46,15 @@ export class GlassButtonComponent {
       this.clicked.emit(event);
     }
   }
+
+  @HostListener('keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      if (!this.disabled && !this.loading) {
+        this.handleClick(event as any);
+      }
+    }
+  }
 }
-
-
 

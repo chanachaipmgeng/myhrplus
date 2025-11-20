@@ -135,6 +135,18 @@ angular-hr-migration/
 
 ## 📚 Documentation
 
+### Main Documentation
+- **[DOCUMENTATION_INDEX.md](./DOCUMENTATION_INDEX.md)** - คู่มือเอกสารทั้งหมด
+- **[UX_UI_STRUCTURE_ANALYSIS_AND_RECOMMENDATIONS.md](./UX_UI_STRUCTURE_ANALYSIS_AND_RECOMMENDATIONS.md)** - การวิเคราะห์และข้อเสนอแนะ UX/UI
+
+### Improvement Summaries
+- **[CONSISTENCY_IMPROVEMENT_SUMMARY.md](./CONSISTENCY_IMPROVEMENT_SUMMARY.md)** - สรุปการปรับปรุง Consistency
+- **[ACCESSIBILITY_IMPROVEMENT_SUMMARY.md](./ACCESSIBILITY_IMPROVEMENT_SUMMARY.md)** - สรุปการปรับปรุง Accessibility
+- **[RESPONSIVE_DESIGN_IMPROVEMENT_SUMMARY.md](./RESPONSIVE_DESIGN_IMPROVEMENT_SUMMARY.md)** - สรุปการปรับปรุง Responsive Design
+- **[MODERN_FEATURES_IMPLEMENTATION_SUMMARY.md](./MODERN_FEATURES_IMPLEMENTATION_SUMMARY.md)** - สรุปการเพิ่ม Modern Features
+
+### Guides
+
 ### เอกสารหลัก
 - **[TEMPLATE_AND_COMPONENTS_GUIDE.md](./TEMPLATE_AND_COMPONENTS_GUIDE.md)** ⭐ - เอกสารหลักที่ครอบคลุมทุกอย่าง
 - **[COMPONENTS_INDEX.md](./COMPONENTS_INDEX.md)** - เอกสารอ้างอิง Components
@@ -237,4 +249,4 @@ Proprietary - Enterprise PT
 ---
 
 **Maintainer**: Development Team  
-**Last Updated**: 2024-12-19
+**Last Updated**: 2024-12-20

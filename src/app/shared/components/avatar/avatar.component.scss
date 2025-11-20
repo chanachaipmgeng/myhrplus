@@ -211,4 +211,61 @@
   transform: scale(1.1);
 }
 
+/* ============================================
+   Avatar Component Styles - Responsive
+   ============================================ */
+
+@import '../../../../styles/design-tokens';
+@import '../../../../styles/mixins';
+
+/* Responsive - Mobile */
+@include respond-to-down(sm) {
+  .avatar-xl {
+    width: 64px;
+    height: 64px;
+    
+    .avatar-initials {
+      font-size: $text-2xl;
+    }
+    
+    .avatar-status {
+      width: 14px;
+      height: 14px;
+    }
+    
+    .avatar-badge {
+      width: 24px;
+      height: 24px;
+      font-size: $text-xs;
+    }
+  }
+  
+  .avatar-lg {
+    width: 48px;
+    height: 48px;
+    
+    .avatar-initials {
+      font-size: $text-lg;
+    }
+  }
+}
+
+/* Touch Targets - Ensure avatars are tappable on mobile */
+@include respond-to-down(sm) {
+  .avatar-container {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  .avatar-sm {
+    min-width: 32px;
+    min-height: 32px;
+  }
+  
+  .avatar-md {
+    min-width: 40px;
+    min-height: 40px;
+  }
+}
+
 

@@ -13,7 +13,7 @@ export class SkeletonLoaderComponent {
   @Input() columns: number = 3;
   @Input() showAvatar: boolean = false;
   @Input() showTitle: boolean = true;
-  @Input() animation: 'pulse' | 'wave' | 'none' = 'pulse';
+  @Input() animation: 'pulse' | 'wave' | 'shimmer' | 'none' = 'pulse';
   @Input() width: string = '100%';
   @Input() height: string = '';
 
