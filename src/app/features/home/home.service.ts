@@ -40,11 +40,13 @@ export class HomeService {
   private menuCategoriesSubject = new BehaviorSubject<MenuCategory[]>([]);
   public menuCategories$ = this.menuCategoriesSubject.asObservable();
 
-  private readonly baseUrl = `${environment.jbossUrl}${environment.apiEndpoints.core}`;
+  // ApiService already handles baseUrl (environment.jbossUrl), so only store the endpoint path
+  private readonly baseUrl = environment.apiEndpoints.core;
 
   constructor(private apiService: ApiService) {}
 
   loadMenuFromAPI(): Observable<MenuCategory[]> {
+    // ApiService already handles baseUrl (environment.jbossUrl), so only pass the endpoint path
     const url = `${this.baseUrl}/config/menu/emv_menu`;
 
     return this.apiService.get<ConfigModel[]>(url).pipe(
