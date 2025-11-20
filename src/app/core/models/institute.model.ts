@@ -1,31 +1,40 @@
-import { BaseModel, TranslateService } from './base.model';
+import { BaseModel, TranslateService, baseGetName, checkData } from './base.model';
 
 /**
  * Institute model
+ * Note: Uses institueId instead of codeId, so extends BaseModel directly
+ * Note: Interface name is "Institue" (typo) but kept for backward compatibility
  */
 export interface Institue {
-  institueId: string | undefined;
-  tdesc: string | undefined;
-  edesc: string | undefined;
-  getInstitueDesc(): string;
+  institueId?: string;
+  tdesc?: string;
+  edesc?: string;
 }
 
-export class MyInstitue extends BaseModel implements Institue {
-  institueId: string | undefined;
-  tdesc: string | undefined;
-  edesc: string | undefined;
+export class Institue extends BaseModel implements Institue {
+  institueId?: string;
+  tdesc?: string;
+  edesc?: string;
 
-  constructor(data: Partial<any>, translateService: TranslateService) {
+  constructor(data?: Partial<Institue>, translateService?: TranslateService) {
     super(data, translateService);
-    this.institueId = data.institueId;
-    this.tdesc = data.tdesc;
-    this.edesc = data.edesc;
+    this.institueId = checkData(data?.institueId) ?? undefined;
+    this.tdesc = checkData(data?.tdesc) ?? undefined;
+    this.edesc = checkData(data?.edesc) ?? undefined;
   }
 
+  /**
+   * Get name/description based on current language
+   */
+  getName(): string | null {
+    return baseGetName(this.tdesc, this.edesc, this.translateService?.currentLang);
+  }
+
+  /**
+   * @deprecated Use getName() instead for consistency
+   */
   getInstitueDesc(): string {
-    return this.translateService?.currentLang === 'th'
-      ? (this.tdesc || '')
-      : (this.edesc || '');
+    return this.getName() ?? '';
   }
 }
 

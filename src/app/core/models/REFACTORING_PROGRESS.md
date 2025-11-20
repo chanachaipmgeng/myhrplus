@@ -7,16 +7,27 @@
 
 ## ✅ Phase 1: ลบไฟล์ที่ซ้ำซ้อน (Completed)
 
-### ไฟล์ที่ลบแล้ว
+### ไฟล์ที่ลบแล้ว (10 ไฟล์)
 1. ✅ `emptype.model.ts` - ลบแล้ว
 2. ✅ `employeetype.model.ts` - ลบแล้ว
 3. ✅ `employee-type.model.ts` - ลบแล้ว
+4. ✅ `contractparty.model.ts` - ลบแล้ว (duplicate ของ contract-party.model.ts)
+5. ✅ `adjType.model.ts` - ลบแล้ว (duplicate ของ adj-type.model.ts)
+6. ✅ `AdjReason.model.ts` - ลบแล้ว (duplicate ของ adj-reason.model.ts)
+7. ✅ `crstype.model.ts` - ลบแล้ว (duplicate ของ crs-type.model.ts)
+8. ✅ `crscategory.model.ts` - ลบแล้ว (duplicate ของ crs-category.model.ts)
+9. ✅ `crsgroup.model.ts` - ลบแล้ว (duplicate ของ crs-group.model.ts)
+10. ✅ `Handicappedtype.model.ts` - ลบแล้ว (duplicate ของ handicapped-type.model.ts)
+
+### ไฟล์ที่อัปเดต (2 ไฟล์)
+1. ✅ `movementmodel.model.ts` - อัปเดต imports ให้ใช้ adj-type, adj-reason
+2. ✅ `raineeplancontent.model.ts` - อัปเดต imports ให้ใช้ crs-type, crs-category, crs-group
 
 ---
 
 ## 🟢 Phase 2: ปรับ Naming Convention (In Progress)
 
-### โมเดลที่ปรับแล้ว (12 โมเดล)
+### โมเดลที่ปรับแล้ว (26 โมเดล)
 
 #### Training Related
 1. ✅ `crs-group.model.ts` - `MyCrsGroup` → `CrsGroup`
@@ -27,6 +38,25 @@
 4. ✅ `occupation.model.ts` - `MyOccupation` → `Occupation`
 5. ✅ `national.model.ts` - `MyNationalModel` → `NationalModel`
 6. ✅ `card-type.model.ts` - `MyCardType` → `CardType`
+
+#### Location Models
+7. ✅ `province.model.ts` - `MyProvince` → `Province`
+8. ✅ `district.model.ts` - `MyDistrict` → `District`
+9. ✅ `zipcode.model.ts` - `MyZipcode` → `Zipcode`
+10. ✅ `country.model.ts` - `MyCountry` → `Country`
+
+#### Education Models
+11. ✅ `degree.model.ts` - `MyDegree` → `Degree`
+12. ✅ `major.model.ts` - `MyMajor` → `Major`
+13. ✅ `faculty.model.ts` - `MyFaculty` → `Faculty`
+14. ✅ `institute.model.ts` - `MyInstitue` → `Institue`
+
+#### Bank & Financial Models
+15. ✅ `bank.model.ts` - `MyBank` → `Bank`
+16. ✅ `bank-branch.model.ts` - `MyBankBranch` → `BankBranch`
+17. ✅ `religion.model.ts` - `MyReligionModel` → `ReligionModel`
+18. ✅ `nationality.model.ts` - `MyNationality` → `Nationality`
+19. ✅ `currency.model.ts` - `MyCurrencyModel` → `CurrencyModel`
 
 #### Previously Standardized
 7. ✅ `emp-type.model.ts` - `EmpTypeModel` (ใช้ BaseCodeDescriptionModel)
@@ -109,16 +139,16 @@
 ## 📊 สถิติความคืบหน้า
 
 ### Overall Progress
-- **โมเดลที่ปรับแล้ว**: 13/400+ (3.25%)
-- **ไฟล์ที่อัปเดต**: 15+/400+ (3.75%)
-- **ไฟล์ที่ลบ**: 3 ไฟล์
-- **งานที่เหลือ**: 387+ models
+- **โมเดลที่ปรับแล้ว**: 26/400+ (6.5%)
+- **ไฟล์ที่อัปเดต**: 21+/400+ (5.25%)
+- **ไฟล์ที่ลบ**: 10 ไฟล์
+- **งานที่เหลือ**: 374+ models
 
 ### Phase Progress
-- **Phase 1**: ✅ 100% (3/3 ไฟล์)
-- **Phase 2**: 🟢 13/282+ (4.6%)
-- **Phase 3**: 🟡 13/232+ (5.6%)
-- **Phase 4**: 🟡 13/400+ (3.25%)
+- **Phase 1**: ✅ 100% (10/10 ไฟล์)
+- **Phase 2**: 🟢 26/282+ (9.2%)
+- **Phase 3**: 🟡 26/232+ (11.2%)
+- **Phase 4**: 🟡 26/400+ (6.5%)
 - **Phase 5**: 🟡 2/400+ (0.5%)
 
 ---
@@ -158,5 +188,5 @@
 ---
 
 **สถานะ**: 🟢 กำลังดำเนินการ  
-**ความคืบหน้า**: 3.25% (13/400+ models)
+**ความคืบหน้า**: 6.5% (26/400+ models)
 

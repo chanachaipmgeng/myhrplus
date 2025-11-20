@@ -1,31 +1,39 @@
-import { BaseModel, TranslateService } from './base.model';
+import { BaseModel, TranslateService, baseGetName, checkData } from './base.model';
 
 /**
  * Major model
+ * Note: Uses majorId instead of codeId, so extends BaseModel directly
  */
 export interface Major {
-  majorId: string | undefined;
-  tdesc: string | undefined;
-  edesc: string | undefined;
-  getMajorDesc(): string;
+  majorId?: string;
+  tdesc?: string;
+  edesc?: string;
 }
 
-export class MyMajor extends BaseModel implements Major {
-  tdesc: string | undefined;
-  edesc: string | undefined;
-  majorId: string | undefined;
+export class Major extends BaseModel implements Major {
+  majorId?: string;
+  tdesc?: string;
+  edesc?: string;
 
-  constructor(data: Partial<any>, translateService: TranslateService) {
+  constructor(data?: Partial<Major>, translateService?: TranslateService) {
     super(data, translateService);
-    this.majorId = data.majorId;
-    this.tdesc = data.tdesc;
-    this.edesc = data.edesc;
+    this.majorId = checkData(data?.majorId) ?? undefined;
+    this.tdesc = checkData(data?.tdesc) ?? undefined;
+    this.edesc = checkData(data?.edesc) ?? undefined;
   }
 
+  /**
+   * Get name/description based on current language
+   */
+  getName(): string | null {
+    return baseGetName(this.tdesc, this.edesc, this.translateService?.currentLang);
+  }
+
+  /**
+   * @deprecated Use getName() instead for consistency
+   */
   getMajorDesc(): string {
-    return this.translateService?.currentLang === 'th'
-      ? (this.tdesc || '')
-      : (this.edesc || '');
+    return this.getName() ?? '';
   }
 }
 

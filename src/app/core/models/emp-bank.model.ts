@@ -1,6 +1,6 @@
 import { BaseModel, TranslateService } from './base.model';
-import { Bank, MyBank } from './bank.model';
-import { BankBranch, MyBankBranch } from './bank-branch.model';
+import { Bank } from './bank.model';
+import { BankBranch } from './bank-branch.model';
 
 /**
  * Employee bank model
@@ -23,11 +23,10 @@ export class MyEmpBank extends BaseModel implements EmpBank {
   constructor(data: Partial<any>, tranSer: TranslateService) {
     super(data, tranSer);
     this.employeeId = data.employeeId ? data.employeeId : '';
-    this.bank = new MyBank(data.bank ? data.bank : {}, this.translateService!);
-    this.bankBranch = new MyBankBranch(
-      data.bankBranch ? data.bankBranch : {},
-      this.translateService!
-    );
+    this.bank = data.bank ? new Bank(data.bank, this.translateService!) : ({} as Bank);
+    this.bankBranch = data.bankBranch
+      ? new BankBranch(data.bankBranch, this.translateService!)
+      : ({} as BankBranch);
     this.accountId = data.accountId ? data.accountId : '';
     this.lineNo = data.lineNo ? data.lineNo : '';
   }

@@ -1,11 +1,11 @@
 import { TranslateService } from '@ngx-translate/core';
 import { BaseModel } from './base.model';
 import { NationalModel, MyNationalModel } from './national.model';
-import { Nationality, MyNationality } from './nationality.model';
+import { Nationality } from './nationality.model';
 import { Prefix } from './prefix.model';
 import { environment } from '../../environments/environment';
 import { MyPosition, Position } from './position.model';
-import { MyReligionModel, ReligionModel } from './religion.model';
+import { ReligionModel } from './religion.model';
 
 export interface EmployeeProfileModel {
   employeeId?: string;
@@ -90,8 +90,8 @@ export class MyEmployeeProfileModel extends BaseModel
     super(data, translateService);
     this.position = new MyPosition(this.position!, this.translateService);
     this.national = new MyNationalModel(this.national!, this.translateService);
-    this.nationality = new MyNationality(this.nationality!, this.translateService);
-    this.religion = new MyReligionModel(this.religion!, this.translateService);
+    this.nationality = this.nationality ? new Nationality(this.nationality, this.translateService) : undefined;
+    this.religion = this.religion ? new ReligionModel(this.religion, this.translateService) : undefined;
     this.firstHiredate = data.firstHiredate?data.firstHiredate : ''
   }
 

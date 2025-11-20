@@ -1,34 +1,42 @@
-import { BaseModel, TranslateService } from './base.model';
+import { BaseModel, TranslateService, baseGetName, checkData } from './base.model';
 
 /**
  * Bank model
+ * Note: Uses bankId instead of codeId, so extends BaseModel directly
  */
 export interface Bank {
   bankId?: string;
   tdesc?: string;
   edesc?: string;
   bankCode?: string;
-  getDesc(): string;
 }
 
-export class MyBank extends BaseModel implements Bank {
-  tdesc: string = '';
-  edesc: string = '';
+export class Bank extends BaseModel implements Bank {
   bankId?: string;
+  tdesc?: string;
+  edesc?: string;
   bankCode?: string;
 
-  constructor(data: Partial<Bank>, tranSer: TranslateService) {
-    super(data, tranSer);
-    this.bankId = data.bankId;
-    this.bankCode = data.bankCode;
-    this.tdesc = data.tdesc || '';
-    this.edesc = data.edesc || '';
+  constructor(data?: Partial<Bank>, translateService?: TranslateService) {
+    super(data, translateService);
+    this.bankId = checkData(data?.bankId) ?? undefined;
+    this.bankCode = checkData(data?.bankCode) ?? undefined;
+    this.tdesc = checkData(data?.tdesc) ?? undefined;
+    this.edesc = checkData(data?.edesc) ?? undefined;
   }
 
+  /**
+   * Get name/description based on current language
+   */
+  getName(): string | null {
+    return baseGetName(this.tdesc, this.edesc, this.translateService?.currentLang);
+  }
+
+  /**
+   * @deprecated Use getName() instead for consistency
+   */
   getDesc(): string {
-    return this.translateService?.currentLang === 'th'
-      ? (this.tdesc ? this.tdesc : '')
-      : (this.edesc ? this.edesc : '');
+    return this.getName() ?? '';
   }
 }
 

@@ -10,8 +10,8 @@ import { OldEmpPosition } from './oldempposition.model';
 
 
 import { TranslateService } from '@ngx-translate/core';
-import { AdjTypeModel } from './adjType.model';
-import { AdjReasonModel } from './AdjReason.model';
+import { AdjTypeModel } from './adj-type.model';
+import { AdjReasonModel } from './adj-reason.model';
 
 export interface MovementsModel {
   employeeid?: string;

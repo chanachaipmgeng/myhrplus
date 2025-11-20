@@ -1,10 +1,10 @@
 import { BaseModel, TranslateService } from './base.model';
 import { Background, MyBackground } from './background.model';
-import { Degree, MyDegree } from './degree.model';
-import { Faculty, MyFaculty } from './faculty.model';
-import { Country, MyCountry } from './country.model';
-import { Major, MyMajor } from './major.model';
-import { Institue, MyInstitue } from './institute.model';
+import { Degree } from './degree.model';
+import { Faculty } from './faculty.model';
+import { Country } from './country.model';
+import { Major } from './major.model';
+import { Institue } from './institute.model';
 
 /**
  * Educate model

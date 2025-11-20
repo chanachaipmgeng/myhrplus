@@ -1,8 +1,9 @@
-import { BaseModel, TranslateService } from './base.model';
+import { BaseModel, TranslateService, baseGetName, checkData } from './base.model';
 import { District } from './district.model';
 
 /**
  * Zipcode model
+ * Note: Uses zipcodeId instead of codeId, so extends BaseModel directly
  */
 export interface Zipcode {
   zipcodeId?: string;
@@ -10,29 +11,36 @@ export interface Zipcode {
   edesc?: string;
   province?: any;
   district?: District;
-  getDesc?(): string;
 }
 
-export class MyZipcode extends BaseModel implements Zipcode {
-  tdesc: string = '';
-  edesc: string = '';
+export class Zipcode extends BaseModel implements Zipcode {
   zipcodeId?: string;
+  tdesc?: string;
+  edesc?: string;
   province?: any;
   district?: District;
 
-  constructor(data: Partial<Zipcode>, translateService: TranslateService) {
+  constructor(data?: Partial<Zipcode>, translateService?: TranslateService) {
     super(data, translateService);
-    this.zipcodeId = data.zipcodeId;
-    this.tdesc = data.tdesc || '';
-    this.edesc = data.edesc || '';
-    this.province = data.province;
-    this.district = data.district;
+    this.zipcodeId = checkData(data?.zipcodeId) ?? undefined;
+    this.tdesc = checkData(data?.tdesc) ?? undefined;
+    this.edesc = checkData(data?.edesc) ?? undefined;
+    this.province = data?.province;
+    this.district = data?.district;
   }
 
+  /**
+   * Get name/description based on current language
+   */
+  getName(): string | null {
+    return baseGetName(this.tdesc, this.edesc, this.translateService?.currentLang);
+  }
+
+  /**
+   * @deprecated Use getName() instead for consistency
+   */
   getDesc(): string {
-    return this.translateService?.currentLang === 'th'
-      ? (this.tdesc || '')
-      : (this.edesc || '');
+    return this.getName() ?? '';
   }
 }
 
