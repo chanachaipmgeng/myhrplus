@@ -55,6 +55,7 @@ import { FileManagerDemoComponent } from './components/file-manager-demo/file-ma
 import { SyncfusionUploaderDemoComponent } from './components/syncfusion-uploader-demo/syncfusion-uploader-demo.component';
 import { AutocompleteDemoComponent } from './components/autocomplete-demo/autocomplete-demo.component';
 import { SmartTextAreaDemoComponent } from './components/smart-textarea-demo/smart-textarea-demo.component';
+import { AIAssistViewDemoComponent } from './components/ai-assist-view-demo/ai-assist-view-demo.component';
 
 const routes: Routes = [
   {
@@ -276,6 +277,10 @@ const routes: Routes = [
       {
         path: 'smart-textarea',
         component: SmartTextAreaDemoComponent
+      },
+      {
+        path: 'ai-assist-view',
+        component: AIAssistViewDemoComponent
       }
     ]
   }

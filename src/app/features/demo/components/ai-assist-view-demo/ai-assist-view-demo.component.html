@@ -1,0 +1,135 @@
+<div class="ai-assist-view-demo-container">
+  <app-glass-card>
+    <div class="demo-header">
+      <h1 class="text-3xl font-bold text-slate-800 dark:text-slate-200 mb-2">
+        Syncfusion AI Assist View Component
+      </h1>
+      <p class="text-slate-600 dark:text-slate-400">
+        An AI-powered assistant interface component with suggestions, prompt handling, and interactive chat features.
+      </p>
+    </div>
+
+    <div class="demo-content">
+      <!-- Basic AI Assist View -->
+      <section class="demo-section">
+        <h2 class="text-2xl font-semibold text-slate-700 dark:text-slate-300 mb-4">
+          AI Assist View
+        </h2>
+        <div class="ai-assist-view-wrapper">
+          <app-ai-assist-view
+            #aiAssistView
+            [placeholder]="placeholder"
+            [enableSuggestions]="enableSuggestions"
+            [showSuggestions]="showSuggestions"
+            [suggestions]="suggestions"
+            [promptHandler]="promptHandler"
+            [height]="height"
+            (prompt)="onPrompt($event)"
+            (suggestionClick)="onSuggestionClick($event)"
+            (created)="onCreated($event)">
+          </app-ai-assist-view>
+        </div>
+      </section>
+
+      <!-- Controls -->
+      <section class="demo-section">
+        <h2 class="text-2xl font-semibold text-slate-700 dark:text-slate-300 mb-4">
+          Controls
+        </h2>
+        <div class="controls-grid">
+          <div class="control-group">
+            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+              Actions
+            </label>
+            <div class="flex gap-2 flex-wrap">
+              <button
+                (click)="refresh()"
+                class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors">
+                Refresh
+              </button>
+              <button
+                (click)="toggleSuggestions()"
+                class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors">
+                {{ showSuggestions ? 'Hide' : 'Show' }} Suggestions
+              </button>
+              <button
+                (click)="addSuggestion()"
+                class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors">
+                Add Suggestion
+              </button>
+              <button
+                (click)="clearSuggestions()"
+                class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors">
+                Clear Suggestions
+              </button>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+              Settings
+            </label>
+            <div class="flex flex-col gap-2">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  [checked]="enableSuggestions"
+                  (change)="enableSuggestions = !enableSuggestions"
+                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                <span class="text-sm text-slate-700 dark:text-slate-300">Enable Suggestions</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  [checked]="showSuggestions"
+                  (change)="showSuggestions = !showSuggestions"
+                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                <span class="text-sm text-slate-700 dark:text-slate-300">Show Suggestions</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+              Current Suggestions ({{ suggestions.length }})
+            </label>
+            <div class="suggestions-list">
+              <div
+                *ngFor="let suggestion of suggestions; let i = index"
+                class="suggestion-item">
+                <span class="text-sm text-slate-700 dark:text-slate-300">{{ i + 1 }}. {{ suggestion }}</span>
+              </div>
+              <p *ngIf="suggestions.length === 0" class="text-sm text-slate-500 dark:text-slate-400">
+                No suggestions available
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Code Examples -->
+      <section class="demo-section">
+        <h2 class="text-2xl font-semibold text-slate-700 dark:text-slate-300 mb-4">
+          Usage Examples
+        </h2>
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Basic AI Assist View</h3>
+            <app-code-viewer [code]="basicExample" language="html"></app-code-viewer>
+          </div>
+          
+          <div>
+            <h3 class="text-lg font-semibold mb-2">With AI Handler</h3>
+            <app-code-viewer [code]="withAIHandlerExample" language="html"></app-code-viewer>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Prompt Handler Implementation</h3>
+            <app-code-viewer [code]="promptHandlerExample" language="typescript"></app-code-viewer>
+          </div>
+        </div>
+      </section>
+    </div>
+  </app-glass-card>
+</div>
+
