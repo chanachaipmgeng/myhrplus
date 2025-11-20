@@ -1,0 +1,36 @@
+<div class="data-grid-container" [ngClass]="customClass">
+  <ejs-grid
+    #grid
+    [dataSource]="dataSource"
+    [columns]="columns"
+    [allowPaging]="allowPaging"
+    [allowSorting]="allowSorting"
+    [allowFiltering]="allowFiltering"
+    [allowGrouping]="allowGrouping"
+    [allowSelection]="allowSelection"
+    [allowResizing]="allowResizing"
+    [allowReordering]="allowReordering"
+    [allowEditing]="allowEditing"
+    [allowExcelExport]="allowExcelExport"
+    [allowPdfExport]="allowPdfExport"
+    [showColumnChooser]="showColumnChooser"
+    [toolbar]="showToolbar ? toolbar : []"
+    [pageSettings]="pageSettings"
+    [filterSettings]="filterSettings"
+    [sortSettings]="sortSettings"
+    [groupSettings]="groupSettings"
+    [selectionSettings]="selectionSettings"
+    [editSettings]="editSettings"
+    [height]="height"
+    [width]="width"
+    (rowSelected)="onRowSelected($event)"
+    (rowDeselected)="onRowDeselected($event)"
+    (cellSave)="onCellSave($event)"
+    (rowAdded)="onRowAdded($event)"
+    (rowDeleted)="onRowDeleted($event)"
+    (dataBound)="onDataBound($event)"
+    (actionBegin)="onActionBegin($event)"
+    (actionComplete)="onActionComplete($event)">
+  </ejs-grid>
+</div>
+

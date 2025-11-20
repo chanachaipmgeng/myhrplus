@@ -35,6 +35,7 @@ import { SkeletonLoaderDemoComponent } from './components/skeleton-loader-demo/s
 import { FormValidationMessagesDemoComponent } from './components/form-validation-messages-demo/form-validation-messages-demo.component';
 import { LoadingSpinnerDemoComponent } from './components/loading-spinner-demo/loading-spinner-demo.component';
 import { CalendarDemoComponent } from './components/calendar-demo/calendar-demo.component';
+import { PivotTableDemoComponent } from './components/pivot-table-demo/pivot-table-demo.component';
 
 const routes: Routes = [
   {
@@ -176,6 +177,10 @@ const routes: Routes = [
       {
         path: 'calendar',
         component: CalendarDemoComponent
+      },
+      {
+        path: 'pivot-table',
+        component: PivotTableDemoComponent
       }
     ]
   }
