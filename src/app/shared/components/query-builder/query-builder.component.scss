@@ -1,0 +1,312 @@
+/* ============================================
+   Query Builder Component Styles
+   ============================================ */
+
+@import '../../../../styles/design-tokens';
+@import '../../../../styles/mixins';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.query-builder-container {
+  width: 100%;
+  @include glass-morphism('weak', 'light');
+  border-radius: $radius-lg;
+  padding: $spacing-4;
+  overflow: hidden;
+  
+  .dark & {
+    @include glass-morphism('weak', 'dark');
+  }
+
+  // Syncfusion Query Builder Styles
+  ::ng-deep {
+    .e-query-builder {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: $radius-md;
+      
+      .dark & {
+        border-color: rgba(51, 65, 85, 0.3);
+      }
+
+      // Rule Container
+      .e-rule-container {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: $radius-sm;
+        padding: $spacing-3;
+        margin-bottom: $spacing-2;
+        
+        .dark & {
+          background: rgba(15, 23, 42, 0.1);
+          border-color: rgba(51, 65, 85, 0.3);
+        }
+
+        // Rule Fields
+        .e-rule-field {
+          .e-dropdownlist {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: $radius-sm;
+            color: $gray-700;
+            
+            .dark & {
+              background: rgba(15, 23, 42, 0.3);
+              border-color: rgba(51, 65, 85, 0.3);
+              color: $gray-300;
+            }
+
+            &:focus {
+              border-color: rgb(var(--primary-rgb));
+              box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+            }
+          }
+        }
+
+        // Rule Operator
+        .e-rule-operator {
+          .e-dropdownlist {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: $radius-sm;
+            color: $gray-700;
+            
+            .dark & {
+              background: rgba(15, 23, 42, 0.3);
+              border-color: rgba(51, 65, 85, 0.3);
+              color: $gray-300;
+            }
+
+            &:focus {
+              border-color: rgb(var(--primary-rgb));
+              box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+            }
+          }
+        }
+
+        // Rule Value
+        .e-rule-value {
+          .e-input-group {
+            input,
+            .e-dropdownlist {
+              background: rgba(255, 255, 255, 0.1);
+              border: 1px solid rgba(255, 255, 255, 0.2);
+              border-radius: $radius-sm;
+              color: $gray-700;
+              
+              .dark & {
+                background: rgba(15, 23, 42, 0.3);
+                border-color: rgba(51, 65, 85, 0.3);
+                color: $gray-300;
+              }
+
+              &:focus {
+                border-color: rgb(var(--primary-rgb));
+                box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+              }
+            }
+          }
+        }
+
+        // Rule Buttons
+        .e-rule-delete,
+        .e-rule-clone {
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          color: $gray-700;
+          border-radius: $radius-sm;
+          min-width: 44px;
+          min-height: 44px;
+          transition: $transition-all;
+          
+          .dark & {
+            background: rgba(15, 23, 42, 0.3);
+            border-color: rgba(51, 65, 85, 0.3);
+            color: $gray-300;
+          }
+
+          &:hover {
+            background: rgba(var(--primary-rgb), 0.1);
+            border-color: rgba(var(--primary-rgb), 0.3);
+            color: rgb(var(--primary-rgb));
+            
+            .dark & {
+              background: rgba(var(--primary-rgb), 0.2);
+            }
+          }
+
+          &:focus {
+            box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+          }
+
+          @include respond-to(md) {
+            min-width: auto;
+            min-height: auto;
+          }
+        }
+      }
+
+      // Group Container
+      .e-group-container {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: $radius-sm;
+        padding: $spacing-3;
+        margin-bottom: $spacing-2;
+        
+        .dark & {
+          background: rgba(15, 23, 42, 0.05);
+          border-color: rgba(51, 65, 85, 0.2);
+        }
+
+        // Group Condition
+        .e-group-condition {
+          .e-dropdownlist {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: $radius-sm;
+            color: $gray-700;
+            
+            .dark & {
+              background: rgba(15, 23, 42, 0.3);
+              border-color: rgba(51, 65, 85, 0.3);
+              color: $gray-300;
+            }
+
+            &:focus {
+              border-color: rgb(var(--primary-rgb));
+              box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+            }
+          }
+        }
+
+        // Group Buttons
+        .e-group-delete,
+        .e-group-clone {
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          color: $gray-700;
+          border-radius: $radius-sm;
+          min-width: 44px;
+          min-height: 44px;
+          transition: $transition-all;
+          
+          .dark & {
+            background: rgba(15, 23, 42, 0.3);
+            border-color: rgba(51, 65, 85, 0.3);
+            color: $gray-300;
+          }
+
+          &:hover {
+            background: rgba(var(--primary-rgb), 0.1);
+            border-color: rgba(var(--primary-rgb), 0.3);
+            color: rgb(var(--primary-rgb));
+            
+            .dark & {
+              background: rgba(var(--primary-rgb), 0.2);
+            }
+          }
+
+          @include respond-to(md) {
+            min-width: auto;
+            min-height: auto;
+          }
+        }
+      }
+
+      // Buttons
+      .e-query-builder-button {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: $gray-700;
+        border-radius: $radius-sm;
+        padding: $spacing-2 $spacing-4;
+        min-width: 44px;
+        min-height: 44px;
+        transition: $transition-all;
+        
+        .dark & {
+          background: rgba(15, 23, 42, 0.3);
+          border-color: rgba(51, 65, 85, 0.3);
+          color: $gray-300;
+        }
+
+        &:hover {
+          background: rgba(var(--primary-rgb), 0.1);
+          border-color: rgba(var(--primary-rgb), 0.3);
+          color: rgb(var(--primary-rgb));
+          
+          .dark & {
+            background: rgba(var(--primary-rgb), 0.2);
+          }
+        }
+
+        &:focus {
+          box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+        }
+
+        &.e-primary {
+          background: rgb(var(--primary-rgb));
+          border-color: rgb(var(--primary-rgb));
+          color: white;
+
+          &:hover {
+            background: rgba(var(--primary-rgb), 0.9);
+          }
+        }
+
+        @include respond-to(md) {
+          min-width: auto;
+          min-height: auto;
+        }
+      }
+    }
+  }
+}
+
+// Responsive
+@include respond-to-down(sm) {
+  .query-builder-container {
+    padding: $spacing-2;
+    
+    ::ng-deep {
+      .e-query-builder {
+        .e-rule-container,
+        .e-group-container {
+          padding: $spacing-2;
+        }
+
+        .e-rule-field,
+        .e-rule-operator,
+        .e-rule-value {
+          .e-dropdownlist,
+          input {
+            font-size: $text-xs;
+            padding: $spacing-1 $spacing-2;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Gemini Theme
+body.theme-gemini {
+  .query-builder-container {
+    @include glass-gemini('weak');
+    
+    ::ng-deep {
+      .e-query-builder {
+        .e-rule-container,
+        .e-group-container {
+          @include glass-gemini('default');
+          @include gemini-border-glow();
+        }
+      }
+    }
+  }
+}
+

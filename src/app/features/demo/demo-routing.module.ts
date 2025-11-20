@@ -40,6 +40,7 @@ import { DataGridDemoComponent } from './components/data-grid-demo/data-grid-dem
 import { SchedulerDemoComponent } from './components/scheduler-demo/scheduler-demo.component';
 import { ChartDemoComponent } from './components/chart-demo/chart-demo.component';
 import { RichTextEditorDemoComponent } from './components/rich-text-editor-demo/rich-text-editor-demo.component';
+import { QueryBuilderDemoComponent } from './components/query-builder-demo/query-builder-demo.component';
 
 const routes: Routes = [
   {
@@ -201,6 +202,10 @@ const routes: Routes = [
       {
         path: 'rich-text-editor',
         component: RichTextEditorDemoComponent
+      },
+      {
+        path: 'query-builder',
+        component: QueryBuilderDemoComponent
       }
     ]
   }
