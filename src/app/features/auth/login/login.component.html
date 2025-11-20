@@ -1,4 +1,35 @@
 <section class="login-container">
+  <!-- Language and Theme Toggle Controls -->
+  <div class="login-controls">
+    <div class="login-controls-group">
+      <!-- Language Switcher -->
+      <button
+        type="button"
+        class="control-button language-button"
+        (click)="toggleLanguage()"
+        [title]="currentLang === 'th' ? 'Switch to English' : 'เปลี่ยนเป็นภาษาไทย'"
+        aria-label="Change language">
+        <span class="control-icon">{{ currentLang === 'th' ? '🇹🇭' : '🇬🇧' }}</span>
+        <span class="control-text">{{ currentLang === 'th' ? 'ไทย' : 'EN' }}</span>
+      </button>
+
+      <!-- Dark Mode Toggle -->
+      <button
+        type="button"
+        class="control-button theme-button"
+        (click)="toggleDarkMode()"
+        [title]="isDarkMode ? 'Switch to Light Mode' : 'เปลี่ยนเป็นโหมดมืด'"
+        aria-label="Toggle dark mode">
+        <svg *ngIf="!isDarkMode" class="control-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3V1M12 23V21M5.314 5.314L3.9 3.9M20.1 20.1L18.686 18.686M3 12H1M23 12H21M5.314 18.686L3.9 20.1M20.1 3.9L18.686 5.314M18 12C18 15.314 15.314 18 12 18C8.686 18 6 15.314 6 12C6 8.686 8.686 6 12 6C15.314 6 18 8.686 18 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <svg *ngIf="isDarkMode" class="control-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
   <div class="login-layout">
     <!-- Left Section - Promotional (40%) -->
     <div class="login-left-section">
@@ -135,7 +166,9 @@
           <!-- Error Message -->
           <div *ngIf="errorMessage" class="error-message">
             <div class="error-message-content">
-              <span class="e-icons e-error" aria-hidden="true"></span>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 5L5 15M5 5L15 15" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
               <p class="thai-text">{{ errorMessage }}</p>
             </div>
           </div>

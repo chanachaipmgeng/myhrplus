@@ -220,6 +220,30 @@ export class AuthService {
     );
   }
 
+  setMailForgetPassword(username: string, email: string, dbName: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const body = {
+        userName: username,
+        email: email,
+        dbName: dbName
+      };
+      
+      this.http.post<any>(
+        `${environment.jbossUrl}${environment.apiEndpoints.unsecure}/authen/forgot-password`,
+        body
+      ).subscribe({
+        next: (response) => {
+          console.log('Forgot password response:', response);
+          resolve(response);
+        },
+        error: (error) => {
+          console.error('Forgot password error:', error);
+          reject(error);
+        }
+      });
+    });
+  }
+
   logout(): void {
     // Call logout API if needed
     this.http.post(`${environment.jbossUrl}${environment.apiEndpoints.auth}/logout`, {})

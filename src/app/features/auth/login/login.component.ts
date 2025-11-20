@@ -7,6 +7,7 @@ import { MenuService } from '../../../core/services/menu.service';
 import { EmployeeService } from '../../../core/services/employee.service';
 import { SwaplangCodeService } from '../../../core/services/swaplang-code.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ThemeService } from '../../../core/services/theme.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import jwt_decode from 'jwt-decode';
@@ -31,6 +32,14 @@ export class LoginComponent implements OnInit {
   dbFields: object = { text: 'dbDisplay', value: 'db' };
   dbDataSource: any[] = [];
 
+  // Language and Theme
+  currentLang: string = 'th';
+  isDarkMode: boolean = false;
+  availableLanguages = [
+    { code: 'th', name: 'ไทย', flag: '🇹🇭' },
+    { code: 'en', name: 'English', flag: '🇬🇧' }
+  ];
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -40,7 +49,8 @@ export class LoginComponent implements OnInit {
     private menuService: MenuService,
     private employeeService: EmployeeService,
     private swapLangService: SwaplangCodeService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private themeService: ThemeService
   ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
@@ -63,6 +73,18 @@ export class LoginComponent implements OnInit {
 
     // Load database list
     this.loadDatabases();
+
+    // Initialize language
+    this.currentLang = this.translate.currentLang || 'th';
+    this.translate.onLangChange.subscribe(event => {
+      this.currentLang = event.lang;
+    });
+
+    // Initialize theme
+    this.themeService.isDarkMode$.subscribe(isDark => {
+      this.isDarkMode = isDark;
+    });
+    this.isDarkMode = this.themeService.isDarkMode();
   }
 
   loadRememberedCredentials(): void {
@@ -114,6 +136,16 @@ export class LoginComponent implements OnInit {
   onForgotPassword(): void {
     // Navigate to forgot password page
     this.router.navigate(['/auth/forgot-password']);
+  }
+
+  toggleLanguage(): void {
+    const newLang = this.currentLang === 'th' ? 'en' : 'th';
+    this.translate.use(newLang);
+    this.currentLang = newLang;
+  }
+
+  toggleDarkMode(): void {
+    this.themeService.toggleMode();
   }
 
   onUsernameChange(value: string): void {

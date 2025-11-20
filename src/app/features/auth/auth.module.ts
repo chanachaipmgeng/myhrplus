@@ -7,12 +7,14 @@ import { SharedModule } from '../../shared/shared.module';
 import { SyncfusionModule } from '../../shared/syncfusion/syncfusion.module';
 
 import { LoginComponent } from './login/login.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { AuthRoutingModule } from './auth-routing.module';
 
 @NgModule({
   declarations: [
     LoginComponent,
+    ForgotPasswordComponent,
     UnauthorizedComponent
   ],
   imports: [
