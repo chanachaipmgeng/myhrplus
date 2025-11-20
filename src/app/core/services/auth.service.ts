@@ -227,7 +227,7 @@ export class AuthService {
         email: email,
         dbName: dbName
       };
-      
+
       this.http.post<any>(
         `${environment.jbossUrl}${environment.apiEndpoints.unsecure}/authen/forgot-password`,
         body
@@ -324,7 +324,7 @@ export class AuthService {
   getToken(): string | null {
     // Check localStorage first
     let token = this.storage.getItem(this.TOKEN_KEY);
-    
+
     // If not found, check sessionStorage (for backward compatibility)
     if (!token && typeof window !== 'undefined' && window.sessionStorage) {
       const sessionToken = sessionStorage.getItem('userToken');
@@ -334,7 +334,7 @@ export class AuthService {
         token = sessionToken;
       }
     }
-    
+
     return token;
   }
 
@@ -350,11 +350,82 @@ export class AuthService {
     this.storage.setItem(this.TOKEN_KEY, token);
     this.storage.setItem(this.USER_KEY, JSON.stringify(user));
     this.currentUserSubject.next(user);
-    
+
     // Also update sessionStorage for backward compatibility
     if (typeof window !== 'undefined' && window.sessionStorage) {
       sessionStorage.setItem('userToken', token);
       sessionStorage.setItem('currentUser', JSON.stringify(user));
+    }
+  }
+
+  /**
+   * Set user from token (used for token-based authentication via URL parameters)
+   * This method is called by TokenAuthGuard when authenticating via URL token
+   */
+  setUserFromToken(token: string, decodedToken: any): void {
+    try {
+      // Map decoded token to User interface
+      const user: User = {
+        id: decodedToken.uid || decodedToken.employeeid || decodedToken.actorid || decodedToken.sub || decodedToken.username,
+        username: decodedToken.username || decodedToken.user || decodedToken.sub,
+        user: decodedToken.user || decodedToken.username,
+        uid: decodedToken.uid,
+        employeeid: decodedToken.employeeid,
+        actorid: decodedToken.actorid,
+        memberid: decodedToken.memberid,
+        name: decodedToken.fullname || decodedToken.name || decodedToken.username,
+        fullname: decodedToken.fullname,
+        email: decodedToken.email,
+        roles: decodedToken.roles || [],
+        user_role: decodedToken.user_role,
+        role_level: decodedToken.role_level,
+        user_level: decodedToken.user_level,
+        permissions: decodedToken.permissions,
+        companyId: decodedToken.companyid || decodedToken.companyId,
+        companyid: decodedToken.companyid,
+        companyName: decodedToken.companyName,
+        comid: decodedToken.comid,
+        branch: decodedToken.branch,
+        dbName: decodedToken.dbName,
+        schema: decodedToken.schema,
+        workarea: decodedToken.workarea,
+        emp_position: decodedToken.emp_position,
+        job: decodedToken.job,
+        accountactive: decodedToken.accountactive,
+        firstlogin: decodedToken.firstlogin,
+        ad: decodedToken.ad,
+        lang: decodedToken.lang || 'th',
+        app_name: decodedToken.app_name,
+        url_myhr: decodedToken.url_myhr,
+        encode: decodedToken.encode,
+        sub: decodedToken.sub,
+        iss: decodedToken.iss,
+        zmlogin: decodedToken.zmlogin,
+        token_zeeme: decodedToken.token_zeeme,
+        zm_user: decodedToken.zm_user,
+        token: token,
+        // Include all other token properties
+        ...decodedToken
+      };
+
+      // Store in both localStorage and sessionStorage
+      this.storage.setItem(this.TOKEN_KEY, token);
+      this.storage.setItem(this.USER_KEY, JSON.stringify(user));
+      this.currentUserSubject.next(user);
+
+      // Also store in sessionStorage for backward compatibility
+      if (typeof window !== 'undefined' && window.sessionStorage) {
+        sessionStorage.setItem('userToken', token);
+        sessionStorage.setItem('currentUser', JSON.stringify(user));
+        if (decodedToken.dbName) {
+          sessionStorage.setItem('dbName', decodedToken.dbName);
+        }
+      }
+
+      console.log('AuthService: User set from token', user);
+    } catch (error) {
+      console.error('AuthService: Error setting user from token', error);
+      throw error;
     }
   }
 
@@ -440,7 +511,7 @@ export class AuthService {
     if (!userData && typeof window !== 'undefined' && window.sessionStorage) {
       const sessionUser = sessionStorage.getItem('currentUser');
       const sessionToken = sessionStorage.getItem('userToken');
-      
+
       if (sessionUser && sessionToken) {
         try {
           userData = JSON.parse(sessionUser);
@@ -457,7 +528,7 @@ export class AuthService {
     if (userData) {
       try {
         const user = typeof userData === 'string' ? JSON.parse(userData) : userData;
-        
+
         if (token && !this.isTokenExpired(token)) {
           this.currentUserSubject.next(user);
         } else if (token) {
@@ -537,5 +608,43 @@ export class AuthService {
       this.tokenRefreshTimer.unsubscribe();
       this.tokenRefreshTimer = null;
     }
+  }
+
+  /**
+   * Get PDPA consent information for employee
+   * @param employeeId - Employee ID
+   * @returns Observable with employee consent and PDPA data
+   */
+  getPdpa(employeeId: string): Observable<{ employeeConsent: any; pdpa: any }> {
+    return this.http.get<{ employeeConsent: any; pdpa: any }>(
+      `${environment.jbossUrl}${environment.apiEndpoints.employeeView}/pdpa/employee-consent/${employeeId}`
+    ).pipe(
+      catchError(error => {
+        console.error('Error getting PDPA consent:', error);
+        return throwError(() => error);
+      })
+    );
+  }
+
+  /**
+   * Save PDPA consent
+   * @param body - Request body with model containing version and employeeId
+   * @returns Promise with response
+   */
+  savePdpa(body: { model: { version: number; employeeId: string } }): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post<any>(
+        `${environment.jbossUrl}${environment.apiEndpoints.employeeView}/pdpa/employee-consent`,
+        body
+      ).subscribe({
+        next: (response) => {
+          resolve(response);
+        },
+        error: (error) => {
+          console.error('Error saving PDPA consent:', error);
+          reject(error);
+        }
+      });
+    });
   }
 }

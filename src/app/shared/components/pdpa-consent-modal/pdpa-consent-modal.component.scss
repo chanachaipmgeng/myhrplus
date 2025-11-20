@@ -1,0 +1,82 @@
+.modal-content {
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-bottom: none;
+  border-radius: 0.5rem 0.5rem 0 0;
+
+  .modal-title {
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+  }
+}
+
+.modal-body {
+  max-height: 60vh;
+  overflow-y: auto;
+
+  .consent-content {
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+    font-size: 0.95rem;
+    line-height: 1.6;
+
+    // Style for HTML content
+    :deep(p) {
+      margin-bottom: 1rem;
+    }
+
+    :deep(ul), :deep(ol) {
+      margin-bottom: 1rem;
+      padding-left: 2rem;
+    }
+
+    :deep(li) {
+      margin-bottom: 0.5rem;
+    }
+
+    :deep(h1), :deep(h2), :deep(h3), :deep(h4), :deep(h5), :deep(h6) {
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    :deep(strong) {
+      font-weight: 600;
+    }
+  }
+}
+
+.modal-footer {
+  border-top: 1px solid #dee2e6;
+  padding: 1rem;
+
+  .btn {
+    min-width: 100px;
+  }
+}
+
+// Dark mode support
+:host-context(.dark) {
+  .modal-body {
+    .consent-content {
+      background-color: #2d3748;
+      color: #e2e8f0;
+      border-color: #4a5568;
+    }
+  }
+
+  .modal-footer {
+    border-top-color: #4a5568;
+  }
+}
+
