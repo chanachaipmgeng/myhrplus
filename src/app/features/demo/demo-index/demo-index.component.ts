@@ -27,9 +27,11 @@ export class DemoIndexComponent {
 
     // Layout Components
     { name: 'Page Layout', route: 'page-layout', description: 'Standard page layout with header, breadcrumb, and actions', category: 'Layout', icon: '📄' },
+    { name: 'Page Header', route: 'page-header', description: 'Page header with title, subtitle, breadcrumbs, and actions', category: 'Layout', icon: '📋' },
     { name: 'Tabs', route: 'tabs', description: 'Tab navigation component', category: 'Layout', icon: '📑' },
     { name: 'Breadcrumbs', route: 'breadcrumbs', description: 'Breadcrumb navigation', category: 'Layout', icon: '🍞' },
     { name: 'Stepper', route: 'stepper', description: 'Step-by-step navigation component', category: 'Layout', icon: '👣' },
+    { name: 'Progressive Disclosure', route: 'progressive-disclosure', description: 'Expand/collapse component with animations', category: 'Layout', icon: '📖' },
 
     // Data Display
     { name: 'Statistics Card', route: 'statistics-card', description: 'Card for displaying statistics with icons', category: 'Data Display', icon: '📊' },
@@ -81,6 +83,8 @@ export class DemoIndexComponent {
     { name: 'Smart TextArea', route: 'smart-textarea', description: 'Intelligent textarea component with AI-powered suggestions and customizable features (Syncfusion)', category: 'Form', icon: '💬' },
     { name: 'AI Assist View', route: 'ai-assist-view', description: 'AI-powered assistant interface component with suggestions, prompt handling, and interactive chat features (Syncfusion)', category: 'Form', icon: '🤖' },
     { name: 'Search Filter', route: 'search-filter', description: 'Search and filter component', category: 'Form', icon: '🔍' },
+    { name: 'Mask Toggle', route: 'mask-toggle', description: 'Toggle masked/unmasked display of sensitive data (PDPA/GDPR compliance)', category: 'Form', icon: '👁️' },
+    { name: 'Contextual Help', route: 'contextual-help', description: 'Contextual help component with tooltips', category: 'Other', icon: '❓' },
     { name: 'File Upload', route: 'file-upload', description: 'File upload component', category: 'Form', icon: '📁' },
     { name: 'Image Upload', route: 'image-upload', description: 'Image upload component', category: 'Form', icon: '🖼️' },
     { name: 'Form Validation Messages', route: 'form-validation-messages', description: 'Form validation messages component', category: 'Form', icon: '✅' },
@@ -88,7 +92,8 @@ export class DemoIndexComponent {
     // Other
     { name: 'Icon', route: 'icon', description: 'Material Icons wrapper component', category: 'Other', icon: '🎨' },
     { name: 'Avatar', route: 'avatar', description: 'Avatar component with status', category: 'Other', icon: '👤' },
-    { name: 'Theme Toggle', route: 'theme-toggle', description: 'Theme mode and color toggle', category: 'Other', icon: '🎨' }
+    { name: 'Theme Toggle', route: 'theme-toggle', description: 'Theme mode and color toggle', category: 'Other', icon: '🎨' },
+    { name: 'Theme Switcher', route: 'theme-switcher', description: 'Advanced theme switcher with mode and color options', category: 'Other', icon: '🎨' }
   ];
 
   get categories(): string[] {

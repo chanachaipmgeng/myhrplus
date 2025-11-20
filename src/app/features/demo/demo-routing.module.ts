@@ -56,6 +56,11 @@ import { SyncfusionUploaderDemoComponent } from './components/syncfusion-uploade
 import { AutocompleteDemoComponent } from './components/autocomplete-demo/autocomplete-demo.component';
 import { SmartTextAreaDemoComponent } from './components/smart-textarea-demo/smart-textarea-demo.component';
 import { AIAssistViewDemoComponent } from './components/ai-assist-view-demo/ai-assist-view-demo.component';
+import { ContextualHelpDemoComponent } from './components/contextual-help-demo/contextual-help-demo.component';
+import { ProgressiveDisclosureDemoComponent } from './components/progressive-disclosure-demo/progressive-disclosure-demo.component';
+import { PageHeaderDemoComponent } from './components/page-header-demo/page-header-demo.component';
+import { MaskToggleDemoComponent } from './components/mask-toggle-demo/mask-toggle-demo.component';
+import { ThemeSwitcherDemoComponent } from './components/theme-switcher-demo/theme-switcher-demo.component';
 
 const routes: Routes = [
   {
@@ -281,6 +286,26 @@ const routes: Routes = [
       {
         path: 'ai-assist-view',
         component: AIAssistViewDemoComponent
+      },
+      {
+        path: 'contextual-help',
+        component: ContextualHelpDemoComponent
+      },
+      {
+        path: 'progressive-disclosure',
+        component: ProgressiveDisclosureDemoComponent
+      },
+      {
+        path: 'page-header',
+        component: PageHeaderDemoComponent
+      },
+      {
+        path: 'mask-toggle',
+        component: MaskToggleDemoComponent
+      },
+      {
+        path: 'theme-switcher',
+        component: ThemeSwitcherDemoComponent
       }
     ]
   }

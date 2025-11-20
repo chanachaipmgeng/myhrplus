@@ -1,12 +1,12 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { IconComponent } from '../icon/icon.component';
+import { SharedModule } from '../../shared.module';
 
 @Component({
   selector: 'app-progressive-disclosure',
   standalone: true,
-  imports: [CommonModule, IconComponent],
+  imports: [CommonModule, SharedModule],
   templateUrl: './progressive-disclosure.component.html',
   styleUrls: ['./progressive-disclosure.component.scss'],
   animations: [

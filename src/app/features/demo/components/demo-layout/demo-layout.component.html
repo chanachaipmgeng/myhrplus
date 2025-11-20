@@ -1,0 +1,104 @@
+<div class="demo-layout-container">
+  <!-- Header -->
+  <header class="demo-header glass-card">
+    <div class="header-content">
+      <div class="header-left">
+        <button
+          type="button"
+          class="menu-toggle-btn"
+          (click)="toggleSidebar()"
+          [attr.aria-label]="'Toggle sidebar'">
+          <span class="material-icons">menu</span>
+        </button>
+        <h1 class="header-title">Component Demo Showcase</h1>
+      </div>
+      <div class="header-right">
+        <!-- Language Switcher -->
+        <div class="language-switcher">
+          <select
+            [value]="currentLang"
+            (change)="changeLanguage($any($event.target).value)"
+            class="lang-select">
+            <option *ngFor="let lang of availableLangs" [value]="lang.code">
+              {{ lang.flag }} {{ lang.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Theme Mode Switcher -->
+        <div class="theme-controls">
+          <select
+            [value]="currentTheme.mode"
+            (change)="changeThemeMode($any($event.target).value)"
+            class="theme-mode-select">
+            <option *ngFor="let mode of themeModes" [value]="mode.value">
+              {{ mode.icon }} {{ mode.label }}
+            </option>
+          </select>
+
+          <select
+            [value]="currentTheme.color"
+            (change)="changeThemeColor($any($event.target).value)"
+            class="theme-color-select">
+            <option *ngFor="let color of themeColors" [value]="color.value">
+              {{ color.label }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="demo-main">
+    <!-- Sidebar -->
+    <ejs-sidebar
+      #sidebar
+      [width]="'280px'"
+      [position]="'Left'"
+      [isOpen]="false"
+      [closeOnDocumentClick]="true"
+      (close)="closeSidebar()">
+      <div class="sidebar-content">
+        <div class="sidebar-header">
+          <h2 class="sidebar-title">Components</h2>
+          <button
+            type="button"
+            class="close-btn"
+            (click)="closeSidebar()"
+            aria-label="Close sidebar">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+
+        <div class="sidebar-body">
+          <div *ngFor="let group of componentGroups" class="component-group">
+            <div class="group-header">
+              <span class="group-icon">{{ group.icon }}</span>
+              <h3 class="group-name">{{ group.name }}</h3>
+            </div>
+            <ul class="component-list">
+              <li
+                *ngFor="let component of group.components"
+                class="component-item"
+                [class.active]="isActiveRoute(component.route)">
+                <a
+                  (click)="navigateToComponent(component.route)"
+                  class="component-link">
+                  <span class="component-icon">{{ component.icon }}</span>
+                  <span class="component-name">{{ component.name }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </ejs-sidebar>
+
+    <!-- Content Area -->
+    <div class="demo-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+

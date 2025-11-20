@@ -1,9 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ThemeService, ThemeMode, ThemeColor } from '../../../core/services/theme.service';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-theme-switcher',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './theme-switcher.component.html',
   styleUrls: ['./theme-switcher.component.scss']
 })
