@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../../../shared/shared.module';
+import { ThemeSwitcherComponent } from '../../../../shared/components/theme-switcher/theme-switcher.component';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { PropsTableComponent, PropDefinition } from '../../shared/props-table/props-table.component';
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [
     CommonModule,
-    SharedModule,
+    ThemeSwitcherComponent,
     GlassCardComponent,
     CodeViewerComponent,
     PropsTableComponent

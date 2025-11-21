@@ -329,3 +329,4 @@ The component uses Glass Morphism styling by default and supports dark mode. You
 
 For complete API reference, see [Syncfusion Uploader Documentation](https://ej2.syncfusion.com/angular/documentation/uploader/getting-started/).
 
+

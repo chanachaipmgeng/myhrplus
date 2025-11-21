@@ -131,3 +131,4 @@ export class SmartTextAreaDemoComponent {
 </app-smart-textarea>`;
 }
 
+

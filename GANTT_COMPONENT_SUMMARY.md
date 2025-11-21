@@ -187,3 +187,4 @@ See the live demo at `/demo/gantt` for examples and interactive controls.
 - [Full Guide](./GANTT_COMPONENT_GUIDE.md)
 - [Syncfusion Gantt Docs](https://ej2.syncfusion.com/angular/documentation/gantt/getting-started/)
 
+

@@ -1,9 +1,9 @@
 <div class="relative inline-block">
-  <div [attr.aria-describedby]="ariaDescribedBy || (show && text ? tooltipId : null)">
+  <div [attr.aria-describedby]="ariaDescribedBy || (isVisible && text ? tooltipId : null)">
     <ng-content></ng-content>
   </div>
   <div
-    *ngIf="show && text"
+    *ngIf="isVisible && text"
     [id]="tooltipId"
     role="tooltip"
     [class]="tooltipClasses"

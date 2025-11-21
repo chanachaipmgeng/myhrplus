@@ -144,3 +144,4 @@ See the live demo at `/demo/autocomplete` for examples and interactive controls.
 - [Full Guide](./AUTOCOMPLETE_COMPONENT_GUIDE.md)
 - [Syncfusion Autocomplete Docs](https://ej2.syncfusion.com/angular/documentation/auto-complete/getting-started/)
 
+

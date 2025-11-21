@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../../../shared/shared.module';
+import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
 import { GlassButtonComponent } from '../../../../shared/components/glass-button/glass-button.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
@@ -11,7 +11,7 @@ import { PropsTableComponent, PropDefinition } from '../../shared/props-table/pr
   standalone: true,
   imports: [
     CommonModule,
-    SharedModule,
+    PageHeaderComponent,
     GlassCardComponent,
     GlassButtonComponent,
     CodeViewerComponent,

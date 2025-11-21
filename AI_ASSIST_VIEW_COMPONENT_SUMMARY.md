@@ -90,3 +90,4 @@ See the demo at `/demo/ai-assist-view` for interactive examples and usage patter
 
 For detailed documentation, see `AI_ASSIST_VIEW_COMPONENT_GUIDE.md`.
 
+

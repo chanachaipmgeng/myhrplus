@@ -12,22 +12,31 @@ export class TooltipComponent {
   @Input() text: string = '';
   @Input() position: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
   @Input() showOnHover: boolean = true;
+  @Input() show?: boolean;
   @Input() ariaDescribedBy?: string;
 
-  show: boolean = false;
+  private _internalShow: boolean = false;
   tooltipId: string = `tooltip-${Math.random().toString(36).substr(2, 9)}`;
+
+  get isVisible(): boolean {
+    // If show input is provided, use it; otherwise use internal state
+    if (this.show !== undefined) {
+      return this.show;
+    }
+    return this._internalShow;
+  }
 
   @HostListener('mouseenter')
   onMouseEnter(): void {
-    if (this.showOnHover) {
-      this.show = true;
+    if (this.showOnHover && this.show === undefined) {
+      this._internalShow = true;
     }
   }
 
   @HostListener('mouseleave')
   onMouseLeave(): void {
-    if (this.showOnHover) {
-      this.show = false;
+    if (this.showOnHover && this.show === undefined) {
+      this._internalShow = false;
     }
   }
 

@@ -155,3 +155,4 @@ See the live demo at `/demo/syncfusion-uploader` for examples and interactive co
 - [Full Guide](./SYNCFUSION_UPLOADER_COMPONENT_GUIDE.md)
 - [Syncfusion Uploader Docs](https://ej2.syncfusion.com/angular/documentation/uploader/getting-started/)
 
+

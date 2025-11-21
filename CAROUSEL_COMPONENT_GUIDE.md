@@ -412,3 +412,4 @@ When `enableTouchSwipe` is `true` (default), users can:
 
 For complete API reference, see [Syncfusion Carousel Documentation](https://ej2.syncfusion.com/angular/documentation/carousel/getting-started/).
 
+
