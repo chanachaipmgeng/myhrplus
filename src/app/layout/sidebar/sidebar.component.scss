@@ -809,46 +809,6 @@ a.module-icon-btn {
   }
 }
 
-mat-nav-list {
-  padding-top: 0;
-}
-
-a[mat-list-item] {
-  font-family: 'Sarabun', 'Inter', sans-serif;
-  transition: all 0.2s ease;
-  
-  &.active {
-    background: rgba(var(--primary-rgb), 0.2) !important;
-    color: rgb(var(--primary-rgb)) !important;
-    border-left: 3px solid rgb(var(--primary-rgb));
-    box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.2);
-    
-    mat-icon {
-      color: rgb(var(--primary-rgb)) !important;
-    }
-    
-    span {
-      color: rgb(var(--primary-rgb)) !important;
-      font-weight: 600;
-    }
-  }
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.3) !important;
-    transform: translateX(4px);
-  }
-}
-
-.dark a[mat-list-item] {
-  &.active {
-    background: rgba(var(--primary-rgb), 0.3) !important;
-    box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.3);
-  }
-
-  &:hover {
-    background: rgba(51, 65, 85, 0.3) !important;
-  }
-}
 
 .menu-group {
   box-shadow: none;
@@ -860,32 +820,6 @@ a[mat-list-item] {
   margin-bottom: 0.5rem;
   transition: all 0.3s ease;
   
-  ::ng-deep .mat-expansion-panel-header {
-    padding: 0.75rem 1rem;
-    font-family: 'Sarabun', 'Inter', sans-serif;
-  }
-  
-  ::ng-deep .mat-expansion-panel-body {
-    padding: 0.5rem;
-  }
-
-  mat-icon {
-    margin-right: 0.75rem;
-    color: #475569;
-    transition: color 0.3s ease;
-  }
-
-  .dark & mat-icon {
-    color: #94a3b8;
-  }
-  
-  ::ng-deep .mat-expansion-panel-header:hover {
-    background: rgba(255, 255, 255, 0.3) !important;
-  }
-
-  .dark & ::ng-deep .mat-expansion-panel-header:hover {
-    background: rgba(51, 65, 85, 0.3) !important;
-  }
 }
 
 .dark .menu-group {
@@ -893,28 +827,6 @@ a[mat-list-item] {
   background: rgba(15, 23, 42, 0.2);
 }
 
-::ng-deep .mat-expansion-panel {
-  background: rgba(255, 255, 255, 0.2) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.2) !important;
-  transition: all 0.3s ease;
-}
-
-.dark ::ng-deep .mat-expansion-panel {
-  background: rgba(15, 23, 42, 0.2) !important;
-  border-color: rgba(51, 65, 85, 0.3) !important;
-  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3) !important;
-}
-
-::ng-deep .mat-expansion-panel:not([class*='mat-elevation-z']) {
-  box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.2) !important;
-}
-
-.dark ::ng-deep .mat-expansion-panel:not([class*='mat-elevation-z']) {
-  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3) !important;
-}
 
 /* User Avatar Section */
 .user-avatar-section {

@@ -144,25 +144,6 @@
     overflow: hidden;
     min-width: 200px;
 
-    button[mat-menu-item] {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-
-      .flag-emoji {
-        font-size: 20px;
-        line-height: 1;
-      }
-
-      .check-icon {
-        margin-left: auto;
-        color: #07399C;
-      }
-
-      &.active {
-        background-color: rgba(7, 57, 156, 0.1);
-      }
-    }
   }
 
   .user-menu {
@@ -207,21 +188,6 @@
       }
     }
 
-    button[mat-menu-item] {
-      padding: 12px 20px;
-
-      mat-icon {
-        font-size: 20px;
-        width: 20px;
-        height: 20px;
-        color: #6c757d;
-        margin-right: 12px;
-      }
-
-      span {
-        flex: 1;
-      }
-    }
   }
 }
 
@@ -269,14 +235,6 @@
   }
 }
 
-// Settings Modal Styles
-::ng-deep .settings-modal {
-  .mat-dialog-container {
-    padding: 0;
-    border-radius: 16px;
-    overflow: hidden;
-  }
-}
 
 .profile-modal-container {
   background-color: #f3f7fb;
@@ -288,11 +246,6 @@
   .settings-tabs {
     margin-bottom: 1.5rem;
 
-    ::ng-deep .mat-tab-label {
-      font-weight: 500;
-      padding: 12px 24px;
-      min-width: 150px;
-    }
   }
 
   .tab-content {
@@ -305,9 +258,6 @@
   }
 
   .profile-card {
-    mat-card-content {
-      padding: 2rem;
-    }
 
     .profile-layout {
       display: flex;
@@ -373,9 +323,6 @@
   }
 
   .settings-card {
-    mat-card-content {
-      padding: 2rem;
-    }
 
     .settings-layout {
       display: flex;

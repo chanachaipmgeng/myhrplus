@@ -120,12 +120,6 @@
   cursor: not-allowed;
 }
 
-.step-icon mat-icon,
-.step-check mat-icon {
-  font-size: 20px !important;
-  width: 20px !important;
-  height: 20px !important;
-}
 
 .step-number {
   font-weight: 600;
@@ -213,7 +207,7 @@
       width: 2px;
       height: calc(100% + 1rem);
       background: #e2e8f0;
-      
+
       .dark & {
         background: #334155;
       }
@@ -242,7 +236,7 @@
     flex-direction: column;
     gap: $spacing-2;
     margin-top: $spacing-4;
-    
+
     button {
       width: 100%;
       min-height: 44px; // Touch target
@@ -285,7 +279,7 @@
   min-height: 44px; // Touch target
   padding: $spacing-2;
   cursor: pointer;
-  
+
   @include respond-to(md) {
     min-height: auto;
     padding: 0;
@@ -296,7 +290,7 @@
   min-width: 44px;
   min-height: 44px;
   padding: $spacing-2 $spacing-4;
-  
+
   @include respond-to(md) {
     min-width: auto;
     min-height: auto;
