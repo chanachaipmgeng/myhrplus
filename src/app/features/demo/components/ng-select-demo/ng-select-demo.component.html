@@ -1,17 +1,22 @@
-<div class="demo-page">
-  <div class="demo-header">
-    <h1 class="demo-title">NgSelect</h1>
-    <p class="demo-description">
+<div class="w-full py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      NgSelect
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
       Select dropdown component with search, multi-select, and custom templates support.
     </p>
   </div>
 
   <!-- Live Demo Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Live Demo</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
     
     <app-glass-card padding="p-6">
-      <div class="demo-preview space-y-6">
+      <div class="space-y-6">
         <div>
           <h3 class="text-lg font-semibold mb-4">Basic Select</h3>
           <ng-select
@@ -22,7 +27,7 @@
             placeholder="เลือกเมือง"
             (change)="onCityChange($event)">
           </ng-select>
-          <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mt-2">
             Selected: {{ getSelectedCityName() }}
           </p>
         </div>
@@ -49,7 +54,7 @@
             bindLabel="name"
             placeholder="เลือกหลายเมือง">
           </ng-select>
-          <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mt-2">
             Selected: {{ selectedCities.length }} cities
           </p>
         </div>
@@ -58,8 +63,11 @@
   </section>
 
   <!-- Code Examples Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Code Examples</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Code Examples
+    </h2>
     
     <app-glass-card padding="p-6">
       <div class="space-y-6">

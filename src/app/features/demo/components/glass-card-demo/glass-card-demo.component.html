@@ -49,10 +49,10 @@
         [animate]="selectedAnimation"
         padding="p-6">
         <h3 class="text-xl font-semibold mb-2">Glass Card Demo</h3>
-        <p class="text-slate-600 dark:text-slate-400">
+        <p class="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
           This is a {{ selectedVariant }} glass card with {{ selectedAnimation || 'no' }} animation.
         </p>
-        <p class="text-sm text-slate-500 dark:text-slate-500 mt-4">
+        <p class="text-sm text-gray-500 dark:text-gray-500 theme-gemini:text-white/60 mt-4">
           Variant: <strong>{{ selectedVariant }}</strong> | 
           Animation: <strong>{{ selectedAnimation || 'None' }}</strong>
         </p>
@@ -69,21 +69,21 @@
     <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6 mb-6">
       <app-glass-card variant="default" padding="p-6">
         <h3 class="text-lg font-semibold mb-2">Default</h3>
-        <p class="text-sm text-slate-600 dark:text-slate-400">
+        <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
           Standard glass card with balanced blur effect.
         </p>
       </app-glass-card>
 
       <app-glass-card variant="strong" padding="p-6">
         <h3 class="text-lg font-semibold mb-2">Strong</h3>
-        <p class="text-sm text-slate-600 dark:text-slate-400">
+        <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
           Stronger blur effect, more opaque and prominent.
         </p>
       </app-glass-card>
 
       <app-glass-card variant="weak" padding="p-6">
         <h3 class="text-lg font-semibold mb-2">Weak</h3>
-        <p class="text-sm text-slate-600 dark:text-slate-400">
+        <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
           Subtle blur effect, more transparent and lightweight.
         </p>
       </app-glass-card>
@@ -99,22 +99,22 @@
     <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6 mb-6">
       <app-glass-card variant="default" padding="p-6" animate="fade-in">
         <h3 class="text-lg font-semibold mb-2">Fade In</h3>
-        <p class="text-sm text-slate-600 dark:text-slate-400">Fade in animation</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Fade in animation</p>
       </app-glass-card>
 
       <app-glass-card variant="default" padding="p-6" animate="slide-up">
         <h3 class="text-lg font-semibold mb-2">Slide Up</h3>
-        <p class="text-sm text-slate-600 dark:text-slate-400">Slide up animation</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Slide up animation</p>
       </app-glass-card>
 
       <app-glass-card variant="default" padding="p-6" animate="slide-down">
         <h3 class="text-lg font-semibold mb-2">Slide Down</h3>
-        <p class="text-sm text-slate-600 dark:text-slate-400">Slide down animation</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Slide down animation</p>
       </app-glass-card>
 
       <app-glass-card variant="default" padding="p-6" animate="scale-in">
         <h3 class="text-lg font-semibold mb-2">Scale In</h3>
-        <p class="text-sm text-slate-600 dark:text-slate-400">Scale in animation</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Scale in animation</p>
       </app-glass-card>
     </div>
   </section>
