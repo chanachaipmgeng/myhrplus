@@ -13,11 +13,15 @@
   </ejs-sidebar>
 
   <!-- Main Content -->
-  <div class="main-wrapper flex-1 min-h-screen flex flex-col transition-all duration-300"
+  <div #mainWrapper
+       class="main-wrapper flex-1 min-h-screen flex flex-col transition-all duration-300"
        [class.main-wrapper-sidebar-open]="sidebarOpen && !(isHandset$ | async)"
-       [class.main-wrapper-sidebar-closed]="!sidebarOpen && !(isHandset$ | async)">
-    <app-header (toggleSidenav)="toggleSidebar()"></app-header>
-    <main class="main-content flex-1 animate-fade-in p-4 md:p-6">
+       [class.main-wrapper-sidebar-closed]="!sidebarOpen && !(isHandset$ | async)"
+       [class.main-wrapper-mobile]="isHandset$ | async">
+    <!-- Header - Hidden when hiddenHeader === 'hidden' (for ESS mode) -->
+    <app-header *ngIf="hiddenHeader !== 'hidden'" (toggleSidenav)="toggleSidebar()"></app-header>
+    <main class="main-content flex-1 animate-fade-in p-4 md:p-6"
+          [class.main-content-no-header]="hiddenHeader === 'hidden'">
       <router-outlet></router-outlet>
     </main>
     <app-footer></app-footer>
