@@ -2,11 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarouselComponent, CarouselItem } from '../../../../shared/components/carousel/carousel.component';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-carousel-demo',
   standalone: true,
-  imports: [CommonModule, CarouselComponent, GlassCardComponent],
+  imports: [CommonModule, CarouselComponent, GlassCardComponent, CodeViewerComponent],
   templateUrl: './carousel-demo.component.html',
   styleUrls: ['./carousel-demo.component.scss']
 })
@@ -143,5 +144,23 @@ export class CarouselDemoComponent {
       this.refresh();
     }
   }
+
+  // Code example
+  basicExample = `<app-carousel
+  [items]="carouselItems"
+  [interval]="3000"
+  [autoPlay]="true"
+  [loop]="true"
+  [showIndicators]="true"
+  [showPlayButton]="true"
+  [showPreviousButton]="true"
+  [showNextButton]="true"
+  [animationEffect]="'Slide'"
+  [height]="'500px'"
+  [width]="'100%'"
+  (slideChanged)="onSlideChanged($event)"
+  (play)="onPlay($event)"
+  (pause)="onPause($event)">
+</app-carousel>`;
 }
 

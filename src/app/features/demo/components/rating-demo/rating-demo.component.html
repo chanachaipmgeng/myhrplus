@@ -18,26 +18,26 @@
     <app-glass-card padding="p-6">
       <div class="space-y-6">
         <div>
-          <h3 class="text-lg font-semibold mb-4">Star Rating</h3>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Star Rating</h3>
           <app-rating
             [rating]="starRating"
             [showValue]="true"
             (ratingChange)="onStarRatingChange($event)">
           </app-rating>
-          <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mt-2">
             Current rating: {{ starRating }}/5
           </p>
         </div>
 
         <div>
-          <h3 class="text-lg font-semibold mb-4">Heart Rating</h3>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Heart Rating</h3>
           <app-rating
             [rating]="heartRating"
             icon="heart"
             [showValue]="true"
             (ratingChange)="onHeartRatingChange($event)">
           </app-rating>
-          <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mt-2">
             Current rating: {{ heartRating }}/5
           </p>
         </div>
@@ -55,7 +55,7 @@
     <div class="space-y-8">
       <!-- Star Rating -->
       <app-glass-card padding="p-6">
-        <h3 class="text-lg font-semibold mb-4">Star Rating</h3>
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Star Rating</h3>
         <app-rating
           [rating]="starRating"
           [showValue]="true"
@@ -65,7 +65,7 @@
 
       <!-- Heart Rating -->
       <app-glass-card padding="p-6">
-        <h3 class="text-lg font-semibold mb-4">Heart Rating</h3>
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Heart Rating</h3>
         <app-rating
           [rating]="heartRating"
           icon="heart"
@@ -76,20 +76,20 @@
 
       <!-- Readonly Rating -->
       <app-glass-card padding="p-6">
-        <h3 class="text-lg font-semibold mb-4">Readonly Rating</h3>
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Readonly Rating</h3>
         <app-rating
           [rating]="readonlyRating"
           [readonly]="true"
           [showValue]="true">
         </app-rating>
-        <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+        <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mt-2">
           This rating is readonly and cannot be changed.
         </p>
       </app-glass-card>
 
       <!-- Custom Max Rating -->
       <app-glass-card padding="p-6">
-        <h3 class="text-lg font-semibold mb-4">Custom Max Rating (10 stars)</h3>
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Custom Max Rating (10 stars)</h3>
         <app-rating
           [rating]="5"
           [maxRating]="10"

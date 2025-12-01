@@ -1,13 +1,20 @@
-<div class="chart-demo-container">
-  <app-glass-card padding="p-6" customClass="mb-6">
-    <h2 class="text-2xl font-bold mb-4 thai-text">Chart Component Demo</h2>
-    <p class="text-slate-600 dark:text-slate-400 mb-6 thai-text">
-      Component สำหรับแสดงกราฟและข้อมูลจาก Syncfusion พร้อม Glass Morphism styling และ features ครบถ้วน
-    </p>
+<div class="w-full py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <app-glass-card padding="p-6">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+        Chart Component Demo
+      </h1>
+      <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+        Component สำหรับแสดงกราฟและข้อมูลจาก Syncfusion พร้อม Glass Morphism styling และ features ครบถ้วน
+      </p>
+    </div>
 
     <!-- Column Chart Example -->
-    <div class="mb-8">
-      <h3 class="text-xl font-semibold mb-4 thai-text">ตัวอย่าง Column Chart</h3>
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                 text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+        ตัวอย่าง Column Chart
+      </h2>
       <app-chart
         [dataSource]="salesData"
         [series]="columnSeries"
@@ -21,11 +28,14 @@
         (pointClick)="onPointClick($event)"
         (loaded)="onLoaded($event)">
       </app-chart>
-    </div>
+    </section>
 
     <!-- Line Chart Example -->
-    <div class="mb-8">
-      <h3 class="text-xl font-semibold mb-4 thai-text">ตัวอย่าง Line Chart</h3>
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                 text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+        ตัวอย่าง Line Chart
+      </h2>
       <app-chart
         [dataSource]="revenueData"
         [series]="lineSeries"
@@ -37,11 +47,14 @@
         [height]="'400px'"
         [width]="'100%'">
       </app-chart>
-    </div>
+    </section>
 
     <!-- Pie Chart Example -->
-    <div class="mb-8">
-      <h3 class="text-xl font-semibold mb-4 thai-text">ตัวอย่าง Pie Chart</h3>
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                 text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+        ตัวอย่าง Pie Chart
+      </h2>
       <app-chart
         [dataSource]="departmentData"
         [series]="pieSeries"
@@ -51,11 +64,14 @@
         [height]="'400px'"
         [width]="'100%'">
       </app-chart>
-    </div>
+    </section>
 
     <!-- Area Chart Example -->
-    <div class="mb-8">
-      <h3 class="text-xl font-semibold mb-4 thai-text">ตัวอย่าง Area Chart</h3>
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                 text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+        ตัวอย่าง Area Chart
+      </h2>
       <app-chart
         [dataSource]="salesData"
         [series]="areaSeries"
@@ -67,11 +83,14 @@
         [height]="'400px'"
         [width]="'100%'">
       </app-chart>
-    </div>
+    </section>
 
     <!-- Multiple Series Example -->
-    <div class="mb-8">
-      <h3 class="text-xl font-semibold mb-4 thai-text">ตัวอย่าง Multiple Series</h3>
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                 text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+        ตัวอย่าง Multiple Series
+      </h2>
       <app-chart
         [dataSource]="salesData"
         [series]="multipleSeries"
@@ -83,12 +102,15 @@
         [height]="'400px'"
         [width]="'100%'">
       </app-chart>
-    </div>
+    </section>
 
     <!-- Usage Example -->
-    <div class="mt-8">
-      <h3 class="text-xl font-semibold mb-4 thai-text">ตัวอย่างการใช้งาน</h3>
-      <pre class="bg-slate-100 dark:bg-slate-800 p-4 rounded-lg overflow-x-auto"><code class="text-sm">// TypeScript
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                 text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+        ตัวอย่างการใช้งาน
+      </h2>
+      <pre class="bg-gray-100 dark:bg-gray-800 theme-gemini:bg-gray-900/50 p-4 rounded-lg overflow-x-auto border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30"><code class="text-sm font-mono text-gray-800 dark:text-gray-200 theme-gemini:text-white/90">// TypeScript
 import {{ '{' }} ChartSeries {{ '}' }} from '../../shared/components/chart/chart.component';
 
 salesData: any[] = [
@@ -117,7 +139,7 @@ columnSeries: ChartSeries[] = [
   [height]="'400px'"
   (pointClick)="onPointClick($event)"&gt;
 &lt;/app-chart&gt;</code></pre>
-    </div>
+    </section>
   </app-glass-card>
 </div>
 

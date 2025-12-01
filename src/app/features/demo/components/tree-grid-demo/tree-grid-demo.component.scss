@@ -2,25 +2,6 @@
    Tree Grid Demo Component Styles
    ============================================ */
 
-@import '../../../../../styles/design-tokens';
-@import '../../../../../styles/mixins';
-
-:host {
-  display: block;
-  width: 100%;
-}
-
-.tree-grid-demo-container {
-  width: 100%;
-  padding: $spacing-4;
-}
-
-pre {
-  font-family: 'JetBrains Mono', monospace;
-  line-height: 1.6;
-}
-
-code {
-  font-family: 'JetBrains Mono', monospace;
-}
+/* All styles migrated to Tailwind classes in HTML */
+/* This file is kept for any future component-specific styles */
 
