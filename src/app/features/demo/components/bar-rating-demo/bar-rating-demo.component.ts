@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BarRatingModule } from 'ngx-bar-rating';
+// import { BarRatingModule } from 'ngx-bar-rating'; // Note: ngx-bar-rating package needs to be installed: npm install ngx-bar-rating
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-bar-rating-demo',
   standalone: true,
-  imports: [CommonModule, FormsModule, BarRatingModule, GlassCardComponent, CodeViewerComponent],
+  imports: [CommonModule, FormsModule, GlassCardComponent, CodeViewerComponent], // BarRatingModule removed - install ngx-bar-rating first
   templateUrl: './bar-rating-demo.component.html',
   styleUrls: ['./bar-rating-demo.component.scss']
 })

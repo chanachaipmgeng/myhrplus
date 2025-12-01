@@ -20,6 +20,7 @@ import { FormValidationMessagesComponent } from './components/form-validation-me
 import { IconComponent } from './components/icon/icon.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { BackToTopComponent } from './components/back-to-top/back-to-top.component'; // Now standalone
 
 // Directives
 import { ClickOutsideDirective } from './directives/click-outside.directive';
@@ -44,6 +45,7 @@ const COMPONENTS = [
   FormValidationMessagesComponent,
   IconComponent,
   NotificationComponent
+  // BackToTopComponent removed - now standalone component
 ];
 
 const DIRECTIVES = [
@@ -60,13 +62,15 @@ const PIPES = [
     ...COMPONENTS,
     ...DIRECTIVES,
     ...PIPES
+    // BackToTopComponent is standalone, not declared here
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
-    SpinnerComponent
+    SpinnerComponent,
+    BackToTopComponent // Import standalone component
   ],
   exports: [
     CommonModule,
@@ -76,7 +80,8 @@ const PIPES = [
     ...COMPONENTS,
     ...DIRECTIVES,
     ...PIPES,
-    SpinnerComponent
+    SpinnerComponent,
+    BackToTopComponent // Export standalone component
   ]
 })
 export class SharedModule { }
