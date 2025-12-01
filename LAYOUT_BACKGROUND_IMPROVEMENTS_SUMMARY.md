@@ -226,3 +226,4 @@
 - `src/app/layout/sidebar/sidebar.component.scss` - Sidebar background
 - `src/styles.scss` - Global body background
 
+
