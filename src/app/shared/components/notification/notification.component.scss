@@ -9,58 +9,8 @@
   display: block;
 }
 
-/* Notification Container */
-.fixed {
-  position: fixed;
-}
-
-.top-4 {
-  top: 1rem;
-}
-
-.right-4 {
-  right: 1rem;
-}
-
-.z-50 {
-  z-index: 50;
-}
-
-.max-w-md {
-  max-width: 28rem;
-}
-
-.w-full {
-  width: 100%;
-}
-
-.rounded-lg {
-  border-radius: $radius-lg;
-}
-
-.shadow-lg {
-  box-shadow: $shadow-lg;
-}
-
-.border {
-  border-width: 1px;
-}
-
-.p-4 {
-  padding: $spacing-4;
-}
-
-.flex {
-  display: flex;
-}
-
-.items-start {
-  align-items: flex-start;
-}
-
-.gap-3 {
-  gap: $spacing-3;
-}
+/* Notification Container - Using Tailwind classes in HTML */
+/* Removed duplicate utility classes - using Tailwind directly */
 
 /* Notification Types */
 .bg-green-50 {
@@ -127,79 +77,13 @@
   border-color: $primary-800;
 }
 
-/* Icon Container */
-.flex-shrink-0 {
-  flex-shrink: 0;
-}
+/* Icon Container & Content - Using Tailwind classes in HTML */
+/* Removed duplicate utility classes */
 
-/* Content */
-.flex-1 {
-  flex: 1 1 0%;
-}
+/* Text Colors & Close Button - Using Tailwind classes in HTML */
+/* Removed duplicate utility classes */
 
-.min-w-0 {
-  min-width: 0;
-}
-
-.text-sm {
-  font-size: $text-sm;
-}
-
-.font-medium {
-  font-weight: $font-weight-medium;
-}
-
-/* Text Colors */
-.text-green-800 {
-  color: $success-800;
-}
-
-.text-green-200 {
-  color: $success-200;
-}
-
-.text-red-800 {
-  color: $error-800;
-}
-
-.text-red-200 {
-  color: $error-200;
-}
-
-.text-yellow-800 {
-  color: $warning-800;
-}
-
-.text-yellow-200 {
-  color: $warning-200;
-}
-
-.text-blue-800 {
-  color: $primary-800;
-}
-
-.text-blue-200 {
-  color: $primary-200;
-}
-
-/* Close Button */
-.text-gray-400 {
-  color: $gray-400;
-}
-
-.hover\:text-gray-600:hover {
-  color: $gray-600;
-}
-
-.dark .hover\:text-gray-300:hover {
-  color: $gray-300;
-}
-
-.transition-colors {
-  transition: $transition-colors;
-}
-
-/* Animation */
+/* Animation - Enhanced with performance optimization */
 @keyframes slide-in-right {
   from {
     transform: translateX(100%);
@@ -212,7 +96,15 @@
 }
 
 .animate-slide-in-right {
-  animation: slide-in-right 0.3s ease-out;
+  animation: slide-in-right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+  
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 /* Dark Mode */
@@ -265,22 +157,6 @@ body.theme-gemini {
   }
 }
 
-/* Responsive */
-@include respond-to-down(sm) {
-  .top-4 {
-    top: 0.5rem;
-  }
-  
-  .right-4 {
-    right: 0.5rem;
-  }
-  
-  .max-w-md {
-    max-width: calc(100vw - 1rem);
-  }
-  
-  .p-4 {
-    padding: $spacing-3;
-  }
-}
+/* Responsive - Using Tailwind responsive classes in HTML */
+/* Removed duplicate responsive utility classes */
 

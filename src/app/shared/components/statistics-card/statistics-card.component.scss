@@ -9,27 +9,8 @@
   display: block;
 }
 
-/* Card Layout */
-.flex {
-  display: flex;
-}
-
-.items-center {
-  align-items: center;
-}
-
-/* Icon Container */
-.p-3 {
-  padding: $spacing-3;
-}
-
-.rounded-full {
-  border-radius: 9999px;
-}
-
-.text-2xl {
-  font-size: 1.5rem;
-}
+/* Card Layout - Using Tailwind classes in HTML */
+/* Removed duplicate utility classes - using Tailwind directly */
 
 /* Icon Background Colors */
 .bg-blue-100 {
@@ -40,71 +21,8 @@
   background-color: $primary-900;
 }
 
-/* Content */
-.ml-4 {
-  margin-left: $spacing-4;
-}
-
-.flex-1 {
-  flex: 1 1 0%;
-}
-
-.text-sm {
-  font-size: $text-sm;
-}
-
-.font-medium {
-  font-weight: $font-weight-medium;
-}
-
-.text-slate-600 {
-  color: $gray-600;
-}
-
-.dark .text-slate-400 {
-  color: $gray-400;
-}
-
-.text-2xl {
-  font-size: 1.5rem;
-}
-
-.font-bold {
-  font-weight: $font-weight-bold;
-}
-
-.text-slate-900 {
-  color: $gray-900;
-}
-
-.dark .text-slate-100 {
-  color: $gray-100;
-}
-
-/* Change Indicator */
-.text-xs {
-  font-size: $text-xs;
-}
-
-.mt-1 {
-  margin-top: $spacing-1;
-}
-
-.text-green-600 {
-  color: $success-600;
-}
-
-.dark .text-green-400 {
-  color: $success-400;
-}
-
-.text-red-600 {
-  color: $error-600;
-}
-
-.dark .text-red-400 {
-  color: $error-400;
-}
+/* Content & Change Indicator - Using Tailwind classes in HTML */
+/* Removed duplicate utility classes */
 
 /* Dark Mode */
 .dark {
@@ -148,18 +66,15 @@ body.theme-gemini {
   }
 }
 
-/* Responsive */
-@include respond-to-down(sm) {
-  .text-2xl {
-    font-size: 1.25rem;
-  }
+/* Responsive - Using Tailwind responsive classes in HTML */
+/* Removed duplicate responsive utility classes */
+
+/* Enhanced card hover effect */
+:host {
+  @include smooth-transition(transform box-shadow, 0.3s);
   
-  .ml-4 {
-    margin-left: $spacing-2;
-  }
-  
-  .p-3 {
-    padding: $spacing-2;
+  &:hover {
+    @include hover-lift(2px);
   }
 }
 

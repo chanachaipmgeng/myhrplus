@@ -1,0 +1,160 @@
+/* ============================================
+   Component Name Component Styles
+   ============================================
+   Description: Styles for Component Name component
+   Last Updated: 2024-12-20
+   ============================================ */
+
+@import '../../../../styles/design-tokens';
+@import '../../../../styles/mixins';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* ============================================
+   Component Styles
+   ============================================ */
+
+.component-container {
+  width: 100%;
+}
+
+/* ============================================
+   Card Styles
+   ============================================ */
+
+.content-card {
+  @include glass-morphism('default', 'light');
+  border-radius: $radius-lg;
+  padding: $spacing-6;
+  transition: $transition-all;
+
+  &:hover {
+    @include hover-lift(2px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+/* ============================================
+   List Item Styles
+   ============================================ */
+
+.list-item {
+  @include smooth-transition(background-color transform, 0.2s);
+  border-radius: $radius-md;
+  padding: $spacing-4;
+  
+  &:hover {
+    background-color: rgba($primary-500, 0.05);
+    transform: translateX(4px);
+  }
+  
+  &:active {
+    transform: translateX(0) scale(0.98);
+  }
+}
+
+/* ============================================
+   Form Styles
+   ============================================ */
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: $spacing-3;
+  padding-top: $spacing-4;
+  border-top: 1px solid $gray-200;
+}
+
+.dark .form-actions {
+  border-top-color: $gray-700;
+}
+
+/* ============================================
+   Dark Mode
+   ============================================ */
+
+.dark {
+  .content-card {
+    @include glass-morphism('default', 'dark');
+  }
+  
+  .list-item {
+    &:hover {
+      background-color: rgba($primary-400, 0.1);
+    }
+  }
+}
+
+/* ============================================
+   Gemini Theme
+   ============================================ */
+
+body.theme-gemini {
+  .content-card {
+    @include glass-gemini('default');
+    @include gemini-border-glow();
+    
+    &:hover {
+      @include gemini-glow('default');
+    }
+  }
+  
+  .list-item {
+    &:hover {
+      background-color: rgba($gemini-gradient-end, 0.1);
+    }
+  }
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+@include respond-to-down(sm) {
+  .content-card {
+    padding: $spacing-4;
+    border-radius: $radius-md;
+  }
+  
+  .list-item {
+    padding: $spacing-3;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    
+    app-glass-button {
+      width: 100%;
+    }
+  }
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+
+/* Focus indicators */
+.list-item:focus-visible,
+.content-card:focus-visible {
+  @include focus-ring($primary-500);
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .content-card,
+  .list-item {
+    transition: none;
+    animation: none;
+  }
+}
+

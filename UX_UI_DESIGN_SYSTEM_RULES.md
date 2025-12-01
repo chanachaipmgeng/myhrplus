@@ -1,0 +1,1025 @@
+# 🎨 UX/UI Design System Rules & Guidelines
+
+**เวอร์ชัน**: 1.0.0  
+**วันที่อัปเดต**: 2024-12-20  
+**สถานะ**: ✅ Active
+
+---
+
+## 📋 สารบัญ
+
+1. [Design Principles](#design-principles)
+2. [Layout Standards](#layout-standards)
+3. [Component Usage Guidelines](#component-usage-guidelines)
+4. [Color & Typography](#color--typography)
+5. [Spacing & Sizing](#spacing--sizing)
+6. [Animation & Interactions](#animation--interactions)
+7. [Responsive Design](#responsive-design)
+8. [Accessibility Standards](#accessibility-standards)
+9. [Creating New Screens](#creating-new-screens)
+10. [Code Structure Template](#code-structure-template)
+11. [Quality Checklist](#quality-checklist)
+
+---
+
+## 🎯 Design Principles
+
+### 1. Consistency
+- ✅ ใช้ Design Tokens จาก `_design-tokens.scss` เสมอ
+- ✅ ใช้ Components จาก `shared/components` แทนการสร้างใหม่
+- ✅ ใช้ Mixins จาก `_mixins.scss` สำหรับ common patterns
+- ✅ ใช้ Tailwind utility classes สำหรับ layout และ spacing
+
+### 2. Glass Morphism
+- ✅ ใช้ Glass Components (`glass-card`, `glass-button`, `glass-input`)
+- ✅ ใช้ `@include glass-morphism()` mixin สำหรับ custom glass effects
+- ✅ รองรับ Dark Mode และ Gemini Theme
+
+### 3. Performance
+- ✅ ใช้ `transform` และ `opacity` แทน `width`, `height`, `left`, `top`
+- ✅ ใช้ `@include smooth-transition()` สำหรับ animations
+- ✅ รองรับ `prefers-reduced-motion`
+- ✅ ใช้ `will-change` อย่างระมัดระวัง
+
+### 4. Accessibility
+- ✅ WCAG 2.1 AA compliance
+- ✅ Touch targets ≥ 44x44px
+- ✅ Color contrast ratio ≥ 4.5:1
+- ✅ Keyboard navigation support
+- ✅ ARIA labels และ roles
+
+---
+
+## 📐 Layout Standards
+
+### Page Structure
+
+```html
+<!-- Standard Page Layout -->
+<app-page-layout>
+  <app-page-header
+    [title]="'Page Title'"
+    [description]="'Page description'"
+    [actions]="headerActions">
+  </app-page-header>
+
+  <app-content-layout>
+    <!-- Main Content -->
+    <app-glass-card>
+      <!-- Content here -->
+    </app-glass-card>
+  </app-content-layout>
+</app-page-layout>
+```
+
+### Layout Components
+
+#### 1. Page Layout (`app-page-layout`)
+**ใช้เมื่อ**: สร้างหน้าจอใหม่
+
+```html
+<app-page-layout>
+  <!-- Page content -->
+</app-page-layout>
+```
+
+**Features**:
+- Responsive container
+- Consistent padding
+- Max-width constraints
+- Animation support
+
+#### 2. Page Header (`app-page-header`)
+**ใช้เมื่อ**: ต้องการ header สำหรับหน้า
+
+```html
+<app-page-header
+  [title]="'Dashboard'"
+  [description]="'Overview of your data'"
+  [actions]="headerActions">
+</app-page-header>
+```
+
+**Properties**:
+- `title`: string (required)
+- `description`: string (optional)
+- `actions`: Array of action buttons (optional)
+
+#### 3. Content Layout (`app-content-layout`)
+**ใช้เมื่อ**: ต้องการ container สำหรับ content
+
+```html
+<app-content-layout>
+  <!-- Content -->
+</app-content-layout>
+```
+
+**Features**:
+- Responsive grid
+- Consistent spacing
+- Animation support
+
+---
+
+## 🧩 Component Usage Guidelines
+
+### Glass Components
+
+#### Glass Card
+```html
+<!-- Basic Usage -->
+<app-glass-card>
+  <h3>Card Title</h3>
+  <p>Card content</p>
+</app-glass-card>
+
+<!-- With Variants -->
+<app-glass-card variant="strong">
+  <!-- Strong glass effect -->
+</app-glass-card>
+
+<app-glass-card variant="weak">
+  <!-- Weak glass effect -->
+</app-glass-card>
+```
+
+**Variants**:
+- `default`: Standard glass effect
+- `strong`: Stronger glass effect
+- `weak`: Weaker glass effect
+
+#### Glass Button
+```html
+<!-- Primary Button -->
+<app-glass-button
+  variant="primary"
+  [ariaLabel]="'Save'"
+  (clicked)="onSave()">
+  Save
+</app-glass-button>
+
+<!-- Secondary Button -->
+<app-glass-button
+  variant="secondary"
+  [ariaLabel]="'Cancel'"
+  (clicked)="onCancel()">
+  Cancel
+</app-glass-button>
+
+<!-- Danger Button -->
+<app-glass-button
+  variant="danger"
+  [ariaLabel]="'Delete'"
+  (clicked)="onDelete()">
+  Delete
+</app-glass-button>
+```
+
+**Variants**:
+- `primary`: Primary action (blue gradient)
+- `secondary`: Secondary action (glass effect)
+- `danger`: Destructive action (red gradient)
+
+#### Glass Input
+```html
+<app-glass-input
+  label="Email"
+  type="email"
+  placeholder="Enter your email"
+  [(ngModel)]="email"
+  [required]="true"
+  [errorMessage]="emailError">
+</app-glass-input>
+```
+
+**Properties**:
+- `label`: string (required)
+- `type`: string (optional, default: 'text')
+- `placeholder`: string (optional)
+- `required`: boolean (optional)
+- `errorMessage`: string (optional)
+- `disabled`: boolean (optional)
+
+### Data Display Components
+
+#### Statistics Card
+```html
+<app-statistics-card
+  icon="👥"
+  label="Total Users"
+  value="1,234"
+  [change]="12">
+</app-statistics-card>
+```
+
+#### Empty State
+```html
+<app-empty-state
+  icon="📭"
+  title="No Data"
+  description="There is no data available"
+  [action]="emptyStateAction">
+</app-empty-state>
+```
+
+#### Loading States
+```html
+<!-- Loading Spinner -->
+<app-loading
+  [show]="isLoading"
+  message="Loading data...">
+</app-loading>
+
+<!-- Skeleton Loader -->
+<app-skeleton-loader
+  type="card"
+  [rows]="3"
+  animation="shimmer">
+</app-skeleton-loader>
+```
+
+### Navigation Components
+
+#### Tabs
+```html
+<app-tabs
+  [tabs]="tabs"
+  [activeTab]="activeTab"
+  (activeTabChange)="onTabChange($event)">
+  <div *ngIf="activeTab === 'tab1'">Tab 1 Content</div>
+  <div *ngIf="activeTab === 'tab2'">Tab 2 Content</div>
+</app-tabs>
+```
+
+#### Breadcrumbs
+```html
+<app-breadcrumbs [items]="breadcrumbItems"></app-breadcrumbs>
+```
+
+### Form Components
+
+#### Form Validation Messages
+```html
+<app-form-validation-messages
+  [control]="formControl"
+  [fieldName]="'Email'">
+</app-form-validation-messages>
+```
+
+---
+
+## 🎨 Color & Typography
+
+### Color Usage
+
+#### Primary Colors
+```scss
+// Use design tokens
+$primary-500  // Main primary color
+$primary-600  // Hover state
+$primary-400  // Light state
+```
+
+#### Semantic Colors
+```scss
+// Success
+$success-500  // Success actions
+$success-600  // Hover state
+
+// Error
+$error-500    // Error states
+$error-600    // Hover state
+
+// Warning
+$warning-500  // Warning states
+$warning-600  // Hover state
+
+// Info
+$info-500     // Info states
+$info-600     // Hover state
+```
+
+#### Gray Scale
+```scss
+// Text Colors
+$gray-900     // Primary text (light mode)
+$gray-700     // Secondary text (light mode)
+$gray-500     // Tertiary text (light mode)
+$gray-100     // Primary text (dark mode)
+$gray-300     // Secondary text (dark mode)
+$gray-400     // Tertiary text (dark mode)
+```
+
+### Typography
+
+#### Font Families
+```scss
+// Primary: Inter, Sarabun, Noto Sans
+font-family: 'Inter', 'Sarabun', 'Noto Sans', sans-serif;
+
+// Thai: Sarabun, Noto Sans Thai
+font-family: 'Sarabun', 'Noto Sans Thai', sans-serif;
+```
+
+#### Font Sizes
+```scss
+$text-xs: 0.75rem;    // 12px
+$text-sm: 0.875rem;   // 14px
+$text-base: 1rem;     // 16px
+$text-lg: 1.125rem;   // 18px
+$text-xl: 1.25rem;    // 20px
+$text-2xl: 1.5rem;    // 24px
+$text-3xl: 1.875rem;  // 30px
+$text-4xl: 2.25rem;   // 36px
+```
+
+#### Font Weights
+```scss
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+```
+
+#### Usage in HTML
+```html
+<!-- Headings -->
+<h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100">Heading 1</h1>
+<h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-200">Heading 2</h2>
+<h3 class="text-xl font-medium text-slate-700 dark:text-slate-300">Heading 3</h3>
+
+<!-- Body Text -->
+<p class="text-base text-slate-600 dark:text-slate-400">Body text</p>
+<p class="text-sm text-slate-500 dark:text-slate-500">Small text</p>
+```
+
+---
+
+## 📏 Spacing & Sizing
+
+### Spacing Scale
+```scss
+$spacing-1: 0.25rem;  // 4px
+$spacing-2: 0.5rem;   // 8px
+$spacing-3: 0.75rem;  // 12px
+$spacing-4: 1rem;     // 16px
+$spacing-5: 1.25rem;  // 20px
+$spacing-6: 1.5rem;   // 24px
+$spacing-8: 2rem;     // 32px
+$spacing-10: 2.5rem;  // 40px
+$spacing-12: 3rem;    // 48px
+```
+
+### Usage
+```html
+<!-- Tailwind Classes -->
+<div class="p-4">Padding 16px</div>
+<div class="m-4">Margin 16px</div>
+<div class="gap-4">Gap 16px</div>
+
+<!-- SCSS -->
+.element {
+  padding: $spacing-4;
+  margin: $spacing-6;
+  gap: $spacing-3;
+}
+```
+
+### Border Radius
+```scss
+$radius-sm: 0.25rem;   // 4px
+$radius-md: 0.5rem;    // 8px
+$radius-lg: 0.75rem;   // 12px
+$radius-xl: 1rem;      // 16px
+$radius-2xl: 1.5rem;   // 24px
+$radius-full: 9999px;  // Full circle
+```
+
+---
+
+## 🎬 Animation & Interactions
+
+### Animation Principles
+
+#### Duration Guidelines
+- **Micro-interactions**: 200ms (hover, focus, active)
+- **Page Transitions**: 300-500ms
+- **Modal/Dialog**: 300ms
+- **Loading States**: 1-2s (infinite)
+
+#### Easing Functions
+```scss
+// Standard easing
+cubic-bezier(0.4, 0, 0.2, 1)  // Standard
+cubic-bezier(0.34, 1.56, 0.64, 1)  // Bounce
+ease-in-out  // Smooth
+```
+
+### Micro-interactions
+
+#### Hover Effects
+```scss
+// Use mixins
+@include hover-lift(2px);
+@include hover-scale(1.05);
+@include glow-effect($primary-500, 0.3);
+```
+
+#### Button Interactions
+```scss
+.button {
+  @include smooth-transition(transform box-shadow, 0.2s);
+  
+  &:hover:not(:disabled) {
+    @include hover-lift(2px);
+    @include glow-effect($primary-500, 0.3);
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0) scale(0.98);
+    transition-duration: 0.1s;
+  }
+}
+```
+
+### Loading Animations
+
+#### Skeleton Loader
+```html
+<app-skeleton-loader
+  type="card"
+  [rows]="3"
+  animation="shimmer">
+</app-skeleton-loader>
+```
+
+**Animation Types**:
+- `pulse`: Fade in/out
+- `wave`: Shimmer wave
+- `shimmer`: Modern shimmer effect
+- `none`: No animation
+
+### Reduced Motion Support
+
+```scss
+.animated-element {
+  animation: fadeIn 0.3s ease;
+  
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    will-change: auto;
+  }
+}
+```
+
+---
+
+## 📱 Responsive Design
+
+### Breakpoints
+```scss
+$breakpoint-xs: 0;
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+```
+
+### Mobile-First Approach
+
+```scss
+// Base styles (mobile)
+.element {
+  padding: $spacing-4;
+  font-size: $text-base;
+}
+
+// Tablet and up
+@include respond-to(md) {
+  .element {
+    padding: $spacing-6;
+    font-size: $text-lg;
+  }
+}
+
+// Desktop and up
+@include respond-to(lg) {
+  .element {
+    padding: $spacing-8;
+    font-size: $text-xl;
+  }
+}
+```
+
+### Touch Targets
+
+```scss
+// Minimum 44x44px for touch targets
+.button,
+.link,
+.touchable {
+  min-width: 44px;
+  min-height: 44px;
+  
+  @include respond-to-down(sm) {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+```
+
+### Responsive Utilities
+
+```html
+<!-- Tailwind Responsive Classes -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  <!-- Responsive grid -->
+</div>
+
+<div class="text-sm md:text-base lg:text-lg">
+  <!-- Responsive text -->
+</div>
+```
+
+---
+
+## ♿ Accessibility Standards
+
+### WCAG 2.1 AA Compliance
+
+#### Color Contrast
+- **Normal Text**: ≥ 4.5:1
+- **Large Text**: ≥ 3:1
+- **UI Components**: ≥ 3:1
+
+#### Keyboard Navigation
+```html
+<!-- Focusable elements -->
+<button tabindex="0">Click me</button>
+<a href="#" tabindex="0">Link</a>
+
+<!-- Skip navigation -->
+<a href="#main-content" class="sr-only focus:not-sr-only">
+  Skip to main content
+</a>
+```
+
+#### ARIA Labels
+```html
+<!-- Buttons -->
+<button [attr.aria-label]="'Close dialog'">
+  <app-icon name="close"></app-icon>
+</button>
+
+<!-- Forms -->
+<input
+  type="email"
+  [attr.aria-label]="'Email address'"
+  [attr.aria-required]="true"
+  [attr.aria-invalid]="hasError">
+
+<!-- Live regions -->
+<div role="alert" aria-live="polite">
+  {{ notificationMessage }}
+</div>
+```
+
+#### Screen Reader Support
+```html
+<!-- Hidden but accessible -->
+<span class="sr-only">Screen reader only text</span>
+
+<!-- Visible focus indicator -->
+.element:focus-visible {
+  outline: 2px solid $primary-500;
+  outline-offset: 2px;
+}
+```
+
+---
+
+## 🏗️ Creating New Screens
+
+### Step-by-Step Guide
+
+#### 1. Create Feature Module Structure
+```
+src/app/features/feature-name/
+├── feature-name.component.ts
+├── feature-name.component.html
+├── feature-name.component.scss
+├── feature-name-routing.module.ts
+└── feature-name.module.ts
+```
+
+#### 2. Use Standard Layout
+```typescript
+// feature-name.component.ts
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { PageLayoutComponent } from '../../shared/components/page-layout/page-layout.component';
+import { PageHeaderComponent } from '../../shared/components/page-header/page-header.component';
+import { ContentLayoutComponent } from '../../shared/components/content-layout/content-layout.component';
+import { GlassCardComponent } from '../../shared/components/glass-card/glass-card.component';
+
+@Component({
+  selector: 'app-feature-name',
+  standalone: true,
+  imports: [
+    CommonModule,
+    PageLayoutComponent,
+    PageHeaderComponent,
+    ContentLayoutComponent,
+    GlassCardComponent
+  ],
+  templateUrl: './feature-name.component.html',
+  styleUrls: ['./feature-name.component.scss']
+})
+export class FeatureNameComponent implements OnInit {
+  // Component logic
+}
+```
+
+#### 3. HTML Template Structure
+```html
+<app-page-layout>
+  <app-page-header
+    [title]="'Feature Name'"
+    [description]="'Feature description'"
+    [actions]="headerActions">
+  </app-page-header>
+
+  <app-content-layout>
+    <!-- Loading State -->
+    <app-loading
+      [show]="isLoading"
+      message="Loading data...">
+    </app-loading>
+
+    <!-- Empty State -->
+    <app-empty-state
+      *ngIf="!isLoading && isEmpty"
+      icon="📭"
+      title="No Data"
+      description="There is no data available"
+      [action]="emptyStateAction">
+    </app-empty-state>
+
+    <!-- Main Content -->
+    <div *ngIf="!isLoading && !isEmpty" class="space-y-4">
+      <app-glass-card>
+        <!-- Content here -->
+      </app-glass-card>
+    </div>
+  </app-content-layout>
+</app-page-layout>
+```
+
+#### 4. SCSS Styling
+```scss
+/* ============================================
+   Feature Name Component Styles
+   ============================================ */
+
+@import '../../../../styles/design-tokens';
+@import '../../../../styles/mixins';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* Component Styles */
+.feature-content {
+  @include glass-morphism('default', 'light');
+  border-radius: $radius-lg;
+  padding: $spacing-6;
+  
+  /* Responsive */
+  @include respond-to-down(sm) {
+    padding: $spacing-4;
+  }
+}
+
+/* Dark Mode */
+.dark .feature-content {
+  @include glass-morphism('default', 'dark');
+}
+
+/* Gemini Theme */
+body.theme-gemini .feature-content {
+  @include glass-gemini('default');
+}
+```
+
+---
+
+## 📝 Code Structure Template
+
+### Complete Component Template
+
+```typescript
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+// Layout Components
+import { PageLayoutComponent } from '../../shared/components/page-layout/page-layout.component';
+import { PageHeaderComponent } from '../../shared/components/page-header/page-header.component';
+import { ContentLayoutComponent } from '../../shared/components/content-layout/content-layout.component';
+
+// UI Components
+import { GlassCardComponent } from '../../shared/components/glass-card/glass-card.component';
+import { GlassButtonComponent } from '../../shared/components/glass-button/glass-button.component';
+import { GlassInputComponent } from '../../shared/components/glass-input/glass-input.component';
+import { LoadingComponent } from '../../shared/components/loading/loading.component';
+import { EmptyStateComponent } from '../../shared/components/empty-state/empty-state.component';
+import { SkeletonLoaderComponent } from '../../shared/components/skeleton-loader/skeleton-loader.component';
+
+// Services
+import { ApiService } from '../../../core/services/api.service';
+import { NotificationService } from '../../../core/services/notification.service';
+
+@Component({
+  selector: 'app-feature-name',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    PageLayoutComponent,
+    PageHeaderComponent,
+    ContentLayoutComponent,
+    GlassCardComponent,
+    GlassButtonComponent,
+    GlassInputComponent,
+    LoadingComponent,
+    EmptyStateComponent,
+    SkeletonLoaderComponent
+  ],
+  templateUrl: './feature-name.component.html',
+  styleUrls: ['./feature-name.component.scss']
+})
+export class FeatureNameComponent implements OnInit, OnDestroy {
+  // Public Properties
+  isLoading = false;
+  isEmpty = false;
+  data: any[] = [];
+
+  // Header Actions
+  headerActions = [
+    {
+      label: 'Add New',
+      variant: 'primary' as const,
+      onClick: () => this.onAddNew()
+    }
+  ];
+
+  // Empty State Action
+  emptyStateAction = {
+    label: 'Create New',
+    variant: 'primary' as const,
+    onClick: () => this.onAddNew()
+  };
+
+  // Private Properties
+  private destroy$ = new Subject<void>();
+
+  constructor(
+    private apiService: ApiService,
+    private notificationService: NotificationService
+  ) {}
+
+  ngOnInit(): void {
+    this.loadData();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  // Public Methods
+  loadData(): void {
+    this.isLoading = true;
+    this.apiService.get<any[]>('/api/endpoint')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          this.data = response.data || [];
+          this.isEmpty = this.data.length === 0;
+          this.isLoading = false;
+        },
+        error: (error) => {
+          this.notificationService.showError('Failed to load data');
+          this.isLoading = false;
+        }
+      });
+  }
+
+  onAddNew(): void {
+    // Handle add new action
+  }
+
+  // Private Methods
+  private handleError(error: any): void {
+    console.error('Error:', error);
+    this.notificationService.showError('An error occurred');
+  }
+}
+```
+
+---
+
+## ✅ Quality Checklist
+
+### Before Creating New Screen
+
+#### Design
+- [ ] ใช้ Design Tokens จาก `_design-tokens.scss`
+- [ ] ใช้ Components จาก `shared/components`
+- [ ] ใช้ Layout Components (`page-layout`, `page-header`, `content-layout`)
+- [ ] รองรับ Dark Mode
+- [ ] รองรับ Gemini Theme
+- [ ] Responsive design (mobile-first)
+
+#### Functionality
+- [ ] Loading states (skeleton loader หรือ spinner)
+- [ ] Empty states
+- [ ] Error handling
+- [ ] Success feedback
+- [ ] Form validation (ถ้ามี form)
+
+#### Accessibility
+- [ ] ARIA labels สำหรับ interactive elements
+- [ ] Keyboard navigation support
+- [ ] Focus indicators
+- [ ] Color contrast ≥ 4.5:1
+- [ ] Touch targets ≥ 44x44px
+
+#### Performance
+- [ ] ใช้ `transform` แทน `width`/`height` สำหรับ animations
+- [ ] รองรับ `prefers-reduced-motion`
+- [ ] Lazy loading สำหรับ images
+- [ ] Optimize API calls
+
+#### Code Quality
+- [ ] TypeScript types (no `any`)
+- [ ] Error handling
+- [ ] Cleanup subscriptions (`takeUntil`)
+- [ ] Consistent naming conventions
+- [ ] Comments สำหรับ complex logic
+
+### Code Review Checklist
+
+#### HTML
+- [ ] Semantic HTML
+- [ ] ARIA attributes
+- [ ] Tailwind classes (ไม่ duplicate ใน SCSS)
+- [ ] Loading/Empty states
+- [ ] Error states
+
+#### SCSS
+- [ ] ใช้ Design Tokens
+- [ ] ใช้ Mixins
+- [ ] Responsive styles
+- [ ] Dark Mode support
+- [ ] Gemini Theme support
+- [ ] Animation optimization
+
+#### TypeScript
+- [ ] Proper types
+- [ ] Error handling
+- [ ] Cleanup subscriptions
+- [ ] Service injection
+- [ ] Component lifecycle
+
+---
+
+## 🎯 Best Practices
+
+### 1. Component Reusability
+```typescript
+// ✅ Good - Use shared components
+<app-glass-card>
+  <app-glass-button variant="primary">Save</app-glass-button>
+</app-glass-card>
+
+// ❌ Bad - Create custom components
+<div class="custom-card">
+  <button class="custom-button">Save</button>
+</div>
+```
+
+### 2. Styling Consistency
+```scss
+// ✅ Good - Use design tokens
+.element {
+  padding: $spacing-4;
+  border-radius: $radius-lg;
+  color: $gray-900;
+}
+
+// ❌ Bad - Hardcoded values
+.element {
+  padding: 16px;
+  border-radius: 12px;
+  color: #1e293b;
+}
+```
+
+### 3. Animation Performance
+```scss
+// ✅ Good - Use transform
+.element {
+  @include smooth-transition(transform, 0.3s);
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+// ❌ Bad - Use width/height
+.element {
+  transition: width 0.3s ease;
+  &:hover {
+    width: 200px;
+  }
+}
+```
+
+### 4. Responsive Design
+```scss
+// ✅ Good - Mobile-first
+.element {
+  padding: $spacing-4;
+  @include respond-to(md) {
+    padding: $spacing-6;
+  }
+}
+
+// ❌ Bad - Desktop-first
+.element {
+  padding: $spacing-6;
+  @include respond-to-down(md) {
+    padding: $spacing-4;
+  }
+}
+```
+
+### 5. Accessibility
+```html
+<!-- ✅ Good - ARIA labels -->
+<button [attr.aria-label]="'Close dialog'">
+  <app-icon name="close"></app-icon>
+</button>
+
+<!-- ❌ Bad - No ARIA labels -->
+<button>
+  <app-icon name="close"></app-icon>
+</button>
+```
+
+---
+
+## 📚 Resources
+
+### Design Tokens
+- `src/styles/_design-tokens.scss` - Colors, Typography, Spacing, etc.
+
+### Mixins
+- `src/styles/_mixins.scss` - Glass morphism, Animations, Responsive, etc.
+
+### Components
+- `src/app/shared/components/` - Reusable UI components
+
+### Services
+- `src/app/core/services/` - API, Notification, Storage, etc.
+
+### Animations
+- `src/app/core/animations/animations.ts` - Angular animations
+
+---
+
+## 🔄 Updates & Maintenance
+
+### Version History
+- **v1.0.0** (2024-12-20): Initial release
+
+### Contributing
+เมื่อต้องการเพิ่มหรือแก้ไข rules:
+1. อัปเดตเอกสารนี้
+2. อัปเดต version number
+3. เพิ่ม changelog
+4. Review กับ team
+
+---
+
+**Last Updated**: 2024-12-20  
+**Maintained By**: Development Team  
+**Status**: ✅ Active
+

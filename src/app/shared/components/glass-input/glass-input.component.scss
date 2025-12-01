@@ -56,11 +56,12 @@
   border-radius: $radius-md;
   font-size: $text-base;
   color: $gray-900;
-  transition: $transition-all;
+  @include smooth-transition(border-color box-shadow transform, 0.2s);
   box-shadow: $shadow-sm;
 
   &::placeholder {
     color: $gray-400;
+    transition: opacity 0.2s ease;
   }
 
   &:focus {
@@ -68,6 +69,18 @@
     @include focus-ring($primary-500);
     box-shadow: $shadow-md;
     outline: none;
+    /* Micro-interaction: subtle scale on focus */
+    transform: scale(1.01);
+    
+    &::placeholder {
+      opacity: 0.6;
+    }
+  }
+  
+  /* Hover state */
+  &:hover:not(:focus):not(:disabled) {
+    box-shadow: $shadow-md;
+    transform: translateY(-1px);
   }
 
   &:disabled {
@@ -80,6 +93,12 @@
     border-color: $error-500;
     box-shadow: 0 0 0 2px rgba($error-500, 0.2);
     animation: shake 0.5s ease-in-out;
+    will-change: transform;
+    
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
   }
 
   /* Success State */
@@ -87,6 +106,12 @@
     border-color: $success-500;
     box-shadow: 0 0 0 2px rgba($success-500, 0.2);
     animation: pulse-success 0.6s ease-in-out;
+    will-change: box-shadow;
+    
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
   }
 }
 

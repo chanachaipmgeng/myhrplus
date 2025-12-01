@@ -28,12 +28,17 @@ body.theme-gemini .bg-slate-200 {
   border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
-/* Progress Fill */
+/* Progress Fill - Optimized with transform */
 .h-full {
   border-radius: $radius-full;
-  transition: width $duration-500 $ease-out;
+  /* Use transform instead of width for better performance */
+  transform-origin: left;
   position: relative;
   overflow: hidden;
+  @include smooth-transition(transform, $duration-500);
+  
+  /* Fallback for browsers that don't support transform on width */
+  transition: width $duration-500 $ease-out;
 
   /* Primary Variant */
   &.bg-primary-500 {

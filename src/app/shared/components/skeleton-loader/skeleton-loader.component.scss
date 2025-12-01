@@ -13,6 +13,14 @@
 .skeleton-loader {
   width: 100%;
   animation: fadeIn 0.3s ease-in;
+  
+  /* Optimize for performance */
+  will-change: opacity;
+  
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
 }
 
 .skeleton-text-line,
@@ -186,6 +194,20 @@
   .skeleton-avatar,
   .skeleton-custom {
     animation: pulse 1.5s ease-in-out infinite;
+    /* Optimize for performance */
+    will-change: opacity;
+  }
+  
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .skeleton-text-line,
+    .skeleton-title,
+    .skeleton-table-cell,
+    .skeleton-avatar,
+    .skeleton-custom {
+      animation: none;
+      opacity: 0.7;
+    }
   }
 }
 
@@ -196,6 +218,19 @@
   .skeleton-avatar,
   .skeleton-custom {
     animation: wave 1.5s ease-in-out infinite;
+    /* Optimize for performance */
+    will-change: background-position;
+  }
+  
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .skeleton-text-line,
+    .skeleton-title,
+    .skeleton-table-cell,
+    .skeleton-avatar,
+    .skeleton-custom {
+      animation: none;
+    }
   }
 }
 
@@ -233,6 +268,19 @@
     );
     background-size: 200% 100%;
     animation: shimmer 2s ease-in-out infinite;
+    /* Optimize for performance */
+    will-change: background-position;
+  }
+  
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .skeleton-text-line,
+    .skeleton-title,
+    .skeleton-table-cell,
+    .skeleton-avatar,
+    .skeleton-custom {
+      animation: none;
+    }
   }
   
   .dark & {

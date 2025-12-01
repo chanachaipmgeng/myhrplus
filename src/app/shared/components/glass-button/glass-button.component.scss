@@ -16,7 +16,7 @@
   @include flex-center();
   border-radius: $radius-md;
   font-weight: $font-weight-medium;
-  transition: $transition-all;
+  @include smooth-transition(transform box-shadow background, 0.2s);
   cursor: pointer;
   border: 1px solid transparent;
   position: relative;
@@ -38,11 +38,14 @@
     background: linear-gradient(135deg, $primary-600, $primary-700);
     @include hover-lift(2px);
     box-shadow: $shadow-lg;
+    /* Micro-interaction: subtle glow */
+    @include glow-effect($primary-500, 0.3);
   }
 
   &:active:not(:disabled) {
-    transform: translateY(0);
+    transform: translateY(0) scale(0.98);
     box-shadow: $shadow-sm;
+    transition-duration: 0.1s; /* Faster on active */
   }
 
   &:focus-visible {
@@ -60,10 +63,13 @@
     @include glass-morphism('strong', 'light');
     @include hover-lift(2px);
     box-shadow: $shadow-md;
+    /* Micro-interaction: subtle scale */
+    @include hover-scale(1.02);
   }
 
   &:active:not(:disabled) {
-    transform: translateY(0);
+    transform: translateY(0) scale(0.98);
+    transition-duration: 0.1s; /* Faster on active */
   }
 
   &:focus-visible {
@@ -81,11 +87,14 @@
     background: linear-gradient(135deg, $error-600, $error-700);
     @include hover-lift(2px);
     box-shadow: $shadow-lg;
+    /* Micro-interaction: subtle glow */
+    @include glow-effect($error-500, 0.3);
   }
 
   &:active:not(:disabled) {
-    transform: translateY(0);
+    transform: translateY(0) scale(0.98);
     box-shadow: $shadow-sm;
+    transition-duration: 0.1s; /* Faster on active */
   }
 
   &:focus-visible {

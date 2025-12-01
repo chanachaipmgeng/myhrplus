@@ -16,14 +16,22 @@
   @include glass-morphism('default', 'light');
   border-radius: $radius-lg;
   box-shadow: $shadow-glass;
-  transition: $transition-all;
+  @include smooth-transition(transform box-shadow, 0.3s);
   position: relative;
   overflow: hidden;
 
-  /* Hover State */
+  /* Hover State - Enhanced micro-interaction */
   &:hover {
-    transform: translateY(-2px);
+    @include hover-lift(2px);
     box-shadow: $shadow-glass-lg;
+    /* Subtle scale on hover */
+    transform: translateY(-2px) scale(1.01);
+  }
+  
+  /* Active State */
+  &:active {
+    transform: translateY(0) scale(0.99);
+    transition-duration: 0.1s;
   }
 }
 

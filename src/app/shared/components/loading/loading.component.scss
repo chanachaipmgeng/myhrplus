@@ -65,6 +65,8 @@
 
 .animate-spin {
   animation: spin 1s linear infinite;
+  /* Optimize for performance */
+  will-change: transform;
 }
 
 @keyframes spin {
@@ -73,6 +75,16 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* Enhanced loading animation with fade-in */
+:host {
+  @include fade-in(0.3s);
+  
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
   }
 }
 
