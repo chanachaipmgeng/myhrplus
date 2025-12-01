@@ -27,6 +27,16 @@
 :root {
   --primary-rgb: 59, 130, 246; /* Default: Blue */
   --theme-color: 'blue';
+
+  /* Theme Gradients */
+  --theme-gradient-blue: #{$theme-gradient-blue};
+  --theme-gradient-indigo: #{$theme-gradient-indigo};
+  --theme-gradient-purple: #{$theme-gradient-purple};
+  --theme-gradient-green: #{$theme-gradient-green};
+  --theme-gradient-orange: #{$theme-gradient-orange};
+  --theme-gradient-red: #{$theme-gradient-red};
+  --theme-gradient-teal: #{$theme-gradient-teal};
+  --theme-gradient-pink: #{$theme-gradient-pink};
 }
 
 /* ============================================

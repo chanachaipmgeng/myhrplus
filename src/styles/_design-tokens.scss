@@ -92,6 +92,18 @@ $info-900: #1e3a8a;
 $info-950: #172554;
 
 /* ============================================
+   Colors - Theme Gradients
+   ============================================ */
+$theme-gradient-blue: linear-gradient(135deg, #3b82f6, #2563eb);
+$theme-gradient-indigo: linear-gradient(135deg, #6366f1, #4f46e5);
+$theme-gradient-purple: linear-gradient(135deg, #a855f7, #9333ea);
+$theme-gradient-green: linear-gradient(135deg, #22c55e, #16a34a);
+$theme-gradient-orange: linear-gradient(135deg, #f97316, #ea580c);
+$theme-gradient-red: linear-gradient(135deg, #ef4444, #dc2626);
+$theme-gradient-teal: linear-gradient(135deg, #14b8a6, #0d9488);
+$theme-gradient-pink: linear-gradient(135deg, #ec4899, #db2777);
+
+/* ============================================
    Colors - Neutral (Gray Scale)
    ============================================ */
 $gray-50: #f9fafb;
@@ -160,10 +172,10 @@ $glass-glow-gemini: rgba(59, 130, 246, 0.2);
 /* ============================================
    Typography - Font Families
    ============================================ */
-$font-sans: 'Noto Sans', 'Noto Sans Thai', 'Poppins', 'Inter', 'Kanit', 'Sarabun', system-ui, sans-serif;
-$font-english: 'Poppins', 'Noto Sans', 'Inter', system-ui, sans-serif;
-$font-thai: 'Kanit', 'Noto Sans Thai', 'Sarabun', 'Noto Sans', system-ui, sans-serif;
-$font-mono: 'JetBrains Mono', monospace;
+$font-sans: 'Noto Sans Thai', 'Inter', 'Sarabun', system-ui, sans-serif;
+$font-english: 'Inter', system-ui, sans-serif;
+$font-thai: 'Noto Sans Thai', 'Sarabun', system-ui, sans-serif;
+$font-mono: monospace;
 
 /* ============================================
    Typography - Font Sizes
@@ -440,4 +452,3 @@ $gemini-glow-weak: rgba(59, 130, 246, 0.2);
 @function get-duration($ms) {
   @return map-get($durations, $ms);
 }
-

@@ -21,14 +21,14 @@ export class ThemeToggleComponent implements OnInit {
   @ViewChild('colorButton') colorButton?: ElementRef<HTMLButtonElement>;
 
   themeColors = [
-    { value: 'blue' as ThemeColor, name: 'น้ำเงิน', gradient: 'linear-gradient(135deg, #3b82f6, #2563eb)' },
-    { value: 'indigo' as ThemeColor, name: 'คราม', gradient: 'linear-gradient(135deg, #6366f1, #4f46e5)' },
-    { value: 'purple' as ThemeColor, name: 'ม่วง', gradient: 'linear-gradient(135deg, #a855f7, #9333ea)' },
-    { value: 'green' as ThemeColor, name: 'เขียว', gradient: 'linear-gradient(135deg, #22c55e, #16a34a)' },
-    { value: 'orange' as ThemeColor, name: 'ส้ม', gradient: 'linear-gradient(135deg, #f97316, #ea580c)' },
-    { value: 'red' as ThemeColor, name: 'แดง', gradient: 'linear-gradient(135deg, #ef4444, #dc2626)' },
-    { value: 'teal' as ThemeColor, name: 'เทาเขียว', gradient: 'linear-gradient(135deg, #14b8a6, #0d9488)' },
-    { value: 'pink' as ThemeColor, name: 'ชมพู', gradient: 'linear-gradient(135deg, #ec4899, #db2777)' }
+    { value: 'blue' as ThemeColor, name: 'น้ำเงิน', gradient: 'var(--theme-gradient-blue)' },
+    { value: 'indigo' as ThemeColor, name: 'คราม', gradient: 'var(--theme-gradient-indigo)' },
+    { value: 'purple' as ThemeColor, name: 'ม่วง', gradient: 'var(--theme-gradient-purple)' },
+    { value: 'green' as ThemeColor, name: 'เขียว', gradient: 'var(--theme-gradient-green)' },
+    { value: 'orange' as ThemeColor, name: 'ส้ม', gradient: 'var(--theme-gradient-orange)' },
+    { value: 'red' as ThemeColor, name: 'แดง', gradient: 'var(--theme-gradient-red)' },
+    { value: 'teal' as ThemeColor, name: 'เทาเขียว', gradient: 'var(--theme-gradient-teal)' },
+    { value: 'pink' as ThemeColor, name: 'ชมพู', gradient: 'var(--theme-gradient-pink)' }
   ];
 
   constructor(public themeService: ThemeService) {}
