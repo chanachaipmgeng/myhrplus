@@ -1,4 +1,4 @@
-<div class="layout-container min-h-screen transition-all duration-300">
+<div class="w-full overflow-x-hidden relative min-h-screen transition-all duration-300">
   <!-- Syncfusion Sidebar -->
   <ejs-sidebar
     #sidebar
@@ -20,7 +20,7 @@
        [class.main-wrapper-mobile]="isHandset$ | async">
     <!-- Header - Hidden when hiddenHeader === 'hidden' (for ESS mode) -->
     <app-header *ngIf="hiddenHeader !== 'hidden'" (toggleSidenav)="toggleSidebar()"></app-header>
-    <main class="main-content flex-1 animate-fade-in p-4 md:p-6"
+    <main class="main-content flex-1 animate-fade-in relative z-10 overflow-x-hidden p-4 md:p-6"
           [class.main-content-no-header]="hiddenHeader === 'hidden'">
       <router-outlet></router-outlet>
     </main>

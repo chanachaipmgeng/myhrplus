@@ -1,8 +1,15 @@
 # 🎨 UX/UI Design System Rules & Guidelines
 
-**เวอร์ชัน**: 1.0.0  
+**เวอร์ชัน**: 1.1.0  
 **วันที่อัปเดต**: 2024-12-20  
 **สถานะ**: ✅ Active
+
+## 📝 Recent Updates (2024-12-20)
+- ✅ Added background pattern animations guidelines
+- ✅ Added gradient animation guidelines
+- ✅ Updated color palette (gray-* instead of slate-*)
+- ✅ Added prefers-reduced-motion support guidelines
+- ✅ Added performance optimization guidelines for backgrounds
 
 ---
 
@@ -312,12 +319,12 @@
 </div>
 ```
 
-#### Gray Scale
+#### Gray Scale (Preferred over Slate)
 ```html
-<!-- Text Colors -->
-<p class="text-gray-900 dark:text-gray-100">Primary text</p>
-<p class="text-gray-700 dark:text-gray-300">Secondary text</p>
-<p class="text-gray-500 dark:text-gray-400">Tertiary text</p>
+<!-- Text Colors - Use gray-* instead of slate-* for consistency -->
+<p class="text-gray-900 dark:text-gray-100 theme-gemini:text-white/90">Primary text</p>
+<p class="text-gray-700 dark:text-gray-300 theme-gemini:text-white/80">Secondary text</p>
+<p class="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70">Tertiary text</p>
 ```
 
 ### Typography (Tailwind Classes)
@@ -354,14 +361,14 @@
 
 #### Usage in HTML
 ```html
-<!-- Headings -->
-<h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100">Heading 1</h1>
-<h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-200">Heading 2</h2>
-<h3 class="text-xl font-medium text-slate-700 dark:text-slate-300">Heading 3</h3>
+<!-- Headings - Use gray-* instead of slate-* -->
+<h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100 theme-gemini:text-white/90">Heading 1</h1>
+<h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 theme-gemini:text-white/90">Heading 2</h2>
+<h3 class="text-xl font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/80">Heading 3</h3>
 
 <!-- Body Text -->
-<p class="text-base text-slate-600 dark:text-slate-400">Body text</p>
-<p class="text-sm text-slate-500 dark:text-slate-500">Small text</p>
+<p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80">Body text</p>
+<p class="text-sm text-gray-500 dark:text-gray-500 theme-gemini:text-white/70">Small text</p>
 ```
 
 ---
@@ -479,9 +486,82 @@ ease-in-out  // Smooth
   @media (prefers-reduced-motion: reduce) {
     animation: none;
     will-change: auto;
+    background-position: /* static position */;
   }
 }
 ```
+
+### Background Patterns & Animations
+
+#### Pattern Overlays
+- **Use SCSS**: Pattern overlays should be in SCSS with `::before` or `::after` pseudo-elements
+- **Animation**: Use `patternShimmer` keyframes for subtle pattern animations
+- **Duration**: 12-16s for subtle, non-distracting animations
+- **Accessibility**: Always include `prefers-reduced-motion` support
+
+```scss
+.element::before {
+  content: '';
+  position: absolute;
+  background-image: radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.1) 1px, transparent 0);
+  background-size: 20px 20px;
+  animation: patternShimmer 12s ease-in-out infinite;
+  
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes patternShimmer {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translate(0, 0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translate(1px, 1px);
+  }
+}
+```
+
+#### Gradient Animations
+- **Use SCSS**: Gradient animations should be in SCSS
+- **Animation**: Use `gradientShift` keyframes for subtle gradient shifts
+- **Duration**: 20-25s for very subtle background animations
+- **Performance**: Use `background-attachment: scroll` on mobile (≤768px)
+
+```scss
+.main-content {
+  background: /* multi-layer gradients */;
+  background-size: 100% 100%, 100% 100%, 200% 200%;
+  background-position: 0% 0%, 100% 100%, 0% 50%;
+  background-attachment: fixed;
+  animation: gradientShift 20s ease-in-out infinite;
+  
+  @media (max-width: 768px) {
+    background-attachment: scroll; /* Better performance on mobile */
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    background-position: 0% 0%, 100% 100%, 0% 50%;
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 0%, 100% 100%, 0% 50%;
+  }
+  50% {
+    background-position: 2% 2%, 98% 98%, 100% 50%;
+  }
+}
+```
+
+#### Background Duplication Prevention
+- **Body Background**: Should be `transparent` to avoid duplication with main-content
+- **Main Content**: Handles its own background with gradients and patterns
+- **Layout Components**: Each component (header, footer, sidebar) handles its own background
 
 ---
 

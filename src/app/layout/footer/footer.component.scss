@@ -1,5 +1,5 @@
 .footer {
-  background: linear-gradient(135deg, 
+  background: linear-gradient(135deg,
     rgba(255, 255, 255, 0.8) 0%,
     rgba(248, 250, 252, 0.9) 100%
   );
@@ -11,7 +11,7 @@
   width: 100%;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  
+
   /* Subtle gradient overlay */
   &::before {
     content: '';
@@ -20,81 +20,84 @@
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, 
+    background: linear-gradient(90deg,
       transparent 0%,
       rgba(148, 163, 184, 0.3) 50%,
       transparent 100%
     );
     pointer-events: none;
   }
+
+  /* Pattern overlay for Light mode */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.03) 1px, transparent 0);
+    background-size: 20px 20px;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+    animation: patternShimmer 14s ease-in-out infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
 }
 
 .dark .footer {
-  background: linear-gradient(135deg, 
+  background: linear-gradient(135deg,
     rgba(15, 23, 42, 0.85) 0%,
     rgba(30, 41, 59, 0.9) 100%
   );
   border-top: 1px solid rgba(51, 65, 85, 0.6);
-  
+
   &::before {
-    background: linear-gradient(90deg, 
+    background: linear-gradient(90deg,
       transparent 0%,
       rgba(59, 130, 246, 0.4) 50%,
       transparent 100%
     );
   }
+
+  &::after {
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.05) 1px, transparent 0);
+    opacity: 0.3;
+    animation: patternShimmer 16s ease-in-out infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
 }
 
+/* Footer content styles migrated to Tailwind classes in HTML */
 .footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1400px;
-  margin: 0 auto;
-  width: 100%;
   font-family: 'Sarabun', 'Inter', sans-serif;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-/* Responsive Footer */
-@media (max-width: 640px) {
-  .footer-content {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.25rem;
-  }
-}
-
-@media (min-width: 641px) and (max-width: 768px) {
-  .footer-content {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-}
-
-@media (min-width: 769px) {
-  .footer-content {
-    flex-direction: row;
-    justify-content: space-between;
-  }
+  max-width: 1400px;
 }
 
 /* Gemini 1.5 Theme - Footer */
 body.theme-gemini .gemini-footer {
-  background: linear-gradient(135deg, 
+  background: linear-gradient(135deg,
     rgba(15, 23, 42, 0.9) 0%,
     rgba(30, 41, 59, 0.95) 100%
   ) !important;
   backdrop-filter: blur(24px) saturate(200%) !important;
   -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
   border-top: 1px solid rgba(59, 130, 246, 0.4) !important;
-  box-shadow: 
+  box-shadow:
     0 -4px 20px 0 rgba(0, 0, 0, 0.6),
     0 0 0 1px rgba(59, 130, 246, 0.2) inset,
     0 0 40px rgba(59, 130, 246, 0.1) !important;
   position: relative;
-  
+
   /* Animated gradient border */
   &::before {
     content: '';
@@ -103,7 +106,7 @@ body.theme-gemini .gemini-footer {
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, 
+    background: linear-gradient(90deg,
       transparent 0%,
       rgba(147, 197, 253, 0.6) 20%,
       rgba(96, 165, 250, 0.6) 50%,
@@ -114,8 +117,8 @@ body.theme-gemini .gemini-footer {
     animation: geminiShimmer 4s ease-in-out infinite;
     z-index: 1;
   }
-  
-  /* Subtle glow effect */
+
+  /* Subtle glow effect with pattern overlay */
   &::after {
     content: '';
     position: absolute;
@@ -123,18 +126,27 @@ body.theme-gemini .gemini-footer {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 50% 100%, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+    background:
+      radial-gradient(circle at 50% 100%, rgba(59, 130, 246, 0.1) 0%, transparent 70%),
+      radial-gradient(circle at 1px 1px, rgba(147, 197, 253, 0.05) 1px, transparent 0);
+    background-size: 100% 100%, 20px 20px;
+    opacity: 1;
     pointer-events: none;
     z-index: 0;
+    animation: patternShimmer 12s ease-in-out infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
   }
-  
+
   .footer-content {
     span {
       color: rgba(203, 213, 225, 0.9) !important;
       transition: all 0.3s ease;
-      
+
       &:first-child {
-        background: linear-gradient(135deg, 
+        background: linear-gradient(135deg,
           rgba(147, 197, 253, 0.9) 0%,
           rgba(96, 165, 250, 0.9) 50%,
           rgba(59, 130, 246, 0.9) 100%
@@ -146,5 +158,27 @@ body.theme-gemini .gemini-footer {
         animation: geminiGradient 3s ease infinite;
       }
     }
+  }
+}
+
+/* Pattern shimmer animation for footer */
+@keyframes patternShimmer {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translate(0, 0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translate(1px, 1px);
+  }
+}
+
+/* Gemini gradient animation for footer text */
+@keyframes geminiGradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
   }
 }
