@@ -102,3 +102,4 @@ See the demo at `/demo/smart-textarea` for interactive examples and usage patter
 For detailed documentation, see `SMART_TEXTAREA_COMPONENT_GUIDE.md`.
 
 
+

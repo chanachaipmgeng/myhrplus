@@ -147,3 +147,4 @@ See the live demo at `/demo/carousel` for examples and interactive controls.
 - [Syncfusion Carousel Docs](https://ej2.syncfusion.com/angular/documentation/carousel/getting-started/)
 
 
+

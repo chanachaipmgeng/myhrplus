@@ -22,7 +22,7 @@ import { ThemeToggleDemoComponent } from './components/theme-toggle-demo/theme-t
 import { AvatarDemoComponent } from './components/avatar-demo/avatar-demo.component';
 import { StatusBadgeDemoComponent } from './components/status-badge-demo/status-badge-demo.component';
 import { ErrorStateDemoComponent } from './components/error-state-demo/error-state-demo.component';
-import { DataTableDemoComponent } from './components/data-table-demo/data-table-demo.component';
+// DataTableDemoComponent removed
 import { ConfirmDialogDemoComponent } from './components/confirm-dialog-demo/confirm-dialog-demo.component';
 import { BreadcrumbsDemoComponent } from './components/breadcrumbs-demo/breadcrumbs-demo.component';
 import { StepperDemoComponent } from './components/stepper-demo/stepper-demo.component';
@@ -60,7 +60,7 @@ import { ContextualHelpDemoComponent } from './components/contextual-help-demo/c
 import { ProgressiveDisclosureDemoComponent } from './components/progressive-disclosure-demo/progressive-disclosure-demo.component';
 import { PageHeaderDemoComponent } from './components/page-header-demo/page-header-demo.component';
 import { MaskToggleDemoComponent } from './components/mask-toggle-demo/mask-toggle-demo.component';
-import { ThemeSwitcherDemoComponent } from './components/theme-switcher-demo/theme-switcher-demo.component';
+// ThemeSwitcherDemoComponent removed
 
 const routes: Routes = [
   {
@@ -151,10 +151,10 @@ const routes: Routes = [
         path: 'error-state',
         component: ErrorStateDemoComponent
       },
-      {
-        path: 'data-table',
-        component: DataTableDemoComponent
-      },
+      // {
+      //   path: 'data-table',
+      //   component: DataTableDemoComponent
+      // },
       {
         path: 'confirm-dialog',
         component: ConfirmDialogDemoComponent
@@ -303,10 +303,10 @@ const routes: Routes = [
         path: 'mask-toggle',
         component: MaskToggleDemoComponent
       },
-      {
-        path: 'theme-switcher',
-        component: ThemeSwitcherDemoComponent
-      }
+      // {
+      //   path: 'theme-switcher',
+      //   component: ThemeSwitcherDemoComponent
+      // }
     ]
   }
 ];

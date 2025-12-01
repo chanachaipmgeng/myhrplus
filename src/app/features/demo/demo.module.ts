@@ -28,7 +28,7 @@ import { ThemeToggleDemoComponent } from './components/theme-toggle-demo/theme-t
 import { AvatarDemoComponent } from './components/avatar-demo/avatar-demo.component';
 import { StatusBadgeDemoComponent } from './components/status-badge-demo/status-badge-demo.component';
 import { ErrorStateDemoComponent } from './components/error-state-demo/error-state-demo.component';
-import { DataTableDemoComponent } from './components/data-table-demo/data-table-demo.component';
+// DataTableDemoComponent removed
 import { ConfirmDialogDemoComponent } from './components/confirm-dialog-demo/confirm-dialog-demo.component';
 import { BreadcrumbsDemoComponent } from './components/breadcrumbs-demo/breadcrumbs-demo.component';
 import { StepperDemoComponent } from './components/stepper-demo/stepper-demo.component';
@@ -39,6 +39,7 @@ import { FileUploadDemoComponent } from './components/file-upload-demo/file-uplo
 import { SkeletonLoaderDemoComponent } from './components/skeleton-loader-demo/skeleton-loader-demo.component';
 import { FormValidationMessagesDemoComponent } from './components/form-validation-messages-demo/form-validation-messages-demo.component';
 import { LoadingSpinnerDemoComponent } from './components/loading-spinner-demo/loading-spinner-demo.component';
+import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 
 @NgModule({
   imports: [
@@ -70,7 +71,7 @@ import { LoadingSpinnerDemoComponent } from './components/loading-spinner-demo/l
     AvatarDemoComponent,
     StatusBadgeDemoComponent,
     ErrorStateDemoComponent,
-    DataTableDemoComponent,
+    // DataTableDemoComponent removed,
     ConfirmDialogDemoComponent,
     BreadcrumbsDemoComponent,
     StepperDemoComponent,
@@ -80,8 +81,8 @@ import { LoadingSpinnerDemoComponent } from './components/loading-spinner-demo/l
     FileUploadDemoComponent,
     SkeletonLoaderDemoComponent,
     FormValidationMessagesDemoComponent,
-    LoadingSpinnerDemoComponent
+    LoadingSpinnerDemoComponent,
+    LoadingSpinnerComponent
   ]
 })
 export class DemoModule { }
-

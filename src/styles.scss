@@ -2,14 +2,10 @@
    Google Fonts Import
    ============================================ */
 /* Modern fonts from Intelligent-Video-Analytics-Platform */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap');
 /* Legacy fonts for backward compatibility */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 /* ============================================
    Design Tokens & Mixins
@@ -34,10 +30,6 @@
 }
 
 /* ============================================
-   Angular Material Theme - REMOVED
-   ============================================ */
-
-/* ============================================
    Syncfusion Theme
    ============================================ */
 @import 'app/shared/syncfusion/styles/syncfusion-theme.scss';
@@ -55,7 +47,7 @@
 html, body {
   height: 100%;
   /* Modern fonts from Intelligent-Video-Analytics-Platform */
-  font-family: 'Noto Sans', 'Noto Sans Thai', 'Poppins', 'Inter', 'Kanit', 'Sarabun', system-ui, sans-serif;
+  font-family: 'Inter', 'Noto Sans Thai', 'Sarabun', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -231,7 +223,7 @@ body.theme-pink {
    ============================================ */
 /* Typography Scale ตาม Design System */
 h1 {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', 'Noto Sans Thai', sans-serif;
   font-size: 2.25rem; /* 36px */
   font-weight: 700; /* Bold */
   line-height: 1.375;
@@ -240,7 +232,7 @@ h1 {
 }
 
 h2 {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', 'Noto Sans Thai', sans-serif;
   font-size: 1.5rem; /* 24px */
   font-weight: 600; /* Semibold */
   line-height: 1.375;
@@ -249,7 +241,7 @@ h2 {
 }
 
 h3 {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', 'Noto Sans Thai', sans-serif;
   font-size: 1.25rem; /* 20px */
   font-weight: 600; /* Semibold */
   line-height: 1.375;
@@ -258,7 +250,7 @@ h3 {
 }
 
 h4 {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', 'Noto Sans Thai', sans-serif;
   font-size: 1.125rem; /* 18px */
   font-weight: 600; /* Semibold */
   line-height: 1.375;
@@ -267,7 +259,7 @@ h4 {
 }
 
 h5, h6 {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', 'Noto Sans Thai', sans-serif;
   font-weight: 600;
   line-height: 1.375;
   color: #1e293b;
@@ -344,7 +336,7 @@ span, div, a, button, input, textarea, select {
 }
 
 code, pre, kbd, samp {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: monospace;
 }
 
 /* Thai text specific */
@@ -657,158 +649,6 @@ code, pre, kbd, samp {
     border-color: rgba(51, 65, 85, 0.3);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
   }
-}
-
-/* ============================================
-   Material Design Overrides (Light Mode)
-   ============================================ */
-.mat-mdc-form-field {
-  width: 100%;
-}
-
-.mat-mdc-form-field .mat-mdc-text-field-wrapper {
-  background: rgba(255, 255, 255, 0.2) !important;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border-radius: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease;
-}
-
-.dark .mat-mdc-form-field .mat-mdc-text-field-wrapper {
-  background: rgba(15, 23, 42, 0.2) !important;
-  border-color: rgba(51, 65, 85, 0.3);
-}
-
-.mat-mdc-form-field .mat-mdc-text-field-wrapper:hover {
-  background: rgba(255, 255, 255, 0.25) !important;
-}
-
-.dark .mat-mdc-form-field .mat-mdc-text-field-wrapper:hover {
-  background: rgba(15, 23, 42, 0.25) !important;
-}
-
-.mat-mdc-form-field .mat-mdc-text-field-wrapper.mdc-text-field--focused {
-  background: rgba(255, 255, 255, 0.3) !important;
-  border-color: rgba(var(--primary-rgb), 0.5);
-  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
-}
-
-.dark .mat-mdc-form-field .mat-mdc-text-field-wrapper.mdc-text-field--focused {
-  background: rgba(15, 23, 42, 0.3) !important;
-  border-color: rgba(var(--primary-rgb), 0.5);
-  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2);
-}
-
-.mat-mdc-button, .mat-mdc-raised-button, .mat-mdc-outlined-button {
-  border-radius: 0.5rem !important;
-  font-family: 'Inter', 'Sarabun', sans-serif !important;
-  font-weight: 500 !important;
-  transition: all 0.2s ease !important;
-}
-
-.mat-mdc-button:hover, .mat-mdc-raised-button:hover, .mat-mdc-outlined-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.dark .mat-mdc-button:hover, .dark .mat-mdc-raised-button:hover, .dark .mat-mdc-outlined-button:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-}
-
-.mat-mdc-card {
-  background: rgba(255, 255, 255, 0.25) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  border-radius: 1rem !important;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
-  transition: all 0.3s ease;
-}
-
-.dark .mat-mdc-card {
-  background: rgba(15, 23, 42, 0.25) !important;
-  border-color: rgba(51, 65, 85, 0.3) !important;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5) !important;
-}
-
-.mat-mdc-table {
-  background: rgba(255, 255, 255, 0.2) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  border-radius: 0.75rem !important;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.dark .mat-mdc-table {
-  background: rgba(15, 23, 42, 0.2) !important;
-}
-
-.mat-mdc-table thead {
-  background: rgba(255, 255, 255, 0.3) !important;
-}
-
-.dark .mat-mdc-table thead {
-  background: rgba(15, 23, 42, 0.3) !important;
-}
-
-.mat-mdc-dialog-container {
-  background: rgba(255, 255, 255, 0.3) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.4) !important;
-  border-radius: 1.5rem !important;
-  box-shadow: 0 12px 48px 0 rgba(31, 38, 135, 0.5) !important;
-  transition: all 0.3s ease;
-}
-
-.dark .mat-mdc-dialog-container {
-  background: rgba(15, 23, 42, 0.3) !important;
-  border-color: rgba(51, 65, 85, 0.4) !important;
-  box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.7) !important;
-}
-
-.mat-mdc-snack-bar-container {
-  background: rgba(255, 255, 255, 0.3) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.4) !important;
-  border-radius: 0.75rem !important;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
-  transition: all 0.3s ease;
-}
-
-.dark .mat-mdc-snack-bar-container {
-  background: rgba(15, 23, 42, 0.3) !important;
-  border-color: rgba(51, 65, 85, 0.4) !important;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5) !important;
-}
-
-.mat-mdc-sidenav {
-  background: rgba(255, 255, 255, 0.2) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  border-right: 1px solid rgba(255, 255, 255, 0.3) !important;
-  transition: all 0.3s ease;
-}
-
-.dark .mat-mdc-sidenav {
-  background: rgba(15, 23, 42, 0.2) !important;
-  border-right-color: rgba(51, 65, 85, 0.3) !important;
-}
-
-.mat-mdc-toolbar {
-  background: rgba(255, 255, 255, 0.25) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
-  transition: all 0.3s ease;
-}
-
-.dark .mat-mdc-toolbar {
-  background: rgba(15, 23, 42, 0.25) !important;
-  border-bottom-color: rgba(51, 65, 85, 0.3) !important;
 }
 
 /* ============================================

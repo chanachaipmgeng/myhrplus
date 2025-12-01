@@ -147,3 +147,4 @@ See the live demo at `/demo/file-manager` for examples and interactive controls.
 - [Syncfusion File Manager Docs](https://ej2.syncfusion.com/angular/documentation/file-manager/getting-started/)
 
 
+

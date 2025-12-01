@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlassCardComponent } from '../glass-card/glass-card.component';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-loading',
   standalone: true,
-  imports: [CommonModule, GlassCardComponent],
+  imports: [CommonModule, GlassCardComponent, SpinnerComponent],
   templateUrl: './loading.component.html',
   styleUrls: ['./loading.component.scss']
 })

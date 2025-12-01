@@ -4,11 +4,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 // Components
-import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
-import { DataTableComponent } from './components/data-table/data-table.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
-// EmptyStateComponent and RatingComponent are now standalone - removed from declarations
 import { ErrorStateComponent } from './components/error-state/error-state.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { StatusBadgeComponent } from './components/status-badge/status-badge.component';
@@ -32,11 +29,8 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { DateFormatPipe } from './pipes/date-format.pipe';
 
 const COMPONENTS = [
-  LoadingSpinnerComponent,
-  DataTableComponent,
   ConfirmDialogComponent,
   FileUploadComponent,
-  // EmptyStateComponent and RatingComponent are standalone - removed from declarations
   ErrorStateComponent,
   AvatarComponent,
   StatusBadgeComponent,
@@ -49,7 +43,6 @@ const COMPONENTS = [
   ImageUploadComponent,
   FormValidationMessagesComponent,
   IconComponent,
-  SpinnerComponent,
   NotificationComponent
 ];
 
@@ -72,7 +65,8 @@ const PIPES = [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    SpinnerComponent
   ],
   exports: [
     CommonModule,
@@ -81,8 +75,8 @@ const PIPES = [
     RouterModule,
     ...COMPONENTS,
     ...DIRECTIVES,
-    ...PIPES
+    ...PIPES,
+    SpinnerComponent
   ]
 })
 export class SharedModule { }
-
