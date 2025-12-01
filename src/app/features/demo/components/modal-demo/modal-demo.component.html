@@ -1,20 +1,28 @@
-<div class="demo-page">
-  <div class="demo-header">
-    <h1 class="demo-title">Modal Component</h1>
-    <p class="demo-description">
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Modal Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
       Modal dialog component with various sizes, customizable footer, and event handling.
     </p>
   </div>
 
   <!-- Live Demo Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Live Demo</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
     
     <app-glass-card padding="p-6">
-      <div class="demo-controls">
-        <div class="control-group">
-          <label>Size:</label>
-          <select [(ngModel)]="selectedSize" class="control-select">
+      <div class="flex gap-4 mb-6 flex-wrap">
+        <div class="flex items-center gap-2">
+          <label class="font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Size:</label>
+          <select [(ngModel)]="selectedSize" 
+                  class="px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm cursor-pointer transition-smooth
+                         hover:border-primary-500 dark:hover:border-primary-400 theme-gemini:border-blue-500/30 theme-gemini:glass-gemini-weak theme-gemini:hover:glass-gemini
+                         focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20">
             <option value="sm">Small</option>
             <option value="md">Medium</option>
             <option value="lg">Large</option>
@@ -23,7 +31,7 @@
         </div>
       </div>
 
-      <div class="demo-preview">
+      <div class="mb-6">
         <app-glass-button variant="primary" (clicked)="showBasicModal = true">
           Open Modal ({{ selectedSize }})
         </app-glass-button>
@@ -32,10 +40,13 @@
   </section>
 
   <!-- Examples Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Examples</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Examples
+    </h2>
     
-    <div class="examples-grid">
+    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6">
       <app-glass-card padding="p-6">
         <h3 class="text-lg font-semibold mb-4">Basic Modal</h3>
         <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">
@@ -79,25 +90,31 @@
   </section>
 
   <!-- Code Examples -->
-  <section class="demo-section">
-    <h2 class="section-title">Code Examples</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Code Examples
+    </h2>
     
-    <h3 class="subsection-title">Basic Usage</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
     <app-code-viewer [code]="basicExample" language="html" title="Basic Modal"></app-code-viewer>
 
-    <h3 class="subsection-title">Sizes</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Sizes</h3>
     <app-code-viewer [code]="sizesExample" language="html" title="Modal Sizes"></app-code-viewer>
 
-    <h3 class="subsection-title">Without Footer</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Without Footer</h3>
     <app-code-viewer [code]="noFooterExample" language="html" title="Modal Without Footer"></app-code-viewer>
 
-    <h3 class="subsection-title">Event Handling</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Event Handling</h3>
     <app-code-viewer [code]="eventsExample" language="html" title="Modal Events"></app-code-viewer>
   </section>
 
   <!-- API Documentation -->
-  <section class="demo-section">
-    <h2 class="section-title">API Documentation</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Documentation
+    </h2>
     <app-props-table [props]="props" title="Inputs"></app-props-table>
     <app-props-table [props]="outputs" title="Outputs"></app-props-table>
   </section>

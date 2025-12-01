@@ -1,24 +1,29 @@
-<div class="demo-page">
-  <div class="demo-header">
-    <h1 class="demo-title">Stepper Component</h1>
-    <p class="demo-description">
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Stepper Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
       Step-by-step navigation component with horizontal and vertical orientations, optional steps, and completion tracking.
     </p>
   </div>
 
   <!-- Live Demo Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Live Demo</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
     
     <app-glass-card padding="p-6">
-      <div class="demo-preview">
+      <div class="mb-6">
         <app-stepper
           [steps]="steps"
           [currentStep]="currentStep"
           (stepChange)="onStepChange($event)">
         </app-stepper>
         
-        <div class="stepper-controls mt-6">
+        <div class="flex gap-4 mt-6">
           <app-glass-button
             variant="secondary"
             (clicked)="onPrevious()"
@@ -37,8 +42,11 @@
   </section>
 
   <!-- Vertical Orientation Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Vertical Orientation</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Vertical Orientation
+    </h2>
     <app-glass-card padding="p-6">
       <app-stepper
         [steps]="steps"
@@ -50,8 +58,11 @@
   </section>
 
   <!-- With Optional Steps Section -->
-  <section class="demo-section">
-    <h2 class="section-title">With Optional Steps</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      With Optional Steps
+    </h2>
     <app-glass-card padding="p-6">
       <app-stepper
         [steps]="stepsWithOptional"
@@ -61,22 +72,28 @@
   </section>
 
   <!-- Code Examples -->
-  <section class="demo-section">
-    <h2 class="section-title">Code Examples</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Code Examples
+    </h2>
     
-    <h3 class="subsection-title">Basic Usage</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
     <app-code-viewer [code]="basicExample" language="html" title="Basic Stepper"></app-code-viewer>
 
-    <h3 class="subsection-title">Vertical Orientation</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Vertical Orientation</h3>
     <app-code-viewer [code]="verticalExample" language="html" title="Vertical Stepper"></app-code-viewer>
 
-    <h3 class="subsection-title">Linear Mode</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Linear Mode</h3>
     <app-code-viewer [code]="linearExample" language="html" title="Linear Stepper"></app-code-viewer>
   </section>
 
   <!-- API Documentation -->
-  <section class="demo-section">
-    <h2 class="section-title">API Documentation</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Documentation
+    </h2>
     <app-props-table [props]="props" title="Inputs"></app-props-table>
     <app-props-table [props]="outputs" title="Outputs"></app-props-table>
   </section>

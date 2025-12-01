@@ -23,7 +23,8 @@ export class StatisticsGridComponent {
   @Input() columns: number = 3;
 
   get gridClass(): string {
-    return `grid-cols-${this.columns}`;
+    // Grid columns handled by Tailwind classes in HTML
+    return '';
   }
 }
 

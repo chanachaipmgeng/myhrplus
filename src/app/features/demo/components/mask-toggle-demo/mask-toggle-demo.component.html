@@ -1,90 +1,102 @@
-<app-glass-card padding="p-6">
-  <div class="space-y-8">
-    <!-- Header -->
-    <div>
-      <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Mask Toggle</h1>
-      <p class="text-slate-600 dark:text-slate-400">
-        Component for toggling masked/unmasked display of sensitive data (PDPA/GDPR compliance)
-      </p>
-    </div>
-
-    <!-- Basic Example -->
-    <section>
-      <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-200 mb-4">Basic Example</h2>
-      <app-glass-card padding="p-6" variant="weak">
-        <div class="space-y-4">
-          <div class="flex items-center gap-4">
-            <span class="text-slate-700 dark:text-slate-300 font-medium w-32">Mobile:</span>
-            <app-mask-toggle
-              [value]="mobile"
-              [fieldName]="'mobile'">
-            </app-mask-toggle>
-          </div>
-        </div>
-      </app-glass-card>
-      <app-code-viewer [code]="basicExample" language="html"></app-code-viewer>
-    </section>
-
-    <!-- Different Field Types -->
-    <section>
-      <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-200 mb-4">Different Field Types</h2>
-      <app-glass-card padding="p-6" variant="weak">
-        <div class="space-y-4">
-          <div class="flex items-center gap-4">
-            <span class="text-slate-700 dark:text-slate-300 font-medium w-32">Mobile:</span>
-            <app-mask-toggle
-              [value]="mobile"
-              [fieldName]="'mobile'">
-            </app-mask-toggle>
-          </div>
-
-          <div class="flex items-center gap-4">
-            <span class="text-slate-700 dark:text-slate-300 font-medium w-32">Email:</span>
-            <app-mask-toggle
-              [value]="email"
-              [fieldName]="'email'">
-            </app-mask-toggle>
-          </div>
-
-          <div class="flex items-center gap-4">
-            <span class="text-slate-700 dark:text-slate-300 font-medium w-32">ID Card:</span>
-            <app-mask-toggle
-              [value]="idCard"
-              [fieldName]="'idCard'">
-            </app-mask-toggle>
-          </div>
-
-          <div class="flex items-center gap-4">
-            <span class="text-slate-700 dark:text-slate-300 font-medium w-32">Bank Account:</span>
-            <app-mask-toggle
-              [value]="bankAccount"
-              [fieldName]="'bankAccount'">
-            </app-mask-toggle>
-          </div>
-        </div>
-      </app-glass-card>
-    </section>
-
-    <!-- Usage Note -->
-    <section>
-      <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-200 mb-4">Usage Note</h2>
-      <app-glass-card padding="p-6" variant="weak">
-        <div class="space-y-2 text-slate-700 dark:text-slate-300">
-          <p>• This component uses <code class="px-2 py-1 bg-slate-200 dark:bg-slate-700 rounded">FieldMaskingService</code> to apply masking rules</p>
-          <p>• Click the eye icon to toggle between masked and unmasked view</p>
-          <p>• Masking rules are configured in <code class="px-2 py-1 bg-slate-200 dark:bg-slate-700 rounded">FieldMaskingService</code></p>
-          <p>• Useful for PDPA/GDPR compliance when displaying sensitive data</p>
-        </div>
-      </app-glass-card>
-    </section>
-
-    <!-- Props Table -->
-    <section>
-      <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-200 mb-4">Props</h2>
-      <app-props-table [props]="props"></app-props-table>
-    </section>
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Mask Toggle Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+      Component for toggling masked/unmasked display of sensitive data (PDPA/GDPR compliance)
+    </p>
   </div>
-</app-glass-card>
+
+  <!-- Basic Example -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Basic Example
+    </h2>
+    <app-glass-card padding="p-6" variant="weak">
+      <div class="space-y-4">
+        <div class="flex items-center gap-4">
+          <span class="text-slate-700 dark:text-slate-300 theme-gemini:text-white/90 font-medium w-32">Mobile:</span>
+          <app-mask-toggle
+            [value]="mobile"
+            [fieldName]="'mobile'">
+          </app-mask-toggle>
+        </div>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Mask Toggle"></app-code-viewer>
+  </section>
+
+  <!-- Different Field Types -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Different Field Types
+    </h2>
+    <app-glass-card padding="p-6" variant="weak">
+      <div class="space-y-4">
+        <div class="flex items-center gap-4">
+          <span class="text-slate-700 dark:text-slate-300 theme-gemini:text-white/90 font-medium w-32">Mobile:</span>
+          <app-mask-toggle
+            [value]="mobile"
+            [fieldName]="'mobile'">
+          </app-mask-toggle>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <span class="text-slate-700 dark:text-slate-300 theme-gemini:text-white/90 font-medium w-32">Email:</span>
+          <app-mask-toggle
+            [value]="email"
+            [fieldName]="'email'">
+          </app-mask-toggle>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <span class="text-slate-700 dark:text-slate-300 theme-gemini:text-white/90 font-medium w-32">ID Card:</span>
+          <app-mask-toggle
+            [value]="idCard"
+            [fieldName]="'idCard'">
+          </app-mask-toggle>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <span class="text-slate-700 dark:text-slate-300 theme-gemini:text-white/90 font-medium w-32">Bank Account:</span>
+          <app-mask-toggle
+            [value]="bankAccount"
+            [fieldName]="'bankAccount'">
+          </app-mask-toggle>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Usage Note -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Usage Note
+    </h2>
+    <app-glass-card padding="p-6" variant="weak">
+      <div class="space-y-2 text-slate-700 dark:text-slate-300 theme-gemini:text-white/90">
+        <p>• This component uses <code class="px-2 py-1 bg-slate-200 dark:bg-slate-700 theme-gemini:bg-slate-700/50 rounded">FieldMaskingService</code> to apply masking rules</p>
+        <p>• Click the eye icon to toggle between masked and unmasked view</p>
+        <p>• Masking rules are configured in <code class="px-2 py-1 bg-slate-200 dark:bg-slate-700 theme-gemini:bg-slate-700/50 rounded">FieldMaskingService</code></p>
+        <p>• Useful for PDPA/GDPR compliance when displaying sensitive data</p>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Props Table -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Documentation
+    </h2>
+    <app-props-table [props]="props" title="Inputs"></app-props-table>
+  </section>
+</div>
+
 
 
 

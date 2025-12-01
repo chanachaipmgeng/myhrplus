@@ -1,25 +1,30 @@
-<div class="demo-page">
-  <div class="demo-header">
-    <h1 class="demo-title">Glass Input Component</h1>
-    <p class="demo-description">
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Glass Input Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
       Glass morphism input field component with validation support, hints, and various states.
     </p>
   </div>
 
   <!-- Live Demo Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Live Demo</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
     
     <app-glass-card padding="p-6">
-      <div class="demo-controls">
-        <div class="control-group">
-          <label>
-            <input type="checkbox" [(ngModel)]="inputValue" [value]="'test'"> Enable Live Input
+      <div class="flex gap-4 mb-6 flex-wrap">
+        <div class="flex items-center gap-2">
+          <label class="font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 flex items-center gap-2">
+            <input type="checkbox" [(ngModel)]="inputValue" [value]="'test'" class="cursor-pointer"> Enable Live Input
           </label>
         </div>
       </div>
 
-      <div class="demo-preview space-y-4">
+      <div class="space-y-4">
         <app-glass-input
           label="Interactive Input"
           placeholder="Type something..."
@@ -27,7 +32,7 @@
           hint="This is a live demo input">
         </app-glass-input>
 
-        <div *ngIf="inputValue" class="result-box">
+        <div *ngIf="inputValue" class="p-4 bg-primary-50/50 dark:bg-primary-900/30 theme-gemini:glass-gemini-weak rounded-md border border-primary-200/50 dark:border-primary-700/50 theme-gemini:border-blue-500/30">
           <p class="text-sm text-slate-600 dark:text-slate-400">Current value:</p>
           <p class="font-mono text-slate-800 dark:text-slate-200">{{ inputValue }}</p>
         </div>
@@ -36,8 +41,11 @@
   </section>
 
   <!-- Input Types Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Input Types</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Input Types
+    </h2>
     <app-glass-card padding="p-6">
       <div class="space-y-4">
         <app-glass-input
@@ -64,8 +72,11 @@
   </section>
 
   <!-- States Section -->
-  <section class="demo-section">
-    <h2 class="section-title">States</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      States
+    </h2>
     <app-glass-card padding="p-6">
       <div class="space-y-4">
         <app-glass-input
@@ -97,8 +108,11 @@
   </section>
 
   <!-- Validation Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Validation</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Validation
+    </h2>
     <app-glass-card padding="p-6">
       <div class="space-y-4">
         <app-glass-input
@@ -120,31 +134,37 @@
   </section>
 
   <!-- Code Examples -->
-  <section class="demo-section">
-    <h2 class="section-title">Code Examples</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Code Examples
+    </h2>
     
-    <h3 class="subsection-title">Basic Usage</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
     <app-code-viewer [code]="basicExample" language="html" title="Basic Glass Input"></app-code-viewer>
 
-    <h3 class="subsection-title">Input Types</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Input Types</h3>
     <app-code-viewer [code]="typesExample" language="html" title="Different Input Types"></app-code-viewer>
 
-    <h3 class="subsection-title">Validation</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Validation</h3>
     <app-code-viewer [code]="validationExample" language="html" title="Input Validation"></app-code-viewer>
 
-    <h3 class="subsection-title">States</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">States</h3>
     <app-code-viewer [code]="statesExample" language="html" title="Input States"></app-code-viewer>
 
-    <h3 class="subsection-title">With Hint</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Hint</h3>
     <app-code-viewer [code]="hintExample" language="html" title="Input with Hint"></app-code-viewer>
 
-    <h3 class="subsection-title">Reactive Forms</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Reactive Forms</h3>
     <app-code-viewer [code]="reactiveFormExample" language="typescript" title="Using with Reactive Forms"></app-code-viewer>
   </section>
 
   <!-- API Documentation -->
-  <section class="demo-section">
-    <h2 class="section-title">API Documentation</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Documentation
+    </h2>
     <app-props-table [props]="props" title="Inputs"></app-props-table>
   </section>
 </div>

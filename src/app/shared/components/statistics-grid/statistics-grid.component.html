@@ -1,4 +1,4 @@
-<div class="statistics-grid" [ngClass]="gridClass">
+<div class="grid gap-6 md:gap-4 sm:gap-3" [ngClass]="'grid-cols-' + columns + ' lg:grid-cols-' + (columns > 2 ? 2 : columns) + ' md:grid-cols-1'">
   <app-statistics-card
     *ngFor="let stat of stats"
     [icon]="stat.icon"

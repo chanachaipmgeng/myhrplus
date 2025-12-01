@@ -1,9 +1,8 @@
 /* ============================================
    Date Range Picker Component Styles
+   ============================================
+   Migrated to Tailwind - Minimal SCSS for component-specific styles only
    ============================================ */
-
-@import '../../../../styles/design-tokens';
-@import '../../../../styles/mixins';
 
 :host {
   display: block;
@@ -11,93 +10,43 @@
 }
 
 .date-range-picker {
-  transition: $transition-all;
-  width: 100%;
-  @include glass-morphism('weak', 'light');
-  border-radius: $radius-lg;
-  padding: $spacing-4;
-  
-  .dark & {
-    @include glass-morphism('weak', 'dark');
-  }
+  @apply transition-smooth w-full glass-weak dark:glass-dark-weak rounded-lg p-4;
 }
 
 .picker-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: $spacing-4;
-  gap: $spacing-2;
+  @apply flex justify-between items-center mb-4 gap-2;
 }
 
 .preset-btn {
-  transition: $transition-colors;
-  min-width: 44px;
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: $spacing-2;
-  border-radius: $radius-md;
-  cursor: pointer;
+  @apply transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded-md cursor-pointer;
   
   &:hover {
     color: rgb(var(--primary-rgb)) !important;
-    background: rgba(var(--primary-rgb), 0.1);
+    @apply bg-primary-500/10;
   }
   
-  @include respond-to(md) {
-    min-width: auto;
-    min-height: auto;
+  @media (min-width: 768px) {
+    @apply min-w-0 min-h-0;
   }
 }
 
 .date-range-form {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-4;
+  @apply flex flex-col gap-4;
 }
 
 .date-inputs {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: $spacing-4;
-  
-  @include respond-to(md) {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4;
 }
 
 .date-field {
-  width: 100%;
+  @apply w-full;
   
   label {
-    display: block;
-    font-size: $text-sm;
-    font-weight: $font-weight-medium;
-    margin-bottom: $spacing-2;
-    color: $gray-700;
-    
-    .dark & {
-      color: $gray-300;
-    }
+    @apply block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300;
   }
   
   input[type="date"] {
-    width: 100%;
-    min-height: 44px;
-    padding: $spacing-2 $spacing-3 $spacing-2 $spacing-10;
-    border: 1px solid $gray-300;
-    border-radius: $radius-md;
-    background: white;
-    color: $gray-900;
-    transition: $transition-all;
-    
-    .dark & {
-      background: $gray-700;
-      border-color: $gray-600;
-      color: $gray-100;
-    }
+    @apply w-full min-h-[44px] px-10 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-slate-900 dark:text-slate-100 transition-smooth;
     
     &:focus {
       outline: none;
@@ -105,128 +54,88 @@
       box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
     }
     
-    @include respond-to(md) {
-      min-height: auto;
+    @media (min-width: 768px) {
+      @apply min-h-0;
     }
   }
 }
 
 .picker-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: $spacing-2;
-  padding-top: $spacing-2;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  
-  .dark & {
-    border-top-color: rgba(51, 65, 85, 0.3);
-  }
+  @apply flex justify-end gap-2 pt-2 border-t border-white/20 dark:border-slate-700/30;
   
   button {
-    min-width: 44px;
-    min-height: 44px;
-    padding: $spacing-2 $spacing-4;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: $spacing-2;
+    @apply min-w-[44px] min-h-[44px] px-4 py-2 inline-flex items-center justify-center gap-2;
     
-    @include respond-to(md) {
-      min-width: auto;
-      min-height: auto;
+    @media (min-width: 768px) {
+      @apply min-w-0 min-h-0;
     }
   }
 }
 
 /* Preset Menu */
 .absolute {
-  position: absolute;
-  right: 0;
-  margin-top: $spacing-2;
-  width: 12rem; // w-48
-  @include glass-morphism('strong', 'light');
-  border-radius: $radius-lg;
-  box-shadow: $shadow-lg;
-  z-index: 50;
-  overflow: hidden;
-  
-  .dark & {
-    @include glass-morphism('strong', 'dark');
-  }
+  @apply glass-strong dark:glass-dark-strong rounded-lg shadow-lg z-50 overflow-hidden;
   
   button {
-    width: 100%;
-    padding: $spacing-2 $spacing-4;
-    text-align: left;
-    min-height: 44px;
-    transition: $transition-colors;
+    @apply w-full px-4 py-2 text-left min-h-[44px] transition-colors;
     
     &:hover {
-      background: rgba(var(--primary-rgb), 0.1);
-      
-      .dark & {
-        background: rgba(var(--primary-rgb), 0.2);
-      }
+      @apply bg-primary-500/10 dark:bg-primary-500/20;
     }
   }
 }
 
 /* Responsive - Mobile */
-@include respond-to-down(sm) {
+@media (max-width: 640px) {
   .date-range-picker {
-    padding: $spacing-3;
+    @apply p-3;
   }
   
   .picker-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: $spacing-2;
-    margin-bottom: $spacing-3;
+    @apply flex-col items-start gap-2 mb-3;
     
     h3 {
-      font-size: $text-base;
+      @apply text-base;
     }
   }
   
   .date-inputs {
-    gap: $spacing-3;
+    @apply gap-3;
   }
   
   .picker-actions {
-    flex-direction: column;
-    width: 100%;
+    @apply flex-col w-full;
     
     button {
-      width: 100%;
-      justify-content: center;
+      @apply w-full justify-center;
     }
   }
 }
 
 /* Responsive - Tablet */
-@include respond-to-between(sm, md) {
+@media (min-width: 640px) and (max-width: 768px) {
   .date-inputs {
-    gap: $spacing-3;
+    @apply gap-3;
   }
   
   .picker-header {
-    margin-bottom: $spacing-3;
+    @apply mb-3;
   }
 }
 
 /* Gemini Theme */
 body.theme-gemini {
   .date-range-picker {
-    @include glass-gemini('weak');
+    @apply glass-gemini-weak;
   }
   
   .preset-btn:hover {
-    @include gemini-glow('subtle');
+    filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.4));
   }
   
   .absolute {
-    @include glass-gemini('default');
-    @include gemini-border-glow();
+    @apply glass-gemini shadow-gemini;
+    border-color: rgba(59, 130, 246, 0.3);
   }
 }
 

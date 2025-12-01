@@ -262,3 +262,4 @@ transition: width 0.3s ease;
 
 **For detailed information, see [UX_UI_DESIGN_SYSTEM_RULES.md](./UX_UI_DESIGN_SYSTEM_RULES.md)**
 
+

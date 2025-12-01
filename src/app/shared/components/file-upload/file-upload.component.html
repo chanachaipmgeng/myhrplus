@@ -15,7 +15,7 @@
   </button>
 
   <div class="file-list mt-4 space-y-2" *ngIf="selectedFiles.length > 0">
-    <div class="file-item glass-card-weak p-3 flex items-center gap-3" *ngFor="let file of selectedFiles; let i = index">
+    <div class="file-item glass-weak dark:glass-dark-weak theme-gemini:glass-gemini-weak p-3 flex items-center gap-3 border border-white/30 dark:border-slate-700/30 rounded-lg transition-smooth hover:bg-white/30 dark:hover:bg-slate-900/30" *ngFor="let file of selectedFiles; let i = index">
       <app-icon name="description" size="sm" color="text-slate-600 dark:text-slate-400"></app-icon>
       <span class="file-name thai-text flex-1">{{ file.name }}</span>
       <span class="file-size text-sm text-slate-500 dark:text-slate-500">({{ getFileSize(file.size) }})</span>

@@ -25,21 +25,25 @@
 ## 🎯 Design Principles
 
 ### 1. Consistency
-- ✅ ใช้ Design Tokens จาก `_design-tokens.scss` เสมอ
+- ✅ ใช้ Design Tokens จาก `tailwind.config.js` (migrated from SCSS)
 - ✅ ใช้ Components จาก `shared/components` แทนการสร้างใหม่
-- ✅ ใช้ Mixins จาก `_mixins.scss` สำหรับ common patterns
-- ✅ ใช้ Tailwind utility classes สำหรับ layout และ spacing
+- ✅ ใช้ Tailwind utility classes สำหรับ layout, spacing, และ styling
+- ✅ ใช้ Tailwind plugins (`glass-morphism`, `animations`) สำหรับ reusable patterns
+- ✅ ใช้ `@apply` เฉพาะเมื่อจำเป็น (เช่น Syncfusion overrides)
 
 ### 2. Glass Morphism
+- ✅ ใช้ Tailwind classes: `glass`, `glass-strong`, `glass-weak`, `glass-gemini`
+- ✅ ใช้ Dark Mode: `dark:glass-dark`, `dark:glass-dark-strong`, `dark:glass-dark-weak`
+- ✅ ใช้ Gemini Theme: `theme-gemini:glass-gemini`, `theme-gemini:glass-gemini-strong`
 - ✅ ใช้ Glass Components (`glass-card`, `glass-button`, `glass-input`)
-- ✅ ใช้ `@include glass-morphism()` mixin สำหรับ custom glass effects
 - ✅ รองรับ Dark Mode และ Gemini Theme
 
 ### 3. Performance
 - ✅ ใช้ `transform` และ `opacity` แทน `width`, `height`, `left`, `top`
-- ✅ ใช้ `@include smooth-transition()` สำหรับ animations
-- ✅ รองรับ `prefers-reduced-motion`
-- ✅ ใช้ `will-change` อย่างระมัดระวัง
+- ✅ ใช้ Tailwind classes: `transition-smooth`, `hover-lift`, `hover-scale`, `active-scale`
+- ✅ ใช้ Tailwind animations: `animate-fade-in`, `animate-shake`, `animate-pulse-success`
+- ✅ รองรับ `prefers-reduced-motion` ผ่าน `motion-safe:` variant
+- ✅ ใช้ `will-change` อย่างระมัดระวัง (Tailwind JIT optimize ให้อัตโนมัติ)
 
 ### 4. Accessibility
 - ✅ WCAG 2.1 AA compliance
@@ -270,76 +274,82 @@
 
 ## 🎨 Color & Typography
 
-### Color Usage
+### Color Usage (Tailwind Classes)
 
 #### Primary Colors
-```scss
-// Use design tokens
-$primary-500  // Main primary color
-$primary-600  // Hover state
-$primary-400  // Light state
+```html
+<!-- Use Tailwind classes -->
+<div class="bg-primary-500 text-primary-600 hover:bg-primary-600">
+  Primary color
+</div>
+
+<!-- Dark mode -->
+<div class="bg-primary-500 dark:bg-primary-400 text-primary-600 dark:text-primary-300">
+  Primary with dark mode
+</div>
 ```
 
 #### Semantic Colors
-```scss
-// Success
-$success-500  // Success actions
-$success-600  // Hover state
+```html
+<!-- Success -->
+<div class="bg-success-500 hover:bg-success-600 text-white">
+  Success action
+</div>
 
-// Error
-$error-500    // Error states
-$error-600    // Hover state
+<!-- Error -->
+<div class="bg-error-500 hover:bg-error-600 text-white">
+  Error state
+</div>
 
-// Warning
-$warning-500  // Warning states
-$warning-600  // Hover state
+<!-- Warning -->
+<div class="bg-warning-500 hover:bg-warning-600 text-white">
+  Warning state
+</div>
 
-// Info
-$info-500     // Info states
-$info-600     // Hover state
+<!-- Info -->
+<div class="bg-info-500 hover:bg-info-600 text-white">
+  Info state
+</div>
 ```
 
 #### Gray Scale
-```scss
-// Text Colors
-$gray-900     // Primary text (light mode)
-$gray-700     // Secondary text (light mode)
-$gray-500     // Tertiary text (light mode)
-$gray-100     // Primary text (dark mode)
-$gray-300     // Secondary text (dark mode)
-$gray-400     // Tertiary text (dark mode)
+```html
+<!-- Text Colors -->
+<p class="text-gray-900 dark:text-gray-100">Primary text</p>
+<p class="text-gray-700 dark:text-gray-300">Secondary text</p>
+<p class="text-gray-500 dark:text-gray-400">Tertiary text</p>
 ```
 
-### Typography
+### Typography (Tailwind Classes)
 
 #### Font Families
-```scss
-// Primary: Inter, Sarabun, Noto Sans
-font-family: 'Inter', 'Sarabun', 'Noto Sans', sans-serif;
+```html
+<!-- Primary: Inter, Sarabun, Noto Sans -->
+<p class="font-sans">Default text</p>
 
-// Thai: Sarabun, Noto Sans Thai
-font-family: 'Sarabun', 'Noto Sans Thai', sans-serif;
+<!-- Thai: Sarabun, Noto Sans Thai -->
+<p class="thai-text">Thai text</p>
 ```
 
 #### Font Sizes
-```scss
-$text-xs: 0.75rem;    // 12px
-$text-sm: 0.875rem;   // 14px
-$text-base: 1rem;     // 16px
-$text-lg: 1.125rem;   // 18px
-$text-xl: 1.25rem;    // 20px
-$text-2xl: 1.5rem;    // 24px
-$text-3xl: 1.875rem;  // 30px
-$text-4xl: 2.25rem;   // 36px
+```html
+<p class="text-xs">12px - Extra small</p>
+<p class="text-sm">14px - Small</p>
+<p class="text-base">16px - Base</p>
+<p class="text-lg">18px - Large</p>
+<p class="text-xl">20px - Extra large</p>
+<p class="text-2xl">24px - 2X large</p>
+<p class="text-3xl">30px - 3X large</p>
+<p class="text-4xl">36px - 4X large</p>
 ```
 
 #### Font Weights
-```scss
-$font-weight-light: 300;
-$font-weight-normal: 400;
-$font-weight-medium: 500;
-$font-weight-semibold: 600;
-$font-weight-bold: 700;
+```html
+<p class="font-light">300 - Light</p>
+<p class="font-normal">400 - Normal</p>
+<p class="font-medium">500 - Medium</p>
+<p class="font-semibold">600 - Semibold</p>
+<p class="font-bold">700 - Bold</p>
 ```
 
 #### Usage in HTML
@@ -1022,4 +1032,5 @@ export class FeatureNameComponent implements OnInit, OnDestroy {
 **Last Updated**: 2024-12-20  
 **Maintained By**: Development Team  
 **Status**: ✅ Active
+
 

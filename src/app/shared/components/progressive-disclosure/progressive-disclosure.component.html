@@ -1,24 +1,33 @@
 <div 
-  class="progressive-disclosure"
-  [ngClass]="['variant-' + variant, { 'is-expanded': isExpanded }]">
+  class="progressive-disclosure w-full transition-smooth"
+  [ngClass]="{
+    'variant-default border-b border-gray-200 dark:border-gray-700': variant === 'default',
+    'variant-accordion glass-weak dark:glass-dark-weak theme-gemini:glass-gemini-weak rounded-md mb-2 overflow-hidden': variant === 'accordion',
+    'variant-card glass dark:glass-dark theme-gemini:glass-gemini theme-gemini:shadow-gemini rounded-xl p-4 shadow-md': variant === 'card',
+    'is-expanded': isExpanded
+  }">
   
   <!-- Header -->
   <button
     (click)="toggle()"
-    class="disclosure-header"
+    class="disclosure-header w-full py-3 px-4 md:py-0 bg-transparent border-none cursor-pointer flex items-center justify-between transition-smooth min-h-[44px] md:min-h-0 text-left hover:bg-primary-500/5 dark:hover:bg-primary-500/10 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:rounded-md"
     [attr.aria-expanded]="isExpanded"
     [attr.aria-controls]="'content-' + _uniqueId"
     role="button"
-    tabindex="0">
-    <div class="header-content">
-      <h3 *ngIf="title" class="disclosure-title thai-text">{{ title }}</h3>
+    tabindex="0"
+    [ngClass]="{
+      'rounded-t-md': variant === 'accordion',
+      'p-0 mb-4': variant === 'card'
+    }">
+    <div class="header-content flex items-center justify-between w-full gap-2">
+      <h3 *ngIf="title" class="disclosure-title thai-text text-base md:text-base font-semibold text-gray-900 dark:text-gray-100 m-0 transition-colors hover:text-primary-600 dark:hover:text-primary-400 theme-gemini:hover:bg-gradient-to-r theme-gemini:hover:from-gemini-gradient-start theme-gemini:hover:to-gemini-gradient-end theme-gemini:hover:bg-clip-text theme-gemini:hover:text-transparent">{{ title }}</h3>
       <app-icon
         *ngIf="showIcon"
         [name]="currentIcon"
         size="sm"
         color="text-slate-500 dark:text-slate-400"
-        class="disclosure-icon"
-        [ngClass]="{ 'icon-expanded': isExpanded }">
+        class="disclosure-icon transition-smooth flex-shrink-0"
+        [ngClass]="{ 'rotate-180': isExpanded }">
       </app-icon>
     </div>
   </button>
@@ -26,11 +35,14 @@
   <!-- Content -->
   <div
     [id]="'content-' + _uniqueId"
-    class="disclosure-content"
+    class="disclosure-content overflow-hidden transition-smooth"
     [attr.aria-hidden]="!isExpanded"
     [@slideToggle]="isExpanded ? 'expanded' : 'collapsed'"
     *ngIf="isExpanded">
-    <div class="content-inner">
+    <div class="content-inner p-4 pt-2 md:p-3 md:pt-2"
+         [ngClass]="{
+           'p-0': variant === 'card'
+         }">
       <ng-content></ng-content>
     </div>
   </div>

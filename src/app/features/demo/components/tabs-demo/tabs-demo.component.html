@@ -1,14 +1,19 @@
-<div class="demo-page">
-  <div class="demo-header">
-    <h1 class="demo-title">Tabs Component</h1>
-    <p class="demo-description">
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Tabs Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
       Tab navigation component with icons, badges, and disabled states.
     </p>
   </div>
 
   <!-- Live Demo Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Live Demo</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
     
     <app-glass-card padding="p-6">
       <app-tabs
@@ -17,7 +22,7 @@
         (activeTabChange)="onTabChange($event)">
       </app-tabs>
 
-      <div class="tab-content mt-6">
+      <div class="min-h-[100px] mt-6">
         <div *ngIf="activeTab === 'tab1'" class="p-4 bg-slate-50 dark:bg-slate-900 rounded-lg">
           <h3 class="text-lg font-semibold mb-2">Tab 1 Content</h3>
           <p class="text-slate-600 dark:text-slate-400">This is the content for Tab 1.</p>
@@ -35,8 +40,11 @@
   </section>
 
   <!-- Examples Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Examples</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Examples
+    </h2>
     
     <div class="space-y-8">
       <!-- Tabs with Badges -->
@@ -47,7 +55,7 @@
           [activeTab]="activeTab2"
           (activeTabChange)="activeTab2 = $event">
         </app-tabs>
-        <div class="tab-content mt-4">
+        <div class="min-h-[100px] mt-4">
           <p class="text-sm text-slate-600 dark:text-slate-400">
             Active tab: {{ activeTab2 }}
           </p>
@@ -62,7 +70,7 @@
           [activeTab]="activeTab"
           (activeTabChange)="activeTab = $event">
         </app-tabs>
-        <div class="tab-content mt-4">
+        <div class="min-h-[100px] mt-4">
           <p class="text-sm text-slate-600 dark:text-slate-400">
             The middle tab is disabled and cannot be clicked.
           </p>
@@ -72,63 +80,69 @@
   </section>
 
   <!-- Code Examples -->
-  <section class="demo-section">
-    <h2 class="section-title">Code Examples</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Code Examples
+    </h2>
     
-    <h3 class="subsection-title">Basic Usage</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
     <app-code-viewer [code]="basicExample" language="html" title="Basic Tabs"></app-code-viewer>
 
-    <h3 class="subsection-title">With Icons</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Icons</h3>
     <app-code-viewer [code]="withIconsExample" language="html" title="Tabs with Icons"></app-code-viewer>
 
-    <h3 class="subsection-title">With Badges</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Badges</h3>
     <app-code-viewer [code]="withBadgesExample" language="typescript" title="Tabs with Badges"></app-code-viewer>
 
-    <h3 class="subsection-title">Disabled Tabs</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Disabled Tabs</h3>
     <app-code-viewer [code]="disabledExample" language="typescript" title="Disabled Tabs"></app-code-viewer>
   </section>
 
   <!-- API Documentation -->
-  <section class="demo-section">
-    <h2 class="section-title">API Documentation</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Documentation
+    </h2>
     <app-props-table [props]="props" title="Inputs"></app-props-table>
     <app-props-table [props]="outputs" title="Outputs"></app-props-table>
     
-    <h3 class="subsection-title">Tab Interface</h3>
-    <div class="interface-table">
-      <table class="props-table">
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Tab Interface</h3>
+    <div class="overflow-x-auto glass dark:glass-dark theme-gemini:glass-gemini rounded-lg p-2 shadow-glass mt-4">
+      <table class="w-full border-collapse text-sm">
         <thead>
-          <tr>
-            <th>Property</th>
-            <th>Type</th>
-            <th>Description</th>
+          <tr class="bg-white/50 dark:bg-gray-800/50 theme-gemini:bg-blue-500/10">
+            <th class="px-3 py-3 text-left font-semibold text-gray-700 dark:text-gray-300 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30">Property</th>
+            <th class="px-3 py-3 text-left font-semibold text-gray-700 dark:text-gray-300 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30">Type</th>
+            <th class="px-3 py-3 text-left font-semibold text-gray-700 dark:text-gray-300 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30">Description</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><code>id</code></td>
-            <td><code>string</code></td>
-            <td>Unique identifier for the tab</td>
+          <tr class="border-b border-gray-200/50 dark:border-gray-700/50 hover:bg-white/50 dark:hover:bg-gray-800/30 theme-gemini:hover:bg-blue-500/5 transition-smooth">
+            <td class="px-3 py-3"><code class="font-mono text-sm text-primary-600 dark:text-primary-400 theme-gemini:text-blue-400 bg-primary-500/10 dark:bg-primary-500/20 theme-gemini:bg-blue-500/20 px-1.5 py-0.5 rounded">id</code></td>
+            <td class="px-3 py-3"><code class="font-mono text-sm text-warning-600 dark:text-warning-400 bg-warning-500/10 dark:bg-warning-500/20 px-1.5 py-0.5 rounded">string</code></td>
+            <td class="px-3 py-3 text-gray-600 dark:text-gray-400">Unique identifier for the tab</td>
           </tr>
-          <tr>
-            <td><code>label</code></td>
-            <td><code>string</code></td>
-            <td>Tab label text</td>
+          <tr class="border-b border-gray-200/50 dark:border-gray-700/50 hover:bg-white/50 dark:hover:bg-gray-800/30 theme-gemini:hover:bg-blue-500/5 transition-smooth">
+            <td class="px-3 py-3"><code class="font-mono text-sm text-primary-600 dark:text-primary-400 theme-gemini:text-blue-400 bg-primary-500/10 dark:bg-primary-500/20 theme-gemini:bg-blue-500/20 px-1.5 py-0.5 rounded">label</code></td>
+            <td class="px-3 py-3"><code class="font-mono text-sm text-warning-600 dark:text-warning-400 bg-warning-500/10 dark:bg-warning-500/20 px-1.5 py-0.5 rounded">string</code></td>
+            <td class="px-3 py-3 text-gray-600 dark:text-gray-400">Tab label text</td>
           </tr>
-          <tr>
-            <td><code>icon</code></td>
-            <td><code>string</code></td>
-            <td>Optional icon (emoji or text)</td>
+          <tr class="border-b border-gray-200/50 dark:border-gray-700/50 hover:bg-white/50 dark:hover:bg-gray-800/30 theme-gemini:hover:bg-blue-500/5 transition-smooth">
+            <td class="px-3 py-3"><code class="font-mono text-sm text-primary-600 dark:text-primary-400 theme-gemini:text-blue-400 bg-primary-500/10 dark:bg-primary-500/20 theme-gemini:bg-blue-500/20 px-1.5 py-0.5 rounded">icon</code></td>
+            <td class="px-3 py-3"><code class="font-mono text-sm text-warning-600 dark:text-warning-400 bg-warning-500/10 dark:bg-warning-500/20 px-1.5 py-0.5 rounded">string</code></td>
+            <td class="px-3 py-3 text-gray-600 dark:text-gray-400">Optional icon (emoji or text)</td>
           </tr>
-          <tr>
-            <td><code>badge</code></td>
-            <td><code>string | number</code></td>
-            <td>Optional badge value</td>
+          <tr class="border-b border-gray-200/50 dark:border-gray-700/50 hover:bg-white/50 dark:hover:bg-gray-800/30 theme-gemini:hover:bg-blue-500/5 transition-smooth">
+            <td class="px-3 py-3"><code class="font-mono text-sm text-primary-600 dark:text-primary-400 theme-gemini:text-blue-400 bg-primary-500/10 dark:bg-primary-500/20 theme-gemini:bg-blue-500/20 px-1.5 py-0.5 rounded">badge</code></td>
+            <td class="px-3 py-3"><code class="font-mono text-sm text-warning-600 dark:text-warning-400 bg-warning-500/10 dark:bg-warning-500/20 px-1.5 py-0.5 rounded">string | number</code></td>
+            <td class="px-3 py-3 text-gray-600 dark:text-gray-400">Optional badge value</td>
           </tr>
-          <tr>
-            <td><code>disabled</code></td>
-            <td><code>boolean</code></td>
-            <td>Disable tab interaction</td>
+          <tr class="border-b border-gray-200/50 dark:border-gray-700/50 hover:bg-white/50 dark:hover:bg-gray-800/30 theme-gemini:hover:bg-blue-500/5 transition-smooth">
+            <td class="px-3 py-3"><code class="font-mono text-sm text-primary-600 dark:text-primary-400 theme-gemini:text-blue-400 bg-primary-500/10 dark:bg-primary-500/20 theme-gemini:bg-blue-500/20 px-1.5 py-0.5 rounded">disabled</code></td>
+            <td class="px-3 py-3"><code class="font-mono text-sm text-warning-600 dark:text-warning-400 bg-warning-500/10 dark:bg-warning-500/20 px-1.5 py-0.5 rounded">boolean</code></td>
+            <td class="px-3 py-3 text-gray-600 dark:text-gray-400">Disable tab interaction</td>
           </tr>
         </tbody>
       </table>

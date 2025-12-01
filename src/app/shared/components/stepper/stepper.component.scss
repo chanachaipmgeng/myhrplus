@@ -1,299 +1,74 @@
-.stepper-container {
-  width: 100%;
-}
+/* ============================================
+   Stepper Component Styles
+   ============================================
+   Migrated to Tailwind - Stepper-specific styles only
+   ============================================ */
 
 .stepper-horizontal {
   .stepper-steps {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    position: relative;
+    @apply flex items-start justify-between relative;
   }
 
   .stepper-step {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .step-connector {
-    flex: 1;
-    height: 2px;
-    background: #e2e8f0;
-    margin: 0 1rem;
-    margin-top: 20px;
-    transition: all 0.3s ease;
-  }
-
-  .connector-completed {
-    background: rgb(var(--primary-rgb));
+    @apply flex-1 flex items-center relative;
   }
 }
 
 .stepper-vertical {
   .stepper-steps {
-    display: flex;
-    flex-direction: column;
+    @apply flex flex-col;
   }
 
   .stepper-step {
-    display: flex;
-    align-items: flex-start;
-    position: relative;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-bottom: 1.5rem;
-  }
-
-  .step-connector-vertical {
-    position: absolute;
-    left: 20px;
-    top: 48px;
-    width: 2px;
-    height: calc(100% + 1.5rem);
-    background: #e2e8f0;
-    transition: all 0.3s ease;
-  }
-
-  .connector-completed {
-    background: rgb(var(--primary-rgb));
+    @apply flex items-start relative mb-6;
   }
 }
-
-.step-content {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex: 1;
-}
-
-.step-indicator {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #e2e8f0;
-  color: #64748b;
-  border: 2px solid #e2e8f0;
-  transition: all 0.3s ease;
-  flex-shrink: 0;
-}
-
-.dark .step-indicator {
-  background: #334155;
-  border-color: #334155;
-  color: #94a3b8;
-}
-
-.step-pending .step-indicator {
-  background: #e2e8f0;
-  border-color: #e2e8f0;
-  color: #64748b;
-}
-
-.dark .step-pending .step-indicator {
-  background: #334155;
-  border-color: #334155;
-  color: #94a3b8;
-}
-
-.step-active .step-indicator {
-  background: rgb(var(--primary-rgb));
-  border-color: rgb(var(--primary-rgb));
-  color: white;
-  box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.1);
-}
-
-.step-completed .step-indicator {
-  background: #22c55e;
-  border-color: #22c55e;
-  color: white;
-}
-
-.step-disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-
-.step-number {
-  font-weight: 600;
-  font-size: 0.875rem;
-  font-family: 'Inter', sans-serif;
-}
-
-.step-label {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  flex: 1;
-}
-
-.step-title {
-  font-weight: 600;
-  color: #1e293b;
-  transition: color 0.3s ease;
-  font-family: 'Sarabun', 'Inter', sans-serif;
-}
-
-.dark .step-title {
-  color: #f1f5f9;
-}
-
-.step-active .step-title {
-  color: rgb(var(--primary-rgb));
-  font-weight: 700;
-}
-
-.step-description {
-  color: #64748b;
-  transition: color 0.3s ease;
-}
-
-.dark .step-description {
-  color: #94a3b8;
-}
-
-.step-optional {
-  .step-title::after {
-    content: ' (ไม่บังคับ)';
-    font-size: 0.75rem;
-    color: #94a3b8;
-    font-weight: normal;
-  }
-}
-
-.stepper-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.dark .stepper-actions {
-  border-top-color: rgba(51, 65, 85, 0.3);
-}
-
-/* ============================================
-   Stepper Component Styles
-   ============================================ */
-
-@import '../../../../styles/design-tokens';
-@import '../../../../styles/mixins';
 
 /* Responsive - Mobile */
-@include respond-to-down(md) {
+@media (max-width: 768px) {
   .stepper-horizontal {
     .stepper-steps {
-      flex-direction: column;
-      gap: $spacing-4;
+      @apply flex-col gap-4;
     }
 
     .step-connector {
-      display: none;
+      @apply hidden;
     }
 
-    .step-connector-vertical {
-      display: block;
-      position: absolute;
-      left: 20px;
-      top: 48px;
-      width: 2px;
-      height: calc(100% + 1rem);
-      background: #e2e8f0;
-
-      .dark & {
-        background: #334155;
+    .stepper-step {
+      @apply relative;
+      
+      &::after {
+        content: '';
+        @apply absolute left-5 top-12 w-0.5 bg-slate-200 dark:bg-slate-700;
+        height: calc(100% + 1rem);
       }
-    }
-
-    .step-content {
-      flex-direction: row;
-      align-items: flex-start;
-      gap: $spacing-3;
-    }
-
-    .step-label {
-      flex: 1;
-    }
-
-    .step-title {
-      font-size: $text-sm;
-    }
-
-    .step-description {
-      font-size: $text-xs;
     }
   }
 
   .stepper-actions {
-    flex-direction: column;
-    gap: $spacing-2;
-    margin-top: $spacing-4;
-
+    @apply flex-col gap-2 mt-4;
+    
     button {
-      width: 100%;
-      min-height: 44px; // Touch target
-      justify-content: center;
+      @apply w-full justify-center;
     }
-  }
-
-  .step-indicator {
-    width: 36px;
-    height: 36px;
-    flex-shrink: 0;
   }
 }
 
 /* Responsive - Tablet */
-@include respond-to-between(md, lg) {
+@media (min-width: 768px) and (max-width: 1024px) {
   .stepper-horizontal {
     .stepper-steps {
-      gap: $spacing-2;
+      @apply gap-2;
     }
 
     .step-connector {
-      margin: 0 $spacing-2;
+      @apply mx-2;
     }
 
-    .step-label {
-      .step-title {
-        font-size: $text-sm;
-      }
-
-      .step-description {
-        display: none; // Hide description on tablet
-      }
+    .step-description {
+      @apply hidden;
     }
-  }
-}
-
-/* Touch Targets */
-.stepper-step {
-  min-height: 44px; // Touch target
-  padding: $spacing-2;
-  cursor: pointer;
-
-  @include respond-to(md) {
-    min-height: auto;
-    padding: 0;
-  }
-}
-
-.stepper-actions button {
-  min-width: 44px;
-  min-height: 44px;
-  padding: $spacing-2 $spacing-4;
-
-  @include respond-to(md) {
-    min-width: auto;
-    min-height: auto;
   }
 }
 

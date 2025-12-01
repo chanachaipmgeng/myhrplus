@@ -1,17 +1,22 @@
-<div class="demo-page">
-  <div class="demo-header">
-    <h1 class="demo-title">Loading Spinner Component</h1>
-    <p class="demo-description">
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Loading Spinner Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
       Global loading spinner component that works with LoadingService for showing/hiding loading state across the application.
     </p>
   </div>
 
   <!-- Live Demo Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Live Demo</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
     
     <app-glass-card padding="p-6">
-      <div class="demo-preview">
+      <div class="mb-6">
         <p class="text-slate-700 dark:text-slate-300 mb-4">
           คลิกปุ่มด้านล่างเพื่อแสดง loading spinner (จะปิดอัตโนมัติใน 3 วินาที)
         </p>
@@ -23,38 +28,55 @@
   </section>
 
   <!-- Usage Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Usage</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Usage
+    </h2>
     
     <app-glass-card padding="p-6">
-      <div class="usage-info">
+      <div>
         <p class="text-slate-700 dark:text-slate-300 mb-4">
           Loading Spinner component ใช้ร่วมกับ LoadingService เพื่อควบคุมการแสดง/ซ่อน loading state
         </p>
-        <ul class="usage-list">
-          <li>เพิ่ม component ใน app component หรือ layout component</li>
-          <li>ใช้ LoadingService.show() เพื่อแสดง loading</li>
-          <li>ใช้ LoadingService.hide() เพื่อซ่อน loading</li>
-          <li>Component จะแสดง/ซ่อนอัตโนมัติตาม state ของ service</li>
+        <ul class="list-none p-0 m-0">
+          <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['•'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">
+            เพิ่ม component ใน app component หรือ layout component
+          </li>
+          <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['•'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">
+            ใช้ LoadingService.show() เพื่อแสดง loading
+          </li>
+          <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['•'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">
+            ใช้ LoadingService.hide() เพื่อซ่อน loading
+          </li>
+          <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['•'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">
+            Component จะแสดง/ซ่อนอัตโนมัติตาม state ของ service
+          </li>
         </ul>
       </div>
     </app-glass-card>
   </section>
 
   <!-- Code Examples -->
-  <section class="demo-section">
-    <h2 class="section-title">Code Examples</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Code Examples
+    </h2>
     
-    <h3 class="subsection-title">Basic Usage</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
     <app-code-viewer [code]="basicExample" language="html" title="Basic Loading Spinner"></app-code-viewer>
 
-    <h3 class="subsection-title">Using LoadingService</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Using LoadingService</h3>
     <app-code-viewer [code]="serviceExample" language="typescript" title="LoadingService Usage"></app-code-viewer>
   </section>
 
   <!-- API Documentation -->
-  <section class="demo-section">
-    <h2 class="section-title">API Documentation</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Documentation
+    </h2>
     <app-glass-card padding="p-6">
       <p class="text-slate-600 dark:text-slate-400">
         Loading Spinner component has no inputs or outputs. It uses LoadingService internally to manage loading state.

@@ -1,24 +1,30 @@
-<div class="demo-layout-container">
+<div class="flex flex-col h-screen overflow-hidden">
   <!-- Header -->
-  <header class="demo-header glass-card">
-    <div class="header-content">
-      <div class="header-left">
+  <header class="sticky top-0 z-[100] px-4 md:px-6 py-4 glass dark:glass-dark theme-gemini:glass-gemini border-b border-black/10 dark:border-white/10 shadow-sm">
+    <div class="flex justify-between items-center gap-4">
+      <div class="flex items-center gap-4">
         <button
           type="button"
-          class="menu-toggle-btn"
+          class="flex items-center justify-center w-10 h-10 border-none bg-transparent rounded-lg cursor-pointer transition-smooth
+                 hover:bg-black/5 dark:hover:bg-white/10 theme-gemini:hover:bg-blue-500/10
+                 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
           (click)="toggleSidebar()"
           [attr.aria-label]="'Toggle sidebar'">
-          <span class="material-icons">menu</span>
+          <span class="material-icons text-2xl text-gray-900 dark:text-gray-100">menu</span>
         </button>
-        <h1 class="header-title">Component Demo Showcase</h1>
+        <h1 class="text-xl md:text-base font-semibold text-gray-900 dark:text-gray-100 m-0">Component Demo Showcase</h1>
       </div>
-      <div class="header-right">
+      <div class="flex items-center gap-4">
         <!-- Language Switcher -->
-        <div class="language-switcher">
+        <div class="flex items-center gap-2">
           <select
             [value]="currentLang"
             (change)="changeLanguage($any($event.target).value)"
-            class="lang-select">
+            class="px-3 py-2 border border-black/10 dark:border-white/10 rounded-md
+                   glass-weak dark:glass-dark-weak theme-gemini:glass-gemini-weak
+                   text-gray-900 dark:text-gray-100 text-sm cursor-pointer transition-smooth
+                   hover:glass dark:hover:glass-dark theme-gemini:hover:glass-gemini
+                   focus:outline-none focus:ring-2 focus:ring-primary-500/20">
             <option *ngFor="let lang of availableLangs" [value]="lang.code">
               {{ lang.flag }} {{ lang.name }}
             </option>
@@ -26,11 +32,15 @@
         </div>
 
         <!-- Theme Mode Switcher -->
-        <div class="theme-controls">
+        <div class="flex items-center gap-2 md:flex-col md:gap-1">
           <select
             [value]="currentTheme.mode"
             (change)="changeThemeMode($any($event.target).value)"
-            class="theme-mode-select">
+            class="px-3 py-2 md:px-2 md:py-1.5 md:text-xs border border-black/10 dark:border-white/10 rounded-md
+                   glass-weak dark:glass-dark-weak theme-gemini:glass-gemini-weak
+                   text-gray-900 dark:text-gray-100 text-sm cursor-pointer transition-smooth
+                   hover:glass dark:hover:glass-dark theme-gemini:hover:glass-gemini
+                   focus:outline-none focus:ring-2 focus:ring-primary-500/20">
             <option *ngFor="let mode of themeModes" [value]="mode.value">
               {{ mode.icon }} {{ mode.label }}
             </option>
@@ -39,7 +49,11 @@
           <select
             [value]="currentTheme.color"
             (change)="changeThemeColor($any($event.target).value)"
-            class="theme-color-select">
+            class="px-3 py-2 md:px-2 md:py-1.5 md:text-xs border border-black/10 dark:border-white/10 rounded-md
+                   glass-weak dark:glass-dark-weak theme-gemini:glass-gemini-weak
+                   text-gray-900 dark:text-gray-100 text-sm cursor-pointer transition-smooth
+                   hover:glass dark:hover:glass-dark theme-gemini:hover:glass-gemini
+                   focus:outline-none focus:ring-2 focus:ring-primary-500/20">
             <option *ngFor="let color of themeColors" [value]="color.value">
               {{ color.label }}
             </option>
@@ -50,7 +64,7 @@
   </header>
 
   <!-- Main Content -->
-  <div class="demo-main">
+  <div class="flex flex-1 overflow-hidden">
     <!-- Sidebar -->
     <ejs-sidebar
       #sidebar
@@ -59,34 +73,43 @@
       [isOpen]="false"
       [closeOnDocumentClick]="true"
       (close)="closeSidebar()">
-      <div class="sidebar-content">
-        <div class="sidebar-header">
-          <h2 class="sidebar-title">Components</h2>
+      <div class="flex flex-col h-full">
+        <div class="flex justify-between items-center px-6 py-4 border-b border-black/10 dark:border-white/10">
+          <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 m-0">Components</h2>
           <button
             type="button"
-            class="close-btn"
+            class="flex items-center justify-center w-8 h-8 border-none bg-transparent rounded-md cursor-pointer transition-smooth
+                   hover:bg-black/5 dark:hover:bg-white/10 theme-gemini:hover:bg-blue-500/10
+                   focus:outline-none focus:ring-2 focus:ring-primary-500/20"
             (click)="closeSidebar()"
             aria-label="Close sidebar">
-            <span class="material-icons">close</span>
+            <span class="material-icons text-xl text-gray-900 dark:text-gray-100">close</span>
           </button>
         </div>
 
-        <div class="sidebar-body">
-          <div *ngFor="let group of componentGroups" class="component-group">
-            <div class="group-header">
-              <span class="group-icon">{{ group.icon }}</span>
-              <h3 class="group-name">{{ group.name }}</h3>
+        <div class="flex-1 overflow-y-auto py-4">
+          <div *ngFor="let group of componentGroups" class="mb-6 last:mb-0">
+            <div class="flex items-center gap-2 px-6 py-3 mb-2">
+              <span class="text-xl">{{ group.icon }}</span>
+              <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100 opacity-70 m-0 uppercase tracking-wider">
+                {{ group.name }}
+              </h3>
             </div>
-            <ul class="component-list">
-              <li
-                *ngFor="let component of group.components"
-                class="component-item"
-                [class.active]="isActiveRoute(component.route)">
+            <ul class="list-none p-0 m-0">
+              <li *ngFor="let component of group.components" class="my-1">
                 <a
                   (click)="navigateToComponent(component.route)"
-                  class="component-link">
-                  <span class="component-icon">{{ component.icon }}</span>
-                  <span class="component-name">{{ component.name }}</span>
+                  class="flex items-center gap-3 px-6 py-3 text-gray-900 dark:text-gray-100 no-underline transition-smooth cursor-pointer
+                         border-l-[3px] border-transparent
+                         hover:bg-black/5 dark:hover:bg-white/5 hover:border-primary-500
+                         theme-gemini:hover:bg-blue-500/10 theme-gemini:hover:border-blue-400
+                         focus:outline-none focus:ring-2 focus:ring-primary-500/20"
+                  [ngClass]="{
+                    'bg-blue-500/10 dark:bg-blue-500/20 border-primary-500 font-medium': isActiveRoute(component.route),
+                    'theme-gemini:bg-blue-500/20 theme-gemini:border-blue-400': isActiveRoute(component.route)
+                  }">
+                  <span class="text-lg">{{ component.icon }}</span>
+                  <span class="text-sm">{{ component.name }}</span>
                 </a>
               </li>
             </ul>
@@ -96,7 +119,7 @@
     </ejs-sidebar>
 
     <!-- Content Area -->
-    <div class="demo-content">
+    <div class="flex-1 overflow-y-auto p-8 md:p-4 bg-gray-50 dark:bg-gray-900 theme-gemini:bg-black">
       <router-outlet></router-outlet>
     </div>
   </div>

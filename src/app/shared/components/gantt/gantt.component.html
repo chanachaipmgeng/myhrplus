@@ -1,4 +1,4 @@
-<div class="gantt-container" [ngClass]="customClass" [style.height]="height" [style.width]="width">
+<div class="gantt-container relative w-full h-full glass dark:glass-dark theme-gemini:glass-gemini rounded-2xl border border-white/10 dark:border-white/5 shadow-glass p-4 overflow-hidden" [ngClass]="customClass" [style.height]="height" [style.width]="width">
   <ejs-gantt
     #gantt
     [dataSource]="dataSource"
@@ -35,6 +35,7 @@
     (created)="onCreated($event)">
   </ejs-gantt>
 </div>
+
 
 
 

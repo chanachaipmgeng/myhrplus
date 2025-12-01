@@ -1,24 +1,36 @@
-<div class="demo-index">
-  <div class="intro-section">
-    <h1 class="intro-title">Component Demo Showcase</h1>
-    <p class="intro-description">
+<div class="w-full py-12">
+  <div class="text-center mb-12">
+    <h1 class="text-4xl md:text-3xl sm:text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Component Demo Showcase
+    </h1>
+    <p class="text-lg text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 max-w-2xl mx-auto">
       ตัวอย่างการใช้งาน Components ทั้งหมดพร้อมโค้ดตัวอย่างและ API Documentation
     </p>
   </div>
 
-  <div class="components-grid">
+  <div class="flex flex-col gap-12">
     @for (category of categories; track category) {
-      <section class="category-section">
-        <h2 class="category-title">{{ category }}</h2>
-        <div class="components-list">
+      <section class="mb-8">
+        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+          {{ category }}
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-[repeat(auto-fill,minmax(240px,1fr))] lg:grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-6 md:gap-4">
           @for (component of getComponentsByCategory(category); track component.route) {
-            <a [routerLink]="['/demo', component.route]" class="component-card">
-              <app-glass-card padding="p-6" customClass="h-full hover:scale-105 transition-transform">
-                <div class="component-card-content">
-                  <div class="component-icon">{{ component.icon }}</div>
-                  <h3 class="component-name">{{ component.name }}</h3>
-                  <p class="component-description">{{ component.description }}</p>
-                  <span class="view-demo-link">View Demo →</span>
+            <a [routerLink]="['/demo', component.route]" 
+               class="block no-underline text-inherit transition-transform hover:-translate-y-1">
+              <app-glass-card padding="p-6" customClass="h-full hover-scale transition-smooth">
+                <div class="flex flex-col items-center text-center h-full">
+                  <div class="text-5xl mb-4">{{ component.icon }}</div>
+                  <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+                    {{ component.name }}
+                  </h3>
+                  <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mb-4 flex-1">
+                    {{ component.description }}
+                  </p>
+                  <span class="text-sm font-medium text-primary-600 dark:text-primary-400 theme-gemini:text-blue-400 theme-gemini:drop-shadow-[0_0_8px_rgba(59,130,246,0.5)] mt-auto">
+                    View Demo →
+                  </span>
                 </div>
               </app-glass-card>
             </a>

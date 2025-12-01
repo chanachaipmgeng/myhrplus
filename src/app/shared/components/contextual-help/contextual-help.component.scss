@@ -2,112 +2,12 @@
    Contextual Help Component Styles
    ============================================ */
 
-@import '../../../../styles/design-tokens';
-@import '../../../../styles/mixins';
-
 :host {
   display: inline-block;
 }
 
-.contextual-help {
-  display: inline-flex;
-  align-items: center;
-  cursor: help;
-  transition: $transition-all;
-}
-
-.help-trigger {
-  display: inline-flex;
-  align-items: center;
-  gap: $spacing-1;
-  padding: $spacing-1;
-  border-radius: $radius-md;
-  transition: $transition-all;
-  
-  &:hover {
-    background: rgba(var(--primary-rgb), 0.1);
-    
-    .help-icon {
-      color: rgb(var(--primary-rgb)) !important;
-    }
-  }
-}
-
-.help-inline {
-  display: inline-flex;
-  align-items: center;
-  gap: $spacing-1;
-  padding: $spacing-1;
-  border-radius: $radius-md;
-  transition: $transition-all;
-  
-  &:hover {
-    background: rgba(var(--primary-rgb), 0.1);
-    
-    .help-icon {
-      color: rgb(var(--primary-rgb)) !important;
-    }
-  }
-}
-
-.help-icon-only {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: $radius-full;
-  transition: $transition-all;
-  
-  &:hover {
-    background: rgba(var(--primary-rgb), 0.1);
-    
-    .help-icon {
-      color: rgb(var(--primary-rgb)) !important;
-      transform: scale(1.1);
-    }
-  }
-}
-
-.help-icon {
-  transition: $transition-all;
-  flex-shrink: 0;
-}
-
-.help-text {
-  font-size: $text-sm;
-  color: $gray-600;
-  transition: $transition-colors;
-  
-  .dark & {
-    color: $gray-400;
-  }
-  
-  .contextual-help:hover & {
-    color: rgb(var(--primary-rgb));
-  }
-}
-
-// Responsive
-@include respond-to-down(sm) {
-  .help-trigger,
-  .help-inline {
-    min-width: 44px;
-    min-height: 44px;
-    justify-content: center;
-  }
-  
-  .help-text {
-    display: none; // Hide text on mobile, show icon only
-  }
-}
-
-// Gemini Theme
-body.theme-gemini {
-  .help-trigger:hover,
-  .help-inline:hover,
-  .help-icon-only:hover {
-    @include gemini-glow('subtle');
-  }
+/* Gemini Theme - subtle glow on hover */
+body.theme-gemini .contextual-help:hover {
+  @apply shadow-gemini-sm;
 }
 

@@ -1,30 +1,38 @@
-<div class="demo-page">
-  <div class="demo-header">
-    <h1 class="demo-title">Progress Bar Component</h1>
-    <p class="demo-description">
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Progress Bar Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
       Progress bar component with variants, labels, and descriptions. Perfect for showing task completion or loading states.
     </p>
   </div>
 
   <!-- Live Demo Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Live Demo</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
     
     <app-glass-card padding="p-6">
-      <div class="demo-controls">
-        <div class="control-group">
-          <label>Progress Value:</label>
+      <div class="flex gap-4 mb-6 flex-wrap items-center">
+        <div class="flex items-center gap-3 flex-1 min-w-[200px]">
+          <label class="font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 min-w-[120px]">Progress Value:</label>
           <input
             type="range"
             min="0"
             max="100"
             [(ngModel)]="progressValue"
-            class="control-range">
-          <span class="value-display">{{ progressValue }}%</span>
+            class="flex-1 h-1.5 rounded-full bg-gray-200 dark:bg-gray-700 outline-none appearance-none
+                   theme-gemini:bg-gray-700/50
+                   [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary-500 dark:[&::-webkit-slider-thumb]:bg-primary-400 theme-gemini:[&::-webkit-slider-thumb]:bg-blue-500 theme-gemini:[&::-webkit-slider-thumb]:shadow-gemini-sm [&::-webkit-slider-thumb]:cursor-pointer
+                   [&::-moz-range-thumb]:w-[18px] [&::-moz-range-thumb]:h-[18px] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-primary-500 dark:[&::-moz-range-thumb]:bg-primary-400 theme-gemini:[&::-moz-range-thumb]:bg-blue-500 [&::-moz-range-thumb]:border-none [&::-moz-range-thumb]:cursor-pointer">
+          <span class="min-w-[50px] text-right font-semibold text-primary-600 dark:text-primary-400 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">{{ progressValue }}%</span>
         </div>
       </div>
 
-      <div class="demo-preview">
+      <div class="mb-6">
         <app-progress-bar
           [value]="progressValue"
           label="Interactive Progress"
@@ -35,8 +43,11 @@
   </section>
 
   <!-- Variants Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Variants</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Variants
+    </h2>
     <app-glass-card padding="p-6">
       <div class="space-y-6">
         <app-progress-bar
@@ -71,8 +82,11 @@
   </section>
 
   <!-- Animated Progress Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Animated Progress</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Animated Progress
+    </h2>
     <app-glass-card padding="p-6">
       <div class="space-y-4">
         <app-progress-bar
@@ -92,25 +106,31 @@
   </section>
 
   <!-- Code Examples -->
-  <section class="demo-section">
-    <h2 class="section-title">Code Examples</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Code Examples
+    </h2>
     
-    <h3 class="subsection-title">Basic Usage</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
     <app-code-viewer [code]="basicExample" language="html" title="Basic Progress Bar"></app-code-viewer>
 
-    <h3 class="subsection-title">Variants</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Variants</h3>
     <app-code-viewer [code]="variantsExample" language="html" title="Progress Bar Variants"></app-code-viewer>
 
-    <h3 class="subsection-title">With Description</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Description</h3>
     <app-code-viewer [code]="withDescriptionExample" language="html" title="Progress Bar with Description"></app-code-viewer>
 
-    <h3 class="subsection-title">Animated Progress</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Animated Progress</h3>
     <app-code-viewer [code]="animatedExample" language="typescript" title="Animated Progress Bar"></app-code-viewer>
   </section>
 
   <!-- API Documentation -->
-  <section class="demo-section">
-    <h2 class="section-title">API Documentation</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Documentation
+    </h2>
     <app-props-table [props]="props" title="Inputs"></app-props-table>
   </section>
 </div>

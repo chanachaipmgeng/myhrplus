@@ -1,19 +1,24 @@
-<div class="demo-page">
-  <div class="demo-header">
-    <h1 class="demo-title">Theme Toggle Component</h1>
-    <p class="demo-description">
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Theme Toggle Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
       Theme toggle component for switching between light, dark, and auto modes, as well as different theme colors.
     </p>
   </div>
 
   <!-- Live Demo Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Live Demo</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
     
     <app-glass-card padding="p-6">
-      <div class="demo-preview">
-        <div class="toggle-demo">
-          <p class="demo-text">ลองเปลี่ยนธีมและสีด้วย component ด้านล่าง:</p>
+      <div class="mb-6">
+        <div class="flex flex-col items-center gap-4 p-6">
+          <p class="text-base text-gray-700 dark:text-gray-300 theme-gemini:text-white/80 text-center">ลองเปลี่ยนธีมและสีด้วย component ด้านล่าง:</p>
           <app-theme-toggle></app-theme-toggle>
         </div>
       </div>
@@ -21,62 +26,71 @@
   </section>
 
   <!-- Features Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Features</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Features
+    </h2>
     
-    <div class="features-grid">
+    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6">
       <app-glass-card padding="p-6">
         <h3 class="text-lg font-semibold mb-2">Theme Modes</h3>
-        <ul class="feature-list">
-          <li>Light Mode</li>
-          <li>Dark Mode</li>
-          <li>Auto (follows system)</li>
+        <ul class="list-none p-0 m-0">
+          <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Light Mode</li>
+          <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Dark Mode</li>
+          <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Auto (follows system)</li>
         </ul>
       </app-glass-card>
 
       <app-glass-card padding="p-6">
         <h3 class="text-lg font-semibold mb-2">Theme Colors</h3>
-        <ul class="feature-list">
-          <li>Blue (default)</li>
-          <li>Indigo</li>
-          <li>Purple</li>
-          <li>Green</li>
-          <li>Orange</li>
-          <li>Red</li>
-          <li>Teal</li>
-          <li>Pink</li>
+        <ul class="list-none p-0 m-0">
+          <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Blue (default)</li>
+          <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Indigo</li>
+          <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Purple</li>
+          <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Green</li>
+          <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Orange</li>
+          <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Red</li>
+          <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Teal</li>
+          <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Pink</li>
         </ul>
       </app-glass-card>
 
       <app-glass-card padding="p-6">
         <h3 class="text-lg font-semibold mb-2">Features</h3>
-        <ul class="feature-list">
-          <li>Persistent settings</li>
-          <li>Dropdown menus</li>
-          <li>Visual color preview</li>
-          <li>Gemini theme support</li>
+        <ul class="list-none p-0 m-0">
+          <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Persistent settings</li>
+          <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Dropdown menus</li>
+          <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Visual color preview</li>
+          <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Gemini theme support</li>
         </ul>
       </app-glass-card>
     </div>
   </section>
 
   <!-- Code Examples -->
-  <section class="demo-section">
-    <h2 class="section-title">Code Examples</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Code Examples
+    </h2>
     
-    <h3 class="subsection-title">Basic Usage</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
     <app-code-viewer [code]="basicExample" language="html" title="Basic Theme Toggle"></app-code-viewer>
 
-    <h3 class="subsection-title">Usage</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Usage</h3>
     <app-code-viewer [code]="usageExample" language="html" title="Theme Toggle Usage"></app-code-viewer>
 
-    <h3 class="subsection-title">Using ThemeService</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Using ThemeService</h3>
     <app-code-viewer [code]="serviceExample" language="typescript" title="ThemeService Usage"></app-code-viewer>
   </section>
 
   <!-- API Documentation -->
-  <section class="demo-section">
-    <h2 class="section-title">API Documentation</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Documentation
+    </h2>
     <app-glass-card padding="p-6">
       <p class="text-slate-600 dark:text-slate-400">
         Theme Toggle component has no inputs or outputs. It uses ThemeService internally to manage theme state.

@@ -1,18 +1,23 @@
-<div class="demo-page">
-  <div class="demo-header">
-    <h1 class="demo-title">Status Badge Component</h1>
-    <p class="demo-description">
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Status Badge Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
       Status badge component with predefined status types, variants, sizes, and icons.
     </p>
   </div>
 
   <!-- Live Demo Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Live Demo</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
     
     <app-glass-card padding="p-6">
-      <div class="demo-preview">
-        <div class="badges-grid">
+      <div class="mb-6">
+        <div class="flex flex-wrap gap-3">
           <app-status-badge
             *ngFor="let status of statusTypes"
             [status]="status">
@@ -23,58 +28,73 @@
   </section>
 
   <!-- Variants Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Variants</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Variants
+    </h2>
     <app-glass-card padding="p-6">
-      <div class="variants-demo">
-        <div class="variant-group">
-          <h3 class="text-sm font-semibold mb-2">Filled</h3>
-          <app-status-badge status="pending" variant="filled"></app-status-badge>
-          <app-status-badge status="approved" variant="filled"></app-status-badge>
-          <app-status-badge status="rejected" variant="filled"></app-status-badge>
+      <div class="flex flex-col gap-6">
+        <div class="flex flex-col gap-3">
+          <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Filled</h3>
+          <div class="flex flex-wrap gap-3">
+            <app-status-badge status="pending" variant="filled"></app-status-badge>
+            <app-status-badge status="approved" variant="filled"></app-status-badge>
+            <app-status-badge status="rejected" variant="filled"></app-status-badge>
+          </div>
         </div>
-        <div class="variant-group">
-          <h3 class="text-sm font-semibold mb-2">Outlined</h3>
-          <app-status-badge status="pending" variant="outlined"></app-status-badge>
-          <app-status-badge status="approved" variant="outlined"></app-status-badge>
-          <app-status-badge status="rejected" variant="outlined"></app-status-badge>
+        <div class="flex flex-col gap-3">
+          <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Outlined</h3>
+          <div class="flex flex-wrap gap-3">
+            <app-status-badge status="pending" variant="outlined"></app-status-badge>
+            <app-status-badge status="approved" variant="outlined"></app-status-badge>
+            <app-status-badge status="rejected" variant="outlined"></app-status-badge>
+          </div>
         </div>
-        <div class="variant-group">
-          <h3 class="text-sm font-semibold mb-2">Soft</h3>
-          <app-status-badge status="pending" variant="soft"></app-status-badge>
-          <app-status-badge status="approved" variant="soft"></app-status-badge>
-          <app-status-badge status="rejected" variant="soft"></app-status-badge>
+        <div class="flex flex-col gap-3">
+          <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Soft</h3>
+          <div class="flex flex-wrap gap-3">
+            <app-status-badge status="pending" variant="soft"></app-status-badge>
+            <app-status-badge status="approved" variant="soft"></app-status-badge>
+            <app-status-badge status="rejected" variant="soft"></app-status-badge>
+          </div>
         </div>
       </div>
     </app-glass-card>
   </section>
 
   <!-- Sizes Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Sizes</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Sizes
+    </h2>
     <app-glass-card padding="p-6">
-      <div class="sizes-demo">
-        <div class="size-item">
+      <div class="flex gap-6 items-center flex-wrap">
+        <div class="flex flex-col items-center gap-2">
           <app-status-badge status="approved" size="sm"></app-status-badge>
-          <span>Small</span>
+          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Small</span>
         </div>
-        <div class="size-item">
+        <div class="flex flex-col items-center gap-2">
           <app-status-badge status="approved" size="md"></app-status-badge>
-          <span>Medium</span>
+          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Medium</span>
         </div>
-        <div class="size-item">
+        <div class="flex flex-col items-center gap-2">
           <app-status-badge status="approved" size="lg"></app-status-badge>
-          <span>Large</span>
+          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Large</span>
         </div>
       </div>
     </app-glass-card>
   </section>
 
   <!-- Without Icon Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Without Icon</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Without Icon
+    </h2>
     <app-glass-card padding="p-6">
-      <div class="no-icon-demo">
+      <div class="flex gap-6 items-center flex-wrap">
         <app-status-badge status="pending" [showIcon]="false"></app-status-badge>
         <app-status-badge status="approved" [showIcon]="false"></app-status-badge>
         <app-status-badge status="rejected" [showIcon]="false"></app-status-badge>
@@ -83,25 +103,31 @@
   </section>
 
   <!-- Code Examples -->
-  <section class="demo-section">
-    <h2 class="section-title">Code Examples</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Code Examples
+    </h2>
     
-    <h3 class="subsection-title">Basic Usage</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
     <app-code-viewer [code]="basicExample" language="html" title="Basic Status Badge"></app-code-viewer>
 
-    <h3 class="subsection-title">Variants</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Variants</h3>
     <app-code-viewer [code]="variantsExample" language="html" title="Status Badge Variants"></app-code-viewer>
 
-    <h3 class="subsection-title">Sizes</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Sizes</h3>
     <app-code-viewer [code]="sizesExample" language="html" title="Status Badge Sizes"></app-code-viewer>
 
-    <h3 class="subsection-title">Custom Label</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Custom Label</h3>
     <app-code-viewer [code]="customLabelExample" language="html" title="Custom Label"></app-code-viewer>
   </section>
 
   <!-- API Documentation -->
-  <section class="demo-section">
-    <h2 class="section-title">API Documentation</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Documentation
+    </h2>
     <app-props-table [props]="props" title="Inputs"></app-props-table>
   </section>
 </div>
