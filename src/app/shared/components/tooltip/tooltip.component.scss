@@ -1,88 +1,13 @@
 /* ============================================
    Tooltip Component Styles
+   ============================================
+   Migrated to Tailwind - Minimal SCSS for component-specific styles only
    ============================================ */
-
-@import '../../../../styles/design-tokens';
-@import '../../../../styles/mixins';
 
 :host {
   display: inline-block;
 }
 
-/* Tooltip Container & Tooltip - Using Tailwind classes in HTML */
-/* Removed duplicate utility classes - using Tailwind directly */
-
-/* Tooltip Background */
-.bg-slate-800 {
-  background-color: $gray-800;
-}
-
-.dark .bg-slate-700 {
-  background-color: $gray-700;
-}
-
-/* Tooltip Arrow - Using Tailwind classes in HTML */
-/* Removed duplicate utility classes */
-
-/* Position Variants */
-// Position styles are handled via inline styles in component
-
-/* Dark Mode */
-.dark {
-  .bg-slate-800 {
-    background-color: $gray-700;
-  }
-  
-  .bg-slate-700 {
-    background-color: $gray-600;
-  }
-}
-
-/* Gemini Theme */
-body.theme-gemini {
-  .bg-slate-800,
-  .dark .bg-slate-700 {
-    @include glass-gemini('default');
-    @include gemini-border-glow();
-    background: linear-gradient(135deg, rgba($gemini-gradient-end, 0.9), rgba($gemini-gradient-start, 0.9));
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-  
-  .w-2 {
-    background: linear-gradient(135deg, rgba($gemini-gradient-end, 0.9), rgba($gemini-gradient-start, 0.9));
-  }
-  
-  .text-white {
-    @include gradient-text-gemini();
-    color: white; // Fallback
-  }
-}
-
-/* Responsive - Using Tailwind responsive classes in HTML */
-/* Removed duplicate responsive utility classes */
-
-/* Enhanced tooltip animation */
-.tooltip-enter {
-  animation: tooltipFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform, opacity;
-}
-
-@keyframes tooltipFadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95) translateY(-4px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .tooltip-enter {
-    animation: none;
-  }
-}
+/* Component uses Tailwind classes directly in HTML */
+/* All styles handled by Tailwind utilities and plugins */
 

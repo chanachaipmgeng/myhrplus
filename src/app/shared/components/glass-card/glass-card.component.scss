@@ -1,110 +1,16 @@
 /* ============================================
    Glass Card Component Styles
+   ============================================
+   Migrated to Tailwind - Minimal SCSS for component-specific styles only
    ============================================ */
-
-@import '../../../../styles/design-tokens';
-@import '../../../../styles/mixins';
 
 :host {
   display: block;
 }
 
-/* Base Glass Card */
-.glass-card,
-.glass-card-strong,
-.glass-card-weak {
-  @include glass-morphism('default', 'light');
-  border-radius: $radius-lg;
-  box-shadow: $shadow-glass;
-  @include smooth-transition(transform box-shadow, 0.3s);
-  position: relative;
-  overflow: hidden;
-
-  /* Hover State - Enhanced micro-interaction */
-  &:hover {
-    @include hover-lift(2px);
-    box-shadow: $shadow-glass-lg;
-    /* Subtle scale on hover */
-    transform: translateY(-2px) scale(1.01);
-  }
-  
-  /* Active State */
-  &:active {
-    transform: translateY(0) scale(0.99);
-    transition-duration: 0.1s;
-  }
-}
-
-/* Strong Variant */
-.glass-card-strong {
-  @include glass-morphism('strong', 'light');
-  box-shadow: $shadow-glass-lg;
-}
-
-/* Weak Variant */
-.glass-card-weak {
-  @include glass-morphism('weak', 'light');
-  box-shadow: $shadow-glass-sm;
-}
-
-/* Dark Mode */
-.dark {
-  .glass-card {
-    @include glass-morphism('default', 'dark');
-    box-shadow: $shadow-glass-dark;
-  }
-
-  .glass-card-strong {
-    @include glass-morphism('strong', 'dark');
-    box-shadow: $shadow-glass-dark-lg;
-  }
-
-  .glass-card-weak {
-    @include glass-morphism('weak', 'dark');
-    box-shadow: $shadow-glass-dark-sm;
-  }
-}
-
-/* Gemini Theme */
-body.theme-gemini {
-  .glass-card,
-  .glass-card-strong,
-  .glass-card-weak {
-    @include glass-gemini('default');
-    @include gemini-border-glow();
-
-    &:hover {
-      @include gemini-glow('default');
-      transform: translateY(-4px) scale(1.02);
-    }
-  }
-
-  .glass-card-strong {
-    @include glass-gemini('strong');
-  }
-
-  .glass-card-weak {
-    @include glass-gemini('weak');
-  }
-}
-
-/* Responsive */
-@include respond-to-down(sm) {
-  .glass-card,
-  .glass-card-strong,
-  .glass-card-weak {
-    border-radius: $radius-md;
-  }
-}
-
-/* Animations */
-.animate-fade-in {
-  @include fade-in();
-}
-
-.animate-slide-up {
-  @include slide-up();
-}
+/* Component uses Tailwind classes directly in HTML */
+/* All glass morphism, hover effects, and animations handled by Tailwind utilities */
+/* Dark mode and Gemini theme handled via Tailwind dark: and theme-gemini: variants */
 
 .animate-slide-down {
   @include slide-down();

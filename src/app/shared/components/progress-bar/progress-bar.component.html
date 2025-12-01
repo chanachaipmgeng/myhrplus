@@ -15,12 +15,14 @@
     [attr.aria-valuemin]="0"
     [attr.aria-valuemax]="100"
     [attr.aria-valuetext]="ariaValueText"
-    class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
+    class="w-full bg-slate-200 dark:bg-slate-700 theme-gemini:bg-primary-500/10 theme-gemini:border theme-gemini:border-primary-500/20 rounded-full h-2 overflow-hidden">
     <div
-      class="h-full rounded-full transition-all duration-500"
+      class="h-full rounded-full transition-transform-smooth relative overflow-hidden"
       [ngClass]="progressClass"
       [style.width.%]="value"
       aria-hidden="true">
+      <!-- Shine effect -->
+      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-[progressShine_2s_infinite]"></div>
     </div>
   </div>
   <p *ngIf="description" class="text-xs text-slate-500 dark:text-slate-400 mt-1" [attr.aria-describedby]="progressId">

@@ -1,17 +1,17 @@
 <app-glass-card padding="p-12" customClass="text-center">
   <div class="flex flex-col items-center justify-center">
     <!-- Icon -->
-    <div class="mb-4" [class]="iconSizeClass">
+    <div class="mb-4" [class]="iconSizeClass + ' sm:text-4xl md:text-6xl lg:text-8xl'">
       {{ icon || defaultIcon }}
     </div>
 
     <!-- Title -->
-    <h3 class="text-xl font-bold mb-2 text-slate-800 dark:text-slate-200">
+    <h3 class="text-xl font-bold mb-2 text-slate-800 dark:text-slate-200 theme-gemini:bg-gradient-gemini-text theme-gemini:bg-clip-text theme-gemini:text-transparent">
       {{ title || 'ไม่มีข้อมูล' }}
     </h3>
 
     <!-- Description -->
-    <p class="text-slate-600 dark:text-slate-400 mb-6 max-w-md">
+    <p class="text-slate-600 dark:text-slate-400 theme-gemini:text-white/70 mb-6 max-w-md">
       {{ description || 'ยังไม่มีข้อมูลในส่วนนี้' }}
     </p>
 

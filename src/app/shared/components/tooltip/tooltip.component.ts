@@ -41,7 +41,7 @@ export class TooltipComponent {
   }
 
   get tooltipClasses(): string {
-    return 'bg-slate-800 dark:bg-slate-700';
+    return 'bg-slate-800/90 dark:bg-slate-700/90 backdrop-blur-md';
   }
 }
 

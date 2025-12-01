@@ -6,19 +6,19 @@
     *ngIf="isVisible && text"
     [id]="tooltipId"
     role="tooltip"
-    [class]="tooltipClasses"
-    class="absolute z-50 px-3 py-2 text-sm text-white rounded-lg shadow-lg pointer-events-none transition-opacity"
+    [class]="tooltipClasses + ' animate-fade-in motion-safe:animate-none'"
+    class="absolute z-50 px-3 py-2 text-sm text-white rounded-lg shadow-lg pointer-events-none transition-opacity glass-weak dark:glass-dark-weak theme-gemini:glass-gemini-weak theme-gemini:shadow-gemini-sm"
     [style.top.px]="position === 'bottom' ? 100 : position === 'top' ? -100 : 0"
     [style.left.px]="0"
     [style.margin-top.px]="position === 'bottom' ? 8 : position === 'top' ? -8 : 0">
     {{ text }}
     <div
       *ngIf="position === 'bottom'"
-      class="absolute -top-1 left-4 w-2 h-2 bg-slate-800 dark:bg-slate-700 rotate-45">
+      class="absolute -top-1 left-4 w-2 h-2 bg-slate-800 dark:bg-slate-700 theme-gemini:bg-primary-500/80 rotate-45">
     </div>
     <div
       *ngIf="position === 'top'"
-      class="absolute -bottom-1 left-4 w-2 h-2 bg-slate-800 dark:bg-slate-700 rotate-45">
+      class="absolute -bottom-1 left-4 w-2 h-2 bg-slate-800 dark:bg-slate-700 theme-gemini:bg-primary-500/80 rotate-45">
     </div>
   </div>
 </div>

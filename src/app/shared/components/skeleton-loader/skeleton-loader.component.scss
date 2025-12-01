@@ -1,303 +1,24 @@
 /* ============================================
    Skeleton Loader Component Styles
+   ============================================
+   Migrated to Tailwind - Minimal SCSS for component-specific styles only
    ============================================ */
-
-@import '../../../../styles/design-tokens';
-@import '../../../../styles/mixins';
 
 :host {
   display: block;
   width: 100%;
 }
 
-.skeleton-loader {
-  width: 100%;
-  animation: fadeIn 0.3s ease-in;
-  
-  /* Optimize for performance */
-  will-change: opacity;
-  
-  /* Respect reduced motion preference */
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-  }
-}
+/* Component uses Tailwind classes directly in HTML */
+/* Animations handled by Tailwind utilities and keyframes */
 
-.skeleton-text-line,
-.skeleton-title,
-.skeleton-table-cell,
-.skeleton-avatar,
-.skeleton-custom {
-  background: linear-gradient(
-    90deg,
-    #e2e8f0 0%,
-    #f1f5f9 50%,
-    #e2e8f0 100%
-  );
-  background-size: 200% 100%;
-  border-radius: 0.25rem;
-  transition: all 0.3s ease;
-}
-
-.dark .skeleton-text-line,
-.dark .skeleton-title,
-.dark .skeleton-table-cell,
-.dark .skeleton-avatar,
-.dark .skeleton-custom {
-  background: linear-gradient(
-    90deg,
-    #334155 0%,
-    #475569 50%,
-    #334155 100%
-  );
-  background-size: 200% 100%;
-}
-
-// Text Skeleton
-.skeleton-text-line {
-  height: 1rem;
-  margin-bottom: 0.75rem;
-}
-
-.skeleton-text-line:last-child {
-  margin-bottom: 0;
-}
-
-// Card Skeleton
-.skeleton-card {
-  padding: 1.5rem;
-  border-radius: 0.75rem;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.dark .skeleton-card {
-  background: rgba(15, 23, 42, 0.1);
-  border-color: rgba(51, 65, 85, 0.2);
-}
-
-.skeleton-card-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.skeleton-title {
-  height: 1.25rem;
-  width: 60%;
-  margin-bottom: 0.5rem;
-}
-
-.skeleton-card-content {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-// Table Skeleton
-.skeleton-table {
-  width: 100%;
-  border-radius: 0.75rem;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.dark .skeleton-table {
-  background: rgba(15, 23, 42, 0.1);
-  border-color: rgba(51, 65, 85, 0.2);
-}
-
-.skeleton-table-header {
-  display: grid;
-  grid-template-columns: repeat(var(--columns, 3), 1fr);
-  gap: 1rem;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.dark .skeleton-table-header {
-  background: rgba(15, 23, 42, 0.1);
-  border-bottom-color: rgba(51, 65, 85, 0.2);
-}
-
-.skeleton-table-row {
-  display: grid;
-  grid-template-columns: repeat(var(--columns, 3), 1fr);
-  gap: 1rem;
-  padding: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.dark .skeleton-table-row {
-  border-bottom-color: rgba(51, 65, 85, 0.1);
-}
-
-.skeleton-table-row:last-child {
-  border-bottom: none;
-}
-
-.skeleton-table-cell {
-  height: 1rem;
-}
-
-// List Skeleton
-.skeleton-list-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.dark .skeleton-list-item {
-  border-bottom-color: rgba(51, 65, 85, 0.1);
-}
-
-.skeleton-list-item:last-child {
-  border-bottom: none;
-}
-
-.skeleton-list-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-// Avatar Skeleton
-.skeleton-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-// Animations
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.animate-pulse {
-  .skeleton-text-line,
-  .skeleton-title,
-  .skeleton-table-cell,
-  .skeleton-avatar,
-  .skeleton-custom {
-    animation: pulse 1.5s ease-in-out infinite;
-    /* Optimize for performance */
-    will-change: opacity;
-  }
-  
-  /* Respect reduced motion preference */
-  @media (prefers-reduced-motion: reduce) {
-    .skeleton-text-line,
-    .skeleton-title,
-    .skeleton-table-cell,
-    .skeleton-avatar,
-    .skeleton-custom {
-      animation: none;
-      opacity: 0.7;
-    }
-  }
-}
-
-.animate-wave {
-  .skeleton-text-line,
-  .skeleton-title,
-  .skeleton-table-cell,
-  .skeleton-avatar,
-  .skeleton-custom {
-    animation: wave 1.5s ease-in-out infinite;
-    /* Optimize for performance */
-    will-change: background-position;
-  }
-  
-  /* Respect reduced motion preference */
-  @media (prefers-reduced-motion: reduce) {
-    .skeleton-text-line,
-    .skeleton-title,
-    .skeleton-table-cell,
-    .skeleton-avatar,
-    .skeleton-custom {
-      animation: none;
-    }
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
+/* Animation keyframes for wave and shimmer effects */
 @keyframes wave {
   0% {
     background-position: -200% 0;
   }
   100% {
     background-position: 200% 0;
-  }
-}
-
-// Modern shimmer effect
-.animate-shimmer {
-  .skeleton-text-line,
-  .skeleton-title,
-  .skeleton-table-cell,
-  .skeleton-avatar,
-  .skeleton-custom {
-    background: linear-gradient(
-      90deg,
-      #e2e8f0 0%,
-      #f1f5f9 20%,
-      #e2e8f0 40%,
-      #e2e8f0 100%
-    );
-    background-size: 200% 100%;
-    animation: shimmer 2s ease-in-out infinite;
-    /* Optimize for performance */
-    will-change: background-position;
-  }
-  
-  /* Respect reduced motion preference */
-  @media (prefers-reduced-motion: reduce) {
-    .skeleton-text-line,
-    .skeleton-title,
-    .skeleton-table-cell,
-    .skeleton-avatar,
-    .skeleton-custom {
-      animation: none;
-    }
-  }
-  
-  .dark & {
-    .skeleton-text-line,
-    .skeleton-title,
-    .skeleton-table-cell,
-    .skeleton-avatar,
-    .skeleton-custom {
-      background: linear-gradient(
-        90deg,
-        #334155 0%,
-        #475569 20%,
-        #334155 40%,
-        #334155 100%
-      );
-      background-size: 200% 100%;
-    }
   }
 }
 
@@ -310,36 +31,19 @@
   }
 }
 
-// Responsive
-@include respond-to-down(sm) {
-  .skeleton-card {
-    padding: $spacing-3;
-  }
-  
-  .skeleton-avatar {
-    width: 32px;
-    height: 32px;
-  }
-  
-  .skeleton-title {
-    height: 1rem;
-  }
+/* Animation classes */
+.animate-wave [class*="bg-gradient-to-r"] {
+  animation: wave 1.5s ease-in-out infinite;
 }
 
-// Gemini Theme
-body.theme-gemini {
-  .skeleton-text-line,
-  .skeleton-title,
-  .skeleton-table-cell,
-  .skeleton-avatar,
-  .skeleton-custom {
-    background: linear-gradient(
-      90deg,
-      rgba(15, 23, 42, 0.3) 0%,
-      rgba(59, 130, 246, 0.2) 50%,
-      rgba(15, 23, 42, 0.3) 100%
-    );
-    background-size: 200% 100%;
+.animate-shimmer [class*="bg-gradient-to-r"] {
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-wave [class*="bg-gradient-to-r"],
+  .animate-shimmer [class*="bg-gradient-to-r"] {
+    animation: none;
   }
 }
 

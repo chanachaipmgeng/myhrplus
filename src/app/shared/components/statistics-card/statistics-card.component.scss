@@ -1,80 +1,13 @@
 /* ============================================
    Statistics Card Component Styles
+   ============================================
+   Migrated to Tailwind - Minimal SCSS for component-specific styles only
    ============================================ */
-
-@import '../../../../styles/design-tokens';
-@import '../../../../styles/mixins';
 
 :host {
   display: block;
 }
 
-/* Card Layout - Using Tailwind classes in HTML */
-/* Removed duplicate utility classes - using Tailwind directly */
-
-/* Icon Background Colors */
-.bg-blue-100 {
-  background-color: $primary-100;
-}
-
-.dark .bg-blue-900 {
-  background-color: $primary-900;
-}
-
-/* Content & Change Indicator - Using Tailwind classes in HTML */
-/* Removed duplicate utility classes */
-
-/* Dark Mode */
-.dark {
-  .text-slate-600 {
-    color: $gray-400;
-  }
-  
-  .text-slate-900 {
-    color: $gray-100;
-  }
-}
-
-/* Gemini Theme */
-body.theme-gemini {
-  .rounded-full {
-    @include glass-gemini('default');
-    @include gemini-glow('subtle');
-    background: linear-gradient(135deg, rgba($gemini-gradient-end, 0.2), rgba($gemini-gradient-start, 0.2));
-  }
-  
-  .text-slate-600,
-  .dark .text-slate-400 {
-    color: rgba(255, 255, 255, 0.7);
-  }
-  
-  .text-slate-900,
-  .dark .text-slate-100 {
-    @include gradient-text-gemini();
-  }
-  
-  .text-green-600,
-  .dark .text-green-400 {
-    color: $success-400;
-    @include gemini-glow('subtle');
-  }
-  
-  .text-red-600,
-  .dark .text-red-400 {
-    color: $error-400;
-    @include gemini-glow('subtle');
-  }
-}
-
-/* Responsive - Using Tailwind responsive classes in HTML */
-/* Removed duplicate responsive utility classes */
-
-/* Enhanced card hover effect */
-:host {
-  @include smooth-transition(transform box-shadow, 0.3s);
-  
-  &:hover {
-    @include hover-lift(2px);
-  }
-}
+/* Component uses Tailwind classes directly in HTML */
+/* All styles handled by Tailwind utilities and plugins */
 

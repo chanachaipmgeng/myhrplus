@@ -1,53 +1,65 @@
-<div class="skeleton-loader" [ngClass]="['skeleton-' + type, 'animate-' + animation]">
+<div class="w-full animate-fade-in motion-safe:animate-none" [ngClass]="['skeleton-' + type, 'animate-' + animation]">
   <!-- Text Skeleton -->
   <ng-container *ngIf="type === 'text'">
-    <div *ngFor="let row of getRowsArray()" class="skeleton-text-line" [style.width]="getRandomWidth()"></div>
+    <div *ngFor="let row of getRowsArray()" 
+         class="h-4 mb-3 last:mb-0 rounded bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 bg-[length:200%_100%] dark:from-slate-700 dark:via-slate-600 dark:to-slate-700 theme-gemini:from-primary-500/20 theme-gemini:via-primary-400/30 theme-gemini:to-primary-500/20"
+         [style.width]="getRandomWidth()"></div>
   </ng-container>
 
   <!-- Card Skeleton -->
   <ng-container *ngIf="type === 'card'">
-    <div class="skeleton-card">
-      <div class="skeleton-card-header" *ngIf="showTitle">
-        <div class="skeleton-avatar" *ngIf="showAvatar"></div>
-        <div class="skeleton-title"></div>
+    <div class="p-6 rounded-lg glass-weak dark:glass-dark-weak theme-gemini:glass-gemini-weak">
+      <div class="flex items-center gap-4 mb-4" *ngIf="showTitle">
+        <div class="w-10 h-10 rounded-full flex-shrink-0 bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 bg-[length:200%_100%] dark:from-slate-700 dark:via-slate-600 dark:to-slate-700 theme-gemini:from-primary-500/20 theme-gemini:via-primary-400/30 theme-gemini:to-primary-500/20" *ngIf="showAvatar"></div>
+        <div class="h-5 w-3/5 mb-2 rounded bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 bg-[length:200%_100%] dark:from-slate-700 dark:via-slate-600 dark:to-slate-700 theme-gemini:from-primary-500/20 theme-gemini:via-primary-400/30 theme-gemini:to-primary-500/20"></div>
       </div>
-      <div class="skeleton-card-content">
-        <div *ngFor="let row of getRowsArray()" class="skeleton-text-line" [style.width]="getRandomWidth()"></div>
+      <div class="flex flex-col gap-2">
+        <div *ngFor="let row of getRowsArray()" 
+             class="h-4 mb-3 last:mb-0 rounded bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 bg-[length:200%_100%] dark:from-slate-700 dark:via-slate-600 dark:to-slate-700 theme-gemini:from-primary-500/20 theme-gemini:via-primary-400/30 theme-gemini:to-primary-500/20"
+             [style.width]="getRandomWidth()"></div>
       </div>
     </div>
   </ng-container>
 
   <!-- Table Skeleton -->
   <ng-container *ngIf="type === 'table'">
-    <div class="skeleton-table">
-      <div class="skeleton-table-header">
-        <div *ngFor="let col of getColumnsArray()" class="skeleton-table-cell"></div>
+    <div class="w-full rounded-lg overflow-hidden glass-weak dark:glass-dark-weak theme-gemini:glass-gemini-weak">
+      <div class="grid gap-4 p-4 glass-weak dark:glass-dark-weak border-b border-slate-200/20 dark:border-slate-700/20" 
+           [style.grid-template-columns]="'repeat(' + columns + ', 1fr)'">
+        <div *ngFor="let col of getColumnsArray()" 
+             class="h-4 rounded bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 bg-[length:200%_100%] dark:from-slate-700 dark:via-slate-600 dark:to-slate-700 theme-gemini:from-primary-500/20 theme-gemini:via-primary-400/30 theme-gemini:to-primary-500/20"></div>
       </div>
-      <div *ngFor="let row of getRowsArray()" class="skeleton-table-row">
-        <div *ngFor="let col of getColumnsArray()" class="skeleton-table-cell"></div>
+      <div *ngFor="let row of getRowsArray()" 
+           class="grid gap-4 p-4 border-b border-slate-200/10 dark:border-slate-700/10 last:border-b-0"
+           [style.grid-template-columns]="'repeat(' + columns + ', 1fr)'">
+        <div *ngFor="let col of getColumnsArray()" 
+             class="h-4 rounded bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 bg-[length:200%_100%] dark:from-slate-700 dark:via-slate-600 dark:to-slate-700 theme-gemini:from-primary-500/20 theme-gemini:via-primary-400/30 theme-gemini:to-primary-500/20"></div>
       </div>
     </div>
   </ng-container>
 
   <!-- List Skeleton -->
   <ng-container *ngIf="type === 'list'">
-    <div *ngFor="let row of getRowsArray()" class="skeleton-list-item">
-      <div class="skeleton-avatar" *ngIf="showAvatar"></div>
-      <div class="skeleton-list-content">
-        <div class="skeleton-title"></div>
-        <div class="skeleton-text-line" [style.width]="getRandomWidth()"></div>
+    <div *ngFor="let row of getRowsArray()" 
+         class="flex items-center gap-4 p-4 border-b border-slate-200/10 dark:border-slate-700/10 last:border-b-0">
+      <div class="w-10 h-10 rounded-full flex-shrink-0 bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 bg-[length:200%_100%] dark:from-slate-700 dark:via-slate-600 dark:to-slate-700 theme-gemini:from-primary-500/20 theme-gemini:via-primary-400/30 theme-gemini:to-primary-500/20" *ngIf="showAvatar"></div>
+      <div class="flex-1 flex flex-col gap-2">
+        <div class="h-5 w-3/5 mb-2 rounded bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 bg-[length:200%_100%] dark:from-slate-700 dark:via-slate-600 dark:to-slate-700 theme-gemini:from-primary-500/20 theme-gemini:via-primary-400/30 theme-gemini:to-primary-500/20"></div>
+        <div class="h-4 mb-3 last:mb-0 rounded bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 bg-[length:200%_100%] dark:from-slate-700 dark:via-slate-600 dark:to-slate-700 theme-gemini:from-primary-500/20 theme-gemini:via-primary-400/30 theme-gemini:to-primary-500/20" [style.width]="getRandomWidth()"></div>
       </div>
     </div>
   </ng-container>
 
   <!-- Avatar Skeleton -->
   <ng-container *ngIf="type === 'avatar'">
-    <div class="skeleton-avatar"></div>
+    <div class="w-10 h-10 rounded-full flex-shrink-0 bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 bg-[length:200%_100%] dark:from-slate-700 dark:via-slate-600 dark:to-slate-700 theme-gemini:from-primary-500/20 theme-gemini:via-primary-400/30 theme-gemini:to-primary-500/20"></div>
   </ng-container>
 
   <!-- Custom Skeleton -->
   <ng-container *ngIf="type === 'custom'">
-    <div class="skeleton-custom" [style.width]="width" [style.height]="height"></div>
+    <div class="rounded bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 bg-[length:200%_100%] dark:from-slate-700 dark:via-slate-600 dark:to-slate-700 theme-gemini:from-primary-500/20 theme-gemini:via-primary-400/30 theme-gemini:to-primary-500/20" 
+         [style.width]="width" 
+         [style.height]="height"></div>
   </ng-container>
 </div>
 

@@ -15,13 +15,24 @@ export class GlassCardComponent {
   @Input() customClass: string = '';
 
   get cardClass(): string {
-    const baseClass = this.variant === 'strong'
-      ? 'glass-card-strong'
+    // Use Tailwind glass utilities
+    const glassClass = this.variant === 'strong'
+      ? 'glass-strong'
       : this.variant === 'weak'
-      ? 'glass-card-weak'
-      : 'glass-card';
+      ? 'glass-weak'
+      : 'glass';
+    
+    // Base classes with hover effect and transitions
+    const baseClasses = `${glassClass} rounded-lg shadow-glass hover-lift transition-smooth dark:glass-dark`;
+    
+    // Gemini theme support - use conditional classes
+    const geminiClasses = this.variant === 'strong'
+      ? 'theme-gemini:glass-gemini-strong theme-gemini:shadow-gemini-lg'
+      : this.variant === 'weak'
+      ? 'theme-gemini:glass-gemini-weak theme-gemini:shadow-gemini-sm'
+      : 'theme-gemini:glass-gemini theme-gemini:shadow-gemini';
 
-    return `${baseClass} ${this.padding} ${this.customClass}`.trim();
+    return `${baseClasses} ${geminiClasses} ${this.padding} ${this.customClass}`.trim();
   }
 }
 
