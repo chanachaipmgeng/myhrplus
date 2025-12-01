@@ -84,6 +84,7 @@ body.theme-gemini ::ng-deep .syncfusion-sidebar {
 /* Main Wrapper */
 .main-wrapper {
   min-width: 0; /* Prevent flex overflow */
+  /* Note: margin-left transition is acceptable here as it's layout-related, not animation */
   transition: margin-left 0.3s ease-in-out;
   
   /* Desktop: Adjust margin when sidebar is open/closed */
