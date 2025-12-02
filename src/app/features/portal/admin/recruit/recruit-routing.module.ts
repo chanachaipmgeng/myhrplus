@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ROUTES } from '../../../../core/constants/routes.constant';
 
 const routes: Routes = [
   {
@@ -8,9 +9,9 @@ const routes: Routes = [
     redirectTo: '/recruit/home',
     pathMatch: 'full'
   },
-  // Level 3-4 routes
+  // 1. Setup (RE01A01)
   {
-    path: 'job-postings',
+    path: 'setup',
     children: [
       {
         path: '',
@@ -18,39 +19,52 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'list',
+        path: 'basic-config',
         redirectTo: '/recruit/home',
         pathMatch: 'full'
       },
       {
-        path: 'create',
+        path: 'interview-committee',
+        redirectTo: '/recruit/home',
+        pathMatch: 'full'
+      },
+      {
+        path: 'skill-level-config',
+        redirectTo: '/recruit/home',
+        pathMatch: 'full'
+      },
+      {
+        path: 'source-of-job',
+        redirectTo: '/recruit/home',
+        pathMatch: 'full'
+      },
+      {
+        path: 'candidate-status',
+        redirectTo: '/recruit/home',
+        pathMatch: 'full'
+      },
+      {
+        path: 'urgency-status',
         redirectTo: '/recruit/home',
         pathMatch: 'full'
       }
     ]
   },
+  // 2. Process (RE01A02)
   {
-    path: 'candidates',
-    children: [
-      {
-        path: '',
-        redirectTo: '/recruit/home',
-        pathMatch: 'full'
-      },
-      {
-        path: 'list',
-        redirectTo: '/recruit/home',
-        pathMatch: 'full'
-      },
-      {
-        path: 'evaluate',
-        redirectTo: '/recruit/home',
-        pathMatch: 'full'
-      }
-    ]
+    path: 'process',
+    redirectTo: '/recruit/home',
+    pathMatch: 'full'
   },
+  // 3. Jobboard
   {
-    path: 'reports',
+    path: 'jobboard',
+    redirectTo: '/recruit/home',
+    pathMatch: 'full'
+  },
+  // 4. Terms Of Use
+  {
+    path: 'terms',
     children: [
       {
         path: '',
@@ -58,18 +72,14 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'recruitment',
-        redirectTo: '/recruit/home',
-        pathMatch: 'full'
-      },
-      {
-        path: 'candidates',
+        path: 'user-manual',
         redirectTo: '/recruit/home',
         pathMatch: 'full'
       }
     ]
   }
   // TODO: Migrate recruit module content to here
+  // When components are created, replace redirects with actual component routes
 ];
 
 @NgModule({
@@ -77,4 +87,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class RecruitRoutingModule { }
-

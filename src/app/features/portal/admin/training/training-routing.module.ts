@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ROUTES } from '../../../../core/constants/routes.constant';
 
 const routes: Routes = [
   {
@@ -8,49 +9,85 @@ const routes: Routes = [
     redirectTo: '/training/home',
     pathMatch: 'full'
   },
-  // Level 3-4 routes
+  // 1. Setup (TR0101)
   {
-    path: 'catalog',
+    path: 'setup',
     children: [
       {
         path: '',
         redirectTo: '/training/home',
         pathMatch: 'full'
       },
+      // 1.1 Courses
       {
-        path: 'list',
-        redirectTo: '/training/home',
-        pathMatch: 'full'
+        path: 'courses',
+        children: [
+          {
+            path: '',
+            redirectTo: '/training/home',
+            pathMatch: 'full'
+          },
+          {
+            path: 'course-types',
+            redirectTo: '/training/home',
+            pathMatch: 'full'
+          },
+          {
+            path: 'course-groups',
+            redirectTo: '/training/home',
+            pathMatch: 'full'
+          },
+          {
+            path: 'course-categories',
+            redirectTo: '/training/home',
+            pathMatch: 'full'
+          },
+          {
+            path: 'training-type-table',
+            redirectTo: '/training/home',
+            pathMatch: 'full'
+          },
+          {
+            path: 'courses-program',
+            redirectTo: '/training/home',
+            pathMatch: 'full'
+          },
+          {
+            path: 'dsd-training-type',
+            redirectTo: '/training/home',
+            pathMatch: 'full'
+          }
+        ]
       },
+      // 1.2 Other Master
       {
-        path: 'create',
+        path: 'other-master',
         redirectTo: '/training/home',
         pathMatch: 'full'
       }
     ]
   },
+  // 2. Evaluation Process
   {
-    path: 'registration',
-    children: [
-      {
-        path: '',
-        redirectTo: '/training/home',
-        pathMatch: 'full'
-      },
-      {
-        path: 'register',
-        redirectTo: '/training/home',
-        pathMatch: 'full'
-      },
-      {
-        path: 'history',
-        redirectTo: '/training/home',
-        pathMatch: 'full'
-      }
-    ]
+    path: 'evaluation-process',
+    redirectTo: '/training/home',
+    pathMatch: 'full'
   },
+  // 3. Transaction
   {
-    path: 'reports',
+    path: 'transaction',
+    redirectTo: '/training/home',
+    pathMatch: 'full'
+  },
+  // 4. History
+  {
+    path: 'history',
+    redirectTo: '/training/home',
+    pathMatch: 'full'
+  },
+  // 5. Terms Of Use
+  {
+    path: 'terms',
     children: [
       {
         path: '',
@@ -58,18 +95,14 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'training',
-        redirectTo: '/training/home',
-        pathMatch: 'full'
-      },
-      {
-        path: 'participants',
+        path: 'user-manual',
         redirectTo: '/training/home',
         pathMatch: 'full'
       }
     ]
   }
   // TODO: Migrate training module content to here
+  // When components are created, replace redirects with actual component routes
 ];
 
 @NgModule({
@@ -77,4 +110,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class TrainingRoutingModule { }
-
