@@ -1,7 +1,7 @@
 <!-- Omni-Search Modal -->
 <div
   *ngIf="isOpen"
-  class="omni-search-overlay fixed inset-0 z-[200] flex items-start justify-center pt-20 px-4"
+  class="omni-search-overlay fixed inset-0 z-[200] flex items-start justify-center pt-20 px-4 bg-black/50 backdrop-blur-sm"
   (click)="close()">
   <div
     class="omni-search-modal w-full max-w-2xl"
@@ -59,6 +59,14 @@
             (click)="selectResult(result)"
             (mouseenter)="selectedIndex = i"
             [class.selected]="selectedIndex === i"
+            [ngClass]="{
+              'bg-blue-500/10': selectedIndex === i,
+              'dark:bg-blue-500/20': selectedIndex === i,
+              'theme-gemini:bg-blue-500/20': selectedIndex === i,
+              'border-l-blue-500': selectedIndex === i,
+              'dark:border-l-blue-400': selectedIndex === i,
+              'theme-gemini:border-l-blue-400': selectedIndex === i
+            }"
             class="search-result-item px-4 py-3 cursor-pointer transition-colors
                    hover:bg-black/5 dark:hover:bg-white/10
                    border-l-[3px] border-transparent

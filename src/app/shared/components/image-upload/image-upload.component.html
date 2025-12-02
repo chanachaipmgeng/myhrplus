@@ -41,7 +41,7 @@
         *ngFor="let image of uploadedImages; let i = index"
         class="preview-item bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
         <div class="preview-image-container relative">
-          <img [src]="image.preview" [alt]="image.name" class="preview-image w-full h-48 object-cover">
+          <img *ngIf="image.preview" appLazyImage [src]="image.preview" [alt]="image.name" class="preview-image w-full h-48 object-cover">
           <button
             class="remove-button absolute top-2 right-2 p-2 bg-red-500 hover:bg-red-600 text-white rounded-full transition-colors"
             (click)="removeImage(i)"

@@ -98,7 +98,9 @@
       top: 0;
       bottom: 0;
       width: 3px;
-      background: linear-gradient(to bottom, #3b82f6, #2563eb);
+      /* Using Tailwind blue color scale */
+      background: linear-gradient(to bottom, rgb(59, 130, 246), rgb(37, 99, 235));
+      /* Equivalent: bg-gradient-to-b from-blue-500 to-blue-600 */
       border-radius: 0 2px 2px 0;
     }
   }
@@ -119,7 +121,9 @@
       top: 0;
       bottom: 0;
       width: 3px;
-      background: linear-gradient(to bottom, #3b82f6, #2563eb);
+      /* Using Tailwind blue color scale */
+      background: linear-gradient(to bottom, rgb(59, 130, 246), rgb(37, 99, 235));
+      /* Equivalent: bg-gradient-to-b from-blue-500 to-blue-600 */
       border-radius: 0 2px 2px 0;
     }
   }

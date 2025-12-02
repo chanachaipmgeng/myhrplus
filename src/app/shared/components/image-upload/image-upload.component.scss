@@ -2,16 +2,15 @@
   width: 100%;
 
   .upload-section {
-    margin-bottom: 16px;
+    /* Margin handled by Tailwind mb-4 in HTML */
 
     .upload-area {
-      border: 2px dashed rgba(var(--primary-rgb), 0.3);
-      border-radius: 12px;
-      padding: 32px;
+      /* Border, border-radius, padding handled by Tailwind classes in HTML */
+      /* Using border-2 border-dashed rounded-lg p-8 */
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
-      background: rgba(var(--primary-rgb), 0.05);
+      /* Background handled by Tailwind classes in HTML */
       position: relative;
 
       &:hover:not(.disabled) {
@@ -36,50 +35,43 @@
 
       .upload-content {
         .upload-icon {
-          font-size: 48px;
-          width: 48px;
-          height: 48px;
-          color: rgb(var(--primary-rgb));
-          margin-bottom: 16px;
+          /* Size handled by Tailwind size="xl" in HTML */
+          /* Color handled by Tailwind text-gray-400 in HTML */
+          /* Margin handled by Tailwind mb-4 in HTML */
         }
 
         .upload-text {
-          font-size: 16px;
-          font-weight: 500;
-          color: rgba(0, 0, 0, 0.87);
-          margin-bottom: 8px;
+          /* Font-size handled by Tailwind text-base in HTML */
+          /* Font-weight handled by Tailwind font-medium in HTML */
+          /* Color handled by Tailwind text-gray-700 in HTML */
+          /* Margin handled by Tailwind mb-2 in HTML */
         }
 
         .upload-hint {
-          font-size: 12px;
+          /* Font-size handled by Tailwind text-sm in HTML */
         }
       }
     }
 
     .errors {
-      margin-top: 12px;
+      /* Margin handled by Tailwind mt-4 in HTML */
 
       .error-message {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 12px;
-        background: rgba(239, 68, 68, 0.1);
-        border: 1px solid rgba(239, 68, 68, 0.3);
-        border-radius: 8px;
-        color: #ef4444;
-        font-size: 14px;
-        margin-bottom: 8px;
-
+        /* Display, align-items, gap handled by Tailwind flex items-center gap-2 in HTML */
+        /* Padding handled by Tailwind px-3 py-2 in HTML */
+        /* Background, border, border-radius, color handled by Tailwind classes in HTML */
+        /* Font-size handled by Tailwind text-sm in HTML */
+        /* Margin handled by Tailwind space-y-2 in HTML */
       }
     }
   }
 
   .preview-section {
+    /* Margin handled by Tailwind mt-6 in HTML */
+    
     .preview-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
+      /* Display, grid-template-columns, gap handled by Tailwind grid classes in HTML */
+      /* Using grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 */
 
       &.single {
         grid-template-columns: 1fr;
@@ -114,12 +106,9 @@
           }
 
           .remove-button {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            backdrop-filter: blur(4px);
+            /* Position, top, right handled by Tailwind absolute top-2 right-2 in HTML */
+            /* Background, color handled by Tailwind bg-red-500 in HTML */
+            /* Backdrop-filter handled by Tailwind classes in HTML */
 
             &:hover {
               background: rgba(239, 68, 68, 0.9);
@@ -134,20 +123,18 @@
         }
 
         .preview-info {
-          padding: 12px;
+          /* Padding handled by Tailwind p-3 in HTML */
 
           .preview-name {
-            font-size: 14px;
-            font-weight: 500;
-            color: rgba(0, 0, 0, 0.87);
-            margin-bottom: 4px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            /* Font-size handled by Tailwind text-sm in HTML */
+            /* Font-weight handled by Tailwind font-medium in HTML */
+            /* Color handled by Tailwind text-gray-800 in HTML */
+            /* Margin handled by Tailwind mt-1 in HTML */
+            /* Overflow handled by Tailwind truncate in HTML */
           }
 
           .preview-size {
-            font-size: 12px;
+            /* Font-size handled by Tailwind text-xs in HTML */
           }
         }
       }

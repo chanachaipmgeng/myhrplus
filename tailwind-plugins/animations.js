@@ -8,20 +8,36 @@ const plugin = require('tailwindcss/plugin');
 
 module.exports = plugin(function({ addUtilities, theme, addVariant }) {
   const animationUtilities = {
-    // Smooth Transitions
+    // Smooth Transitions (Optimized with will-change)
     '.transition-smooth': {
       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       willChange: 'transform, opacity',
+      '@media (prefers-reduced-motion: reduce)': {
+        transition: 'none',
+        willChange: 'auto',
+      },
     },
     '.transition-transform-smooth': {
       transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       willChange: 'transform',
+      '@media (prefers-reduced-motion: reduce)': {
+        transition: 'none',
+        willChange: 'auto',
+      },
     },
     '.transition-colors-smooth': {
       transition: 'color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out',
+      '@media (prefers-reduced-motion: reduce)': {
+        transition: 'none',
+      },
     },
     '.transition-opacity-smooth': {
       transition: 'opacity 0.2s ease-in-out',
+      willChange: 'opacity',
+      '@media (prefers-reduced-motion: reduce)': {
+        transition: 'none',
+        willChange: 'auto',
+      },
     },
     
     // Hover Lift Effects

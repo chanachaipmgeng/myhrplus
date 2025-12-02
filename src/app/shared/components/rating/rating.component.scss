@@ -12,6 +12,7 @@
 /* All styles handled by Tailwind utilities and plugins */
 
 /* Gemini Theme */
+/* Using Tailwind color utilities - keeping only complex filter effects */
 body.theme-gemini {
   .text-yellow-400 {
     @apply glow-primary;
@@ -22,9 +23,10 @@ body.theme-gemini {
     filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.4));
   }
   
+  /* Text colors handled by Tailwind theme-gemini: variants in HTML */
   .text-slate-600,
   .dark .text-slate-400 {
-    color: rgba(255, 255, 255, 0.7);
+    @apply text-white/70;
   }
 }
 

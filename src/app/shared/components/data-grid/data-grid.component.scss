@@ -2,6 +2,8 @@
    Data Grid Component Styles
    ============================================ */
 
+@import '../../../../styles/syncfusion-mixins';
+
 :host {
   @apply block w-full;
 }
@@ -9,46 +11,31 @@
 /* Syncfusion Grid customization - Using ::ng-deep for third-party library styles */
 :host ::ng-deep {
   .e-grid {
-    @apply bg-transparent rounded-md border border-white/10 dark:border-slate-700/30;
+    @include syncfusion-glass-container;
 
     /* Toolbar */
     .e-toolbar {
-      @apply glass-weak dark:glass-dark-weak rounded-md p-2 mb-4 border border-white/20 dark:border-slate-700/30;
+      @include syncfusion-glass-toolbar;
 
       .e-toolbar-items {
         .e-toolbar-item {
           .e-btn {
-            @apply glass-weak dark:glass-dark-weak text-gray-700 dark:text-gray-300 transition-smooth min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 hover:bg-primary-500/10 dark:hover:bg-primary-500/20 hover:border-primary-500/30 hover:text-primary-600 focus:ring-2 focus:ring-primary-500/20;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-
-            .dark & {
-              background: rgba(15, 23, 42, 0.3);
-              border-color: rgba(51, 65, 85, 0.3);
-            }
+            @include syncfusion-glass-button;
           }
         }
       }
     }
 
-    body.theme-gemini & .e-toolbar {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 30px rgba(59, 130, 246, 0.1);
-    }
-
     /* Grid Header */
     .e-gridheader {
-      @apply glass-weak dark:glass-dark-weak;
+      @include syncfusion-glass-header;
 
       .e-headercell {
         @apply bg-transparent border-b border-white/10 dark:border-slate-700/30 text-gray-700 dark:text-gray-300 font-semibold p-3 transition-smooth hover:bg-primary-500/5 dark:hover:bg-primary-500/10;
       }
     }
 
-    body.theme-gemini & .e-gridheader {
-      background: rgba(147, 197, 253, 0.1);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
+    /* Gemini theme handled by mixin */
 
     /* Grid Content */
     .e-gridcontent {

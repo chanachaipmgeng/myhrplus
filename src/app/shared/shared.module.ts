@@ -24,6 +24,7 @@ import { BackToTopComponent } from './components/back-to-top/back-to-top.compone
 
 // Directives
 import { ClickOutsideDirective } from './directives/click-outside.directive';
+import { LazyImageDirective } from './directives/lazy-image.directive'; // Standalone directive
 
 // Pipes
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
@@ -50,6 +51,7 @@ const COMPONENTS = [
 
 const DIRECTIVES = [
   ClickOutsideDirective
+  // LazyImageDirective removed - now standalone directive
 ];
 
 const PIPES = [
@@ -71,7 +73,8 @@ const PIPES = [
     RouterModule,
     SpinnerComponent,
     IconComponent, // Import standalone component
-    BackToTopComponent // Import standalone component
+    BackToTopComponent, // Import standalone component
+    LazyImageDirective // Import standalone directive
   ],
   exports: [
     CommonModule,
@@ -83,7 +86,8 @@ const PIPES = [
     ...PIPES,
     SpinnerComponent,
     IconComponent, // Export standalone component
-    BackToTopComponent // Export standalone component
+    BackToTopComponent, // Export standalone component
+    LazyImageDirective // Export standalone directive
   ]
 })
 export class SharedModule { }

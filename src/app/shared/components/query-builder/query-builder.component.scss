@@ -2,6 +2,8 @@
    Query Builder Component Styles
    ============================================ */
 
+@import '../../../../styles/syncfusion-mixins';
+
 :host {
   @apply block w-full;
 }
@@ -9,7 +11,7 @@
 /* Syncfusion Query Builder customization - Using ::ng-deep for third-party library styles */
 :host ::ng-deep {
   .e-query-builder {
-    @apply bg-transparent rounded-md border border-white/10 dark:border-slate-700/30;
+    @include syncfusion-glass-container;
 
     /* Rule Container */
     .e-rule-container {
@@ -18,28 +20,14 @@
       /* Rule Fields */
       .e-rule-field {
         .e-dropdownlist {
-          @apply glass-weak dark:glass-dark-weak rounded-sm text-gray-700 dark:text-gray-300 transition-smooth focus:border-primary-600 focus:ring-2 focus:ring-primary-500/20;
-          background: rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-
-          .dark & {
-            background: rgba(15, 23, 42, 0.3);
-            border-color: rgba(51, 65, 85, 0.3);
-          }
+          @include syncfusion-glass-dropdown;
         }
       }
 
       /* Rule Operator */
       .e-rule-operator {
         .e-dropdownlist {
-          @apply glass-weak dark:glass-dark-weak rounded-sm text-gray-700 dark:text-gray-300 transition-smooth focus:border-primary-600 focus:ring-2 focus:ring-primary-500/20;
-          background: rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-
-          .dark & {
-            background: rgba(15, 23, 42, 0.3);
-            border-color: rgba(51, 65, 85, 0.3);
-          }
+          @include syncfusion-glass-dropdown;
         }
       }
 

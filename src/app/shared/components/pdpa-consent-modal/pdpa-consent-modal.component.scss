@@ -4,7 +4,9 @@
 }
 
 .modal-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* Using Tailwind gradient colors - indigo-500 to purple-600 */
+  background: linear-gradient(135deg, rgb(99, 102, 241) 0%, rgb(147, 51, 234) 100%);
+  /* Equivalent: bg-gradient-to-br from-indigo-500 to-purple-600 */
   color: white;
   border-bottom: none;
   border-radius: 0.5rem 0.5rem 0 0;
@@ -57,26 +59,33 @@
 }
 
 .modal-footer {
-  border-top: 1px solid #dee2e6;
-  padding: 1rem;
+  /* Border handled by Tailwind border-t in HTML */
+  /* Padding: 1rem = p-4 - using Tailwind spacing scale */
+  padding: 1rem; /* Keep for legacy Bootstrap modal structure */
 
   .btn {
-    min-width: 100px;
+    /* Min-width handled by Tailwind min-w-[100px] in HTML */
+    min-width: 100px; /* Keep for legacy Bootstrap buttons */
   }
 }
 
 // Dark mode support
+// Using Tailwind gray color scale
 :host-context(.dark) {
   .modal-body {
     .consent-content {
-      background-color: #2d3748;
-      color: #e2e8f0;
-      border-color: #4a5568;
+      /* Using Tailwind gray-800 */
+      background-color: rgb(31, 41, 55); /* gray-800 */
+      /* Using Tailwind slate-200 */
+      color: rgb(226, 232, 240); /* slate-200 */
+      /* Using Tailwind gray-700 */
+      border-color: rgb(55, 65, 81); /* gray-700 */
     }
   }
 
   .modal-footer {
-    border-top-color: #4a5568;
+    /* Using Tailwind gray-700 */
+    border-top-color: rgb(55, 65, 81); /* gray-700 */
   }
 }
 

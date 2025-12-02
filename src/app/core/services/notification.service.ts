@@ -1,5 +1,6 @@
 import { Injectable, ComponentRef, ViewContainerRef } from '@angular/core';
 import { NotificationComponent, NotificationType } from '../../shared/components/notification/notification.component';
+import { standardizeErrorMessage, formatErrorMessage, StandardizedError } from '../utils/error-message.util';
 
 @Injectable({
   providedIn: 'root'
@@ -58,5 +59,33 @@ export class NotificationService {
 
   showInfo(message: string, duration: number = 3000): void {
     this.show(message, 'info', duration);
+  }
+
+  /**
+   * Show standardized error message
+   */
+  showStandardizedError(error: any, options?: { duration?: number }): StandardizedError {
+    const standardized = standardizeErrorMessage(error);
+    const message = formatErrorMessage(standardized);
+    this.showError(message, options?.duration || 5000);
+    return standardized;
+  }
+
+  /**
+   * Show error with retry option
+   */
+  showErrorWithRetry(error: any, onRetry?: () => void, duration: number = 0): StandardizedError {
+    const standardized = standardizeErrorMessage(error);
+    const message = formatErrorMessage(standardized);
+    
+    // For retryable errors, show longer duration (0 = no auto-close)
+    if (standardized.retryable && onRetry) {
+      this.show(message, 'error', duration);
+      // Note: Retry button should be handled in the component that calls this
+    } else {
+      this.showError(message, duration || 5000);
+    }
+    
+    return standardized;
   }
 }

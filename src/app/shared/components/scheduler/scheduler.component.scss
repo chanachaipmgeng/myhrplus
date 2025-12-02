@@ -2,6 +2,8 @@
    Scheduler Component Styles
    ============================================ */
 
+@import '../../../../styles/syncfusion-mixins';
+
 :host {
   @apply block w-full;
 }
@@ -9,7 +11,7 @@
 /* Syncfusion Schedule customization - Using ::ng-deep for third-party library styles */
 :host ::ng-deep {
   .e-schedule {
-    @apply bg-transparent rounded-md border border-white/10 dark:border-slate-700/30;
+    @include syncfusion-glass-container;
 
     /* Header */
     .e-header-container {
@@ -21,20 +23,13 @@
 
       .e-header-calendar {
         .e-btn {
-          @apply glass-weak dark:glass-dark-weak text-gray-700 dark:text-gray-300 transition-smooth min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 hover:bg-primary-500/10 dark:hover:bg-primary-500/20 hover:border-primary-500/30 hover:text-primary-600 focus:ring-2 focus:ring-primary-500/20;
-          background: rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-
-          .dark & {
-            background: rgba(15, 23, 42, 0.3);
-            border-color: rgba(51, 65, 85, 0.3);
-          }
+          @include syncfusion-glass-button;
         }
       }
     }
 
     body.theme-gemini & .e-header-container {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 30px rgba(59, 130, 246, 0.1);
+      @include syncfusion-gemini-shadow;
     }
 
     /* Content */
@@ -42,7 +37,7 @@
       .e-content-table {
         .e-content-row {
           .e-content-cells {
-            @apply bg-transparent border-r border-b border-white/5 dark:border-slate-700/10 transition-smooth hover:bg-primary-500/5 dark:hover:bg-primary-500/10;
+            @include syncfusion-content-cell;
           }
         }
       }

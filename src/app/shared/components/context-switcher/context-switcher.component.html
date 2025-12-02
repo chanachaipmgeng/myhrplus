@@ -6,7 +6,17 @@
       type="button"
       (click)="switchContext(context.value)"
       [class.active]="currentContext === context.value"
-      class="context-tab flex-1 px-4 py-2 rounded-md transition-all duration-300 text-sm font-medium
+      [ngClass]="{
+        'bg-blue-500/10': currentContext === context.value,
+        'dark:bg-blue-500/20': currentContext === context.value,
+        'theme-gemini:bg-blue-500/20': currentContext === context.value,
+        'text-blue-700': currentContext === context.value,
+        'dark:text-blue-400': currentContext === context.value,
+        'theme-gemini:text-blue-300': currentContext === context.value,
+        'font-semibold': currentContext === context.value,
+        'font-medium': currentContext !== context.value
+      }"
+      class="context-tab flex-1 px-4 py-2 rounded-md transition-all duration-300 text-sm
              text-gray-700 dark:text-gray-300 theme-gemini:text-white/80
              hover:bg-black/5 dark:hover:bg-white/10 theme-gemini:hover:bg-blue-500/10
              focus:outline-none focus:ring-2 focus:ring-primary-500/20"
@@ -26,7 +36,7 @@
   </div>
 
   <!-- Current Context Info -->
-  <div class="context-info mt-2 px-3 py-2 text-xs text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 text-center">
+  <div class="context-info thai-text mt-2 px-3 py-2 text-xs text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 text-center">
     {{ getCurrentContextData()?.description }}
   </div>
 </div>

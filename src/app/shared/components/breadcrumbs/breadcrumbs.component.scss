@@ -15,6 +15,7 @@
 }
 
 /* Gemini Theme */
+/* Using Tailwind classes - keeping only complex filter effects */
 body.theme-gemini {
   .breadcrumb-link {
     @apply glass-gemini-weak;
@@ -25,9 +26,9 @@ body.theme-gemini {
     }
   }
   
+  /* Breadcrumb current gradient handled by Tailwind theme-gemini: variants in HTML */
   .breadcrumb-current {
-    @apply bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent;
-    -webkit-background-clip: text;
+    /* Gradient text handled by Tailwind classes in HTML */
   }
 }
 

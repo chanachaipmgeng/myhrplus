@@ -2,6 +2,8 @@
    Rich Text Editor Component Styles
    ============================================ */
 
+@import '../../../../styles/syncfusion-mixins';
+
 :host {
   @apply block w-full;
 }
@@ -9,42 +11,26 @@
 /* Syncfusion Rich Text Editor customization - Using ::ng-deep for third-party library styles */
 :host ::ng-deep {
   .e-rte {
-    @apply bg-transparent rounded-md border border-white/10 dark:border-slate-700/30;
+    @include syncfusion-glass-container;
 
     /* Toolbar */
     .e-rte-toolbar {
-      @apply glass-weak dark:glass-dark-weak border-b border-white/10 dark:border-slate-700/30 p-2 rounded-t-md;
+      @include syncfusion-glass-toolbar;
+      @apply border-b border-white/10 dark:border-slate-700/30 p-2 rounded-t-md;
 
       .e-toolbar-items {
         .e-toolbar-item {
           .e-btn {
-            @apply glass-weak dark:glass-dark-weak text-gray-700 dark:text-gray-300 min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 rounded-sm transition-smooth hover:bg-primary-500/10 dark:hover:bg-primary-500/20 hover:border-primary-500/30 hover:text-primary-600 focus:ring-2 focus:ring-primary-500/20 active:bg-primary-500/20 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-
-            .dark & {
-              background: rgba(15, 23, 42, 0.3);
-              border-color: rgba(51, 65, 85, 0.3);
-            }
+            @include syncfusion-glass-button;
+            @apply rounded-sm active:bg-primary-500/20 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
           }
 
           /* Dropdown */
           .e-dropdown-btn {
-            @apply glass-weak dark:glass-dark-weak text-gray-700 dark:text-gray-300 transition-smooth hover:bg-primary-500/10 dark:hover:bg-primary-500/20 hover:border-primary-500/30 hover:text-primary-600;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-
-            .dark & {
-              background: rgba(15, 23, 42, 0.3);
-              border-color: rgba(51, 65, 85, 0.3);
-            }
+            @include syncfusion-glass-button;
           }
         }
       }
-    }
-
-    body.theme-gemini & .e-rte-toolbar {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 30px rgba(59, 130, 246, 0.1);
     }
 
     /* Content Area */

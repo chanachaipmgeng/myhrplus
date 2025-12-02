@@ -53,7 +53,9 @@
     position: absolute;
     inset: -2px;
     border-radius: inherit;
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    /* Using Tailwind blue color scale */
+  background: linear-gradient(135deg, rgb(59, 130, 246), rgb(37, 99, 235));
+  /* Equivalent: bg-gradient-to-br from-blue-500 to-blue-600 */
     opacity: 0;
     filter: blur(8px);
     transition: opacity 0.3s ease;
@@ -90,7 +92,9 @@
       transform: translateY(-50%);
       width: 3px;
       height: 60%;
-      background: linear-gradient(to bottom, #3b82f6, #2563eb);
+      /* Using Tailwind blue color scale */
+      background: linear-gradient(to bottom, rgb(59, 130, 246), rgb(37, 99, 235));
+      /* Equivalent: bg-gradient-to-b from-blue-500 to-blue-600 */
       border-radius: 0 2px 2px 0;
     }
   }
@@ -244,14 +248,16 @@
   right: 0;
   width: 12px;
   height: 12px;
-  background: #10b981;
+  /* Using Tailwind green-500 */
+  background: rgb(16, 185, 129); /* green-500 */
   border: 2px solid white;
   border-radius: 50%;
   box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
   animation: statusPulse 2s ease-in-out infinite;
 
   .dark & {
-    border-color: #1f2937;
+    /* Using Tailwind gray-800 */
+    border-color: rgb(31, 41, 55); /* gray-800 */
   }
 }
 
