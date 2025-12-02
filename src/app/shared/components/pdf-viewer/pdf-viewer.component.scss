@@ -4,42 +4,43 @@
 
   ::ng-deep {
     .e-pdfviewer {
-      border: 1px solid rgba(148, 163, 184, 0.2);
+      border: 1px solid var(--glass-border);
       border-radius: 0.5rem;
       overflow: hidden;
     }
 
     .e-pdfviewer-toolbar {
-      background: rgba(255, 255, 255, 0.1);
+      background: var(--glass-bg);
       -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+      border-bottom: 1px solid var(--glass-border);
     }
 
     .e-pdfviewer-sidebar {
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--glass-bg-weak);
       -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
-      border-right: 1px solid rgba(148, 163, 184, 0.2);
+      border-right: 1px solid var(--glass-border);
     }
 
     .e-pdfviewer-content {
-      background: rgba(255, 255, 255, 0.02);
+      background: var(--glass-bg-weak);
     }
   }
 }
 
 // Dark mode support
-:host-context(.dark) {
+:host-context(.dark),
+[data-theme='dark'] {
   .pdf-viewer-container {
     ::ng-deep {
       .e-pdfviewer {
-        border-color: rgba(148, 163, 184, 0.3);
+        border-color: var(--glass-border-strong);
       }
 
       .e-pdfviewer-toolbar,
       .e-pdfviewer-sidebar {
-        background: rgba(0, 0, 0, 0.2);
+        background: var(--glass-bg);
       }
     }
   }
