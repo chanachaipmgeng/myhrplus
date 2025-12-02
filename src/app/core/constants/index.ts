@@ -14,4 +14,5 @@ export * from './training-screens.constant';
 export * from './welfare-screens.constant';
 export * from './recruit-screens.constant';
 export * from './appraisal-screens.constant';
+export * from './settings-screens.constant';
 
