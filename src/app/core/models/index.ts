@@ -37,6 +37,7 @@ export * from './company-history.model';
 export * from './vision.model';
 export * from './mission.model';
 export * from './company-screen.model';
+export * from './screen.model';
 
 // Employee models
 export * from './employee.model';
