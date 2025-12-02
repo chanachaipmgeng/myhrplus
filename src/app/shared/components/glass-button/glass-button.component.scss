@@ -10,12 +10,13 @@
 
 /* Focus ring styles - using Tailwind focus-visible utilities */
 button:focus-visible {
-  outline: 2px solid theme('colors.primary.500');
+  outline: 2px solid var(--primary-color);
   outline-offset: 2px;
 }
 
+[data-theme='dark'] button:focus-visible,
 .dark button:focus-visible {
-  outline-color: theme('colors.primary.400');
+  outline-color: rgba(var(--primary-rgb), 0.8);
 }
 
 /* Loading spinner animation */
@@ -27,6 +28,45 @@ button:focus-visible {
 
 .animate-spin {
   animation: spin 0.6s linear infinite;
+}
+
+/* Gemini 1.5 Theme - Glass Button */
+/* Moved from global styles.scss to improve encapsulation */
+[data-theme='gemini'] :host,
+body.theme-gemini :host {
+  ::ng-deep .glass-button-primary {
+    background: linear-gradient(135deg,
+      var(--gradient-primary-start) 0%,
+      var(--gradient-primary-mid) 50%,
+      var(--gradient-primary-end) 100%
+    ) !important;
+    border: 1px solid var(--glass-border-strong) !important;
+    box-shadow:
+      0 4px 16px rgba(var(--primary-rgb), 0.3),
+      0 0 20px rgba(var(--primary-rgb), 0.2) !important;
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg,
+        var(--gradient-primary-hover-start) 0%,
+        var(--gradient-primary-hover-mid) 50%,
+        var(--gradient-primary-hover-end) 100%
+      ) !important;
+      box-shadow:
+        0 6px 20px rgba(var(--primary-rgb), 0.4),
+        0 0 30px rgba(var(--primary-rgb), 0.3) !important;
+      transform: translateY(-2px) scale(1.02);
+    }
+  }
+
+  ::ng-deep .glass-button {
+    border: 1px solid var(--glass-border) !important;
+
+    &:hover:not(:disabled) {
+      background: rgba(var(--primary-rgb), 0.15) !important;
+      border-color: var(--glass-border-strong) !important;
+      box-shadow: 0 0 20px rgba(var(--primary-rgb), 0.2) !important;
+    }
+  }
 }
 
 /* Responsive - handled via Tailwind responsive classes in component */

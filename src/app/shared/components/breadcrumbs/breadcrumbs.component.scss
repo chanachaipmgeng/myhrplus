@@ -14,15 +14,15 @@
   display: none;
 }
 
-/* Gemini Theme */
-/* Using Tailwind classes - keeping only complex filter effects */
-body.theme-gemini {
+/* Gemini Theme - Using CSS Variables */
+[data-theme='gemini'] :host,
+body.theme-gemini :host {
   .breadcrumb-link {
     @apply glass-gemini-weak;
     
     &:hover {
       @apply glass-gemini;
-      filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.4));
+      filter: drop-shadow(0 0 4px rgba(var(--primary-rgb), 0.4));
     }
   }
   

@@ -14,32 +14,14 @@
   /* Prevent overflow */
   overflow: hidden;
 
-  /* Background - Glassmorphism effect */
+  /* Background - Glassmorphism effect - Using CSS Variables */
   background: linear-gradient(
     to bottom,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.05) 100%
+    var(--sidebar-bg-start) 0%,
+    var(--sidebar-bg-end) 100%
   );
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-
-  /* Dark mode */
-  .dark & {
-    background: linear-gradient(
-      to bottom,
-      rgba(15, 23, 42, 0.8) 0%,
-      rgba(30, 41, 59, 0.7) 100%
-    );
-  }
-
-  /* Gemini theme */
-  [class*='theme-gemini'] & {
-    background: linear-gradient(
-      to bottom,
-      rgba(15, 23, 42, 0.9) 0%,
-      rgba(30, 41, 59, 0.85) 100%
-    );
-  }
 }
 
 /* Icon Bar */
@@ -49,14 +31,14 @@
   min-width: 80px;
   max-width: 80px;
 
-  /* Background gradient with pattern overlay */
+  /* Background gradient with pattern overlay - Using CSS Variables */
   background: linear-gradient(
     to bottom,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.05) 100%
+    var(--sidebar-icon-bg-start) 0%,
+    var(--sidebar-icon-bg-end) 100%
   );
 
-  /* Subtle pattern overlay */
+  /* Subtle pattern overlay - Using CSS Variables */
   &::before {
     content: '';
     position: absolute;
@@ -66,50 +48,24 @@
         90deg,
         transparent,
         transparent 2px,
-        rgba(59, 130, 246, 0.02) 2px,
-        rgba(59, 130, 246, 0.02) 4px
+        var(--sidebar-pattern-color) 2px,
+        var(--sidebar-pattern-color) 4px
       );
     opacity: 0.5;
     pointer-events: none;
     z-index: 0;
   }
 
+  [data-theme='dark'] &,
   .dark & {
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.2) 0%,
-      rgba(0, 0, 0, 0.1) 100%
-    );
-
     &::before {
-      background-image:
-        repeating-linear-gradient(
-          90deg,
-          transparent,
-          transparent 2px,
-          rgba(59, 130, 246, 0.03) 2px,
-          rgba(59, 130, 246, 0.03) 4px
-        );
       opacity: 0.3;
     }
   }
 
+  [data-theme='gemini'] &,
   [class*='theme-gemini'] & {
-    background: linear-gradient(
-      to bottom,
-      rgba(59, 130, 246, 0.1) 0%,
-      rgba(59, 130, 246, 0.05) 100%
-    );
-
     &::before {
-      background-image:
-        repeating-linear-gradient(
-          90deg,
-          transparent,
-          transparent 2px,
-          rgba(255, 255, 255, 0.05) 2px,
-          rgba(255, 255, 255, 0.05) 4px
-        );
       opacity: 0.4;
     }
   }
@@ -125,15 +81,13 @@
 .logo-container {
   position: relative;
 
-  /* Glow effect */
+  /* Glow effect - Using CSS Variables */
   &::after {
     content: '';
     position: absolute;
     inset: -2px;
     border-radius: inherit;
-    /* Using Tailwind blue color scale */
-  background: linear-gradient(135deg, rgb(59, 130, 246), rgb(37, 99, 235));
-  /* Equivalent: bg-gradient-to-br from-blue-500 to-blue-600 */
+    background: linear-gradient(135deg, var(--primary-color), rgb(37, 99, 235));
     opacity: 0;
     filter: blur(8px);
     transition: opacity 0.3s ease;
@@ -158,25 +112,27 @@
     color: inherit;
   }
 
-  /* Active state with enhanced visual feedback */
+  /* Active state with enhanced visual feedback - Using CSS Variables */
   &.active,
   &[routerlinkactive='active'] {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(99, 102, 241, 0.2));
-    box-shadow: 
-      0 2px 8px rgba(59, 130, 246, 0.2),
+    background: var(--sidebar-active-bg);
+    box-shadow:
+      0 2px 8px rgba(var(--primary-rgb), 0.2),
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
 
+    [data-theme='dark'] &,
     .dark & {
-      box-shadow: 
-        0 2px 8px rgba(59, 130, 246, 0.3),
+      box-shadow:
+        0 2px 8px rgba(var(--primary-rgb), 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
     }
 
+    [data-theme='gemini'] &,
     [class*='theme-gemini'] & {
-      box-shadow: 
-        0 2px 8px rgba(59, 130, 246, 0.4),
+      box-shadow:
+        0 2px 8px rgba(var(--primary-rgb), 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        0 0 12px rgba(59, 130, 246, 0.2);
+        0 0 12px rgba(var(--primary-rgb), 0.2);
     }
 
     &::before {
@@ -187,28 +143,28 @@
       transform: translateY(-50%);
       width: 3px;
       height: 60%;
-      background: linear-gradient(to bottom, rgb(59, 130, 246), rgb(37, 99, 235));
+      background: linear-gradient(to bottom, var(--primary-color), rgb(37, 99, 235));
       border-radius: 0 2px 2px 0;
-      box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+      box-shadow: 0 0 8px rgba(var(--primary-rgb), 0.5);
     }
   }
 
-  /* Enhanced hover state */
+  /* Enhanced hover state - Using CSS Variables */
   &:hover:not(.active) {
-    background: rgba(59, 130, 246, 0.08);
+    background: var(--sidebar-hover-bg);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.15);
 
+    [data-theme='dark'] &,
     .dark & {
-      background: rgba(59, 130, 246, 0.12);
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+      box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.25);
     }
 
+    [data-theme='gemini'] &,
     [class*='theme-gemini'] & {
-      background: rgba(59, 130, 246, 0.15);
-      box-shadow: 
-        0 4px 12px rgba(59, 130, 246, 0.3),
-        0 0 16px rgba(59, 130, 246, 0.2);
+      box-shadow:
+        0 4px 12px rgba(var(--primary-rgb), 0.3),
+        0 0 16px rgba(var(--primary-rgb), 0.2);
     }
   }
 
@@ -524,7 +480,7 @@
   padding: 0.5rem;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 0.75rem;
-  box-shadow: 
+  box-shadow:
     0 10px 40px rgba(0, 0, 0, 0.1),
     0 0 0 1px rgba(0, 0, 0, 0.05);
   -webkit-backdrop-filter: blur(20px);
@@ -557,7 +513,7 @@
 
   .dark & {
     background: rgba(17, 24, 39, 0.95);
-    box-shadow: 
+    box-shadow:
       0 10px 40px rgba(0, 0, 0, 0.3),
       0 0 0 1px rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.1);
@@ -715,7 +671,7 @@
     );
     opacity: 0.5;
   }
-  
+
   .dark & {
     border-bottom-color: rgba(255, 255, 255, 0.05);
 
@@ -753,7 +709,7 @@
 .breadcrumb-link {
   transition: color 0.2s ease;
   cursor: pointer;
-  
+
   &:hover {
     text-decoration: underline;
   }
@@ -772,7 +728,7 @@
   width: 100%;
   justify-content: flex-start;
   transition: all 0.2s ease;
-  
+
   /* Enhanced hover state */
   &:hover {
     transform: translateX(-2px);
@@ -783,7 +739,7 @@
   &:active {
     transform: translateX(0) scale(0.98);
   }
-  
+
   /* Focus state */
   &:focus {
     outline: 2px solid rgba(59, 130, 246, 0.5);

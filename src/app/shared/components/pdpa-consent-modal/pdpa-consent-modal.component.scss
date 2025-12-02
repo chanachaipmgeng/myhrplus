@@ -1,12 +1,11 @@
 .modal-content {
   border-radius: 0.5rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  box-shadow: var(--modal-shadow);
 }
 
 .modal-header {
-  /* Using Tailwind gradient colors - indigo-500 to purple-600 */
-  background: linear-gradient(135deg, rgb(99, 102, 241) 0%, rgb(147, 51, 234) 100%);
-  /* Equivalent: bg-gradient-to-br from-indigo-500 to-purple-600 */
+  /* Using CSS Variables for gradient */
+  background: linear-gradient(135deg, var(--modal-header-gradient-start) 0%, var(--modal-header-gradient-end) 100%);
   color: white;
   border-bottom: none;
   border-radius: 0.5rem 0.5rem 0 0;
@@ -69,23 +68,19 @@
   }
 }
 
-// Dark mode support
-// Using Tailwind gray color scale
+// Dark mode support - Using CSS Variables
+[data-theme='dark'] :host,
 :host-context(.dark) {
   .modal-body {
     .consent-content {
-      /* Using Tailwind gray-800 */
-      background-color: rgb(31, 41, 55); /* gray-800 */
-      /* Using Tailwind slate-200 */
-      color: rgb(226, 232, 240); /* slate-200 */
-      /* Using Tailwind gray-700 */
-      border-color: rgb(55, 65, 81); /* gray-700 */
+      background-color: var(--modal-body-bg);
+      color: var(--modal-body-text);
+      border-color: var(--modal-body-border);
     }
   }
 
   .modal-footer {
-    /* Using Tailwind gray-700 */
-    border-top-color: rgb(55, 65, 81); /* gray-700 */
+    border-top-color: var(--modal-footer-border);
   }
 }
 

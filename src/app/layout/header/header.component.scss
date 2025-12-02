@@ -9,13 +9,13 @@
 .header-icon-btn {
   position: relative;
 
-  /* Ripple effect */
+  /* Ripple effect - Using CSS Variables */
   &::after {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--header-ripple-color) 0%, transparent 70%);
     opacity: 0;
     transform: scale(0);
     transition: opacity 0.3s ease, transform 0.3s ease;
@@ -33,7 +33,7 @@
   position: relative;
   overflow: hidden;
 
-  /* Shimmer effect on hover */
+  /* Shimmer effect on hover - Using CSS Variables */
   &::before {
     content: '';
     position: absolute;
@@ -41,7 +41,7 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(255, 255, 255, 0.2) 50%,
+      var(--header-shimmer-color) 50%,
       transparent 100%
     );
     transform: translateX(-100%);
@@ -64,32 +64,17 @@
   /* Smooth entrance */
   animation: dropdownSlideIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Shadow enhancement */
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.15),
-    0 0 0 1px rgba(59, 130, 246, 0.1);
-
-  .dark & {
-    box-shadow:
-      0 20px 60px rgba(0, 0, 0, 0.4),
-      0 0 0 1px rgba(59, 130, 246, 0.2);
-  }
-
-  [class*='theme-gemini'] & {
-    box-shadow:
-      0 20px 60px rgba(0, 0, 0, 0.6),
-      0 0 0 1px rgba(59, 130, 246, 0.3),
-      0 0 80px rgba(59, 130, 246, 0.1);
-  }
+  /* Shadow enhancement - Using CSS Variables */
+  box-shadow: var(--header-dropdown-shadow);
 }
 
 /* Language Item */
 .language-item {
   position: relative;
 
-  /* Active indicator */
+  /* Active indicator - Using CSS Variables */
   &.active {
-    background: rgba(59, 130, 246, 0.1);
+    background: var(--header-active-bg);
 
     &::before {
       content: '';
@@ -98,9 +83,7 @@
       top: 0;
       bottom: 0;
       width: 3px;
-      /* Using Tailwind blue color scale */
-      background: linear-gradient(to bottom, rgb(59, 130, 246), rgb(37, 99, 235));
-      /* Equivalent: bg-gradient-to-b from-blue-500 to-blue-600 */
+      background: linear-gradient(to bottom, var(--primary-color), rgb(37, 99, 235));
       border-radius: 0 2px 2px 0;
     }
   }
@@ -110,9 +93,9 @@
 .notification-item {
   position: relative;
 
-  /* Unread indicator */
+  /* Unread indicator - Using CSS Variables */
   &.unread {
-    background: rgba(59, 130, 246, 0.05);
+    background: var(--header-unread-bg);
 
     &::before {
       content: '';
@@ -121,9 +104,7 @@
       top: 0;
       bottom: 0;
       width: 3px;
-      /* Using Tailwind blue color scale */
-      background: linear-gradient(to bottom, rgb(59, 130, 246), rgb(37, 99, 235));
-      /* Equivalent: bg-gradient-to-b from-blue-500 to-blue-600 */
+      background: linear-gradient(to bottom, var(--primary-color), rgb(37, 99, 235));
       border-radius: 0 2px 2px 0;
     }
   }

@@ -79,14 +79,15 @@
       }
 
       .preview-item {
-        border: 1px solid rgba(0, 0, 0, 0.12);
+        /* Using CSS Variables */
+        border: 1px solid var(--preview-item-border);
         border-radius: 12px;
         overflow: hidden;
-        background: rgba(255, 255, 255, 0.5);
+        background: var(--preview-item-bg);
         transition: all 0.3s ease;
 
         &:hover {
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          box-shadow: var(--preview-item-shadow);
           transform: translateY(-2px);
         }
 
@@ -94,7 +95,7 @@
           position: relative;
           width: 100%;
           padding-top: 75%; // 4:3 aspect ratio
-          background: #f5f5f5;
+          background: var(--preview-image-bg);
 
           .preview-image {
             position: absolute;
@@ -111,7 +112,7 @@
             /* Backdrop-filter handled by Tailwind classes in HTML */
 
             &:hover {
-              background: rgba(239, 68, 68, 0.9);
+              background: rgba(239, 68, 68, 0.9); /* Keep red color for error state */
             }
 
             mat-icon {
@@ -142,31 +143,31 @@
   }
 }
 
-// Dark mode support
-.dark {
+// Dark mode support - Using CSS Variables
+[data-theme='dark'] :host,
+.dark :host {
   .image-upload-container {
     .upload-area {
-      background: rgba(255, 255, 255, 0.05);
-
+      /* Dark mode styles handled by CSS variables */
+      
       .upload-content {
         .upload-text {
-          color: rgba(255, 255, 255, 0.87);
+          color: var(--preview-text-color);
         }
       }
     }
 
     .preview-section {
       .preview-item {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(255, 255, 255, 0.12);
+        /* Dark mode styles handled by CSS variables */
 
         .preview-image-container {
-          background: #1a1a1a;
+          /* Dark mode background handled by CSS variables */
         }
 
         .preview-info {
           .preview-name {
-            color: rgba(255, 255, 255, 0.87);
+            color: var(--preview-text-color);
           }
         }
       }

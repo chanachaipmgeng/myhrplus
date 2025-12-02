@@ -11,3 +11,27 @@
 /* Component uses Tailwind classes directly in HTML */
 /* Responsive text sizes handled via Tailwind responsive classes */
 /* Gemini theme handled via Tailwind theme-gemini classes */
+
+/* Gemini 1.5 Theme - Empty State */
+/* Moved from global styles.scss to improve encapsulation */
+[data-theme='gemini'] :host,
+body.theme-gemini :host {
+  ::ng-deep .glass-card {
+    border: 1px solid var(--glass-border) !important;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      0 0 0 1px var(--glass-border-weak),
+      0 0 40px rgba(59, 130, 246, 0.1) !important;
+  }
+
+  ::ng-deep h3 {
+    background: linear-gradient(135deg,
+      #93c5fd 0%,
+      #60a5fa 50%,
+      #3b82f6 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}

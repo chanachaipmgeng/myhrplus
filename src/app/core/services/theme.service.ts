@@ -98,6 +98,7 @@ export class ThemeService {
 
   /**
    * Apply theme to document
+   * Uses data-theme attribute for cleaner theme switching
    */
   private applyTheme(theme: ThemeConfig): void {
     const html = document.documentElement;
@@ -111,20 +112,44 @@ export class ThemeService {
       isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
 
-    // Apply dark mode class
+    // Remove all theme-related classes and attributes
+    html.classList.remove('dark');
+    body.classList.remove('dark');
+    html.removeAttribute('data-theme');
+    body.removeAttribute('data-theme');
+    
+    // Remove all theme color classes
+    const themeColors: ThemeColor[] = ['blue', 'indigo', 'purple', 'green', 'orange', 'red', 'teal', 'pink', 'gemini'];
+    themeColors.forEach(color => {
+      body.classList.remove(`theme-${color}`);
+    });
+
+    // Apply theme using data-theme attribute (preferred method)
+    // Also keep class-based for backward compatibility
+    if (theme.color === 'gemini') {
+      html.setAttribute('data-theme', 'gemini');
+      body.setAttribute('data-theme', 'gemini');
+      body.classList.add('theme-gemini');
+    } else {
+      // For non-gemini themes, use mode-based data-theme
+      html.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      body.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      body.classList.add(`theme-${theme.color}`);
+    }
+
+    // Apply dark mode class (for Tailwind dark: prefix and backward compatibility)
     if (isDark) {
       html.classList.add('dark');
       body.classList.add('dark');
-    } else {
-      html.classList.remove('dark');
-      body.classList.remove('dark');
     }
 
     // Switch Syncfusion UI Kit theme stylesheet
     this.switchSyncfusionTheme(isDark);
 
-    // Set primary color CSS variable
+    // Set CSS variables
     html.style.setProperty('--primary-rgb', theme.primaryColor);
+    html.style.setProperty('--theme-color', theme.color);
+    html.style.setProperty('--theme-mode', theme.mode);
 
     // Update subjects
     this.themeSubject.next(theme);

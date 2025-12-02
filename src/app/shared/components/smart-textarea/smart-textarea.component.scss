@@ -10,16 +10,17 @@
       width: 100%;
       
       .e-input-group {
-        background: rgba(255, 255, 255, 0.1);
+        /* Using CSS Variables */
+        background: var(--form-input-bg);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        border: 1px solid var(--form-input-border);
         border-radius: 0.5rem;
         transition: all 0.3s ease;
 
         &:focus-within {
-          border-color: rgba(59, 130, 246, 0.5);
-          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+          border-color: var(--form-input-focus-border);
+          box-shadow: var(--form-input-focus-shadow);
         }
       }
 
@@ -36,32 +37,32 @@
 
       .e-float-input .e-float-line::before,
       .e-float-input .e-float-line::after {
-        background-color: rgba(59, 130, 246, 0.5);
+        background-color: var(--form-label-float-color);
       }
 
       .e-float-input input:focus ~ label,
       .e-float-input input:valid ~ label {
-        color: rgba(59, 130, 246, 0.8);
+        color: var(--form-label-focus-color);
       }
     }
   }
 
-  // Dark mode
+  // Dark mode - Using CSS Variables
+  [data-theme='dark'] :host,
   :host-context(.dark) {
     ::ng-deep {
       .e-smarttextarea {
         .e-input-group {
-          background: rgba(15, 23, 42, 0.3);
-          border-color: rgba(255, 255, 255, 0.1);
+          /* Dark mode styles handled by CSS variables */
         }
 
         .e-input {
-          color: #e2e8f0;
+          color: var(--form-input-text-color);
         }
 
         .e-float-input input:focus ~ label,
         .e-float-input input:valid ~ label {
-          color: rgba(96, 165, 250, 0.8);
+          /* Dark mode label color handled by CSS variables */
         }
       }
     }

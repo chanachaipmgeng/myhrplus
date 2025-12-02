@@ -47,44 +47,19 @@
     }
   }
 
-  /* Hover State */
+  /* Hover State - Using CSS Variables */
   &:hover:not(.active) {
-    background: rgba(255, 255, 255, 0.05);
-    
-    .dark & {
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    [class*='theme-gemini'] & {
-      background: rgba(255, 255, 255, 0.05);
-    }
+    background: var(--menu-item-hover-bg);
   }
 
-  /* Active State */
+  /* Active State - Using CSS Variables */
   &.active {
-    background: rgba(59, 130, 246, 0.1);
-    border-left: 3px solid rgb(59, 130, 246);
-
-    .dark & {
-      background: rgba(59, 130, 246, 0.2);
-    }
-
-    [class*='theme-gemini'] & {
-      background: rgba(59, 130, 246, 0.15);
-      border-left-color: rgb(96, 165, 250);
-    }
+    background: var(--menu-item-active-bg);
+    border-left: 3px solid var(--menu-item-active-border);
 
     .menu-item-label {
-      color: rgb(59, 130, 246);
+      color: var(--menu-item-active-text);
       font-weight: 600;
-
-      .dark & {
-        color: rgb(96, 165, 250);
-      }
-
-      [class*='theme-gemini'] & {
-        color: rgb(147, 197, 253);
-      }
     }
   }
 
@@ -108,9 +83,9 @@
   transition: all 0.2s ease-out;
   position: relative;
 
-  /* Focus State */
+  /* Focus State - Using CSS Variables */
   &:focus {
-    outline: 2px solid rgba(59, 130, 246, 0.5);
+    outline: 2px solid var(--menu-item-focus-outline);
     outline-offset: 2px;
     border-radius: 0.5rem;
   }
@@ -142,7 +117,7 @@
   color: inherit;
 }
 
-/* Menu Item Badge */
+/* Menu Item Badge - Using CSS Variables */
 .menu-item-badge {
   display: inline-flex;
   align-items: center;
@@ -154,7 +129,7 @@
   font-size: 0.75rem;
   font-weight: 600;
   color: white;
-  background-color: #ef4444;
+  background-color: var(--menu-badge-bg);
   flex-shrink: 0;
 }
 
@@ -190,21 +165,13 @@
   }
 }
 
-/* Menu Item Children (Nested) */
+/* Menu Item Children (Nested) - Using CSS Variables */
 .menu-item-children {
   margin-top: 0.25rem;
   margin-left: 0.5rem;
   padding-left: 0.5rem;
-  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 1px solid var(--menu-item-children-border);
   animation: slideDown 0.3s ease-out;
-
-  .dark & {
-    border-left-color: rgba(255, 255, 255, 0.05);
-  }
-
-  [class*='theme-gemini'] & {
-    border-left-color: rgba(255, 255, 255, 0.1);
-  }
 }
 
 /* Animations */
