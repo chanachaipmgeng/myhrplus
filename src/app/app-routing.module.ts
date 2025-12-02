@@ -28,6 +28,10 @@ const routes: Routes = [
         loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)
       },
       {
+        path: 'portal',
+        loadChildren: () => import('./features/portal/portal.module').then(m => m.PortalModule)
+      },
+      {
         path: 'dashboard',
         loadChildren: () => import('./features/empview/empview.module').then(m => m.EmpviewModule)
       },

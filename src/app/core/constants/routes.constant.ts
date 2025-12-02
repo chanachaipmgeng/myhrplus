@@ -15,6 +15,36 @@ export const ROUTES = {
   // Dashboard & Home
   HOME: '/home',
   DASHBOARD: '/dashboard',
+  
+  // Portal Routes
+  PORTAL: {
+    BASE: '/portal',
+    HOME: '/portal',
+    SELF_SERVICE: {
+      BASE: '/portal/self-service',
+      TIME: '/portal/self-service/time',
+      DOCUMENTS: '/portal/self-service/documents',
+      PAYSLIP: '/portal/self-service/payslip',
+      PROFILE: '/portal/self-service/profile',
+      SUBORDINATES: '/portal/self-service/subordinates',
+      WELFARE: '/portal/self-service/welfare',
+      LEAVE: '/portal/self-service/leave',
+      ATTENDANCE: '/portal/self-service/attendance',
+      STATISTICS: '/portal/self-service/statistics'
+    },
+    ADMIN: {
+      BASE: '/portal/admin',
+      EMPLOYEES: '/portal/admin/employees',
+      COMPANY: '/portal/admin/company',
+      PAYROLL: '/portal/admin/payroll',
+      TIME: '/portal/admin/time',
+      TRAINING: '/portal/admin/training',
+      WELFARE: '/portal/admin/welfare',
+      RECRUIT: '/portal/admin/recruit',
+      APPRAISAL: '/portal/admin/appraisal',
+      SETTINGS: '/portal/admin/settings'
+    }
+  },
 
   // Feature Modules
   PERSONAL: {

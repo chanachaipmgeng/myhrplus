@@ -1,0 +1,61 @@
+<app-page-layout
+  title="สลิปเงินเดือน"
+  [breadcrumb]="[
+    { label: 'Portal', link: '/portal' },
+    { label: 'Self Service', link: '/portal/self-service' },
+    { label: 'สลิปเงินเดือน', link: '/portal/self-service/payslip' }
+  ]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-4">
+    @if (isLoading) {
+      <app-loading></app-loading>
+    } @else {
+      @if (payslips.length === 0) {
+        <app-glass-card>
+          <div class="p-6 text-center">
+            <span class="material-icons text-6xl text-gray-400 mb-4">receipt</span>
+            <p class="text-gray-600 dark:text-gray-400">ยังไม่มีสลิปเงินเดือน</p>
+          </div>
+        </app-glass-card>
+      } @else {
+        @for (payslip of payslips; track payslip.id) {
+          <app-glass-card>
+            <div class="p-6">
+              <div class="flex items-start justify-between">
+                <div class="flex-1">
+                  <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                    สลิปเงินเดือน {{ payslip.month }} {{ payslip.year }}
+                  </h3>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                    <div>
+                      <p class="text-sm text-gray-600 dark:text-gray-400">เงินเดือนรวม</p>
+                      <p class="text-xl font-bold text-primary-600 dark:text-primary-400">
+                        {{ payslip.grossSalary | number:'1.2-2' }} บาท
+                      </p>
+                    </div>
+                    <div>
+                      <p class="text-sm text-gray-600 dark:text-gray-400">หัก</p>
+                      <p class="text-xl font-bold text-red-600 dark:text-red-400">
+                        {{ payslip.deductions | number:'1.2-2' }} บาท
+                      </p>
+                    </div>
+                    <div>
+                      <p class="text-sm text-gray-600 dark:text-gray-400">รับสุทธิ</p>
+                      <p class="text-xl font-bold text-green-600 dark:text-green-400">
+                        {{ payslip.netSalary | number:'1.2-2' }} บาท
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <app-glass-button variant="primary" (clicked)="downloadPayslip(payslip)">
+                  <span class="material-icons mr-2">download</span>
+                  ดาวน์โหลด
+                </app-glass-button>
+              </div>
+            </div>
+          </app-glass-card>
+        }
+      }
+    }
+  </div>
+</app-page-layout>
+

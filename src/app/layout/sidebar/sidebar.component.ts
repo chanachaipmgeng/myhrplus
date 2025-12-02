@@ -9,6 +9,12 @@ import { ThemeService } from '../../core/services/theme.service';
 import { MenuContextService } from '../../core/services/menu-context.service';
 import { MenuDataService } from '../../core/services/menu-data.service';
 import { MenuContext, MenuGroup } from '../../core/models/menu.model';
+import {
+  NAVIGATION_ITEMS,
+  NavigationItem,
+  NavigationChild,
+  getNavigationItemsByRoles
+} from '../../core/constants/navigation.constant';
 import { ListViewComponent } from '@syncfusion/ej2-angular-lists';
 import { ContextSwitcherComponent } from '../../shared/components/context-switcher/context-switcher.component';
 import { IconComponent } from '../../shared/components/icon/icon.component';
@@ -55,9 +61,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
   @ViewChild('userMenuContainer', { static: false }) userMenuContainer!: ElementRef;
 
   menuItems: MenuItem[] = [];
-  mainModules: MainModule[] = [];
+  mainModules: MainModule[] = []; // Legacy - keep for backward compatibility
+  navigationItems: NavigationItem[] = []; // New navigation structure
   selectedModule: string | null = null;
   selectedModuleData: MainModule | null = null;
+  selectedNavigationItem: NavigationItem | null = null;
   listViewFields: any = {
     id: 'id',
     text: 'text',
@@ -101,6 +109,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
       // Reload menu when user changes
       if (user) {
         this.loadMenu();
+        this.loadNavigationItems();
+      } else {
+        this.navigationItems = [];
+        this.selectedNavigationItem = null;
       }
     });
   }
@@ -129,8 +141,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.buildDisplayMenuItems();
       });
 
-    // Load menu from service
+    // Load menu from service (legacy)
     this.loadMenu();
+
+    // Load new navigation structure
+    this.loadNavigationItems();
 
     // Track active route
     this.router.events
@@ -162,6 +177,86 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }
     });
+  }
+
+  /**
+   * Load navigation items based on user roles
+   */
+  private loadNavigationItems(): void {
+    if (!this.currentUser) {
+      this.navigationItems = [];
+      return;
+    }
+
+    // Get user roles
+    const userRoles = this.getUserRoles();
+
+    // Filter navigation items by roles
+    this.navigationItems = getNavigationItemsByRoles(userRoles);
+
+    // Auto-select first navigation item if available
+    if (this.navigationItems.length > 0 && !this.selectedNavigationItem) {
+      this.selectNavigationItem(this.navigationItems[0].id);
+    }
+  }
+
+  /**
+   * Get user roles array
+   */
+  private getUserRoles(): string[] {
+    if (!this.currentUser) {
+      return [];
+    }
+
+    // Try different role properties
+    const roles: string[] = [];
+
+    if (this.currentUser.roles && Array.isArray(this.currentUser.roles)) {
+      roles.push(...this.currentUser.roles);
+    }
+
+    if (this.currentUser.user_role) {
+      roles.push(this.currentUser.user_role);
+    }
+
+    // Check if user is admin (you may need to adjust this logic based on your auth system)
+    if (this.currentUser.user_level === 'admin' ||
+        this.currentUser.role_level === 'admin' ||
+        roles.includes('admin')) {
+      roles.push('admin');
+    }
+
+    // Default to 'user' if no roles found
+    if (roles.length === 0) {
+      roles.push('user');
+    }
+
+    return [...new Set(roles)]; // Remove duplicates
+  }
+
+  /**
+   * Select navigation item (Rail icon clicked)
+   */
+  selectNavigationItem(itemId: string): void {
+    this.selectedNavigationItem = this.navigationItems.find(item => item.id === itemId) || null;
+    this.selectedModule = itemId; // Keep for compatibility
+
+    // Update filtered menu items with children
+    if (this.selectedNavigationItem && this.selectedNavigationItem.children) {
+      this.filteredMenuItems = this.selectedNavigationItem.children.map(child => ({
+        text: child.label,
+        id: `nav-${itemId}-${child.route}`,
+        iconCss: this.getIconClass(child.icon || 'folder'),
+        route: child.route,
+        badge: child.badge,
+        badgeColor: child.badgeColor
+      }));
+    } else {
+      this.filteredMenuItems = [];
+    }
+
+    // Clear search when switching items
+    this.searchQuery = '';
   }
 
   private groupMenuByModule(): void {
@@ -640,7 +735,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
    */
   private buildDisplayMenuItems(): void {
     this.displayMenuItems = [];
-    
+
     this.menuGroups.forEach(group => {
       group.items.forEach(item => {
         // Only add Level 2 items (children will be shown as tabs in content)
@@ -650,7 +745,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
           iconCss: this.getIconClass(item.icon),
           route: item.route || item.url || ''
         };
-        
+
         // Note: We don't add children here - they'll be shown as tabs in content area
         this.displayMenuItems.push(menuItem);
       });
@@ -807,6 +902,20 @@ export class SidebarComponent implements OnInit, OnDestroy {
   private updateSelectedModuleFromRoute(): void {
     if (!this.activeRoute) return;
 
+    // Try to find matching navigation item first
+    const matchingNavItem = this.navigationItems.find(item => {
+      if (item.children) {
+        return item.children.some(child => this.activeRoute.startsWith(child.route));
+      }
+      return false;
+    });
+
+    if (matchingNavItem) {
+      this.selectNavigationItem(matchingNavItem.id);
+      return;
+    }
+
+    // Fallback to legacy module selection
     const moduleCode = this.getModuleCodeFromRoute(this.activeRoute);
     const moduleId = this.mapRouteToModuleId(moduleCode);
     if (moduleId && moduleId !== this.selectedModule) {
