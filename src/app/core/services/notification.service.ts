@@ -1,91 +1,147 @@
-import { Injectable, ComponentRef, ViewContainerRef } from '@angular/core';
-import { NotificationComponent, NotificationType } from '../../shared/components/notification/notification.component';
-import { standardizeErrorMessage, formatErrorMessage, StandardizedError } from '../utils/error-message.util';
+import { Injectable, ViewContainerRef, ComponentRef } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { NotificationComponent } from '../../shared/components/notification/notification.component';
+
+export interface Notification {
+  id: string;
+  title: string;
+  message: string;
+  type: 'info' | 'success' | 'warning' | 'error';
+  timestamp: Date;
+  read: boolean;
+  route?: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
-  private notificationContainer?: ViewContainerRef;
-  private notifications: ComponentRef<NotificationComponent>[] = [];
+  private _notifications = new BehaviorSubject<Notification[]>([]);
+  readonly notifications$ = this._notifications.asObservable();
 
-  setContainer(container: ViewContainerRef): void {
-    this.notificationContainer = container;
+  private container?: ViewContainerRef;
+  private activeToastComponents: ComponentRef<NotificationComponent>[] = [];
+
+  constructor() {
+    this.loadInitialNotifications();
   }
 
-  private show(message: string, type: NotificationType, duration: number = 3000): void {
-    if (!this.notificationContainer) {
-      console.warn('Notification container not set');
+  /**
+   * Set the ViewContainerRef for dynamic toast notifications
+   */
+  setContainer(container: ViewContainerRef): void {
+    this.container = container;
+  }
+
+  /**
+   * Show error toast notification
+   */
+  showError(message: string, duration: number = 5000): void {
+    this.showToast(message, 'error', duration);
+  }
+
+  /**
+   * Show success toast notification
+   */
+  showSuccess(message: string, duration: number = 3000): void {
+    this.showToast(message, 'success', duration);
+  }
+
+  /**
+   * Show warning toast notification
+   */
+  showWarning(message: string, duration: number = 4000): void {
+    this.showToast(message, 'warning', duration);
+  }
+
+  /**
+   * Show info toast notification
+   */
+  showInfo(message: string, duration: number = 3000): void {
+    this.showToast(message, 'info', duration);
+  }
+
+  /**
+   * Internal method to create and show toast notification
+   */
+  private showToast(message: string, type: 'success' | 'error' | 'warning' | 'info', duration: number): void {
+    if (!this.container) {
+      console.warn('NotificationService: Container not set. Call setContainer() first.');
       return;
     }
 
-    const componentRef = this.notificationContainer.createComponent(NotificationComponent);
-    componentRef.instance.message = message;
-    componentRef.instance.type = type;
-    componentRef.instance.duration = duration;
-    componentRef.instance.onClose = () => {
-      this.removeNotification(componentRef);
+    // Create component dynamically
+    const componentRef = this.container.createComponent(NotificationComponent);
+    const component = componentRef.instance;
+
+    // Set component properties
+    component.message = message;
+    component.type = type;
+    component.duration = duration;
+    component.onClose = () => {
+      this.removeToastComponent(componentRef);
     };
 
-    this.notifications.push(componentRef);
+    // Store reference for cleanup
+    this.activeToastComponents.push(componentRef);
 
-    // Auto remove after duration
+    // Auto-remove after duration (if duration > 0)
     if (duration > 0) {
       setTimeout(() => {
-        this.removeNotification(componentRef);
+        this.removeToastComponent(componentRef);
       }, duration);
     }
   }
 
-  private removeNotification(componentRef: ComponentRef<NotificationComponent>): void {
-    const index = this.notifications.indexOf(componentRef);
+  /**
+   * Remove toast component from container
+   */
+  private removeToastComponent(componentRef: ComponentRef<NotificationComponent>): void {
+    const index = this.activeToastComponents.indexOf(componentRef);
     if (index > -1) {
-      this.notifications.splice(index, 1);
-      componentRef.destroy();
+      this.activeToastComponents.splice(index, 1);
     }
+    componentRef.destroy();
   }
 
-  showSuccess(message: string, duration: number = 3000): void {
-    this.show(message, 'success', duration);
+  private loadInitialNotifications(): void {
+    // Mock data for notification dropdown (not toast)
+    const mockNotifications: Notification[] = [
+      {
+        id: '1',
+        title: 'การอนุมัติใหม่',
+        message: 'มีเอกสารรอการอนุมัติ 3 รายการ',
+        type: 'info',
+        timestamp: new Date(),
+        read: false,
+        route: '/workflow/inbox'
+      },
+      {
+        id: '2',
+        title: 'อัพเดทระบบ',
+        message: 'ระบบจะปิดปรับปรุงในวันที่ 15 มกราคม',
+        type: 'warning',
+        timestamp: new Date(Date.now() - 3600000),
+        read: false
+      }
+    ];
+    this._notifications.next(mockNotifications);
   }
 
-  showError(message: string, duration: number = 5000): void {
-    this.show(message, 'error', duration);
+  markAsRead(id: string): void {
+    const current = this._notifications.value;
+    const updated = current.map(n => n.id === id ? { ...n, read: true } : n);
+    this._notifications.next(updated);
   }
 
-  showWarning(message: string, duration: number = 4000): void {
-    this.show(message, 'warning', duration);
+  markAllAsRead(): void {
+    const current = this._notifications.value;
+    const updated = current.map(n => ({ ...n, read: true }));
+    this._notifications.next(updated);
   }
 
-  showInfo(message: string, duration: number = 3000): void {
-    this.show(message, 'info', duration);
-  }
-
-  /**
-   * Show standardized error message
-   */
-  showStandardizedError(error: any, options?: { duration?: number }): StandardizedError {
-    const standardized = standardizeErrorMessage(error);
-    const message = formatErrorMessage(standardized);
-    this.showError(message, options?.duration || 5000);
-    return standardized;
-  }
-
-  /**
-   * Show error with retry option
-   */
-  showErrorWithRetry(error: any, onRetry?: () => void, duration: number = 0): StandardizedError {
-    const standardized = standardizeErrorMessage(error);
-    const message = formatErrorMessage(standardized);
-    
-    // For retryable errors, show longer duration (0 = no auto-close)
-    if (standardized.retryable && onRetry) {
-      this.show(message, 'error', duration);
-      // Note: Retry button should be handled in the component that calls this
-    } else {
-      this.showError(message, duration || 5000);
-    }
-    
-    return standardized;
+  addNotification(notification: Notification): void {
+    const current = this._notifications.value;
+    this._notifications.next([notification, ...current]);
   }
 }

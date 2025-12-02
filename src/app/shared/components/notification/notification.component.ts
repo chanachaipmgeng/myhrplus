@@ -1,11 +1,15 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Subject, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { IconComponent } from '../icon/icon.component';
 
 export type NotificationType = 'success' | 'error' | 'warning' | 'info';
 
 @Component({
   selector: 'app-notification',
+  standalone: true,
+  imports: [CommonModule, IconComponent],
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.scss']
 })

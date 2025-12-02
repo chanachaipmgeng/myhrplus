@@ -121,7 +121,7 @@
       </button>
 
       <!-- Language Switcher -->
-      <div class="relative" #languageMenuContainer>
+      <div class="relative" appClickOutside (appClickOutside)="closeLanguageMenu()">
         <button
           type="button"
           (click)="toggleLanguageMenu()"
@@ -162,7 +162,7 @@
               *ngFor="let lang of languages; let i = index"
               type="button"
               role="menuitem"
-              (click)="changeLanguage(lang.value); showLanguageMenu = false"
+              (click)="changeLanguage(lang.value)"
               [class.active]="currentLanguage === lang.value"
               [attr.aria-label]="'เปลี่ยนภาษาเป็น ' + lang.label"
               [attr.aria-current]="currentLanguage === lang.value ? 'true' : 'false'"
@@ -185,7 +185,7 @@
       <app-theme-toggle></app-theme-toggle>
 
       <!-- Notifications -->
-      <div class="relative" #notificationMenu>
+      <div class="relative" appClickOutside (appClickOutside)="closeNotificationMenu()">
         <button
           type="button"
           (click)="toggleNotificationMenu()"
@@ -311,7 +311,7 @@
       </div>
 
       <!-- User Menu -->
-      <div class="relative" #userMenuContainer>
+      <div class="relative" appClickOutside (appClickOutside)="closeUserMenu()">
         <button
           type="button"
           (click)="toggleUserMenu()"
@@ -351,7 +351,7 @@
             <button
               type="button"
               role="menuitem"
-              (click)="onProfile(); showUserMenu = false"
+              (click)="onProfile()"
               [attr.aria-label]="'เปิดโปรไฟล์'"
               class="user-menu-item w-full px-4 py-2.5 text-left flex items-center gap-3
                      hover:bg-gray-50 dark:hover:bg-gray-700 theme-gemini:hover:bg-white/20
@@ -366,7 +366,7 @@
             <button
               type="button"
               role="menuitem"
-              (click)="onPreferences(); showUserMenu = false"
+              (click)="onPreferences()"
               [attr.aria-label]="'เปิดการตั้งค่า'"
               class="user-menu-item w-full px-4 py-2.5 text-left flex items-center gap-3
                      hover:bg-gray-50 dark:hover:bg-gray-700 theme-gemini:hover:bg-white/20
@@ -382,7 +382,7 @@
             <button
               type="button"
               role="menuitem"
-              (click)="onLogout(); showUserMenu = false"
+              (click)="onLogout()"
               [attr.aria-label]="'ออกจากระบบ'"
               class="user-menu-item w-full px-4 py-2.5 text-left flex items-center gap-3
                      hover:bg-red-50 dark:hover:bg-red-900/20

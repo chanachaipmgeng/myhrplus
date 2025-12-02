@@ -7,6 +7,7 @@
 
    /* Layout Background Pattern */
    .layout-background {
+     @apply bg-slate-50 dark:bg-slate-900;
      position: relative;
 
      /* Animated gradient overlay */
@@ -114,6 +115,7 @@
      .modern-sidebar {
        &.e-sidebar {
          /* Z-index to ensure sidebar is above footer */
+         z-index: 1000;
 
          /* Smooth transitions */
          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
@@ -125,9 +127,12 @@
            0 10px 40px rgba(0, 0, 0, 0.1),
            0 0 0 1px rgba(59, 130, 246, 0.1);
 
-         /* Backdrop blur */
+         /* Backdrop blur - subtle effect, let sidebar component handle background */
          -webkit-backdrop-filter: blur(20px);
          backdrop-filter: blur(20px);
+
+         /* Transparent background - let sidebar component handle its own background */
+         background: transparent !important;
 
          /* Position to avoid header overlap */
          /* Header height: ~64px (mobile) to ~72px (desktop) */
@@ -152,14 +157,14 @@
            height: 100vh !important;
          }
 
-         /* Dark mode */
+         /* Dark mode - Enhanced shadow only */
          .dark & {
            box-shadow:
              0 10px 40px rgba(0, 0, 0, 0.3),
              0 0 0 1px rgba(59, 130, 246, 0.2);
          }
 
-         /* Gemini theme */
+         /* Gemini theme - Enhanced shadow only */
          [class*='theme-gemini'] & {
            box-shadow:
              0 10px 40px rgba(0, 0, 0, 0.5),
@@ -233,4 +238,3 @@
        }
      }
    }
-

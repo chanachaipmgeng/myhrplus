@@ -19,7 +19,7 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
 import { FormValidationMessagesComponent } from './components/form-validation-messages/form-validation-messages.component';
 import { IconComponent } from './components/icon/icon.component'; // Now standalone
 import { SpinnerComponent } from './components/spinner/spinner.component';
-import { NotificationComponent } from './components/notification/notification.component';
+import { NotificationComponent } from './components/notification/notification.component'; // Now standalone
 import { BackToTopComponent } from './components/back-to-top/back-to-top.component'; // Now standalone
 import { MenuItemComponent } from './components/menu-item/menu-item.component'; // Standalone
 
@@ -44,8 +44,8 @@ const COMPONENTS = [
   DateRangePickerComponent,
   SkeletonLoaderComponent,
   ImageUploadComponent,
-  FormValidationMessagesComponent,
-  NotificationComponent
+  FormValidationMessagesComponent
+  // NotificationComponent removed - now standalone component
   // IconComponent removed - now standalone component
   // BackToTopComponent removed - now standalone component
 ];
@@ -76,7 +76,8 @@ const PIPES = [
     IconComponent, // Import standalone component
     BackToTopComponent, // Import standalone component
     LazyImageDirective, // Import standalone directive
-    MenuItemComponent // Import standalone component
+    MenuItemComponent, // Import standalone component
+    NotificationComponent // Import standalone component
   ],
   exports: [
     CommonModule,
@@ -90,7 +91,8 @@ const PIPES = [
     IconComponent, // Export standalone component
     BackToTopComponent, // Export standalone component
     LazyImageDirective, // Export standalone directive
-    MenuItemComponent // Export standalone component
+    MenuItemComponent, // Export standalone component
+    NotificationComponent // Export standalone component
   ]
 })
 export class SharedModule { }

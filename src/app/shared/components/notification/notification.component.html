@@ -2,7 +2,7 @@
   role="alert"
   [attr.aria-live]="type === 'error' ? 'assertive' : 'polite'"
   [attr.aria-atomic]="true"
-  class="fixed top-4 right-4 z-50 max-w-md w-full animate-slide-in-right motion-safe:animate-none glass-weak rounded-lg shadow-lg border p-4 flex items-start gap-3 theme-gemini:glass-gemini-weak theme-gemini:shadow-gemini-sm"
+  class="max-w-md w-full animate-slide-in-right motion-safe:animate-none glass-weak rounded-lg shadow-lg border p-4 flex items-start gap-3 theme-gemini:glass-gemini-weak theme-gemini:shadow-gemini-sm pointer-events-auto"
   [ngClass]="{
     'bg-success-50/80 dark:bg-success-900/30 border-success-200 dark:border-success-800 theme-gemini:border-success-400/30': type === 'success',
     'bg-error-50/80 dark:bg-error-900/30 border-error-200 dark:border-error-800 theme-gemini:border-error-400/30': type === 'error',

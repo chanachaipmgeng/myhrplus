@@ -4,7 +4,7 @@ import { filter, takeUntil, switchMap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MenuService, MenuItem } from '../../core/services/menu.service';
-import { AuthService, User } from '../../core/services/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 import { ThemeService } from '../../core/services/theme.service';
 import { MenuContextService } from '../../core/services/menu-context.service';
 import { MenuDataService } from '../../core/services/menu-data.service';
@@ -16,30 +16,9 @@ import {
   getNavigationItemsByRoles
 } from '../../core/constants/navigation.constant';
 import { environment } from '../../../environments/environment';
-import { MenuItemComponent } from '../../shared/components/menu-item/menu-item.component';
 import { ListViewComponent } from '@syncfusion/ej2-angular-lists';
-import { IconComponent } from '../../shared/components/icon/icon.component';
 import { NestedMenuAccordionComponent } from '../../shared/components/nested-menu-accordion/nested-menu-accordion.component';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-
-interface NestedMenuItem {
-  text: string;
-  id: string;
-  iconCss?: string;
-  route?: string;
-  badge?: string;
-  badgeColor?: string;
-  child?: NestedMenuItem[];
-}
-
-interface MainModule {
-  id: string;
-  name: string;
-  iconCss: string;
-  menuItems: NestedMenuItem[];
-}
+import { PREDEFINED_MODULES, MODULE_ROUTE_MAP, NestedMenuItem, MainModule } from '../../core/constants/sidebar-modules.constant';
 
 @Component({
   selector: 'app-sidebar',
@@ -206,7 +185,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   /**
    * Load navigation items based on user roles
-   * Default selects ESS and shows its Level 2 items
+   * Only auto-select if no route is active (initial load)
    */
   private loadNavigationItems(): void {
     if (!this.currentUser) {
@@ -230,12 +209,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
       childrenCount: item.children?.length || 0
     })));
 
-    // Auto-select ESS (Empview) as default if available
-    if (this.navigationItems.length > 0 && !this.selectedNavigationItem) {
+    // Only auto-select if no active route and no selection exists
+    // This prevents overriding user's current navigation
+    if (this.navigationItems.length > 0 && !this.selectedNavigationItem && !this.activeRoute) {
       const essItem = this.navigationItems.find(item => item.id === 'ess');
       if (essItem) {
-        // Default to ESS (Empview)
-        console.log('[Sidebar] Auto-selecting ESS as default');
+        // Default to ESS (Empview) only on initial load
+        console.log('[Sidebar] Auto-selecting ESS as default (initial load)');
         this.selectNavigationItem('ess');
       } else {
         // Fallback to first available item
@@ -371,6 +351,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   /**
    * Select Level 2 item (Rail icon clicked - direct selection from Rail)
+   * For ESS: This should navigate directly (ESS doesn't use selectedLevel2Item)
+   * For Admin: This sets selectedLevel2Item and shows Level 3 items
    */
   selectLevel2Item(level2Item: NavigationChild, parentNavItem: NavigationItem | null): void {
     // Find parent if not provided
@@ -385,7 +367,20 @@ export class SidebarComponent implements OnInit, OnDestroy {
       parentId: parentNavItem?.id
     });
 
-    // Set selected Level 2 item
+    // For ESS: Navigate directly if route exists, don't set selectedLevel2Item
+    if (parentNavItem?.id === 'ess') {
+      if (level2Item.route) {
+        this.navigateToRoute(level2Item.route);
+        // ESS doesn't use selectedLevel2Item - keep it null
+        this.selectedLevel3Item = null;
+        this.selectedLevel4Item = null;
+        this.expandedLevel3Items.clear();
+        this.searchQuery = '';
+        return;
+      }
+    }
+
+    // For Admin: Set selected Level 2 item
     this.selectedLevel2Item = level2Item;
 
     // Set parent navigation item and selected navigation item
@@ -406,16 +401,22 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     // Clear search when switching items
     this.searchQuery = '';
+
+    // For Admin: If Level 2 item has route, navigate to it
+    if (parentNavItem?.id === 'admin' && level2Item.route) {
+      this.navigateToRoute(level2Item.route);
+    }
   }
 
   /**
    * Get navigation children for recursive menu component
-   * Returns Level 3 items when Level 2 is selected
+   * For ESS: Returns Level 2 items (children of selected Level 1) - ESS doesn't use selectedLevel2Item
+   * For Admin: Returns Level 3 items (children of selected Level 2) - Admin requires Level 2 selection
    * Uses caching to prevent infinite loops from change detection
    */
   getNavigationChildren(): NavigationChild[] {
     // Create cache key based on current state
-    const cacheKey = `${this.selectedLevel2Item?.label || 'none'}`;
+    const cacheKey = `${this.selectedNavigationItem?.id || 'none'}-${this.selectedLevel2Item?.label || 'none'}`;
 
     // Return cached result if key matches
     if (this._cachedNavigationChildrenKey === cacheKey && this._cachedNavigationChildren.length >= 0) {
@@ -424,10 +425,30 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     let result: NavigationChild[] = [];
 
-    // If Level 2 is selected, return Level 3 items (children of Level 2)
-    if (this.selectedLevel2Item && this.selectedLevel2Item.children) {
-      result = [...this.selectedLevel2Item.children]; // Create new array to avoid reference issues
-      console.log('[Sidebar] getNavigationChildren (Level 3):', result.map(item => ({
+    // For ESS: Return Level 2 items (children of selected Level 1)
+    // ESS doesn't use selectedLevel2Item - it shows all Level 2 items in Rail
+    if (this.selectedNavigationItem?.id === 'ess' && this.selectedNavigationItem.children) {
+      result = [...this.selectedNavigationItem.children];
+      console.log('[Sidebar] getNavigationChildren (ESS - Level 2):', result.map(item => ({
+        label: item.label,
+        route: item.route,
+        childrenCount: item.children?.length || 0
+      })));
+    }
+    // For Admin: Return Level 3 items (children of selected Level 2)
+    // Admin requires Level 2 selection first
+    else if (this.selectedNavigationItem?.id === 'admin' && this.selectedLevel2Item && this.selectedLevel2Item.children) {
+      result = [...this.selectedLevel2Item.children];
+      console.log('[Sidebar] getNavigationChildren (Admin - Level 3):', result.map(item => ({
+        label: item.label,
+        route: item.route,
+        childrenCount: item.children?.length || 0
+      })));
+    }
+    // For Home: Return Level 2 items (children of selected Level 1)
+    else if (this.selectedNavigationItem?.id === 'home' && this.selectedNavigationItem.children) {
+      result = [...this.selectedNavigationItem.children];
+      console.log('[Sidebar] getNavigationChildren (Home - Level 2):', result.map(item => ({
         label: item.label,
         route: item.route,
         childrenCount: item.children?.length || 0
@@ -435,7 +456,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
     else {
       result = [];
-      console.log('[Sidebar] getNavigationChildren (no Level 2 selected or no children): []');
+      console.log('[Sidebar] getNavigationChildren: No items available');
     }
 
     // Cache result
@@ -511,12 +532,18 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   /**
    * Handle accordion item click
+   * For ESS: Level 2 items are shown in accordion (Level 3-4 as children)
+   * For Admin: Level 3 items are shown in accordion (Level 4 as children)
    */
   onAccordionItemClick(item: NavigationChild): void {
+    const isEss = this.selectedNavigationItem?.id === 'ess';
+    const level = isEss ? 2 : 3;
+
     console.log('[Sidebar] Accordion item clicked:', {
       label: item.label,
       route: item.route,
-      level: this.selectedNavigationItem?.id === 'ess' ? 2 : 3
+      level: level,
+      isEss: isEss
     });
 
     if (item.route) {
@@ -525,6 +552,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
       // Update selected items based on route depth
       this.updateSelectedItemsFromRoute(item.route);
+    } else if (item.children && item.children.length > 0) {
+      // If item has children but no route, it's a parent group
+      // Toggle expansion is handled by accordion component
+      console.log('[Sidebar] Accordion item is a parent group, expansion handled by component');
     }
   }
 
@@ -538,21 +569,22 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   /**
    * Update selected items based on route
-   * For ESS: Find in Level 2 children (Level 3-4)
-   * For Admin: Find in Level 3 children (Level 4)
-   * IMPORTANT: Does NOT change selectedLevel2Item - only updates Level 3-4 selections
+   * For ESS: Find in Level 2 children (Level 3-4) - ESS doesn't use selectedLevel2Item
+   * For Admin: Find in Level 3 children (Level 4) - Admin requires Level 2 selection
+   * IMPORTANT: Does NOT change selectedLevel2Item for ESS - only updates Level 3-4 selections
    */
   private updateSelectedItemsFromRoute(route: string): void {
     console.log('[Sidebar] updateSelectedItemsFromRoute: Searching for route =', route);
 
     // For ESS: Search in Level 2 items (selectedNavigationItem.children)
+    // ESS shows all Level 2 items in Rail, doesn't use selectedLevel2Item
     if (this.selectedNavigationItem?.id === 'ess' && this.selectedNavigationItem.children) {
       console.log('[Sidebar] Searching in ESS Level 2 items');
       for (const level2Item of this.selectedNavigationItem.children) {
-        if (level2Item.route === route) {
-          // Direct Level 2 match - don't change selectedLevel2Item
+        // Check direct Level 2 route match
+        if (level2Item.route && route.startsWith(level2Item.route)) {
           console.log('[Sidebar] Found ESS Level 2 match:', level2Item.label);
-          // Keep selectedLevel2Item as is (null for ESS)
+          // ESS doesn't use selectedLevel2Item - keep it null
           this.selectedLevel3Item = null;
           this.selectedLevel4Item = null;
           return;
@@ -561,12 +593,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
         // Check Level 3
         if (level2Item.children) {
           for (const level3Item of level2Item.children) {
-            if (level3Item.route === route) {
+            if (level3Item.route && route.startsWith(level3Item.route)) {
               console.log('[Sidebar] Found ESS Level 3 match:', {
                 level2Label: level2Item.label,
                 level3Label: level3Item.label
               });
-              // Don't change selectedLevel2Item - only update Level 3-4
+              // ESS doesn't use selectedLevel2Item - only update Level 3-4
               this.selectedLevel3Item = level3Item;
               this.selectedLevel4Item = null;
               return;
@@ -575,13 +607,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
             // Check Level 4
             if (level3Item.children) {
               for (const level4Item of level3Item.children) {
-                if (level4Item.route === route) {
+                if (level4Item.route && route.startsWith(level4Item.route)) {
                   console.log('[Sidebar] Found ESS Level 4 match:', {
                     level2Label: level2Item.label,
                     level3Label: level3Item.label,
                     level4Label: level4Item.label
                   });
-                  // Don't change selectedLevel2Item - only update Level 3-4
+                  // ESS doesn't use selectedLevel2Item - only update Level 3-4
                   this.selectedLevel3Item = level3Item;
                   this.selectedLevel4Item = level4Item;
                   return;
@@ -599,7 +631,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     if (this.selectedNavigationItem?.id === 'admin' && this.selectedLevel2Item && this.selectedLevel2Item.children) {
       console.log('[Sidebar] Searching in Admin Level 3 items (current Level 2:', this.selectedLevel2Item.label + ')');
       for (const level3Item of this.selectedLevel2Item.children) {
-        if (level3Item.route === route) {
+        if (level3Item.route && route.startsWith(level3Item.route)) {
           console.log('[Sidebar] Found Admin Level 3 match:', level3Item.label);
           // Don't change selectedLevel2Item - only update Level 3-4
           this.selectedLevel3Item = level3Item;
@@ -610,7 +642,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
         // Check Level 4
         if (level3Item.children) {
           for (const level4Item of level3Item.children) {
-            if (level4Item.route === route) {
+            if (level4Item.route && route.startsWith(level4Item.route)) {
               console.log('[Sidebar] Found Admin Level 4 match:', {
                 level3Label: level3Item.label,
                 level4Label: level4Item.label
@@ -624,6 +656,18 @@ export class SidebarComponent implements OnInit, OnDestroy {
         }
       }
       console.log('[Sidebar] No Admin match found for route:', route);
+    }
+
+    // For Home: Similar to ESS
+    if (this.selectedNavigationItem?.id === 'home' && this.selectedNavigationItem.children) {
+      for (const level2Item of this.selectedNavigationItem.children) {
+        if (level2Item.route && route.startsWith(level2Item.route)) {
+          console.log('[Sidebar] Found Home Level 2 match:', level2Item.label);
+          this.selectedLevel3Item = null;
+          this.selectedLevel4Item = null;
+          return;
+        }
+      }
     }
   }
 
@@ -640,100 +684,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   private groupMenuByModule(): void {
-    // Initialize predefined modules - Ordered as specified
-    const predefinedModules: MainModule[] = [
-      // 1. Home - หน้า home ของ home module
-      {
-        id: 'home',
-        name: 'Home',
-        iconCss: 'e-icons e-home',
-        menuItems: [
-          {
-            text: 'หน้าแรก',
-            id: 'home-dashboard',
-            iconCss: 'e-icons e-home',
-            route: '/home'
-          }
-        ]
-      },
-      // 2. Empview - Employee Self Service (ดึงจาก empview-routing.module.ts)
-      // {
-      //   id: 'empview',
-      //   name: 'Employee Self Service',
-      //   iconCss: 'e-icons e-user',
-      //   menuItems: this.getEmpviewMenuItems()
-      // },
-      // // 3. Workflow - การขอเอกสาร
-      // {
-      //   id: 'workflow',
-      //   name: 'Workflow',
-      //   iconCss: 'e-icons e-flow',
-      //   menuItems: this.getWorkflowMenuItems()
-      // },
-      // 4. Company Management (สำหรับ HR)
-      {
-        id: 'company',
-        name: 'Company Management',
-        iconCss: 'e-icons e-briefcase',
-        menuItems: this.getCompanyMenuItems()
-      },
-      // 5. Personal Management (สำหรับ HR)
-      {
-        id: 'personal',
-        name: 'Personal Management',
-        iconCss: 'e-icons e-user',
-        menuItems: this.getPersonalMenuItems()
-      },
-      // 6. Time Management (สำหรับ HR)
-      {
-        id: 'ta',
-        name: 'Time Management',
-        iconCss: 'e-icons e-clock',
-        menuItems: this.getTaMenuItems()
-      },
-      // 7. Payroll Management (สำหรับ HR)
-      {
-        id: 'payroll',
-        name: 'Payroll Management',
-        iconCss: 'e-icons e-money',
-        menuItems: this.getPayrollMenuItems()
-      },
-      // 8. Welfare Management (สำหรับ HR)
-      {
-        id: 'welfare',
-        name: 'Welfare Management',
-        iconCss: 'e-icons e-favorite',
-        menuItems: this.getWelfareMenuItems()
-      },
-      // 9. Training Management (สำหรับ HR)
-      {
-        id: 'training',
-        name: 'Training Management',
-        iconCss: 'e-icons e-book',
-        menuItems: this.getTrainingMenuItems()
-      },
-      // 10. Recruit Management (สำหรับ HR)
-      {
-        id: 'recruit',
-        name: 'Recruit Management',
-        iconCss: 'e-icons e-people',
-        menuItems: this.getRecruitMenuItems()
-      },
-      // 11. Appraisal Management (สำหรับ HR)
-      {
-        id: 'appraisal',
-        name: 'Appraisal Management',
-        iconCss: 'e-icons e-chart',
-        menuItems: this.getAppraisalMenuItems()
-      },
-      // 12. Setting Management (สำหรับ HR)
-      {
-        id: 'setting',
-        name: 'Setting Management',
-        iconCss: 'e-icons e-settings',
-        menuItems: this.getSettingMenuItems()
-      }
-    ];
+    // Use predefined modules from constant
+    const predefinedModules = [...PREDEFINED_MODULES];
 
     // Create module map - preserve existing menuItems from predefined modules
     const moduleMap = new Map<string, MainModule>();
@@ -778,234 +730,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Get menu items from empview routing module
-  // Note: empview module is lazy loaded at /dashboard, so routes should be /dashboard/...
-  private getEmpviewMenuItems(): NestedMenuItem[] {
-    const menuItems: NestedMenuItem[] = [
-      {
-        text: 'Dashboard',
-        id: 'empview-dashboard',
-        iconCss: 'e-icons e-dashboard',
-        route: '/dashboard'
-      },
-      {
-        text: 'Employee Profile',
-        id: 'empview-profile',
-        iconCss: 'e-icons e-user',
-        route: '/dashboard/employee-profile'
-      },
-      {
-        text: 'Employee Work Information',
-        id: 'empview-work-info',
-        iconCss: 'e-icons e-briefcase',
-        route: '/dashboard/employee-work-information'
-      },
-      {
-        text: 'Working Hour Data',
-        id: 'empview-timestamp',
-        iconCss: 'e-icons e-clock',
-        route: '/dashboard/employee-timestamp'
-      },
-      {
-        text: 'Punch In/Out Checking',
-        id: 'empview-time-warning',
-        iconCss: 'e-icons e-warning',
-        route: '/dashboard/employee-time-warning'
-      },
-      {
-        text: 'Raw Data',
-        id: 'empview-attendance',
-        iconCss: 'e-icons e-list',
-        route: '/dashboard/employee-attendance'
-      },
-      {
-        text: 'Privilege Leave',
-        id: 'empview-leaverole',
-        iconCss: 'e-icons e-calendar',
-        route: '/dashboard/employee-leaverole'
-      },
-      {
-        text: 'OT Statistic',
-        id: 'empview-otstatistic',
-        iconCss: 'e-icons e-chart',
-        route: '/dashboard/employee-otstatistic'
-      },
-      {
-        text: 'Leave Statistic',
-        id: 'empview-leavestatistic',
-        iconCss: 'e-icons e-chart',
-        route: '/dashboard/employee-leavestatistic'
-      },
-      {
-        text: 'Change Requisition',
-        id: 'empview-edittimestatistic',
-        iconCss: 'e-icons e-edit',
-        route: '/dashboard/employee-edittimestatistic'
-      },
-      {
-        text: 'Working History Data',
-        id: 'empview-working-history',
-        iconCss: 'e-icons e-history',
-        route: '/dashboard/working-history-data'
-      },
-      {
-        text: 'e-Payslip',
-        id: 'empview-payslip',
-        iconCss: 'e-icons e-receipt',
-        route: '/dashboard/employee-payslip'
-      },
-      {
-        text: '50Twi',
-        id: 'empview-twi50',
-        iconCss: 'e-icons e-file',
-        route: '/dashboard/employee-twi50'
-      },
-      {
-        text: 'PND91',
-        id: 'empview-pnd91',
-        iconCss: 'e-icons e-file',
-        route: '/dashboard/employee-pnd91'
-      }
-    ];
-    return menuItems;
-  }
-
-  // Get menu items from workflow routing module
-  private getWorkflowMenuItems(): NestedMenuItem[] {
-    return [
-      {
-        text: 'หน้าแรก',
-        id: 'workflow-home',
-        iconCss: 'e-icons e-home',
-        route: '/workflow/home'
-      }
-    ];
-  }
-
-  // Get menu items from TA routing module
-  private getTaMenuItems(): NestedMenuItem[] {
-    // ดึงเมนูจาก routing module จริงๆ
-    // ตอนนี้มีแค่ home route
-    return [
-      {
-        text: 'หน้าแรก',
-        id: 'ta-home',
-        iconCss: 'e-icons e-home',
-        route: '/ta/home'
-      }
-    ];
-  }
-
-  // Get menu items from other modules
-  private getPayrollMenuItems(): NestedMenuItem[] {
-    return [
-      {
-        text: 'หน้าแรก',
-        id: 'payroll-home',
-        iconCss: 'e-icons e-home',
-        route: '/payroll/home'
-      }
-    ];
-  }
-
-  private getWelfareMenuItems(): NestedMenuItem[] {
-    return [
-      {
-        text: 'หน้าแรก',
-        id: 'welfare-home',
-        iconCss: 'e-icons e-home',
-        route: '/welfare/home'
-      }
-    ];
-  }
-
-  private getTrainingMenuItems(): NestedMenuItem[] {
-    return [
-      {
-        text: 'หน้าแรก',
-        id: 'training-home',
-        iconCss: 'e-icons e-home',
-        route: '/training/home'
-      }
-    ];
-  }
-
-  private getRecruitMenuItems(): NestedMenuItem[] {
-    return [
-      {
-        text: 'หน้าแรก',
-        id: 'recruit-home',
-        iconCss: 'e-icons e-home',
-        route: '/recruit/home'
-      }
-    ];
-  }
-
-  private getAppraisalMenuItems(): NestedMenuItem[] {
-    return [
-      {
-        text: 'หน้าแรก',
-        id: 'appraisal-home',
-        iconCss: 'e-icons e-home',
-        route: '/appraisal/home'
-      }
-    ];
-  }
-
-  private getPersonalMenuItems(): NestedMenuItem[] {
-    return [
-      {
-        text: 'หน้าแรก',
-        id: 'personal-home',
-        iconCss: 'e-icons e-home',
-        route: '/personal/home'
-      }
-    ];
-  }
-
-  private getCompanyMenuItems(): NestedMenuItem[] {
-    return [
-      {
-        text: 'หน้าแรก',
-        id: 'company-home',
-        iconCss: 'e-icons e-home',
-        route: '/company/home'
-      }
-    ];
-  }
-
-  private getSettingMenuItems(): NestedMenuItem[] {
-    return [
-      {
-        text: 'หน้าแรก',
-        id: 'setting-home',
-        iconCss: 'e-icons e-home',
-        route: '/setting/home'
-      }
-    ];
-  }
-
   private mapRouteToModuleId(moduleCode: string): string {
-    // Map route module codes to predefined module IDs
-    const routeToModuleMap: { [key: string]: string } = {
-      'home': 'home',
-      'dashboard': 'empview',
-      'empview': 'empview',
-      'employee': 'empview',
-      'workflow': 'workflow',
-      'company': 'company',
-      'personal': 'personal',
-      'ta': 'ta',
-      'time': 'ta',
-      'payroll': 'payroll',
-      'welfare': 'welfare',
-      'training': 'training',
-      'recruit': 'recruit',
-      'appraisal': 'appraisal',
-      'setting': 'setting',
-      'settings': 'setting'
-    };
-    return routeToModuleMap[moduleCode.toLowerCase()] || 'home';
+    return MODULE_ROUTE_MAP[moduleCode.toLowerCase()] || 'home';
   }
 
   private getModuleCodeFromRoute(route: string): string {
@@ -1299,9 +1025,17 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     console.log('[Sidebar] updateSelectedModuleFromRoute: Active route =', this.activeRoute);
 
-    // If Level 1 and Level 2 are already selected, only update Level 3-4 without changing Level 2
-    if (this.selectedNavigationItem && this.selectedLevel2Item) {
-      console.log('[Sidebar] Level 1 and Level 2 already selected, only updating Level 3-4');
+    // For ESS: If Level 1 is already selected, only update Level 3-4
+    // ESS doesn't use selectedLevel2Item
+    if (this.selectedNavigationItem?.id === 'ess') {
+      console.log('[Sidebar] ESS already selected, only updating Level 3-4');
+      this.updateSelectedItemsFromRoute(this.activeRoute);
+      return;
+    }
+
+    // For Admin: If Level 1 and Level 2 are already selected, only update Level 3-4
+    if (this.selectedNavigationItem?.id === 'admin' && this.selectedLevel2Item) {
+      console.log('[Sidebar] Admin Level 1 and Level 2 already selected, only updating Level 3-4');
       this.updateSelectedItemsFromRoute(this.activeRoute);
       return;
     }
@@ -1311,6 +1045,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
     for (const navItem of this.navigationItems) {
       if (!navItem.children) continue;
 
+      // Check if route matches Level 1 item directly (for Home)
+      if (navItem.id === 'home' && this.activeRoute.startsWith('/portal')) {
+        if (this.selectedNavigationItem?.id !== navItem.id) {
+          this.selectNavigationItem(navItem.id);
+        }
+        this.updateSelectedItemsFromRoute(this.activeRoute);
+        return;
+      }
+
       for (const level2Item of navItem.children) {
         // Check Level 2 route
         if (level2Item.route && this.activeRoute.startsWith(level2Item.route)) {
@@ -1319,15 +1062,28 @@ export class SidebarComponent implements OnInit, OnDestroy {
             level2Label: level2Item.label,
             route: level2Item.route
           });
-          // Only change Level 1 and Level 2 if they are different
-          if (this.selectedNavigationItem?.id !== navItem.id) {
-            this.selectNavigationItem(navItem.id);
+
+          // For ESS: Don't set selectedLevel2Item, just select Level 1
+          if (navItem.id === 'ess') {
+            if (this.selectedNavigationItem?.id !== navItem.id) {
+              this.selectNavigationItem(navItem.id);
+            }
+            // ESS doesn't use selectedLevel2Item
+            this.updateSelectedItemsFromRoute(this.activeRoute);
+            return;
           }
-          if (this.selectedLevel2Item !== level2Item) {
-            this.selectLevel2Item(level2Item, navItem);
+
+          // For Admin: Set both Level 1 and Level 2
+          if (navItem.id === 'admin') {
+            if (this.selectedNavigationItem?.id !== navItem.id) {
+              this.selectNavigationItem(navItem.id);
+            }
+            if (this.selectedLevel2Item !== level2Item) {
+              this.selectLevel2Item(level2Item, navItem);
+            }
+            this.updateSelectedItemsFromRoute(this.activeRoute);
+            return;
           }
-          this.updateSelectedItemsFromRoute(this.activeRoute);
-          return;
         }
 
         // Check Level 3 routes
@@ -1340,15 +1096,27 @@ export class SidebarComponent implements OnInit, OnDestroy {
                 level3Label: level3Item.label,
                 route: level3Item.route
               });
-              // Only change Level 1 and Level 2 if they are different
-              if (this.selectedNavigationItem?.id !== navItem.id) {
-                this.selectNavigationItem(navItem.id);
+
+              // For ESS: Don't set selectedLevel2Item
+              if (navItem.id === 'ess') {
+                if (this.selectedNavigationItem?.id !== navItem.id) {
+                  this.selectNavigationItem(navItem.id);
+                }
+                this.updateSelectedItemsFromRoute(this.activeRoute);
+                return;
               }
-              if (this.selectedLevel2Item !== level2Item) {
-                this.selectLevel2Item(level2Item, navItem);
+
+              // For Admin: Set both Level 1 and Level 2
+              if (navItem.id === 'admin') {
+                if (this.selectedNavigationItem?.id !== navItem.id) {
+                  this.selectNavigationItem(navItem.id);
+                }
+                if (this.selectedLevel2Item !== level2Item) {
+                  this.selectLevel2Item(level2Item, navItem);
+                }
+                this.updateSelectedItemsFromRoute(this.activeRoute);
+                return;
               }
-              this.updateSelectedItemsFromRoute(this.activeRoute);
-              return;
             }
 
             // Check Level 4 routes
@@ -1362,15 +1130,27 @@ export class SidebarComponent implements OnInit, OnDestroy {
                     level4Label: level4Item.label,
                     route: level4Item.route
                   });
-                  // Only change Level 1 and Level 2 if they are different
-                  if (this.selectedNavigationItem?.id !== navItem.id) {
-                    this.selectNavigationItem(navItem.id);
+
+                  // For ESS: Don't set selectedLevel2Item
+                  if (navItem.id === 'ess') {
+                    if (this.selectedNavigationItem?.id !== navItem.id) {
+                      this.selectNavigationItem(navItem.id);
+                    }
+                    this.updateSelectedItemsFromRoute(this.activeRoute);
+                    return;
                   }
-                  if (this.selectedLevel2Item !== level2Item) {
-                    this.selectLevel2Item(level2Item, navItem);
+
+                  // For Admin: Set both Level 1 and Level 2
+                  if (navItem.id === 'admin') {
+                    if (this.selectedNavigationItem?.id !== navItem.id) {
+                      this.selectNavigationItem(navItem.id);
+                    }
+                    if (this.selectedLevel2Item !== level2Item) {
+                      this.selectLevel2Item(level2Item, navItem);
+                    }
+                    this.updateSelectedItemsFromRoute(this.activeRoute);
+                    return;
                   }
-                  this.updateSelectedItemsFromRoute(this.activeRoute);
-                  return;
                 }
               }
             }
