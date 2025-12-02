@@ -25,11 +25,12 @@
 }
 
 /* Gemini Theme */
+[data-theme='gemini'] .material-icons,
 body.theme-gemini .material-icons {
   @apply glow-primary;
   
   &:hover {
-    filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
+    filter: drop-shadow(0 0 8px rgba(var(--primary-rgb), 0.6));
   }
 }
 

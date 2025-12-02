@@ -13,23 +13,31 @@
   @apply glass dark:glass-dark theme-gemini:glass-gemini rounded-xl border border-primary-500/20 dark:border-primary-400/20;
 }
 
+[data-theme='gemini'] :host ::ng-deep .cal-month-view,
+[data-theme='gemini'] :host ::ng-deep .cal-week-view,
+[data-theme='gemini'] :host ::ng-deep .cal-day-view,
 body.theme-gemini :host ::ng-deep .cal-month-view,
 body.theme-gemini :host ::ng-deep .cal-week-view,
 body.theme-gemini :host ::ng-deep .cal-day-view {
-  border-color: rgba(var(--gemini-gradient-end-rgb), 0.3);
+  border-color: rgba(var(--primary-rgb), 0.3);
 }
 
 :host ::ng-deep .cal-header {
   @apply bg-gray-700/80 dark:bg-gray-800/80 text-gray-100 dark:text-gray-200 p-3 border-b border-gray-600/50 dark:border-gray-700/50;
 }
 
+[data-theme='gemini'] :host ::ng-deep .cal-header,
 body.theme-gemini :host ::ng-deep .cal-header {
   @apply bg-clip-text text-transparent;
-  /* Using Tailwind blue color scale for gradient */
-  background: linear-gradient(to right, rgb(147, 197, 253), rgb(96, 165, 250), rgb(59, 130, 246), rgb(37, 99, 235));
-  /* Equivalent: from-blue-300 via-blue-400 via-blue-500 to-blue-600 */
-  background-color: rgba(37, 99, 235, 0.2);
-  border-bottom-color: rgba(37, 99, 235, 0.3);
+  /* Using CSS Variables for gradient */
+  background: linear-gradient(to right,
+    var(--gradient-primary-start),
+    var(--gradient-primary-mid),
+    var(--gradient-primary-end),
+    rgb(37, 99, 235)
+  );
+  background-color: rgba(var(--primary-rgb), 0.2);
+  border-bottom-color: rgba(var(--primary-rgb), 0.3);
 }
 
 :host ::ng-deep .cal-cell-row {
@@ -54,21 +62,27 @@ body.theme-gemini :host ::ng-deep .cal-header {
   @apply text-gray-300 dark:text-gray-300 font-medium;
 }
 
+[data-theme='gemini'] :host ::ng-deep .cal-day-number,
 body.theme-gemini :host ::ng-deep .cal-day-number {
   @apply bg-clip-text text-transparent;
-  /* Using Tailwind blue color scale for gradient */
-  background: linear-gradient(to right, rgb(147, 197, 253), rgb(96, 165, 250), rgb(59, 130, 246), rgb(37, 99, 235));
-  /* Equivalent: from-blue-300 via-blue-400 via-blue-500 to-blue-600 */
+  /* Using CSS Variables for gradient */
+  background: linear-gradient(to right,
+    var(--gradient-primary-start),
+    var(--gradient-primary-mid),
+    var(--gradient-primary-end),
+    rgb(37, 99, 235)
+  );
 }
 
 :host ::ng-deep .cal-today {
   @apply bg-primary-600/30 dark:bg-primary-500/30 border-2 border-primary-500 dark:border-primary-400;
 }
 
+[data-theme='gemini'] :host ::ng-deep .cal-today,
 body.theme-gemini :host ::ng-deep .cal-today {
   @apply shadow-gemini-sm;
-  background-color: rgba(var(--gemini-gradient-end-rgb), 0.3);
-  border-color: rgb(var(--gemini-gradient-end-rgb));
+  background-color: rgba(var(--primary-rgb), 0.3);
+  border-color: var(--primary-color);
 }
 
 :host ::ng-deep .cal-weekend {
@@ -79,11 +93,16 @@ body.theme-gemini :host ::ng-deep .cal-today {
   @apply bg-primary-600 text-white rounded-md px-2 py-1 text-sm overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer transition-smooth hover:bg-primary-700 hover:scale-105;
 }
 
+[data-theme='gemini'] :host ::ng-deep .cal-event,
 body.theme-gemini :host ::ng-deep .cal-event {
   @apply shadow-gemini-sm hover:shadow-gemini;
-  /* Using Tailwind blue color scale for gradient */
-  background: linear-gradient(to bottom right, rgb(37, 99, 235), rgb(59, 130, 246), rgb(96, 165, 250), rgb(147, 197, 253));
-  /* Equivalent: from-blue-600 via-blue-500 via-blue-400 to-blue-300 */
+  /* Using CSS Variables for gradient */
+  background: linear-gradient(to bottom right,
+    rgb(37, 99, 235),
+    var(--gradient-primary-end),
+    var(--gradient-primary-mid),
+    var(--gradient-primary-start)
+  );
 }
 
 :host ::ng-deep .cal-event-title {

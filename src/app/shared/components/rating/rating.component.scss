@@ -13,13 +13,15 @@
 
 /* Gemini Theme */
 /* Using Tailwind color utilities - keeping only complex filter effects */
+[data-theme='gemini'],
 body.theme-gemini {
   .text-yellow-400 {
     @apply glow-primary;
-    filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.4));
+    filter: drop-shadow(0 0 4px rgba(var(--primary-rgb), 0.4));
   }
   
   .text-red-500 {
+    /* Using CSS variable for red color - fallback to hardcoded if not defined */
     filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.4));
   }
   

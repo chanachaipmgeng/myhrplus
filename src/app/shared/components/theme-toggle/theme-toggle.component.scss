@@ -15,39 +15,43 @@
 }
 
 /* Gemini Theme */
+[data-theme='gemini'],
 body.theme-gemini {
   .p-2 {
     @apply glass-gemini-weak;
     
     &:hover {
-      filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.4));
+      filter: drop-shadow(0 0 4px rgba(var(--primary-rgb), 0.4));
     }
   }
   
   .bg-white\/90,
   .dark .bg-slate-900\/90 {
     @apply glass-gemini shadow-gemini;
-    border-color: rgba(59, 130, 246, 0.3);
+    border-color: rgba(var(--primary-rgb), 0.3);
   }
   
   .active {
     @apply glass-gemini;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.2)) !important;
+    background: linear-gradient(135deg,
+      rgba(var(--primary-rgb), 0.2),
+      rgba(var(--primary-rgb), 0.2)
+    ) !important;
     @apply bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent;
     -webkit-background-clip: text;
   }
   
   .w-10 {
-    border-color: rgba(59, 130, 246, 0.3);
+    border-color: rgba(var(--primary-rgb), 0.3);
     
     &:hover {
-      filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
+      filter: drop-shadow(0 0 8px rgba(var(--primary-rgb), 0.6));
     }
   }
   
   .border-indigo-500 {
-    border-color: rgb(59, 130, 246);
-    filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
+    border-color: var(--primary-color);
+    filter: drop-shadow(0 0 8px rgba(var(--primary-rgb), 0.6));
   }
 }
 

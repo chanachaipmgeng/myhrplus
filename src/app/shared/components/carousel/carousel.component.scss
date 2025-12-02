@@ -23,21 +23,22 @@
     .e-carousel-navigators {
       .e-carousel-nav-btn {
         @apply glass dark:glass-dark rounded-full text-slate-800 dark:text-slate-100 transition-smooth hover:scale-110;
-        background: rgba(255, 255, 255, 0.2);
+        background: var(--glass-bg);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        border: 1px solid var(--glass-border);
 
         &:hover {
-          background: rgba(255, 255, 255, 0.3);
+          background: var(--glass-bg-strong);
         }
 
-        .dark & {
-          background: rgba(0, 0, 0, 0.3);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+        .dark &,
+        [data-theme='dark'] & {
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border-weak);
 
           &:hover {
-            background: rgba(0, 0, 0, 0.4);
+            background: var(--glass-bg-strong);
           }
         }
       }
@@ -65,21 +66,22 @@
     /* Play button */
     .e-carousel-play-btn {
       @apply glass dark:glass-dark rounded-full text-slate-800 dark:text-slate-100 transition-smooth hover:scale-110;
-      background: rgba(255, 255, 255, 0.2);
+      background: var(--glass-bg);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid var(--glass-border);
 
       &:hover {
-        background: rgba(255, 255, 255, 0.3);
+        background: var(--glass-bg-strong);
       }
 
-      .dark & {
-        background: rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+      .dark &,
+      [data-theme='dark'] & {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border-weak);
 
         &:hover {
-          background: rgba(0, 0, 0, 0.4);
+          background: var(--glass-bg-strong);
         }
       }
     }

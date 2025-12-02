@@ -26,9 +26,12 @@
 6. **[PHASE_2_COMPLETION_SUMMARY.md](./PHASE_2_COMPLETION_SUMMARY.md)** - Phase 2 summary
 7. **[PHASE_3_COMPLETION_SUMMARY.md](./PHASE_3_COMPLETION_SUMMARY.md)** - Phase 3 summary
 8. **[PHASE_4_COMPLETION_SUMMARY.md](./PHASE_4_COMPLETION_SUMMARY.md)** - Phase 4 summary
+9. **[PHASE_5_COMPLETION_SUMMARY.md](./PHASE_5_COMPLETION_SUMMARY.md)** - Phase 5 summary
+10. **[PHASE_6_COMPLETION_SUMMARY.md](./PHASE_6_COMPLETION_SUMMARY.md)** - Phase 6 summary
 
 ### สำหรับ Complete Summary
-9. **[FINAL_STYLING_IMPROVEMENTS_SUMMARY.md](./FINAL_STYLING_IMPROVEMENTS_SUMMARY.md)** - Final summary
+11. **[FINAL_STYLING_IMPROVEMENTS_SUMMARY.md](./FINAL_STYLING_IMPROVEMENTS_SUMMARY.md)** - Final summary
+12. **[STYLING_MIGRATION_COMPLETE.md](./STYLING_MIGRATION_COMPLETE.md)** - Complete migration report
 
 ### สำหรับ Future Work
 10. **[ADDITIONAL_RECOMMENDATIONS.md](./ADDITIONAL_RECOMMENDATIONS.md)** - Future recommendations
@@ -163,7 +166,23 @@
 - Smart Textarea Component
 - Image Upload Component
 - PDPA Consent Modal Component
+- Calendar Component
 - Form-specific CSS Variables
+
+### Phase 5: Additional Components ✅
+- Icon Component
+- Theme Toggle Component
+- Rating Component
+- Additional theme support
+
+### Phase 6: Layout & Additional Components ✅
+- Main Layout Component
+- Speech to Text Component
+- Signature Component
+- Carousel Component
+- Autocomplete Component
+- Statistics Grid Component
+- Layout-specific CSS variables
 
 ### Documentation ✅
 - Quick Reference Guide
