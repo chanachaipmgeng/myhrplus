@@ -15,9 +15,12 @@ import {
   NavigationChild,
   getNavigationItemsByRoles
 } from '../../core/constants/navigation.constant';
+import { environment } from '../../../environments/environment';
+import { MenuItemComponent } from '../../shared/components/menu-item/menu-item.component';
 import { ListViewComponent } from '@syncfusion/ej2-angular-lists';
 import { ContextSwitcherComponent } from '../../shared/components/context-switcher/context-switcher.component';
 import { IconComponent } from '../../shared/components/icon/icon.component';
+import { NestedMenuAccordionComponent } from '../../shared/components/nested-menu-accordion/nested-menu-accordion.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -62,10 +65,28 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   menuItems: MenuItem[] = [];
   mainModules: MainModule[] = []; // Legacy - keep for backward compatibility
-  navigationItems: NavigationItem[] = []; // New navigation structure
+  navigationItems: NavigationItem[] = []; // New navigation structure (Level 1)
+  level2Items: NavigationChild[] = []; // Level 2 items for Rail (Left Icon Bar) - all Level 2 items from all Level 1
+  allLevel2Items: NavigationChild[] = []; // All Level 2 items from all navigation items (for direct display in Rail)
   selectedModule: string | null = null;
   selectedModuleData: MainModule | null = null;
-  selectedNavigationItem: NavigationItem | null = null;
+  selectedNavigationItem: NavigationItem | null = null; // Selected Level 1 item (ESS, Admin, etc.)
+  selectedLevel2Item: NavigationChild | null = null; // Selected Level 2 item
+  selectedLevel3Item: NavigationChild | null = null; // Selected Level 3 item
+  selectedLevel4Item: NavigationChild | null = null; // Selected Level 4 item
+  parentNavigationItem: NavigationItem | null = null; // Parent of selected Level 2 item
+
+  // Expanded items tracking for accordion
+  expandedLevel3Items: Set<string> = new Set();
+
+  // Cached navigation children to prevent infinite loops
+  private _cachedNavigationChildren: NavigationChild[] = [];
+  private _cachedNavigationChildrenKey: string = '';
+
+  // Public property for template use (computed from getNavigationChildren)
+  get navigationChildren(): NavigationChild[] {
+    return this.getNavigationChildren();
+  }
   listViewFields: any = {
     id: 'id',
     text: 'text',
@@ -120,6 +141,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // Get current user
     this.currentUser = this.authService.getCurrentUser();
+
+    // Mock user data for testing if no user exists (development mode only)
+    if (!this.currentUser && !environment.production) {
+      this.currentUser = this.getMockUser();
+    }
 
     // Subscribe to theme changes
     this.themeService.isDarkMode$.pipe(takeUntil(this.destroy$)).subscribe(isDark => {
@@ -181,23 +207,91 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   /**
    * Load navigation items based on user roles
+   * Default selects ESS and shows its Level 2 items
    */
   private loadNavigationItems(): void {
     if (!this.currentUser) {
       this.navigationItems = [];
+      this.level2Items = [];
+      this.allLevel2Items = [];
+      console.log('[Sidebar] No current user, clearing navigation items');
       return;
     }
 
     // Get user roles
     const userRoles = this.getUserRoles();
+    console.log('[Sidebar] Current user roles:', userRoles);
 
-    // Filter navigation items by roles
+    // Filter navigation items by roles (Level 1: Home, ESS, Admin)
     this.navigationItems = getNavigationItemsByRoles(userRoles);
+    console.log('[Sidebar] Loaded navigation items (Level 1):', this.navigationItems.map(item => ({
+      id: item.id,
+      label: item.label,
+      icon: item.icon,
+      childrenCount: item.children?.length || 0
+    })));
 
-    // Auto-select first navigation item if available
+    // Auto-select ESS (Empview) as default if available
     if (this.navigationItems.length > 0 && !this.selectedNavigationItem) {
-      this.selectNavigationItem(this.navigationItems[0].id);
+      const essItem = this.navigationItems.find(item => item.id === 'ess');
+      if (essItem) {
+        // Default to ESS (Empview)
+        console.log('[Sidebar] Auto-selecting ESS as default');
+        this.selectNavigationItem('ess');
+      } else {
+        // Fallback to first available item
+        console.log('[Sidebar] Auto-selecting first available item:', this.navigationItems[0].id);
+        this.selectNavigationItem(this.navigationItems[0].id);
+      }
     }
+  }
+
+  /**
+   * Load Level 2 items for selected Level 1 item
+   * Level 2 items are displayed in Rail for the selected Level 1
+   */
+  private loadLevel2Items(): void {
+    if (!this.selectedNavigationItem || !this.selectedNavigationItem.children) {
+      this.level2Items = [];
+      console.log('[Sidebar] No Level 2 items available for:', this.selectedNavigationItem?.id);
+      return;
+    }
+
+    // Get Level 2 items from selected Level 1 item
+    this.level2Items = [...this.selectedNavigationItem.children];
+    console.log('[Sidebar] Loaded Level 2 items for', this.selectedNavigationItem.id + ':', this.level2Items.map(item => ({
+      label: item.label,
+      icon: item.icon,
+      route: item.route,
+      childrenCount: item.children?.length || 0
+    })));
+
+    // Clear Level 2 selection when switching Level 1
+    this.selectedLevel2Item = null;
+    console.log('[Sidebar] Level 2 items will be shown in Rail for', this.selectedNavigationItem.id);
+  }
+
+  /**
+   * Find parent navigation item for a Level 2 item
+   * Public method for template use
+   */
+  findParentNavigationItem(level2Item: NavigationChild): NavigationItem | null {
+    // Check if level2Item has parentId stored
+    const parentId = (level2Item as any).parentId;
+    if (parentId) {
+      const parent = this.navigationItems.find(item => item.id === parentId);
+      if (parent) {
+        return parent;
+      }
+    }
+
+    // Fallback: search by matching children
+    for (const navItem of this.navigationItems) {
+      if (navItem.children && navItem.children.some(child => child === level2Item || child.label === level2Item.label)) {
+        return navItem;
+      }
+    }
+    return null;
   }
 
   /**
@@ -205,7 +299,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
    */
   private getUserRoles(): string[] {
     if (!this.currentUser) {
-      return [];
+      // Return default roles for testing
+      return ['user'];
     }
 
     // Try different role properties
@@ -222,8 +317,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
     // Check if user is admin (you may need to adjust this logic based on your auth system)
     if (this.currentUser.user_level === 'admin' ||
         this.currentUser.role_level === 'admin' ||
-        roles.includes('admin')) {
+        this.currentUser.emp_position === 'admin' ||
+        roles.some(r => r.toLowerCase() === 'admin')) {
       roles.push('admin');
+    }
+
+    // If user has 'All' role, also add 'user' and 'admin' for compatibility
+    if (roles.some(r => r.toLowerCase() === 'all')) {
+      roles.push('user', 'admin');
     }
 
     // Default to 'user' if no roles found
@@ -231,31 +332,307 @@ export class SidebarComponent implements OnInit, OnDestroy {
       roles.push('user');
     }
 
-    return [...new Set(roles)]; // Remove duplicates
+    const uniqueRoles = [...new Set(roles)]; // Remove duplicates
+    console.log('[Sidebar] getUserRoles: Raw roles from user =', roles, '-> Unique =', uniqueRoles);
+    return uniqueRoles;
   }
 
   /**
-   * Select navigation item (Rail icon clicked)
+   * Select Level 1 item (Rail icon clicked - Home, ESS, Admin)
    */
   selectNavigationItem(itemId: string): void {
-    this.selectedNavigationItem = this.navigationItems.find(item => item.id === itemId) || null;
-    this.selectedModule = itemId; // Keep for compatibility
+    console.log('[Sidebar] Selecting Level 1 item:', itemId);
 
-    // Update filtered menu items with children
-    if (this.selectedNavigationItem && this.selectedNavigationItem.children) {
-      this.filteredMenuItems = this.selectedNavigationItem.children.map(child => ({
-        text: child.label,
-        id: `nav-${itemId}-${child.route}`,
-        iconCss: this.getIconClass(child.icon || 'folder'),
-        route: child.route,
-        badge: child.badge,
-        badgeColor: child.badgeColor
-      }));
-    } else {
-      this.filteredMenuItems = [];
+    // Find the navigation item (Level 1)
+    const navItem = this.navigationItems.find(item => item.id === itemId) || null;
+    if (!navItem) {
+      console.warn('[Sidebar] Navigation item not found:', itemId);
+      return;
     }
 
+    // Set selected Level 1 item
+    this.selectedNavigationItem = navItem;
+    this.selectedModule = itemId;
+    console.log('[Sidebar] Selected Level 1:', {
+      id: navItem.id,
+      label: navItem.label,
+      childrenCount: navItem.children?.length || 0
+    });
+
+    // Clear cache when switching items
+    this._cachedNavigationChildren = [];
+    this._cachedNavigationChildrenKey = '';
+
+    // Load Level 2 items for this Level 1 item
+    this.loadLevel2Items();
+
     // Clear search when switching items
+    this.searchQuery = '';
+  }
+
+  /**
+   * Select Level 2 item (Rail icon clicked - direct selection from Rail)
+   */
+  selectLevel2Item(level2Item: NavigationChild, parentNavItem: NavigationItem | null): void {
+    // Find parent if not provided
+    if (!parentNavItem) {
+      parentNavItem = this.findParentNavigationItem(level2Item);
+    }
+
+    console.log('[Sidebar] Selecting Level 2 item:', {
+      label: level2Item.label,
+      route: level2Item.route,
+      childrenCount: level2Item.children?.length || 0,
+      parentId: parentNavItem?.id
+    });
+
+    // Set selected Level 2 item
+    this.selectedLevel2Item = level2Item;
+
+    // Set parent navigation item and selected navigation item
+    this.parentNavigationItem = parentNavItem;
+    if (parentNavItem) {
+      this.selectedNavigationItem = parentNavItem;
+      this.selectedModule = parentNavItem.id;
+    }
+
+    // Clear Level 3-4 selections when switching Level 2
+    this.selectedLevel3Item = null;
+    this.selectedLevel4Item = null;
+    this.expandedLevel3Items.clear();
+
+    // Clear cache when switching items
+    this._cachedNavigationChildren = [];
+    this._cachedNavigationChildrenKey = '';
+
+    // Clear search when switching items
+    this.searchQuery = '';
+  }
+
+  /**
+   * Get navigation children for recursive menu component
+   * Returns Level 3 items when Level 2 is selected
+   * Uses caching to prevent infinite loops from change detection
+   */
+  getNavigationChildren(): NavigationChild[] {
+    // Create cache key based on current state
+    const cacheKey = `${this.selectedLevel2Item?.label || 'none'}`;
+
+    // Return cached result if key matches
+    if (this._cachedNavigationChildrenKey === cacheKey && this._cachedNavigationChildren.length >= 0) {
+      return this._cachedNavigationChildren;
+    }
+
+    let result: NavigationChild[] = [];
+
+    // If Level 2 is selected, return Level 3 items (children of Level 2)
+    if (this.selectedLevel2Item && this.selectedLevel2Item.children) {
+      result = [...this.selectedLevel2Item.children]; // Create new array to avoid reference issues
+      console.log('[Sidebar] getNavigationChildren (Level 3):', result.map(item => ({
+        label: item.label,
+        route: item.route,
+        childrenCount: item.children?.length || 0
+      })));
+    }
+    else {
+      result = [];
+      console.log('[Sidebar] getNavigationChildren (no Level 2 selected or no children): []');
+    }
+
+    // Cache result
+    this._cachedNavigationChildren = result;
+    this._cachedNavigationChildrenKey = cacheKey;
+
+    return result;
+  }
+
+  /**
+   * Get breadcrumb path for current navigation
+   */
+  getBreadcrumbPath(): Array<{ label: string; route?: string; level: number }> {
+    const path: Array<{ label: string; route?: string; level: number }> = [];
+
+    // Level 1
+    if (this.selectedNavigationItem) {
+      path.push({
+        label: this.selectedNavigationItem.label,
+        level: 1
+      });
+    }
+
+    // Level 2 (only for Admin, not for ESS)
+    if (this.selectedNavigationItem?.id === 'admin' && this.selectedLevel2Item) {
+      path.push({
+        label: this.selectedLevel2Item.label,
+        route: this.selectedLevel2Item.route,
+        level: 2
+      });
+    }
+
+    // Level 3 (if active)
+    if (this.selectedLevel3Item) {
+      path.push({
+        label: this.selectedLevel3Item.label,
+        route: this.selectedLevel3Item.route,
+        level: 3
+      });
+    }
+
+    // Level 4 (if active)
+    if (this.selectedLevel4Item) {
+      path.push({
+        label: this.selectedLevel4Item.label,
+        route: this.selectedLevel4Item.route,
+        level: 4
+      });
+    }
+
+    return path;
+  }
+
+  /**
+   * Navigate to breadcrumb item
+   */
+  navigateToBreadcrumb(item: { label: string; route?: string; level: number }): void {
+    if (!item.route) {
+      return;
+    }
+
+    // Reset selections based on level
+    if (item.level === 2) {
+      this.selectedLevel3Item = null;
+      this.selectedLevel4Item = null;
+    } else if (item.level === 3) {
+      this.selectedLevel4Item = null;
+    }
+
+    // Navigate to route
+    this.navigateToRoute(item.route);
+  }
+
+  /**
+   * Handle accordion item click
+   */
+  onAccordionItemClick(item: NavigationChild): void {
+    console.log('[Sidebar] Accordion item clicked:', {
+      label: item.label,
+      route: item.route,
+      level: this.selectedNavigationItem?.id === 'ess' ? 2 : 3
+    });
+
+    if (item.route) {
+      // Navigate to route
+      this.navigateToRoute(item.route);
+
+      // Update selected items based on route depth
+      this.updateSelectedItemsFromRoute(item.route);
+    }
+  }
+
+  /**
+   * Handle accordion toggle expand
+   */
+  onAccordionToggleExpand(event: { item: NavigationChild; expanded: boolean }): void {
+    // Expanded state is already managed by expandedLevel3Items Set
+    // This method can be used for additional logic if needed
+  }
+
+  /**
+   * Update selected items based on route
+   * For ESS: Find in Level 2 children (Level 3-4)
+   * For Admin: Find in Level 3 children (Level 4)
+   */
+  private updateSelectedItemsFromRoute(route: string): void {
+    console.log('[Sidebar] updateSelectedItemsFromRoute: Searching for route =', route);
+
+    // For ESS: Search in Level 2 items (selectedNavigationItem.children)
+    if (this.selectedNavigationItem?.id === 'ess' && this.selectedNavigationItem.children) {
+      console.log('[Sidebar] Searching in ESS Level 2 items');
+      for (const level2Item of this.selectedNavigationItem.children) {
+        if (level2Item.route === route) {
+          // Direct Level 2 match
+          console.log('[Sidebar] Found ESS Level 2 match:', level2Item.label);
+          this.selectedLevel2Item = null; // ESS doesn't use Level 2 selection
+          this.selectedLevel3Item = null;
+          this.selectedLevel4Item = null;
+          return;
+        }
+
+        // Check Level 3
+        if (level2Item.children) {
+          for (const level3Item of level2Item.children) {
+            if (level3Item.route === route) {
+              console.log('[Sidebar] Found ESS Level 3 match:', {
+                level2Label: level2Item.label,
+                level3Label: level3Item.label
+              });
+              this.selectedLevel2Item = null; // ESS doesn't use Level 2 selection
+              this.selectedLevel3Item = level3Item;
+              this.selectedLevel4Item = null;
+              return;
+            }
+
+            // Check Level 4
+            if (level3Item.children) {
+              for (const level4Item of level3Item.children) {
+                if (level4Item.route === route) {
+                  console.log('[Sidebar] Found ESS Level 4 match:', {
+                    level2Label: level2Item.label,
+                    level3Label: level3Item.label,
+                    level4Label: level4Item.label
+                  });
+                  this.selectedLevel2Item = null; // ESS doesn't use Level 2 selection
+                  this.selectedLevel3Item = level3Item;
+                  this.selectedLevel4Item = level4Item;
+                  return;
+                }
+              }
+            }
+          }
+        }
+      }
+      console.log('[Sidebar] No ESS match found for route:', route);
+    }
+
+    // For Admin: Search in Level 3 items (selectedLevel2Item.children)
+    if (this.selectedNavigationItem?.id === 'admin' && this.selectedLevel2Item && this.selectedLevel2Item.children) {
+      console.log('[Sidebar] Searching in Admin Level 3 items');
+      for (const level3Item of this.selectedLevel2Item.children) {
+        if (level3Item.route === route) {
+          console.log('[Sidebar] Found Admin Level 3 match:', level3Item.label);
+          this.selectedLevel3Item = level3Item;
+          this.selectedLevel4Item = null;
+          return;
+        }
+
+        // Check Level 4
+        if (level3Item.children) {
+          for (const level4Item of level3Item.children) {
+            if (level4Item.route === route) {
+              console.log('[Sidebar] Found Admin Level 4 match:', {
+                level3Label: level3Item.label,
+                level4Label: level4Item.label
+              });
+              this.selectedLevel3Item = level3Item;
+              this.selectedLevel4Item = level4Item;
+              return;
+            }
+          }
+        }
+      }
+      console.log('[Sidebar] No Admin match found for route:', route);
+    }
+  }
+
+  /**
+   * Go back to Level 2 (from Level 3+)
+   * For ESS: Clear Level 3-4 selections (show Level 2 items)
+   * For Admin: Clear Level 3-4 selections (show Level 3 items of selected Level 2)
+   */
+  goBackToLevel2(): void {
+    this.selectedLevel3Item = null;
+    this.selectedLevel4Item = null;
+    this.expandedLevel3Items.clear();
     this.searchQuery = '';
   }
 
@@ -669,7 +1046,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   getModuleHomeRoute(moduleId: string): string {
     const moduleHomeRoutes: { [key: string]: string } = {
-      'home': '/home',
+      'home': '/portal',
+      'ess': '/portal/self-service/time',
+      'admin': '/portal/admin/employees',
       'empview': '/dashboard',
       'workflow': '/workflow/home',
       'company': '/company/home',
@@ -680,10 +1059,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
       'training': '/training/home',
       'recruit': '/recruit/home',
       'appraisal': '/appraisal/home',
-      'setting': '/setting/home'
+      'setting': '/setting/home',
+      'portal-home': '/portal'
     };
 
-    return moduleHomeRoutes[moduleId] || '/home';
+    return moduleHomeRoutes[moduleId] || '/portal';
   }
 
   private navigateToModuleHome(moduleId: string): void {
@@ -706,6 +1086,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
    * Get icon class from icon name
    */
   private getIconClass(iconName: string): string {
+    if (!iconName) return 'e-icons e-folder';
+
     // Map icon names to Syncfusion icon classes
     const iconMap: { [key: string]: string } = {
       'access_time': 'e-icons e-clock',
@@ -725,7 +1107,16 @@ export class SidebarComponent implements OnInit, OnDestroy {
       'event': 'e-icons e-calendar',
       'receipt': 'e-icons e-receipt',
       'person': 'e-icons e-user',
-      'arrow_forward': 'e-icons e-arrow-right'
+      'arrow_forward': 'e-icons e-arrow-right',
+      'favorite': 'e-icons e-heart',
+      'bar_chart': 'e-icons e-chart',
+      'school': 'e-icons e-book',
+      'person_add': 'e-icons e-user-plus',
+      'assessment': 'e-icons e-chart-line',
+      'shield-check': 'e-icons e-shield',
+      'shield_check': 'e-icons e-shield',
+      'warning': 'e-icons e-warning',
+      'login': 'e-icons e-login'
     };
     return iconMap[iconName.toLowerCase()] || 'e-icons e-folder';
   }
@@ -771,10 +1162,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   navigateToHome(): void {
-    this.router.navigate(['/home']).catch(() => {
-      this.router.navigate(['/dashboard']).catch(() => {
-        this.router.navigate(['/']).catch(() => {});
-      });
+    this.router.navigate(['/portal']).catch(() => {
+      this.router.navigate(['/']).catch(() => {});
     });
   }
 
@@ -860,15 +1249,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   navigateToProfile(): void {
     this.showUserMenu = false;
-    this.router.navigate(['/personal/profile']).catch(() => {
-      this.router.navigate(['/profile']).catch(() => {});
+    this.router.navigate(['/portal/self-service/profile']).catch(() => {
+      this.router.navigate(['/portal']).catch(() => {});
     });
   }
 
   navigateToSettings(): void {
     this.showUserMenu = false;
-    this.router.navigate(['/setting']).catch(() => {
-      this.router.navigate(['/settings']).catch(() => {});
+    this.router.navigate(['/portal/admin/settings']).catch(() => {
+      this.router.navigate(['/portal']).catch(() => {});
     });
   }
 
@@ -900,20 +1289,71 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   private updateSelectedModuleFromRoute(): void {
-    if (!this.activeRoute) return;
-
-    // Try to find matching navigation item first
-    const matchingNavItem = this.navigationItems.find(item => {
-      if (item.children) {
-        return item.children.some(child => this.activeRoute.startsWith(child.route));
-      }
-      return false;
-    });
-
-    if (matchingNavItem) {
-      this.selectNavigationItem(matchingNavItem.id);
+    if (!this.activeRoute) {
+      console.log('[Sidebar] updateSelectedModuleFromRoute: No active route');
       return;
     }
+
+    console.log('[Sidebar] updateSelectedModuleFromRoute: Active route =', this.activeRoute);
+
+    // Try to find matching navigation item first (including nested children up to 4 levels)
+    for (const navItem of this.navigationItems) {
+      if (!navItem.children) continue;
+
+      for (const level2Item of navItem.children) {
+        // Check Level 2 route
+        if (level2Item.route && this.activeRoute.startsWith(level2Item.route)) {
+          console.log('[Sidebar] Found Level 2 match:', {
+            navItemId: navItem.id,
+            level2Label: level2Item.label,
+            route: level2Item.route
+          });
+          this.selectNavigationItem(navItem.id);
+          this.selectLevel2Item(level2Item, navItem);
+          this.updateSelectedItemsFromRoute(this.activeRoute);
+          return;
+        }
+
+        // Check Level 3 routes
+        if (level2Item.children) {
+          for (const level3Item of level2Item.children) {
+            if (level3Item.route && this.activeRoute.startsWith(level3Item.route)) {
+              console.log('[Sidebar] Found Level 3 match:', {
+                navItemId: navItem.id,
+                level2Label: level2Item.label,
+                level3Label: level3Item.label,
+                route: level3Item.route
+              });
+              this.selectNavigationItem(navItem.id);
+              this.selectLevel2Item(level2Item, navItem);
+              this.updateSelectedItemsFromRoute(this.activeRoute);
+              return;
+            }
+
+            // Check Level 4 routes
+            if (level3Item.children) {
+              for (const level4Item of level3Item.children) {
+                if (level4Item.route && this.activeRoute.startsWith(level4Item.route)) {
+                  console.log('[Sidebar] Found Level 4 match:', {
+                    navItemId: navItem.id,
+                    level2Label: level2Item.label,
+                    level3Label: level3Item.label,
+                    level4Label: level4Item.label,
+                    route: level4Item.route
+                  });
+                  this.selectNavigationItem(navItem.id);
+                  this.selectLevel2Item(level2Item, navItem);
+                  this.updateSelectedItemsFromRoute(this.activeRoute);
+                  return;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    console.log('[Sidebar] No navigation match found for route:', this.activeRoute);
 
     // Fallback to legacy module selection
     const moduleCode = this.getModuleCodeFromRoute(this.activeRoute);
@@ -952,40 +1392,76 @@ export class SidebarComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // Debug: Log the args structure to understand Syncfusion ListView event format
-    // console.log('ListView select args:', args);
-
     // Syncfusion ListView sends data in different formats:
-    // - args.item (the selected item data)
-    // - args.itemData (alternative property)
+    // - args.data (the selected item data with route) - MOST RELIABLE
+    // - args.item (the selected item DOM element)
     // - args.text (the text of selected item)
-    const item = args.item || args.itemData || args;
 
-    // Get route from item - check multiple possible locations
-    let route = item.route || item.data?.route || (item.data && item.data.route);
+    // Get route from args.data first (most reliable based on error log)
+    let route = args.data?.route;
 
     // If still no route, try to find it in the filteredMenuItems by id or text
     if (!route) {
-      if (item.id) {
-        const menuItem = this.findMenuItemById(item.id);
+      const itemId = args.data?.id;
+      const itemText = args.text || args.data?.text;
+
+      if (itemId) {
+        const menuItem = this.findMenuItemById(itemId);
         if (menuItem && menuItem.route) {
           route = menuItem.route;
         }
-      } else if (item.text) {
-        const menuItem = this.findMenuItemByText(item.text);
+      } else if (itemText) {
+        const menuItem = this.findMenuItemByText(itemText);
         if (menuItem && menuItem.route) {
           route = menuItem.route;
         }
       }
     }
 
+    // Navigate to route if found
     if (route) {
-      this.navigateToRoute(route);
+      // Map legacy routes to new routes if needed
+      const mappedRoute = this.mapLegacyRoute(route);
+      this.navigateToRoute(mappedRoute);
     } else {
-      console.warn('No route found for menu item:', item);
-      // Debug: Log full args for troubleshooting
-      console.log('Full args structure:', JSON.stringify(args, null, 2));
+      // If no route found, check if it's a parent item with children (should expand instead)
+      const hasChildren = args.data?.child && args.data.child.length > 0;
+      if (hasChildren) {
+        // This is a parent item, should expand/collapse instead of navigate
+        // Syncfusion ListView handles this automatically, so we can ignore
+        return;
+      }
+
+      // Log warning only if it's not a parent item
+      console.warn('No route found for menu item:', {
+        text: args.text || args.data?.text,
+        id: args.data?.id,
+        hasChildren: hasChildren,
+        data: args.data
+      });
     }
+  }
+
+  /**
+   * Map legacy routes to new routes
+   */
+  private mapLegacyRoute(route: string): string {
+    const routeMap: { [key: string]: string } = {
+      '/home': '/portal',
+      '/company/manage': '/portal/admin/company',
+      '/company/home': '/portal/admin/company',
+      '/personal/home': '/portal/admin/employees',
+      '/ta/home': '/portal/admin/time',
+      '/payroll/home': '/portal/admin/payroll',
+      '/training/home': '/portal/admin/training',
+      '/welfare/home': '/portal/admin/welfare',
+      '/recruit/home': '/portal/admin/recruit',
+      '/appraisal/home': '/portal/admin/appraisal',
+      '/setting/home': '/portal/admin/settings',
+      '/settings/home': '/portal/admin/settings'
+    };
+
+    return routeMap[route] || route;
   }
 
   private findMenuItemById(id: string): NestedMenuItem | null {
@@ -1045,10 +1521,34 @@ export class SidebarComponent implements OnInit, OnDestroy {
           this.activeRoute = route;
           // Update selected module based on route
           this.updateSelectedModuleFromRoute();
+        } else {
+          // If navigation failed, try to find alternative route
+          console.warn(`Navigation to ${route} failed, trying alternative routes...`);
+          // Try redirecting to home if route doesn't exist
+          if (route === '/home') {
+            this.router.navigate(['/portal']).catch(() => {
+              this.router.navigate(['/']).catch(() => {});
+            });
+          } else if (route === '/company/manage') {
+            // Redirect to company home
+            this.router.navigate(['/company/home']).catch(() => {
+              this.router.navigate(['/portal/admin/company']).catch(() => {});
+            });
+          }
         }
       },
       (error) => {
         console.error('Navigation error:', error);
+        // Try alternative routes
+        if (route === '/home' || route === '/dashboard') {
+          this.router.navigate(['/portal']).catch(() => {
+            this.router.navigate(['/']).catch(() => {});
+          });
+        } else if (route === '/company/manage') {
+          this.router.navigate(['/portal/admin/company']).catch(() => {
+            this.router.navigate(['/portal']).catch(() => {});
+          });
+        }
       }
     );
   }
@@ -1073,8 +1573,75 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Handle route change from menu item component
+   */
+  onRouteChange(route: string): void {
+    this.activeRoute = route;
+    // Update selected module based on route
+    this.updateSelectedModuleFromRoute();
+  }
+
   toggleChildren(item: MenuItem): void {
     // Toggle children visibility if needed
     // This can be enhanced with expand/collapse functionality
+  }
+
+  /**
+   * Get mock user data for testing
+   * Remove this method when real authentication is implemented
+   */
+  private getMockUser(): any {
+    return {
+      id: 'mock-user-001',
+      username: 'testuser',
+      name: 'Test User',
+      fullname: 'Test User',
+      email: 'test@example.com',
+      roles: ['user', 'admin'], // Mock as admin to see all menus
+      user_role: 'admin',
+      role_level: 'admin',
+      user_level: 'admin',
+      emp_position: 'Manager',
+      job: 'Manager',
+      accountactive: 'Y',
+      companyId: '001',
+      companyName: 'Test Company'
+    };
+  }
+
+  /**
+   * Go to Home (switch back to ESS)
+   */
+  goToHome(): void {
+    // Switch back to ESS
+    const essItem = this.navigationItems.find(item => item.id === 'ess');
+    if (essItem) {
+      this.selectNavigationItem('ess');
+    } else {
+      // Fallback: clear selection
+      this.selectedNavigationItem = null;
+      this.level2Items = [];
+      this.selectedLevel2Item = null;
+    }
+    this.searchQuery = '';
+  }
+
+  /**
+   * Check if user has admin role
+   */
+  hasAdminRole(): boolean {
+    const userRoles = this.getUserRoles();
+    return userRoles.some(role => role.toLowerCase() === 'admin' || role.toLowerCase() === 'all');
+  }
+
+  /**
+   * Switch to Admin menu
+   */
+  switchToAdmin(): void {
+    const adminItem = this.navigationItems.find(item => item.id === 'admin');
+    if (adminItem) {
+      this.selectNavigationItem('admin');
+    }
   }
 }

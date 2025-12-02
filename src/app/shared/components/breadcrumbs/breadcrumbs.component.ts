@@ -47,7 +47,7 @@ export class BreadcrumbsComponent implements OnInit {
     if (this.showHome) {
       breadcrumbs.push({
         label: 'หน้าแรก',
-        route: '/dashboard',
+        route: '/portal',
         icon: this.homeIcon
       });
     }

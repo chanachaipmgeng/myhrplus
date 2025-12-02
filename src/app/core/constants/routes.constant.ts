@@ -12,11 +12,7 @@ export const ROUTES = {
     FORBIDDEN: '/forbidden'
   },
 
-  // Dashboard & Home
-  HOME: '/home',
-  DASHBOARD: '/dashboard',
-  
-  // Portal Routes
+  // Portal Routes (Primary - Use these routes)
   PORTAL: {
     BASE: '/portal',
     HOME: '/portal',
@@ -46,99 +42,56 @@ export const ROUTES = {
     }
   },
 
-  // Feature Modules
-  PERSONAL: {
-    BASE: '/personal',
-    HOME: '/personal/home',
-    PROFILE: '/personal/profile',
-    PREFERENCES: '/personal/preferences',
-    ADDRESS: '/personal/address',
-    FAMILY: '/personal/family',
-    EDUCATION: '/personal/education',
-    WORK_EXPERIENCE: '/personal/work-experience',
-    DOCUMENTS: '/personal/documents'
+  // Legacy Routes (Deprecated - Redirect to Portal Routes)
+  // Use PORTAL.* routes instead
+  LEGACY: {
+    HOME: '/home',                    // → PORTAL.HOME
+    DASHBOARD: '/dashboard',          // → PORTAL.SELF_SERVICE.BASE
+    PERSONAL: {
+      BASE: '/personal',              // → PORTAL.ADMIN.EMPLOYEES
+      HOME: '/personal/home'
+    },
+    TA: {
+      BASE: '/ta',                    // → PORTAL.ADMIN.TIME
+      HOME: '/ta/home'
+    },
+    PAYROLL: {
+      BASE: '/payroll',               // → PORTAL.ADMIN.PAYROLL
+      HOME: '/payroll/home'
+    },
+    TRAINING: {
+      BASE: '/training',              // → PORTAL.ADMIN.TRAINING
+      HOME: '/training/home'
+    },
+    APPRAISAL: {
+      BASE: '/appraisal',             // → PORTAL.ADMIN.APPRAISAL
+      HOME: '/appraisal/home'
+    },
+    RECRUIT: {
+      BASE: '/recruit',               // → PORTAL.ADMIN.RECRUIT
+      HOME: '/recruit/home'
+    },
+    WELFARE: {
+      BASE: '/welfare',               // → PORTAL.ADMIN.WELFARE
+      HOME: '/welfare/home'
+    },
+    COMPANY: {
+      BASE: '/company',               // → PORTAL.ADMIN.COMPANY
+      HOME: '/company/home'
+    },
+    SETTING: {
+      BASE: '/setting',               // → PORTAL.ADMIN.SETTINGS
+      HOME: '/setting/home'
+    }
   },
 
-  TA: {
-    BASE: '/ta',
-    HOME: '/ta/home',
-    LEAVE_REQUEST: '/ta/leave-request',
-    TIME_EDIT: '/ta/time-edit',
-    SHIFT_CHANGE: '/ta/shift-change',
-    EXCHANGE_SHIFT: '/ta/exchange-shift',
-    OVERTIME: '/ta/overtime',
-    MANAGER_APPROVALS: '/ta/manager-approvals',
-    REPORTS: '/ta/reports'
-  },
-
-  PAYROLL: {
-    BASE: '/payroll',
-    HOME: '/payroll/home',
-    PAYSLIP: '/payroll/payslip',
-    TAX_INFO: '/payroll/tax-information',
-    DEDUCTIONS: '/payroll/deductions',
-    REPORTS: '/payroll/reports'
-  },
-
-  TRAINING: {
-    BASE: '/training',
-    HOME: '/training/home',
-    CATALOG: '/training/catalog',
-    REGISTRATION: '/training/registration',
-    HISTORY: '/training/history',
-    CERTIFICATES: '/training/certificates',
-    DETAILS: '/training/details',
-    REPORTS: '/training/reports'
-  },
-
-  APPRAISAL: {
-    BASE: '/appraisal',
-    HOME: '/appraisal/home',
-    GOAL_SETTING: '/appraisal/goal-setting',
-    PERFORMANCE: '/appraisal/performance',
-    REVIEW: '/appraisal/review',
-    HISTORY: '/appraisal/history',
-    REPORTS: '/appraisal/reports'
-  },
-
-  RECRUIT: {
-    BASE: '/recruit',
-    HOME: '/recruit/home',
-    JOB_POSTINGS: '/recruit/job-postings',
-    JOB_DETAILS: '/recruit/job-details',
-    CANDIDATE_MANAGEMENT: '/recruit/candidate-management',
-    CANDIDATE_DETAILS: '/recruit/candidate-details',
-    APPLICATION: '/recruit/application',
-    INTERVIEW: '/recruit/interview',
-    REPORTS: '/recruit/reports'
-  },
-
-  WELFARE: {
-    BASE: '/welfare',
-    HOME: '/welfare/home',
-    BENEFITS: '/welfare/benefits',
-    BENEFIT_DETAILS: '/welfare/benefit-details',
-    ENROLLMENT: '/welfare/enrollment',
-    HISTORY: '/welfare/history',
-    REPORTS: '/welfare/reports'
-  },
-
+  // Other Routes
   WORKFLOW: {
     BASE: '/workflow',
     HOME: '/workflow/home',
     INBOX: '/workflow/inbox',
     SENTBOX: '/workflow/sentbox',
     CREATE: '/workflow/create'
-  },
-
-  COMPANY: {
-    BASE: '/company',
-    HOME: '/company/home'
-  },
-
-  SETTING: {
-    BASE: '/setting',
-    HOME: '/setting/home'
   },
 
   // Demo

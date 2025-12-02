@@ -21,6 +21,7 @@ import { IconComponent } from './components/icon/icon.component'; // Now standal
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { BackToTopComponent } from './components/back-to-top/back-to-top.component'; // Now standalone
+import { MenuItemComponent } from './components/menu-item/menu-item.component'; // Standalone
 
 // Directives
 import { ClickOutsideDirective } from './directives/click-outside.directive';
@@ -74,7 +75,8 @@ const PIPES = [
     SpinnerComponent,
     IconComponent, // Import standalone component
     BackToTopComponent, // Import standalone component
-    LazyImageDirective // Import standalone directive
+    LazyImageDirective, // Import standalone directive
+    MenuItemComponent // Import standalone component
   ],
   exports: [
     CommonModule,
@@ -87,7 +89,8 @@ const PIPES = [
     SpinnerComponent,
     IconComponent, // Export standalone component
     BackToTopComponent, // Export standalone component
-    LazyImageDirective // Export standalone directive
+    LazyImageDirective, // Export standalone directive
+    MenuItemComponent // Export standalone component
   ]
 })
 export class SharedModule { }

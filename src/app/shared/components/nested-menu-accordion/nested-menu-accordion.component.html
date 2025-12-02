@@ -1,0 +1,61 @@
+<div class="nested-menu-accordion">
+  <div *ngFor="let item of items; trackBy: trackByLabel" 
+       class="menu-item"
+       [class.level-3]="level === 3"
+       [class.level-4]="level === 4"
+       [class.has-children]="hasChildren(item)"
+       [class.expanded]="isExpanded(item)"
+       [class.active]="isActive(item)"
+       [class.navigable]="!hasChildren(item) && !!item.route">
+    
+    <!-- Menu Item Content -->
+    <div class="menu-item-content"
+         (click)="onItemClick(item, $event)"
+         [attr.aria-expanded]="hasChildren(item) ? isExpanded(item) : null"
+         [attr.aria-current]="isActive(item) ? 'page' : null"
+         role="button"
+         [attr.tabindex]="0"
+         (keydown.enter)="onItemClick(item, $event)"
+         (keydown.space)="onItemClick(item, $event); $event.preventDefault()">
+      
+      <!-- Icon -->
+      <span *ngIf="item.icon" 
+            [class]="getIconClass(item.icon)"
+            class="menu-item-icon"></span>
+      
+      <!-- Label -->
+      <span class="menu-item-label">{{ item.label }}</span>
+      
+      <!-- Badge -->
+      <span *ngIf="item.badge" 
+            class="menu-item-badge"
+            [style.background-color]="item.badgeColor || '#ef4444'">
+        {{ item.badge }}
+      </span>
+      
+      <!-- Action Icon (Chevron for expandable, Arrow for navigable) -->
+      <span class="menu-item-action">
+        <span *ngIf="hasChildren(item)" 
+              class="e-icons e-chevron-down chevron-icon"
+              [class.rotated]="isExpanded(item)"></span>
+        <span *ngIf="!hasChildren(item) && item.route" 
+              class="e-icons e-arrow-right arrow-icon"></span>
+      </span>
+    </div>
+    
+    <!-- Nested Children (Level 4) -->
+    <div *ngIf="hasChildren(item) && isExpanded(item)" 
+         class="menu-item-children"
+         [@slideDown]>
+      <app-nested-menu-accordion
+        [items]="item.children || []"
+        [activeRoute]="activeRoute"
+        [level]="4"
+        [expandedItems]="expandedItems"
+        (itemClick)="itemClick.emit($event)"
+        (toggleExpand)="toggleExpand.emit($event)">
+      </app-nested-menu-accordion>
+    </div>
+  </div>
+</div>
+

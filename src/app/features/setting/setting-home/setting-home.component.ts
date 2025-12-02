@@ -15,28 +15,28 @@ export class SettingHomeComponent implements OnInit {
       title: 'ตั้งค่าระบบ',
       description: 'จัดการตั้งค่าระบบ',
       icon: 'e-icons e-settings',
-      route: '/setting/system',
+      route: '/portal/admin/settings',
       color: 'bg-blue-500'
     },
     {
       title: 'ตั้งค่าผู้ใช้',
       description: 'จัดการผู้ใช้งาน',
       icon: 'e-icons e-user',
-      route: '/setting/users',
+      route: '/portal/admin/settings',
       color: 'bg-green-500'
     },
     {
       title: 'ตั้งค่าสิทธิ์',
       description: 'จัดการสิทธิ์การเข้าถึง',
       icon: 'e-icons e-lock',
-      route: '/setting/permissions',
+      route: '/portal/admin/settings',
       color: 'bg-purple-500'
     },
     {
       title: 'ตั้งค่าเมนู',
       description: 'จัดการเมนูระบบ',
       icon: 'e-icons e-menu',
-      route: '/setting/menu',
+      route: '/portal/admin/settings',
       color: 'bg-yellow-500'
     }
   ];

@@ -16,9 +16,9 @@ export class MenuDataService {
         {
           groupName: 'Employee Self Service',
           items: [
-            { name: 'การลงเวลา (Time Attendance)', icon: 'access_time', route: '/ta/attendance' },
-            { name: 'การขอเอกสาร (Request)', icon: 'description', route: '/workflow/request' },
-            { name: 'ข้อมูลลูกน้อง (My Team)', icon: 'people', route: '/empview/team' }
+            { name: 'การลงเวลา (Time Attendance)', icon: 'access_time', route: '/portal/self-service/attendance' },
+            { name: 'การขอเอกสาร (Request)', icon: 'description', route: '/portal/self-service/documents' },
+            { name: 'ข้อมูลลูกน้อง (My Team)', icon: 'people', route: '/portal/self-service/subordinates' }
           ]
         }
       ],
@@ -26,18 +26,18 @@ export class MenuDataService {
         {
           groupName: 'Admin Management',
           items: [
-            { name: 'จัดการข้อมูลบริษัท', icon: 'business', route: '/company/manage' },
+            { name: 'จัดการข้อมูลบริษัท', icon: 'business', route: '/portal/admin/company' },
             {
               name: 'จัดการข้อมูลพนักงาน',
               icon: 'person_check',
-              route: '/personal/manage',
+              route: '/portal/admin/employees',
               children: [
-                { name: 'ข้อมูลการทำงาน', icon: 'work', route: '/emp/work-info' },
-                { name: 'รายงาน (Reports)', icon: 'description', route: '/emp/reports' },
-                { name: 'ทะเบียนประวัติ', icon: 'folder', route: '/emp/registry' }
+                { name: 'ข้อมูลการทำงาน', icon: 'work', route: '/portal/admin/employees' },
+                { name: 'รายงาน (Reports)', icon: 'description', route: '/portal/admin/employees/reports' },
+                { name: 'ทะเบียนประวัติ', icon: 'folder', route: '/portal/admin/employees/master/list' }
               ]
             },
-            { name: 'จัดการเงินเดือน', icon: 'attach_money', route: '/payroll/manage' }
+            { name: 'จัดการเงินเดือน', icon: 'attach_money', route: '/portal/admin/payroll' }
           ]
         }
       ]

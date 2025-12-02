@@ -15,28 +15,28 @@ export class CompanyHomeComponent implements OnInit {
       title: 'ข้อมูลบริษัท',
       description: 'จัดการข้อมูลบริษัท',
       icon: 'e-icons e-briefcase',
-      route: '/company/profile',
+      route: '/portal/admin/company',
       color: 'bg-blue-500'
     },
     {
       title: 'โครงสร้างองค์กร',
       description: 'จัดการโครงสร้างองค์กร',
       icon: 'e-icons e-organization',
-      route: '/company/organization',
+      route: '/portal/admin/company',
       color: 'bg-green-500'
     },
     {
       title: 'แผนก',
       description: 'จัดการแผนก',
       icon: 'e-icons e-folder',
-      route: '/company/departments',
+      route: '/portal/admin/company',
       color: 'bg-purple-500'
     },
     {
       title: 'ตำแหน่งงาน',
       description: 'จัดการตำแหน่งงาน',
       icon: 'e-icons e-user',
-      route: '/company/positions',
+      route: '/portal/admin/company',
       color: 'bg-yellow-500'
     }
   ];

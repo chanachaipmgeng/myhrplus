@@ -27,50 +27,122 @@
 
     <!-- Navigation Icons (Rail) -->
     <div class="flex flex-col gap-3 flex-1 w-full px-2">
-      <!-- Use new navigation structure if available, otherwise fallback to legacy -->
-      <button *ngFor="let navItem of navigationItems; let i = index"
-              (click)="selectNavigationItem(navItem.id)"
-              [class.active]="selectedNavigationItem?.id === navItem.id"
-              [attr.aria-label]="navItem.label"
-              [attr.aria-current]="selectedNavigationItem?.id === navItem.id ? 'true' : 'false'"
-              [attr.title]="navItem.label"
-              [style.animation-delay.ms]="i * 50"
-              class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl
-                     transition-all duration-300 ease-out
-                     hover:scale-110 hover:shadow-lg hover:-translate-y-0.5
-                     active:scale-95
-                     relative group
-                     animate-fade-in
-                     cursor-pointer
-                     border-0 bg-transparent">
-        <!-- Hover Background -->
-        <div class="absolute inset-0 rounded-xl
-                    bg-gradient-to-br from-blue-500/0 to-indigo-500/0
-                    group-hover:from-blue-500/10 group-hover:to-indigo-500/10
-                    transition-all duration-300"></div>
-        <!-- Icon -->
-        <span class="material-icons text-xl transition-all duration-300 relative z-10
-                     group-hover:scale-110 group-hover:rotate-6
-                     text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">
-          {{ navItem.icon }}
-        </span>
-        <!-- Active Indicator -->
-        <span *ngIf="selectedNavigationItem?.id === navItem.id"
-              class="active-indicator
-                     animate-pulse"></span>
-        <!-- Badge -->
-        <span *ngIf="navItem.badge"
-              class="absolute top-0 right-0 w-5 h-5 rounded-full
-                     flex items-center justify-center text-xs font-bold
-                     bg-red-500 text-white
-                     transform translate-x-1 -translate-y-1
-                     z-20">{{ navItem.badge }}</span>
-        <!-- Tooltip -->
-        <span class="module-tooltip
-                     animate-fade-in
-                     [animation-delay:100ms]">{{ navItem.label }}</span>
-      </button>
-      
+      <!-- Level 2 Items - Show when Level 1 is selected -->
+      <ng-container *ngIf="selectedNavigationItem && level2Items.length > 0">
+        <!-- Home Button -->
+        <button (click)="goToHome()"
+                class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl
+                       transition-all duration-300 ease-out
+                       hover:scale-110 hover:shadow-lg hover:-translate-y-0.5
+                       active:scale-95
+                       relative group
+                       animate-fade-in
+                       cursor-pointer
+                       border-0 bg-transparent
+                       mb-2">
+          <div class="absolute inset-0 rounded-xl
+                      bg-gradient-to-br from-blue-500/0 to-indigo-500/0
+                      group-hover:from-blue-500/10 group-hover:to-indigo-500/10
+                      transition-all duration-300"></div>
+          <span class="material-icons text-xl transition-all duration-300 relative z-10
+                       group-hover:scale-110 group-hover:rotate-6
+                       text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">
+            home
+          </span>
+          <span class="module-tooltip animate-fade-in">หน้าแรก</span>
+        </button>
+
+        <!-- Level 2 Items (children of selected Level 1) -->
+        <button *ngFor="let level2Item of level2Items; let i = index"
+                (click)="selectLevel2Item(level2Item, selectedNavigationItem)"
+                [class.active]="selectedLevel2Item === level2Item"
+                [attr.aria-label]="level2Item.label"
+                [attr.aria-current]="selectedLevel2Item === level2Item ? 'true' : 'false'"
+                [attr.title]="level2Item.label"
+                [style.animation-delay.ms]="i * 50"
+                class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl
+                       transition-all duration-300 ease-out
+                       hover:scale-110 hover:shadow-lg hover:-translate-y-0.5
+                       active:scale-95
+                       relative group
+                       animate-fade-in
+                       cursor-pointer
+                       border-0 bg-transparent">
+          <!-- Hover Background -->
+          <div class="absolute inset-0 rounded-xl
+                      bg-gradient-to-br from-blue-500/0 to-indigo-500/0
+                      group-hover:from-blue-500/10 group-hover:to-indigo-500/10
+                      transition-all duration-300"></div>
+          <!-- Icon -->
+          <span class="material-icons text-xl transition-all duration-300 relative z-10
+                       group-hover:scale-110 group-hover:rotate-6
+                       text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">
+            {{ level2Item.icon || 'folder' }}
+          </span>
+          <!-- Active Indicator -->
+          <span *ngIf="selectedLevel2Item === level2Item"
+                class="active-indicator
+                       animate-pulse"></span>
+          <!-- Badge -->
+          <span *ngIf="level2Item.badge"
+                class="absolute top-0 right-0 w-5 h-5 rounded-full
+                       flex items-center justify-center text-xs font-bold
+                       bg-red-500 text-white
+                       transform translate-x-1 -translate-y-1
+                       z-20">{{ level2Item.badge }}</span>
+          <!-- Tooltip -->
+          <span class="module-tooltip
+                       animate-fade-in
+                       [animation-delay:100ms]">{{ level2Item.label }}</span>
+        </button>
+      </ng-container>
+
+      <!-- Level 1 Items (Home, ESS, Admin) - Show when no Level 1 is selected or no Level 2 items -->
+      <ng-container *ngIf="!selectedNavigationItem || level2Items.length === 0">
+        <button *ngFor="let navItem of navigationItems; let i = index"
+                (click)="selectNavigationItem(navItem.id)"
+                [class.active]="selectedNavigationItem?.id === navItem.id"
+                [attr.aria-label]="navItem.label"
+                [attr.aria-current]="selectedNavigationItem?.id === navItem.id ? 'true' : 'false'"
+                [attr.title]="navItem.label"
+                [style.animation-delay.ms]="i * 50"
+                class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl
+                       transition-all duration-300 ease-out
+                       hover:scale-110 hover:shadow-lg hover:-translate-y-0.5
+                       active:scale-95
+                       relative group
+                       animate-fade-in
+                       cursor-pointer
+                       border-0 bg-transparent">
+          <!-- Hover Background -->
+          <div class="absolute inset-0 rounded-xl
+                      bg-gradient-to-br from-blue-500/0 to-indigo-500/0
+                      group-hover:from-blue-500/10 group-hover:to-indigo-500/10
+                      transition-all duration-300"></div>
+          <!-- Icon -->
+          <span class="material-icons text-xl transition-all duration-300 relative z-10
+                       group-hover:scale-110 group-hover:rotate-6
+                       text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">
+            {{ navItem.icon }}
+          </span>
+          <!-- Active Indicator -->
+          <span *ngIf="selectedNavigationItem?.id === navItem.id"
+                class="active-indicator
+                       animate-pulse"></span>
+          <!-- Badge -->
+          <span *ngIf="navItem.badge"
+                class="absolute top-0 right-0 w-5 h-5 rounded-full
+                       flex items-center justify-center text-xs font-bold
+                       bg-red-500 text-white
+                       transform translate-x-1 -translate-y-1
+                       z-20">{{ navItem.badge }}</span>
+          <!-- Tooltip -->
+          <span class="module-tooltip
+                       animate-fade-in
+                       [animation-delay:100ms]">{{ navItem.label }}</span>
+        </button>
+      </ng-container>
+
       <!-- Fallback to legacy modules if navigationItems is empty -->
       <ng-container *ngIf="navigationItems.length === 0">
         <a *ngFor="let module of mainModules; let i = index"
@@ -127,11 +199,49 @@
         <app-context-switcher></app-context-switcher>
       </div>
 
+      <!-- Breadcrumb -->
+      <div class="mb-4" *ngIf="getBreadcrumbPath().length > 0">
+        <div class="breadcrumb-container flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 theme-gemini:text-white/70">
+          <span *ngFor="let item of getBreadcrumbPath(); let last = last; let i = index"
+                class="breadcrumb-item flex items-center gap-2">
+            <button *ngIf="item.route && !last"
+                    (click)="navigateToBreadcrumb(item)"
+                    class="breadcrumb-link hover:text-blue-500 dark:hover:text-blue-400 theme-gemini:hover:text-blue-300 transition-colors duration-200 cursor-pointer">
+              {{ item.label }}
+            </button>
+            <span *ngIf="!item.route || last"
+                  class="breadcrumb-current"
+                  [class.font-semibold]="last"
+                  [class.text-blue-500]="last"
+                  [class.dark:text-blue-400]="last"
+                  [class.theme-gemini:text-blue-300]="last">
+              {{ item.label }}
+            </span>
+            <span *ngIf="!last" class="breadcrumb-separator text-gray-400 dark:text-gray-500 theme-gemini:text-white/50">›</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Back Button (when in Level 3+ for Admin, or Level 3+ for ESS) -->
+      <div class="mb-4" *ngIf="(selectedNavigationItem?.id === 'admin' && selectedLevel3Item) ||
+                               (selectedNavigationItem?.id === 'ess' && (selectedLevel3Item || selectedLevel4Item))">
+        <button (click)="goBackToLevel2()"
+                class="back-button flex items-center gap-2 px-3 py-2 rounded-lg
+                       transition-all duration-200 ease-out
+                       hover:bg-white/10 dark:hover:bg-gray-800/20 theme-gemini:hover:bg-white/10
+                       hover:scale-[1.02] active:scale-[0.98]
+                       text-sm text-gray-700 dark:text-gray-300 theme-gemini:text-white/90
+                       cursor-pointer border-0 bg-transparent">
+          <span class="material-icons text-base">arrow_back</span>
+          <span class="thai-text">กลับ</span>
+        </button>
+      </div>
+
       <!-- Module Header with Search -->
-      <div class="mb-6" *ngIf="selectedNavigationItem || menuGroups.length > 0">
+      <div class="mb-6" *ngIf="selectedNavigationItem || selectedLevel2Item || menuGroups.length > 0">
         <div class="flex items-center justify-between mb-4">
           <h2 class="module-title text-lg font-bold thai-text transition-colors duration-300">
-            {{ selectedNavigationItem?.label || (menuGroups.length > 0 ? menuGroups[0].groupName : 'เมนู') }}
+            {{ selectedLevel2Item?.label || selectedNavigationItem?.label || (menuGroups.length > 0 ? menuGroups[0].groupName : 'เมนู') }}
           </h2>
         </div>
 
@@ -184,9 +294,24 @@
         </div>
       </div>
 
-      <!-- Module Menu Items -->
+      <!-- Module Menu Items - Using Nested Accordion -->
+      <!-- Show Level 3 items when Level 2 is selected (Level 4 as children) -->
+      <ng-container *ngIf="!isLoading && navigationChildren.length > 0">
+        <div class="nested-menu-container">
+          <app-nested-menu-accordion
+            [items]="navigationChildren"
+            [activeRoute]="activeRoute"
+            [level]="3"
+            [expandedItems]="expandedLevel3Items"
+            (itemClick)="onAccordionItemClick($event)"
+            (toggleExpand)="onAccordionToggleExpand($event)">
+          </app-nested-menu-accordion>
+        </div>
+      </ng-container>
+
+      <!-- Fallback to Legacy ListView (if no navigation children) -->
       <ejs-listview
-        *ngIf="!isLoading && filteredMenuItems && filteredMenuItems.length > 0"
+        *ngIf="!isLoading && navigationChildren.length === 0 && filteredMenuItems && filteredMenuItems.length > 0"
         #listview
         [dataSource]="filteredMenuItems"
         [fields]="listViewFields"
@@ -197,7 +322,7 @@
       </ejs-listview>
 
       <!-- Search No Results -->
-      <div *ngIf="!isLoading && searchQuery && filteredMenuItems.length === 0"
+      <div *ngIf="!isLoading && searchQuery && navigationChildren.length === 0 && filteredMenuItems.length === 0"
            class="empty-menu-state flex flex-col items-center justify-center py-12">
         <app-icon name="search_off" size="xl" color="text-gray-400 dark:text-gray-600 theme-gemini:text-white/60" class="mb-4 opacity-50"></app-icon>
         <p class="empty-text thai-text text-center">ไม่พบเมนูที่ค้นหา</p>
@@ -210,7 +335,7 @@
       </div>
 
       <!-- Empty State - No Menu Items -->
-      <div *ngIf="!isLoading && !searchQuery && displayMenuItems.length === 0"
+      <div *ngIf="!isLoading && !searchQuery && navigationChildren.length === 0 && displayMenuItems.length === 0"
            class="empty-menu-state flex flex-col items-center justify-center py-12">
         <app-icon name="folder_open" size="xl" color="text-gray-400 dark:text-gray-600 theme-gemini:text-white/60" class="mb-4 opacity-50"></app-icon>
         <p class="empty-text thai-text text-center">ไม่มีเมนูในโหมดนี้</p>
@@ -286,7 +411,7 @@
              *ngIf="showUserMenu"
              @slideDown>
           <div class="user-menu-items">
-            <a routerLink="/personal/profile"
+            <a routerLink="/portal/self-service/profile"
                class="user-menu-item
                       transition-all duration-200 ease-out
                       hover:translate-x-1 hover:scale-[1.02]
@@ -300,7 +425,7 @@
                         class="group-hover:scale-110 transition-transform duration-200"></app-icon>
               <span class="thai-text">โปรไฟล์</span>
             </a>
-            <a routerLink="/setting/home"
+            <a routerLink="/portal/admin/settings"
                class="user-menu-item
                       transition-all duration-200 ease-out
                       hover:translate-x-1 hover:scale-[1.02]
@@ -314,6 +439,22 @@
                         class="group-hover:scale-110 transition-transform duration-200"></app-icon>
               <span class="thai-text">ตั้งค่า</span>
             </a>
+            <!-- Admin Menu Option (only show if user has admin role) -->
+            <button *ngIf="hasAdminRole()"
+                    class="user-menu-item
+                           transition-all duration-200 ease-out
+                           hover:translate-x-1 hover:scale-[1.02]
+                           active:scale-[0.98]"
+                    (click)="switchToAdmin(); showUserMenu = false"
+                    [attr.aria-label]="'Admin'"
+                    type="button">
+              <app-icon name="shield-check" size="sm"
+                        color="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70
+                               group-hover:text-blue-500 dark:group-hover:text-blue-400
+                               transition-colors duration-200"
+                        class="group-hover:scale-110 transition-transform duration-200"></app-icon>
+              <span class="thai-text">Admin</span>
+            </button>
             <div class="user-menu-divider"></div>
             <button
               class="user-menu-item text-red-500 dark:text-red-400

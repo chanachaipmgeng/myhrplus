@@ -60,8 +60,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Get return url from route parameters or default to '/home' (Home Module)
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
+    // Get return url from route parameters or default to '/portal' (Portal)
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/portal';
 
     // If already logged in, redirect
     if (this.authService.isAuthenticated()) {
@@ -234,13 +234,13 @@ export class LoginComponent implements OnInit {
                           this.swapLangService.saveSwaplang(swapResult);
                           this.notificationService.showSuccess('Login successful');
                           this.menuService.clearCache();
-                          this.router.navigate(['/home']);
+                          this.router.navigate(['/portal']);
                         }, (error) => {
                           console.error('Error loading swap language:', error);
                           // Proceed anyway
                           this.notificationService.showSuccess('Login successful');
                           this.menuService.clearCache();
-                          this.router.navigate(['/home']);
+                          this.router.navigate(['/portal']);
                         });
                       } else if (accountActive === 'waiting') {
                         this.loading = false;
@@ -259,14 +259,14 @@ export class LoginComponent implements OnInit {
                         this.swapLangService.saveSwaplang(swapResult);
                         this.notificationService.showSuccess('Login successful');
                         this.menuService.clearCache();
-                        // Navigate to company profile as per old system behavior
-                        this.router.navigate(['/company/company-profile']);
+                        // Navigate to portal admin company as per new system
+                        this.router.navigate(['/portal/admin/company']);
                       }, (error) => {
                         console.error('Error loading swap language:', error);
                         // Proceed anyway
                         this.notificationService.showSuccess('Login successful');
                         this.menuService.clearCache();
-                        this.router.navigate(['/company/company-profile']);
+                        this.router.navigate(['/portal/admin/company']);
                       });
                     }
                   } catch (error) {
@@ -276,13 +276,13 @@ export class LoginComponent implements OnInit {
                       this.swapLangService.saveSwaplang(swapResult);
                       this.notificationService.showSuccess('Login successful');
                       this.menuService.clearCache();
-                      this.router.navigate(['/home']);
+                      this.router.navigate(['/portal']);
                     }, (error) => {
                       console.error('Error loading swap language:', error);
                       // Proceed anyway
                       this.notificationService.showSuccess('Login successful');
                       this.menuService.clearCache();
-                      this.router.navigate(['/home']);
+                      this.router.navigate(['/portal']);
                     });
                   }
                 },

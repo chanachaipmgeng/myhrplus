@@ -15,14 +15,14 @@ export class AppraisalHomeComponent implements OnInit {
       title: 'การประเมินผล',
       description: 'จัดการการประเมินผลการทำงาน',
       icon: 'e-icons e-chart',
-      route: '/appraisal/appraisals',
+      route: '/portal/admin/appraisal',
       color: 'bg-blue-500'
     },
     {
       title: 'รายงาน',
       description: 'รายงานการประเมินผล',
       icon: 'e-icons e-file',
-      route: '/appraisal/reports',
+      route: '/portal/admin/appraisal',
       color: 'bg-green-500'
     }
   ];

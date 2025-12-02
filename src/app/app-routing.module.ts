@@ -5,6 +5,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { ROUTES } from './core/constants/routes.constant';
 
 const routes: Routes = [
+  // Auth Routes
   {
     path: 'auth',
     loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
@@ -13,67 +14,104 @@ const routes: Routes = [
     path: 'unauthorized',
     loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
   },
+
+  // Main Layout with AuthGuard
   {
     path: '',
     component: MainLayoutComponent,
     canActivate: [AuthGuard],
     children: [
+      // Default redirect to portal
       {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'portal',
         pathMatch: 'full'
       },
-      {
-        path: 'home',
-        loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)
-      },
+
+      // ============================================
+      // Portal Group (Primary Routes)
+      // ============================================
       {
         path: 'portal',
         loadChildren: () => import('./features/portal/portal.module').then(m => m.PortalModule)
       },
+
+      // ============================================
+      // Legacy Routes - Redirect to Portal Structure
+      // ============================================
+      // Home → Portal
+      {
+        path: 'home',
+        redirectTo: '/portal',
+        pathMatch: 'full'
+      },
+      // Dashboard (Empview) → Self-Service
       {
         path: 'dashboard',
-        loadChildren: () => import('./features/empview/empview.module').then(m => m.EmpviewModule)
+        redirectTo: '/portal/self-service',
+        pathMatch: 'full'
       },
+      // Personal → Admin/Employees
       {
         path: 'personal',
-        loadChildren: () => import('./features/personal/personal.module').then(m => m.PersonalModule)
+        redirectTo: '/portal/admin/employees',
+        pathMatch: 'full'
       },
+      // TA → Admin/Time
       {
         path: 'ta',
-        loadChildren: () => import('./features/ta/ta.module').then(m => m.TaModule)
+        redirectTo: '/portal/admin/time',
+        pathMatch: 'full'
       },
+      // Payroll → Admin/Payroll
       {
         path: 'payroll',
-        loadChildren: () => import('./features/payroll/payroll.module').then(m => m.PayrollModule)
+        redirectTo: '/portal/admin/payroll',
+        pathMatch: 'full'
       },
+      // Training → Admin/Training
       {
         path: 'training',
-        loadChildren: () => import('./features/training/training.module').then(m => m.TrainingModule)
+        redirectTo: '/portal/admin/training',
+        pathMatch: 'full'
       },
+      // Appraisal → Admin/Appraisal
       {
         path: 'appraisal',
-        loadChildren: () => import('./features/appraisal/appraisal.module').then(m => m.AppraisalModule)
+        redirectTo: '/portal/admin/appraisal',
+        pathMatch: 'full'
       },
+      // Recruit → Admin/Recruit
       {
         path: 'recruit',
-        loadChildren: () => import('./features/recruit/recruit.module').then(m => m.RecruitModule)
+        redirectTo: '/portal/admin/recruit',
+        pathMatch: 'full'
       },
+      // Welfare → Admin/Welfare
       {
         path: 'welfare',
-        loadChildren: () => import('./features/welfare/welfare.module').then(m => m.WelfareModule)
+        redirectTo: '/portal/admin/welfare',
+        pathMatch: 'full'
       },
+      // Company → Admin/Company
+      {
+        path: 'company',
+        redirectTo: '/portal/admin/company',
+        pathMatch: 'full'
+      },
+      // Setting → Admin/Settings
+      {
+        path: 'setting',
+        redirectTo: '/portal/admin/settings',
+        pathMatch: 'full'
+      },
+
+      // ============================================
+      // Other Routes (TBD - might stay or migrate)
+      // ============================================
       {
         path: 'workflow',
         loadChildren: () => import('./features/workflow/workflow.module').then(m => m.WorkflowModule)
-      },
-      {
-        path: 'company',
-        loadChildren: () => import('./features/company/company.module').then(m => m.CompanyModule)
-      },
-      {
-        path: 'setting',
-        loadChildren: () => import('./features/setting/setting.module').then(m => m.SettingModule)
       }
     ]
   },
@@ -84,7 +122,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: ROUTES.HOME
+    redirectTo: ROUTES.PORTAL.HOME
   }
 ];
 

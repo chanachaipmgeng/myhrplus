@@ -11,6 +11,7 @@ import { GlassCardComponent } from '../shared/components/glass-card/glass-card.c
 import { ContextSwitcherComponent } from '../shared/components/context-switcher/context-switcher.component';
 import { IconComponent } from '../shared/components/icon/icon.component';
 import { OmniSearchComponent } from '../shared/components/omni-search/omni-search.component';
+import { NestedMenuAccordionComponent } from '../shared/components/nested-menu-accordion/nested-menu-accordion.component';
 
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { HeaderComponent } from './header/header.component';
@@ -35,7 +36,8 @@ import { FooterComponent } from './footer/footer.component';
     GlassCardComponent, // Standalone component
     ContextSwitcherComponent, // Standalone component
     IconComponent, // Standalone component
-    OmniSearchComponent // Standalone component
+    OmniSearchComponent, // Standalone component
+    NestedMenuAccordionComponent // Standalone component
   ],
   exports: [
     MainLayoutComponent

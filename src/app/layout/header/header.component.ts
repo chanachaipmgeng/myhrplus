@@ -160,11 +160,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onProfile(): void {
-    this.router.navigate(['/personal/profile']);
+    this.router.navigate(['/portal/self-service/profile']);
   }
 
   onPreferences(): void {
-    this.router.navigate(['/personal/preferences']);
+    this.router.navigate(['/portal/self-service/profile']);
   }
 
   changeLanguage(language: Language): void {

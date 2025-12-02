@@ -176,8 +176,8 @@ export class HomeComponent implements OnInit {
   }
 
   navigateToCategory(category: MenuCategory): void {
-    // Navigate to EMPVIEW module (dashboard) for all main menu items
-    this.router.navigate(['/dashboard']);
+    // Navigate to portal for all main menu items
+    this.router.navigate(['/portal']);
   }
 
   getGreeting(): string {
