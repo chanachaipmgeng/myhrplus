@@ -9,4 +9,5 @@ export * from './app-config.constant';
 export * from './company-screens.constant';
 export * from './personal-screens.constant';
 export * from './payroll-screens.constant';
+export * from './time-screens.constant';
 
