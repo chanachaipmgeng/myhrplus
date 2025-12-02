@@ -134,28 +134,9 @@
          /* Transparent background - let sidebar component handle its own background */
          background: transparent !important;
 
-         /* Position to avoid header overlap */
-         /* Header height: ~64px (mobile) to ~72px (desktop) */
-         /* Default: header visible */
-         top: 64px !important;
-         height: calc(100vh - 64px) !important;
-
-         @media (min-width: 768px) {
-           top: 72px !important;
-           height: calc(100vh - 72px) !important;
-         }
-
-         /* When header is hidden */
-         .header-hidden & {
-           top: 0 !important;
-           height: 100vh !important;
-         }
-
-         /* Alternative: check parent class */
-         :host-context(.header-hidden) & {
-           top: 0 !important;
-           height: 100vh !important;
-         }
+         /* Full height sidebar - always full screen height */
+         top: 0 !important;
+         height: 100vh !important;
 
          /* Dark mode - Enhanced shadow only */
          .dark & {
