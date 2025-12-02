@@ -191,113 +191,135 @@
   <!-- Right Menu Panel - Module Menu -->
   <div class="menu-panel flex-1 flex flex-col overflow-hidden
               transition-all duration-300 ease-in-out
-              bg-white/10 dark:bg-gray-900/10 theme-gemini:bg-gray-900/20
-              backdrop-blur-sm">
-    <div class="p-5 flex-1 overflow-y-auto">
-      <!-- Context Switcher -->
-      <div class="mb-4">
-        <app-context-switcher></app-context-switcher>
-      </div>
-
-      <!-- Breadcrumb -->
-      <div class="mb-4" *ngIf="getBreadcrumbPath().length > 0">
-        <div class="breadcrumb-container flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 theme-gemini:text-white/70">
-          <span *ngFor="let item of getBreadcrumbPath(); let last = last; let i = index"
-                class="breadcrumb-item flex items-center gap-2">
-            <button *ngIf="item.route && !last"
-                    (click)="navigateToBreadcrumb(item)"
-                    class="breadcrumb-link hover:text-blue-500 dark:hover:text-blue-400 theme-gemini:hover:text-blue-300 transition-colors duration-200 cursor-pointer">
-              {{ item.label }}
-            </button>
-            <span *ngIf="!item.route || last"
-                  class="breadcrumb-current"
-                  [class.font-semibold]="last"
-                  [class.text-blue-500]="last"
-                  [class.dark:text-blue-400]="last"
-                  [class.theme-gemini:text-blue-300]="last">
-              {{ item.label }}
-            </span>
-            <span *ngIf="!last" class="breadcrumb-separator text-gray-400 dark:text-gray-500 theme-gemini:text-white/50">›</span>
-          </span>
-        </div>
-      </div>
-
-      <!-- Back Button (when in Level 3+ for Admin, or Level 3+ for ESS) -->
-      <div class="mb-4" *ngIf="(selectedNavigationItem?.id === 'admin' && selectedLevel3Item) ||
-                               (selectedNavigationItem?.id === 'ess' && (selectedLevel3Item || selectedLevel4Item))">
-        <button (click)="goBackToLevel2()"
-                class="back-button flex items-center gap-2 px-3 py-2 rounded-lg
-                       transition-all duration-200 ease-out
-                       hover:bg-white/10 dark:hover:bg-gray-800/20 theme-gemini:hover:bg-white/10
-                       hover:scale-[1.02] active:scale-[0.98]
-                       text-sm text-gray-700 dark:text-gray-300 theme-gemini:text-white/90
-                       cursor-pointer border-0 bg-transparent">
-          <span class="material-icons text-base">arrow_back</span>
-          <span class="thai-text">กลับ</span>
-        </button>
-      </div>
-
-      <!-- Module Header with Search -->
-      <div class="mb-6" *ngIf="selectedNavigationItem || selectedLevel2Item || menuGroups.length > 0">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="module-title text-lg font-bold thai-text transition-colors duration-300">
-            {{ selectedLevel2Item?.label || selectedNavigationItem?.label || (menuGroups.length > 0 ? menuGroups[0].groupName : 'เมนู') }}
+              bg-gradient-to-br from-white/5 via-white/10 to-white/5
+              dark:from-gray-900/20 dark:via-gray-900/30 dark:to-gray-900/20
+              theme-gemini:from-gray-900/30 theme-gemini:via-gray-900/40 theme-gemini:to-gray-900/30
+              backdrop-blur-md border-l border-white/10 dark:border-gray-800/30 theme-gemini:border-white/20">
+    <div class="p-6 flex-1 overflow-y-auto">
+      <!-- Header Section -->
+      <div class="mb-6">
+        <!-- Module Title -->
+        <div class="mb-4" *ngIf="selectedLevel2Item || selectedNavigationItem">
+          <h2 class="module-title text-xl font-bold thai-text
+                     text-gray-800 dark:text-gray-100 theme-gemini:text-white
+                     mb-1 transition-colors duration-300">
+            {{ selectedLevel2Item?.label || selectedNavigationItem?.label || 'เมนู' }}
           </h2>
+          <p class="text-xs text-gray-500 dark:text-gray-400 theme-gemini:text-white/70" *ngIf="selectedNavigationItem">
+            {{ selectedNavigationItem.label }}
+          </p>
         </div>
 
-        <!-- Search Box -->
-        <div class="search-container mb-4 relative animate-fade-in" *ngIf="displayMenuItems.length > 3">
-          <input
-            type="text"
-            [(ngModel)]="searchQuery"
-            (input)="onSearchChange()"
-            [placeholder]="'ค้นหาเมนู...'"
-            class="search-input w-full px-4 py-2 pl-10 pr-10 rounded-lg border
-                   transition-all duration-300 ease-out
-                   focus:outline-none focus:ring-2 focus:ring-blue-500/50
-                   hover:scale-[1.02] hover:shadow-md
-                   bg-white/50 dark:bg-gray-800/50 theme-gemini:bg-gray-800/30
-                   backdrop-blur-sm
-                   group"
-            [attr.aria-label]="'ค้นหาเมนู'">
-          <app-icon name="search" size="sm"
-                    color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70
-                           group-focus:text-blue-500 dark:group-focus:text-blue-400
-                           transition-colors duration-300"
-                    class="search-icon absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none
-                           group-focus:scale-110 transition-transform duration-300"></app-icon>
-          <button
-            *ngIf="searchQuery"
-            (click)="clearSearch()"
-            class="clear-search-btn absolute right-3 top-1/2 -translate-y-1/2
-                   w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full
-                   hover:bg-gray-200 dark:hover:bg-gray-700 theme-gemini:hover:bg-white/20
-                   hover:scale-110 active:scale-95
-                   transition-all duration-200 ease-out"
-            [attr.aria-label]="'ล้างการค้นหา'"
-            type="button">
-            <app-icon name="close" size="sm"
-                      color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70
-                             hover:text-red-500 dark:hover:text-red-400
-                             transition-colors duration-200"></app-icon>
+        <!-- Breadcrumb -->
+        <div class="mb-4" *ngIf="getBreadcrumbPath().length > 1">
+          <div class="breadcrumb-container flex items-center gap-1.5 text-xs
+                     bg-white/30 dark:bg-gray-800/30 theme-gemini:bg-white/10
+                     backdrop-blur-sm rounded-lg px-3 py-2
+                     border border-white/20 dark:border-gray-700/30 theme-gemini:border-white/20">
+            <span *ngFor="let item of getBreadcrumbPath(); let last = last; let i = index"
+                  class="breadcrumb-item flex items-center gap-1.5">
+              <button *ngIf="item.route && !last"
+                      (click)="navigateToBreadcrumb(item)"
+                      class="breadcrumb-link
+                             text-gray-600 dark:text-gray-400 theme-gemini:text-white/80
+                             hover:text-blue-600 dark:hover:text-blue-400 theme-gemini:hover:text-blue-300
+                             transition-colors duration-200 cursor-pointer
+                             px-2 py-1 rounded hover:bg-white/20 dark:hover:bg-gray-700/20">
+                {{ item.label }}
+              </button>
+              <span *ngIf="!item.route || last"
+                    class="breadcrumb-current px-2 py-1 rounded
+                           font-medium
+                           text-gray-800 dark:text-gray-200 theme-gemini:text-white
+                           bg-blue-50 dark:bg-blue-900/20 theme-gemini:bg-blue-500/20">
+                {{ item.label }}
+              </span>
+              <span *ngIf="!last"
+                    class="breadcrumb-separator text-gray-400 dark:text-gray-500 theme-gemini:text-white/50 mx-1">
+                <app-icon name="chevron_right" size="xs"></app-icon>
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Back Button (when in Level 3+) -->
+        <div class="mb-4" *ngIf="(selectedNavigationItem?.id === 'admin' && selectedLevel3Item) ||
+                                 (selectedNavigationItem?.id === 'ess' && (selectedLevel3Item || selectedLevel4Item))">
+          <button (click)="goBackToLevel2()"
+                  class="back-button flex items-center gap-2 px-4 py-2 rounded-lg
+                         transition-all duration-200 ease-out
+                         bg-white/20 dark:bg-gray-800/30 theme-gemini:bg-white/10
+                         hover:bg-white/30 dark:hover:bg-gray-700/40 theme-gemini:hover:bg-white/20
+                         hover:scale-[1.02] active:scale-[0.98]
+                         text-sm font-medium
+                         text-gray-700 dark:text-gray-300 theme-gemini:text-white/90
+                         cursor-pointer border-0
+                         backdrop-blur-sm
+                         border border-white/30 dark:border-gray-700/30 theme-gemini:border-white/20">
+            <span class="material-icons text-base">arrow_back</span>
+            <span class="thai-text">กลับ</span>
           </button>
         </div>
 
-        <div class="module-divider h-px transition-colors duration-300 mb-4"></div>
+        <!-- Search Box -->
+        <div class="search-container mb-4 relative animate-fade-in" *ngIf="navigationChildren.length > 3 || filteredMenuItems.length > 3">
+          <div class="relative">
+            <input
+              type="text"
+              [(ngModel)]="searchQuery"
+              (input)="onSearchChange()"
+              [placeholder]="'ค้นหาเมนู...'"
+              class="search-input w-full px-4 py-3 pl-11 pr-11 rounded-xl
+                     transition-all duration-300 ease-out
+                     focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50
+                     hover:scale-[1.01] hover:shadow-lg
+                     bg-white/60 dark:bg-gray-800/60 theme-gemini:bg-gray-800/40
+                     backdrop-blur-md
+                     border border-white/30 dark:border-gray-700/30 theme-gemini:border-white/20
+                     text-gray-800 dark:text-gray-200 theme-gemini:text-white
+                     placeholder:text-gray-500 dark:placeholder:text-gray-400 theme-gemini:placeholder:text-white/50
+                     group"
+              [attr.aria-label]="'ค้นหาเมนู'">
+            <app-icon name="search" size="sm"
+                      color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70
+                             group-focus:text-blue-500 dark:group-focus:text-blue-400
+                             transition-colors duration-300"
+                      class="search-icon absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none
+                             group-focus:scale-110 transition-transform duration-300"></app-icon>
+            <button
+              *ngIf="searchQuery"
+              (click)="clearSearch()"
+              class="clear-search-btn absolute right-2 top-1/2 -translate-y-1/2
+                     w-8 h-8 flex items-center justify-center rounded-lg
+                     hover:bg-gray-200/50 dark:hover:bg-gray-700/50 theme-gemini:hover:bg-white/20
+                     hover:scale-110 active:scale-95
+                     transition-all duration-200 ease-out"
+              [attr.aria-label]="'ล้างการค้นหา'"
+              type="button">
+              <app-icon name="close" size="sm"
+                        color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70
+                               hover:text-red-500 dark:hover:text-red-400
+                               transition-colors duration-200"></app-icon>
+            </button>
+          </div>
+        </div>
       </div>
 
       <!-- Loading State -->
-      <div *ngIf="isLoading" class="loading-state">
-        <div class="skeleton-loader" *ngFor="let item of [1,2,3,4,5]">
-          <div class="skeleton-icon"></div>
-          <div class="skeleton-text"></div>
+      <div *ngIf="isLoading" class="loading-state space-y-3">
+        <div class="skeleton-loader flex items-center gap-3 p-3 rounded-lg bg-white/10 dark:bg-gray-800/20 theme-gemini:bg-white/5 animate-pulse" *ngFor="let item of [1,2,3,4,5]">
+          <div class="skeleton-icon w-8 h-8 rounded-lg bg-white/20 dark:bg-gray-700/30 theme-gemini:bg-white/10"></div>
+          <div class="skeleton-text flex-1 h-4 rounded bg-white/20 dark:bg-gray-700/30 theme-gemini:bg-white/10"></div>
         </div>
       </div>
 
       <!-- Module Menu Items - Using Nested Accordion -->
       <!-- Show Level 3 items when Level 2 is selected (Level 4 as children) -->
       <ng-container *ngIf="!isLoading && navigationChildren.length > 0">
-        <div class="nested-menu-container">
+        <div class="nested-menu-container
+                    bg-white/20 dark:bg-gray-800/20 theme-gemini:bg-white/5
+                    backdrop-blur-sm rounded-xl p-4
+                    border border-white/20 dark:border-gray-700/20 theme-gemini:border-white/10">
           <app-nested-menu-accordion
             [items]="navigationChildren"
             [activeRoute]="activeRoute"
@@ -323,12 +345,28 @@
 
       <!-- Search No Results -->
       <div *ngIf="!isLoading && searchQuery && navigationChildren.length === 0 && filteredMenuItems.length === 0"
-           class="empty-menu-state flex flex-col items-center justify-center py-12">
-        <app-icon name="search_off" size="xl" color="text-gray-400 dark:text-gray-600 theme-gemini:text-white/60" class="mb-4 opacity-50"></app-icon>
-        <p class="empty-text thai-text text-center">ไม่พบเมนูที่ค้นหา</p>
+           class="empty-menu-state flex flex-col items-center justify-center py-16
+                  bg-white/10 dark:bg-gray-800/10 theme-gemini:bg-white/5
+                  backdrop-blur-sm rounded-xl
+                  border border-white/20 dark:border-gray-700/20 theme-gemini:border-white/10">
+        <div class="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 theme-gemini:bg-white/10 flex items-center justify-center mb-4">
+          <app-icon name="search_off" size="lg" color="text-gray-400 dark:text-gray-600 theme-gemini:text-white/60"></app-icon>
+        </div>
+        <p class="empty-text thai-text text-center text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 font-medium mb-2">
+          ไม่พบเมนูที่ค้นหา
+        </p>
+        <p class="text-xs text-gray-500 dark:text-gray-500 theme-gemini:text-white/50 mb-4">
+          ลองค้นหาด้วยคำอื่น
+        </p>
         <button
           (click)="clearSearch()"
-          class="mt-4 px-4 py-2 rounded-lg transition-all duration-300"
+          class="px-4 py-2 rounded-lg
+                 bg-white/20 dark:bg-gray-800/30 theme-gemini:bg-white/10
+                 hover:bg-white/30 dark:hover:bg-gray-700/40 theme-gemini:hover:bg-white/20
+                 text-sm font-medium
+                 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90
+                 transition-all duration-300
+                 border border-white/30 dark:border-gray-700/30 theme-gemini:border-white/20"
           type="button">
           ล้างการค้นหา
         </button>
@@ -336,9 +374,16 @@
 
       <!-- Empty State - No Menu Items -->
       <div *ngIf="!isLoading && !searchQuery && navigationChildren.length === 0 && displayMenuItems.length === 0"
-           class="empty-menu-state flex flex-col items-center justify-center py-12">
-        <app-icon name="folder_open" size="xl" color="text-gray-400 dark:text-gray-600 theme-gemini:text-white/60" class="mb-4 opacity-50"></app-icon>
-        <p class="empty-text thai-text text-center">ไม่มีเมนูในโหมดนี้</p>
+           class="empty-menu-state flex flex-col items-center justify-center py-16
+                  bg-white/10 dark:bg-gray-800/10 theme-gemini:bg-white/5
+                  backdrop-blur-sm rounded-xl
+                  border border-white/20 dark:border-gray-700/20 theme-gemini:border-white/10">
+        <div class="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 theme-gemini:bg-white/10 flex items-center justify-center mb-4">
+          <app-icon name="folder_open" size="lg" color="text-gray-400 dark:text-gray-600 theme-gemini:text-white/60"></app-icon>
+        </div>
+        <p class="empty-text thai-text text-center text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 font-medium">
+          ไม่มีเมนูในโหมดนี้
+        </p>
       </div>
     </div>
 

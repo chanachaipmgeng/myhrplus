@@ -18,7 +18,6 @@ import {
 import { environment } from '../../../environments/environment';
 import { MenuItemComponent } from '../../shared/components/menu-item/menu-item.component';
 import { ListViewComponent } from '@syncfusion/ej2-angular-lists';
-import { ContextSwitcherComponent } from '../../shared/components/context-switcher/context-switcher.component';
 import { IconComponent } from '../../shared/components/icon/icon.component';
 import { NestedMenuAccordionComponent } from '../../shared/components/nested-menu-accordion/nested-menu-accordion.component';
 import { CommonModule } from '@angular/common';
@@ -541,6 +540,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
    * Update selected items based on route
    * For ESS: Find in Level 2 children (Level 3-4)
    * For Admin: Find in Level 3 children (Level 4)
+   * IMPORTANT: Does NOT change selectedLevel2Item - only updates Level 3-4 selections
    */
   private updateSelectedItemsFromRoute(route: string): void {
     console.log('[Sidebar] updateSelectedItemsFromRoute: Searching for route =', route);
@@ -550,9 +550,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
       console.log('[Sidebar] Searching in ESS Level 2 items');
       for (const level2Item of this.selectedNavigationItem.children) {
         if (level2Item.route === route) {
-          // Direct Level 2 match
+          // Direct Level 2 match - don't change selectedLevel2Item
           console.log('[Sidebar] Found ESS Level 2 match:', level2Item.label);
-          this.selectedLevel2Item = null; // ESS doesn't use Level 2 selection
+          // Keep selectedLevel2Item as is (null for ESS)
           this.selectedLevel3Item = null;
           this.selectedLevel4Item = null;
           return;
@@ -566,7 +566,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
                 level2Label: level2Item.label,
                 level3Label: level3Item.label
               });
-              this.selectedLevel2Item = null; // ESS doesn't use Level 2 selection
+              // Don't change selectedLevel2Item - only update Level 3-4
               this.selectedLevel3Item = level3Item;
               this.selectedLevel4Item = null;
               return;
@@ -581,7 +581,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
                     level3Label: level3Item.label,
                     level4Label: level4Item.label
                   });
-                  this.selectedLevel2Item = null; // ESS doesn't use Level 2 selection
+                  // Don't change selectedLevel2Item - only update Level 3-4
                   this.selectedLevel3Item = level3Item;
                   this.selectedLevel4Item = level4Item;
                   return;
@@ -595,11 +595,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
 
     // For Admin: Search in Level 3 items (selectedLevel2Item.children)
+    // IMPORTANT: Only search within current selectedLevel2Item - don't change it
     if (this.selectedNavigationItem?.id === 'admin' && this.selectedLevel2Item && this.selectedLevel2Item.children) {
-      console.log('[Sidebar] Searching in Admin Level 3 items');
+      console.log('[Sidebar] Searching in Admin Level 3 items (current Level 2:', this.selectedLevel2Item.label + ')');
       for (const level3Item of this.selectedLevel2Item.children) {
         if (level3Item.route === route) {
           console.log('[Sidebar] Found Admin Level 3 match:', level3Item.label);
+          // Don't change selectedLevel2Item - only update Level 3-4
           this.selectedLevel3Item = level3Item;
           this.selectedLevel4Item = null;
           return;
@@ -613,6 +615,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
                 level3Label: level3Item.label,
                 level4Label: level4Item.label
               });
+              // Don't change selectedLevel2Item - only update Level 3-4
               this.selectedLevel3Item = level3Item;
               this.selectedLevel4Item = level4Item;
               return;
@@ -1296,7 +1299,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     console.log('[Sidebar] updateSelectedModuleFromRoute: Active route =', this.activeRoute);
 
+    // If Level 1 and Level 2 are already selected, only update Level 3-4 without changing Level 2
+    if (this.selectedNavigationItem && this.selectedLevel2Item) {
+      console.log('[Sidebar] Level 1 and Level 2 already selected, only updating Level 3-4');
+      this.updateSelectedItemsFromRoute(this.activeRoute);
+      return;
+    }
+
     // Try to find matching navigation item first (including nested children up to 4 levels)
+    // Only change Level 1 and Level 2 if they are not already selected
     for (const navItem of this.navigationItems) {
       if (!navItem.children) continue;
 
@@ -1308,8 +1319,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
             level2Label: level2Item.label,
             route: level2Item.route
           });
-          this.selectNavigationItem(navItem.id);
-          this.selectLevel2Item(level2Item, navItem);
+          // Only change Level 1 and Level 2 if they are different
+          if (this.selectedNavigationItem?.id !== navItem.id) {
+            this.selectNavigationItem(navItem.id);
+          }
+          if (this.selectedLevel2Item !== level2Item) {
+            this.selectLevel2Item(level2Item, navItem);
+          }
           this.updateSelectedItemsFromRoute(this.activeRoute);
           return;
         }
@@ -1324,8 +1340,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
                 level3Label: level3Item.label,
                 route: level3Item.route
               });
-              this.selectNavigationItem(navItem.id);
-              this.selectLevel2Item(level2Item, navItem);
+              // Only change Level 1 and Level 2 if they are different
+              if (this.selectedNavigationItem?.id !== navItem.id) {
+                this.selectNavigationItem(navItem.id);
+              }
+              if (this.selectedLevel2Item !== level2Item) {
+                this.selectLevel2Item(level2Item, navItem);
+              }
               this.updateSelectedItemsFromRoute(this.activeRoute);
               return;
             }
@@ -1341,8 +1362,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
                     level4Label: level4Item.label,
                     route: level4Item.route
                   });
-                  this.selectNavigationItem(navItem.id);
-                  this.selectLevel2Item(level2Item, navItem);
+                  // Only change Level 1 and Level 2 if they are different
+                  if (this.selectedNavigationItem?.id !== navItem.id) {
+                    this.selectNavigationItem(navItem.id);
+                  }
+                  if (this.selectedLevel2Item !== level2Item) {
+                    this.selectLevel2Item(level2Item, navItem);
+                  }
                   this.updateSelectedItemsFromRoute(this.activeRoute);
                   return;
                 }
