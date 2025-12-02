@@ -1,0 +1,30 @@
+/* Context Switcher Component Styles */
+
+.context-switcher-container {
+  width: 100%;
+}
+
+.context-tab {
+  position: relative;
+
+  &.active {
+    background: rgba(59, 130, 246, 0.1) !important;
+    color: rgb(37, 99, 235) !important;
+    font-weight: 600;
+
+    .dark & {
+      background: rgba(59, 130, 246, 0.2) !important;
+      color: rgb(96, 165, 250) !important;
+    }
+
+    body.theme-gemini & {
+      background: rgba(59, 130, 246, 0.2) !important;
+      color: rgb(147, 197, 253) !important;
+    }
+  }
+}
+
+.context-info {
+  font-family: 'Sarabun', 'Noto Sans Thai', sans-serif;
+}
+

@@ -4,6 +4,8 @@
    Migrated to Tailwind - Minimal SCSS for component-specific styles only
    ============================================ */
 
+@import '../../../../styles/mixins';
+
 :host {
   display: block;
 }

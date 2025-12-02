@@ -1,20 +1,33 @@
-<div class="two-layer-sidebar h-full flex" [class.dark]="isDarkMode">
+<div class="two-layer-sidebar h-full flex animate-fade-in" [class.dark]="isDarkMode">
   <!-- Left Icon Bar - Module Icons -->
-  <div class="icon-bar flex flex-col items-center py-4 border-r transition-colors duration-300">
+  <div class="icon-bar flex flex-col items-center py-4 border-r
+              transition-all duration-300 ease-in-out
+              bg-white/5 dark:bg-gray-900/20 theme-gemini:bg-gray-900/30
+              backdrop-blur-sm">
     <!-- Logo -->
     <div class="mb-6">
       <a routerLink="/home"
-         class="logo-container w-12 h-12 rounded-xl flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 cursor-pointer"
-         [attr.aria-label]="'Home'"
-         role="button"
-         tabindex="0">
-        <span class="text-white text-xl font-bold">H</span>
+         class="logo-container w-12 h-12 rounded-xl flex items-center justify-center shadow-lg
+                transition-all duration-300 ease-out
+                hover:scale-110 hover:shadow-xl hover:-translate-y-1
+                active:scale-95
+                bg-gradient-to-br from-blue-500 to-indigo-600
+                dark:from-blue-600 dark:to-indigo-700
+                cursor-pointer
+                group relative overflow-hidden
+                animate-gemini-pulse">
+        <!-- Shimmer Effect -->
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent
+                    -translate-x-full group-hover:translate-x-full
+                    transition-transform duration-1000 ease-in-out"></div>
+        <span class="text-white text-xl font-bold relative z-10
+                      group-hover:scale-110 transition-transform duration-300">H</span>
       </a>
     </div>
 
     <!-- Module Icons -->
     <div class="flex flex-col gap-3 flex-1 w-full px-2">
-      <a *ngFor="let module of mainModules"
+      <a *ngFor="let module of mainModules; let i = index"
          [routerLink]="getModuleHomeRoute(module.id)"
          routerLinkActive="active"
          [routerLinkActiveOptions]="{exact: false}"
@@ -22,44 +35,94 @@
          [attr.aria-label]="module.name"
          [attr.aria-current]="selectedModule === module.id ? 'true' : 'false'"
          [attr.title]="module.name"
-         class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl transition-all duration-300 relative group">
-        <span [class]="module.iconCss" class="text-xl transition-colors duration-300"></span>
+         [style.animation-delay.ms]="i * 50"
+         class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl
+                transition-all duration-300 ease-out
+                hover:scale-110 hover:shadow-lg hover:-translate-y-0.5
+                active:scale-95
+                relative group
+                animate-fade-in">
+        <!-- Hover Background -->
+        <div class="absolute inset-0 rounded-xl
+                    bg-gradient-to-br from-blue-500/0 to-indigo-500/0
+                    group-hover:from-blue-500/10 group-hover:to-indigo-500/10
+                    transition-all duration-300"></div>
+        <span *ngIf="module.iconCss"
+              [class]="module.iconCss"
+              class="text-xl transition-all duration-300 relative z-10
+                     group-hover:scale-110 group-hover:rotate-6
+                     text-gray-700 dark:text-gray-300 theme-gemini:text-white/90"></span>
+        <span *ngIf="!module.iconCss"
+              class="text-xl transition-all duration-300 relative z-10
+                     group-hover:scale-110 group-hover:rotate-6
+                     text-gray-700 dark:text-gray-300 theme-gemini:text-white/90
+                     e-icons e-folder"></span>
         <!-- Active Indicator -->
-        <span *ngIf="selectedModule === module.id" class="active-indicator"></span>
+        <span *ngIf="selectedModule === module.id"
+              class="active-indicator
+                     animate-pulse"></span>
         <!-- Tooltip -->
-        <span class="module-tooltip">{{ module.name }}</span>
+        <span class="module-tooltip
+                     animate-fade-in
+                     [animation-delay:100ms]">{{ module.name }}</span>
       </a>
     </div>
   </div>
 
   <!-- Right Menu Panel - Module Menu -->
-  <div class="menu-panel flex-1 flex flex-col overflow-hidden transition-colors duration-300">
+  <div class="menu-panel flex-1 flex flex-col overflow-hidden
+              transition-all duration-300 ease-in-out
+              bg-white/10 dark:bg-gray-900/10 theme-gemini:bg-gray-900/20
+              backdrop-blur-sm">
     <div class="p-5 flex-1 overflow-y-auto">
+      <!-- Context Switcher -->
+      <div class="mb-4">
+        <app-context-switcher></app-context-switcher>
+      </div>
+
       <!-- Module Header with Search -->
-      <div class="mb-6" *ngIf="selectedModuleData">
+      <div class="mb-6" *ngIf="menuGroups.length > 0">
         <div class="flex items-center justify-between mb-4">
-          <h2 class="module-title text-2xl font-bold thai-text transition-colors duration-300">
-            {{ selectedModuleData.name }}
+          <h2 class="module-title text-lg font-bold thai-text transition-colors duration-300">
+            {{ menuGroups.length > 0 ? menuGroups[0].groupName : 'เมนู' }}
           </h2>
         </div>
 
         <!-- Search Box -->
-        <div class="search-container mb-4 relative" *ngIf="selectedModuleData.menuItems.length > 3">
+        <div class="search-container mb-4 relative animate-fade-in" *ngIf="displayMenuItems.length > 3">
           <input
             type="text"
             [(ngModel)]="searchQuery"
             (input)="onSearchChange()"
             [placeholder]="'ค้นหาเมนู...'"
-            class="search-input w-full px-4 py-2 rounded-lg border transition-all duration-300 focus:outline-none focus:ring-2"
+            class="search-input w-full px-4 py-2 pl-10 pr-10 rounded-lg border
+                   transition-all duration-300 ease-out
+                   focus:outline-none focus:ring-2 focus:ring-blue-500/50
+                   hover:scale-[1.02] hover:shadow-md
+                   bg-white/50 dark:bg-gray-800/50 theme-gemini:bg-gray-800/30
+                   backdrop-blur-sm
+                   group"
             [attr.aria-label]="'ค้นหาเมนู'">
-          <app-icon name="search" size="sm" color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70" class="search-icon absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></app-icon>
+          <app-icon name="search" size="sm"
+                    color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70
+                           group-focus:text-blue-500 dark:group-focus:text-blue-400
+                           transition-colors duration-300"
+                    class="search-icon absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none
+                           group-focus:scale-110 transition-transform duration-300"></app-icon>
           <button
             *ngIf="searchQuery"
             (click)="clearSearch()"
-            class="clear-search-btn"
+            class="clear-search-btn absolute right-3 top-1/2 -translate-y-1/2
+                   w-6 h-6 flex items-center justify-center rounded-full
+                   hover:bg-gray-200 dark:hover:bg-gray-700 theme-gemini:hover:bg-white/20
+                   hover:scale-110 active:scale-95
+                   transition-all duration-200 ease-out"
             [attr.aria-label]="'ล้างการค้นหา'"
             type="button">
-            <app-icon name="close" size="sm" color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70"></app-icon>
+            <app-icon name="close" size="sm"
+                      color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70
+                             hover:text-red-500 dark:hover:text-red-400
+                             transition-colors duration-200"></app-icon>
           </button>
         </div>
 
@@ -76,7 +139,7 @@
 
       <!-- Module Menu Items -->
       <ejs-listview
-        *ngIf="!isLoading && selectedModuleData && filteredMenuItems && filteredMenuItems.length > 0"
+        *ngIf="!isLoading && filteredMenuItems && filteredMenuItems.length > 0"
         #listview
         [dataSource]="filteredMenuItems"
         [fields]="listViewFields"
@@ -87,7 +150,7 @@
       </ejs-listview>
 
       <!-- Search No Results -->
-      <div *ngIf="!isLoading && selectedModuleData && searchQuery && filteredMenuItems.length === 0"
+      <div *ngIf="!isLoading && searchQuery && filteredMenuItems.length === 0"
            class="empty-menu-state flex flex-col items-center justify-center py-12">
         <app-icon name="search_off" size="xl" color="text-gray-400 dark:text-gray-600 theme-gemini:text-white/60" class="mb-4 opacity-50"></app-icon>
         <p class="empty-text thai-text text-center">ไม่พบเมนูที่ค้นหา</p>
@@ -100,23 +163,20 @@
       </div>
 
       <!-- Empty State - No Menu Items -->
-      <div *ngIf="!isLoading && selectedModuleData && !searchQuery && selectedModuleData.menuItems.length === 0"
+      <div *ngIf="!isLoading && !searchQuery && displayMenuItems.length === 0"
            class="empty-menu-state flex flex-col items-center justify-center py-12">
         <app-icon name="folder_open" size="xl" color="text-gray-400 dark:text-gray-600 theme-gemini:text-white/60" class="mb-4 opacity-50"></app-icon>
-        <p class="empty-text thai-text text-center">ไม่มีเมนูในโมดูลนี้</p>
-      </div>
-
-      <!-- Empty State - No Module Selected -->
-      <div *ngIf="!selectedModuleData" class="empty-state flex flex-col items-center justify-center h-full py-12">
-        <app-icon name="folder" size="xl" color="text-gray-400 dark:text-gray-600 theme-gemini:text-white/60" class="mb-4 opacity-50"></app-icon>
-        <p class="empty-text thai-text text-center">เลือกโมดูลเพื่อดูเมนู</p>
+        <p class="empty-text thai-text text-center">ไม่มีเมนูในโหมดนี้</p>
       </div>
     </div>
 
     <!-- User Avatar Section - Bottom of Menu Panel -->
     <div class="user-avatar-section border-t transition-colors duration-300" *ngIf="currentUser" #userMenuContainer>
       <div class="p-4">
-        <div class="user-info-container flex items-center gap-3 cursor-pointer group"
+        <div class="user-info-container flex items-center gap-3 cursor-pointer group
+                     transition-all duration-300 ease-out
+                     hover:scale-[1.02] hover:bg-white/5 dark:hover:bg-gray-800/20 theme-gemini:hover:bg-white/10
+                     rounded-lg p-2 -mx-2"
              (click)="toggleUserMenu()"
              (keydown.enter)="toggleUserMenu()"
              (keydown.space)="toggleUserMenu(); $event.preventDefault()"
@@ -126,15 +186,25 @@
              tabindex="0">
           <!-- Avatar -->
           <div class="user-avatar relative flex-shrink-0">
-            <div class="avatar-circle w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm transition-all duration-300 group-hover:scale-110"
+            <div class="avatar-circle w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm
+                         transition-all duration-300 ease-out
+                         group-hover:scale-110 group-hover:shadow-xl group-hover:ring-2 group-hover:ring-blue-500/50
+                         relative overflow-hidden"
                  [style.background]="getAvatarColor()">
+              <!-- Shimmer Effect -->
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent
+                          -translate-x-full group-hover:translate-x-full
+                          transition-transform duration-1000 ease-in-out"></div>
               <img *ngIf="getAvatarUrl()"
                    [src]="getAvatarUrl()"
                    [alt]="getUserDisplayName()"
-                   class="w-full h-full rounded-full object-cover"
+                   class="w-full h-full rounded-full object-cover relative z-10
+                          group-hover:scale-110 transition-transform duration-300"
                    (load)="onAvatarImageLoad()"
                    (error)="onAvatarImageError($event)">
-              <span class="avatar-initials" [class.hidden]="avatarImageLoaded && getAvatarUrl()">
+              <span class="avatar-initials relative z-10
+                           group-hover:scale-110 transition-transform duration-300"
+                    [class.hidden]="avatarImageLoaded && getAvatarUrl()">
                 {{ getInitials() }}
               </span>
             </div>
@@ -153,37 +223,62 @@
           </div>
 
           <!-- Dropdown Icon -->
-          <div class="dropdown-icon transition-transform duration-300" [class.rotated]="showUserMenu">
-            <span class="e-icons e-chevron-down"></span>
+          <div class="dropdown-icon transition-transform duration-300 ease-out
+                       group-hover:scale-110"
+               [class.rotated]="showUserMenu">
+            <span class="e-icons e-chevron-down
+                         group-hover:text-blue-500 dark:group-hover:text-blue-400
+                         transition-colors duration-300"></span>
           </div>
         </div>
 
         <!-- User Menu Dropdown -->
-        <div class="user-menu-dropdown"
+        <div class="user-menu-dropdown
+                     animate-fade-in
+                     [animation-duration:200ms]"
              *ngIf="showUserMenu"
              @slideDown>
           <div class="user-menu-items">
             <a routerLink="/personal/profile"
-               class="user-menu-item"
+               class="user-menu-item
+                      transition-all duration-200 ease-out
+                      hover:translate-x-1 hover:scale-[1.02]
+                      active:scale-[0.98]"
                (click)="showUserMenu = false"
                [attr.aria-label]="'โปรไฟล์'">
-              <app-icon name="person" size="sm" color="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70"></app-icon>
+              <app-icon name="person" size="sm"
+                        color="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70
+                               group-hover:text-blue-500 dark:group-hover:text-blue-400
+                               transition-colors duration-200"
+                        class="group-hover:scale-110 transition-transform duration-200"></app-icon>
               <span class="thai-text">โปรไฟล์</span>
             </a>
             <a routerLink="/setting/home"
-               class="user-menu-item"
+               class="user-menu-item
+                      transition-all duration-200 ease-out
+                      hover:translate-x-1 hover:scale-[1.02]
+                      active:scale-[0.98]"
                (click)="showUserMenu = false"
                [attr.aria-label]="'ตั้งค่า'">
-              <app-icon name="settings" size="sm" color="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70"></app-icon>
+              <app-icon name="settings" size="sm"
+                        color="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70
+                               group-hover:text-blue-500 dark:group-hover:text-blue-400
+                               transition-colors duration-200"
+                        class="group-hover:scale-110 transition-transform duration-200"></app-icon>
               <span class="thai-text">ตั้งค่า</span>
             </a>
             <div class="user-menu-divider"></div>
             <button
-              class="user-menu-item text-red-500 dark:text-red-400"
+              class="user-menu-item text-red-500 dark:text-red-400
+                     transition-all duration-200 ease-out
+                     hover:translate-x-1 hover:scale-[1.02] hover:bg-red-50 dark:hover:bg-red-900/20
+                     active:scale-[0.98]"
               (click)="logout()"
               [attr.aria-label]="'ออกจากระบบ'"
               type="button">
-              <app-icon name="logout" size="sm" color="text-red-500 dark:text-red-400"></app-icon>
+              <app-icon name="logout" size="sm"
+                        color="text-red-500 dark:text-red-400
+                               group-hover:scale-110 transition-transform duration-200"></app-icon>
               <span class="thai-text">ออกจากระบบ</span>
             </button>
           </div>

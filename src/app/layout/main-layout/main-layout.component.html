@@ -6,24 +6,32 @@
     [isOpen]="sidebarOpen"
     [type]="sidebarType"
     [position]="'Left'"
-    [closeOnDocumentClick]="(isHandset$ | async)"
+    [closeOnDocumentClick]="isHandset$ | async"
     (close)="onSidebarClose()"
-    class="syncfusion-sidebar">
+    class="syncfusion-sidebar"
+  >
     <app-sidebar></app-sidebar>
   </ejs-sidebar>
 
   <!-- Main Content -->
-  <div #mainWrapper
-       class="main-wrapper flex-1 min-h-screen flex flex-col transition-all duration-300"
-       [class.main-wrapper-sidebar-open]="sidebarOpen && !(isHandset$ | async)"
-       [class.main-wrapper-sidebar-closed]="!sidebarOpen && !(isHandset$ | async)"
-       [class.main-wrapper-mobile]="isHandset$ | async">
+  <div
+    #mainWrapper
+    class="main-wrapper flex-1 min-h-screen flex flex-col transition-all duration-300"
+    [class.main-wrapper-sidebar-open]="sidebarOpen && !(isHandset$ | async)"
+    [class.main-wrapper-sidebar-closed]="!sidebarOpen && !(isHandset$ | async)"
+    [class.main-wrapper-mobile]="isHandset$ | async"
+  >
     <!-- Header - Hidden when hiddenHeader === 'hidden' (for ESS mode) -->
     <app-header *ngIf="hiddenHeader !== 'hidden'" (toggleSidenav)="toggleSidebar()"></app-header>
-    <main class="main-content flex-1 animate-fade-in relative z-10 overflow-x-hidden p-4 md:p-6"
-          [class.main-content-no-header]="hiddenHeader === 'hidden'">
-      <router-outlet></router-outlet>
-    </main>
+    <div
+      class="relative flex-1 min-h-0 p-4 md:p-6 lg:p-8 animate-fade-in [animation-delay:100ms]"
+      [style.padding-bottom]="hiddenHeader !== 'hidden' ? '60px' : '0'"
+      [style.padding-bottom.md]="hiddenHeader !== 'hidden' ? '68px' : '0'"
+    >
+      <div class="animate-slide-up [animation-delay:200ms]">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
     <app-footer></app-footer>
   </div>
 </div>

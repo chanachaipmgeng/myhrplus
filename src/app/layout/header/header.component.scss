@@ -1,74 +1,114 @@
-/* App title styles - font-family and Gemini gradient animation kept in SCSS */
-.app-title {
-  font-family: 'Sarabun', 'Noto Sans Thai', sans-serif;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+/* ============================================
+   Header Component Styles
+   Modern Glassmorphism with Micro-interactions
+   ============================================ */
 
-/* Gemini 1.5 Theme - Header Title */
-body.theme-gemini .app-title {
-  background: linear-gradient(135deg,
-    #93c5fd 0%,      /* Light blue */
-    #60a5fa 30%,     /* Medium blue */
-    #3b82f6 60%,     /* Blue */
-    #2563eb 100%     /* Darker blue */
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200% 200%;
-  animation: geminiGradient 3s ease infinite;
-}
+@import '../../../styles/mixins';
 
-/* App title English - font-family kept in SCSS, colors migrated to Tailwind */
-.app-title-en {
-  font-family: 'Inter', sans-serif;
-}
+/* Header Icon Buttons */
+.header-icon-btn {
+  position: relative;
 
-/* Logo Icon - Responsive sizing for nested SVG/icon elements */
-.logo-icon {
-  ::ng-deep svg,
-  ::ng-deep i {
-    width: 100% !important;
-    height: 100% !important;
+  /* Ripple effect */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+  }
+
+  &:active::after {
+    opacity: 1;
+    transform: scale(1.5);
   }
 }
 
-/* Header Icon Buttons - Hover and active states migrated to Tailwind classes in HTML */
+/* Omni Search Trigger */
+.omni-search-trigger {
+  position: relative;
+  overflow: hidden;
 
-/* Dropdowns */
-.notification-dropdown,
+  /* Shimmer effect on hover */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  &:hover::before {
+    transform: translateX(100%);
+  }
+}
+
+/* Dropdown Menus */
 .language-dropdown,
+.notification-dropdown,
 .user-dropdown {
-  animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Enhanced backdrop */
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
+
+  /* Smooth entrance */
+  animation: dropdownSlideIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Shadow enhancement */
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(59, 130, 246, 0.1);
+
+  .dark & {
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(59, 130, 246, 0.2);
+  }
+
+  [class*='theme-gemini'] & {
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(59, 130, 246, 0.3),
+      0 0 80px rgba(59, 130, 246, 0.1);
+  }
 }
 
-.language-dropdown {
-  .language-item {
-    &.active {
-      background: rgba(59, 130, 246, 0.1);
-      color: #3b82f6;
+/* Language Item */
+.language-item {
+  position: relative;
+
+  /* Active indicator */
+  &.active {
+    background: rgba(59, 130, 246, 0.1);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, #3b82f6, #2563eb);
+      border-radius: 0 2px 2px 0;
     }
   }
 }
 
-.user-dropdown {
-  .user-menu-item {
-    .e-icons {
-      width: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-}
-
+/* Notification Item */
 .notification-item {
   position: relative;
 
+  /* Unread indicator */
   &.unread {
     background: rgba(59, 130, 246, 0.05);
 
@@ -79,181 +119,86 @@ body.theme-gemini .app-title {
       top: 0;
       bottom: 0;
       width: 3px;
-      background: #3b82f6;
+      background: linear-gradient(to bottom, #3b82f6, #2563eb);
+      border-radius: 0 2px 2px 0;
     }
   }
 
-  .notification-icon {
-    font-size: 1.25rem;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &:hover {
-    transform: translateX(2px);
+  /* Pulse animation for unread */
+  &.unread .notification-icon {
+    animation: pulse 2s ease-in-out infinite;
   }
 }
 
-@keyframes slideDown {
+/* User Menu Item */
+.user-menu-item {
+  position: relative;
+
+  /* Icon animation */
+  app-icon {
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  &:hover app-icon {
+    transform: scale(1.1) rotate(5deg);
+  }
+}
+
+/* Animations */
+@keyframes dropdownSlideIn {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-10px) scale(0.95);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
-@keyframes geminiShimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-/* Pattern shimmer animation for header/footer */
-@keyframes patternShimmer {
+@keyframes pulse {
   0%, 100% {
-    opacity: 0.3;
-    transform: translate(0, 0);
+    opacity: 1;
+    transform: scale(1);
   }
   50% {
-    opacity: 0.5;
-    transform: translate(1px, 1px);
+    opacity: 0.8;
+    transform: scale(1.05);
   }
 }
 
-/* Responsive Header - Notification dropdown width for mobile */
-@media (max-width: 640px) {
-  .notification-dropdown {
+/* Responsive Design */
+@include respond-to-down('md') {
+  .omni-search-trigger {
+    /* Reduce max-width on mobile */
+    max-width: 100%;
+  }
+
+  .language-dropdown,
+  .notification-dropdown,
+  .user-dropdown {
+    /* Full width on mobile */
     width: calc(100vw - 2rem);
-    right: -0.5rem;
+    max-width: 20rem;
   }
 }
 
-/* Header Background - Modern Glassmorphism */
-.gemini-header {
-  background: linear-gradient(135deg,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(248, 250, 252, 0.95) 50%,
-    rgba(241, 245, 249, 0.9) 100%
-  ) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8) !important;
-  box-shadow:
-    0 4px 16px 0 rgba(0, 0, 0, 0.08),
-    0 0 0 1px rgba(255, 255, 255, 0.5) inset !important;
-  position: relative;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .header-icon-btn,
+  .omni-search-trigger,
+  .language-item,
+  .notification-item,
+  .user-menu-item {
+    transition: none;
+    animation: none;
+  }
 
-  /* Pattern overlay for Light mode */
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image:
-      radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.03) 1px, transparent 0);
-    background-size: 20px 20px;
-    opacity: 0.4;
-    pointer-events: none;
-    z-index: 0;
-    animation: patternShimmer 14s ease-in-out infinite;
-
-    @media (prefers-reduced-motion: reduce) {
-      animation: none;
-    }
+  .language-dropdown,
+  .notification-dropdown,
+  .user-dropdown {
+    animation: none;
   }
 }
 
-.dark .gemini-header {
-  background: linear-gradient(135deg,
-    rgba(15, 23, 42, 0.85) 0%,
-    rgba(30, 41, 59, 0.9) 50%,
-    rgba(15, 23, 42, 0.85) 100%
-  ) !important;
-  border-bottom: 1px solid rgba(51, 65, 85, 0.5) !important;
-  box-shadow:
-    0 4px 16px 0 rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(59, 130, 246, 0.1) inset !important;
-
-  &::after {
-    background-image:
-      radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.05) 1px, transparent 0);
-    opacity: 0.3;
-    animation: patternShimmer 16s ease-in-out infinite;
-
-    @media (prefers-reduced-motion: reduce) {
-      animation: none;
-    }
-  }
-}
-
-/* Gemini 1.5 Theme - Header */
-body.theme-gemini .gemini-header {
-  background: linear-gradient(135deg,
-    rgba(15, 23, 42, 0.9) 0%,
-    rgba(30, 41, 59, 0.95) 50%,
-    rgba(15, 23, 42, 0.9) 100%
-  ) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
-  backdrop-filter: blur(24px) saturate(200%) !important;
-  border-bottom: 1px solid rgba(59, 130, 246, 0.4) !important;
-  box-shadow:
-    0 4px 20px 0 rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(59, 130, 246, 0.2) inset,
-    0 0 40px rgba(59, 130, 246, 0.1) !important;
-  position: relative;
-
-  /* Animated gradient border */
-  &::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg,
-      transparent 0%,
-      rgba(147, 197, 253, 0.6) 20%,
-      rgba(96, 165, 250, 0.6) 50%,
-      rgba(59, 130, 246, 0.6) 80%,
-      transparent 100%
-    );
-    background-size: 200% 100%;
-    animation: geminiShimmer 4s ease-in-out infinite;
-    z-index: 1;
-  }
-
-  /* Subtle glow effect */
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background:
-      radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.1) 0%, transparent 70%),
-      radial-gradient(circle at 1px 1px, rgba(147, 197, 253, 0.05) 1px, transparent 0);
-    background-size: 100% 100%, 20px 20px;
-    opacity: 1;
-    pointer-events: none;
-    z-index: 0;
-    animation: patternShimmer 12s ease-in-out infinite;
-
-    @media (prefers-reduced-motion: reduce) {
-      animation: none;
-    }
-  }
-}
 

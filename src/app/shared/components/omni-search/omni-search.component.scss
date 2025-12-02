@@ -1,0 +1,39 @@
+/* Omni-Search Component Styles */
+
+.omni-search-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.omni-search-modal {
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-result-item {
+  &.selected {
+    background: rgba(59, 130, 246, 0.1) !important;
+    border-left-color: rgb(59, 130, 246) !important;
+
+    .dark & {
+      background: rgba(59, 130, 246, 0.2) !important;
+    }
+
+    body.theme-gemini & {
+      background: rgba(59, 130, 246, 0.2) !important;
+      border-left-color: rgb(96, 165, 250) !important;
+    }
+  }
+}
+

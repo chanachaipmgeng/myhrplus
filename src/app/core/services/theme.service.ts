@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { StorageService } from './storage.service';
 
 export type ThemeMode = 'light' | 'dark' | 'auto';
-export type ThemeColor = 'blue' | 'indigo' | 'purple' | 'green' | 'orange' | 'red' | 'teal' | 'pink';
+export type ThemeColor = 'blue' | 'indigo' | 'purple' | 'green' | 'orange' | 'red' | 'teal' | 'pink' | 'gemini';
 
 export interface ThemeConfig {
   mode: ThemeMode;
@@ -17,9 +17,9 @@ export interface ThemeConfig {
 export class ThemeService {
   private readonly THEME_STORAGE_KEY = 'hr-theme-config';
   private readonly DEFAULT_THEME: ThemeConfig = {
-    mode: 'light',
-    color: 'blue',
-    primaryColor: '59, 130, 246' // Blue
+    mode: 'dark',
+    color: 'gemini',
+    primaryColor: '59, 130, 246' // Blue for Gemini theme
   };
 
   private themeSubject = new BehaviorSubject<ThemeConfig>(this.DEFAULT_THEME);
@@ -63,7 +63,8 @@ export class ThemeService {
       orange: '249, 115, 22',
       red: '239, 68, 68',
       teal: '20, 184, 166',
-      pink: '236, 72, 153'
+      pink: '236, 72, 153',
+      gemini: '59, 130, 246' // Blue for Gemini theme
     };
 
     const currentTheme = this.themeSubject.value;

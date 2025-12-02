@@ -8,6 +8,9 @@ import { ThemeToggleComponent } from '../shared/components/theme-toggle/theme-to
 // Import standalone components
 import { GlassButtonComponent } from '../shared/components/glass-button/glass-button.component';
 import { GlassCardComponent } from '../shared/components/glass-card/glass-card.component';
+import { ContextSwitcherComponent } from '../shared/components/context-switcher/context-switcher.component';
+import { IconComponent } from '../shared/components/icon/icon.component';
+import { OmniSearchComponent } from '../shared/components/omni-search/omni-search.component';
 
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { HeaderComponent } from './header/header.component';
@@ -29,7 +32,10 @@ import { FooterComponent } from './footer/footer.component';
     SyncfusionModule, // Syncfusion UI-KIT components
     ThemeToggleComponent, // Standalone component
     GlassButtonComponent, // Standalone component
-    GlassCardComponent // Standalone component
+    GlassCardComponent, // Standalone component
+    ContextSwitcherComponent, // Standalone component
+    IconComponent, // Standalone component
+    OmniSearchComponent // Standalone component
   ],
   exports: [
     MainLayoutComponent

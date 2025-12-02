@@ -1,307 +1,236 @@
-/* Layout container styles migrated to Tailwind classes in HTML */
+/* ============================================
+   Main Layout Component Styles
+   Modern, Responsive, Animated Layout
+   ============================================ */
 
-/* Syncfusion Sidebar Styles - Two-Layer Design */
-::ng-deep .syncfusion-sidebar {
-  background: linear-gradient(135deg,
-    rgba(248, 250, 252, 0.98) 0%,
-    rgba(241, 245, 249, 0.95) 100%
-  ) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-  backdrop-filter: blur(24px) saturate(180%) !important;
-  border-right: 1px solid rgba(226, 232, 240, 0.8) !important;
-  box-shadow:
-    0 8px 32px 0 rgba(0, 0, 0, 0.08),
-    0 0 0 1px rgba(255, 255, 255, 0.5) inset !important;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
+   @import '../../../styles/mixins';
 
-::ng-deep .dark .syncfusion-sidebar {
-  background: linear-gradient(135deg,
-    rgba(15, 23, 42, 0.98) 0%,
-    rgba(30, 41, 59, 0.95) 100%
-  ) !important;
-  border-right-color: rgba(51, 65, 85, 0.6) !important;
-  box-shadow:
-    0 8px 32px 0 rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(59, 130, 246, 0.1) inset !important;
-}
+   /* Layout Background Pattern */
+   .layout-background {
+     position: relative;
 
-/* Gemini 1.5 Theme - Sidebar */
-body.theme-gemini ::ng-deep .syncfusion-sidebar {
-  background: linear-gradient(135deg,
-    rgba(15, 23, 42, 0.95) 0%,
-    rgba(30, 41, 59, 0.98) 100%
-  ) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
-  backdrop-filter: blur(28px) saturate(200%) !important;
-  border-right: 1px solid rgba(59, 130, 246, 0.4) !important;
-  box-shadow:
-    0 8px 32px 0 rgba(0, 0, 0, 0.7),
-    0 0 0 1px rgba(59, 130, 246, 0.2) inset,
-    0 0 50px rgba(59, 130, 246, 0.1) !important;
-  position: relative;
+     /* Animated gradient overlay */
+     &::before {
+       content: '';
+       position: absolute;
+       inset: 0;
+       background:
+         radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+         radial-gradient(circle at 80% 70%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+       opacity: 0.4;
+       animation: gradientShift 8s ease-in-out infinite;
+       pointer-events: none;
+       z-index: 0;
+     }
 
-  /* Animated border glow */
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: -1px;
-    bottom: 0;
-    width: 3px;
-    background: linear-gradient(180deg,
-      transparent 0%,
-      rgba(147, 197, 253, 0.6) 20%,
-      rgba(96, 165, 250, 0.6) 50%,
-      rgba(59, 130, 246, 0.6) 80%,
-      transparent 100%
-    );
-    background-size: 100% 200%;
-    animation: geminiGradient 4s ease-in-out infinite;
-    z-index: 1;
-    pointer-events: none;
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
-  }
+     /* Pattern overlay */
+     &::after {
+       content: '';
+       position: absolute;
+       inset: 0;
+       background-image:
+         repeating-linear-gradient(
+           0deg,
+           transparent,
+           transparent 2px,
+           rgba(59, 130, 246, 0.03) 2px,
+           rgba(59, 130, 246, 0.03) 4px
+         );
+       opacity: 0.5;
+       animation: patternShimmer 20s linear infinite;
+       pointer-events: none;
+       z-index: 1;
+     }
 
-  /* Subtle glow effect */
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 100px;
-    background: radial-gradient(ellipse at right, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
-}
+     /* Dark mode adjustments */
+     .dark &::before,
+     .dark &::after {
+       opacity: 0.2;
+     }
 
-/* Main Wrapper - Mobile touch support */
-.main-wrapper-mobile {
-  /* Improve touch scrolling */
-  touch-action: pan-y pinch-zoom;
+     /* Gemini theme adjustments */
+     [class*='theme-gemini'] &::before {
+       background:
+         radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+         radial-gradient(circle at 80% 70%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+       opacity: 0.6;
+     }
 
-  /* Prevent text selection during swipe */
-  -webkit-user-select: none;
-  user-select: none;
-}
+     [class*='theme-gemini'] &::after {
+       background-image:
+         repeating-linear-gradient(
+           0deg,
+           transparent,
+           transparent 2px,
+           rgba(59, 130, 246, 0.05) 2px,
+           rgba(59, 130, 246, 0.05) 4px
+         );
+       opacity: 0.7;
+     }
+   }
 
-/* Main Content - Gradient backgrounds and pattern overlays */
-.main-content {
-  min-height: calc(100vh - 120px);
-  position: relative;
-  z-index: 1;
-  overflow-x: hidden;
+   /* Content Area */
+   .content-area {
+     /* Smooth scroll */
+     scroll-behavior: smooth;
 
-  /* When header is hidden (ESS mode) */
-  &.main-content-no-header {
-    min-height: calc(100vh - 60px); /* Only footer height */
-  }
 
-  /* Modern gradient background - Light Mode with subtle animation */
-  background:
-    radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
-    linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #cbd5e1 75%, #f8fafc 100%);
-  background-size: 100% 100%, 100% 100%, 200% 200%;
-  background-position: 0% 0%, 100% 100%, 0% 50%;
-  background-attachment: fixed;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  animation: gradientShift 20s ease-in-out infinite;
+     /* Custom scrollbar */
+     &::-webkit-scrollbar {
+       width: 8px;
+     }
 
-  /* Optimize performance on mobile */
-  @media (max-width: 768px) {
-    background-attachment: scroll; /* Better performance on mobile */
-  }
+     &::-webkit-scrollbar-track {
+       background: rgba(0, 0, 0, 0.05);
+       border-radius: 4px;
+     }
 
-  /* Respect user's motion preferences */
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-    background-position: 0% 0%, 100% 100%, 0% 50%;
-  }
+     &::-webkit-scrollbar-thumb {
+       background: rgba(59, 130, 246, 0.3);
+       border-radius: 4px;
+       transition: background 0.3s ease;
 
-  /* Subtle pattern overlay with animation */
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image:
-      radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.15) 1px, transparent 0);
-    background-size: 20px 20px;
-    opacity: 0.4;
-    pointer-events: none;
-    z-index: 0;
-    animation: patternShimmer 12s ease-in-out infinite;
+       &:hover {
+         background: rgba(59, 130, 246, 0.5);
+       }
+     }
 
-    /* Respect user's motion preferences */
-    @media (prefers-reduced-motion: reduce) {
-      animation: none;
-    }
-  }
+     /* Dark mode scrollbar */
+     .dark &::-webkit-scrollbar-track {
+       background: rgba(255, 255, 255, 0.05);
+     }
 
-  /* Content wrapper */
-  > * {
-    position: relative;
-    z-index: 1;
-  }
-}
+     .dark &::-webkit-scrollbar-thumb {
+       background: rgba(59, 130, 246, 0.4);
 
-/* Dark Mode - Modern gradient background with subtle animation */
-.dark .main-content {
-  background:
-    radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
-    radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(30, 41, 59, 0.3) 0%, transparent 70%),
-    linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #1e293b 75%, #0f172a 100%);
-  background-size: 100% 100%, 100% 100%, 100% 100%, 200% 200%;
-  background-position: 0% 0%, 100% 100%, 50% 50%, 0% 50%;
-  background-attachment: fixed;
-  animation: gradientShift 25s ease-in-out infinite;
+       &:hover {
+         background: rgba(59, 130, 246, 0.6);
+       }
+     }
+   }
 
-  /* Optimize performance on mobile */
-  @media (max-width: 768px) {
-    background-attachment: scroll; /* Better performance on mobile */
-  }
+   /* Syncfusion Sidebar Enhancements */
+   ::ng-deep {
+     .modern-sidebar {
+       &.e-sidebar {
+         /* Z-index to ensure sidebar is above footer */
 
-  /* Respect user's motion preferences */
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-    background-position: 0% 0%, 100% 100%, 50% 50%, 0% 50%;
-  }
+         /* Smooth transitions */
+         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                     opacity 0.3s ease-in-out,
+                     box-shadow 0.3s ease-in-out;
 
-  &::before {
-    background-image:
-      radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.08) 1px, transparent 0);
-    opacity: 0.3;
-    animation: patternShimmer 15s ease-in-out infinite;
+         /* Enhanced shadow */
+         box-shadow:
+           0 10px 40px rgba(0, 0, 0, 0.1),
+           0 0 0 1px rgba(59, 130, 246, 0.1);
 
-    @media (prefers-reduced-motion: reduce) {
-      animation: none;
-    }
-  }
-}
+         /* Backdrop blur */
+         -webkit-backdrop-filter: blur(20px);
+         backdrop-filter: blur(20px);
 
-/* Gemini 1.5 Theme - Main Content */
-body.theme-gemini .main-content {
-  background:
-    radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(37, 99, 235, 0.12) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(147, 197, 253, 0.08) 0%, transparent 60%),
-    linear-gradient(135deg, #000000 0%, #0a0a0f 25%, #0f172a 50%, #1e293b 75%, #000000 100%);
-  background-attachment: fixed;
-  position: relative;
+         /* Position to avoid header overlap */
+         /* Header height: ~64px (mobile) to ~72px (desktop) */
+         /* Default: header visible */
+         top: 64px !important;
+         height: calc(100vh - 64px) !important;
 
-  /* Optimize performance on mobile */
-  @media (max-width: 768px) {
-    background-attachment: scroll; /* Better performance on mobile */
-  }
+         @media (min-width: 768px) {
+           top: 72px !important;
+           height: calc(100vh - 72px) !important;
+         }
 
-  /* Animated gradient overlay */
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background:
-      radial-gradient(circle at 10% 20%, rgba(147, 197, 253, 0.06) 0%, transparent 40%),
-      radial-gradient(circle at 90% 80%, rgba(96, 165, 250, 0.04) 0%, transparent 40%),
-      radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.03) 0%, transparent 50%);
-    animation: geminiParticles 25s ease-in-out infinite;
-    pointer-events: none;
-    z-index: 0;
-  }
+         /* When header is hidden */
+         .header-hidden & {
+           top: 0 !important;
+           height: 100vh !important;
+         }
 
-  &::before {
-    background-image:
-      radial-gradient(circle at 1px 1px, rgba(147, 197, 253, 0.1) 1px, transparent 0);
-    opacity: 0.2;
-    animation: geminiShimmer 8s ease-in-out infinite;
-  }
+         /* Alternative: check parent class */
+         :host-context(.header-hidden) & {
+           top: 0 !important;
+           height: 100vh !important;
+         }
 
-  /* Ensure content is above background effects */
-  > * {
-    position: relative;
-    z-index: 1;
-  }
-}
+         /* Dark mode */
+         .dark & {
+           box-shadow:
+             0 10px 40px rgba(0, 0, 0, 0.3),
+             0 0 0 1px rgba(59, 130, 246, 0.2);
+         }
 
-/* Responsive Breakpoints */
-@media (max-width: 768px) {
-  .sidenav {
-    width: 280px;
-  }
-}
+         /* Gemini theme */
+         [class*='theme-gemini'] & {
+           box-shadow:
+             0 10px 40px rgba(0, 0, 0, 0.5),
+             0 0 0 1px rgba(59, 130, 246, 0.3),
+             0 0 60px rgba(59, 130, 246, 0.1);
+         }
+       }
 
-@media (min-width: 769px) {
-  .sidenav {
-    width: 288px; /* 72 * 4 = 288px */
-  }
-}
+       /* Overlay */
+       &.e-sidebar-overlay {
+         background: rgba(0, 0, 0, 0.3);
+         -webkit-backdrop-filter: blur(4px);
+         backdrop-filter: blur(4px);
+         transition: opacity 0.3s ease-in-out;
+       }
+     }
+   }
 
-@media (min-width: 1024px) {
-  .main-wrapper {
-    max-width: 100%;
-  }
-}
+   /* Animations */
+   @keyframes gradientShift {
+     0%, 100% {
+       background-position: 0% 50%;
+     }
+     50% {
+       background-position: 100% 50%;
+     }
+   }
 
-/* Animated gradients */
-@keyframes geminiParticles {
-  0%, 100% {
-    opacity: 1;
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    opacity: 0.8;
-    transform: translate(20px, -20px) scale(1.1);
-  }
-  66% {
-    opacity: 0.9;
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-}
+   @keyframes patternShimmer {
+     0% {
+       background-position: 0 0;
+     }
+     100% {
+       background-position: 0 100px;
+     }
+   }
 
-@keyframes geminiShimmer {
-  0%, 100% {
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 0.4;
-  }
-}
+   /* Responsive Design */
+   @include respond-to-down('md') {
+     .layout-background {
+       &::before,
+       &::after {
+         opacity: 0.3;
+       }
+     }
 
-@keyframes geminiGradient {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
+     .content-area {
+       /* Reduce padding on mobile */
+       padding: 1rem;
+     }
+   }
 
-/* Pattern shimmer animation for Light/Dark mode */
-@keyframes patternShimmer {
-  0%, 100% {
-    opacity: 0.4;
-    transform: translate(0, 0);
-  }
-  50% {
-    opacity: 0.6;
-    transform: translate(2px, 2px);
-  }
-}
+   /* Reduced Motion Support */
+   @media (prefers-reduced-motion: reduce) {
+     .layout-background {
+       &::before,
+       &::after {
+         animation: none;
+       }
+     }
 
-/* Gradient shift animation for Light/Dark mode */
-@keyframes gradientShift {
-  0%, 100% {
-    background-position: 0% 0%, 100% 100%, 0% 50%;
-  }
-  50% {
-    background-position: 2% 2%, 98% 98%, 100% 50%;
-  }
-}
+     .content-area {
+       scroll-behavior: auto;
+     }
+
+     ::ng-deep {
+       .modern-sidebar {
+         &.e-sidebar {
+           transition: none;
+         }
+       }
+     }
+   }
+

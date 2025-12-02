@@ -17,7 +17,7 @@ import { DateRangePickerComponent } from './components/date-range-picker/date-ra
 import { SkeletonLoaderComponent } from './components/skeleton-loader/skeleton-loader.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { FormValidationMessagesComponent } from './components/form-validation-messages/form-validation-messages.component';
-import { IconComponent } from './components/icon/icon.component';
+import { IconComponent } from './components/icon/icon.component'; // Now standalone
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { BackToTopComponent } from './components/back-to-top/back-to-top.component'; // Now standalone
@@ -43,8 +43,8 @@ const COMPONENTS = [
   SkeletonLoaderComponent,
   ImageUploadComponent,
   FormValidationMessagesComponent,
-  IconComponent,
   NotificationComponent
+  // IconComponent removed - now standalone component
   // BackToTopComponent removed - now standalone component
 ];
 
@@ -70,6 +70,7 @@ const PIPES = [
     FormsModule,
     RouterModule,
     SpinnerComponent,
+    IconComponent, // Import standalone component
     BackToTopComponent // Import standalone component
   ],
   exports: [
@@ -81,6 +82,7 @@ const PIPES = [
     ...DIRECTIVES,
     ...PIPES,
     SpinnerComponent,
+    IconComponent, // Export standalone component
     BackToTopComponent // Export standalone component
   ]
 })

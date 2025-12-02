@@ -1,12 +1,20 @@
 import { Component, OnInit, OnDestroy, ViewChild, HostListener, ElementRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { filter, takeUntil } from 'rxjs/operators';
+import { filter, takeUntil, switchMap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MenuService, MenuItem } from '../../core/services/menu.service';
 import { AuthService, User } from '../../core/services/auth.service';
 import { ThemeService } from '../../core/services/theme.service';
+import { MenuContextService } from '../../core/services/menu-context.service';
+import { MenuDataService } from '../../core/services/menu-data.service';
+import { MenuContext, MenuGroup } from '../../core/models/menu.model';
 import { ListViewComponent } from '@syncfusion/ej2-angular-lists';
+import { ContextSwitcherComponent } from '../../shared/components/context-switcher/context-switcher.component';
+import { IconComponent } from '../../shared/components/icon/icon.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 interface NestedMenuItem {
   text: string;
@@ -27,6 +35,7 @@ interface MainModule {
 
 @Component({
   selector: 'app-sidebar',
+  standalone: false,
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
   animations: [
@@ -73,11 +82,18 @@ export class SidebarComponent implements OnInit, OnDestroy {
   showUserMenu: boolean = false;
   avatarImageLoaded: boolean = false;
 
+  // Context switching
+  currentContext: MenuContext = 'personal';
+  menuGroups: MenuGroup[] = [];
+  displayMenuItems: NestedMenuItem[] = [];
+
   constructor(
     private router: Router,
     private menuService: MenuService,
     private authService: AuthService,
-    public themeService: ThemeService
+    public themeService: ThemeService,
+    private menuContextService: MenuContextService,
+    private menuDataService: MenuDataService
   ) {
     // Subscribe to current user
     this.authService.currentUser$.subscribe(user => {
@@ -98,6 +114,20 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.isDarkMode = isDark;
     });
     this.isDarkMode = this.themeService.isDarkMode();
+
+    // Subscribe to context changes
+    this.menuContextService.getCurrentContext()
+      .pipe(
+        takeUntil(this.destroy$),
+        switchMap(context => {
+          this.currentContext = context;
+          return this.menuDataService.getMenuGroups(context);
+        })
+      )
+      .subscribe(groups => {
+        this.menuGroups = groups;
+        this.buildDisplayMenuItems();
+      });
 
     // Load menu from service
     this.loadMenu();
@@ -577,59 +607,72 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.filterMenuItems();
   }
 
-  private filterMenuItems(): void {
-    if (!this.selectedModuleData || !this.selectedModuleData.menuItems) {
-      this.filteredMenuItems = [];
-      return;
-    }
+  /**
+   * Get icon class from icon name
+   */
+  private getIconClass(iconName: string): string {
+    // Map icon names to Syncfusion icon classes
+    const iconMap: { [key: string]: string } = {
+      'access_time': 'e-icons e-clock',
+      'description': 'e-icons e-file',
+      'people': 'e-icons e-user',
+      'business': 'e-icons e-briefcase',
+      'person_check': 'e-icons e-user-check',
+      'work': 'e-icons e-briefcase',
+      'folder': 'e-icons e-folder',
+      'attach_money': 'e-icons e-money',
+      'menu': 'e-icons e-menu',
+      'home': 'e-icons e-home',
+      'dashboard': 'e-icons e-dashboard',
+      'settings': 'e-icons e-settings',
+      'user': 'e-icons e-user',
+      'logout': 'e-icons e-logout',
+      'event': 'e-icons e-calendar',
+      'receipt': 'e-icons e-receipt',
+      'person': 'e-icons e-user',
+      'arrow_forward': 'e-icons e-arrow-right'
+    };
+    return iconMap[iconName.toLowerCase()] || 'e-icons e-folder';
+  }
 
+  /**
+   * Build display menu items from menu groups (Level 2 only, Level 3 shown as tabs)
+   */
+  private buildDisplayMenuItems(): void {
+    this.displayMenuItems = [];
+    
+    this.menuGroups.forEach(group => {
+      group.items.forEach(item => {
+        // Only add Level 2 items (children will be shown as tabs in content)
+        const menuItem: NestedMenuItem = {
+          text: item.name,
+          id: `menu-${group.groupName}-${item.name}`,
+          iconCss: this.getIconClass(item.icon),
+          route: item.route || item.url || ''
+        };
+        
+        // Note: We don't add children here - they'll be shown as tabs in content area
+        this.displayMenuItems.push(menuItem);
+      });
+    });
+
+    // Update filtered items
+    this.filterMenuItems();
+  }
+
+  /**
+   * Filter menu items based on search query
+   */
+  private filterMenuItems(): void {
     if (!this.searchQuery || this.searchQuery.trim() === '') {
-      // Ensure all items have required properties
-      this.filteredMenuItems = (this.selectedModuleData.menuItems || []).map(item => ({
-        text: item.text || '',
-        id: item.id || `menu-${Date.now()}-${Math.random()}`,
-        iconCss: item.iconCss || 'e-icons e-folder',
-        route: item.route || '',
-        badge: item.badge,
-        badgeColor: item.badgeColor,
-        child: item.child ? item.child.map(child => ({
-          text: child.text || '',
-          id: child.id || `child-${Date.now()}-${Math.random()}`,
-          iconCss: child.iconCss || 'e-icons e-folder',
-          route: child.route || ''
-        })) : undefined
-      }));
+      this.filteredMenuItems = [...this.displayMenuItems];
       return;
     }
 
     const query = this.searchQuery.toLowerCase().trim();
-    const filtered = (this.selectedModuleData.menuItems || []).filter(item => {
-      // Search in main item text
-      const matchesMain = item.text?.toLowerCase().includes(query);
-
-      // Search in child items
-      const matchesChild = item.child?.some(child =>
-        child.text?.toLowerCase().includes(query)
-      );
-
-      return matchesMain || matchesChild;
-    });
-
-    // Ensure all filtered items have required properties
-    this.filteredMenuItems = filtered.map(item => ({
-      text: item.text || '',
-      id: item.id || `menu-${Date.now()}-${Math.random()}`,
-      iconCss: item.iconCss || 'e-icons e-folder',
-      route: item.route || '',
-      badge: item.badge,
-      badgeColor: item.badgeColor,
-      child: item.child ? item.child.map(child => ({
-        text: child.text || '',
-        id: child.id || `child-${Date.now()}-${Math.random()}`,
-        iconCss: child.iconCss || 'e-icons e-folder',
-        route: child.route || ''
-      })) : undefined
-    }));
+    this.filteredMenuItems = this.displayMenuItems.filter(item =>
+      item.text?.toLowerCase().includes(query)
+    );
   }
 
   navigateToHome(): void {
@@ -793,27 +836,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.filteredMenuItems = [];
       }
     }
-  }
-
-  private getIconClass(iconName: string): string {
-    // Map icon names to Syncfusion icon classes
-    const iconMap: { [key: string]: string } = {
-      'menu': 'e-icons e-menu',
-      'home': 'e-icons e-home',
-      'dashboard': 'e-icons e-dashboard',
-      'folder': 'e-icons e-folder',
-      'settings': 'e-icons e-settings',
-      'user': 'e-icons e-user',
-      'logout': 'e-icons e-logout',
-      'business_center': 'e-icons e-folder',
-      'work': 'e-icons e-briefcase',
-      'event': 'e-icons e-calendar',
-      'receipt': 'e-icons e-receipt',
-      'access_time': 'e-icons e-clock',
-      'person': 'e-icons e-user',
-      'arrow_forward': 'e-icons e-arrow-right'
-    };
-    return iconMap[iconName.toLowerCase()] || 'e-icons e-folder';
   }
 
   onMenuItemSelect(args: any): void {

@@ -5,6 +5,7 @@ import { I18nService, Language } from '../../core/services/i18n.service';
 import { MenuItemModel } from '@syncfusion/ej2-angular-navigations';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { OmniSearchComponent } from '../../shared/components/omni-search/omni-search.component';
 
 interface Notification {
   id: string;
@@ -26,6 +27,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @ViewChild('notificationMenu', { static: false }) notificationMenu!: ElementRef;
   @ViewChild('languageMenuContainer', { static: false }) languageMenuContainer!: ElementRef;
   @ViewChild('userMenuContainer', { static: false }) userMenuContainer!: ElementRef;
+  @ViewChild('omniSearch', { static: false }) omniSearch!: OmniSearchComponent;
 
   currentLanguage: Language = 'th';
   showLanguageMenu = false;
@@ -212,5 +214,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (hours < 24) return `${hours} ชั่วโมงที่แล้ว`;
     if (days < 7) return `${days} วันที่แล้ว`;
     return date.toLocaleDateString('th-TH');
+  }
+
+  /**
+   * Open Omni-Search
+   */
+  openOmniSearch(): void {
+    if (this.omniSearch) {
+      this.omniSearch.open();
+    }
   }
 }
