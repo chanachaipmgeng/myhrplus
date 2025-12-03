@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { TokenManagerService } from '../services/token-manager.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ export class AuthGuard implements CanActivate {
 
   constructor(
     private authService: AuthService,
+    private tokenManager: TokenManagerService,
     private router: Router
   ) {}
 
@@ -16,35 +18,44 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    // Check authentication
-    if (this.authService.isAuthenticated()) {
-      return true;
-    }
-
-    // If not authenticated, check if we're already on login page
-    // to avoid redirect loop
+    // If already on login/auth page, allow access to avoid redirect loop
     if (state.url.startsWith('/auth/login') || state.url.startsWith('/auth')) {
       return true;
     }
 
-    // Check if there's a token in sessionStorage that might not be loaded yet
-    if (typeof window !== 'undefined' && window.sessionStorage) {
-      const sessionToken = sessionStorage.getItem('userToken');
-      const sessionUser = sessionStorage.getItem('currentUser');
+    // Check authentication using AuthService
+    if (this.authService.isAuthenticated()) {
+      return true;
+    }
+
+    // Check if there's a token in storage that might not be loaded yet
+    const token = this.tokenManager.getToken();
+    if (token) {
+      // Validate token using TokenManagerService
+      const validation = this.tokenManager.validateToken(token);
       
-      if (sessionToken && sessionUser) {
-        try {
-          // Try to restore session
-          const user = JSON.parse(sessionUser);
+      if (validation.isValid && !validation.isExpired) {
+        // Token is valid, try to restore session
+        if (typeof window !== 'undefined' && window.sessionStorage) {
+          const sessionUser = sessionStorage.getItem('currentUser');
           
-          // Check if token is expired
-          if (!this.isTokenExpired(sessionToken)) {
-            // Restore user and token to AuthService
-            this.restoreSession(user, sessionToken);
-            return true;
+          if (sessionUser) {
+            try {
+              const user = JSON.parse(sessionUser);
+              // Restore user and token to AuthService
+              this.authService.restoreSession(user, token);
+              return true;
+            } catch (error) {
+              console.error('Error restoring session:', error);
+            }
           }
-        } catch (error) {
-          console.error('Error restoring session:', error);
+        }
+      } else if (validation.isExpired) {
+        // Token expired, check if we can refresh
+        if (this.tokenManager.getRefreshToken()) {
+          // Try to refresh token (async, but guard is synchronous)
+          // For now, redirect to login - refresh will be handled by interceptor
+          console.warn('Token expired, redirecting to login for refresh');
         }
       }
     }
@@ -54,21 +65,6 @@ export class AuthGuard implements CanActivate {
       queryParams: { returnUrl: state.url }
     });
     return false;
-  }
-
-  private restoreSession(user: any, token: string): void {
-    // Use public method to restore session
-    this.authService.restoreSession(user, token);
-  }
-
-  private isTokenExpired(token: string): boolean {
-    try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      const exp = payload.exp * 1000;
-      return Date.now() >= exp;
-    } catch (error) {
-      return true;
-    }
   }
 }
 

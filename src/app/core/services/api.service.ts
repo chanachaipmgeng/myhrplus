@@ -102,17 +102,25 @@ export class ApiService {
             // Don't retry on client errors (4xx) except 408, 429
             if (error.status >= 400 && error.status < 500) {
               if (error.status === 408 || error.status === 429) {
-                // Retry on timeout or too many requests
+                // Retry on timeout or too many requests with exponential backoff
                 if (index < this.maxRetries) {
-                  return timer(this.retryDelay * (index + 1));
+                  const delay = this.calculateRetryDelay(index);
+                  return timer(delay);
                 }
               }
               return throwError(() => error);
             }
 
-            // Retry on server errors (5xx) or network errors
+            // Don't retry on certain 5xx errors that indicate permanent failures
+            if (error.status === 501 || error.status === 505) {
+              // Not Implemented, HTTP Version Not Supported - don't retry
+              return throwError(() => error);
+            }
+
+            // Retry on server errors (5xx) or network errors with exponential backoff
             if (index < this.maxRetries) {
-              return timer(this.retryDelay * (index + 1));
+              const delay = this.calculateRetryDelay(index);
+              return timer(delay);
             }
 
             return throwError(() => error);
@@ -121,6 +129,19 @@ export class ApiService {
         )
       )
     );
+  }
+
+  /**
+   * Calculate retry delay with exponential backoff
+   * Formula: baseDelay * 2^index, capped at maxDelay
+   * @param index - Retry attempt index (0-based)
+   * @returns Delay in milliseconds
+   */
+  private calculateRetryDelay(index: number): number {
+    const maxDelay = 10000; // 10 seconds max
+    const baseDelay = this.retryDelay; // 1 second base
+    const exponentialDelay = baseDelay * Math.pow(2, index);
+    return Math.min(exponentialDelay, maxDelay);
   }
 
   private buildParams(params: any): HttpParams {

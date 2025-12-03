@@ -192,3 +192,4 @@ imports: [CommonModule, FormsModule, /* NgSelectModule removed */]
 Demo components ตอนนี้ compile ได้แล้ว และพร้อมใช้งาน เมื่อ install packages ที่จำเป็นแล้ว components จะทำงานได้เต็มรูปแบบ
 
 
+

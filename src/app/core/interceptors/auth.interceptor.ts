@@ -9,22 +9,30 @@ import {
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
+import { TokenManagerService } from '../services/token-manager.service';
+import { CacheService } from '../services/cache.service';
 import { environment } from '../../../environments/environment';
 
 /**
  * HTTP Interceptor for:
  * - Adding authentication tokens
  * - URL transformation
- * - Response caching (for specific APIs)
+ * - Response caching (for specific APIs) - uses CacheService
  * - Error handling
  */
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  private responseCache = new Map<string, any>();
   // Zeeme token for specific endpoints
   private readonly tokenZeeme = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBdXRoIiwiaXNzIjoiQ29tcHV0ZXIgU2NpZW5jZSBDb3Jwb3JhdGlvbiBMaW1pdGVkIiwiZnVsbE5hbWUiOiLguJjguLXguKPguYDguJTguIog4LiE4Li54Lir4LiY4LiZ4LmA4Liq4LiW4Li14Lii4LijIiwibWVtYmVySWQiOiJjN2QwZTBmMC0wMzBlLTExZTctODE3NS1kMWRiNjFiYjU1ZjgifQ.MCvsIoImQ4BPWh1lQeas2mcqqksx45BBhgMZpmx7hA0';
 
-  constructor(private authService: AuthService) {}
+  // Cache TTL for HTTP responses (5 minutes)
+  private readonly CACHE_TTL = 5 * 60 * 1000;
+
+  constructor(
+    private authService: AuthService,
+    private tokenManager: TokenManagerService,
+    private cacheService: CacheService
+  ) {}
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     // Skip local files and assets
@@ -50,14 +58,17 @@ export class AuthInterceptor implements HttpInterceptor {
 
     // Check if request should be cached
     if (this.canCache(req)) {
-      const cache = this.responseCache.get(req.urlWithParams);
-      if (cache) {
-        return of(cache);
+      const cacheKey = this.getCacheKey(req);
+      const cached = this.cacheService.get<HttpEvent<unknown>>(cacheKey);
+      
+      if (cached) {
+        return of(cached);
       }
 
       return next.handle(authReq).pipe(
         tap(response => {
-          this.responseCache.set(req.urlWithParams, response);
+          // Cache successful responses
+          this.cacheService.set(cacheKey, response, this.CACHE_TTL);
         }),
         catchError((error: HttpErrorResponse) => {
           this.handleError(error);
@@ -68,7 +79,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
     // Non-cached requests
     return next.handle(authReq).pipe(
-      tap(() => this.responseCache.delete('error0')),
       catchError((error: HttpErrorResponse) => {
         this.handleError(error);
         return throwError(() => error);
@@ -100,15 +110,25 @@ export class AuthInterceptor implements HttpInterceptor {
       return this.tokenZeeme;
     }
 
-    // Get token from AuthService or sessionStorage
-    const token = this.authService.getToken();
+    // Get token from TokenManagerService
+    const token = this.tokenManager.getToken();
     if (token) {
-      return token;
+      // Validate token before using it
+      const validation = this.tokenManager.validateToken(token);
+      if (validation.isValid && !validation.isExpired) {
+        return token;
+      }
     }
 
     // Fallback to sessionStorage (for backward compatibility)
     if (typeof window !== 'undefined' && window.sessionStorage) {
-      return sessionStorage.getItem('userToken') || '';
+      const sessionToken = sessionStorage.getItem('userToken');
+      if (sessionToken) {
+        const validation = this.tokenManager.validateToken(sessionToken);
+        if (validation.isValid && !validation.isExpired) {
+          return sessionToken;
+        }
+      }
     }
 
     return '';
@@ -127,26 +147,37 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   /**
+   * Get cache key for request
+   */
+  private getCacheKey(request: HttpRequest<unknown>): string {
+    return `http_cache_${request.method}_${request.urlWithParams}`;
+  }
+
+  /**
    * Handle HTTP errors
    */
   private handleError(error: HttpErrorResponse): void {
-    if (error.status === 0 && !this.responseCache.get('error0')) {
+    if (error.status === 0) {
       // Network or client-side error
       console.error('A client-side or network error occurred. Please check your internet connection.');
       // Note: Using console.error instead of alert for better UX
       // You can integrate with notification service here
-      this.responseCache.set('error0', 'Network error');
-    } else if (error.status !== 0) {
-      // Server error - clear network error cache
-      this.responseCache.delete('error0');
     }
   }
 
   /**
    * Clear response cache (useful for logout or when data needs refresh)
+   * Uses CacheService for unified cache management
    */
-  public clearCache(): void {
-    this.responseCache.clear();
+  public clearCache(pattern?: string): void {
+    if (pattern) {
+      // Clear cache entries matching pattern
+      // CacheService doesn't support pattern matching yet, so clear all
+      // This can be enhanced in CacheService later
+      this.cacheService.clear();
+    } else {
+      this.cacheService.clear();
+    }
   }
 }
 

@@ -33,3 +33,4 @@ export interface SearchResult {
   level: 1 | 2 | 3; // Menu level
 }
 
+

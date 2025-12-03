@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { StorageService } from './storage.service';
 import { ApiService, ApiResponse } from './api.service';
+import { TokenManagerService } from './token-manager.service';
 import jwt_decode from 'jwt-decode';
 
 export interface User {
@@ -120,7 +121,8 @@ export class AuthService {
     private http: HttpClient, // Keep for login/forgot-password that need direct access
     private apiService: ApiService,
     private router: Router,
-    private storage: StorageService
+    private storage: StorageService,
+    private tokenManager: TokenManagerService
   ) {
     this.loadUserFromStorage();
     this.startTokenRefreshTimer();
@@ -191,6 +193,9 @@ export class AuthService {
                 ...tokenPayload
               };
 
+              // Store token using TokenManagerService
+              this.tokenManager.setToken(response.accessToken);
+
               // Store in sessionStorage (matching hrplus-std-rd pattern)
               if (typeof window !== 'undefined' && window.sessionStorage) {
                 sessionStorage.setItem('dbName', credentials.dbName || '');
@@ -198,8 +203,7 @@ export class AuthService {
                 sessionStorage.setItem('currentUser', JSON.stringify(user));
               }
 
-              // Also store in our storage service
-              this.storage.setItem(this.TOKEN_KEY, response.accessToken);
+              // Store user data
               this.storage.setItem(this.USER_KEY, JSON.stringify(user));
               this.currentUserSubject.next(user);
 
@@ -274,29 +278,16 @@ export class AuthService {
   }
 
   refreshToken(): Observable<string | null> {
-    const refreshToken = this.storage.getItem(this.REFRESH_TOKEN_KEY);
-    if (!refreshToken) {
-      this.logout();
-      return throwError(() => new Error('No refresh token'));
-    }
-
-    // ApiService already handles baseUrl (environment.jbossUrl), so only pass the endpoint path
-    return this.apiService.post<LoginResponse>(
-      `${environment.apiEndpoints.auth}/refresh`,
-      { refreshToken }
-    ).pipe(
-      map((response: ApiResponse<LoginResponse>) => {
-        const loginResponse = response.data || (response as unknown as LoginResponse);
-        if (loginResponse.success && loginResponse.data) {
-          this.setUser(
-            loginResponse.data.user,
-            loginResponse.data.token,
-            loginResponse.data.refreshToken,
-            loginResponse.data.expiresIn
-          );
-          return loginResponse.data.token;
+    // Use TokenManagerService for token refresh
+    return this.tokenManager.refreshToken().pipe(
+      map(token => {
+        // After token refresh, update user if needed
+        const user = this.getCurrentUser();
+        if (user) {
+          // Token was refreshed, user data should still be valid
+          return token;
         }
-        throw new Error('Token refresh failed');
+        return token;
       }),
       catchError(error => {
         console.error('Token refresh error:', error);
@@ -307,24 +298,15 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    const token = this.getToken();
+    const token = this.tokenManager.getToken();
     if (!token) {
-      // Also check sessionStorage as fallback
-      if (typeof window !== 'undefined' && window.sessionStorage) {
-        const sessionToken = sessionStorage.getItem('userToken');
-        if (sessionToken && !this.isTokenExpired(sessionToken)) {
-          // Migrate to localStorage
-          this.storage.setItem(this.TOKEN_KEY, sessionToken);
-          return true;
-        }
-      }
       return false;
     }
 
-    // Check if token is expired
-    if (this.isTokenExpired(token)) {
-      // Token expired, but don't logout immediately
-      // Return false and let guard handle navigation
+    // Validate token using TokenManagerService
+    const validation = this.tokenManager.validateToken(token);
+    
+    if (!validation.isValid || validation.isExpired) {
       return false;
     }
 
@@ -337,20 +319,8 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    // Check localStorage first
-    let token = this.storage.getItem(this.TOKEN_KEY);
-
-    // If not found, check sessionStorage (for backward compatibility)
-    if (!token && typeof window !== 'undefined' && window.sessionStorage) {
-      const sessionToken = sessionStorage.getItem('userToken');
-      if (sessionToken) {
-        // Migrate to localStorage
-        this.storage.setItem(this.TOKEN_KEY, sessionToken);
-        token = sessionToken;
-      }
-    }
-
-    return token;
+    // Use TokenManagerService for token retrieval
+    return this.tokenManager.getToken();
   }
 
   getCurrentUser(): User | null {
@@ -362,7 +332,10 @@ export class AuthService {
    * This method is called by AuthGuard to restore session immediately
    */
   restoreSession(user: User, token: string): void {
-    this.storage.setItem(this.TOKEN_KEY, token);
+    // Store token using TokenManagerService
+    this.tokenManager.setToken(token);
+    
+    // Store user data
     this.storage.setItem(this.USER_KEY, JSON.stringify(user));
     this.currentUserSubject.next(user);
 
@@ -423,8 +396,10 @@ export class AuthService {
         ...decodedToken
       };
 
-      // Store in both localStorage and sessionStorage
-      this.storage.setItem(this.TOKEN_KEY, token);
+      // Store token using TokenManagerService
+      this.tokenManager.setToken(token);
+      
+      // Store user data
       this.storage.setItem(this.USER_KEY, JSON.stringify(user));
       this.currentUserSubject.next(user);
 
@@ -503,24 +478,21 @@ export class AuthService {
   }
 
   private setUser(user: User, token: string, refreshToken?: string, expiresIn?: number): void {
-    this.storage.setItem(this.TOKEN_KEY, token);
+    // Store token using TokenManagerService
+    this.tokenManager.setToken(token, expiresIn);
+    
     if (refreshToken) {
-      this.storage.setItem(this.REFRESH_TOKEN_KEY, refreshToken);
+      this.tokenManager.setRefreshToken(refreshToken);
     }
+    
     this.storage.setItem(this.USER_KEY, JSON.stringify(user));
-
-    if (expiresIn) {
-      const expiryTime = Date.now() + (expiresIn * 1000);
-      this.storage.setItem(this.TOKEN_EXPIRY_KEY, expiryTime.toString());
-    }
-
     this.currentUserSubject.next(user);
   }
 
   private loadUserFromStorage(): void {
     // Check localStorage first (from StorageService)
     let userData = this.storage.getItem(this.USER_KEY);
-    let token = this.getToken();
+    let token = this.tokenManager.getToken();
 
     // If not found in localStorage, check sessionStorage (for backward compatibility)
     if (!userData && typeof window !== 'undefined' && window.sessionStorage) {
@@ -532,7 +504,7 @@ export class AuthService {
           userData = JSON.parse(sessionUser);
           // Migrate to localStorage for persistence
           this.storage.setItem(this.USER_KEY, sessionUser);
-          this.storage.setItem(this.TOKEN_KEY, sessionToken);
+          this.tokenManager.setToken(sessionToken);
           token = sessionToken;
         } catch (error) {
           console.error('Error parsing sessionStorage user data:', error);
@@ -544,17 +516,25 @@ export class AuthService {
       try {
         const user = typeof userData === 'string' ? JSON.parse(userData) : userData;
 
-        if (token && !this.isTokenExpired(token)) {
-          this.currentUserSubject.next(user);
-        } else if (token) {
-          // Token expired, try to refresh
-          this.refreshToken().subscribe({
-            next: () => {},
-            error: () => {
-              // If refresh fails, clear session
-              this.clearSession();
-            }
-          });
+        if (token) {
+          // Validate token using TokenManagerService
+          const validation = this.tokenManager.validateToken(token);
+          
+          if (validation.isValid && !validation.isExpired) {
+            this.currentUserSubject.next(user);
+          } else if (validation.isExpired) {
+            // Token expired, try to refresh
+            this.refreshToken().subscribe({
+              next: () => {},
+              error: () => {
+                // If refresh fails, clear session
+                this.clearSession();
+              }
+            });
+          } else {
+            // Token invalid, clear session
+            this.clearSession();
+          }
         } else {
           // No token found, clear session
           this.clearSession();
@@ -567,32 +547,18 @@ export class AuthService {
   }
 
   private clearSession(): void {
-    this.storage.removeItem(this.TOKEN_KEY);
-    this.storage.removeItem(this.REFRESH_TOKEN_KEY);
+    // Clear token using TokenManagerService
+    this.tokenManager.clearToken();
+    
     this.storage.removeItem(this.USER_KEY);
-    this.storage.removeItem(this.TOKEN_EXPIRY_KEY);
     this.currentUserSubject.next(null);
     this.stopTokenRefreshTimer();
+    
     // Also clear sessionStorage
     if (typeof window !== 'undefined' && window.sessionStorage) {
       sessionStorage.removeItem('userToken');
       sessionStorage.removeItem('currentUser');
       sessionStorage.removeItem('dbName');
-    }
-  }
-
-  private isTokenExpired(token: string): boolean {
-    try {
-      const payload = jwt_decode<any>(token);
-      const exp = payload.exp * 1000;
-      return Date.now() >= exp;
-    } catch (error) {
-      // If we can't parse the token, check expiry from storage
-      const expiryTime = this.storage.getItem(this.TOKEN_EXPIRY_KEY);
-      if (expiryTime) {
-        return Date.now() >= parseInt(expiryTime, 10);
-      }
-      return true;
     }
   }
 
