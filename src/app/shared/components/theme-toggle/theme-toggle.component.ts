@@ -1,6 +1,7 @@
 import { Component, HostListener, ElementRef, ViewChild, ChangeDetectionStrategy, signal, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
+import { trigger, transition, style, animate } from '@angular/animations';
 import { ThemeService, ThemeMode, ThemeColor } from '../../../core/services/theme.service';
 import { SharedModule } from '../../shared.module';
 
@@ -10,7 +11,18 @@ import { SharedModule } from '../../shared.module';
   imports: [CommonModule, SharedModule],
   templateUrl: './theme-toggle.component.html',
   styleUrls: ['./theme-toggle.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('dropdownAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'scale(0.95) translateY(-10px)' }),
+        animate('150ms ease-out', style({ opacity: 1, transform: 'scale(1) translateY(0)' }))
+      ]),
+      transition(':leave', [
+        animate('100ms ease-in', style({ opacity: 0, transform: 'scale(0.95) translateY(-10px)' }))
+      ])
+    ])
+  ]
 })
 export class ThemeToggleComponent {
   public themeService = inject(ThemeService);

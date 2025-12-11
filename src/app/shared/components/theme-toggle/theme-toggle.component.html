@@ -1,47 +1,31 @@
 <div class="flex items-center gap-2 theme-toggle-container">
   <!-- Theme Mode Toggle -->
   <div class="relative">
-    <button
-      #modeButton
-      (click)="toggleModeMenu()"
-      [attr.aria-label]="'เปลี่ยนธีม'"
-      [attr.aria-expanded]="showModeMenu()"
-      [attr.aria-haspopup]="true"
-      role="button"
-      tabindex="0"
-      class="p-2 text-slate-700 dark:text-slate-200 hover:bg-white/30 dark:hover:bg-slate-700/30 rounded-lg transition-all duration-200">
-      <app-icon [name]="modeIcon()" size="md" color="text-slate-700 dark:text-slate-200" [ariaLabel]="'ธีมปัจจุบัน: ' + mode()"></app-icon>
+    <button #modeButton (click)="toggleModeMenu()" [attr.aria-label]="'เปลี่ยนธีม'"
+      [attr.aria-expanded]="showModeMenu()" [attr.aria-haspopup]="true" role="button" tabindex="0"
+      class="theme-toggle-btn p-2 text-slate-700 dark:text-slate-200 hover:bg-white/30 dark:hover:bg-slate-700/30 rounded-lg transition-all duration-200">
+      <app-icon [name]="modeIcon()" size="md" color="text-slate-700 dark:text-slate-200"
+        [ariaLabel]="'ธีมปัจจุบัน: ' + mode()"></app-icon>
     </button>
-    <div 
-      *ngIf="showModeMenu()"
-      role="menu"
-      [attr.aria-label]="'เมนูเลือกธีม'"
-      class="absolute right-0 mt-2 w-48 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
-      <button
-        role="menuitemradio"
-        [attr.aria-checked]="mode() === 'light'"
-        (click)="setMode('light')"
+    <div *ngIf="showModeMenu()" @dropdownAnimation role="menu" [attr.aria-label]="'เมนูเลือกธีม'"
+      class="glass-menu absolute right-0 mt-2 w-48 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50 overflow-hidden">
+      <button role="menuitemradio" [attr.aria-checked]="mode() === 'light'" (click)="setMode('light')"
         [class.active]="mode() === 'light'"
-        class="w-full px-4 py-2 text-left text-slate-700 dark:text-slate-200 hover:bg-white/40 dark:hover:bg-slate-700/40 flex items-center gap-2 thai-text">
+        class="w-full px-4 py-2 text-left text-slate-700 dark:text-slate-200 hover:bg-white/40 dark:hover:bg-slate-700/40 flex items-center gap-2 thai-text transition-colors">
         <app-icon name="light_mode" size="sm" color="text-slate-600 dark:text-slate-400" aria-hidden="true"></app-icon>
         <span>โหมดสว่าง</span>
       </button>
-      <button
-        role="menuitemradio"
-        [attr.aria-checked]="mode() === 'dark'"
-        (click)="setMode('dark')"
+      <button role="menuitemradio" [attr.aria-checked]="mode() === 'dark'" (click)="setMode('dark')"
         [class.active]="mode() === 'dark'"
-        class="w-full px-4 py-2 text-left text-slate-700 dark:text-slate-200 hover:bg-white/40 dark:hover:bg-slate-700/40 flex items-center gap-2 thai-text">
+        class="w-full px-4 py-2 text-left text-slate-700 dark:text-slate-200 hover:bg-white/40 dark:hover:bg-slate-700/40 flex items-center gap-2 thai-text transition-colors">
         <app-icon name="dark_mode" size="sm" color="text-slate-600 dark:text-slate-400" aria-hidden="true"></app-icon>
         <span>โหมดมืด</span>
       </button>
-      <button
-        role="menuitemradio"
-        [attr.aria-checked]="mode() === 'auto'"
-        (click)="setMode('auto')"
+      <button role="menuitemradio" [attr.aria-checked]="mode() === 'auto'" (click)="setMode('auto')"
         [class.active]="mode() === 'auto'"
-        class="w-full px-4 py-2 text-left text-slate-700 dark:text-slate-200 hover:bg-white/40 dark:hover:bg-slate-700/40 flex items-center gap-2 thai-text">
-        <app-icon name="brightness_auto" size="sm" color="text-slate-600 dark:text-slate-400" aria-hidden="true"></app-icon>
+        class="w-full px-4 py-2 text-left text-slate-700 dark:text-slate-200 hover:bg-white/40 dark:hover:bg-slate-700/40 flex items-center gap-2 thai-text transition-colors">
+        <app-icon name="brightness_auto" size="sm" color="text-slate-600 dark:text-slate-400"
+          aria-hidden="true"></app-icon>
         <span>อัตโนมัติ</span>
       </button>
     </div>
@@ -49,39 +33,23 @@
 
   <!-- Theme Color Picker -->
   <div class="relative">
-    <button
-      #colorButton
-      (click)="toggleColorMenu()"
-      [attr.aria-label]="'เปลี่ยนสีธีม'"
-      [attr.aria-expanded]="showColorMenu()"
-      [attr.aria-haspopup]="true"
-      role="button"
-      tabindex="0"
-      class="p-2 text-slate-700 dark:text-slate-200 hover:bg-white/30 dark:hover:bg-slate-700/30 rounded-lg transition-all duration-200">
-      <app-icon name="palette" size="md" color="text-slate-700 dark:text-slate-200" [ariaLabel]="'สีธีมปัจจุบัน: ' + color()"></app-icon>
+    <button #colorButton (click)="toggleColorMenu()" [attr.aria-label]="'เปลี่ยนสีธีม'"
+      [attr.aria-expanded]="showColorMenu()" [attr.aria-haspopup]="true" role="button" tabindex="0"
+      class="theme-toggle-btn p-2 text-slate-700 dark:text-slate-200 hover:bg-white/30 dark:hover:bg-slate-700/30 rounded-lg transition-all duration-200">
+      <app-icon name="palette" size="md" color="text-slate-700 dark:text-slate-200"
+        [ariaLabel]="'สีธีมปัจจุบัน: ' + color()"></app-icon>
     </button>
-    <div 
-      *ngIf="showColorMenu()"
-      role="menu"
-      [attr.aria-label]="'เมนูเลือกสีธีม'"
-      class="absolute right-0 mt-2 w-64 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 p-3 z-50">
+    <div *ngIf="showColorMenu()" @dropdownAnimation role="menu" [attr.aria-label]="'เมนูเลือกสีธีม'"
+      class="glass-menu absolute right-0 mt-2 w-64 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 p-3 z-50">
       <div class="grid grid-cols-4 gap-2" role="group">
-        <button
-          *ngFor="let c of themeColors"
-          role="menuitemradio"
-          [attr.aria-checked]="color() === c.value"
-          (click)="setColor(c.value)"
-          [class.active]="color() === c.value"
-          class="w-10 h-10 rounded-lg border-2 transition-all duration-200 hover:scale-110 hover:shadow-lg"
-          [style.background]="c.gradient"
-          [class.border-indigo-500]="color() === c.value"
-          [class.border-slate-300]="color() !== c.value"
-          [class.dark:border-slate-600]="color() !== c.value"
+        <button *ngFor="let c of themeColors" role="menuitemradio" [attr.aria-checked]="color() === c.value"
+          (click)="setColor(c.value)" [class.active]="color() === c.value"
+          class="color-swatch w-10 h-10 rounded-lg border-2 transition-all duration-200 hover:scale-110 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          [style.background]="c.gradient" [class.border-indigo-500]="color() === c.value"
+          [class.border-slate-300]="color() !== c.value" [class.dark:border-slate-600]="color() !== c.value"
           [attr.aria-label]="c.name">
         </button>
       </div>
     </div>
   </div>
 </div>
-
-

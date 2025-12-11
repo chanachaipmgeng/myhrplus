@@ -10,25 +10,12 @@
   width: 100%;
 }
 
-/* Tab Navigation */
-.border-b {
-  border-bottom: 1px solid $gray-200;
-}
-
-.dark .border-b {
-  border-bottom-color: $gray-700;
-}
-
-body.theme-gemini .border-b {
-  border-bottom-color: rgba(59, 130, 246, 0.3);
-}
-
-/* Tab Button */
+/* Tab Button Custom Styles */
 button {
   position: relative;
   transition: $transition-colors;
 
-  /* Active Tab */
+  /* Active Tab Indicator */
   &.border-primary-500 {
     border-bottom-color: $primary-500;
     color: $primary-600;
@@ -57,7 +44,7 @@ button {
   }
 }
 
-/* Dark Mode */
+/* Dark Mode Overrides */
 .dark button {
   &.border-primary-500 {
     color: $primary-400;
@@ -74,43 +61,38 @@ button {
   }
 }
 
-/* Gemini Theme */
-body.theme-gemini button {
-  &.border-primary-500 {
-    @include gradient-text-gemini();
-    border-bottom-color: $gemini-gradient-mid;
+/* Gemini Theme Overrides */
+body.theme-gemini {
+  .border-b {
+    border-bottom-color: rgba(59, 130, 246, 0.3);
+  }
 
-    &::after {
-      background: linear-gradient(90deg, 
-        $gemini-gradient-start,
-        $gemini-gradient-mid,
-        $gemini-gradient-end
-      );
-      @include gemini-glow('weak');
+  button {
+    &.border-primary-500 {
+      @include gradient-text-gemini();
+      border-bottom-color: $gemini-gradient-mid;
+
+      &::after {
+        background: linear-gradient(90deg,
+            $gemini-gradient-start,
+            $gemini-gradient-mid,
+            $gemini-gradient-end );
+        @include gemini-glow('weak');
+      }
+    }
+
+    &:hover:not(:disabled) {
+      color: $gray-300;
+      border-bottom-color: rgba(59, 130, 246, 0.5);
     }
   }
 
-  &:hover:not(:disabled) {
-    color: $gray-300;
-    border-bottom-color: rgba(59, 130, 246, 0.5);
+  /* Badge Override */
+  .bg-blue-100 {
+    background: rgba(59, 130, 246, 0.2);
+    color: $gemini-gradient-mid;
+    @include gemini-glow('weak');
   }
-}
-
-/* Badge */
-.bg-blue-100 {
-  background: rgba($primary-500, 0.1);
-  color: $primary-600;
-}
-
-.dark .bg-blue-100 {
-  background: rgba($primary-500, 0.2);
-  color: $primary-400;
-}
-
-body.theme-gemini .bg-blue-100 {
-  background: rgba(59, 130, 246, 0.2);
-  color: $gemini-gradient-mid;
-  @include gemini-glow('weak');
 }
 
 /* Responsive */
@@ -120,4 +102,3 @@ body.theme-gemini .bg-blue-100 {
     scrollbar-width: thin;
   }
 }
-
