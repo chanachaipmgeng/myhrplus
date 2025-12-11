@@ -577,6 +577,15 @@ export class ComponentNameDemoComponent {
   - Components tightly coupled to a specific feature
   - Components that need many module dependencies
 
+### State Management (Signals vs RxJS)
+- **Signals (Preferred)**: Use Angular Signals for synchronized state and template binding.
+  - `signal()`: For writable local state (e.g., `showMenu`, `currentUser`).
+  - `computed()`: For derived values (e.g., `fullName = computed(() => this.firstName() + this.lastName())`).
+  - `toSignal()`: To convert Observables for template use (e.g., `data = toSignal(data$)`).
+  - **Why**: Signals provide finer-grained reactivity and reduce the need for `AsyncPipe` and manual subscriptions.
+- **RxJS**: Use for asynchronous event streams and HTTP handling.
+  - Use `toSignal` to consume RxJS streams in components/templates.
+
 ### RxJS Best Practices
 - **Observables**: Prefer Observables over Promises
 - **Operators**: Use RxJS operators for transformations

@@ -1,4 +1,5 @@
-import { Component, OnInit, HostListener, ElementRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, HostListener, ElementRef, ViewChild, ChangeDetectionStrategy, signal, computed, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { ThemeService, ThemeMode, ThemeColor } from '../../../core/services/theme.service';
 import { SharedModule } from '../../shared.module';
@@ -11,12 +12,27 @@ import { SharedModule } from '../../shared.module';
   styleUrls: ['./theme-toggle.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ThemeToggleComponent implements OnInit {
-  currentMode: ThemeMode = 'light';
-  currentColor: ThemeColor = 'blue';
-  currentModeIcon = 'light_mode';
-  showModeMenu = false;
-  showColorMenu = false;
+export class ThemeToggleComponent {
+  public themeService = inject(ThemeService);
+
+  theme = toSignal(this.themeService.theme$, {
+    initialValue: { mode: 'light' as ThemeMode, color: 'blue' as ThemeColor, primaryColor: '59, 130, 246' }
+  });
+
+  mode = computed(() => this.theme().mode);
+  color = computed(() => this.theme().color);
+
+  modeIcon = computed(() => {
+    switch (this.mode()) {
+      case 'light': return 'light_mode';
+      case 'dark': return 'dark_mode';
+      case 'auto': return 'brightness_auto';
+      default: return 'light_mode';
+    }
+  });
+
+  showModeMenu = signal(false);
+  showColorMenu = signal(false);
 
   @ViewChild('modeButton') modeButton?: ElementRef<HTMLButtonElement>;
   @ViewChild('colorButton') colorButton?: ElementRef<HTMLButtonElement>;
@@ -32,65 +48,40 @@ export class ThemeToggleComponent implements OnInit {
     { value: 'pink' as ThemeColor, name: 'ชมพู', gradient: 'linear-gradient(135deg, #ec4899, #db2777)' }
   ];
 
-  constructor(public themeService: ThemeService) { }
-
-  ngOnInit(): void {
-    this.themeService.theme$.subscribe(theme => {
-      this.currentMode = theme.mode;
-      this.currentColor = theme.color;
-      this.updateModeIcon();
-    });
-  }
-
   toggleModeMenu(): void {
-    this.showModeMenu = !this.showModeMenu;
-    this.showColorMenu = false;
+    this.showModeMenu.update(v => !v);
+    this.showColorMenu.set(false);
   }
 
   toggleColorMenu(): void {
-    this.showColorMenu = !this.showColorMenu;
-    this.showModeMenu = false;
+    this.showColorMenu.update(v => !v);
+    this.showModeMenu.set(false);
   }
 
   setMode(mode: ThemeMode): void {
     this.themeService.setMode(mode);
-    this.updateModeIcon();
-    this.showModeMenu = false;
+    this.showModeMenu.set(false);
   }
 
   setColor(color: ThemeColor): void {
     this.themeService.setColor(color);
-    this.showColorMenu = false;
-  }
-
-  private updateModeIcon(): void {
-    switch (this.currentMode) {
-      case 'light':
-        this.currentModeIcon = 'light_mode';
-        break;
-      case 'dark':
-        this.currentModeIcon = 'dark_mode';
-        break;
-      case 'auto':
-        this.currentModeIcon = 'brightness_auto';
-        break;
-    }
+    this.showColorMenu.set(false);
   }
 
   @HostListener('document:click', ['$event'])
   handleDocumentClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
     if (!target.closest('.theme-toggle-container')) {
-      this.showModeMenu = false;
-      this.showColorMenu = false;
+      this.showModeMenu.set(false);
+      this.showColorMenu.set(false);
     }
   }
 
   @HostListener('keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent): void {
     if (event.key === 'Escape') {
-      this.showModeMenu = false;
-      this.showColorMenu = false;
+      this.showModeMenu.set(false);
+      this.showColorMenu.set(false);
     }
   }
 }
