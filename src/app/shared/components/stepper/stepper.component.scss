@@ -1,13 +1,22 @@
+/* ============================================
+   Stepper Component Styles
+   ============================================ */
+
+@import '../../../../styles/design-tokens';
+@import '../../../../styles/mixins';
+
 .stepper-container {
   width: 100%;
 }
 
+/* Horizontal Layout */
 .stepper-horizontal {
   .stepper-steps {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     position: relative;
+    gap: $spacing-2;
   }
 
   .stepper-step {
@@ -17,22 +26,32 @@
     position: relative;
     cursor: pointer;
     transition: all 0.3s ease;
+
+    // Touch target
+    min-height: 44px;
+    padding: $spacing-2;
+
+    @include respond-to(md) {
+      min-height: auto;
+      padding: 0;
+    }
   }
 
   .step-connector {
     flex: 1;
     height: 2px;
-    background: #e2e8f0;
+    background: $gray-200;
     margin: 0 1rem;
     margin-top: 20px;
     transition: all 0.3s ease;
   }
 
   .connector-completed {
-    background: rgb(var(--primary-rgb));
+    background: $primary-500;
   }
 }
 
+/* Vertical Layout */
 .stepper-vertical {
   .stepper-steps {
     display: flex;
@@ -54,15 +73,16 @@
     top: 48px;
     width: 2px;
     height: calc(100% + 1.5rem);
-    background: #e2e8f0;
+    background: $gray-200;
     transition: all 0.3s ease;
   }
 
   .connector-completed {
-    background: rgb(var(--primary-rgb));
+    background: $primary-500;
   }
 }
 
+/* Step Content Elements */
 .step-content {
   display: flex;
   align-items: center;
@@ -77,41 +97,43 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #e2e8f0;
-  color: #64748b;
-  border: 2px solid #e2e8f0;
+  background: $gray-200;
+  color: $gray-500;
+  border: 2px solid $gray-200;
   transition: all 0.3s ease;
   flex-shrink: 0;
 }
 
-.dark .step-indicator {
-  background: #334155;
-  border-color: #334155;
-  color: #94a3b8;
+/* Dark Mode Overrides for Base Elements */
+.dark {
+
+  .step-connector,
+  .step-connector-vertical {
+    background: $gray-700;
+  }
+
+  .connector-completed {
+    background: $primary-500;
+  }
+
+  .step-indicator {
+    background: $gray-700;
+    border-color: $gray-700;
+    color: $gray-400;
+  }
 }
 
-.step-pending .step-indicator {
-  background: #e2e8f0;
-  border-color: #e2e8f0;
-  color: #64748b;
-}
-
-.dark .step-pending .step-indicator {
-  background: #334155;
-  border-color: #334155;
-  color: #94a3b8;
-}
-
+/* Step States */
 .step-active .step-indicator {
-  background: rgb(var(--primary-rgb));
-  border-color: rgb(var(--primary-rgb));
+  background: $primary-500;
+  border-color: $primary-500;
   color: white;
-  box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.1);
+  box-shadow: 0 0 0 4px rgba($primary-500, 0.1);
 }
 
 .step-completed .step-indicator {
-  background: #22c55e;
-  border-color: #22c55e;
+  background: $success-500;
+  border-color: $success-500;
   color: white;
 }
 
@@ -120,17 +142,10 @@
   cursor: not-allowed;
 }
 
-.step-icon mat-icon,
-.step-check mat-icon {
-  font-size: 20px !important;
-  width: 20px !important;
-  height: 20px !important;
-}
-
+/* Typography */
 .step-number {
-  font-weight: 600;
+  font-weight: $font-weight-semibold;
   font-size: 0.875rem;
-  font-family: 'Inter', sans-serif;
 }
 
 .step-label {
@@ -141,59 +156,82 @@
 }
 
 .step-title {
-  font-weight: 600;
-  color: #1e293b;
+  font-weight: $font-weight-semibold;
+  color: $gray-800;
   transition: color 0.3s ease;
-  font-family: 'Sarabun', 'Inter', sans-serif;
 }
 
 .dark .step-title {
-  color: #f1f5f9;
+  color: $gray-100;
 }
 
 .step-active .step-title {
-  color: rgb(var(--primary-rgb));
-  font-weight: 700;
+  color: $primary-500;
+  font-weight: $font-weight-bold;
 }
 
 .step-description {
-  color: #64748b;
+  color: $gray-500;
   transition: color 0.3s ease;
 }
 
 .dark .step-description {
-  color: #94a3b8;
+  color: $gray-400;
 }
 
-.step-optional {
-  .step-title::after {
-    content: ' (ไม่บังคับ)';
-    font-size: 0.75rem;
-    color: #94a3b8;
-    font-weight: normal;
-  }
+.step-optional .step-title::after {
+  content: ' (ไม่บังคับ)';
+  font-size: 0.75rem;
+  color: $gray-400;
+  font-weight: normal;
 }
 
+/* Actions */
 .stepper-actions {
   display: flex;
   justify-content: space-between;
   margin-top: 2rem;
   padding-top: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
+
+  button {
+    min-width: 44px;
+    min-height: 44px;
+
+    @include respond-to(md) {
+      min-width: auto;
+      min-height: auto;
+    }
+  }
 }
 
 .dark .stepper-actions {
   border-top-color: rgba(51, 65, 85, 0.3);
 }
 
-/* ============================================
-   Stepper Component Styles
-   ============================================ */
+/* Gemini Theme */
+body.theme-gemini {
+  .step-active .step-indicator {
+    @include gemini-glow('default');
+    @include gemini-border-glow();
+  }
 
-@import '../../../../styles/design-tokens';
-@import '../../../../styles/mixins';
+  .step-active .step-title {
+    @include gradient-text-gemini();
+  }
 
-/* Responsive - Mobile */
+  .connector-completed {
+    background: linear-gradient(90deg, $gemini-gradient-start, $gemini-gradient-end);
+    @include gemini-glow('weak');
+  }
+
+  .step-completed .step-indicator {
+    background: linear-gradient(135deg, $success-500, $success-600);
+    @include gemini-glow('weak');
+  }
+}
+
+/* Responsive */
 @include respond-to-down(md) {
   .stepper-horizontal {
     .stepper-steps {
@@ -206,16 +244,16 @@
     }
 
     .step-connector-vertical {
-      display: block;
+      display: block; // Fallback to vertical line on mobile
       position: absolute;
       left: 20px;
       top: 48px;
       width: 2px;
       height: calc(100% + 1rem);
-      background: #e2e8f0;
-      
+      background: $gray-200;
+
       .dark & {
-        background: #334155;
+        background: $gray-700;
       }
     }
 
@@ -223,14 +261,6 @@
       flex-direction: row;
       align-items: flex-start;
       gap: $spacing-3;
-    }
-
-    .step-label {
-      flex: 1;
-    }
-
-    .step-title {
-      font-size: $text-sm;
     }
 
     .step-description {
@@ -242,10 +272,9 @@
     flex-direction: column;
     gap: $spacing-2;
     margin-top: $spacing-4;
-    
+
     button {
       width: 100%;
-      min-height: 44px; // Touch target
       justify-content: center;
     }
   }
@@ -253,54 +282,5 @@
   .step-indicator {
     width: 36px;
     height: 36px;
-    flex-shrink: 0;
   }
 }
-
-/* Responsive - Tablet */
-@include respond-to-between(md, lg) {
-  .stepper-horizontal {
-    .stepper-steps {
-      gap: $spacing-2;
-    }
-
-    .step-connector {
-      margin: 0 $spacing-2;
-    }
-
-    .step-label {
-      .step-title {
-        font-size: $text-sm;
-      }
-
-      .step-description {
-        display: none; // Hide description on tablet
-      }
-    }
-  }
-}
-
-/* Touch Targets */
-.stepper-step {
-  min-height: 44px; // Touch target
-  padding: $spacing-2;
-  cursor: pointer;
-  
-  @include respond-to(md) {
-    min-height: auto;
-    padding: 0;
-  }
-}
-
-.stepper-actions button {
-  min-width: 44px;
-  min-height: 44px;
-  padding: $spacing-2 $spacing-4;
-  
-  @include respond-to(md) {
-    min-width: auto;
-    min-height: auto;
-  }
-}
-
-

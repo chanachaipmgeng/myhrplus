@@ -1,6 +1,7 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, inject, computed, signal, effect } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { filter, map, startWith } from 'rxjs/operators';
 
 export interface BreadcrumbItem {
   label: string;
@@ -14,48 +15,46 @@ export interface BreadcrumbItem {
   styleUrls: ['./breadcrumbs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BreadcrumbsComponent implements OnInit {
-  @Input() items: BreadcrumbItem[] = [];
-  @Input() separator: string = '/';
-  @Input() showHome: boolean = true;
-  @Input() homeIcon: string = 'home';
-  @Input() autoGenerate: boolean = false;
-  @Input() maxItems: number = 5;
+export class BreadcrumbsComponent {
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
 
-  breadcrumbs: BreadcrumbItem[] = [];
+  items = input<BreadcrumbItem[]>([]);
+  separator = input<string>('/');
+  showHome = input<boolean>(true);
+  homeIcon = input<string>('home');
+  autoGenerate = input<boolean>(false);
+  maxItems = input<number>(5);
 
-  constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) { }
+  // Reactive router events
+  private navigationEnd = toSignal(
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      startWith(null)
+    )
+  );
 
-  ngOnInit(): void {
-    if (this.autoGenerate) {
-      this.router.events
-        .pipe(filter(event => event instanceof NavigationEnd))
-        .subscribe(() => {
-          this.generateBreadcrumbs();
-        });
-      this.generateBreadcrumbs();
-    } else {
-      this.breadcrumbs = this.items;
+  // Computed breadcrumbs
+  breadcrumbs = computed(() => {
+    // Trigger re-calculation on navigation end
+    this.navigationEnd();
+
+    if (!this.autoGenerate()) {
+      return this.items();
     }
-  }
 
-  private generateBreadcrumbs(): void {
     const breadcrumbs: BreadcrumbItem[] = [];
 
-    if (this.showHome) {
+    if (this.showHome()) {
       breadcrumbs.push({
         label: 'หน้าแรก',
         route: '/dashboard',
-        icon: this.homeIcon
+        icon: this.homeIcon()
       });
     }
 
     let route = this.activatedRoute.root;
     let url = '';
-    let routeData: any;
 
     do {
       const childrenRoutes = route.children;
@@ -66,7 +65,7 @@ export class BreadcrumbsComponent implements OnInit {
           const routeSnapshot = childRoute.snapshot;
           url += '/' + routeSnapshot.url.map(segment => segment.path).join('/');
 
-          routeData = routeSnapshot.data;
+          const routeData = routeSnapshot.data;
 
           // Check for breadcrumbs array first (new format)
           if (routeData && routeData['breadcrumbs'] && Array.isArray(routeData['breadcrumbs'])) {
@@ -103,17 +102,18 @@ export class BreadcrumbsComponent implements OnInit {
     } while (route);
 
     // Limit items if maxItems is set
-    if (this.maxItems > 0 && breadcrumbs.length > this.maxItems) {
-      const start = breadcrumbs.length - this.maxItems;
-      this.breadcrumbs = [
+    const max = this.maxItems();
+    if (max > 0 && breadcrumbs.length > max) {
+      const start = breadcrumbs.length - max;
+      return [
         ...breadcrumbs.slice(0, 1),
         { label: '...', route: '' },
         ...breadcrumbs.slice(start)
       ];
-    } else {
-      this.breadcrumbs = breadcrumbs;
     }
-  }
+
+    return breadcrumbs;
+  });
 
   navigate(route: string): void {
     if (route) {
@@ -122,7 +122,7 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   isLast(index: number): boolean {
-    return index === this.breadcrumbs.length - 1;
+    return index === this.breadcrumbs().length - 1;
   }
 }
 

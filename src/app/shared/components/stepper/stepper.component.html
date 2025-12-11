@@ -1,18 +1,11 @@
-<div class="stepper-container" [ngClass]="'stepper-' + orientation">
-  <div class="stepper-steps" [ngClass]="'steps-' + orientation">
-    <div
-      *ngFor="let step of steps; let i = index"
-      class="stepper-step"
-      [ngClass]="[
-        'step-' + getStepStatus(i),
-        { 'step-disabled': step.disabled },
-        { 'step-optional': step.optional }
-      ]"
-      (click)="onStepClick(i)">
+<div class="stepper-container" [ngClass]="'stepper-' + orientation()">
+  <div class="stepper-steps" [ngClass]="'steps-' + orientation()">
+    <div *ngFor="let step of steps(); let i = index" class="stepper-step" [attr.role]="'button'"
+      [class]="'step-' + getStepStatus(i)"
+      [ngClass]="{ 'step-disabled': step.disabled, 'step-optional': step.optional }" (click)="onStepClick(i)"
+      @stepAnimation>
       <!-- Step Connector (for horizontal) -->
-      <div
-        *ngIf="orientation === 'horizontal' && i > 0"
-        class="step-connector"
+      <div *ngIf="orientation() === 'horizontal' && i > 0" class="step-connector"
         [class.connector-completed]="isStepCompleted(i - 1)">
       </div>
 
@@ -20,20 +13,14 @@
       <div class="step-content">
         <!-- Step Indicator -->
         <div class="step-indicator">
-          <div
-            *ngIf="showStepIcons && step.icon && !isStepCompleted(i)"
-            class="step-icon">
+          <div *ngIf="showStepIcons() && step.icon && !isStepCompleted(i)" class="step-icon">
             <app-icon [name]="step.icon" size="sm" color="text-white"></app-icon>
           </div>
-          <div
-            *ngIf="isStepCompleted(i)"
-            class="step-check">
+          <div *ngIf="isStepCompleted(i)" class="step-check">
             <app-icon name="check" size="sm" color="text-white"></app-icon>
           </div>
-          <div
-            *ngIf="!showStepIcons || (!step.icon && !isStepCompleted(i))"
-            class="step-number">
-            {{ showStepNumbers ? (i + 1) : '' }}
+          <div *ngIf="!showStepIcons() || (!step.icon && !isStepCompleted(i))" class="step-number">
+            {{ showStepNumbers() ? (i + 1) : '' }}
           </div>
         </div>
 
@@ -47,34 +34,25 @@
       </div>
 
       <!-- Step Connector (for vertical) -->
-      <div
-        *ngIf="orientation === 'vertical' && i < steps.length - 1"
-        class="step-connector-vertical"
+      <div *ngIf="orientation() === 'vertical' && i < steps().length - 1" class="step-connector-vertical"
         [class.connector-completed]="isStepCompleted(i)">
       </div>
     </div>
   </div>
 
   <!-- Navigation Buttons -->
-  <div class="stepper-actions" *ngIf="orientation === 'horizontal'">
-    <button
-      (click)="onPrevious()"
-      [disabled]="!canGoPrevious()"
+  <div class="stepper-actions" *ngIf="orientation() === 'horizontal'">
+    <button (click)="onPrevious()" [disabled]="!canGoPrevious()"
       class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors thai-text flex items-center gap-2">
       <app-icon name="arrow_back" size="sm"></app-icon>
       <span>ย้อนกลับ</span>
     </button>
-    <button
-      *ngIf="!isLastStep()"
-      (click)="onNext()"
-      [disabled]="!canGoNext()"
+    <button *ngIf="!isLastStep()" (click)="onNext()" [disabled]="!canGoNext()"
       class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors thai-text flex items-center gap-2">
       <span>ถัดไป</span>
       <app-icon name="arrow_forward" size="sm"></app-icon>
     </button>
-    <button
-      *ngIf="isLastStep()"
-      (click)="onComplete()"
+    <button *ngIf="isLastStep()" (click)="onComplete()"
       class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors thai-text flex items-center gap-2">
       <app-icon name="check" size="sm"></app-icon>
       <span>เสร็จสิ้น</span>

@@ -1,4 +1,6 @@
-import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, model, output, effect } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 export interface StepperStep {
   label: string;
@@ -13,46 +15,56 @@ export interface StepperStep {
   selector: 'app-stepper',
   templateUrl: './stepper.component.html',
   styleUrls: ['./stepper.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('stepAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(10px)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ])
+  ]
 })
-export class StepperComponent implements OnInit {
-  @Input() steps: StepperStep[] = [];
-  @Input() currentStep: number = 0;
-  @Input() orientation: 'horizontal' | 'vertical' = 'horizontal';
-  @Input() linear: boolean = false;
-  @Input() showStepNumbers: boolean = true;
-  @Input() showStepIcons: boolean = true;
+export class StepperComponent {
+  steps = input.required<StepperStep[]>();
+  currentStep = model<number>(0);
+  orientation = input<'horizontal' | 'vertical'>('horizontal');
+  linear = input<boolean>(false);
+  showStepNumbers = input<boolean>(true);
+  showStepIcons = input<boolean>(true);
 
-  @Output() stepChange = new EventEmitter<number>();
-  @Output() complete = new EventEmitter<void>();
+  complete = output<void>();
 
-  ngOnInit(): void {
-    // Validate current step
-    if (this.currentStep < 0) {
-      this.currentStep = 0;
-    } else if (this.currentStep >= this.steps.length) {
-      this.currentStep = this.steps.length - 1;
-    }
+  constructor() {
+    // Validate current step bounds effect
+    effect(() => {
+      const current = this.currentStep();
+      const total = this.steps().length;
+      if (total > 0) {
+        if (current < 0) {
+          this.currentStep.set(0);
+        } else if (current >= total) {
+          this.currentStep.set(total - 1);
+        }
+      }
+    }, { allowSignalWrites: true });
   }
 
   onStepClick(index: number): void {
     if (this.canNavigateToStep(index)) {
-      this.currentStep = index;
-      this.stepChange.emit(index);
+      this.currentStep.set(index);
     }
   }
 
   onNext(): void {
-    if (this.canNavigateToStep(this.currentStep + 1)) {
-      this.currentStep++;
-      this.stepChange.emit(this.currentStep);
+    if (this.canNavigateToStep(this.currentStep() + 1)) {
+      this.currentStep.update(v => v + 1);
     }
   }
 
   onPrevious(): void {
-    if (this.currentStep > 0) {
-      this.currentStep--;
-      this.stepChange.emit(this.currentStep);
+    if (this.currentStep() > 0) {
+      this.currentStep.update(v => v - 1);
     }
   }
 
@@ -61,18 +73,19 @@ export class StepperComponent implements OnInit {
   }
 
   canNavigateToStep(index: number): boolean {
-    if (index < 0 || index >= this.steps.length) {
+    const steps = this.steps();
+    if (index < 0 || index >= steps.length) {
       return false;
     }
 
-    if (this.steps[index].disabled) {
+    if (steps[index].disabled) {
       return false;
     }
 
-    if (this.linear) {
+    if (this.linear()) {
       // In linear mode, can only navigate to completed steps or next step
       for (let i = 0; i < index; i++) {
-        if (!this.steps[i].completed && !this.steps[i].optional) {
+        if (!steps[i].completed && !steps[i].optional) {
           return false;
         }
       }
@@ -82,15 +95,15 @@ export class StepperComponent implements OnInit {
   }
 
   isStepCompleted(index: number): boolean {
-    return this.steps[index]?.completed || false;
+    return this.steps()[index]?.completed || false;
   }
 
   isStepActive(index: number): boolean {
-    return index === this.currentStep;
+    return index === this.currentStep();
   }
 
   isStepOptional(index: number): boolean {
-    return this.steps[index]?.optional || false;
+    return this.steps()[index]?.optional || false;
   }
 
   getStepStatus(index: number): 'completed' | 'active' | 'pending' {
@@ -104,15 +117,15 @@ export class StepperComponent implements OnInit {
   }
 
   canGoNext(): boolean {
-    return this.canNavigateToStep(this.currentStep + 1);
+    return this.canNavigateToStep(this.currentStep() + 1);
   }
 
   canGoPrevious(): boolean {
-    return this.currentStep > 0;
+    return this.currentStep() > 0;
   }
 
   isLastStep(): boolean {
-    return this.currentStep === this.steps.length - 1;
+    return this.currentStep() === this.steps().length - 1;
   }
 }
 
