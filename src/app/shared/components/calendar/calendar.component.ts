@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, signal, computed } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
@@ -37,7 +37,8 @@ import { CalendarService, CalendarEventMeta } from '../../../core/services/calen
     GlassButtonComponent
   ],
   templateUrl: './calendar.component.html',
-  styleUrl: './calendar.component.scss'
+  styleUrl: './calendar.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarComponent implements OnInit, OnDestroy {
   @Input() view: CalendarView = CalendarView.Month;
@@ -68,7 +69,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  constructor(private calendarService: CalendarService) {}
+  constructor(private calendarService: CalendarService) { }
 
   ngOnInit(): void {
     // Subscribe to refresh events

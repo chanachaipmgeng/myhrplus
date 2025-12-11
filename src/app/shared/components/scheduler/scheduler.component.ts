@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 import {
@@ -83,7 +83,8 @@ export interface SchedulerConfig {
     PrintService
   ],
   templateUrl: './scheduler.component.html',
-  styleUrls: ['./scheduler.component.scss']
+  styleUrls: ['./scheduler.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SchedulerComponent implements OnInit, OnDestroy {
   @ViewChild('schedule', { static: false }) schedule!: ScheduleComponent;

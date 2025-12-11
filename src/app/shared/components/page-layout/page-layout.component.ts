@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlassButtonComponent } from '../glass-button/glass-button.component';
 import { fadeIn, slideInDown } from '../../../core/animations/animations';
@@ -24,7 +24,8 @@ export interface PageAction {
   imports: [CommonModule, GlassButtonComponent],
   animations: [fadeIn, slideInDown],
   templateUrl: './page-layout.component.html',
-  styleUrls: ['./page-layout.component.scss']
+  styleUrls: ['./page-layout.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageLayoutComponent {
   @Input() title: string = '';

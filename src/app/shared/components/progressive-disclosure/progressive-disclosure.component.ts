@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SharedModule } from '../../shared.module';
@@ -24,7 +24,8 @@ import { SharedModule } from '../../shared.module';
         animate('300ms ease-in-out')
       ])
     ])
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProgressiveDisclosureComponent implements OnInit {
   @Input() title: string = '';
@@ -33,21 +34,21 @@ export class ProgressiveDisclosureComponent implements OnInit {
   @Input() showIcon: boolean = true;
   @Input() icon: string = 'expand_more';
   @Input() iconExpanded: string = 'expand_less';
-  
+
   @Output() expandedChange = new EventEmitter<boolean>();
-  
+
   isExpanded: boolean = false;
   _uniqueId: string = `disclosure-${Math.random().toString(36).substr(2, 9)}`;
-  
+
   ngOnInit(): void {
     this.isExpanded = this.defaultExpanded;
   }
-  
+
   toggle(): void {
     this.isExpanded = !this.isExpanded;
     this.expandedChange.emit(this.isExpanded);
   }
-  
+
   get currentIcon(): string {
     return this.isExpanded ? this.iconExpanded : this.icon;
   }

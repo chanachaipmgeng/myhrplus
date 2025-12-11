@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SmartTextAreaModule, SmartTextAreaComponent as SyncfusionSmartTextAreaComponent } from '@syncfusion/ej2-angular-inputs';
 
@@ -24,7 +24,8 @@ export interface SmartTextAreaConfig {
   standalone: true,
   imports: [CommonModule, SmartTextAreaModule],
   templateUrl: './smart-textarea.component.html',
-  styleUrls: ['./smart-textarea.component.scss']
+  styleUrls: ['./smart-textarea.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SmartTextAreaComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('smartTextarea', { static: false }) smartTextarea!: SyncfusionSmartTextAreaComponent;

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarouselModule } from '@syncfusion/ej2-angular-navigations';
 import {
@@ -42,7 +42,8 @@ export interface CarouselConfig {
   standalone: true,
   imports: [CommonModule, CarouselModule],
   templateUrl: './carousel.component.html',
-  styleUrls: ['./carousel.component.scss']
+  styleUrls: ['./carousel.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarouselComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('carousel', { static: false }) carousel!: SyncfusionCarouselComponent;

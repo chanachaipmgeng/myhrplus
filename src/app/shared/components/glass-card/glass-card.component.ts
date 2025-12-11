@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -6,7 +6,8 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './glass-card.component.html',
-  styleUrls: ['./glass-card.component.scss']
+  styleUrls: ['./glass-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GlassCardComponent {
   @Input() variant: 'default' | 'strong' | 'weak' = 'default';
@@ -18,8 +19,8 @@ export class GlassCardComponent {
     const baseClass = this.variant === 'strong'
       ? 'glass-card-strong'
       : this.variant === 'weak'
-      ? 'glass-card-weak'
-      : 'glass-card';
+        ? 'glass-card-weak'
+        : 'glass-card';
 
     return `${baseClass} ${this.padding} ${this.customClass}`.trim();
   }

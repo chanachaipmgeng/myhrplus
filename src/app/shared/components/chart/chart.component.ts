@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChartModule } from '@syncfusion/ej2-angular-charts';
 import {
@@ -49,17 +49,18 @@ export interface ChartConfig {
   standalone: true,
   imports: [CommonModule, ChartModule],
   templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.scss']
+  styleUrls: ['./chart.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChartComponent implements OnInit, OnDestroy {
   @ViewChild('chart', { static: false }) chart!: SyncfusionChartComponent;
 
   // Data Source
   @Input() dataSource: any[] = [];
-  
+
   // Series
   @Input() series: ChartSeries[] = [];
-  
+
   // Axes
   @Input() primaryXAxis: any = {
     valueType: 'Category'
@@ -67,47 +68,47 @@ export class ChartComponent implements OnInit, OnDestroy {
   @Input() primaryYAxis: any = {
     valueType: 'Double'
   };
-  
+
   // Title
   @Input() title: string = '';
   @Input() titleStyle: any = {};
-  
+
   // Legend
   @Input() legendSettings: any = {
     visible: true,
     position: 'Top'
   };
-  
+
   // Tooltip
   @Input() tooltip: any = {
     enable: true
   };
-  
+
   // Chart Area
   @Input() chartArea: any = {
     border: {
       width: 0
     }
   };
-  
+
   // Margin
   @Input() margin: any = {};
-  
+
   // Size
   @Input() height: string | number = '400px';
   @Input() width: string | number = '100%';
-  
+
   // Theme
   @Input() theme: string = 'Material';
-  
+
   // Features
   @Input() enableAnimation: boolean = true;
   @Input() enableRtl: boolean = false;
   @Input() enableExport: boolean = true;
-  
+
   // Styling
   @Input() customClass: string = '';
-  
+
   // Events
   @Output() loaded = new EventEmitter<ILoadedEventArgs>();
   @Output() pointClick = new EventEmitter<IPointEventArgs>();

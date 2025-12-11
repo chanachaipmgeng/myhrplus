@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared.module';
 
@@ -7,7 +7,8 @@ import { SharedModule } from '../../shared.module';
   standalone: true,
   imports: [CommonModule, SharedModule],
   templateUrl: './page-header.component.html',
-  styleUrls: ['./page-header.component.scss']
+  styleUrls: ['./page-header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageHeaderComponent {
   @Input() title: string = '';

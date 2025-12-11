@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AutoCompleteModule } from '@syncfusion/ej2-angular-dropdowns';
 import {
@@ -42,7 +42,8 @@ export interface AutocompleteConfig {
   standalone: true,
   imports: [CommonModule, AutoCompleteModule],
   templateUrl: './autocomplete.component.html',
-  styleUrls: ['./autocomplete.component.scss']
+  styleUrls: ['./autocomplete.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AutocompleteComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('autocomplete', { static: false }) autocomplete!: SyncfusionAutoCompleteComponent;

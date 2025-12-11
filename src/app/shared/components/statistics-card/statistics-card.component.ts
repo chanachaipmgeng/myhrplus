@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlassCardComponent } from '../glass-card/glass-card.component';
 
@@ -7,7 +7,8 @@ import { GlassCardComponent } from '../glass-card/glass-card.component';
   standalone: true,
   imports: [CommonModule, GlassCardComponent],
   templateUrl: './statistics-card.component.html',
-  styleUrls: ['./statistics-card.component.scss']
+  styleUrls: ['./statistics-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StatisticsCardComponent {
   @Input() icon!: string;
@@ -19,8 +20,8 @@ export class StatisticsCardComponent {
 
   get changeClass(): string {
     if (!this.change) return '';
-    return this.change > 0 
-      ? 'text-green-600 dark:text-green-400' 
+    return this.change > 0
+      ? 'text-green-600 dark:text-green-400'
       : 'text-red-600 dark:text-red-400';
   }
 }

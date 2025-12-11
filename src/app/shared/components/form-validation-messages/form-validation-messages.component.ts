@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 
 export interface ValidationMessage {
@@ -10,7 +10,8 @@ export interface ValidationMessage {
 @Component({
   selector: 'app-form-validation-messages',
   templateUrl: './form-validation-messages.component.html',
-  styleUrls: ['./form-validation-messages.component.scss']
+  styleUrls: ['./form-validation-messages.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormValidationMessagesComponent implements OnInit {
   @Input() control!: AbstractControl | null;

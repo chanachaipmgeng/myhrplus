@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PdfViewerModule } from '@syncfusion/ej2-angular-pdfviewer';
 import {
@@ -39,7 +39,8 @@ export interface PdfViewerConfig {
   standalone: true,
   imports: [CommonModule, PdfViewerModule],
   templateUrl: './pdf-viewer.component.html',
-  styleUrls: ['./pdf-viewer.component.scss']
+  styleUrls: ['./pdf-viewer.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PdfViewerComponent implements OnInit, OnDestroy {
   @ViewChild('pdfviewer', { static: false }) pdfviewer!: SyncfusionPdfViewerComponent;

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GanttModule } from '@syncfusion/ej2-angular-gantt';
 import {
@@ -90,7 +90,8 @@ export interface GanttConfig {
     CriticalPathService
   ],
   templateUrl: './gantt.component.html',
-  styleUrls: ['./gantt.component.scss']
+  styleUrls: ['./gantt.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GanttComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('gantt', { static: false }) gantt!: SyncfusionGanttComponent;

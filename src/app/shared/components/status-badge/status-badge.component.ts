@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-export type StatusType = 
+export type StatusType =
   | 'pending' | 'approved' | 'rejected' | 'cancelled'
   | 'draft' | 'submitted' | 'reviewed' | 'completed'
   | 'active' | 'inactive' | 'suspended'
@@ -10,7 +10,8 @@ export type StatusType =
 @Component({
   selector: 'app-status-badge',
   templateUrl: './status-badge.component.html',
-  styleUrls: ['./status-badge.component.scss']
+  styleUrls: ['./status-badge.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StatusBadgeComponent {
   @Input() status: StatusType = 'pending';
@@ -21,7 +22,7 @@ export class StatusBadgeComponent {
 
   get displayLabel(): string {
     if (this.label) return this.label;
-    
+
     const labelMap: Record<StatusType, string> = {
       pending: 'รอดำเนินการ',
       approved: 'อนุมัติแล้ว',

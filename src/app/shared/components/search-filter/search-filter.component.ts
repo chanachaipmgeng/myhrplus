@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
@@ -13,7 +13,8 @@ export interface FilterOption {
 @Component({
   selector: 'app-search-filter',
   templateUrl: './search-filter.component.html',
-  styleUrls: ['./search-filter.component.scss']
+  styleUrls: ['./search-filter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchFilterComponent implements OnInit {
   @Input() placeholder: string = 'ค้นหา...';
@@ -102,7 +103,7 @@ export class SearchFilterComponent implements OnInit {
   getFilterDisplayValue(key: string): string {
     const value = this.activeFilters[key];
     if (!value) return '';
-    
+
     const filter = this.filters.find(f => f.key === key);
     if (filter?.type === 'select' && filter.options) {
       const option = filter.options.find(o => o.value === value);

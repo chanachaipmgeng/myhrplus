@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
@@ -11,7 +11,8 @@ export interface BreadcrumbItem {
 @Component({
   selector: 'app-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',
-  styleUrls: ['./breadcrumbs.component.scss']
+  styleUrls: ['./breadcrumbs.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BreadcrumbsComponent implements OnInit {
   @Input() items: BreadcrumbItem[] = [];
@@ -26,7 +27,7 @@ export class BreadcrumbsComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (this.autoGenerate) {
@@ -43,7 +44,7 @@ export class BreadcrumbsComponent implements OnInit {
 
   private generateBreadcrumbs(): void {
     const breadcrumbs: BreadcrumbItem[] = [];
-    
+
     if (this.showHome) {
       breadcrumbs.push({
         label: 'หน้าแรก',
@@ -64,9 +65,9 @@ export class BreadcrumbsComponent implements OnInit {
         if (childRoute.outlet === 'primary') {
           const routeSnapshot = childRoute.snapshot;
           url += '/' + routeSnapshot.url.map(segment => segment.path).join('/');
-          
+
           routeData = routeSnapshot.data;
-          
+
           // Check for breadcrumbs array first (new format)
           if (routeData && routeData['breadcrumbs'] && Array.isArray(routeData['breadcrumbs'])) {
             routeData['breadcrumbs'].forEach((item: any) => {
@@ -95,7 +96,7 @@ export class BreadcrumbsComponent implements OnInit {
               });
             });
           }
-          
+
           route = childRoute;
         }
       });

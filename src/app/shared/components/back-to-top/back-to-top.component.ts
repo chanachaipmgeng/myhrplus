@@ -1,10 +1,11 @@
 import { ViewportScroller } from '@angular/common';
-import { Component, ElementRef, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-back-to-top',
   templateUrl: './back-to-top.component.html',
-  styleUrls: ['./back-to-top.component.scss']
+  styleUrls: ['./back-to-top.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BackToTopComponent {
   public show = false;
@@ -12,7 +13,7 @@ export class BackToTopComponent {
   constructor(
     private viewScroller: ViewportScroller,
     private elementRef: ElementRef
-  ) {}
+  ) { }
 
   @HostListener('window:scroll', [])
   onWindowScroll(): void {

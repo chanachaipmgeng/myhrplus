@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SignatureModule } from '@syncfusion/ej2-angular-inputs';
 import {
@@ -24,7 +24,8 @@ export interface SignatureConfig {
   standalone: true,
   imports: [CommonModule, SignatureModule],
   templateUrl: './signature.component.html',
-  styleUrls: ['./signature.component.scss']
+  styleUrls: ['./signature.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignatureComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('signature', { static: false }) signature!: SyncfusionSignatureComponent;

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
 import {
@@ -34,7 +34,8 @@ export interface UploaderConfig {
   standalone: true,
   imports: [CommonModule, UploaderModule],
   templateUrl: './syncfusion-uploader.component.html',
-  styleUrls: ['./syncfusion-uploader.component.scss']
+  styleUrls: ['./syncfusion-uploader.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SyncfusionUploaderWrapperComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('uploader', { static: false }) uploader!: SyncfusionUploaderComponent;

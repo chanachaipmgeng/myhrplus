@@ -1,4 +1,4 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 
@@ -14,7 +14,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/f
     }
   ],
   templateUrl: './glass-input.component.html',
-  styleUrls: ['./glass-input.component.scss']
+  styleUrls: ['./glass-input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GlassInputComponent implements ControlValueAccessor {
   @Input() label: string = '';
@@ -33,8 +34,8 @@ export class GlassInputComponent implements ControlValueAccessor {
   value: string = '';
   hasError: boolean = false;
 
-  private onChange = (value: string) => {};
-  private onTouched = () => {};
+  private onChange = (value: string) => { };
+  private onTouched = () => { };
 
   get containerClass(): string {
     return this.fullWidth ? 'w-full' : '';

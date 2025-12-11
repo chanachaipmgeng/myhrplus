@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeService, ThemeMode, ThemeColor } from '../../../core/services/theme.service';
 import { SharedModule } from '../../shared.module';
@@ -8,7 +8,8 @@ import { SharedModule } from '../../shared.module';
   standalone: true,
   imports: [CommonModule, SharedModule],
   templateUrl: './theme-toggle.component.html',
-  styleUrls: ['./theme-toggle.component.scss']
+  styleUrls: ['./theme-toggle.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ThemeToggleComponent implements OnInit {
   currentMode: ThemeMode = 'light';
@@ -31,7 +32,7 @@ export class ThemeToggleComponent implements OnInit {
     { value: 'pink' as ThemeColor, name: 'ชมพู', gradient: 'linear-gradient(135deg, #ec4899, #db2777)' }
   ];
 
-  constructor(public themeService: ThemeService) {}
+  constructor(public themeService: ThemeService) { }
 
   ngOnInit(): void {
     this.themeService.theme$.subscribe(theme => {

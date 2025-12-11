@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../core/services/auth.service';
@@ -22,7 +22,8 @@ import { SharedModule } from '../../shared.module';
 @Component({
   selector: 'app-pdpa-consent-modal',
   templateUrl: './pdpa-consent-modal.component.html',
-  styleUrls: ['./pdpa-consent-modal.component.scss']
+  styleUrls: ['./pdpa-consent-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PdpaConsentModalComponent implements OnInit {
   @Input() pdpa: Pdpa | null = null;
@@ -36,7 +37,7 @@ export class PdpaConsentModalComponent implements OnInit {
   constructor(
     private authService: AuthService,
     public translate: TranslateService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // Set default language if not set

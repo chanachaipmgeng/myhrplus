@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export interface DatePreset {
@@ -10,7 +10,8 @@ export interface DatePreset {
 @Component({
   selector: 'app-date-range-picker',
   templateUrl: './date-range-picker.component.html',
-  styleUrls: ['./date-range-picker.component.scss']
+  styleUrls: ['./date-range-picker.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DateRangePickerComponent implements OnInit {
   @Input() startDate: Date | null = null;
@@ -21,7 +22,7 @@ export class DateRangePickerComponent implements OnInit {
   @Input() maxDate: Date | null = null;
   @Input() format: string = 'dd/MM/yyyy';
 
-  @Output() rangeChange = new EventEmitter<{start: Date | null, end: Date | null}>();
+  @Output() rangeChange = new EventEmitter<{ start: Date | null, end: Date | null }>();
 
   dateRangeForm: FormGroup;
   showPresetMenu: boolean = false;
@@ -50,7 +51,7 @@ export class DateRangePickerComponent implements OnInit {
   onDateChange(): void {
     const start = this.dateRangeForm.get('startDate')?.value;
     const end = this.dateRangeForm.get('endDate')?.value;
-    
+
     if (start && end && start > end) {
       // Swap dates if start is after end
       this.dateRangeForm.patchValue({
@@ -78,7 +79,7 @@ export class DateRangePickerComponent implements OnInit {
     if (this.presets.length > 0) {
       return this.presets;
     }
-    
+
     const now = new Date();
     return [
       {

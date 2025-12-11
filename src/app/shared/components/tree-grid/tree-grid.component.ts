@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TreeGridModule } from '@syncfusion/ej2-angular-treegrid';
 import {
@@ -82,7 +82,8 @@ export interface TreeGridConfig {
     VirtualScrollService
   ],
   templateUrl: './tree-grid.component.html',
-  styleUrls: ['./tree-grid.component.scss']
+  styleUrls: ['./tree-grid.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeGridComponent implements OnInit, OnDestroy {
   @ViewChild('treegrid', { static: false }) treegrid!: SyncfusionTreeGridComponent;
@@ -90,13 +91,13 @@ export class TreeGridComponent implements OnInit, OnDestroy {
   // Data
   @Input() dataSource: any[] = [];
   @Input() columns: TreeGridColumn[] = [];
-  
+
   // Tree Settings
   @Input() childMapping: string = 'subtasks';
   @Input() hasChildMapping?: string;
   @Input() idMapping?: string;
   @Input() parentIdMapping?: string;
-  
+
   // Features
   @Input() allowPaging: boolean = true;
   @Input() allowSorting: boolean = true;
@@ -110,7 +111,7 @@ export class TreeGridComponent implements OnInit, OnDestroy {
   @Input() allowPdfExport: boolean = true;
   @Input() showColumnChooser: boolean = true;
   @Input() enableVirtualization: boolean = false;
-  
+
   // Settings
   @Input() pageSettings: any = {
     pageSize: 10,
@@ -127,12 +128,12 @@ export class TreeGridComponent implements OnInit, OnDestroy {
     mode: 'Row'
   };
   @Input() toolbar: any[] = ['Add', 'Edit', 'Delete', 'Update', 'Cancel', 'Search', 'ExcelExport', 'PdfExport', 'CsvExport', 'ColumnChooser'];
-  
+
   // Styling
   @Input() customClass: string = '';
   @Input() height: string | number = '400px';
   @Input() width: string | number = '100%';
-  
+
   // Events
   @Output() created = new EventEmitter<any>();
   @Output() dataBound = new EventEmitter<any>();

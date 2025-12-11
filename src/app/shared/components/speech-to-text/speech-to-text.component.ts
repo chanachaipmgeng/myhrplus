@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SpeechToTextModule, TextAreaModule, TextAreaComponent } from '@syncfusion/ej2-angular-inputs';
 
@@ -18,7 +18,8 @@ export interface SpeechToTextConfig {
   standalone: true,
   imports: [CommonModule, SpeechToTextModule, TextAreaModule],
   templateUrl: './speech-to-text.component.html',
-  styleUrls: ['./speech-to-text.component.scss']
+  styleUrls: ['./speech-to-text.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SpeechToTextComponent implements OnInit, OnDestroy {
   @ViewChild('outputTextarea', { static: false }) outputTextarea!: TextAreaComponent;
@@ -31,10 +32,10 @@ export class SpeechToTextComponent implements OnInit, OnDestroy {
   @Input() serviceURI?: string;
   @Input() grammars?: string;
   @Input() showUI: boolean = true;
-  
+
   // Value
   @Input() value: string = '';
-  
+
   // TextArea Settings
   @Input() placeholder: string = 'Text from speech will appear here...';
   @Input() rows: number = 5;
@@ -42,10 +43,10 @@ export class SpeechToTextComponent implements OnInit, OnDestroy {
   @Input() resizeMode: 'None' | 'Both' | 'Horizontal' | 'Vertical' = 'None';
   @Input() readonly: boolean = false;
   @Input() enabled: boolean = true;
-  
+
   // Styling
   @Input() customClass: string = '';
-  
+
   // Events
   @Output() transcriptChanged = new EventEmitter<any>();
   @Output() started = new EventEmitter<any>();
@@ -215,7 +216,7 @@ export class SpeechToTextComponent implements OnInit, OnDestroy {
    * Check if speech recognition is supported
    */
   isSupported(): boolean {
-    return !!(typeof window !== 'undefined' && 
+    return !!(typeof window !== 'undefined' &&
       (('webkitSpeechRecognition' in window) || ('SpeechRecognition' in window)));
   }
 

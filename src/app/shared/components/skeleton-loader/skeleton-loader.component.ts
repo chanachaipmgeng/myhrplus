@@ -1,11 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 export type SkeletonType = 'text' | 'card' | 'table' | 'list' | 'avatar' | 'custom';
 
 @Component({
   selector: 'app-skeleton-loader',
   templateUrl: './skeleton-loader.component.html',
-  styleUrls: ['./skeleton-loader.component.scss']
+  styleUrls: ['./skeleton-loader.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SkeletonLoaderComponent {
   @Input() type: SkeletonType = 'text';

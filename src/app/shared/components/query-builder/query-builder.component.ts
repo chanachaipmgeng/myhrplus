@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QueryBuilderModule } from '@syncfusion/ej2-angular-querybuilder';
 import {
@@ -37,27 +37,28 @@ export interface QueryBuilderConfig {
   standalone: true,
   imports: [CommonModule, QueryBuilderModule],
   templateUrl: './query-builder.component.html',
-  styleUrls: ['./query-builder.component.scss']
+  styleUrls: ['./query-builder.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QueryBuilderComponent implements OnInit, OnDestroy {
   @ViewChild('querybuilder', { static: false }) querybuilder!: SyncfusionQueryBuilderComponent;
 
   // Data Source
   @Input() dataSource: any[] = [];
-  
+
   // Columns
   @Input() columns: QueryBuilderColumn[] = [];
-  
+
   // Rule
   @Input() rule: RuleModel = {
     condition: 'and',
     rules: []
   };
-  
+
   // Size
   @Input() width: string | number = '100%';
   @Input() height: string | number = '600px';
-  
+
   // Features
   @Input() allowValidation: boolean = true;
   @Input() enableNotCondition: boolean = true;
@@ -65,10 +66,10 @@ export class QueryBuilderComponent implements OnInit, OnDestroy {
   @Input() separator: string = ',';
   @Input() displayMode: 'Horizontal' | 'Vertical' = 'Horizontal';
   @Input() showButtons: boolean = true;
-  
+
   // Styling
   @Input() customClass: string = '';
-  
+
   // Events
   @Output() created = new EventEmitter<any>();
   @Output() beforeChange = new EventEmitter<any>();

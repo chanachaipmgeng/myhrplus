@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StatisticsCardComponent } from '../statistics-card/statistics-card.component';
 
@@ -16,7 +16,8 @@ export interface StatCard {
   standalone: true,
   imports: [CommonModule, StatisticsCardComponent],
   templateUrl: './statistics-grid.component.html',
-  styleUrls: ['./statistics-grid.component.scss']
+  styleUrls: ['./statistics-grid.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StatisticsGridComponent {
   @Input() stats: StatCard[] = [];

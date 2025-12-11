@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlassCardComponent } from '../glass-card/glass-card.component';
 import { GlassButtonComponent } from '../glass-button/glass-button.component';
@@ -15,7 +15,8 @@ export interface EmptyStateAction {
   standalone: true,
   imports: [CommonModule, GlassCardComponent, GlassButtonComponent],
   templateUrl: './empty-state.component.html',
-  styleUrls: ['./empty-state.component.scss']
+  styleUrls: ['./empty-state.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EmptyStateComponent {
   @Input() icon?: string;

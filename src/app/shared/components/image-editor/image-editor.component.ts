@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ImageEditorModule } from '@syncfusion/ej2-angular-image-editor';
 import {
@@ -21,7 +21,8 @@ export interface ImageEditorConfig {
   standalone: true,
   imports: [CommonModule, ImageEditorModule],
   templateUrl: './image-editor.component.html',
-  styleUrls: ['./image-editor.component.scss']
+  styleUrls: ['./image-editor.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ImageEditorComponent implements OnInit, OnDestroy {
   @ViewChild('imageEditor', { static: false }) imageEditor!: SyncfusionImageEditorComponent;
@@ -29,18 +30,18 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
   // Size
   @Input() width: string | number = '100%';
   @Input() height: string | number = '600px';
-  
+
   // Toolbar
   @Input() toolbar: string[] = [
     'Annotate', 'Crop', 'Transform', 'Finetune', 'Filter', 'ZoomIn', 'ZoomOut', 'Reset', 'Save'
   ];
-  
+
   // Features
   @Input() allowUndoRedo: boolean = true;
-  
+
   // Styling
   @Input() customClass: string = '';
-  
+
   // Events
   @Output() created = new EventEmitter<any>();
   @Output() imageLoaded = new EventEmitter<any>();
@@ -174,7 +175,7 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
     if (this.imageEditor) {
       const editor = this.imageEditor as any;
       const ctx = editor.getContext ? editor.getContext('2d') : null;
-      
+
       switch (type) {
         case 'RotateLeft':
           editor.rotateImage('rotateleft');

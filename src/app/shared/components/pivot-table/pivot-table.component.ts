@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PivotViewModule } from '@syncfusion/ej2-angular-pivotview';
 import {
@@ -42,7 +42,8 @@ export interface PivotTableConfig {
     DrillThroughService
   ],
   templateUrl: './pivot-table.component.html',
-  styleUrls: ['./pivot-table.component.scss']
+  styleUrls: ['./pivot-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PivotTableComponent implements OnInit, OnDestroy {
   @ViewChild('pivotview', { static: false }) pivotview!: any;

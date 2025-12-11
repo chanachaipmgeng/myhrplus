@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GridModule } from '@syncfusion/ej2-angular-grids';
 import {
@@ -91,17 +91,18 @@ export interface DataGridConfig {
     VirtualScrollService
   ],
   templateUrl: './data-grid.component.html',
-  styleUrls: ['./data-grid.component.scss']
+  styleUrls: ['./data-grid.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DataGridComponent implements OnInit, OnDestroy {
   @ViewChild('grid', { static: false }) grid!: GridComponent;
 
   // Data Source
   @Input() dataSource: any[] = [];
-  
+
   // Columns
   @Input() columns: DataGridColumn[] = [];
-  
+
   // Features
   @Input() allowPaging: boolean = true;
   @Input() allowSorting: boolean = true;
@@ -115,7 +116,7 @@ export class DataGridComponent implements OnInit, OnDestroy {
   @Input() allowPdfExport: boolean = true;
   @Input() showColumnChooser: boolean = false;
   @Input() showToolbar: boolean = true;
-  
+
   // Settings
   @Input() pageSettings: any = {
     pageSize: 10,
@@ -141,17 +142,17 @@ export class DataGridComponent implements OnInit, OnDestroy {
     allowDeleting: false,
     mode: 'Normal'
   };
-  
+
   // Toolbar
   @Input() toolbar: any[] = ['Add', 'Edit', 'Delete', 'Update', 'Cancel', 'Search', 'ExcelExport', 'PdfExport', 'CsvExport', 'Print', 'ColumnChooser'];
-  
+
   // Size
   @Input() height: string | number = '600px';
   @Input() width: string | number = '100%';
-  
+
   // Styling
   @Input() customClass: string = '';
-  
+
   // Events
   @Output() rowSelected = new EventEmitter<any>();
   @Output() rowDeselected = new EventEmitter<any>();

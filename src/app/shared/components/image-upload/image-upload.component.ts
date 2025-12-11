@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
   createImageData,
@@ -45,7 +45,8 @@ export interface UploadedImage {
       useExisting: ImageUploadComponent,
       multi: true
     }
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ImageUploadComponent implements OnInit, ControlValueAccessor {
   @Input() label = 'อัปโหลดรูปภาพ';
@@ -72,8 +73,8 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
   isDragging = false;
   errors: string[] = [];
 
-  private onChange = (value: UploadedImage[]) => {};
-  private onTouched = () => {};
+  private onChange = (value: UploadedImage[]) => { };
+  private onTouched = () => { };
 
   ngOnInit(): void {
     if (!this.config.maxSize) this.config.maxSize = 5;

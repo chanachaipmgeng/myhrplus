@@ -1,11 +1,12 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 export type ErrorType = 'network' | 'server' | 'validation' | 'permission' | 'notfound' | 'generic';
 
 @Component({
   selector: 'app-error-state',
   templateUrl: './error-state.component.html',
-  styleUrls: ['./error-state.component.scss']
+  styleUrls: ['./error-state.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ErrorStateComponent {
   @Input() type: ErrorType = 'generic';

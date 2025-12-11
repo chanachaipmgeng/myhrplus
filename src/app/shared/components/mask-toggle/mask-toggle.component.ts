@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { FieldMaskingService } from '../../../core/services/field-masking.service';
 
 /**
@@ -35,7 +35,8 @@ import { FieldMaskingService } from '../../../core/services/field-masking.servic
     .mask-toggle-btn:hover {
       color: var(--bs-link-hover-color);
     }
-  `]
+  `],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MaskToggleComponent {
   @Input() value: string | null | undefined = '';
@@ -44,7 +45,7 @@ export class MaskToggleComponent {
   /** true = show raw value / false = show masked value */
   show = false;
 
-  constructor(private maskService: FieldMaskingService) {}
+  constructor(private maskService: FieldMaskingService) { }
 
   get display(): string | null | undefined {
     return this.show ? this.value : this.maskService.mask(this.fieldName, this.value);

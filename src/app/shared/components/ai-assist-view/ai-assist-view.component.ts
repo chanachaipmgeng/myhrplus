@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -19,7 +19,8 @@ export interface AIAssistViewConfig {
   imports: [CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './ai-assist-view.component.html',
-  styleUrls: ['./ai-assist-view.component.scss']
+  styleUrls: ['./ai-assist-view.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AIAssistViewComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('container', { static: false }) container!: ElementRef<HTMLDivElement>;

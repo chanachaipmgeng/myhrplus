@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
 import {
@@ -67,21 +67,22 @@ export interface RichTextEditorConfig {
     CountService
   ],
   templateUrl: './rich-text-editor.component.html',
-  styleUrls: ['./rich-text-editor.component.scss']
+  styleUrls: ['./rich-text-editor.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RichTextEditorComponent implements OnInit, OnDestroy {
   @ViewChild('rte', { static: false }) rte!: SyncfusionRichTextEditorComponent;
 
   // Value
   @Input() value: string = '';
-  
+
   // Placeholder
   @Input() placeholder: string = 'Enter text here...';
-  
+
   // Size
   @Input() height: string | number = '400px';
   @Input() width: string | number = '100%';
-  
+
   // Toolbar Settings
   @Input() toolbarSettings: ToolbarSettingsModel = {
     items: [
@@ -94,7 +95,7 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
       'SourceCode', 'FullScreen', '|', 'Undo', 'Redo'
     ]
   };
-  
+
   // Quick Toolbar Settings
   @Input() quickToolbarSettings: QuickToolbarSettingsModel = {
     image: [
@@ -116,7 +117,7 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
       'TableProperties'
     ]
   };
-  
+
   // Image Settings
   @Input() imageSettings: ImageSettingsModel = {
     allowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
@@ -128,15 +129,15 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
     path: '',
     resize: true
   };
-  
+
   // File Manager Settings
   @Input() fileManagerSettings: FileManagerSettingsModel = {};
-  
+
   // Table Settings
   @Input() tableSettings: TableSettingsModel = {
     width: '100%'
   };
-  
+
   // Paste Cleanup Settings
   @Input() pasteCleanupSettings: PasteCleanupSettingsModel = {
     prompt: true,
@@ -146,13 +147,13 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
     deniedAttrs: [],
     allowedStyleProps: []
   };
-  
+
   // HTML Editor Settings
   @Input() htmlEditorSettings: any = {};
-  
+
   // Markdown Settings
   @Input() markdownSettings: any = {};
-  
+
   // Features
   @Input() enableRtl: boolean = false;
   @Input() enableResize: boolean = true;
@@ -163,10 +164,10 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
   @Input() showCharCount: boolean = false;
   @Input() maxLength: number = 0;
   @Input() readonly: boolean = false;
-  
+
   // Styling
   @Input() customClass: string = '';
-  
+
   // Events
   @Output() created = new EventEmitter<any>();
   @Output() change = new EventEmitter<any>();

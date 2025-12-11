@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SpreadsheetModule } from '@syncfusion/ej2-angular-spreadsheet';
 import {
@@ -40,7 +40,8 @@ export interface SpreadsheetConfig {
   standalone: true,
   imports: [CommonModule, SpreadsheetModule],
   templateUrl: './spreadsheet.component.html',
-  styleUrls: ['./spreadsheet.component.scss']
+  styleUrls: ['./spreadsheet.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SpreadsheetComponent implements OnInit, OnDestroy {
   @ViewChild('spreadsheet', { static: false }) spreadsheet!: SyncfusionSpreadsheetComponent;

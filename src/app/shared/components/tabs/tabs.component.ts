@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, HostListener, QueryList, ViewChildren, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener, QueryList, ViewChildren, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 export interface Tab {
@@ -14,14 +14,15 @@ export interface Tab {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './tabs.component.html',
-  styleUrls: ['./tabs.component.scss']
+  styleUrls: ['./tabs.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabsComponent {
   @Input() tabs!: Tab[];
   @Input() activeTab: string = '';
   @Input() ariaLabel?: string;
   @Output() activeTabChange = new EventEmitter<string>();
-  
+
   @ViewChildren('tabButton') tabButtons!: QueryList<ElementRef<HTMLButtonElement>>;
 
   selectTab(tabId: string): void {
@@ -82,7 +83,7 @@ export class TabsComponent {
       }, 0);
     }
   }
-  
+
   getTabClasses(tabId: string): string {
     const base = 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-300';
     const active = 'border-primary-500 text-primary-600 dark:text-primary-400';

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DiagramModule } from '@syncfusion/ej2-angular-diagrams';
 import {
@@ -32,7 +32,8 @@ export interface DiagramsConfig {
   standalone: true,
   imports: [CommonModule, DiagramModule],
   templateUrl: './diagrams.component.html',
-  styleUrls: ['./diagrams.component.scss']
+  styleUrls: ['./diagrams.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DiagramsComponent implements OnInit, OnDestroy {
   @ViewChild('diagram', { static: false }) diagram!: SyncfusionDiagramComponent;

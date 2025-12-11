@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NavService } from '../../../core/services/nav.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -6,13 +6,14 @@ import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-content-layout',
   templateUrl: './content-layout.component.html',
-  styleUrls: ['./content-layout.component.scss']
+  styleUrls: ['./content-layout.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContentLayoutComponent implements OnInit {
   constructor(
     public navService: NavService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // Close sidebar on mobile when route changes

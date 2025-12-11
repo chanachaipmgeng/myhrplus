@@ -1,4 +1,4 @@
-import { Component, Input, TemplateRef } from '@angular/core';
+import { Component, Input, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TooltipComponent } from '../tooltip/tooltip.component';
 import { SharedModule } from '../../shared.module';
@@ -8,7 +8,8 @@ import { SharedModule } from '../../shared.module';
   standalone: true,
   imports: [CommonModule, TooltipComponent, SharedModule],
   templateUrl: './contextual-help.component.html',
-  styleUrls: ['./contextual-help.component.scss']
+  styleUrls: ['./contextual-help.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContextualHelpComponent {
   @Input() text?: string;
@@ -18,21 +19,21 @@ export class ContextualHelpComponent {
   @Input() variant: 'default' | 'inline' | 'icon-only' = 'default';
   @Input() customTemplate?: TemplateRef<any>;
   @Input() showOnHover: boolean = true;
-  
+
   showTooltip: boolean = false;
-  
+
   toggleTooltip(): void {
     if (!this.showOnHover) {
       this.showTooltip = !this.showTooltip;
     }
   }
-  
+
   onMouseEnter(): void {
     if (this.showOnHover) {
       this.showTooltip = true;
     }
   }
-  
+
   onMouseLeave(): void {
     if (this.showOnHover) {
       this.showTooltip = false;

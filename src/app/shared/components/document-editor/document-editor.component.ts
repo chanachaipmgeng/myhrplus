@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DocumentEditorModule } from '@syncfusion/ej2-angular-documenteditor';
 import {
@@ -60,7 +60,8 @@ export interface DocumentEditorConfig {
   standalone: true,
   imports: [CommonModule, DocumentEditorModule],
   templateUrl: './document-editor.component.html',
-  styleUrls: ['./document-editor.component.scss']
+  styleUrls: ['./document-editor.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DocumentEditorComponent implements OnInit, OnDestroy {
   @ViewChild('documentEditor', { static: false }) documentEditor!: SyncfusionDocumentEditorComponent;
@@ -68,7 +69,7 @@ export class DocumentEditorComponent implements OnInit, OnDestroy {
   // Size
   @Input() width: string | number = '100%';
   @Input() height: string | number = '800px';
-  
+
   // Features
   @Input() enableSpellCheck: boolean = true;
   @Input() enableSelection: boolean = true;
@@ -100,10 +101,10 @@ export class DocumentEditorComponent implements OnInit, OnDestroy {
   @Input() enableSfdtExport: boolean = true;
   @Input() enableTextExport: boolean = true;
   @Input() enableSearch: boolean = true;
-  
+
   // Styling
   @Input() customClass: string = '';
-  
+
   // Events
   @Output() created = new EventEmitter<any>();
   @Output() documentChange = new EventEmitter<any>();

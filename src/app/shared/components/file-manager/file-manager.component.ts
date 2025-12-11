@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FileManagerModule } from '@syncfusion/ej2-angular-filemanager';
 import {
@@ -43,7 +43,8 @@ export interface FileManagerConfig {
   standalone: true,
   imports: [CommonModule, FileManagerModule],
   templateUrl: './file-manager.component.html',
-  styleUrls: ['./file-manager.component.scss']
+  styleUrls: ['./file-manager.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileManagerComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('filemanager', { static: false }) filemanager!: SyncfusionFileManagerComponent;
