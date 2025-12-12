@@ -1,10 +1,5 @@
-<div
-  [class]="cardClass"
-  [class.animate-fade-in]="animate === 'fade-in'"
-  [class.animate-slide-up]="animate === 'slide-up'"
-  [class.animate-slide-down]="animate === 'slide-down'"
-  [class.animate-scale-in]="animate === 'scale-in'">
+<div [class]="cardClass()" [class.animate-fade-in]="animate() === 'fade-in'"
+  [class.animate-slide-up]="animate() === 'slide-up'" [class.animate-slide-down]="animate() === 'slide-down'"
+  [class.animate-scale-in]="animate() === 'scale-in'">
   <ng-content></ng-content>
 </div>
-
-

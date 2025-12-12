@@ -19,12 +19,12 @@ export class NotificationService {
     }
 
     const componentRef = this.notificationContainer.createComponent(NotificationComponent);
-    componentRef.instance.message = message;
-    componentRef.instance.type = type;
-    componentRef.instance.duration = duration;
-    componentRef.instance.onClose = () => {
+    componentRef.setInput('message', message);
+    componentRef.setInput('type', type);
+    componentRef.setInput('duration', duration);
+    componentRef.setInput('onClose', () => {
       this.removeNotification(componentRef);
-    };
+    });
 
     this.notifications.push(componentRef);
 

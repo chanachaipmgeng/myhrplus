@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output, computed } from '@angular/core';
 
 export type ErrorType = 'network' | 'server' | 'validation' | 'permission' | 'notfound' | 'generic';
 
@@ -9,18 +9,18 @@ export type ErrorType = 'network' | 'server' | 'validation' | 'permission' | 'no
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ErrorStateComponent {
-  @Input() type: ErrorType = 'generic';
-  @Input() title: string = '';
-  @Input() message: string = '';
-  @Input() errorCode: string | number = '';
-  @Input() showRetry: boolean = false;
-  @Input() retryText: string = 'ลองอีกครั้ง';
-  @Input() showDetails: boolean = false;
-  @Input() details: string = '';
+  type = input<ErrorType>('generic');
+  title = input<string>('');
+  message = input<string>('');
+  errorCode = input<string | number>('');
+  showRetry = input<boolean>(false);
+  retryText = input<string>('ลองอีกครั้ง');
+  showDetails = input<boolean>(false);
+  details = input<string>('');
 
-  @Output() retry = new EventEmitter<void>();
+  retry = output<void>();
 
-  get errorIcon(): string {
+  errorIcon = computed(() => {
     const iconMap: Record<ErrorType, string> = {
       network: 'wifi_off',
       server: 'dns',
@@ -29,10 +29,10 @@ export class ErrorStateComponent {
       notfound: 'search_off',
       generic: 'error_outline'
     };
-    return iconMap[this.type] || 'error_outline';
-  }
+    return iconMap[this.type()] || 'error_outline';
+  });
 
-  get defaultTitle(): string {
+  defaultTitle = computed(() => {
     const titleMap: Record<ErrorType, string> = {
       network: 'ไม่สามารถเชื่อมต่อได้',
       server: 'เกิดข้อผิดพลาดจากเซิร์ฟเวอร์',
@@ -41,10 +41,10 @@ export class ErrorStateComponent {
       notfound: 'ไม่พบข้อมูล',
       generic: 'เกิดข้อผิดพลาด'
     };
-    return titleMap[this.type] || 'เกิดข้อผิดพลาด';
-  }
+    return titleMap[this.type()] || 'เกิดข้อผิดพลาด';
+  });
 
-  get defaultMessage(): string {
+  defaultMessage = computed(() => {
     const messageMap: Record<ErrorType, string> = {
       network: 'กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ตและลองอีกครั้ง',
       server: 'เกิดข้อผิดพลาดจากเซิร์ฟเวอร์ กรุณาลองอีกครั้งในภายหลัง',
@@ -53,8 +53,8 @@ export class ErrorStateComponent {
       notfound: 'ไม่พบข้อมูลที่คุณกำลังค้นหา',
       generic: 'เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ กรุณาลองอีกครั้ง'
     };
-    return messageMap[this.type] || 'เกิดข้อผิดพลาด';
-  }
+    return messageMap[this.type()] || 'เกิดข้อผิดพลาด';
+  });
 
   onRetry(): void {
     this.retry.emit();

@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
 
 @Component({
   selector: 'app-icon',
@@ -7,12 +7,12 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IconComponent {
-  @Input() name!: string;
-  @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
-  @Input() color?: string;
-  @Input() ariaLabel?: string;
+  name = input.required<string>();
+  size = input<'xs' | 'sm' | 'md' | 'lg' | 'xl'>('md');
+  color = input<string | undefined>(undefined);
+  ariaLabel = input<string | undefined>(undefined);
 
-  get sizeClass(): string {
+  sizeClass = computed(() => {
     const sizeMap = {
       xs: 'text-xs w-3 h-3',
       sm: 'text-base w-4 h-4',
@@ -20,7 +20,7 @@ export class IconComponent {
       lg: 'text-2xl w-6 h-6',
       xl: 'text-4xl w-10 h-10'
     };
-    return sizeMap[this.size];
-  }
+    return sizeMap[this.size()];
+  });
 }
 

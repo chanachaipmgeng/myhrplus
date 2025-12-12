@@ -1,10 +1,8 @@
-<span
-  class="status-badge"
-  [ngClass]="[
-    'status-' + statusColor,
-    'badge-' + size,
-    'badge-' + variant
+<span class="status-badge" [ngClass]="[
+    'status-' + statusColor(),
+    'badge-' + size(),
+    'badge-' + variant()
   ]">
-  <app-icon *ngIf="showIcon" [name]="statusIcon" size="sm" class="badge-icon"></app-icon>
-  <span class="badge-label thai-text">{{ displayLabel }}</span>
+  <app-icon *ngIf="showIcon()" [name]="statusIcon()" size="sm" class="badge-icon"></app-icon>
+  <span class="badge-label thai-text">{{ displayLabel() }}</span>
 </span>

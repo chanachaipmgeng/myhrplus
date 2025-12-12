@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlassCardComponent } from '../glass-card/glass-card.component';
 import { GlassButtonComponent } from '../glass-button/glass-button.component';
@@ -19,20 +19,20 @@ export interface EmptyStateAction {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EmptyStateComponent {
-  @Input() icon?: string;
-  @Input() title?: string;
-  @Input() description?: string;
-  @Input() action?: EmptyStateAction;
-  @Input() iconSize: 'sm' | 'md' | 'lg' = 'md';
+  icon = input<string | undefined>(undefined);
+  title = input<string | undefined>(undefined);
+  description = input<string | undefined>(undefined);
+  action = input<EmptyStateAction | undefined>(undefined);
+  iconSize = input<'sm' | 'md' | 'lg'>('md');
 
   defaultIcon = '📭';
 
-  get iconSizeClass(): string {
+  iconSizeClass = computed(() => {
     const sizes = {
       sm: 'text-4xl',
       md: 'text-6xl',
       lg: 'text-8xl'
     };
-    return sizes[this.iconSize] || sizes.md;
-  }
+    return sizes[this.iconSize()] || sizes.md;
+  });
 }

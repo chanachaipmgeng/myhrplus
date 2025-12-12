@@ -1,17 +1,7 @@
-<button
-  [type]="type"
-  [disabled]="disabled || loading"
-  [class]="buttonClasses"
-  [attr.aria-label]="ariaLabel"
-  [attr.aria-describedby]="ariaDescribedBy"
-  [attr.aria-disabled]="disabled || loading"
-  [attr.aria-busy]="loading"
-  role="button"
-  tabindex="0"
-  (click)="handleClick($event)"
+<button [type]="type()" [disabled]="disabled() || loading()" [class]="buttonClasses()" [attr.aria-label]="ariaLabel()"
+  [attr.aria-describedby]="ariaDescribedBy()" [attr.aria-disabled]="disabled() || loading()"
+  [attr.aria-busy]="loading()" role="button" tabindex="0" (click)="handleClick($event)"
   (keydown)="handleKeyDown($event)">
-  <span *ngIf="loading" class="inline-block animate-spin mr-2" aria-hidden="true">⟳</span>
+  <span *ngIf="loading()" class="inline-block animate-spin mr-2" aria-hidden="true">⟳</span>
   <ng-content></ng-content>
 </button>
-
-

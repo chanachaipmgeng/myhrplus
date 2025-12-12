@@ -2,62 +2,59 @@
   <!-- Page Header -->
   <div class="page-header" @slideInDown>
     <!-- Breadcrumb -->
-    @if (breadcrumb && breadcrumb.length > 0) {
-      <nav class="breadcrumb">
-        @for (item of breadcrumb; track item.label; let isLast = $last) {
-          @if (item.link && !isLast) {
-            <a [href]="item.link" class="breadcrumb-item">
-              @if (item.icon) {
-                <span class="breadcrumb-icon">{{ item.icon }}</span>
-              }
-              {{ item.label }}
-            </a>
-            <span class="breadcrumb-separator">›</span>
-          } @else {
-            <span class="breadcrumb-item current">
-              @if (item.icon) {
-                <span class="breadcrumb-icon">{{ item.icon }}</span>
-              }
-              {{ item.label }}
-            </span>
-          }
+    @if (breadcrumb() && breadcrumb()!.length > 0) {
+    <nav class="breadcrumb">
+      @for (item of breadcrumb(); track item.label; let isLast = $last) {
+      @if (item.link && !isLast) {
+      <a [href]="item.link" class="breadcrumb-item">
+        @if (item.icon) {
+        <span class="breadcrumb-icon">{{ item.icon }}</span>
         }
-      </nav>
+        {{ item.label }}
+      </a>
+      <span class="breadcrumb-separator">›</span>
+      } @else {
+      <span class="breadcrumb-item current">
+        @if (item.icon) {
+        <span class="breadcrumb-icon">{{ item.icon }}</span>
+        }
+        {{ item.label }}
+      </span>
+      }
+      }
+    </nav>
     }
 
     <!-- Title & Description -->
     <div class="header-content">
       <div class="title-section">
-        @if (icon) {
-          <span class="page-icon">{{ icon }}</span>
+        @if (icon()) {
+        <span class="page-icon">{{ icon() }}</span>
         }
         <div>
-          <h1 class="page-title">{{ title }}</h1>
-          @if (description) {
-            <p class="page-description">{{ description }}</p>
+          <h1 class="page-title">{{ title() }}</h1>
+          @if (description()) {
+          <p class="page-description">{{ description() }}</p>
           }
         </div>
       </div>
 
       <!-- Actions -->
-      @if (actions && actions.length > 0) {
-        <div class="actions-section">
-          @for (action of actions; track action.label) {
-            <app-glass-button
-              [variant]="action.variant || 'primary'"
-              [disabled]="action.disabled || false"
-              (clicked)="action.onClick()"
-            >
-              @if (action.icon) {
-                <span>{{ action.icon }}</span>
-              }
-              {{ action.label }}
-              @if (action.loading) {
-                <span class="loading-spinner"></span>
-              }
-            </app-glass-button>
+      @if (actions() && actions()!.length > 0) {
+      <div class="actions-section">
+        @for (action of actions(); track action.label) {
+        <app-glass-button [variant]="action.variant || 'primary'" [disabled]="action.disabled || false"
+          (clicked)="action.onClick()">
+          @if (action.icon) {
+          <span>{{ action.icon }}</span>
           }
-        </div>
+          {{ action.label }}
+          @if (action.loading) {
+          <span class="loading-spinner"></span>
+          }
+        </app-glass-button>
+        }
+      </div>
       }
     </div>
 
@@ -73,11 +70,9 @@
   </div>
 
   <!-- Page Footer -->
-  @if (showFooter) {
-    <div class="page-footer">
-      <ng-content select="[footer]"></ng-content>
-    </div>
+  @if (showFooter()) {
+  <div class="page-footer">
+    <ng-content select="[footer]"></ng-content>
+  </div>
   }
 </div>
-
-

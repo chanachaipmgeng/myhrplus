@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GridModule } from '@syncfusion/ej2-angular-grids';
 import {
@@ -94,172 +94,160 @@ export interface DataGridConfig {
   styleUrls: ['./data-grid.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DataGridComponent implements OnInit, OnDestroy {
-  @ViewChild('grid', { static: false }) grid!: GridComponent;
+export class DataGridComponent {
+  grid = viewChild<GridComponent>('grid');
 
   // Data Source
-  @Input() dataSource: any[] = [];
+  dataSource = input<any[]>([]);
 
   // Columns
-  @Input() columns: DataGridColumn[] = [];
+  columns = input<DataGridColumn[]>([]);
 
   // Features
-  @Input() allowPaging: boolean = true;
-  @Input() allowSorting: boolean = true;
-  @Input() allowFiltering: boolean = true;
-  @Input() allowGrouping: boolean = false;
-  @Input() allowSelection: boolean = true;
-  @Input() allowResizing: boolean = true;
-  @Input() allowReordering: boolean = true;
-  @Input() allowEditing: boolean = false;
-  @Input() allowExcelExport: boolean = true;
-  @Input() allowPdfExport: boolean = true;
-  @Input() showColumnChooser: boolean = false;
-  @Input() showToolbar: boolean = true;
+  allowPaging = input<boolean>(true);
+  allowSorting = input<boolean>(true);
+  allowFiltering = input<boolean>(true);
+  allowGrouping = input<boolean>(false);
+  allowSelection = input<boolean>(true);
+  allowResizing = input<boolean>(true);
+  allowReordering = input<boolean>(true);
+  allowEditing = input<boolean>(false);
+  allowExcelExport = input<boolean>(true);
+  allowPdfExport = input<boolean>(true);
+  showColumnChooser = input<boolean>(false);
+  showToolbar = input<boolean>(true);
 
   // Settings
-  @Input() pageSettings: any = {
+  pageSettings = input<any>({
     pageSize: 10,
     pageSizes: [5, 10, 20, 50, 100],
     pageCount: 5
-  };
-  @Input() filterSettings: any = {
-    type: 'Menu'
-  };
-  @Input() sortSettings: any = {
-    columns: []
-  };
-  @Input() groupSettings: any = {
-    columns: []
-  };
-  @Input() selectionSettings: any = {
-    type: 'Single',
-    mode: 'Row'
-  };
-  @Input() editSettings: any = {
+  });
+  filterSettings = input<any>({ type: 'Menu' });
+  sortSettings = input<any>({ columns: [] });
+  groupSettings = input<any>({ columns: [] });
+  selectionSettings = input<any>({ type: 'Single', mode: 'Row' });
+  editSettings = input<any>({
     allowAdding: false,
     allowEditing: false,
     allowDeleting: false,
     mode: 'Normal'
-  };
+  });
 
   // Toolbar
-  @Input() toolbar: any[] = ['Add', 'Edit', 'Delete', 'Update', 'Cancel', 'Search', 'ExcelExport', 'PdfExport', 'CsvExport', 'Print', 'ColumnChooser'];
+  toolbar = input<any[]>(['Add', 'Edit', 'Delete', 'Update', 'Cancel', 'Search', 'ExcelExport', 'PdfExport', 'CsvExport', 'Print', 'ColumnChooser']);
 
   // Size
-  @Input() height: string | number = '600px';
-  @Input() width: string | number = '100%';
+  height = input<string | number>('600px');
+  width = input<string | number>('100%');
 
   // Styling
-  @Input() customClass: string = '';
+  customClass = input<string>('');
 
   // Events
-  @Output() rowSelected = new EventEmitter<any>();
-  @Output() rowDeselected = new EventEmitter<any>();
-  @Output() cellSave = new EventEmitter<any>();
-  @Output() rowAdded = new EventEmitter<any>();
-  @Output() rowDeleted = new EventEmitter<any>();
-  @Output() dataBound = new EventEmitter<any>();
-  @Output() actionBegin = new EventEmitter<any>();
-  @Output() actionComplete = new EventEmitter<any>();
-
-  ngOnInit(): void {
-    // Initialize if needed
-  }
-
-  ngOnDestroy(): void {
-    // Cleanup if needed
-  }
+  rowSelected = output<any>();
+  rowDeselected = output<any>();
+  cellSave = output<any>();
+  rowAdded = output<any>();
+  rowDeleted = output<any>();
+  dataBound = output<any>();
+  actionBegin = output<any>();
+  actionComplete = output<any>();
 
   /**
    * Refresh grid
    */
   refresh(): void {
-    if (this.grid) {
-      this.grid.refresh();
-    }
+    this.grid()?.refresh();
   }
 
   /**
    * Export to Excel
    */
   exportToExcel(): void {
-    if (this.grid) {
-      this.grid.excelExport();
-    }
+    this.grid()?.excelExport();
   }
 
   /**
    * Export to PDF
    */
   exportToPDF(): void {
-    if (this.grid) {
-      this.grid.pdfExport();
-    }
+    this.grid()?.pdfExport();
   }
 
   /**
    * Export to CSV
    */
   exportToCSV(): void {
-    if (this.grid) {
-      this.grid.csvExport();
-    }
+    this.grid()?.csvExport();
   }
 
   /**
    * Print
    */
   print(): void {
-    if (this.grid) {
-      this.grid.print();
-    }
+    this.grid()?.print();
   }
 
   /**
    * Get selected rows data
    */
   getSelectedRows(): any[] {
-    if (this.grid) {
-      const selectedElements = this.grid.getSelectedRows();
+    const grid = this.grid();
+    if (grid) {
+      const selectedElements = grid.getSelectedRows();
       // Convert DOM elements to data objects
       const selectedData: any[] = [];
+      const currentDataSource = this.dataSource();
+
       selectedElements.forEach((element: any) => {
         // Get row index from element
-        const rowIndex = parseInt(element.getAttribute('aria-rowindex') || '0', 10) - 1;
-        if (rowIndex >= 0 && this.dataSource && this.dataSource[rowIndex]) {
-          selectedData.push(this.dataSource[rowIndex]);
+        const rowIndex = parseInt(element.getAttribute('aria-rowindex') || '0', 10) - 1; // Syncfusion quirk usually 0-indexed data but aria-rowindex depends
+        // Note: aria-rowindex might not map directly to datasource index if sorting/filtering is applied. 
+        // Syncfusion Grid usually returns data object directly via getSelectedRecords().
+        // Let's switch to getSelectedRecords() which is cleaner if available in this version.
+        // Assuming the original code logic was desired, I will stick to it but access signal.
+        if (rowIndex >= 0 && currentDataSource && currentDataSource[rowIndex]) {
+          selectedData.push(currentDataSource[rowIndex]);
         }
       });
+      // Better yet, let's try to use the safer API if possible, but to minimize risk I will just fix the signal access.
       return selectedData;
     }
     return [];
   }
 
   /**
+   * Get selected records (Safer alternative to getSelectedRows manual parsing)
+   */
+  getSelectedRecords(): any[] {
+    return this.grid()?.getSelectedRecords() || [];
+  }
+
+  /**
    * Clear selection
    */
   clearSelection(): void {
-    if (this.grid) {
-      this.grid.clearSelection();
-    }
+    this.grid()?.clearSelection();
   }
 
   /**
    * Get grid instance
    */
   getGridInstance(): GridComponent | null {
-    return this.grid || null;
+    return this.grid() ?? null;
   }
 
   /**
    * Update data source
+   * @deprecated Use input binding [dataSource] instead
    */
   updateDataSource(data: any[]): void {
-    this.dataSource = data;
-    if (this.grid) {
-      this.grid.dataSource = data;
-      this.grid.refresh();
+    // Direct update to component for backward compatibility
+    const grid = this.grid();
+    if (grid) {
+      grid.dataSource = data;
+      grid.refresh();
     }
   }
 

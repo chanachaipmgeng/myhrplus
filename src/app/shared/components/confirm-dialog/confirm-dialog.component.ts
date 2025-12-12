@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output, computed } from '@angular/core';
 
 export interface ConfirmDialogData {
   title: string;
@@ -14,15 +14,14 @@ export interface ConfirmDialogData {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConfirmDialogComponent {
-  @Input() data!: ConfirmDialogData;
-  @Output() closed = new EventEmitter<boolean>();
+  data = input.required<ConfirmDialogData>();
+  closed = output<boolean>();
 
-  constructor() {
-    if (this.data) {
-      this.data.confirmText = this.data.confirmText || 'Confirm';
-      this.data.cancelText = this.data.cancelText || 'Cancel';
-    }
-  }
+  displayData = computed(() => ({
+    ...this.data(),
+    confirmText: this.data().confirmText || 'Confirm',
+    cancelText: this.data().cancelText || 'Cancel'
+  }));
 
   onCancel(): void {
     this.closed.emit(false);

@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
 
 export type StatusType =
   | 'pending' | 'approved' | 'rejected' | 'cancelled'
@@ -14,14 +14,14 @@ export type StatusType =
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StatusBadgeComponent {
-  @Input() status: StatusType = 'pending';
-  @Input() label: string = '';
-  @Input() showIcon: boolean = true;
-  @Input() size: 'sm' | 'md' | 'lg' = 'md';
-  @Input() variant: 'filled' | 'outlined' | 'soft' = 'filled';
+  status = input<StatusType>('pending');
+  label = input<string>('');
+  showIcon = input<boolean>(true);
+  size = input<'sm' | 'md' | 'lg'>('md');
+  variant = input<'filled' | 'outlined' | 'soft'>('filled');
 
-  get displayLabel(): string {
-    if (this.label) return this.label;
+  displayLabel = computed(() => {
+    if (this.label()) return this.label();
 
     const labelMap: Record<StatusType, string> = {
       pending: 'รอดำเนินการ',
@@ -43,10 +43,10 @@ export class StatusBadgeComponent {
       warning: 'คำเตือน',
       info: 'ข้อมูล'
     };
-    return labelMap[this.status] || this.status;
-  }
+    return labelMap[this.status()] || this.status();
+  });
 
-  get statusIcon(): string {
+  statusIcon = computed(() => {
     const iconMap: Record<StatusType, string> = {
       pending: 'schedule',
       approved: 'check_circle',
@@ -67,10 +67,10 @@ export class StatusBadgeComponent {
       warning: 'warning',
       info: 'info'
     };
-    return iconMap[this.status] || 'circle';
-  }
+    return iconMap[this.status()] || 'circle';
+  });
 
-  get statusColor(): string {
+  statusColor = computed(() => {
     const colorMap: Record<StatusType, string> = {
       pending: 'amber',
       approved: 'green',
@@ -91,8 +91,8 @@ export class StatusBadgeComponent {
       warning: 'amber',
       info: 'blue'
     };
-    return colorMap[this.status] || 'gray';
-  }
+    return colorMap[this.status()] || 'gray';
+  });
 }
 
 

@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
 
 export type SkeletonType = 'text' | 'card' | 'table' | 'list' | 'avatar' | 'custom';
 
@@ -9,24 +9,25 @@ export type SkeletonType = 'text' | 'card' | 'table' | 'list' | 'avatar' | 'cust
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SkeletonLoaderComponent {
-  @Input() type: SkeletonType = 'text';
-  @Input() rows: number = 3;
-  @Input() columns: number = 3;
-  @Input() showAvatar: boolean = false;
-  @Input() showTitle: boolean = true;
-  @Input() animation: 'pulse' | 'wave' | 'shimmer' | 'none' = 'pulse';
-  @Input() width: string = '100%';
-  @Input() height: string = '';
+  type = input<SkeletonType>('text');
+  rows = input<number>(3);
+  columns = input<number>(3);
+  showAvatar = input<boolean>(false);
+  showTitle = input<boolean>(true);
+  animation = input<'pulse' | 'wave' | 'shimmer' | 'none'>('pulse');
+  width = input<string>('100%');
+  height = input<string>('');
 
-  getRowsArray(): number[] {
-    return Array(this.rows).fill(0).map((_, i) => i);
-  }
+  rowsArray = computed(() => {
+    return Array(this.rows()).fill(0).map(() => ({ width: this.getRandomWidth() }));
+  });
 
-  getColumnsArray(): number[] {
-    return Array(this.columns).fill(0).map((_, i) => i);
-  }
+  columnsArray = computed(() => {
+    return Array(this.columns()).fill(0).map(() => 0);
+  });
 
-  getRandomWidth(): string {
+  // Helper method for generating random widths
+  private getRandomWidth(): string {
     const widths = ['60%', '80%', '90%', '100%'];
     return widths[Math.floor(Math.random() * widths.length)];
   }

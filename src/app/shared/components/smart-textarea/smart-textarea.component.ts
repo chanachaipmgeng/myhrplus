@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output, viewChild, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SmartTextAreaModule, SmartTextAreaComponent as SyncfusionSmartTextAreaComponent } from '@syncfusion/ej2-angular-inputs';
 
@@ -27,136 +27,126 @@ export interface SmartTextAreaConfig {
   styleUrls: ['./smart-textarea.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SmartTextAreaComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('smartTextarea', { static: false }) smartTextarea!: SyncfusionSmartTextAreaComponent;
+export class SmartTextAreaComponent {
+  smartTextarea = viewChild<SyncfusionSmartTextAreaComponent>('smartTextarea');
 
   // Basic Properties
-  @Input() placeholder: string = 'Type your message...';
-  @Input() floatLabelType: 'Auto' | 'Always' | 'Never' = 'Auto';
-  @Input() rows: number = 5;
-  @Input() cols: number = 50;
-  @Input() value: string = '';
-  @Input() enabled: boolean = true;
-  @Input() readonly: boolean = false;
-  @Input() resizeMode: 'None' | 'Both' | 'Horizontal' | 'Vertical' = 'None';
-  @Input() width: string | number = '100%';
-  @Input() height: string | number = 'auto';
-  @Input() customClass?: string;
+  placeholder = input<string>('Type your message...');
+  floatLabelType = input<'Auto' | 'Always' | 'Never'>('Auto');
+  rows = input<number>(5);
+  cols = input<number>(50);
+  value = input<string>('');
+  enabled = input<boolean>(true);
+  readonly = input<boolean>(false);
+  resizeMode = input<'None' | 'Both' | 'Horizontal' | 'Vertical'>('None');
+  width = input<string | number>('100%');
+  height = input<string | number>('auto');
+  customClass = input<string | undefined>(undefined);
 
   // AI Features
-  @Input() userRole?: string;
-  @Input() userPhrases?: string[];
-  @Input() aiSuggestionHandler?: (options: any) => void;
+  userRole = input<string | undefined>(undefined);
+  userPhrases = input<string[] | undefined>(undefined);
+  aiSuggestionHandler = input<((options: any) => void) | undefined>(undefined);
+
+  // Configuration object input
+  config = input<SmartTextAreaConfig | undefined>(undefined);
+
+  // Computed properties merging Config and Inputs
+  effectivePlaceholder = computed(() => this.config()?.placeholder ?? this.placeholder());
+  effectiveFloatLabelType = computed(() => this.config()?.floatLabelType ?? this.floatLabelType());
+  effectiveRows = computed(() => this.config()?.rows ?? this.rows());
+  effectiveCols = computed(() => this.config()?.cols ?? this.cols());
+  effectiveValue = computed(() => this.config()?.value ?? this.value());
+  effectiveEnabled = computed(() => this.config()?.enabled ?? this.enabled());
+  effectiveReadonly = computed(() => this.config()?.readonly ?? this.readonly());
+  effectiveResizeMode = computed(() => this.config()?.resizeMode ?? this.resizeMode());
+  effectiveWidth = computed(() => this.config()?.width ?? this.width());
+  effectiveHeight = computed(() => this.config()?.height ?? this.height());
+  effectiveCustomClass = computed(() => this.config()?.customClass ?? this.customClass());
+  effectiveUserRole = computed(() => this.config()?.userRole ?? this.userRole());
+  effectiveUserPhrases = computed(() => this.config()?.userPhrases ?? this.userPhrases());
+  effectiveAiSuggestionHandler = computed(() => this.config()?.aiSuggestionHandler ?? this.aiSuggestionHandler());
 
   // Events
-  @Output() change = new EventEmitter<any>();
-  @Output() focus = new EventEmitter<any>();
-  @Output() blur = new EventEmitter<any>();
-  @Output() created = new EventEmitter<any>();
+  change = output<any>();
+  focus = output<any>();
+  blur = output<any>();
+  created = output<any>();
 
-  @Input() config?: SmartTextAreaConfig;
-
-  ngOnInit(): void {
-    // Apply config if provided
-    if (this.config) {
-      this.placeholder = this.config.placeholder ?? this.placeholder;
-      this.floatLabelType = this.config.floatLabelType ?? this.floatLabelType;
-      this.rows = this.config.rows ?? this.rows;
-      this.cols = this.config.cols ?? this.cols;
-      this.value = this.config.value ?? this.value;
-      this.enabled = this.config.enabled ?? this.enabled;
-      this.readonly = this.config.readonly ?? this.readonly;
-      this.resizeMode = this.config.resizeMode ?? this.resizeMode;
-      this.width = this.config.width ?? this.width;
-      this.height = this.config.height ?? this.height;
-      this.customClass = this.config.customClass || this.customClass;
-      this.userRole = this.config.userRole ?? this.userRole;
-      this.userPhrases = this.config.userPhrases ?? this.userPhrases;
-      this.aiSuggestionHandler = this.config.aiSuggestionHandler ?? this.aiSuggestionHandler;
-    }
+  constructor() {
+    effect(() => {
+      // Optional: Log or react to config changes side-effects if needed
+    });
   }
 
-  ngAfterViewInit(): void {
-    if (this.smartTextarea) {
-      this.created.emit({ smartTextarea: this.smartTextarea });
+  onCreated(event: any): void {
+    const instance = this.smartTextarea();
+    if (instance) {
+      this.created.emit({ smartTextarea: instance });
+    } else {
+      this.created.emit(event);
     }
-  }
-
-  ngOnDestroy(): void {
-    // Cleanup if needed
   }
 
   /**
    * Get Smart TextArea instance
    */
   getSmartTextAreaInstance(): SyncfusionSmartTextAreaComponent | null {
-    return this.smartTextarea || null;
+    return this.smartTextarea() ?? null;
   }
 
   /**
    * Get value
    */
   getValue(): string {
-    if (this.smartTextarea) {
-      return this.smartTextarea.value || '';
-    }
-    return this.value;
+    return this.smartTextarea()?.value ?? this.effectiveValue();
   }
 
   /**
    * Set value
    */
   setValue(value: string): void {
-    if (this.smartTextarea) {
-      this.smartTextarea.value = value;
+    const instance = this.smartTextarea();
+    if (instance) {
+      instance.value = value;
     }
-    this.value = value;
   }
 
   /**
    * Focus
    */
   focusIn(): void {
-    if (this.smartTextarea) {
-      this.smartTextarea.focusIn();
-    }
+    this.smartTextarea()?.focusIn();
   }
 
   /**
    * Blur
    */
   focusOut(): void {
-    if (this.smartTextarea) {
-      this.smartTextarea.focusOut();
-    }
+    this.smartTextarea()?.focusOut();
   }
 
   /**
    * Clear
    */
   clear(): void {
-    if (this.smartTextarea) {
-      this.smartTextarea.value = '';
+    const instance = this.smartTextarea();
+    if (instance) {
+      instance.value = '';
     }
-    this.value = '';
   }
 
   /**
    * Refresh
    */
   refresh(): void {
-    if (this.smartTextarea) {
-      this.smartTextarea.dataBind();
-    }
+    this.smartTextarea()?.dataBind();
   }
 
   /**
    * Event handlers
    */
   onChange(event: any): void {
-    if (this.smartTextarea) {
-      this.value = this.smartTextarea.value || '';
-    }
     this.change.emit(event);
   }
 
@@ -166,10 +156,6 @@ export class SmartTextAreaComponent implements OnInit, AfterViewInit, OnDestroy 
 
   onBlur(event: any): void {
     this.blur.emit(event);
-  }
-
-  onCreated(event: any): void {
-    this.created.emit(event);
   }
 }
 

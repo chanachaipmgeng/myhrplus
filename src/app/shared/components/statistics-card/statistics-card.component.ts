@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlassCardComponent } from '../glass-card/glass-card.component';
 
@@ -11,19 +11,19 @@ import { GlassCardComponent } from '../glass-card/glass-card.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StatisticsCardComponent {
-  @Input() icon!: string;
-  @Input() label!: string;
-  @Input() value!: string | number;
-  @Input() suffix?: string;
-  @Input() change?: number;
-  @Input() iconBgClass: string = 'bg-blue-100 dark:bg-blue-900';
+  icon = input.required<string>();
+  label = input.required<string>();
+  value = input.required<string | number>();
+  suffix = input<string | undefined>(undefined);
+  change = input<number | undefined>(undefined);
+  iconBgClass = input<string>('bg-blue-100 dark:bg-blue-900');
 
-  get changeClass(): string {
-    if (!this.change) return '';
-    return this.change > 0
+  changeClass = computed(() => {
+    if (!this.change()) return '';
+    return this.change()! > 0
       ? 'text-green-600 dark:text-green-400'
       : 'text-red-600 dark:text-red-400';
-  }
+  });
 }
 
 

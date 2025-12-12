@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,20 +10,20 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GlassCardComponent {
-  @Input() variant: 'default' | 'strong' | 'weak' = 'default';
-  @Input() animate: 'fade-in' | 'slide-up' | 'slide-down' | 'scale-in' | null = null;
-  @Input() padding: string = 'p-6';
-  @Input() customClass: string = '';
+  variant = input<'default' | 'strong' | 'weak'>('default');
+  animate = input<'fade-in' | 'slide-up' | 'slide-down' | 'scale-in' | null>(null);
+  padding = input<string>('p-6');
+  customClass = input<string>('');
 
-  get cardClass(): string {
-    const baseClass = this.variant === 'strong'
+  cardClass = computed(() => {
+    const baseClass = this.variant() === 'strong'
       ? 'glass-card-strong'
-      : this.variant === 'weak'
+      : this.variant() === 'weak'
         ? 'glass-card-weak'
         : 'glass-card';
 
-    return `${baseClass} ${this.padding} ${this.customClass}`.trim();
-  }
+    return `${baseClass} ${this.padding()} ${this.customClass()}`.trim();
+  });
 }
 
 

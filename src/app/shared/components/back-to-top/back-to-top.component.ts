@@ -1,5 +1,5 @@
 import { ViewportScroller } from '@angular/common';
-import { Component, ElementRef, HostListener, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ElementRef, HostListener, ChangeDetectionStrategy, signal } from '@angular/core';
 
 @Component({
   selector: 'app-back-to-top',
@@ -8,7 +8,7 @@ import { Component, ElementRef, HostListener, ChangeDetectionStrategy } from '@a
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BackToTopComponent {
-  public show = false;
+  show = signal<boolean>(false);
 
   constructor(
     private viewScroller: ViewportScroller,
@@ -23,9 +23,9 @@ export class BackToTopComponent {
       document.body.scrollTop ||
       0;
     if (number > 400) {
-      this.show = true;
+      this.show.set(true);
     } else {
-      this.show = false;
+      this.show.set(false);
     }
   }
 

@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlassButtonComponent } from '../glass-button/glass-button.component';
 import { fadeIn, slideInDown } from '../../../core/animations/animations';
@@ -28,10 +28,10 @@ export interface PageAction {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageLayoutComponent {
-  @Input() title: string = '';
-  @Input() description?: string;
-  @Input() icon?: string;
-  @Input() breadcrumb?: BreadcrumbItem[];
-  @Input() actions?: PageAction[];
-  @Input() showFooter: boolean = false;
+  title = input<string>('');
+  description = input<string | undefined>(undefined);
+  icon = input<string | undefined>(undefined);
+  breadcrumb = input<BreadcrumbItem[] | undefined>(undefined);
+  actions = input<PageAction[] | undefined>(undefined);
+  showFooter = input<boolean>(false);
 }

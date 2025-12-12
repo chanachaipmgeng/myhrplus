@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,19 +10,19 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SpinnerComponent {
-  @Input() size: 'sm' | 'md' | 'lg' = 'md';
-  @Input() color: string = 'text-primary-600';
-  @Input() message?: string;
-  @Input() fullScreen: boolean = false;
+  size = input<'sm' | 'md' | 'lg'>('md');
+  color = input<string>('text-primary-600');
+  message = input<string | undefined>(undefined);
+  fullScreen = input<boolean>(false);
 
-  get containerClass(): string {
-    return this.fullScreen
+  containerClass = computed(() => {
+    return this.fullScreen()
       ? 'fixed inset-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm'
       : '';
-  }
+  });
 
-  get spinnerClass(): string {
-    return `spinner-${this.size} ${this.color}`;
-  }
+  spinnerClass = computed(() => {
+    return `spinner-${this.size()} ${this.color()}`;
+  });
 }
 

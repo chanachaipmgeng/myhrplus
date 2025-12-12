@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,34 +10,32 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProgressBarComponent {
-  @Input() value: number = 0;
-  @Input() label?: string;
-  @Input() description?: string;
-  @Input() showValue: boolean = true;
-  @Input() variant: 'primary' | 'success' | 'warning' | 'danger' = 'primary';
-  @Input() ariaLabel?: string;
-  @Input() customAriaValueText?: string;
+  value = input<number>(0);
+  label = input<string | undefined>(undefined);
+  description = input<string | undefined>(undefined);
+  showValue = input<boolean>(true);
+  variant = input<'primary' | 'success' | 'warning' | 'danger'>('primary');
+  ariaLabel = input<string | undefined>(undefined);
+  customAriaValueText = input<string | undefined>(undefined);
 
-  get progressClass(): string {
+  progressClass = computed(() => {
     const variants = {
       primary: 'bg-primary-500',
       success: 'bg-green-500',
       warning: 'bg-yellow-500',
       danger: 'bg-red-500'
     };
-    return variants[this.variant] || variants.primary;
-  }
+    return variants[this.variant()] || variants.primary;
+  });
 
-  get progressId(): string {
-    return `progress-${Math.random().toString(36).substr(2, 9)}`;
-  }
+  progressId = computed(() => `progress-${Math.random().toString(36).substr(2, 9)}`);
 
-  get ariaValueText(): string {
-    if (this.customAriaValueText) {
-      return this.customAriaValueText;
+  ariaValueText = computed(() => {
+    if (this.customAriaValueText()) {
+      return this.customAriaValueText()!;
     }
-    return `${this.value}%`;
-  }
+    return `${this.value()}%`;
+  });
 }
 
 
