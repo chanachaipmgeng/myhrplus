@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, ChangeDetectionStrategy, input, output, computed, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SpreadsheetModule } from '@syncfusion/ej2-angular-spreadsheet';
 import {
@@ -44,58 +44,62 @@ export interface SpreadsheetConfig {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SpreadsheetComponent implements OnInit, OnDestroy {
-  @ViewChild('spreadsheet', { static: false }) spreadsheet!: SyncfusionSpreadsheetComponent;
+  spreadsheet = viewChild<SyncfusionSpreadsheetComponent>('spreadsheet');
 
   // Data
-  @Input() sheets: any[] = [];
-  @Input() dataSource?: any;
+  sheetsInput = input<any[]>([], { alias: 'sheets' });
+  dataSource = input<any | undefined>(undefined, { alias: 'dataSource' });
 
-  // Features
-  @Input() allowOpen: boolean = true;
-  @Input() allowSave: boolean = true;
-  @Input() allowEditing: boolean = true;
-  @Input() allowInsert: boolean = true;
-  @Input() allowDelete: boolean = true;
-  // Note: allowFormatting, allowFreezing, allowMerging, allowFormulaBar, showStatusBar
-  // are controlled via ribbon UI and not direct input properties
-  @Input() allowUndoRedo: boolean = true;
-  @Input() allowFindAndReplace: boolean = true;
-  @Input() allowSorting: boolean = true;
-  @Input() allowFiltering: boolean = true;
-  @Input() allowResizing: boolean = true;
-  @Input() allowHyperlink: boolean = true;
-  @Input() allowChart: boolean = true;
-  @Input() allowImage: boolean = true;
-  @Input() allowConditionalFormat: boolean = true;
-  @Input() allowDataValidation: boolean = true;
-  @Input() showSheetTabs: boolean = true;
-  @Input() showRibbon: boolean = true;
-  @Input() showFormulaBar: boolean = true;
-
-  // Size
-  @Input() height: string | number = '600px';
-  @Input() width: string | number = '100%';
-  @Input() customClass?: string;
-
-  // Events
-  @Output() created = new EventEmitter<any>();
-  @Output() cellEdit = new EventEmitter<any>();
-  @Output() cellSave = new EventEmitter<any>();
-  @Output() beforeOpen = new EventEmitter<any>();
-  @Output() openComplete = new EventEmitter<any>();
-  @Output() beforeSave = new EventEmitter<any>();
-  @Output() saveComplete = new EventEmitter<any>();
-  @Output() actionBegin = new EventEmitter<any>();
-  @Output() actionComplete = new EventEmitter<any>();
-
-  ngOnInit(): void {
-    // Initialize default sheet if no sheets provided
-    if (!this.sheets || this.sheets.length === 0) {
-      this.sheets = [{
+  // Computed Sheets (handle initialization logic)
+  sheets = computed(() => {
+    const s = this.sheetsInput();
+    if ((!s || s.length === 0) && this.dataSource()) {
+      return [{
         name: 'Sheet1',
-        ranges: [{ dataSource: this.dataSource || [] }]
+        ranges: [{ dataSource: this.dataSource() }]
       }];
     }
+    return s || [];
+  });
+
+  // Features
+  allowOpen = input<boolean>(true, { alias: 'allowOpen' });
+  allowSave = input<boolean>(true, { alias: 'allowSave' });
+  allowEditing = input<boolean>(true, { alias: 'allowEditing' });
+  allowInsert = input<boolean>(true, { alias: 'allowInsert' });
+  allowDelete = input<boolean>(true, { alias: 'allowDelete' });
+  allowUndoRedo = input<boolean>(true, { alias: 'allowUndoRedo' });
+  allowFindAndReplace = input<boolean>(true, { alias: 'allowFindAndReplace' });
+  allowSorting = input<boolean>(true, { alias: 'allowSorting' });
+  allowFiltering = input<boolean>(true, { alias: 'allowFiltering' });
+  allowResizing = input<boolean>(true, { alias: 'allowResizing' });
+  allowHyperlink = input<boolean>(true, { alias: 'allowHyperlink' });
+  allowChart = input<boolean>(true, { alias: 'allowChart' });
+  allowImage = input<boolean>(true, { alias: 'allowImage' });
+  allowConditionalFormat = input<boolean>(true, { alias: 'allowConditionalFormat' });
+  allowDataValidation = input<boolean>(true, { alias: 'allowDataValidation' });
+  showSheetTabs = input<boolean>(true, { alias: 'showSheetTabs' });
+  showRibbon = input<boolean>(true, { alias: 'showRibbon' });
+  showFormulaBar = input<boolean>(true, { alias: 'showFormulaBar' });
+
+  // Size
+  height = input<string | number>('600px', { alias: 'height' });
+  width = input<string | number>('100%', { alias: 'width' });
+  customClass = input<string | undefined>(undefined, { alias: 'customClass' });
+
+  // Events
+  created = output<any>();
+  cellEdit = output<any>();
+  cellSave = output<any>();
+  beforeOpen = output<any>();
+  openComplete = output<any>();
+  beforeSave = output<any>();
+  saveComplete = output<any>();
+  actionBegin = output<any>();
+  actionComplete = output<any>();
+
+  ngOnInit(): void {
+    // Initialization logic handled by computed 'sheets'
   }
 
   ngOnDestroy(): void {
@@ -106,20 +110,21 @@ export class SpreadsheetComponent implements OnInit, OnDestroy {
    * Get spreadsheet instance
    */
   getSpreadsheetInstance(): SyncfusionSpreadsheetComponent | null {
-    return this.spreadsheet || null;
+    return this.spreadsheet() || null;
   }
 
   /**
    * Open file
    */
   open(file: File | Blob | string): void {
-    if (this.spreadsheet) {
+    const s = this.spreadsheet();
+    if (s) {
       if (typeof file === 'string') {
         // If string, treat as file path or URL
-        (this.spreadsheet as any).open({ file: file });
+        (s as any).open({ file: file });
       } else {
         // If File or Blob, use directly
-        (this.spreadsheet as any).open({ file: file });
+        (s as any).open({ file: file });
       }
     }
   }
@@ -128,12 +133,13 @@ export class SpreadsheetComponent implements OnInit, OnDestroy {
    * Save as Excel
    */
   saveAsExcel(fileName?: string): void {
-    if (this.spreadsheet) {
+    const s = this.spreadsheet();
+    if (s) {
       const saveOptions: any = {
         fileName: fileName || 'Spreadsheet',
         saveType: 'Xlsx' as any
       };
-      this.spreadsheet.save(saveOptions);
+      s.save(saveOptions);
     }
   }
 
@@ -141,12 +147,13 @@ export class SpreadsheetComponent implements OnInit, OnDestroy {
    * Save as CSV
    */
   saveAsCsv(fileName?: string): void {
-    if (this.spreadsheet) {
+    const s = this.spreadsheet();
+    if (s) {
       const saveOptions: any = {
         fileName: fileName || 'Spreadsheet',
         saveType: 'Csv' as any
       };
-      this.spreadsheet.save(saveOptions);
+      s.save(saveOptions);
     }
   }
 
@@ -154,12 +161,13 @@ export class SpreadsheetComponent implements OnInit, OnDestroy {
    * Save as PDF
    */
   saveAsPdf(fileName?: string): void {
-    if (this.spreadsheet) {
+    const s = this.spreadsheet();
+    if (s) {
       const saveOptions: any = {
         fileName: fileName || 'Spreadsheet',
         saveType: 'Pdf' as any
       };
-      this.spreadsheet.save(saveOptions);
+      s.save(saveOptions);
     }
   }
 
@@ -167,27 +175,24 @@ export class SpreadsheetComponent implements OnInit, OnDestroy {
    * Insert row
    */
   insertRow(index: number, count: number = 1): void {
-    if (this.spreadsheet) {
-      this.spreadsheet.insertRow(index, count);
-    }
+    this.spreadsheet()?.insertRow(index, count);
   }
 
   /**
    * Insert column
    */
   insertColumn(index: number, count: number = 1): void {
-    if (this.spreadsheet) {
-      this.spreadsheet.insertColumn(index, count);
-    }
+    this.spreadsheet()?.insertColumn(index, count);
   }
 
   /**
    * Delete row
    */
   deleteRow(index: number, count: number = 1): void {
-    if (this.spreadsheet) {
+    const s = this.spreadsheet();
+    if (s) {
       // Use delete method with row model
-      (this.spreadsheet as any).delete(index, index + count - 1, 'Row');
+      (s as any).delete(index, index + count - 1, 'Row');
     }
   }
 
@@ -195,9 +200,10 @@ export class SpreadsheetComponent implements OnInit, OnDestroy {
    * Delete column
    */
   deleteColumn(index: number, count: number = 1): void {
-    if (this.spreadsheet) {
+    const s = this.spreadsheet();
+    if (s) {
       // Use delete method with column model
-      (this.spreadsheet as any).delete(index, index + count - 1, 'Column');
+      (s as any).delete(index, index + count - 1, 'Column');
     }
   }
 
@@ -205,53 +211,44 @@ export class SpreadsheetComponent implements OnInit, OnDestroy {
    * Undo
    */
   undo(): void {
-    if (this.spreadsheet) {
-      this.spreadsheet.undo();
-    }
+    this.spreadsheet()?.undo();
   }
 
   /**
    * Redo
    */
   redo(): void {
-    if (this.spreadsheet) {
-      this.spreadsheet.redo();
-    }
+    this.spreadsheet()?.redo();
   }
 
   /**
    * Cut
    */
   cut(): void {
-    if (this.spreadsheet) {
-      this.spreadsheet.cut();
-    }
+    this.spreadsheet()?.cut();
   }
 
   /**
    * Copy
    */
   copy(): void {
-    if (this.spreadsheet) {
-      this.spreadsheet.copy();
-    }
+    this.spreadsheet()?.copy();
   }
 
   /**
    * Paste
    */
   paste(): void {
-    if (this.spreadsheet) {
-      this.spreadsheet.paste();
-    }
+    this.spreadsheet()?.paste();
   }
 
   /**
    * Find
    */
   find(text: string): void {
-    if (this.spreadsheet) {
-      (this.spreadsheet as any).find(text);
+    const s = this.spreadsheet();
+    if (s) {
+      (s as any).find(text);
     }
   }
 
@@ -259,8 +256,9 @@ export class SpreadsheetComponent implements OnInit, OnDestroy {
    * Replace
    */
   replace(text: string, replaceText: string): void {
-    if (this.spreadsheet) {
-      (this.spreadsheet as any).replace(text, replaceText);
+    const s = this.spreadsheet();
+    if (s) {
+      (s as any).replace(text, replaceText);
     }
   }
 
@@ -268,9 +266,10 @@ export class SpreadsheetComponent implements OnInit, OnDestroy {
    * Sort
    */
   sort(range: string, sortOptions: any): void {
-    if (this.spreadsheet) {
+    const s = this.spreadsheet();
+    if (s) {
       // Use sort method with proper options
-      (this.spreadsheet as any).sort(sortOptions || {}, range);
+      (s as any).sort(sortOptions || {}, range);
     }
   }
 
@@ -278,9 +277,10 @@ export class SpreadsheetComponent implements OnInit, OnDestroy {
    * Filter
    */
   applyFilter(range: string): void {
-    if (this.spreadsheet) {
+    const s = this.spreadsheet();
+    if (s) {
       // Apply filter using range
-      (this.spreadsheet as any).applyFilter([], range);
+      (s as any).applyFilter([], range);
     }
   }
 
@@ -288,36 +288,31 @@ export class SpreadsheetComponent implements OnInit, OnDestroy {
    * Clear filter
    */
   clearFilter(): void {
-    if (this.spreadsheet) {
-      this.spreadsheet.clearFilter();
-    }
+    this.spreadsheet()?.clearFilter();
   }
 
   /**
    * Merge cells
    */
   merge(range: string): void {
-    if (this.spreadsheet) {
-      this.spreadsheet.merge(range);
-    }
+    this.spreadsheet()?.merge(range);
   }
 
   /**
    * Unmerge cells
    */
   unmerge(range: string): void {
-    if (this.spreadsheet) {
-      this.spreadsheet.unMerge(range);
-    }
+    this.spreadsheet()?.unMerge(range);
   }
 
   /**
    * Freeze panes
    */
   freeze(row: number, col: number): void {
-    if (this.spreadsheet) {
+    const s = this.spreadsheet();
+    if (s) {
       // Use public method or type assertion
-      (this.spreadsheet as any).freezePanes(row, col);
+      (s as any).freezePanes(row, col);
     }
   }
 
@@ -325,27 +320,24 @@ export class SpreadsheetComponent implements OnInit, OnDestroy {
    * Unfreeze panes
    */
   unfreeze(): void {
-    if (this.spreadsheet) {
-      this.spreadsheet.Unfreeze();
-    }
+    this.spreadsheet()?.Unfreeze();
   }
 
   /**
    * Add sheet
    */
   addSheet(sheetName?: string): void {
-    if (this.spreadsheet) {
-      this.spreadsheet.insertSheet([{ name: sheetName || `Sheet${this.sheets.length + 1}` }]);
-    }
+    this.spreadsheet()?.insertSheet([{ name: sheetName || `Sheet${(this.sheets()?.length || 0) + 1}` }]);
   }
 
   /**
    * Delete sheet
    */
   deleteSheet(sheetIndex: number): void {
-    if (this.spreadsheet) {
+    const s = this.spreadsheet();
+    if (s) {
       // Use removeSheet method
-      (this.spreadsheet as any).removeSheet([sheetIndex]);
+      (s as any).removeSheet([sheetIndex]);
     }
   }
 
@@ -353,25 +345,22 @@ export class SpreadsheetComponent implements OnInit, OnDestroy {
    * Go to cell
    */
   goToCell(address: string): void {
-    if (this.spreadsheet) {
-      this.spreadsheet.goTo(address);
-    }
+    this.spreadsheet()?.goTo(address);
   }
 
   /**
    * Select range
    */
   selectRange(range: string): void {
-    if (this.spreadsheet) {
-      this.spreadsheet.selectRange(range);
-    }
+    this.spreadsheet()?.selectRange(range);
   }
 
   /**
    * Get cell value
    */
   getCellValue(address: string): any {
-    if (this.spreadsheet) {
+    const s = this.spreadsheet();
+    if (s) {
       // Parse address to row and column indices
       const match = address.match(/([A-Z]+)(\d+)/);
       if (match) {
@@ -382,7 +371,7 @@ export class SpreadsheetComponent implements OnInit, OnDestroy {
           colIndex = colIndex * 26 + (colStr.charCodeAt(i) - 64);
         }
         colIndex -= 1;
-        const cell = this.spreadsheet.getCell(rowIndex, colIndex);
+        const cell = s.getCell(rowIndex, colIndex);
         if (cell) {
           // Get value from cell element or use type assertion
           return (cell as any).value || (cell as HTMLElement).textContent || null;
@@ -396,19 +385,18 @@ export class SpreadsheetComponent implements OnInit, OnDestroy {
    * Set cell value
    */
   setCellValue(address: string, value: any): void {
-    if (this.spreadsheet) {
-      this.spreadsheet.updateCell({ value: value }, address);
-    }
+    this.spreadsheet()?.updateCell({ value: value }, address);
   }
 
   /**
    * Get used range
    */
   getUsedRange(): any {
-    if (this.spreadsheet) {
+    const s = this.spreadsheet();
+    if (s) {
       // Get used range from active sheet
-      const activeSheet = (this.spreadsheet as any).activeSheetIndex || 0;
-      const sheet = (this.spreadsheet as any).sheets[activeSheet];
+      const activeSheet = (s as any).activeSheetIndex || 0;
+      const sheet = (s as any).sheets[activeSheet];
       if (sheet) {
         return {
           rowIndex: sheet.usedRange?.rowIndex || 0,
@@ -425,48 +413,12 @@ export class SpreadsheetComponent implements OnInit, OnDestroy {
    * Refresh
    */
   refresh(): void {
-    if (this.spreadsheet) {
-      this.spreadsheet.dataBind();
-    }
+    this.spreadsheet()?.dataBind();
   }
 
   /**
    * Event handlers
+   * Removed manual wrappers
    */
-  onCreated(event: any): void {
-    this.created.emit(event);
-  }
-
-  onCellEdit(event: any): void {
-    this.cellEdit.emit(event);
-  }
-
-  onCellSave(event: any): void {
-    this.cellSave.emit(event);
-  }
-
-  onBeforeOpen(event: any): void {
-    this.beforeOpen.emit(event);
-  }
-
-  onOpenComplete(event: any): void {
-    this.openComplete.emit(event);
-  }
-
-  onBeforeSave(event: any): void {
-    this.beforeSave.emit(event);
-  }
-
-  onSaveComplete(event: any): void {
-    this.saveComplete.emit(event);
-  }
-
-  onActionBegin(event: any): void {
-    this.actionBegin.emit(event);
-  }
-
-  onActionComplete(event: any): void {
-    this.actionComplete.emit(event);
-  }
 }
 

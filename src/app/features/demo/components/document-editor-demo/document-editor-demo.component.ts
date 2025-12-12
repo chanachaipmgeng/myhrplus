@@ -53,7 +53,7 @@ export class DocumentEditorDemoComponent {
         }
       ]
     });
-    
+
     if (this.editor) {
       this.editor.open(sampleSfdt);
     }
@@ -90,14 +90,14 @@ export class DocumentEditorDemoComponent {
   // Zoom
   zoomIn(): void {
     if (this.editor) {
-      const currentZoom = this.editor.zoomFactor || 1;
+      const currentZoom = this.editor.zoomFactor() || 1;
       this.editor.setZoomFactor(Math.min(currentZoom + 0.1, 4));
     }
   }
 
   zoomOut(): void {
     if (this.editor) {
-      const currentZoom = this.editor.zoomFactor || 1;
+      const currentZoom = this.editor.zoomFactor() || 1;
       this.editor.setZoomFactor(Math.max(currentZoom - 0.1, 0.1));
     }
   }

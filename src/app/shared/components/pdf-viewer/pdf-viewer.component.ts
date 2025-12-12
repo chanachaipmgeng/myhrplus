@@ -1,8 +1,20 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, ChangeDetectionStrategy, input, output, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PdfViewerModule } from '@syncfusion/ej2-angular-pdfviewer';
 import {
-  PdfViewerComponent as SyncfusionPdfViewerComponent
+  PdfViewerComponent as SyncfusionPdfViewerComponent,
+  LinkAnnotationService,
+  BookmarkViewService,
+  MagnificationService,
+  ThumbnailViewService,
+  ToolbarService,
+  NavigationService,
+  TextSearchService,
+  TextSelectionService,
+  PrintService,
+  FormDesignerService,
+  FormFieldsService,
+  AnnotationService
 } from '@syncfusion/ej2-angular-pdfviewer';
 
 export interface PdfViewerConfig {
@@ -38,49 +50,59 @@ export interface PdfViewerConfig {
   selector: 'app-pdf-viewer',
   standalone: true,
   imports: [CommonModule, PdfViewerModule],
+  providers: [
+    LinkAnnotationService,
+    BookmarkViewService,
+    MagnificationService,
+    ThumbnailViewService,
+    ToolbarService,
+    NavigationService,
+    TextSearchService,
+    TextSelectionService,
+    PrintService,
+    FormDesignerService,
+    FormFieldsService,
+    AnnotationService
+  ],
   templateUrl: './pdf-viewer.component.html',
   styleUrls: ['./pdf-viewer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PdfViewerComponent implements OnInit, OnDestroy {
-  @ViewChild('pdfviewer', { static: false }) pdfviewer!: SyncfusionPdfViewerComponent;
+  pdfviewer = viewChild<SyncfusionPdfViewerComponent>('pdfviewer');
 
-  // Document
-  @Input() documentPath: string = '';
-  @Input() serviceUrl?: string;
+  // Logic
+  documentPath = input<string | undefined>(undefined, { alias: 'documentPath' });
+  serviceUrl = input<string | undefined>(undefined, { alias: 'serviceUrl' });
 
   // Features
-  @Input() enableToolbar: boolean = true;
-  @Input() enableNavigation: boolean = true;
-  @Input() enableThumbnail: boolean = true;
-  @Input() enableBookmark: boolean = true;
-  @Input() enableTextSelection: boolean = true;
-  @Input() enableTextSearch: boolean = true;
-  @Input() enablePrint: boolean = true;
-  @Input() enableDownload: boolean = true;
-  @Input() enableFormFields: boolean = true;
-  // Note: enableAnnotations, enableHyperlinks, enableStickyNotes, enableHandTool,
-  // enableTextMarkup, enableShapeAnnotation, enableStampAnnotation, enableSignature,
-  // enableMeasurement are controlled via toolbar and not direct input properties
-  @Input() enableMagnification: boolean = true;
-  // Note: isReadOnly and zoomFactor are not direct input properties
+  enableToolbar = input<boolean>(true, { alias: 'enableToolbar' });
+  enableNavigation = input<boolean>(true, { alias: 'enableNavigation' });
+  enableThumbnail = input<boolean>(true, { alias: 'enableThumbnail' });
+  enableBookmark = input<boolean>(true, { alias: 'enableBookmark' });
+  enableTextSelection = input<boolean>(true, { alias: 'enableTextSelection' });
+  enableTextSearch = input<boolean>(true, { alias: 'enableTextSearch' });
+  enablePrint = input<boolean>(true, { alias: 'enablePrint' });
+  enableDownload = input<boolean>(true, { alias: 'enableDownload' });
+  enableFormFields = input<boolean>(true, { alias: 'enableFormFields' });
+  enableMagnification = input<boolean>(true, { alias: 'enableMagnification' });
 
   // Size
-  @Input() height: string | number = '800px';
-  @Input() width: string | number = '100%';
-  @Input() customClass?: string;
+  height = input<string | number>('640px', { alias: 'height' });
+  width = input<string | number>('100%', { alias: 'width' });
+  customClass = input<string>('', { alias: 'customClass' });
 
   // Events
-  @Output() documentLoad = new EventEmitter<any>();
-  @Output() pageChange = new EventEmitter<any>();
-  @Output() zoomChange = new EventEmitter<any>();
-  @Output() annotationAdd = new EventEmitter<any>();
-  @Output() annotationRemove = new EventEmitter<any>();
-  @Output() annotationSelect = new EventEmitter<any>();
-  @Output() hyperlinkClick = new EventEmitter<any>();
-  @Output() textSelection = new EventEmitter<any>();
-  @Output() formFieldFocus = new EventEmitter<any>();
-  @Output() formFieldBlur = new EventEmitter<any>();
+  documentLoad = output<any>();
+  pageChange = output<any>();
+  zoomChange = output<any>();
+  annotationAdd = output<any>();
+  annotationRemove = output<any>();
+  annotationSelect = output<any>();
+  hyperlinkClick = output<any>();
+  textSelection = output<any>();
+  formFieldFocus = output<any>();
+  formFieldBlur = output<any>();
 
   ngOnInit(): void {
     // Initialize if needed
@@ -91,76 +113,56 @@ export class PdfViewerComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Load document
+   */
+  loadDocument(document: string, password?: string): void {
+    const viewer = this.pdfviewer();
+    if (viewer && document) {
+      (viewer as any).load(document, password);
+    }
+  }
+
+  /**
+   * Unload document
+   */
+  unload(): void {
+    this.pdfviewer()?.unload();
+  }
+
+  /**
    * Get PDF viewer instance
    */
   getPdfViewerInstance(): SyncfusionPdfViewerComponent | null {
-    return this.pdfviewer || null;
+    return this.pdfviewer() || null;
   }
 
   /**
-   * Load document
-   */
-  loadDocument(documentPath: string): void {
-    if (this.pdfviewer) {
-      this.pdfviewer.documentPath = documentPath;
-      // Load method requires documentPath and password (optional)
-      (this.pdfviewer as any).load(documentPath, '');
-    }
-  }
-
-  /**
-   * Print PDF
+   * Print
    */
   print(): void {
-    if (this.pdfviewer) {
-      // Use print method from toolbar
-      (this.pdfviewer as any).toolbarModule.print();
+    const viewer = this.pdfviewer();
+    if (viewer) {
+      (viewer as any).toolbarModule.print();
     }
   }
 
   /**
-   * Download PDF
+   * Download
    */
   download(): void {
-    if (this.pdfviewer) {
-      // Use download method from toolbar
-      (this.pdfviewer as any).toolbarModule?.download();
+    const viewer = this.pdfviewer();
+    if (viewer) {
+      (viewer as any).toolbarModule?.download();
     }
   }
 
   /**
-   * Navigate to page
+   * Go to page
    */
   goToPage(pageNumber: number): void {
-    if (this.pdfviewer) {
-      (this.pdfviewer as any).navigationModule?.goToPage(pageNumber);
-    }
-  }
-
-  /**
-   * Go to first page
-   */
-  firstPage(): void {
-    if (this.pdfviewer) {
-      (this.pdfviewer as any).navigationModule?.goToFirstPage();
-    }
-  }
-
-  /**
-   * Go to last page
-   */
-  lastPage(): void {
-    if (this.pdfviewer) {
-      (this.pdfviewer as any).navigationModule?.goToLastPage();
-    }
-  }
-
-  /**
-   * Go to previous page
-   */
-  previousPage(): void {
-    if (this.pdfviewer) {
-      (this.pdfviewer as any).navigationModule?.goToPreviousPage();
+    const viewer = this.pdfviewer();
+    if (viewer) {
+      (viewer as any).navigationModule?.goToPage(pageNumber);
     }
   }
 
@@ -168,8 +170,49 @@ export class PdfViewerComponent implements OnInit, OnDestroy {
    * Go to next page
    */
   nextPage(): void {
-    if (this.pdfviewer) {
-      (this.pdfviewer as any).navigationModule?.goToNextPage();
+    const viewer = this.pdfviewer();
+    if (viewer) {
+      (viewer as any).navigationModule?.goToNextPage();
+    }
+  }
+
+  /**
+   * Go to previous page
+   */
+  previousPage(): void {
+    const viewer = this.pdfviewer();
+    if (viewer) {
+      (viewer as any).navigationModule?.goToPreviousPage();
+    }
+  }
+
+  /**
+   * Go to first page
+   */
+  firstPage(): void {
+    const viewer = this.pdfviewer();
+    if (viewer) {
+      (viewer as any).navigationModule?.goToFirstPage();
+    }
+  }
+
+  /**
+   * Go to last page
+   */
+  lastPage(): void {
+    const viewer = this.pdfviewer();
+    if (viewer) {
+      (viewer as any).navigationModule?.goToLastPage();
+    }
+  }
+
+  /**
+   * Zoom to
+   */
+  zoomTo(zoomValue: number): void {
+    const viewer = this.pdfviewer();
+    if (viewer) {
+      (viewer as any).magnificationModule?.zoomTo(zoomValue);
     }
   }
 
@@ -177,8 +220,9 @@ export class PdfViewerComponent implements OnInit, OnDestroy {
    * Zoom in
    */
   zoomIn(): void {
-    if (this.pdfviewer) {
-      (this.pdfviewer as any).magnificationModule?.zoomIn();
+    const viewer = this.pdfviewer();
+    if (viewer) {
+      (viewer as any).magnificationModule?.zoomIn();
     }
   }
 
@@ -186,26 +230,9 @@ export class PdfViewerComponent implements OnInit, OnDestroy {
    * Zoom out
    */
   zoomOut(): void {
-    if (this.pdfviewer) {
-      (this.pdfviewer as any).magnificationModule?.zoomOut();
-    }
-  }
-
-  /**
-   * Fit to page
-   */
-  fitToPage(): void {
-    if (this.pdfviewer) {
-      (this.pdfviewer as any).magnificationModule?.fitToPage();
-    }
-  }
-
-  /**
-   * Fit to width
-   */
-  fitToWidth(): void {
-    if (this.pdfviewer) {
-      (this.pdfviewer as any).magnificationModule?.fitToWidth();
+    const viewer = this.pdfviewer();
+    if (viewer) {
+      (viewer as any).magnificationModule?.zoomOut();
     }
   }
 
@@ -213,27 +240,70 @@ export class PdfViewerComponent implements OnInit, OnDestroy {
    * Set zoom factor
    */
   setZoomFactor(zoomFactor: number): void {
-    if (this.pdfviewer) {
+    const viewer = this.pdfviewer();
+    if (viewer) {
       // Use zoom method with factor
-      (this.pdfviewer as any).magnificationModule.zoom(zoomFactor);
+      (viewer as any).magnificationModule.zoom(zoomFactor);
+    }
+  }
+
+  /**
+   * Fit to page
+   */
+  fitToPage(): void {
+    const viewer = this.pdfviewer();
+    if (viewer) {
+      (viewer as any).magnificationModule?.fitToPage();
+    }
+  }
+
+  /**
+   * Fit to width
+   */
+  fitToWidth(): void {
+    const viewer = this.pdfviewer();
+    if (viewer) {
+      (viewer as any).magnificationModule?.fitToWidth();
     }
   }
 
   /**
    * Search text
    */
-  searchText(text: string): void {
-    if (this.pdfviewer) {
-      (this.pdfviewer as any).textSearch.searchText(text);
+  searchText(text: string, isMatchCase: boolean = false): void {
+    const viewer = this.pdfviewer();
+    if (viewer) {
+      (viewer as any).textSearch.searchText(text, isMatchCase);
     }
   }
 
   /**
-   * Clear search
+   * Search next
+   */
+  searchNext(): void {
+    const viewer = this.pdfviewer();
+    if (viewer) {
+      (viewer as any).textSearch.searchNext();
+    }
+  }
+
+  /**
+   * Search previous
+   */
+  searchPrevious(): void {
+    const viewer = this.pdfviewer();
+    if (viewer) {
+      (viewer as any).textSearch.searchPrevious();
+    }
+  }
+
+  /**
+   * Cancel search
    */
   clearSearch(): void {
-    if (this.pdfviewer) {
-      (this.pdfviewer as any).textSearch.cancel();
+    const viewer = this.pdfviewer();
+    if (viewer) {
+      (viewer as any).textSearch.cancelTextSearch();
     }
   }
 
@@ -241,9 +311,10 @@ export class PdfViewerComponent implements OnInit, OnDestroy {
    * Get current page number
    */
   getCurrentPage(): number {
-    if (this.pdfviewer) {
+    const viewer = this.pdfviewer();
+    if (viewer) {
       // Get current page from navigation module
-      return (this.pdfviewer as any).navigationModule?.currentPageNumber || 1;
+      return (viewer as any).navigationModule?.currentPageNumber || 1;
     }
     return 0;
   }
@@ -252,8 +323,9 @@ export class PdfViewerComponent implements OnInit, OnDestroy {
    * Get total pages
    */
   getTotalPages(): number {
-    if (this.pdfviewer) {
-      return this.pdfviewer.pageCount || 0;
+    const viewer = this.pdfviewer();
+    if (viewer) {
+      return viewer.pageCount || 0;
     }
     return 0;
   }
@@ -262,52 +334,12 @@ export class PdfViewerComponent implements OnInit, OnDestroy {
    * Refresh
    */
   refresh(): void {
-    if (this.pdfviewer) {
-      this.pdfviewer.refresh();
-    }
+    this.pdfviewer()?.refresh();
   }
 
   /**
    * Event handlers
+   * Removed manual wrappers
    */
-  onDocumentLoad(event: any): void {
-    this.documentLoad.emit(event);
-  }
-
-  onPageChange(event: any): void {
-    this.pageChange.emit(event);
-  }
-
-  onZoomChange(event: any): void {
-    this.zoomChange.emit(event);
-  }
-
-  onAnnotationAdd(event: any): void {
-    this.annotationAdd.emit(event);
-  }
-
-  onAnnotationRemove(event: any): void {
-    this.annotationRemove.emit(event);
-  }
-
-  onAnnotationSelect(event: any): void {
-    this.annotationSelect.emit(event);
-  }
-
-  onHyperlinkClick(event: any): void {
-    this.hyperlinkClick.emit(event);
-  }
-
-  onTextSelection(event: any): void {
-    this.textSelection.emit(event);
-  }
-
-  onFormFieldFocus(event: any): void {
-    this.formFieldFocus.emit(event);
-  }
-
-  onFormFieldBlur(event: any): void {
-    this.formFieldBlur.emit(event);
-  }
 }
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, ChangeDetectionStrategy, input, output, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TreeGridModule } from '@syncfusion/ej2-angular-treegrid';
 import {
@@ -86,68 +86,68 @@ export interface TreeGridConfig {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeGridComponent implements OnInit, OnDestroy {
-  @ViewChild('treegrid', { static: false }) treegrid!: SyncfusionTreeGridComponent;
+  treegrid = viewChild<SyncfusionTreeGridComponent>('treegrid');
 
   // Data
-  @Input() dataSource: any[] = [];
-  @Input() columns: TreeGridColumn[] = [];
+  dataSource = input<any[]>([], { alias: 'dataSource' });
+  columns = input<TreeGridColumn[]>([], { alias: 'columns' });
 
   // Tree Settings
-  @Input() childMapping: string = 'subtasks';
-  @Input() hasChildMapping?: string;
-  @Input() idMapping?: string;
-  @Input() parentIdMapping?: string;
+  childMapping = input<string>('subtasks', { alias: 'childMapping' });
+  hasChildMapping = input<string | undefined>(undefined, { alias: 'hasChildMapping' });
+  idMapping = input<string | undefined>(undefined, { alias: 'idMapping' });
+  parentIdMapping = input<string | undefined>(undefined, { alias: 'parentIdMapping' });
 
   // Features
-  @Input() allowPaging: boolean = true;
-  @Input() allowSorting: boolean = true;
-  @Input() allowFiltering: boolean = true;
+  allowPaging = input<boolean>(true, { alias: 'allowPaging' });
+  allowSorting = input<boolean>(true, { alias: 'allowSorting' });
+  allowFiltering = input<boolean>(true, { alias: 'allowFiltering' });
   // Note: allowSearching is handled via toolbar search functionality
-  @Input() allowSelection: boolean = true;
-  @Input() allowResizing: boolean = true;
-  @Input() allowReordering: boolean = true;
+  allowSelection = input<boolean>(true, { alias: 'allowSelection' });
+  allowResizing = input<boolean>(true, { alias: 'allowResizing' });
+  allowReordering = input<boolean>(true, { alias: 'allowReordering' });
   // Note: allowEditing is controlled via editSettings
-  @Input() allowExcelExport: boolean = true;
-  @Input() allowPdfExport: boolean = true;
-  @Input() showColumnChooser: boolean = true;
-  @Input() enableVirtualization: boolean = false;
+  allowExcelExport = input<boolean>(true, { alias: 'allowExcelExport' });
+  allowPdfExport = input<boolean>(true, { alias: 'allowPdfExport' });
+  showColumnChooser = input<boolean>(true, { alias: 'showColumnChooser' });
+  enableVirtualization = input<boolean>(false, { alias: 'enableVirtualization' });
 
   // Settings
-  @Input() pageSettings: any = {
+  pageSettings = input<any>({
     pageSize: 10,
     pageSizes: [10, 20, 50, 100]
-  };
-  @Input() selectionSettings: any = {
+  }, { alias: 'pageSettings' });
+  selectionSettings = input<any>({
     mode: 'Row',
     type: 'Single'
-  };
-  @Input() editSettings: any = {
+  }, { alias: 'selectionSettings' });
+  editSettings = input<any>({
     allowAdding: true,
     allowEditing: true,
     allowDeleting: true,
     mode: 'Row'
-  };
-  @Input() toolbar: any[] = ['Add', 'Edit', 'Delete', 'Update', 'Cancel', 'Search', 'ExcelExport', 'PdfExport', 'CsvExport', 'ColumnChooser'];
+  }, { alias: 'editSettings' });
+  toolbar = input<any[]>(['Add', 'Edit', 'Delete', 'Update', 'Cancel', 'Search', 'ExcelExport', 'PdfExport', 'CsvExport', 'ColumnChooser'], { alias: 'toolbar' });
 
   // Styling
-  @Input() customClass: string = '';
-  @Input() height: string | number = '400px';
-  @Input() width: string | number = '100%';
+  customClass = input<string>('', { alias: 'customClass' });
+  height = input<string | number>('400px', { alias: 'height' });
+  width = input<string | number>('100%', { alias: 'width' });
 
   // Events
-  @Output() created = new EventEmitter<any>();
-  @Output() dataBound = new EventEmitter<any>();
-  @Output() rowSelected = new EventEmitter<any>();
-  @Output() rowDeselected = new EventEmitter<any>();
-  @Output() cellSelected = new EventEmitter<any>();
-  @Output() cellDeselected = new EventEmitter<any>();
-  @Output() recordClick = new EventEmitter<any>();
-  @Output() recordDoubleClick = new EventEmitter<any>();
-  @Output() rowDragStart = new EventEmitter<any>();
-  @Output() rowDrop = new EventEmitter<any>();
-  @Output() actionBegin = new EventEmitter<any>();
-  @Output() actionComplete = new EventEmitter<any>();
-  @Output() dataStateChange = new EventEmitter<any>();
+  created = output<any>();
+  dataBound = output<any>();
+  rowSelected = output<any>();
+  rowDeselected = output<any>();
+  cellSelected = output<any>();
+  cellDeselected = output<any>();
+  recordClick = output<any>();
+  recordDoubleClick = output<any>();
+  rowDragStart = output<any>();
+  rowDrop = output<any>();
+  actionBegin = output<any>();
+  actionComplete = output<any>();
+  dataStateChange = output<any>();
 
   ngOnInit(): void {
     // Initialize if needed
@@ -161,20 +161,19 @@ export class TreeGridComponent implements OnInit, OnDestroy {
    * Refresh grid
    */
   refresh(): void {
-    if (this.treegrid) {
-      this.treegrid.refresh();
-    }
+    this.treegrid()?.refresh();
   }
 
   /**
    * Get selected rows
    */
   getSelectedRows(): any[] {
-    if (this.treegrid) {
-      const selectedRows = this.treegrid.getSelectedRows();
+    const tg = this.treegrid();
+    if (tg) {
+      const selectedRows = tg.getSelectedRows();
       const selectedData: any[] = [];
       selectedRows.forEach((row: any) => {
-        const rowInfo = this.treegrid.getRowInfo(row);
+        const rowInfo = tg.getRowInfo(row);
         if (rowInfo) {
           // Get data from rowInfo or row element
           const rowData = (rowInfo as any).rowData || (row as any).data || row;
@@ -192,47 +191,40 @@ export class TreeGridComponent implements OnInit, OnDestroy {
    * Select row by index
    */
   selectRow(index: number): void {
-    if (this.treegrid) {
-      this.treegrid.selectRow(index);
-    }
+    this.treegrid()?.selectRow(index);
   }
 
   /**
    * Clear selection
    */
   clearSelection(): void {
-    if (this.treegrid) {
-      this.treegrid.clearSelection();
-    }
+    this.treegrid()?.clearSelection();
   }
 
   /**
    * Expand all rows
    */
   expandAll(): void {
-    if (this.treegrid) {
-      this.treegrid.expandAll();
-    }
+    this.treegrid()?.expandAll();
   }
 
   /**
    * Collapse all rows
    */
   collapseAll(): void {
-    if (this.treegrid) {
-      this.treegrid.collapseAll();
-    }
+    this.treegrid()?.collapseAll();
   }
 
   /**
    * Expand row by index
    */
   expandRow(index: number): void {
-    if (this.treegrid) {
+    const tg = this.treegrid();
+    if (tg) {
       // Get row element by index
-      const rows = this.treegrid.getRows();
+      const rows = tg.getRows();
       if (rows && rows[index]) {
-        this.treegrid.expandRow(rows[index]);
+        tg.expandRow(rows[index]);
       }
     }
   }
@@ -241,11 +233,12 @@ export class TreeGridComponent implements OnInit, OnDestroy {
    * Collapse row by index
    */
   collapseRow(index: number): void {
-    if (this.treegrid) {
+    const tg = this.treegrid();
+    if (tg) {
       // Get row element by index
-      const rows = this.treegrid.getRows();
+      const rows = tg.getRows();
       if (rows && rows[index]) {
-        this.treegrid.collapseRow(rows[index]);
+        tg.collapseRow(rows[index]);
       }
     }
   }
@@ -254,11 +247,12 @@ export class TreeGridComponent implements OnInit, OnDestroy {
    * Export to Excel
    */
   exportToExcel(fileName?: string): void {
-    if (this.treegrid) {
+    const tg = this.treegrid();
+    if (tg) {
       const excelExportProperties = {
         fileName: fileName || 'TreeGrid'
       };
-      this.treegrid.excelExport(excelExportProperties);
+      tg.excelExport(excelExportProperties);
     }
   }
 
@@ -266,11 +260,12 @@ export class TreeGridComponent implements OnInit, OnDestroy {
    * Export to PDF
    */
   exportToPdf(fileName?: string): void {
-    if (this.treegrid) {
+    const tg = this.treegrid();
+    if (tg) {
       const pdfExportProperties = {
         fileName: fileName || 'TreeGrid'
       };
-      this.treegrid.pdfExport(pdfExportProperties);
+      tg.pdfExport(pdfExportProperties);
     }
   }
 
@@ -278,11 +273,12 @@ export class TreeGridComponent implements OnInit, OnDestroy {
    * Export to CSV
    */
   exportToCsv(fileName?: string): void {
-    if (this.treegrid) {
+    const tg = this.treegrid();
+    if (tg) {
       const csvExportProperties = {
         fileName: fileName || 'TreeGrid'
       };
-      this.treegrid.csvExport(csvExportProperties);
+      tg.csvExport(csvExportProperties);
     }
   }
 
@@ -290,9 +286,10 @@ export class TreeGridComponent implements OnInit, OnDestroy {
    * Search
    */
   search(searchText: string): void {
-    if (this.treegrid && searchText) {
+    const tg = this.treegrid();
+    if (tg && searchText) {
       // Use filter method for searching
-      (this.treegrid as any).filterByColumn('', 'contains', searchText);
+      (tg as any).filterByColumn('', 'contains', searchText);
     }
   }
 
@@ -300,71 +297,19 @@ export class TreeGridComponent implements OnInit, OnDestroy {
    * Clear search
    */
   clearSearch(): void {
-    if (this.treegrid) {
-      this.treegrid.clearFiltering();
-    }
+    this.treegrid()?.clearFiltering();
   }
 
   /**
    * Get tree grid instance
    */
   getTreeGridInstance(): SyncfusionTreeGridComponent | null {
-    return this.treegrid || null;
+    return this.treegrid() || null;
   }
 
   /**
    * Event handlers
+   * Removed manual wrappers; use emit directly in template
    */
-  onCreated(args: any): void {
-    this.created.emit(args);
-  }
-
-  onDataBound(args: any): void {
-    this.dataBound.emit(args);
-  }
-
-  onRowSelected(args: any): void {
-    this.rowSelected.emit(args);
-  }
-
-  onRowDeselected(args: any): void {
-    this.rowDeselected.emit(args);
-  }
-
-  onCellSelected(args: any): void {
-    this.cellSelected.emit(args);
-  }
-
-  onCellDeselected(args: any): void {
-    this.cellDeselected.emit(args);
-  }
-
-  onRecordClick(args: any): void {
-    this.recordClick.emit(args);
-  }
-
-  onRecordDoubleClick(args: any): void {
-    this.recordDoubleClick.emit(args);
-  }
-
-  onRowDragStart(args: any): void {
-    this.rowDragStart.emit(args);
-  }
-
-  onRowDrop(args: any): void {
-    this.rowDrop.emit(args);
-  }
-
-  onActionBegin(args: any): void {
-    this.actionBegin.emit(args);
-  }
-
-  onActionComplete(args: any): void {
-    this.actionComplete.emit(args);
-  }
-
-  onDataStateChange(args: any): void {
-    this.dataStateChange.emit(args);
-  }
 }
 

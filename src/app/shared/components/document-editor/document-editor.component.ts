@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, ChangeDetectionStrategy, input, output, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DocumentEditorModule } from '@syncfusion/ej2-angular-documenteditor';
 import {
@@ -64,63 +64,63 @@ export interface DocumentEditorConfig {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DocumentEditorComponent implements OnInit, OnDestroy {
-  @ViewChild('documentEditor', { static: false }) documentEditor!: SyncfusionDocumentEditorComponent;
+  documentEditor = viewChild<SyncfusionDocumentEditorComponent>('documentEditor');
 
   // Size
-  @Input() width: string | number = '100%';
-  @Input() height: string | number = '800px';
+  width = input<string | number>('100%', { alias: 'width' });
+  height = input<string | number>('800px', { alias: 'height' });
 
   // Features
-  @Input() enableSpellCheck: boolean = true;
-  @Input() enableSelection: boolean = true;
-  @Input() enableEditor: boolean = true;
-  @Input() enableEditorHistory: boolean = true;
-  @Input() enableContextMenu: boolean = true;
-  @Input() enableHyperlinkDialog: boolean = true;
-  @Input() enableImageResizer: boolean = true;
-  @Input() enableTableDialog: boolean = true;
-  @Input() enableBookmarkDialog: boolean = true;
-  @Input() enableTableOfContentsDialog: boolean = true;
-  @Input() enablePageSetupDialog: boolean = true;
-  @Input() enableStyleDialog: boolean = true;
-  @Input() enableListDialog: boolean = true;
-  @Input() enableParagraphDialog: boolean = true;
-  @Input() enableFontDialog: boolean = true;
-  @Input() enableTablePropertiesDialog: boolean = true;
-  @Input() enableBordersAndShadingDialog: boolean = true;
-  @Input() enableTableOptionsDialog: boolean = true;
-  @Input() enableTrackChanges: boolean = true;
-  @Input() enableFormField: boolean = true;
-  @Input() enableOptionsPane: boolean = true;
-  @Input() showComments: boolean = false;
-  @Input() showRevisions: boolean = false;
-  @Input() zoomFactor: number = 1;
-  @Input() isReadOnly: boolean = false;
-  @Input() enablePrint: boolean = true;
-  @Input() enableWordExport: boolean = true;
-  @Input() enableSfdtExport: boolean = true;
-  @Input() enableTextExport: boolean = true;
-  @Input() enableSearch: boolean = true;
+  enableSpellCheck = input<boolean>(true, { alias: 'enableSpellCheck' });
+  enableSelection = input<boolean>(true, { alias: 'enableSelection' });
+  enableEditor = input<boolean>(true, { alias: 'enableEditor' });
+  enableEditorHistory = input<boolean>(true, { alias: 'enableEditorHistory' });
+  enableContextMenu = input<boolean>(true, { alias: 'enableContextMenu' });
+  enableHyperlinkDialog = input<boolean>(true, { alias: 'enableHyperlinkDialog' });
+  enableImageResizer = input<boolean>(true, { alias: 'enableImageResizer' });
+  enableTableDialog = input<boolean>(true, { alias: 'enableTableDialog' });
+  enableBookmarkDialog = input<boolean>(true, { alias: 'enableBookmarkDialog' });
+  enableTableOfContentsDialog = input<boolean>(true, { alias: 'enableTableOfContentsDialog' });
+  enablePageSetupDialog = input<boolean>(true, { alias: 'enablePageSetupDialog' });
+  enableStyleDialog = input<boolean>(true, { alias: 'enableStyleDialog' });
+  enableListDialog = input<boolean>(true, { alias: 'enableListDialog' });
+  enableParagraphDialog = input<boolean>(true, { alias: 'enableParagraphDialog' });
+  enableFontDialog = input<boolean>(true, { alias: 'enableFontDialog' });
+  enableTablePropertiesDialog = input<boolean>(true, { alias: 'enableTablePropertiesDialog' });
+  enableBordersAndShadingDialog = input<boolean>(true, { alias: 'enableBordersAndShadingDialog' });
+  enableTableOptionsDialog = input<boolean>(true, { alias: 'enableTableOptionsDialog' });
+  enableTrackChanges = input<boolean>(true, { alias: 'enableTrackChanges' });
+  enableFormField = input<boolean>(true, { alias: 'enableFormField' });
+  enableOptionsPane = input<boolean>(true, { alias: 'enableOptionsPane' });
+  showComments = input<boolean>(false, { alias: 'showComments' });
+  showRevisions = input<boolean>(false, { alias: 'showRevisions' });
+  zoomFactor = input<number>(1, { alias: 'zoomFactor' });
+  isReadOnly = input<boolean>(false, { alias: 'isReadOnly' });
+  enablePrint = input<boolean>(true, { alias: 'enablePrint' });
+  enableWordExport = input<boolean>(true, { alias: 'enableWordExport' });
+  enableSfdtExport = input<boolean>(true, { alias: 'enableSfdtExport' });
+  enableTextExport = input<boolean>(true, { alias: 'enableTextExport' });
+  enableSearch = input<boolean>(true, { alias: 'enableSearch' });
 
   // Styling
-  @Input() customClass: string = '';
+  customClass = input<string>('', { alias: 'customClass' });
 
   // Events
-  @Output() created = new EventEmitter<any>();
-  @Output() documentChange = new EventEmitter<any>();
-  @Output() selectionChange = new EventEmitter<any>();
-  @Output() contentChange = new EventEmitter<any>();
-  @Output() zoomFactorChange = new EventEmitter<any>();
-  @Output() requestNavigate = new EventEmitter<any>();
-  @Output() beforePaneSwitch = new EventEmitter<any>();
-  @Output() paneSwitch = new EventEmitter<any>();
-  @Output() beforeServiceFailure = new EventEmitter<any>();
-  @Output() serviceFailure = new EventEmitter<any>();
-  @Output() customContextMenuBeforeOpen = new EventEmitter<any>();
-  @Output() customContextMenuOpen = new EventEmitter<any>();
-  @Output() beforeRestrictEditing = new EventEmitter<any>();
-  @Output() restrictEditing = new EventEmitter<any>();
-  @Output() documentEditorSettingsChange = new EventEmitter<any>();
+  created = output<any>();
+  documentChange = output<any>();
+  selectionChange = output<any>();
+  contentChange = output<any>();
+  zoomFactorChange = output<any>();
+  requestNavigate = output<any>();
+  beforePaneSwitch = output<any>();
+  paneSwitch = output<any>();
+  beforeServiceFailure = output<any>();
+  serviceFailure = output<any>();
+  customContextMenuBeforeOpen = output<any>();
+  customContextMenuOpen = output<any>();
+  beforeRestrictEditing = output<any>();
+  restrictEditing = output<any>();
+  documentEditorSettingsChange = output<any>();
 
   ngOnInit(): void {
     // Initialize if needed
@@ -134,17 +134,16 @@ export class DocumentEditorComponent implements OnInit, OnDestroy {
    * Open document from SFDT
    */
   open(document: string): void {
-    if (this.documentEditor) {
-      this.documentEditor.open(document);
-    }
+    this.documentEditor()?.open(document);
   }
 
   /**
    * Save document as SFDT
    */
   saveAsSfdt(): string {
-    if (this.documentEditor) {
-      return this.documentEditor.serialize();
+    const editor = this.documentEditor();
+    if (editor) {
+      return editor.serialize();
     }
     return '';
   }
@@ -153,8 +152,9 @@ export class DocumentEditorComponent implements OnInit, OnDestroy {
    * Save document as Blob
    */
   saveAsBlob(format: 'Docx' | 'Sfdt' | 'Txt'): Promise<Blob> {
-    if (this.documentEditor) {
-      return this.documentEditor.saveAsBlob(format as any);
+    const editor = this.documentEditor();
+    if (editor) {
+      return editor.saveAsBlob(format as any);
     }
     return Promise.reject('Document editor not initialized');
   }
@@ -163,19 +163,18 @@ export class DocumentEditorComponent implements OnInit, OnDestroy {
    * Print document
    */
   print(): void {
-    if (this.documentEditor) {
-      this.documentEditor.print();
-    }
+    this.documentEditor()?.print();
   }
 
   /**
    * Export document
    */
   export(format: 'Docx' | 'Sfdt' | 'Txt', fileName?: string): void {
-    if (this.documentEditor) {
+    const editor = this.documentEditor();
+    if (editor) {
       const formatType = format as any;
       const file = (fileName || 'document') as any;
-      this.documentEditor.save(formatType, file);
+      editor.save(formatType, file);
     }
   }
 
@@ -183,7 +182,7 @@ export class DocumentEditorComponent implements OnInit, OnDestroy {
    * Export as PDF (requires server-side conversion)
    */
   exportAsPdf(fileName?: string): void {
-    if (this.documentEditor) {
+    if (this.documentEditor()) {
       // PDF export requires server-side conversion
       // Use saveAsBlob('Sfdt') and convert on server
       console.warn('PDF export requires server-side conversion. Use exportAsSfdt() and convert on server.');
@@ -194,68 +193,57 @@ export class DocumentEditorComponent implements OnInit, OnDestroy {
    * Insert text
    */
   insertText(text: string): void {
-    if (this.documentEditor) {
-      this.documentEditor.editor.insertText(text);
-    }
+    this.documentEditor()?.editor.insertText(text);
   }
 
   /**
    * Insert image
    */
   insertImage(base64: string): void {
-    if (this.documentEditor) {
-      this.documentEditor.editor.insertImage(base64);
-    }
+    this.documentEditor()?.editor.insertImage(base64);
   }
 
   /**
    * Insert table
    */
   insertTable(rowCount: number, columnCount: number): void {
-    if (this.documentEditor) {
-      this.documentEditor.editor.insertTable(rowCount, columnCount);
-    }
+    this.documentEditor()?.editor.insertTable(rowCount, columnCount);
   }
 
   /**
    * Undo
    */
   undo(): void {
-    if (this.documentEditor) {
-      this.documentEditor.editorHistoryModule.undo();
-    }
+    this.documentEditor()?.editorHistoryModule.undo();
   }
 
   /**
    * Redo
    */
   redo(): void {
-    if (this.documentEditor) {
-      this.documentEditor.editorHistoryModule.redo();
-    }
+    this.documentEditor()?.editorHistoryModule.redo();
   }
 
   /**
    * Select all
    */
   selectAll(): void {
-    if (this.documentEditor) {
-      this.documentEditor.selection.selectAll();
-    }
+    this.documentEditor()?.selection.selectAll();
   }
 
   /**
    * Copy
    */
   copy(): void {
-    if (this.documentEditor) {
+    const editor = this.documentEditor();
+    if (editor) {
       // Use document editor's built-in copy functionality
-      const editor = (this.documentEditor as any).editor;
-      if (editor && editor.copy) {
-        editor.copy();
+      const ed = (editor as any).editor;
+      if (ed && ed.copy) {
+        ed.copy();
       } else {
         // Fallback: use clipboard API
-        const selectedText = this.documentEditor.selection.text;
+        const selectedText = editor.selection.text;
         if (selectedText) {
           navigator.clipboard.writeText(selectedText);
         }
@@ -267,15 +255,16 @@ export class DocumentEditorComponent implements OnInit, OnDestroy {
    * Cut
    */
   cut(): void {
-    if (this.documentEditor) {
+    const editor = this.documentEditor();
+    if (editor) {
       // Use document editor's built-in cut functionality
-      const editor = (this.documentEditor as any).editor;
-      if (editor && editor.cut) {
-        editor.cut();
+      const ed = (editor as any).editor;
+      if (ed && ed.cut) {
+        ed.cut();
       } else {
         // Fallback: copy then delete
         this.copy();
-        this.documentEditor.editor.delete();
+        editor.editor.delete();
       }
     }
   }
@@ -284,11 +273,12 @@ export class DocumentEditorComponent implements OnInit, OnDestroy {
    * Paste
    */
   paste(): void {
-    if (this.documentEditor) {
+    const editor = this.documentEditor();
+    if (editor) {
       // Use document editor's built-in paste functionality
-      const editor = (this.documentEditor as any).editor;
-      if (editor && editor.paste) {
-        editor.paste();
+      const ed = (editor as any).editor;
+      if (ed && ed.paste) {
+        ed.paste();
       } else {
         // Fallback: use clipboard API
         navigator.clipboard.readText().then(text => {
@@ -302,9 +292,10 @@ export class DocumentEditorComponent implements OnInit, OnDestroy {
    * Find and replace
    */
   find(text: string): boolean {
-    if (this.documentEditor) {
+    const editor = this.documentEditor();
+    if (editor) {
       try {
-        this.documentEditor.searchModule.findAll(text);
+        editor.searchModule.findAll(text);
         return true;
       } catch {
         return false;
@@ -317,12 +308,13 @@ export class DocumentEditorComponent implements OnInit, OnDestroy {
    * Replace
    */
   replace(text: string, replaceText: string): boolean {
-    if (this.documentEditor) {
+    const editor = this.documentEditor();
+    if (editor) {
       try {
-        const results = this.documentEditor.searchModule.findAll(text) as any;
+        const results = editor.searchModule.findAll(text) as any;
         if (results && Array.isArray(results) && results.length > 0) {
           // replaceAll expects TextSearchResults (array) as first parameter and string as second
-          this.documentEditor.searchModule.replaceAll(results as any, replaceText as any);
+          editor.searchModule.replaceAll(results as any, replaceText as any);
           return true;
         }
       } catch (error) {
@@ -337,8 +329,9 @@ export class DocumentEditorComponent implements OnInit, OnDestroy {
    * Set zoom factor
    */
   setZoomFactor(factor: number): void {
-    if (this.documentEditor) {
-      this.documentEditor.zoomFactor = factor;
+    const editor = this.documentEditor();
+    if (editor) {
+      editor.zoomFactor = factor;
     }
   }
 
@@ -346,88 +339,26 @@ export class DocumentEditorComponent implements OnInit, OnDestroy {
    * Focus
    */
   focus(): void {
-    if (this.documentEditor) {
-      this.documentEditor.focusIn();
-    }
+    this.documentEditor()?.focusIn();
   }
 
   /**
    * Refresh
    */
   refresh(): void {
-    if (this.documentEditor) {
-      this.documentEditor.dataBind();
-    }
+    this.documentEditor()?.dataBind();
   }
 
   /**
    * Get document editor instance
    */
   getDocumentEditorInstance(): SyncfusionDocumentEditorComponent | null {
-    return this.documentEditor || null;
+    return this.documentEditor() || null;
   }
 
   /**
    * Event handlers
+   * Removed manual wrappers
    */
-  onCreated(args: any): void {
-    this.created.emit(args);
-  }
-
-  onDocumentChange(args: any): void {
-    this.documentChange.emit(args);
-  }
-
-  onSelectionChange(args: any): void {
-    this.selectionChange.emit(args);
-  }
-
-  onContentChange(args: any): void {
-    this.contentChange.emit(args);
-  }
-
-  onZoomFactorChange(args: any): void {
-    this.zoomFactorChange.emit(args);
-  }
-
-  onRequestNavigate(args: any): void {
-    this.requestNavigate.emit(args);
-  }
-
-  onBeforePaneSwitch(args: any): void {
-    this.beforePaneSwitch.emit(args);
-  }
-
-  onPaneSwitch(args: any): void {
-    this.paneSwitch.emit(args);
-  }
-
-  onBeforeServiceFailure(args: any): void {
-    this.beforeServiceFailure.emit(args);
-  }
-
-  onServiceFailure(args: any): void {
-    this.serviceFailure.emit(args);
-  }
-
-  onCustomContextMenuBeforeOpen(args: any): void {
-    this.customContextMenuBeforeOpen.emit(args);
-  }
-
-  onCustomContextMenuOpen(args: any): void {
-    this.customContextMenuOpen.emit(args);
-  }
-
-  onBeforeRestrictEditing(args: any): void {
-    this.beforeRestrictEditing.emit(args);
-  }
-
-  onRestrictEditing(args: any): void {
-    this.restrictEditing.emit(args);
-  }
-
-  onDocumentEditorSettingsChange(args: any): void {
-    this.documentEditorSettingsChange.emit(args);
-  }
 }
 
