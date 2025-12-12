@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectionStrategy, input, output, viewChild, computed } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
   createImageData,
@@ -48,53 +48,60 @@ export interface UploadedImage {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ImageUploadComponent implements OnInit, ControlValueAccessor {
-  @Input() label = 'อัปโหลดรูปภาพ';
-  @Input() placeholder = 'ลากไฟล์มาวางที่นี่หรือคลิกเพื่อเลือก';
-  @Input() accept = 'image/*';
-  @Input() multiple = false;
-  @Input() disabled = false;
-  @Input() required = false;
-  @Input() config: ImageUploadConfig = {
+export class ImageUploadComponent implements ControlValueAccessor {
+  label = input<string>('อัปโหลดรูปภาพ', { alias: 'label' });
+  placeholder = input<string>('ลากไฟล์มาวางที่นี่หรือคลิกเพื่อเลือก', { alias: 'placeholder' });
+  accept = input<string>('image/*', { alias: 'accept' });
+  multiple = input<boolean>(false, { alias: 'multiple' });
+  disabledInput = input<boolean>(false, { alias: 'disabled' });
+  required = input<boolean>(false, { alias: 'required' });
+  config = input<ImageUploadConfig>({
     maxSize: 5, // 5MB
     maxFiles: 1,
     allowedTypes: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
     enablePreview: true
-  };
+  }, { alias: 'config' });
 
-  @Output() fileSelect = new EventEmitter<UploadedImage[]>();
-  @Output() fileRemove = new EventEmitter<UploadedImage>();
-  @Output() error = new EventEmitter<string>();
-  @Output() qualityCheck = new EventEmitter<{ image: UploadedImage; assessment: ImageQualityAssessment }>();
+  fileSelect = output<UploadedImage[]>();
+  fileRemove = output<UploadedImage>();
+  error = output<string>();
+  qualityCheck = output<{ image: UploadedImage; assessment: ImageQualityAssessment }>();
 
-  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+  fileInput = viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
+
+  // Derived config with defaults
+  effectiveConfig = computed(() => {
+    const c = { ...this.config() };
+    if (!c.maxSize) c.maxSize = 5;
+    if (!c.maxFiles) c.maxFiles = this.multiple() ? 5 : 1;
+    if (!c.allowedTypes) {
+      c.allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    }
+    if (c.enablePreview === undefined) {
+      c.enablePreview = true;
+    }
+    if (c.enableQualityCheck === undefined) {
+      c.enableQualityCheck = false;
+    }
+    if (c.requireQualityCheck === undefined) {
+      c.requireQualityCheck = false;
+    }
+    if (!c.minQuality) {
+      c.minQuality = 'good';
+    }
+    return c;
+  });
+
 
   uploadedImages: UploadedImage[] = [];
   isDragging = false;
   errors: string[] = [];
+  disabled = false;
 
   private onChange = (value: UploadedImage[]) => { };
   private onTouched = () => { };
 
-  ngOnInit(): void {
-    if (!this.config.maxSize) this.config.maxSize = 5;
-    if (!this.config.maxFiles) this.config.maxFiles = this.multiple ? 5 : 1;
-    if (!this.config.allowedTypes) {
-      this.config.allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-    }
-    if (this.config.enablePreview === undefined) {
-      this.config.enablePreview = true;
-    }
-    if (this.config.enableQualityCheck === undefined) {
-      this.config.enableQualityCheck = false;
-    }
-    if (this.config.requireQualityCheck === undefined) {
-      this.config.requireQualityCheck = false;
-    }
-    if (!this.config.minQuality) {
-      this.config.minQuality = 'good';
-    }
-  }
+  // ngOnInit removed as logic is now in effectiveConfig computed
 
   writeValue(value: UploadedImage[]): void {
     if (value) {
@@ -111,7 +118,7 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.disabled = isDisabled || this.disabledInput();
   }
 
   onDragOver(event: DragEvent): void {
@@ -152,9 +159,10 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
     this.errors = [];
 
     // Check max files
+    const config = this.effectiveConfig();
     const totalFiles = this.uploadedImages.length + files.length;
-    if (totalFiles > this.config.maxFiles!) {
-      const error = `สามารถอัปโหลดได้สูงสุด ${this.config.maxFiles} ไฟล์`;
+    if (totalFiles > config.maxFiles!) {
+      const error = `สามารถอัปโหลดได้สูงสุด ${config.maxFiles} ไฟล์`;
       this.errors.push(error);
       this.error.emit(error);
       return;
@@ -162,8 +170,8 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
 
     for (const file of files) {
       // Check file type
-      if (!this.config.allowedTypes!.includes(file.type)) {
-        const error = `ไฟล์ ${file.name} ไม่ใช่ประเภทที่รองรับ (${this.config.allowedTypes!.join(', ')})`;
+      if (!config.allowedTypes!.includes(file.type)) {
+        const error = `ไฟล์ ${file.name} ไม่ใช่ประเภทที่รองรับ (${config.allowedTypes!.join(', ')})`;
         this.errors.push(error);
         this.error.emit(error);
         continue;
@@ -171,8 +179,8 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
 
       // Check file size
       const fileSizeMB = file.size / (1024 * 1024);
-      if (fileSizeMB > this.config.maxSize!) {
-        const error = `ไฟล์ ${file.name} ใหญ่เกินไป (สูงสุด ${this.config.maxSize}MB)`;
+      if (fileSizeMB > config.maxSize!) {
+        const error = `ไฟล์ ${file.name} ใหญ่เกินไป (สูงสุด ${config.maxSize}MB)`;
         this.errors.push(error);
         this.error.emit(error);
         continue;
@@ -186,7 +194,7 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
 
       // Image Quality Assessment
       let qualityAssessment: ImageQualityAssessment | undefined;
-      if (this.config.enableQualityCheck) {
+      if (config.enableQualityCheck) {
         try {
           const imageData = await createImageData(file);
           qualityAssessment = assessImageQuality(imageData);
@@ -205,9 +213,9 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
           this.qualityCheck.emit({ image: tempImage, assessment: qualityAssessment });
 
           // Check if quality is sufficient
-          if (this.config.requireQualityCheck) {
+          if (config.requireQualityCheck) {
             const qualityOrder = ['poor', 'fair', 'good', 'excellent'];
-            const minQualityIndex = qualityOrder.indexOf(this.config.minQuality!);
+            const minQualityIndex = qualityOrder.indexOf(config.minQuality!);
             const actualQualityIndex = qualityOrder.indexOf(qualityAssessment.quality);
 
             if (actualQualityIndex < minQualityIndex) {
@@ -283,7 +291,7 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
 
   openFileDialog(): void {
     if (!this.disabled) {
-      this.fileInput.nativeElement.click();
+      this.fileInput().nativeElement.click();
     }
   }
 
@@ -296,7 +304,7 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
   }
 
   get canAddMore(): boolean {
-    return this.uploadedImages.length < this.config.maxFiles!;
+    return this.uploadedImages.length < this.effectiveConfig().maxFiles!;
   }
 
   // Quality Assessment Helpers

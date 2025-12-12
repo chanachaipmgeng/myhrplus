@@ -1,22 +1,19 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlassCardComponent } from '../glass-card/glass-card.component';
-import { SpinnerComponent } from '../spinner/spinner.component';
+import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-loading',
   standalone: true,
-  imports: [CommonModule, GlassCardComponent, SpinnerComponent],
+  imports: [CommonModule, GlassCardComponent, LoadingSpinnerComponent],
   templateUrl: './loading.component.html',
   styleUrls: ['./loading.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoadingComponent {
-  @Input() show: boolean = true;
-  @Input() message: string = '';
-  @Input() containerClass: string = 'min-h-[200px]';
+  isLoading = input<boolean>(false);
+  message = input<string>('Loading...');
+  overlay = input<boolean>(true);
+  fullScreen = input<boolean>(false);
 }
-
-
-
-

@@ -1,35 +1,16 @@
-<div class="autocomplete-container" [ngClass]="customClass" [style.width]="width" [style.height]="height">
-  <ejs-autocomplete
-    #autocomplete
-    [dataSource]="dataSource"
-    [fields]="fields"
-    [placeholder]="placeholder"
-    [allowFiltering]="allowFiltering"
-    [ignoreCase]="!caseSensitive"
-    [filterType]="filterType"
-    [minLength]="minLength"
-    [showClearButton]="showClearButton"
-    [enableVirtualization]="enableVirtualization"
-    [allowCustom]="allowCustom"
-    [autofill]="autofill"
-    [highlight]="highlight"
-    [ignoreAccent]="ignoreAccent"
-    [sortOrder]="sortOrder"
-    [suggestionCount]="suggestionCount"
-    [enabled]="enabled"
-    [readonly]="readonly"
-    [enableRtl]="enableRtl"
-    [locale]="locale"
-    [value]="value"
-    [width]="width"
-    (change)="onChange($event)"
-    (select)="onSelect($event)"
-    (focus)="onFocus($event)"
-    (blur)="onBlur($event)"
-    (filtering)="onFiltering($event)"
-    (open)="onOpen($event)"
-    (close)="onClose($event)"
-    (created)="onCreated($event)">
+<div class="autocomplete-container" [ngClass]="effectiveOptions().customClass" [style.width]="effectiveOptions().width"
+  [style.height]="effectiveOptions().height">
+  <ejs-autocomplete #autocomplete [dataSource]="effectiveOptions().dataSource" [fields]="effectiveOptions().fields"
+    [placeholder]="effectiveOptions().placeholder" [allowFiltering]="effectiveOptions().allowFiltering"
+    [ignoreCase]="!effectiveOptions().caseSensitive" [filterType]="effectiveOptions().filterType"
+    [minLength]="effectiveOptions().minLength" [showClearButton]="effectiveOptions().showClearButton"
+    [enableVirtualization]="effectiveOptions().enableVirtualization" [allowCustom]="effectiveOptions().allowCustom"
+    [autofill]="effectiveOptions().autofill" [highlight]="effectiveOptions().highlight"
+    [ignoreAccent]="effectiveOptions().ignoreAccent" [sortOrder]="effectiveOptions().sortOrder"
+    [suggestionCount]="effectiveOptions().suggestionCount" [enabled]="effectiveOptions().enabled"
+    [readonly]="effectiveOptions().readonly" [enableRtl]="effectiveOptions().enableRtl"
+    [locale]="effectiveOptions().locale" [value]="effectiveOptions().value" [width]="effectiveOptions().width"
+    (change)="onChange($event)" (select)="onSelect($event)" (focus)="onFocus($event)" (blur)="onBlur($event)"
+    (filtering)="onFiltering($event)" (open)="onOpen($event)" (close)="onClose($event)" (created)="onCreated($event)">
   </ejs-autocomplete>
 </div>
-

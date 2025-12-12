@@ -1,38 +1,19 @@
-<div 
-  class="progressive-disclosure"
-  [ngClass]="['variant-' + variant, { 'is-expanded': isExpanded }]">
-  
-  <!-- Header -->
-  <button
-    (click)="toggle()"
-    class="disclosure-header"
-    [attr.aria-expanded]="isExpanded"
-    [attr.aria-controls]="'content-' + _uniqueId"
-    role="button"
-    tabindex="0">
-    <div class="header-content">
-      <h3 *ngIf="title" class="disclosure-title thai-text">{{ title }}</h3>
-      <app-icon
-        *ngIf="showIcon"
-        [name]="currentIcon"
-        size="sm"
-        color="text-slate-500 dark:text-slate-400"
-        class="disclosure-icon"
-        [ngClass]="{ 'icon-expanded': isExpanded }">
-      </app-icon>
-    </div>
-  </button>
-  
-  <!-- Content -->
+<div class="progressive-disclosure-container border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden">
   <div
-    [id]="'content-' + _uniqueId"
-    class="disclosure-content"
-    [attr.aria-hidden]="!isExpanded"
-    [@slideToggle]="isExpanded ? 'expanded' : 'collapsed'"
-    *ngIf="isExpanded">
-    <div class="content-inner">
-      <ng-content></ng-content>
+    class="disclosure-header p-4 bg-slate-50 dark:bg-slate-800 flex justify-between items-center cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-750 transition-colors"
+    (click)="toggle()">
+    <div class="header-content">
+      <h3 class="font-medium text-slate-900 dark:text-white">{{ title() }}</h3>
+      <p *ngIf="summary()" class="text-sm text-slate-500 dark:text-slate-400 mt-1">{{ summary() }}</p>
+    </div>
+    <div class="toggle-icon text-slate-400 transition-transform duration-300" [class.rotate-180]="expanded()">
+      <i class="fas fa-chevron-down"></i>
     </div>
   </div>
-</div>
 
+  <div class="disclosure-content bg-white dark:bg-slate-900 overflow-hidden transition-all duration-300 ease-in-out"
+    [style.max-height]="expanded() ? '1000px' : '0'" [style.opacity]="expanded() ? '1' : '0'" [class.p-4]="expanded()"
+    [class.border-t]="expanded()">
+    <ng-content></ng-content>
+  </div>
+</div>

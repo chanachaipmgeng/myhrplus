@@ -1,4 +1,4 @@
-import { Component, HostListener, ElementRef, ViewChild, ChangeDetectionStrategy, signal, computed, inject } from '@angular/core';
+import { Component, HostListener, ElementRef, ChangeDetectionStrategy, signal, computed, inject, viewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
@@ -46,8 +46,9 @@ export class ThemeToggleComponent {
   showModeMenu = signal(false);
   showColorMenu = signal(false);
 
-  @ViewChild('modeButton') modeButton?: ElementRef<HTMLButtonElement>;
-  @ViewChild('colorButton') colorButton?: ElementRef<HTMLButtonElement>;
+  // View queries
+  modeButton = viewChild<ElementRef<HTMLButtonElement>>('modeButton');
+  colorButton = viewChild<ElementRef<HTMLButtonElement>>('colorButton');
 
   themeColors = [
     { value: 'blue' as ThemeColor, name: 'น้ำเงิน', gradient: 'linear-gradient(135deg, #3b82f6, #2563eb)' },

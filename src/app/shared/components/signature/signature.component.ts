@@ -1,9 +1,6 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, input, output, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SignatureModule } from '@syncfusion/ej2-angular-inputs';
-import {
-  SignatureComponent as SyncfusionSignatureComponent
-} from '@syncfusion/ej2-angular-inputs';
+import { SignatureModule, SignatureComponent as SyncfusionSignatureComponent } from '@syncfusion/ej2-angular-inputs';
 
 export interface SignatureConfig {
   backgroundColor?: string;
@@ -27,55 +24,44 @@ export interface SignatureConfig {
   styleUrls: ['./signature.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SignatureComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('signature', { static: false }) signature!: SyncfusionSignatureComponent;
+export class SignatureComponent {
+  signature = viewChild<SyncfusionSignatureComponent>('signature');
 
-  // Appearance - Note: These are set via methods after component creation
-  @Input() backgroundColor: string = '#ffffff';
-  @Input() strokeColor: string = '#000000';
-  @Input() minStrokeWidth: number = 0.5;
-  @Input() maxStrokeWidth: number = 2.5;
-  @Input() velocity: number = 0.7;
+  // Appearance
+  backgroundColor = input<string>('#ffffff');
+  strokeColor = input<string>('#000000');
+  minStrokeWidth = input<number>(0.5);
+  maxStrokeWidth = input<number>(2.5);
+  velocity = input<number>(0.7);
 
   // Behavior
-  @Input() isReadOnly: boolean = false;
-  @Input() saveWithBackground: boolean = true;
-  @Input() allowClear: boolean = true;
+  isReadOnly = input<boolean>(false);
+  saveWithBackground = input<boolean>(true);
+  allowClear = input<boolean>(true);
 
   // Size
-  @Input() height: string | number = '300px';
-  @Input() width: string | number = '100%';
-  @Input() customClass?: string;
+  height = input<string | number>('300px');
+  width = input<string | number>('100%');
+  customClass = input<string | undefined>(undefined);
 
   // Events
-  @Output() change = new EventEmitter<any>();
-  @Output() created = new EventEmitter<any>();
-
-  ngOnInit(): void {
-    // Initialize if needed
-  }
-
-  ngAfterViewInit(): void {
-    // Properties are set via template bindings
-  }
-
-  ngOnDestroy(): void {
-    // Cleanup if needed
-  }
+  change = output<any>();
+  created = output<any>();
 
   /**
    * Get signature instance
    */
   getSignatureInstance(): SyncfusionSignatureComponent | null {
-    return this.signature || null;
+    return this.signature() || null;
   }
 
   /**
    * Clear signature
    */
   clear(): void {
-    if (this.signature) {
-      this.signature.clear();
+    const sig = this.signature();
+    if (sig) {
+      sig.clear();
     }
   }
 
@@ -83,8 +69,9 @@ export class SignatureComponent implements OnInit, AfterViewInit, OnDestroy {
    * Undo last stroke
    */
   undo(): void {
-    if (this.signature) {
-      this.signature.undo();
+    const sig = this.signature();
+    if (sig) {
+      sig.undo();
     }
   }
 
@@ -92,8 +79,9 @@ export class SignatureComponent implements OnInit, AfterViewInit, OnDestroy {
    * Redo last undone stroke
    */
   redo(): void {
-    if (this.signature) {
-      this.signature.redo();
+    const sig = this.signature();
+    if (sig) {
+      sig.redo();
     }
   }
 
@@ -101,8 +89,9 @@ export class SignatureComponent implements OnInit, AfterViewInit, OnDestroy {
    * Check if signature is empty
    */
   isEmpty(): boolean {
-    if (this.signature) {
-      return this.signature.isEmpty();
+    const sig = this.signature();
+    if (sig) {
+      return sig.isEmpty();
     }
     return true;
   }
@@ -111,10 +100,11 @@ export class SignatureComponent implements OnInit, AfterViewInit, OnDestroy {
    * Save signature as base64
    */
   saveAsBase64(): string {
-    if (this.signature) {
+    const sig = this.signature();
+    if (sig) {
       // getSignature accepts SignatureFileType: 'Png' | 'Svg' | 'Jpeg'
       const fileType = 'Png' as any;
-      return this.signature.getSignature(fileType);
+      return sig.getSignature(fileType);
     }
     return '';
   }
@@ -123,7 +113,7 @@ export class SignatureComponent implements OnInit, AfterViewInit, OnDestroy {
    * Save signature as blob
    */
   saveAsBlob(): Blob | null {
-    if (this.signature) {
+    if (this.signature()) {
       const base64 = this.saveAsBase64();
       if (base64) {
         // Convert base64 to blob
@@ -144,7 +134,7 @@ export class SignatureComponent implements OnInit, AfterViewInit, OnDestroy {
    * Download signature as image
    */
   download(fileName?: string): void {
-    if (this.signature) {
+    if (this.signature()) {
       const base64 = this.saveAsBase64();
       if (base64) {
         const link = document.createElement('a');
@@ -159,8 +149,9 @@ export class SignatureComponent implements OnInit, AfterViewInit, OnDestroy {
    * Load signature from base64
    */
   load(base64: string): void {
-    if (this.signature && base64) {
-      this.signature.load(base64);
+    const sig = this.signature();
+    if (sig && base64) {
+      sig.load(base64);
     }
   }
 
@@ -168,7 +159,8 @@ export class SignatureComponent implements OnInit, AfterViewInit, OnDestroy {
    * Load signature from URL
    */
   loadFromUrl(url: string): void {
-    if (this.signature && url) {
+    const sig = this.signature();
+    if (sig && url) {
       // Convert image URL to base64
       const img = new Image();
       img.crossOrigin = 'anonymous';
@@ -198,4 +190,3 @@ export class SignatureComponent implements OnInit, AfterViewInit, OnDestroy {
     this.created.emit(event);
   }
 }
-

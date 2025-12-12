@@ -1,29 +1,10 @@
-<div class="query-builder-container" [ngClass]="customClass">
-  <ejs-querybuilder
-    #querybuilder
-    [dataSource]="dataSource"
-    [columns]="columns"
-    [rule]="rule"
-    [width]="width"
-    [height]="height"
-    [allowValidation]="allowValidation"
-    [enableNotCondition]="enableNotCondition"
-    [maxGroupCount]="maxGroupCount"
-    [separator]="separator"
-    [displayMode]="displayMode"
-    [showButtons]="showButtons"
-    (created)="onCreated($event)"
-    (beforeChange)="onBeforeChange($event)"
-    (change)="onChange($event)"
-    (ruleChange)="onRuleChange($event)"
-    (beforeRuleAdd)="onBeforeRuleAdd($event)"
-    (ruleAdd)="onRuleAdd($event)"
-    (beforeRuleDelete)="onBeforeRuleDelete($event)"
-    (ruleDelete)="onRuleDelete($event)"
-    (beforeGroupAdd)="onBeforeGroupAdd($event)"
-    (groupAdd)="onGroupAdd($event)"
-    (beforeGroupDelete)="onBeforeGroupDelete($event)"
-    (groupDelete)="onGroupDelete($event)">
+<div class="query-builder-container" [class]="customClass()">
+  <ejs-querybuilder #querybuilder [dataSource]="dataSource()" [columns]="columns()" [rule]="rule()" [width]="width()"
+    [height]="height()" [allowValidation]="allowValidation()" [enableNotCondition]="enableNotCondition()"
+    [maxGroupCount]="maxGroupCount()" [displayMode]="displayMode()" [showButtons]="showButtons()"
+    [separator]="separator()" (ruleAdd)="onRuleAdd($event)" (beforeRuleDelete)="onBeforeRuleDelete($event)"
+    (ruleDelete)="onRuleDelete($event)" (beforeGroupAdd)="onBeforeGroupAdd($event)" (groupAdd)="onGroupAdd($event)"
+    (beforeGroupDelete)="onBeforeGroupDelete($event)" (groupDelete)="onGroupDelete($event)"
+    (created)="onCreated($event)" (ruleChange)="onRuleChange($event)">
   </ejs-querybuilder>
 </div>
-

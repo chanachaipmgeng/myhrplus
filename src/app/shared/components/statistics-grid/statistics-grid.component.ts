@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StatisticsCardComponent } from '../statistics-card/statistics-card.component';
 
@@ -20,12 +20,10 @@ export interface StatCard {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StatisticsGridComponent {
-  @Input() stats: StatCard[] = [];
-  @Input() columns: number = 3;
+  stats = input<StatCard[]>([]);
+  columns = input<number>(3);
 
-  get gridClass(): string {
-    return `grid-cols-${this.columns}`;
-  }
+  gridClass = computed(() => `grid-cols-${this.columns()}`);
 }
 
 

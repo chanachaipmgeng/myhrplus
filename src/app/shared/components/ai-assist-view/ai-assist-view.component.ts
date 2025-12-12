@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output, viewChild, ElementRef, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -22,57 +22,54 @@ export interface AIAssistViewConfig {
   styleUrls: ['./ai-assist-view.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AIAssistViewComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('container', { static: false }) container!: ElementRef<HTMLDivElement>;
+export class AIAssistViewComponent {
+  container = viewChild<ElementRef<HTMLDivElement>>('container');
   private aiAssistViewInstance: any = null;
 
   // Basic Properties
-  @Input() placeholder: string = 'Ask me anything...';
-  @Input() enableSuggestions: boolean = true;
-  @Input() showSuggestions: boolean = true;
-  @Input() suggestions: string[] = [];
-  @Input() width: string | number = '100%';
-  @Input() height: string | number = '600px';
-  @Input() customClass?: string;
+  placeholder = input<string>('Ask me anything...');
+  enableSuggestions = input<boolean>(true);
+  showSuggestions = input<boolean>(true);
+  suggestions = input<string[]>([]);
+  width = input<string | number>('100%');
+  height = input<string | number>('600px');
+  customClass = input<string | undefined>(undefined);
 
   // AI Handler
-  @Input() promptHandler?: (options: any) => void;
+  promptHandlerInput = input<((options: any) => void) | undefined>(undefined, { alias: 'promptHandler' });
+
+  // Config
+  config = input<AIAssistViewConfig | undefined>(undefined);
+
+  // Computed configuration to merge individual inputs with config object
+  effectiveConfig = computed(() => {
+    const cfg = this.config() || {};
+    return {
+      placeholder: cfg.placeholder ?? this.placeholder(),
+      enableSuggestions: cfg.enableSuggestions ?? this.enableSuggestions(),
+      showSuggestions: cfg.showSuggestions ?? this.showSuggestions(),
+      suggestions: cfg.suggestions ?? this.suggestions(),
+      width: cfg.width ?? this.width(),
+      height: cfg.height ?? this.height(),
+      customClass: cfg.customClass ?? this.customClass(),
+      promptHandler: cfg.promptHandler ?? this.promptHandlerInput()
+    };
+  });
 
   // Events
-  @Output() prompt = new EventEmitter<any>();
-  @Output() suggestionClick = new EventEmitter<any>();
-  @Output() created = new EventEmitter<any>();
+  prompt = output<any>();
+  suggestionClick = output<any>();
+  created = output<any>();
 
-  @Input() config?: AIAssistViewConfig;
-
-  ngOnInit(): void {
-    // Apply config if provided
-    if (this.config) {
-      this.placeholder = this.config.placeholder ?? this.placeholder;
-      this.enableSuggestions = this.config.enableSuggestions ?? this.enableSuggestions;
-      this.showSuggestions = this.config.showSuggestions ?? this.showSuggestions;
-      this.suggestions = this.config.suggestions ?? this.suggestions;
-      this.width = this.config.width ?? this.width;
-      this.height = this.config.height ?? this.height;
-      this.customClass = this.config.customClass || this.customClass;
-      this.promptHandler = this.config.promptHandler ?? this.promptHandler;
-    }
-  }
-
-  ngAfterViewInit(): void {
-    // Initialize AI Assist View using JavaScript API if available
-    // For now, we'll use a simple div-based approach
-    // Note: AIAssistView may require server-side setup or specific initialization
-    if (this.container) {
-      this.created.emit({ container: this.container.nativeElement });
-    }
-  }
-
-  ngOnDestroy(): void {
-    // Cleanup if needed
-    if (this.aiAssistViewInstance) {
-      this.aiAssistViewInstance = null;
-    }
+  // Effect to initialize (simulating ngAfterViewInit logic if needed, 
+  // though viewChild is available in effects)
+  constructor() {
+    effect(() => {
+      const el = this.container();
+      if (el) {
+        this.created.emit({ container: el.nativeElement });
+      }
+    });
   }
 
   /**
@@ -85,11 +82,12 @@ export class AIAssistViewComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * Send prompt
    */
-  sendPrompt(prompt: string): void {
-    if (this.promptHandler) {
-      this.promptHandler({ prompt, timestamp: new Date() });
-      this.prompt.emit({ prompt, timestamp: new Date() });
+  sendPrompt(promptText: string): void {
+    const handler = this.effectiveConfig().promptHandler;
+    if (handler) {
+      handler({ prompt: promptText, timestamp: new Date() });
     }
+    this.prompt.emit({ prompt: promptText, timestamp: new Date() });
   }
 
   /**
@@ -106,8 +104,9 @@ export class AIAssistViewComponent implements OnInit, AfterViewInit, OnDestroy {
    * Event handlers
    */
   onPrompt(event: any): void {
-    if (this.promptHandler) {
-      this.promptHandler(event);
+    const handler = this.effectiveConfig().promptHandler;
+    if (handler) {
+      handler(event);
     }
     this.prompt.emit(event);
   }
@@ -125,19 +124,20 @@ export class AIAssistViewComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onInputEnter(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input && input.value.trim()) {
-      this.sendPrompt(input.value.trim());
-      input.value = '';
+    const inputEl = event.target as HTMLInputElement;
+    if (inputEl && inputEl.value.trim()) {
+      this.sendPrompt(inputEl.value.trim());
+      inputEl.value = '';
     }
   }
 
   onSendClick(): void {
-    if (this.container) {
-      const input = this.container.nativeElement.querySelector('.ai-input') as HTMLInputElement;
-      if (input && input.value.trim()) {
-        this.sendPrompt(input.value.trim());
-        input.value = '';
+    const el = this.container();
+    if (el) {
+      const inputEl = el.nativeElement.querySelector('.ai-input') as HTMLInputElement;
+      if (inputEl && inputEl.value.trim()) {
+        this.sendPrompt(inputEl.value.trim());
+        inputEl.value = '';
       }
     }
   }

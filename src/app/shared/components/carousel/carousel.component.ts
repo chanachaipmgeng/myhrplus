@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit, ChangeDetectionStrategy, input, output, viewChild, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarouselModule } from '@syncfusion/ej2-angular-navigations';
 import {
@@ -46,72 +46,81 @@ export interface CarouselConfig {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarouselComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('carousel', { static: false }) carousel!: SyncfusionCarouselComponent;
+  carousel = viewChild<SyncfusionCarouselComponent>('carousel');
 
   // Data
-  @Input() items: CarouselItem[] = [];
-  @Input() config?: CarouselConfig;
+  items = input<CarouselItem[]>([]);
+  config = input<CarouselConfig | undefined>(undefined);
 
   // Behavior
-  @Input() interval: number = 3000;
-  @Input() autoPlay: boolean = true;
-  @Input() loop: boolean = true;
-  @Input() animationEffect: 'Slide' | 'Fade' | 'None' = 'Slide';
-  @Input() slideTransition: 'Slide' | 'Fade' = 'Slide';
-  @Input() partialVisible: boolean = false;
-  @Input() itemsCount: number = 1;
+  interval = input<number>(3000);
+  autoPlay = input<boolean>(true);
+  loop = input<boolean>(true);
+  animationEffect = input<'Slide' | 'Fade' | 'None'>('Slide');
+  slideTransition = input<'Slide' | 'Fade'>('Slide');
+  partialVisible = input<boolean>(false);
+  itemsCount = input<number>(1);
 
   // UI Controls
-  @Input() showIndicators: boolean = true;
-  @Input() showPlayButton: boolean = true;
-  @Input() showPreviousButton: boolean = true;
-  @Input() showNextButton: boolean = true;
+  showIndicators = input<boolean>(true);
+  showPlayButton = input<boolean>(true);
+  showPreviousButton = input<boolean>(true);
+  showNextButton = input<boolean>(true);
 
   // Interaction
-  @Input() enableTouchSwipe: boolean = true;
-  @Input() enableKeyboardNavigation: boolean = true;
-  @Input() enableRtl: boolean = false;
+  enableTouchSwipe = input<boolean>(true);
+  enableKeyboardNavigation = input<boolean>(true);
+  enableRtl = input<boolean>(false);
 
   // Appearance
-  @Input() cssClass?: string;
-  @Input() height: string | number = '400px';
-  @Input() width: string | number = '100%';
-  @Input() customClass?: string;
+  cssClass = input<string | undefined>(undefined);
+  height = input<string | number>('400px');
+  width = input<string | number>('100%');
+  customClass = input<string | undefined>(undefined);
 
   // Events
-  @Output() slideChanged = new EventEmitter<any>();
-  @Output() play = new EventEmitter<any>();
-  @Output() pause = new EventEmitter<any>();
-  @Output() created = new EventEmitter<any>();
+  slideChanged = output<any>();
+  play = output<any>();
+  pause = output<any>();
+  created = output<any>();
+
+  // Computed configuration to merge inputs and config object
+  effectiveConfig = computed(() => {
+    const config = this.config();
+    return {
+      items: config?.items ?? this.items(),
+      interval: config?.interval ?? this.interval(),
+      autoPlay: config?.autoPlay ?? this.autoPlay(),
+      loop: config?.loop ?? this.loop(),
+      animationEffect: config?.animationEffect ?? this.animationEffect(),
+      slideTransition: config?.slideTransition ?? this.slideTransition(),
+      partialVisible: config?.partialVisible ?? this.partialVisible(),
+      itemsCount: config?.itemsCount ?? this.itemsCount(),
+      showIndicators: config?.showIndicators ?? this.showIndicators(),
+      showPlayButton: config?.showPlayButton ?? this.showPlayButton(),
+      showPreviousButton: config?.showPreviousButton ?? this.showPreviousButton(),
+      showNextButton: config?.showNextButton ?? this.showNextButton(),
+      enableTouchSwipe: config?.enableTouchSwipe ?? this.enableTouchSwipe(),
+      enableKeyboardNavigation: config?.enableKeyboardNavigation ?? this.enableKeyboardNavigation(),
+      enableRtl: config?.enableRtl ?? this.enableRtl(),
+      cssClass: config?.cssClass ?? this.cssClass(),
+      height: config?.height ?? this.height(),
+      width: config?.width ?? this.width(),
+      customClass: config?.customClass ?? this.customClass()
+    };
+  });
 
   private _currentIndex: number = 0;
   private _isPlaying: boolean = false;
 
   ngOnInit(): void {
-    // Apply config if provided
-    if (this.config) {
-      this.items = this.config.items || this.items;
-      this.interval = this.config.interval ?? this.interval;
-      this.showIndicators = this.config.showIndicators ?? this.showIndicators;
-      this.showPlayButton = this.config.showPlayButton ?? this.showPlayButton;
-      this.showPreviousButton = this.config.showPreviousButton ?? this.showPreviousButton;
-      this.showNextButton = this.config.showNextButton ?? this.showNextButton;
-      this.autoPlay = this.config.autoPlay ?? this.autoPlay;
-      this.loop = this.config.loop ?? this.loop;
-      this.animationEffect = this.config.animationEffect ?? this.animationEffect;
-      this.partialVisible = this.config.partialVisible ?? this.partialVisible;
-      this.cssClass = this.config.cssClass ?? this.cssClass;
-      this.enableTouchSwipe = this.config.enableTouchSwipe ?? this.enableTouchSwipe;
-      this.enableRtl = this.config.enableRtl ?? this.enableRtl;
-      this.height = this.config.height ?? this.height;
-      this.width = this.config.width ?? this.width;
-    }
+    // Logic handled by effectiveConfig computed signal
   }
 
   ngAfterViewInit(): void {
-    if (this.carousel) {
-      this._isPlaying = this.autoPlay;
-      this.created.emit({ carousel: this.carousel });
+    if (this.carousel()) {
+      this._isPlaying = this.effectiveConfig().autoPlay ?? true;
+      this.created.emit({ carousel: this.carousel() });
     }
   }
 
@@ -123,15 +132,16 @@ export class CarouselComponent implements OnInit, AfterViewInit, OnDestroy {
    * Get carousel instance
    */
   getCarouselInstance(): SyncfusionCarouselComponent | null {
-    return this.carousel || null;
+    return this.carousel() || null;
   }
 
   /**
    * Navigate to next slide
    */
   next(): void {
-    if (this.carousel) {
-      this.carousel.next();
+    const carousel = this.carousel();
+    if (carousel) {
+      carousel.next();
     }
   }
 
@@ -139,8 +149,9 @@ export class CarouselComponent implements OnInit, AfterViewInit, OnDestroy {
    * Navigate to previous slide
    */
   previous(): void {
-    if (this.carousel) {
-      this.carousel.prev();
+    const carousel = this.carousel();
+    if (carousel) {
+      carousel.prev();
     }
   }
 
@@ -148,8 +159,9 @@ export class CarouselComponent implements OnInit, AfterViewInit, OnDestroy {
    * Navigate to specific slide
    */
   goTo(index: number): void {
-    if (this.carousel && index >= 0 && index < this.items.length) {
-      this.carousel.selectedIndex = index;
+    const carousel = this.carousel();
+    if (carousel && index >= 0 && index < this.effectiveConfig().items!.length) {
+      carousel.selectedIndex = index;
       this._currentIndex = index;
     }
   }
@@ -158,10 +170,11 @@ export class CarouselComponent implements OnInit, AfterViewInit, OnDestroy {
    * Play carousel
    */
   playCarousel(): void {
-    if (this.carousel) {
-      this.carousel.play();
+    const carousel = this.carousel();
+    if (carousel) {
+      carousel.play();
       this._isPlaying = true;
-      this.play.emit({ carousel: this.carousel });
+      this.play.emit({ carousel: carousel });
     }
   }
 
@@ -169,10 +182,11 @@ export class CarouselComponent implements OnInit, AfterViewInit, OnDestroy {
    * Pause carousel
    */
   pauseCarousel(): void {
-    if (this.carousel) {
-      this.carousel.pause();
+    const carousel = this.carousel();
+    if (carousel) {
+      carousel.pause();
       this._isPlaying = false;
-      this.pause.emit({ carousel: this.carousel });
+      this.pause.emit({ carousel: carousel });
     }
   }
 
@@ -191,8 +205,9 @@ export class CarouselComponent implements OnInit, AfterViewInit, OnDestroy {
    * Get current slide index
    */
   getCurrentIndex(): number {
-    if (this.carousel) {
-      return this.carousel.selectedIndex || 0;
+    const carousel = this.carousel();
+    if (carousel) {
+      return carousel.selectedIndex || 0;
     }
     return this._currentIndex;
   }
@@ -201,15 +216,16 @@ export class CarouselComponent implements OnInit, AfterViewInit, OnDestroy {
    * Get total slides count
    */
   getTotalSlides(): number {
-    return this.items.length;
+    return this.effectiveConfig().items?.length || 0;
   }
 
   /**
    * Refresh carousel
    */
   refresh(): void {
-    if (this.carousel) {
-      this.carousel.refresh();
+    const carousel = this.carousel();
+    if (carousel) {
+      carousel.refresh();
     }
   }
 

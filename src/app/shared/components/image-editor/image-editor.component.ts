@@ -1,20 +1,6 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, input, output, viewChild, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ImageEditorModule } from '@syncfusion/ej2-angular-image-editor';
-import {
-  ImageEditorComponent as SyncfusionImageEditorComponent
-} from '@syncfusion/ej2-angular-image-editor';
-
-export interface ImageEditorConfig {
-  width?: string | number;
-  height?: string | number;
-  toolbar?: string[];
-  selection?: any;
-  annotationSettings?: any;
-  shapeSettings?: any;
-  freehandDrawSettings?: any;
-  customClass?: string;
-}
+import { ImageEditorModule, ImageEditorComponent as SyncfusionImageEditorComponent } from '@syncfusion/ej2-angular-image-editor';
 
 @Component({
   selector: 'app-image-editor',
@@ -24,46 +10,91 @@ export interface ImageEditorConfig {
   styleUrls: ['./image-editor.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ImageEditorComponent implements OnInit, OnDestroy {
-  @ViewChild('imageEditor', { static: false }) imageEditor!: SyncfusionImageEditorComponent;
+export class ImageEditorComponent implements OnInit {
+  imageEditor = viewChild<SyncfusionImageEditorComponent>('imageEditor');
 
-  // Size
-  @Input() width: string | number = '100%';
-  @Input() height: string | number = '600px';
+  // Configuration
+  theme = input<string>('Bootstrap5');
+  width = input<string>('100%');
+  height = input<string>('550px');
+  allowZoom = input<boolean>(true);
+  allowUndoRedo = input<boolean>(true); // Added missing input
+  toolbar = input<string[] | undefined>(undefined);
+  disabled = input<boolean>(false);
 
-  // Toolbar
-  @Input() toolbar: string[] = [
-    'Annotate', 'Crop', 'Transform', 'Finetune', 'Filter', 'ZoomIn', 'ZoomOut', 'Reset', 'Save'
-  ];
+  // Renamed cssClass to customClass to match template error "customClass()"
+  customClass = input<string>('');
 
-  // Features
-  @Input() allowUndoRedo: boolean = true;
-
-  // Styling
-  @Input() customClass: string = '';
+  // Data
+  imageUrl = input<string | undefined>(undefined);
 
   // Events
-  @Output() created = new EventEmitter<any>();
-  @Output() imageLoaded = new EventEmitter<any>();
-  @Output() toolbarItemClicked = new EventEmitter<any>();
-  @Output() selectionChanged = new EventEmitter<any>();
-  @Output() shapeChanged = new EventEmitter<any>();
-  @Output() imageChanged = new EventEmitter<any>();
+  created = output<any>();
+  fileOpened = output<any>();
+  saved = output<any>();
+  toolbarCreated = output<any>();
+  zooming = output<any>();
+  panning = output<any>();
+  cropping = output<any>();
+  flipped = output<any>();
+  rotated = output<any>();
+  shapeChanging = output<any>();
+  shapeChange = output<any>();
+  filtering = output<any>();
+  finetuning = output<any>();
+
+  // Renamed to match template bindings
+  selectionChanging = output<any>();
+  editComplete = output<any>();
+  toolbarItemClickedOut = output<any>(); // Renamed to avoid collision with handler
+
+  constructor() {
+    effect(() => {
+      const url = this.imageUrl();
+      const editor = this.imageEditor();
+      if (editor && url) {
+        editor.open(url);
+      }
+    });
+  }
 
   ngOnInit(): void {
-    // Initialize if needed
+    // Initialization handled by effect
   }
 
-  ngOnDestroy(): void {
-    // Cleanup if needed
+  // Event Handlers
+  onCreated(event: any): void {
+    this.created.emit(event);
   }
+
+  onImageLoaded(event: any): void {
+    this.fileOpened.emit(event);
+  }
+
+  onToolbarItemClicked(event: any): void {
+    this.toolbarItemClickedOut.emit(event);
+  }
+
+  onSelectionChanged(event: any): void {
+    this.selectionChanging.emit(event);
+  }
+
+  onShapeChanged(event: any): void {
+    this.shapeChange.emit(event);
+  }
+
+  onImageChanged(event: any): void {
+    this.editComplete.emit(event);
+  }
+
 
   /**
    * Open image from URL
    */
   open(imageUrl: string): void {
-    if (this.imageEditor) {
-      this.imageEditor.open(imageUrl);
+    const editor = this.imageEditor();
+    if (editor) {
+      editor.open(imageUrl);
     }
   }
 
@@ -71,11 +102,10 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
    * Get image data URL
    */
   getImageData(): string {
-    if (this.imageEditor) {
-      const imageData = this.imageEditor.getImageData();
-      // Convert ImageData to data URL if needed
+    const editor = this.imageEditor();
+    if (editor) {
+      const imageData = editor.getImageData();
       if (imageData && typeof imageData === 'object' && 'data' in imageData) {
-        // ImageData object - convert to data URL
         const canvas = document.createElement('canvas');
         canvas.width = (imageData as any).width || 0;
         canvas.height = (imageData as any).height || 0;
@@ -85,16 +115,13 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
           return canvas.toDataURL();
         }
       }
-      // If it's already a string, return it
       if (typeof imageData === 'string') {
         return imageData;
       }
-      // Otherwise, try to get canvas data URL
-      const editor = this.imageEditor as any;
-      if (editor.imageCanvas) {
-        return editor.imageCanvas.toDataURL();
+      const editorAny = editor as any;
+      if (editorAny.imageCanvas) {
+        return editorAny.imageCanvas.toDataURL();
       }
-      return '';
     }
     return '';
   }
@@ -103,12 +130,10 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
    * Get image as Blob
    */
   async getImageBlob(): Promise<Blob> {
-    if (this.imageEditor) {
-      const dataUrl = this.getImageData();
-      if (dataUrl) {
-        const response = await fetch(dataUrl);
-        return await response.blob();
-      }
+    const dataUrl = this.getImageData();
+    if (dataUrl) {
+      const response = await fetch(dataUrl);
+      return await response.blob();
     }
     return Promise.reject('Image editor not initialized');
   }
@@ -116,9 +141,10 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
   /**
    * Export image
    */
-  export(type: 'PNG' | 'JPEG' | 'SVG', fileName?: string): void {
-    if (this.imageEditor) {
-      this.imageEditor.export(type, fileName || 'image');
+  export(type: 'PNG' | 'JPEG' | 'SVG' = 'PNG', fileName: string = 'image'): void {
+    const editor = this.imageEditor();
+    if (editor) {
+      editor.export(type, fileName);
     }
   }
 
@@ -126,18 +152,16 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
    * Save image (triggers download)
    */
   save(): void {
-    if (this.imageEditor) {
-      // Use export to save
-      this.imageEditor.export('PNG' as any, 'image');
-    }
+    this.export('PNG', 'image');
   }
 
   /**
    * Reset image
    */
   reset(): void {
-    if (this.imageEditor) {
-      this.imageEditor.reset();
+    const editor = this.imageEditor();
+    if (editor) {
+      editor.reset();
     }
   }
 
@@ -145,8 +169,9 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
    * Undo
    */
   undo(): void {
-    if (this.imageEditor) {
-      this.imageEditor.undo();
+    const editor = this.imageEditor();
+    if (editor) {
+      editor.undo();
     }
   }
 
@@ -154,8 +179,9 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
    * Redo
    */
   redo(): void {
-    if (this.imageEditor) {
-      this.imageEditor.redo();
+    const editor = this.imageEditor();
+    if (editor) {
+      editor.redo();
     }
   }
 
@@ -163,8 +189,9 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
    * Crop image
    */
   crop(): void {
-    if (this.imageEditor) {
-      this.imageEditor.crop();
+    const editor = this.imageEditor();
+    if (editor) {
+      editor.crop();
     }
   }
 
@@ -172,82 +199,76 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
    * Transform image
    */
   transform(type: 'RotateLeft' | 'RotateRight' | 'FlipHorizontal' | 'FlipVertical'): void {
-    if (this.imageEditor) {
-      const editor = this.imageEditor as any;
-      const ctx = editor.getContext ? editor.getContext('2d') : null;
-
+    const editor = this.imageEditor();
+    if (editor) {
       switch (type) {
         case 'RotateLeft':
-          editor.rotateImage('rotateleft');
+          editor.rotateImage('rotateleft' as any);
           break;
         case 'RotateRight':
-          editor.rotateImage('rotateright');
+          editor.rotateImage('rotateright' as any);
           break;
         case 'FlipHorizontal':
-          if (ctx) {
-            editor.horizontalFlip(ctx);
-          }
+          editor.flip('Horizontal' as any);
           break;
         case 'FlipVertical':
-          if (ctx) {
-            editor.verticalFlip(ctx);
-          }
+          editor.flip('Vertical' as any);
           break;
       }
     }
   }
 
   /**
-   * Apply filter
+   * Rotate image
    */
-  applyFilter(filter: string): void {
-    if (this.imageEditor) {
-      this.imageEditor.applyImageFilter(filter as any);
+  rotate(degree: number): void {
+    const editor = this.imageEditor();
+    if (editor) {
+      editor.rotate(degree);
     }
   }
 
   /**
-   * Finetune image
+   * Flip image
    */
-  finetune(type: string, value: number): void {
-    if (this.imageEditor) {
-      this.imageEditor.finetuneImage(type as any, value);
+  flip(direction: 'Horizontal' | 'Vertical'): void {
+    const editor = this.imageEditor();
+    if (editor) {
+      editor.flip(direction as any);
     }
   }
 
   /**
-   * Zoom in
+   * Zoom image
    */
+  zoom(zoomFactor: number): void {
+    const editor = this.imageEditor();
+    if (editor) {
+      editor.zoom(zoomFactor);
+    }
+  }
+
   zoomIn(): void {
-    if (this.imageEditor) {
-      this.imageEditor.zoom(1.1);
+    const editor = this.imageEditor();
+    if (editor) {
+      editor.zoom(0.1); // Assuming 0.1 increment
     }
   }
 
-  /**
-   * Zoom out
-   */
   zoomOut(): void {
-    if (this.imageEditor) {
-      this.imageEditor.zoom(0.9);
+    const editor = this.imageEditor();
+    if (editor) {
+      editor.zoom(-0.1); // Assuming -0.1 decrement
     }
   }
 
   /**
-   * Set zoom
+   * Pan image
    */
-  setZoom(factor: number): void {
-    if (this.imageEditor) {
-      this.imageEditor.zoom(factor);
-    }
-  }
-
-  /**
-   * Refresh
-   */
-  refresh(): void {
-    if (this.imageEditor) {
-      this.imageEditor.dataBind();
+  pan(x: number, y: number): void {
+    const editor = this.imageEditor();
+    if (editor) {
+      editor.pan(x as any, y as any); // Type cast if necessary
     }
   }
 
@@ -255,34 +276,6 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
    * Get image editor instance
    */
   getImageEditorInstance(): SyncfusionImageEditorComponent | null {
-    return this.imageEditor || null;
-  }
-
-  /**
-   * Event handlers
-   */
-  onCreated(args: any): void {
-    this.created.emit(args);
-  }
-
-  onImageLoaded(args: any): void {
-    this.imageLoaded.emit(args);
-  }
-
-  onToolbarItemClicked(args: any): void {
-    this.toolbarItemClicked.emit(args);
-  }
-
-  onSelectionChanged(args: any): void {
-    this.selectionChanged.emit(args);
-  }
-
-  onShapeChanged(args: any): void {
-    this.shapeChanged.emit(args);
-  }
-
-  onImageChanged(args: any): void {
-    this.imageChanged.emit(args);
+    return this.imageEditor() || null;
   }
 }
-

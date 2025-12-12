@@ -1,5 +1,5 @@
-<div *ngIf="show" class="flex items-center justify-center" [ngClass]="containerClass">
-  <app-glass-card padding="p-8" customClass="flex flex-col items-center space-y-4">
-    <app-spinner size="lg" [message]="message"></app-spinner>
-  </app-glass-card>
+<div *ngIf="isLoading()" class="loading-container flex flex-col items-center justify-center gap-4"
+  [class.overlay]="overlay()" [class.full-screen]="fullScreen()">
+  <app-loading-spinner size="lg" color="text-primary-600"></app-loading-spinner>
+  <span class="loading-message text-slate-600 dark:text-slate-300 font-medium animate-pulse">{{ message() }}</span>
 </div>

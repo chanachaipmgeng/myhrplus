@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit, ChangeDetectionStrategy, input, output, viewChild, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AutoCompleteModule } from '@syncfusion/ej2-angular-dropdowns';
 import {
@@ -46,84 +46,90 @@ export interface AutocompleteConfig {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AutocompleteComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('autocomplete', { static: false }) autocomplete!: SyncfusionAutoCompleteComponent;
+  autocomplete = viewChild<SyncfusionAutoCompleteComponent>('autocomplete');
 
   // Data Source
-  @Input() dataSource: AutocompleteItem[] = [];
-  @Input() fields: any = {
+  dataSource = input<AutocompleteItem[]>([]);
+  fields = input<any>({
     value: 'value',
     text: 'text'
-  };
+  });
 
   // Appearance
-  @Input() placeholder: string = 'Type to search...';
-  @Input() width: string | number = '100%';
-  @Input() height: string | number = 'auto';
-  @Input() customClass?: string;
+  placeholder = input<string>('Type to search...');
+  width = input<string | number>('100%');
+  height = input<string | number>('auto');
+  customClass = input<string | undefined>(undefined);
 
   // Behavior
-  @Input() allowFiltering: boolean = true;
-  @Input() caseSensitive: boolean = false;
-  @Input() filterType: 'Contains' | 'StartsWith' | 'EndsWith' = 'Contains';
-  @Input() minLength: number = 1;
-  @Input() showClearButton: boolean = true;
-  @Input() enableVirtualization: boolean = false;
-  @Input() allowCustom: boolean = false;
-  @Input() autofill: boolean = true;
-  @Input() highlight: boolean = true;
-  @Input() ignoreAccent: boolean = false;
-  @Input() sortOrder: 'None' | 'Ascending' | 'Descending' = 'None';
-  @Input() suggestionCount: number = 20;
-  @Input() enabled: boolean = true;
-  @Input() readonly: boolean = false;
-  @Input() enableRtl: boolean = false;
-  @Input() locale: string = 'en';
-  @Input() value?: string | number | AutocompleteItem;
+  allowFiltering = input<boolean>(true);
+  caseSensitive = input<boolean>(false);
+  filterType = input<'Contains' | 'StartsWith' | 'EndsWith'>('Contains');
+  minLength = input<number>(1);
+  showClearButton = input<boolean>(true);
+  enableVirtualization = input<boolean>(false);
+  allowCustom = input<boolean>(false);
+  autofill = input<boolean>(true);
+  highlight = input<boolean>(true);
+  ignoreAccent = input<boolean>(false);
+  sortOrder = input<'None' | 'Ascending' | 'Descending'>('None');
+  suggestionCount = input<number>(20);
+  enabled = input<boolean>(true);
+  readonly = input<boolean>(false);
+  enableRtl = input<boolean>(false);
+  locale = input<string>('en');
+  value = input<string | number | AutocompleteItem | undefined>(undefined);
 
   // Events
-  @Output() change = new EventEmitter<any>();
-  @Output() select = new EventEmitter<any>();
-  @Output() focus = new EventEmitter<any>();
-  @Output() blur = new EventEmitter<any>();
-  @Output() filtering = new EventEmitter<any>();
-  @Output() open = new EventEmitter<any>();
-  @Output() close = new EventEmitter<any>();
-  @Output() created = new EventEmitter<any>();
+  change = output<any>();
+  select = output<any>();
+  focus = output<any>();
+  blur = output<any>();
+  filtering = output<any>();
+  open = output<any>();
+  close = output<any>();
+  created = output<any>();
 
-  @Input() config?: AutocompleteConfig;
+  config = input<AutocompleteConfig | undefined>(undefined);
+
+  effectiveOptions = computed(() => {
+    const cfg = this.config();
+    return {
+      dataSource: cfg?.dataSource ?? this.dataSource(),
+      fields: cfg?.fields ?? this.fields(),
+      placeholder: cfg?.placeholder ?? this.placeholder(),
+      width: cfg?.width ?? this.width(),
+      height: cfg?.height ?? this.height(),
+      customClass: cfg?.customClass ?? this.customClass(),
+      allowFiltering: cfg?.allowFiltering ?? this.allowFiltering(),
+      caseSensitive: cfg?.caseSensitive ?? this.caseSensitive(),
+      filterType: cfg?.filterType ?? this.filterType(),
+      minLength: cfg?.minLength ?? this.minLength(),
+      showClearButton: cfg?.showClearButton ?? this.showClearButton(),
+      enableVirtualization: cfg?.enableVirtualization ?? this.enableVirtualization(),
+      allowCustom: cfg?.allowCustom ?? this.allowCustom(),
+      autofill: cfg?.autofill ?? this.autofill(),
+      highlight: cfg?.highlight ?? this.highlight(),
+      ignoreAccent: cfg?.ignoreAccent ?? this.ignoreAccent(),
+      sortOrder: cfg?.sortOrder ?? this.sortOrder(),
+      suggestionCount: cfg?.suggestionCount ?? this.suggestionCount(),
+      enabled: cfg?.enabled ?? this.enabled(),
+      readonly: cfg?.readonly ?? this.readonly(),
+      enableRtl: cfg?.enableRtl ?? this.enableRtl(),
+      locale: cfg?.locale ?? this.locale(),
+      value: cfg?.value ?? this.value()
+    };
+  });
+
 
   ngOnInit(): void {
-    // Apply config if provided
-    if (this.config) {
-      this.dataSource = this.config.dataSource || this.dataSource;
-      this.fields = this.config.fields || this.fields;
-      this.placeholder = this.config.placeholder ?? this.placeholder;
-      this.allowFiltering = this.config.allowFiltering ?? this.allowFiltering;
-      this.caseSensitive = this.config.caseSensitive ?? this.caseSensitive;
-      this.filterType = this.config.filterType ?? this.filterType;
-      this.minLength = this.config.minLength ?? this.minLength;
-      this.showClearButton = this.config.showClearButton ?? this.showClearButton;
-      this.enableVirtualization = this.config.enableVirtualization ?? this.enableVirtualization;
-      this.allowCustom = this.config.allowCustom ?? this.allowCustom;
-      this.autofill = this.config.autofill ?? this.autofill;
-      this.highlight = this.config.highlight ?? this.highlight;
-      this.ignoreAccent = this.config.ignoreAccent ?? this.ignoreAccent;
-      this.sortOrder = this.config.sortOrder ?? this.sortOrder;
-      this.suggestionCount = this.config.suggestionCount ?? this.suggestionCount;
-      this.enabled = this.config.enabled ?? this.enabled;
-      this.readonly = this.config.readonly ?? this.readonly;
-      this.enableRtl = this.config.enableRtl ?? this.enableRtl;
-      this.locale = this.config.locale || this.locale;
-      this.value = this.config.value ?? this.value;
-      this.width = this.config.width ?? this.width;
-      this.height = this.config.height ?? this.height;
-      this.customClass = this.config.customClass || this.customClass;
-    }
+    // Logic moved to effectiveOptions computed signal
   }
 
   ngAfterViewInit(): void {
-    if (this.autocomplete) {
-      this.created.emit({ autocomplete: this.autocomplete });
+    const autocomplete = this.autocomplete();
+    if (autocomplete) {
+      this.created.emit({ autocomplete });
     }
   }
 
@@ -135,15 +141,16 @@ export class AutocompleteComponent implements OnInit, AfterViewInit, OnDestroy {
    * Get Autocomplete instance
    */
   getAutocompleteInstance(): SyncfusionAutoCompleteComponent | null {
-    return this.autocomplete || null;
+    return this.autocomplete() || null;
   }
 
   /**
    * Get value
    */
   getValue(): string | number | AutocompleteItem | undefined {
-    if (this.autocomplete) {
-      const value = this.autocomplete.value;
+    const autocomplete = this.autocomplete();
+    if (autocomplete) {
+      const value = autocomplete.value;
       if (value === null || value === undefined) {
         return undefined;
       }
@@ -157,15 +164,16 @@ export class AutocompleteComponent implements OnInit, AfterViewInit, OnDestroy {
       // string or number
       return value as string | number;
     }
-    return this.value;
+    return this.value();
   }
 
   /**
    * Set value
    */
   setValue(value: string | number | AutocompleteItem): void {
-    if (this.autocomplete) {
-      this.autocomplete.value = value;
+    const autocomplete = this.autocomplete();
+    if (autocomplete) {
+      autocomplete.value = value;
     }
   }
 
@@ -173,8 +181,9 @@ export class AutocompleteComponent implements OnInit, AfterViewInit, OnDestroy {
    * Get text
    */
   getText(): string {
-    if (this.autocomplete) {
-      return this.autocomplete.text || '';
+    const autocomplete = this.autocomplete();
+    if (autocomplete) {
+      return autocomplete.text || '';
     }
     return '';
   }
@@ -183,10 +192,11 @@ export class AutocompleteComponent implements OnInit, AfterViewInit, OnDestroy {
    * Get data item
    */
   getDataItem(): AutocompleteItem | null {
-    if (this.autocomplete && this.autocomplete.value !== null && this.autocomplete.value !== undefined) {
-      const value = this.autocomplete.value;
+    const autocomplete = this.autocomplete();
+    if (autocomplete && autocomplete.value !== null && autocomplete.value !== undefined) {
+      const value = autocomplete.value;
       if (typeof value === 'string' || typeof value === 'number') {
-        return this.autocomplete.getDataByValue(value) as AutocompleteItem;
+        return autocomplete.getDataByValue(value) as AutocompleteItem;
       }
     }
     return null;
@@ -196,44 +206,37 @@ export class AutocompleteComponent implements OnInit, AfterViewInit, OnDestroy {
    * Show popup
    */
   showPopup(): void {
-    if (this.autocomplete) {
-      this.autocomplete.showPopup();
-    }
+    this.autocomplete()?.showPopup();
   }
 
   /**
    * Hide popup
    */
   hidePopup(): void {
-    if (this.autocomplete) {
-      this.autocomplete.hidePopup();
-    }
+    this.autocomplete()?.hidePopup();
   }
 
   /**
    * Focus
    */
   focusIn(): void {
-    if (this.autocomplete) {
-      this.autocomplete.focusIn();
-    }
+    this.autocomplete()?.focusIn();
   }
 
   /**
    * Blur
    */
   focusOut(): void {
-    if (this.autocomplete) {
-      this.autocomplete.focusOut();
-    }
+    this.autocomplete()?.focusOut();
   }
 
   /**
    * Clear
    */
   clear(): void {
-    if (this.autocomplete) {
-      this.autocomplete.value = null;
+    const autocomplete = this.autocomplete();
+    if (autocomplete) {
+      autocomplete.value = null;
     }
   }
 
@@ -241,9 +244,7 @@ export class AutocompleteComponent implements OnInit, AfterViewInit, OnDestroy {
    * Refresh
    */
   refresh(): void {
-    if (this.autocomplete) {
-      this.autocomplete.dataBind();
-    }
+    this.autocomplete()?.dataBind();
   }
 
   /**

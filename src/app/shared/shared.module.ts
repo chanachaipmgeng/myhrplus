@@ -34,7 +34,7 @@ const COMPONENTS = [
   ErrorStateComponent,
   AvatarComponent,
   StatusBadgeComponent,
-  SearchFilterComponent,
+  // SearchFilterComponent is standalone, imported directly
   BreadcrumbsComponent,
   StepperComponent,
   DateRangePickerComponent,
@@ -66,7 +66,8 @@ const PIPES = [
     RouterModule,
     SpinnerComponent,
     TimelineComponent,
-    IconComponent
+    IconComponent,
+    SearchFilterComponent
   ],
   exports: [
     CommonModule,
@@ -78,7 +79,8 @@ const PIPES = [
     ...PIPES,
     SpinnerComponent,
     TimelineComponent,
-    IconComponent
+    IconComponent,
+    SearchFilterComponent
   ]
 })
 export class SharedModule { }

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, signal, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, input, output, model } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
@@ -41,28 +41,28 @@ import { CalendarService, CalendarEventMeta } from '../../../core/services/calen
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarComponent implements OnInit, OnDestroy {
-  @Input() view: CalendarView = CalendarView.Month;
-  @Input() viewDate: Date = new Date();
-  @Input() events: CalendarEvent<CalendarEventMeta>[] = [];
-  @Input() activeDayIsOpen: boolean = true;
-  @Input() showToolbar: boolean = true;
-  @Input() showWeekends: boolean = true;
-  @Input() dayStartHour: number = 0;
-  @Input() dayEndHour: number = 23;
-  @Input() hourSegments: number = 2;
-  @Input() weekStartsOn: number = 1;
-  @Input() excludeDays: number[] = [];
-  @Input() weekendDays: number[] = [0, 6];
-  @Input() eventActions: CalendarEventAction[] = [];
-  @Input() refresh: Subject<any> = new Subject();
+  view = model<CalendarView>(CalendarView.Month);
+  viewDate = model<Date>(new Date());
+  events = input<CalendarEvent<CalendarEventMeta>[]>([]);
+  activeDayIsOpen = model<boolean>(true);
+  showToolbar = input<boolean>(true);
+  showWeekends = input<boolean>(true);
+  dayStartHour = input<number>(0);
+  dayEndHour = input<number>(23);
+  hourSegments = input<number>(2);
+  weekStartsOn = input<number>(1);
+  excludeDays = input<number[]>([]);
+  weekendDays = input<number[]>([0, 6]);
+  eventActions = input<CalendarEventAction[]>([]);
+  refresh = input<Subject<any>>(new Subject());
 
-  @Output() viewChange = new EventEmitter<CalendarView>();
-  @Output() viewDateChange = new EventEmitter<Date>();
-  @Output() eventClicked = new EventEmitter<CalendarEvent<CalendarEventMeta>>();
-  @Output() dayClicked = new EventEmitter<{ date: Date; events: CalendarEvent<CalendarEventMeta>[] }>();
-  @Output() eventTimesChanged = new EventEmitter<CalendarEventTimesChangedEvent>();
-  @Output() eventDropped = new EventEmitter<CalendarEvent<CalendarEventMeta>>();
-  @Output() refreshClicked = new EventEmitter<void>();
+  viewChange = output<CalendarView>();
+  viewDateChange = output<Date>();
+  eventClicked = output<CalendarEvent<CalendarEventMeta>>();
+  dayClicked = output<{ date: Date; events: CalendarEvent<CalendarEventMeta>[] }>();
+  eventTimesChanged = output<CalendarEventTimesChangedEvent>();
+  eventDropped = output<CalendarEvent<CalendarEventMeta>>();
+  refreshClicked = output<void>();
 
   CalendarView = CalendarView; // Expose CalendarView enum to template
   CalendarEventTimesChangedEventType = CalendarEventTimesChangedEventType;
@@ -72,8 +72,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
   constructor(private calendarService: CalendarService) { }
 
   ngOnInit(): void {
-    // Subscribe to refresh events
-    this.refresh.pipe(takeUntil(this.destroy$)).subscribe(() => {
+    // Subscribe to refresh events from the input subject
+    this.refresh().pipe(takeUntil(this.destroy$)).subscribe(() => {
       // Handle refresh if needed
     });
   }
@@ -85,12 +85,12 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   // Event Handlers
   onViewChange(view: CalendarView): void {
-    this.view = view;
+    this.view.set(view);
     this.viewChange.emit(view);
   }
 
   onViewDateChange(date: Date): void {
-    this.viewDate = date;
+    this.viewDate.set(date);
     this.viewDateChange.emit(date);
   }
 
@@ -134,33 +134,33 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   closeOpenMonthViewDay(): void {
-    this.activeDayIsOpen = false;
+    this.activeDayIsOpen.set(false);
   }
 
   // Private helper methods
   private getPreviousViewDate(): Date {
-    switch (this.view) {
+    switch (this.view()) {
       case CalendarView.Month:
-        return subDays(this.viewDate, 1);
+        return subDays(this.viewDate(), 1);
       case CalendarView.Week:
-        return subDays(this.viewDate, 7);
+        return subDays(this.viewDate(), 7);
       case CalendarView.Day:
-        return subDays(this.viewDate, 1);
+        return subDays(this.viewDate(), 1);
       default:
-        return this.viewDate;
+        return this.viewDate();
     }
   }
 
   private getNextViewDate(): Date {
-    switch (this.view) {
+    switch (this.view()) {
       case CalendarView.Month:
-        return addDays(this.viewDate, 1);
+        return addDays(this.viewDate(), 1);
       case CalendarView.Week:
-        return addDays(this.viewDate, 7);
+        return addDays(this.viewDate(), 7);
       case CalendarView.Day:
-        return addDays(this.viewDate, 1);
+        return addDays(this.viewDate(), 1);
       default:
-        return this.viewDate;
+        return this.viewDate();
     }
   }
 

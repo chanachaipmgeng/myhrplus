@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, model, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,30 +10,25 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RatingComponent {
-  @Input() rating: number = 0;
-  @Input() maxRating: number = 5;
-  @Input() readonly: boolean = false;
-  @Input() showValue: boolean = false;
-  @Input() icon: 'star' | 'heart' = 'star';
-  @Output() ratingChange = new EventEmitter<number>();
+  rating = model<number>(0);
+  maxRating = input<number>(5);
+  readonly = input<boolean>(false);
+  showValue = input<boolean>(false);
+  icon = input<'star' | 'heart'>('star');
 
-  hoveredRating: number = 0;
-  stars: number[] = [];
+  hoveredRating = signal<number>(0);
 
-  ngOnInit(): void {
-    this.stars = Array(this.maxRating).fill(0).map((_, i) => i);
-  }
+  stars = computed(() => Array(this.maxRating()).fill(0).map((_, i) => i));
 
   onStarClick(value: number): void {
-    if (!this.readonly) {
-      this.rating = value;
-      this.ratingChange.emit(value);
+    if (!this.readonly()) {
+      this.rating.set(value);
     }
   }
 
   getStarClass(index: number): string {
-    const isActive = index <= (this.hoveredRating || this.rating);
-    if (this.icon === 'heart') {
+    const isActive = index <= (this.hoveredRating() || this.rating());
+    if (this.icon() === 'heart') {
       return isActive
         ? 'text-red-500 hover:text-red-600'
         : 'text-slate-300 dark:text-slate-600 hover:text-red-400';
@@ -44,9 +39,9 @@ export class RatingComponent {
   }
 
   getStarIcon(index: number): string {
-    if (this.icon === 'heart') {
-      return index <= (this.hoveredRating || this.rating) ? '❤️' : '🤍';
+    if (this.icon() === 'heart') {
+      return index <= (this.hoveredRating() || this.rating()) ? '❤️' : '🤍';
     }
-    return index <= (this.hoveredRating || this.rating) ? '★' : '☆';
+    return index <= (this.hoveredRating() || this.rating()) ? '★' : '☆';
   }
 }

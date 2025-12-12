@@ -1,23 +1,14 @@
-<div class="carousel-container" [ngClass]="customClass" [style.height]="height" [style.width]="width">
-  <ejs-carousel
-    #carousel
-    [items]="items"
-    [interval]="interval"
-    [showIndicators]="showIndicators"
-    [showPlayButton]="showPlayButton"
-    [autoPlay]="autoPlay"
-    [loop]="loop"
-    [animationEffect]="animationEffect"
-    [partialVisible]="partialVisible"
-    [cssClass]="cssClass"
-    [enableTouchSwipe]="enableTouchSwipe"
-    [enableRtl]="enableRtl"
-    (slideChanged)="onSlideChanged($event)"
-    (play)="onPlay($event)"
-    (pause)="onPause($event)"
-    (created)="onCreated($event)">
+<div class="carousel-container" [ngClass]="effectiveConfig().customClass" [style.height]="effectiveConfig().height"
+  [style.width]="effectiveConfig().width">
+  <ejs-carousel #carousel [items]="effectiveConfig().items!" [interval]="effectiveConfig().interval"
+    [showIndicators]="effectiveConfig().showIndicators" [showPlayButton]="effectiveConfig().showPlayButton"
+    [autoPlay]="effectiveConfig().autoPlay" [loop]="effectiveConfig().loop"
+    [animationEffect]="effectiveConfig().animationEffect" [partialVisible]="effectiveConfig().partialVisible"
+    [cssClass]="effectiveConfig().cssClass" [enableTouchSwipe]="effectiveConfig().enableTouchSwipe"
+    [enableRtl]="effectiveConfig().enableRtl" (slideChanged)="onSlideChanged($event)" (play)="onPlay($event)"
+    (pause)="onPause($event)" (created)="onCreated($event)">
     <e-carousel-items>
-      <e-carousel-item *ngFor="let item of items; let i = index">
+      <e-carousel-item *ngFor="let item of effectiveConfig().items!; let i = index">
         <ng-template #template>
           <div class="carousel-item-content" [ngClass]="item['cssClass']">
             <ng-container *ngIf="item.imageUrl">
@@ -38,4 +29,3 @@
     </e-carousel-items>
   </ejs-carousel>
 </div>
-
