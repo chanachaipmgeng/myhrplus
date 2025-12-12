@@ -37,12 +37,10 @@ const COMPONENTS = [
   SearchFilterComponent,
   BreadcrumbsComponent,
   StepperComponent,
-  TimelineComponent,
   DateRangePickerComponent,
   SkeletonLoaderComponent,
   ImageUploadComponent,
   FormValidationMessagesComponent,
-  IconComponent,
   NotificationComponent
 ];
 
@@ -66,7 +64,9 @@ const PIPES = [
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
-    SpinnerComponent
+    SpinnerComponent,
+    TimelineComponent,
+    IconComponent
   ],
   exports: [
     CommonModule,
@@ -76,7 +76,9 @@ const PIPES = [
     ...COMPONENTS,
     ...DIRECTIVES,
     ...PIPES,
-    SpinnerComponent
+    SpinnerComponent,
+    TimelineComponent,
+    IconComponent
   ]
 })
 export class SharedModule { }

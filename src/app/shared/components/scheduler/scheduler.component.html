@@ -1,38 +1,14 @@
-<div class="scheduler-container" [ngClass]="customClass">
-  <ejs-schedule
-    #schedule
-    [eventSettings]="eventSettings"
-    [currentView]="currentView"
-    [views]="views"
-    [selectedDate]="selectedDate"
-    [startHour]="startHour"
-    [endHour]="endHour"
-    [workDays]="workDays"
-    [firstDayOfWeek]="firstDayOfWeek"
-    [showWeekend]="showWeekend"
-    [allowDragAndDrop]="allowDragAndDrop"
-    [allowResizing]="allowResizing"
-    [enableRtl]="enableRtl"
-    [enableAdaptiveUI]="enableAdaptiveUI"
-    [group]="group"
-    [resources]="resources"
-    [height]="height"
-    [width]="width"
-    [locale]="locale"
-    (eventClick)="onEventClick($event)"
-    (eventDoubleClick)="onEventDoubleClick($event)"
-    (cellClick)="onCellClick($event)"
-    (cellDoubleClick)="onCellDoubleClick($event)"
-    (navigating)="onNavigating($event)"
-    (actionBegin)="onActionBegin($event)"
-    (actionComplete)="onActionComplete($event)"
-    (eventRendered)="onEventRendered($event)"
-    (popupOpen)="onPopupOpen($event)"
-    (popupClose)="onPopupClose($event)"
-    (dragStart)="onDragStart($event)"
-    (dragStop)="onDragStop($event)"
-    (resizeStart)="onResizeStart($event)"
-    (resizeStop)="onResizeStop($event)">
+<div class="scheduler-container" [ngClass]="customClass()">
+  <ejs-schedule #schedule [eventSettings]="eventSettings()" [currentView]="currentView()" [views]="views()"
+    [selectedDate]="selectedDate()" [startHour]="startHour()" [endHour]="endHour()" [workDays]="workDays()"
+    [firstDayOfWeek]="firstDayOfWeek()" [showWeekend]="showWeekend()" [allowDragAndDrop]="allowDragAndDrop()"
+    [allowResizing]="allowResizing()" [enableRtl]="enableRtl()" [enableAdaptiveUI]="enableAdaptiveUI()"
+    [group]="group()" [resources]="resources()" [height]="height()" [width]="width()" [locale]="locale()"
+    (eventClick)="eventClick.emit($event)" (eventDoubleClick)="eventDoubleClick.emit($event)"
+    (cellClick)="cellClick.emit($event)" (cellDoubleClick)="cellDoubleClick.emit($event)"
+    (navigating)="navigating.emit($event)" (actionBegin)="actionBegin.emit($event)"
+    (actionComplete)="actionComplete.emit($event)" (eventRendered)="eventRendered.emit($event)"
+    (popupOpen)="popupOpen.emit($event)" (popupClose)="popupClose.emit($event)" (dragStart)="dragStart.emit($event)"
+    (dragStop)="dragStop.emit($event)" (resizeStart)="resizeStart.emit($event)" (resizeStop)="resizeStop.emit($event)">
   </ejs-schedule>
 </div>
-

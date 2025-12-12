@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, input, output, effect, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 import {
@@ -16,9 +16,10 @@ import {
   ExcelExportService,
   ICalendarExportService,
   ICalendarImportService,
-  PrintService
+  PrintService,
+  EventSettingsModel,
+  View
 } from '@syncfusion/ej2-angular-schedule';
-import { EventSettingsModel, View } from '@syncfusion/ej2-angular-schedule';
 
 export interface SchedulerEvent {
   Id?: number | string;
@@ -87,64 +88,70 @@ export interface SchedulerConfig {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SchedulerComponent implements OnInit, OnDestroy {
-  @ViewChild('schedule', { static: false }) schedule!: ScheduleComponent;
+  schedule = viewChild<ScheduleComponent>('schedule');
 
   // Data Source
-  @Input() eventSettings: EventSettingsModel = {
+  eventSettings = input<EventSettingsModel>({
     dataSource: []
-  };
+  });
 
   // Views
-  @Input() currentView: View = 'Month';
-  @Input() views: View[] = ['Day', 'Week', 'WorkWeek', 'Month', 'Agenda', 'MonthAgenda'];
+  currentView = input<View>('Month');
+  views = input<View[]>(['Day', 'Week', 'WorkWeek', 'Month', 'Agenda', 'MonthAgenda']);
 
   // Date & Time
-  @Input() selectedDate: Date = new Date();
-  @Input() startHour: string = '09:00';
-  @Input() endHour: string = '18:00';
-  @Input() workDays: number[] = [1, 2, 3, 4, 5]; // Monday to Friday
-  @Input() firstDayOfWeek: number = 0; // Sunday
-  @Input() showWeekend: boolean = true;
+  selectedDate = input<Date>(new Date());
+  startHour = input<string>('09:00');
+  endHour = input<string>('18:00');
+  workDays = input<number[]>([1, 2, 3, 4, 5]); // Monday to Friday
+  firstDayOfWeek = input<number>(0); // Sunday
+  showWeekend = input<boolean>(true);
 
   // Features
-  @Input() allowDragAndDrop: boolean = true;
-  @Input() allowResizing: boolean = true;
-  @Input() allowExcelExport: boolean = true;
-  @Input() allowICalendarExport: boolean = true;
-  @Input() allowICalendarImport: boolean = true;
-  @Input() allowPrint: boolean = true;
-  @Input() enableRtl: boolean = false;
-  @Input() enableAdaptiveUI: boolean = true;
+  allowDragAndDrop = input<boolean>(true);
+  allowResizing = input<boolean>(true);
+  allowExcelExport = input<boolean>(true);
+  allowICalendarExport = input<boolean>(true);
+  allowICalendarImport = input<boolean>(true);
+  allowPrint = input<boolean>(true);
+  enableRtl = input<boolean>(false);
+  enableAdaptiveUI = input<boolean>(true);
 
   // Grouping & Resources
-  @Input() group: any = null;
-  @Input() resources: any[] = [];
+  group = input<any>(null);
+  resources = input<any[]>([]);
 
   // Size
-  @Input() height: string | number = '600px';
-  @Input() width: string | number = '100%';
+  height = input<string | number>('600px');
+  width = input<string | number>('100%');
 
   // Locale
-  @Input() locale: string = 'en';
+  locale = input<string>('en');
 
   // Styling
-  @Input() customClass: string = '';
+  customClass = input<string>('');
 
   // Events
-  @Output() eventClick = new EventEmitter<any>();
-  @Output() eventDoubleClick = new EventEmitter<any>();
-  @Output() cellClick = new EventEmitter<any>();
-  @Output() cellDoubleClick = new EventEmitter<any>();
-  @Output() navigating = new EventEmitter<any>();
-  @Output() actionBegin = new EventEmitter<any>();
-  @Output() actionComplete = new EventEmitter<any>();
-  @Output() eventRendered = new EventEmitter<any>();
-  @Output() popupOpen = new EventEmitter<any>();
-  @Output() popupClose = new EventEmitter<any>();
-  @Output() dragStart = new EventEmitter<any>();
-  @Output() dragStop = new EventEmitter<any>();
-  @Output() resizeStart = new EventEmitter<any>();
-  @Output() resizeStop = new EventEmitter<any>();
+  eventClick = output<any>();
+  eventDoubleClick = output<any>();
+  cellClick = output<any>();
+  cellDoubleClick = output<any>();
+  navigating = output<any>();
+  actionBegin = output<any>();
+  actionComplete = output<any>();
+  eventRendered = output<any>();
+  popupOpen = output<any>();
+  popupClose = output<any>();
+  dragStart = output<any>();
+  dragStop = output<any>();
+  resizeStart = output<any>();
+  resizeStop = output<any>();
+
+  constructor() {
+    effect(() => {
+      // Handle necessary updates if template binding is insufficient
+    });
+  }
 
   ngOnInit(): void {
     // Initialize if needed
@@ -158,54 +165,45 @@ export class SchedulerComponent implements OnInit, OnDestroy {
    * Refresh scheduler
    */
   refresh(): void {
-    if (this.schedule) {
-      this.schedule.refresh();
-    }
+    this.schedule()?.refresh();
   }
 
   /**
    * Export to Excel
    */
   exportToExcel(): void {
-    if (this.schedule) {
-      this.schedule.exportToExcel();
-    }
+    this.schedule()?.exportToExcel();
   }
 
   /**
    * Export to iCalendar
    */
   exportToICalendar(): void {
-    if (this.schedule) {
-      this.schedule.exportToICalendar();
-    }
+    this.schedule()?.exportToICalendar();
   }
 
   /**
    * Import from iCalendar
    */
   importICalendar(file: File): void {
-    if (this.schedule) {
-      this.schedule.importICalendar(file);
-    }
+    this.schedule()?.importICalendar(file);
   }
 
   /**
    * Print
    */
   print(): void {
-    if (this.schedule) {
-      this.schedule.print();
-    }
+    this.schedule()?.print();
   }
 
   /**
    * Navigate to date
    */
   navigateToDate(date: Date): void {
-    if (this.schedule) {
-      this.schedule.selectedDate = date;
-      this.schedule.dataBind();
+    const s = this.schedule();
+    if (s) {
+      s.selectedDate = date;
+      s.dataBind();
     }
   }
 
@@ -213,9 +211,10 @@ export class SchedulerComponent implements OnInit, OnDestroy {
    * Change view
    */
   changeView(view: View): void {
-    if (this.schedule) {
-      this.schedule.currentView = view;
-      this.schedule.dataBind();
+    const s = this.schedule();
+    if (s) {
+      s.currentView = view;
+      s.dataBind();
     }
   }
 
@@ -223,21 +222,32 @@ export class SchedulerComponent implements OnInit, OnDestroy {
    * Get scheduler instance
    */
   getSchedulerInstance(): ScheduleComponent | null {
-    return this.schedule || null;
+    return this.schedule() || null;
   }
 
   /**
    * Add event
    */
   addEvent(event: SchedulerEvent): void {
-    if (this.schedule && this.eventSettings.dataSource) {
-      const dataSource = Array.isArray(this.eventSettings.dataSource)
-        ? this.eventSettings.dataSource
-        : [];
-      dataSource.push(event);
-      this.eventSettings = { ...this.eventSettings, dataSource };
-      this.schedule.eventSettings = this.eventSettings;
-      this.schedule.refresh();
+    const s = this.schedule();
+    // This method implementation might need review as directly mutating input signals is not possible
+    // But here we are mutating the Syncfusion component's settings directly or the input object reference?
+    // Wait, eventSettings is an input signal. We cannot mutate it.
+    // However, the original code logic was mutating `this.eventSettings` which was an @Input property.
+    // Since we are migrating to signals, we can't write to `this.eventSettings`.
+    // Instead we should probably be relying on the parent to update the data, OR we directly interact with the Schedule methods.
+    // Syncfusion Schedule usually has addEvent methods.
+
+    // Original code:
+    // dataSource.push(event);
+    // this.eventSettings = { ...this.eventSettings, dataSource };
+    // this.schedule.eventSettings = this.eventSettings;
+    // this.schedule.refresh();
+
+    // Since this is a wrapper component, ideally the parent should manage state. 
+    // BUT to keep backward compatibility with the imperative method style:
+    if (s) {
+      s.addEvent(event);
     }
   }
 
@@ -245,17 +255,9 @@ export class SchedulerComponent implements OnInit, OnDestroy {
    * Update event
    */
   updateEvent(event: SchedulerEvent): void {
-    if (this.schedule && this.eventSettings.dataSource) {
-      const dataSource = Array.isArray(this.eventSettings.dataSource)
-        ? this.eventSettings.dataSource
-        : [];
-      const index = dataSource.findIndex((e: any) => e.Id === event.Id);
-      if (index !== -1) {
-        dataSource[index] = event;
-        this.eventSettings = { ...this.eventSettings, dataSource };
-        this.schedule.eventSettings = this.eventSettings;
-        this.schedule.refresh();
-      }
+    const s = this.schedule();
+    if (s) {
+      s.saveEvent(event);
     }
   }
 
@@ -263,74 +265,11 @@ export class SchedulerComponent implements OnInit, OnDestroy {
    * Delete event
    */
   deleteEvent(eventId: number | string): void {
-    if (this.schedule && this.eventSettings.dataSource) {
-      const dataSource = Array.isArray(this.eventSettings.dataSource)
-        ? this.eventSettings.dataSource
-        : [];
-      const filtered = dataSource.filter((e: any) => e.Id !== eventId);
-      this.eventSettings = { ...this.eventSettings, dataSource: filtered };
-      this.schedule.eventSettings = this.eventSettings;
-      this.schedule.refresh();
+    const s = this.schedule();
+    if (s) {
+      s.deleteEvent(eventId);
     }
   }
-
-  /**
-   * Event handlers
-   */
-  onEventClick(args: any): void {
-    this.eventClick.emit(args);
-  }
-
-  onEventDoubleClick(args: any): void {
-    this.eventDoubleClick.emit(args);
-  }
-
-  onCellClick(args: any): void {
-    this.cellClick.emit(args);
-  }
-
-  onCellDoubleClick(args: any): void {
-    this.cellDoubleClick.emit(args);
-  }
-
-  onNavigating(args: any): void {
-    this.navigating.emit(args);
-  }
-
-  onActionBegin(args: any): void {
-    this.actionBegin.emit(args);
-  }
-
-  onActionComplete(args: any): void {
-    this.actionComplete.emit(args);
-  }
-
-  onEventRendered(args: any): void {
-    this.eventRendered.emit(args);
-  }
-
-  onPopupOpen(args: any): void {
-    this.popupOpen.emit(args);
-  }
-
-  onPopupClose(args: any): void {
-    this.popupClose.emit(args);
-  }
-
-  onDragStart(args: any): void {
-    this.dragStart.emit(args);
-  }
-
-  onDragStop(args: any): void {
-    this.dragStop.emit(args);
-  }
-
-  onResizeStart(args: any): void {
-    this.resizeStart.emit(args);
-  }
-
-  onResizeStop(args: any): void {
-    this.resizeStop.emit(args);
-  }
 }
+
 

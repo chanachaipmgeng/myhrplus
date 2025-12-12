@@ -1,37 +1,16 @@
-<div class="file-manager-container" [ngClass]="customClass" [style.height]="height" [style.width]="width">
-  <ejs-filemanager
-    #filemanager
-    [ajaxSettings]="ajaxSettings"
-    [view]="view"
-    [allowMultiSelection]="allowMultiSelection"
-    [showFileExtension]="showFileExtension"
-    [showHiddenItems]="showHiddenItems"
-    [showThumbnail]="showThumbnail"
-    [enablePersistence]="enablePersistence"
-    [enableRtl]="enableRtl"
-    [locale]="locale"
-    [navigationPaneSettings]="navigationPaneSettings"
-    [toolbarSettings]="toolbarSettings"
-    [detailsViewSettings]="detailsViewSettings"
-    [contextMenuSettings]="contextMenuSettings"
-    [uploadSettings]="uploadSettings"
-    [height]="height"
-    [width]="width"
-    (fileLoad)="onFileLoad($event)"
-    (fileOpen)="onFileOpen($event)"
-    (fileSelect)="onFileSelect($event)"
-    (fileDeselect)="onFileDeselect($event)"
-    (beforeFileLoad)="onBeforeFileLoad($event)"
-    (beforeFileOpen)="onBeforeFileOpen($event)"
-    (beforeDownload)="onBeforeDownload($event)"
-    (beforeUpload)="onBeforeUpload($event)"
-    (beforeImageLoad)="onBeforeImageLoad($event)"
-    (beforeSend)="onBeforeSend($event)"
-    (successFileUpload)="onSuccessFileUpload($event)"
-    (failureFileUpload)="onFailureFileUpload($event)"
-    (created)="onCreated($event)">
+<div class="file-manager-container" [ngClass]="customClass()" [style.height]="height()" [style.width]="width()">
+  <ejs-filemanager #filemanager [ajaxSettings]="ajaxSettings()" [view]="view()"
+    [allowMultiSelection]="allowMultiSelection()" [showFileExtension]="showFileExtension()"
+    [showHiddenItems]="showHiddenItems()" [showThumbnail]="showThumbnail()" [enablePersistence]="enablePersistence()"
+    [enableRtl]="enableRtl()" [locale]="locale()" [navigationPaneSettings]="navigationPaneSettings()"
+    [toolbarSettings]="toolbarSettings()" [detailsViewSettings]="detailsViewSettings()"
+    [contextMenuSettings]="contextMenuSettings()" [uploadSettings]="uploadSettings()" [height]="height()"
+    [width]="width()" (fileLoad)="fileLoad.emit($event)" (fileOpen)="fileOpen.emit($event)"
+    (fileSelect)="fileSelect.emit($event)" (fileDeselect)="fileDeselect.emit($event)"
+    (beforeFileLoad)="beforeFileLoad.emit($event)" (beforeFileOpen)="beforeFileOpen.emit($event)"
+    (beforeDownload)="beforeDownload.emit($event)" (beforeUpload)="beforeUpload.emit($event)"
+    (beforeImageLoad)="beforeImageLoad.emit($event)" (beforeSend)="beforeSend.emit($event)"
+    (successFileUpload)="successFileUpload.emit($event)" (failureFileUpload)="failureFileUpload.emit($event)"
+    (created)="created.emit($event)">
   </ejs-filemanager>
 </div>
-
-
-

@@ -1,4 +1,6 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { IconComponent } from '../icon/icon.component';
 
 export interface TimelineItem {
   title: string;
@@ -13,16 +15,18 @@ export interface TimelineItem {
 
 @Component({
   selector: 'app-timeline',
+  standalone: true,
+  imports: [CommonModule, IconComponent],
   templateUrl: './timeline.component.html',
   styleUrls: ['./timeline.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TimelineComponent {
-  @Input() items: TimelineItem[] = [];
-  @Input() orientation: 'vertical' | 'horizontal' = 'vertical';
-  @Input() showDates: boolean = true;
-  @Input() showIcons: boolean = true;
-  @Input() alternate: boolean = false;
+  items = input<TimelineItem[]>([]);
+  orientation = input<'vertical' | 'horizontal'>('vertical');
+  showDates = input<boolean>(true);
+  showIcons = input<boolean>(true);
+  alternate = input<boolean>(false);
 
   expandedItems: Set<number> = new Set();
 
