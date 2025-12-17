@@ -209,8 +209,63 @@ export class LoginComponent implements OnInit {
               localStorage.removeItem('rememberMe');
             }
 
-            // Check getSetPass for defaultpage and accountactive
-            this.employeeService.getSetPass()
+            // Wait for token to be set in TokenManagerService before calling API
+            // Use Promise to ensure token is available in interceptor
+            Promise.resolve().then(() => {
+              // Verify token is set before calling API
+              const token = this.authService.getToken();
+              if (!token) {
+                console.error('Token not set after login');
+                this.loading = false;
+                this.errorMessage = 'Failed to set authentication token';
+                this.notificationService.showError(this.errorMessage);
+                return;
+              }
+
+              // Double check token is available in sessionStorage (for interceptor fallback)
+              const sessionToken = sessionStorage.getItem('userToken');
+              if (!sessionToken) {
+                console.warn('Token not in sessionStorage, waiting...');
+                setTimeout(() => {
+                  this.callGetSetPass(result);
+                }, 50);
+                return;
+              }
+
+              // Token is ready, call API
+              this.callGetSetPass(result);
+            });
+          } else {
+            this.loading = false;
+            this.errorMessage = 'Login failed: No access token received';
+            this.notificationService.showError(this.errorMessage);
+          }
+        })
+        .catch((error: HttpErrorResponse) => {
+          console.error('Login failed. Reason:', error);
+          this.loading = false;
+
+          if (error.status === 401) {
+            this.errorMessage = 'Invalid Username or Password';
+            this.notificationService.showError(this.errorMessage);
+          } else {
+            this.errorMessage = error.message || 'Login failed. Please try again.';
+            this.notificationService.showError(this.errorMessage);
+          }
+
+          this.loginForm.patchValue({ password: '' });
+        });
+    } else {
+      this.notificationService.showWarning('Please fill in all required fields');
+    }
+  }
+
+  /**
+   * Call getSetPass API after token is verified
+   */
+  private callGetSetPass(result: any): void {
+    // Check getSetPass for defaultpage and accountactive
+    this.employeeService.getSetPass()
               .subscribe({
                 next: (manageResult: SetCharacter) => {
                   // If defaultpage is '1', redirect to JSP page (legacy behavior)
@@ -226,7 +281,7 @@ export class LoginComponent implements OnInit {
                   try {
                     const decodedToken = jwt_decode<any>(result.accessToken);
                     const accountActive = decodedToken.accountactive;
-
+console.log(decodedToken); console.log(accountActive);
                     if (accountActive) {
                       if (accountActive === 'true') {
                         // Account is active - load swap language and navigate
@@ -234,13 +289,13 @@ export class LoginComponent implements OnInit {
                           this.swapLangService.saveSwaplang(swapResult);
                           this.notificationService.showSuccess('Login successful');
                           this.menuService.clearCache();
-                          this.router.navigate(['/portal']);
+                          this.router.navigate(['/home']);
                         }, (error) => {
                           console.error('Error loading swap language:', error);
                           // Proceed anyway
                           this.notificationService.showSuccess('Login successful');
                           this.menuService.clearCache();
-                          this.router.navigate(['/portal']);
+                          this.router.navigate(['/home']);
                         });
                       } else if (accountActive === 'waiting') {
                         this.loading = false;
@@ -276,13 +331,13 @@ export class LoginComponent implements OnInit {
                       this.swapLangService.saveSwaplang(swapResult);
                       this.notificationService.showSuccess('Login successful');
                       this.menuService.clearCache();
-                      this.router.navigate(['/portal']);
+                      this.router.navigate(['/home']);
                     }, (error) => {
                       console.error('Error loading swap language:', error);
                       // Proceed anyway
                       this.notificationService.showSuccess('Login successful');
                       this.menuService.clearCache();
-                      this.router.navigate(['/portal']);
+                      this.router.navigate(['/home']);
                     });
                   }
                 },
@@ -303,28 +358,5 @@ export class LoginComponent implements OnInit {
                   });
                 }
               });
-          } else {
-            this.loading = false;
-            this.errorMessage = 'Login failed: No access token received';
-            this.notificationService.showError(this.errorMessage);
-          }
-        })
-        .catch((error: HttpErrorResponse) => {
-          console.error('Login failed. Reason:', error);
-          this.loading = false;
-
-          if (error.status === 401) {
-            this.errorMessage = 'Invalid Username or Password';
-            this.notificationService.showError(this.errorMessage);
-          } else {
-            this.errorMessage = error.message || 'Login failed. Please try again.';
-            this.notificationService.showError(this.errorMessage);
-          }
-
-          this.loginForm.patchValue({ password: '' });
-        });
-    } else {
-      this.notificationService.showWarning('Please fill in all required fields');
-    }
   }
 }

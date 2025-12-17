@@ -17,7 +17,6 @@ export interface TokenValidationResult {
 export interface TokenRefreshResponse {
   success: boolean;
   accessToken?: string;
-  refreshToken?: string;
   expiresIn?: number;
 }
 
@@ -35,7 +34,6 @@ export interface TokenRefreshResponse {
 })
 export class TokenManagerService {
   private readonly TOKEN_KEY = 'auth_token';
-  private readonly REFRESH_TOKEN_KEY = 'refresh_token';
   private readonly TOKEN_EXPIRY_KEY = 'token_expiry';
   private readonly SESSION_TOKEN_KEY = 'userToken'; // For backward compatibility
 
@@ -49,9 +47,6 @@ export class TokenManagerService {
   private readonly CACHE_TTL = 60000; // Cache for 1 minute
   private readonly MAX_CACHE_SIZE = 10; // Maximum cached validations
 
-  private tokenRefreshInProgress = false;
-  private tokenRefreshSubject = new BehaviorSubject<string | null>(null);
-  public tokenRefresh$ = this.tokenRefreshSubject.asObservable();
 
   constructor(
     private storage: StorageService,
@@ -104,7 +99,6 @@ export class TokenManagerService {
    */
   clearToken(): void {
     this.storage.removeItem(this.TOKEN_KEY);
-    this.storage.removeItem(this.REFRESH_TOKEN_KEY);
     this.storage.removeItem(this.TOKEN_EXPIRY_KEY);
     this.tokenValidationCache.clear();
 
@@ -195,82 +189,6 @@ export class TokenManagerService {
     }
   }
 
-  /**
-   * Get refresh token from storage
-   */
-  getRefreshToken(): string | null {
-    return this.storage.getItem<string>(this.REFRESH_TOKEN_KEY);
-  }
-
-  /**
-   * Set refresh token in storage
-   */
-  setRefreshToken(refreshToken: string): void {
-    this.storage.setItem(this.REFRESH_TOKEN_KEY, refreshToken);
-  }
-
-  /**
-   * Refresh access token
-   * Uses a single refresh operation to avoid multiple simultaneous refresh calls
-   */
-  refreshToken(): Observable<string> {
-    // If refresh is already in progress, return the existing observable
-    if (this.tokenRefreshInProgress) {
-      return this.tokenRefresh$.pipe(
-        map(token => {
-          if (!token) {
-            throw new Error('Token refresh failed');
-          }
-          return token;
-        })
-      );
-    }
-
-    const refreshToken = this.getRefreshToken();
-    if (!refreshToken) {
-      return throwError(() => new Error('No refresh token available'));
-    }
-
-    this.tokenRefreshInProgress = true;
-
-    // ApiService already handles baseUrl (environment.jbossUrl), so only pass the endpoint path
-    return this.apiService.post<TokenRefreshResponse>(
-      `${environment.apiEndpoints.auth}/refresh`,
-      { refreshToken }
-    ).pipe(
-      map((response: ApiResponse<TokenRefreshResponse>) => {
-        const refreshResponse = response.data || (response as unknown as TokenRefreshResponse);
-
-        if (refreshResponse.success && refreshResponse.accessToken) {
-          // Update tokens
-          this.setToken(
-            refreshResponse.accessToken,
-            refreshResponse.expiresIn
-          );
-
-          if (refreshResponse.refreshToken) {
-            this.setRefreshToken(refreshResponse.refreshToken);
-          }
-
-          // Clear validation cache
-          this.tokenValidationCache.clear();
-
-          // Notify subscribers
-          this.tokenRefreshSubject.next(refreshResponse.accessToken);
-          this.tokenRefreshInProgress = false;
-
-          return refreshResponse.accessToken;
-        }
-
-        throw new Error('Token refresh failed: invalid response');
-      }),
-      catchError(error => {
-        this.tokenRefreshInProgress = false;
-        this.tokenRefreshSubject.next(null);
-        return throwError(() => error);
-      })
-    );
-  }
 
   /**
    * Decode token without validation

@@ -31,7 +31,8 @@ export class ApiService {
 
   get<T>(endpoint: string, params?: any, useCache: boolean = false, cacheKey?: string): Observable<ApiResponse<T>> {
     const httpParams = this.buildParams(params);
-    const url = `${this.baseUrl}${endpoint}`;
+    // Check if endpoint is already a full URL
+    const url = endpoint.startsWith('http') ? endpoint : `${this.baseUrl}${endpoint}`;
     
     const request = this.http.get<ApiResponse<T>>(url, { params: httpParams });
 
@@ -43,24 +44,30 @@ export class ApiService {
   }
 
   post<T>(endpoint: string, body: any): Observable<ApiResponse<T>> {
+    // Check if endpoint is already a full URL
+    const url = endpoint.startsWith('http') ? endpoint : `${this.baseUrl}${endpoint}`;
     const request = this.http.post<ApiResponse<T>>(
-      `${this.baseUrl}${endpoint}`,
+      url,
       body
     );
     return this.retryRequest(request);
   }
 
   put<T>(endpoint: string, body: any): Observable<ApiResponse<T>> {
+    // Check if endpoint is already a full URL
+    const url = endpoint.startsWith('http') ? endpoint : `${this.baseUrl}${endpoint}`;
     const request = this.http.put<ApiResponse<T>>(
-      `${this.baseUrl}${endpoint}`,
+      url,
       body
     );
     return this.retryRequest(request);
   }
 
   delete<T>(endpoint: string): Observable<ApiResponse<T>> {
+    // Check if endpoint is already a full URL
+    const url = endpoint.startsWith('http') ? endpoint : `${this.baseUrl}${endpoint}`;
     const request = this.http.delete<ApiResponse<T>>(
-      `${this.baseUrl}${endpoint}`
+      url
     );
     return this.retryRequest(request);
   }
@@ -75,8 +82,10 @@ export class ApiService {
       });
     }
 
+    // Check if endpoint is already a full URL
+    const url = endpoint.startsWith('http') ? endpoint : `${this.baseUrl}${endpoint}`;
     const request = this.http.post<ApiResponse<any>>(
-      `${this.baseUrl}${endpoint}`,
+      url,
       formData
     );
     return this.retryRequest(request);
@@ -84,8 +93,10 @@ export class ApiService {
 
   downloadFile(endpoint: string, params?: any): Observable<Blob> {
     const httpParams = this.buildParams(params);
+    // Check if endpoint is already a full URL
+    const url = endpoint.startsWith('http') ? endpoint : `${this.baseUrl}${endpoint}`;
     const request = this.http.get(
-      `${this.baseUrl}${endpoint}`,
+      url,
       {
         params: httpParams,
         responseType: 'blob'

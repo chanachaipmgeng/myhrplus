@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, interval } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { LogHistoryService } from './log-history.service';
-import { LogLevel } from '../constants/log-levels.constant';
 
 export interface PerformanceMetric {
   name: string;
@@ -47,7 +45,7 @@ export class MonitoringService {
   private readonly MAX_METRICS = 1000;
   private readonly HEALTH_CHECK_INTERVAL = 60000; // 1 minute
 
-  constructor(private logHistory: LogHistoryService) {
+  constructor() {
     // Start health monitoring
     this.startHealthMonitoring();
   }
@@ -66,15 +64,6 @@ export class MonitoringService {
     // Keep only last 100 measurements per endpoint
     if (times.length > 100) {
       times.shift();
-    }
-
-    // Log slow requests
-    if (responseTime > 3000) {
-      this.logHistory.warn(`Slow API request: ${endpoint} took ${responseTime}ms`, {
-        endpoint,
-        responseTime,
-        moduleName: 'Monitoring'
-      });
     }
   }
 
@@ -141,12 +130,12 @@ export class MonitoringService {
    * Get error rate (errors per minute)
    */
   getErrorRate(): number {
-    const logs = this.logHistory.getLogs({
-      level: LogLevel.ERROR,
-      startDate: new Date(Date.now() - 60000) // Last minute
+    // Count errors from errorCounts map
+    let errorCount = 0;
+    this.errorCounts.forEach(count => {
+      errorCount += count;
     });
-
-    return logs.length;
+    return errorCount;
   }
 
   /**
@@ -194,15 +183,11 @@ export class MonitoringService {
   }
 
   /**
-   * Get active users count (from logs)
+   * Get active users count
    */
   private getActiveUsers(): number {
-    const logs = this.logHistory.getLogs({
-      startDate: new Date(Date.now() - 5 * 60 * 1000) // Last 5 minutes
-    });
-
-    const uniqueUsers = new Set(logs.map(log => log.userId).filter(Boolean));
-    return uniqueUsers.size;
+    // Placeholder - would need user tracking service
+    return 0;
   }
 
   /**
@@ -225,19 +210,6 @@ export class MonitoringService {
       )
       .subscribe(health => {
         this.healthSubject.next(health);
-
-        // Log health status if degraded or unhealthy
-        if (health.status === 'unhealthy') {
-          this.logHistory.error('System health: UNHEALTHY', undefined, {
-            health,
-            moduleName: 'Monitoring'
-          });
-        } else if (health.status === 'degraded') {
-          this.logHistory.warn('System health: DEGRADED', {
-            health,
-            moduleName: 'Monitoring'
-          });
-        }
       });
   }
 

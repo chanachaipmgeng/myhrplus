@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -28,11 +28,11 @@ export class AuthInterceptor implements HttpInterceptor {
   // Cache TTL for HTTP responses (5 minutes)
   private readonly CACHE_TTL = 5 * 60 * 1000;
 
-  constructor(
-    private authService: AuthService,
-    private tokenManager: TokenManagerService,
-    private cacheService: CacheService
-  ) {}
+  // Lazy inject services to avoid circular dependency
+  private tokenManager?: TokenManagerService;
+  private cacheService?: CacheService;
+
+  constructor(private injector: Injector) {}
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     // Skip local files and assets
@@ -42,24 +42,47 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
+    // Lazy inject services to avoid circular dependency
+    if (!this.tokenManager) {
+      this.tokenManager = this.injector.get(TokenManagerService);
+      this.cacheService = this.injector.get(CacheService);
+    }
+
     // Transform URL if needed
     const fullUrl = this.transformUrl(req.url);
 
     // Get token (use Zeeme token for specific endpoints, otherwise use auth token)
-    const token = this.getToken(req.url);
+    const token = this.getToken(req.url, fullUrl);
 
     // Clone request with authorization header and transformed URL
+    const headers: { [key: string]: string } = {};
+    
+    // Add Authorization header if token exists
+    if (token && token.trim() !== '') {
+      headers['Authorization'] = `Bearer ${token}`;
+      // Debug log to verify token is being added
+      console.log('AuthInterceptor: Adding Authorization header for:', fullUrl);
+    } else {
+      // Log warning if no token found for non-public endpoints
+      if (!fullUrl.includes('/public/') && !fullUrl.includes('/authen')) {
+        console.warn('AuthInterceptor: No token found for request:', fullUrl);
+        // Debug: Check what's in sessionStorage
+        if (typeof window !== 'undefined' && window.sessionStorage) {
+          const debugToken = sessionStorage.getItem('userToken');
+          console.warn('AuthInterceptor: sessionStorage userToken:', debugToken ? 'exists' : 'missing');
+        }
+      }
+    }
+
     const authReq = req.clone({
       url: fullUrl,
-      setHeaders: {
-        Authorization: `Bearer ${token}`
-      }
+      setHeaders: headers
     });
 
     // Check if request should be cached
     if (this.canCache(req)) {
       const cacheKey = this.getCacheKey(req);
-      const cached = this.cacheService.get<HttpEvent<unknown>>(cacheKey);
+      const cached = this.cacheService!.get<HttpEvent<unknown>>(cacheKey);
       
       if (cached) {
         return of(cached);
@@ -68,7 +91,7 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(authReq).pipe(
         tap(response => {
           // Cache successful responses
-          this.cacheService.set(cacheKey, response, this.CACHE_TTL);
+          this.cacheService!.set(cacheKey, response, this.CACHE_TTL);
         }),
         catchError((error: HttpErrorResponse) => {
           this.handleError(error);
@@ -103,32 +126,44 @@ export class AuthInterceptor implements HttpInterceptor {
 
   /**
    * Get appropriate token for the request
+   * @param originalUrl - Original request URL
+   * @param transformedUrl - Transformed request URL
+   * @returns Token string or empty string
    */
-  private getToken(url: string): string {
+  private getToken(originalUrl: string, transformedUrl: string): string {
     // Use Zeeme token for Zeeme API endpoints
-    if (url.includes('zeeme.myhr.co.th/ZeemeApi/rest/company-config')) {
+    if (transformedUrl.includes('zeeme.myhr.co.th/ZeemeApi/rest/company-config') ||
+        originalUrl.includes('zeeme.myhr.co.th/ZeemeApi/rest/company-config')) {
       return this.tokenZeeme;
     }
 
-    // Get token from TokenManagerService
-    const token = this.tokenManager.getToken();
-    if (token) {
-      // Validate token before using it
-      const validation = this.tokenManager.validateToken(token);
-      if (validation.isValid && !validation.isExpired) {
-        return token;
+    // Priority 1: Get from sessionStorage first (fastest, most reliable)
+    // This ensures token is available immediately after login
+    // Always use token from sessionStorage if available, let server validate
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      const sessionToken = sessionStorage.getItem('userToken');
+      if (sessionToken && sessionToken.trim() !== '') {
+        // Debug: Log token retrieval
+        console.log('AuthInterceptor: Token found in sessionStorage, length:', sessionToken.length);
+        // Use token directly - server will validate it
+        // Only skip if token is clearly invalid (empty or null)
+        return sessionToken;
+      } else {
+        console.warn('AuthInterceptor: No token in sessionStorage (userToken key)');
       }
     }
 
-    // Fallback to sessionStorage (for backward compatibility)
-    if (typeof window !== 'undefined' && window.sessionStorage) {
-      const sessionToken = sessionStorage.getItem('userToken');
-      if (sessionToken) {
-        const validation = this.tokenManager.validateToken(sessionToken);
-        if (validation.isValid && !validation.isExpired) {
-          return sessionToken;
-        }
+    // Priority 2: Get from TokenManagerService (if available)
+    if (this.tokenManager) {
+      const token = this.tokenManager.getToken();
+      if (token && token.trim() !== '') {
+        console.log('AuthInterceptor: Token found in TokenManagerService, length:', token.length);
+        return token;
+      } else {
+        console.warn('AuthInterceptor: No token in TokenManagerService');
       }
+    } else {
+      console.warn('AuthInterceptor: TokenManagerService not available');
     }
 
     return '';
@@ -170,14 +205,12 @@ export class AuthInterceptor implements HttpInterceptor {
    * Uses CacheService for unified cache management
    */
   public clearCache(pattern?: string): void {
-    if (pattern) {
-      // Clear cache entries matching pattern
-      // CacheService doesn't support pattern matching yet, so clear all
-      // This can be enhanced in CacheService later
-      this.cacheService.clear();
-    } else {
-      this.cacheService.clear();
+    if (!this.cacheService) {
+      this.cacheService = this.injector.get(CacheService);
     }
+    
+    // Clear cache (pattern matching not yet supported, so clear all)
+    this.cacheService.clear();
   }
 }
 

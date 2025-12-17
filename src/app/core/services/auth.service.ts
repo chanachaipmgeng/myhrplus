@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal, computed, effect } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, throwError, timer, Subscription } from 'rxjs';
+import { Observable, throwError, timer, Subscription } from 'rxjs';
 import { map, catchError, tap, switchMap } from 'rxjs/operators';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { StorageService } from './storage.service';
@@ -86,7 +87,6 @@ export interface LoginResponse {
   data?: {
     user: User;
     token: string;
-    refreshToken?: string;
     expiresIn?: number;
   };
   message?: string;
@@ -104,12 +104,26 @@ export interface DatabaseModel {
 })
 export class AuthService {
   private readonly TOKEN_KEY = 'auth_token';
-  private readonly REFRESH_TOKEN_KEY = 'refresh_token';
   private readonly USER_KEY = 'user_data';
   private readonly TOKEN_EXPIRY_KEY = 'token_expiry';
 
-  private currentUserSubject = new BehaviorSubject<User | null>(null);
-  public currentUser$ = this.currentUserSubject.asObservable();
+  // Use signal for reactive state management
+  private currentUserSignal = signal<User | null>(null);
+  public currentUser = this.currentUserSignal.asReadonly();
+  
+  // Computed signal for authentication status
+  public isAuthenticatedSignal = computed(() => {
+    const user = this.currentUserSignal();
+    const token = this.tokenManager.getToken();
+    if (!user || !token) {
+      return false;
+    }
+    const validation = this.tokenManager.validateToken(token);
+    return validation.isValid && !validation.isExpired;
+  });
+
+  // Observable for backward compatibility (if needed)
+  public currentUser$ = toObservable(this.currentUserSignal);
 
   private tokenRefreshTimer: Subscription | null = null;
 
@@ -193,21 +207,41 @@ export class AuthService {
                 ...tokenPayload
               };
 
-              // Store token using TokenManagerService
+              // Store token using TokenManagerService FIRST (primary storage)
+              // TokenManagerService will also store in sessionStorage for backward compatibility
               this.tokenManager.setToken(response.accessToken);
 
-              // Store in sessionStorage (matching hrplus-std-rd pattern)
-              if (typeof window !== 'undefined' && window.sessionStorage) {
-                sessionStorage.setItem('dbName', credentials.dbName || '');
-                sessionStorage.setItem('userToken', response.accessToken);
-                sessionStorage.setItem('currentUser', JSON.stringify(user));
-              }
+              // Store user data and session info using AuthService methods
+              // This will also store token in sessionStorage via setSessionStorageData
+              this.setUserFromToken(response.accessToken, tokenPayload, credentials.dbName);
 
-              // Store user data
-              this.storage.setItem(this.USER_KEY, JSON.stringify(user));
-              this.currentUserSubject.next(user);
+              // Verify token is set in sessionStorage before resolving
+              // This ensures token is available when interceptor runs
+              const verifySessionToken = (): boolean => {
+                if (typeof window !== 'undefined' && window.sessionStorage) {
+                  const sessionToken = sessionStorage.getItem('userToken');
+                  return sessionToken === response.accessToken;
+                }
+                return false;
+              };
 
-              resolve(response);
+              // Use setTimeout to ensure sessionStorage write is complete
+              setTimeout(() => {
+                if (verifySessionToken()) {
+                  resolve(response);
+                } else {
+                  // If still not ready, wait a bit more
+                  setTimeout(() => {
+                    if (verifySessionToken()) {
+                      resolve(response);
+                    } else {
+                      // Resolve anyway - token should be set by now
+                      console.warn('Token verification timeout, resolving anyway');
+                      resolve(response);
+                    }
+                  }, 50);
+                }
+              }, 0);
             } catch (error) {
               console.error('Error decoding token:', error);
               reject(error);
@@ -277,25 +311,6 @@ export class AuthService {
     this.router.navigate(['/auth/login']);
   }
 
-  refreshToken(): Observable<string | null> {
-    // Use TokenManagerService for token refresh
-    return this.tokenManager.refreshToken().pipe(
-      map(token => {
-        // After token refresh, update user if needed
-        const user = this.getCurrentUser();
-        if (user) {
-          // Token was refreshed, user data should still be valid
-          return token;
-        }
-        return token;
-      }),
-      catchError(error => {
-        console.error('Token refresh error:', error);
-        this.logout();
-        return throwError(() => error);
-      })
-    );
-  }
 
   isAuthenticated(): boolean {
     const token = this.tokenManager.getToken();
@@ -311,7 +326,7 @@ export class AuthService {
     }
 
     // Ensure user is loaded
-    if (!this.currentUserSubject.value) {
+    if (!this.currentUserSignal()) {
       this.loadUserFromStorage();
     }
 
@@ -324,7 +339,34 @@ export class AuthService {
   }
 
   getCurrentUser(): User | null {
-    return this.currentUserSubject.value;
+    return this.currentUserSignal();
+  }
+
+  /**
+   * Set sessionStorage data for backward compatibility
+   * @param token - JWT token
+   * @param user - User object
+   * @param dbName - Optional database name
+   */
+  private setSessionStorageData(token: string, user: User, dbName?: string): void {
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      sessionStorage.setItem('userToken', token);
+      sessionStorage.setItem('currentUser', JSON.stringify(user));
+      if (dbName) {
+        sessionStorage.setItem('dbName', dbName);
+      }
+    }
+  }
+
+  /**
+   * Get token from sessionStorage (for backward compatibility)
+   * @returns Token string or null
+   */
+  private getSessionToken(): string | null {
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      return sessionStorage.getItem('userToken');
+    }
+    return null;
   }
 
   /**
@@ -337,20 +379,20 @@ export class AuthService {
     
     // Store user data
     this.storage.setItem(this.USER_KEY, JSON.stringify(user));
-    this.currentUserSubject.next(user);
+    this.currentUserSignal.set(user);
 
     // Also update sessionStorage for backward compatibility
-    if (typeof window !== 'undefined' && window.sessionStorage) {
-      sessionStorage.setItem('userToken', token);
-      sessionStorage.setItem('currentUser', JSON.stringify(user));
-    }
+    this.setSessionStorageData(token, user, user.dbName);
   }
 
   /**
    * Set user from token (used for token-based authentication via URL parameters)
    * This method is called by TokenAuthGuard when authenticating via URL token
+   * @param token - JWT token
+   * @param decodedToken - Decoded token payload
+   * @param dbName - Optional database name to store in sessionStorage
    */
-  setUserFromToken(token: string, decodedToken: any): void {
+  setUserFromToken(token: string, decodedToken: any, dbName?: string): void {
     try {
       // Map decoded token to User interface
       const user: User = {
@@ -397,20 +439,15 @@ export class AuthService {
       };
 
       // Store token using TokenManagerService
+      // TokenManagerService will also store in sessionStorage for backward compatibility
       this.tokenManager.setToken(token);
       
       // Store user data
       this.storage.setItem(this.USER_KEY, JSON.stringify(user));
-      this.currentUserSubject.next(user);
+      this.currentUserSignal.set(user);
 
-      // Also store in sessionStorage for backward compatibility
-      if (typeof window !== 'undefined' && window.sessionStorage) {
-        sessionStorage.setItem('userToken', token);
-        sessionStorage.setItem('currentUser', JSON.stringify(user));
-        if (decodedToken.dbName) {
-          sessionStorage.setItem('dbName', decodedToken.dbName);
-        }
-      }
+      // Store in sessionStorage for backward compatibility
+      this.setSessionStorageData(token, user, dbName || decodedToken.dbName);
 
       console.warn('AuthService: User set from token', user);
     } catch (error) {
@@ -477,16 +514,12 @@ export class AuthService {
     return permissions.some(permission => this.hasPermission(permission));
   }
 
-  private setUser(user: User, token: string, refreshToken?: string, expiresIn?: number): void {
+  private setUser(user: User, token: string, expiresIn?: number): void {
     // Store token using TokenManagerService
     this.tokenManager.setToken(token, expiresIn);
     
-    if (refreshToken) {
-      this.tokenManager.setRefreshToken(refreshToken);
-    }
-    
     this.storage.setItem(this.USER_KEY, JSON.stringify(user));
-    this.currentUserSubject.next(user);
+    this.currentUserSignal.set(user);
   }
 
   private loadUserFromStorage(): void {
@@ -521,18 +554,9 @@ export class AuthService {
           const validation = this.tokenManager.validateToken(token);
           
           if (validation.isValid && !validation.isExpired) {
-            this.currentUserSubject.next(user);
-          } else if (validation.isExpired) {
-            // Token expired, try to refresh
-            this.refreshToken().subscribe({
-              next: () => {},
-              error: () => {
-                // If refresh fails, clear session
-                this.clearSession();
-              }
-            });
+            this.currentUserSignal.set(user);
           } else {
-            // Token invalid, clear session
+            // Token expired or invalid, clear session
             this.clearSession();
           }
         } else {
@@ -551,7 +575,7 @@ export class AuthService {
     this.tokenManager.clearToken();
     
     this.storage.removeItem(this.USER_KEY);
-    this.currentUserSubject.next(null);
+    this.currentUserSignal.set(null);
     this.stopTokenRefreshTimer();
     
     // Also clear sessionStorage
@@ -563,25 +587,8 @@ export class AuthService {
   }
 
   private startTokenRefreshTimer(): void {
-    this.stopTokenRefreshTimer();
-
-    // Refresh token 5 minutes before expiry
-    const expiryTime = this.storage.getItem(this.TOKEN_EXPIRY_KEY);
-    if (expiryTime) {
-      const expiry = parseInt(expiryTime, 10);
-      const now = Date.now();
-      const timeUntilExpiry = expiry - now;
-      const refreshTime = timeUntilExpiry - (5 * 60 * 1000); // 5 minutes before expiry
-
-      if (refreshTime > 0) {
-        this.tokenRefreshTimer = timer(refreshTime).subscribe(() => {
-          this.refreshToken().subscribe({
-            next: () => this.startTokenRefreshTimer(),
-            error: () => this.logout()
-          });
-        });
-      }
-    }
+    // Token refresh timer removed - using accessToken only
+    // Token expiry will be handled by server validation
   }
 
   private stopTokenRefreshTimer(): void {

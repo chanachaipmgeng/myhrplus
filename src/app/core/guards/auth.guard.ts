@@ -51,12 +51,8 @@ export class AuthGuard implements CanActivate {
           }
         }
       } else if (validation.isExpired) {
-        // Token expired, check if we can refresh
-        if (this.tokenManager.getRefreshToken()) {
-          // Try to refresh token (async, but guard is synchronous)
-          // For now, redirect to login - refresh will be handled by interceptor
-          console.warn('Token expired, redirecting to login for refresh');
-        }
+        // Token expired, redirect to login
+        console.warn('Token expired, redirecting to login');
       }
     }
 
