@@ -116,7 +116,7 @@
 }
 
 .bg-blue-900\/30 {
-  background-color: rgba($primary-900, 0.3);
+  background-color: alpha-color($primary-900, 0.3);
 }
 
 .border-blue-200 {
@@ -230,7 +230,7 @@
   }
   
   .bg-blue-50 {
-    background-color: rgba($primary-900, 0.3);
+    background-color: alpha-color($primary-900, 0.3);
   }
 }
 
@@ -257,7 +257,7 @@ body.theme-gemini {
   .bg-blue-50,
   .bg-blue-900\/30 {
     @include glass-gemini('weak');
-    border-color: rgba($primary-400, 0.3);
+    border-color: alpha-color($primary-400, 0.3);
   }
   
   .animate-slide-in-right {

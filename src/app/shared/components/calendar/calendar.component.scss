@@ -35,7 +35,7 @@
 :host ::ng-deep .cal-day-view {
   @include glass-morphism('default', 'light');
   border-radius: $radius-lg;
-  border: 1px solid rgba($primary-500, 0.2);
+  border: 1px solid alpha-color($primary-500, 0.2);
 }
 
 :host ::ng-deep .cal-header {
@@ -69,7 +69,7 @@
 }
 
 :host ::ng-deep .cal-today {
-  background: rgba($primary-600, 0.3);
+  background: alpha-color($primary-600, 0.3);
   border: 2px solid $primary-500;
 }
 
@@ -152,7 +152,7 @@
   :host ::ng-deep .cal-week-view,
   :host ::ng-deep .cal-day-view {
     @include glass-morphism('default', 'dark');
-    border-color: rgba($primary-400, 0.2);
+    border-color: alpha-color($primary-400, 0.2);
   }
 
   :host ::ng-deep .cal-header {
@@ -175,7 +175,7 @@
   }
 
   :host ::ng-deep .cal-today {
-    background: rgba($primary-500, 0.3);
+    background: alpha-color($primary-500, 0.3);
     border-color: $primary-400;
   }
 
@@ -200,13 +200,13 @@ body.theme-gemini {
   :host ::ng-deep .cal-week-view,
   :host ::ng-deep .cal-day-view {
     @include glass-gemini('default');
-    border-color: rgba($gemini-gradient-end, 0.3);
+    border-color: alpha-color($gemini-gradient-end, 0.3);
   }
 
   :host ::ng-deep .cal-header {
-    background: rgba($gemini-gradient-end, 0.2);
+    background: alpha-color($gemini-gradient-end, 0.2);
     @include gradient-text-gemini();
-    border-bottom-color: rgba($gemini-gradient-end, 0.3);
+    border-bottom-color: alpha-color($gemini-gradient-end, 0.3);
   }
 
   :host ::ng-deep .cal-day-number {
@@ -214,7 +214,7 @@ body.theme-gemini {
   }
 
   :host ::ng-deep .cal-today {
-    background: rgba($gemini-gradient-end, 0.3);
+    background: alpha-color($gemini-gradient-end, 0.3);
     border-color: $gemini-gradient-end;
     @include gemini-glow('subtle');
   }

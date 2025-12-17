@@ -93,7 +93,7 @@
   code {
     font-family: $font-mono;
     font-size: $text-sm;
-    background: rgba($primary-500, 0.1);
+    background: alpha-color($primary-500, 0.1);
     padding: 2px 6px;
     border-radius: $radius-sm;
     color: $primary-600;
@@ -138,7 +138,7 @@
     }
 
     code {
-      background: rgba($primary-500, 0.2);
+      background: alpha-color($primary-500, 0.2);
       color: $primary-400;
     }
   }
@@ -156,7 +156,7 @@ body.theme-gemini {
 
   .section-title {
     @include gradient-text-gemini();
-    border-bottom-color: rgba($gemini-gradient-end, 0.3);
+    border-bottom-color: alpha-color($gemini-gradient-end, 0.3);
   }
 
   .subsection-title {
@@ -174,7 +174,7 @@ body.theme-gemini {
     }
 
     code {
-      background: rgba($gemini-gradient-end, 0.2);
+      background: alpha-color($gemini-gradient-end, 0.2);
       color: $gemini-gradient-start;
     }
   }

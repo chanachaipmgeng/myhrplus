@@ -45,7 +45,7 @@
   
   &:hover {
     color: $primary-600;
-    background: rgba($primary-500, 0.05);
+    background: alpha-color($primary-500, 0.05);
   }
   
   &.current {
@@ -160,7 +160,7 @@
     
     &:hover {
       color: $primary-400;
-      background: rgba($primary-500, 0.1);
+      background: alpha-color($primary-500, 0.1);
     }
     
     &.current {
@@ -222,7 +222,7 @@ body.theme-gemini {
   }
   
   .page-footer {
-    border-top-color: rgba($gemini-gradient-end, 0.3);
+    border-top-color: alpha-color($gemini-gradient-end, 0.3);
     @include gemini-border-glow();
   }
 }

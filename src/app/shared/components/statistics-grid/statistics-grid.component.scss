@@ -48,9 +48,9 @@ body.theme-gemini {
       position: absolute;
       inset: -$spacing-2;
       background: linear-gradient(135deg,
-        rgba($gemini-gradient-start, 0.05),
-        rgba($gemini-gradient-mid, 0.05),
-        rgba($gemini-gradient-end, 0.05)
+        alpha-color($gemini-gradient-start, 0.05),
+        alpha-color($gemini-gradient-mid, 0.05),
+        alpha-color($gemini-gradient-end, 0.05)
       );
       border-radius: $radius-xl;
       z-index: -1;

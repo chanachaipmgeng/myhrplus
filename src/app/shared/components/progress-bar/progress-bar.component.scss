@@ -38,7 +38,7 @@ body.theme-gemini .bg-slate-200 {
   /* Primary Variant */
   &.bg-primary-500 {
     background: linear-gradient(90deg, $primary-500, $primary-600);
-    box-shadow: 0 0 10px rgba($primary-500, 0.5);
+    box-shadow: 0 0 10px alpha-color($primary-500, 0.5);
   }
 
   /* Success Variant */

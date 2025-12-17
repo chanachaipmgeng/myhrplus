@@ -64,7 +64,7 @@
   transition: $transition-all;
 
   &:hover {
-    background: rgba($primary-50, 0.5);
+    background: alpha-color($primary-50, 0.5);
     transform: translateY(-2px);
   }
 }
@@ -115,7 +115,7 @@
     background: rgba($gray-800, 0.5);
 
     &:hover {
-      background: rgba($primary-900, 0.5);
+      background: alpha-color($primary-900, 0.5);
     }
   }
 
@@ -136,7 +136,7 @@ body.theme-gemini {
 
   .section-title {
     @include gradient-text-gemini();
-    border-bottom-color: rgba($gemini-gradient-end, 0.3);
+    border-bottom-color: alpha-color($gemini-gradient-end, 0.3);
   }
 
   .subsection-title {

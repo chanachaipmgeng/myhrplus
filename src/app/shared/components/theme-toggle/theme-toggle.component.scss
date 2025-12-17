@@ -14,12 +14,12 @@
  * or have specific theme overrides that might be verbose in HTML
  */
 .active {
-  background: rgba($primary-500, 0.1) !important;
+  background: alpha-color($primary-500, 0.1) !important;
   color: $primary-600 !important;
 }
 
 .dark .active {
-  background: rgba($primary-500, 0.2) !important;
+  background: alpha-color($primary-500, 0.2) !important;
   color: $primary-400 !important;
 }
 
@@ -41,7 +41,7 @@ body.theme-gemini {
   .active {
     @include glass-gemini('default');
     @include gemini-glow('subtle');
-    background: linear-gradient(135deg, rgba($gemini-gradient-end, 0.2), rgba($gemini-gradient-start, 0.2)) !important;
+    background: linear-gradient(135deg, alpha-color($gemini-gradient-end, 0.2), alpha-color($gemini-gradient-start, 0.2)) !important;
     @include gradient-text-gemini();
   }
 

@@ -86,7 +86,7 @@
   &:focus {
     outline: none;
     border-color: $primary-500;
-    box-shadow: 0 0 0 3px rgba($primary-500, 0.1);
+    box-shadow: 0 0 0 3px alpha-color($primary-500, 0.1);
   }
 }
 
@@ -151,7 +151,7 @@
 
     &:focus {
       border-color: $primary-400;
-      box-shadow: 0 0 0 3px rgba($primary-500, 0.2);
+      box-shadow: 0 0 0 3px alpha-color($primary-500, 0.2);
     }
   }
 }
@@ -168,7 +168,7 @@ body.theme-gemini {
 
   .section-title {
     @include gradient-text-gemini();
-    border-bottom-color: rgba($gemini-gradient-end, 0.3);
+    border-bottom-color: alpha-color($gemini-gradient-end, 0.3);
   }
 
   .subsection-title {
@@ -182,7 +182,7 @@ body.theme-gemini {
   .control-select {
     @include glass-gemini('weak');
     color: white;
-    border-color: rgba($gemini-gradient-end, 0.3);
+    border-color: alpha-color($gemini-gradient-end, 0.3);
 
     &:hover {
       @include gemini-glow('subtle');

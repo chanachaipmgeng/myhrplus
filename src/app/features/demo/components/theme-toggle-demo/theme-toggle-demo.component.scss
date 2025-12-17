@@ -130,7 +130,7 @@ body.theme-gemini {
 
   .section-title {
     @include gradient-text-gemini();
-    border-bottom-color: rgba($gemini-gradient-end, 0.3);
+    border-bottom-color: alpha-color($gemini-gradient-end, 0.3);
   }
 
   .subsection-title {

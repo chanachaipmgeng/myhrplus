@@ -54,7 +54,7 @@
   font-family: $font-mono;
   font-size: $text-sm;
   color: $primary-600;
-  background: rgba($primary-500, 0.1);
+  background: alpha-color($primary-500, 0.1);
   padding: 2px 6px;
   border-radius: $radius-sm;
 }
@@ -128,7 +128,7 @@
 
   .prop-name {
     color: $primary-400;
-    background: rgba($primary-500, 0.2);
+    background: alpha-color($primary-500, 0.2);
   }
 
   .prop-type {
@@ -163,22 +163,22 @@ body.theme-gemini {
 
   .props-table {
     thead {
-      background: rgba($gemini-gradient-end, 0.1);
+      background: alpha-color($gemini-gradient-end, 0.1);
     }
 
     th {
       @include gradient-text-gemini();
-      border-bottom-color: rgba($gemini-gradient-end, 0.3);
+      border-bottom-color: alpha-color($gemini-gradient-end, 0.3);
     }
 
     tbody tr:hover {
-      background: rgba($gemini-gradient-end, 0.05);
+      background: alpha-color($gemini-gradient-end, 0.05);
     }
   }
 
   .prop-name {
     color: $gemini-gradient-start;
-    background: rgba($gemini-gradient-end, 0.2);
+    background: alpha-color($gemini-gradient-end, 0.2);
   }
 
   .prop-type {

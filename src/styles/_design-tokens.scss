@@ -6,33 +6,41 @@
    ============================================ */
 
 /* ============================================
-   Colors - Primary
+   Colors - Primary (Dynamic via CSS Variables)
    ============================================ */
-$primary-50: #f0f9ff;
-$primary-100: #e0f2fe;
-$primary-200: #bae6fd;
-$primary-300: #7dd3fc;
-$primary-400: #38bdf8;
-$primary-500: #0ea5e9; // Main primary color
-$primary-600: #0284c7;
-$primary-700: #0369a1;
-$primary-800: #075985;
-$primary-900: #0c4a6e;
-$primary-950: #082f49;
+:root {
+   --primary-rgb: 59, 130, 246;
+   /* Default Blue */
+}
+
+$primary-base: rgb(var(--primary-rgb));
+
+/* Using color-mix for dynamic shades generation (requires modern browser) */
+$primary-50: color-mix(in srgb, #{$primary-base}, white 95%);
+$primary-100: color-mix(in srgb, #{$primary-base}, white 90%);
+$primary-200: color-mix(in srgb, #{$primary-base}, white 80%);
+$primary-300: color-mix(in srgb, #{$primary-base}, white 60%);
+$primary-400: color-mix(in srgb, #{$primary-base}, white 30%);
+$primary-500: #{$primary-base}; // Main primary color
+$primary-600: color-mix(in srgb, #{$primary-base}, black 10%);
+$primary-700: color-mix(in srgb, #{$primary-base}, black 25%);
+$primary-800: color-mix(in srgb, #{$primary-base}, black 40%);
+$primary-900: color-mix(in srgb, #{$primary-base}, black 60%);
+$primary-950: color-mix(in srgb, #{$primary-base}, black 80%);
 
 /* Primary Color Map */
 $primary-colors: (
-  50: $primary-50,
-  100: $primary-100,
-  200: $primary-200,
-  300: $primary-300,
-  400: $primary-400,
-  500: $primary-500,
-  600: $primary-600,
-  700: $primary-700,
-  800: $primary-800,
-  900: $primary-900,
-  950: $primary-950
+   50: $primary-50,
+   100: $primary-100,
+   200: $primary-200,
+   300: $primary-300,
+   400: $primary-400,
+   500: $primary-500,
+   600: $primary-600,
+   700: $primary-700,
+   800: $primary-800,
+   900: $primary-900,
+   950: $primary-950
 );
 
 /* ============================================
@@ -154,8 +162,8 @@ $glass-border-dark-weak: rgba(51, 65, 85, 0.2);
 
 /* Gemini Theme Glass */
 $glass-bg-gemini: rgba(15, 23, 42, 0.9);
-$glass-border-gemini: rgba(59, 130, 246, 0.3);
-$glass-glow-gemini: rgba(59, 130, 246, 0.2);
+$glass-border-gemini: color-mix(in srgb, rgb(var(--primary-rgb)), transparent 70%); // 0.3 opacity
+$glass-glow-gemini: color-mix(in srgb, rgb(var(--primary-rgb)), transparent 80%); // 0.2 opacity
 
 /* ============================================
    Typography - Font Families
@@ -168,29 +176,29 @@ $font-mono: 'JetBrains Mono', monospace;
 /* ============================================
    Typography - Font Sizes
    ============================================ */
-$text-xs: 0.75rem;    // 12px
-$text-sm: 0.875rem;   // 14px
-$text-base: 1rem;     // 16px
-$text-lg: 1.125rem;   // 18px
-$text-xl: 1.25rem;    // 20px
-$text-2xl: 1.5rem;     // 24px
-$text-3xl: 1.875rem;  // 30px
-$text-4xl: 2.25rem;   // 36px
-$text-5xl: 3rem;      // 48px
-$text-6xl: 3.75rem;   // 60px
+$text-xs: 0.75rem; // 12px
+$text-sm: 0.875rem; // 14px
+$text-base: 1rem; // 16px
+$text-lg: 1.125rem; // 18px
+$text-xl: 1.25rem; // 20px
+$text-2xl: 1.5rem; // 24px
+$text-3xl: 1.875rem; // 30px
+$text-4xl: 2.25rem; // 36px
+$text-5xl: 3rem; // 48px
+$text-6xl: 3.75rem; // 60px
 
 /* Typography Size Map */
 $font-sizes: (
-  xs: $text-xs,
-  sm: $text-sm,
-  base: $text-base,
-  lg: $text-lg,
-  xl: $text-xl,
-  '2xl': $text-2xl,
-  '3xl': $text-3xl,
-  '4xl': $text-4xl,
-  '5xl': $text-5xl,
-  '6xl': $text-6xl
+   xs: $text-xs,
+   sm: $text-sm,
+   base: $text-base,
+   lg: $text-lg,
+   xl: $text-xl,
+   '2xl': $text-2xl,
+   '3xl': $text-3xl,
+   '4xl': $text-4xl,
+   '5xl': $text-5xl,
+   '6xl': $text-6xl
 );
 
 /* ============================================
@@ -227,58 +235,58 @@ $letter-spacing-widest: 0.1em;
    Spacing Scale
    ============================================ */
 $spacing-0: 0;
-$spacing-1: 0.25rem;  // 4px
-$spacing-2: 0.5rem;   // 8px
-$spacing-3: 0.75rem;  // 12px
-$spacing-4: 1rem;     // 16px
-$spacing-5: 1.25rem;  // 20px
-$spacing-6: 1.5rem;   // 24px
-$spacing-8: 2rem;     // 32px
-$spacing-10: 2.5rem;  // 40px
-$spacing-12: 3rem;    // 48px
-$spacing-16: 4rem;    // 64px
-$spacing-20: 5rem;    // 80px
-$spacing-24: 6rem;    // 96px
+$spacing-1: 0.25rem; // 4px
+$spacing-2: 0.5rem; // 8px
+$spacing-3: 0.75rem; // 12px
+$spacing-4: 1rem; // 16px
+$spacing-5: 1.25rem; // 20px
+$spacing-6: 1.5rem; // 24px
+$spacing-8: 2rem; // 32px
+$spacing-10: 2.5rem; // 40px
+$spacing-12: 3rem; // 48px
+$spacing-16: 4rem; // 64px
+$spacing-20: 5rem; // 80px
+$spacing-24: 6rem; // 96px
 
 /* Spacing Map */
 $spacings: (
-  0: $spacing-0,
-  1: $spacing-1,
-  2: $spacing-2,
-  3: $spacing-3,
-  4: $spacing-4,
-  5: $spacing-5,
-  6: $spacing-6,
-  8: $spacing-8,
-  10: $spacing-10,
-  12: $spacing-12,
-  16: $spacing-16,
-  20: $spacing-20,
-  24: $spacing-24
+   0: $spacing-0,
+   1: $spacing-1,
+   2: $spacing-2,
+   3: $spacing-3,
+   4: $spacing-4,
+   5: $spacing-5,
+   6: $spacing-6,
+   8: $spacing-8,
+   10: $spacing-10,
+   12: $spacing-12,
+   16: $spacing-16,
+   20: $spacing-20,
+   24: $spacing-24
 );
 
 /* ============================================
    Border Radius
    ============================================ */
 $radius-none: 0;
-$radius-sm: 0.25rem;   // 4px
-$radius-md: 0.5rem;    // 8px
-$radius-lg: 0.75rem;   // 12px
-$radius-xl: 1rem;      // 16px
-$radius-2xl: 1.5rem;   // 24px
-$radius-3xl: 2rem;     // 32px
-$radius-full: 9999px;  // Full circle
+$radius-sm: 0.25rem; // 4px
+$radius-md: 0.5rem; // 8px
+$radius-lg: 0.75rem; // 12px
+$radius-xl: 1rem; // 16px
+$radius-2xl: 1.5rem; // 24px
+$radius-3xl: 2rem; // 32px
+$radius-full: 9999px; // Full circle
 
 /* Border Radius Map */
 $border-radius: (
-  none: $radius-none,
-  sm: $radius-sm,
-  md: $radius-md,
-  lg: $radius-lg,
-  xl: $radius-xl,
-  '2xl': $radius-2xl,
-  '3xl': $radius-3xl,
-  full: $radius-full
+   none: $radius-none,
+   sm: $radius-sm,
+   md: $radius-md,
+   lg: $radius-lg,
+   xl: $radius-xl,
+   '2xl': $radius-2xl,
+   '3xl': $radius-3xl,
+   full: $radius-full
 );
 
 /* ============================================
@@ -347,12 +355,12 @@ $breakpoint-2xl: 1536px;
 
 /* Breakpoint Map */
 $breakpoints: (
-  xs: $breakpoint-xs,
-  sm: $breakpoint-sm,
-  md: $breakpoint-md,
-  lg: $breakpoint-lg,
-  xl: $breakpoint-xl,
-  '2xl': $breakpoint-2xl
+   xs: $breakpoint-xs,
+   sm: $breakpoint-sm,
+   md: $breakpoint-md,
+   lg: $breakpoint-lg,
+   xl: $breakpoint-xl,
+   '2xl': $breakpoint-2xl
 );
 
 /* ============================================
@@ -369,14 +377,14 @@ $duration-1000: 1000ms;
 
 /* Animation Duration Map */
 $durations: (
-  75: $duration-75,
-  100: $duration-100,
-  150: $duration-150,
-  200: $duration-200,
-  300: $duration-300,
-  500: $duration-500,
-  700: $duration-700,
-  1000: $duration-1000
+   75: $duration-75,
+   100: $duration-100,
+   150: $duration-150,
+   200: $duration-200,
+   300: $duration-300,
+   500: $duration-500,
+   700: $duration-700,
+   1000: $duration-1000
 );
 
 /* ============================================
@@ -400,12 +408,12 @@ $transition-shadow: box-shadow $duration-200 $ease-in-out;
    Gemini Theme Specific
    ============================================ */
 $gemini-bg: #000000;
-$gemini-gradient-start: #93c5fd;
-$gemini-gradient-mid: #60a5fa;
-$gemini-gradient-end: #3b82f6;
-$gemini-glow: rgba(59, 130, 246, 0.3);
-$gemini-glow-strong: rgba(59, 130, 246, 0.5);
-$gemini-glow-weak: rgba(59, 130, 246, 0.2);
+$gemini-gradient-start: color-mix(in srgb, rgb(var(--primary-rgb)), white 40%);
+$gemini-gradient-mid: color-mix(in srgb, rgb(var(--primary-rgb)), white 10%);
+$gemini-gradient-end: rgb(var(--primary-rgb));
+$gemini-glow: color-mix(in srgb, rgb(var(--primary-rgb)), transparent 70%); // 0.3 opacity
+$gemini-glow-strong: color-mix(in srgb, rgb(var(--primary-rgb)), transparent 50%); // 0.5 opacity
+$gemini-glow-weak: color-mix(in srgb, rgb(var(--primary-rgb)), transparent 80%); // 0.2 opacity
 
 /* ============================================
    Helper Functions
@@ -413,31 +421,30 @@ $gemini-glow-weak: rgba(59, 130, 246, 0.2);
 
 /* Get color from map */
 @function get-color($color-map, $shade) {
-  @return map-get($color-map, $shade);
+   @return map-get($color-map, $shade);
 }
 
 /* Get spacing */
 @function get-spacing($size) {
-  @return map-get($spacings, $size);
+   @return map-get($spacings, $size);
 }
 
 /* Get font size */
 @function get-font-size($size) {
-  @return map-get($font-sizes, $size);
+   @return map-get($font-sizes, $size);
 }
 
 /* Get border radius */
 @function get-radius($size) {
-  @return map-get($border-radius, $size);
+   @return map-get($border-radius, $size);
 }
 
 /* Get breakpoint */
 @function get-breakpoint($size) {
-  @return map-get($breakpoints, $size);
+   @return map-get($breakpoints, $size);
 }
 
 /* Get duration */
 @function get-duration($ms) {
-  @return map-get($durations, $ms);
+   @return map-get($durations, $ms);
 }
-

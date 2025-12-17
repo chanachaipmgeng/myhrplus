@@ -122,7 +122,7 @@ body.theme-gemini {
   .rounded-full {
     @include glass-gemini('default');
     @include gemini-glow('subtle');
-    background: linear-gradient(135deg, rgba($gemini-gradient-end, 0.2), rgba($gemini-gradient-start, 0.2));
+    background: linear-gradient(135deg, alpha-color($gemini-gradient-end, 0.2), alpha-color($gemini-gradient-start, 0.2));
   }
   
   .text-slate-600,

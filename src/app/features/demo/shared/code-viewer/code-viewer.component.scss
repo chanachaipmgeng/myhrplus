@@ -30,15 +30,15 @@
 .copy-button {
   padding: $spacing-1 $spacing-3;
   font-size: $text-xs;
-  background: rgba($primary-500, 0.1);
+  background: alpha-color($primary-500, 0.1);
   color: $primary-600;
-  border: 1px solid rgba($primary-500, 0.2);
+  border: 1px solid alpha-color($primary-500, 0.2);
   border-radius: $radius-md;
   cursor: pointer;
   transition: $transition-all;
 
   &:hover {
-    background: rgba($primary-500, 0.2);
+    background: alpha-color($primary-500, 0.2);
   }
 }
 
@@ -83,8 +83,8 @@ body.theme-gemini {
   }
 
   .code-header {
-    background: rgba($gemini-gradient-end, 0.1);
-    border-bottom-color: rgba($gemini-gradient-end, 0.3);
+    background: alpha-color($gemini-gradient-end, 0.1);
+    border-bottom-color: alpha-color($gemini-gradient-end, 0.3);
   }
 
   .code-title {
@@ -92,9 +92,9 @@ body.theme-gemini {
   }
 
   .copy-button {
-    background: rgba($gemini-gradient-end, 0.2);
+    background: alpha-color($gemini-gradient-end, 0.2);
     color: $gemini-gradient-start;
-    border-color: rgba($gemini-gradient-end, 0.3);
+    border-color: alpha-color($gemini-gradient-end, 0.3);
 
     &:hover {
       @include gemini-glow('subtle');

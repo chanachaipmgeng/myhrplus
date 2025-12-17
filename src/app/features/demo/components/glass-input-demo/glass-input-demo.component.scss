@@ -74,9 +74,9 @@
 
 .result-box {
   padding: $spacing-4;
-  background: rgba($primary-50, 0.5);
+  background: alpha-color($primary-50, 0.5);
   border-radius: $radius-md;
-  border: 1px solid rgba($primary-200, 0.5);
+  border: 1px solid alpha-color($primary-200, 0.5);
 }
 
 /* Dark Mode */
@@ -103,8 +103,8 @@
   }
 
   .result-box {
-    background: rgba($primary-900, 0.3);
-    border-color: rgba($primary-700, 0.5);
+    background: alpha-color($primary-900, 0.3);
+    border-color: alpha-color($primary-700, 0.5);
   }
 }
 
@@ -120,7 +120,7 @@ body.theme-gemini {
 
   .section-title {
     @include gradient-text-gemini();
-    border-bottom-color: rgba($gemini-gradient-end, 0.3);
+    border-bottom-color: alpha-color($gemini-gradient-end, 0.3);
   }
 
   .subsection-title {
@@ -129,7 +129,7 @@ body.theme-gemini {
 
   .result-box {
     @include glass-gemini('weak');
-    border-color: rgba($gemini-gradient-end, 0.3);
+    border-color: alpha-color($gemini-gradient-end, 0.3);
   }
 }
 
