@@ -5,9 +5,15 @@ import { ROUTES } from '../../../../core/constants/routes.constant';
 const routes: Routes = [
   {
     path: '',
-    // Temporarily redirect to existing recruit module
-    redirectTo: '/recruit/home',
-    pathMatch: 'full'
+    loadComponent: () => import('./dashboard/recruit-dashboard.component').then(m => m.RecruitDashboardComponent),
+    data: {
+      title: 'Recruit Management',
+      breadcrumbs: [
+        { label: 'Portal', route: '/portal' },
+        { label: 'Admin', route: '/portal/admin' },
+        { label: 'Recruit Management', route: '/portal/admin/recruit' }
+      ]
+    }
   },
   // 1. Setup (RE01A01)
   {

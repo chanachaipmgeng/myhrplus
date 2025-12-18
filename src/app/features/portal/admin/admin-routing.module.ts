@@ -4,8 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/portal',
-    pathMatch: 'full'
+    loadComponent: () => import('./dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent),
+    data: {
+      title: 'Admin Management',
+      breadcrumbs: [
+        { label: 'Portal', route: '/portal' },
+        { label: 'Admin', route: '/portal/admin' }
+      ]
+    }
   },
   {
     path: 'employees',

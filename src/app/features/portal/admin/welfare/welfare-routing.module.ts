@@ -5,9 +5,15 @@ import { ROUTES } from '../../../../core/constants/routes.constant';
 const routes: Routes = [
   {
     path: '',
-    // Temporarily redirect to existing welfare module
-    redirectTo: '/welfare/home',
-    pathMatch: 'full'
+    loadComponent: () => import('./dashboard/welfare-dashboard.component').then(m => m.WelfareDashboardComponent),
+    data: {
+      title: 'Welfare Management',
+      breadcrumbs: [
+        { label: 'Portal', route: '/portal' },
+        { label: 'Admin', route: '/portal/admin' },
+        { label: 'Welfare Management', route: '/portal/admin/welfare' }
+      ]
+    }
   },
   // 1. Master (WE01A01)
   {

@@ -4,8 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/portal',
-    pathMatch: 'full'
+    loadComponent: () => import('./dashboard/self-service-dashboard.component').then(m => m.SelfServiceDashboardComponent),
+    data: {
+      title: 'Employee Self Service',
+      breadcrumbs: [
+        { label: 'Portal', route: '/portal' },
+        { label: 'Self Service', route: '/portal/self-service' }
+      ]
+    }
   },
   {
     path: 'time',

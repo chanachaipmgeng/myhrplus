@@ -5,9 +5,15 @@ import { ROUTES } from '../../../../core/constants/routes.constant';
 const routes: Routes = [
   {
     path: '',
-    // Temporarily redirect to existing personal module
-    redirectTo: '/personal/home',
-    pathMatch: 'full'
+    loadComponent: () => import('./dashboard/employees-dashboard.component').then(m => m.EmployeesDashboardComponent),
+    data: {
+      title: 'Personal Management',
+      breadcrumbs: [
+        { label: 'Portal', route: '/portal' },
+        { label: 'Admin', route: '/portal/admin' },
+        { label: 'Personal Management', route: '/portal/admin/employees' }
+      ]
+    }
   },
   // 1. Personal Information (PS01A02)
   {

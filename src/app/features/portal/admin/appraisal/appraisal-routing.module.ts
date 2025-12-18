@@ -5,9 +5,15 @@ import { ROUTES } from '../../../../core/constants/routes.constant';
 const routes: Routes = [
   {
     path: '',
-    // Temporarily redirect to existing appraisal module
-    redirectTo: '/appraisal/home',
-    pathMatch: 'full'
+    loadComponent: () => import('./dashboard/appraisal-dashboard.component').then(m => m.AppraisalDashboardComponent),
+    data: {
+      title: 'Appraisal Management',
+      breadcrumbs: [
+        { label: 'Portal', route: '/portal' },
+        { label: 'Admin', route: '/portal/admin' },
+        { label: 'Appraisal Management', route: '/portal/admin/appraisal' }
+      ]
+    }
   },
   // 1. Appraisal Type (AS03A)
   {

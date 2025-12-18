@@ -330,7 +330,14 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
       {
         label: 'Personal Management',
         icon: 'people',
+        route: '/portal/admin/employees', // Dashboard route - หน้าแรกของโมดูล
         children: [ // Level 3 - เมนูของโมดูล Personal
+          // 0. Dashboard (หน้าแรก)
+          {
+            label: 'Dashboard',
+            route: '/portal/admin/employees',
+            icon: 'dashboard'
+          },
           // 1. Personal Information (PS01A02)
           {
             label: 'Personal Information',
@@ -553,7 +560,14 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
       {
         label: 'Payroll Management',
         icon: 'attach_money',
+        route: '/portal/admin/payroll', // Dashboard route - หน้าแรกของโมดูล
         children: [ // Level 3
+          // 0. Dashboard (หน้าแรก)
+          {
+            label: 'Dashboard',
+            route: '/portal/admin/payroll',
+            icon: 'dashboard'
+          },
           // 1. Transaction (PR03A)
           {
             label: 'Transaction',
@@ -634,7 +648,14 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
       {
         label: 'Time Management',
         icon: 'access_time',
+        route: '/portal/admin/time', // Dashboard route - หน้าแรกของโมดูล
         children: [ // Level 3
+          // 0. Dashboard (หน้าแรก)
+          {
+            label: 'Dashboard',
+            route: '/portal/admin/time',
+            icon: 'dashboard'
+          },
           // 1. Daily Attendance (TA01A051)
           {
             label: 'Daily Attendance',
@@ -733,7 +754,14 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
       {
         label: 'Training Management',
         icon: 'school',
+        route: '/portal/admin/training', // Dashboard route - หน้าแรกของโมดูล
         children: [ // Level 3
+          // 0. Dashboard (หน้าแรก)
+          {
+            label: 'Dashboard',
+            route: '/portal/admin/training',
+            icon: 'dashboard'
+          },
           // 1. Setup (TR0101)
           {
             label: 'Setup',
@@ -798,7 +826,14 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
       {
         label: 'Welfare Management',
         icon: 'favorite',
+        route: '/portal/admin/welfare', // Dashboard route - หน้าแรกของโมดูล
         children: [ // Level 3
+          // 0. Dashboard (หน้าแรก)
+          {
+            label: 'Dashboard',
+            route: '/portal/admin/welfare',
+            icon: 'dashboard'
+          },
           // 1. Master (WE01A01)
           {
             label: 'Master',
@@ -875,7 +910,14 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
       {
         label: 'Recruit Management',
         icon: 'person_add',
+        route: '/portal/admin/recruit', // Dashboard route - หน้าแรกของโมดูล
         children: [ // Level 3
+          // 0. Dashboard (หน้าแรก)
+          {
+            label: 'Dashboard',
+            route: '/portal/admin/recruit',
+            icon: 'dashboard'
+          },
           // 1. Setup (RE01A01)
           {
             label: 'Setup',
@@ -919,7 +961,14 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
       {
         label: 'Appraisal Management',
         icon: 'assessment',
+        route: '/portal/admin/appraisal', // Dashboard route - หน้าแรกของโมดูล
         children: [ // Level 3
+          // 0. Dashboard (หน้าแรก)
+          {
+            label: 'Dashboard',
+            route: '/portal/admin/appraisal',
+            icon: 'dashboard'
+          },
           // 1. Appraisal Type (AS03A)
           {
             label: 'Appraisal Type',
@@ -1017,7 +1066,14 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
       {
         label: 'Settings',
         icon: 'settings',
+        route: '/portal/admin/settings', // Dashboard route - หน้าแรกของโมดูล
         children: [ // Level 3
+          // 0. Dashboard (หน้าแรก)
+          {
+            label: 'Dashboard',
+            route: '/portal/admin/settings',
+            icon: 'dashboard'
+          },
           // 1. User (ST01A)
           {
             label: 'User',

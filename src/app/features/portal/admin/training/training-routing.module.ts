@@ -5,9 +5,15 @@ import { ROUTES } from '../../../../core/constants/routes.constant';
 const routes: Routes = [
   {
     path: '',
-    // Temporarily redirect to existing training module
-    redirectTo: '/training/home',
-    pathMatch: 'full'
+    loadComponent: () => import('./dashboard/training-dashboard.component').then(m => m.TrainingDashboardComponent),
+    data: {
+      title: 'Training Management',
+      breadcrumbs: [
+        { label: 'Portal', route: '/portal' },
+        { label: 'Admin', route: '/portal/admin' },
+        { label: 'Training Management', route: '/portal/admin/training' }
+      ]
+    }
   },
   // 1. Setup (TR0101)
   {

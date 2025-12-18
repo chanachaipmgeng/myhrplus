@@ -5,9 +5,15 @@ import { ROUTES } from '../../../../core/constants/routes.constant';
 const routes: Routes = [
   {
     path: '',
-    // Temporarily redirect to existing payroll module
-    redirectTo: '/payroll/home',
-    pathMatch: 'full'
+    loadComponent: () => import('./dashboard/payroll-dashboard.component').then(m => m.PayrollDashboardComponent),
+    data: {
+      title: 'Payroll Management',
+      breadcrumbs: [
+        { label: 'Portal', route: '/portal' },
+        { label: 'Admin', route: '/portal/admin' },
+        { label: 'Payroll Management', route: '/portal/admin/payroll' }
+      ]
+    }
   },
   // 1. Transaction (PR03A)
   {

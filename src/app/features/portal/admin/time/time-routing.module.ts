@@ -5,9 +5,15 @@ import { ROUTES } from '../../../../core/constants/routes.constant';
 const routes: Routes = [
   {
     path: '',
-    // Temporarily redirect to existing ta module
-    redirectTo: '/ta/home',
-    pathMatch: 'full'
+    loadComponent: () => import('./dashboard/time-dashboard.component').then(m => m.TimeDashboardComponent),
+    data: {
+      title: 'Time Management',
+      breadcrumbs: [
+        { label: 'Portal', route: '/portal' },
+        { label: 'Admin', route: '/portal/admin' },
+        { label: 'Time Management', route: '/portal/admin/time' }
+      ]
+    }
   },
   // 1. Daily Attendance (TA01A051)
   {

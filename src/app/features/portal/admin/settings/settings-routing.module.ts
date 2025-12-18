@@ -5,9 +5,15 @@ import { ROUTES } from '../../../../core/constants/routes.constant';
 const routes: Routes = [
   {
     path: '',
-    // Temporarily redirect to existing setting module
-    redirectTo: '/setting/home',
-    pathMatch: 'full'
+    loadComponent: () => import('./dashboard/settings-dashboard.component').then(m => m.SettingsDashboardComponent),
+    data: {
+      title: 'Settings Management',
+      breadcrumbs: [
+        { label: 'Portal', route: '/portal' },
+        { label: 'Admin', route: '/portal/admin' },
+        { label: 'Settings Management', route: '/portal/admin/settings' }
+      ]
+    }
   },
   // 1. User (ST01A)
   {
