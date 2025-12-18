@@ -1,4 +1,4 @@
-import { Component, Input, TemplateRef, ChangeDetectionStrategy, input } from '@angular/core';
+import { Component, Input, TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TooltipComponent } from '../tooltip/tooltip.component';
 import { SharedModule } from '../../shared.module';
@@ -8,34 +8,33 @@ import { SharedModule } from '../../shared.module';
   standalone: true,
   imports: [CommonModule, TooltipComponent, SharedModule],
   templateUrl: './contextual-help.component.html',
-  styleUrls: ['./contextual-help.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./contextual-help.component.scss']
 })
 export class ContextualHelpComponent {
-  text = input<string | undefined>(undefined);
-  title = input<string | undefined>(undefined);
-  icon = input<string>('help_outline');
-  position = input<'top' | 'bottom' | 'left' | 'right'>('top');
-  variant = input<'default' | 'inline' | 'icon-only'>('default');
-  customTemplate = input<TemplateRef<any> | undefined>(undefined);
-  showOnHover = input<boolean>(true);
-
+  @Input() text?: string;
+  @Input() title?: string;
+  @Input() icon: string = 'help_outline';
+  @Input() position: 'top' | 'bottom' | 'left' | 'right' = 'top';
+  @Input() variant: 'default' | 'inline' | 'icon-only' = 'default';
+  @Input() customTemplate?: TemplateRef<any>;
+  @Input() showOnHover: boolean = true;
+  
   showTooltip: boolean = false;
-
+  
   toggleTooltip(): void {
-    if (!this.showOnHover()) {
+    if (!this.showOnHover) {
       this.showTooltip = !this.showTooltip;
     }
   }
-
+  
   onMouseEnter(): void {
-    if (this.showOnHover()) {
+    if (this.showOnHover) {
       this.showTooltip = true;
     }
   }
-
+  
   onMouseLeave(): void {
-    if (this.showOnHover()) {
+    if (this.showOnHover) {
       this.showTooltip = false;
     }
   }

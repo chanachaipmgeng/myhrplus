@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ChangeDetectionStrategy, input, signal, computed } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FieldMaskingService } from '../../../core/services/field-masking.service';
 
 /**
@@ -14,13 +14,13 @@ import { FieldMaskingService } from '../../../core/services/field-masking.servic
   imports: [CommonModule],
   template: `
     <div class="mask-toggle-container d-inline-flex align-items-center gap-2">
-      <span class="mask-value">{{ display() }}</span>
+      <span class="mask-value">{{ display }}</span>
       <button
         type="button"
         class="btn btn-sm btn-link p-0 mask-toggle-btn"
         (click)="toggle()"
-        [title]="show() ? 'ซ่อน' : 'แสดง'">
-        <i class="fa" [ngClass]="show() ? 'fa-eye-slash' : 'fa-eye'"></i>
+        [title]="show ? 'ซ่อน' : 'แสดง'">
+        <i class="fa" [ngClass]="show ? 'fa-eye-slash' : 'fa-eye'"></i>
       </button>
     </div>
   `,
@@ -35,24 +35,23 @@ import { FieldMaskingService } from '../../../core/services/field-masking.servic
     .mask-toggle-btn:hover {
       color: var(--bs-link-hover-color);
     }
-  `],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  `]
 })
 export class MaskToggleComponent {
-  value = input<string | null | undefined>('', { alias: 'value' });
-  fieldName = input<string>('', { alias: 'fieldName' });
+  @Input() value: string | null | undefined = '';
+  @Input() fieldName = '';
 
   /** true = show raw value / false = show masked value */
-  show = signal(false);
+  show = false;
 
-  display = computed(() => {
-    return this.show() ? this.value() : this.maskService.mask(this.fieldName(), this.value());
-  });
+  constructor(private maskService: FieldMaskingService) {}
 
-  constructor(private maskService: FieldMaskingService) { }
+  get display(): string | null | undefined {
+    return this.show ? this.value : this.maskService.mask(this.fieldName, this.value);
+  }
 
   toggle(): void {
-    this.show.update(v => !v);
+    this.show = !this.show;
   }
 }
 

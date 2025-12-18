@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -6,36 +6,37 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './progress-bar.component.html',
-  styleUrls: ['./progress-bar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./progress-bar.component.scss']
 })
 export class ProgressBarComponent {
-  value = input<number>(0);
-  label = input<string | undefined>(undefined);
-  description = input<string | undefined>(undefined);
-  showValue = input<boolean>(true);
-  variant = input<'primary' | 'success' | 'warning' | 'danger'>('primary');
-  ariaLabel = input<string | undefined>(undefined);
-  customAriaValueText = input<string | undefined>(undefined);
+  @Input() value: number = 0;
+  @Input() label?: string;
+  @Input() description?: string;
+  @Input() showValue: boolean = true;
+  @Input() variant: 'primary' | 'success' | 'warning' | 'danger' = 'primary';
+  @Input() ariaLabel?: string;
+  @Input() customAriaValueText?: string;
 
-  progressClass = computed(() => {
+  get progressClass(): string {
     const variants = {
-      primary: 'bg-primary-500',
-      success: 'bg-green-500',
-      warning: 'bg-yellow-500',
-      danger: 'bg-red-500'
+      primary: 'bg-gradient-to-r from-primary-500 to-primary-600 shadow-md theme-gemini:from-primary-400 theme-gemini:to-primary-600 theme-gemini:shadow-gemini',
+      success: 'bg-gradient-to-r from-success-500 to-success-600 shadow-md',
+      warning: 'bg-gradient-to-r from-warning-500 to-warning-600 shadow-md',
+      danger: 'bg-gradient-to-r from-error-500 to-error-600 shadow-md'
     };
-    return variants[this.variant()] || variants.primary;
-  });
+    return `${variants[this.variant] || variants.primary} relative overflow-hidden`;
+  }
 
-  progressId = computed(() => `progress-${Math.random().toString(36).substr(2, 9)}`);
+  get progressId(): string {
+    return `progress-${Math.random().toString(36).substr(2, 9)}`;
+  }
 
-  ariaValueText = computed(() => {
-    if (this.customAriaValueText()) {
-      return this.customAriaValueText()!;
+  get ariaValueText(): string {
+    if (this.customAriaValueText) {
+      return this.customAriaValueText;
     }
-    return `${this.value()}%`;
-  });
+    return `${this.value}%`;
+  }
 }
 
 

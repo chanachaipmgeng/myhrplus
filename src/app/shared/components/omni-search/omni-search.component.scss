@@ -1,0 +1,29 @@
+/* Omni-Search Component Styles */
+/* Migrated simple utilities to Tailwind - keeping only complex styles (animations) */
+
+.omni-search-overlay {
+  /* Background and backdrop-filter migrated to Tailwind classes in HTML */
+  /* Using bg-black/50 backdrop-blur-sm */
+}
+
+.omni-search-modal {
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-result-item {
+  /* Selected state colors migrated to Tailwind classes in HTML */
+  /* Using bg-blue-500/10 dark:bg-blue-500/20 theme-gemini:bg-blue-500/20 */
+  /* Using border-l-blue-500 dark:border-l-blue-400 theme-gemini:border-l-blue-400 */
+}
+

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlassCardComponent } from '../glass-card/glass-card.component';
 import { GlassButtonComponent } from '../glass-button/glass-button.component';
@@ -15,24 +15,23 @@ export interface EmptyStateAction {
   standalone: true,
   imports: [CommonModule, GlassCardComponent, GlassButtonComponent],
   templateUrl: './empty-state.component.html',
-  styleUrls: ['./empty-state.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./empty-state.component.scss']
 })
 export class EmptyStateComponent {
-  icon = input<string | undefined>(undefined);
-  title = input<string | undefined>(undefined);
-  description = input<string | undefined>(undefined);
-  action = input<EmptyStateAction | undefined>(undefined);
-  iconSize = input<'sm' | 'md' | 'lg'>('md');
+  @Input() icon?: string;
+  @Input() title?: string;
+  @Input() description?: string;
+  @Input() action?: EmptyStateAction;
+  @Input() iconSize: 'sm' | 'md' | 'lg' = 'md';
 
   defaultIcon = '📭';
 
-  iconSizeClass = computed(() => {
+  get iconSizeClass(): string {
     const sizes = {
       sm: 'text-4xl',
       md: 'text-6xl',
       lg: 'text-8xl'
     };
-    return sizes[this.iconSize()] || sizes.md;
-  });
+    return sizes[this.iconSize] || sizes.md;
+  }
 }

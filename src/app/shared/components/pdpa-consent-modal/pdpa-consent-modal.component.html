@@ -1,5 +1,17 @@
-<app-modal [isOpen]="showModal()" [title]="'PDPA Consent Agreement'" [size]="'lg'" [closable]="!required()"
-  (closed)="decline()">
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title">
+      <i class="fa fa-shield-alt me-2"></i>
+      {{ 'PDPA Consent' | translate }}
+    </h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="onExit()"
+      [disabled]="loading">
+    </button>
+  </div>
 
   <div class="modal-body p-0">
     <!-- Version and Date Info -->
@@ -10,19 +22,19 @@
           <strong>{{ 'Version' | translate }}:</strong> {{ pdpa.version }}
         </p>
       </div>
-      <div footer class="flex justify-end gap-3">
-        <app-glass-button *ngIf="!required()" variant="secondary" (clicked)="decline()">
-          Decline
-        </app-glass-button>
-        <app-glass-button variant="primary" (clicked)="accept()">
-          Accept & Continue
-        </app-glass-button>
+      <div class="col-md-6">
+        <p class="text-muted mb-1" *ngIf="pdpa">
+          <i class="fa fa-calendar me-2"></i>
+          <strong>{{ 'Date' | translate }}:</strong> {{ pdpa.startDate }}
+        </p>
       </div>
     </div>
 
     <!-- Consent Content -->
     <div class="px-3 py-3" *ngIf="pdpa">
-      <div class="consent-content border rounded p-3 bg-light" [innerHTML]="getConsentContent()">
+      <div
+        class="consent-content border rounded p-3 bg-light"
+        [innerHTML]="getConsentContent()">
       </div>
     </div>
 
@@ -35,14 +47,23 @@
 
   <!-- Modal Footer -->
   <div class="modal-footer">
-    <button type="button" class="btn btn-danger" (click)="onExit()" [disabled]="loading">
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="onExit()"
+      [disabled]="loading">
       <i class="fa fa-times me-2"></i>
       {{ 'Exit' | translate }}
     </button>
-    <button type="button" class="btn btn-success" (click)="onSubmitConsent()" [disabled]="loading">
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="onSubmitConsent()"
+      [disabled]="loading">
       <span *ngIf="loading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
       <i *ngIf="!loading" class="fa fa-check me-2"></i>
       {{ 'Consent' | translate }}
     </button>
   </div>
-  </div>
+</div>
+

@@ -2,16 +2,15 @@
   width: 100%;
 
   .upload-section {
-    margin-bottom: 16px;
+    /* Margin handled by Tailwind mb-4 in HTML */
 
     .upload-area {
-      border: 2px dashed rgba(var(--primary-rgb), 0.3);
-      border-radius: 12px;
-      padding: 32px;
+      /* Border, border-radius, padding handled by Tailwind classes in HTML */
+      /* Using border-2 border-dashed rounded-lg p-8 */
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
-      background: rgba(var(--primary-rgb), 0.05);
+      /* Background handled by Tailwind classes in HTML */
       position: relative;
 
       &:hover:not(.disabled) {
@@ -36,55 +35,43 @@
 
       .upload-content {
         .upload-icon {
-          font-size: 48px;
-          width: 48px;
-          height: 48px;
-          color: rgb(var(--primary-rgb));
-          margin-bottom: 16px;
+          /* Size handled by Tailwind size="xl" in HTML */
+          /* Color handled by Tailwind text-gray-400 in HTML */
+          /* Margin handled by Tailwind mb-4 in HTML */
         }
 
         .upload-text {
-          font-size: 16px;
-          font-weight: 500;
-          color: rgba(0, 0, 0, 0.87);
-          margin-bottom: 8px;
+          /* Font-size handled by Tailwind text-base in HTML */
+          /* Font-weight handled by Tailwind font-medium in HTML */
+          /* Color handled by Tailwind text-gray-700 in HTML */
+          /* Margin handled by Tailwind mb-2 in HTML */
         }
 
         .upload-hint {
-          font-size: 12px;
+          /* Font-size handled by Tailwind text-sm in HTML */
         }
       }
     }
 
     .errors {
-      margin-top: 12px;
+      /* Margin handled by Tailwind mt-4 in HTML */
 
       .error-message {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 12px;
-        background: rgba(239, 68, 68, 0.1);
-        border: 1px solid rgba(239, 68, 68, 0.3);
-        border-radius: 8px;
-        color: #ef4444;
-        font-size: 14px;
-        margin-bottom: 8px;
-
-        mat-icon {
-          font-size: 18px;
-          width: 18px;
-          height: 18px;
-        }
+        /* Display, align-items, gap handled by Tailwind flex items-center gap-2 in HTML */
+        /* Padding handled by Tailwind px-3 py-2 in HTML */
+        /* Background, border, border-radius, color handled by Tailwind classes in HTML */
+        /* Font-size handled by Tailwind text-sm in HTML */
+        /* Margin handled by Tailwind space-y-2 in HTML */
       }
     }
   }
 
   .preview-section {
+    /* Margin handled by Tailwind mt-6 in HTML */
+    
     .preview-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
+      /* Display, grid-template-columns, gap handled by Tailwind grid classes in HTML */
+      /* Using grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 */
 
       &.single {
         grid-template-columns: 1fr;
@@ -92,14 +79,15 @@
       }
 
       .preview-item {
-        border: 1px solid rgba(0, 0, 0, 0.12);
+        /* Using CSS Variables */
+        border: 1px solid var(--preview-item-border);
         border-radius: 12px;
         overflow: hidden;
-        background: rgba(255, 255, 255, 0.5);
+        background: var(--preview-item-bg);
         transition: all 0.3s ease;
 
         &:hover {
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          box-shadow: var(--preview-item-shadow);
           transform: translateY(-2px);
         }
 
@@ -107,7 +95,7 @@
           position: relative;
           width: 100%;
           padding-top: 75%; // 4:3 aspect ratio
-          background: #f5f5f5;
+          background: var(--preview-image-bg);
 
           .preview-image {
             position: absolute;
@@ -119,15 +107,12 @@
           }
 
           .remove-button {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            backdrop-filter: blur(4px);
+            /* Position, top, right handled by Tailwind absolute top-2 right-2 in HTML */
+            /* Background, color handled by Tailwind bg-red-500 in HTML */
+            /* Backdrop-filter handled by Tailwind classes in HTML */
 
             &:hover {
-              background: rgba(239, 68, 68, 0.9);
+              background: rgba(239, 68, 68, 0.9); /* Keep red color for error state */
             }
 
             mat-icon {
@@ -139,20 +124,18 @@
         }
 
         .preview-info {
-          padding: 12px;
+          /* Padding handled by Tailwind p-3 in HTML */
 
           .preview-name {
-            font-size: 14px;
-            font-weight: 500;
-            color: rgba(0, 0, 0, 0.87);
-            margin-bottom: 4px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            /* Font-size handled by Tailwind text-sm in HTML */
+            /* Font-weight handled by Tailwind font-medium in HTML */
+            /* Color handled by Tailwind text-gray-800 in HTML */
+            /* Margin handled by Tailwind mt-1 in HTML */
+            /* Overflow handled by Tailwind truncate in HTML */
           }
 
           .preview-size {
-            font-size: 12px;
+            /* Font-size handled by Tailwind text-xs in HTML */
           }
         }
       }
@@ -160,31 +143,31 @@
   }
 }
 
-// Dark mode support
-.dark {
+// Dark mode support - Using CSS Variables
+[data-theme='dark'] :host,
+.dark :host {
   .image-upload-container {
     .upload-area {
-      background: rgba(255, 255, 255, 0.05);
-
+      /* Dark mode styles handled by CSS variables */
+      
       .upload-content {
         .upload-text {
-          color: rgba(255, 255, 255, 0.87);
+          color: var(--preview-text-color);
         }
       }
     }
 
     .preview-section {
       .preview-item {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(255, 255, 255, 0.12);
+        /* Dark mode styles handled by CSS variables */
 
         .preview-image-container {
-          background: #1a1a1a;
+          /* Dark mode background handled by CSS variables */
         }
 
         .preview-info {
           .preview-name {
-            color: rgba(255, 255, 255, 0.87);
+            color: var(--preview-text-color);
           }
         }
       }

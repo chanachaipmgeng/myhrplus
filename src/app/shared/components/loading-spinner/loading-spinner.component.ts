@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoadingService } from '../../../core/services/loading.service';
 import { Observable } from 'rxjs';
@@ -9,8 +9,7 @@ import { SpinnerComponent } from '../spinner/spinner.component';
   standalone: true,
   imports: [CommonModule, SpinnerComponent],
   templateUrl: './loading-spinner.component.html',
-  styleUrls: ['./loading-spinner.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./loading-spinner.component.scss']
 })
 export class LoadingSpinnerComponent implements OnInit {
   loading$: Observable<boolean>;

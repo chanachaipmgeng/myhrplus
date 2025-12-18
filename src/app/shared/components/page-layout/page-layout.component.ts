@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlassButtonComponent } from '../glass-button/glass-button.component';
 import { fadeIn, slideInDown } from '../../../core/animations/animations';
@@ -24,14 +24,13 @@ export interface PageAction {
   imports: [CommonModule, GlassButtonComponent],
   animations: [fadeIn, slideInDown],
   templateUrl: './page-layout.component.html',
-  styleUrls: ['./page-layout.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./page-layout.component.scss']
 })
 export class PageLayoutComponent {
-  title = input<string>('');
-  description = input<string | undefined>(undefined);
-  icon = input<string | undefined>(undefined);
-  breadcrumb = input<BreadcrumbItem[] | undefined>(undefined);
-  actions = input<PageAction[] | undefined>(undefined);
-  showFooter = input<boolean>(false);
+  @Input() title: string = '';
+  @Input() description?: string;
+  @Input() icon?: string;
+  @Input() breadcrumb?: BreadcrumbItem[];
+  @Input() actions?: PageAction[];
+  @Input() showFooter: boolean = false;
 }

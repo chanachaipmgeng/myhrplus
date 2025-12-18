@@ -1,19 +1,18 @@
-import { Component, ChangeDetectionStrategy, input, output, viewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
-  styleUrls: ['./file-upload.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./file-upload.component.scss']
 })
 export class FileUploadComponent {
-  accept = input<string>('*', { alias: 'accept' });
-  multiple = input<boolean>(false, { alias: 'multiple' });
-  maxSize = input<number>(10 * 1024 * 1024, { alias: 'maxSize' }); // 10MB default
-  fileSelected = output<File[]>();
-  error = output<string>();
+  @Input() accept = '*';
+  @Input() multiple = false;
+  @Input() maxSize = 10 * 1024 * 1024; // 10MB default
+  @Output() fileSelected = new EventEmitter<File[]>();
+  @Output() error = new EventEmitter<string>();
 
-  fileInput = viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
   selectedFiles: File[] = [];
 
@@ -21,21 +20,21 @@ export class FileUploadComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const files = Array.from(input.files);
-
+      
       // Validate file sizes
-      const invalidFiles = files.filter(file => file.size > this.maxSize());
+      const invalidFiles = files.filter(file => file.size > this.maxSize);
       if (invalidFiles.length > 0) {
-        this.error.emit(`File size exceeds maximum allowed size of ${this.maxSize() / 1024 / 1024}MB`);
+        this.error.emit(`File size exceeds maximum allowed size of ${this.maxSize / 1024 / 1024}MB`);
         return;
       }
 
-      this.selectedFiles = this.multiple() ? files : [files[0]];
+      this.selectedFiles = this.multiple ? files : [files[0]];
       this.fileSelected.emit(this.selectedFiles);
     }
   }
 
   triggerFileInput(): void {
-    this.fileInput().nativeElement.click();
+    this.fileInput.nativeElement.click();
   }
 
   removeFile(index: number): void {

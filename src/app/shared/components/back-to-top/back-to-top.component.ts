@@ -1,19 +1,20 @@
-import { ViewportScroller } from '@angular/common';
-import { Component, ElementRef, HostListener, ChangeDetectionStrategy, signal } from '@angular/core';
+import { ViewportScroller, CommonModule } from '@angular/common';
+import { Component, ElementRef, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-back-to-top',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './back-to-top.component.html',
-  styleUrls: ['./back-to-top.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./back-to-top.component.scss']
 })
 export class BackToTopComponent {
-  show = signal<boolean>(false);
+  public show = false;
 
   constructor(
     private viewScroller: ViewportScroller,
     private elementRef: ElementRef
-  ) { }
+  ) {}
 
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
@@ -23,9 +24,9 @@ export class BackToTopComponent {
       document.body.scrollTop ||
       0;
     if (number > 400) {
-      this.show.set(true);
+      this.show = true;
     } else {
-      this.show.set(false);
+      this.show = false;
     }
   }
 
@@ -33,6 +34,7 @@ export class BackToTopComponent {
     this.viewScroller.scrollToPosition([0, 0]);
   }
 }
+
 
 
 

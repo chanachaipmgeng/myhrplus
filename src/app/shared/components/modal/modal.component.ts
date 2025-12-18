@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, OnChanges, AfterViewInit, ElementRef, HostListener, ChangeDetectionStrategy, input, output, viewChild, computed, effect } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, OnChanges, AfterViewInit, ElementRef, ViewChild, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlassButtonComponent } from '../glass-button/glass-button.component';
 
@@ -7,70 +7,52 @@ import { GlassButtonComponent } from '../glass-button/glass-button.component';
   standalone: true,
   imports: [CommonModule, GlassButtonComponent],
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent implements OnInit, OnDestroy, AfterViewInit {
-  show = input<boolean>(false);
-  title = input<string>('');
-  size = input<'sm' | 'md' | 'lg' | 'xl'>('md');
-  closable = input<boolean>(true);
-  showFooter = input<boolean>(true);
-  showCancel = input<boolean>(true);
-  showConfirm = input<boolean>(true);
-  cancelText = input<string>('ยกเลิก');
-  confirmText = input<string>('ยืนยัน');
-  confirmVariant = input<'primary' | 'danger'>('primary');
-  closeOnBackdrop = input<boolean>(true);
-  ariaLabelledBy = input<string | undefined>(undefined);
-  ariaDescribedBy = input<string | undefined>(undefined);
+export class ModalComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
+  @Input() show: boolean = false;
+  @Input() title: string = '';
+  @Input() size: 'sm' | 'md' | 'lg' | 'xl' = 'md';
+  @Input() closable: boolean = true;
+  @Input() showFooter: boolean = true;
+  @Input() showCancel: boolean = true;
+  @Input() showConfirm: boolean = true;
+  @Input() cancelText: string = 'ยกเลิก';
+  @Input() confirmText: string = 'ยืนยัน';
+  @Input() confirmVariant: 'primary' | 'danger' = 'primary';
+  @Input() closeOnBackdrop: boolean = true;
+  @Input() ariaLabelledBy?: string;
+  @Input() ariaDescribedBy?: string;
 
-  modalPanel = viewChild<ElementRef<HTMLElement>>('modalPanel');
-  closeButton = viewChild<ElementRef<HTMLButtonElement>>('closeButton');
+  @ViewChild('modalPanel', { static: false }) modalPanel?: ElementRef<HTMLElement>;
+  @ViewChild('closeButton', { static: false }) closeButton?: ElementRef<HTMLButtonElement>;
 
-  closeEvent = output<void>();
-  confirmEvent = output<void>();
-  cancelEvent = output<void>();
+  @Output() closeEvent = new EventEmitter<void>();
+  @Output() confirmEvent = new EventEmitter<void>();
+  @Output() cancelEvent = new EventEmitter<void>();
 
   private previousActiveElement: HTMLElement | null = null;
   private modalId: string = `modal-${Math.random().toString(36).substr(2, 9)}`;
   private titleId: string = `${this.modalId}-title`;
   private descriptionId: string = `${this.modalId}-description`;
 
-  sizeClass = computed(() => {
+  get sizeClass(): string {
     const sizes = {
       sm: 'sm:max-w-md',
       md: 'sm:max-w-lg',
       lg: 'sm:max-w-2xl',
       xl: 'sm:max-w-4xl'
     };
-    return sizes[this.size()] || sizes.md;
-  });
-
-  modalTitleId = computed(() => this.ariaLabelledBy() || this.titleId);
-  modalDescriptionId = computed(() => this.ariaDescribedBy() || this.descriptionId);
-
-  constructor() {
-    effect(() => {
-      if (this.show()) {
-        this.saveActiveElement();
-        // Use setTimeout to allow view to update
-        setTimeout(() => {
-          this.trapFocus();
-        }, 0);
-      } else {
-        this.restoreFocus();
-      }
-    });
+    return sizes[this.size] || sizes.md;
   }
 
   close(): void {
-    // Note: show is an input, we emit event and parent should handle visibility
+    this.show = false;
     this.closeEvent.emit();
   }
 
   onBackdropClick(): void {
-    if (this.closeOnBackdrop()) {
+    if (this.closeOnBackdrop) {
       this.close();
     }
   }
@@ -85,7 +67,12 @@ export class ModalComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // Initialization handled by signals/effects mostly
+    if (!this.ariaLabelledBy) {
+      this.ariaLabelledBy = this.titleId;
+    }
+    if (!this.ariaDescribedBy) {
+      this.ariaDescribedBy = this.descriptionId;
+    }
   }
 
   ngOnDestroy(): void {
@@ -93,17 +80,28 @@ export class ModalComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.show()) {
+    if (this.show) {
       this.trapFocus();
+    }
+  }
+
+  ngOnChanges(): void {
+    if (this.show) {
+      this.saveActiveElement();
+      setTimeout(() => {
+        this.trapFocus();
+      }, 0);
+    } else {
+      this.restoreFocus();
     }
   }
 
   @HostListener('keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent): void {
-    if (!this.show()) return;
+    if (!this.show) return;
 
     // Close on Escape
-    if (event.key === 'Escape' && this.closable()) {
+    if (event.key === 'Escape' && this.closable) {
       event.preventDefault();
       this.close();
       return;
@@ -116,10 +114,9 @@ export class ModalComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private handleTabKey(event: KeyboardEvent): void {
-    const panel = this.modalPanel();
-    if (!panel) return;
+    if (!this.modalPanel) return;
 
-    const focusableElements = panel.nativeElement.querySelectorAll(
+    const focusableElements = this.modalPanel.nativeElement.querySelectorAll(
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     ) as NodeListOf<HTMLElement>;
 
@@ -128,7 +125,7 @@ export class ModalComponent implements OnInit, OnDestroy, AfterViewInit {
 
     if (event.shiftKey) {
       // Shift + Tab
-      if (document.activeElement === firstElement || document.activeElement === panel.nativeElement) {
+      if (document.activeElement === firstElement || document.activeElement === this.modalPanel.nativeElement) {
         event.preventDefault();
         lastElement?.focus();
       }
@@ -153,17 +150,22 @@ export class ModalComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private trapFocus(): void {
-    const closeBtn = this.closeButton();
-    const panel = this.modalPanel();
-
-    if (closeBtn) {
-      closeBtn.nativeElement.focus();
-    } else if (panel) {
-      const focusableElements = panel.nativeElement.querySelectorAll(
+    if (this.closeButton) {
+      this.closeButton.nativeElement.focus();
+    } else if (this.modalPanel) {
+      const focusableElements = this.modalPanel.nativeElement.querySelectorAll(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       ) as NodeListOf<HTMLElement>;
       focusableElements[0]?.focus();
     }
+  }
+
+  get modalTitleId(): string {
+    return this.ariaLabelledBy || this.titleId;
+  }
+
+  get modalDescriptionId(): string {
+    return this.ariaDescribedBy || this.descriptionId;
   }
 }
 

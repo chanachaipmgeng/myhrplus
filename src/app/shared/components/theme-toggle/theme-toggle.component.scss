@@ -1,76 +1,72 @@
 /* ============================================
    Theme Toggle Component Styles
+   ============================================
+   Migrated to Tailwind - Minimal SCSS for component-specific styles only
    ============================================ */
-
-@import '../../../../styles/design-tokens';
-@import '../../../../styles/mixins';
 
 :host {
   display: inline-block;
 }
 
-/* 
- * styles for .active are kept because they use complex gradients
- * or have specific theme overrides that might be verbose in HTML
- */
+/* Active State */
 .active {
-  background: alpha-color($primary-500, 0.1) !important;
-  color: $primary-600 !important;
+  @apply bg-primary-500/10 text-primary-600;
+  @apply dark:bg-primary-500/20 dark:text-primary-400;
 }
 
-.dark .active {
-  background: alpha-color($primary-500, 0.2) !important;
-  color: $primary-400 !important;
-}
-
-/* Gemini Theme Overrides */
+/* Gemini Theme */
+[data-theme='gemini'],
 body.theme-gemini {
-  .theme-toggle-btn {
-    @include glass-gemini('weak');
-
+  .p-2 {
+    @apply glass-gemini-weak;
+    
     &:hover {
-      @include gemini-glow('subtle');
+      filter: drop-shadow(0 0 4px rgba(var(--primary-rgb), 0.4));
     }
   }
-
-  .glass-menu {
-    @include glass-gemini('default');
-    @include gemini-border-glow();
+  
+  .bg-white\/90,
+  .dark .bg-slate-900\/90 {
+    @apply glass-gemini shadow-gemini;
+    border-color: rgba(var(--primary-rgb), 0.3);
   }
-
+  
   .active {
-    @include glass-gemini('default');
-    @include gemini-glow('subtle');
-    background: linear-gradient(135deg, alpha-color($gemini-gradient-end, 0.2), alpha-color($gemini-gradient-start, 0.2)) !important;
-    @include gradient-text-gemini();
+    @apply glass-gemini;
+    background: linear-gradient(135deg,
+      rgba(var(--primary-rgb), 0.2),
+      rgba(var(--primary-rgb), 0.2)
+    ) !important;
+    @apply bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent;
+    -webkit-background-clip: text;
   }
-
-  .color-swatch {
-    @include gemini-border-glow();
-
+  
+  .w-10 {
+    border-color: rgba(var(--primary-rgb), 0.3);
+    
     &:hover {
-      @include gemini-glow('default');
+      filter: drop-shadow(0 0 8px rgba(var(--primary-rgb), 0.6));
     }
   }
-
+  
   .border-indigo-500 {
-    border-color: $gemini-gradient-end;
-    @include gemini-glow('default');
+    border-color: var(--primary-color);
+    filter: drop-shadow(0 0 8px rgba(var(--primary-rgb), 0.6));
   }
 }
 
-/* Responsive Overrides (if not handled by Tailwind classes) */
-@include respond-to-down(sm) {
-  .menu-mode {
+/* Responsive */
+@media (max-width: 640px) {
+  .w-48 {
     width: 10rem;
   }
-
-  .menu-color {
+  
+  .w-64 {
     width: 14rem;
   }
-
+  
   .grid-cols-4 {
-    display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+

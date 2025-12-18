@@ -1,126 +1,8 @@
-.search-filter-container {
-  transition: all 0.3s ease;
-}
-
-.search-filter-header {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-}
-
-.search-input-wrapper {
-  flex: 1;
-}
-
-.search-input {
-  width: 100%;
-}
-
-.filter-toggle {
-  position: relative;
-  transition: all 0.3s ease;
-  
-  &.active {
-    color: rgb(var(--primary-rgb)) !important;
-  }
-  
-  .filter-count {
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    background: #ef4444;
-    color: white;
-    border-radius: 50%;
-    width: 18px;
-    height: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    font-weight: 600;
-    font-family: 'Inter', sans-serif;
-  }
-}
-
-.filter-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  align-items: center;
-}
-
-.filter-chip {
-  background: rgba(var(--primary-rgb), 0.1) !important;
-  border: 1px solid rgba(var(--primary-rgb), 0.3) !important;
-  color: rgb(var(--primary-rgb)) !important;
-  transition: all 0.3s ease;
-}
-
-.dark .filter-chip {
-  background: rgba(var(--primary-rgb), 0.2) !important;
-  border-color: rgba(var(--primary-rgb), 0.4) !important;
-}
-
-.filter-chip:hover {
-  background: rgba(var(--primary-rgb), 0.15) !important;
-}
-
-.dark .filter-chip:hover {
-  background: rgba(var(--primary-rgb), 0.3) !important;
-}
-
-.clear-all-btn {
-  font-size: 0.75rem;
-  padding: 0.25rem 0.5rem;
-  min-width: auto;
-  height: auto;
-  transition: color 0.3s ease;
-}
-
-.clear-all-btn:hover {
-  color: rgb(var(--primary-rgb));
-}
-
-.advanced-filters {
-  padding: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0.75rem;
-  transition: all 0.3s ease;
-}
-
-.dark .advanced-filters {
-  border-color: rgba(51, 65, 85, 0.3);
-}
-
-.filters-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-}
-
-.filter-field {
-  width: 100%;
-}
-
-.filter-checkbox-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.checkbox-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
 /* ============================================
    Search Filter Component Styles
+   ============================================
+   Migrated to Tailwind - Minimal SCSS for component-specific styles only
    ============================================ */
-
-@import '../../../../styles/design-tokens';
-@import '../../../../styles/mixins';
 
 :host {
   display: block;
@@ -128,110 +10,47 @@
 }
 
 .search-filter-container {
-  transition: $transition-all;
-  width: 100%;
+  @apply transition-smooth w-full;
 }
 
 .search-filter-header {
-  display: flex;
-  gap: $spacing-3;
-  align-items: flex-start;
-  width: 100%;
+  @apply flex gap-3 items-start w-full;
 }
 
 .search-input-wrapper {
-  flex: 1;
-  min-width: 0; // Allow shrinking
-}
-
-.search-input {
-  width: 100%;
+  @apply flex-1 min-w-0;
 }
 
 .filter-toggle {
-  position: relative;
-  transition: $transition-all;
-  min-width: 44px;
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  @apply relative transition-smooth min-w-[44px] min-h-[44px] flex items-center justify-center flex-shrink-0;
   
   &.active {
     color: rgb(var(--primary-rgb)) !important;
   }
   
-  .filter-count {
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    background: $error-500;
-    color: white;
-    border-radius: $radius-full;
-    width: 18px;
-    height: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    font-weight: $font-weight-semibold;
-  }
-  
-  @include respond-to(md) {
-    min-width: auto;
-    min-height: auto;
+  @media (min-width: 768px) {
+    @apply min-w-0 min-h-0;
   }
 }
 
 .filter-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $spacing-2;
-  margin-top: $spacing-3;
-  align-items: center;
+  @apply flex flex-wrap gap-2 mt-3 items-center;
 }
 
 .filter-chip {
-  background: rgba(var(--primary-rgb), 0.1) !important;
-  border: 1px solid rgba(var(--primary-rgb), 0.3) !important;
-  color: rgb(var(--primary-rgb)) !important;
-  transition: $transition-all;
-  min-height: 32px;
-  padding: $spacing-1 $spacing-3;
-  display: inline-flex;
-  align-items: center;
-  gap: $spacing-1;
-  
-  .dark & {
-    background: rgba(var(--primary-rgb), 0.2) !important;
-    border-color: rgba(var(--primary-rgb), 0.4) !important;
-  }
+  @apply bg-primary-500/10 dark:bg-primary-500/20 border border-primary-500/30 dark:border-primary-500/40 text-primary-600 dark:text-primary-400 transition-smooth min-h-[32px] px-3 py-1 inline-flex items-center gap-1;
   
   &:hover {
-    background: rgba(var(--primary-rgb), 0.15) !important;
-    
-    .dark & {
-      background: rgba(var(--primary-rgb), 0.3) !important;
-    }
+    @apply bg-primary-500/15 dark:bg-primary-500/30;
   }
   
   button {
-    min-width: 24px;
-    min-height: 24px;
-    padding: 0.125rem; // 2px (equivalent to spacing-0_5)
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @apply min-w-6 min-h-6 p-0.5 flex items-center justify-center;
   }
 }
 
 .clear-all-btn {
-  font-size: $text-xs;
-  padding: $spacing-1 $spacing-2;
-  min-width: auto;
-  min-height: 32px;
-  transition: $transition-colors;
+  @apply text-xs px-2 py-1 min-h-[32px] transition-colors;
   
   &:hover {
     color: rgb(var(--primary-rgb));
@@ -239,89 +58,72 @@
 }
 
 .advanced-filters {
-  padding: $spacing-4;
-  @include glass-morphism('weak', 'light');
-  border-radius: $radius-lg;
-  transition: $transition-all;
-  margin-top: $spacing-4;
-  
-  .dark & {
-    @include glass-morphism('weak', 'dark');
-  }
+  @apply glass-weak dark:glass-dark-weak rounded-lg transition-smooth mt-4 border border-white/20 dark:border-slate-700/30;
 }
 
 .filters-grid {
-  display: grid;
+  @apply grid gap-4;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: $spacing-4;
 }
 
 .filter-field {
-  width: 100%;
+  @apply w-full;
 }
 
 .filter-checkbox-group {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-2;
+  @apply flex flex-col gap-2;
 }
 
 .checkbox-list {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-2;
+  @apply flex flex-col gap-2;
 }
 
 /* Responsive - Mobile */
-@include respond-to-down(sm) {
+@media (max-width: 640px) {
   .search-filter-header {
-    flex-direction: column;
-    gap: $spacing-2;
+    @apply flex-col gap-2;
   }
   
   .search-input-wrapper {
-    width: 100%;
+    @apply w-full;
   }
   
   .filter-toggle {
-    align-self: flex-end;
+    @apply self-end;
   }
   
   .filters-grid {
-    grid-template-columns: 1fr;
-    gap: $spacing-3;
+    @apply grid-cols-1 gap-3;
   }
   
   .filter-chips {
-    gap: $spacing-1;
+    @apply gap-1;
   }
   
   .filter-chip {
-    font-size: $text-xs;
-    padding: $spacing-1 $spacing-2;
+    @apply text-xs px-2;
   }
   
   .advanced-filters {
-    padding: $spacing-3;
+    @apply p-3;
   }
 }
 
 /* Responsive - Tablet */
-@include respond-to-between(sm, md) {
+@media (min-width: 640px) and (max-width: 1024px) {
   .filters-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: $spacing-3;
+    @apply grid-cols-2 gap-3;
   }
   
   .search-filter-header {
-    gap: $spacing-2;
+    @apply gap-2;
   }
 }
 
 /* Responsive - Desktop */
-@include respond-to(lg) {
+@media (min-width: 1024px) {
   .filters-grid {
-    grid-template-columns: repeat(3, 1fr);
+    @apply grid-cols-3;
   }
 }
 
@@ -329,43 +131,33 @@
 input[type="text"],
 input[type="date"],
 select {
-  min-height: 44px;
-  padding: $spacing-2 $spacing-3;
+  @apply min-h-[44px] px-3 py-2;
   
-  @include respond-to(md) {
-    min-height: auto;
+  @media (min-width: 768px) {
+    @apply min-h-0;
   }
 }
 
 button {
-  min-width: 44px;
-  min-height: 44px;
+  @apply min-w-[44px] min-h-[44px];
   
-  @include respond-to(md) {
-    min-width: auto;
-    min-height: auto;
-  }
-}
-
-/* Dark Mode */
-.dark {
-  .advanced-filters {
-    border-color: rgba(51, 65, 85, 0.3);
+  @media (min-width: 768px) {
+    @apply min-w-0 min-h-0;
   }
 }
 
 /* Gemini Theme */
 body.theme-gemini {
   .search-filter-container {
-    @include glass-gemini('weak');
+    @apply glass-gemini-weak;
   }
   
   .advanced-filters {
-    @include glass-gemini('default');
+    @apply glass-gemini;
   }
   
   .filter-toggle.active {
-    @include gemini-glow('subtle');
+    filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.4));
   }
 }
 

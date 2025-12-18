@@ -1,7 +1,8 @@
-import { Component, ChangeDetectionStrategy, input, output, viewChild, effect } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChartModule, ChartComponent as SyncfusionChartComponent } from '@syncfusion/ej2-angular-charts';
+import { ChartModule } from '@syncfusion/ej2-angular-charts';
 import {
+  ChartComponent as SyncfusionChartComponent,
   ILoadedEventArgs,
   IPointEventArgs,
   IAnimationCompleteEventArgs,
@@ -12,7 +13,7 @@ import {
 } from '@syncfusion/ej2-angular-charts';
 
 export interface ChartSeries {
-  type?: string;
+  type?: string; // ChartSeriesType: 'Column' | 'Line' | 'Area' | 'Pie' | 'Doughnut' | 'Bar' | etc.
   dataSource?: any[];
   xName?: string;
   yName?: string;
@@ -25,123 +26,165 @@ export interface ChartSeries {
   [key: string]: any;
 }
 
+export interface ChartConfig {
+  primaryXAxis?: any;
+  primaryYAxis?: any;
+  title?: string;
+  titleStyle?: any;
+  legendSettings?: any;
+  tooltip?: any;
+  height?: string | number;
+  width?: string | number;
+  chartArea?: any;
+  margin?: any;
+  theme?: string;
+  enableAnimation?: boolean;
+  enableRtl?: boolean;
+  enableExport?: boolean;
+  series?: ChartSeries[];
+}
+
 @Component({
   selector: 'app-chart',
   standalone: true,
   imports: [CommonModule, ChartModule],
   templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./chart.component.scss']
 })
-export class ChartComponent {
-  chart = viewChild<SyncfusionChartComponent>('chart');
+export class ChartComponent implements OnInit, OnDestroy {
+  @ViewChild('chart', { static: false }) chart!: SyncfusionChartComponent;
 
   // Data Source
-  dataSource = input<any[]>([]);
-
+  @Input() dataSource: any[] = [];
+  
   // Series
-  series = input<ChartSeries[]>([]);
-
+  @Input() series: ChartSeries[] = [];
+  
   // Axes
-  primaryXAxis = input<any>({ valueType: 'Category' });
-  primaryYAxis = input<any>({ valueType: 'Double' });
-
+  @Input() primaryXAxis: any = {
+    valueType: 'Category'
+  };
+  @Input() primaryYAxis: any = {
+    valueType: 'Double'
+  };
+  
   // Title
-  title = input<string>('');
-  titleStyle = input<any>({});
-
+  @Input() title: string = '';
+  @Input() titleStyle: any = {};
+  
   // Legend
-  legendSettings = input<any>({ visible: true, position: 'Top' });
-
+  @Input() legendSettings: any = {
+    visible: true,
+    position: 'Top'
+  };
+  
   // Tooltip
-  tooltip = input<any>({ enable: true });
-
+  @Input() tooltip: any = {
+    enable: true
+  };
+  
   // Chart Area
-  chartArea = input<any>({ border: { width: 0 } });
-
+  @Input() chartArea: any = {
+    border: {
+      width: 0
+    }
+  };
+  
   // Margin
-  margin = input<any>({});
-
+  @Input() margin: any = {};
+  
   // Size
-  height = input<string | number>('400px');
-  width = input<string | number>('100%');
-
+  @Input() height: string | number = '400px';
+  @Input() width: string | number = '100%';
+  
   // Theme
-  theme = input<string>('Material');
-
+  @Input() theme: string = 'Material';
+  
   // Features
-  enableAnimation = input<boolean>(true);
-  enableRtl = input<boolean>(false);
-  enableExport = input<boolean>(true);
-
+  @Input() enableAnimation: boolean = true;
+  @Input() enableRtl: boolean = false;
+  @Input() enableExport: boolean = true;
+  
   // Styling
-  customClass = input<string>('');
-
+  @Input() customClass: string = '';
+  
   // Events
-  loaded = output<ILoadedEventArgs>();
-  pointClick = output<IPointEventArgs>();
-  pointMove = output<IPointEventArgs>();
-  animationComplete = output<IAnimationCompleteEventArgs>();
-  textRender = output<ITextRenderEventArgs>();
-  axisLabelRender = output<IAxisLabelRenderEventArgs>();
-  tooltipRender = output<ITooltipRenderEventArgs>();
-  legendRender = output<ILegendRenderEventArgs>();
+  @Output() loaded = new EventEmitter<ILoadedEventArgs>();
+  @Output() pointClick = new EventEmitter<IPointEventArgs>();
+  @Output() pointMove = new EventEmitter<IPointEventArgs>();
+  @Output() animationComplete = new EventEmitter<IAnimationCompleteEventArgs>();
+  @Output() textRender = new EventEmitter<ITextRenderEventArgs>();
+  @Output() axisLabelRender = new EventEmitter<IAxisLabelRenderEventArgs>();
+  @Output() tooltipRender = new EventEmitter<ITooltipRenderEventArgs>();
+  @Output() legendRender = new EventEmitter<ILegendRenderEventArgs>();
+
+  ngOnInit(): void {
+    // Initialize if needed
+  }
+
+  ngOnDestroy(): void {
+    // Cleanup if needed
+  }
 
   /**
    * Refresh chart
    */
   refresh(): void {
-    this.chart()?.refresh();
+    if (this.chart) {
+      this.chart.refresh();
+    }
   }
 
   /**
    * Export chart
    */
   export(type: 'PNG' | 'JPEG' | 'SVG' | 'PDF', fileName?: string): void {
-    this.chart()?.export(type, fileName || 'chart');
+    if (this.chart) {
+      this.chart.export(type, fileName || 'chart');
+    }
   }
 
   /**
    * Print chart
    */
   print(): void {
-    this.chart()?.print();
+    if (this.chart) {
+      this.chart.print();
+    }
   }
 
   /**
    * Get chart instance
    */
   getChartInstance(): SyncfusionChartComponent | null {
-    return this.chart() ?? null;
+    return this.chart || null;
   }
 
   /**
    * Update data source
-   * @deprecated Use input binding [dataSource] instead
    */
   updateDataSource(data: any[]): void {
-    // Direct update to component for backward compatibility
-    const chart = this.chart();
-    if (chart) {
-      chart.dataSource = data;
-      chart.refresh();
+    this.dataSource = data;
+    if (this.chart) {
+      this.chart.dataSource = data;
+      this.chart.refresh();
     }
   }
 
   /**
    * Update series
-   * @deprecated Use input binding [series] instead
    */
   updateSeries(series: ChartSeries[]): void {
-    // Direct update to component for backward compatibility
-    const chart = this.chart();
-    if (chart) {
-      chart.series = series as any;
-      chart.refresh();
+    this.series = series;
+    if (this.chart) {
+      this.chart.series = series as any;
+      this.chart.refresh();
     }
   }
 
-  // Event handlers forwarding
+  /**
+   * Event handlers
+   */
   onLoaded(args: ILoadedEventArgs): void {
     this.loaded.emit(args);
   }

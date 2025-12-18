@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared.module';
 
@@ -7,15 +7,14 @@ import { SharedModule } from '../../shared.module';
   standalone: true,
   imports: [CommonModule, SharedModule],
   templateUrl: './page-header.component.html',
-  styleUrls: ['./page-header.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./page-header.component.scss']
 })
 export class PageHeaderComponent {
-  title = input<string>('');
-  subtitle = input<string | undefined>(undefined);
-  description = input<string | undefined>(undefined);
-  showBreadcrumbs = input<boolean>(true);
-  actions = input<any[] | undefined>(undefined);
+  @Input() title: string = '';
+  @Input() subtitle?: string;
+  @Input() description?: string;
+  @Input() showBreadcrumbs: boolean = true;
+  @Input() actions?: any[]; // Array of action buttons
 }
 
 

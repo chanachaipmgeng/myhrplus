@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from '../icon/icon.component';
 
@@ -22,11 +22,11 @@ export interface TimelineItem {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TimelineComponent {
-  items = input<TimelineItem[]>([]);
-  orientation = input<'vertical' | 'horizontal'>('vertical');
-  showDates = input<boolean>(true);
-  showIcons = input<boolean>(true);
-  alternate = input<boolean>(false);
+  @Input() items: TimelineItem[] = [];
+  @Input() orientation: 'vertical' | 'horizontal' = 'vertical';
+  @Input() showDates: boolean = true;
+  @Input() showIcons: boolean = true;
+  @Input() alternate: boolean = false;
 
   expandedItems: Set<number> = new Set();
 

@@ -1,34 +1,45 @@
-<div class="ai-assist-view-container" [ngClass]="effectiveConfig().customClass" [style.width]="effectiveConfig().width"
-  [style.height]="effectiveConfig().height" #container>
-  <div class="ai-assist-view-content">
-    <div class="ai-assist-view-header">
+<div 
+  class="ai-assist-view-container w-full h-full flex flex-col bg-white/5 dark:bg-slate-900/30 backdrop-blur-md border border-white/10 rounded-xl p-4" 
+  [ngClass]="customClass" 
+  [style.width]="width" 
+  [style.height]="height"
+  #container>
+  <div class="ai-assist-view-content flex flex-col h-full gap-4">
+    <div class="ai-assist-view-header pb-4 border-b border-white/10">
       <h3 class="text-lg font-semibold text-slate-700 dark:text-slate-300 mb-2">AI Assistant</h3>
-      <p class="text-sm text-slate-500 dark:text-slate-400">{{ effectiveConfig().placeholder }}</p>
+      <p class="text-sm text-slate-500 dark:text-slate-400">{{ placeholder }}</p>
     </div>
-
-    <div class="ai-assist-view-messages" *ngIf="false">
+    
+    <div class="ai-assist-view-messages flex-1 overflow-y-auto p-2" *ngIf="false">
       <!-- Messages will be displayed here -->
     </div>
-
-    <div class="ai-assist-view-suggestions"
-      *ngIf="effectiveConfig().showSuggestions && effectiveConfig().suggestions && effectiveConfig().suggestions.length > 0">
+    
+    <div class="ai-assist-view-suggestions p-3 bg-white/5 dark:bg-slate-900/30 backdrop-blur-sm rounded-lg border border-white/10" *ngIf="showSuggestions && suggestions.length > 0">
       <div class="suggestions-label text-sm font-medium text-slate-600 dark:text-slate-400 mb-2">
         Suggestions:
       </div>
-      <div class="suggestions-list">
-        <button *ngFor="let suggestion of effectiveConfig().suggestions" (click)="onSuggestionClick({ suggestion })"
-          class="suggestion-item">
+      <div class="suggestions-list flex flex-wrap gap-2 mt-2">
+        <button
+          *ngFor="let suggestion of suggestions"
+          (click)="onSuggestionClick({ suggestion })"
+          class="suggestion-item bg-white/10 dark:bg-slate-800/40 backdrop-blur-sm border border-white/10 rounded-md px-3 py-2 cursor-pointer transition-all duration-200 text-sm text-slate-900 dark:text-slate-200 hover:bg-white/15 dark:hover:bg-slate-800/60 hover:border-blue-500/30">
           {{ suggestion }}
         </button>
       </div>
     </div>
-
-    <div class="ai-assist-view-input">
-      <input type="text" [placeholder]="effectiveConfig().placeholder" class="ai-input"
+    
+    <div class="ai-assist-view-input flex gap-2 pt-3 border-t border-white/10">
+      <input
+        type="text"
+        [placeholder]="placeholder"
+        class="ai-input flex-1 p-3 bg-white/10 dark:bg-slate-800/40 backdrop-blur-sm border border-white/20 dark:border-white/10 rounded-lg text-slate-900 dark:text-slate-200 text-sm transition-all duration-200 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/10 placeholder:text-slate-500 dark:placeholder:text-slate-400"
         (keyup.enter)="onInputEnter($event)">
-      <button (click)="onSendClick()" class="ai-send-button">
+      <button
+        (click)="onSendClick()"
+        class="ai-send-button px-6 py-3 bg-blue-500/80 dark:bg-blue-600/80 backdrop-blur-sm border border-blue-500/30 rounded-lg text-white text-sm font-medium cursor-pointer transition-all duration-200 hover:bg-blue-500 dark:hover:bg-blue-600 hover:border-blue-500/50 active:scale-95">
         Send
       </button>
     </div>
   </div>
 </div>
+

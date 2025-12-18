@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, input, output, viewChild, effect } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SpeechToTextModule, TextAreaModule, TextAreaComponent } from '@syncfusion/ej2-angular-inputs';
 
@@ -18,65 +18,43 @@ export interface SpeechToTextConfig {
   standalone: true,
   imports: [CommonModule, SpeechToTextModule, TextAreaModule],
   templateUrl: './speech-to-text.component.html',
-  styleUrls: ['./speech-to-text.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./speech-to-text.component.scss']
 })
 export class SpeechToTextComponent implements OnInit, OnDestroy {
-  outputTextarea = viewChild<TextAreaComponent>('outputTextarea');
+  @ViewChild('outputTextarea', { static: false }) outputTextarea!: TextAreaComponent;
 
   // Configuration
-  locale = input<string>('en-US');
-  continuous = input<boolean>(false);
-  interimResults = input<boolean>(true);
-  maxAlternatives = input<number>(1);
-  serviceURI = input<string | undefined>(undefined);
-  grammars = input<string | undefined>(undefined);
-  showUI = input<boolean>(true);
-
-  // Value - using model if two-way binding is desired, but keeping as input/output pair for now
-  // to match existing @Input() value and @Output() valueChange
-  // If we want to strictly follow signal migration, we can use model, 
-  // but let's stick to input/output to minimize breaking changes for now, 
-  // or use model and sync. 
-  // Actually, let's use standard signal inputs and outputs as requested.
-  valueInput = input<string>('', { alias: 'value' });
-
+  @Input() locale: string = 'en-US';
+  @Input() continuous: boolean = false;
+  @Input() interimResults: boolean = true;
+  @Input() maxAlternatives: number = 1;
+  @Input() serviceURI?: string;
+  @Input() grammars?: string;
+  @Input() showUI: boolean = true;
+  
+  // Value
+  @Input() value: string = '';
+  
   // TextArea Settings
-  placeholder = input<string>('Text from speech will appear here...');
-  rows = input<number>(5);
-  cols = input<number>(50);
-  resizeMode = input<'None' | 'Both' | 'Horizontal' | 'Vertical'>('None');
-  readonly = input<boolean>(false);
-  enabled = input<boolean>(true);
-
+  @Input() placeholder: string = 'Text from speech will appear here...';
+  @Input() rows: number = 5;
+  @Input() cols: number = 50;
+  @Input() resizeMode: 'None' | 'Both' | 'Horizontal' | 'Vertical' = 'None';
+  @Input() readonly: boolean = false;
+  @Input() enabled: boolean = true;
+  
   // Styling
-  customClass = input<string>('');
-
+  @Input() customClass: string = '';
+  
   // Events
-  transcriptChanged = output<any>();
-  started = output<any>();
-  stopped = output<any>();
-  error = output<any>();
-  valueChange = output<string>();
+  @Output() transcriptChanged = new EventEmitter<any>();
+  @Output() started = new EventEmitter<any>();
+  @Output() stopped = new EventEmitter<any>();
+  @Output() error = new EventEmitter<any>();
+  @Output() valueChange = new EventEmitter<string>();
 
   private recognition: any = null;
   private isListening: boolean = false;
-
-  // Internal value tracking to handle assignments
-  private currentValue = '';
-
-  constructor() {
-    // Sync input value to internal value
-    effect(() => {
-      this.currentValue = this.valueInput();
-      if (this.outputTextarea()) {
-        this.outputTextarea()!.value = this.currentValue;
-      }
-    });
-
-    // Re-initialize recognition if critical configs change?
-    // For now, allow init on ngOnInit as before.
-  }
 
   ngOnInit(): void {
     this.initializeSpeechRecognition();
@@ -100,17 +78,17 @@ export class SpeechToTextComponent implements OnInit, OnDestroy {
     }
 
     if (this.recognition) {
-      this.recognition.continuous = this.continuous();
-      this.recognition.interimResults = this.interimResults();
-      this.recognition.lang = this.locale();
-      this.recognition.maxAlternatives = this.maxAlternatives();
+      this.recognition.continuous = this.continuous;
+      this.recognition.interimResults = this.interimResults;
+      this.recognition.lang = this.locale;
+      this.recognition.maxAlternatives = this.maxAlternatives;
 
-      if (this.serviceURI()) {
-        this.recognition.serviceURI = this.serviceURI();
+      if (this.serviceURI) {
+        this.recognition.serviceURI = this.serviceURI;
       }
 
-      if (this.grammars()) {
-        this.recognition.grammars = this.grammars();
+      if (this.grammars) {
+        this.recognition.grammars = this.grammars;
       }
 
       this.recognition.onstart = () => {
@@ -132,15 +110,15 @@ export class SpeechToTextComponent implements OnInit, OnDestroy {
         }
 
         const newValue = finalTranscript || interimTranscript;
-        this.currentValue = newValue;
-        this.valueChange.emit(this.currentValue);
+        this.value = newValue;
+        this.valueChange.emit(this.value);
 
-        if (this.outputTextarea()) {
-          this.outputTextarea()!.value = this.currentValue;
+        if (this.outputTextarea) {
+          this.outputTextarea.value = this.value;
         }
 
         this.transcriptChanged.emit({
-          transcript: this.currentValue,
+          transcript: this.value,
           interimTranscript,
           finalTranscript
         });
@@ -219,10 +197,10 @@ export class SpeechToTextComponent implements OnInit, OnDestroy {
    * Clear text
    */
   clear(): void {
-    this.currentValue = '';
-    this.valueChange.emit(this.currentValue);
-    if (this.outputTextarea()) {
-      this.outputTextarea()!.value = '';
+    this.value = '';
+    this.valueChange.emit(this.value);
+    if (this.outputTextarea) {
+      this.outputTextarea.value = '';
     }
   }
 
@@ -237,7 +215,7 @@ export class SpeechToTextComponent implements OnInit, OnDestroy {
    * Check if speech recognition is supported
    */
   isSupported(): boolean {
-    return !!(typeof window !== 'undefined' &&
+    return !!(typeof window !== 'undefined' && 
       (('webkitSpeechRecognition' in window) || ('SpeechRecognition' in window)));
   }
 
@@ -245,17 +223,17 @@ export class SpeechToTextComponent implements OnInit, OnDestroy {
    * Get value
    */
   getValue(): string {
-    return this.currentValue;
+    return this.value;
   }
 
   /**
    * Set value
    */
   setValue(value: string): void {
-    this.currentValue = value;
-    this.valueChange.emit(this.currentValue);
-    if (this.outputTextarea()) {
-      this.outputTextarea()!.value = value;
+    this.value = value;
+    this.valueChange.emit(this.value);
+    if (this.outputTextarea) {
+      this.outputTextarea.value = value;
     }
   }
 
@@ -264,11 +242,11 @@ export class SpeechToTextComponent implements OnInit, OnDestroy {
    */
   onTextAreaChange(event: any): void {
     if (event && event.value !== undefined) {
-      this.currentValue = event.value || '';
-      this.valueChange.emit(this.currentValue);
+      this.value = event.value || '';
+      this.valueChange.emit(this.value);
     } else if (event && typeof event === 'string') {
-      this.currentValue = event;
-      this.valueChange.emit(this.currentValue);
+      this.value = event;
+      this.valueChange.emit(this.value);
     }
   }
 }

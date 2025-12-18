@@ -3,12 +3,20 @@
     <!-- Search Input -->
     <div class="search-input-wrapper flex-1">
       <div class="relative">
-        <input type="text" [formControl]="searchControl" [placeholder]="placeholder()"
+        <input
+          type="text"
+          [formControl]="searchControl"
+          [placeholder]="placeholder"
           class="w-full pl-10 pr-10 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white/20 dark:bg-slate-800/20 backdrop-blur-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 thai-text">
-        <app-icon name="search" size="sm" color="text-gray-400 dark:text-gray-500"
+        <app-icon 
+          name="search" 
+          size="sm" 
+          color="text-gray-400 dark:text-gray-500"
           class="absolute left-3 top-1/2 transform -translate-y-1/2">
         </app-icon>
-        <button *ngIf="searchForm.get('search')?.value" (click)="onClearSearch()"
+        <button
+          *ngIf="searchForm.get('search')?.value"
+          (click)="onClearSearch()"
           class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
           <app-icon name="close" size="sm"></app-icon>
         </button>
@@ -16,42 +24,48 @@
     </div>
 
     <!-- Filter Toggle -->
-    <button *ngIf="showAdvanced() && filters().length > 0" (click)="onToggleAdvanced()"
+    <button
+      *ngIf="showAdvanced && filters.length > 0"
+      (click)="onToggleAdvanced()"
       [class.active]="isAdvancedOpen || getActiveFilterCount() > 0"
       class="filter-toggle text-slate-600 dark:text-slate-400 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors relative">
       <app-icon name="filter_list" size="sm"></app-icon>
-      <span *ngIf="getActiveFilterCount() > 0"
-        class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+      <span *ngIf="getActiveFilterCount() > 0" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
         {{ getActiveFilterCount() }}
       </span>
     </button>
   </div>
 
   <!-- Active Filter Chips -->
-  <div class="filter-chips flex flex-wrap gap-2 mt-3" *ngIf="showFilterChips() && getActiveFilterCount() > 0">
-    <span *ngFor="let key of getActiveFilterKeys()"
+  <div class="filter-chips flex flex-wrap gap-2 mt-3" *ngIf="showFilterChips && getActiveFilterCount() > 0">
+    <span
+      *ngFor="let key of getActiveFilterKeys()"
       class="inline-flex items-center gap-1 px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-full text-sm thai-text">
       <span>{{ getFilterLabel(key) }}: {{ getFilterDisplayValue(key) }}</span>
-      <button (click)="onRemoveFilter(key)"
+      <button
+        (click)="onRemoveFilter(key)"
         class="hover:bg-indigo-200 dark:hover:bg-indigo-800 rounded-full p-0.5 transition-colors">
         <app-icon name="cancel" size="sm"></app-icon>
       </button>
     </span>
-    <button (click)="onClearAllFilters()"
+    <button
+      (click)="onClearAllFilters()"
       class="px-3 py-1 text-xs text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 thai-text">
       ล้างทั้งหมด
     </button>
   </div>
 
   <!-- Advanced Filters Panel -->
-  <div class="advanced-filters glass-card-weak mt-4 p-4" *ngIf="isAdvancedOpen && filters().length > 0">
+  <div class="advanced-filters glass-card-weak mt-4 p-4" *ngIf="isAdvancedOpen && filters.length > 0">
     <div class="filters-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" [formGroup]="filterForm">
-      <ng-container *ngFor="let filter of filters()">
+      <ng-container *ngFor="let filter of filters">
         <!-- Select Filter -->
-        <div *ngIf="filter.type === 'select'" class="filter-field">
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 thai-text">{{ filter.label
-            }}</label>
-          <select [formControlName]="filter.key"
+        <div
+          *ngIf="filter.type === 'select'"
+          class="filter-field">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 thai-text">{{ filter.label }}</label>
+          <select 
+            [formControlName]="filter.key" 
             class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 thai-text">
             <option value="">ทั้งหมด</option>
             <option *ngFor="let option of filter.options" [value]="option.value">
@@ -62,11 +76,14 @@
 
         <!-- Checkbox Filter -->
         <div *ngIf="filter.type === 'checkbox'" class="filter-checkbox-group">
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 thai-text">{{ filter.label
-            }}</label>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 thai-text">{{ filter.label }}</label>
           <div class="checkbox-list space-y-2">
-            <label *ngFor="let option of filter.options" class="flex items-center gap-2 cursor-pointer thai-text">
-              <input type="checkbox" [formControlName]="filter.key + '_' + option.value"
+            <label
+              *ngFor="let option of filter.options"
+              class="flex items-center gap-2 cursor-pointer thai-text">
+              <input
+                type="checkbox"
+                [formControlName]="filter.key + '_' + option.value"
                 class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
               <span>{{ option.label }}</span>
             </label>
@@ -74,10 +91,13 @@
         </div>
 
         <!-- Date Filter -->
-        <div *ngIf="filter.type === 'date'" class="filter-field">
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 thai-text">{{ filter.label
-            }}</label>
-          <input type="date" [formControlName]="filter.key"
+        <div
+          *ngIf="filter.type === 'date'"
+          class="filter-field">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 thai-text">{{ filter.label }}</label>
+          <input
+            type="date"
+            [formControlName]="filter.key"
             class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
         </div>
       </ng-container>

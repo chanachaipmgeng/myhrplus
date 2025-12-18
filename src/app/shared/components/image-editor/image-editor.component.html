@@ -1,7 +1,16 @@
-<div class="image-editor-container" [ngClass]="customClass()">
-  <ejs-imageeditor #imageEditor [width]="height()" [height]="height()" [toolbar]="toolbar()"
-    (created)="onCreated($event)" (fileOpened)="onImageLoaded($event)"
-    (toolbarItemClicked)="onToolbarItemClicked($event)" (selectionChanging)="onSelectionChanged($event)"
-    (shapeChange)="onShapeChanged($event)" (editComplete)="onImageChanged($event)">
+<div class="image-editor-container w-full glass-weak dark:glass-dark-weak theme-gemini:glass-gemini-weak rounded-xl p-4 overflow-hidden" [ngClass]="customClass">
+  <ejs-imageeditor
+    #imageEditor
+    [width]="width"
+    [height]="height"
+    [toolbar]="toolbar"
+    [allowUndoRedo]="allowUndoRedo"
+    (created)="onCreated($event)"
+    (fileOpened)="onImageLoaded($event)"
+    (toolbarItemClicked)="onToolbarItemClicked($event)"
+    (selectionChanging)="onSelectionChanged($event)"
+    (shapeChange)="onShapeChanged($event)"
+    (editComplete)="onImageChanged($event)">
   </ejs-imageeditor>
 </div>
+

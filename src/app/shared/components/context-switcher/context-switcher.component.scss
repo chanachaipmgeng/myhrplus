@@ -1,0 +1,19 @@
+/* Context Switcher Component Styles */
+/* Migrated simple utilities to Tailwind - keeping only component-specific styles */
+
+.context-switcher-container {
+  /* Width handled by Tailwind w-full in HTML */
+}
+
+.context-tab {
+  position: relative;
+
+  /* Active state colors migrated to Tailwind classes in HTML */
+  /* Using bg-blue-500/10 dark:bg-blue-500/20 theme-gemini:bg-blue-500/20 */
+  /* Using text-blue-700 dark:text-blue-400 theme-gemini:text-blue-300 */
+}
+
+.context-info {
+  /* Font family handled by Tailwind thai-text class in HTML */
+}
+

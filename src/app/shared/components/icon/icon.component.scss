@@ -1,9 +1,8 @@
 /* ============================================
    Icon Component Styles
+   ============================================
+   Migrated to Tailwind - Minimal SCSS for Material Icons base styles
    ============================================ */
-
-@import '../../../../styles/design-tokens';
-@import '../../../../styles/mixins';
 
 :host {
   display: inline-block;
@@ -17,99 +16,28 @@
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
-  display: inline-block;
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
-  transition: $transition-all;
-}
-
-/* Size Variants */
-.text-xs {
-  font-size: 0.75rem; // 12px
-}
-
-.text-base {
-  font-size: 1rem; // 16px
-}
-
-.text-xl {
-  font-size: 1.25rem; // 20px
-}
-
-.text-2xl {
-  font-size: 1.5rem; // 24px
-}
-
-.text-4xl {
-  font-size: 2.25rem; // 36px
-}
-
-/* Width & Height for Icons */
-.w-3 {
-  width: 0.75rem;
-}
-
-.h-3 {
-  height: 0.75rem;
-}
-
-.w-4 {
-  width: 1rem;
-}
-
-.h-4 {
-  height: 1rem;
-}
-
-.w-5 {
-  width: 1.25rem;
-}
-
-.h-5 {
-  height: 1.25rem;
-}
-
-.w-6 {
-  width: 1.5rem;
-}
-
-.h-6 {
-  height: 1.5rem;
-}
-
-.w-10 {
-  width: 2.5rem;
-}
-
-.h-10 {
-  height: 2.5rem;
-}
-
-/* Dark Mode */
-.dark {
-  .material-icons {
-    // Icon colors handled via color classes
-  }
+  @apply transition-smooth;
 }
 
 /* Gemini Theme */
-body.theme-gemini {
-  .material-icons {
-    @include gemini-glow('subtle');
-    
-    &:hover {
-      @include gemini-glow('default');
-    }
+[data-theme='gemini'] .material-icons,
+body.theme-gemini .material-icons {
+  @apply glow-primary;
+  
+  &:hover {
+    filter: drop-shadow(0 0 8px rgba(var(--primary-rgb), 0.6));
   }
 }
 
 /* Responsive */
-@include respond-to-down(sm) {
+@media (max-width: 640px) {
   .text-4xl {
-    font-size: 1.875rem; // 30px
+    font-size: 1.875rem; /* 30px */
   }
   
   .w-10 {

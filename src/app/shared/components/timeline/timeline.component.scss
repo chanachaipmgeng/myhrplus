@@ -1,298 +1,185 @@
+/* ============================================
+   Timeline Component Styles
+   ============================================
+   Migrated to Tailwind - Timeline-specific styles only
+   ============================================ */
+
 .timeline-container {
-  width: 100%;
-  padding: 1rem 0;
+  @apply w-full py-4;
 }
 
 .timeline-vertical {
   .timeline-items {
-    display: flex;
-    flex-direction: column;
-    position: relative;
+    @apply flex flex-col relative;
   }
 
   .timeline-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
-    position: relative;
-    padding-bottom: 2rem;
+    @apply flex items-start gap-6 relative pb-8;
   }
 
   .timeline-line {
-    position: absolute;
-    left: 19px;
-    top: 48px;
-    width: 2px;
+    @apply absolute left-[19px] top-12 w-0.5 bg-slate-200 dark:bg-slate-700 transition-colors;
     height: calc(100% - 48px);
-    background: #e2e8f0;
-    transition: background 0.3s ease;
-  }
-
-  .dark .timeline-line {
-    background: #334155;
   }
 
   .timeline-dot {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 3px solid;
-    background: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    flex-shrink: 0;
-    z-index: 1;
-    transition: all 0.3s ease;
-  }
-
-  .dark .timeline-dot {
-    background: #1e293b;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    @apply w-10 h-10 rounded-full flex items-center justify-center border-[3px] bg-white dark:bg-slate-800 shadow-md flex-shrink-0 z-10 transition-smooth;
   }
 
   .timeline-content {
-    flex: 1;
-    padding: 1rem 1.5rem;
-    margin-top: 0;
-    transition: all 0.3s ease;
+    @apply flex-1 px-4 py-4 mt-0 transition-smooth;
   }
 
   .item-alternate {
-    flex-direction: row-reverse;
+    @apply flex-row-reverse;
 
     .timeline-line {
-      left: auto;
-      right: 19px;
+      @apply left-auto right-[19px];
     }
   }
 }
 
 .timeline-horizontal {
   .timeline-items {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    padding: 1rem 0;
+    @apply flex flex-row overflow-x-auto py-4;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
   }
 
   .timeline-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 200px;
-    position: relative;
-    padding: 0 1rem;
+    @apply flex flex-col items-center min-w-[200px] relative px-4;
   }
 
   .timeline-line {
-    position: absolute;
-    top: 19px;
-    left: calc(50% + 20px);
-    width: calc(100% - 40px);
-    height: 2px;
-    background: #e2e8f0;
-  }
-
-  .dark .timeline-line {
-    background: #334155;
+    @apply absolute top-[19px] left-[calc(50%+20px)] w-[calc(100%-40px)] h-0.5 bg-slate-200 dark:bg-slate-700;
   }
 
   .timeline-dot {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 3px solid;
-    background: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-    margin-bottom: 1rem;
-  }
-
-  .dark .timeline-dot {
-    background: #1e293b;
+    @apply w-10 h-10 rounded-full flex items-center justify-center border-[3px] bg-white dark:bg-slate-800 shadow-md z-10 mb-4;
   }
 
   .timeline-content {
-    width: 100%;
-    padding: 1rem;
-    text-align: center;
+    @apply w-full p-4 text-center;
   }
 }
 
 .timeline-icon {
-  color: white;
+  @apply text-white;
   font-size: 20px !important;
   width: 20px !important;
   height: 20px !important;
 }
 
 .timeline-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
+  @apply flex justify-between items-start gap-4 mb-2;
 }
 
 .timeline-title-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  flex: 1;
+  @apply flex flex-col gap-1 flex-1;
 }
 
 .timeline-title {
-  font-size: 1rem;
-  margin: 0;
-  transition: color 0.3s ease;
+  @apply text-base m-0 transition-colors;
 }
 
 .timeline-date {
   font-family: 'Inter', sans-serif;
-  transition: color 0.3s ease;
+  @apply transition-colors;
 }
 
 .timeline-description {
-  font-size: 0.875rem;
-  line-height: 1.5;
-  margin: 0;
-  transition: color 0.3s ease;
+  @apply text-sm leading-relaxed m-0 transition-colors;
 }
 
 .timeline-details {
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0.5rem;
-  transition: all 0.3s ease;
-}
-
-.dark .timeline-details {
-  border-color: rgba(51, 65, 85, 0.3);
+  @apply border border-white/20 dark:border-slate-700/30 rounded-md transition-smooth;
 }
 
 .expand-btn {
-  flex-shrink: 0;
+  @apply flex-shrink-0 min-w-[44px] min-h-[44px] p-2 cursor-pointer transition-smooth;
 }
 
-/* ============================================
-   Timeline Component Styles
-   ============================================ */
-
-@import '../../../../styles/design-tokens';
-@import '../../../../styles/mixins';
-
 /* Responsive - Mobile */
-@include respond-to-down(md) {
+@media (max-width: 768px) {
   .timeline-vertical {
     .item-alternate {
-      flex-direction: row;
+      @apply flex-row;
     }
 
     .timeline-item {
-      gap: $spacing-3;
-      padding-bottom: $spacing-4;
+      @apply gap-3 pb-4;
     }
 
     .timeline-dot {
-      width: 32px;
-      height: 32px;
-      flex-shrink: 0;
+      @apply w-8 h-8;
     }
 
     .timeline-content {
-      padding: $spacing-3;
-      font-size: $text-sm;
+      @apply p-3 text-sm;
     }
 
     .timeline-title {
-      font-size: $text-sm;
+      @apply text-sm;
     }
 
     .timeline-description {
-      font-size: $text-xs;
+      @apply text-xs;
     }
 
     .timeline-line {
-      left: 15px;
-      top: 40px;
+      @apply left-[15px] top-10;
     }
   }
 
   .timeline-horizontal {
     .timeline-items {
-      padding: $spacing-2 0;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
+      @apply py-2;
     }
 
     .timeline-item {
-      min-width: 120px;
-      padding: 0 $spacing-2;
+      @apply min-w-[120px] px-2;
     }
 
     .timeline-dot {
-      width: 32px;
-      height: 32px;
-      margin-bottom: $spacing-2;
+      @apply w-8 h-8 mb-2;
     }
 
     .timeline-content {
-      padding: $spacing-2;
-      font-size: $text-xs;
+      @apply p-2 text-xs;
     }
 
     .timeline-title {
-      font-size: $text-xs;
+      @apply text-xs;
     }
 
     .timeline-description {
-      display: none; // Hide description on mobile horizontal
+      @apply hidden;
     }
-  }
-
-  .expand-btn {
-    min-width: 44px;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 }
 
 /* Responsive - Tablet */
-@include respond-to-between(md, lg) {
+@media (min-width: 768px) and (max-width: 1024px) {
   .timeline-vertical {
     .timeline-item {
-      gap: $spacing-4;
+      @apply gap-4;
     }
 
     .timeline-content {
-      padding: $spacing-3 $spacing-4;
+      @apply px-3 py-4;
     }
   }
 
   .timeline-horizontal {
     .timeline-item {
-      min-width: 180px;
+      @apply min-w-[180px];
     }
   }
 }
 
-/* Touch Targets */
-.expand-btn {
-  min-width: 44px;
-  min-height: 44px;
-  padding: $spacing-2;
-  cursor: pointer;
-  transition: $transition-all;
-  
-  @include respond-to(md) {
-    min-width: auto;
-    min-height: auto;
+@media (min-width: 768px) {
+  .expand-btn {
+    @apply min-w-0 min-h-0;
   }
 }
 

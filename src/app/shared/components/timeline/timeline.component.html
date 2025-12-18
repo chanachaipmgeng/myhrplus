@@ -1,17 +1,26 @@
-<div class="timeline-container" [ngClass]="'timeline-' + orientation()">
+<div class="timeline-container" [ngClass]="'timeline-' + orientation">
   <div class="timeline-items">
-    <div *ngFor="let item of items(); let i = index" class="timeline-item" [ngClass]="{
-        'item-alternate': alternate() && i % 2 === 1,
+    <div
+      *ngFor="let item of items; let i = index"
+      class="timeline-item"
+      [ngClass]="{
+        'item-alternate': alternate && i % 2 === 1,
         'item-expanded': isExpanded(i)
       }">
       <!-- Timeline Line -->
-      <div class="timeline-line" *ngIf="i < items().length - 1"></div>
+      <div class="timeline-line" *ngIf="i < items.length - 1"></div>
 
       <!-- Timeline Dot -->
-      <div class="timeline-dot" [style.background-color]="item.color || getStatusColor(item.status)"
+      <div
+        class="timeline-dot"
+        [style.background-color]="item.color || getStatusColor(item.status)"
         [style.border-color]="item.color || getStatusColor(item.status)">
-        <app-icon *ngIf="showIcons() && (item.icon || item.status)" [name]="item.icon || getDefaultIcon(item.status)"
-          size="sm" color="text-white" class="timeline-icon">
+        <app-icon
+          *ngIf="showIcons && (item.icon || item.status)"
+          [name]="item.icon || getDefaultIcon(item.status)"
+          size="sm"
+          color="text-white"
+          class="timeline-icon">
         </app-icon>
       </div>
 
@@ -22,21 +31,29 @@
             <h4 class="timeline-title thai-text font-semibold text-slate-800 dark:text-slate-100">
               {{ item.title }}
             </h4>
-            <span *ngIf="showDates() && item.date" class="timeline-date text-sm text-slate-500 dark:text-slate-400">
+            <span
+              *ngIf="showDates && item.date"
+              class="timeline-date text-sm text-slate-500 dark:text-slate-400">
               {{ formatDate(item.date) }}
             </span>
           </div>
-          <button *ngIf="item.expandable" (click)="toggleExpand(i)"
+          <button
+            *ngIf="item.expandable"
+            (click)="toggleExpand(i)"
             class="expand-btn text-slate-600 dark:text-slate-400 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
             <app-icon [name]="isExpanded(i) ? 'expand_less' : 'expand_more'" size="sm"></app-icon>
           </button>
         </div>
 
-        <p *ngIf="item.description" class="timeline-description text-slate-600 dark:text-slate-400 thai-text">
+        <p
+          *ngIf="item.description"
+          class="timeline-description text-slate-600 dark:text-slate-400 thai-text">
           {{ item.description }}
         </p>
 
-        <div *ngIf="item.expandable && isExpanded(i) && item.details" class="timeline-details glass-card-weak mt-3 p-4">
+        <div
+          *ngIf="item.expandable && isExpanded(i) && item.details"
+          class="timeline-details glass-card-weak mt-3 p-4">
           <pre class="text-xs font-mono text-slate-600 dark:text-slate-400">{{ item.details | json }}</pre>
         </div>
       </div>

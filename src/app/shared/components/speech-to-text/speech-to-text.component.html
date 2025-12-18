@@ -1,31 +1,48 @@
-<div class="speech-to-text-container" [ngClass]="customClass()">
-  <div class="speech-to-text-controls" *ngIf="showUI()">
-    <button type="button" class="speech-button" [class.listening]="isListeningNow()"
-      [disabled]="!isSupported() || !enabled()" (click)="isListeningNow() ? stop() : start()"
+<div class="speech-to-text-container w-full glass-weak dark:glass-dark-weak theme-gemini:glass-gemini-weak rounded-xl p-4" [ngClass]="customClass">
+  <div class="speech-to-text-controls" *ngIf="showUI">
+    <button
+      type="button"
+      class="speech-button"
+      [class.listening]="isListeningNow()"
+      [disabled]="!isSupported() || !enabled"
+      (click)="isListeningNow() ? stop() : start()"
       [attr.aria-label]="isListeningNow() ? 'Stop listening' : 'Start listening'"
       [attr.aria-pressed]="isListeningNow()">
       <span class="speech-icon" *ngIf="!isListeningNow()">🎤</span>
       <span class="speech-icon listening" *ngIf="isListeningNow()">⏹️</span>
       <span class="speech-text">{{ isListeningNow() ? 'Stop' : 'Start' }}</span>
     </button>
-    <button type="button" class="clear-button" [disabled]="!getValue() || !enabled()" (click)="clear()"
+    <button
+      type="button"
+      class="clear-button"
+      [disabled]="!value || !enabled"
+      (click)="clear()"
       [attr.aria-label]="'Clear text'">
       <span>Clear</span>
     </button>
   </div>
 
-  <div class="speech-status" *ngIf="showUI()">
+  <div class="speech-status" *ngIf="showUI">
     <span class="status-indicator" [class.listening]="isListeningNow()"></span>
     <span class="status-text">
       {{ isListeningNow() ? 'Listening...' : (isSupported() ? 'Ready' : 'Not supported') }}
     </span>
   </div>
 
-  <ejs-textarea #outputTextarea [value]="getValue()" [placeholder]="placeholder()" [rows]="rows()" [cols]="cols()"
-    [resizeMode]="resizeMode()" [readonly]="readonly()" [enabled]="enabled()" (change)="onTextAreaChange($event)">
+  <ejs-textarea
+    #outputTextarea
+    [value]="value"
+    [placeholder]="placeholder"
+    [rows]="rows"
+    [cols]="cols"
+    [resizeMode]="resizeMode"
+    [readonly]="readonly"
+    [enabled]="enabled"
+    (change)="onTextAreaChange($event)">
   </ejs-textarea>
 
   <div class="speech-info" *ngIf="!isSupported()">
     <p class="info-text">Speech Recognition is not supported in this browser.</p>
   </div>
 </div>
+

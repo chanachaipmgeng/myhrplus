@@ -1,130 +1,37 @@
 /* ============================================
    Empty State Component Styles
+   ============================================
+   Migrated to Tailwind - Minimal SCSS for component-specific styles only
    ============================================ */
-
-@import '../../../../styles/design-tokens';
-@import '../../../../styles/mixins';
 
 :host {
   display: block;
 }
 
-/* Layout */
-.flex {
-  display: flex;
-}
+/* Component uses Tailwind classes directly in HTML */
+/* Responsive text sizes handled via Tailwind responsive classes */
+/* Gemini theme handled via Tailwind theme-gemini classes */
 
-.flex-col {
-  flex-direction: column;
-}
-
-.items-center {
-  align-items: center;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.text-center {
-  text-align: center;
-}
-
-/* Icon */
-.mb-4 {
-  margin-bottom: $spacing-4;
-}
-
-.text-4xl {
-  font-size: $text-4xl;
-}
-
-.text-6xl {
-  font-size: $text-6xl;
-}
-
-.text-8xl {
-  font-size: 6rem; // 96px
-}
-
-/* Title */
-.text-xl {
-  font-size: $text-xl;
-}
-
-.font-bold {
-  font-weight: $font-weight-bold;
-}
-
-.mb-2 {
-  margin-bottom: $spacing-2;
-}
-
-.text-slate-800 {
-  color: $gray-800;
-}
-
-.dark .text-slate-200 {
-  color: $gray-200;
-}
-
-/* Description */
-.text-slate-600 {
-  color: $gray-600;
-}
-
-.dark .text-slate-400 {
-  color: $gray-400;
-}
-
-.mb-6 {
-  margin-bottom: $spacing-6;
-}
-
-.max-w-md {
-  max-width: 28rem;
-}
-
-/* Action Button */
-.mr-2 {
-  margin-right: $spacing-2;
-}
-
-/* Dark Mode */
-.dark {
-  .text-slate-800 {
-    color: $gray-200;
+/* Gemini 1.5 Theme - Empty State */
+/* Moved from global styles.scss to improve encapsulation */
+[data-theme='gemini'] :host,
+body.theme-gemini :host {
+  ::ng-deep .glass-card {
+    border: 1px solid var(--glass-border) !important;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      0 0 0 1px var(--glass-border-weak),
+      0 0 40px rgba(59, 130, 246, 0.1) !important;
   }
-  
-  .text-slate-600 {
-    color: $gray-400;
-  }
-}
 
-/* Gemini Theme */
-body.theme-gemini {
-  .text-slate-800,
-  .dark .text-slate-200 {
-    @include gradient-text-gemini();
-  }
-  
-  .text-slate-600,
-  .dark .text-slate-400 {
-    color: rgba(255, 255, 255, 0.7);
-  }
-}
-
-/* Responsive */
-@include respond-to-down(sm) {
-  .text-8xl {
-    font-size: 4rem; // 64px
-  }
-  
-  .text-6xl {
-    font-size: $text-4xl;
-  }
-  
-  .text-4xl {
-    font-size: $text-3xl;
+  ::ng-deep h3 {
+    background: linear-gradient(135deg,
+      #93c5fd 0%,
+      #60a5fa 50%,
+      #3b82f6 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }

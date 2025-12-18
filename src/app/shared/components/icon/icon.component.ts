@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -6,16 +6,15 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './icon.component.html',
-  styleUrls: ['./icon.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./icon.component.scss']
 })
 export class IconComponent {
-  name = input.required<string>();
-  size = input<'xs' | 'sm' | 'md' | 'lg' | 'xl'>('md');
-  color = input<string | undefined>(undefined);
-  ariaLabel = input<string | undefined>(undefined);
+  @Input() name!: string;
+  @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
+  @Input() color?: string;
+  @Input() ariaLabel?: string;
 
-  sizeClass = computed(() => {
+  get sizeClass(): string {
     const sizeMap = {
       xs: 'text-xs w-3 h-3',
       sm: 'text-base w-4 h-4',
@@ -23,7 +22,7 @@ export class IconComponent {
       lg: 'text-2xl w-6 h-6',
       xl: 'text-4xl w-10 h-10'
     };
-    return sizeMap[this.size()];
-  });
+    return sizeMap[this.size];
+  }
 }
 

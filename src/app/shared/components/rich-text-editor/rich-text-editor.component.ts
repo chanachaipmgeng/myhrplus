@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, input, output, viewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
 import {
@@ -67,24 +67,23 @@ export interface RichTextEditorConfig {
     CountService
   ],
   templateUrl: './rich-text-editor.component.html',
-  styleUrls: ['./rich-text-editor.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./rich-text-editor.component.scss']
 })
 export class RichTextEditorComponent implements OnInit, OnDestroy {
-  rte = viewChild<SyncfusionRichTextEditorComponent>('rte');
+  @ViewChild('rte', { static: false }) rte!: SyncfusionRichTextEditorComponent;
 
   // Value
-  value = input<string>('', { alias: 'value' });
-
+  @Input() value: string = '';
+  
   // Placeholder
-  placeholder = input<string>('Enter text here...', { alias: 'placeholder' });
-
+  @Input() placeholder: string = 'Enter text here...';
+  
   // Size
-  height = input<string | number>('400px', { alias: 'height' });
-  width = input<string | number>('100%', { alias: 'width' });
-
+  @Input() height: string | number = '400px';
+  @Input() width: string | number = '100%';
+  
   // Toolbar Settings
-  toolbarSettings = input<ToolbarSettingsModel>({
+  @Input() toolbarSettings: ToolbarSettingsModel = {
     items: [
       'Bold', 'Italic', 'Underline', 'StrikeThrough',
       'FontName', 'FontSize', 'FontColor', 'BackgroundColor',
@@ -94,10 +93,10 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
       'CreateLink', 'Image', '|', 'ClearFormat', 'Print',
       'SourceCode', 'FullScreen', '|', 'Undo', 'Redo'
     ]
-  }, { alias: 'toolbarSettings' });
-
+  };
+  
   // Quick Toolbar Settings
-  quickToolbarSettings = input<QuickToolbarSettingsModel>({
+  @Input() quickToolbarSettings: QuickToolbarSettingsModel = {
     image: [
       'Replace', 'Align', 'Caption', 'Remove', 'InsertLink',
       '-', 'Display', 'AltText', 'Dimension'
@@ -116,10 +115,10 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
       '-', 'BackgroundColor', 'TableRemove', 'TableCellVerticalAlign',
       'TableProperties'
     ]
-  }, { alias: 'quickToolbarSettings' });
-
+  };
+  
   // Image Settings
-  imageSettings = input<ImageSettingsModel>({
+  @Input() imageSettings: ImageSettingsModel = {
     allowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
     minWidth: 16,
     maxWidth: 1000,
@@ -128,69 +127,69 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
     saveUrl: '',
     path: '',
     resize: true
-  }, { alias: 'imageSettings' });
-
+  };
+  
   // File Manager Settings
-  fileManagerSettings = input<FileManagerSettingsModel>({}, { alias: 'fileManagerSettings' });
-
+  @Input() fileManagerSettings: FileManagerSettingsModel = {};
+  
   // Table Settings
-  tableSettings = input<TableSettingsModel>({
+  @Input() tableSettings: TableSettingsModel = {
     width: '100%'
-  }, { alias: 'tableSettings' });
-
+  };
+  
   // Paste Cleanup Settings
-  pasteCleanupSettings = input<PasteCleanupSettingsModel>({
+  @Input() pasteCleanupSettings: PasteCleanupSettingsModel = {
     prompt: true,
     plainText: false,
     keepFormat: false,
     deniedTags: [],
     deniedAttrs: [],
     allowedStyleProps: []
-  }, { alias: 'pasteCleanupSettings' });
-
+  };
+  
   // HTML Editor Settings
-  htmlEditorSettings = input<any>({}, { alias: 'htmlEditorSettings' });
-
+  @Input() htmlEditorSettings: any = {};
+  
   // Markdown Settings
-  markdownSettings = input<any>({}, { alias: 'markdownSettings' });
-
+  @Input() markdownSettings: any = {};
+  
   // Features
-  enableRtl = input<boolean>(false, { alias: 'enableRtl' });
-  enableResize = input<boolean>(true, { alias: 'enableResize' });
-  enableTabKey = input<boolean>(true, { alias: 'enableTabKey' });
-  enablePersistence = input<boolean>(false, { alias: 'enablePersistence' });
-  enableAutoUrl = input<boolean>(true, { alias: 'enableAutoUrl' });
-  enableHtmlEncode = input<boolean>(false, { alias: 'enableHtmlEncode' });
-  showCharCount = input<boolean>(false, { alias: 'showCharCount' });
-  maxLength = input<number>(0, { alias: 'maxLength' });
-  readonly = input<boolean>(false, { alias: 'readonly' });
-
+  @Input() enableRtl: boolean = false;
+  @Input() enableResize: boolean = true;
+  @Input() enableTabKey: boolean = true;
+  @Input() enablePersistence: boolean = false;
+  @Input() enableAutoUrl: boolean = true;
+  @Input() enableHtmlEncode: boolean = false;
+  @Input() showCharCount: boolean = false;
+  @Input() maxLength: number = 0;
+  @Input() readonly: boolean = false;
+  
   // Styling
-  customClass = input<string>('', { alias: 'customClass' });
-
+  @Input() customClass: string = '';
+  
   // Events
-  created = output<any>();
-  change = output<any>();
-  actionBegin = output<any>();
-  actionComplete = output<any>();
-  focus = output<any>();
-  blur = output<any>();
-  toolbarClick = output<any>();
-  imageUploading = output<any>();
-  imageUploadSuccess = output<any>();
-  imageUploadFailed = output<any>();
-  imageRemoving = output<any>();
-  fileUploading = output<any>();
-  fileUploadSuccess = output<any>();
-  fileUploadFailed = output<any>();
-  beforeDialogOpen = output<any>();
-  dialogOpen = output<any>();
-  dialogClose = output<any>();
-  beforeImageUpload = output<any>();
-  beforeFileUpload = output<any>();
-  beforePaste = output<any>();
-  beforeDrop = output<any>();
-  beforeSanitizeHtml = output<any>();
+  @Output() created = new EventEmitter<any>();
+  @Output() change = new EventEmitter<any>();
+  @Output() actionBegin = new EventEmitter<any>();
+  @Output() actionComplete = new EventEmitter<any>();
+  @Output() focus = new EventEmitter<any>();
+  @Output() blur = new EventEmitter<any>();
+  @Output() toolbarClick = new EventEmitter<any>();
+  @Output() imageUploading = new EventEmitter<any>();
+  @Output() imageUploadSuccess = new EventEmitter<any>();
+  @Output() imageUploadFailed = new EventEmitter<any>();
+  @Output() imageRemoving = new EventEmitter<any>();
+  @Output() fileUploading = new EventEmitter<any>();
+  @Output() fileUploadSuccess = new EventEmitter<any>();
+  @Output() fileUploadFailed = new EventEmitter<any>();
+  @Output() beforeDialogOpen = new EventEmitter<any>();
+  @Output() dialogOpen = new EventEmitter<any>();
+  @Output() dialogClose = new EventEmitter<any>();
+  @Output() beforeImageUpload = new EventEmitter<any>();
+  @Output() beforeFileUpload = new EventEmitter<any>();
+  @Output() beforePaste = new EventEmitter<any>();
+  @Output() beforeDrop = new EventEmitter<any>();
+  @Output() beforeSanitizeHtml = new EventEmitter<any>();
 
   ngOnInit(): void {
     // Initialize if needed
@@ -204,23 +203,20 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
    * Get value
    */
   getValue(): string {
-    const rte = this.rte();
-    if (rte) {
-      return rte.value;
+    if (this.rte) {
+      return this.rte.value;
     }
-    return this.value();
+    return this.value;
   }
 
   /**
    * Set value
    */
   setValue(value: string): void {
-    // Note: Since 'value' is an input signal, we cannot assign to it.
-    // However, we can update the internal RTE value if it exists.
-    const rte = this.rte();
-    if (rte) {
-      rte.value = value;
-      rte.dataBind();
+    this.value = value;
+    if (this.rte) {
+      this.rte.value = value;
+      this.rte.dataBind();
     }
   }
 
@@ -228,20 +224,18 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
    * Get HTML content
    */
   getHtml(): string {
-    const rte = this.rte();
-    if (rte) {
-      return rte.getHtml();
+    if (this.rte) {
+      return this.rte.getHtml();
     }
-    return this.value();
+    return this.value;
   }
 
   /**
    * Get text content
    */
   getText(): string {
-    const rte = this.rte();
-    if (rte) {
-      return rte.getText();
+    if (this.rte) {
+      return this.rte.getText();
     }
     return '';
   }
@@ -250,9 +244,8 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
    * Get selected text
    */
   getSelectedText(): string {
-    const rte = this.rte();
-    if (rte) {
-      return rte.getSelectedHtml();
+    if (this.rte) {
+      return this.rte.getSelectedHtml();
     }
     return '';
   }
@@ -261,9 +254,8 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
    * Insert text
    */
   insertText(text: string): void {
-    const rte = this.rte();
-    if (rte) {
-      rte.executeCommand('insertText', text);
+    if (this.rte) {
+      this.rte.executeCommand('insertText', text);
     }
   }
 
@@ -271,9 +263,8 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
    * Insert HTML
    */
   insertHtml(html: string): void {
-    const rte = this.rte();
-    if (rte) {
-      rte.executeCommand('insertHTML', html);
+    if (this.rte) {
+      this.rte.executeCommand('insertHTML', html);
     }
   }
 
@@ -281,9 +272,8 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
    * Format text
    */
   formatText(format: string, value?: string): void {
-    const rte = this.rte();
-    if (rte) {
-      rte.executeCommand(format as any, value);
+    if (this.rte) {
+      this.rte.executeCommand(format as any, value);
     }
   }
 
@@ -291,9 +281,8 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
    * Undo
    */
   undo(): void {
-    const rte = this.rte();
-    if (rte) {
-      rte.executeCommand('undo');
+    if (this.rte) {
+      this.rte.executeCommand('undo');
     }
   }
 
@@ -301,9 +290,8 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
    * Redo
    */
   redo(): void {
-    const rte = this.rte();
-    if (rte) {
-      rte.executeCommand('redo');
+    if (this.rte) {
+      this.rte.executeCommand('redo');
     }
   }
 
@@ -311,9 +299,8 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
    * Clear format
    */
   clearFormat(): void {
-    const rte = this.rte();
-    if (rte) {
-      rte.executeCommand('removeFormat');
+    if (this.rte) {
+      this.rte.executeCommand('removeFormat');
     }
   }
 
@@ -321,9 +308,8 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
    * Refresh
    */
   refresh(): void {
-    const rte = this.rte();
-    if (rte) {
-      rte.dataBind();
+    if (this.rte) {
+      this.rte.dataBind();
     }
   }
 
@@ -331,7 +317,7 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
    * Get editor instance
    */
   getEditorInstance(): SyncfusionRichTextEditorComponent | null {
-    return this.rte() || null;
+    return this.rte || null;
   }
 
   /**
@@ -342,7 +328,7 @@ export class RichTextEditorComponent implements OnInit, OnDestroy {
   }
 
   onChange(args: any): void {
-    // Note: cannot update readonly input signal 'value'
+    this.value = args.value;
     this.change.emit(args);
   }
 

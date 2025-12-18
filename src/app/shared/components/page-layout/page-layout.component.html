@@ -1,78 +1,89 @@
-<div class="page-layout" @fadeIn>
+<div class="w-full min-h-full flex flex-col animate-fade-in" @fadeIn>
   <!-- Page Header -->
-  <div class="page-header" @slideInDown>
+  <div class="mb-6 animate-slide-down" @slideInDown>
     <!-- Breadcrumb -->
-    @if (breadcrumb() && breadcrumb()!.length > 0) {
-    <nav class="breadcrumb">
-      @for (item of breadcrumb(); track item.label; let isLast = $last) {
-      @if (item.link && !isLast) {
-      <a [href]="item.link" class="breadcrumb-item">
-        @if (item.icon) {
-        <span class="breadcrumb-icon">{{ item.icon }}</span>
+    @if (breadcrumb && breadcrumb.length > 0) {
+      <nav class="flex items-center gap-2 mb-4 text-sm flex-wrap">
+        @for (item of breadcrumb; track item.label; let isLast = $last) {
+          @if (item.link && !isLast) {
+            <a [href]="item.link" class="flex items-center gap-1 text-slate-500 dark:text-slate-400 no-underline transition-smooth px-2 py-1 rounded-md hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-500/5 dark:hover:bg-primary-500/10 theme-gemini:glass-gemini-weak">
+              @if (item.icon) {
+                <span class="text-base">{{ item.icon }}</span>
+              }
+              {{ item.label }}
+            </a>
+            <span class="text-slate-500 dark:text-slate-400 opacity-50">›</span>
+          } @else {
+            <span class="flex items-center gap-1 text-slate-900 dark:text-slate-100 font-semibold px-2 py-1 theme-gemini:bg-gradient-to-r theme-gemini:from-primary-400 theme-gemini:to-primary-600 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+              @if (item.icon) {
+                <span class="text-base">{{ item.icon }}</span>
+              }
+              {{ item.label }}
+            </span>
+          }
         }
-        {{ item.label }}
-      </a>
-      <span class="breadcrumb-separator">›</span>
-      } @else {
-      <span class="breadcrumb-item current">
-        @if (item.icon) {
-        <span class="breadcrumb-icon">{{ item.icon }}</span>
-        }
-        {{ item.label }}
-      </span>
-      }
-      }
-    </nav>
+      </nav>
     }
 
     <!-- Title & Description -->
-    <div class="header-content">
-      <div class="title-section">
-        @if (icon()) {
-        <span class="page-icon">{{ icon() }}</span>
+    <div class="flex justify-between items-start gap-8 flex-wrap">
+      <div class="flex items-start gap-4 flex-1">
+        @if (icon) {
+          <span class="text-[2.5rem] leading-none p-3 bg-gradient-to-br from-primary-600 to-primary-400 dark:from-primary-500 dark:to-primary-300 rounded-2xl shadow-lg flex items-center justify-center theme-gemini:glass-gemini theme-gemini:shadow-gemini theme-gemini:bg-gradient-to-br theme-gemini:from-primary-600 theme-gemini:to-primary-400">
+            {{ icon }}
+          </span>
         }
         <div>
-          <h1 class="page-title">{{ title() }}</h1>
-          @if (description()) {
-          <p class="page-description">{{ description() }}</p>
+          <h1 class="text-4xl md:text-2xl font-bold text-slate-900 dark:text-slate-100 m-0 leading-snug mb-6 theme-gemini:bg-gradient-to-r theme-gemini:from-primary-400 theme-gemini:to-primary-600 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+            {{ title }}
+          </h1>
+          @if (description) {
+            <p class="mt-2 text-slate-700 dark:text-slate-300 text-base leading-relaxed max-w-[600px] theme-gemini:text-white/80">
+              {{ description }}
+            </p>
           }
         </div>
       </div>
 
       <!-- Actions -->
-      @if (actions() && actions()!.length > 0) {
-      <div class="actions-section">
-        @for (action of actions(); track action.label) {
-        <app-glass-button [variant]="action.variant || 'primary'" [disabled]="action.disabled || false"
-          (clicked)="action.onClick()">
-          @if (action.icon) {
-          <span>{{ action.icon }}</span>
+      @if (actions && actions.length > 0) {
+        <div class="flex gap-4 flex-wrap items-center md:w-full">
+          @for (action of actions; track action.label) {
+            <app-glass-button
+              [variant]="action.variant || 'primary'"
+              [disabled]="action.disabled || false"
+              (clicked)="action.onClick()"
+            >
+              @if (action.icon) {
+                <span>{{ action.icon }}</span>
+              }
+              {{ action.label }}
+              @if (action.loading) {
+                <span class="inline-block w-4 h-4 border-2 border-transparent border-t-current rounded-full animate-spin"></span>
+              }
+            </app-glass-button>
           }
-          {{ action.label }}
-          @if (action.loading) {
-          <span class="loading-spinner"></span>
-          }
-        </app-glass-button>
-        }
-      </div>
+        </div>
       }
     </div>
 
     <!-- Custom Header Content -->
-    <div class="header-extra">
+    <div class="w-full mt-4">
       <ng-content select="[header]"></ng-content>
     </div>
   </div>
 
   <!-- Page Content -->
-  <div class="page-content">
+  <div class="flex-1 flex flex-col gap-8">
     <ng-content></ng-content>
   </div>
 
   <!-- Page Footer -->
-  @if (showFooter()) {
-  <div class="page-footer">
-    <ng-content select="[footer]"></ng-content>
-  </div>
+  @if (showFooter) {
+    <div class="mt-8 pt-8 border-t border-slate-300/20 dark:border-slate-700/30 theme-gemini:border-primary-500/30">
+      <ng-content select="[footer]"></ng-content>
+    </div>
   }
 </div>
+
+

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StatisticsCardComponent } from '../statistics-card/statistics-card.component';
 
@@ -16,14 +16,16 @@ export interface StatCard {
   standalone: true,
   imports: [CommonModule, StatisticsCardComponent],
   templateUrl: './statistics-grid.component.html',
-  styleUrls: ['./statistics-grid.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./statistics-grid.component.scss']
 })
 export class StatisticsGridComponent {
-  stats = input<StatCard[]>([]);
-  columns = input<number>(3);
+  @Input() stats: StatCard[] = [];
+  @Input() columns: number = 3;
 
-  gridClass = computed(() => `grid-cols-${this.columns()}`);
+  get gridClass(): string {
+    // Grid columns handled by Tailwind classes in HTML
+    return '';
+  }
 }
 
 

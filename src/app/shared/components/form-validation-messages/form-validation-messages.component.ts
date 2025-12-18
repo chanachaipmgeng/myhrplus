@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, input, effect } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 
 export interface ValidationMessage {
@@ -10,15 +10,14 @@ export interface ValidationMessage {
 @Component({
   selector: 'app-form-validation-messages',
   templateUrl: './form-validation-messages.component.html',
-  styleUrls: ['./form-validation-messages.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./form-validation-messages.component.scss']
 })
 export class FormValidationMessagesComponent implements OnInit {
-  control = input<AbstractControl | null>(null);
-  customMessages = input<{ [key: string]: string }>({});
-  showIcon = input<boolean>(true);
-  showOnlyFirst = input<boolean>(true);
-  position = input<'below' | 'inline'>('below');
+  @Input() control!: AbstractControl | null;
+  @Input() customMessages: { [key: string]: string } = {};
+  @Input() showIcon = true;
+  @Input() showOnlyFirst = true;
+  @Input() position: 'below' | 'inline' = 'below';
 
   errors: ValidationMessage[] = [];
 
@@ -74,36 +73,23 @@ export class FormValidationMessagesComponent implements OnInit {
     uuid: 'fingerprint'
   };
 
-  constructor() {
-    effect((onCleanup) => {
-      const ctrl = this.control();
-      if (ctrl) {
-        this.updateErrors();
-        const sub = ctrl.statusChanges.subscribe(() => {
-          this.updateErrors();
-        });
-        onCleanup(() => {
-          sub.unsubscribe();
-        });
-      } else {
-        this.errors = [];
-      }
-    });
-  }
-
   ngOnInit(): void {
-    // Logic moved to effect
+    if (this.control) {
+      this.control.statusChanges.subscribe(() => {
+        this.updateErrors();
+      });
+      this.updateErrors();
+    }
   }
 
   private updateErrors(): void {
     this.errors = [];
-    const ctrl = this.control();
 
-    if (!ctrl || !ctrl.errors || !ctrl.touched) {
+    if (!this.control || !this.control.errors || !this.control.touched) {
       return;
     }
 
-    const errors = ctrl.errors;
+    const errors = this.control.errors;
     const errorKeys = Object.keys(errors);
 
     for (const key of errorKeys) {
@@ -116,7 +102,7 @@ export class FormValidationMessagesComponent implements OnInit {
         icon
       });
 
-      if (this.showOnlyFirst()) {
+      if (this.showOnlyFirst) {
         break;
       }
     }
@@ -124,8 +110,8 @@ export class FormValidationMessagesComponent implements OnInit {
 
   private getMessage(key: string, errorValue: any): string {
     // Check custom messages first
-    if (this.customMessages()[key]) {
-      return this.formatMessage(this.customMessages()[key], errorValue);
+    if (this.customMessages[key]) {
+      return this.formatMessage(this.customMessages[key], errorValue);
     }
 
     // Check default messages

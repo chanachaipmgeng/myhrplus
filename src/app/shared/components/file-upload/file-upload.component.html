@@ -1,20 +1,26 @@
 <div class="file-upload-container">
-  <input #fileInput type="file" [accept]="accept()" [multiple]="multiple()" (change)="onFileSelected($event)"
+  <input
+    #fileInput
+    type="file"
+    [accept]="accept"
+    [multiple]="multiple"
+    (change)="onFileSelected($event)"
     style="display: none">
-
-  <button (click)="triggerFileInput()"
+  
+  <button 
+    (click)="triggerFileInput()"
     class="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-indigo-700 text-white rounded-lg hover:from-blue-600 hover:to-indigo-700 dark:hover:from-blue-700 dark:hover:to-indigo-800 transition-all flex items-center gap-2 thai-text">
     <app-icon name="cloud_upload" size="sm" color="text-white"></app-icon>
-    <span>เลือกไฟล์{{ multiple() ? ' (หลายไฟล์)' : '' }}</span>
+    <span>เลือกไฟล์{{ multiple ? ' (หลายไฟล์)' : '' }}</span>
   </button>
 
   <div class="file-list mt-4 space-y-2" *ngIf="selectedFiles.length > 0">
-    <div class="file-item glass-card-weak p-3 flex items-center gap-3"
-      *ngFor="let file of selectedFiles; let i = index">
+    <div class="file-item glass-weak dark:glass-dark-weak theme-gemini:glass-gemini-weak p-3 flex items-center gap-3 border border-white/30 dark:border-slate-700/30 rounded-lg transition-smooth hover:bg-white/30 dark:hover:bg-slate-900/30" *ngFor="let file of selectedFiles; let i = index">
       <app-icon name="description" size="sm" color="text-slate-600 dark:text-slate-400"></app-icon>
       <span class="file-name thai-text flex-1">{{ file.name }}</span>
       <span class="file-size text-sm text-slate-500 dark:text-slate-500">({{ getFileSize(file.size) }})</span>
-      <button (click)="removeFile(i)"
+      <button 
+        (click)="removeFile(i)"
         class="text-slate-600 dark:text-slate-400 hover:text-red-500 dark:hover:text-red-400 transition-colors p-1">
         <app-icon name="close" size="sm"></app-icon>
       </button>

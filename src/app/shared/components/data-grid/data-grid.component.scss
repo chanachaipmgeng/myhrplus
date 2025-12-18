@@ -2,304 +2,118 @@
    Data Grid Component Styles
    ============================================ */
 
-@import '../../../../styles/design-tokens';
-@import '../../../../styles/mixins';
+@import '../../../../styles/syncfusion-mixins';
 
 :host {
-  display: block;
-  width: 100%;
+  @apply block w-full;
 }
 
-.data-grid-container {
-  width: 100%;
-  @include glass-morphism('weak', 'light');
-  border-radius: $radius-lg;
-  padding: $spacing-4;
-  overflow: hidden;
+/* Syncfusion Grid customization - Using ::ng-deep for third-party library styles */
+:host ::ng-deep {
+  .e-grid {
+    @include syncfusion-glass-container;
 
-  .dark & {
-    @include glass-morphism('weak', 'dark');
-  }
+    /* Toolbar */
+    .e-toolbar {
+      @include syncfusion-glass-toolbar;
 
-  // Syncfusion Grid Styles
-  ::ng-deep {
-    .e-grid {
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: $radius-md;
-
-      .dark & {
-        border-color: rgba(51, 65, 85, 0.3);
-      }
-
-      // Toolbar
-      .e-toolbar {
-        background: rgba(255, 255, 255, 0.1);
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: $radius-md;
-        padding: $spacing-2;
-        margin-bottom: $spacing-4;
-
-        .dark & {
-          background: rgba(15, 23, 42, 0.3);
-          border-color: rgba(51, 65, 85, 0.3);
-        }
-
-        .e-toolbar-items {
-          .e-toolbar-item {
-            .e-btn {
-              background: rgba(255, 255, 255, 0.1);
-              border: 1px solid rgba(255, 255, 255, 0.2);
-              color: $gray-700;
-              transition: $transition-all;
-              min-width: 44px;
-              min-height: 44px;
-
-              .dark & {
-                background: rgba(15, 23, 42, 0.3);
-                border-color: rgba(51, 65, 85, 0.3);
-                color: $gray-300;
-              }
-
-              &:hover {
-                background: rgba(var(--primary-rgb), 0.1);
-                border-color: rgba(var(--primary-rgb), 0.3);
-                color: rgb(var(--primary-rgb));
-
-                .dark & {
-                  background: rgba(var(--primary-rgb), 0.2);
-                }
-              }
-
-              &:focus {
-                box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
-              }
-
-              @include respond-to(md) {
-                min-width: auto;
-                min-height: auto;
-              }
-            }
+      .e-toolbar-items {
+        .e-toolbar-item {
+          .e-btn {
+            @include syncfusion-glass-button;
           }
-        }
-      }
-
-      // Grid Header
-      .e-gridheader {
-        background: rgba(255, 255, 255, 0.1);
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-
-        .dark & {
-          background: rgba(15, 23, 42, 0.3);
-        }
-
-        .e-headercell {
-          background: transparent;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-          color: $gray-700;
-          font-weight: $font-weight-semibold;
-          padding: $spacing-3;
-
-          .dark & {
-            border-bottom-color: rgba(51, 65, 85, 0.3);
-            color: $gray-300;
-          }
-
-          &:hover {
-            background: rgba(var(--primary-rgb), 0.05);
-
-            .dark & {
-              background: rgba(var(--primary-rgb), 0.1);
-            }
-          }
-        }
-      }
-
-      // Grid Content
-      .e-gridcontent {
-        .e-row {
-          background: transparent;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-          transition: $transition-all;
-
-          .dark & {
-            border-bottom-color: rgba(51, 65, 85, 0.1);
-          }
-
-          &:hover {
-            background: rgba(var(--primary-rgb), 0.05);
-
-            .dark & {
-              background: rgba(var(--primary-rgb), 0.1);
-            }
-          }
-
-          &.e-selected {
-            background: rgba(var(--primary-rgb), 0.15);
-
-            .dark & {
-              background: rgba(var(--primary-rgb), 0.25);
-            }
-          }
-
-          .e-rowcell {
-            background: transparent;
-            color: $gray-900;
-            padding: $spacing-3;
-
-            .dark & {
-              color: $gray-100;
-            }
-          }
-        }
-
-        // Alternating rows
-        .e-row:nth-child(even) {
-          background: rgba(255, 255, 255, 0.02);
-
-          .dark & {
-            background: rgba(15, 23, 42, 0.05);
-          }
-        }
-      }
-
-      // Pager
-      .e-pager {
-        background: rgba(255, 255, 255, 0.05);
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        padding: $spacing-2;
-
-        .dark & {
-          background: rgba(15, 23, 42, 0.2);
-          border-top-color: rgba(51, 65, 85, 0.3);
-        }
-
-        .e-pagercontainer {
-          .e-pagercontainer {
-            .e-numericitem,
-            .e-prevpagedisabled,
-            .e-prevpage,
-            .e-nextpage,
-            .e-nextpagedisabled,
-            .e-lastpagedisabled,
-            .e-lastpage,
-            .e-firstpagedisabled,
-            .e-firstpage {
-              background: transparent;
-              border: 1px solid rgba(255, 255, 255, 0.1);
-              color: $gray-700;
-              min-width: 44px;
-              min-height: 44px;
-              transition: $transition-all;
-
-              .dark & {
-                border-color: rgba(51, 65, 85, 0.3);
-                color: $gray-300;
-              }
-
-              &:hover:not(.e-active):not(.e-disable) {
-                background: rgba(var(--primary-rgb), 0.1);
-                border-color: rgba(var(--primary-rgb), 0.3);
-                color: rgb(var(--primary-rgb));
-
-                .dark & {
-                  background: rgba(var(--primary-rgb), 0.2);
-                }
-              }
-
-              &.e-active {
-                background: rgb(var(--primary-rgb));
-                border-color: rgb(var(--primary-rgb));
-                color: white;
-              }
-
-              @include respond-to(md) {
-                min-width: auto;
-                min-height: auto;
-              }
-            }
-          }
-        }
-      }
-
-      // Filter Dialog
-      .e-filter-popup {
-        @include glass-morphism('strong', 'light');
-        border-radius: $radius-md;
-
-        .dark & {
-          @include glass-morphism('strong', 'dark');
-        }
-      }
-
-      // Edit Dialog
-      .e-dialog {
-        @include glass-morphism('strong', 'light');
-        border-radius: $radius-lg;
-
-        .dark & {
-          @include glass-morphism('strong', 'dark');
         }
       }
     }
-  }
-}
 
-// Responsive
-@include respond-to-down(sm) {
-  .data-grid-container {
-    padding: $spacing-2;
+    /* Grid Header */
+    .e-gridheader {
+      @include syncfusion-glass-header;
 
-    ::ng-deep {
-      .e-grid {
-        .e-toolbar {
-          padding: $spacing-1;
+      .e-headercell {
+        @apply bg-transparent border-b border-white/10 dark:border-slate-700/30 text-gray-700 dark:text-gray-300 font-semibold p-3 transition-smooth hover:bg-primary-500/5 dark:hover:bg-primary-500/10;
+      }
+    }
 
-          .e-toolbar-items {
-            .e-toolbar-item {
-              .e-btn {
-                padding: $spacing-1 $spacing-2;
-                font-size: $text-xs;
-              }
-            }
-          }
+    /* Gemini theme handled by mixin */
+
+    /* Grid Content */
+    .e-gridcontent {
+      .e-row {
+        @apply bg-transparent border-b border-white/5 dark:border-slate-700/10 transition-smooth hover:bg-primary-500/5 dark:hover:bg-primary-500/10;
+
+        &.e-selected {
+          @apply bg-primary-500/15 dark:bg-primary-500/25;
         }
 
-        .e-headercell,
         .e-rowcell {
-          padding: $spacing-2;
-          font-size: $text-xs;
+          @apply bg-transparent text-gray-900 dark:text-gray-100 p-3;
         }
       }
+
+      /* Alternating rows */
+      .e-row:nth-child(even) {
+        background: rgba(255, 255, 255, 0.02);
+
+        .dark & {
+          background: rgba(15, 23, 42, 0.05);
+        }
+      }
+    }
+
+    body.theme-gemini & .e-row.e-selected {
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+    }
+
+    /* Pager */
+    .e-pager {
+      @apply glass-weak dark:glass-dark-weak border-t border-white/10 dark:border-slate-700/30 p-2;
+
+      .e-pagercontainer .e-pagercontainer {
+        .e-numericitem,
+        .e-prevpagedisabled,
+        .e-prevpage,
+        .e-nextpage,
+        .e-nextpagedisabled,
+        .e-lastpagedisabled,
+        .e-lastpage,
+        .e-firstpagedisabled,
+        .e-firstpage {
+          @apply bg-transparent border border-white/10 dark:border-slate-700/30 text-gray-700 dark:text-gray-300 min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 transition-smooth hover:bg-primary-500/10 dark:hover:bg-primary-500/20 hover:border-primary-500/30 hover:text-primary-600;
+
+          &.e-active {
+            @apply bg-primary-600 border-primary-600 text-white;
+          }
+        }
+      }
+    }
+
+    /* Filter Dialog */
+    .e-filter-popup {
+      @apply glass-strong dark:glass-dark-strong theme-gemini:glass-gemini rounded-md;
+    }
+
+    /* Edit Dialog */
+    .e-dialog {
+      @apply glass-strong dark:glass-dark-strong theme-gemini:glass-gemini rounded-xl;
     }
   }
 }
 
-// Gemini Theme
-body.theme-gemini {
-  .data-grid-container {
-    @include glass-gemini('weak');
+/* Responsive */
+@media (max-width: 640px) {
+  :host ::ng-deep .e-grid {
+    .e-toolbar {
+      @apply p-1;
 
-    ::ng-deep {
-      .e-grid {
-        .e-toolbar {
-          @include glass-gemini('default');
-          @include gemini-border-glow();
-        }
-
-        .e-gridheader {
-          @include glass-gemini('weak');
-        }
-
-        .e-row.e-selected {
-          @include gemini-glow('subtle');
-        }
+      .e-toolbar-items .e-toolbar-item .e-btn {
+        @apply px-2 py-1 text-xs;
       }
+    }
+
+    .e-headercell,
+    .e-rowcell {
+      @apply p-2 text-xs;
     }
   }
 }

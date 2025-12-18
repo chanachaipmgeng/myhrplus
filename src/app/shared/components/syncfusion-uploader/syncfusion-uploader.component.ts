@@ -1,6 +1,10 @@
-import { Component, ChangeDetectionStrategy, input, output, viewChild, effect, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UploaderModule, UploaderComponent as SyncfusionUploaderComponent, FileInfo } from '@syncfusion/ej2-angular-inputs';
+import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
+import {
+  UploaderComponent as SyncfusionUploaderComponent,
+  FileInfo
+} from '@syncfusion/ej2-angular-inputs';
 
 export interface UploaderConfig {
   asyncSettings?: any;
@@ -30,144 +34,208 @@ export interface UploaderConfig {
   standalone: true,
   imports: [CommonModule, UploaderModule],
   templateUrl: './syncfusion-uploader.component.html',
-  styleUrls: ['./syncfusion-uploader.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./syncfusion-uploader.component.scss']
 })
-export class SyncfusionUploaderWrapperComponent implements OnInit {
-  uploader = viewChild<SyncfusionUploaderComponent>('uploader');
+export class SyncfusionUploaderWrapperComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('uploader', { static: false }) uploader!: SyncfusionUploaderComponent;
 
   // Upload Settings
-  asyncSettings = input<any>({ saveUrl: '', removeUrl: '' });
-  allowedExtensions = input<string>('');
-  autoUpload = input<boolean>(false);
-  buttons = input<any>({});
-  directoryUpload = input<boolean>(false);
-  dropArea = input<HTMLElement | string | undefined>(undefined);
-  enablePersistence = input<boolean>(false);
-  enableRtl = input<boolean>(false);
-  files = input<FileInfo[]>([]);
-  htmlAttributes = input<{ [key: string]: string }>({});
-  locale = input<string>('en');
-  maxFileSize = input<number>(0);
-  minFileSize = input<number>(0);
-  multiple = input<boolean>(true);
-  sequentialUpload = input<boolean>(false);
-  showFileList = input<boolean>(true);
-  template = input<string | undefined>(undefined);
+  @Input() asyncSettings: any = {
+    saveUrl: '',
+    removeUrl: ''
+  };
+  @Input() allowedExtensions: string = '';
+  @Input() autoUpload: boolean = false;
+  @Input() buttons: any = {};
+  @Input() directoryUpload: boolean = false;
+  @Input() dropArea?: HTMLElement | string;
+  @Input() enablePersistence: boolean = false;
+  @Input() enableRtl: boolean = false;
+  @Input() files: FileInfo[] = [];
+  @Input() htmlAttributes: { [key: string]: string } = {};
+  @Input() locale: string = 'en';
+  @Input() maxFileSize: number = 0; // 0 = unlimited
+  @Input() minFileSize: number = 0;
+  @Input() multiple: boolean = true;
+  @Input() sequentialUpload: boolean = false;
+  @Input() showFileList: boolean = true;
+  @Input() template?: string;
 
   // Appearance
-  height = input<string | number>('auto');
-  width = input<string | number>('100%');
-  customClass = input<string | undefined>(undefined);
-  config = input<UploaderConfig | undefined>(undefined);
+  @Input() height: string | number = 'auto';
+  @Input() width: string | number = '100%';
+  @Input() customClass?: string;
+  @Input() config?: UploaderConfig;
 
   // Events
-  uploading = output<any>();
-  success = output<any>();
-  failure = output<any>();
-  removing = output<any>();
-  removed = output<any>();
-  fileSelected = output<any>();
-  fileRemoved = output<any>();
-  beforeUpload = output<any>();
-  beforeRemove = output<any>();
-  progress = output<any>();
-  canceling = output<any>();
-  cancelled = output<any>();
-  pausing = output<any>();
-  paused = output<any>();
-  resuming = output<any>();
-  resumed = output<any>();
-  created = output<any>();
-
-  // Use a computed-like structure or just access signals in template.
-  // Since we have a 'config' input that can override others, we can make 'effective' signals if needed.
-  // But Syncfusion components usually take individual inputs.
-  // In `ngOnInit` the original code merged config.
-  // We can do the same using a computed signal or just method.
-  // Simplest is to follow the pattern used in other components: `effectiveConfig`.
-
-  // For simplicity, let's just stick to binding direct inputs for now, 
-  // relying on the parent to pass the correct values or `config` object management.
-  // However, the previous logic did: `if (this.config) { this.asyncSettings = this.config.asyncSettings || this.asyncSettings; ... }`
-
-  // We can't easily merge signals into other signals unless we create new computed signals for EVERY property.
-  // That's verbose. 
-  // Alternatives:
-  // 1. Just ignore `config` in template and assume user passes individual props if they want signals.
-  // 2. Or create a `computed` for `effectiveAsyncSettings`, `effectiveAllowedExtensions`, etc.
-
-  // Let's create `effectiveConfig` that computes generic config, but individual props are what template expects.
-  // Actually, standard Syncfusion usage in template is `[asyncSettings]="asyncSettings"`.
-  // So we need properties.
-
-  // I will skip the complex `config` merging for now and assume users migrate to standard inputs or I should implement it if it's critical.
-  // The original component had it.
-
-  // Let's implement `effectiveValues` object via computed, similar to `AutocompleteComponent`.
-
-  /*
-  effectiveConfig = computed(() => {
-    const cfg = this.config() || {};
-    return {
-      asyncSettings: cfg.asyncSettings || this.asyncSettings(),
-      allowedExtensions: cfg.allowedExtensions ?? this.allowedExtensions(),
-      ...
-    };
-  });
-  */
-
-  // This seems best.
+  @Output() uploading = new EventEmitter<any>();
+  @Output() success = new EventEmitter<any>();
+  @Output() failure = new EventEmitter<any>();
+  @Output() removing = new EventEmitter<any>();
+  @Output() removed = new EventEmitter<any>();
+  @Output() fileSelected = new EventEmitter<any>();
+  @Output() fileRemoved = new EventEmitter<any>();
+  @Output() beforeUpload = new EventEmitter<any>();
+  @Output() beforeRemove = new EventEmitter<any>();
+  @Output() progress = new EventEmitter<any>();
+  @Output() canceling = new EventEmitter<any>();
+  @Output() cancelled = new EventEmitter<any>();
+  @Output() pausing = new EventEmitter<any>();
+  @Output() paused = new EventEmitter<any>();
+  @Output() resuming = new EventEmitter<any>();
+  @Output() resumed = new EventEmitter<any>();
+  @Output() created = new EventEmitter<any>();
 
   ngOnInit(): void {
-    // No-op, signals handle reactivity.
+    // Apply config if provided
+    if (this.config) {
+      this.asyncSettings = this.config.asyncSettings || this.asyncSettings;
+      this.allowedExtensions = this.config.allowedExtensions ?? this.allowedExtensions;
+      this.autoUpload = this.config.autoUpload ?? this.autoUpload;
+      this.buttons = this.config.buttons || this.buttons;
+      this.directoryUpload = this.config.directoryUpload ?? this.directoryUpload;
+      this.enablePersistence = this.config.enablePersistence ?? this.enablePersistence;
+      this.enableRtl = this.config.enableRtl ?? this.enableRtl;
+      this.files = this.config.files || this.files;
+      this.htmlAttributes = this.config.htmlAttributes || this.htmlAttributes;
+      this.locale = this.config.locale || this.locale;
+      this.maxFileSize = this.config.maxFileSize ?? this.maxFileSize;
+      this.minFileSize = this.config.minFileSize ?? this.minFileSize;
+      this.multiple = this.config.multiple ?? this.multiple;
+      this.sequentialUpload = this.config.sequentialUpload ?? this.sequentialUpload;
+      this.showFileList = this.config.showFileList ?? this.showFileList;
+      this.template = this.config.template || this.template;
+      this.height = this.config.height ?? this.height;
+      this.width = this.config.width ?? this.width;
+      this.customClass = this.config.customClass || this.customClass;
+    }
   }
 
+  ngAfterViewInit(): void {
+    if (this.uploader) {
+      this.created.emit({ uploader: this.uploader });
+    }
+  }
+
+  ngOnDestroy(): void {
+    // Cleanup if needed
+  }
+
+  /**
+   * Get Uploader instance
+   */
   getUploaderInstance(): SyncfusionUploaderComponent | null {
-    return this.uploader() || null;
+    return this.uploader || null;
   }
 
+  /**
+   * Upload files
+   */
   upload(files?: FileInfo[]): void {
-    this.uploader()?.upload(files as any);
+    if (this.uploader) {
+      if (files) {
+        this.uploader.upload(files as any);
+      } else {
+        this.uploader.upload();
+      }
+    }
   }
 
+  /**
+   * Remove files
+   */
   remove(files?: FileInfo[]): void {
-    this.uploader()?.remove(files as any);
+    if (this.uploader) {
+      if (files) {
+        this.uploader.remove(files as any);
+      } else {
+        this.uploader.remove();
+      }
+    }
   }
 
+  /**
+   * Clear all files
+   */
   clearAll(): void {
-    this.uploader()?.clearAll();
+    if (this.uploader) {
+      this.uploader.clearAll();
+    }
   }
 
+  /**
+   * Cancel upload
+   */
   cancel(files?: FileInfo[]): void {
-    this.uploader()?.cancel(files as any);
+    if (this.uploader) {
+      if (files) {
+        this.uploader.cancel(files as any);
+      } else {
+        this.uploader.cancel();
+      }
+    }
   }
 
+  /**
+   * Pause upload
+   */
   pause(files?: FileInfo[]): void {
-    this.uploader()?.pause(files as any);
+    if (this.uploader) {
+      if (files) {
+        this.uploader.pause(files as any);
+      } else {
+        this.uploader.pause();
+      }
+    }
   }
 
+  /**
+   * Resume upload
+   */
   resume(files?: FileInfo[]): void {
-    this.uploader()?.resume(files as any);
+    if (this.uploader) {
+      if (files) {
+        this.uploader.resume(files as any);
+      } else {
+        this.uploader.resume();
+      }
+    }
   }
 
+  /**
+   * Get files
+   */
   getFiles(): FileInfo[] {
-    return (this.uploader()?.getFilesData() as FileInfo[]) || [];
+    if (this.uploader) {
+      return this.uploader.getFilesData() as FileInfo[];
+    }
+    return [];
   }
 
+  /**
+   * Get selected files
+   */
   getSelectedFiles(): FileInfo[] {
-    const uploader = this.uploader();
-    if (uploader) {
-      const allFiles = uploader.getFilesData() as any[];
+    if (this.uploader) {
+      // getSelectedFiles is private, use getFilesData and filter selected
+      const allFiles = this.uploader.getFilesData() as any[];
       return allFiles.filter((file: any) => file.status === 'Selected' || file.selected) as FileInfo[];
     }
     return [];
   }
 
+  /**
+   * Refresh uploader
+   */
   refresh(): void {
-    this.uploader()?.refresh();
+    if (this.uploader) {
+      this.uploader.refresh();
+    }
   }
-  // Event Handlers
+
+  /**
+   * Event handlers
+   */
   onUploading(event: any): void {
     this.uploading.emit(event);
   }
@@ -190,6 +258,10 @@ export class SyncfusionUploaderWrapperComponent implements OnInit {
 
   onFileSelected(event: any): void {
     this.fileSelected.emit(event);
+  }
+
+  onFileRemoved(event: any): void {
+    this.fileRemoved.emit(event);
   }
 
   onBeforeUpload(event: any): void {
@@ -232,3 +304,4 @@ export class SyncfusionUploaderWrapperComponent implements OnInit {
     this.created.emit(event);
   }
 }
+

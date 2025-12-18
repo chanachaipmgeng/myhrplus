@@ -1,286 +1,75 @@
 /* ============================================
    Stepper Component Styles
+   ============================================
+   Migrated to Tailwind - Stepper-specific styles only
    ============================================ */
 
-@import '../../../../styles/design-tokens';
-@import '../../../../styles/mixins';
-
-.stepper-container {
-  width: 100%;
-}
-
-/* Horizontal Layout */
 .stepper-horizontal {
   .stepper-steps {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    position: relative;
-    gap: $spacing-2;
+    @apply flex items-start justify-between relative;
   }
 
   .stepper-step {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-    transition: all 0.3s ease;
-
-    // Touch target
-    min-height: 44px;
-    padding: $spacing-2;
-
-    @include respond-to(md) {
-      min-height: auto;
-      padding: 0;
-    }
-  }
-
-  .step-connector {
-    flex: 1;
-    height: 2px;
-    background: $gray-200;
-    margin: 0 1rem;
-    margin-top: 20px;
-    transition: all 0.3s ease;
-  }
-
-  .connector-completed {
-    background: $primary-500;
+    @apply flex-1 flex items-center relative;
   }
 }
 
-/* Vertical Layout */
 .stepper-vertical {
   .stepper-steps {
-    display: flex;
-    flex-direction: column;
+    @apply flex flex-col;
   }
 
   .stepper-step {
-    display: flex;
-    align-items: flex-start;
-    position: relative;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-bottom: 1.5rem;
-  }
-
-  .step-connector-vertical {
-    position: absolute;
-    left: 20px;
-    top: 48px;
-    width: 2px;
-    height: calc(100% + 1.5rem);
-    background: $gray-200;
-    transition: all 0.3s ease;
-  }
-
-  .connector-completed {
-    background: $primary-500;
+    @apply flex items-start relative mb-6;
   }
 }
 
-/* Step Content Elements */
-.step-content {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex: 1;
-}
-
-.step-indicator {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: $gray-200;
-  color: $gray-500;
-  border: 2px solid $gray-200;
-  transition: all 0.3s ease;
-  flex-shrink: 0;
-}
-
-/* Dark Mode Overrides for Base Elements */
-.dark {
-
-  .step-connector,
-  .step-connector-vertical {
-    background: $gray-700;
-  }
-
-  .connector-completed {
-    background: $primary-500;
-  }
-
-  .step-indicator {
-    background: $gray-700;
-    border-color: $gray-700;
-    color: $gray-400;
-  }
-}
-
-/* Step States */
-.step-active .step-indicator {
-  background: $primary-500;
-  border-color: $primary-500;
-  color: white;
-  box-shadow: 0 0 0 4px alpha-color($primary-500, 0.1);
-}
-
-.step-completed .step-indicator {
-  background: $success-500;
-  border-color: $success-500;
-  color: white;
-}
-
-.step-disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Typography */
-.step-number {
-  font-weight: $font-weight-semibold;
-  font-size: 0.875rem;
-}
-
-.step-label {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  flex: 1;
-}
-
-.step-title {
-  font-weight: $font-weight-semibold;
-  color: $gray-800;
-  transition: color 0.3s ease;
-}
-
-.dark .step-title {
-  color: $gray-100;
-}
-
-.step-active .step-title {
-  color: $primary-500;
-  font-weight: $font-weight-bold;
-}
-
-.step-description {
-  color: $gray-500;
-  transition: color 0.3s ease;
-}
-
-.dark .step-description {
-  color: $gray-400;
-}
-
-.step-optional .step-title::after {
-  content: ' (ไม่บังคับ)';
-  font-size: 0.75rem;
-  color: $gray-400;
-  font-weight: normal;
-}
-
-/* Actions */
-.stepper-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-
-  button {
-    min-width: 44px;
-    min-height: 44px;
-
-    @include respond-to(md) {
-      min-width: auto;
-      min-height: auto;
-    }
-  }
-}
-
-.dark .stepper-actions {
-  border-top-color: rgba(51, 65, 85, 0.3);
-}
-
-/* Gemini Theme */
-body.theme-gemini {
-  .step-active .step-indicator {
-    @include gemini-glow('default');
-    @include gemini-border-glow();
-  }
-
-  .step-active .step-title {
-    @include gradient-text-gemini();
-  }
-
-  .connector-completed {
-    background: linear-gradient(90deg, $gemini-gradient-start, $gemini-gradient-end);
-    @include gemini-glow('weak');
-  }
-
-  .step-completed .step-indicator {
-    background: linear-gradient(135deg, $success-500, $success-600);
-    @include gemini-glow('weak');
-  }
-}
-
-/* Responsive */
-@include respond-to-down(md) {
+/* Responsive - Mobile */
+@media (max-width: 768px) {
   .stepper-horizontal {
     .stepper-steps {
-      flex-direction: column;
-      gap: $spacing-4;
+      @apply flex-col gap-4;
     }
 
     .step-connector {
-      display: none;
+      @apply hidden;
     }
 
-    .step-connector-vertical {
-      display: block; // Fallback to vertical line on mobile
-      position: absolute;
-      left: 20px;
-      top: 48px;
-      width: 2px;
-      height: calc(100% + 1rem);
-      background: $gray-200;
-
-      .dark & {
-        background: $gray-700;
+    .stepper-step {
+      @apply relative;
+      
+      &::after {
+        content: '';
+        @apply absolute left-5 top-12 w-0.5 bg-slate-200 dark:bg-slate-700;
+        height: calc(100% + 1rem);
       }
-    }
-
-    .step-content {
-      flex-direction: row;
-      align-items: flex-start;
-      gap: $spacing-3;
-    }
-
-    .step-description {
-      font-size: $text-xs;
     }
   }
 
   .stepper-actions {
-    flex-direction: column;
-    gap: $spacing-2;
-    margin-top: $spacing-4;
-
+    @apply flex-col gap-2 mt-4;
+    
     button {
-      width: 100%;
-      justify-content: center;
+      @apply w-full justify-center;
     }
   }
+}
 
-  .step-indicator {
-    width: 36px;
-    height: 36px;
+/* Responsive - Tablet */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .stepper-horizontal {
+    .stepper-steps {
+      @apply gap-2;
+    }
+
+    .step-connector {
+      @apply mx-2;
+    }
+
+    .step-description {
+      @apply hidden;
+    }
   }
 }
+
+

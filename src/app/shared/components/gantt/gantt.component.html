@@ -1,15 +1,41 @@
-<div class="gantt-container" [ngClass]="customClass()" [style.height]="height()" [style.width]="width()">
-  <ejs-gantt #gantt [dataSource]="dataSource()" [taskFields]="taskFields()" [columns]="columns()"
-    [allowSelection]="allowSelection()" [allowSorting]="allowSorting()" [allowFiltering]="allowFiltering()"
-    [allowResizing]="allowResizing()" [allowReordering]="allowReordering()" [editSettings]="computedEditSettings()"
-    [toolbar]="enableToolbar() ? toolbar() : []" [allowExcelExport]="allowExcelExport()"
-    [allowPdfExport]="allowPdfExport()" [enableCriticalPath]="enableCriticalPath()"
-    [timelineSettings]="timelineSettings()" [labelSettings]="labelSettings()" [splitterSettings]="splitterSettings()"
-    [projectStartDate]="projectStartDate()" [projectEndDate]="projectEndDate()" [workWeek]="workWeek()"
-    [holidays]="holidays()" [eventMarkers]="eventMarkers()" [enableRtl]="enableRtl()" [locale]="locale()"
-    [height]="height()" (actionBegin)="actionBegin.emit($event)" (actionComplete)="actionComplete.emit($event)"
-    (cellEdit)="cellEdit.emit($event)" (taskbarEdited)="taskbarEdited.emit($event)"
-    (rowSelected)="rowSelected.emit($event)" (rowDeselected)="rowDeselected.emit($event)"
-    (dataBound)="dataBound.emit($event)" (created)="created.emit($event)">
+<div class="gantt-container relative w-full h-full glass dark:glass-dark theme-gemini:glass-gemini rounded-2xl border border-white/10 dark:border-white/5 shadow-glass p-4 overflow-hidden" [ngClass]="customClass" [style.height]="height" [style.width]="width">
+  <ejs-gantt
+    #gantt
+    [dataSource]="dataSource"
+    [taskFields]="taskFields"
+    [columns]="columns"
+    [allowSelection]="allowSelection"
+    [allowSorting]="allowSorting"
+    [allowFiltering]="allowFiltering"
+    [allowResizing]="allowResizing"
+    [allowReordering]="allowReordering"
+    [editSettings]="{ allowEditing: allowEditing, allowTaskbarDragDrop: allowTaskbarDragDrop, allowTaskbarResize: allowTaskbarResize }"
+    [toolbar]="enableToolbar ? toolbar : []"
+    [allowExcelExport]="allowExcelExport"
+    [allowPdfExport]="allowPdfExport"
+    [enableCriticalPath]="enableCriticalPath"
+    [timelineSettings]="timelineSettings"
+    [labelSettings]="labelSettings"
+    [splitterSettings]="splitterSettings"
+    [projectStartDate]="projectStartDate"
+    [projectEndDate]="projectEndDate"
+    [workWeek]="workWeek"
+    [holidays]="holidays"
+    [eventMarkers]="eventMarkers"
+    [enableRtl]="enableRtl"
+    [locale]="locale"
+    [height]="height"
+    (actionBegin)="onActionBegin($event)"
+    (actionComplete)="onActionComplete($event)"
+    (cellEdit)="onCellEdit($event)"
+    (taskbarEdited)="onTaskbarEdited($event)"
+    (rowSelected)="onRowSelected($event)"
+    (rowDeselected)="onRowDeselected($event)"
+    (dataBound)="onDataBound($event)"
+    (created)="onCreated($event)">
   </ejs-gantt>
 </div>
+
+
+
+

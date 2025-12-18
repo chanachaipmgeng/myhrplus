@@ -1,10 +1,11 @@
 .modal-content {
   border-radius: 0.5rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  box-shadow: var(--modal-shadow);
 }
 
 .modal-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* Using CSS Variables for gradient */
+  background: linear-gradient(135deg, var(--modal-header-gradient-start) 0%, var(--modal-header-gradient-end) 100%);
   color: white;
   border-bottom: none;
   border-radius: 0.5rem 0.5rem 0 0;
@@ -57,26 +58,29 @@
 }
 
 .modal-footer {
-  border-top: 1px solid #dee2e6;
-  padding: 1rem;
+  /* Border handled by Tailwind border-t in HTML */
+  /* Padding: 1rem = p-4 - using Tailwind spacing scale */
+  padding: 1rem; /* Keep for legacy Bootstrap modal structure */
 
   .btn {
-    min-width: 100px;
+    /* Min-width handled by Tailwind min-w-[100px] in HTML */
+    min-width: 100px; /* Keep for legacy Bootstrap buttons */
   }
 }
 
-// Dark mode support
+// Dark mode support - Using CSS Variables
+[data-theme='dark'] :host,
 :host-context(.dark) {
   .modal-body {
     .consent-content {
-      background-color: #2d3748;
-      color: #e2e8f0;
-      border-color: #4a5568;
+      background-color: var(--modal-body-bg);
+      color: var(--modal-body-text);
+      border-color: var(--modal-body-border);
     }
   }
 
   .modal-footer {
-    border-top-color: #4a5568;
+    border-top-color: var(--modal-footer-border);
   }
 }
 

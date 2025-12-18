@@ -1,6 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy, input, output, viewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { QueryBuilderModule, QueryBuilderComponent as SyncfusionQueryBuilderComponent, RuleModel } from '@syncfusion/ej2-angular-querybuilder';
+import { QueryBuilderModule } from '@syncfusion/ej2-angular-querybuilder';
+import {
+  QueryBuilderComponent as SyncfusionQueryBuilderComponent,
+  RuleModel,
+  ColumnsModel
+} from '@syncfusion/ej2-angular-querybuilder';
 
 export interface QueryBuilderColumn {
   field: string;
@@ -13,54 +18,85 @@ export interface QueryBuilderColumn {
   [key: string]: any;
 }
 
+export interface QueryBuilderConfig {
+  dataSource?: any[];
+  columns?: QueryBuilderColumn[];
+  rule?: RuleModel;
+  width?: string | number;
+  height?: string | number;
+  allowValidation?: boolean;
+  enableNotCondition?: boolean;
+  maxGroupCount?: number;
+  separator?: string;
+  displayMode?: 'Horizontal' | 'Vertical';
+  showButtons?: boolean;
+}
+
 @Component({
   selector: 'app-query-builder',
   standalone: true,
   imports: [CommonModule, QueryBuilderModule],
   templateUrl: './query-builder.component.html',
-  styleUrls: ['./query-builder.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./query-builder.component.scss']
 })
-export class QueryBuilderComponent {
-  querybuilder = viewChild<SyncfusionQueryBuilderComponent>('querybuilder');
+export class QueryBuilderComponent implements OnInit, OnDestroy {
+  @ViewChild('querybuilder', { static: false }) querybuilder!: SyncfusionQueryBuilderComponent;
 
-  // Configuration
-  dataSource = input<any[]>([]);
-  columns = input<QueryBuilderColumn[]>([]);
-  rule = input<RuleModel>({ condition: 'and', rules: [] });
-  width = input<string | number>('100%');
-  height = input<string | number>('600px');
-  allowValidation = input<boolean>(true);
-  enableNotCondition = input<boolean>(true);
-  maxGroupCount = input<number>(5);
-  separator = input<string>(',');
-  displayMode = input<'Horizontal' | 'Vertical'>('Horizontal');
-  showButtons = input<boolean>(true);
-
+  // Data Source
+  @Input() dataSource: any[] = [];
+  
+  // Columns
+  @Input() columns: QueryBuilderColumn[] = [];
+  
+  // Rule
+  @Input() rule: RuleModel = {
+    condition: 'and',
+    rules: []
+  };
+  
+  // Size
+  @Input() width: string | number = '100%';
+  @Input() height: string | number = '600px';
+  
+  // Features
+  @Input() allowValidation: boolean = true;
+  @Input() enableNotCondition: boolean = true;
+  @Input() maxGroupCount: number = 5;
+  @Input() separator: string = ',';
+  @Input() displayMode: 'Horizontal' | 'Vertical' = 'Horizontal';
+  @Input() showButtons: boolean = true;
+  
   // Styling
-  customClass = input<string>('');
-
+  @Input() customClass: string = '';
+  
   // Events
-  created = output<any>();
-  beforeChange = output<any>();
-  change = output<any>();
-  ruleChange = output<any>();
-  beforeRuleAdd = output<any>();
-  ruleAdd = output<any>();
-  beforeRuleDelete = output<any>();
-  ruleDelete = output<any>();
-  beforeGroupAdd = output<any>();
-  groupAdd = output<any>();
-  beforeGroupDelete = output<any>();
-  groupDelete = output<any>();
+  @Output() created = new EventEmitter<any>();
+  @Output() beforeChange = new EventEmitter<any>();
+  @Output() change = new EventEmitter<any>();
+  @Output() ruleChange = new EventEmitter<any>();
+  @Output() beforeRuleAdd = new EventEmitter<any>();
+  @Output() ruleAdd = new EventEmitter<any>();
+  @Output() beforeRuleDelete = new EventEmitter<any>();
+  @Output() ruleDelete = new EventEmitter<any>();
+  @Output() beforeGroupAdd = new EventEmitter<any>();
+  @Output() groupAdd = new EventEmitter<any>();
+  @Output() beforeGroupDelete = new EventEmitter<any>();
+  @Output() groupDelete = new EventEmitter<any>();
+
+  ngOnInit(): void {
+    // Initialize if needed
+  }
+
+  ngOnDestroy(): void {
+    // Cleanup if needed
+  }
 
   /**
    * Get SQL query
    */
   getSqlFromRules(): string {
-    const qb = this.querybuilder();
-    if (qb) {
-      return qb.getSqlFromRules(this.rule());
+    if (this.querybuilder) {
+      return this.querybuilder.getSqlFromRules(this.rule);
     }
     return '';
   }
@@ -69,20 +105,19 @@ export class QueryBuilderComponent {
    * Get rules
    */
   getRules(): RuleModel {
-    const qb = this.querybuilder();
-    if (qb) {
-      return qb.getRules();
+    if (this.querybuilder) {
+      return this.querybuilder.getRules();
     }
-    return this.rule();
+    return this.rule;
   }
 
   /**
    * Set rules
    */
   setRules(rule: RuleModel): void {
-    const qb = this.querybuilder();
-    if (qb) {
-      qb.setRules(rule);
+    this.rule = rule;
+    if (this.querybuilder) {
+      this.querybuilder.setRules(rule);
     }
   }
 
@@ -90,9 +125,8 @@ export class QueryBuilderComponent {
    * Add groups
    */
   addGroups(groups: RuleModel[], groupID: string): void {
-    const qb = this.querybuilder();
-    if (qb) {
-      qb.addGroups(groups, groupID);
+    if (this.querybuilder) {
+      this.querybuilder.addGroups(groups, groupID);
     }
   }
 
@@ -100,9 +134,8 @@ export class QueryBuilderComponent {
    * Add rules
    */
   addRules(rules: RuleModel[], groupID: string): void {
-    const qb = this.querybuilder();
-    if (qb) {
-      qb.addRules(rules, groupID);
+    if (this.querybuilder) {
+      this.querybuilder.addRules(rules, groupID);
     }
   }
 
@@ -110,9 +143,8 @@ export class QueryBuilderComponent {
    * Delete groups
    */
   deleteGroups(groupIDs: string[]): void {
-    const qb = this.querybuilder();
-    if (qb) {
-      qb.deleteGroups(groupIDs);
+    if (this.querybuilder) {
+      this.querybuilder.deleteGroups(groupIDs);
     }
   }
 
@@ -120,9 +152,8 @@ export class QueryBuilderComponent {
    * Notify change
    */
   notifyChange(value: string | number | boolean | Date | string[] | number[] | Date[], element: Element, type?: string): void {
-    const qb = this.querybuilder();
-    if (qb) {
-      qb.notifyChange(value, element, type);
+    if (this.querybuilder) {
+      this.querybuilder.notifyChange(value, element, type);
     }
   }
 
@@ -130,9 +161,8 @@ export class QueryBuilderComponent {
    * Refresh
    */
   refresh(): void {
-    const qb = this.querybuilder();
-    if (qb) {
-      qb.dataBind();
+    if (this.querybuilder) {
+      this.querybuilder.dataBind();
     }
   }
 
@@ -140,43 +170,58 @@ export class QueryBuilderComponent {
    * Get query builder instance
    */
   getQueryBuilderInstance(): SyncfusionQueryBuilderComponent | null {
-    return this.querybuilder() || null;
+    return this.querybuilder || null;
   }
 
-  // Event Handlers
-  onCreated(event: any): void {
-    this.created.emit(event);
+  /**
+   * Event handlers
+   */
+  onCreated(args: any): void {
+    this.created.emit(args);
   }
 
-  onRuleChange(event: any): void {
-    this.ruleChange.emit(event);
+  onBeforeChange(args: any): void {
+    this.beforeChange.emit(args);
   }
 
-  onRuleAdd(event: any): void {
-    this.ruleAdd.emit(event);
+  onChange(args: any): void {
+    this.change.emit(args);
   }
 
-  onBeforeRuleDelete(event: any): void {
-    this.beforeRuleDelete.emit(event);
+  onRuleChange(args: any): void {
+    this.ruleChange.emit(args);
   }
 
-  onRuleDelete(event: any): void {
-    this.ruleDelete.emit(event);
+  onBeforeRuleAdd(args: any): void {
+    this.beforeRuleAdd.emit(args);
   }
 
-  onBeforeGroupAdd(event: any): void {
-    this.beforeGroupAdd.emit(event);
+  onRuleAdd(args: any): void {
+    this.ruleAdd.emit(args);
   }
 
-  onGroupAdd(event: any): void {
-    this.groupAdd.emit(event);
+  onBeforeRuleDelete(args: any): void {
+    this.beforeRuleDelete.emit(args);
   }
 
-  onBeforeGroupDelete(event: any): void {
-    this.beforeGroupDelete.emit(event);
+  onRuleDelete(args: any): void {
+    this.ruleDelete.emit(args);
   }
 
-  onGroupDelete(event: any): void {
-    this.groupDelete.emit(event);
+  onBeforeGroupAdd(args: any): void {
+    this.beforeGroupAdd.emit(args);
+  }
+
+  onGroupAdd(args: any): void {
+    this.groupAdd.emit(args);
+  }
+
+  onBeforeGroupDelete(args: any): void {
+    this.beforeGroupDelete.emit(args);
+  }
+
+  onGroupDelete(args: any): void {
+    this.groupDelete.emit(args);
   }
 }
+

@@ -1,6 +1,6 @@
-import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-export type StatusType =
+export type StatusType = 
   | 'pending' | 'approved' | 'rejected' | 'cancelled'
   | 'draft' | 'submitted' | 'reviewed' | 'completed'
   | 'active' | 'inactive' | 'suspended'
@@ -10,19 +10,18 @@ export type StatusType =
 @Component({
   selector: 'app-status-badge',
   templateUrl: './status-badge.component.html',
-  styleUrls: ['./status-badge.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./status-badge.component.scss']
 })
 export class StatusBadgeComponent {
-  status = input<StatusType>('pending');
-  label = input<string>('');
-  showIcon = input<boolean>(true);
-  size = input<'sm' | 'md' | 'lg'>('md');
-  variant = input<'filled' | 'outlined' | 'soft'>('filled');
+  @Input() status: StatusType = 'pending';
+  @Input() label: string = '';
+  @Input() showIcon: boolean = true;
+  @Input() size: 'sm' | 'md' | 'lg' = 'md';
+  @Input() variant: 'filled' | 'outlined' | 'soft' = 'filled';
 
-  displayLabel = computed(() => {
-    if (this.label()) return this.label();
-
+  get displayLabel(): string {
+    if (this.label) return this.label;
+    
     const labelMap: Record<StatusType, string> = {
       pending: 'รอดำเนินการ',
       approved: 'อนุมัติแล้ว',
@@ -43,10 +42,10 @@ export class StatusBadgeComponent {
       warning: 'คำเตือน',
       info: 'ข้อมูล'
     };
-    return labelMap[this.status()] || this.status();
-  });
+    return labelMap[this.status] || this.status;
+  }
 
-  statusIcon = computed(() => {
+  get statusIcon(): string {
     const iconMap: Record<StatusType, string> = {
       pending: 'schedule',
       approved: 'check_circle',
@@ -67,10 +66,10 @@ export class StatusBadgeComponent {
       warning: 'warning',
       info: 'info'
     };
-    return iconMap[this.status()] || 'circle';
-  });
+    return iconMap[this.status] || 'circle';
+  }
 
-  statusColor = computed(() => {
+  get statusColor(): string {
     const colorMap: Record<StatusType, string> = {
       pending: 'amber',
       approved: 'green',
@@ -91,8 +90,8 @@ export class StatusBadgeComponent {
       warning: 'amber',
       info: 'blue'
     };
-    return colorMap[this.status()] || 'gray';
-  });
+    return colorMap[this.status] || 'gray';
+  }
 }
 
 

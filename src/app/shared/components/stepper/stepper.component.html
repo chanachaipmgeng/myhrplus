@@ -1,59 +1,97 @@
-<div class="stepper-container" [ngClass]="'stepper-' + orientation()">
-  <div class="stepper-steps" [ngClass]="'steps-' + orientation()">
-    <div *ngFor="let step of steps(); let i = index" class="stepper-step" [attr.role]="'button'"
-      [class]="'step-' + getStepStatus(i)"
-      [ngClass]="{ 'step-disabled': step.disabled, 'step-optional': step.optional }" (click)="onStepClick(i)"
-      @stepAnimation>
+<div class="w-full" [ngClass]="'stepper-' + orientation">
+  <div class="stepper-steps" [ngClass]="'steps-' + orientation">
+    <div
+      *ngFor="let step of steps; let i = index"
+      class="stepper-step min-h-[44px] md:min-h-0 p-2 md:p-0 transition-smooth"
+      [ngClass]="'step-' + getStepStatus(i)"
+      [class.step-disabled]="step.disabled"
+      [class.opacity-50]="step.disabled"
+      [class.cursor-not-allowed]="step.disabled"
+      [class.cursor-pointer]="!step.disabled"
+      [class.step-optional]="step.optional"
+      (click)="onStepClick(i)">
       <!-- Step Connector (for horizontal) -->
-      <div *ngIf="orientation() === 'horizontal' && i > 0" class="step-connector"
-        [class.connector-completed]="isStepCompleted(i - 1)">
+      <div
+        *ngIf="orientation === 'horizontal' && i > 0"
+        class="flex-1 h-0.5 bg-slate-200 dark:bg-slate-700 mx-4 mt-5 transition-smooth"
+        [class.bg-primary-600]="isStepCompleted(i - 1)"
+        [class.dark:bg-primary-500]="isStepCompleted(i - 1)">
       </div>
 
       <!-- Step Content -->
-      <div class="step-content">
+      <div class="flex items-center gap-4 flex-1 md:flex-row">
         <!-- Step Indicator -->
-        <div class="step-indicator">
-          <div *ngIf="showStepIcons() && step.icon && !isStepCompleted(i)" class="step-icon">
+        <div class="w-10 h-10 md:w-9 md:h-9 rounded-full flex items-center justify-center border-2 transition-smooth flex-shrink-0"
+             [ngClass]="{
+               'bg-slate-200 dark:bg-slate-700 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400': getStepStatus(i) === 'pending',
+               'bg-primary-600 dark:bg-primary-500 border-primary-600 dark:border-primary-500 text-white shadow-lg': getStepStatus(i) === 'active',
+               'bg-green-500 border-green-500 text-white': getStepStatus(i) === 'completed'
+             }"
+             [style.box-shadow]="getStepStatus(i) === 'active' ? '0 10px 15px -3px rgba(59, 130, 246, 0.2)' : null">
+          <div
+            *ngIf="showStepIcons && step.icon && !isStepCompleted(i)"
+            class="step-icon">
             <app-icon [name]="step.icon" size="sm" color="text-white"></app-icon>
           </div>
-          <div *ngIf="isStepCompleted(i)" class="step-check">
+          <div
+            *ngIf="isStepCompleted(i)"
+            class="step-check">
             <app-icon name="check" size="sm" color="text-white"></app-icon>
           </div>
-          <div *ngIf="!showStepIcons() || (!step.icon && !isStepCompleted(i))" class="step-number">
-            {{ showStepNumbers() ? (i + 1) : '' }}
+          <div
+            *ngIf="!showStepIcons || (!step.icon && !isStepCompleted(i))"
+            class="font-semibold text-sm font-inter">
+            {{ showStepNumbers ? (i + 1) : '' }}
           </div>
         </div>
 
         <!-- Step Label -->
-        <div class="step-label">
-          <span class="step-title thai-text">{{ step.label }}</span>
-          <span *ngIf="step.description" class="step-description thai-text text-sm">
+        <div class="flex flex-col gap-1 flex-1">
+          <span class="font-semibold text-slate-900 dark:text-slate-100 transition-colors thai-text font-sarabun"
+                [ngClass]="{
+                  'text-primary-600 dark:text-primary-400 font-bold': getStepStatus(i) === 'active'
+                }">
+            {{ step.label }}
+            <span *ngIf="step.optional" class="text-xs text-slate-500 dark:text-slate-400 font-normal"> (ไม่บังคับ)</span>
+          </span>
+          <span *ngIf="step.description" class="text-sm text-slate-600 dark:text-slate-400 transition-colors thai-text">
             {{ step.description }}
           </span>
         </div>
       </div>
 
       <!-- Step Connector (for vertical) -->
-      <div *ngIf="orientation() === 'vertical' && i < steps().length - 1" class="step-connector-vertical"
-        [class.connector-completed]="isStepCompleted(i)">
+      <div
+        *ngIf="orientation === 'vertical' && i < steps.length - 1"
+        class="absolute left-5 top-12 w-0.5 bg-slate-200 dark:bg-slate-700 transition-smooth"
+        [class.bg-primary-600]="isStepCompleted(i)"
+        [class.dark:bg-primary-500]="isStepCompleted(i)"
+        [style.height]="'calc(100% + 1.5rem)'">
       </div>
     </div>
   </div>
 
   <!-- Navigation Buttons -->
-  <div class="stepper-actions" *ngIf="orientation() === 'horizontal'">
-    <button (click)="onPrevious()" [disabled]="!canGoPrevious()"
-      class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors thai-text flex items-center gap-2">
+  <div class="flex justify-between mt-8 pt-6 border-t border-white/20 dark:border-slate-700/30 md:flex-row flex-col gap-2" *ngIf="orientation === 'horizontal'">
+    <button
+      (click)="onPrevious()"
+      [disabled]="!canGoPrevious()"
+      class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors thai-text flex items-center gap-2 min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 md:w-auto w-full justify-center">
       <app-icon name="arrow_back" size="sm"></app-icon>
       <span>ย้อนกลับ</span>
     </button>
-    <button *ngIf="!isLastStep()" (click)="onNext()" [disabled]="!canGoNext()"
-      class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors thai-text flex items-center gap-2">
+    <button
+      *ngIf="!isLastStep()"
+      (click)="onNext()"
+      [disabled]="!canGoNext()"
+      class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors thai-text flex items-center gap-2 min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 md:w-auto w-full justify-center">
       <span>ถัดไป</span>
       <app-icon name="arrow_forward" size="sm"></app-icon>
     </button>
-    <button *ngIf="isLastStep()" (click)="onComplete()"
-      class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors thai-text flex items-center gap-2">
+    <button
+      *ngIf="isLastStep()"
+      (click)="onComplete()"
+      class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors thai-text flex items-center gap-2 min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 md:w-auto w-full justify-center">
       <app-icon name="check" size="sm"></app-icon>
       <span>เสร็จสิ้น</span>
     </button>

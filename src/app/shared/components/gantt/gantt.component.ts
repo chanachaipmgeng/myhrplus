@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy, ChangeDetectionStrategy, input, output, effect, viewChild, computed } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GanttModule } from '@syncfusion/ej2-angular-gantt';
 import {
@@ -90,18 +90,14 @@ export interface GanttConfig {
     CriticalPathService
   ],
   templateUrl: './gantt.component.html',
-  styleUrls: ['./gantt.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./gantt.component.scss']
 })
-export class GanttComponent implements OnInit, OnDestroy {
-  gantt = viewChild<SyncfusionGanttComponent>('gantt');
-
-  // Config Object (Optional override)
-  config = input<GanttConfig | undefined>(undefined);
+export class GanttComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('gantt', { static: false }) gantt!: SyncfusionGanttComponent;
 
   // Data Source
-  dataSourceInput = input<GanttTask[]>([], { alias: 'dataSource' });
-  taskFieldsInput = input<any>({
+  @Input() dataSource: GanttTask[] = [];
+  @Input() taskFields: any = {
     id: 'taskID',
     name: 'taskName',
     startDate: 'startDate',
@@ -110,115 +106,94 @@ export class GanttComponent implements OnInit, OnDestroy {
     progress: 'progress',
     dependency: 'dependency',
     child: 'subtasks'
-  }, { alias: 'taskFields' });
+  };
 
   // Columns
-  columnsInput = input<GanttColumn[]>([], { alias: 'columns' });
+  @Input() columns: GanttColumn[] = [];
 
   // Behavior
-  allowSelectionInput = input<boolean>(true, { alias: 'allowSelection' });
-  allowSortingInput = input<boolean>(true, { alias: 'allowSorting' });
-  allowFilteringInput = input<boolean>(true, { alias: 'allowFiltering' });
-  allowResizingInput = input<boolean>(true, { alias: 'allowResizing' });
-  allowReorderingInput = input<boolean>(true, { alias: 'allowReordering' });
-  allowEditingInput = input<boolean>(true, { alias: 'allowEditing' });
-  allowTaskbarDragDropInput = input<boolean>(true, { alias: 'allowTaskbarDragDrop' });
-  allowTaskbarResizeInput = input<boolean>(true, { alias: 'allowTaskbarResize' });
+  @Input() allowSelection: boolean = true;
+  @Input() allowSorting: boolean = true;
+  @Input() allowFiltering: boolean = true;
+  @Input() allowResizing: boolean = true;
+  @Input() allowReordering: boolean = true;
+  @Input() allowEditing: boolean = true;
+  @Input() allowTaskbarDragDrop: boolean = true;
+  @Input() allowTaskbarResize: boolean = true;
 
   // Toolbar
-  enableToolbarInput = input<boolean>(false, { alias: 'enableToolbar' });
-  toolbarInput = input<string[]>(['Add', 'Edit', 'Update', 'Delete', 'Cancel', 'ExpandAll', 'CollapseAll', 'Search', 'ZoomIn', 'ZoomOut', 'ZoomToFit', 'PrevTimeSpan', 'NextTimeSpan', 'ExcelExport', 'CsvExport', 'PdfExport', 'Indent', 'Outdent'], { alias: 'toolbar' });
+  @Input() enableToolbar: boolean = false;
+  @Input() toolbar: string[] = ['Add', 'Edit', 'Update', 'Delete', 'Cancel', 'ExpandAll', 'CollapseAll', 'Search', 'ZoomIn', 'ZoomOut', 'ZoomToFit', 'PrevTimeSpan', 'NextTimeSpan', 'ExcelExport', 'CsvExport', 'PdfExport', 'Indent', 'Outdent'];
 
   // Export
-  allowExcelExportInput = input<boolean>(false, { alias: 'allowExcelExport' });
-  allowPdfExportInput = input<boolean>(false, { alias: 'allowPdfExport' });
+  @Input() allowExcelExport: boolean = false;
+  @Input() allowPdfExport: boolean = false;
 
   // Advanced
-  enableCriticalPathInput = input<boolean>(false, { alias: 'enableCriticalPath' });
-  timelineSettingsInput = input<any>({}, { alias: 'timelineSettings' });
-  labelSettingsInput = input<any>({}, { alias: 'labelSettings' });
-  splitterSettingsInput = input<any>({ position: '50%' }, { alias: 'splitterSettings' });
-  projectStartDateInput = input<Date | string | undefined>(undefined, { alias: 'projectStartDate' });
-  projectEndDateInput = input<Date | string | undefined>(undefined, { alias: 'projectEndDate' });
-  workWeekInput = input<number[]>([0, 1, 2, 3, 4], { alias: 'workWeek' });
-  holidaysInput = input<any[]>([], { alias: 'holidays' });
-  eventMarkersInput = input<any[]>([], { alias: 'eventMarkers' });
+  @Input() enableCriticalPath: boolean = false;
+  @Input() timelineSettings: any = {};
+  @Input() labelSettings: any = {};
+  @Input() splitterSettings: any = { position: '50%' };
+  @Input() projectStartDate?: Date | string;
+  @Input() projectEndDate?: Date | string;
+  @Input() workWeek: number[] = [0, 1, 2, 3, 4];
+  @Input() holidays: any[] = [];
+  @Input() eventMarkers: any[] = [];
 
   // Appearance
-  heightInput = input<string | number>('450px', { alias: 'height' });
-  widthInput = input<string | number>('100%', { alias: 'width' });
-  enableRtlInput = input<boolean>(false, { alias: 'enableRtl' });
-  localeInput = input<string>('en', { alias: 'locale' });
-  customClassInput = input<string | undefined>(undefined, { alias: 'customClass' });
-
-  // Computed Properties (Merge config + inputs)
-  dataSource = computed(() => this.config()?.dataSource ?? this.dataSourceInput());
-  taskFields = computed(() => this.config()?.taskFields ?? this.taskFieldsInput());
-  columns = computed(() => this.config()?.columns ?? this.columnsInput());
-
-  allowSelection = computed(() => this.config()?.allowSelection ?? this.allowSelectionInput());
-  allowSorting = computed(() => this.config()?.allowSorting ?? this.allowSortingInput());
-  allowFiltering = computed(() => this.config()?.allowFiltering ?? this.allowFilteringInput());
-  allowResizing = computed(() => this.config()?.allowResizing ?? this.allowResizingInput());
-  allowReordering = computed(() => this.config()?.allowReordering ?? this.allowReorderingInput());
-
-  // Edit Settings Computed
-  allowEditing = computed(() => this.allowEditingInput()); // Config doesn't have allowEditing top-level, it's usually inside settings but interface shows it
-  // Wait, interface GanttConfig doesn't show allowEditing. It shows it in config? No, it's not in GanttConfig interface!
-  // Checking GanttConfig interface: allowEditing IS NOT in GanttConfig.
-  // So I don't need to merge it.
-  // But wait, allowTaskbarDragDrop is also not in GanttConfig.
-
-  allowTaskbarDragDrop = computed(() => this.allowTaskbarDragDropInput());
-  allowTaskbarResize = computed(() => this.allowTaskbarResizeInput());
-
-  computedEditSettings = computed(() => ({
-    allowEditing: this.allowEditing(),
-    allowTaskbarDragDrop: this.allowTaskbarDragDrop(),
-    allowTaskbarResize: this.allowTaskbarResize()
-  }));
-
-  enableToolbar = computed(() => this.config()?.enableToolbar ?? this.enableToolbarInput());
-  toolbar = computed(() => this.config()?.toolbar ?? this.toolbarInput());
-
-  allowExcelExport = computed(() => this.config()?.allowExcelExport ?? this.allowExcelExportInput());
-  allowPdfExport = computed(() => this.config()?.allowPdfExport ?? this.allowPdfExportInput());
-
-  enableCriticalPath = computed(() => this.config()?.enableCriticalPath ?? this.enableCriticalPathInput());
-  timelineSettings = computed(() => this.config()?.timelineSettings ?? this.timelineSettingsInput());
-  labelSettings = computed(() => this.config()?.labelSettings ?? this.labelSettingsInput());
-  splitterSettings = computed(() => this.config()?.splitterSettings ?? this.splitterSettingsInput());
-  projectStartDate = computed(() => this.config()?.projectStartDate ?? this.projectStartDateInput());
-  projectEndDate = computed(() => this.config()?.projectEndDate ?? this.projectEndDateInput());
-  workWeek = computed(() => this.config()?.workWeek ?? this.workWeekInput());
-  holidays = computed(() => this.config()?.holidays ?? this.holidaysInput());
-  eventMarkers = computed(() => this.config()?.eventMarkers ?? this.eventMarkersInput());
-
-  height = computed(() => this.config()?.height ?? this.heightInput());
-  width = computed(() => this.config()?.width ?? this.widthInput());
-  enableRtl = computed(() => this.config()?.enableRtl ?? this.enableRtlInput());
-  locale = computed(() => this.config()?.locale ?? this.localeInput());
-  customClass = computed(() => this.config()?.customClass ?? this.customClassInput());
-
+  @Input() height: string | number = '450px';
+  @Input() width: string | number = '100%';
+  @Input() enableRtl: boolean = false;
+  @Input() locale: string = 'en';
+  @Input() customClass?: string;
+  @Input() config?: GanttConfig;
 
   // Events
-  actionBegin = output<any>();
-  actionComplete = output<any>();
-  cellEdit = output<any>();
-  taskbarEdited = output<any>();
-  rowSelected = output<any>();
-  rowDeselected = output<any>();
-  dataBound = output<any>();
-  created = output<any>();
-
-  constructor() {
-    effect(() => {
-      // Handle side effects if necessary
-    });
-  }
+  @Output() actionBegin = new EventEmitter<any>();
+  @Output() actionComplete = new EventEmitter<any>();
+  @Output() cellEdit = new EventEmitter<any>();
+  @Output() taskbarEdited = new EventEmitter<any>();
+  @Output() rowSelected = new EventEmitter<any>();
+  @Output() rowDeselected = new EventEmitter<any>();
+  @Output() dataBound = new EventEmitter<any>();
+  @Output() created = new EventEmitter<any>();
 
   ngOnInit(): void {
-    // Logic moved to computed signals
+    // Apply config if provided
+    if (this.config) {
+      this.dataSource = this.config.dataSource || this.dataSource;
+      this.taskFields = this.config.taskFields || this.taskFields;
+      this.columns = this.config.columns || this.columns;
+      this.height = this.config.height ?? this.height;
+      this.width = this.config.width ?? this.width;
+      this.allowSelection = this.config.allowSelection ?? this.allowSelection;
+      this.allowSorting = this.config.allowSorting ?? this.allowSorting;
+      this.allowFiltering = this.config.allowFiltering ?? this.allowFiltering;
+      this.allowResizing = this.config.allowResizing ?? this.allowResizing;
+      this.allowReordering = this.config.allowReordering ?? this.allowReordering;
+      this.enableToolbar = this.config.enableToolbar ?? this.enableToolbar;
+      this.toolbar = this.config.toolbar || this.toolbar;
+      this.allowExcelExport = this.config.allowExcelExport ?? this.allowExcelExport;
+      this.allowPdfExport = this.config.allowPdfExport ?? this.allowPdfExport;
+      this.enableCriticalPath = this.config.enableCriticalPath ?? this.enableCriticalPath;
+      this.timelineSettings = this.config.timelineSettings || this.timelineSettings;
+      this.labelSettings = this.config.labelSettings || this.labelSettings;
+      this.splitterSettings = this.config.splitterSettings || this.splitterSettings;
+      this.projectStartDate = this.config.projectStartDate || this.projectStartDate;
+      this.projectEndDate = this.config.projectEndDate || this.projectEndDate;
+      this.workWeek = this.config.workWeek || this.workWeek;
+      this.holidays = this.config.holidays || this.holidays;
+      this.eventMarkers = this.config.eventMarkers || this.eventMarkers;
+      this.enableRtl = this.config.enableRtl ?? this.enableRtl;
+      this.locale = this.config.locale || this.locale;
+      this.customClass = this.config.customClass || this.customClass;
+    }
+  }
+
+  ngAfterViewInit(): void {
+    if (this.gantt) {
+      this.created.emit({ gantt: this.gantt });
+    }
   }
 
   ngOnDestroy(): void {
@@ -229,26 +204,27 @@ export class GanttComponent implements OnInit, OnDestroy {
    * Get Gantt instance
    */
   getGanttInstance(): SyncfusionGanttComponent | null {
-    return this.gantt() || null;
+    return this.gantt || null;
   }
 
   /**
    * Refresh Gantt
    */
   refresh(): void {
-    this.gantt()?.refresh();
+    if (this.gantt) {
+      this.gantt.refresh();
+    }
   }
 
   /**
    * Export to Excel
    */
   exportToExcel(fileName?: string): void {
-    const g = this.gantt();
-    if (g) {
+    if (this.gantt) {
       const exportProperties = {
         fileName: fileName || 'GanttChart'
       };
-      g.excelExport(exportProperties);
+      this.gantt.excelExport(exportProperties);
     }
   }
 
@@ -256,12 +232,11 @@ export class GanttComponent implements OnInit, OnDestroy {
    * Export to PDF
    */
   exportToPdf(fileName?: string): void {
-    const g = this.gantt();
-    if (g) {
+    if (this.gantt) {
       const exportProperties = {
         fileName: fileName || 'GanttChart'
       };
-      g.pdfExport(exportProperties);
+      this.gantt.pdfExport(exportProperties);
     }
   }
 
@@ -269,12 +244,11 @@ export class GanttComponent implements OnInit, OnDestroy {
    * Export to CSV
    */
   exportToCsv(fileName?: string): void {
-    const g = this.gantt();
-    if (g) {
+    if (this.gantt) {
       const exportProperties = {
         fileName: fileName || 'GanttChart'
       };
-      g.csvExport(exportProperties);
+      this.gantt.csvExport(exportProperties);
     }
   }
 
@@ -282,42 +256,49 @@ export class GanttComponent implements OnInit, OnDestroy {
    * Expand all tasks
    */
   expandAll(): void {
-    this.gantt()?.expandAll();
+    if (this.gantt) {
+      this.gantt.expandAll();
+    }
   }
 
   /**
    * Collapse all tasks
    */
   collapseAll(): void {
-    this.gantt()?.collapseAll();
+    if (this.gantt) {
+      this.gantt.collapseAll();
+    }
   }
 
   /**
    * Expand row by index
    */
   expandByIndex(index: number): void {
-    this.gantt()?.expandByIndex(index);
+    if (this.gantt) {
+      this.gantt.expandByIndex(index);
+    }
   }
 
   /**
    * Collapse row by index
    */
   collapseByIndex(index: number): void {
-    this.gantt()?.collapseByIndex(index);
+    if (this.gantt) {
+      this.gantt.collapseByIndex(index);
+    }
   }
 
   /**
    * Get selected rows
    */
   getSelectedRows(): any[] {
-    const g = this.gantt();
-    if (g) {
+    if (this.gantt) {
       // Get selected row indexes
-      const selectedIndexes = g.selectionModule?.selectedRowIndexes || [];
+      const selectedIndexes = this.gantt.selectionModule?.selectedRowIndexes || [];
       // Get row data from selected indexes
       const selectedRows: any[] = [];
       selectedIndexes.forEach((index: number) => {
-        const row = g.getRowByIndex(index);
+        const row = this.gantt.getRowByIndex(index);
         if (row) {
           selectedRows.push(row);
         }
@@ -331,73 +312,91 @@ export class GanttComponent implements OnInit, OnDestroy {
    * Select row by index
    */
   selectRow(index: number): void {
-    this.gantt()?.selectRows([index]);
+    if (this.gantt) {
+      this.gantt.selectRows([index]);
+    }
   }
 
   /**
    * Clear selection
    */
   clearSelection(): void {
-    this.gantt()?.selectionModule?.clearSelection();
+    if (this.gantt && this.gantt.selectionModule) {
+      this.gantt.selectionModule.clearSelection();
+    }
   }
 
   /**
    * Search tasks
    */
   search(searchText: string): void {
-    this.gantt()?.filterByColumn('taskName', 'contains', searchText);
+    if (this.gantt) {
+      // Use filterByColumn for search functionality
+      this.gantt.filterByColumn('taskName', 'contains', searchText);
+    }
   }
 
   /**
    * Clear search
    */
   clearSearch(): void {
-    this.gantt()?.clearFiltering();
+    if (this.gantt) {
+      this.gantt.clearFiltering();
+    }
   }
 
   /**
    * Zoom in
    */
   zoomIn(): void {
-    this.gantt()?.zoomIn();
+    if (this.gantt) {
+      this.gantt.zoomIn();
+    }
   }
 
   /**
    * Zoom out
    */
   zoomOut(): void {
-    this.gantt()?.zoomOut();
+    if (this.gantt) {
+      this.gantt.zoomOut();
+    }
   }
 
   /**
    * Zoom to fit
    */
   zoomToFit(): void {
-    this.gantt()?.fitToProject();
+    if (this.gantt) {
+      this.gantt.fitToProject();
+    }
   }
 
   /**
    * Navigate to previous time span
    */
   previousTimeSpan(): void {
-    this.gantt()?.previousTimeSpan();
+    if (this.gantt) {
+      this.gantt.previousTimeSpan();
+    }
   }
 
   /**
    * Navigate to next time span
    */
   nextTimeSpan(): void {
-    this.gantt()?.nextTimeSpan();
+    if (this.gantt) {
+      this.gantt.nextTimeSpan();
+    }
   }
 
   /**
    * Add new task
    */
   addRecord(data?: GanttTask, rowIndex?: number): void {
-    const g = this.gantt();
-    if (g && g.editModule) {
+    if (this.gantt && this.gantt.editModule) {
       const position = rowIndex !== undefined ? { index: rowIndex } : undefined;
-      g.editModule.addRecord(data as any, position as any);
+      this.gantt.editModule.addRecord(data as any, position as any);
     }
   }
 
@@ -405,16 +404,15 @@ export class GanttComponent implements OnInit, OnDestroy {
    * Update task
    */
   updateRecord(field: string, data: GanttTask, rowIndex: number): void {
-    const g = this.gantt();
-    if (g && g.editModule) {
+    if (this.gantt && this.gantt.editModule) {
       // Update record using edit module
-      const rowData = g.getRowByIndex(rowIndex);
+      const rowData = this.gantt.getRowByIndex(rowIndex);
       if (rowData) {
         const updatedData = { ...rowData, ...data };
         // Use updateRecordByID with task ID
         const taskId = (updatedData as any).taskID || (updatedData as any).ganttProperties?.taskId;
         if (taskId) {
-          g.editModule.updateRecordByID(updatedData as any);
+          this.gantt.editModule.updateRecordByID(updatedData as any);
         }
       }
     }
@@ -424,18 +422,47 @@ export class GanttComponent implements OnInit, OnDestroy {
    * Delete task
    */
   deleteRecord(rowIndex: number): void {
-    const g = this.gantt();
-    if (g && g.editModule) {
-      const rowData = g.getRowByIndex(rowIndex);
+    if (this.gantt && this.gantt.editModule) {
+      const rowData = this.gantt.getRowByIndex(rowIndex);
       if (rowData) {
-        g.editModule.deleteRecord(rowData as any);
+        this.gantt.editModule.deleteRecord(rowData as any);
       }
     }
   }
 
   /**
    * Event handlers
-   * Removed manual event handlers; template should bind directly to outputs via emit
    */
+  onActionBegin(event: any): void {
+    this.actionBegin.emit(event);
+  }
+
+  onActionComplete(event: any): void {
+    this.actionComplete.emit(event);
+  }
+
+  onCellEdit(event: any): void {
+    this.cellEdit.emit(event);
+  }
+
+  onTaskbarEdited(event: any): void {
+    this.taskbarEdited.emit(event);
+  }
+
+  onRowSelected(event: any): void {
+    this.rowSelected.emit(event);
+  }
+
+  onRowDeselected(event: any): void {
+    this.rowDeselected.emit(event);
+  }
+
+  onDataBound(event: any): void {
+    this.dataBound.emit(event);
+  }
+
+  onCreated(event: any): void {
+    this.created.emit(event);
+  }
 }
 

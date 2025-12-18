@@ -1,7 +1,5 @@
-import { Component, HostListener, ElementRef, ChangeDetectionStrategy, signal, computed, inject, viewChild } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Component, OnInit, HostListener, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { trigger, transition, style, animate } from '@angular/animations';
 import { ThemeService, ThemeMode, ThemeColor } from '../../../core/services/theme.service';
 import { SharedModule } from '../../shared.module';
 
@@ -10,91 +8,88 @@ import { SharedModule } from '../../shared.module';
   standalone: true,
   imports: [CommonModule, SharedModule],
   templateUrl: './theme-toggle.component.html',
-  styleUrls: ['./theme-toggle.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('dropdownAnimation', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'scale(0.95) translateY(-10px)' }),
-        animate('150ms ease-out', style({ opacity: 1, transform: 'scale(1) translateY(0)' }))
-      ]),
-      transition(':leave', [
-        animate('100ms ease-in', style({ opacity: 0, transform: 'scale(0.95) translateY(-10px)' }))
-      ])
-    ])
-  ]
+  styleUrls: ['./theme-toggle.component.scss']
 })
-export class ThemeToggleComponent {
-  public themeService = inject(ThemeService);
+export class ThemeToggleComponent implements OnInit {
+  currentMode: ThemeMode = 'light';
+  currentColor: ThemeColor = 'blue';
+  currentModeIcon = 'light_mode';
+  showModeMenu = false;
+  showColorMenu = false;
 
-  theme = toSignal(this.themeService.theme$, {
-    initialValue: { mode: 'light' as ThemeMode, color: 'blue' as ThemeColor, primaryColor: '59, 130, 246' }
-  });
-
-  mode = computed(() => this.theme().mode);
-  color = computed(() => this.theme().color);
-
-  modeIcon = computed(() => {
-    switch (this.mode()) {
-      case 'light': return 'light_mode';
-      case 'dark': return 'dark_mode';
-      case 'auto': return 'brightness_auto';
-      default: return 'light_mode';
-    }
-  });
-
-  showModeMenu = signal(false);
-  showColorMenu = signal(false);
-
-  // View queries
-  modeButton = viewChild<ElementRef<HTMLButtonElement>>('modeButton');
-  colorButton = viewChild<ElementRef<HTMLButtonElement>>('colorButton');
+  @ViewChild('modeButton') modeButton?: ElementRef<HTMLButtonElement>;
+  @ViewChild('colorButton') colorButton?: ElementRef<HTMLButtonElement>;
 
   themeColors = [
-    { value: 'blue' as ThemeColor, name: 'น้ำเงิน', gradient: 'linear-gradient(135deg, #3b82f6, #2563eb)' },
-    { value: 'indigo' as ThemeColor, name: 'คราม', gradient: 'linear-gradient(135deg, #6366f1, #4f46e5)' },
-    { value: 'purple' as ThemeColor, name: 'ม่วง', gradient: 'linear-gradient(135deg, #a855f7, #9333ea)' },
-    { value: 'green' as ThemeColor, name: 'เขียว', gradient: 'linear-gradient(135deg, #22c55e, #16a34a)' },
-    { value: 'orange' as ThemeColor, name: 'ส้ม', gradient: 'linear-gradient(135deg, #f97316, #ea580c)' },
-    { value: 'red' as ThemeColor, name: 'แดง', gradient: 'linear-gradient(135deg, #ef4444, #dc2626)' },
-    { value: 'teal' as ThemeColor, name: 'เทาเขียว', gradient: 'linear-gradient(135deg, #14b8a6, #0d9488)' },
-    { value: 'pink' as ThemeColor, name: 'ชมพู', gradient: 'linear-gradient(135deg, #ec4899, #db2777)' }
+    { value: 'blue' as ThemeColor, name: 'น้ำเงิน', gradient: 'var(--theme-gradient-blue)' },
+    { value: 'indigo' as ThemeColor, name: 'คราม', gradient: 'var(--theme-gradient-indigo)' },
+    { value: 'purple' as ThemeColor, name: 'ม่วง', gradient: 'var(--theme-gradient-purple)' },
+    { value: 'green' as ThemeColor, name: 'เขียว', gradient: 'var(--theme-gradient-green)' },
+    { value: 'orange' as ThemeColor, name: 'ส้ม', gradient: 'var(--theme-gradient-orange)' },
+    { value: 'red' as ThemeColor, name: 'แดง', gradient: 'var(--theme-gradient-red)' },
+    { value: 'teal' as ThemeColor, name: 'เทาเขียว', gradient: 'var(--theme-gradient-teal)' },
+    { value: 'pink' as ThemeColor, name: 'ชมพู', gradient: 'var(--theme-gradient-pink)' }
   ];
 
+  constructor(public themeService: ThemeService) {}
+
+  ngOnInit(): void {
+    this.themeService.theme$.subscribe(theme => {
+      this.currentMode = theme.mode;
+      this.currentColor = theme.color;
+      this.updateModeIcon();
+    });
+  }
+
   toggleModeMenu(): void {
-    this.showModeMenu.update(v => !v);
-    this.showColorMenu.set(false);
+    this.showModeMenu = !this.showModeMenu;
+    this.showColorMenu = false;
   }
 
   toggleColorMenu(): void {
-    this.showColorMenu.update(v => !v);
-    this.showModeMenu.set(false);
+    this.showColorMenu = !this.showColorMenu;
+    this.showModeMenu = false;
   }
 
   setMode(mode: ThemeMode): void {
     this.themeService.setMode(mode);
-    this.showModeMenu.set(false);
+    this.updateModeIcon();
+    this.showModeMenu = false;
   }
 
   setColor(color: ThemeColor): void {
     this.themeService.setColor(color);
-    this.showColorMenu.set(false);
+    this.showColorMenu = false;
+  }
+
+  private updateModeIcon(): void {
+    switch (this.currentMode) {
+      case 'light':
+        this.currentModeIcon = 'light_mode';
+        break;
+      case 'dark':
+        this.currentModeIcon = 'dark_mode';
+        break;
+      case 'auto':
+        this.currentModeIcon = 'brightness_auto';
+        break;
+    }
   }
 
   @HostListener('document:click', ['$event'])
   handleDocumentClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
     if (!target.closest('.theme-toggle-container')) {
-      this.showModeMenu.set(false);
-      this.showColorMenu.set(false);
+      this.showModeMenu = false;
+      this.showColorMenu = false;
     }
   }
 
   @HostListener('keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent): void {
     if (event.key === 'Escape') {
-      this.showModeMenu.set(false);
-      this.showColorMenu.set(false);
+      this.showModeMenu = false;
+      this.showColorMenu = false;
     }
   }
 }

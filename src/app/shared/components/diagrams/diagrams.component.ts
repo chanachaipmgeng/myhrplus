@@ -1,80 +1,92 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, input, output, effect, viewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DiagramModule } from '@syncfusion/ej2-angular-diagrams';
 import {
   DiagramComponent as SyncfusionDiagramComponent,
   NodeModel,
   ConnectorModel,
-  Connector,
-  Node
+  ShapeAnnotationModel,
+  PointModel
 } from '@syncfusion/ej2-angular-diagrams';
+
+export interface DiagramsConfig {
+  nodes?: NodeModel[];
+  connectors?: ConnectorModel[];
+  pageSettings?: any;
+  snapSettings?: any;
+  rulerSettings?: any;
+  // Note: background is not a direct input property, it's controlled via CSS
+  layout?: any;
+  dataSourceSettings?: any;
+  selectedItems?: any;
+  constraints?: any;
+  tool?: any;
+  drawingObject?: any;
+  height?: string | number;
+  width?: string | number;
+  customClass?: string;
+}
 
 @Component({
   selector: 'app-diagrams',
   standalone: true,
   imports: [CommonModule, DiagramModule],
   templateUrl: './diagrams.component.html',
-  styleUrls: ['./diagrams.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./diagrams.component.scss']
 })
 export class DiagramsComponent implements OnInit, OnDestroy {
-  diagram = viewChild<SyncfusionDiagramComponent>('diagram');
+  @ViewChild('diagram', { static: false }) diagram!: SyncfusionDiagramComponent;
 
   // Data
-  nodes = input<NodeModel[]>([]);
-  connectors = input<ConnectorModel[]>([]);
+  @Input() nodes: NodeModel[] = [];
+  @Input() connectors: ConnectorModel[] = [];
 
   // Settings
-  pageSettings = input<any>({
+  @Input() pageSettings: any = {
     width: 1000,
     height: 1000,
     orientation: 'Landscape',
     showPageBreaks: false
-  });
-  snapSettings = input<any>({
+  };
+  @Input() snapSettings: any = {
     horizontalGridlines: { lineColor: '#e0e0e0' },
     verticalGridlines: { lineColor: '#e0e0e0' },
     constraints: 0
-  });
-  rulerSettings = input<any>({
+  };
+  @Input() rulerSettings: any = {
     showRulers: true
-  });
-  layout = input<any>({
+  };
+  // Note: background is not a direct input property, it's controlled via CSS
+  @Input() layout: any = {
     type: 'None'
-  });
-  dataSourceSettings = input<any>({});
-  selectedItems = input<any>({
+  };
+  @Input() dataSourceSettings: any = {};
+  @Input() selectedItems: any = {
     constraints: 0
-  });
-  constraints = input<any>(0);
-  tool = input<any>('Default');
-  drawingObject = input<any>({});
+  };
+  @Input() constraints: any = 0;
+  @Input() tool: any = 'Default';
+  @Input() drawingObject: any = {};
 
   // Size
-  height = input<string | number>('600px');
-  width = input<string | number>('100%');
-  customClass = input<string | undefined>(undefined);
+  @Input() height: string | number = '600px';
+  @Input() width: string | number = '100%';
+  @Input() customClass?: string;
 
   // Events
-  created = output<any>();
-  nodeClick = output<any>();
-  connectorClick = output<any>();
-  selectionChange = output<any>();
-  scrollChange = output<any>();
-  zoomChange = output<any>();
-  historyChange = output<any>();
-  objectDoubleClick = output<any>();
-  textEdit = output<any>();
-  dragEnter = output<any>();
-  dragLeave = output<any>();
-  dragOver = output<any>();
-  drop = output<any>();
-
-  constructor() {
-    effect(() => {
-      // Handle necessary updates if template binding is insufficient
-    });
-  }
+  @Output() created = new EventEmitter<any>();
+  @Output() nodeClick = new EventEmitter<any>();
+  @Output() connectorClick = new EventEmitter<any>();
+  @Output() selectionChange = new EventEmitter<any>();
+  @Output() scrollChange = new EventEmitter<any>();
+  @Output() zoomChange = new EventEmitter<any>();
+  @Output() historyChange = new EventEmitter<any>();
+  @Output() objectDoubleClick = new EventEmitter<any>();
+  @Output() textEdit = new EventEmitter<any>();
+  @Output() dragEnter = new EventEmitter<any>();
+  @Output() dragLeave = new EventEmitter<any>();
+  @Output() dragOver = new EventEmitter<any>();
+  @Output() drop = new EventEmitter<any>();
 
   ngOnInit(): void {
     // Initialize if needed
@@ -88,32 +100,35 @@ export class DiagramsComponent implements OnInit, OnDestroy {
    * Get diagram instance
    */
   getDiagramInstance(): SyncfusionDiagramComponent | null {
-    return this.diagram() || null;
+    return this.diagram || null;
   }
 
   /**
    * Add node
    */
   addNode(node: NodeModel): void {
-    this.diagram()?.add(node);
+    if (this.diagram) {
+      this.diagram.add(node);
+    }
   }
 
   /**
    * Add connector
    */
   addConnector(connector: ConnectorModel): void {
-    this.diagram()?.add(connector);
+    if (this.diagram) {
+      this.diagram.add(connector);
+    }
   }
 
   /**
    * Remove node
    */
   removeNode(nodeId: string): void {
-    const d = this.diagram();
-    if (d) {
-      const node = d.nodes.find((n: any) => n.id === nodeId);
+    if (this.diagram) {
+      const node = this.diagram.nodes.find((n: any) => n.id === nodeId);
       if (node) {
-        d.remove(node);
+        this.diagram.remove(node);
       }
     }
   }
@@ -122,11 +137,10 @@ export class DiagramsComponent implements OnInit, OnDestroy {
    * Remove connector
    */
   removeConnector(connectorId: string): void {
-    const d = this.diagram();
-    if (d) {
-      const connector = d.connectors.find((c: any) => c.id === connectorId);
+    if (this.diagram) {
+      const connector = this.diagram.connectors.find((c: any) => c.id === connectorId);
       if (connector) {
-        d.remove(connector);
+        this.diagram.remove(connector);
       }
     }
   }
@@ -135,79 +149,99 @@ export class DiagramsComponent implements OnInit, OnDestroy {
    * Clear diagram
    */
   clear(): void {
-    this.diagram()?.clear();
+    if (this.diagram) {
+      this.diagram.clear();
+    }
   }
 
   /**
    * Select all
    */
   selectAll(): void {
-    this.diagram()?.selectAll();
+    if (this.diagram) {
+      this.diagram.selectAll();
+    }
   }
 
   /**
    * Unselect all
    */
   unselectAll(): void {
-    this.diagram()?.clearSelection();
+    if (this.diagram) {
+      this.diagram.clearSelection();
+    }
   }
 
   /**
    * Copy
    */
   copy(): void {
-    this.diagram()?.copy();
+    if (this.diagram) {
+      this.diagram.copy();
+    }
   }
 
   /**
    * Paste
    */
   paste(): void {
-    this.diagram()?.paste();
+    if (this.diagram) {
+      this.diagram.paste();
+    }
   }
 
   /**
    * Cut
    */
   cut(): void {
-    this.diagram()?.cut();
+    if (this.diagram) {
+      this.diagram.cut();
+    }
   }
 
   /**
    * Undo
    */
   undo(): void {
-    this.diagram()?.undo();
+    if (this.diagram) {
+      this.diagram.undo();
+    }
   }
 
   /**
    * Redo
    */
   redo(): void {
-    this.diagram()?.redo();
+    if (this.diagram) {
+      this.diagram.redo();
+    }
   }
 
   /**
    * Zoom in
    */
   zoomIn(): void {
-    this.diagram()?.zoomTo({ type: 'ZoomIn' });
+    if (this.diagram) {
+      this.diagram.zoomTo({ type: 'ZoomIn' });
+    }
   }
 
   /**
    * Zoom out
    */
   zoomOut(): void {
-    this.diagram()?.zoomTo({ type: 'ZoomOut' });
+    if (this.diagram) {
+      this.diagram.zoomTo({ type: 'ZoomOut' });
+    }
   }
 
   /**
    * Fit to page
    */
   fitToPage(): void {
-    const d = this.diagram();
-    if (d) {
-      (d as any).fitToPage({ mode: 'Page', region: 'Content' });
+    if (this.diagram) {
+      // Use fitToPage with options
+      (this.diagram as any).fitToPage({ mode: 'Page', region: 'Content' });
     }
   }
 
@@ -215,9 +249,9 @@ export class DiagramsComponent implements OnInit, OnDestroy {
    * Reset zoom
    */
   resetZoom(): void {
-    const d = this.diagram();
-    if (d) {
-      (d as any).reset();
+    if (this.diagram) {
+      // Use reset method
+      (this.diagram as any).reset();
     }
   }
 
@@ -225,9 +259,9 @@ export class DiagramsComponent implements OnInit, OnDestroy {
    * Export as image
    */
   exportImage(fileName?: string): void {
-    const d = this.diagram();
-    if (d) {
-      (d as any).exportDiagram({ format: 'PNG', fileName: fileName || 'Diagram' });
+    if (this.diagram) {
+      // Use exportDiagram with options
+      (this.diagram as any).exportDiagram({ format: 'PNG', fileName: fileName || 'Diagram' });
     }
   }
 
@@ -235,9 +269,9 @@ export class DiagramsComponent implements OnInit, OnDestroy {
    * Export as SVG
    */
   exportSvg(fileName?: string): void {
-    const d = this.diagram();
-    if (d) {
-      (d as any).exportDiagram({ format: 'SVG', fileName: fileName || 'Diagram' });
+    if (this.diagram) {
+      // Use exportDiagram with options
+      (this.diagram as any).exportDiagram({ format: 'SVG', fileName: fileName || 'Diagram' });
     }
   }
 
@@ -245,9 +279,9 @@ export class DiagramsComponent implements OnInit, OnDestroy {
    * Print
    */
   print(): void {
-    const d = this.diagram();
-    if (d) {
-      (d as any).print();
+    if (this.diagram) {
+      // Use print method
+      (this.diagram as any).print();
     }
   }
 
@@ -255,16 +289,17 @@ export class DiagramsComponent implements OnInit, OnDestroy {
    * Load diagram from JSON
    */
   loadDiagram(jsonData: any): void {
-    this.diagram()?.loadDiagram(JSON.stringify(jsonData));
+    if (this.diagram) {
+      this.diagram.loadDiagram(JSON.stringify(jsonData));
+    }
   }
 
   /**
    * Save diagram as JSON
    */
   saveDiagram(): any {
-    const d = this.diagram();
-    if (d) {
-      return JSON.parse(d.saveDiagram());
+    if (this.diagram) {
+      return JSON.parse(this.diagram.saveDiagram());
     }
     return null;
   }
@@ -273,22 +308,31 @@ export class DiagramsComponent implements OnInit, OnDestroy {
    * Get selected nodes
    */
   getSelectedNodes(): NodeModel[] {
-    return (this.diagram()?.selectedItems.nodes as NodeModel[]) || [];
+    if (this.diagram) {
+      return this.diagram.selectedItems.nodes || [];
+    }
+    return [];
   }
 
   /**
    * Get selected connectors
    */
   getSelectedConnectors(): ConnectorModel[] {
-    return (this.diagram()?.selectedItems.connectors as ConnectorModel[]) || [];
+    if (this.diagram) {
+      return this.diagram.selectedItems.connectors || [];
+    }
+    return [];
   }
 
   /**
    * Refresh
    */
   refresh(): void {
-    this.diagram()?.dataBind();
+    if (this.diagram) {
+      this.diagram.dataBind();
+    }
   }
+
   /**
    * Event handlers
    */

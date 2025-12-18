@@ -2,234 +2,161 @@
    Chart Component Styles
    ============================================ */
 
-@import '../../../../styles/design-tokens';
-@import '../../../../styles/mixins';
-
 :host {
-  display: block;
-  width: 100%;
+  @apply block w-full;
 }
 
-.chart-container {
-  width: 100%;
-  @include glass-morphism('weak', 'light');
-  border-radius: $radius-lg;
-  padding: $spacing-4;
-  overflow: hidden;
-  
-  .dark & {
-    @include glass-morphism('weak', 'dark');
-  }
+/* Syncfusion Chart customization - Using ::ng-deep for third-party library styles */
+:host ::ng-deep {
+  .e-chart {
+    @apply bg-transparent rounded-md border border-white/10 dark:border-slate-700/30;
 
-  // Syncfusion Chart Styles
-  ::ng-deep {
-    .e-chart {
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: $radius-md;
-      
+    /* Chart Title */
+    .e-chart-title {
+      @apply text-gray-900 dark:text-gray-100 font-semibold;
+    }
+
+    /* Chart Area */
+    .e-chart-area {
+      @apply bg-transparent;
+    }
+
+    /* Legend */
+    .e-legend {
+      .e-legend-item {
+        .e-legend-text {
+          @apply text-gray-700 dark:text-gray-300;
+        }
+
+        .e-legend-icon {
+          @apply rounded-sm;
+        }
+      }
+    }
+
+    /* Tooltip */
+    .e-chart-tooltip {
+      @apply glass-strong dark:glass-dark-strong theme-gemini:glass-gemini rounded-md px-3 py-2 shadow-lg;
+
+      .e-tooltip-content {
+        @apply text-gray-900 dark:text-gray-100;
+      }
+    }
+
+    body.theme-gemini & .e-chart-tooltip {
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 40px rgba(59, 130, 246, 0.1);
+    }
+
+    /* Axis */
+    .e-axis-title {
+      @apply text-gray-700 dark:text-gray-300 font-medium;
+    }
+
+    .e-axis-label {
+      @apply text-gray-600 dark:text-gray-400;
+    }
+
+    /* Grid Lines */
+    .e-axis-line,
+    .e-major-grid-line,
+    .e-minor-grid-line {
+      stroke: rgba(255, 255, 255, 0.1);
+
       .dark & {
-        border-color: rgba(51, 65, 85, 0.3);
+        stroke: rgba(51, 65, 85, 0.3);
+      }
+    }
+
+    /* Series */
+    .e-series {
+      /* Line Series */
+      &.e-line-series {
+        stroke-width: 2;
       }
 
-      // Chart Title
-      .e-chart-title {
-        color: $gray-900;
-        font-weight: $font-weight-semibold;
-        
-        .dark & {
-          color: $gray-100;
-        }
-      }
-
-      // Chart Area
-      .e-chart-area {
-        background: transparent;
-      }
-
-      // Legend
-      .e-legend {
-        .e-legend-item {
-          .e-legend-text {
-            color: $gray-700;
-            
-            .dark & {
-              color: $gray-300;
-            }
-          }
-
-          .e-legend-icon {
-            border-radius: $radius-sm;
-          }
-        }
-      }
-
-      // Tooltip
-      .e-chart-tooltip {
-        @include glass-morphism('strong', 'light');
-        border-radius: $radius-md;
-        padding: $spacing-2 $spacing-3;
-        box-shadow: $shadow-lg;
-        
-        .dark & {
-          @include glass-morphism('strong', 'dark');
-        }
-
-        .e-tooltip-content {
-          color: $gray-900;
-          
-          .dark & {
-            color: $gray-100;
-          }
-        }
-      }
-
-      // Axis
-      .e-axis-title {
-        color: $gray-700;
-        font-weight: $font-weight-medium;
-        
-        .dark & {
-          color: $gray-300;
-        }
-      }
-
-      .e-axis-label {
-        color: $gray-600;
-        
-        .dark & {
-          color: $gray-400;
-        }
-      }
-
-      // Grid Lines
-      .e-axis-line,
-      .e-major-grid-line,
-      .e-minor-grid-line {
-        stroke: rgba(255, 255, 255, 0.1);
-        
-        .dark & {
-          stroke: rgba(51, 65, 85, 0.3);
-        }
-      }
-
-      // Series
-      .e-series {
-        // Line Series
-        &.e-line-series {
-          stroke-width: 2;
-        }
-
-        // Column/Bar Series
-        &.e-column-series,
-        &.e-bar-series {
-          .e-point {
-            fill: rgb(var(--primary-rgb));
-            stroke: rgba(var(--primary-rgb), 0.3);
-            transition: $transition-all;
-
-            &:hover {
-              fill: rgba(var(--primary-rgb), 0.8);
-              stroke: rgba(var(--primary-rgb), 0.5);
-              transform: scale(1.05);
-            }
-          }
-        }
-
-        // Area Series
-        &.e-area-series {
-          fill: rgba(var(--primary-rgb), 0.2);
-          stroke: rgb(var(--primary-rgb));
-          stroke-width: 2;
-        }
-
-        // Pie/Doughnut Series
-        &.e-pie-series,
-        &.e-doughnut-series {
-          .e-point {
-            stroke: rgba(255, 255, 255, 0.1);
-            stroke-width: 2;
-            transition: $transition-all;
-
-            &:hover {
-              transform: scale(1.05);
-              filter: brightness(1.1);
-            }
-          }
-        }
-
-        // Marker
-        .e-marker {
+      /* Column/Bar Series */
+      &.e-column-series,
+      &.e-bar-series {
+        .e-point {
           fill: rgb(var(--primary-rgb));
-          stroke: white;
-          stroke-width: 2;
-        }
-      }
+          stroke: rgba(var(--primary-rgb), 0.3);
+          @apply transition-smooth;
 
-      // Data Labels
-      .e-datalabel {
-        fill: $gray-700;
-        font-size: $text-sm;
-        
-        .dark & {
-          fill: $gray-300;
-        }
-      }
-
-      // Selection
-      .e-selected-point {
-        fill: rgba(var(--primary-rgb), 0.8);
-        stroke: rgb(var(--primary-rgb));
-        stroke-width: 3;
-      }
-    }
-  }
-}
-
-// Responsive
-@include respond-to-down(sm) {
-  .chart-container {
-    padding: $spacing-2;
-    
-    ::ng-deep {
-      .e-chart {
-        .e-chart-title {
-          font-size: $text-base;
-        }
-
-        .e-legend {
-          font-size: $text-xs;
-        }
-
-        .e-axis-label {
-          font-size: $text-xs;
-        }
-      }
-    }
-  }
-}
-
-// Gemini Theme
-body.theme-gemini {
-  .chart-container {
-    @include glass-gemini('weak');
-    
-    ::ng-deep {
-      .e-chart {
-        .e-chart-tooltip {
-          @include glass-gemini('default');
-          @include gemini-border-glow();
-        }
-
-        .e-series {
-          &.e-column-series,
-          &.e-bar-series {
-            .e-point {
-              @include gemini-glow('subtle');
-            }
+          &:hover {
+            fill: rgba(var(--primary-rgb), 0.8);
+            stroke: rgba(var(--primary-rgb), 0.5);
+            transform: scale(1.05);
           }
         }
       }
+
+      body.theme-gemini & &.e-column-series .e-point,
+      body.theme-gemini & &.e-bar-series .e-point {
+        filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.3));
+      }
+
+      /* Area Series */
+      &.e-area-series {
+        fill: rgba(var(--primary-rgb), 0.2);
+        stroke: rgb(var(--primary-rgb));
+        stroke-width: 2;
+      }
+
+      /* Pie/Doughnut Series */
+      &.e-pie-series,
+      &.e-doughnut-series {
+        .e-point {
+          stroke: rgba(255, 255, 255, 0.1);
+          stroke-width: 2;
+          @apply transition-smooth;
+
+          &:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+          }
+        }
+      }
+
+      /* Marker */
+      .e-marker {
+        fill: rgb(var(--primary-rgb));
+        stroke: white;
+        stroke-width: 2;
+      }
+    }
+
+    /* Data Labels */
+    .e-datalabel {
+      @apply text-sm;
+      fill: rgb(55, 65, 81);
+
+      .dark & {
+        fill: rgb(209, 213, 219);
+      }
+    }
+
+    /* Selection */
+    .e-selected-point {
+      fill: rgba(var(--primary-rgb), 0.8);
+      stroke: rgb(var(--primary-rgb));
+      stroke-width: 3;
+    }
+  }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  :host ::ng-deep .e-chart {
+    .e-chart-title {
+      @apply text-base;
+    }
+
+    .e-legend {
+      @apply text-xs;
+    }
+
+    .e-axis-label {
+      @apply text-xs;
     }
   }
 }

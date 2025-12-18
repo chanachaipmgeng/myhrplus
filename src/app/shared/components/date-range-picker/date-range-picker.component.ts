@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, input, output, effect } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export interface DatePreset {
@@ -10,19 +10,18 @@ export interface DatePreset {
 @Component({
   selector: 'app-date-range-picker',
   templateUrl: './date-range-picker.component.html',
-  styleUrls: ['./date-range-picker.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./date-range-picker.component.scss']
 })
 export class DateRangePickerComponent implements OnInit {
-  startDate = input<Date | null>(null, { alias: 'startDate' });
-  endDate = input<Date | null>(null, { alias: 'endDate' });
-  presets = input<DatePreset[]>([], { alias: 'presets' });
-  showPresets = input<boolean>(true, { alias: 'showPresets' });
-  minDate = input<Date | null>(null, { alias: 'minDate' });
-  maxDate = input<Date | null>(null, { alias: 'maxDate' });
-  format = input<string>('dd/MM/yyyy', { alias: 'format' });
+  @Input() startDate: Date | null = null;
+  @Input() endDate: Date | null = null;
+  @Input() presets: DatePreset[] = [];
+  @Input() showPresets: boolean = true;
+  @Input() minDate: Date | null = null;
+  @Input() maxDate: Date | null = null;
+  @Input() format: string = 'dd/MM/yyyy';
 
-  rangeChange = output<{ start: Date | null, end: Date | null }>();
+  @Output() rangeChange = new EventEmitter<{start: Date | null, end: Date | null}>();
 
   dateRangeForm: FormGroup;
   showPresetMenu: boolean = false;
@@ -32,24 +31,15 @@ export class DateRangePickerComponent implements OnInit {
       startDate: [null, Validators.required],
       endDate: [null, Validators.required]
     });
-
-    effect(() => {
-      const start = this.startDate();
-      if (start) {
-        this.dateRangeForm.patchValue({ startDate: start }, { emitEvent: false });
-      }
-    });
-
-    effect(() => {
-      const end = this.endDate();
-      if (end) {
-        this.dateRangeForm.patchValue({ endDate: end }, { emitEvent: false });
-      }
-    });
   }
 
   ngOnInit(): void {
-    // Initial setup handled by effects
+    if (this.startDate) {
+      this.dateRangeForm.patchValue({ startDate: this.startDate });
+    }
+    if (this.endDate) {
+      this.dateRangeForm.patchValue({ endDate: this.endDate });
+    }
 
     // Watch for changes
     this.dateRangeForm.valueChanges.subscribe(() => {
@@ -60,7 +50,7 @@ export class DateRangePickerComponent implements OnInit {
   onDateChange(): void {
     const start = this.dateRangeForm.get('startDate')?.value;
     const end = this.dateRangeForm.get('endDate')?.value;
-
+    
     if (start && end && start > end) {
       // Swap dates if start is after end
       this.dateRangeForm.patchValue({
@@ -85,10 +75,10 @@ export class DateRangePickerComponent implements OnInit {
   }
 
   getPresets(): DatePreset[] {
-    if (this.presets().length > 0) {
-      return this.presets();
+    if (this.presets.length > 0) {
+      return this.presets;
     }
-
+    
     const now = new Date();
     return [
       {

@@ -1,8 +1,7 @@
-import { Component, ChangeDetectionStrategy, input, output, OnInit, effect } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { GlassCardComponent } from '../glass-card/glass-card.component';
 import { IconComponent } from '../icon/icon.component';
 
 export interface FilterOption {
@@ -16,21 +15,21 @@ export interface FilterOption {
 @Component({
   selector: 'app-search-filter',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, GlassCardComponent, IconComponent],
+  imports: [CommonModule, ReactiveFormsModule, IconComponent],
   templateUrl: './search-filter.component.html',
   styleUrls: ['./search-filter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchFilterComponent implements OnInit {
-  placeholder = input<string>('ค้นหา...');
-  filters = input<FilterOption[]>([]);
-  showAdvanced = input<boolean>(false);
-  debounceTime = input<number>(300);
-  showFilterChips = input<boolean>(true);
+  @Input() placeholder: string = 'ค้นหา...';
+  @Input() filters: FilterOption[] = [];
+  @Input() showAdvanced: boolean = false;
+  @Input() debounceTime: number = 300;
+  @Input() showFilterChips: boolean = true;
 
-  search = output<string>();
-  filterChange = output<Record<string, any>>();
-  advancedToggle = output<boolean>();
+  @Output() search = new EventEmitter<string>();
+  @Output() filterChange = new EventEmitter<Record<string, any>>();
+  @Output() advancedToggle = new EventEmitter<boolean>();
 
   searchForm: FormGroup;
   filterForm: FormGroup;
@@ -45,31 +44,23 @@ export class SearchFilterComponent implements OnInit {
     });
 
     this.filterForm = this.fb.group({});
-
-    // Effect to rebuild form when filters change
-    effect(() => {
-      const filters = this.filters();
-      // Clear existing controls
-      Object.keys(this.filterForm.controls).forEach(key => {
-        this.filterForm.removeControl(key);
-      });
-      // Add new controls
-      filters.forEach(filter => {
-        this.filterForm.addControl(filter.key, this.fb.control(filter.value || ''));
-      });
-    });
   }
 
   ngOnInit(): void {
     // Setup search debounce
     this.searchForm.get('search')?.valueChanges
       .pipe(
-        debounceTime(this.debounceTime()),
+        debounceTime(this.debounceTime),
         distinctUntilChanged()
       )
       .subscribe(value => {
         this.search.emit(value);
       });
+
+    // Setup filter form
+    this.filters.forEach(filter => {
+      this.filterForm.addControl(filter.key, this.fb.control(filter.value || ''));
+    });
 
     // Setup filter changes
     this.filterForm.valueChanges
@@ -97,7 +88,7 @@ export class SearchFilterComponent implements OnInit {
   }
 
   onClearAllFilters(): void {
-    this.filters().forEach(filter => {
+    this.filters.forEach(filter => {
       this.filterForm.patchValue({ [filter.key]: '' });
     });
     this.activeFilters = {};
@@ -109,15 +100,15 @@ export class SearchFilterComponent implements OnInit {
   }
 
   getFilterLabel(key: string): string {
-    const filter = this.filters().find(f => f.key === key);
+    const filter = this.filters.find(f => f.key === key);
     return filter?.label || key;
   }
 
   getFilterDisplayValue(key: string): string {
     const value = this.activeFilters[key];
     if (!value) return '';
-
-    const filter = this.filters().find(f => f.key === key);
+    
+    const filter = this.filters.find(f => f.key === key);
     if (filter?.type === 'select' && filter.options) {
       const option = filter.options.find(o => o.value === value);
       return option?.label || value;
@@ -132,3 +123,4 @@ export class SearchFilterComponent implements OnInit {
     });
   }
 }
+

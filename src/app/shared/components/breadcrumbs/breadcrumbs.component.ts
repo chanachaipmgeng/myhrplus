@@ -1,7 +1,6 @@
-import { Component, ChangeDetectionStrategy, input, inject, computed, signal, effect } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { filter, map, startWith } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
 export interface BreadcrumbItem {
   label: string;
@@ -12,49 +11,50 @@ export interface BreadcrumbItem {
 @Component({
   selector: 'app-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',
-  styleUrls: ['./breadcrumbs.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./breadcrumbs.component.scss']
 })
-export class BreadcrumbsComponent {
-  private router = inject(Router);
-  private activatedRoute = inject(ActivatedRoute);
+export class BreadcrumbsComponent implements OnInit {
+  @Input() items: BreadcrumbItem[] = [];
+  @Input() separator: string = '/';
+  @Input() showHome: boolean = true;
+  @Input() homeIcon: string = 'home';
+  @Input() autoGenerate: boolean = false;
+  @Input() maxItems: number = 5;
 
-  items = input<BreadcrumbItem[]>([]);
-  separator = input<string>('/');
-  showHome = input<boolean>(true);
-  homeIcon = input<string>('home');
-  autoGenerate = input<boolean>(false);
-  maxItems = input<number>(5);
+  breadcrumbs: BreadcrumbItem[] = [];
 
-  // Reactive router events
-  private navigationEnd = toSignal(
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd),
-      startWith(null)
-    )
-  );
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
-  // Computed breadcrumbs
-  breadcrumbs = computed(() => {
-    // Trigger re-calculation on navigation end
-    this.navigationEnd();
-
-    if (!this.autoGenerate()) {
-      return this.items();
+  ngOnInit(): void {
+    if (this.autoGenerate) {
+      this.router.events
+        .pipe(filter(event => event instanceof NavigationEnd))
+        .subscribe(() => {
+          this.generateBreadcrumbs();
+        });
+      this.generateBreadcrumbs();
+    } else {
+      this.breadcrumbs = this.items;
     }
+  }
 
+  private generateBreadcrumbs(): void {
     const breadcrumbs: BreadcrumbItem[] = [];
-
-    if (this.showHome()) {
+    
+    if (this.showHome) {
       breadcrumbs.push({
         label: 'หน้าแรก',
-        route: '/dashboard',
-        icon: this.homeIcon()
+        route: '/portal',
+        icon: this.homeIcon
       });
     }
 
     let route = this.activatedRoute.root;
     let url = '';
+    let routeData: any;
 
     do {
       const childrenRoutes = route.children;
@@ -64,9 +64,9 @@ export class BreadcrumbsComponent {
         if (childRoute.outlet === 'primary') {
           const routeSnapshot = childRoute.snapshot;
           url += '/' + routeSnapshot.url.map(segment => segment.path).join('/');
-
-          const routeData = routeSnapshot.data;
-
+          
+          routeData = routeSnapshot.data;
+          
           // Check for breadcrumbs array first (new format)
           if (routeData && routeData['breadcrumbs'] && Array.isArray(routeData['breadcrumbs'])) {
             routeData['breadcrumbs'].forEach((item: any) => {
@@ -95,25 +95,24 @@ export class BreadcrumbsComponent {
               });
             });
           }
-
+          
           route = childRoute;
         }
       });
     } while (route);
 
     // Limit items if maxItems is set
-    const max = this.maxItems();
-    if (max > 0 && breadcrumbs.length > max) {
-      const start = breadcrumbs.length - max;
-      return [
+    if (this.maxItems > 0 && breadcrumbs.length > this.maxItems) {
+      const start = breadcrumbs.length - this.maxItems;
+      this.breadcrumbs = [
         ...breadcrumbs.slice(0, 1),
         { label: '...', route: '' },
         ...breadcrumbs.slice(start)
       ];
+    } else {
+      this.breadcrumbs = breadcrumbs;
     }
-
-    return breadcrumbs;
-  });
+  }
 
   navigate(route: string): void {
     if (route) {
@@ -122,7 +121,7 @@ export class BreadcrumbsComponent {
   }
 
   isLast(index: number): boolean {
-    return index === this.breadcrumbs().length - 1;
+    return index === this.breadcrumbs.length - 1;
   }
 }
 

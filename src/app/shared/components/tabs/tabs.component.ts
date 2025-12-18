@@ -1,6 +1,5 @@
-import { Component, ChangeDetectionStrategy, input, model, viewChildren, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener, QueryList, ViewChildren, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { trigger, transition, style, animate } from '@angular/animations';
 
 export interface Tab {
   id: string;
@@ -15,33 +14,26 @@ export interface Tab {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './tabs.component.html',
-  styleUrls: ['./tabs.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('fadeAnimation', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(5px)' }),
-        animate('200ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
-      ])
-    ])
-  ]
+  styleUrls: ['./tabs.component.scss']
 })
 export class TabsComponent {
-  tabs = input.required<Tab[]>();
-  activeTab = model<string>('');
-  ariaLabel = input<string>('แท็บ');
-
-  tabButtons = viewChildren<ElementRef<HTMLButtonElement>>('tabButton');
+  @Input() tabs!: Tab[];
+  @Input() activeTab: string = '';
+  @Input() ariaLabel?: string;
+  @Output() activeTabChange = new EventEmitter<string>();
+  
+  @ViewChildren('tabButton') tabButtons!: QueryList<ElementRef<HTMLButtonElement>>;
 
   selectTab(tabId: string): void {
-    const tab = this.tabs().find(t => t.id === tabId);
-    if (tab && !tab.disabled && this.activeTab() !== tabId) {
-      this.activeTab.set(tabId);
+    const tab = this.tabs.find(t => t.id === tabId);
+    if (tab && !tab.disabled && this.activeTab !== tabId) {
+      this.activeTab = tabId;
+      this.activeTabChange.emit(tabId);
     }
   }
 
   handleTabKeyDown(event: KeyboardEvent, tabId: string, index: number): void {
-    const tabsArray = this.tabs().filter(t => !t.disabled);
+    const tabsArray = this.tabs.filter(t => !t.disabled);
     const currentIndex = tabsArray.findIndex(t => t.id === tabId);
 
     switch (event.key) {
@@ -78,28 +70,23 @@ export class TabsComponent {
   }
 
   private focusTab(index: number): void {
-    const tabsArray = this.tabs().filter(t => !t.disabled);
+    const tabsArray = this.tabs.filter(t => !t.disabled);
     const tabId = tabsArray[index]?.id;
-
     if (tabId) {
-      // Use setTimeout to ensure the DOM has updated if elements were re-rendered
-      // although with OnPush and signals it might happen fast, deferring ensures logic runs after render
       setTimeout(() => {
-        const buttons = this.tabButtons();
-        // We need to match the button to the tabId. 
-        // The buttons query list corresponds to the *ngFor="let tab of tabs" order.
-        // So we need to find the overall index of the tab in the original list.
-        const originalIndex = this.tabs().findIndex(t => t.id === tabId);
-        const button = buttons[originalIndex];
-        button?.nativeElement.focus();
+        const tabButton = this.tabButtons.find((_, i) => {
+          const originalIndex = this.tabs.findIndex(t => t.id === tabId);
+          return i === originalIndex;
+        });
+        tabButton?.nativeElement.focus();
       }, 0);
     }
   }
-
+  
   getTabClasses(tabId: string): string {
-    const base = 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-300';
-    const active = 'border-primary-500 text-primary-600 dark:text-primary-400';
-    return this.activeTab() === tabId ? active : base;
+    const base = 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-300 hover-lift-sm transition-smooth theme-gemini:text-white/70';
+    const active = 'border-primary-500 text-primary-600 dark:text-primary-400 relative theme-gemini:border-primary-400 theme-gemini:text-primary-300';
+    return this.activeTab === tabId ? active : base;
   }
 
   getTabId(tabId: string): string {

@@ -1,15 +1,25 @@
 <div class="border-b border-slate-200 dark:border-slate-700">
-  <nav role="tablist" [attr.aria-label]="ariaLabel()" class="-mb-px flex space-x-8 overflow-x-auto">
-    <button *ngFor="let tab of tabs(); let i = index" #tabButton role="tab" [id]="getTabId(tab.id)"
-      [attr.aria-selected]="activeTab() === tab.id" [attr.aria-controls]="getTabPanelId(tab.id)"
-      [attr.aria-disabled]="tab.disabled" [attr.tabindex]="activeTab() === tab.id ? 0 : -1" (click)="selectTab(tab.id)"
-      (keydown)="handleTabKeyDown($event, tab.id, i)" [disabled]="tab.disabled" [class]="getTabClasses(tab.id)"
+  <nav 
+    role="tablist"
+    [attr.aria-label]="ariaLabel || 'แท็บ'"
+    class="-mb-px flex space-x-8 overflow-x-auto">
+    <button
+      *ngFor="let tab of tabs; let i = index"
+      #tabButton
+      role="tab"
+      [id]="getTabId(tab.id)"
+      [attr.aria-selected]="activeTab === tab.id"
+      [attr.aria-controls]="getTabPanelId(tab.id)"
+      [attr.aria-disabled]="tab.disabled"
+      [attr.tabindex]="activeTab === tab.id ? 0 : -1"
+      (click)="selectTab(tab.id)"
+      (keydown)="handleTabKeyDown($event, tab.id, i)"
+      [disabled]="tab.disabled"
+      [class]="getTabClasses(tab.id)"
       class="whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
       <span *ngIf="tab.icon" class="mr-2" aria-hidden="true">{{ tab.icon }}</span>
       {{ tab.label }}
-      <span *ngIf="tab.badge"
-        class="ml-2 px-2 py-0.5 text-xs rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300"
-        [attr.aria-label]="'จำนวน: ' + tab.badge">
+      <span *ngIf="tab.badge" class="ml-2 px-2 py-0.5 text-xs rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300" [attr.aria-label]="'จำนวน: ' + tab.badge">
         {{ tab.badge }}
       </span>
     </button>
@@ -18,10 +28,14 @@
 
 <!-- Tab Content -->
 <div class="mt-6">
-  <ng-container *ngFor="let tab of tabs()">
-    <div *ngIf="activeTab() === tab.id" [id]="getTabPanelId(tab.id)" role="tabpanel"
-      [attr.aria-labelledby]="getTabId(tab.id)" @fadeAnimation>
-      <ng-content></ng-content>
-    </div>
-  </ng-container>
+  <div 
+    *ngFor="let tab of tabs"
+    [id]="getTabPanelId(tab.id)"
+    role="tabpanel"
+    [attr.aria-labelledby]="getTabId(tab.id)"
+    [attr.hidden]="activeTab !== tab.id ? true : null">
+    <ng-content *ngIf="activeTab === tab.id"></ng-content>
+  </div>
 </div>
+
+

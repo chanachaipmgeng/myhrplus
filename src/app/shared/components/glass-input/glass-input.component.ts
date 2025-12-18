@@ -1,11 +1,12 @@
-import { Component, ChangeDetectionStrategy, input, signal, computed, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
+import { IconComponent } from '../icon/icon.component';
 
 @Component({
   selector: 'app-glass-input',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, IconComponent],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -14,73 +15,103 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/f
     }
   ],
   templateUrl: './glass-input.component.html',
-  styleUrls: ['./glass-input.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./glass-input.component.scss']
 })
 export class GlassInputComponent implements ControlValueAccessor {
-  label = input<string>('');
-  placeholder = input<string>('');
-  type = input<string>('text');
-  disabled = input<boolean>(false); // From Template binding
-  readonly = input<boolean>(false);
-  required = input<boolean>(false);
-  hint = input<string>('');
-  errorMessage = input<string>('');
-  fullWidth = input<boolean>(true);
-  inputId = input<string>(`glass-input-${Math.random().toString(36).substr(2, 9)}`);
-  ariaLabel = input<string | undefined>(undefined);
-  ariaDescribedBy = input<string | undefined>(undefined);
+  @Input() label: string = '';
+  @Input() placeholder: string = '';
+  @Input() type: string = 'text';
+  @Input() disabled: boolean = false;
+  @Input() readonly: boolean = false;
+  @Input() required: boolean = false;
+  @Input() hint: string = '';
+  @Input() errorMessage: string = '';
+  @Input() showSuccess: boolean = false;
+  @Input() successMessage: string = '';
+  @Input() fullWidth: boolean = true;
+  @Input() inputId: string = `glass-input-${Math.random().toString(36).substr(2, 9)}`;
+  @Input() ariaLabel?: string;
+  @Input() ariaDescribedBy?: string;
+  @Input() inputmode: 'none' | 'text' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search' | undefined = undefined;
 
-  // Internal state
-  value = signal<string>('');
-  hasError = signal<boolean>(false);
+  value: string = '';
+  hasError: boolean = false;
+  isValid: boolean = false;
 
-  // CVA disabled state
-  private formDisabled = signal<boolean>(false);
+  private onChange = (value: string) => {};
+  private onTouched = () => {};
 
-  // Effective disabled state
-  effectiveDisabled = computed(() => this.disabled() || this.formDisabled());
+  get containerClass(): string {
+    return this.fullWidth ? 'w-full' : '';
+  }
 
-  private onChange = (value: string) => { };
-  private onTouched = () => { };
+  get errorMessageId(): string {
+    return `${this.inputId}-error`;
+  }
 
-  containerClass = computed(() => this.fullWidth() ? 'w-full' : '');
+  get hintId(): string {
+    return `${this.inputId}-hint`;
+  }
 
-  errorMessageId = computed(() => `${this.inputId()}-error`);
+  get successMessageId(): string {
+    return `${this.inputId}-success`;
+  }
 
-  hintId = computed(() => `${this.inputId()}-hint`);
-
-  describedByIds = computed(() => {
+  get describedByIds(): string {
     const ids: string[] = [];
-    if (this.ariaDescribedBy()) {
-      ids.push(this.ariaDescribedBy()!);
+    if (this.ariaDescribedBy) {
+      ids.push(this.ariaDescribedBy);
     }
-    if (this.hasError() && this.errorMessage()) {
-      ids.push(this.errorMessageId());
-    } else if (this.hint() && !this.hasError()) {
-      ids.push(this.hintId());
+    if (this.hasError && this.errorMessage) {
+      ids.push(this.errorMessageId);
+    } else if (this.isValid && this.showSuccess && this.successMessage) {
+      ids.push(this.successMessageId);
+    } else if (this.hint && !this.hasError && !this.isValid) {
+      ids.push(this.hintId);
     }
     return ids.join(' ') || undefined || '';
-  });
+  }
 
   onInput(event: Event): void {
     const target = event.target as HTMLInputElement;
-    const newValue = target.value;
-    this.value.set(newValue);
-    this.hasError.set(this.required() && !newValue.trim());
-    this.onChange(newValue);
+    this.value = target.value;
+    
+    // Reset states
+    this.hasError = false;
+    this.isValid = false;
+    
+    // Validate if required
+    if (this.required && !this.value.trim()) {
+      this.hasError = true;
+    } else if (this.value.trim() && this.showSuccess) {
+      this.isValid = true;
+    }
+    
+    this.onChange(this.value);
   }
 
   onBlur(): void {
     this.onTouched();
+    
+    // Validate on blur if required
+    if (this.required && !this.value.trim()) {
+      this.hasError = true;
+      this.isValid = false;
+    } else if (this.value.trim() && this.showSuccess) {
+      this.isValid = true;
+      this.hasError = false;
+    }
   }
 
   onFocus(): void {
-    this.hasError.set(false);
+    // Clear error on focus (user is fixing it)
+    if (this.hasError) {
+      this.hasError = false;
+    }
   }
 
   writeValue(value: string): void {
-    this.value.set(value || '');
+    this.value = value || '';
   }
 
   registerOnChange(fn: (value: string) => void): void {
@@ -92,7 +123,33 @@ export class GlassInputComponent implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.formDisabled.set(isDisabled);
+    this.disabled = isDisabled;
+  }
+
+  /**
+   * Get inputmode based on input type for mobile keyboard optimization
+   */
+  getInputMode(): string | null {
+    if (this.inputmode) {
+      return this.inputmode;
+    }
+
+    // Auto-detect inputmode based on type
+    switch (this.type) {
+      case 'email':
+        return 'email';
+      case 'tel':
+        return 'tel';
+      case 'url':
+        return 'url';
+      case 'number':
+        return 'numeric';
+      case 'search':
+        return 'search';
+      case 'text':
+      default:
+        return 'text';
+    }
   }
 }
 

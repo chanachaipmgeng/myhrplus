@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input, model, effect } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SharedModule } from '../../shared.module';
@@ -24,27 +24,32 @@ import { SharedModule } from '../../shared.module';
         animate('300ms ease-in-out')
       ])
     ])
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  ]
 })
-export class ProgressiveDisclosureComponent {
-  title = input<string>('Show more');
-  summary = input<string | undefined>(undefined);
-  defaultExpanded = input<boolean>(false);
-  showIcon = input<boolean>(true);
-  expanded = model<boolean>(false);
-
-  constructor() {
-    effect(() => {
-      // If defaultExpanded is true and expanded is false (initial), set it.
-      // But better: use ngOnInit to set initial value if model is not set?
-      // Actually, if the parent binds `[expanded]`, that takes precedence.
-      // If parent binds `[defaultExpanded]`, we should use it for initial state.
-      // But `expanded` signal already has initial value `false`.
-    });
+export class ProgressiveDisclosureComponent implements OnInit {
+  @Input() title: string = '';
+  @Input() defaultExpanded: boolean = false;
+  @Input() variant: 'default' | 'accordion' | 'card' = 'default';
+  @Input() showIcon: boolean = true;
+  @Input() icon: string = 'expand_more';
+  @Input() iconExpanded: string = 'expand_less';
+  
+  @Output() expandedChange = new EventEmitter<boolean>();
+  
+  isExpanded: boolean = false;
+  _uniqueId: string = `disclosure-${Math.random().toString(36).substr(2, 9)}`;
+  
+  ngOnInit(): void {
+    this.isExpanded = this.defaultExpanded;
   }
-
+  
   toggle(): void {
-    this.expanded.update(v => !v);
+    this.isExpanded = !this.isExpanded;
+    this.expandedChange.emit(this.isExpanded);
+  }
+  
+  get currentIcon(): string {
+    return this.isExpanded ? this.iconExpanded : this.icon;
   }
 }
+

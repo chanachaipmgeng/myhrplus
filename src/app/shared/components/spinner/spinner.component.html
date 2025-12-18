@@ -1,9 +1,18 @@
-<div class="spinner-container" [class]="containerClass()">
-  <div class="spinner" [class]="spinnerClass()">
-    <div class="spinner-circle"></div>
-    <div class="spinner-circle"></div>
-    <div class="spinner-circle"></div>
-    <div class="spinner-circle"></div>
+<div class="flex flex-col items-center justify-center" [class]="containerClass">
+  <div class="inline-block relative" [class]="spinnerClass">
+    <div class="absolute border-2 border-transparent border-t-current rounded-full animate-spin" 
+         [class]="size === 'sm' ? 'w-5 h-5 border-[2px]' : size === 'md' ? 'w-10 h-10 border-[3px]' : 'w-[60px] h-[60px] border-4'"
+         style="animation-delay: -0.45s;"></div>
+    <div class="absolute border-2 border-transparent border-t-current rounded-full animate-spin" 
+         [class]="size === 'sm' ? 'w-5 h-5 border-[2px]' : size === 'md' ? 'w-10 h-10 border-[3px]' : 'w-[60px] h-[60px] border-4'"
+         style="animation-delay: -0.3s;"></div>
+    <div class="absolute border-2 border-transparent border-t-current rounded-full animate-spin" 
+         [class]="size === 'sm' ? 'w-5 h-5 border-[2px]' : size === 'md' ? 'w-10 h-10 border-[3px]' : 'w-[60px] h-[60px] border-4'"
+         style="animation-delay: -0.15s;"></div>
+    <div class="absolute border-2 border-transparent border-t-current rounded-full animate-spin" 
+         [class]="size === 'sm' ? 'w-5 h-5 border-[2px]' : size === 'md' ? 'w-10 h-10 border-[3px]' : 'w-[60px] h-[60px] border-4'"></div>
   </div>
-  <p *ngIf="message()" class="spinner-message thai-text">{{ message() }}</p>
+  <p *ngIf="message" class="mt-4 text-sm text-slate-600 dark:text-slate-400 thai-text theme-gemini:bg-gradient-to-r theme-gemini:from-primary-400 theme-gemini:to-primary-600 theme-gemini:bg-clip-text theme-gemini:text-transparent">{{ message }}</p>
 </div>
+
+

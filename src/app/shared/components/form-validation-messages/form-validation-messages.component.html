@@ -1,8 +1,15 @@
-<div class="validation-messages" [class.inline]="position() === 'inline'">
-  <div *ngFor="let error of errors" class="error-message flex items-center gap-2 text-red-600 dark:text-red-400 text-sm"
+<div [ngClass]="{
+  'mt-1': position !== 'inline',
+  'inline-flex items-center gap-2 mt-0 ml-2': position === 'inline'
+}">
+  <div
+    *ngFor="let error of errors"
+    [ngClass]="{
+      'flex items-center gap-1.5 sm:gap-1 px-2.5 sm:px-2 py-1.5 sm:py-1 bg-red-500/10 dark:bg-red-500/15 border-l-[3px] border-red-500 dark:border-red-400 rounded text-red-600 dark:text-red-400 text-xs sm:text-[10px] mb-1 last:mb-0 animate-fade-in': position !== 'inline',
+      'inline-flex items-center gap-1.5 sm:gap-1 px-2.5 sm:px-2 py-1.5 sm:py-1 bg-red-500/15 dark:bg-red-500/20 rounded text-red-600 dark:text-red-400 text-xs sm:text-[10px] mb-0 animate-fade-in': position === 'inline'
+    }"
     [attr.data-error-type]="error.key">
-    <app-icon *ngIf="showIcon()" [name]="error.icon || 'error'" size="sm"
-      color="text-red-600 dark:text-red-400"></app-icon>
-    <span class="error-text thai-text">{{ error.message }}</span>
+    <app-icon *ngIf="showIcon" [name]="error.icon || 'error'" size="sm" color="text-red-600 dark:text-red-400" class="flex-shrink-0"></app-icon>
+    <span class="thai-text leading-tight">{{ error.message }}</span>
   </div>
 </div>

@@ -21,7 +21,11 @@
   <app-footer></app-footer>
 
   <!-- Responsive Overlay -->
-  <div *ngIf="isMobile() && !navService.collapseSidebar" id="responsive-overlay"
-    class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden" (click)="clearToggle()">
+  <div 
+    *ngIf="navService.isMobile() && !navService.collapseSidebar"
+    id="responsive-overlay" 
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+    (click)="clearToggle()">
   </div>
 </div>
+

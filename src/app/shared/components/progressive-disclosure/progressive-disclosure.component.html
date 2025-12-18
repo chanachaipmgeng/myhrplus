@@ -1,19 +1,50 @@
-<div class="progressive-disclosure-container border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden">
+<div 
+  class="progressive-disclosure w-full transition-smooth"
+  [ngClass]="{
+    'variant-default border-b border-gray-200 dark:border-gray-700': variant === 'default',
+    'variant-accordion glass-weak dark:glass-dark-weak theme-gemini:glass-gemini-weak rounded-md mb-2 overflow-hidden': variant === 'accordion',
+    'variant-card glass dark:glass-dark theme-gemini:glass-gemini theme-gemini:shadow-gemini rounded-xl p-4 shadow-md': variant === 'card',
+    'is-expanded': isExpanded
+  }">
+  
+  <!-- Header -->
+  <button
+    (click)="toggle()"
+    class="disclosure-header w-full py-3 px-4 md:py-0 bg-transparent border-none cursor-pointer flex items-center justify-between transition-smooth min-h-[44px] md:min-h-0 text-left hover:bg-primary-500/5 dark:hover:bg-primary-500/10 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:rounded-md"
+    [attr.aria-expanded]="isExpanded"
+    [attr.aria-controls]="'content-' + _uniqueId"
+    role="button"
+    tabindex="0"
+    [ngClass]="{
+      'rounded-t-md': variant === 'accordion',
+      'p-0 mb-4': variant === 'card'
+    }">
+    <div class="header-content flex items-center justify-between w-full gap-2">
+      <h3 *ngIf="title" class="disclosure-title thai-text text-base md:text-base font-semibold text-gray-900 dark:text-gray-100 m-0 transition-colors hover:text-primary-600 dark:hover:text-primary-400 theme-gemini:hover:bg-gradient-to-r theme-gemini:hover:from-gemini-gradient-start theme-gemini:hover:to-gemini-gradient-end theme-gemini:hover:bg-clip-text theme-gemini:hover:text-transparent">{{ title }}</h3>
+      <app-icon
+        *ngIf="showIcon"
+        [name]="currentIcon"
+        size="sm"
+        color="text-slate-500 dark:text-slate-400"
+        class="disclosure-icon transition-smooth flex-shrink-0"
+        [ngClass]="{ 'rotate-180': isExpanded }">
+      </app-icon>
+    </div>
+  </button>
+  
+  <!-- Content -->
   <div
-    class="disclosure-header p-4 bg-slate-50 dark:bg-slate-800 flex justify-between items-center cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-750 transition-colors"
-    (click)="toggle()">
-    <div class="header-content">
-      <h3 class="font-medium text-slate-900 dark:text-white">{{ title() }}</h3>
-      <p *ngIf="summary()" class="text-sm text-slate-500 dark:text-slate-400 mt-1">{{ summary() }}</p>
+    [id]="'content-' + _uniqueId"
+    class="disclosure-content overflow-hidden transition-smooth"
+    [attr.aria-hidden]="!isExpanded"
+    [@slideToggle]="isExpanded ? 'expanded' : 'collapsed'"
+    *ngIf="isExpanded">
+    <div class="content-inner p-4 pt-2 md:p-3 md:pt-2"
+         [ngClass]="{
+           'p-0': variant === 'card'
+         }">
+      <ng-content></ng-content>
     </div>
-    <div class="toggle-icon text-slate-400 transition-transform duration-300" [class.rotate-180]="expanded()">
-      <i class="fas fa-chevron-down"></i>
-    </div>
-  </div>
-
-  <div class="disclosure-content bg-white dark:bg-slate-900 overflow-hidden transition-all duration-300 ease-in-out"
-    [style.max-height]="expanded() ? '1000px' : '0'" [style.opacity]="expanded() ? '1' : '0'" [class.p-4]="expanded()"
-    [class.border-t]="expanded()">
-    <ng-content></ng-content>
   </div>
 </div>
+

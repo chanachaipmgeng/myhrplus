@@ -1,9 +1,26 @@
-<div class="smart-textarea-container" [ngClass]="effectiveCustomClass()" [style.width]="effectiveWidth()"
-  [style.height]="effectiveHeight()">
-  <ejs-smarttextarea #smartTextarea [placeholder]="effectivePlaceholder()" [floatLabelType]="effectiveFloatLabelType()"
-    [rows]="effectiveRows()" [cols]="effectiveCols()" [value]="effectiveValue()" [enabled]="effectiveEnabled()"
-    [readonly]="effectiveReadonly()" [resizeMode]="effectiveResizeMode()" [userRole]="effectiveUserRole()"
-    [UserPhrases]="effectiveUserPhrases()" [aiSuggestionHandler]="effectiveAiSuggestionHandler()"
-    (change)="onChange($event)" (focus)="onFocus($event)" (blur)="onBlur($event)" (created)="onCreated($event)">
+<div class="smart-textarea-container" [ngClass]="customClass" [style.width]="width" [style.height]="height">
+  <ejs-smarttextarea
+    #smartTextarea
+    [placeholder]="placeholder"
+    [floatLabelType]="floatLabelType"
+    [rows]="rows"
+    [cols]="cols"
+    [value]="value"
+    [enabled]="enabled"
+    [readonly]="readonly"
+    [resizeMode]="resizeMode"
+    [userRole]="userRole"
+    [UserPhrases]="userPhrases"
+    [aiSuggestionHandler]="aiSuggestionHandler"
+    (change)="onChange($event)"
+    (focus)="onFocus($event)"
+    (blur)="onBlur($event)"
+    (created)="onCreated($event)">
   </ejs-smarttextarea>
 </div>
+
+
+
+
+
+

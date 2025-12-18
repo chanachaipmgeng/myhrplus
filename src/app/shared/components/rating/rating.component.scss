@@ -1,117 +1,40 @@
 /* ============================================
    Rating Component Styles
+   ============================================
+   Migrated to Tailwind - Minimal SCSS for component-specific styles only
    ============================================ */
-
-@import '../../../../styles/design-tokens';
-@import '../../../../styles/mixins';
 
 :host {
   display: inline-block;
 }
 
-/* Base Styles */
-.flex {
-  display: flex;
-}
-
-.items-center {
-  align-items: center;
-}
-
-.space-x-1 {
-  gap: $spacing-1;
-}
-
-.text-2xl {
-  font-size: $text-2xl;
-}
-
-.transition-colors {
-  transition: $transition-colors;
-}
-
-.disabled\:cursor-default:disabled {
-  cursor: default;
-}
-
-.ml-2 {
-  margin-left: $spacing-2;
-}
-
-.text-sm {
-  font-size: $text-sm;
-}
-
-.text-slate-600 {
-  color: $gray-600;
-}
-
-.dark .text-slate-400 {
-  color: $gray-400;
-}
-
-/* Star Colors */
-.text-yellow-400 {
-  color: $warning-400;
-}
-
-.hover\:text-yellow-500:hover {
-  color: $warning-500;
-}
-
-.text-slate-300 {
-  color: $gray-300;
-}
-
-.dark .text-slate-600 {
-  color: $gray-600;
-}
-
-.hover\:text-yellow-400:hover {
-  color: $warning-400;
-}
-
-/* Heart Colors */
-.text-red-500 {
-  color: $error-500;
-}
-
-.hover\:text-red-600:hover {
-  color: $error-600;
-}
-
-.hover\:text-red-400:hover {
-  color: $error-400;
-}
-
-/* Dark Mode */
-.dark {
-  .text-slate-600 {
-    color: $gray-400;
-  }
-}
+/* Component uses Tailwind classes directly in HTML */
+/* All styles handled by Tailwind utilities and plugins */
 
 /* Gemini Theme */
+/* Using Tailwind color utilities - keeping only complex filter effects */
+[data-theme='gemini'],
 body.theme-gemini {
   .text-yellow-400 {
-    color: $gemini-gradient-mid;
-    @include gemini-glow('subtle');
+    @apply glow-primary;
+    filter: drop-shadow(0 0 4px rgba(var(--primary-rgb), 0.4));
   }
   
   .text-red-500 {
-    color: $error-400;
-    @include gemini-glow('subtle');
+    /* Using CSS variable for red color - fallback to hardcoded if not defined */
+    filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.4));
   }
   
+  /* Text colors handled by Tailwind theme-gemini: variants in HTML */
   .text-slate-600,
   .dark .text-slate-400 {
-    color: rgba(255, 255, 255, 0.7);
+    @apply text-white/70;
   }
 }
 
 /* Responsive */
-@include respond-to-down(sm) {
+@media (max-width: 640px) {
   .text-2xl {
-    font-size: $text-xl;
+    font-size: 1.25rem; /* text-xl */
   }
 }

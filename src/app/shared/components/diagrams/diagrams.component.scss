@@ -4,23 +4,23 @@
 
   ::ng-deep {
     .e-diagram {
-      border: 1px solid rgba(148, 163, 184, 0.2);
+      border: 1px solid var(--glass-border);
       border-radius: 0.5rem;
       overflow: hidden;
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--glass-bg-weak);
       -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
     }
 
     .e-diagram-ruler {
-      background: rgba(255, 255, 255, 0.1);
+      background: var(--glass-bg);
       -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+      border-bottom: 1px solid var(--glass-border);
     }
 
     .e-diagram-selection-handle {
-      background: rgb(var(--primary-rgb));
+      background: var(--primary-color);
       border: 2px solid white;
     }
 
@@ -33,21 +33,24 @@
 }
 
 // Dark mode support
-:host-context(.dark) {
+:host-context(.dark),
+[data-theme='dark'] {
   .diagrams-container {
     ::ng-deep {
       .e-diagram {
-        border-color: rgba(148, 163, 184, 0.3);
-        background: rgba(0, 0, 0, 0.2);
+        border-color: var(--glass-border-strong);
+        background: var(--glass-bg);
       }
 
       .e-diagram-ruler {
-        background: rgba(0, 0, 0, 0.3);
-        border-bottom-color: rgba(148, 163, 184, 0.3);
+        background: var(--glass-bg-strong);
+        border-bottom-color: var(--glass-border-strong);
       }
     }
   }
 }
+
+
 
 
 

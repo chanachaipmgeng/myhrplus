@@ -1,27 +1,31 @@
-<div class="error-state glass-card-weak p-6">
-  <div class="error-state-content">
-    <div class="error-state-icon">
-      <app-icon [name]="errorIcon()" size="xl" color="text-red-600 dark:text-red-400"></app-icon>
+<div class="flex items-center justify-center text-center p-6 rounded-lg border border-red-500/20 dark:border-red-500/30 glass-weak dark:glass-dark-weak theme-gemini:glass-gemini-weak transition-smooth">
+  <div class="max-w-[500px] w-full px-4 sm:px-0">
+    <div class="mb-6 flex justify-center items-center">
+      <app-icon [name]="errorIcon" size="xl" color="text-red-600 dark:text-red-400"></app-icon>
     </div>
-    <h3 class="error-state-title thai-text font-semibold text-red-600 dark:text-red-400 mb-2">
-      {{ title() || defaultTitle() }}
+    <h3 class="text-xl sm:text-lg font-semibold text-red-600 dark:text-red-400 mb-3 sm:mb-2 thai-text">
+      {{ title || defaultTitle }}
     </h3>
-    <p class="error-state-message text-slate-600 dark:text-slate-400 thai-text mb-4">
-      {{ message() || defaultMessage() }}
+    <p class="text-sm sm:text-xs text-slate-600 dark:text-slate-400 mb-4 sm:mb-3 thai-text leading-relaxed">
+      {{ message || defaultMessage }}
     </p>
-    <div class="error-state-code text-xs text-slate-500 dark:text-slate-500 font-mono mb-4" *ngIf="errorCode()">
-      Error Code: {{ errorCode() }}
+    <div class="text-xs sm:text-[10px] text-red-600 dark:text-red-400 font-mono mb-4 sm:mb-3 px-4 sm:px-3 py-2 rounded-md bg-red-500/10 dark:bg-red-500/15 border border-red-500/20 dark:border-red-500/30 theme-gemini:glass-gemini-weak theme-gemini:border-red-500/40 transition-smooth" *ngIf="errorCode">
+      Error Code: {{ errorCode }}
     </div>
-    <div class="error-state-details text-sm text-slate-600 dark:text-slate-400 mb-4" *ngIf="showDetails() && details()">
-      <details class="cursor-pointer">
-        <summary class="thai-text font-medium">รายละเอียดเพิ่มเติม</summary>
-        <p class="mt-2 thai-text">{{ details() }}</p>
+    <div class="text-sm text-slate-600 dark:text-slate-400 mb-4 sm:mb-3 text-left" *ngIf="showDetails && details">
+      <details class="cursor-pointer p-3 sm:p-2 rounded-md glass-weak dark:glass-dark-weak border border-white/20 dark:border-slate-700/30 transition-smooth">
+        <summary class="thai-text font-medium p-2 min-h-[44px] flex items-center hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+          รายละเอียดเพิ่มเติม
+        </summary>
+        <p class="mt-2 thai-text">{{ details }}</p>
       </details>
     </div>
-    <button *ngIf="showRetry()" (click)="onRetry()"
-      class="error-state-retry glass-button px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors flex items-center gap-2">
+    <button
+      *ngIf="showRetry"
+      (click)="onRetry()"
+      class="mt-4 sm:mt-3 w-full sm:w-auto min-h-[44px] px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors flex items-center justify-center gap-2 glass-button hover-lift active-scale">
       <app-icon name="refresh" size="sm"></app-icon>
-      <span class="thai-text ml-2">{{ retryText() }}</span>
+      <span class="thai-text">{{ retryText }}</span>
     </button>
   </div>
 </div>

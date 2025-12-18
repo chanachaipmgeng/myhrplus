@@ -1,6 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy, input, output, viewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SignatureModule, SignatureComponent as SyncfusionSignatureComponent } from '@syncfusion/ej2-angular-inputs';
+import { SignatureModule } from '@syncfusion/ej2-angular-inputs';
+import {
+  SignatureComponent as SyncfusionSignatureComponent
+} from '@syncfusion/ej2-angular-inputs';
 
 export interface SignatureConfig {
   backgroundColor?: string;
@@ -21,47 +24,57 @@ export interface SignatureConfig {
   standalone: true,
   imports: [CommonModule, SignatureModule],
   templateUrl: './signature.component.html',
-  styleUrls: ['./signature.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./signature.component.scss']
 })
-export class SignatureComponent {
-  signature = viewChild<SyncfusionSignatureComponent>('signature');
+export class SignatureComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('signature', { static: false }) signature!: SyncfusionSignatureComponent;
 
-  // Appearance
-  backgroundColor = input<string>('#ffffff');
-  strokeColor = input<string>('#000000');
-  minStrokeWidth = input<number>(0.5);
-  maxStrokeWidth = input<number>(2.5);
-  velocity = input<number>(0.7);
+  // Appearance - Note: These are set via methods after component creation
+  @Input() backgroundColor: string = '#ffffff';
+  @Input() strokeColor: string = '#000000';
+  @Input() minStrokeWidth: number = 0.5;
+  @Input() maxStrokeWidth: number = 2.5;
+  @Input() velocity: number = 0.7;
 
   // Behavior
-  isReadOnly = input<boolean>(false);
-  saveWithBackground = input<boolean>(true);
-  allowClear = input<boolean>(true);
+  @Input() isReadOnly: boolean = false;
+  @Input() saveWithBackground: boolean = true;
+  @Input() allowClear: boolean = true;
 
   // Size
-  height = input<string | number>('300px');
-  width = input<string | number>('100%');
-  customClass = input<string | undefined>(undefined);
+  @Input() height: string | number = '300px';
+  @Input() width: string | number = '100%';
+  @Input() customClass?: string;
 
   // Events
-  change = output<any>();
-  created = output<any>();
+  @Output() change = new EventEmitter<any>();
+  @Output() created = new EventEmitter<any>();
+
+  ngOnInit(): void {
+    // Initialize if needed
+  }
+
+  ngAfterViewInit(): void {
+    // Properties are set via template bindings
+  }
+
+  ngOnDestroy(): void {
+    // Cleanup if needed
+  }
 
   /**
    * Get signature instance
    */
   getSignatureInstance(): SyncfusionSignatureComponent | null {
-    return this.signature() || null;
+    return this.signature || null;
   }
 
   /**
    * Clear signature
    */
   clear(): void {
-    const sig = this.signature();
-    if (sig) {
-      sig.clear();
+    if (this.signature) {
+      this.signature.clear();
     }
   }
 
@@ -69,9 +82,8 @@ export class SignatureComponent {
    * Undo last stroke
    */
   undo(): void {
-    const sig = this.signature();
-    if (sig) {
-      sig.undo();
+    if (this.signature) {
+      this.signature.undo();
     }
   }
 
@@ -79,9 +91,8 @@ export class SignatureComponent {
    * Redo last undone stroke
    */
   redo(): void {
-    const sig = this.signature();
-    if (sig) {
-      sig.redo();
+    if (this.signature) {
+      this.signature.redo();
     }
   }
 
@@ -89,9 +100,8 @@ export class SignatureComponent {
    * Check if signature is empty
    */
   isEmpty(): boolean {
-    const sig = this.signature();
-    if (sig) {
-      return sig.isEmpty();
+    if (this.signature) {
+      return this.signature.isEmpty();
     }
     return true;
   }
@@ -100,11 +110,10 @@ export class SignatureComponent {
    * Save signature as base64
    */
   saveAsBase64(): string {
-    const sig = this.signature();
-    if (sig) {
+    if (this.signature) {
       // getSignature accepts SignatureFileType: 'Png' | 'Svg' | 'Jpeg'
       const fileType = 'Png' as any;
-      return sig.getSignature(fileType);
+      return this.signature.getSignature(fileType);
     }
     return '';
   }
@@ -113,7 +122,7 @@ export class SignatureComponent {
    * Save signature as blob
    */
   saveAsBlob(): Blob | null {
-    if (this.signature()) {
+    if (this.signature) {
       const base64 = this.saveAsBase64();
       if (base64) {
         // Convert base64 to blob
@@ -134,7 +143,7 @@ export class SignatureComponent {
    * Download signature as image
    */
   download(fileName?: string): void {
-    if (this.signature()) {
+    if (this.signature) {
       const base64 = this.saveAsBase64();
       if (base64) {
         const link = document.createElement('a');
@@ -149,9 +158,8 @@ export class SignatureComponent {
    * Load signature from base64
    */
   load(base64: string): void {
-    const sig = this.signature();
-    if (sig && base64) {
-      sig.load(base64);
+    if (this.signature && base64) {
+      this.signature.load(base64);
     }
   }
 
@@ -159,8 +167,7 @@ export class SignatureComponent {
    * Load signature from URL
    */
   loadFromUrl(url: string): void {
-    const sig = this.signature();
-    if (sig && url) {
+    if (this.signature && url) {
       // Convert image URL to base64
       const img = new Image();
       img.crossOrigin = 'anonymous';
@@ -190,3 +197,4 @@ export class SignatureComponent {
     this.created.emit(event);
   }
 }
+

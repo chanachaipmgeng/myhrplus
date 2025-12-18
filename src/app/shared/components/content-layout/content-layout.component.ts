@@ -1,32 +1,25 @@
-import { Component, ChangeDetectionStrategy, computed, inject, DestroyRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavService } from '../../../core/services/nav.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { toSignal, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-content-layout',
   templateUrl: './content-layout.component.html',
-  styleUrls: ['./content-layout.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./content-layout.component.scss']
 })
-export class ContentLayoutComponent {
-  navService = inject(NavService);
-  private router = inject(Router);
+export class ContentLayoutComponent implements OnInit {
+  constructor(
+    public navService: NavService,
+    private router: Router
+  ) {}
 
-  // Reactive screen state
-  screenWidth = toSignal(this.navService.screenWidth, { initialValue: window.innerWidth });
-  isMobile = computed(() => this.screenWidth() < 768);
-
-  constructor() {
+  ngOnInit(): void {
     // Close sidebar on mobile when route changes
     this.router.events
-      .pipe(
-        filter(event => event instanceof NavigationEnd),
-        takeUntilDestroyed()
-      )
+      .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
-        if (this.isMobile()) {
+        if (this.navService.isMobile()) {
           this.navService.closeSidebar();
         }
       });
@@ -39,7 +32,7 @@ export class ContentLayoutComponent {
 
   toggleSidebarBody(): void {
     // Toggle sidebar body
-    if (this.isMobile()) {
+    if (this.navService.isMobile()) {
       this.navService.toggleSidebar();
     }
   }
@@ -49,6 +42,9 @@ export class ContentLayoutComponent {
     this.navService.closeSidebar();
   }
 }
+
+
+
 
 
 

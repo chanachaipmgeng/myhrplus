@@ -1,82 +1,339 @@
-<div class="two-layer-sidebar h-full flex" [class.dark]="isDarkMode">
+<div class="two-layer-sidebar h-full flex animate-fade-in" [class.dark]="isDarkMode">
   <!-- Left Icon Bar - Module Icons -->
-  <div class="icon-bar flex flex-col items-center py-4 border-r transition-colors duration-300">
+  <div class="icon-bar flex flex-col items-center py-4 border-r
+              transition-all duration-300 ease-in-out
+              bg-white/5 dark:bg-gray-900/20 theme-gemini:bg-gray-900/30
+              backdrop-blur-sm">
     <!-- Logo -->
     <div class="mb-6">
-      <a routerLink="/home"
-         class="logo-container w-12 h-12 rounded-xl flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 cursor-pointer"
-         [attr.aria-label]="'Home'"
-         role="button"
-         tabindex="0">
-        <span class="text-white text-xl font-bold">H</span>
+      <a routerLink="/portal"
+         class="logo-container w-12 h-12 rounded-xl flex items-center justify-center shadow-lg
+                transition-all duration-300 ease-out
+                hover:scale-110 hover:shadow-xl hover:-translate-y-1
+                active:scale-95
+                bg-gradient-to-br from-blue-500 to-indigo-600
+                dark:from-blue-600 dark:to-indigo-700
+                cursor-pointer
+                group relative overflow-hidden
+                animate-gemini-pulse">
+        <!-- Shimmer Effect -->
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent
+                    -translate-x-full group-hover:translate-x-full
+                    transition-transform duration-1000 ease-in-out"></div>
+        <span class="text-white text-xl font-bold relative z-10
+                      group-hover:scale-110 transition-transform duration-300">H</span>
       </a>
     </div>
 
-    <!-- Module Icons -->
+    <!-- Navigation Icons (Rail) -->
     <div class="flex flex-col gap-3 flex-1 w-full px-2">
-      <a *ngFor="let module of mainModules"
-         [routerLink]="getModuleHomeRoute(module.id)"
-         routerLinkActive="active"
-         [routerLinkActiveOptions]="{exact: false}"
-         [class.active]="selectedModule === module.id"
-         [attr.aria-label]="module.name"
-         [attr.aria-current]="selectedModule === module.id ? 'true' : 'false'"
-         [attr.title]="module.name"
-         class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl transition-all duration-300 relative group">
-        <span [class]="module.iconCss" class="text-xl transition-colors duration-300"></span>
-        <!-- Active Indicator -->
-        <span *ngIf="selectedModule === module.id" class="active-indicator"></span>
-        <!-- Tooltip -->
-        <span class="module-tooltip">{{ module.name }}</span>
-      </a>
+      <!-- Level 2 Items - Show when Level 1 is selected -->
+      <ng-container *ngIf="selectedNavigationItem && level2Items.length > 0">
+        <!-- Home Button -->
+        <button (click)="goToHome()"
+                class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl
+                       transition-all duration-300 ease-out
+                       hover:scale-110 hover:shadow-lg hover:-translate-y-0.5
+                       active:scale-95
+                       relative group
+                       animate-fade-in
+                       cursor-pointer
+                       border-0 bg-transparent
+                       mb-2">
+          <div class="absolute inset-0 rounded-xl
+                      bg-gradient-to-br from-blue-500/0 to-indigo-500/0
+                      group-hover:from-blue-500/10 group-hover:to-indigo-500/10
+                      transition-all duration-300"></div>
+          <span class="material-icons text-xl transition-all duration-300 relative z-10
+                       group-hover:scale-110 group-hover:rotate-6
+                       text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">
+            home
+          </span>
+          <span class="module-tooltip animate-fade-in">หน้าแรก</span>
+        </button>
+
+        <!-- Level 2 Items (children of selected Level 1) -->
+        <button *ngFor="let level2Item of level2Items; let i = index"
+                (click)="selectLevel2Item(level2Item, selectedNavigationItem)"
+                [class.active]="selectedLevel2Item === level2Item"
+                [attr.aria-label]="level2Item.label"
+                [attr.aria-current]="selectedLevel2Item === level2Item ? 'true' : 'false'"
+                [attr.title]="level2Item.label"
+                [style.animation-delay.ms]="i * 50"
+                class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl
+                       transition-all duration-300 ease-out
+                       hover:scale-110 hover:shadow-lg hover:-translate-y-0.5
+                       active:scale-95
+                       relative group
+                       animate-fade-in
+                       cursor-pointer
+                       border-0 bg-transparent">
+          <!-- Hover Background -->
+          <div class="absolute inset-0 rounded-xl
+                      bg-gradient-to-br from-blue-500/0 to-indigo-500/0
+                      group-hover:from-blue-500/10 group-hover:to-indigo-500/10
+                      transition-all duration-300"></div>
+          <!-- Icon -->
+          <span class="material-icons text-xl transition-all duration-300 relative z-10
+                       group-hover:scale-110 group-hover:rotate-6
+                       text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">
+            {{ level2Item.icon || 'folder' }}
+          </span>
+          <!-- Active Indicator -->
+          <span *ngIf="selectedLevel2Item === level2Item"
+                class="active-indicator
+                       animate-pulse"></span>
+          <!-- Badge -->
+          <span *ngIf="level2Item.badge"
+                class="absolute top-0 right-0 w-5 h-5 rounded-full
+                       flex items-center justify-center text-xs font-bold
+                       bg-red-500 text-white
+                       transform translate-x-1 -translate-y-1
+                       z-20">{{ level2Item.badge }}</span>
+          <!-- Tooltip -->
+          <span class="module-tooltip
+                       animate-fade-in
+                       [animation-delay:100ms]">{{ level2Item.label }}</span>
+        </button>
+      </ng-container>
+
+      <!-- Level 1 Items (Home, ESS, Admin) - Show when no Level 1 is selected or no Level 2 items -->
+      <ng-container *ngIf="!selectedNavigationItem || level2Items.length === 0">
+        <button *ngFor="let navItem of navigationItems; let i = index"
+                (click)="selectNavigationItem(navItem.id)"
+                [class.active]="selectedNavigationItem?.id === navItem.id"
+                [attr.aria-label]="navItem.label"
+                [attr.aria-current]="selectedNavigationItem?.id === navItem.id ? 'true' : 'false'"
+                [attr.title]="navItem.label"
+                [style.animation-delay.ms]="i * 50"
+                class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl
+                       transition-all duration-300 ease-out
+                       hover:scale-110 hover:shadow-lg hover:-translate-y-0.5
+                       active:scale-95
+                       relative group
+                       animate-fade-in
+                       cursor-pointer
+                       border-0 bg-transparent">
+          <!-- Hover Background -->
+          <div class="absolute inset-0 rounded-xl
+                      bg-gradient-to-br from-blue-500/0 to-indigo-500/0
+                      group-hover:from-blue-500/10 group-hover:to-indigo-500/10
+                      transition-all duration-300"></div>
+          <!-- Icon -->
+          <span class="material-icons text-xl transition-all duration-300 relative z-10
+                       group-hover:scale-110 group-hover:rotate-6
+                       text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">
+            {{ navItem.icon }}
+          </span>
+          <!-- Active Indicator -->
+          <span *ngIf="selectedNavigationItem?.id === navItem.id"
+                class="active-indicator
+                       animate-pulse"></span>
+          <!-- Badge -->
+          <span *ngIf="navItem.badge"
+                class="absolute top-0 right-0 w-5 h-5 rounded-full
+                       flex items-center justify-center text-xs font-bold
+                       bg-red-500 text-white
+                       transform translate-x-1 -translate-y-1
+                       z-20">{{ navItem.badge }}</span>
+          <!-- Tooltip -->
+          <span class="module-tooltip
+                       animate-fade-in
+                       [animation-delay:100ms]">{{ navItem.label }}</span>
+        </button>
+      </ng-container>
+
+      <!-- Fallback to legacy modules if navigationItems is empty -->
+      <ng-container *ngIf="navigationItems.length === 0">
+        <a *ngFor="let module of mainModules; let i = index"
+           [routerLink]="getModuleHomeRoute(module.id)"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{exact: false}"
+           [class.active]="selectedModule === module.id"
+           [attr.aria-label]="module.name"
+           [attr.aria-current]="selectedModule === module.id ? 'true' : 'false'"
+           [attr.title]="module.name"
+           [style.animation-delay.ms]="i * 50"
+           class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl
+                  transition-all duration-300 ease-out
+                  hover:scale-110 hover:shadow-lg hover:-translate-y-0.5
+                  active:scale-95
+                  relative group
+                  animate-fade-in">
+          <!-- Hover Background -->
+          <div class="absolute inset-0 rounded-xl
+                      bg-gradient-to-br from-blue-500/0 to-indigo-500/0
+                      group-hover:from-blue-500/10 group-hover:to-indigo-500/10
+                      transition-all duration-300"></div>
+          <span *ngIf="module.iconCss"
+                [class]="module.iconCss"
+                class="text-xl transition-all duration-300 relative z-10
+                       group-hover:scale-110 group-hover:rotate-6
+                       text-gray-700 dark:text-gray-300 theme-gemini:text-white/90"></span>
+          <span *ngIf="!module.iconCss"
+                class="text-xl transition-all duration-300 relative z-10
+                       group-hover:scale-110 group-hover:rotate-6
+                       text-gray-700 dark:text-gray-300 theme-gemini:text-white/90
+                       e-icons e-folder"></span>
+          <!-- Active Indicator -->
+          <span *ngIf="selectedModule === module.id"
+                class="active-indicator
+                       animate-pulse"></span>
+          <!-- Tooltip -->
+          <span class="module-tooltip
+                       animate-fade-in
+                       [animation-delay:100ms]">{{ module.name }}</span>
+        </a>
+      </ng-container>
     </div>
   </div>
 
   <!-- Right Menu Panel - Module Menu -->
-  <div class="menu-panel flex-1 flex flex-col overflow-hidden transition-colors duration-300">
-    <div class="p-5 flex-1 overflow-y-auto">
-      <!-- Module Header with Search -->
-      <div class="mb-6" *ngIf="selectedModuleData">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="module-title text-2xl font-bold thai-text transition-colors duration-300">
-            {{ selectedModuleData.name }}
+  <div class="menu-panel flex-1 flex flex-col overflow-hidden
+              transition-all duration-300 ease-in-out
+              bg-gradient-to-br from-white/5 via-white/10 to-white/5
+              dark:from-gray-900/20 dark:via-gray-900/30 dark:to-gray-900/20
+              theme-gemini:from-gray-900/30 theme-gemini:via-gray-900/40 theme-gemini:to-gray-900/30
+              backdrop-blur-md border-l border-white/10 dark:border-gray-800/30 theme-gemini:border-white/20">
+    <div class="p-6 flex-1 overflow-y-auto">
+      <!-- Header Section -->
+      <div class="mb-6">
+        <!-- Module Title -->
+        <div class="mb-4" *ngIf="selectedLevel2Item || selectedNavigationItem">
+          <h2 class="module-title text-xl font-bold thai-text
+                     text-gray-800 dark:text-gray-100 theme-gemini:text-white
+                     mb-1 transition-colors duration-300">
+            {{ selectedLevel2Item?.label || selectedNavigationItem?.label || 'เมนู' }}
           </h2>
+          <p class="text-xs text-gray-500 dark:text-gray-400 theme-gemini:text-white/70" *ngIf="selectedNavigationItem">
+            {{ selectedNavigationItem.label }}
+          </p>
         </div>
 
-        <!-- Search Box -->
-        <div class="search-container mb-4 relative" *ngIf="selectedModuleData.menuItems.length > 3">
-          <input
-            type="text"
-            [(ngModel)]="searchQuery"
-            (input)="onSearchChange()"
-            [placeholder]="'ค้นหาเมนู...'"
-            class="search-input w-full px-4 py-2 rounded-lg border transition-all duration-300 focus:outline-none focus:ring-2"
-            [attr.aria-label]="'ค้นหาเมนู'">
-          <app-icon name="search" size="sm" color="text-slate-500 dark:text-slate-400" class="search-icon absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></app-icon>
-          <button
-            *ngIf="searchQuery"
-            (click)="clearSearch()"
-            class="clear-search-btn"
-            [attr.aria-label]="'ล้างการค้นหา'"
-            type="button">
-            <app-icon name="close" size="sm" color="text-slate-500 dark:text-slate-400"></app-icon>
+        <!-- Breadcrumb -->
+        <div class="mb-4" *ngIf="getBreadcrumbPath().length > 1">
+          <div class="breadcrumb-container flex items-center gap-1.5 text-xs
+                     bg-white/30 dark:bg-gray-800/30 theme-gemini:bg-white/10
+                     backdrop-blur-sm rounded-lg px-3 py-2
+                     border border-white/20 dark:border-gray-700/30 theme-gemini:border-white/20">
+            <span *ngFor="let item of getBreadcrumbPath(); let last = last; let i = index"
+                  class="breadcrumb-item flex items-center gap-1.5">
+              <button *ngIf="item.route && !last"
+                      (click)="navigateToBreadcrumb(item)"
+                      class="breadcrumb-link
+                             text-gray-600 dark:text-gray-400 theme-gemini:text-white/80
+                             hover:text-blue-600 dark:hover:text-blue-400 theme-gemini:hover:text-blue-300
+                             transition-colors duration-200 cursor-pointer
+                             px-2 py-1 rounded hover:bg-white/20 dark:hover:bg-gray-700/20">
+                {{ item.label }}
+              </button>
+              <span *ngIf="!item.route || last"
+                    class="breadcrumb-current px-2 py-1 rounded
+                           font-medium
+                           text-gray-800 dark:text-gray-200 theme-gemini:text-white
+                           bg-blue-50 dark:bg-blue-900/20 theme-gemini:bg-blue-500/20">
+                {{ item.label }}
+              </span>
+              <span *ngIf="!last"
+                    class="breadcrumb-separator text-gray-400 dark:text-gray-500 theme-gemini:text-white/50 mx-1">
+                <app-icon name="chevron_right" size="xs"></app-icon>
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Back Button (when in Level 3+) -->
+        <div class="mb-4" *ngIf="(selectedNavigationItem?.id === 'admin' && selectedLevel3Item) ||
+                                 (selectedNavigationItem?.id === 'ess' && (selectedLevel3Item || selectedLevel4Item))">
+          <button (click)="goBackToLevel2()"
+                  class="back-button flex items-center gap-2 px-4 py-2 rounded-lg
+                         transition-all duration-200 ease-out
+                         bg-white/20 dark:bg-gray-800/30 theme-gemini:bg-white/10
+                         hover:bg-white/30 dark:hover:bg-gray-700/40 theme-gemini:hover:bg-white/20
+                         hover:scale-[1.02] active:scale-[0.98]
+                         text-sm font-medium
+                         text-gray-700 dark:text-gray-300 theme-gemini:text-white/90
+                         cursor-pointer border-0
+                         backdrop-blur-sm
+                         border border-white/30 dark:border-gray-700/30 theme-gemini:border-white/20">
+            <span class="material-icons text-base">arrow_back</span>
+            <span class="thai-text">กลับ</span>
           </button>
         </div>
 
-        <div class="module-divider h-px transition-colors duration-300 mb-4"></div>
-      </div>
-
-      <!-- Loading State -->
-      <div *ngIf="isLoading" class="loading-state">
-        <div class="skeleton-loader" *ngFor="let item of [1,2,3,4,5]">
-          <div class="skeleton-icon"></div>
-          <div class="skeleton-text"></div>
+        <!-- Search Box -->
+        <div class="search-container mb-4 relative animate-fade-in" *ngIf="navigationChildren.length > 3 || filteredMenuItems.length > 3">
+          <div class="relative">
+            <input
+              type="text"
+              [(ngModel)]="searchQuery"
+              (input)="onSearchChange()"
+              [placeholder]="'ค้นหาเมนู...'"
+              class="search-input w-full px-4 py-3 pl-11 pr-11 rounded-xl
+                     transition-all duration-300 ease-out
+                     focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50
+                     hover:scale-[1.01] hover:shadow-lg
+                     bg-white/60 dark:bg-gray-800/60 theme-gemini:bg-gray-800/40
+                     backdrop-blur-md
+                     border border-white/30 dark:border-gray-700/30 theme-gemini:border-white/20
+                     text-gray-800 dark:text-gray-200 theme-gemini:text-white
+                     placeholder:text-gray-500 dark:placeholder:text-gray-400 theme-gemini:placeholder:text-white/50
+                     group"
+              [attr.aria-label]="'ค้นหาเมนู'">
+            <app-icon name="search" size="sm"
+                      color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70
+                             group-focus:text-blue-500 dark:group-focus:text-blue-400
+                             transition-colors duration-300"
+                      class="search-icon absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none
+                             group-focus:scale-110 transition-transform duration-300"></app-icon>
+            <button
+              *ngIf="searchQuery"
+              (click)="clearSearch()"
+              class="clear-search-btn absolute right-2 top-1/2 -translate-y-1/2
+                     w-8 h-8 flex items-center justify-center rounded-lg
+                     hover:bg-gray-200/50 dark:hover:bg-gray-700/50 theme-gemini:hover:bg-white/20
+                     hover:scale-110 active:scale-95
+                     transition-all duration-200 ease-out"
+              [attr.aria-label]="'ล้างการค้นหา'"
+              type="button">
+              <app-icon name="close" size="sm"
+                        color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70
+                               hover:text-red-500 dark:hover:text-red-400
+                               transition-colors duration-200"></app-icon>
+            </button>
+          </div>
         </div>
       </div>
 
-      <!-- Module Menu Items -->
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="loading-state space-y-3">
+        <div class="skeleton-loader flex items-center gap-3 p-3 rounded-lg bg-white/10 dark:bg-gray-800/20 theme-gemini:bg-white/5 animate-pulse" *ngFor="let item of [1,2,3,4,5]">
+          <div class="skeleton-icon w-8 h-8 rounded-lg bg-white/20 dark:bg-gray-700/30 theme-gemini:bg-white/10"></div>
+          <div class="skeleton-text flex-1 h-4 rounded bg-white/20 dark:bg-gray-700/30 theme-gemini:bg-white/10"></div>
+        </div>
+      </div>
+
+      <!-- Module Menu Items - Using Nested Accordion -->
+      <!-- Show Level 3 items when Level 2 is selected (Level 4 as children) -->
+      <ng-container *ngIf="!isLoading && navigationChildren.length > 0">
+        <div class="nested-menu-container
+                    bg-white/20 dark:bg-gray-800/20 theme-gemini:bg-white/5
+                    backdrop-blur-sm rounded-xl p-4
+                    border border-white/20 dark:border-gray-700/20 theme-gemini:border-white/10">
+          <app-nested-menu-accordion
+            [items]="navigationChildren"
+            [activeRoute]="activeRoute"
+            [level]="3"
+            [expandedItems]="expandedLevel3Items"
+            (itemClick)="onAccordionItemClick($event)"
+            (toggleExpand)="onAccordionToggleExpand($event)">
+          </app-nested-menu-accordion>
+        </div>
+      </ng-container>
+
+      <!-- Fallback to Legacy ListView (if no navigation children) -->
       <ejs-listview
-        *ngIf="!isLoading && selectedModuleData && filteredMenuItems && filteredMenuItems.length > 0"
+        *ngIf="!isLoading && navigationChildren.length === 0 && filteredMenuItems && filteredMenuItems.length > 0"
         #listview
         [dataSource]="filteredMenuItems"
         [fields]="listViewFields"
@@ -87,36 +344,56 @@
       </ejs-listview>
 
       <!-- Search No Results -->
-      <div *ngIf="!isLoading && selectedModuleData && searchQuery && filteredMenuItems.length === 0"
-           class="empty-menu-state flex flex-col items-center justify-center py-12">
-        <app-icon name="search_off" size="xl" color="text-slate-400 dark:text-slate-600" class="mb-4 opacity-50"></app-icon>
-        <p class="empty-text thai-text text-center">ไม่พบเมนูที่ค้นหา</p>
+      <div *ngIf="!isLoading && searchQuery && navigationChildren.length === 0 && filteredMenuItems.length === 0"
+           class="empty-menu-state flex flex-col items-center justify-center py-16
+                  bg-white/10 dark:bg-gray-800/10 theme-gemini:bg-white/5
+                  backdrop-blur-sm rounded-xl
+                  border border-white/20 dark:border-gray-700/20 theme-gemini:border-white/10">
+        <div class="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 theme-gemini:bg-white/10 flex items-center justify-center mb-4">
+          <app-icon name="search_off" size="lg" color="text-gray-400 dark:text-gray-600 theme-gemini:text-white/60"></app-icon>
+        </div>
+        <p class="empty-text thai-text text-center text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 font-medium mb-2">
+          ไม่พบเมนูที่ค้นหา
+        </p>
+        <p class="text-xs text-gray-500 dark:text-gray-500 theme-gemini:text-white/50 mb-4">
+          ลองค้นหาด้วยคำอื่น
+        </p>
         <button
           (click)="clearSearch()"
-          class="mt-4 px-4 py-2 rounded-lg transition-all duration-300"
+          class="px-4 py-2 rounded-lg
+                 bg-white/20 dark:bg-gray-800/30 theme-gemini:bg-white/10
+                 hover:bg-white/30 dark:hover:bg-gray-700/40 theme-gemini:hover:bg-white/20
+                 text-sm font-medium
+                 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90
+                 transition-all duration-300
+                 border border-white/30 dark:border-gray-700/30 theme-gemini:border-white/20"
           type="button">
           ล้างการค้นหา
         </button>
       </div>
 
       <!-- Empty State - No Menu Items -->
-      <div *ngIf="!isLoading && selectedModuleData && !searchQuery && selectedModuleData.menuItems.length === 0"
-           class="empty-menu-state flex flex-col items-center justify-center py-12">
-        <app-icon name="folder_open" size="xl" color="text-slate-400 dark:text-slate-600" class="mb-4 opacity-50"></app-icon>
-        <p class="empty-text thai-text text-center">ไม่มีเมนูในโมดูลนี้</p>
-      </div>
-
-      <!-- Empty State - No Module Selected -->
-      <div *ngIf="!selectedModuleData" class="empty-state flex flex-col items-center justify-center h-full py-12">
-        <app-icon name="folder" size="xl" color="text-slate-400 dark:text-slate-600" class="mb-4 opacity-50"></app-icon>
-        <p class="empty-text thai-text text-center">เลือกโมดูลเพื่อดูเมนู</p>
+      <div *ngIf="!isLoading && !searchQuery && navigationChildren.length === 0 && displayMenuItems.length === 0"
+           class="empty-menu-state flex flex-col items-center justify-center py-16
+                  bg-white/10 dark:bg-gray-800/10 theme-gemini:bg-white/5
+                  backdrop-blur-sm rounded-xl
+                  border border-white/20 dark:border-gray-700/20 theme-gemini:border-white/10">
+        <div class="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 theme-gemini:bg-white/10 flex items-center justify-center mb-4">
+          <app-icon name="folder_open" size="lg" color="text-gray-400 dark:text-gray-600 theme-gemini:text-white/60"></app-icon>
+        </div>
+        <p class="empty-text thai-text text-center text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 font-medium">
+          ไม่มีเมนูในโหมดนี้
+        </p>
       </div>
     </div>
 
     <!-- User Avatar Section - Bottom of Menu Panel -->
     <div class="user-avatar-section border-t transition-colors duration-300" *ngIf="currentUser" #userMenuContainer>
       <div class="p-4">
-        <div class="user-info-container flex items-center gap-3 cursor-pointer group"
+        <div class="user-info-container flex items-center gap-3 cursor-pointer group
+                     transition-all duration-300 ease-out
+                     hover:scale-[1.02] hover:bg-white/5 dark:hover:bg-gray-800/20 theme-gemini:hover:bg-white/10
+                     rounded-lg p-2 -mx-2"
              (click)="toggleUserMenu()"
              (keydown.enter)="toggleUserMenu()"
              (keydown.space)="toggleUserMenu(); $event.preventDefault()"
@@ -126,15 +403,25 @@
              tabindex="0">
           <!-- Avatar -->
           <div class="user-avatar relative flex-shrink-0">
-            <div class="avatar-circle w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm transition-all duration-300 group-hover:scale-110"
+            <div class="avatar-circle w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm
+                         transition-all duration-300 ease-out
+                         group-hover:scale-110 group-hover:shadow-xl group-hover:ring-2 group-hover:ring-blue-500/50
+                         relative overflow-hidden"
                  [style.background]="getAvatarColor()">
+              <!-- Shimmer Effect -->
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent
+                          -translate-x-full group-hover:translate-x-full
+                          transition-transform duration-1000 ease-in-out"></div>
               <img *ngIf="getAvatarUrl()"
                    [src]="getAvatarUrl()"
                    [alt]="getUserDisplayName()"
-                   class="w-full h-full rounded-full object-cover"
+                   class="w-full h-full rounded-full object-cover relative z-10
+                          group-hover:scale-110 transition-transform duration-300"
                    (load)="onAvatarImageLoad()"
                    (error)="onAvatarImageError($event)">
-              <span class="avatar-initials" [class.hidden]="avatarImageLoaded && getAvatarUrl()">
+              <span class="avatar-initials relative z-10
+                           group-hover:scale-110 transition-transform duration-300"
+                    [class.hidden]="avatarImageLoaded && getAvatarUrl()">
                 {{ getInitials() }}
               </span>
             </div>
@@ -153,37 +440,78 @@
           </div>
 
           <!-- Dropdown Icon -->
-          <div class="dropdown-icon transition-transform duration-300" [class.rotated]="showUserMenu">
-            <span class="e-icons e-chevron-down"></span>
+          <div class="dropdown-icon transition-transform duration-300 ease-out
+                       group-hover:scale-110"
+               [class.rotated]="showUserMenu">
+            <span class="e-icons e-chevron-down
+                         group-hover:text-blue-500 dark:group-hover:text-blue-400
+                         transition-colors duration-300"></span>
           </div>
         </div>
 
         <!-- User Menu Dropdown -->
-        <div class="user-menu-dropdown"
+        <div class="user-menu-dropdown
+                     animate-fade-in
+                     [animation-duration:200ms]"
              *ngIf="showUserMenu"
              @slideDown>
           <div class="user-menu-items">
-            <a routerLink="/personal/profile"
-               class="user-menu-item"
+            <a routerLink="/portal/self-service/profile"
+               class="user-menu-item
+                      transition-all duration-200 ease-out
+                      hover:translate-x-1 hover:scale-[1.02]
+                      active:scale-[0.98]"
                (click)="showUserMenu = false"
                [attr.aria-label]="'โปรไฟล์'">
-              <app-icon name="person" size="sm" color="text-slate-600 dark:text-slate-400"></app-icon>
+              <app-icon name="person" size="sm"
+                        color="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70
+                               group-hover:text-blue-500 dark:group-hover:text-blue-400
+                               transition-colors duration-200"
+                        class="group-hover:scale-110 transition-transform duration-200"></app-icon>
               <span class="thai-text">โปรไฟล์</span>
             </a>
-            <a routerLink="/setting/home"
-               class="user-menu-item"
+            <a routerLink="/portal/admin/settings"
+               class="user-menu-item
+                      transition-all duration-200 ease-out
+                      hover:translate-x-1 hover:scale-[1.02]
+                      active:scale-[0.98]"
                (click)="showUserMenu = false"
                [attr.aria-label]="'ตั้งค่า'">
-              <app-icon name="settings" size="sm" color="text-slate-600 dark:text-slate-400"></app-icon>
+              <app-icon name="settings" size="sm"
+                        color="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70
+                               group-hover:text-blue-500 dark:group-hover:text-blue-400
+                               transition-colors duration-200"
+                        class="group-hover:scale-110 transition-transform duration-200"></app-icon>
               <span class="thai-text">ตั้งค่า</span>
             </a>
+            <!-- Admin Menu Option (only show if user has admin role) -->
+            <button *ngIf="hasAdminRole()"
+                    class="user-menu-item
+                           transition-all duration-200 ease-out
+                           hover:translate-x-1 hover:scale-[1.02]
+                           active:scale-[0.98]"
+                    (click)="switchToAdmin(); showUserMenu = false"
+                    [attr.aria-label]="'Admin'"
+                    type="button">
+              <app-icon name="shield-check" size="sm"
+                        color="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70
+                               group-hover:text-blue-500 dark:group-hover:text-blue-400
+                               transition-colors duration-200"
+                        class="group-hover:scale-110 transition-transform duration-200"></app-icon>
+              <span class="thai-text">Admin</span>
+            </button>
             <div class="user-menu-divider"></div>
             <button
-              class="user-menu-item text-red-500 dark:text-red-400"
+              class="user-menu-item text-red-500 dark:text-red-400
+                     transition-all duration-200 ease-out
+                     hover:translate-x-1 hover:scale-[1.02] hover:bg-red-50 dark:hover:bg-red-900/20
+                     active:scale-[0.98]"
               (click)="logout()"
               [attr.aria-label]="'ออกจากระบบ'"
               type="button">
-              <app-icon name="logout" size="sm" color="text-red-500 dark:text-red-400"></app-icon>
+              <app-icon name="logout" size="sm"
+                        color="text-red-500 dark:text-red-400
+                               group-hover:scale-110 transition-transform duration-200"></app-icon>
               <span class="thai-text">ออกจากระบบ</span>
             </button>
           </div>

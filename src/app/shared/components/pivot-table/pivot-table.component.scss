@@ -2,244 +2,124 @@
    Pivot Table Component Styles
    ============================================ */
 
-@import '../../../../styles/design-tokens';
-@import '../../../../styles/mixins';
-
 :host {
-  display: block;
-  width: 100%;
+  @apply block w-full;
 }
 
-.pivot-table-container {
-  width: 100%;
-  @include glass-morphism('weak', 'light');
-  border-radius: $radius-lg;
-  padding: $spacing-4;
-  overflow: hidden;
-  
-  .dark & {
-    @include glass-morphism('weak', 'dark');
-  }
+/* Syncfusion PivotView customization - Using ::ng-deep for third-party library styles */
+:host ::ng-deep {
+  .e-pivotview {
+    @apply bg-transparent border-none;
 
-  // Syncfusion PivotView Styles
-  ::ng-deep {
-    .e-pivotview {
-      background: transparent;
-      border: none;
-      
-      .e-pivotview-control-wrapper {
-        background: transparent;
-      }
+    .e-pivotview-control-wrapper {
+      @apply bg-transparent;
+    }
 
-      // Toolbar
-      .e-toolbar {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: $radius-md;
-        padding: $spacing-2;
-        margin-bottom: $spacing-4;
-        
-        .dark & {
-          background: rgba(15, 23, 42, 0.3);
-          border-color: rgba(51, 65, 85, 0.3);
-        }
+    /* Toolbar */
+    .e-toolbar {
+      @apply glass-weak dark:glass-dark-weak rounded-md p-2 mb-4 border border-white/20 dark:border-slate-700/30;
 
-        .e-toolbar-item {
-          .e-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: $gray-700;
-            transition: $transition-all;
-            
-            .dark & {
-              background: rgba(15, 23, 42, 0.3);
-              border-color: rgba(51, 65, 85, 0.3);
-              color: $gray-300;
-            }
-
-            &:hover {
-              background: rgba(var(--primary-rgb), 0.1);
-              border-color: rgba(var(--primary-rgb), 0.3);
-              color: rgb(var(--primary-rgb));
-              
-              .dark & {
-                background: rgba(var(--primary-rgb), 0.2);
-              }
-            }
-
-            &:focus {
-              box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
-            }
-          }
-        }
-      }
-
-      // Grouping Bar
-      .e-grouping-bar {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: $radius-md;
-        padding: $spacing-3;
-        margin-bottom: $spacing-4;
-        
-        .dark & {
-          background: rgba(15, 23, 42, 0.2);
-          border-color: rgba(51, 65, 85, 0.2);
-        }
-
-        .e-grouping-bar-filters,
-        .e-grouping-bar-rows,
-        .e-grouping-bar-columns,
-        .e-grouping-bar-values {
-          .e-grouping-bar-item {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: $radius-sm;
-            padding: $spacing-2 $spacing-3;
-            margin: $spacing-1;
-            transition: $transition-all;
-            
-            .dark & {
-              background: rgba(15, 23, 42, 0.3);
-              border-color: rgba(51, 65, 85, 0.3);
-            }
-
-            &:hover {
-              background: rgba(var(--primary-rgb), 0.1);
-              border-color: rgba(var(--primary-rgb), 0.3);
-              
-              .dark & {
-                background: rgba(var(--primary-rgb), 0.2);
-              }
-            }
-          }
-        }
-      }
-
-      // Grid
-      .e-grid {
-        background: transparent;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: $radius-md;
-        
-        .dark & {
-          border-color: rgba(51, 65, 85, 0.3);
-        }
-
-        .e-gridheader {
+      .e-toolbar-item {
+        .e-btn {
+          @apply glass-weak dark:glass-dark-weak text-gray-700 dark:text-gray-300 transition-smooth hover:bg-primary-500/10 dark:hover:bg-primary-500/20 hover:border-primary-500/30 hover:text-primary-600 focus:ring-2 focus:ring-primary-500/20;
           background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(10px);
-          
+          border: 1px solid rgba(255, 255, 255, 0.2);
+
           .dark & {
             background: rgba(15, 23, 42, 0.3);
-          }
-
-          .e-headercell {
-            background: transparent;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            color: $gray-700;
-            font-weight: $font-weight-semibold;
-            
-            .dark & {
-              border-bottom-color: rgba(51, 65, 85, 0.3);
-              color: $gray-300;
-            }
-          }
-        }
-
-        .e-gridcontent {
-          .e-row {
-            background: transparent;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            
-            .dark & {
-              border-bottom-color: rgba(51, 65, 85, 0.1);
-            }
-
-            &:hover {
-              background: rgba(var(--primary-rgb), 0.05);
-              
-              .dark & {
-                background: rgba(var(--primary-rgb), 0.1);
-              }
-            }
-
-            .e-rowcell {
-              background: transparent;
-              color: $gray-900;
-              
-              .dark & {
-                color: $gray-100;
-              }
-            }
-          }
-
-          .e-summaryrow {
-            background: rgba(255, 255, 255, 0.05);
-            font-weight: $font-weight-semibold;
-            
-            .dark & {
-              background: rgba(15, 23, 42, 0.2);
-            }
+            border-color: rgba(51, 65, 85, 0.3);
           }
         }
       }
     }
-  }
-}
 
-// Responsive
-@include respond-to-down(sm) {
-  .pivot-table-container {
-    padding: $spacing-2;
-    
-    ::ng-deep {
-      .e-pivotview {
-        .e-toolbar {
-          padding: $spacing-1;
-          
-          .e-toolbar-item {
-            .e-btn {
-              padding: $spacing-1 $spacing-2;
-              font-size: $text-xs;
-            }
-          }
-        }
+    body.theme-gemini & .e-toolbar {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 30px rgba(59, 130, 246, 0.1);
+    }
 
-        .e-grouping-bar {
-          padding: $spacing-2;
-          
-          .e-grouping-bar-item {
-            padding: $spacing-1 $spacing-2;
-            font-size: $text-xs;
+    /* Grouping Bar */
+    .e-grouping-bar {
+      @apply glass-weak dark:glass-dark-weak rounded-md p-3 mb-4 border border-white/10 dark:border-slate-700/20;
+
+      .e-grouping-bar-filters,
+      .e-grouping-bar-rows,
+      .e-grouping-bar-columns,
+      .e-grouping-bar-values {
+        .e-grouping-bar-item {
+          @apply glass-weak dark:glass-dark-weak rounded-sm px-3 py-2 m-1 transition-smooth hover:bg-primary-500/10 dark:hover:bg-primary-500/20 hover:border-primary-500/30;
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+
+          .dark & {
+            background: rgba(15, 23, 42, 0.3);
+            border-color: rgba(51, 65, 85, 0.3);
           }
         }
       }
     }
+
+    body.theme-gemini & .e-grouping-bar {
+      background: rgba(147, 197, 253, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    /* Grid */
+    .e-grid {
+      @apply bg-transparent rounded-md border border-white/10 dark:border-slate-700/30;
+
+      .e-gridheader {
+        @apply glass-weak dark:glass-dark-weak;
+
+        .e-headercell {
+          @apply bg-transparent border-b border-white/10 dark:border-slate-700/30 text-gray-700 dark:text-gray-300 font-semibold;
+        }
+      }
+
+      .e-gridcontent {
+        .e-row {
+          @apply bg-transparent border-b border-white/5 dark:border-slate-700/10 transition-smooth hover:bg-primary-500/5 dark:hover:bg-primary-500/10;
+
+          .e-rowcell {
+            @apply bg-transparent text-gray-900 dark:text-gray-100;
+          }
+        }
+
+        .e-summaryrow {
+          @apply bg-white/5 dark:bg-slate-900/20 font-semibold;
+        }
+      }
+    }
+
+    body.theme-gemini & .e-grid {
+      background: rgba(147, 197, 253, 0.05);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
   }
 }
 
-// Gemini Theme
-body.theme-gemini {
-  .pivot-table-container {
-    @include glass-gemini('weak');
-    
-    ::ng-deep {
-      .e-pivotview {
-        .e-toolbar {
-          @include glass-gemini('default');
-          @include gemini-border-glow();
-        }
+/* Responsive */
+@media (max-width: 640px) {
+  :host ::ng-deep .e-pivotview {
+    .e-toolbar {
+      @apply p-1;
 
-        .e-grouping-bar {
-          @include glass-gemini('default');
+      .e-toolbar-item {
+        .e-btn {
+          @apply px-2 py-1 text-xs;
         }
+      }
+    }
 
-        .e-grid {
-          @include glass-gemini('weak');
-        }
+    .e-grouping-bar {
+      @apply p-2;
+
+      .e-grouping-bar-filters .e-grouping-bar-item,
+      .e-grouping-bar-rows .e-grouping-bar-item,
+      .e-grouping-bar-columns .e-grouping-bar-item,
+      .e-grouping-bar-values .e-grouping-bar-item {
+        @apply px-2 py-1 text-xs;
       }
     }
   }
