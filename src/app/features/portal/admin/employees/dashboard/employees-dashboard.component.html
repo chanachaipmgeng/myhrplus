@@ -1,0 +1,90 @@
+<app-page-header 
+  title="Personal Management" 
+  subtitle="ศูนย์กลางจัดการข้อมูลพนักงาน">
+</app-page-header>
+
+<div class="p-5 bg-gray-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
+  <!-- Navigation Cards Section -->
+  <div class="mb-8">
+    <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">เมนูหลัก</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Personal Information Card -->
+      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+           [routerLink]="['personal-info']">
+        <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
+          <i class="material-icons text-xl">person</i>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">ข้อมูลส่วนตัว</h3>
+        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการข้อมูลส่วนตัว, เงินเดือน, และข้อมูลการทำงาน</p>
+        <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
+          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+        </div>
+      </div>
+
+      <!-- Staff Movement Card -->
+      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+           [routerLink]="['staff-movement']">
+        <div class="w-12 h-12 bg-green-50 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4 text-green-600 dark:text-green-400 transition-colors duration-300 group-hover:scale-110">
+          <i class="material-icons text-xl">swap_horiz</i>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">การย้ายพนักงาน</h3>
+        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการการย้ายตำแหน่ง, การลาออก และการเลื่อนตำแหน่ง</p>
+        <div class="flex items-center text-green-600 dark:text-green-400 text-sm font-medium transition-colors duration-300">
+          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+        </div>
+      </div>
+
+      <!-- Process Card -->
+      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+           [routerLink]="['process']">
+        <div class="w-12 h-12 bg-purple-50 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4 text-purple-600 dark:text-purple-400 transition-colors duration-300 group-hover:scale-110">
+          <i class="material-icons text-xl">settings</i>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">กระบวนการ</h3>
+        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">ประมวลผลการย้ายพนักงาน และโครงสร้างองค์กร</p>
+        <div class="flex items-center text-purple-600 dark:text-purple-400 text-sm font-medium transition-colors duration-300">
+          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+        </div>
+      </div>
+
+      <!-- Import Data Card -->
+      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+           [routerLink]="['import-data']">
+        <div class="w-12 h-12 bg-orange-50 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mb-4 text-orange-600 dark:text-orange-400 transition-colors duration-300 group-hover:scale-110">
+          <i class="material-icons text-xl">upload</i>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">นำเข้าข้อมูล</h3>
+        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">นำเข้าข้อมูลพนักงานและข้อมูลการย้าย</p>
+        <div class="flex items-center text-orange-600 dark:text-orange-400 text-sm font-medium transition-colors duration-300">
+          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+        </div>
+      </div>
+
+      <!-- Setup Card -->
+      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+           [routerLink]="['setup']">
+        <div class="w-12 h-12 bg-teal-50 dark:bg-teal-900/30 rounded-lg flex items-center justify-center mb-4 text-teal-600 dark:text-teal-400 transition-colors duration-300 group-hover:scale-110">
+          <i class="material-icons text-xl">settings</i>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">ตั้งค่า</h3>
+        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">ตั้งค่าตารางข้อมูลพื้นฐานสำหรับพนักงาน</p>
+        <div class="flex items-center text-teal-600 dark:text-teal-400 text-sm font-medium transition-colors duration-300">
+          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+        </div>
+      </div>
+
+      <!-- Legal Execution Card -->
+      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+           [routerLink]="['legal-execution']">
+        <div class="w-12 h-12 bg-red-50 dark:bg-red-900/30 rounded-lg flex items-center justify-center mb-4 text-red-600 dark:text-red-400 transition-colors duration-300 group-hover:scale-110">
+          <i class="material-icons text-xl">gavel</i>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">การบังคับคดี</h3>
+        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการการบังคับคดีและการหักเงินเดือน</p>
+        <div class="flex items-center text-red-600 dark:text-red-400 text-sm font-medium transition-colors duration-300">
+          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

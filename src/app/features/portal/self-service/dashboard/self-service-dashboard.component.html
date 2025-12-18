@@ -1,0 +1,129 @@
+<app-page-header 
+  title="Employee Self Service" 
+  subtitle="ศูนย์กลางบริการตนเองสำหรับพนักงาน">
+</app-page-header>
+
+<div class="p-5 bg-gray-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
+  <!-- Navigation Cards Section -->
+  <div class="mb-8">
+    <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">เมนูหลัก</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Time Card -->
+      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+           [routerLink]="['time']">
+        <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
+          <i class="material-icons text-xl">access_time</i>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">ลงเวลา</h3>
+        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">ลงเวลาเข้า-ออก และตรวจสอบแจ้งเตือนเวลา</p>
+        <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
+          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+        </div>
+      </div>
+
+      <!-- Documents Card -->
+      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+           [routerLink]="['documents']">
+        <div class="w-12 h-12 bg-green-50 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4 text-green-600 dark:text-green-400 transition-colors duration-300 group-hover:scale-110">
+          <i class="material-icons text-xl">description</i>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">ขอเอกสาร</h3>
+        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">ขอเอกสาร PND91, TWI50 และเอกสารอื่นๆ</p>
+        <div class="flex items-center text-green-600 dark:text-green-400 text-sm font-medium transition-colors duration-300">
+          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+        </div>
+      </div>
+
+      <!-- Payslip Card -->
+      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+           [routerLink]="['payslip']">
+        <div class="w-12 h-12 bg-purple-50 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4 text-purple-600 dark:text-purple-400 transition-colors duration-300 group-hover:scale-110">
+          <i class="material-icons text-xl">receipt</i>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">สลิปเงินเดือน</h3>
+        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">ดูสลิปเงินเดือนและประวัติการจ่ายเงินเดือน</p>
+        <div class="flex items-center text-purple-600 dark:text-purple-400 text-sm font-medium transition-colors duration-300">
+          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+        </div>
+      </div>
+
+      <!-- Profile Card -->
+      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+           [routerLink]="['profile']">
+        <div class="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center mb-4 text-indigo-600 dark:text-indigo-400 transition-colors duration-300 group-hover:scale-110">
+          <i class="material-icons text-xl">person</i>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">ตรวจสอบข้อมูลตัวเอง</h3>
+        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">ดูและแก้ไขข้อมูลส่วนตัว</p>
+        <div class="flex items-center text-indigo-600 dark:text-indigo-400 text-sm font-medium transition-colors duration-300">
+          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+        </div>
+      </div>
+
+      <!-- Subordinates Card -->
+      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+           [routerLink]="['subordinates']">
+        <div class="w-12 h-12 bg-teal-50 dark:bg-teal-900/30 rounded-lg flex items-center justify-center mb-4 text-teal-600 dark:text-teal-400 transition-colors duration-300 group-hover:scale-110">
+          <i class="material-icons text-xl">people</i>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">ลูกน้อง</h3>
+        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการข้อมูลลูกน้องและทีมงาน</p>
+        <div class="flex items-center text-teal-600 dark:text-teal-400 text-sm font-medium transition-colors duration-300">
+          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+        </div>
+      </div>
+
+      <!-- Welfare Card -->
+      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+           [routerLink]="['welfare']">
+        <div class="w-12 h-12 bg-pink-50 dark:bg-pink-900/30 rounded-lg flex items-center justify-center mb-4 text-pink-600 dark:text-pink-400 transition-colors duration-300 group-hover:scale-110">
+          <i class="material-icons text-xl">favorite</i>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">สวัสดิการ</h3>
+        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">ดูสวัสดิการและสิทธิประโยชน์</p>
+        <div class="flex items-center text-pink-600 dark:text-pink-400 text-sm font-medium transition-colors duration-300">
+          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+        </div>
+      </div>
+
+      <!-- Leave Card -->
+      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+           [routerLink]="['leave']">
+        <div class="w-12 h-12 bg-yellow-50 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center mb-4 text-yellow-600 dark:text-yellow-400 transition-colors duration-300 group-hover:scale-110">
+          <i class="material-icons text-xl">event</i>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">ลาพักผ่อน</h3>
+        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">ยื่นคำขอลาและตรวจสอบสถานะการลา</p>
+        <div class="flex items-center text-yellow-600 dark:text-yellow-400 text-sm font-medium transition-colors duration-300">
+          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+        </div>
+      </div>
+
+      <!-- Attendance Card -->
+      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+           [routerLink]="['attendance']">
+        <div class="w-12 h-12 bg-orange-50 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mb-4 text-orange-600 dark:text-orange-400 transition-colors duration-300 group-hover:scale-110">
+          <i class="material-icons text-xl">access_time</i>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">การลงเวลา</h3>
+        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">ตรวจสอบประวัติการลงเวลา</p>
+        <div class="flex items-center text-orange-600 dark:text-orange-400 text-sm font-medium transition-colors duration-300">
+          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+        </div>
+      </div>
+
+      <!-- Statistics Card -->
+      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+           [routerLink]="['statistics']">
+        <div class="w-12 h-12 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg flex items-center justify-center mb-4 text-cyan-600 dark:text-cyan-400 transition-colors duration-300 group-hover:scale-110">
+          <i class="material-icons text-xl">bar_chart</i>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">สถิติ</h3>
+        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">ดูสถิติการลา, OT และแก้ไขเวลา</p>
+        <div class="flex items-center text-cyan-600 dark:text-cyan-400 text-sm font-medium transition-colors duration-300">
+          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
