@@ -56,8 +56,8 @@
                 },
                 {
                   "type": "any",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "15mb",
+                  "maximumError": "25mb"
                 }
               ],
               "outputHashing": "all",

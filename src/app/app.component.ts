@@ -34,6 +34,10 @@ export class AppComponent implements OnInit, AfterViewInit {
       const body = document.body;
       // Remove all theme classes
       body.classList.remove('theme-blue', 'theme-indigo', 'theme-purple', 'theme-green', 'theme-orange', 'theme-red', 'theme-teal', 'theme-pink', 'theme-gemini');
+      // Ensure gemini theme is applied when color is 'gemini'
+      if (theme.color === 'gemini') {
+        body.classList.add('theme-gemini');
+      }
       // Add current theme class
       body.classList.add(`theme-${theme.color}`);
     });
