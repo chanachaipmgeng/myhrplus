@@ -1,4 +1,7 @@
 import { AbstractControl, ValidationErrors, ValidatorFn, FormGroup } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap, catchError } from 'rxjs/operators';
+import { VALIDATION } from '../constants/validation.constant';
 
 export class CustomValidators {
 
@@ -6,10 +9,16 @@ export class CustomValidators {
   static email(control: AbstractControl): ValidationErrors | null {
     if (!control.value) return null;
 
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    // Use pattern from VALIDATION constants
+    const emailPattern = VALIDATION.EMAIL.PATTERN;
     const isValid = emailPattern.test(control.value);
 
-    return isValid ? null : { email: { value: control.value, message: 'Invalid email format' } };
+    return isValid ? null : {
+      email: {
+        value: control.value,
+        message: VALIDATION.EMAIL.MESSAGE.INVALID
+      }
+    };
   }
 
   // Strong password validation
@@ -19,24 +28,26 @@ export class CustomValidators {
     const password = control.value;
     const errors: any = {};
 
-    if (password.length < 8) {
-      errors.minLength = { required: 8, actual: password.length };
+    // Use constants from VALIDATION
+    if (password.length < VALIDATION.PASSWORD.MIN_LENGTH) {
+      errors.minLength = {
+        required: VALIDATION.PASSWORD.MIN_LENGTH,
+        actual: password.length,
+        message: VALIDATION.PASSWORD.MESSAGE.MIN_LENGTH
+      };
     }
 
-    if (!/[A-Z]/.test(password)) {
-      errors.uppercase = { message: 'Password must contain at least one uppercase letter' };
+    if (password.length > VALIDATION.PASSWORD.MAX_LENGTH) {
+      errors.maxLength = {
+        required: VALIDATION.PASSWORD.MAX_LENGTH,
+        actual: password.length,
+        message: VALIDATION.PASSWORD.MESSAGE.MAX_LENGTH
+      };
     }
 
-    if (!/[a-z]/.test(password)) {
-      errors.lowercase = { message: 'Password must contain at least one lowercase letter' };
-    }
-
-    if (!/\d/.test(password)) {
-      errors.digit = { message: 'Password must contain at least one digit' };
-    }
-
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-      errors.specialChar = { message: 'Password must contain at least one special character' };
+    // Use pattern from VALIDATION constants
+    if (!VALIDATION.PASSWORD.PATTERN.test(password)) {
+      errors.pattern = { message: VALIDATION.PASSWORD.MESSAGE.PATTERN };
     }
 
     return Object.keys(errors).length > 0 ? { strongPassword: errors } : null;
@@ -46,10 +57,17 @@ export class CustomValidators {
   static phoneNumber(control: AbstractControl): ValidationErrors | null {
     if (!control.value) return null;
 
-    const phonePattern = /^(\+66|0)[0-9]{8,9}$/;
-    const isValid = phonePattern.test(control.value.replace(/\s/g, ''));
+    // Use pattern from VALIDATION constants (normalize to match pattern)
+    const normalizedValue = control.value.replace(/\s/g, '').replace(/^\+66/, '0');
+    const phonePattern = VALIDATION.PHONE.PATTERN;
+    const isValid = phonePattern.test(normalizedValue);
 
-    return isValid ? null : { phoneNumber: { value: control.value, message: 'Invalid phone number format' } };
+    return isValid ? null : {
+      phoneNumber: {
+        value: control.value,
+        message: VALIDATION.PHONE.MESSAGE.INVALID
+      }
+    };
   }
 
   // Thai ID validation
@@ -57,8 +75,10 @@ export class CustomValidators {
     if (!control.value) return null;
 
     const id = control.value.replace(/-/g, '');
-    if (id.length !== 13) {
-      return { thaiId: { message: 'Thai ID must be 13 digits' } };
+
+    // Use pattern from VALIDATION constants
+    if (!VALIDATION.THAI_ID.PATTERN.test(id)) {
+      return { thaiId: { message: VALIDATION.THAI_ID.MESSAGE.INVALID } };
     }
 
     // Thai ID check digit algorithm
@@ -69,7 +89,7 @@ export class CustomValidators {
     const checkDigit = (11 - (sum % 11)) % 10;
 
     if (parseInt(id[12]) !== checkDigit) {
-      return { thaiId: { message: 'Invalid Thai ID check digit' } };
+      return { thaiId: { message: VALIDATION.THAI_ID.MESSAGE.INVALID } };
     }
 
     return null;
@@ -169,18 +189,21 @@ export class CustomValidators {
   }
 
   // File size validation
-  static fileSize(maxSizeInMB: number): ValidatorFn {
+  static fileSize(maxSizeInMB?: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!control.value) return null;
 
       const file = control.value;
       if (file instanceof File) {
-        const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
+        // Use max size from VALIDATION constants if not provided
+        const maxSize = maxSizeInMB || (VALIDATION.FILE.MAX_SIZE / 1024 / 1024);
+        const maxSizeInBytes = maxSize * 1024 * 1024;
+
         if (file.size > maxSizeInBytes) {
           return {
             fileSize: {
-              message: `File size must be less than ${maxSizeInMB}MB`,
-              maxSize: maxSizeInMB,
+              message: VALIDATION.FILE.MESSAGE.MAX_SIZE,
+              maxSize: maxSize,
               actualSize: (file.size / (1024 * 1024)).toFixed(2)
             }
           };
@@ -192,20 +215,22 @@ export class CustomValidators {
   }
 
   // File type validation
-  static fileType(allowedTypes: string[]): ValidatorFn {
+  static fileType(allowedTypes?: string[]): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!control.value) return null;
 
       const file = control.value;
       if (file instanceof File) {
+        // Use allowed types from VALIDATION constants if not provided
+        const types = allowedTypes || VALIDATION.FILE.ALLOWED_TYPES;
         const fileType = file.type;
-        const isValidType = allowedTypes.some(type => fileType.startsWith(type));
+        const isValidType = types.some(type => fileType.startsWith(type));
 
         if (!isValidType) {
           return {
             fileType: {
-              message: `File type must be one of: ${allowedTypes.join(', ')}`,
-              allowedTypes,
+              message: VALIDATION.FILE.MESSAGE.INVALID_TYPE,
+              allowedTypes: types,
               actualType: fileType
             }
           };
@@ -313,19 +338,36 @@ export class CustomValidators {
     };
   }
 
-  // Async validation (for API calls)
-  static asyncValidator(validatorFn: (value: any) => Promise<boolean>, errorMessage: string): ValidatorFn {
-    return (control: AbstractControl): Promise<ValidationErrors | null> => {
-      if (!control.value) return Promise.resolve(null);
+  // Async validation (for API calls) - with debounce for performance
+  static asyncValidator(
+    validatorFn: (value: any) => Promise<boolean>,
+    errorMessage: string,
+    debounceTimeMs: number = 300
+  ): ValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> | Promise<ValidationErrors | null> => {
+      if (!control.value) {
+        return Promise.resolve(null);
+      }
 
-      return validatorFn(control.value).then(isValid => {
-        return isValid ? null : {
-          async: {
-            value: control.value,
-            message: errorMessage
-          }
-        };
-      });
+      // Use Observable with debounce for better performance
+      return of(control.value).pipe(
+        debounceTime(debounceTimeMs),
+        distinctUntilChanged(),
+        switchMap(value =>
+          validatorFn(value).then(isValid => {
+            return isValid ? null : {
+              async: {
+                value: control.value,
+                message: errorMessage
+              }
+            };
+          })
+        ),
+        catchError(() => {
+          // On error, don't fail validation (let user continue)
+          return of(null);
+        })
+      );
     };
   }
 }
