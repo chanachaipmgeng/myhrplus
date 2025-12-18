@@ -136,10 +136,10 @@ export const DARK_MODE_OVERRIDES = {
 
 export const TYPOGRAPHY = {
   fontFamily: {
-    sans: "'Noto Sans', 'Noto Sans Thai', 'Poppins', 'Kanit', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif",
-    english: "'Poppins', 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif",
-    thai: "'Kanit', 'Noto Sans Thai', 'Noto Sans', sans-serif",
-    mono: "'JetBrains Mono', 'Fira Code', 'Courier New', monospace"
+    sans: "'Noto Sans', 'Noto Sans Thai', 'Inter', 'Sarabun', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif",
+    english: "'Inter', 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif",
+    thai: "'Noto Sans Thai', 'Sarabun', 'Noto Sans', sans-serif",
+    mono: "monospace"
   },
   fontSize: {
     xs: '0.75rem',    // 12px
