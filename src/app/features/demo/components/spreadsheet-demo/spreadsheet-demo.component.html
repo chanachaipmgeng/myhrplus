@@ -1,22 +1,22 @@
-<div class="spreadsheet-demo-container p-6 space-y-6">
-  <app-glass-card>
-    <div class="space-y-6">
-      <!-- Header -->
-      <div>
-        <h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-2">
-          Spreadsheet Component Demo
-        </h1>
-        <p class="text-slate-600 dark:text-slate-400">
-          A comprehensive spreadsheet component with Excel-like functionality including formulas, formatting, charts, and more.
-        </p>
-      </div>
+<div class="w-full py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <app-glass-card padding="p-6">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+        Spreadsheet Component Demo
+      </h1>
+      <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+        A comprehensive spreadsheet component with Excel-like functionality including formulas, formatting, charts, and more.
+      </p>
+    </div>
 
+    <div class="space-y-8">
       <!-- Basic Usage -->
-      <div>
-        <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-4">
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
           Basic Usage
         </h2>
-        <pre class="bg-slate-100 dark:bg-slate-800 p-4 rounded-lg overflow-x-auto"><code class="text-sm">// TypeScript
+        <pre class="bg-gray-100 dark:bg-gray-800 theme-gemini:bg-gray-900/50 p-4 rounded-lg overflow-x-auto border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30"><code class="text-sm font-mono text-gray-800 dark:text-gray-200 theme-gemini:text-white/90">// TypeScript
 import {{ '{' }} SpreadsheetComponent {{ '}' }} from '../../shared/components/spreadsheet/spreadsheet.component';
 
 &#64;ViewChild('spreadsheet') spreadsheet!: SpreadsheetComponent;
@@ -35,11 +35,12 @@ sheets = [
   [height]="'600px'"
   [width]="'100%'"&gt;
 &lt;/app-spreadsheet&gt;</code></pre>
-      </div>
+      </section>
 
       <!-- Actions -->
-      <div>
-        <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-4">
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
           Actions
         </h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -70,75 +71,75 @@ sheets = [
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
             (click)="insertRow()">
             Insert Row
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
             (click)="insertColumn()">
             Insert Column
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
             (click)="deleteRow()">
             Delete Row
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
             (click)="deleteColumn()">
             Delete Column
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
             (click)="undo()">
             Undo
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
             (click)="redo()">
             Redo
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
             (click)="cut()">
             Cut
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
             (click)="copy()">
             Copy
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
             (click)="paste()">
             Paste
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
             (click)="goToCell()">
             Go to A1
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
             (click)="addSheet()">
             Add Sheet
           </button>
         </div>
-      </div>
+      </section>
 
       <!-- Spreadsheet -->
-      <div class="mb-8">
+      <section class="mb-12">
         <app-spreadsheet
           #spreadsheet
           [sheets]="sheets"
@@ -163,14 +164,15 @@ sheets = [
           [height]="'600px'"
           [width]="'100%'">
         </app-spreadsheet>
-      </div>
+      </section>
 
       <!-- Features -->
-      <div>
-        <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-4">
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
           Features
         </h2>
-        <ul class="list-disc list-inside space-y-2 text-slate-600 dark:text-slate-400">
+        <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 theme-gemini:text-white/80">
           <li>Excel-like editing and formatting</li>
           <li>Formula support (SUM, AVERAGE, COUNT, etc.)</li>
           <li>Charts and graphs</li>
@@ -184,7 +186,7 @@ sheets = [
           <li>Hyperlinks and images</li>
           <li>Find and replace</li>
         </ul>
-      </div>
+      </section>
     </div>
   </app-glass-card>
 </div>

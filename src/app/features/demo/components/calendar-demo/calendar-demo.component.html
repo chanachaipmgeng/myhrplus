@@ -1,10 +1,15 @@
-<div class="space-y-6">
+<div class="w-full py-12">
   <!-- Header -->
-  <div class="flex items-center justify-between">
-    <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">
-      Calendar Component Demo
-    </h1>
-    <div class="flex space-x-2">
+  <div class="mb-8 flex items-center justify-between flex-wrap gap-4">
+    <div>
+      <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+        Calendar Component Demo
+      </h1>
+      <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+        Calendar component with event management, multiple views, and customizable settings.
+      </p>
+    </div>
+    <div class="flex gap-2 flex-wrap">
       <app-glass-button (clicked)="addEvent()" variant="primary">
         <i class="fas fa-plus mr-2"></i> Add New Event
       </app-glass-button>
@@ -27,23 +32,27 @@
   </div>
 
   <!-- Live Demo -->
-  <app-glass-card padding="p-6">
-    <h2 class="text-2xl font-bold mb-4">Live Demo</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
     
-    <!-- Tabs -->
-    <div class="flex space-x-1 mb-6">
-      <button
-        *ngFor="let tab of tabs"
-        (click)="selectTab(tab)"
-        [class]="'px-4 py-2 rounded-lg font-medium transition-all ' + (activeTab() === tab ? 'bg-blue-600 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-700')"
-      >
-        <i [class]="'mr-2 ' + (tab === 'calendar' ? 'fas fa-calendar-alt' : tab === 'events' ? 'fas fa-list-alt' : tab === 'stats' ? 'fas fa-chart-bar' : 'fas fa-cog')"></i>
-        {{ tab | titlecase }}
-      </button>
-    </div>
+    <app-glass-card padding="p-6">
+      <!-- Tabs -->
+      <div class="flex gap-1 mb-6 flex-wrap">
+        <button
+          *ngFor="let tab of tabs"
+          (click)="selectTab(tab)"
+          [class]="'px-4 py-2 rounded-lg font-medium transition-all ' + (activeTab() === tab ? 'bg-primary-600 dark:bg-primary-500 text-white' : 'text-gray-400 dark:text-gray-500 hover:text-white hover:bg-gray-700 dark:hover:bg-gray-600')"
+        >
+          <i [class]="'mr-2 ' + (tab === 'calendar' ? 'fas fa-calendar-alt' : tab === 'events' ? 'fas fa-list-alt' : tab === 'stats' ? 'fas fa-chart-bar' : 'fas fa-cog')"></i>
+          {{ tab | titlecase }}
+        </button>
+      </div>
 
-    <!-- Calendar Tab -->
-    <div *ngIf="activeTab() === 'calendar'" class="calendar-tab">
+      <!-- Calendar Tab -->
+      <div *ngIf="activeTab() === 'calendar'" class="w-full">
       <app-calendar
         [view]="view()"
         [viewDate]="viewDate()"
@@ -69,8 +78,8 @@
       ></app-calendar>
     </div>
 
-    <!-- Events Tab -->
-    <div *ngIf="activeTab() === 'events'" class="events-tab">
+      <!-- Events Tab -->
+      <div *ngIf="activeTab() === 'events'" class="w-full">
       <div class="flex items-center justify-between mb-4">
         <h3 class="text-xl font-semibold">All Events</h3>
       </div>
@@ -112,8 +121,8 @@
       </div>
     </div>
 
-    <!-- Statistics Tab -->
-    <div *ngIf="activeTab() === 'stats'" class="stats-tab">
+      <!-- Statistics Tab -->
+      <div *ngIf="activeTab() === 'stats'" class="w-full">
       <h3 class="text-xl font-semibold mb-4">Event Statistics</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <app-glass-card customClass="p-4 text-center">
@@ -135,16 +144,16 @@
       </div>
     </div>
 
-    <!-- Settings Tab -->
-    <div *ngIf="activeTab() === 'settings'" class="settings-tab">
+      <!-- Settings Tab -->
+      <div *ngIf="activeTab() === 'settings'" class="w-full">
       <h3 class="text-xl font-semibold mb-4">Calendar Settings</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <app-glass-card customClass="p-4">
-          <label class="block font-medium mb-2">Default View</label>
+          <label class="block font-medium mb-2 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Default View</label>
           <select
             [ngModel]="view()"
             (ngModelChange)="onViewChange($event)"
-            class="w-full p-2 bg-gray-700 text-white rounded border border-gray-600"
+            class="w-full p-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 rounded-lg text-gray-900 dark:text-gray-100 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
           >
             <option [value]="CalendarView.Month">Month</option>
             <option [value]="CalendarView.Week">Week</option>
@@ -153,11 +162,11 @@
         </app-glass-card>
 
         <app-glass-card customClass="p-4">
-          <label class="block font-medium mb-2">Week Starts On</label>
+          <label class="block font-medium mb-2 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Week Starts On</label>
           <select
             [ngModel]="weekStartsOn()"
             (ngModelChange)="weekStartsOn.set($event)"
-            class="w-full p-2 bg-gray-700 text-white rounded border border-gray-600"
+            class="w-full p-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 rounded-lg text-gray-900 dark:text-gray-100 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
           >
             <option [value]="0">Sunday</option>
             <option [value]="1">Monday</option>
@@ -165,109 +174,110 @@
         </app-glass-card>
 
         <app-glass-card customClass="p-4">
-          <label class="block font-medium mb-2">Day Start Hour</label>
+          <label class="block font-medium mb-2 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Day Start Hour</label>
           <input
             type="number"
             [ngModel]="dayStartHour()"
             (ngModelChange)="dayStartHour.set($event)"
             min="0"
             max="23"
-            class="w-full p-2 bg-gray-700 text-white rounded border border-gray-600"
+            class="w-full p-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 rounded-lg text-gray-900 dark:text-gray-100 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
           >
         </app-glass-card>
 
         <app-glass-card customClass="p-4">
-          <label class="block font-medium mb-2">Day End Hour</label>
+          <label class="block font-medium mb-2 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Day End Hour</label>
           <input
             type="number"
             [ngModel]="dayEndHour()"
             (ngModelChange)="dayEndHour.set($event)"
             min="0"
             max="23"
-            class="w-full p-2 bg-gray-700 text-white rounded border border-gray-600"
+            class="w-full p-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 rounded-lg text-gray-900 dark:text-gray-100 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
           >
         </app-glass-card>
       </div>
-    </div>
-  </app-glass-card>
+      </div>
+    </app-glass-card>
+  </section>
 
   <!-- Event Form Modal -->
-  <div *ngIf="showEventForm()" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div *ngIf="showEventForm()" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
     <app-glass-card customClass="p-6 w-full max-w-lg">
       <h3 class="text-xl font-semibold mb-4">{{ selectedEvent()?.meta?.id ? 'Edit Event' : 'Add New Event' }}</h3>
       <form (ngSubmit)="saveEvent()" class="space-y-4">
         <div>
-          <label class="block text-sm font-medium mb-1">Title</label>
+            <label class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Title</label>
           <input
             type="text"
             [(ngModel)]="selectedEvent()!.title"
             name="title"
             required
-            class="w-full p-2 bg-gray-700 text-white rounded border border-gray-600"
+            class="w-full p-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 rounded-lg text-gray-900 dark:text-gray-100 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
           >
         </div>
         <div>
-          <label class="block text-sm font-medium mb-1">Description</label>
+          <label class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Description</label>
           <textarea
             [(ngModel)]="selectedEvent()!.meta!.description"
             name="description"
             rows="3"
-            class="w-full p-2 bg-gray-700 text-white rounded border border-gray-600"
+            class="w-full p-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 rounded-lg text-gray-900 dark:text-gray-100 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
           ></textarea>
         </div>
 
         <div class="grid grid-cols-2 gap-2">
           <div>
-            <label class="block text-sm font-medium mb-1">Start Date</label>
+            <label class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Start Date</label>
             <input
               type="date"
               [ngModel]="selectedEvent()!.start | date:'yyyy-MM-dd'"
               (ngModelChange)="updateEventDate('start', $event)"
               name="startDate"
-              class="w-full p-2 bg-gray-700 text-white rounded border border-gray-600"
+              class="w-full p-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 rounded-lg text-gray-900 dark:text-gray-100 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
           </div>
           <div>
-            <label class="block text-sm font-medium mb-1">Start Time</label>
+            <label class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Start Time</label>
             <input
               type="time"
               [ngModel]="selectedEvent()!.start | date:'HH:mm'"
               (ngModelChange)="updateEventTime('start', $event)"
               name="startTime"
-              class="w-full p-2 bg-gray-700 text-white rounded border border-gray-600"
+              class="w-full p-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 rounded-lg text-gray-900 dark:text-gray-100 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
           </div>
         </div>
 
         <div class="grid grid-cols-2 gap-2">
           <div>
-            <label class="block text-sm font-medium mb-1">End Date</label>
+            <label class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">End Date</label>
             <input
               type="date"
               [ngModel]="selectedEvent()!.end | date:'yyyy-MM-dd'"
               (ngModelChange)="updateEventDate('end', $event)"
               name="endDate"
-              class="w-full p-2 bg-gray-700 text-white rounded border border-gray-600"
+              class="w-full p-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 rounded-lg text-gray-900 dark:text-gray-100 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
           </div>
           <div>
-            <label class="block text-sm font-medium mb-1">End Time</label>
+            <label class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">End Time</label>
             <input
               type="time"
               [ngModel]="selectedEvent()!.end | date:'HH:mm'"
               (ngModelChange)="updateEventTime('end', $event)"
               name="endTime"
-              class="w-full p-2 bg-gray-700 text-white rounded border border-gray-600"
+              class="w-full p-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 rounded-lg text-gray-900 dark:text-gray-100 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
           </div>
         </div>
 
         <div>
-          <label class="block text-sm font-medium mb-1">Category</label>
+          <label class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Category</label>
           <select
             [(ngModel)]="selectedEvent()!.meta!.category"
             name="category"
-            class="w-full p-2 bg-gray-700 text-white rounded border border-gray-600"
+            class="w-full p-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 rounded-lg text-gray-900 dark:text-gray-100 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
           >
             <option value="General">General</option>
             <option value="Meeting">Meeting</option>
@@ -277,11 +287,11 @@
           </select>
         </div>
         <div>
-          <label class="block text-sm font-medium mb-1">Priority</label>
+          <label class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Priority</label>
           <select
             [(ngModel)]="selectedEvent()!.meta!.priority"
             name="priority"
-            class="w-full p-2 bg-gray-700 text-white rounded border border-gray-600"
+            class="w-full p-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 rounded-lg text-gray-900 dark:text-gray-100 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
           >
             <option value="low">Low</option>
             <option value="medium">Medium</option>
@@ -289,11 +299,11 @@
           </select>
         </div>
         <div>
-          <label class="block text-sm font-medium mb-1">Status</label>
+          <label class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Status</label>
           <select
             [(ngModel)]="selectedEvent()!.meta!.status"
             name="status"
-            class="w-full p-2 bg-gray-700 text-white rounded border border-gray-600"
+            class="w-full p-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 rounded-lg text-gray-900 dark:text-gray-100 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
           >
             <option value="scheduled">Scheduled</option>
             <option value="in-progress">In Progress</option>
@@ -315,26 +325,37 @@
   </div>
 
   <!-- Code Examples -->
-  <app-glass-card padding="p-6">
-    <h2 class="text-2xl font-bold mb-4">Code Examples</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Code Examples
+    </h2>
     
-    <app-code-viewer
-      title="Basic Usage"
-      language="typescript"
-      [code]="basicUsageCode">
-    </app-code-viewer>
+    <app-glass-card padding="p-6">
+      <app-code-viewer
+        title="Basic Usage"
+        language="typescript"
+        [code]="basicUsageCode">
+      </app-code-viewer>
 
-    <app-code-viewer
-      title="With Event Management"
-      language="typescript"
-      [code]="eventManagementCode">
-    </app-code-viewer>
-  </app-glass-card>
+      <app-code-viewer
+        title="With Event Management"
+        language="typescript"
+        [code]="eventManagementCode">
+      </app-code-viewer>
+    </app-glass-card>
+  </section>
 
   <!-- API Documentation -->
-  <app-props-table
-    title="Calendar Component Properties"
-    [props]="calendarProps">
-  </app-props-table>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Documentation
+    </h2>
+    <app-props-table
+      title="Calendar Component Properties"
+      [props]="calendarProps">
+    </app-props-table>
+  </section>
 </div>
 

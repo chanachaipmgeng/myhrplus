@@ -2,34 +2,7 @@
    Calendar Demo Component Styles
    ============================================ */
 
-@import '../../../../../styles/design-tokens';
-@import '../../../../../styles/mixins';
-
-:host {
-  display: block;
-}
-
-.calendar-tab,
-.events-tab,
-.stats-tab,
-.settings-tab {
-  width: 100%;
-}
-
-/* Responsive */
-@include respond-to-down(md) {
-  .stats-tab {
-    .grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-}
-
-@include respond-to-down(sm) {
-  .stats-tab {
-    .grid {
-      grid-template-columns: repeat(1, minmax(0, 1fr));
-    }
-  }
-}
+/* All styles migrated to Tailwind classes in HTML */
+/* Responsive grid is handled by Tailwind's responsive classes */
+/* This file is kept for any future component-specific styles */
 

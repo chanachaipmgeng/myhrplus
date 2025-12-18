@@ -1,38 +1,43 @@
-<div class="demo-page">
-  <div class="demo-header">
-    <h1 class="demo-title">Rating Component</h1>
-    <p class="demo-description">
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Rating Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
       Star and heart rating component with interactive and readonly modes. Supports custom max ratings and value display.
     </p>
   </div>
 
   <!-- Live Demo Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Live Demo</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
     
     <app-glass-card padding="p-6">
-      <div class="demo-preview space-y-6">
+      <div class="space-y-6">
         <div>
-          <h3 class="text-lg font-semibold mb-4">Star Rating</h3>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Star Rating</h3>
           <app-rating
             [rating]="starRating"
             [showValue]="true"
             (ratingChange)="onStarRatingChange($event)">
           </app-rating>
-          <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mt-2">
             Current rating: {{ starRating }}/5
           </p>
         </div>
 
         <div>
-          <h3 class="text-lg font-semibold mb-4">Heart Rating</h3>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Heart Rating</h3>
           <app-rating
             [rating]="heartRating"
             icon="heart"
             [showValue]="true"
             (ratingChange)="onHeartRatingChange($event)">
           </app-rating>
-          <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mt-2">
             Current rating: {{ heartRating }}/5
           </p>
         </div>
@@ -41,13 +46,16 @@
   </section>
 
   <!-- Examples Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Examples</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Examples
+    </h2>
     
     <div class="space-y-8">
       <!-- Star Rating -->
       <app-glass-card padding="p-6">
-        <h3 class="text-lg font-semibold mb-4">Star Rating</h3>
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Star Rating</h3>
         <app-rating
           [rating]="starRating"
           [showValue]="true"
@@ -57,7 +65,7 @@
 
       <!-- Heart Rating -->
       <app-glass-card padding="p-6">
-        <h3 class="text-lg font-semibold mb-4">Heart Rating</h3>
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Heart Rating</h3>
         <app-rating
           [rating]="heartRating"
           icon="heart"
@@ -68,20 +76,20 @@
 
       <!-- Readonly Rating -->
       <app-glass-card padding="p-6">
-        <h3 class="text-lg font-semibold mb-4">Readonly Rating</h3>
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Readonly Rating</h3>
         <app-rating
           [rating]="readonlyRating"
           [readonly]="true"
           [showValue]="true">
         </app-rating>
-        <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+        <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mt-2">
           This rating is readonly and cannot be changed.
         </p>
       </app-glass-card>
 
       <!-- Custom Max Rating -->
       <app-glass-card padding="p-6">
-        <h3 class="text-lg font-semibold mb-4">Custom Max Rating (10 stars)</h3>
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Custom Max Rating (10 stars)</h3>
         <app-rating
           [rating]="5"
           [maxRating]="10"
@@ -93,28 +101,34 @@
   </section>
 
   <!-- Code Examples -->
-  <section class="demo-section">
-    <h2 class="section-title">Code Examples</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Code Examples
+    </h2>
     
-    <h3 class="subsection-title">Basic Usage</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
     <app-code-viewer [code]="basicExample" language="html" title="Basic Rating"></app-code-viewer>
 
-    <h3 class="subsection-title">Readonly Rating</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Readonly Rating</h3>
     <app-code-viewer [code]="readonlyExample" language="html" title="Readonly Rating"></app-code-viewer>
 
-    <h3 class="subsection-title">Heart Rating</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Heart Rating</h3>
     <app-code-viewer [code]="heartExample" language="html" title="Heart Rating"></app-code-viewer>
 
-    <h3 class="subsection-title">With Value Display</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Value Display</h3>
     <app-code-viewer [code]="withValueExample" language="html" title="Rating with Value"></app-code-viewer>
 
-    <h3 class="subsection-title">Custom Max Rating</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Custom Max Rating</h3>
     <app-code-viewer [code]="customMaxExample" language="html" title="Custom Max Rating"></app-code-viewer>
   </section>
 
   <!-- API Documentation -->
-  <section class="demo-section">
-    <h2 class="section-title">API Documentation</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Documentation
+    </h2>
     <app-props-table [props]="props" title="Inputs"></app-props-table>
     <app-props-table [props]="outputs" title="Outputs"></app-props-table>
   </section>

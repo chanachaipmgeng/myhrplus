@@ -1,21 +1,23 @@
-<div class="gantt-demo-container">
-  <app-glass-card>
-    <div class="demo-header">
-      <h1 class="text-3xl font-bold text-slate-800 dark:text-slate-200 mb-2">
+<div class="w-full py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <app-glass-card padding="p-6">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
         Syncfusion Gantt Chart Component
       </h1>
-      <p class="text-slate-600 dark:text-slate-400">
+      <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
         A powerful project management component for displaying and managing tasks in a timeline view with dependencies, resources, and progress tracking.
       </p>
     </div>
 
-    <div class="demo-content">
+    <div class="space-y-8">
       <!-- Basic Gantt Chart -->
-      <section class="demo-section">
-        <h2 class="text-2xl font-semibold text-slate-700 dark:text-slate-300 mb-4">
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
           Project Timeline
         </h2>
-        <div class="gantt-wrapper">
+        <div class="p-4 bg-white/5 dark:bg-black/20 theme-gemini:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-gemini:border-blue-500/30">
+          <div class="mt-4 rounded-lg overflow-hidden">
           <app-gantt
             #gantt
             [dataSource]="ganttData"
@@ -38,17 +40,19 @@
             (rowSelected)="onRowSelected($event)"
             (dataBound)="onDataBound($event)">
           </app-gantt>
+          </div>
         </div>
       </section>
 
       <!-- Controls -->
-      <section class="demo-section">
-        <h2 class="text-2xl font-semibold text-slate-700 dark:text-slate-300 mb-4">
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
           Controls
         </h2>
-        <div class="controls-grid">
-          <div class="control-group">
-            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6 mt-4">
+          <div class="p-4 bg-white/5 dark:bg-black/20 theme-gemini:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-gemini:border-blue-500/30 flex flex-col gap-2">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 mb-2">
               Export
             </label>
             <div class="flex gap-2 flex-wrap">
@@ -70,8 +74,8 @@
             </div>
           </div>
 
-          <div class="control-group">
-            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+          <div class="p-4 bg-white/5 dark:bg-black/20 theme-gemini:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-gemini:border-blue-500/30 flex flex-col gap-2">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 mb-2">
               Navigation
             </label>
             <div class="flex gap-2 flex-wrap">
@@ -87,19 +91,19 @@
               </button>
               <button
                 (click)="clearSelection()"
-                class="px-4 py-2 bg-slate-500 hover:bg-slate-600 text-white rounded-lg transition-colors">
+                class="px-4 py-2 bg-gray-500 hover:bg-gray-600 theme-gemini:bg-white/20 theme-gemini:hover:bg-white/30 text-white rounded-lg transition-colors">
                 Clear Selection
               </button>
               <button
                 (click)="getSelectedRows()"
-                class="px-4 py-2 bg-slate-500 hover:bg-slate-600 text-white rounded-lg transition-colors">
+                class="px-4 py-2 bg-gray-500 hover:bg-gray-600 theme-gemini:bg-white/20 theme-gemini:hover:bg-white/30 text-white rounded-lg transition-colors">
                 Get Selected
               </button>
             </div>
           </div>
 
-          <div class="control-group">
-            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+          <div class="p-4 bg-white/5 dark:bg-black/20 theme-gemini:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-gemini:border-blue-500/30 flex flex-col gap-2">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 mb-2">
               Settings
             </label>
             <div class="flex flex-col gap-2">
@@ -109,7 +113,7 @@
                   [checked]="allowSelection"
                   (change)="allowSelection = !allowSelection"
                   class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
-                <span class="text-sm text-slate-700 dark:text-slate-300">Allow Selection</span>
+                <span class="text-sm text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Allow Selection</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
                 <input
@@ -117,7 +121,7 @@
                   [checked]="allowSorting"
                   (change)="allowSorting = !allowSorting"
                   class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
-                <span class="text-sm text-slate-700 dark:text-slate-300">Allow Sorting</span>
+                <span class="text-sm text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Allow Sorting</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
                 <input
@@ -125,7 +129,7 @@
                   [checked]="allowFiltering"
                   (change)="allowFiltering = !allowFiltering"
                   class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
-                <span class="text-sm text-slate-700 dark:text-slate-300">Allow Filtering</span>
+                <span class="text-sm text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Allow Filtering</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
                 <input
@@ -133,7 +137,7 @@
                   [checked]="allowEditing"
                   (change)="allowEditing = !allowEditing"
                   class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
-                <span class="text-sm text-slate-700 dark:text-slate-300">Allow Editing</span>
+                <span class="text-sm text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Allow Editing</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
                 <input
@@ -141,7 +145,7 @@
                   [checked]="enableToolbar"
                   (change)="enableToolbar = !enableToolbar"
                   class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
-                <span class="text-sm text-slate-700 dark:text-slate-300">Enable Toolbar</span>
+                <span class="text-sm text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Enable Toolbar</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
                 <input
@@ -149,7 +153,7 @@
                   [checked]="enableCriticalPath"
                   (change)="enableCriticalPath = !enableCriticalPath"
                   class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
-                <span class="text-sm text-slate-700 dark:text-slate-300">Enable Critical Path</span>
+                <span class="text-sm text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Enable Critical Path</span>
               </label>
             </div>
           </div>
@@ -157,12 +161,13 @@
       </section>
 
       <!-- Code Example -->
-      <section class="demo-section">
-        <h2 class="text-2xl font-semibold text-slate-700 dark:text-slate-300 mb-4">
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
           Usage Example
         </h2>
-        <div class="code-example">
-          <pre class="bg-slate-900 text-slate-100 p-4 rounded-lg overflow-x-auto"><code>&lt;app-gantt
+        <div class="mt-4">
+          <pre class="bg-gray-900 dark:bg-gray-800 theme-gemini:bg-gray-900/50 text-gray-100 dark:text-gray-200 theme-gemini:text-white/90 p-4 rounded-lg overflow-x-auto border border-gray-700 dark:border-gray-600 theme-gemini:border-blue-500/30"><code class="text-sm font-mono">&lt;app-gantt
   [dataSource]="ganttData"
   [taskFields]="taskFields"
   [columns]="columns"
@@ -183,6 +188,7 @@
     </div>
   </app-glass-card>
 </div>
+
 
 
 

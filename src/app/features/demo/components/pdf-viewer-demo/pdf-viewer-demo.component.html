@@ -1,22 +1,22 @@
-<div class="pdf-viewer-demo-container p-6 space-y-6">
-  <app-glass-card>
-    <div class="space-y-6">
-      <!-- Header -->
-      <div>
-        <h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-2">
-          PDF Viewer Component Demo
-        </h1>
-        <p class="text-slate-600 dark:text-slate-400">
-          A comprehensive PDF viewer component with annotation, form filling, text search, and more.
-        </p>
-      </div>
+<div class="w-full py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <app-glass-card padding="p-6">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+        PDF Viewer Component Demo
+      </h1>
+      <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+        A comprehensive PDF viewer component with annotation, form filling, text search, and more.
+      </p>
+    </div>
 
+    <div class="space-y-8">
       <!-- Basic Usage -->
-      <div>
-        <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-4">
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
           Basic Usage
         </h2>
-        <pre class="bg-slate-100 dark:bg-slate-800 p-4 rounded-lg overflow-x-auto"><code class="text-sm">// TypeScript
+        <pre class="bg-gray-100 dark:bg-gray-800 theme-gemini:bg-gray-900/50 p-4 rounded-lg overflow-x-auto border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30"><code class="text-sm font-mono text-gray-800 dark:text-gray-200 theme-gemini:text-white/90">// TypeScript
 import {{ '{' }} PdfViewerComponent {{ '}' }} from '../../shared/components/pdf-viewer/pdf-viewer.component';
 
 &#64;ViewChild('pdfviewer') pdfviewer!: PdfViewerComponent;
@@ -30,11 +30,12 @@ documentPath = 'https://example.com/document.pdf';
   [height]="'800px'"
   [width]="'100%'"&gt;
 &lt;/app-pdf-viewer&gt;</code></pre>
-      </div>
+      </section>
 
       <!-- Actions -->
-      <div>
-        <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-4">
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
           Actions
         </h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
@@ -66,25 +67,25 @@ documentPath = 'https://example.com/document.pdf';
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
           <button
             type="button"
-            class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
             (click)="goToFirstPage()">
             First Page
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
             (click)="goToPreviousPage()">
             Previous
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
             (click)="goToNextPage()">
             Next
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
             (click)="goToLastPage()">
             Last Page
           </button>
@@ -92,25 +93,25 @@ documentPath = 'https://example.com/document.pdf';
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
           <button
             type="button"
-            class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
             (click)="zoomIn()">
             Zoom In
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
             (click)="zoomOut()">
             Zoom Out
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
             (click)="fitToWidth()">
             Fit to Width
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
             (click)="setZoom(1)">
             Reset Zoom
           </button>
@@ -120,7 +121,7 @@ documentPath = 'https://example.com/document.pdf';
             type="text"
             #searchInput
             placeholder="Search text..."
-            class="flex-1 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
+            class="flex-1 px-4 py-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 rounded-lg text-gray-700 dark:text-gray-300 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
             (keyup.enter)="search(searchInput.value)">
           <button
             type="button"
@@ -130,18 +131,18 @@ documentPath = 'https://example.com/document.pdf';
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
             (click)="clearSearch()">
             Clear
           </button>
         </div>
-        <div class="mt-4 text-sm text-slate-600 dark:text-slate-400">
+        <div class="mt-4 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
           Current Page: <span class="font-semibold">{{ getCurrentPageInfo() }}</span>
         </div>
-      </div>
+      </section>
 
       <!-- PDF Viewer -->
-      <div class="mb-8">
+      <section class="mb-12">
         <app-pdf-viewer
           #pdfviewer
           [documentPath]="documentPath"
@@ -159,14 +160,15 @@ documentPath = 'https://example.com/document.pdf';
           [height]="'800px'"
           [width]="'100%'">
         </app-pdf-viewer>
-      </div>
+      </section>
 
       <!-- Features -->
-      <div>
-        <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-4">
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
           Features
         </h2>
-        <ul class="list-disc list-inside space-y-2 text-slate-600 dark:text-slate-400">
+        <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 theme-gemini:text-white/80">
           <li>PDF document viewing and navigation</li>
           <li>Text search and selection</li>
           <li>Zoom in/out and fit to page/width</li>
@@ -179,7 +181,7 @@ documentPath = 'https://example.com/document.pdf';
           <li>Hyperlink support</li>
           <li>Hand tool for panning</li>
         </ul>
-      </div>
+      </section>
     </div>
   </app-glass-card>
 </div>

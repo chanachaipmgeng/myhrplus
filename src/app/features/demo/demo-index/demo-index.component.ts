@@ -36,7 +36,6 @@ export class DemoIndexComponent {
     // Data Display
     { name: 'Statistics Card', route: 'statistics-card', description: 'Card for displaying statistics with icons', category: 'Data Display', icon: '📊' },
     { name: 'Statistics Grid', route: 'statistics-grid', description: 'Grid layout for statistics cards', category: 'Data Display', icon: '📈' },
-    { name: 'Data Table', route: 'data-table', description: 'Advanced data table with sorting and filtering', category: 'Data Display', icon: '📋' },
     { name: 'Data Grid', route: 'data-grid', description: 'Enterprise data grid with advanced features (Syncfusion)', category: 'Data Display', icon: '📊' },
     { name: 'Pivot Table', route: 'pivot-table', description: 'Pivot table for data analysis (Syncfusion)', category: 'Data Display', icon: '📊' },
     { name: 'Timeline', route: 'timeline', description: 'Timeline component for displaying events', category: 'Data Display', icon: '⏱️' },
@@ -93,7 +92,11 @@ export class DemoIndexComponent {
     { name: 'Icon', route: 'icon', description: 'Material Icons wrapper component', category: 'Other', icon: '🎨' },
     { name: 'Avatar', route: 'avatar', description: 'Avatar component with status', category: 'Other', icon: '👤' },
     { name: 'Theme Toggle', route: 'theme-toggle', description: 'Theme mode and color toggle', category: 'Other', icon: '🎨' },
-    { name: 'Theme Switcher', route: 'theme-switcher', description: 'Advanced theme switcher with mode and color options', category: 'Other', icon: '🎨' }
+    { name: 'NgSelect', route: 'ng-select', description: 'NgSelect dropdown component with search, multi-select, and custom templates', category: 'Form', icon: '🔽' },
+    { name: 'Fullscreen', route: 'fullscreen', description: 'Fullscreen API component for entering/exiting fullscreen mode', category: 'Other', icon: '⛶' },
+    { name: 'Back to Top', route: 'back-to-top', description: 'Back to top button component with smooth scroll', category: 'Other', icon: '⬆️' },
+    { name: 'SweetAlert2', route: 'sweetalert2', description: 'SweetAlert2 integration for beautiful alert dialogs', category: 'Feedback', icon: '🎨' },
+    { name: 'Bar Rating', route: 'bar-rating', description: 'Bar rating component with customizable options', category: 'Form', icon: '⭐' }
   ];
 
   get categories(): string[] {

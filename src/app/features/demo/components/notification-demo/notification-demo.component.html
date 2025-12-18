@@ -1,18 +1,23 @@
-<div class="demo-page">
-  <div class="demo-header">
-    <h1 class="demo-title">Notification Component</h1>
-    <p class="demo-description">
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Notification Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
       Toast notification component with different types, auto-close functionality, and customizable duration.
     </p>
   </div>
 
   <!-- Live Demo Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Live Demo</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
     
     <app-glass-card padding="p-6">
-      <div class="demo-preview">
-        <div class="buttons-grid">
+      <div class="mb-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <app-glass-button variant="primary" (clicked)="showSuccess()">
             Show Success
           </app-glass-button>
@@ -31,13 +36,16 @@
   </section>
 
   <!-- Examples Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Notification Types</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Notification Types
+    </h2>
     
-    <div class="examples-grid">
+    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6">
       <app-glass-card padding="p-6">
         <h3 class="text-lg font-semibold mb-4">Success</h3>
-        <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">
+        <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mb-4">
           Green notification for successful operations
         </p>
         <app-glass-button variant="primary" (clicked)="showSuccess()">
@@ -47,7 +55,7 @@
 
       <app-glass-card padding="p-6">
         <h3 class="text-lg font-semibold mb-4">Error</h3>
-        <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">
+        <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mb-4">
           Red notification for errors
         </p>
         <app-glass-button variant="danger" (clicked)="showError()">
@@ -57,7 +65,7 @@
 
       <app-glass-card padding="p-6">
         <h3 class="text-lg font-semibold mb-4">Warning</h3>
-        <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">
+        <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mb-4">
           Yellow notification for warnings
         </p>
         <app-glass-button variant="secondary" (clicked)="showWarning()">
@@ -67,7 +75,7 @@
 
       <app-glass-card padding="p-6">
         <h3 class="text-lg font-semibold mb-4">Info</h3>
-        <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">
+        <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mb-4">
           Blue notification for information
         </p>
         <app-glass-button variant="secondary" (clicked)="showInfo()">
@@ -78,30 +86,36 @@
   </section>
 
   <!-- Code Examples -->
-  <section class="demo-section">
-    <h2 class="section-title">Code Examples</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Code Examples
+    </h2>
     
-    <h3 class="subsection-title">Basic Usage</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
     <app-code-viewer [code]="basicExample" language="html" title="Basic Notification"></app-code-viewer>
 
-    <h3 class="subsection-title">Notification Types</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Notification Types</h3>
     <app-code-viewer [code]="typesExample" language="html" title="Different Notification Types"></app-code-viewer>
 
-    <h3 class="subsection-title">With Custom Duration</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Custom Duration</h3>
     <app-code-viewer [code]="withDurationExample" language="html" title="Notification with Custom Duration"></app-code-viewer>
 
-    <h3 class="subsection-title">Persistent Notification</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Persistent Notification</h3>
     <app-code-viewer [code]="persistentExample" language="html" title="Persistent Notification"></app-code-viewer>
   </section>
 
   <!-- API Documentation -->
-  <section class="demo-section">
-    <h2 class="section-title">API Documentation</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Documentation
+    </h2>
     <app-props-table [props]="props" title="Inputs"></app-props-table>
   </section>
 
   <!-- Notifications Container -->
-  <div class="notifications-container">
+  <div class="fixed top-4 right-4 z-50 flex flex-col gap-2">
     @for (notification of notifications; track notification.id) {
       <app-notification
         [message]="notification.message"

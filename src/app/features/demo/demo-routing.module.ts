@@ -60,6 +60,11 @@ import { ContextualHelpDemoComponent } from './components/contextual-help-demo/c
 import { ProgressiveDisclosureDemoComponent } from './components/progressive-disclosure-demo/progressive-disclosure-demo.component';
 import { PageHeaderDemoComponent } from './components/page-header-demo/page-header-demo.component';
 import { MaskToggleDemoComponent } from './components/mask-toggle-demo/mask-toggle-demo.component';
+import { NgSelectDemoComponent } from './components/ng-select-demo/ng-select-demo.component';
+import { FullscreenDemoComponent } from './components/fullscreen-demo/fullscreen-demo.component';
+import { BackToTopDemoComponent } from './components/back-to-top-demo/back-to-top-demo.component';
+import { SweetAlert2DemoComponent } from './components/sweetalert2-demo/sweetalert2-demo.component';
+import { BarRatingDemoComponent } from './components/bar-rating-demo/bar-rating-demo.component';
 // ThemeSwitcherDemoComponent removed
 
 const routes: Routes = [
@@ -303,6 +308,26 @@ const routes: Routes = [
         path: 'mask-toggle',
         component: MaskToggleDemoComponent
       },
+      {
+        path: 'ng-select',
+        component: NgSelectDemoComponent
+      },
+      {
+        path: 'fullscreen',
+        component: FullscreenDemoComponent
+      },
+      {
+        path: 'back-to-top',
+        component: BackToTopDemoComponent
+      },
+      {
+        path: 'sweetalert2',
+        component: SweetAlert2DemoComponent
+      },
+      {
+        path: 'bar-rating',
+        component: BarRatingDemoComponent
+      }
       // {
       //   path: 'theme-switcher',
       //   component: ThemeSwitcherDemoComponent

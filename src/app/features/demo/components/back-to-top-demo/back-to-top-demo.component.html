@@ -1,19 +1,24 @@
-<div class="demo-page">
-  <div class="demo-header">
-    <h1 class="demo-title">Back To Top</h1>
-    <p class="demo-description">
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Back To Top Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
       Scroll to top button component that appears when user scrolls down. Features glassmorphism styling and smooth animations.
     </p>
   </div>
 
   <!-- Live Demo Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Live Demo</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
     
     <app-glass-card padding="p-6">
-      <div class="demo-preview space-y-6">
+      <div class="space-y-6">
         <div>
-          <p class="mb-4 text-slate-600 dark:text-slate-400">
+          <p class="mb-4 text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
             Scroll down this page to see the back-to-top button appear. Click it to smoothly scroll back to the top.
           </p>
           
@@ -43,15 +48,18 @@
   </section>
 
   <!-- Code Examples Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Code Examples</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Code Examples
+    </h2>
     
     <app-glass-card padding="p-6">
       <div class="space-y-6">
         <div>
           <h3 class="text-lg font-semibold mb-2">Basic Usage</h3>
-          <app-code-viewer [code]="basicExample" language="html"></app-code-viewer>
-          <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+          <app-code-viewer [code]="basicExample" language="html" title="Basic Back To Top"></app-code-viewer>
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mt-2">
             {{ usageNote }}
           </p>
         </div>
@@ -59,6 +67,7 @@
     </app-glass-card>
   </section>
 </div>
+
 
 
 

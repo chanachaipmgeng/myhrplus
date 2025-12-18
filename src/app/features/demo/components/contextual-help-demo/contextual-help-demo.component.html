@@ -1,116 +1,128 @@
-<app-glass-card padding="p-6">
-  <div class="space-y-8">
-    <!-- Header -->
-    <div>
-      <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Contextual Help</h1>
-      <p class="text-slate-600 dark:text-slate-400">
-        Component for displaying contextual help information with tooltips
-      </p>
-    </div>
-
-    <!-- Basic Example -->
-    <section>
-      <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-200 mb-4">Basic Example</h2>
-      <app-glass-card padding="p-6" variant="weak">
-        <div class="space-y-4">
-          <div class="flex items-center gap-4">
-            <span class="text-slate-700 dark:text-slate-300">Default variant:</span>
-            <app-contextual-help
-              text="Need help?"
-              title="This is a helpful tooltip that appears when you hover over the help icon"
-              icon="help_outline"
-              position="top"
-              variant="default">
-            </app-contextual-help>
-          </div>
-        </div>
-      </app-glass-card>
-      <app-code-viewer [code]="basicExample" language="html"></app-code-viewer>
-    </section>
-
-    <!-- Variants -->
-    <section>
-      <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-200 mb-4">Variants</h2>
-      <app-glass-card padding="p-6" variant="weak">
-        <div class="space-y-6">
-          <div class="flex items-center gap-4">
-            <span class="text-slate-700 dark:text-slate-300">Default:</span>
-            <app-contextual-help
-              text="Default variant"
-              title="Default variant tooltip"
-              variant="default">
-            </app-contextual-help>
-          </div>
-
-          <div class="flex items-center gap-4">
-            <span class="text-slate-700 dark:text-slate-300">Inline:</span>
-            <app-contextual-help
-              text="Inline variant"
-              title="Inline variant tooltip"
-              variant="inline">
-            </app-contextual-help>
-          </div>
-
-          <div class="flex items-center gap-4">
-            <span class="text-slate-700 dark:text-slate-300">Icon Only:</span>
-            <app-contextual-help
-              title="Icon only tooltip"
-              variant="icon-only"
-              [showOnHover]="false">
-            </app-contextual-help>
-          </div>
-        </div>
-      </app-glass-card>
-    </section>
-
-    <!-- Positions -->
-    <section>
-      <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-200 mb-4">Tooltip Positions</h2>
-      <app-glass-card padding="p-6" variant="weak">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div class="flex flex-col items-center gap-2">
-            <app-contextual-help
-              title="Top tooltip"
-              position="top"
-              variant="icon-only">
-            </app-contextual-help>
-            <span class="text-sm text-slate-600 dark:text-slate-400">Top</span>
-          </div>
-          <div class="flex flex-col items-center gap-2">
-            <app-contextual-help
-              title="Right tooltip"
-              position="right"
-              variant="icon-only">
-            </app-contextual-help>
-            <span class="text-sm text-slate-600 dark:text-slate-400">Right</span>
-          </div>
-          <div class="flex flex-col items-center gap-2">
-            <app-contextual-help
-              title="Bottom tooltip"
-              position="bottom"
-              variant="icon-only">
-            </app-contextual-help>
-            <span class="text-sm text-slate-600 dark:text-slate-400">Bottom</span>
-          </div>
-          <div class="flex flex-col items-center gap-2">
-            <app-contextual-help
-              title="Left tooltip"
-              position="left"
-              variant="icon-only">
-            </app-contextual-help>
-            <span class="text-sm text-slate-600 dark:text-slate-400">Left</span>
-          </div>
-        </div>
-      </app-glass-card>
-    </section>
-
-    <!-- Props Table -->
-    <section>
-      <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-200 mb-4">Props</h2>
-      <app-props-table [props]="props"></app-props-table>
-    </section>
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Contextual Help Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+      Component for displaying contextual help information with tooltips
+    </p>
   </div>
-</app-glass-card>
+
+  <!-- Basic Example -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Basic Example
+    </h2>
+    <app-glass-card padding="p-6" variant="weak">
+      <div class="space-y-4">
+        <div class="flex items-center gap-4">
+          <span class="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Default variant:</span>
+          <app-contextual-help
+            text="Need help?"
+            title="This is a helpful tooltip that appears when you hover over the help icon"
+            icon="help_outline"
+            position="top"
+            variant="default">
+          </app-contextual-help>
+        </div>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Contextual Help"></app-code-viewer>
+  </section>
+
+  <!-- Variants -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Variants
+    </h2>
+    <app-glass-card padding="p-6" variant="weak">
+      <div class="space-y-6">
+        <div class="flex items-center gap-4">
+          <span class="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Default:</span>
+          <app-contextual-help
+            text="Default variant"
+            title="Default variant tooltip"
+            variant="default">
+          </app-contextual-help>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <span class="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Inline:</span>
+          <app-contextual-help
+            text="Inline variant"
+            title="Inline variant tooltip"
+            variant="inline">
+          </app-contextual-help>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <span class="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Icon Only:</span>
+          <app-contextual-help
+            title="Icon only tooltip"
+            variant="icon-only"
+            [showOnHover]="false">
+          </app-contextual-help>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Positions -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Tooltip Positions
+    </h2>
+    <app-glass-card padding="p-6" variant="weak">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="flex flex-col items-center gap-2">
+          <app-contextual-help
+            title="Top tooltip"
+            position="top"
+            variant="icon-only">
+          </app-contextual-help>
+          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Top</span>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <app-contextual-help
+            title="Right tooltip"
+            position="right"
+            variant="icon-only">
+          </app-contextual-help>
+          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Right</span>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <app-contextual-help
+            title="Bottom tooltip"
+            position="bottom"
+            variant="icon-only">
+          </app-contextual-help>
+          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Bottom</span>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <app-contextual-help
+            title="Left tooltip"
+            position="left"
+            variant="icon-only">
+          </app-contextual-help>
+          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Left</span>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Props Table -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Documentation
+    </h2>
+    <app-props-table [props]="props" title="Inputs"></app-props-table>
+  </section>
+</div>
+
 
 
 

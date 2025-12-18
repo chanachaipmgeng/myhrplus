@@ -1,17 +1,31 @@
-<div class="demo-page">
-  <div class="demo-header">
-    <h1 class="demo-title">Bar Rating</h1>
-    <p class="demo-description">
+<div class="w-full py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Bar Rating
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
       Star rating component with customizable themes and interactive/readonly modes.
     </p>
   </div>
 
   <!-- Live Demo Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Live Demo</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
     
     <app-glass-card padding="p-6">
-      <div class="demo-preview space-y-6">
+      <div class="space-y-6">
+        <div class="p-4 bg-yellow-50 dark:bg-yellow-900/20 theme-gemini:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-800 theme-gemini:border-yellow-700 rounded-lg">
+          <p class="text-yellow-800 dark:text-yellow-200 theme-gemini:text-yellow-300">
+            <strong>Note:</strong> ngx-bar-rating package is not installed. Please install it first:
+          </p>
+          <code class="block mt-2 p-2 bg-gray-100 dark:bg-gray-800 theme-gemini:bg-gray-900/50 rounded text-sm">
+            npm install ngx-bar-rating
+          </code>
+        </div>
+        <!-- 
         <div>
           <h3 class="text-lg font-semibold mb-4">Interactive Rating</h3>
           <bar-rating
@@ -19,40 +33,44 @@
             [max]="5"
             (rateChange)="onRatingChange($event)">
           </bar-rating>
-          <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mt-2">
             Current rating: {{ rating1 }}/5
           </p>
         </div>
 
         <div>
-          <h3 class="text-lg font-semibold mb-4">Readonly Rating</h3>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Readonly Rating</h3>
           <bar-rating
             [(rate)]="rating2"
             [max]="5"
             [readOnly]="true">
           </bar-rating>
-          <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mt-2">
             Rating: {{ rating2 }}/5 (Readonly)
           </p>
         </div>
 
         <div>
-          <h3 class="text-lg font-semibold mb-4">Custom Max Rating (10)</h3>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Custom Max Rating (10)</h3>
           <bar-rating
             [(rate)]="rating3"
             [max]="10">
           </bar-rating>
-          <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mt-2">
             Current rating: {{ rating3 }}/10
           </p>
         </div>
+        -->
       </div>
     </app-glass-card>
   </section>
 
   <!-- Code Examples Section -->
-  <section class="demo-section">
-    <h2 class="section-title">Code Examples</h2>
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Code Examples
+    </h2>
     
     <app-glass-card padding="p-6">
       <div class="space-y-6">
@@ -69,6 +87,7 @@
     </app-glass-card>
   </section>
 </div>
+
 
 
 

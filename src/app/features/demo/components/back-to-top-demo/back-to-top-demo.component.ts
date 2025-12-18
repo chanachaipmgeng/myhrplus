@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../../shared/shared.module';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { BackToTopComponent } from '../../../../shared/components/back-to-top/back-to-top.component';
 
 @Component({
   selector: 'app-back-to-top-demo',
   standalone: true,
-  imports: [CommonModule, SharedModule, GlassCardComponent, CodeViewerComponent],
+  imports: [CommonModule, SharedModule, GlassCardComponent, CodeViewerComponent, BackToTopComponent],
   templateUrl: './back-to-top-demo.component.html',
   styleUrls: ['./back-to-top-demo.component.scss']
 })
