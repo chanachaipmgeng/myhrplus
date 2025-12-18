@@ -1,0 +1,68 @@
+<app-page-layout
+  title="ลงเวลาเข้า-ออก"
+  [breadcrumb]="[
+    { label: 'Portal', link: '/portal' },
+    { label: 'Self Service', link: '/portal/self-service' },
+    { label: 'ลงเวลา', link: '/portal/self-service/time' },
+    { label: 'ลงเวลาเข้า-ออก', link: '/portal/self-service/time/timestamp' }
+  ]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+    <!-- Current Time Display -->
+    <app-glass-card>
+      <div class="p-6 text-center">
+        <div class="text-6xl font-bold text-primary-600 dark:text-primary-400 mb-2">
+          {{ currentTime | date:'HH:mm:ss' }}
+        </div>
+        <div class="text-lg text-gray-600 dark:text-gray-400">
+          {{ currentTime | date:'EEEE, d MMMM yyyy' }}
+        </div>
+      </div>
+    </app-glass-card>
+
+    <!-- Today Status -->
+    <app-glass-card>
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">สถานะวันนี้</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-4 rounded-lg bg-primary-500/10 dark:bg-primary-500/20">
+            <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">เวลาเข้า</div>
+            <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">
+              {{ todayStatus.checkIn || '-' }}
+            </div>
+          </div>
+          <div class="p-4 rounded-lg bg-primary-500/10 dark:bg-primary-500/20">
+            <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">เวลาออก</div>
+            <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">
+              {{ todayStatus.checkOut || '-' }}
+            </div>
+          </div>
+          <div class="p-4 rounded-lg bg-primary-500/10 dark:bg-primary-500/20">
+            <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">ชั่วโมงทำงาน</div>
+            <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">
+              {{ todayStatus.workingHours }} ชม.
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-glass-card>
+
+    <!-- Action Buttons -->
+    <div class="flex gap-4 justify-center">
+      <app-glass-button
+        variant="primary"
+        [disabled]="!!todayStatus.checkIn && !todayStatus.checkOut"
+        (clicked)="checkIn()">
+        <span class="material-icons mr-2">login</span>
+        เข้างาน
+      </app-glass-button>
+      <app-glass-button
+        variant="secondary"
+        [disabled]="!todayStatus.checkIn || !!todayStatus.checkOut"
+        (clicked)="checkOut()">
+        <span class="material-icons mr-2">logout</span>
+        ออกงาน
+      </app-glass-button>
+    </div>
+  </div>
+</app-page-layout>
+

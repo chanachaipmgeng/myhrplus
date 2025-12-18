@@ -181,17 +181,21 @@ export class MenuService {
     // Remove /hr prefix and .jsp extension
     let route = jspPath.replace('/hr/', '').replace('.jsp', '');
 
-    // Map common paths
-    if (route.includes('PERSONAL/PWF001')) return '/personal/workflow/certificate';
-    if (route.includes('PERSONAL/PWF014')) return '/personal/workflow/update';
-    if (route.includes('TA/TAU_CSCWF_001')) return '/ta/leave';
-    if (route.includes('TA/TAU_CSCWF_005')) return '/ta/time-edit';
-    if (route.includes('TA/TAU_CSCWF_007')) return '/ta/shift-change';
-    if (route.includes('TA/TAU_CSCWF_009')) return '/ta/exchange-shift';
-    if (route.includes('TA/TAU_CSCWF_021')) return '/ta/overtime';
-    if (route.includes('TRAINING/TRAWF_004')) return '/training/external';
-    if (route.includes('TRAINING/TRAWF_009')) return '/training/internal';
-    if (route.includes('WELFARE/WELWF001')) return '/welfare/request';
+    // Map common paths to portal routes
+    // Personal workflows → Portal Admin Employees
+    if (route.includes('PERSONAL/PWF001')) return '/portal/admin/employees';
+    if (route.includes('PERSONAL/PWF014')) return '/portal/admin/employees';
+    // TA workflows → Portal Admin Time
+    if (route.includes('TA/TAU_CSCWF_001')) return '/portal/admin/time';
+    if (route.includes('TA/TAU_CSCWF_005')) return '/portal/admin/time';
+    if (route.includes('TA/TAU_CSCWF_007')) return '/portal/admin/time';
+    if (route.includes('TA/TAU_CSCWF_009')) return '/portal/admin/time';
+    if (route.includes('TA/TAU_CSCWF_021')) return '/portal/admin/time';
+    // Training workflows → Portal Admin Training
+    if (route.includes('TRAINING/TRAWF_004')) return '/portal/admin/training';
+    if (route.includes('TRAINING/TRAWF_009')) return '/portal/admin/training';
+    // Welfare workflows → Portal Admin Welfare
+    if (route.includes('WELFARE/WELWF001')) return '/portal/admin/welfare';
 
     // Generic conversion
     route = route.toLowerCase().replace(/\//g, '/');
@@ -220,50 +224,50 @@ export class MenuService {
     const user = this.authService.getCurrentUser();
     const menuItems: MenuItem[] = [
       {
-        name: 'Dashboard',
-        path: '/dashboard',
-        id: 'dashboard',
+        name: 'Portal',
+        path: '/portal',
+        id: 'portal',
         tdesc: 'หน้าแรก',
-        edesc: 'Home',
+        edesc: 'Portal',
         icon: 'home',
-        route: '/dashboard'
+        route: '/portal'
       }
     ];
 
-    // Add modules based on user permissions
+    // Add modules based on user permissions - Use portal routes
     if (this.hasModuleAccess('PERSONAL', user)) {
       menuItems.push({
-        name: 'Personal',
-        path: '/personal',
-        id: 'personal',
-        tdesc: 'ข้อมูลส่วนบุคคล',
-        edesc: 'Personal',
+        name: 'Employees',
+        path: '/portal/admin/employees',
+        id: 'employees',
+        tdesc: 'จัดการพนักงาน',
+        edesc: 'Employee Management',
         icon: 'person',
-        route: '/personal'
+        route: '/portal/admin/employees'
       });
     }
 
     if (this.hasModuleAccess('TA', user)) {
       menuItems.push({
-        name: 'Time Attendance',
-        path: '/ta',
-        id: 'ta',
-        tdesc: 'ลงเวลา',
-        edesc: 'Time Attendance',
+        name: 'Time Management',
+        path: '/portal/admin/time',
+        id: 'time',
+        tdesc: 'จัดการเวลา',
+        edesc: 'Time Management',
         icon: 'access_time',
-        route: '/ta'
+        route: '/portal/admin/time'
       });
     }
 
     if (this.hasModuleAccess('PAYROLL', user)) {
       menuItems.push({
         name: 'Payroll',
-        path: '/payroll',
+        path: '/portal/admin/payroll',
         id: 'payroll',
-        tdesc: 'เงินเดือน',
-        edesc: 'Payroll',
+        tdesc: 'จัดการเงินเดือน',
+        edesc: 'Payroll Management',
         icon: 'account_balance_wallet',
-        route: '/payroll'
+        route: '/portal/admin/payroll'
       });
     }
 
@@ -282,60 +286,60 @@ export class MenuService {
     if (this.hasModuleAccess('TRAINING', user)) {
       menuItems.push({
         name: 'Training',
-        path: '/training',
+        path: '/portal/admin/training',
         id: 'training',
-        tdesc: 'การฝึกอบรม',
-        edesc: 'Training',
+        tdesc: 'จัดการการฝึกอบรม',
+        edesc: 'Training Management',
         icon: 'school',
-        route: '/training'
+        route: '/portal/admin/training'
       });
     }
 
     if (this.hasModuleAccess('APPRAISAL', user)) {
       menuItems.push({
         name: 'Appraisal',
-        path: '/appraisal',
+        path: '/portal/admin/appraisal',
         id: 'appraisal',
-        tdesc: 'การประเมินผล',
-        edesc: 'Appraisal',
+        tdesc: 'จัดการการประเมิน',
+        edesc: 'Appraisal Management',
         icon: 'assessment',
-        route: '/appraisal'
+        route: '/portal/admin/appraisal'
       });
     }
 
     if (this.hasModuleAccess('WELFARE', user)) {
       menuItems.push({
         name: 'Welfare',
-        path: '/welfare',
+        path: '/portal/admin/welfare',
         id: 'welfare',
-        tdesc: 'สวัสดิการ',
-        edesc: 'Welfare',
+        tdesc: 'จัดการสวัสดิการ',
+        edesc: 'Welfare Management',
         icon: 'favorite',
-        route: '/welfare'
+        route: '/portal/admin/welfare'
       });
     }
 
     if (this.hasModuleAccess('RECRUIT', user)) {
       menuItems.push({
         name: 'Recruitment',
-        path: '/recruit',
+        path: '/portal/admin/recruit',
         id: 'recruit',
-        tdesc: 'การสรรหา',
-        edesc: 'Recruitment',
+        tdesc: 'จัดการการสรรหา',
+        edesc: 'Recruitment Management',
         icon: 'people',
-        route: '/recruit'
+        route: '/portal/admin/recruit'
       });
     }
 
     if (this.hasModuleAccess('COMPANY', user)) {
       menuItems.push({
         name: 'Company',
-        path: '/company',
+        path: '/portal/admin/company',
         id: 'company',
-        tdesc: 'บริษัท',
-        edesc: 'Company',
+        tdesc: 'จัดการบริษัท',
+        edesc: 'Company Management',
         icon: 'business',
-        route: '/company'
+        route: '/portal/admin/company'
       });
     }
 

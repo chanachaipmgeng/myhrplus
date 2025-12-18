@@ -1,0 +1,55 @@
+<div class="menu-item-container" [class.active]="isActive" [class.has-children]="hasChildren()">
+  <!-- Menu Item -->
+  <div class="menu-item flex items-center gap-2 py-2 px-3 rounded-lg transition-all duration-200 ease-out hover:bg-white/10 dark:hover:bg-gray-800/20 theme-gemini:hover:bg-white/10 cursor-pointer"
+       [ngClass]="getPaddingClass()"
+       [class.font-bold]="level === 2"
+       [class.text-sm]="level > 2"
+       [class.active-item]="isActive"
+       [class.has-route]="isClickable()"
+       (click)="navigate(item.route, $event)">
+    
+    <!-- Chevron Icon (for items with children) -->
+    <span *ngIf="hasChildren()"
+          class="chevron-icon flex-shrink-0 w-5 h-5 flex items-center justify-center transition-transform duration-200 ease-out"
+          [class.rotated]="isExpanded"
+          (click)="toggleExpand($event)">
+      <app-icon [name]="getChevronIcon()" 
+                size="sm"
+                color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70"></app-icon>
+    </span>
+    
+    <!-- Spacer for items without children -->
+    <span *ngIf="!hasChildren()" class="w-5"></span>
+
+    <!-- Item Icon (if provided) -->
+    <app-icon *ngIf="item.icon"
+              [name]="item.icon"
+              size="sm"
+              color="text-gray-600 dark:text-gray-300 theme-gemini:text-white/80 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors duration-200"
+              class="flex-shrink-0"></app-icon>
+
+    <!-- Item Label -->
+    <span class="menu-label flex-1 thai-text text-gray-700 dark:text-gray-200 theme-gemini:text-white/90 transition-colors duration-200">
+      {{ item.label }}
+    </span>
+
+    <!-- Badge (if provided) -->
+    <span *ngIf="item.badge"
+          class="badge flex-shrink-0 px-2 py-0.5 rounded-full text-xs font-semibold"
+          [ngClass]="item.badgeColor || 'bg-blue-500 text-white'">
+      {{ item.badge }}
+    </span>
+  </div>
+
+  <!-- Nested Children (Accordion) -->
+  <div *ngIf="hasChildren() && isExpanded"
+       class="nested-children animate-fade-in transition-all duration-200 ease-out">
+    <app-menu-item
+      *ngFor="let child of item.children"
+      [item]="child"
+      [level]="level + 1"
+      [activeRoute]="activeRoute"
+      (routeChange)="routeChange.emit($event)">
+    </app-menu-item>
+  </div>
+</div>

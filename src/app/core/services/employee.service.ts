@@ -208,9 +208,9 @@ export class EmployeeService {
   ) {}
 
   getSetPass(): Observable<SetCharacter> {
-    // ApiService already handles baseUrl (environment.jbossUrl), so only pass the endpoint path
-    // Note: Assuming this endpoint is on /hr, not /plus
-    const url = `/user/manage`;
+    // Use /plus/user/manage endpoint (new API)
+    // Send full URL to ApiService since it uses jbossUrl by default, but this endpoint needs baseUrl
+    const url = `${environment.baseUrl}/user/manage`;
     return this.apiService.get<SetCharacter>(url).pipe(
       map((response) => {
         return response.data || (response as unknown as SetCharacter);

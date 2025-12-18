@@ -17,12 +17,15 @@ import { DateRangePickerComponent } from './components/date-range-picker/date-ra
 import { SkeletonLoaderComponent } from './components/skeleton-loader/skeleton-loader.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { FormValidationMessagesComponent } from './components/form-validation-messages/form-validation-messages.component';
-import { IconComponent } from './components/icon/icon.component';
+import { IconComponent } from './components/icon/icon.component'; // Now standalone
 import { SpinnerComponent } from './components/spinner/spinner.component';
-import { NotificationComponent } from './components/notification/notification.component';
+import { NotificationComponent } from './components/notification/notification.component'; // Now standalone
+import { BackToTopComponent } from './components/back-to-top/back-to-top.component'; // Now standalone
+import { MenuItemComponent } from './components/menu-item/menu-item.component'; // Standalone
 
 // Directives
 import { ClickOutsideDirective } from './directives/click-outside.directive';
+import { LazyImageDirective } from './directives/lazy-image.directive'; // Standalone directive
 
 // Pipes
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
@@ -34,18 +37,22 @@ const COMPONENTS = [
   ErrorStateComponent,
   AvatarComponent,
   StatusBadgeComponent,
-  // SearchFilterComponent is standalone, imported directly
   BreadcrumbsComponent,
   StepperComponent,
   DateRangePickerComponent,
   SkeletonLoaderComponent,
   ImageUploadComponent,
-  FormValidationMessagesComponent,
-  NotificationComponent
+  FormValidationMessagesComponent
+  // SearchFilterComponent removed - now standalone component
+  // TimelineComponent removed - now standalone component
+  // NotificationComponent removed - now standalone component
+  // IconComponent removed - now standalone component
+  // BackToTopComponent removed - now standalone component
 ];
 
 const DIRECTIVES = [
   ClickOutsideDirective
+  // LazyImageDirective removed - now standalone directive
 ];
 
 const PIPES = [
@@ -58,6 +65,7 @@ const PIPES = [
     ...COMPONENTS,
     ...DIRECTIVES,
     ...PIPES
+    // BackToTopComponent is standalone, not declared here
   ],
   imports: [
     CommonModule,
@@ -65,9 +73,13 @@ const PIPES = [
     FormsModule,
     RouterModule,
     SpinnerComponent,
-    TimelineComponent,
-    IconComponent,
-    SearchFilterComponent
+    IconComponent, // Import standalone component
+    BackToTopComponent, // Import standalone component
+    LazyImageDirective, // Import standalone directive
+    MenuItemComponent, // Import standalone component
+    NotificationComponent, // Import standalone component
+    SearchFilterComponent, // Import standalone component
+    TimelineComponent // Import standalone component
   ],
   exports: [
     CommonModule,
@@ -78,9 +90,13 @@ const PIPES = [
     ...DIRECTIVES,
     ...PIPES,
     SpinnerComponent,
-    TimelineComponent,
-    IconComponent,
-    SearchFilterComponent
+    IconComponent, // Export standalone component
+    BackToTopComponent, // Export standalone component
+    LazyImageDirective, // Export standalone directive
+    MenuItemComponent, // Export standalone component
+    NotificationComponent, // Export standalone component
+    SearchFilterComponent, // Export standalone component
+    TimelineComponent // Export standalone component
   ]
 })
 export class SharedModule { }

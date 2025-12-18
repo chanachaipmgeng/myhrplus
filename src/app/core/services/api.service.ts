@@ -31,7 +31,8 @@ export class ApiService {
 
   get<T>(endpoint: string, params?: any, useCache: boolean = false, cacheKey?: string): Observable<ApiResponse<T>> {
     const httpParams = this.buildParams(params);
-    const url = `${this.baseUrl}${endpoint}`;
+    // Check if endpoint is already a full URL
+    const url = endpoint.startsWith('http') ? endpoint : `${this.baseUrl}${endpoint}`;
     
     const request = this.http.get<ApiResponse<T>>(url, { params: httpParams });
 
@@ -43,24 +44,30 @@ export class ApiService {
   }
 
   post<T>(endpoint: string, body: any): Observable<ApiResponse<T>> {
+    // Check if endpoint is already a full URL
+    const url = endpoint.startsWith('http') ? endpoint : `${this.baseUrl}${endpoint}`;
     const request = this.http.post<ApiResponse<T>>(
-      `${this.baseUrl}${endpoint}`,
+      url,
       body
     );
     return this.retryRequest(request);
   }
 
   put<T>(endpoint: string, body: any): Observable<ApiResponse<T>> {
+    // Check if endpoint is already a full URL
+    const url = endpoint.startsWith('http') ? endpoint : `${this.baseUrl}${endpoint}`;
     const request = this.http.put<ApiResponse<T>>(
-      `${this.baseUrl}${endpoint}`,
+      url,
       body
     );
     return this.retryRequest(request);
   }
 
   delete<T>(endpoint: string): Observable<ApiResponse<T>> {
+    // Check if endpoint is already a full URL
+    const url = endpoint.startsWith('http') ? endpoint : `${this.baseUrl}${endpoint}`;
     const request = this.http.delete<ApiResponse<T>>(
-      `${this.baseUrl}${endpoint}`
+      url
     );
     return this.retryRequest(request);
   }
@@ -75,8 +82,10 @@ export class ApiService {
       });
     }
 
+    // Check if endpoint is already a full URL
+    const url = endpoint.startsWith('http') ? endpoint : `${this.baseUrl}${endpoint}`;
     const request = this.http.post<ApiResponse<any>>(
-      `${this.baseUrl}${endpoint}`,
+      url,
       formData
     );
     return this.retryRequest(request);
@@ -84,8 +93,10 @@ export class ApiService {
 
   downloadFile(endpoint: string, params?: any): Observable<Blob> {
     const httpParams = this.buildParams(params);
+    // Check if endpoint is already a full URL
+    const url = endpoint.startsWith('http') ? endpoint : `${this.baseUrl}${endpoint}`;
     const request = this.http.get(
-      `${this.baseUrl}${endpoint}`,
+      url,
       {
         params: httpParams,
         responseType: 'blob'
@@ -102,17 +113,25 @@ export class ApiService {
             // Don't retry on client errors (4xx) except 408, 429
             if (error.status >= 400 && error.status < 500) {
               if (error.status === 408 || error.status === 429) {
-                // Retry on timeout or too many requests
+                // Retry on timeout or too many requests with exponential backoff
                 if (index < this.maxRetries) {
-                  return timer(this.retryDelay * (index + 1));
+                  const delay = this.calculateRetryDelay(index);
+                  return timer(delay);
                 }
               }
               return throwError(() => error);
             }
 
-            // Retry on server errors (5xx) or network errors
+            // Don't retry on certain 5xx errors that indicate permanent failures
+            if (error.status === 501 || error.status === 505) {
+              // Not Implemented, HTTP Version Not Supported - don't retry
+              return throwError(() => error);
+            }
+
+            // Retry on server errors (5xx) or network errors with exponential backoff
             if (index < this.maxRetries) {
-              return timer(this.retryDelay * (index + 1));
+              const delay = this.calculateRetryDelay(index);
+              return timer(delay);
             }
 
             return throwError(() => error);
@@ -121,6 +140,19 @@ export class ApiService {
         )
       )
     );
+  }
+
+  /**
+   * Calculate retry delay with exponential backoff
+   * Formula: baseDelay * 2^index, capped at maxDelay
+   * @param index - Retry attempt index (0-based)
+   * @returns Delay in milliseconds
+   */
+  private calculateRetryDelay(index: number): number {
+    const maxDelay = 10000; // 10 seconds max
+    const baseDelay = this.retryDelay; // 1 second base
+    const exponentialDelay = baseDelay * Math.pow(2, index);
+    return Math.min(exponentialDelay, maxDelay);
   }
 
   private buildParams(params: any): HttpParams {

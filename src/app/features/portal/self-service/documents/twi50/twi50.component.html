@@ -1,0 +1,58 @@
+<app-page-layout
+  title="เอกสาร TWI50"
+  [breadcrumb]="[
+    { label: 'Portal', link: '/portal' },
+    { label: 'Self Service', link: '/portal/self-service' },
+    { label: 'ขอเอกสาร', link: '/portal/self-service/documents' },
+    { label: 'TWI50', link: '/portal/self-service/documents/twi50' }
+  ]"
+  [actions]="pageActions">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-4">
+    @if (isLoading) {
+      <app-loading></app-loading>
+    } @else {
+      @if (documents.length === 0) {
+        <app-glass-card>
+          <div class="p-6 text-center">
+            <span class="material-icons text-6xl text-gray-400 mb-4">description</span>
+            <p class="text-gray-600 dark:text-gray-400 mb-4">ยังไม่มีเอกสาร TWI50</p>
+            <app-glass-button variant="primary" (clicked)="requestDocument()">
+              <span class="material-icons mr-2">add</span>
+              ขอเอกสารใหม่
+            </app-glass-button>
+          </div>
+        </app-glass-card>
+      } @else {
+        @for (doc of documents; track doc.id) {
+          <app-glass-card>
+            <div class="p-6">
+              <div class="flex items-start justify-between">
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                      TWI50 ปี {{ doc.year }}
+                    </h3>
+                    <span class="px-3 py-1 rounded-full text-sm font-medium {{ getStatusClass(doc.status) }}">
+                      {{ getStatusLabel(doc.status) }}
+                    </span>
+                  </div>
+                  <p class="text-gray-600 dark:text-gray-400 mb-2">ระยะเวลา: {{ doc.period }}</p>
+                  <p class="text-sm text-gray-500 dark:text-gray-500">
+                    วันที่ขอ: {{ doc.requestDate | date:'dd/MM/yyyy' }}
+                  </p>
+                </div>
+                @if (doc.status === 'ready') {
+                  <app-glass-button variant="primary" (clicked)="downloadDocument(doc)">
+                    <span class="material-icons mr-2">download</span>
+                    ดาวน์โหลด
+                  </app-glass-button>
+                }
+              </div>
+            </div>
+          </app-glass-card>
+        }
+      }
+    }
+  </div>
+</app-page-layout>
+

@@ -1,0 +1,57 @@
+<app-page-layout
+  title="ลาพักผ่อน"
+  [breadcrumb]="[
+    { label: 'Portal', link: '/portal' },
+    { label: 'Self Service', link: '/portal/self-service' },
+    { label: 'ลาพักผ่อน', link: '/portal/self-service/leave' }
+  ]"
+  [actions]="pageActions">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+    <!-- Statistics -->
+    <app-statistics-grid [stats]="statisticsCards"></app-statistics-grid>
+
+    <!-- Leave Requests -->
+    <div class="space-y-4">
+      <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100">รายการลา</h2>
+      @if (isLoading) {
+        <app-loading></app-loading>
+      } @else {
+        @if (leaveRequests.length === 0) {
+          <app-glass-card>
+            <div class="p-6 text-center">
+              <span class="material-icons text-6xl text-gray-400 mb-4">event</span>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">ยังไม่มีรายการลา</p>
+              <app-glass-button variant="primary" (clicked)="createLeaveRequest()">
+                <span class="material-icons mr-2">add</span>
+                ขอลาใหม่
+              </app-glass-button>
+            </div>
+          </app-glass-card>
+        } @else {
+          @for (request of leaveRequests; track request.id) {
+            <app-glass-card>
+              <div class="p-6">
+                <div class="flex items-start justify-between">
+                  <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-2">
+                      <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{ request.type }}</h3>
+                      <span class="px-3 py-1 rounded-full text-sm font-medium {{ getStatusClass(request.status) }}">
+                        {{ getStatusLabel(request.status) }}
+                      </span>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-2">
+                      {{ request.startDate | date:'dd/MM/yyyy' }} - {{ request.endDate | date:'dd/MM/yyyy' }}
+                      ({{ request.days }} วัน)
+                    </p>
+                    <p class="text-sm text-gray-500 dark:text-gray-500">เหตุผล: {{ request.reason }}</p>
+                  </div>
+                </div>
+              </div>
+            </app-glass-card>
+          }
+        }
+      }
+    </div>
+  </div>
+</app-page-layout>
+

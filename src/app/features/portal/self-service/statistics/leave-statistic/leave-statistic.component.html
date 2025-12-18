@@ -1,0 +1,45 @@
+<app-page-layout
+  title="สถิติการลา"
+  [breadcrumb]="[
+    { label: 'Portal', link: '/portal' },
+    { label: 'Self Service', link: '/portal/self-service' },
+    { label: 'สถิติ', link: '/portal/self-service/statistics' },
+    { label: 'สถิติการลา', link: '/portal/self-service/statistics/leave' }
+  ]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+    <!-- Statistics Cards -->
+    <app-statistics-grid [stats]="statisticsCards"></app-statistics-grid>
+
+    <!-- Detailed Statistics -->
+    <div class="space-y-4">
+      <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100">สถิติรายละเอียด</h2>
+      @if (isLoading) {
+        <app-loading></app-loading>
+      } @else {
+        @for (stat of statistics; track stat.type) {
+          <app-glass-card>
+            <div class="p-6">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{ stat.type }}</h3>
+                <span class="text-sm text-gray-600 dark:text-gray-400">
+                  ใช้ไป {{ stat.used }}/{{ stat.total }} วัน ({{ getPercentage(stat.used, stat.total) }}%)
+                </span>
+              </div>
+              <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4 mb-2">
+                <div 
+                  class="bg-primary-600 dark:bg-primary-400 h-4 rounded-full transition-all"
+                  [style.width.%]="getPercentage(stat.used, stat.total)">
+                </div>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-600 dark:text-gray-400">คงเหลือ: <strong>{{ stat.remaining }} วัน</strong></span>
+                <span class="text-gray-600 dark:text-gray-400">รวม: <strong>{{ stat.total }} วัน</strong></span>
+              </div>
+            </div>
+          </app-glass-card>
+        }
+      }
+    </div>
+  </div>
+</app-page-layout>
+

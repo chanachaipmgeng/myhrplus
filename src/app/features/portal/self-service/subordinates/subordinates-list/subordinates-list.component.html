@@ -1,0 +1,48 @@
+<app-page-layout
+  title="ลูกน้อง"
+  [breadcrumb]="[
+    { label: 'Portal', link: '/portal' },
+    { label: 'Self Service', link: '/portal/self-service' },
+    { label: 'ลูกน้อง', link: '/portal/self-service/subordinates' }
+  ]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-4">
+    @if (isLoading) {
+      <app-loading></app-loading>
+    } @else {
+      @if (subordinates.length === 0) {
+        <app-glass-card>
+          <div class="p-6 text-center">
+            <span class="material-icons text-6xl text-gray-400 mb-4">people</span>
+            <p class="text-gray-600 dark:text-gray-400">ไม่มีลูกน้อง</p>
+          </div>
+        </app-glass-card>
+      } @else {
+        @for (sub of subordinates; track sub.id) {
+          <app-glass-card>
+            <div class="p-6">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-full bg-primary-500/20 flex items-center justify-center">
+                    <span class="material-icons text-primary-600 dark:text-primary-400">person</span>
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                      {{ sub.firstName }} {{ sub.lastName }}
+                    </h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                      {{ sub.position }} - {{ sub.department }}
+                    </p>
+                    <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                      {{ sub.employeeId }} • {{ sub.email }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </app-glass-card>
+        }
+      }
+    }
+  </div>
+</app-page-layout>
+

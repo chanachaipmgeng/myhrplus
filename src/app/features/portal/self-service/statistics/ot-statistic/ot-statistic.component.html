@@ -1,0 +1,61 @@
+<app-page-layout
+  title="สถิติ OT"
+  [breadcrumb]="[
+    { label: 'Portal', link: '/portal' },
+    { label: 'Self Service', link: '/portal/self-service' },
+    { label: 'สถิติ', link: '/portal/self-service/statistics' },
+    { label: 'สถิติ OT', link: '/portal/self-service/statistics/ot' }
+  ]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+    <!-- Statistics Cards -->
+    <app-statistics-grid [stats]="statisticsCards"></app-statistics-grid>
+
+    <!-- OT Records -->
+    <div class="space-y-4">
+      <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100">รายละเอียด OT (10 วันล่าสุด)</h2>
+      @if (isLoading) {
+        <app-loading></app-loading>
+      } @else {
+        <app-glass-card>
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead>
+                <tr class="border-b border-gray-200 dark:border-gray-700">
+                  <th class="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">วันที่</th>
+                  <th class="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">ชั่วโมง</th>
+                  <th class="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">อัตรา</th>
+                  <th class="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">จำนวนเงิน</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (record of otRecords; track record.date) {
+                  <tr class="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                    <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-100">
+                      {{ record.date | date:'dd/MM/yyyy' }}
+                    </td>
+                    <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">
+                      {{ record.hours | number:'1.1-1' }} ชม.
+                    </td>
+                    <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">
+                      {{ record.rate | number }} บาท/ชม.
+                    </td>
+                    <td class="px-4 py-3 text-sm font-semibold text-primary-600 dark:text-primary-400">
+                      {{ record.amount | number:'1.2-2' }} บาท
+                    </td>
+                  </tr>
+                }
+                <tr class="border-t-2 border-gray-300 dark:border-gray-600 font-semibold">
+                  <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-100">รวม</td>
+                  <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-100">{{ totalHours | number:'1.1-1' }} ชม.</td>
+                  <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-100">-</td>
+                  <td class="px-4 py-3 text-sm text-primary-600 dark:text-primary-400">{{ totalAmount | number:'1.2-2' }} บาท</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </app-glass-card>
+      }
+    </div>
+  </div>
+</app-page-layout>
+
