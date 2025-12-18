@@ -5,6 +5,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NgxEchartsModule } from 'ngx-echarts';
+import * as echarts from 'echarts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,7 +37,8 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
     SharedModule,
     LoadingSpinnerComponent,
     LayoutModule,
-    AuthModule
+    AuthModule,
+    NgxEchartsModule.forRoot({ echarts })
   ],
   providers: [
     provideTranslateHttpLoader({
