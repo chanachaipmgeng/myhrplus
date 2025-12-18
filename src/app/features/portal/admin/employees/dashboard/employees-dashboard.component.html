@@ -87,4 +87,60 @@
       </div>
     </div>
   </div>
+
+  <!-- Statistics Cards -->
+  <div class="mb-8">
+    <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">สถิติพนักงาน</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
+      <div class="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
+        <div class="text-4xl font-bold mb-2">{{ statistics.totalEmployees }}</div>
+        <div class="text-sm opacity-90">พนักงานทั้งหมด</div>
+      </div>
+      <div class="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
+        <div class="text-4xl font-bold mb-2">{{ statistics.newHires }}</div>
+        <div class="text-sm opacity-90">พนักงานใหม่</div>
+      </div>
+      <div class="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
+        <div class="text-4xl font-bold mb-2">{{ statistics.terminations }}</div>
+        <div class="text-sm opacity-90">ลาออก</div>
+      </div>
+      <div class="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
+        <div class="text-4xl font-bold mb-2">{{ statistics.promotions }}</div>
+        <div class="text-sm opacity-90">เลื่อนตำแหน่ง</div>
+      </div>
+      <div class="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
+        <div class="text-4xl font-bold mb-2">{{ statistics.transfers }}</div>
+        <div class="text-sm opacity-90">ย้ายตำแหน่ง</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="mb-8">
+    <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">กราฟและสถิติ</h2>
+    
+    <!-- Charts Row 1 -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
+      <!-- Pie Chart: Employee Status -->
+      <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">สถานะพนักงาน</h3>
+        <div echarts [options]="employeeStatusPieChartOption" class="w-full" style="height: 400px;"></div>
+      </div>
+      
+      <!-- Bar Chart: Department Distribution -->
+      <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">การกระจายพนักงานตามแผนก</h3>
+        <div echarts [options]="departmentDistributionBarChartOption" class="w-full" style="height: 400px;"></div>
+      </div>
+    </div>
+
+    <!-- Charts Row 2 -->
+    <div class="grid grid-cols-1 gap-5 mb-5">
+      <!-- Line Chart: Employee Growth -->
+      <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">การเติบโตของพนักงานรายเดือน</h3>
+        <div echarts [options]="employeeGrowthLineChartOption" class="w-full" style="height: 400px;"></div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -87,4 +87,60 @@
       </div>
     </div>
   </div>
+
+  <!-- Statistics Cards -->
+  <div class="mb-8">
+    <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">สถิติการประเมิน</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
+      <div class="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
+        <div class="text-4xl font-bold mb-2">{{ statistics.totalAppraisals }}</div>
+        <div class="text-sm opacity-90">การประเมินทั้งหมด</div>
+      </div>
+      <div class="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
+        <div class="text-4xl font-bold mb-2">{{ statistics.completed }}</div>
+        <div class="text-sm opacity-90">เสร็จสิ้น</div>
+      </div>
+      <div class="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
+        <div class="text-4xl font-bold mb-2">{{ statistics.inProgress }}</div>
+        <div class="text-sm opacity-90">กำลังดำเนินการ</div>
+      </div>
+      <div class="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
+        <div class="text-4xl font-bold mb-2">{{ statistics.pending }}</div>
+        <div class="text-sm opacity-90">รอประเมิน</div>
+      </div>
+      <div class="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
+        <div class="text-4xl font-bold mb-2">{{ statistics.averageScore }}</div>
+        <div class="text-sm opacity-90">คะแนนเฉลี่ย</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="mb-8">
+    <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">กราฟและสถิติ</h2>
+    
+    <!-- Charts Row 1 -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
+      <!-- Pie Chart: Appraisal Grade -->
+      <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">ระดับการประเมิน</h3>
+        <div echarts [options]="appraisalGradePieChartOption" class="w-full" style="height: 400px;"></div>
+      </div>
+      
+      <!-- Bar Chart: Performance Distribution -->
+      <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">คะแนนเฉลี่ยตามแผนก</h3>
+        <div echarts [options]="performanceDistributionBarChartOption" class="w-full" style="height: 400px;"></div>
+      </div>
+    </div>
+
+    <!-- Charts Row 2 -->
+    <div class="grid grid-cols-1 gap-5 mb-5">
+      <!-- Line Chart: Appraisal Trend -->
+      <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">แนวโน้มการประเมินรายเดือน</h3>
+        <div echarts [options]="appraisalTrendLineChartOption" class="w-full" style="height: 400px;"></div>
+      </div>
+    </div>
+  </div>
 </div>
