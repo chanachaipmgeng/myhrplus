@@ -1,20 +1,11 @@
-import { Component, Output, EventEmitter, OnInit, OnDestroy, HostListener, ElementRef, ViewChild } from '@angular/core';
-import { AuthService } from '../../core/services/auth.service';
+import { Component, Output, EventEmitter, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { I18nService, Language } from '../../core/services/i18n.service';
-import { MenuItemModel } from '@syncfusion/ej2-angular-navigations';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
-interface Notification {
-  id: string;
-  title: string;
-  message: string;
-  type: 'info' | 'success' | 'warning' | 'error';
-  timestamp: Date;
-  read: boolean;
-  route?: string;
-}
+import { AuthService } from '../../core/services/auth.service';
+import { I18nService, Language } from '../../core/services/i18n.service';
+import { NotificationService, Notification } from '../../core/services/notification.service';
+import { OmniSearchComponent } from '../../shared/components/omni-search/omni-search.component';
 
 @Component({
   selector: 'app-header',
@@ -23,9 +14,7 @@ interface Notification {
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   @Output() toggleSidenav = new EventEmitter<void>();
-  @ViewChild('notificationMenu', { static: false }) notificationMenu!: ElementRef;
-  @ViewChild('languageMenuContainer', { static: false }) languageMenuContainer!: ElementRef;
-  @ViewChild('userMenuContainer', { static: false }) userMenuContainer!: ElementRef;
+  @ViewChild('omniSearch', { static: false }) omniSearch!: OmniSearchComponent;
 
   currentLanguage: Language = 'th';
   showLanguageMenu = false;
@@ -44,28 +33,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     public authService: AuthService,
     private router: Router,
-    public i18nService: I18nService
+    public i18nService: I18nService,
+    private notificationService: NotificationService
   ) {
     // Subscribe to language changes
     this.i18nService.currentLanguage$.pipe(takeUntil(this.destroy$)).subscribe(lang => {
       this.currentLanguage = lang;
     });
-
-    // Subscribe to user changes
-    this.authService.currentUser$.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      // User changed
-    });
   }
 
   ngOnInit(): void {
-    // Load notifications
-    this.loadNotifications();
-
-    // TODO: Subscribe to real notification service when available
-    // this.notificationService.notifications$.pipe(takeUntil(this.destroy$)).subscribe(notifications => {
-    //   this.notifications = notifications;
-    //   this.unreadCount = notifications.filter(n => !n.read).length;
-    // });
+    // Subscribe to notifications
+    this.notificationService.notifications$.pipe(takeUntil(this.destroy$)).subscribe(notifications => {
+      this.notifications = notifications;
+      this.unreadCount = notifications.filter(n => !n.read).length;
+    });
   }
 
   ngOnDestroy(): void {
@@ -73,83 +55,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  loadNotifications(): void {
-    // Mock notifications - replace with actual service call
-    this.notifications = [
-      {
-        id: '1',
-        title: 'การอนุมัติใหม่',
-        message: 'มีเอกสารรอการอนุมัติ 3 รายการ',
-        type: 'info',
-        timestamp: new Date(),
-        read: false,
-        route: '/workflow/inbox'
-      },
-      {
-        id: '2',
-        title: 'อัพเดทระบบ',
-        message: 'ระบบจะปิดปรับปรุงในวันที่ 15 มกราคม',
-        type: 'warning',
-        timestamp: new Date(Date.now() - 3600000),
-        read: false
-      }
-    ];
-    this.unreadCount = this.notifications.filter(n => !n.read).length;
-  }
-
   toggleNotificationMenu(): void {
     this.showNotificationMenu = !this.showNotificationMenu;
-    this.showLanguageMenu = false;
-    this.showUserMenu = false;
-
     if (this.showNotificationMenu) {
-      // Mark as read when opening
-      this.markAllAsRead();
+      this.showLanguageMenu = false;
+      this.showUserMenu = false;
+      // Optional: Mark as read when opening? Or keep until clicked?
+      // Keeping unread for now until user interacts
     }
+  }
+
+  closeNotificationMenu(): void {
+    this.showNotificationMenu = false;
   }
 
   markAllAsRead(): void {
-    this.notifications.forEach(n => n.read = true);
-    this.unreadCount = 0;
-  }
-
-  markAsRead(notification: Notification): void {
-    notification.read = true;
-    this.unreadCount = this.notifications.filter(n => !n.read).length;
+    this.notificationService.markAllAsRead();
   }
 
   handleNotificationClick(notification: Notification): void {
-    this.markAsRead(notification);
+    this.notificationService.markAsRead(notification.id);
     if (notification.route) {
       this.router.navigate([notification.route]);
       this.showNotificationMenu = false;
-    }
-  }
-
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent): void {
-    // Close notification menu
-    if (this.notificationMenu && this.showNotificationMenu) {
-      const clickedInside = this.notificationMenu.nativeElement.contains(event.target as Node);
-      if (!clickedInside) {
-        this.showNotificationMenu = false;
-      }
-    }
-
-    // Close language menu
-    if (this.languageMenuContainer && this.showLanguageMenu) {
-      const clickedInside = this.languageMenuContainer.nativeElement.contains(event.target as Node);
-      if (!clickedInside) {
-        this.showLanguageMenu = false;
-      }
-    }
-
-    // Close user menu
-    if (this.userMenuContainer && this.showUserMenu) {
-      const clickedInside = this.userMenuContainer.nativeElement.contains(event.target as Node);
-      if (!clickedInside) {
-        this.showUserMenu = false;
-      }
     }
   }
 
@@ -158,26 +86,42 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onProfile(): void {
-    this.router.navigate(['/personal/profile']);
+    this.router.navigate(['/portal/self-service/profile']);
+    this.showUserMenu = false;
   }
 
   onPreferences(): void {
-    this.router.navigate(['/personal/preferences']);
+    this.router.navigate(['/portal/self-service/profile']);
+    this.showUserMenu = false;
   }
 
   changeLanguage(language: Language): void {
     this.i18nService.setLanguage(language);
+    this.showLanguageMenu = false;
   }
 
   toggleLanguageMenu(): void {
     this.showLanguageMenu = !this.showLanguageMenu;
-    this.showUserMenu = false;
+    if (this.showLanguageMenu) {
+      this.showUserMenu = false;
+      this.showNotificationMenu = false;
+    }
+  }
+
+  closeLanguageMenu(): void {
+    this.showLanguageMenu = false;
   }
 
   toggleUserMenu(): void {
     this.showUserMenu = !this.showUserMenu;
-    this.showLanguageMenu = false;
-    this.showNotificationMenu = false;
+    if (this.showUserMenu) {
+      this.showLanguageMenu = false;
+      this.showNotificationMenu = false;
+    }
+  }
+
+  closeUserMenu(): void {
+    this.showUserMenu = false;
   }
 
   getNotificationIconName(type: string): string {
@@ -202,7 +146,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   getTimeAgo(date: Date): string {
     const now = new Date();
-    const diff = now.getTime() - date.getTime();
+    const diff = now.getTime() - new Date(date).getTime();
     const minutes = Math.floor(diff / 60000);
     const hours = Math.floor(diff / 3600000);
     const days = Math.floor(diff / 86400000);
@@ -211,6 +155,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (minutes < 60) return `${minutes} นาทีที่แล้ว`;
     if (hours < 24) return `${hours} ชั่วโมงที่แล้ว`;
     if (days < 7) return `${days} วันที่แล้ว`;
-    return date.toLocaleDateString('th-TH');
+    return new Date(date).toLocaleDateString('th-TH');
+  }
+
+  openOmniSearch(): void {
+    if (this.omniSearch) {
+      this.omniSearch.open();
+    }
   }
 }

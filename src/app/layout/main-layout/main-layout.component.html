@@ -1,25 +1,52 @@
-<div class="layout-container min-h-screen transition-all duration-300">
-  <!-- Syncfusion Sidebar -->
-  <ejs-sidebar
-    #sidebar
-    [width]="sidebarWidth"
-    [isOpen]="sidebarOpen"
-    [type]="sidebarType"
-    [position]="'Left'"
-    [closeOnDocumentClick]="(isHandset$ | async)"
-    (close)="onSidebarClose()"
-    class="syncfusion-sidebar">
-    <app-sidebar></app-sidebar>
-  </ejs-sidebar>
+<ng-container *ngIf="{
+  isHandset: isHandset$ | async,
+  sidebarOpen: sidebarOpen$ | async,
+  hiddenHeader: hiddenHeader$ | async
+} as layout">
+  <div 
+    class="w-full overflow-x-hidden relative min-h-screen transition-all duration-300 layout-background"
+    appSwipe
+    (swipeRight)="onSwipeRight()"
+    (swipeLeft)="onSwipeLeft()"
+  >
+    <!-- Syncfusion Sidebar -->
+    <ejs-sidebar
+      #sidebar
+      [width]="sidebarWidth"
+      [isOpen]="layout.sidebarOpen"
+      [type]="sidebarType"
+      [position]="'Left'"
+      [closeOnDocumentClick]="layout.isHandset"
+      (close)="onSidebarClose()"
+      class="modern-sidebar"
+    >
+      <app-sidebar></app-sidebar>
+    </ejs-sidebar>
 
-  <!-- Main Content -->
-  <div class="main-wrapper flex-1 min-h-screen flex flex-col transition-all duration-300"
-       [class.main-wrapper-sidebar-open]="sidebarOpen && !(isHandset$ | async)"
-       [class.main-wrapper-sidebar-closed]="!sidebarOpen && !(isHandset$ | async)">
-    <app-header (toggleSidenav)="toggleSidebar()"></app-header>
-    <main class="main-content flex-1 animate-fade-in p-4 md:p-6">
-      <router-outlet></router-outlet>
-    </main>
-    <app-footer></app-footer>
+    <!-- Main Content -->
+    <div
+      #mainWrapper
+      class="main-wrapper flex-1 min-h-screen flex flex-col transition-all duration-300"
+      [class.main-wrapper-sidebar-open]="layout.sidebarOpen && !layout.isHandset"
+      [class.main-wrapper-sidebar-closed]="!layout.sidebarOpen && !layout.isHandset"
+      [class.main-wrapper-mobile]="layout.isHandset"
+    >
+      <!-- Header - Hidden when hiddenHeader === 'hidden' (for ESS mode) -->
+      <app-header 
+        *ngIf="layout.hiddenHeader !== 'hidden'" 
+        (toggleSidenav)="toggleSidebar()"
+      ></app-header>
+      
+      <div
+        class="relative flex-1 min-h-0 p-4 md:p-6 lg:p-8 animate-fade-in [animation-delay:100ms] content-area"
+        [style.padding-bottom]="layout.hiddenHeader !== 'hidden' ? '60px' : '0'"
+        [style.padding-bottom.md]="layout.hiddenHeader !== 'hidden' ? '68px' : '0'"
+      >
+        <div class="animate-slide-up [animation-delay:200ms]">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+      <app-footer></app-footer>
+    </div>
   </div>
-</div>
+</ng-container>

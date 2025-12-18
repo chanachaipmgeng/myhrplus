@@ -1,60 +1,181 @@
-<header class="glass-nav bg-white/25 dark:bg-slate-900/25 backdrop-blur-lg border-b border-white/30 dark:border-slate-700/30 shadow-lg transition-all duration-300 sticky top-0 z-30 gemini-header">
-  <div class="flex items-center justify-between px-4 md:px-6 py-3 md:py-4">
+<header class="glass-nav bg-white/20 dark:bg-gray-900/20 theme-gemini:bg-gray-900/25 backdrop-blur-xl border-b border-white/20 dark:border-gray-700/20 theme-gemini:border-blue-500/30 shadow-2xl transition-all duration-500 ease-in-out fixed top-0 left-0 right-0 z-50 gemini-header px-3 sm:px-4 md:px-6
+            animate-fade-in
+            hover:shadow-3xl
+            [&:hover]:bg-white/25 dark:[&:hover]:bg-gray-900/30 theme-gemini:[&:hover]:bg-gray-900/30">
+  <div class="flex items-center justify-between py-3 md:py-4">
     <div class="flex items-center gap-2 md:gap-4 flex-1 min-w-0">
       <!-- Menu Toggle Button -->
       <button
         type="button"
         (click)="toggleSidenav.emit()"
         [title]="'เมนู'"
-        class="header-icon-btn w-10 h-10 flex items-center justify-center rounded-lg transition-all duration-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-        <app-icon name="menu" size="md" color="text-slate-700 dark:text-slate-300"></app-icon>
+        [attr.aria-label]="'เปิด/ปิดเมนู'"
+        [attr.aria-expanded]="false"
+        class="header-icon-btn w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg
+               transition-all duration-300 ease-out
+               hover:bg-gray-100 dark:hover:bg-gray-800 theme-gemini:hover:bg-white/10
+               hover:scale-110 active:scale-95
+               hover:shadow-lg hover:-translate-y-0.5
+               focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+               group relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-indigo-500/0
+                    group-hover:from-blue-500/10 group-hover:to-indigo-500/10
+                    transition-all duration-300 rounded-lg"></div>
+        <app-icon name="menu" size="md" color="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90
+                   group-hover:scale-110 transition-transform duration-300"></app-icon>
       </button>
 
       <!-- Logo Section -->
       <div class="flex items-center gap-2 md:gap-3 flex-shrink-0 min-w-0">
-        <div class="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-indigo-700 shadow-lg flex-shrink-0 relative overflow-hidden">
+        <a routerLink="/portal"
+           [attr.aria-label]="'กลับไปหน้าหลัก'"
+           class="inline-flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] md:w-10 md:h-10 rounded-lg
+                    bg-gradient-to-br from-blue-500 to-indigo-600
+                    dark:from-blue-600 dark:to-indigo-700
+                    shadow-lg flex-shrink-0 relative overflow-hidden
+                    hover:scale-110 hover:shadow-xl
+                    transition-all duration-300 ease-out
+                    group cursor-pointer
+                    animate-gemini-pulse">
+          <!-- Shimmer Effect -->
+          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent
+                      -translate-x-full group-hover:translate-x-full
+                      transition-transform duration-1000 ease-in-out"></div>
           <app-icon
             name="business_center"
             size="sm"
             color="text-white"
-            class="logo-icon">
+            class="logo-icon w-4 h-4 md:w-5 md:h-5 relative z-10
+                   group-hover:rotate-12 transition-transform duration-300">
           </app-icon>
-        </div>
+        </a>
         <div class="flex flex-col min-w-0 hidden sm:block">
-          <span class="app-title thai-text font-semibold text-slate-800 dark:text-slate-100 text-sm md:text-lg leading-tight truncate">
+          <span class="app-title thai-text font-semibold text-gray-800 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent text-sm md:text-lg leading-tight truncate">
             ระบบบริหารทรัพยากรบุคคล
           </span>
-          <span class="app-title-en font-medium text-slate-600 dark:text-slate-400 text-xs hidden md:block">
+          <span class="app-title-en font-medium text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 text-xs hidden md:block">
             HR System
           </span>
         </div>
       </div>
     </div>
 
+    <!-- Omni-Search (Center) -->
+    <div class="flex-1 flex justify-center px-4 hidden md:flex">
+      <button
+        type="button"
+        (click)="openOmniSearch()"
+        [attr.aria-label]="'ค้นหาเมนู (กด Ctrl+K)'"
+        class="omni-search-trigger w-full max-w-md px-4 py-2 rounded-lg
+               bg-white/50 dark:bg-gray-800/50 theme-gemini:bg-gray-800/30
+               border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-left flex items-center gap-3
+               hover:bg-white/70 dark:hover:bg-gray-800/70 theme-gemini:hover:bg-gray-800/50
+               hover:scale-[1.02] hover:shadow-lg hover:-translate-y-0.5
+               active:scale-[0.98]
+               transition-all duration-300 ease-out
+               focus:outline-none focus:ring-2 focus:ring-blue-500/20
+               group relative overflow-hidden">
+        <!-- Hover Glow Effect -->
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-blue-500/0
+                    opacity-0 group-hover:opacity-100
+                    transition-opacity duration-300"></div>
+        <app-icon name="search" size="sm" color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70
+                   group-hover:scale-110 group-hover:text-blue-500 dark:group-hover:text-blue-400
+                   transition-all duration-300 relative z-10"></app-icon>
+        <span class="flex-1 text-sm text-gray-500 dark:text-gray-400 theme-gemini:text-white/70 relative z-10
+                     group-hover:text-gray-700 dark:group-hover:text-gray-300
+                     transition-colors duration-300">
+          ค้นหาเมนู...
+        </span>
+        <kbd class="hidden lg:inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold
+                    bg-gray-100 dark:bg-gray-700 theme-gemini:bg-gray-700/50
+                    text-gray-600 dark:text-gray-300 theme-gemini:text-white/70
+                    border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 rounded">
+          <span>Ctrl</span>
+          <span>K</span>
+        </kbd>
+      </button>
+    </div>
+
     <div class="flex items-center gap-2 md:gap-3 flex-shrink-0">
+      <!-- Omni-Search Button (Mobile) -->
+      <button
+        type="button"
+        (click)="openOmniSearch()"
+        [title]="'ค้นหาเมนู (Ctrl+K)'"
+        [attr.aria-label]="'ค้นหาเมนู (กด Ctrl+K)'"
+        class="header-icon-btn md:hidden w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg
+               transition-all duration-300 ease-out
+               hover:bg-gray-100 dark:hover:bg-gray-800 theme-gemini:hover:bg-white/10
+               hover:scale-110 active:scale-95
+               hover:shadow-lg hover:-translate-y-0.5
+               focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+               group relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-indigo-500/0
+                    group-hover:from-blue-500/10 group-hover:to-indigo-500/10
+                    transition-all duration-300 rounded-lg"></div>
+        <app-icon name="search" size="md" color="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90
+                   group-hover:scale-110 group-hover:text-blue-500 dark:group-hover:text-blue-400
+                   transition-all duration-300 relative z-10"></app-icon>
+      </button>
+
       <!-- Language Switcher -->
-      <div class="relative" #languageMenuContainer>
+      <div class="relative" appClickOutside (appClickOutside)="closeLanguageMenu()">
         <button
           type="button"
           (click)="toggleLanguageMenu()"
           [title]="'เปลี่ยนภาษา'"
-          class="header-icon-btn relative w-10 h-10 flex items-center justify-center rounded-lg transition-all duration-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-          <app-icon name="language" size="md" color="text-slate-700 dark:text-slate-300"></app-icon>
+          [attr.aria-label]="'เปลี่ยนภาษา'"
+          [attr.aria-expanded]="showLanguageMenu"
+          [attr.aria-controls]="'language-menu'"
+          class="header-icon-btn relative w-11 h-11 min-w-[44px] min-h-[44px] md:w-10 md:h-10 flex items-center justify-center rounded-lg
+                 transition-all duration-300 ease-out
+                 hover:bg-gray-100 dark:hover:bg-gray-800 theme-gemini:hover:bg-white/10
+                 hover:scale-110 active:scale-95
+                 hover:shadow-lg hover:-translate-y-0.5
+                 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+                 group overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-indigo-500/0
+                      group-hover:from-blue-500/10 group-hover:to-indigo-500/10
+                      transition-all duration-300 rounded-lg"></div>
+          <app-icon name="language" size="md" color="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90
+                     group-hover:scale-110 group-hover:rotate-12
+                     transition-all duration-300 relative z-10"></app-icon>
         </button>
 
         <!-- Language Dropdown -->
         <div *ngIf="showLanguageMenu"
-             class="language-dropdown absolute right-0 top-full mt-2 w-48 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 z-50 overflow-hidden">
+             id="language-menu"
+             role="menu"
+             [attr.aria-label]="'เมนูเลือกภาษา'"
+             class="language-dropdown absolute right-0 top-full mt-2 w-48
+                    bg-white dark:bg-gray-800 theme-gemini:bg-gray-900/50
+                    rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                    z-50 overflow-hidden
+                    backdrop-blur-xl
+                    animate-scale-in
+                    [animation-duration:200ms]
+                    origin-top-right">
           <div class="py-1">
             <button
-              *ngFor="let lang of languages"
+              *ngFor="let lang of languages; let i = index"
               type="button"
-              (click)="changeLanguage(lang.value); showLanguageMenu = false"
+              role="menuitem"
+              (click)="changeLanguage(lang.value)"
               [class.active]="currentLanguage === lang.value"
-              class="language-item w-full px-4 py-2.5 text-left flex items-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+              [attr.aria-label]="'เปลี่ยนภาษาเป็น ' + lang.label"
+              [attr.aria-current]="currentLanguage === lang.value ? 'true' : 'false'"
+              [style.animation-delay.ms]="i * 50"
+              class="language-item w-full px-4 py-2.5 text-left flex items-center gap-3
+                     hover:bg-gray-50 dark:hover:bg-gray-700 theme-gemini:hover:bg-white/20
+                     hover:translate-x-1 hover:scale-[1.02]
+                     active:scale-[0.98]
+                     transition-all duration-200 ease-out
+                     animate-fade-in">
               <span class="text-lg">{{ lang.flag }}</span>
-              <span class="flex-1 thai-text text-sm font-medium text-slate-700 dark:text-slate-300">{{ lang.label }}</span>
-              <app-icon *ngIf="currentLanguage === lang.value" name="check" size="sm" color="text-blue-500"></app-icon>
+              <span class="flex-1 thai-text text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">{{ lang.label }}</span>
+              <app-icon *ngIf="currentLanguage === lang.value" name="check" size="sm" color="text-blue-500 theme-gemini:text-blue-400"></app-icon>
             </button>
           </div>
         </div>
@@ -64,28 +185,60 @@
       <app-theme-toggle></app-theme-toggle>
 
       <!-- Notifications -->
-      <div class="relative" #notificationMenu>
+      <div class="relative" appClickOutside (appClickOutside)="closeNotificationMenu()">
         <button
           type="button"
           (click)="toggleNotificationMenu()"
           [title]="'การแจ้งเตือน'"
-          class="header-icon-btn relative w-10 h-10 flex items-center justify-center rounded-lg transition-all duration-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-          <app-icon name="notifications" size="md" color="text-slate-700 dark:text-slate-300"></app-icon>
+          [attr.aria-label]="'การแจ้งเตือน' + (unreadCount > 0 ? ' (' + unreadCount + ' รายการใหม่)' : '')"
+          [attr.aria-expanded]="showNotificationMenu"
+          [attr.aria-controls]="'notification-menu'"
+          class="header-icon-btn relative w-11 h-11 min-w-[44px] min-h-[44px] md:w-10 md:h-10 flex items-center justify-center rounded-lg
+                 transition-all duration-300 ease-out
+                 hover:bg-gray-100 dark:hover:bg-gray-800 theme-gemini:hover:bg-white/10
+                 hover:scale-110 active:scale-95
+                 hover:shadow-lg hover:-translate-y-0.5
+                 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+                 group overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-indigo-500/0
+                      group-hover:from-blue-500/10 group-hover:to-indigo-500/10
+                      transition-all duration-300 rounded-lg"></div>
+          <app-icon name="notifications" size="md" color="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90
+                     group-hover:scale-110 group-hover:animate-bounce
+                     transition-all duration-300 relative z-10"></app-icon>
           <span *ngIf="unreadCount > 0"
-                class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 dark:bg-red-400 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-lg animate-pulse z-10">
+                [attr.aria-label]="unreadCount + ' รายการใหม่'"
+                class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 dark:bg-red-400 rounded-full
+                       flex items-center justify-center text-white text-xs font-bold shadow-lg
+                       animate-pulse z-20
+                       group-hover:scale-125 group-hover:shadow-xl
+                       transition-all duration-300">
             {{ unreadCount > 9 ? '9+' : unreadCount }}
           </span>
         </button>
 
         <!-- Notification Dropdown -->
         <div *ngIf="showNotificationMenu"
-             class="notification-dropdown absolute right-0 top-full mt-2 w-80 md:w-96 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 z-50 max-h-96 overflow-hidden flex flex-col">
+             id="notification-menu"
+             role="menu"
+             [attr.aria-label]="'เมนูการแจ้งเตือน'"
+             class="notification-dropdown absolute right-0 top-full mt-2 w-80 md:w-96
+                    bg-white dark:bg-gray-800 theme-gemini:bg-gray-900/50
+                    rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                    z-50 max-h-96 overflow-hidden flex flex-col
+                    backdrop-blur-xl
+                    animate-scale-in
+                    [animation-duration:200ms]
+                    origin-top-right">
           <!-- Header -->
-          <div class="px-4 py-3 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between bg-slate-50 dark:bg-slate-900">
-            <h3 class="font-semibold text-slate-800 dark:text-slate-200 thai-text">การแจ้งเตือน</h3>
+          <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30 flex items-center justify-between bg-gray-50 dark:bg-gray-900 theme-gemini:bg-gray-900/70">
+            <h3 class="font-semibold text-gray-800 dark:text-gray-200 theme-gemini:text-white/90 thai-text">การแจ้งเตือน</h3>
             <button
               *ngIf="unreadCount > 0"
+              type="button"
+              role="menuitem"
               (click)="markAllAsRead()"
+              [attr.aria-label]="'ทำเครื่องหมายว่าอ่านแล้วทั้งหมด'"
               class="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
               ทำเครื่องหมายว่าอ่านแล้วทั้งหมด
             </button>
@@ -95,14 +248,26 @@
           <div class="overflow-y-auto flex-1">
             <div *ngIf="notifications.length === 0"
                  class="p-8 text-center">
-              <app-icon name="notifications_none" size="xl" color="text-slate-400 dark:text-slate-600" class="mb-2 block mx-auto"></app-icon>
-              <p class="text-slate-500 dark:text-slate-400 thai-text text-sm">ไม่มีการแจ้งเตือน</p>
+              <app-icon name="notifications_none" size="xl" color="text-gray-400 dark:text-gray-600 theme-gemini:text-white/60" class="mb-2 block mx-auto"></app-icon>
+              <p class="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70 thai-text text-sm">ไม่มีการแจ้งเตือน</p>
             </div>
 
-            <div *ngFor="let notification of notifications"
+            <div *ngFor="let notification of notifications; let i = index"
+                 role="menuitem"
+                 tabindex="0"
                  (click)="handleNotificationClick(notification)"
+                 (keydown.enter)="handleNotificationClick(notification)"
+                 (keydown.space)="handleNotificationClick(notification); $event.preventDefault()"
                  [class.unread]="!notification.read"
-                 class="notification-item px-4 py-3 border-b border-slate-100 dark:border-slate-700 cursor-pointer transition-all hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                 [attr.aria-label]="notification.title + (notification.read ? '' : ' (ยังไม่ได้อ่าน)')"
+                 [style.animation-delay.ms]="i * 30"
+                 class="notification-item px-4 py-3 border-b border-gray-100 dark:border-gray-700 theme-gemini:border-blue-500/20
+                        cursor-pointer
+                        transition-all duration-200 ease-out
+                        hover:bg-gray-50 dark:hover:bg-gray-700/50 theme-gemini:hover:bg-white/10
+                        hover:translate-x-1 hover:scale-[1.01]
+                        active:scale-[0.99]
+                        animate-fade-in">
               <div class="flex items-start gap-3">
                 <div class="flex-shrink-0 mt-1">
                   <app-icon
@@ -114,16 +279,16 @@
                 </div>
                 <div class="flex-1 min-w-0">
                   <div class="flex items-start justify-between gap-2 mb-1">
-                    <h4 class="font-semibold text-sm text-slate-800 dark:text-slate-200 thai-text truncate">
+                    <h4 class="font-semibold text-sm text-gray-800 dark:text-gray-200 theme-gemini:text-white/90 thai-text truncate">
                       {{ notification.title }}
                     </h4>
                     <span *ngIf="!notification.read"
-                          class="flex-shrink-0 w-2 h-2 bg-blue-500 rounded-full mt-1"></span>
+                          class="flex-shrink-0 w-2 h-2 bg-blue-500 theme-gemini:bg-blue-400 rounded-full mt-1"></span>
                   </div>
-                  <p class="text-xs text-slate-600 dark:text-slate-400 thai-text line-clamp-2 mb-1">
+                  <p class="text-xs text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 thai-text line-clamp-2 mb-1">
                     {{ notification.message }}
                   </p>
-                  <span class="text-xs text-slate-400 dark:text-slate-500">
+                  <span class="text-xs text-gray-400 dark:text-gray-500 theme-gemini:text-white/60">
                     {{ getTimeAgo(notification.timestamp) }}
                   </span>
                 </div>
@@ -133,8 +298,11 @@
 
           <!-- Footer -->
           <div *ngIf="notifications.length > 0"
-               class="px-4 py-2 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-center">
+               class="px-4 py-2 border-t border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30 bg-gray-50 dark:bg-gray-900 theme-gemini:bg-gray-900/70 text-center">
             <button
+              type="button"
+              role="menuitem"
+              [attr.aria-label]="'ดูการแจ้งเตือนทั้งหมด'"
               class="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
               ดูทั้งหมด
             </button>
@@ -143,38 +311,87 @@
       </div>
 
       <!-- User Menu -->
-      <div class="relative" #userMenuContainer>
+      <div class="relative" appClickOutside (appClickOutside)="closeUserMenu()">
         <button
           type="button"
           (click)="toggleUserMenu()"
           [title]="'เมนูผู้ใช้'"
-          class="header-icon-btn relative w-10 h-10 flex items-center justify-center rounded-lg transition-all duration-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-          <app-icon name="account_circle" size="md" color="text-slate-700 dark:text-slate-300"></app-icon>
+          [attr.aria-label]="'เมนูผู้ใช้'"
+          [attr.aria-expanded]="showUserMenu"
+          [attr.aria-controls]="'user-menu'"
+          class="header-icon-btn relative w-11 h-11 min-w-[44px] min-h-[44px] md:w-10 md:h-10 flex items-center justify-center rounded-lg
+                 transition-all duration-300 ease-out
+                 hover:bg-gray-100 dark:hover:bg-gray-800 theme-gemini:hover:bg-white/10
+                 hover:scale-110 active:scale-95
+                 hover:shadow-lg hover:-translate-y-0.5
+                 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+                 group overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-indigo-500/0
+                      group-hover:from-blue-500/10 group-hover:to-indigo-500/10
+                      transition-all duration-300 rounded-lg"></div>
+          <app-icon name="account_circle" size="md" color="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90
+                     group-hover:scale-110
+                     transition-all duration-300 relative z-10"></app-icon>
         </button>
 
         <!-- User Menu Dropdown -->
         <div *ngIf="showUserMenu"
-             class="user-dropdown absolute right-0 top-full mt-2 w-56 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 z-50 overflow-hidden">
+             id="user-menu"
+             role="menu"
+             [attr.aria-label]="'เมนูผู้ใช้'"
+             class="user-dropdown absolute right-0 top-full mt-2 w-56
+                    bg-white dark:bg-gray-800 theme-gemini:bg-gray-900/50
+                    rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                    z-50 overflow-hidden
+                    backdrop-blur-xl
+                    animate-scale-in
+                    [animation-duration:200ms]
+                    origin-top-right">
           <div class="py-1">
             <button
               type="button"
-              (click)="onProfile(); showUserMenu = false"
-              class="user-menu-item w-full px-4 py-2.5 text-left flex items-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
-              <app-icon name="person" size="sm" color="text-slate-600 dark:text-slate-400"></app-icon>
-              <span class="thai-text text-sm font-medium text-slate-700 dark:text-slate-300">โปรไฟล์</span>
+              role="menuitem"
+              (click)="onProfile()"
+              [attr.aria-label]="'เปิดโปรไฟล์'"
+              class="user-menu-item w-full px-4 py-2.5 text-left flex items-center gap-3
+                     hover:bg-gray-50 dark:hover:bg-gray-700 theme-gemini:hover:bg-white/20
+                     hover:translate-x-1 hover:scale-[1.02]
+                     active:scale-[0.98]
+                     transition-all duration-200 ease-out
+                     animate-fade-in
+                     [animation-delay:50ms]">
+              <app-icon name="person" size="sm" color="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70"></app-icon>
+              <span class="thai-text text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">โปรไฟล์</span>
             </button>
             <button
               type="button"
-              (click)="onPreferences(); showUserMenu = false"
-              class="user-menu-item w-full px-4 py-2.5 text-left flex items-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
-              <app-icon name="settings" size="sm" color="text-slate-600 dark:text-slate-400"></app-icon>
-              <span class="thai-text text-sm font-medium text-slate-700 dark:text-slate-300">การตั้งค่า</span>
+              role="menuitem"
+              (click)="onPreferences()"
+              [attr.aria-label]="'เปิดการตั้งค่า'"
+              class="user-menu-item w-full px-4 py-2.5 text-left flex items-center gap-3
+                     hover:bg-gray-50 dark:hover:bg-gray-700 theme-gemini:hover:bg-white/20
+                     hover:translate-x-1 hover:scale-[1.02]
+                     active:scale-[0.98]
+                     transition-all duration-200 ease-out
+                     animate-fade-in
+                     [animation-delay:100ms]">
+              <app-icon name="settings" size="sm" color="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70"></app-icon>
+              <span class="thai-text text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">การตั้งค่า</span>
             </button>
-            <div class="border-t border-slate-200 dark:border-slate-700 my-1"></div>
+            <div class="border-t border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30 my-1"></div>
             <button
               type="button"
-              (click)="onLogout(); showUserMenu = false"
-              class="user-menu-item w-full px-4 py-2.5 text-left flex items-center gap-3 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-red-600 dark:text-red-400">
+              role="menuitem"
+              (click)="onLogout()"
+              [attr.aria-label]="'ออกจากระบบ'"
+              class="user-menu-item w-full px-4 py-2.5 text-left flex items-center gap-3
+                     hover:bg-red-50 dark:hover:bg-red-900/20
+                     hover:translate-x-1 hover:scale-[1.02]
+                     active:scale-[0.98]
+                     transition-all duration-200 ease-out
+                     text-red-600 dark:text-red-400
+                     animate-fade-in
+                     [animation-delay:150ms]">
               <app-icon name="logout" size="sm" color="text-red-600 dark:text-red-400"></app-icon>
               <span class="thai-text text-sm font-medium">ออกจากระบบ</span>
             </button>
@@ -183,4 +400,7 @@
       </div>
     </div>
   </div>
+
+  <!-- Omni-Search Component -->
+  <app-omni-search #omniSearch></app-omni-search>
 </header>
