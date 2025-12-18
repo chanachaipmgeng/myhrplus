@@ -312,6 +312,13 @@ export class ModelNameService {
 
 ## Styling Standards
 
+### SCSS to Tailwind Migration Strategy
+- **Migration Principle**: Migrate simple utility classes to Tailwind, keep complex styles in SCSS
+- **Migrate to Tailwind**: Simple utilities (width, height, padding, margin, display, flex, colors, responsive breakpoints, hover/active states)
+- **Keep in SCSS**: Complex gradients, animations (`@keyframes`), pseudo-elements (`::before`, `::after`), browser-specific styles (scrollbars, `-webkit-` prefixes), Syncfusion overrides (`::ng-deep`), CSS custom properties
+- **Background Patterns**: Use SCSS for multi-layer gradients, pattern overlays, and animated backgrounds
+- **Performance**: Use `background-attachment: scroll` on mobile (≤768px) for better performance
+
 ### SCSS
 - **File Structure**: One SCSS file per component (`component-name.component.scss`)
 - **Global Styles**: Use `src/styles.scss` for global styles
@@ -319,20 +326,30 @@ export class ModelNameService {
 - **Mixins**: Use mixins from `src/styles/_mixins.scss`
 - **Nesting**: Maximum 3 levels deep
 - **BEM-like Naming**: Use for component-specific styles
+- **Background Management**: Avoid duplication - body background should be transparent, let main-content handle its own background
+- **Pattern Animations**: Use `patternShimmer` keyframes for subtle pattern animations
+- **Gradient Animations**: Use `gradientShift` keyframes for subtle gradient animations
+- **Accessibility**: Always add `@media (prefers-reduced-motion: reduce)` to disable animations
 
 ### Tailwind CSS
 - **Utility Classes**: Prefer Tailwind utility classes over custom CSS
 - **Custom Classes**: Use `@layer components` for custom component classes
 - **Dark Mode**: Use `dark:` prefix for dark mode styles
+- **Gemini Theme**: Use `theme-gemini:` prefix for Gemini theme styles
 - **Responsive**: Use responsive prefixes (`sm:`, `md:`, `lg:`, `xl:`, `2xl:`)
 - **Glassmorphism**: Use `.glass-card`, `.glass-button`, `.glass-input` classes
+- **Color Palette**: Use `gray-*` instead of `slate-*` for consistency
+- **Theme Variants**: Always include `theme-gemini:` variants for text, background, border, and hover states
 
 ### Design System
-- **Colors**: Use Tailwind color palette (primary, slate, etc.)
+- **Colors**: Use Tailwind color palette (primary, gray, etc.) - prefer `gray-*` over `slate-*` for consistency
 - **Typography**: Use font families from design tokens (Noto Sans, Poppins, Inter, Sarabun, Kanit)
 - **Spacing**: Use Tailwind spacing scale (0.25rem increments)
 - **Breakpoints**: Use standard breakpoints (xs: 0px, sm: 640px, md: 768px, lg: 1024px, xl: 1280px, 2xl: 1536px)
 - **Glassmorphism**: Follow glassmorphism design patterns with backdrop-filter and transparency
+- **Background Patterns**: Use pattern overlays with subtle animations (`patternShimmer`) for visual depth
+- **Gradient Animations**: Use subtle gradient shifts (`gradientShift`) for Light/Dark mode backgrounds
+- **Theme Support**: Always support Light/Dark/Gemini themes with appropriate variants
 
 ## Libraries & Dependencies
 
@@ -432,6 +449,9 @@ export class ModelNameService {
 - **Virtual Scrolling**: Use for large lists
 - **Image Optimization**: Use `ImageQualityUtils` for image uploads
 - **Caching**: Use `CacheService` for API response caching
+- **Background Performance**: Use `background-attachment: scroll` on mobile (≤768px) instead of `fixed`
+- **Animation Performance**: Use `transform` and `opacity` for animations, avoid `left/top/width/height`
+- **Reduced Motion**: Always respect `prefers-reduced-motion` preference
 
 ### Bundle Size
 - **Tree Shaking**: Ensure proper imports (avoid barrel imports in production)
@@ -457,11 +477,16 @@ export class ModelNameService {
 - **Screen Readers**: Test with screen readers
 - **Color Contrast**: Follow WCAG contrast ratios
 - **Focus Management**: Proper focus management in modals/dialogs
+- **Reduced Motion**: Always support `prefers-reduced-motion: reduce` for animations
+  - Disable animations when user prefers reduced motion
+  - Use static background positions instead of animated ones
+  - Example: `@media (prefers-reduced-motion: reduce) { animation: none; }`
 
 ### Accessibility Styles
 - **Location**: `src/styles/accessibility.scss`
 - **Focus Indicators**: Visible focus indicators
 - **Skip Links**: Skip to main content links
+- **Motion Preferences**: All animations should respect `prefers-reduced-motion`
 
 ## Documentation
 
@@ -577,15 +602,6 @@ export class ComponentNameDemoComponent {
   - Components tightly coupled to a specific feature
   - Components that need many module dependencies
 
-### State Management (Signals vs RxJS)
-- **Signals (Preferred)**: Use Angular Signals for synchronized state and template binding.
-  - `signal()`: For writable local state (e.g., `showMenu`, `currentUser`).
-  - `computed()`: For derived values (e.g., `fullName = computed(() => this.firstName() + this.lastName())`).
-  - `toSignal()`: To convert Observables for template use (e.g., `data = toSignal(data$)`).
-  - **Why**: Signals provide finer-grained reactivity and reduce the need for `AsyncPipe` and manual subscriptions.
-- **RxJS**: Use for asynchronous event streams and HTTP handling.
-  - Use `toSignal` to consume RxJS streams in components/templates.
-
 ### RxJS Best Practices
 - **Observables**: Prefer Observables over Promises
 - **Operators**: Use RxJS operators for transformations
@@ -617,7 +633,28 @@ export class ComponentNameDemoComponent {
 
 ---
 
-**Last Updated**: Based on project analysis as of current date
+## Recent Updates (2024-12-20)
+
+### SCSS to Tailwind Migration
+- ✅ **Completed**: Simple utility classes migrated to Tailwind
+- ✅ **Strategy**: Migrate simple utilities, keep complex styles (gradients, animations, pseudo-elements) in SCSS
+- ✅ **Result**: Reduced SCSS bundle size, better maintainability, consistent styling
+
+### Layout Background Improvements
+- ✅ **Fixed**: Background duplication between body and main-content
+- ✅ **Added**: Pattern animations (`patternShimmer`) for all layout components
+- ✅ **Added**: Subtle gradient animations (`gradientShift`) for Light/Dark mode
+- ✅ **Added**: Pattern overlays for header and footer
+- ✅ **Optimized**: Mobile performance (background-attachment: scroll on mobile)
+- ✅ **Accessibility**: Full `prefers-reduced-motion` support
+
+### Color Consistency
+- ✅ **Standardized**: Use `gray-*` instead of `slate-*` for consistency
+- ✅ **Theme Support**: Full `theme-gemini:` variant support across all components
+
+---
+
+**Last Updated**: 2024-12-20
 **Angular Version**: 17.0.0+
 **TypeScript Version**: 5.2.2+
 

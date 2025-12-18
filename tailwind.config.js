@@ -24,33 +24,86 @@ module.exports = {
         // Modern fonts: Noto Sans (supports both English & Thai), Poppins (English), Kanit (Thai)
         // Keep Inter and Sarabun for backward compatibility
         sans: [
-          'Noto Sans',
           'Noto Sans Thai',
-          'Poppins',
           'Inter',
-          'Kanit',
           'Sarabun',
           ...fontFamily.sans
         ],
-        mono: ['JetBrains Mono', ...fontFamily.mono],
+        mono: [...fontFamily.mono],
         // Separate font families for specific use cases
-        english: ['Poppins', 'Noto Sans', 'Inter', ...fontFamily.sans],
-        thai: ['Kanit', 'Noto Sans Thai', 'Sarabun', 'Noto Sans', ...fontFamily.sans],
+        english: ['Inter', ...fontFamily.sans],
+        thai: ['Noto Sans Thai', 'Sarabun', ...fontFamily.sans],
       },
       colors: {
         primary: {
-          50: 'color-mix(in srgb, rgb(var(--primary-rgb)), white 95%)',
-          100: 'color-mix(in srgb, rgb(var(--primary-rgb)), white 90%)',
-          200: 'color-mix(in srgb, rgb(var(--primary-rgb)), white 80%)',
-          300: 'color-mix(in srgb, rgb(var(--primary-rgb)), white 60%)',
-          400: 'color-mix(in srgb, rgb(var(--primary-rgb)), white 30%)',
-          500: 'rgb(var(--primary-rgb) / <alpha-value>)',
-          600: 'color-mix(in srgb, rgb(var(--primary-rgb)), black 10%)',
-          700: 'color-mix(in srgb, rgb(var(--primary-rgb)), black 25%)',
-          800: 'color-mix(in srgb, rgb(var(--primary-rgb)), black 40%)',
-          900: 'color-mix(in srgb, rgb(var(--primary-rgb)), black 60%)',
-          950: 'color-mix(in srgb, rgb(var(--primary-rgb)), black 80%)',
-          DEFAULT: 'rgb(var(--primary-rgb) / <alpha-value>)',
+          50: '#f0f9ff',
+          100: '#e0f2fe',
+          200: '#bae6fd',
+          300: '#7dd3fc',
+          400: '#38bdf8',
+          500: '#0ea5e9',
+          600: '#0284c7',
+          700: '#0369a1',
+          800: '#075985',
+          900: '#0c4a6e',
+          950: '#082f49',
+          DEFAULT: '#0ea5e9',
+        },
+        success: {
+          50: '#f0fdf4',
+          100: '#dcfce7',
+          200: '#bbf7d0',
+          300: '#86efac',
+          400: '#4ade80',
+          500: '#22c55e',
+          600: '#16a34a',
+          700: '#15803d',
+          800: '#166534',
+          900: '#14532d',
+          950: '#052e16',
+          DEFAULT: '#22c55e',
+        },
+        error: {
+          50: '#fef2f2',
+          100: '#fee2e2',
+          200: '#fecaca',
+          300: '#fca5a5',
+          400: '#f87171',
+          500: '#ef4444',
+          600: '#dc2626',
+          700: '#b91c1c',
+          800: '#991b1b',
+          900: '#7f1d1d',
+          950: '#450a0a',
+          DEFAULT: '#ef4444',
+        },
+        warning: {
+          50: '#fffbeb',
+          100: '#fef3c7',
+          200: '#fde68a',
+          300: '#fcd34d',
+          400: '#fbbf24',
+          500: '#f59e0b',
+          600: '#d97706',
+          700: '#b45309',
+          800: '#92400e',
+          900: '#78350f',
+          950: '#451a03',
+          DEFAULT: '#f59e0b',
+        },
+        info: {
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
+          950: '#172554',
+          DEFAULT: '#3b82f6',
         },
         glass: {
           white: 'rgba(255, 255, 255, 0.25)',
@@ -63,14 +116,38 @@ module.exports = {
       },
       backdropBlur: {
         xs: '2px',
+        sm: '4px',
+        md: '8px',
+        lg: '12px',
+        xl: '16px',
+        '2xl': '24px',
+        '3xl': '40px',
       },
       boxShadow: {
+        // Standard shadows (already in Tailwind, but ensure consistency)
+        'sm': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+        'md': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+        'lg': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+        'xl': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+        '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+        'inner': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
+        // Dark mode shadows
+        'dark-sm': '0 1px 2px 0 rgba(0, 0, 0, 0.3)',
+        'dark-md': '0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3)',
+        'dark-lg': '0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4)',
+        'dark-xl': '0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.5)',
+        'dark-2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.7)',
+        // Glass morphism shadows
         'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
         'glass-sm': '0 4px 16px 0 rgba(31, 38, 135, 0.2)',
         'glass-lg': '0 12px 48px 0 rgba(31, 38, 135, 0.5)',
         'glass-dark': '0 8px 32px 0 rgba(0, 0, 0, 0.5)',
         'glass-dark-sm': '0 4px 16px 0 rgba(0, 0, 0, 0.3)',
         'glass-dark-lg': '0 12px 48px 0 rgba(0, 0, 0, 0.7)',
+        // Gemini theme shadows
+        'gemini': '0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 40px rgba(59, 130, 246, 0.1)',
+        'gemini-sm': '0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 30px rgba(59, 130, 246, 0.1)',
+        'gemini-lg': '0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(59, 130, 246, 0.4), 0 0 60px rgba(59, 130, 246, 0.2)',
       },
       backgroundImage: {
         'gradient-light': 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
@@ -96,10 +173,21 @@ module.exports = {
         'gradient-gemini-text': 'linear-gradient(135deg, #bfdbfe 0%, #93c5fd 25%, #60a5fa 50%, #3b82f6 75%, #2563eb 100%)',
         'gradient-gemini-glow': 'radial-gradient(circle, rgba(147, 197, 253, 0.3) 0%, transparent 70%)',
       },
+      borderRadius: {
+        'none': '0',
+        'sm': '0.25rem',   // 4px
+        'md': '0.5rem',    // 8px
+        'lg': '0.75rem',   // 12px
+        'xl': '1rem',      // 16px
+        '2xl': '1.5rem',   // 24px
+        '3xl': '2rem',     // 32px
+        'full': '9999px',
+      },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
         'slide-up': 'slideUp 0.3s ease-out',
         'slide-down': 'slideDown 0.3s ease-out',
+        'slide-in-right': 'slideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         'scale-in': 'scaleIn 0.2s ease-out',
         'theme-transition': 'themeTransition 0.3s ease-in-out',
         // Gemini 1.5 Animations
@@ -109,6 +197,9 @@ module.exports = {
         'gemini-wave': 'geminiWave 4s ease-in-out infinite',
         'gemini-gradient': 'geminiGradient 3s ease infinite',
         'gemini-glow': 'geminiGlow 2s ease-in-out infinite alternate',
+        'shake': 'shake 0.5s ease-in-out',
+        'pulse-success': 'pulseSuccess 0.6s ease-in-out',
+        'progress-shine': 'progressShine 2s infinite',
       },
       keyframes: {
         fadeIn: {
@@ -122,6 +213,10 @@ module.exports = {
         slideDown: {
           '0%': { transform: 'translateY(-20px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        slideInRight: {
+          '0%': { transform: 'translateX(100%)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
         },
         scaleIn: {
           '0%': { transform: 'scale(0.95)', opacity: '0' },
@@ -162,8 +257,24 @@ module.exports = {
             textShadow: '0 0 20px rgba(147, 197, 253, 0.8), 0 0 30px rgba(96, 165, 250, 0.5), 0 0 40px rgba(59, 130, 246, 0.3)',
           },
         },
+        shake: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-4px)' },
+          '20%, 40%, 60%, 80%': { transform: 'translateX(4px)' },
+        },
+        pulseSuccess: {
+          '0%, 100%': { boxShadow: '0 0 0 0 rgba(34, 197, 94, 0.4)' },
+          '50%': { boxShadow: '0 0 0 4px rgba(34, 197, 94, 0)' },
+        },
+        progressShine: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('./tailwind-plugins/glass-morphism'),
+    require('./tailwind-plugins/animations'),
+  ],
 }

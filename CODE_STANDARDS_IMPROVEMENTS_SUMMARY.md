@@ -10,7 +10,6 @@
 ### Phase 1: Critical Issues - เปลี่ยน HttpClient → ApiService
 
 #### 1. ✅ `company.service.ts`
-
 - เปลี่ยนจาก `HttpClient` เป็น `ApiService`
 - แก้ไข methods ทั้งหมด (8 methods):
   - `getCompanyHistory()`
@@ -25,19 +24,16 @@
 - เพิ่ม proper return types
 
 #### 2. ✅ `home.service.ts`
-
 - เปลี่ยนจาก `HttpClient` เป็น `ApiService`
 - แก้ไข `loadMenuFromAPI()` method
 - ใช้ `ApiResponse<T>` wrapper
 
 #### 3. ✅ `menu.service.ts`
-
 - เปลี่ยน API calls จาก `HttpClient` เป็น `ApiService`
 - เก็บ `HttpClient` สำหรับ static JSON file loading
 - แก้ไข `any` type → `unknown`
 
 #### 4. ✅ `shift-plan.service.ts`
-
 - เปลี่ยนจาก `HttpClient` เป็น `ApiService`
 - แก้ไข methods ทั้งหมด (6 methods):
   - `getEmployeeShiftApproved()`
@@ -49,20 +45,17 @@
 - ลดการใช้ `any` type
 
 #### 5. ✅ `swaplang-code.service.ts`
-
 - เปลี่ยนจาก `HttpClient` เป็น `ApiService`
 - แก้ไข `getList()` และ `getListESS()` methods
 - เพิ่ม return types
 - เพิ่ม error handling
 
 #### 6. ✅ `log-history.service.ts`
-
 - เปลี่ยนจาก `HttpClient` เป็น `ApiService`
 - แก้ไข `postActionLog()` method
 - ใช้ `ApiResponse<unknown>` return type
 
 #### 7. ✅ `private-message.service.ts`
-
 - เปลี่ยนจาก `HttpClient` เป็น `ApiService`
 - แก้ไข methods ทั้งหมด (7 methods):
   - `privateMessageBySize()`
@@ -75,7 +68,6 @@
 - แก้ไข `any` type → proper types
 
 #### 8. ✅ `employee.service.ts`
-
 - ลบ `HttpClient` dependency
 - ใช้ `ApiService` สำหรับ methods ทั้งหมด (6 methods):
   - `getSetPass()` - เปลี่ยนจาก Promise → Observable
@@ -87,7 +79,6 @@
 - แก้ไข `any` type → `unknown`
 
 #### 9. ✅ `auth.service.ts`
-
 - แก้ไข methods ที่ใช้ `HttpClient` โดยตรง (4 methods):
   - `getDatabase()` - ใช้ `ApiService`
   - `refreshToken()` - ใช้ `ApiService`
@@ -99,7 +90,6 @@
 ### Phase 2: Code Quality - แทนที่ console.log
 
 #### ✅ แทนที่ console.log → console.warn/error
-
 - ✅ `auth.service.ts` - 2 จุด
   - `console.log('Forgot password response:')` → `console.warn()`
   - `console.log('AuthService: User set from token')` → `console.warn()`
@@ -202,30 +192,6 @@
 
 ---
 
-## 🚀 Phase 3: Modern Standards (2025 Migration)
-
-### 1. Performance Standards
-
-- **Change Detection**: บังคับใช้ `ChangeDetectionStrategy.OnPush` สำหรับ **Shared Components** ทั้งหมด เพื่อลดภาระของ Change Detection Cycle
-- **Status**: ✅ เสร็จสมบูรณ์ (Shared Components ทั้งหมด 60 components ได้รับการปรับปรุงเป็น `OnPush` แล้ว)
-- **Updated Components**: `GlassButtonComponent`, `BreadcrumbsComponent`, `DataGridComponent`, `SchedulerComponent`, `GanttComponent`, และอื่นๆ ทั้งหมดใน `shared/components/`
-
-### 2. State Management
-
-- **Signals**: แนะนำให้ใช้ **Angular Signals** (`signal()`, `computed()`) สำหรับ Local State ภายใน Component แทนการใช้ตัวแปรปกติหรือ `BehaviorSubject` (ถ้าทำได้)
-- **Input/Output**: รองรับการเปลี่ยนไปใช้ Signal Inputs (`input()`) ในอนาคต
-
-### 3. CSS Architecture
-
-- **Tailwind First**: กำหนดกฎเข้มงวดให้ใช้ Tailwind Utility Classes เป็นอันดับแรก
-- **SCSS Restrictions**: ใช้ SCSS เฉพาะเมื่อจำเป็นจริงๆ (Complex Animations, Legacy Support) ลดการใช้ Mixins ซ้อนกัน
-
-### 4. PWA & SSR
-
-- **Progressive Web App**: เตรียมพร้อมสำหรับการทำ PWA (แม้อาจติดขัดเรื่อง version ในบางครั้ง แต่เป็นมาตรฐานที่ควรมี)
-- **SSR**: รองรับการทำ Server-Side Rendering เพื่อ SEO และ First Paint ที่เร็วขึ้น
-
----
-
 **สรุป**: การปรับปรุงเสร็จสมบูรณ์แล้ว ✅  
-**โค้ดตอนนี้ตรงตามมาตรฐานมากขึ้น**: 99% ของ services ใช้ `ApiService` แทน `HttpClient` โดยตรง และเริ่มนำมาตรฐาน Modern Angular มาใช้
+**โค้ดตอนนี้ตรงตามมาตรฐานมากขึ้น**: 99% ของ services ใช้ `ApiService` แทน `HttpClient` โดยตรง
+

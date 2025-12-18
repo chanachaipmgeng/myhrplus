@@ -1,0 +1,122 @@
+<!-- ============================================
+     Component Name Component Template
+     ============================================ -->
+
+<app-page-layout>
+  <!-- Page Header -->
+  <app-page-header
+    [title]="'Component Title'"
+    [description]="'Component description'"
+    [actions]="headerActions">
+  </app-page-header>
+
+  <!-- Content Layout -->
+  <app-content-layout>
+    <!-- Loading State -->
+    <app-loading
+      [show]="isLoading"
+      message="Loading data...">
+    </app-loading>
+
+    <!-- Skeleton Loader (Alternative) -->
+    <app-skeleton-loader
+      *ngIf="isLoading"
+      type="card"
+      [rows]="3"
+      animation="shimmer">
+    </app-skeleton-loader>
+
+    <!-- Empty State -->
+    <app-empty-state
+      *ngIf="!isLoading && isEmpty"
+      icon="📭"
+      title="No Data"
+      description="There is no data available"
+      [action]="emptyStateAction">
+    </app-empty-state>
+
+    <!-- Main Content -->
+    <div *ngIf="!isLoading && !isEmpty" class="space-y-4">
+      <!-- Glass Card Example -->
+      <app-glass-card>
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">
+            Card Title
+          </h3>
+          
+          <!-- Content -->
+          <div class="space-y-4">
+            <!-- List Example -->
+            <div
+              *ngFor="let item of data; trackBy: trackByFn"
+              class="flex items-center justify-between p-4 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+              <div class="flex-1">
+                <h4 class="text-base font-medium text-slate-900 dark:text-slate-100">
+                  {{ item.name }}
+                </h4>
+                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                  {{ item.description }}
+                </p>
+              </div>
+              
+              <!-- Actions -->
+              <div class="flex items-center gap-2 ml-4">
+                <app-glass-button
+                  variant="secondary"
+                  [ariaLabel]="'Edit ' + item.name"
+                  (clicked)="onEdit(item)">
+                  Edit
+                </app-glass-button>
+                
+                <app-glass-button
+                  variant="danger"
+                  [ariaLabel]="'Delete ' + item.name"
+                  (clicked)="onDelete(item)">
+                  Delete
+                </app-glass-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </app-glass-card>
+
+      <!-- Form Example -->
+      <app-glass-card>
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">
+            Form Title
+          </h3>
+          
+          <form class="space-y-4">
+            <app-glass-input
+              label="Field Label"
+              type="text"
+              placeholder="Enter value"
+              [(ngModel)]="inputProperty"
+              name="fieldName"
+              [required]="true">
+            </app-glass-input>
+
+            <div class="flex justify-end gap-3 pt-4">
+              <app-glass-button
+                variant="secondary"
+                [ariaLabel]="'Cancel'"
+                (clicked)="onCancel()">
+                Cancel
+              </app-glass-button>
+              
+              <app-glass-button
+                variant="primary"
+                [ariaLabel]="'Save'"
+                (clicked)="onSave()">
+                Save
+              </app-glass-button>
+            </div>
+          </form>
+        </div>
+      </app-glass-card>
+    </div>
+  </app-content-layout>
+</app-page-layout>
+
+
