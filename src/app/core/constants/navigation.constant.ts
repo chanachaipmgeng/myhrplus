@@ -20,6 +20,7 @@ export interface NavigationItem {
   label: string;
   icon: string;              // Icon หลักใน Rail ซ้ายสุด
   roles: string[];          // ['user', 'admin'] - ใครเห็นได้บ้าง
+  route?: string;            // Optional - Dashboard route สำหรับโมดูล (หน้าแรกของโมดูล)
   children?: NavigationChild[]; // รายการที่จะไปโผล่ใน Drawer (Rail ที่ 2)
   badge?: string;
   badgeColor?: string;
@@ -36,7 +37,13 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     label: 'Home',
     icon: 'home',
     roles: ['user', 'admin'],
+    route: '/portal', // Dashboard route - หน้าแรกของโมดูล
     children: [
+      {
+        label: 'Dashboard',
+        route: '/portal',
+        icon: 'dashboard'
+      },
       {
         label: 'หน้าแรก',
         route: '/portal',
@@ -50,7 +57,13 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     label: 'Self Service',
     icon: 'person',    // icon หลักใน Rail ซ้ายสุด (ใช้ person แทน user-circle)
     roles: ['user', 'admin'],
+    route: '/portal/self-service', // Dashboard route - หน้าแรกของโมดูล
     children: [              // Level 2 - รายการที่จะไปโผล่ใน Drawer (Rail ที่ 2)
+      {
+        label: 'Dashboard',
+        route: '/portal/self-service',
+        icon: 'dashboard'
+      },
       {
         label: 'ลงเวลา (Time)',
         route: '/portal/self-service/time',
@@ -118,12 +131,20 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     label: 'Admin',
     icon: 'shield-check',   // icon หลักใน Rail ซ้ายสุด
     roles: ['admin'],       // User ทั่วไปจะไม่เห็น Icon นี้
+    route: '/portal/admin', // Dashboard route - หน้าแรกของโมดูล
     children: [
       // Level 2: Company Management (มี Level 3-4)
       {
         label: 'Company Management',
         icon: 'business',
+        route: '/portal/admin/company', // Dashboard route - หน้าแรกของโมดูล
         children: [ // Level 3 - เมนูของโมดูล Company
+          // 0. Dashboard (หน้าแรก)
+          {
+            label: 'Dashboard',
+            route: '/portal/admin/company',
+            icon: 'dashboard'
+          },
           // 1. Human Resources (CO01A)
           {
             label: 'Human Resources',
@@ -134,10 +155,10 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
                 label: 'Company Information',
                 icon: 'info',
                 children: [
-                  { label: 'Company Type', route: '/portal/admin/company/hr/company-info/company-type', icon: 'category' },
-                  { label: 'Company Group', route: '/portal/admin/company/hr/company-info/company-group', icon: 'group_work' },
-                  { label: "Bank's Company Information", route: '/portal/admin/company/hr/company-info/bank-info', icon: 'account_balance' },
-                  { label: 'Company Assets Information', route: '/portal/admin/company/hr/company-info/assets', icon: 'inventory' },
+                  { label: 'Company Type', route: '/portal/admin/company/human-resources/company-type', icon: 'category' },
+                  { label: 'Company Group', route: '/portal/admin/company/human-resources/company-group', icon: 'group_work' },
+                  { label: "Bank's Company Information", route: '/portal/admin/company/human-resources/bank-company', icon: 'account_balance' },
+                  { label: 'Company Assets Information', route: '/portal/admin/company/human-resources/company-asset', icon: 'inventory' },
                   { label: 'Company Papers Information', route: '/portal/admin/company/hr/company-info/papers', icon: 'description' },
                   { label: 'Company Structure', route: '/portal/admin/company/hr/company-info/structure', icon: 'account_tree' }
                 ]

@@ -26,17 +26,19 @@ export class BankCompanyListComponent implements OnInit {
   showModal = false;
   selectedItem: BankCompany | null = null;
 
-  breadcrumbs = [
-    { label: 'Company', url: '/portal/company' },
-    { label: 'Human Resources', url: '/portal/company/human-resources' },
-    { label: 'Bank Info', active: true }
+  headerActions = [
+    {
+      label: 'เพิ่มใหม่',
+      variant: 'primary' as const,
+      onClick: () => this.onCreate()
+    }
   ];
 
   columns = [
-    { field: 'bankid', header: 'Bank Code', width: '100px' },
-    { field: 'bank_client_thname', header: 'Account Name (TH)', width: '200px' },
-    { field: 'account', header: 'Account No.', width: '150px' },
-    { field: 'isdefault', header: 'Default', width: '80px', type: 'boolean' }
+    { field: 'bankid', headerText: 'Bank Code', width: '100px' },
+    { field: 'bank_client_thname', headerText: 'Account Name (TH)', width: '200px' },
+    { field: 'account', headerText: 'Account No.', width: '150px' },
+    { field: 'isdefault', headerText: 'Default', width: '80px', type: 'boolean' as const }
   ];
 
   ngOnInit() {}
@@ -46,7 +48,8 @@ export class BankCompanyListComponent implements OnInit {
     this.showModal = true;
   }
 
-  onEdit(row: BankCompany) {
+  onEdit(args: any) {
+    const row = args.data || args;
     this.selectedItem = row;
     this.showModal = true;
   }

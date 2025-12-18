@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModalComponent } from '@shared/components/modal/modal.component';
@@ -17,7 +17,7 @@ import { AssetService } from '../../services/asset.service';
   ],
   templateUrl: './asset-form.component.html'
 })
-export class AssetFormComponent {
+export class AssetFormComponent implements OnChanges {
   @Input() isOpen = false;
   @Input() data: Asset | null = null;
   @Output() close = new EventEmitter<void>();
@@ -94,7 +94,7 @@ export class AssetFormComponent {
         this.save.emit();
         this.onClose();
       },
-      error: (err) => {
+      error: (err: unknown) => {
         console.error(err);
         this.service.loading.set(false);
       }

@@ -25,8 +25,8 @@ export abstract class BaseApiService<T> {
   protected abstract baseUrl: string;
 
   protected get apiUrl(): string {
-    // Ensure no double slashes if environment.apiUrl ends with /
-    const base = environment.apiUrl.endsWith('/') ? environment.apiUrl.slice(0, -1) : environment.apiUrl;
+    // Ensure no double slashes if environment.apiBaseUrl ends with /
+    const base = environment.apiBaseUrl.endsWith('/') ? environment.apiBaseUrl.slice(0, -1) : environment.apiBaseUrl;
     const path = this.baseUrl.startsWith('/') ? this.baseUrl.substring(1) : this.baseUrl;
     return `${base}/${path}`;
   }

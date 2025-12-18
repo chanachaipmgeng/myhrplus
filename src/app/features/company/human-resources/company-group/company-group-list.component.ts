@@ -26,17 +26,19 @@ export class CompanyGroupListComponent implements OnInit {
   showModal = false;
   selectedItem: CompanyGroup | null = null;
 
-  breadcrumbs = [
-    { label: 'Company', url: '/portal/company' },
-    { label: 'Human Resources', url: '/portal/company/human-resources' },
-    { label: 'Company Group', active: true }
+  headerActions = [
+    {
+      label: 'เพิ่มใหม่',
+      variant: 'primary' as const,
+      onClick: () => this.onCreate()
+    }
   ];
 
   columns = [
-    { field: 'codeid', header: 'รหัส (Code)', width: '100px' },
-    { field: 'tdesc', header: 'รายละเอียด (ไทย)', width: '200px' },
-    { field: 'edesc', header: 'รายละเอียด (อังกฤษ)', width: '200px' },
-    { field: 'edit_date', header: 'วันที่แก้ไข', type: 'date', width: '120px' }
+    { field: 'codeid', headerText: 'รหัส (Code)', width: '100px' },
+    { field: 'tdesc', headerText: 'รายละเอียด (ไทย)', width: '200px' },
+    { field: 'edesc', headerText: 'รายละเอียด (อังกฤษ)', width: '200px' },
+    { field: 'edit_date', headerText: 'วันที่แก้ไข', type: 'date' as const, width: '120px' }
   ];
 
   ngOnInit() {
@@ -47,7 +49,8 @@ export class CompanyGroupListComponent implements OnInit {
     this.showModal = true;
   }
 
-  onEdit(row: CompanyGroup) {
+  onEdit(args: any) {
+    const row = args.data || args;
     this.selectedItem = row;
     this.showModal = true;
   }

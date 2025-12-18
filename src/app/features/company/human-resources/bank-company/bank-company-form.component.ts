@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModalComponent } from '@shared/components/modal/modal.component';
@@ -17,7 +17,7 @@ import { BankCompanyService } from '../../services/bank-company.service';
   ],
   templateUrl: './bank-company-form.component.html'
 })
-export class BankCompanyFormComponent {
+export class BankCompanyFormComponent implements OnChanges {
   @Input() isOpen = false;
   @Input() data: BankCompany | null = null;
   @Output() close = new EventEmitter<void>();
@@ -97,7 +97,7 @@ export class BankCompanyFormComponent {
         this.save.emit();
         this.onClose();
       },
-      error: (err) => {
+      error: (err: unknown) => {
         console.error(err);
         this.service.loading.set(false);
       }

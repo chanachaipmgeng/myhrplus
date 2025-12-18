@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModalComponent } from '@shared/components/modal/modal.component';
@@ -17,7 +17,7 @@ import { CompanyTypeService } from '../../services/company-type.service';
   ],
   templateUrl: './company-type-form.component.html'
 })
-export class CompanyTypeFormComponent {
+export class CompanyTypeFormComponent implements OnChanges {
   @Input() isOpen = false;
   @Input() data: CompanyType | null = null;
   @Output() close = new EventEmitter<void>();
@@ -74,7 +74,7 @@ export class CompanyTypeFormComponent {
         this.save.emit(); // Notify parent to refresh list
         this.onClose();
       },
-      error: (err) => {
+      error: (err: unknown) => {
         console.error(err);
         this.service.loading.set(false);
         // TODO: Show toast error

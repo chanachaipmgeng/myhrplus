@@ -26,18 +26,20 @@ export class AssetListComponent implements OnInit {
   showModal = false;
   selectedItem: Asset | null = null;
 
-  breadcrumbs = [
-    { label: 'Company', url: '/portal/company' },
-    { label: 'Human Resources', url: '/portal/company/human-resources' },
-    { label: 'Company Assets', active: true }
+  headerActions = [
+    {
+      label: 'เพิ่มใหม่',
+      variant: 'primary' as const,
+      onClick: () => this.onCreate()
+    }
   ];
 
   columns = [
-    { field: 'assetid', header: 'Asset Code', width: '100px' },
-    { field: 'tdesc', header: 'Asset Name (TH)', width: '200px' },
-    { field: 'astype', header: 'Type', width: '100px' },
-    { field: 'status', header: 'Status', width: '80px' },
-    { field: 'owner', header: 'Owner', width: '120px' }
+    { field: 'assetid', headerText: 'Asset Code', width: '100px' },
+    { field: 'tdesc', headerText: 'Asset Name (TH)', width: '200px' },
+    { field: 'astype', headerText: 'Type', width: '100px' },
+    { field: 'status', headerText: 'Status', width: '80px' },
+    { field: 'owner', headerText: 'Owner', width: '120px' }
   ];
 
   ngOnInit() {}
@@ -47,7 +49,8 @@ export class AssetListComponent implements OnInit {
     this.showModal = true;
   }
 
-  onEdit(row: Asset) {
+  onEdit(args: any) {
+    const row = args.data || args;
     this.selectedItem = row;
     this.showModal = true;
   }

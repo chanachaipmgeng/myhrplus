@@ -11,7 +11,7 @@ import { PageHeaderComponent } from '@shared/components/page-header/page-header.
     <app-page-header 
       title="Human Resources" 
       subtitle="จัดการข้อมูลบริษัทและโครงสร้างองค์กร"
-      [breadcrumbs]="breadcrumbs">
+      [showBreadcrumbs]="true">
     </app-page-header>
     
     <div class="p-6">
@@ -66,8 +66,4 @@ import { PageHeaderComponent } from '@shared/components/page-header/page-header.
   `
 })
 export class HumanResourcesListComponent {
-  breadcrumbs = [
-    { label: 'Company', url: '/portal/company' },
-    { label: 'Human Resources', active: true }
-  ];
 }

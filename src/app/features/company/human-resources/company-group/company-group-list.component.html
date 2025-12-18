@@ -1,14 +1,13 @@
 <app-page-header 
   title="ทะเบียนกลุ่มบริษัท (Company Group)" 
-  [breadcrumbs]="breadcrumbs"
-  (actionClick)="onCreate()">
+  [showBreadcrumbs]="true"
+  [actions]="headerActions">
 </app-page-header>
 
 <div class="p-6">
   <app-data-grid
-    [data]="(data$ | async) || []"
+    [dataSource]="(data$ | async) || []"
     [columns]="columns"
-    [loading]="service.loading()"
     (rowSelected)="onEdit($event)">
   </app-data-grid>
 </div>
