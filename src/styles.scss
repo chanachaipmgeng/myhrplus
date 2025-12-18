@@ -12,7 +12,9 @@
    ============================================ */
 @import 'styles/design-tokens';
 @import 'styles/mixins';
+@import 'styles/syncfusion-mixins';
 @import 'styles/accessibility';
+@import 'styles/lazy-loading';
 
 /* ============================================
    Tailwind CSS Directives
@@ -25,8 +27,253 @@
    CSS Variables for Theme
    ============================================ */
 :root {
+  /* Primary Color (RGB format for rgba() usage) */
   --primary-rgb: 59, 130, 246; /* Default: Blue */
-  --theme-color: 'blue';
+  --primary-color: rgb(var(--primary-rgb));
+
+  /* Theme Mode */
+  --theme-mode: 'light'; /* 'light' | 'dark' | 'auto' */
+  --theme-color: 'blue'; /* Theme color name */
+
+  /* Background Colors */
+  --bg-base: #f5f1e8;
+  --bg-gradient-start: #faf8f3;
+  --bg-gradient-mid: #f5f1e8;
+  --bg-gradient-end: #ede8d8;
+
+  /* Text Colors */
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+
+  /* Glass Morphism Colors (Light Mode) */
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-bg-strong: rgba(255, 255, 255, 0.4);
+  --glass-bg-weak: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-border-strong: rgba(255, 255, 255, 0.4);
+  --glass-border-weak: rgba(255, 255, 255, 0.2);
+
+  /* Theme Gradients */
+  --theme-gradient-blue: #{$theme-gradient-blue};
+  --theme-gradient-indigo: #{$theme-gradient-indigo};
+  --theme-gradient-purple: #{$theme-gradient-purple};
+  --theme-gradient-green: #{$theme-gradient-green};
+  --theme-gradient-orange: #{$theme-gradient-orange};
+  --theme-gradient-red: #{$theme-gradient-red};
+  --theme-gradient-teal: #{$theme-gradient-teal};
+  --theme-gradient-pink: #{$theme-gradient-pink};
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --shadow-glass-dark: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Dark Mode CSS Variables */
+[data-theme='dark'],
+.dark {
+  --bg-base: #000000;
+  --bg-gradient-start: #000000;
+  --bg-gradient-mid: #0a0a0f;
+  --bg-gradient-end: #1e293b;
+
+  --text-primary: #ffffff;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  /* Glass Morphism Colors (Dark Mode) */
+  --glass-bg: rgba(15, 23, 42, 0.25);
+  --glass-bg-strong: rgba(15, 23, 42, 0.4);
+  --glass-bg-weak: rgba(15, 23, 42, 0.1);
+  --glass-border: rgba(51, 65, 85, 0.3);
+  --glass-border-strong: rgba(51, 65, 85, 0.4);
+  --glass-border-weak: rgba(51, 65, 85, 0.2);
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+}
+
+/* Gemini Theme CSS Variables */
+[data-theme='gemini'],
+body.theme-gemini {
+  --bg-base: #000000;
+  --bg-gradient-start: #000000;
+  --bg-gradient-mid: #0a0a0f;
+  --bg-gradient-end: #000000;
+
+  --text-primary: #ffffff;
+  --text-secondary: #93c5fd;
+  --text-muted: #60a5fa;
+
+  /* Glass Morphism Colors (Gemini) */
+  --glass-bg: rgba(15, 23, 42, 0.9);
+  --glass-bg-strong: rgba(15, 23, 42, 0.95);
+  --glass-bg-weak: rgba(15, 23, 42, 0.7);
+  --glass-border: rgba(59, 130, 246, 0.3);
+  --glass-border-strong: rgba(59, 130, 246, 0.4);
+  --glass-border-weak: rgba(59, 130, 246, 0.2);
+
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 40px rgba(59, 130, 246, 0.1);
+
+  /* Sidebar-specific Colors (Gemini) */
+  --sidebar-bg-start: rgba(15, 23, 42, 0.9);
+  --sidebar-bg-end: rgba(30, 41, 59, 0.85);
+  --sidebar-pattern-color: rgba(255, 255, 255, 0.05);
+  --sidebar-icon-bg-start: rgba(59, 130, 246, 0.1);
+  --sidebar-icon-bg-end: rgba(59, 130, 246, 0.05);
+
+  /* Gradient Colors for Buttons/Components */
+  --gradient-primary-start: #93c5fd;
+  --gradient-primary-mid: #60a5fa;
+  --gradient-primary-end: #3b82f6;
+  --gradient-primary-hover-start: #60a5fa;
+  --gradient-primary-hover-mid: #3b82f6;
+  --gradient-primary-hover-end: #2563eb;
+
+  /* Header-specific CSS Variables (Gemini) */
+  --header-dropdown-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(59, 130, 246, 0.3), 0 0 80px rgba(59, 130, 246, 0.1);
+
+  /* Footer-specific CSS Variables (Gemini) */
+  --footer-bg-start: rgba(15, 23, 42, 0.8);
+  --footer-bg-end: rgba(30, 41, 59, 0.7);
+  --footer-border-color: rgba(59, 130, 246, 0.2);
+  --footer-text-color: rgba(255, 255, 255, 0.7);
+
+  /* Menu-specific CSS Variables (Gemini) */
+  --menu-item-hover-bg: rgba(255, 255, 255, 0.05);
+  --menu-item-active-bg: rgba(59, 130, 246, 0.15);
+  --menu-item-active-border: rgb(96, 165, 250);
+  --menu-item-active-text: rgb(147, 197, 253);
+  --menu-item-children-border: rgba(255, 255, 255, 0.1);
+
+  /* Form-specific CSS Variables (Gemini) */
+  --form-input-bg: rgba(15, 23, 42, 0.4);
+  --form-input-border: rgba(59, 130, 246, 0.3);
+  --form-input-focus-border: rgba(59, 130, 246, 0.6);
+  --form-label-focus-color: rgba(147, 197, 253, 0.9);
+
+  /* Upload/Preview-specific CSS Variables (Gemini) */
+  --upload-area-bg: rgba(15, 23, 42, 0.3);
+  --upload-area-border: rgba(59, 130, 246, 0.2);
+  --preview-item-bg: rgba(15, 23, 42, 0.3);
+  --preview-item-border: rgba(59, 130, 246, 0.2);
+  --preview-image-bg: #0a0a0f;
+}
+
+/* Sidebar-specific CSS Variables (Light Mode) */
+:root {
+  --sidebar-bg-start: rgba(255, 255, 255, 0.1);
+  --sidebar-bg-end: rgba(255, 255, 255, 0.05);
+  --sidebar-pattern-color: rgba(59, 130, 246, 0.02);
+  --sidebar-icon-bg-start: rgba(255, 255, 255, 0.1);
+  --sidebar-icon-bg-end: rgba(255, 255, 255, 0.05);
+  --sidebar-active-bg: rgba(59, 130, 246, 0.2);
+  --sidebar-hover-bg: rgba(59, 130, 246, 0.08);
+  --sidebar-indicator-color: rgb(59, 130, 246);
+
+  /* Header-specific CSS Variables */
+  --header-ripple-color: rgba(59, 130, 246, 0.3);
+  --header-shimmer-color: rgba(255, 255, 255, 0.2);
+  --header-dropdown-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(59, 130, 246, 0.1);
+  --header-active-bg: rgba(59, 130, 246, 0.1);
+  --header-unread-bg: rgba(59, 130, 246, 0.05);
+
+  /* Footer-specific CSS Variables */
+  --footer-bg-start: rgba(255, 255, 255, 0.05);
+  --footer-bg-end: rgba(255, 255, 255, 0.02);
+  --footer-border-color: rgba(0, 0, 0, 0.1);
+  --footer-text-color: rgba(0, 0, 0, 0.6);
+
+  /* Menu-specific CSS Variables */
+  --menu-item-hover-bg: rgba(255, 255, 255, 0.05);
+  --menu-item-active-bg: rgba(59, 130, 246, 0.1);
+  --menu-item-active-border: rgb(59, 130, 246);
+  --menu-item-active-text: rgb(59, 130, 246);
+  --menu-item-children-border: rgba(255, 255, 255, 0.1);
+  --menu-item-focus-outline: rgba(59, 130, 246, 0.5);
+  --menu-badge-bg: #ef4444;
+
+  /* Form-specific CSS Variables */
+  --form-input-bg: rgba(255, 255, 255, 0.1);
+  --form-input-border: rgba(255, 255, 255, 0.2);
+  --form-input-focus-border: rgba(59, 130, 246, 0.5);
+  --form-input-focus-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  --form-label-focus-color: rgba(59, 130, 246, 0.8);
+  --form-label-float-color: rgba(59, 130, 246, 0.5);
+
+  /* Upload/Preview-specific CSS Variables */
+  --upload-area-bg: rgba(255, 255, 255, 0.5);
+  --upload-area-border: rgba(0, 0, 0, 0.12);
+  --upload-area-hover-bg: rgba(59, 130, 246, 0.1);
+  --upload-area-dragging-bg: rgba(59, 130, 246, 0.15);
+  --preview-item-bg: rgba(255, 255, 255, 0.5);
+  --preview-item-border: rgba(0, 0, 0, 0.12);
+  --preview-item-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --preview-image-bg: #f5f5f5;
+  --preview-text-color: rgba(255, 255, 255, 0.87);
+
+  /* Modal-specific CSS Variables */
+  --modal-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --modal-header-gradient-start: rgb(99, 102, 241);
+  --modal-header-gradient-end: rgb(147, 51, 234);
+  --modal-body-bg: transparent;
+  --modal-body-text: inherit;
+}
+
+/* Sidebar-specific CSS Variables (Dark Mode) */
+[data-theme='dark'],
+.dark {
+  --sidebar-bg-start: rgba(0, 0, 0, 0.2);
+  --sidebar-bg-end: rgba(0, 0, 0, 0.1);
+  --sidebar-pattern-color: rgba(59, 130, 246, 0.03);
+  --sidebar-icon-bg-start: rgba(0, 0, 0, 0.2);
+  --sidebar-icon-bg-end: rgba(0, 0, 0, 0.1);
+  --sidebar-active-bg: rgba(59, 130, 246, 0.2);
+  --sidebar-hover-bg: rgba(59, 130, 246, 0.12);
+  --sidebar-indicator-color: rgb(59, 130, 246);
+
+  /* Header-specific CSS Variables (Dark Mode) */
+  --header-dropdown-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.2);
+
+  /* Footer-specific CSS Variables (Dark Mode) */
+  --footer-bg-start: rgba(0, 0, 0, 0.2);
+  --footer-bg-end: rgba(0, 0, 0, 0.1);
+  --footer-border-color: rgba(255, 255, 255, 0.1);
+  --footer-text-color: rgba(255, 255, 255, 0.6);
+
+  /* Menu-specific CSS Variables (Dark Mode) */
+  --menu-item-hover-bg: rgba(255, 255, 255, 0.03);
+  --menu-item-active-bg: rgba(59, 130, 246, 0.2);
+  --menu-item-active-text: rgb(96, 165, 250);
+  --menu-item-children-border: rgba(255, 255, 255, 0.05);
+
+  /* Form-specific CSS Variables (Dark Mode) */
+  --form-input-bg: rgba(15, 23, 42, 0.3);
+  --form-input-border: rgba(255, 255, 255, 0.1);
+  --form-input-focus-border: rgba(59, 130, 246, 0.6);
+  --form-input-focus-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  --form-label-focus-color: rgba(96, 165, 250, 0.8);
+  --form-input-text-color: #e2e8f0;
+
+  /* Upload/Preview-specific CSS Variables (Dark Mode) */
+  --upload-area-bg: rgba(255, 255, 255, 0.05);
+  --upload-area-border: rgba(255, 255, 255, 0.12);
+  --preview-item-bg: rgba(255, 255, 255, 0.05);
+  --preview-item-border: rgba(255, 255, 255, 0.12);
+  --preview-item-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --preview-image-bg: #1a1a1a;
+  --preview-text-color: rgba(255, 255, 255, 0.87);
+
+  /* Modal-specific CSS Variables (Dark Mode) */
+  --modal-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
+  --modal-body-bg: rgb(31, 41, 55);
+  --modal-body-text: rgb(226, 232, 240);
+  --modal-body-border: rgb(55, 65, 81);
+  --modal-footer-border: rgb(55, 65, 81);
 }
 
 /* ============================================
@@ -54,14 +301,9 @@ html, body {
 
 body {
   margin: 0;
-  /* Light Mode: Vertical gradient beige/cream ตาม Design System */
-  background-color: #f5f1e8; /* Fallback */
-  background: linear-gradient(180deg,
-    #faf8f3 0%,     /* Light beige */
-    #f5f1e8 50%,    /* Beige */
-    #ede8d8 100%    /* Cream */
-  );
-  background-attachment: fixed;
+  /* Light Mode: Transparent background - main content handles its own background */
+  background-color: transparent; /* Let main-content handle background */
+  background: transparent; /* Avoid duplication with main-content background */
   min-height: 100vh;
   transition: background 0.3s ease;
   position: relative;
@@ -137,19 +379,11 @@ body.theme-gemini::after {
   }
 }
 
-/* Dark Mode Base - Vertical gradient ตาม Design System */
+/* Dark Mode Base - Transparent background - main content handles its own background */
 .dark body {
-  /* Dark Mode: Vertical gradient from black to dark blue */
-  background-color: #000000; /* Fallback */
-  background: linear-gradient(180deg,
-    #000000 0%,      /* Black */
-    #000000 15%,
-    #0a0a0f 35%,    /* Dark gray */
-    #0f172a 55%,    /* Slate-900 */
-    #1e293b 75%,    /* Slate-800 */
-    #1e293b 100%
-  );
-  background-attachment: fixed;
+  /* Dark Mode: Transparent - Let main-content handle background */
+  background-color: transparent; /* Avoid duplication with main-content background */
+  background: transparent;
   color: #ffffff;
 }
 
@@ -348,14 +582,17 @@ code, pre, kbd, samp {
    Glassmorphism Components (Light Mode)
    ============================================ */
 @layer components {
+  /* ============================================
+     Glass Card - Using CSS Variables and @apply
+     ============================================ */
   .glass-card {
-    /* Light Mode Glass Card ตาม Design System */
-    background: rgba(255, 255, 255, 0.4);
+    /* Light Mode Glass Card - Using CSS Variables */
+    background: var(--glass-bg-strong);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--glass-border-strong);
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-glass);
     transition: all 0.3s ease;
 
     /* Hover effect */
@@ -365,15 +602,15 @@ code, pre, kbd, samp {
     }
   }
 
+  [data-theme='dark'] .glass-card,
   .dark .glass-card {
-    /* Dark Mode Glass Card ตาม Design System */
-    background: rgba(26, 26, 46, 0.6);
+    /* Dark Mode Glass Card - Using CSS Variables */
+    background: var(--glass-bg-strong);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(59, 130, 246, 0.3);
+    border: 1px solid var(--glass-border);
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
-                0 0 0 1px rgba(59, 130, 246, 0.2);
+    box-shadow: var(--shadow-glass-dark);
     transition: all 0.3s ease;
 
     /* Hover effect */
@@ -383,17 +620,15 @@ code, pre, kbd, samp {
     }
   }
 
-  /* Gemini 1.5 Glass Card */
+  /* Gemini 1.5 Glass Card - Using CSS Variables */
+  [data-theme='gemini'] .glass-card,
   body.theme-gemini .glass-card {
-    background: rgba(15, 23, 42, 0.7);
+    background: var(--glass-bg);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(59, 130, 246, 0.4);
+    border: 1px solid var(--glass-border-strong);
     border-radius: 16px;
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.5),
-      0 0 0 1px rgba(59, 130, 246, 0.3),
-      0 0 40px rgba(59, 130, 246, 0.1);
+    box-shadow: var(--shadow-glass);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -429,53 +664,64 @@ code, pre, kbd, samp {
       transform: translateY(-4px) scale(1.01);
       box-shadow:
         0 20px 40px rgba(0, 0, 0, 0.6),
-        0 0 0 1px rgba(59, 130, 246, 0.5),
+        0 0 0 1px var(--glass-border-strong),
         0 0 60px rgba(59, 130, 246, 0.2);
-      border-color: rgba(96, 165, 250, 0.6);
+      border-color: var(--glass-border-strong);
     }
   }
 
+  /* Glass Card Variants - Using CSS Variables and @apply */
   .glass-card-strong {
-    @apply bg-white/40 backdrop-blur-lg rounded-2xl border border-white/40 shadow-glass-lg;
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    box-shadow: 0 12px 48px 0 rgba(31, 38, 135, 0.5);
-    transition: all 0.3s ease;
+    @apply backdrop-blur-lg rounded-2xl transition-all duration-300;
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border-strong);
+    box-shadow: var(--shadow-glass);
   }
 
+  [data-theme='dark'] .glass-card-strong,
   .dark .glass-card-strong {
-    @apply bg-slate-900/40 backdrop-blur-lg rounded-2xl border border-slate-700/40 shadow-glass-dark-lg;
-    background: rgba(15, 23, 42, 0.4);
-    border-color: rgba(51, 65, 85, 0.4);
-    box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.7);
+    background: var(--glass-bg-strong);
+    border-color: var(--glass-border-strong);
+    box-shadow: var(--shadow-glass-dark);
+  }
+
+  [data-theme='gemini'] .glass-card-strong,
+  body.theme-gemini .glass-card-strong {
+    background: var(--glass-bg);
+    border-color: var(--glass-border-strong);
+    box-shadow: var(--shadow-glass);
   }
 
   .glass-card-weak {
-    @apply bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 shadow-glass-sm;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.2);
-    transition: all 0.3s ease;
+    @apply backdrop-blur-sm rounded-xl transition-all duration-300;
+    background: var(--glass-bg-weak);
+    border: 1px solid var(--glass-border-weak);
+    box-shadow: var(--shadow-sm);
   }
 
+  [data-theme='dark'] .glass-card-weak,
   .dark .glass-card-weak {
-    @apply bg-slate-900/10 backdrop-blur-sm rounded-xl border border-slate-700/20 shadow-glass-dark-sm;
-    background: rgba(15, 23, 42, 0.1);
-    border-color: rgba(51, 65, 85, 0.2);
-    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3);
+    background: var(--glass-bg-weak);
+    border-color: var(--glass-border-weak);
+    box-shadow: var(--shadow-sm);
+  }
+
+  [data-theme='gemini'] .glass-card-weak,
+  body.theme-gemini .glass-card-weak {
+    background: var(--glass-bg-weak);
+    border-color: var(--glass-border-weak);
+    box-shadow: var(--shadow-sm);
   }
 
   .glass-button {
-    /* Light Mode Secondary Button ตาม Design System */
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    /* Light Mode Secondary Button - Using CSS Variables */
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border-strong);
     border-radius: 8px;
     padding: 0.5rem 1.25rem;
     font-size: 0.875rem; /* 14px */
     font-weight: 600; /* Semibold */
-    color: rgb(15 23 42);
+    color: var(--text-primary);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     transition: all 0.3s ease;
@@ -483,28 +729,29 @@ code, pre, kbd, samp {
     &:hover {
       background: rgba(255, 255, 255, 0.85);
       transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--shadow-md);
     }
   }
 
+  [data-theme='dark'] .glass-button,
   .dark .glass-button {
-    /* Dark Mode Secondary Button ตาม Design System */
-    background: rgba(26, 26, 46, 0.5);
-    border: 1px solid rgba(59, 130, 246, 0.3);
+    /* Dark Mode Secondary Button - Using CSS Variables */
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     border-radius: 8px;
     padding: 0.5rem 1.25rem;
     font-size: 0.875rem; /* 14px */
     font-weight: 600; /* Semibold */
-    color: #ffffff;
+    color: var(--text-primary);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     transition: all 0.3s ease;
 
     &:hover {
-      background: rgba(59, 130, 246, 0.2);
-      border-color: rgba(59, 130, 246, 0.5);
+      background: rgba(var(--primary-rgb), 0.2);
+      border-color: rgba(var(--primary-rgb), 0.5);
       transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 0 20px rgba(59, 130, 246, 0.2);
+      box-shadow: var(--shadow-lg), 0 0 20px rgba(var(--primary-rgb), 0.2);
     }
   }
 
@@ -565,18 +812,18 @@ code, pre, kbd, samp {
   }
 
   .glass-input {
-    /* Light Mode Glass Input ตาม Design System */
-    background: rgba(255, 255, 255, 0.6);
-    border: 2px solid rgba(255, 255, 255, 0.8);
+    /* Light Mode Glass Input - Using CSS Variables */
+    background: var(--glass-bg-strong);
+    border: 2px solid var(--glass-border-strong);
     border-radius: 8px;
     padding: 12px;
-    color: rgb(15 23 42);
+    color: var(--text-primary);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     transition: all 0.3s ease;
 
     &::placeholder {
-      color: rgb(100 116 139); /* slate-500 */
+      color: var(--text-secondary);
     }
 
     /* Focus effect */
@@ -588,28 +835,29 @@ code, pre, kbd, samp {
     }
   }
 
+  [data-theme='dark'] .glass-input,
   .dark .glass-input {
-    /* Dark Mode Glass Input ตาม Design System */
-    background: rgba(26, 26, 46, 0.5);
-    border: 2px solid rgba(59, 130, 246, 0.3);
+    /* Dark Mode Glass Input - Using CSS Variables */
+    background: var(--glass-bg);
+    border: 2px solid var(--glass-border);
     border-radius: 8px;
     padding: 12px;
-    color: #ffffff;
+    color: var(--text-primary);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     transition: all 0.3s ease;
 
     &::placeholder {
-      color: rgba(255, 255, 255, 0.5);
+      color: var(--text-muted);
     }
 
     /* Focus effect */
     &:focus {
       outline: none;
-      border-color: rgba(59, 130, 246, 0.6);
-      background: rgba(26, 26, 46, 0.7);
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2),
-                  0 0 20px rgba(59, 130, 246, 0.1);
+      border-color: rgba(var(--primary-rgb), 0.6);
+      background: var(--glass-bg-strong);
+      box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2),
+                  0 0 20px rgba(var(--primary-rgb), 0.1);
     }
   }
 
@@ -644,10 +892,105 @@ code, pre, kbd, samp {
   }
 
   .dark .glass-nav {
-    @apply bg-slate-900/20 backdrop-blur-lg rounded-xl border border-slate-700/30 shadow-glass-dark;
+    @apply bg-gray-900/20 backdrop-blur-lg rounded-xl border border-gray-700/30 shadow-glass-dark;
     background: rgba(15, 23, 42, 0.2);
-    border-color: rgba(51, 65, 85, 0.3);
+    border-color: rgba(55, 65, 81, 0.3);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  /* Gemini 1.5 Theme - Glass Nav */
+  body.theme-gemini .glass-nav {
+    background: rgba(15, 23, 42, 0.3) !important;
+    backdrop-filter: blur(24px) saturate(200%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
+    border-color: rgba(59, 130, 246, 0.3) !important;
+    box-shadow:
+      0 8px 32px 0 rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(59, 130, 246, 0.2) inset,
+      0 0 40px rgba(59, 130, 246, 0.1) !important;
+  }
+
+  /* ============================================
+     Additional Utility Classes
+     ============================================ */
+
+  /* Hover Lift Effect */
+  .hover-lift {
+    @apply transition-transform duration-200;
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  /* Active Indicator */
+  .active-indicator {
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 60%;
+      background: linear-gradient(to bottom, var(--primary-color), rgb(37, 99, 235));
+      border-radius: 0 2px 2px 0;
+      box-shadow: 0 0 8px rgba(var(--primary-rgb), 0.5);
+    }
+  }
+
+  /* Glass Subtle Effect */
+  .glass-subtle {
+    @apply backdrop-blur-sm rounded-lg transition-all duration-300;
+    background: var(--glass-bg-weak);
+    border: 1px solid var(--glass-border-weak);
+  }
+
+  /* Ripple Effect Container */
+  .ripple-effect {
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle, var(--header-ripple-color) 0%, transparent 70%);
+      opacity: 0;
+      transform: scale(0);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+
+    &:active::after {
+      opacity: 1;
+      transform: scale(1.5);
+    }
+  }
+
+  /* Shimmer Effect */
+  .shimmer-effect {
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        var(--header-shimmer-color) 50%,
+        transparent 100%
+      );
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    &:hover::before {
+      transform: translateX(100%);
+    }
   }
 }
 
@@ -820,6 +1163,28 @@ code, pre, kbd, samp {
   }
 }
 
+/* Form Validation Animations */
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-4px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes pulse-success {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0);
+  }
+}
+
 @keyframes themeTransition {
   from {
     opacity: 0.8;
@@ -884,35 +1249,98 @@ code, pre, kbd, samp {
 }
 
 /* ============================================
-   Animation Classes
+   Animation Classes (Optimized with will-change)
    ============================================ */
 .animate-fade-in {
   animation: fadeIn 0.5s ease-in-out;
+  will-change: opacity;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    will-change: auto;
+  }
 }
 
 .animate-slide-up {
   animation: slideUp 0.3s ease-out;
+  will-change: transform, opacity;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    will-change: auto;
+  }
 }
 
 .animate-slide-down {
   animation: slideDown 0.3s ease-out;
+  will-change: transform, opacity;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    will-change: auto;
+  }
 }
 
 .animate-scale-in {
   animation: scaleIn 0.2s ease-out;
+  will-change: transform, opacity;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    will-change: auto;
+  }
+}
+
+/* Form Validation Animation Classes */
+.animate-shake {
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  will-change: transform;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    will-change: auto;
+  }
+}
+
+.animate-pulse-success {
+  animation: pulse-success 2s ease-in-out infinite;
+  will-change: box-shadow;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    will-change: auto;
+  }
 }
 
 .animate-theme-transition {
   animation: themeTransition 0.3s ease-in-out;
+  will-change: opacity;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    will-change: auto;
+  }
 }
 
-/* Gemini 1.5 Animation Classes */
+/* Gemini 1.5 Animation Classes (Optimized) */
 .animate-gemini-float {
   animation: geminiFloat 6s ease-in-out infinite;
+  will-change: transform;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    will-change: auto;
+  }
 }
 
 .animate-gemini-pulse {
   animation: geminiPulse 2s ease-in-out infinite;
+  will-change: transform, opacity;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    will-change: auto;
+  }
 }
 
 .animate-gemini-shimmer {
@@ -954,156 +1382,9 @@ code, pre, kbd, samp {
   }
 }
 
-/* Gemini 1.5 Theme - Statistics Card */
-body.theme-gemini {
-  ::ng-deep app-statistics-card {
-    .glass-card {
-      border: 1px solid rgba(59, 130, 246, 0.3) !important;
-      box-shadow:
-        0 4px 16px rgba(0, 0, 0, 0.4),
-        0 0 0 1px rgba(59, 130, 246, 0.2),
-        0 0 30px rgba(59, 130, 246, 0.1) !important;
-      transition: all 0.3s ease;
-
-      &:hover {
-        transform: translateY(-4px) scale(1.02);
-        box-shadow:
-          0 12px 24px rgba(0, 0, 0, 0.5),
-          0 0 0 1px rgba(59, 130, 246, 0.4),
-          0 0 50px rgba(59, 130, 246, 0.2) !important;
-        border-color: rgba(96, 165, 250, 0.5) !important;
-      }
-    }
-
-    .text-slate-900 {
-      background: linear-gradient(135deg,
-        #93c5fd 0%,
-        #60a5fa 50%,
-        #3b82f6 100%
-      );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-  }
-
-  /* Gemini 1.5 Theme - Empty State */
-  ::ng-deep app-empty-state {
-    .glass-card {
-      border: 1px solid rgba(59, 130, 246, 0.3) !important;
-      box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.5),
-        0 0 0 1px rgba(59, 130, 246, 0.2),
-        0 0 40px rgba(59, 130, 246, 0.1) !important;
-    }
-
-    h3 {
-      background: linear-gradient(135deg,
-        #93c5fd 0%,
-        #60a5fa 50%,
-        #3b82f6 100%
-      );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-  }
-
-  /* Gemini 1.5 Theme - Glass Button */
-  ::ng-deep app-glass-button {
-    .glass-button-primary {
-      background: linear-gradient(135deg,
-        #93c5fd 0%,
-        #60a5fa 50%,
-        #3b82f6 100%
-      ) !important;
-      border: 1px solid rgba(59, 130, 246, 0.4) !important;
-      box-shadow:
-        0 4px 16px rgba(59, 130, 246, 0.3),
-        0 0 20px rgba(59, 130, 246, 0.2) !important;
-
-      &:hover:not(:disabled) {
-        background: linear-gradient(135deg,
-          #60a5fa 0%,
-          #3b82f6 50%,
-          #2563eb 100%
-        ) !important;
-        box-shadow:
-          0 6px 20px rgba(59, 130, 246, 0.4),
-          0 0 30px rgba(59, 130, 246, 0.3) !important;
-        transform: translateY(-2px) scale(1.02);
-      }
-    }
-
-    .glass-button {
-      border: 1px solid rgba(59, 130, 246, 0.3) !important;
-
-      &:hover:not(:disabled) {
-        background: rgba(59, 130, 246, 0.15) !important;
-        border-color: rgba(96, 165, 250, 0.5) !important;
-        box-shadow: 0 0 20px rgba(59, 130, 246, 0.2) !important;
-      }
-    }
-  }
-
-  /* Gemini 1.5 Theme - Data Table */
-  ::ng-deep app-data-table {
-    .glass-card {
-      border: 1px solid rgba(59, 130, 246, 0.3) !important;
-      box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.5),
-        0 0 0 1px rgba(59, 130, 246, 0.2) !important;
-    }
-  }
-
-  /* Gemini 1.5 Theme - Modal */
-  ::ng-deep app-modal {
-    .glass-card {
-      border: 1px solid rgba(59, 130, 246, 0.4) !important;
-      box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.6),
-        0 0 0 1px rgba(59, 130, 246, 0.3),
-        0 0 80px rgba(59, 130, 246, 0.2) !important;
-    }
-  }
-
-  /* Gemini 1.5 Theme - Loading Spinner */
-  ::ng-deep app-loading-spinner,
-  ::ng-deep app-loading {
-    .spinner {
-      border-color: rgba(59, 130, 246, 0.2) !important;
-      border-top-color: #3b82f6 !important;
-    }
-  }
-
-  /* Gemini 1.5 Theme - Progress Bar */
-  ::ng-deep app-progress-bar {
-    .progress-bar-fill {
-      background: linear-gradient(90deg,
-        #93c5fd 0%,
-        #60a5fa 50%,
-        #3b82f6 100%
-      ) !important;
-      box-shadow: 0 0 10px rgba(59, 130, 246, 0.5) !important;
-    }
-  }
-
-  /* Gemini 1.5 Theme - Tabs */
-  ::ng-deep app-tabs {
-    .tab-active {
-      background: rgba(59, 130, 246, 0.2) !important;
-      border-bottom-color: #3b82f6 !important;
-      color: #60a5fa !important;
-    }
-  }
-
-  /* Gemini 1.5 Theme - Status Badge */
-  ::ng-deep app-status-badge {
-    .badge {
-      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3) !important;
-    }
-  }
-}
+/* Component-specific Gemini theme styles moved to component SCSS files */
+/* See: statistics-card.component.scss, empty-state.component.scss, glass-button.component.scss */
+/* This improves component encapsulation and maintainability */
 
 /* ============================================
    Responsive Design

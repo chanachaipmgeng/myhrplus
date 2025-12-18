@@ -1,0 +1,111 @@
+/* ============================================
+   Syncfusion Component Mixins
+   ============================================
+   Shared mixins for Syncfusion component overrides
+   Reduces code duplication across components
+   ============================================ */
+
+/**
+ * Syncfusion Glass Button Mixin
+ * Common button styles for Syncfusion components
+ */
+@mixin syncfusion-glass-button {
+  @apply glass-weak dark:glass-dark-weak text-gray-700 dark:text-gray-300 transition-smooth 
+         min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 
+         hover:bg-primary-500/10 dark:hover:bg-primary-500/20 
+         hover:border-primary-500/30 hover:text-primary-600 
+         focus:ring-2 focus:ring-primary-500/20;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  .dark & {
+    background: rgba(15, 23, 42, 0.3);
+    border-color: rgba(51, 65, 85, 0.3);
+  }
+}
+
+/**
+ * Syncfusion Glass Container Mixin
+ * Common container styles for Syncfusion components
+ */
+@mixin syncfusion-glass-container {
+  @apply bg-transparent rounded-md border border-white/10 dark:border-slate-700/30;
+}
+
+/**
+ * Syncfusion Gemini Theme Shadow Mixin
+ * Common shadow styles for Gemini theme
+ */
+@mixin syncfusion-gemini-shadow {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 
+              0 0 0 1px rgba(59, 130, 246, 0.2), 
+              0 0 30px rgba(59, 130, 246, 0.1);
+}
+
+/**
+ * Syncfusion Glass Toolbar Mixin
+ * Common toolbar styles for Syncfusion components
+ */
+@mixin syncfusion-glass-toolbar {
+  @apply glass-weak dark:glass-dark-weak rounded-md p-2 mb-4 border border-white/20 dark:border-slate-700/30;
+  
+  body.theme-gemini & {
+    @include syncfusion-gemini-shadow;
+  }
+}
+
+/**
+ * Syncfusion Glass Header Mixin
+ * Common header styles for Syncfusion components
+ */
+@mixin syncfusion-glass-header {
+  @apply glass-weak dark:glass-dark-weak;
+  
+  body.theme-gemini & {
+    background: rgba(147, 197, 253, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+}
+
+/**
+ * Syncfusion Glass Dropdown Mixin
+ * Common dropdown styles for Syncfusion components
+ */
+@mixin syncfusion-glass-dropdown {
+  @apply glass-weak dark:glass-dark-weak rounded-sm text-gray-700 dark:text-gray-300 
+         transition-smooth focus:border-primary-600 focus:ring-2 focus:ring-primary-500/20;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  .dark & {
+    background: rgba(15, 23, 42, 0.3);
+    border-color: rgba(51, 65, 85, 0.3);
+  }
+}
+
+/**
+ * Syncfusion Glass Input Mixin
+ * Common input styles for Syncfusion components
+ */
+@mixin syncfusion-glass-input {
+  @apply glass-weak dark:glass-dark-weak rounded-sm text-gray-700 dark:text-gray-300 
+         transition-smooth focus:border-primary-600 focus:ring-2 focus:ring-primary-500/20;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  .dark & {
+    background: rgba(15, 23, 42, 0.3);
+    border-color: rgba(51, 65, 85, 0.3);
+  }
+}
+
+/**
+ * Syncfusion Content Cell Mixin
+ * Common content cell styles for Syncfusion components
+ */
+@mixin syncfusion-content-cell {
+  @apply bg-transparent border-r border-b border-white/5 dark:border-slate-700/10 
+         transition-smooth hover:bg-primary-500/5 dark:hover:bg-primary-500/10;
+}
+

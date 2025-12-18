@@ -11,22 +11,14 @@
    Responsive Mixins
    ============================================ */
 
-/* Helper to add transparency to dynamic colors (replaces rgba) */
-@function alpha-color($color, $opacity) {
-  @return color-mix(in srgb, #{$color}, transparent calc(100% - #{$opacity} * 100%));
-}
-
 /* Mobile First Approach */
 @mixin respond-to($breakpoint) {
   @if map-has-key($breakpoints, $breakpoint) {
     $breakpoint-value: map-get($breakpoints, $breakpoint);
-
     @media (min-width: $breakpoint-value) {
       @content;
     }
-  }
-
-  @else {
+  } @else {
     @warn "Unknown breakpoint: #{$breakpoint}";
   }
 }
@@ -35,13 +27,10 @@
 @mixin respond-to-down($breakpoint) {
   @if map-has-key($breakpoints, $breakpoint) {
     $breakpoint-value: map-get($breakpoints, $breakpoint);
-
     @media (max-width: $breakpoint-value - 1px) {
       @content;
     }
-  }
-
-  @else {
+  } @else {
     @warn "Unknown breakpoint: #{$breakpoint}";
   }
 }
@@ -50,7 +39,6 @@
 @mixin respond-to-between($min, $max) {
   $min-value: map-get($breakpoints, $min);
   $max-value: map-get($breakpoints, $max);
-
   @media (min-width: $min-value) and (max-width: $max-value - 1px) {
     @content;
   }
@@ -61,45 +49,35 @@
    ============================================ */
 
 @mixin glass-morphism($variant: 'default', $mode: 'light') {
-  @if $mode =='light' {
-    @if $variant =='strong' {
+  @if $mode == 'light' {
+    @if $variant == 'strong' {
       background: $glass-bg-light-strong;
       border: 1px solid $glass-border-light-strong;
       backdrop-filter: blur($blur-xl);
       -webkit-backdrop-filter: blur($blur-xl);
-    }
-
-    @else if $variant =='weak' {
+    } @else if $variant == 'weak' {
       background: $glass-bg-light-weak;
       border: 1px solid $glass-border-light-weak;
       backdrop-filter: blur($blur-sm);
       -webkit-backdrop-filter: blur($blur-sm);
-    }
-
-    @else {
+    } @else {
       background: $glass-bg-light;
       border: 1px solid $glass-border-light;
       backdrop-filter: blur($blur-lg);
       -webkit-backdrop-filter: blur($blur-lg);
     }
-  }
-
-  @else {
-    @if $variant =='strong' {
+  } @else {
+    @if $variant == 'strong' {
       background: $glass-bg-dark-strong;
       border: 1px solid $glass-border-dark-strong;
       backdrop-filter: blur($blur-xl);
       -webkit-backdrop-filter: blur($blur-xl);
-    }
-
-    @else if $variant =='weak' {
+    } @else if $variant == 'weak' {
       background: $glass-bg-dark-weak;
       border: 1px solid $glass-border-dark-weak;
       backdrop-filter: blur($blur-sm);
       -webkit-backdrop-filter: blur($blur-sm);
-    }
-
-    @else {
+    } @else {
       background: $glass-bg-dark;
       border: 1px solid $glass-border-dark;
       backdrop-filter: blur($blur-lg);
@@ -114,16 +92,12 @@
   border: 1px solid $glass-border-gemini;
   backdrop-filter: blur($blur-2xl);
   -webkit-backdrop-filter: blur($blur-2xl);
-
-  @if $variant =='strong' {
+  
+  @if $variant == 'strong' {
     box-shadow: $shadow-gemini-lg;
-  }
-
-  @else if $variant =='weak' {
+  } @else if $variant == 'weak' {
     box-shadow: $shadow-gemini-sm;
-  }
-
-  @else {
+  } @else {
     box-shadow: $shadow-gemini;
   }
 }
@@ -135,16 +109,15 @@
 @mixin focus-ring($color: $primary-500, $width: 2px) {
   outline: none;
   box-shadow: 0 0 0 $width $color;
-
+  
   &:focus-visible {
-    // using color-mix for transparency to support CSS variables
-    box-shadow: 0 0 0 $width $color, 0 0 0 calc($width * 2) color-mix(in srgb, #{$color}, transparent 80%);
+    box-shadow: 0 0 0 $width $color, 0 0 0 calc($width * 2) rgba($color, 0.2);
   }
 }
 
 @mixin focus-ring-gemini() {
   outline: none;
-  box-shadow:
+  box-shadow: 
     0 0 0 2px $gemini-gradient-mid,
     0 0 0 4px rgba(96, 165, 250, 0.2),
     0 0 20px rgba(59, 130, 246, 0.3);
@@ -156,7 +129,7 @@
 
 @mixin hover-lift($amount: 4px) {
   transition: transform $duration-200 $ease-out, box-shadow $duration-200 $ease-out;
-
+  
   &:hover:not(:disabled) {
     transform: translateY(-$amount);
   }
@@ -164,7 +137,7 @@
 
 @mixin hover-scale($amount: 1.05) {
   transition: transform $duration-200 $ease-out;
-
+  
   &:hover:not(:disabled) {
     transform: scale($amount);
   }
@@ -172,10 +145,9 @@
 
 @mixin hover-glow($color: $primary-500) {
   transition: box-shadow $duration-200 $ease-out;
-
+  
   &:hover:not(:disabled) {
-    // using color-mix for transparency to support CSS variables
-    box-shadow: 0 0 20px color-mix(in srgb, #{$color}, transparent 60%);
+    box-shadow: 0 0 20px rgba($color, 0.4);
   }
 }
 
@@ -194,19 +166,115 @@
    ============================================ */
 
 @mixin loading-skeleton($bg: $gray-200, $highlight: $gray-100) {
-  background: linear-gradient(90deg,
-      $bg 0%,
-      $highlight 50%,
-      $bg 100%);
+  background: linear-gradient(
+    90deg,
+    $bg 0%,
+    $highlight 50%,
+    $bg 100%
+  );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
+}
+
+/* ============================================
+   Animation Mixins - Enhanced
+   ============================================ */
+
+/* Smooth Transition Mixin */
+@mixin smooth-transition($properties: all, $duration: 0.3s, $easing: cubic-bezier(0.4, 0, 0.2, 1)) {
+  transition: $properties $duration $easing;
+  
+  /* Optimize for performance */
+  will-change: $properties;
+  
+  /* Respect user preferences */
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    will-change: auto;
+  }
+}
+
+/* Micro-interaction: Hover Lift */
+@mixin hover-lift($distance: 2px, $duration: 0.2s) {
+  @include smooth-transition(transform, $duration);
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-$distance);
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0) scale(0.98);
+  }
+}
+
+/* Micro-interaction: Scale on Hover */
+@mixin hover-scale($scale: 1.05, $duration: 0.2s) {
+  @include smooth-transition(transform, $duration);
+  
+  &:hover:not(:disabled) {
+    transform: scale($scale);
+  }
+  
+  &:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+}
+
+/* Micro-interaction: Glow Effect */
+@mixin glow-effect($color: $primary-500, $intensity: 0.3, $duration: 0.3s) {
+  @include smooth-transition(box-shadow, $duration);
+  
+  &:hover:not(:disabled) {
+    box-shadow: 0 0 20px rgba($color, $intensity);
+  }
+  
+  &:focus {
+    box-shadow: 0 0 0 3px rgba($color, $intensity * 0.5);
+  }
+}
+
+/* Loading State Animation */
+@mixin loading-pulse($color: $primary-500, $duration: 1.5s) {
+  animation: loadingPulse $duration ease-in-out infinite;
+  
+  @keyframes loadingPulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+  }
+}
+
+/* Shimmer Animation (Enhanced) */
+@mixin shimmer-effect($duration: 1.5s, $color: rgba(255, 255, 255, 0.3)) {
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      $color 50%,
+      transparent 100%
+    );
+    animation: shimmer $duration ease-in-out infinite;
+  }
 }
 
 @keyframes shimmer {
   0% {
     background-position: 200% 0;
   }
-
   100% {
     background-position: -200% 0;
   }
@@ -274,15 +342,15 @@
   display: grid;
   grid-template-columns: repeat($columns, 1fr);
   gap: $gap;
-
+  
   @include respond-to(sm) {
     grid-template-columns: repeat(min(2, $columns), 1fr);
   }
-
+  
   @include respond-to(md) {
     grid-template-columns: repeat(min(3, $columns), 1fr);
   }
-
+  
   @include respond-to(lg) {
     grid-template-columns: repeat($columns, 1fr);
   }
@@ -297,16 +365,16 @@
     width: 8px;
     height: 8px;
   }
-
+  
   &::-webkit-scrollbar-track {
     background: $track-color;
     border-radius: $radius-full;
   }
-
+  
   &::-webkit-scrollbar-thumb {
     background: $thumb-color;
     border-radius: $radius-full;
-
+    
     &:hover {
       background: darken($thumb-color, 10%);
     }
@@ -318,18 +386,14 @@
    ============================================ */
 
 @mixin gemini-glow($intensity: 'default') {
-  @if $intensity =='strong' {
-    box-shadow:
+  @if $intensity == 'strong' {
+    box-shadow: 
       0 0 20px $gemini-glow-strong,
       0 0 40px rgba(59, 130, 246, 0.3);
-  }
-
-  @else if $intensity =='weak' {
+  } @else if $intensity == 'weak' {
     box-shadow: 0 0 10px $gemini-glow-weak;
-  }
-
-  @else {
-    box-shadow:
+  } @else {
+    box-shadow: 
       0 0 15px $gemini-glow,
       0 0 30px rgba(59, 130, 246, 0.2);
   }
@@ -337,7 +401,7 @@
 
 @mixin gemini-border-glow() {
   position: relative;
-
+  
   &::before {
     content: '';
     position: absolute;
@@ -346,11 +410,12 @@
     bottom: 0;
     width: 2px;
     background: linear-gradient(180deg,
-        transparent 0%,
-        rgba(147, 197, 253, 0.5) 20%,
-        rgba(96, 165, 250, 0.5) 50%,
-        rgba(59, 130, 246, 0.5) 80%,
-        transparent 100%);
+      transparent 0%,
+      rgba(147, 197, 253, 0.5) 20%,
+      rgba(96, 165, 250, 0.5) 50%,
+      rgba(59, 130, 246, 0.5) 80%,
+      transparent 100%
+    );
     background-size: 100% 200%;
     animation: geminiGradient 3s ease infinite;
     z-index: 1;
@@ -416,3 +481,4 @@
   clip: auto;
   white-space: normal;
 }
+
