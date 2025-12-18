@@ -6,7 +6,6 @@
 export const STORAGE_KEYS = {
   // Authentication
   AUTH_TOKEN: 'auth_token',
-  REFRESH_TOKEN: 'refresh_token',
   USER_DATA: 'user_data',
   SESSION_ID: 'session_id',
 
