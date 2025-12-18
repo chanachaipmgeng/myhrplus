@@ -1,25 +1,41 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CompanyHomeComponent } from './company-home/company-home.component';
-import { ROUTES } from '../../core/constants/routes.constant';
+import { CompanyDashboardComponent } from './dashboard/company-dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    component: CompanyDashboardComponent
   },
   {
-    path: 'home',
-    component: CompanyHomeComponent,
-    data: {
-      title: 'Company Management Home',
-      breadcrumbs: [
-        { label: 'Company Management', route: ROUTES.COMPANY.BASE },
-        { label: 'Home' }
-      ]
-    }
-  }
+    path: 'human-resources',
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./human-resources/human-resources-list.component').then(m => m.HumanResourcesListComponent)
+      },
+      {
+        path: 'company-type',
+        loadComponent: () => import('./human-resources/company-type/company-type-list.component').then(m => m.CompanyTypeListComponent)
+      },
+      {
+        path: 'company-group',
+        loadComponent: () => import('./human-resources/company-group/company-group-list.component').then(m => m.CompanyGroupListComponent)
+      },
+      {
+        path: 'bank-company',
+        loadComponent: () => import('./human-resources/bank-company/bank-company-list.component').then(m => m.BankCompanyListComponent)
+      },
+      {
+        path: 'company-asset',
+        loadComponent: () => import('./human-resources/company-asset/asset-list.component').then(m => m.AssetListComponent)
+      }
+    ]
+  },
+  // Placeholder routes
+  { path: 'approve', component: CompanyDashboardComponent },
+  { path: 'ess-setup', component: CompanyDashboardComponent },
+  { path: 'reports', component: CompanyDashboardComponent }
 ];
 
 @NgModule({
@@ -27,7 +43,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class CompanyRoutingModule { }
-
-
-
-

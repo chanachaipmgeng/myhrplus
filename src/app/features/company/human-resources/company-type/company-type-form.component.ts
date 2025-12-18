@@ -1,0 +1,84 @@
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ModalComponent } from '@shared/components/modal/modal.component';
+import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
+import { CompanyType } from '../../models/company-type.model';
+import { CompanyTypeService } from '../../services/company-type.service';
+
+@Component({
+  selector: 'app-company-type-form',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ModalComponent,
+    GlassInputComponent
+  ],
+  templateUrl: './company-type-form.component.html'
+})
+export class CompanyTypeFormComponent {
+  @Input() isOpen = false;
+  @Input() data: CompanyType | null = null;
+  @Output() close = new EventEmitter<void>();
+  @Output() save = new EventEmitter<void>();
+
+  private fb = inject(FormBuilder);
+  private service = inject(CompanyTypeService);
+
+  form: FormGroup;
+  isEditMode = false;
+
+  constructor() {
+    this.form = this.fb.group({
+      codeid: ['', [Validators.required, Validators.maxLength(3)]],
+      tdesc: ['', Validators.required],
+      edesc: ['']
+    });
+  }
+
+  // Detect input changes to patch form
+  ngOnChanges() {
+    if (this.isOpen) {
+      this.isEditMode = !!this.data;
+      if (this.data) {
+        this.form.patchValue(this.data);
+        this.form.get('codeid')?.disable(); // PK cannot be changed
+      } else {
+        this.form.reset();
+        this.form.get('codeid')?.enable();
+      }
+    }
+  }
+
+  onClose() {
+    this.close.emit();
+  }
+
+  onSubmit() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    const formData = this.form.getRawValue();
+    this.service.loading.set(true);
+
+    const request$ = this.isEditMode
+      ? this.service.update(formData.codeid, formData)
+      : this.service.create(formData);
+
+    request$.subscribe({
+      next: () => {
+        this.service.loading.set(false);
+        this.save.emit(); // Notify parent to refresh list
+        this.onClose();
+      },
+      error: (err) => {
+        console.error(err);
+        this.service.loading.set(false);
+        // TODO: Show toast error
+      }
+    });
+  }
+}

@@ -1,0 +1,94 @@
+<app-modal
+  [isOpen]="isOpen"
+  [title]="isEditMode ? 'แก้ไขข้อมูลทรัพย์สิน' : 'เพิ่มทรัพย์สิน'"
+  (closeModal)="onClose()"
+  (confirm)="onSubmit()">
+  
+  <form [formGroup]="form" class="space-y-4 p-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+    
+    <!-- Asset Code -->
+    <app-glass-input
+      class="col-span-2 md:col-span-1"
+      label="รหัสทรัพย์สิน (Asset Code)"
+      formControlName="assetid"
+      [required]="true"
+      [readonly]="isEditMode"
+      errorMessage="ระบุรหัสทรัพย์สิน">
+    </app-glass-input>
+
+    <!-- Company Code -->
+    <app-glass-input
+      class="col-span-2 md:col-span-1"
+      label="รหัสบริษัท"
+      formControlName="companyid"
+      [required]="true"
+      [readonly]="true">
+    </app-glass-input>
+
+    <!-- Name TH -->
+    <app-glass-input
+      class="col-span-2"
+      label="ชื่อทรัพย์สิน (ไทย)"
+      formControlName="tdesc"
+      [required]="true">
+    </app-glass-input>
+
+    <!-- Name EN -->
+    <app-glass-input
+      class="col-span-2"
+      label="ชื่อทรัพย์สิน (อังกฤษ)"
+      formControlName="edesc">
+    </app-glass-input>
+
+    <!-- Type -->
+    <app-glass-input
+      class="col-span-2 md:col-span-1"
+      label="ประเภททรัพย์สิน (Asset Type)"
+      formControlName="astype"
+      [required]="true">
+    </app-glass-input>
+
+    <!-- Fine -->
+    <app-glass-input
+      class="col-span-2 md:col-span-1"
+      label="ค่าปรับ (Fine Amount)"
+      formControlName="fine"
+      type="number">
+    </app-glass-input>
+
+    <!-- Owner (Readonly - Assigned via process) -->
+    <app-glass-input
+      class="col-span-2 md:col-span-1"
+      label="ผู้ถือครอง (Owner)"
+      formControlName="owner"
+      [readonly]="true">
+    </app-glass-input>
+
+    <!-- Status -->
+    <div class="col-span-2 md:col-span-1">
+      <label class="block text-sm font-medium text-gray-700 mb-1">สถานะ</label>
+      <select formControlName="status" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+        <option value="1">ปกติ (Active)</option>
+        <option value="2">ชำรุด (Damaged)</option>
+        <option value="3">สูญหาย (Lost)</option>
+        <option value="4">จำหน่ายออก (Disposed)</option>
+      </select>
+    </div>
+
+    <!-- Remarks -->
+    <div class="col-span-2">
+      <label class="block text-sm font-medium text-gray-700 mb-1">หมายเหตุ</label>
+      <textarea formControlName="remarks" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
+    </div>
+
+    <!-- Reservation -->
+    <div class="col-span-2">
+      <label class="flex items-center space-x-2 cursor-pointer">
+        <input type="checkbox" formControlName="reservation" class="form-checkbox h-5 w-5 text-blue-600">
+        <span class="text-gray-700">ใช้ระบบการจอง (Reservation System)</span>
+      </label>
+    </div>
+
+  </form>
+
+</app-modal>

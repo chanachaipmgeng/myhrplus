@@ -1,0 +1,33 @@
+<app-modal
+  [isOpen]="isOpen"
+  [title]="isEditMode ? 'แก้ไขกลุ่มบริษัท' : 'เพิ่มกลุ่มบริษัท'"
+  (closeModal)="onClose()"
+  (confirm)="onSubmit()">
+  
+  <form [formGroup]="form" class="space-y-4 p-2">
+    <!-- Code (PK) -->
+    <app-glass-input
+      label="รหัสกลุ่มบริษัท (Code)"
+      formControlName="codeid"
+      [required]="true"
+      [readonly]="isEditMode"
+      errorMessage="กรุณาระบุรหัส 3 หลัก"
+      maxLength="3">
+    </app-glass-input>
+
+    <!-- Thai Description -->
+    <app-glass-input
+      label="รายละเอียด (ไทย)"
+      formControlName="tdesc"
+      [required]="true"
+      errorMessage="กรุณาระบุรายละเอียดภาษาไทย">
+    </app-glass-input>
+
+    <!-- English Description -->
+    <app-glass-input
+      label="รายละเอียด (อังกฤษ)"
+      formControlName="edesc">
+    </app-glass-input>
+  </form>
+
+</app-modal>

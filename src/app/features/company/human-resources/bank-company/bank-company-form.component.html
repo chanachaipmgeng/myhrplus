@@ -1,0 +1,70 @@
+<app-modal
+  [isOpen]="isOpen"
+  [title]="isEditMode ? 'แก้ไขข้อมูลธนาคาร' : 'เพิ่มข้อมูลธนาคาร'"
+  (closeModal)="onClose()"
+  (confirm)="onSubmit()">
+  
+  <form [formGroup]="form" class="space-y-4 p-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+    
+    <!-- Bank Code -->
+    <app-glass-input
+      class="col-span-2 md:col-span-1"
+      label="รหัสธนาคาร (Bank ID)"
+      formControlName="bankid"
+      [required]="true"
+      errorMessage="ระบุรหัสธนาคาร">
+    </app-glass-input>
+
+    <!-- Company Code (Hidden or Readonly) -->
+    <app-glass-input
+      class="col-span-2 md:col-span-1"
+      label="รหัสบริษัท"
+      formControlName="companyid"
+      [required]="true">
+    </app-glass-input>
+
+    <!-- Account Name TH -->
+    <app-glass-input
+      class="col-span-2"
+      label="ชื่อบัญชี (ไทย)"
+      formControlName="bank_client_thname">
+    </app-glass-input>
+
+    <!-- Account Name EN -->
+    <app-glass-input
+      class="col-span-2"
+      label="ชื่อบัญชี (อังกฤษ)"
+      formControlName="bank_client_engname">
+    </app-glass-input>
+
+    <!-- Account No -->
+    <app-glass-input
+      class="col-span-2 md:col-span-1"
+      label="เลขที่บัญชี"
+      formControlName="account"
+      [required]="true">
+    </app-glass-input>
+
+    <!-- Contact Person -->
+    <app-glass-input
+      class="col-span-2 md:col-span-1"
+      label="ผู้ติดต่อ"
+      formControlName="contact_person">
+    </app-glass-input>
+
+    <!-- Options -->
+    <div class="col-span-2 flex gap-4 mt-2">
+      <label class="flex items-center space-x-2 cursor-pointer">
+        <input type="checkbox" formControlName="isdefault" class="form-checkbox h-5 w-5 text-blue-600">
+        <span class="text-gray-700">บัญชีหลัก (Default)</span>
+      </label>
+      
+      <label class="flex items-center space-x-2 cursor-pointer">
+        <input type="checkbox" formControlName="trans_ats" class="form-checkbox h-5 w-5 text-blue-600">
+        <span class="text-gray-700">ATS</span>
+      </label>
+    </div>
+
+  </form>
+
+</app-modal>

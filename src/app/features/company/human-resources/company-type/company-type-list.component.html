@@ -1,0 +1,21 @@
+<app-page-header 
+  title="ทะเบียนประเภทบริษัท (Company Type)" 
+  [breadcrumbs]="breadcrumbs"
+  (actionClick)="onCreate()">
+</app-page-header>
+
+<div class="p-6">
+  <app-data-grid
+    [data]="(data$ | async) || []"
+    [columns]="columns"
+    [loading]="service.loading()"
+    (rowSelected)="onEdit($event)">
+  </app-data-grid>
+</div>
+
+<app-company-type-form
+  [isOpen]="showModal"
+  [data]="selectedItem"
+  (close)="showModal = false"
+  (save)="onSaveSuccess()">
+</app-company-type-form>
