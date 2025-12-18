@@ -188,8 +188,8 @@ export class DashboardComponent implements OnInit {
   }
 
   navigateToCategory(category: MenuCategory): void {
-    // Navigate to EMPVIEW module (dashboard) for all main menu items
-    this.router.navigate(['/dashboard']);
+    // Navigate to portal self-service for all main menu items
+    this.router.navigate(['/portal/self-service']);
   }
 
   getGreeting(): string {

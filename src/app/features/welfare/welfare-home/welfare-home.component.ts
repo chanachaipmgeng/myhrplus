@@ -15,21 +15,21 @@ export class WelfareHomeComponent implements OnInit {
       title: 'สวัสดิการ',
       description: 'จัดการสวัสดิการพนักงาน',
       icon: 'e-icons e-favorite',
-      route: '/welfare/benefits',
+      route: '/portal/admin/welfare',
       color: 'bg-pink-500'
     },
     {
       title: 'ลงทะเบียนสวัสดิการ',
       description: 'ลงทะเบียนสวัสดิการ',
       icon: 'e-icons e-check',
-      route: '/welfare/enrollment',
+      route: '/portal/admin/welfare',
       color: 'bg-purple-500'
     },
     {
       title: 'รายงาน',
       description: 'รายงานสวัสดิการ',
       icon: 'e-icons e-chart',
-      route: '/welfare/reports',
+      route: '/portal/admin/welfare',
       color: 'bg-indigo-500'
     }
   ];
@@ -48,6 +48,8 @@ export class WelfareHomeComponent implements OnInit {
     this.router.navigate([route]);
   }
 }
+
+
 
 
 

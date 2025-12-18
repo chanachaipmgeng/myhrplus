@@ -233,7 +233,7 @@ export class HomeHeaderComponent implements OnInit, OnDestroy {
   }
 
   navigateToProfile(): void {
-    this.router.navigate(['/dashboard/personal-info']);
+    this.router.navigate(['/portal/self-service/profile']);
   }
 
   navigateToSettings(): void {

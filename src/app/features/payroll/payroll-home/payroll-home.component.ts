@@ -15,21 +15,21 @@ export class PayrollHomeComponent implements OnInit {
       title: 'จัดการเงินเดือน',
       description: 'จัดการข้อมูลเงินเดือนพนักงาน',
       icon: 'e-icons e-money',
-      route: '/payroll/salary',
+      route: '/portal/admin/payroll',
       color: 'bg-green-500'
     },
     {
       title: 'สลิปเงินเดือน',
       description: 'ดูและจัดการสลิปเงินเดือน',
       icon: 'e-icons e-receipt',
-      route: '/payroll/payslip',
+      route: '/portal/admin/payroll',
       color: 'bg-blue-500'
     },
     {
       title: 'รายงาน',
       description: 'รายงานเงินเดือน',
       icon: 'e-icons e-chart',
-      route: '/payroll/reports',
+      route: '/portal/admin/payroll',
       color: 'bg-purple-500'
     }
   ];
@@ -48,6 +48,8 @@ export class PayrollHomeComponent implements OnInit {
     this.router.navigate([route]);
   }
 }
+
+
 
 
 

@@ -15,28 +15,28 @@ export class RecruitHomeComponent implements OnInit {
       title: 'ประกาศรับสมัคร',
       description: 'จัดการประกาศรับสมัครงาน',
       icon: 'e-icons e-file',
-      route: '/recruit/job-postings',
+      route: '/portal/admin/recruit',
       color: 'bg-blue-500'
     },
     {
       title: 'จัดการผู้สมัคร',
       description: 'จัดการข้อมูลผู้สมัครงาน',
       icon: 'e-icons e-people',
-      route: '/recruit/candidates',
+      route: '/portal/admin/recruit',
       color: 'bg-green-500'
     },
     {
       title: 'นัดสัมภาษณ์',
       description: 'จัดการนัดสัมภาษณ์',
       icon: 'e-icons e-calendar',
-      route: '/recruit/interviews',
+      route: '/portal/admin/recruit',
       color: 'bg-purple-500'
     },
     {
       title: 'รายงาน',
       description: 'รายงานการรับสมัคร',
       icon: 'e-icons e-chart',
-      route: '/recruit/reports',
+      route: '/portal/admin/recruit',
       color: 'bg-indigo-500'
     }
   ];
@@ -55,6 +55,8 @@ export class RecruitHomeComponent implements OnInit {
     this.router.navigate([route]);
   }
 }
+
+
 
 
 
