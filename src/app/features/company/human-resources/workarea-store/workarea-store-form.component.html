@@ -1,0 +1,221 @@
+<app-modal
+  [show]="isOpen"
+  [title]="(isEditMode ? 'company.workareaStore.edit' : 'company.workareaStore.add') | translate"
+  (closeEvent)="onClose()"
+  (confirmEvent)="onSubmit()">
+  
+  <form [formGroup]="form" class="space-y-6 p-2 max-h-[80vh] overflow-y-auto">
+    <!-- Basic Information -->
+    <div class="space-y-4">
+      <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 border-b pb-2">
+        {{ 'company.workareaStore.section.basicInfo' | translate }}
+      </h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <app-glass-input
+          [label]="'company.workareaStore.workareaId' | translate"
+          formControlName="workareaid"
+          [required]="true"
+          [readonly]="isEditMode"
+          [errorMessage]="'company.workareaStore.workareaIdRequired' | translate"
+          maxLength="10">
+        </app-glass-input>
+
+        <app-glass-input
+          [label]="'company.workareaStore.companyId' | translate"
+          formControlName="companyid"
+          [required]="true"
+          [readonly]="true">
+        </app-glass-input>
+      </div>
+
+      <app-glass-input
+        [label]="'company.workareaStore.tdesc' | translate"
+        formControlName="tdesc"
+        [required]="true"
+        [errorMessage]="'company.workareaStore.tdescRequired' | translate"
+        maxLength="100">
+      </app-glass-input>
+
+      <app-glass-input
+        [label]="'company.workareaStore.edesc' | translate"
+        formControlName="edesc"
+        [errorMessage]="'company.workareaStore.edescRequired' | translate"
+        maxLength="100">
+      </app-glass-input>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="form-group">
+          <label class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+            {{ 'company.workareaStore.groupId' | translate }} <span class="text-red-500">*</span>
+          </label>
+          <app-glass-input
+            formControlName="groupid"
+            [required]="true"
+            maxLength="10">
+          </app-glass-input>
+        </div>
+
+        <div class="form-group">
+          <label class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+            {{ 'company.workareaStore.zoneTypeId' | translate }} <span class="text-red-500">*</span>
+          </label>
+          <select 
+            formControlName="zonetypeid"
+            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-smooth">
+            <option value="">{{ 'common.select' | translate }}</option>
+            <option *ngFor="let zoneType of (zoneTypes$ | async)" [value]="zoneType.zonetypeid">
+              {{ zoneType.tdesc }} ({{ zoneType.zonetypeid }})
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="form-group">
+          <label class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+            {{ 'company.workareaStore.workTypeId' | translate }} <span class="text-red-500">*</span>
+          </label>
+          <select 
+            formControlName="worktypeid"
+            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-smooth">
+            <option value="">{{ 'common.select' | translate }}</option>
+            <option *ngFor="let workType of (workingAreaTypes$ | async)" [value]="workType.worktypeid">
+              {{ workType.tdesc }} ({{ workType.worktypeid }})
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+            {{ 'company.workareaStore.brandSupport' | translate }}
+          </label>
+          <select 
+            formControlName="brand_support"
+            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-smooth">
+            <option value="">{{ 'common.select' | translate }}</option>
+            <option *ngFor="let brandStore of (brandStores$ | async)" [value]="brandStore.brandstoreid">
+              {{ brandStore.tdesc }} ({{ brandStore.brandstoreid }})
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Information -->
+    <div class="space-y-4">
+      <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 border-b pb-2">
+        {{ 'company.workareaStore.section.contactInfo' | translate }}
+      </h3>
+      
+      <app-glass-input
+        [label]="'company.workareaStore.address' | translate"
+        formControlName="address"
+        maxLength="100">
+      </app-glass-input>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <app-glass-input
+          [label]="'company.workareaStore.provinceId' | translate"
+          formControlName="provinceid"
+          maxLength="5">
+        </app-glass-input>
+
+        <app-glass-input
+          [label]="'company.workareaStore.telphone' | translate"
+          formControlName="telphone"
+          maxLength="20">
+        </app-glass-input>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <app-glass-input
+          [label]="'company.workareaStore.extention' | translate"
+          formControlName="extention"
+          maxLength="10">
+        </app-glass-input>
+
+        <app-glass-input
+          [label]="'company.workareaStore.workEmail' | translate"
+          formControlName="work_email"
+          type="email"
+          maxLength="50">
+        </app-glass-input>
+      </div>
+    </div>
+
+    <!-- Dates & Status -->
+    <div class="space-y-4">
+      <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 border-b pb-2">
+        {{ 'company.workareaStore.section.datesStatus' | translate }}
+      </h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <app-glass-input
+          [label]="'company.workareaStore.datest' | translate"
+          formControlName="datest"
+          [required]="true"
+          type="date">
+        </app-glass-input>
+
+        <app-glass-input
+          [label]="'company.workareaStore.dateen' | translate"
+          formControlName="dateen"
+          type="date">
+        </app-glass-input>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="form-group">
+          <label class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+            {{ 'company.workareaStore.workStatus' | translate }}
+          </label>
+          <select 
+            formControlName="work_status"
+            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-smooth">
+            <option value="Y">{{ 'common.yes' | translate }}</option>
+            <option value="N">{{ 'common.no' | translate }}</option>
+          </select>
+        </div>
+
+        <app-glass-input
+          [label]="'company.workareaStore.simplifiedBranch' | translate"
+          formControlName="simplified_branch"
+          maxLength="100">
+        </app-glass-input>
+      </div>
+    </div>
+
+    <!-- Additional Information -->
+    <div class="space-y-4">
+      <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 border-b pb-2">
+        {{ 'company.workareaStore.section.additionalInfo' | translate }}
+      </h3>
+      
+      <div class="form-group">
+        <label class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+          {{ 'company.workareaStore.objective' | translate }}
+        </label>
+        <textarea 
+          formControlName="objective"
+          rows="3"
+          class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-smooth"
+          maxlength="4000">
+        </textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+          {{ 'company.workareaStore.remarks' | translate }}
+        </label>
+        <textarea 
+          formControlName="remarks"
+          rows="3"
+          class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-smooth"
+          maxlength="4000">
+        </textarea>
+      </div>
+    </div>
+  </form>
+
+</app-modal>

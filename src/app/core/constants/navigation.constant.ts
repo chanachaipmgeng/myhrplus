@@ -187,7 +187,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
                   { label: 'Work Area Location By Beacon', route: '/portal/admin/company/human-resources/workarea-beacon', icon: 'bluetooth_searching' },
                   { label: 'Brand Store Table (STORE)', route: '/portal/admin/company/human-resources/brand-store', icon: 'store' },
                   { label: 'Zone Type Table', route: '/portal/admin/company/human-resources/zone-type', icon: 'map' },
-                  { label: 'WorkArea', route: '/portal/admin/company/hr/branch-business-unit/workarea', icon: 'work' },
+                  { label: 'WorkArea', route: '/portal/admin/company/human-resources/workarea-store', icon: 'work' },
                   { label: 'Brand Store Table (STORE)', route: '/portal/admin/company/hr/branch-business-unit/brand-store', icon: 'storefront' }
                 ]
               },

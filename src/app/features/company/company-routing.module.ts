@@ -109,6 +109,10 @@ const routes: Routes = [
       {
         path: 'zone-type',
         loadComponent: () => import('./human-resources/zone-type/zone-type-list.component').then(m => m.ZoneTypeListComponent)
+      },
+      {
+        path: 'workarea-store',
+        loadComponent: () => import('./human-resources/workarea-store/workarea-store-list.component').then(m => m.WorkareaStoreListComponent)
       }
     ]
   },
