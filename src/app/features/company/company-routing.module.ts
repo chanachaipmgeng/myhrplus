@@ -41,6 +41,10 @@ const routes: Routes = [
       {
         path: 'division',
         loadComponent: () => import('./human-resources/division/division-list.component').then(m => m.DivisionListComponent)
+      },
+      {
+        path: 'department',
+        loadComponent: () => import('./human-resources/department/department-list.component').then(m => m.DepartmentListComponent)
       }
     ]
   },

@@ -170,7 +170,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
                 children: [
                   { label: 'Branch Social Security', route: '/portal/admin/company/human-resources/branch-social-security', icon: 'security' },
                   { label: 'Division', route: '/portal/admin/company/human-resources/division', icon: 'business' },
-                  { label: 'Department', route: '/portal/admin/company/hr/branch-business-unit/department', icon: 'folder' },
+                  { label: 'Department', route: '/portal/admin/company/human-resources/department', icon: 'folder' },
                   { label: 'Section', route: '/portal/admin/company/hr/branch-business-unit/section', icon: 'folder_open' },
                   { label: 'Team', route: '/portal/admin/company/hr/branch-business-unit/team', icon: 'group' },
                   { label: 'T2', route: '/portal/admin/company/hr/branch-business-unit/t2', icon: 'label' },

@@ -1,93 +1,67 @@
 <app-page-header 
-  title="Human Resources" 
-  subtitle="จัดการข้อมูลบริษัทและโครงสร้างองค์กร"
+  [title]="'company.humanResources.title' | translate" 
+  [subtitle]="'company.humanResources.subtitle' | translate"
   [showBreadcrumbs]="true">
 </app-page-header>
 
 <div class="p-6 bg-gray-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
-  <h3 class="text-lg font-bold text-gray-800 dark:text-slate-100 mb-4 border-b dark:border-slate-700 pb-2 transition-colors duration-300">Company Information</h3>
+  <!-- Company Information Section -->
+  <h3 class="text-lg font-bold text-gray-800 dark:text-slate-100 mb-4 border-b dark:border-slate-700 pb-2 transition-colors duration-300">
+    {{ 'company.humanResources.sections.companyInformation' | translate }}
+  </h3>
   
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-    <!-- Company Type (CS008) -->
-    <a [routerLink]="['company-type']" 
-       class="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md dark:hover:shadow-slate-900/50 transition-all duration-300 hover:border-blue-300 dark:hover:border-blue-600 group cursor-pointer">
+    <a *ngFor="let item of companyInformationItems"
+       [routerLink]="[item.route]" 
+       class="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md dark:hover:shadow-slate-900/50 transition-all duration-300 group cursor-pointer"
+       [ngClass]="getHoverBorderColorClass(item.badgeColor)">
       <div class="flex items-center justify-between mb-2">
-        <span class="text-xs font-semibold px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded transition-colors duration-300">CO01A0102</span>
-        <i class="material-icons text-gray-400 dark:text-slate-500 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors duration-300">business</i>
+        <span class="text-xs font-semibold px-2 py-1 rounded transition-colors duration-300"
+              [ngClass]="getBadgeColorClass(item.badgeColor)">
+          {{ item.code }}
+        </span>
+        <i class="material-icons text-gray-400 dark:text-slate-500 transition-colors duration-300"
+           [ngClass]="getHoverIconColorClass(item.badgeColor)">
+          {{ item.icon }}
+        </i>
       </div>
-      <h4 class="font-medium text-gray-800 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">ประเภทบริษัท</h4>
-      <p class="text-xs text-gray-500 dark:text-slate-400 mt-1 transition-colors duration-300">Company Type (CS008)</p>
-    </a>
-
-    <!-- Company Group (CS001) -->
-    <a [routerLink]="['company-group']" 
-       class="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md dark:hover:shadow-slate-900/50 transition-all duration-300 hover:border-blue-300 dark:hover:border-blue-600 group cursor-pointer">
-      <div class="flex items-center justify-between mb-2">
-        <span class="text-xs font-semibold px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded transition-colors duration-300">CO04A10</span>
-        <i class="material-icons text-gray-400 dark:text-slate-500 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors duration-300">layers</i>
-      </div>
-      <h4 class="font-medium text-gray-800 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">กลุ่มบริษัท</h4>
-      <p class="text-xs text-gray-500 dark:text-slate-400 mt-1 transition-colors duration-300">Company Group (CS001)</p>
-    </a>
-
-    <!-- Bank's Company Info (CS006) -->
-    <a [routerLink]="['bank-company']" 
-       class="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md dark:hover:shadow-slate-900/50 transition-all duration-300 hover:border-blue-300 dark:hover:border-blue-600 group cursor-pointer">
-      <div class="flex items-center justify-between mb-2">
-        <span class="text-xs font-semibold px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded transition-colors duration-300">CO01A0110</span>
-        <i class="material-icons text-gray-400 dark:text-slate-500 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors duration-300">account_balance</i>
-      </div>
-      <h4 class="font-medium text-gray-800 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">ข้อมูลธนาคาร</h4>
-      <p class="text-xs text-gray-500 dark:text-slate-400 mt-1 transition-colors duration-300">Bank Info (CS006)</p>
-    </a>
-
-    <!-- Company Assets (CS043) -->
-    <a [routerLink]="['company-asset']" 
-       class="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md dark:hover:shadow-slate-900/50 transition-all duration-300 hover:border-blue-300 dark:hover:border-blue-600 group cursor-pointer">
-      <div class="flex items-center justify-between mb-2">
-        <span class="text-xs font-semibold px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded transition-colors duration-300">CO01A0116</span>
-        <i class="material-icons text-gray-400 dark:text-slate-500 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors duration-300">inventory</i>
-      </div>
-      <h4 class="font-medium text-gray-800 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">ทะเบียนทรัพย์สิน</h4>
-      <p class="text-xs text-gray-500 dark:text-slate-400 mt-1 transition-colors duration-300">Company Assets (CS043)</p>
-    </a>
-
-    <!-- Company Papers (CS045) -->
-    <a [routerLink]="['company-paper']" 
-       class="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md dark:hover:shadow-slate-900/50 transition-all duration-300 hover:border-blue-300 dark:hover:border-blue-600 group cursor-pointer">
-      <div class="flex items-center justify-between mb-2">
-        <span class="text-xs font-semibold px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded transition-colors duration-300">CO01A0117</span>
-        <i class="material-icons text-gray-400 dark:text-slate-500 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors duration-300">description</i>
-      </div>
-      <h4 class="font-medium text-gray-800 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">ทะเบียนเอกสาร</h4>
-      <p class="text-xs text-gray-500 dark:text-slate-400 mt-1 transition-colors duration-300">Company Papers (CS045)</p>
+      <h4 class="font-medium text-gray-800 dark:text-slate-100 transition-colors duration-300"
+          [ngClass]="getHoverTextColorClass(item.badgeColor)">
+        {{ item.labelThai }}
+      </h4>
+      <p class="text-xs text-gray-500 dark:text-slate-400 mt-1 transition-colors duration-300">
+        {{ item.description }}
+      </p>
     </a>
   </div>
 
   <!-- Branch and Business Unit Section -->
-  <h3 class="text-lg font-bold text-gray-800 dark:text-slate-100 mb-4 mt-8 border-b dark:border-slate-700 pb-2 transition-colors duration-300">Branch and Business Unit</h3>
+  <h3 class="text-lg font-bold text-gray-800 dark:text-slate-100 mb-4 mt-8 border-b dark:border-slate-700 pb-2 transition-colors duration-300">
+    {{ 'company.humanResources.sections.branchBusinessUnit' | translate }}
+  </h3>
   
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-    <!-- Branch Social Security (CS047) -->
-    <a [routerLink]="['branch-social-security']" 
-       class="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md dark:hover:shadow-slate-900/50 transition-all duration-300 hover:border-green-300 dark:hover:border-green-600 group cursor-pointer">
+    <a *ngFor="let item of branchBusinessUnitItems"
+       [routerLink]="[item.route]" 
+       class="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md dark:hover:shadow-slate-900/50 transition-all duration-300 group cursor-pointer"
+       [ngClass]="getHoverBorderColorClass(item.badgeColor)">
       <div class="flex items-center justify-between mb-2">
-        <span class="text-xs font-semibold px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded transition-colors duration-300">CO01A0201</span>
-        <i class="material-icons text-gray-400 dark:text-slate-500 group-hover:text-green-500 dark:group-hover:text-green-400 transition-colors duration-300">security</i>
+        <span class="text-xs font-semibold px-2 py-1 rounded transition-colors duration-300"
+              [ngClass]="getBadgeColorClass(item.badgeColor)">
+          {{ item.code }}
+        </span>
+        <i class="material-icons text-gray-400 dark:text-slate-500 transition-colors duration-300"
+           [ngClass]="getHoverIconColorClass(item.badgeColor)">
+          {{ item.icon }}
+        </i>
       </div>
-      <h4 class="font-medium text-gray-800 dark:text-slate-100 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-300">ทะเบียนสาขาประกันสังคม</h4>
-      <p class="text-xs text-gray-500 dark:text-slate-400 mt-1 transition-colors duration-300">Branch Social Security (CS047)</p>
-    </a>
-
-    <!-- Division (PRU002) -->
-    <a [routerLink]="['division']" 
-       class="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md dark:hover:shadow-slate-900/50 transition-all duration-300 hover:border-green-300 dark:hover:border-green-600 group cursor-pointer">
-      <div class="flex items-center justify-between mb-2">
-        <span class="text-xs font-semibold px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded transition-colors duration-300">CO01A0202</span>
-        <i class="material-icons text-gray-400 dark:text-slate-500 group-hover:text-green-500 dark:group-hover:text-green-400 transition-colors duration-300">business</i>
-      </div>
-      <h4 class="font-medium text-gray-800 dark:text-slate-100 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-300">ทะเบียนฝ่าย</h4>
-      <p class="text-xs text-gray-500 dark:text-slate-400 mt-1 transition-colors duration-300">Division (PRU002)</p>
+      <h4 class="font-medium text-gray-800 dark:text-slate-100 transition-colors duration-300"
+          [ngClass]="getHoverTextColorClass(item.badgeColor)">
+        {{ item.labelThai }}
+      </h4>
+      <p class="text-xs text-gray-500 dark:text-slate-400 mt-1 transition-colors duration-300">
+        {{ item.description }}
+      </p>
     </a>
   </div>
 </div>
