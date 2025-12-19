@@ -207,6 +207,16 @@ export const HUMAN_RESOURCES_MENU_ITEMS: HumanResourcesMenuItem[] = [
     description: 'Approve Level (PRU_APPRVLEVEL)',
     category: 'branch-business-unit',
     badgeColor: 'green'
+  },
+  {
+    code: 'CO01A0214',
+    route: 'cost-center',
+    icon: 'account_tree',
+    labelThai: 'ทะเบียนคอร์สเซ้นเตอร์',
+    labelEnglish: 'Cost Center Table',
+    description: 'Cost Center (PRU034)',
+    category: 'branch-business-unit',
+    badgeColor: 'green'
   }
 ];
 

@@ -1,0 +1,43 @@
+<app-modal
+  [show]="isOpen"
+  [title]="(isEditMode ? 'company.costCenter.edit' : 'company.costCenter.add') | translate"
+  (closeEvent)="onClose()"
+  (confirmEvent)="onSubmit()">
+  
+  <form [formGroup]="form" class="space-y-4 p-2">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <app-glass-input
+        [label]="'company.costCenter.costCenterId' | translate"
+        formControlName="costcenterid"
+        [required]="true"
+        [readonly]="isEditMode"
+        [errorMessage]="'company.costCenter.costCenterIdRequired' | translate"
+        maxLength="10">
+      </app-glass-input>
+
+      <app-glass-input
+        [label]="'company.costCenter.companyId' | translate"
+        formControlName="companyid"
+        [required]="true"
+        [readonly]="true">
+      </app-glass-input>
+    </div>
+
+    <app-glass-input
+      [label]="'company.costCenter.tdesc' | translate"
+      formControlName="tdesc"
+      [required]="true"
+      [errorMessage]="'company.costCenter.tdescRequired' | translate"
+      maxLength="100">
+    </app-glass-input>
+
+    <app-glass-input
+      [label]="'company.costCenter.edesc' | translate"
+      formControlName="edesc"
+      [required]="true"
+      [errorMessage]="'company.costCenter.edescRequired' | translate"
+      maxLength="100">
+    </app-glass-input>
+  </form>
+
+</app-modal>

@@ -89,6 +89,10 @@ const routes: Routes = [
       {
         path: 'approve-level',
         loadComponent: () => import('./human-resources/approve-level/approve-level-list.component').then(m => m.ApproveLevelListComponent)
+      },
+      {
+        path: 'cost-center',
+        loadComponent: () => import('./human-resources/cost-center/cost-center-list.component').then(m => m.CostCenterListComponent)
       }
     ]
   },
