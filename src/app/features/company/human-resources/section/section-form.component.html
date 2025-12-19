@@ -1,0 +1,185 @@
+<app-modal
+  [show]="isOpen"
+  [title]="(isEditMode ? 'company.section.edit' : 'company.section.add') | translate"
+  (closeEvent)="onClose()"
+  (confirmEvent)="onSubmit()">
+  
+  <form [formGroup]="form" class="space-y-4 p-2">
+    <!-- BU3 ID (PK) -->
+    <app-glass-input
+      [label]="'company.section.bu3Id' | translate"
+      formControlName="bu3id"
+      [required]="true"
+      [readonly]="isEditMode"
+      [errorMessage]="'company.section.bu3IdRequired' | translate"
+      maxLength="10">
+    </app-glass-input>
+
+    <!-- Company ID (Readonly) -->
+    <app-glass-input
+      [label]="'company.section.companyId' | translate"
+      formControlName="companyid"
+      [required]="true"
+      [readonly]="true">
+    </app-glass-input>
+
+    <!-- Parent (Department - Required) -->
+    <app-glass-input
+      [label]="'company.section.parent' | translate"
+      formControlName="parent"
+      [required]="true"
+      [errorMessage]="'company.section.parentRequired' | translate"
+      maxLength="10">
+    </app-glass-input>
+
+    <!-- Thai Description -->
+    <app-glass-input
+      [label]="'company.section.tdesc' | translate"
+      formControlName="tdesc"
+      [required]="true"
+      [errorMessage]="'company.section.tdescRequired' | translate"
+      maxLength="200">
+    </app-glass-input>
+
+    <!-- English Description -->
+    <app-glass-input
+      [label]="'company.section.edesc' | translate"
+      formControlName="edesc"
+      [required]="true"
+      [errorMessage]="'company.section.edescRequired' | translate"
+      maxLength="200">
+    </app-glass-input>
+
+    <!-- Short Name -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <app-glass-input
+        [label]="'company.section.tshortName' | translate"
+        formControlName="tshort_name"
+        maxLength="10">
+      </app-glass-input>
+
+      <app-glass-input
+        [label]="'company.section.eshortName' | translate"
+        formControlName="eshort_name"
+        maxLength="10">
+      </app-glass-input>
+    </div>
+
+    <!-- Active (Radio) -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2 transition-colors duration-300">
+        {{ 'company.section.active' | translate }} <span class="text-red-500">*</span>
+      </label>
+      <div class="flex gap-4">
+        <label class="flex items-center cursor-pointer">
+          <input 
+            type="radio" 
+            formControlName="active" 
+            value="1"
+            class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+          <span class="ml-2 text-sm text-gray-700 dark:text-slate-300">{{ 'common.active' | translate }}</span>
+        </label>
+        <label class="flex items-center cursor-pointer">
+          <input 
+            type="radio" 
+            formControlName="active" 
+            value="0"
+            class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+          <span class="ml-2 text-sm text-gray-700 dark:text-slate-300">{{ 'common.inactive' | translate }}</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Dates -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <app-glass-input
+        [label]="'company.section.buildDate' | translate"
+        formControlName="build_date"
+        type="date"
+        [required]="true">
+      </app-glass-input>
+
+      <app-glass-input
+        [label]="'company.section.expireDate' | translate"
+        formControlName="expire_date"
+        type="date">
+      </app-glass-input>
+    </div>
+
+    <!-- Supervisor -->
+    <app-glass-input
+      [label]="'company.section.bu3Sup' | translate"
+      formControlName="bu3sup"
+      maxLength="10">
+    </app-glass-input>
+
+    <!-- Objective & Remark -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2 transition-colors duration-300">
+        {{ 'company.section.objective' | translate }}
+      </label>
+      <textarea 
+        formControlName="objective"
+        rows="3"
+        maxLength="4000"
+        class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-300 resize-none">
+      </textarea>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2 transition-colors duration-300">
+        {{ 'company.section.remark' | translate }}
+      </label>
+      <textarea 
+        formControlName="remark"
+        rows="3"
+        maxLength="4000"
+        class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-300 resize-none">
+      </textarea>
+    </div>
+
+    <!-- Additional Fields -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <app-glass-input
+        [label]="'company.section.extention' | translate"
+        formControlName="extention"
+        type="tel"
+        maxLength="10"
+        [errorMessage]="'company.section.error.numbersOnly' | translate">
+      </app-glass-input>
+
+      <app-glass-input
+        [label]="'company.section.consolidate' | translate"
+        formControlName="consolidate"
+        maxLength="10">
+      </app-glass-input>
+
+      <app-glass-input
+        [label]="'company.section.analcode' | translate"
+        formControlName="analcode"
+        maxLength="15">
+      </app-glass-input>
+
+      <app-glass-input
+        [label]="'company.section.sortNumber' | translate"
+        formControlName="sort_number"
+        type="number">
+      </app-glass-input>
+
+      <app-glass-input
+        [label]="'company.section.website' | translate"
+        formControlName="website"
+        maxLength="100">
+      </app-glass-input>
+
+      <app-glass-input
+        [label]="'company.section.email' | translate"
+        formControlName="email"
+        type="email"
+        maxLength="30"
+        [errorMessage]="'company.section.error.email' | translate">
+      </app-glass-input>
+    </div>
+  </form>
+
+</app-modal>

@@ -45,6 +45,14 @@ const routes: Routes = [
       {
         path: 'department',
         loadComponent: () => import('./human-resources/department/department-list.component').then(m => m.DepartmentListComponent)
+      },
+      {
+        path: 'section',
+        loadComponent: () => import('./human-resources/section/section-list.component').then(m => m.SectionListComponent)
+      },
+      {
+        path: 'team',
+        loadComponent: () => import('./human-resources/team/team-list.component').then(m => m.TeamListComponent)
       }
     ]
   },
