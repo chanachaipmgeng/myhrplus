@@ -1,19 +1,26 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { IconComponent } from '../icon/icon.component';
 
 export type ErrorType = 'network' | 'server' | 'validation' | 'permission' | 'notfound' | 'generic';
 
 @Component({
   selector: 'app-error-state',
+  standalone: true,
+  imports: [CommonModule, TranslateModule, IconComponent],
   templateUrl: './error-state.component.html',
   styleUrls: ['./error-state.component.scss']
 })
 export class ErrorStateComponent {
+  private translate = inject(TranslateService);
+  
   @Input() type: ErrorType = 'generic';
   @Input() title: string = '';
   @Input() message: string = '';
   @Input() errorCode: string | number = '';
   @Input() showRetry: boolean = false;
-  @Input() retryText: string = 'ลองอีกครั้ง';
+  @Input() retryText?: string;
   @Input() showDetails: boolean = false;
   @Input() details: string = '';
 
@@ -32,27 +39,31 @@ export class ErrorStateComponent {
   }
 
   get defaultTitle(): string {
-    const titleMap: Record<ErrorType, string> = {
-      network: 'ไม่สามารถเชื่อมต่อได้',
-      server: 'เกิดข้อผิดพลาดจากเซิร์ฟเวอร์',
-      validation: 'ข้อมูลไม่ถูกต้อง',
-      permission: 'ไม่มีสิทธิ์เข้าถึง',
-      notfound: 'ไม่พบข้อมูล',
-      generic: 'เกิดข้อผิดพลาด'
+    const keyMap: Record<ErrorType, string> = {
+      network: 'common.error.network.title',
+      server: 'common.error.server.title',
+      validation: 'common.error.validation.title',
+      permission: 'common.error.permission.title',
+      notfound: 'common.error.notfound.title',
+      generic: 'common.error.generic.title'
     };
-    return titleMap[this.type] || 'เกิดข้อผิดพลาด';
+    return this.translate.instant(keyMap[this.type] || 'common.error.generic.title');
   }
 
   get defaultMessage(): string {
-    const messageMap: Record<ErrorType, string> = {
-      network: 'กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ตและลองอีกครั้ง',
-      server: 'เกิดข้อผิดพลาดจากเซิร์ฟเวอร์ กรุณาลองอีกครั้งในภายหลัง',
-      validation: 'กรุณาตรวจสอบข้อมูลที่กรอกและลองอีกครั้ง',
-      permission: 'คุณไม่มีสิทธิ์เข้าถึงข้อมูลนี้ กรุณาติดต่อผู้ดูแลระบบ',
-      notfound: 'ไม่พบข้อมูลที่คุณกำลังค้นหา',
-      generic: 'เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ กรุณาลองอีกครั้ง'
+    const keyMap: Record<ErrorType, string> = {
+      network: 'common.error.network.message',
+      server: 'common.error.server.message',
+      validation: 'common.error.validation.message',
+      permission: 'common.error.permission.message',
+      notfound: 'common.error.notfound.message',
+      generic: 'common.error.generic.message'
     };
-    return messageMap[this.type] || 'เกิดข้อผิดพลาด';
+    return this.translate.instant(keyMap[this.type] || 'common.error.generic.message');
+  }
+
+  get displayRetryText(): string {
+    return this.retryText || this.translate.instant('common.retry');
   }
 
   onRetry(): void {

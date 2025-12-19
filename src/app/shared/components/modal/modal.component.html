@@ -26,7 +26,7 @@
           *ngIf="closable"
           #closeButton
           (click)="close()"
-          [attr.aria-label]="'ปิด'"
+          [attr.aria-label]="closeAriaLabel"
           class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
           <span aria-hidden="true">✕</span>
         </button>
@@ -42,16 +42,16 @@
         <app-glass-button
           *ngIf="showCancel"
           variant="secondary"
-          [ariaLabel]="cancelText"
+          [ariaLabel]="displayCancelText"
           (clicked)="onCancel()">
-          {{ cancelText }}
+          {{ displayCancelText }}
         </app-glass-button>
         <app-glass-button
           *ngIf="showConfirm"
           [variant]="confirmVariant"
-          [ariaLabel]="confirmText"
+          [ariaLabel]="displayConfirmText"
           (clicked)="onConfirm()">
-          {{ confirmText }}
+          {{ displayConfirmText }}
         </app-glass-button>
       </div>
     </div>

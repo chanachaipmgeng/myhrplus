@@ -30,7 +30,7 @@ import { FooterComponent } from './footer/footer.component';
     CommonModule,
     RouterModule,
     FormsModule, // For ngModel in search input
-    SharedModule,
+    // SharedModule,
     SyncfusionModule, // Syncfusion UI-KIT components
     ThemeToggleComponent, // Standalone component
     GlassButtonComponent, // Standalone component

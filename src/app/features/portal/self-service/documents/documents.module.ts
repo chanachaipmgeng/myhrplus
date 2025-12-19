@@ -12,7 +12,7 @@ import { Twi50Component } from './twi50/twi50.component';
     CommonModule,
     RouterModule,
     DocumentsRoutingModule,
-    SharedModule,
+    // SharedModule,
     // Standalone components
     Pnd91Component,
     Twi50Component

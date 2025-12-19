@@ -10,7 +10,7 @@ import { SharedModule } from '../../../../shared/shared.module';
     CommonModule,
     RouterModule,
     WelfareRoutingModule,
-    SharedModule
+    // SharedModule
   ]
 })
 export class WelfareModule { }

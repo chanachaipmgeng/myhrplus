@@ -11,7 +11,7 @@ import { SubordinatesListComponent } from './subordinates-list/subordinates-list
     CommonModule,
     RouterModule,
     SubordinatesRoutingModule,
-    SharedModule,
+    // SharedModule,
     // Standalone components
     SubordinatesListComponent
   ]

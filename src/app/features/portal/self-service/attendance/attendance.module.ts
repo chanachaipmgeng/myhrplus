@@ -11,7 +11,7 @@ import { AttendanceViewComponent } from './attendance-view/attendance-view.compo
     CommonModule,
     RouterModule,
     AttendanceRoutingModule,
-    SharedModule,
+    // SharedModule,
     // Standalone components
     AttendanceViewComponent
   ]

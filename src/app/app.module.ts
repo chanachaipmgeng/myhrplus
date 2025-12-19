@@ -37,7 +37,7 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
     SharedModule,
     LoadingSpinnerComponent,
     LayoutModule,
-    AuthModule,
+    // AuthModule,
     NgxEchartsModule.forRoot({ echarts })
   ],
   providers: [

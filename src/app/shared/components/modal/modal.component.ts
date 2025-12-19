@@ -1,15 +1,18 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, OnChanges, AfterViewInit, ElementRef, ViewChild, HostListener } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, OnChanges, AfterViewInit, ElementRef, ViewChild, HostListener, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { GlassButtonComponent } from '../glass-button/glass-button.component';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [CommonModule, GlassButtonComponent],
+  imports: [CommonModule, TranslateModule, GlassButtonComponent],
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
+  private translate = inject(TranslateService);
+  
   @Input() show: boolean = false;
   @Input() title: string = '';
   @Input() size: 'sm' | 'md' | 'lg' | 'xl' = 'md';
@@ -17,8 +20,8 @@ export class ModalComponent implements OnInit, OnDestroy, OnChanges, AfterViewIn
   @Input() showFooter: boolean = true;
   @Input() showCancel: boolean = true;
   @Input() showConfirm: boolean = true;
-  @Input() cancelText: string = 'ยกเลิก';
-  @Input() confirmText: string = 'ยืนยัน';
+  @Input() cancelText?: string;
+  @Input() confirmText?: string;
   @Input() confirmVariant: 'primary' | 'danger' = 'primary';
   @Input() closeOnBackdrop: boolean = true;
   @Input() ariaLabelledBy?: string;
@@ -166,6 +169,18 @@ export class ModalComponent implements OnInit, OnDestroy, OnChanges, AfterViewIn
 
   get modalDescriptionId(): string {
     return this.ariaDescribedBy || this.descriptionId;
+  }
+
+  get displayCancelText(): string {
+    return this.cancelText || this.translate.instant('common.cancel');
+  }
+
+  get displayConfirmText(): string {
+    return this.confirmText || this.translate.instant('common.confirm');
+  }
+
+  get closeAriaLabel(): string {
+    return this.translate.instant('common.close');
   }
 }
 

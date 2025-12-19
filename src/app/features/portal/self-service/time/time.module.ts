@@ -12,7 +12,7 @@ import { TimeWarningComponent } from './time-warning/time-warning.component';
     CommonModule,
     RouterModule,
     TimeRoutingModule,
-    SharedModule,
+    // SharedModule,
     // Standalone components
     TimestampComponent,
     TimeWarningComponent

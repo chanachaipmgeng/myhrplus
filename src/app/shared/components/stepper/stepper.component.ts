@@ -1,4 +1,7 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { IconComponent } from '../icon/icon.component';
 
 export interface StepperStep {
   label: string;
@@ -11,10 +14,13 @@ export interface StepperStep {
 
 @Component({
   selector: 'app-stepper',
+  standalone: true,
+  imports: [CommonModule, TranslateModule, IconComponent],
   templateUrl: './stepper.component.html',
   styleUrls: ['./stepper.component.scss']
 })
 export class StepperComponent implements OnInit {
+  private translate = inject(TranslateService);
   @Input() steps: StepperStep[] = [];
   @Input() currentStep: number = 0;
   @Input() orientation: 'horizontal' | 'vertical' = 'horizontal';

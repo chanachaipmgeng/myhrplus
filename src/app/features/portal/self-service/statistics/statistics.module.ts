@@ -13,7 +13,7 @@ import { EditTimeStatisticComponent } from './edit-time-statistic/edit-time-stat
     CommonModule,
     RouterModule,
     StatisticsRoutingModule,
-    SharedModule,
+    // SharedModule,
     // Standalone components
     LeaveStatisticComponent,
     OtStatisticComponent,

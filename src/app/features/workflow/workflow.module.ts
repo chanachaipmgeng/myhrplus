@@ -11,7 +11,7 @@ import { WorkflowHomeComponent } from './workflow-home/workflow-home.component';
   ],
   imports: [
     CommonModule,
-    SharedModule,
+    // SharedModule,
     LayoutModule,
     WorkflowRoutingModule
   ]

@@ -11,7 +11,7 @@ import { WelfareViewComponent } from './welfare-view/welfare-view.component';
     CommonModule,
     RouterModule,
     WelfareRoutingModule,
-    SharedModule,
+    // SharedModule,
     // Standalone components
     WelfareViewComponent
   ]

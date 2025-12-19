@@ -11,7 +11,7 @@ import { ProfileViewComponent } from './profile-view/profile-view.component';
     CommonModule,
     RouterModule,
     ProfileRoutingModule,
-    SharedModule,
+    // SharedModule,
     // Standalone components
     ProfileViewComponent
   ]

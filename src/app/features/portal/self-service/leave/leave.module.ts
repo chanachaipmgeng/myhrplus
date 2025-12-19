@@ -11,7 +11,7 @@ import { LeaveRequestComponent } from './leave-request/leave-request.component';
     CommonModule,
     RouterModule,
     LeaveRoutingModule,
-    SharedModule,
+    // SharedModule,
     // Standalone components
     LeaveRequestComponent
   ]

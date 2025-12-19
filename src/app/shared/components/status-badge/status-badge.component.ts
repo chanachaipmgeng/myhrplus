@@ -1,4 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { IconComponent } from '../icon/icon.component';
 
 export type StatusType = 
   | 'pending' | 'approved' | 'rejected' | 'cancelled'
@@ -9,10 +12,14 @@ export type StatusType =
 
 @Component({
   selector: 'app-status-badge',
+  standalone: true,
+  imports: [CommonModule, TranslateModule, IconComponent],
   templateUrl: './status-badge.component.html',
   styleUrls: ['./status-badge.component.scss']
 })
 export class StatusBadgeComponent {
+  private translate = inject(TranslateService);
+  
   @Input() status: StatusType = 'pending';
   @Input() label: string = '';
   @Input() showIcon: boolean = true;
@@ -22,27 +29,27 @@ export class StatusBadgeComponent {
   get displayLabel(): string {
     if (this.label) return this.label;
     
-    const labelMap: Record<StatusType, string> = {
-      pending: 'รอดำเนินการ',
-      approved: 'อนุมัติแล้ว',
-      rejected: 'ปฏิเสธ',
-      cancelled: 'ยกเลิก',
-      draft: 'ร่าง',
-      submitted: 'ส่งแล้ว',
-      reviewed: 'ตรวจสอบแล้ว',
-      completed: 'เสร็จสมบูรณ์',
-      active: 'ใช้งาน',
-      inactive: 'ไม่ใช้งาน',
-      suspended: 'ระงับ',
-      registered: 'ลงทะเบียนแล้ว',
-      ongoing: 'กำลังดำเนินการ',
-      finished: 'เสร็จสิ้น',
-      success: 'สำเร็จ',
-      error: 'ข้อผิดพลาด',
-      warning: 'คำเตือน',
-      info: 'ข้อมูล'
+    const keyMap: Record<StatusType, string> = {
+      pending: 'common.status.pending',
+      approved: 'common.status.approved',
+      rejected: 'common.status.rejected',
+      cancelled: 'common.status.cancelled',
+      draft: 'common.status.draft',
+      submitted: 'common.status.submitted',
+      reviewed: 'common.status.reviewed',
+      completed: 'common.status.completed',
+      active: 'common.active',
+      inactive: 'common.inactive',
+      suspended: 'common.status.suspended',
+      registered: 'common.status.registered',
+      ongoing: 'common.status.ongoing',
+      finished: 'common.status.finished',
+      success: 'common.status.success',
+      error: 'common.status.error',
+      warning: 'common.status.warning',
+      info: 'common.status.info'
     };
-    return labelMap[this.status] || this.status;
+    return this.translate.instant(keyMap[this.status] || this.status);
   }
 
   get statusIcon(): string {

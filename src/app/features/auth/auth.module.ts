@@ -23,7 +23,7 @@ import { AuthRoutingModule } from './auth-routing.module';
     FormsModule,
     RouterModule,
     TranslateModule,
-    SharedModule,
+    // SharedModule,
     SyncfusionModule,
     AuthRoutingModule
   ]

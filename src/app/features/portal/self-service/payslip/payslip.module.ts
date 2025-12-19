@@ -11,7 +11,7 @@ import { PayslipViewComponent } from './payslip-view/payslip-view.component';
     CommonModule,
     RouterModule,
     PayslipRoutingModule,
-    SharedModule,
+    // SharedModule,
     // Standalone components
     PayslipViewComponent
   ]
