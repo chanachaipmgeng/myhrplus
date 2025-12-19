@@ -210,38 +210,7 @@
           </p>
         </div>
 
-        <!-- Breadcrumb -->
-        <div class="mb-4" *ngIf="getBreadcrumbPath().length > 1">
-          <div class="breadcrumb-container flex items-center gap-1.5 text-xs
-                     bg-white/30 dark:bg-gray-800/30 theme-gemini:bg-white/10
-                     backdrop-blur-sm rounded-lg px-3 py-2
-                     border border-white/20 dark:border-gray-700/30 theme-gemini:border-white/20">
-            <span *ngFor="let item of getBreadcrumbPath(); let last = last; let i = index"
-                  class="breadcrumb-item flex items-center gap-1.5">
-              <button *ngIf="item.route && !last"
-                      (click)="navigateToBreadcrumb(item)"
-                      class="breadcrumb-link
-                             text-gray-600 dark:text-gray-400 theme-gemini:text-white/80
-                             hover:text-blue-600 dark:hover:text-blue-400 theme-gemini:hover:text-blue-300
-                             transition-colors duration-200 cursor-pointer
-                             px-2 py-1 rounded hover:bg-white/20 dark:hover:bg-gray-700/20">
-                {{ item.label }}
-              </button>
-              <span *ngIf="!item.route || last"
-                    class="breadcrumb-current px-2 py-1 rounded
-                           font-medium
-                           text-gray-800 dark:text-gray-200 theme-gemini:text-white
-                           bg-blue-50 dark:bg-blue-900/20 theme-gemini:bg-blue-500/20">
-                {{ item.label }}
-              </span>
-              <span *ngIf="!last"
-                    class="breadcrumb-separator text-gray-400 dark:text-gray-500 theme-gemini:text-white/50 mx-1">
-                <app-icon name="chevron_right" size="xs"></app-icon>
-              </span>
-            </span>
-          </div>
-        </div>
-
+  
         <!-- Back Button (when in Level 3+) -->
         <div class="mb-4" *ngIf="(selectedNavigationItem && selectedNavigationItem.id === 'admin' && selectedLevel3Item) ||
                                  (selectedNavigationItem && selectedNavigationItem.id === 'ess' && (selectedLevel3Item || selectedLevel4Item))">
@@ -325,6 +294,7 @@
             [activeRoute]="activeRoute"
             [level]="3"
             [expandedItems]="expandedLevel3Items"
+            [navId]="selectedNavigationItem ? selectedNavigationItem.id : undefined"
             (itemClick)="onAccordionItemClick($event)"
             (toggleExpand)="onAccordionToggleExpand($event)">
           </app-nested-menu-accordion>

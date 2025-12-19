@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { NavigationChild } from '../../../core/constants/navigation.constant';
 import { IconComponent } from '../icon/icon.component';
@@ -8,7 +9,7 @@ import { IconComponent } from '../icon/icon.component';
 @Component({
   selector: 'app-nested-menu-accordion',
   standalone: true,
-  imports: [CommonModule, RouterModule, IconComponent],
+  imports: [CommonModule, RouterModule, TranslateModule, IconComponent],
   templateUrl: './nested-menu-accordion.component.html',
   styleUrls: ['./nested-menu-accordion.component.scss'],
   animations: [
@@ -24,10 +25,13 @@ import { IconComponent } from '../icon/icon.component';
   ]
 })
 export class NestedMenuAccordionComponent {
+  private translate = inject(TranslateService);
+  
   @Input() items: NavigationChild[] = [];
   @Input() activeRoute: string = '';
   @Input() level: number = 3; // 3 or 4
   @Input() expandedItems: Set<string> = new Set();
+  @Input() navId?: string; // Navigation ID for translation context
   @Output() itemClick = new EventEmitter<NavigationChild>();
   @Output() toggleExpand = new EventEmitter<{ item: NavigationChild; expanded: boolean }>();
 
@@ -134,6 +138,87 @@ export class NestedMenuAccordionComponent {
     };
 
     return iconMap[iconName.toLowerCase()] || 'e-icons e-folder';
+  }
+
+  /**
+   * Translate navigation label
+   * Converts label to translation key and returns translated text
+   */
+  translateLabel(label: string): string {
+    if (!label) return '';
+    
+    // Try to find translation key
+    // Pattern: navigation.{navId}.{labelKey} or navigation.{labelKey}
+    const labelKey = this.normalizeLabelToKey(label);
+    let translationKey = '';
+    
+    if (this.navId && this.level) {
+      // Try with navigation id and level
+      translationKey = `navigation.${this.navId}.level${this.level}.${labelKey}`;
+      const translated = this.translate.instant(translationKey);
+      if (translated !== translationKey) return translated;
+    }
+    
+    if (this.navId) {
+      // Try with navigation id only
+      translationKey = `navigation.${this.navId}.${labelKey}`;
+      const translated = this.translate.instant(translationKey);
+      if (translated !== translationKey) return translated;
+    }
+    
+    // Try generic navigation key
+    translationKey = `navigation.${labelKey}`;
+    const translated = this.translate.instant(translationKey);
+    if (translated !== translationKey) return translated;
+    
+    // If no translation found, return original label
+    return label;
+  }
+
+  /**
+   * Normalize label to translation key format
+   * Converts "ลงเวลา (Time)" to "time" or "Self Service" to "selfService"
+   */
+  private normalizeLabelToKey(label: string): string {
+    if (!label) return '';
+    
+    // First, try to extract English text from parentheses (e.g., "ลงเวลา (Time)" -> "Time")
+    const parenthesesMatch = label.match(/\(([^)]+)\)/);
+    if (parenthesesMatch && parenthesesMatch[1]) {
+      const englishText = parenthesesMatch[1].trim();
+      // Convert to camelCase
+      return englishText
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .split(' ')
+        .map((word, index) => {
+          if (index === 0) return word;
+          return word.charAt(0).toUpperCase() + word.slice(1);
+        })
+        .join('');
+    }
+    
+    // If no parentheses, process the whole label
+    let key = label
+      .replace(/\([^)]*\)/g, '') // Remove any remaining parentheses
+      .trim();
+    
+    // Convert to camelCase
+    key = key
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '') // Remove special characters
+      .replace(/\s+/g, ' ') // Normalize spaces
+      .trim()
+      .split(' ')
+      .map((word, index) => {
+        if (index === 0) return word;
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      })
+      .join('');
+    
+    return key;
   }
 
   /**

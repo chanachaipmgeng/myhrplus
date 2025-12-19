@@ -24,7 +24,7 @@
             class="menu-item-icon"></span>
       
       <!-- Label -->
-      <span class="menu-item-label">{{ item.label }}</span>
+      <span class="menu-item-label">{{ translateLabel(item.label) }}</span>
       
       <!-- Badge -->
       <span *ngIf="item.badge" 
@@ -52,6 +52,7 @@
         [activeRoute]="activeRoute"
         [level]="4"
         [expandedItems]="expandedItems"
+        [navId]="navId"
         (itemClick)="itemClick.emit($event)"
         (toggleExpand)="toggleExpand.emit($event)">
       </app-nested-menu-accordion>
