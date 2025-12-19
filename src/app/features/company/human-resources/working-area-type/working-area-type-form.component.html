@@ -1,0 +1,66 @@
+<app-modal
+  [show]="isOpen"
+  [title]="(isEditMode ? 'company.workingAreaType.edit' : 'company.workingAreaType.add') | translate"
+  (closeEvent)="onClose()"
+  (confirmEvent)="onSubmit()">
+  
+  <form [formGroup]="form" class="space-y-4 p-2">
+    <app-glass-input
+      [label]="'company.workingAreaType.workTypeId' | translate"
+      formControlName="worktypeid"
+      [required]="true"
+      [readonly]="isEditMode"
+      [errorMessage]="'company.workingAreaType.workTypeIdRequired' | translate"
+      maxLength="10">
+    </app-glass-input>
+
+    <app-glass-input
+      [label]="'company.workingAreaType.companyId' | translate"
+      formControlName="companyid"
+      [required]="true"
+      [readonly]="true">
+    </app-glass-input>
+
+    <app-glass-input
+      [label]="'company.workingAreaType.tdesc' | translate"
+      formControlName="tdesc"
+      [required]="true"
+      [errorMessage]="'company.workingAreaType.tdescRequired' | translate"
+      maxLength="200">
+    </app-glass-input>
+
+    <app-glass-input
+      [label]="'company.workingAreaType.edesc' | translate"
+      formControlName="edesc"
+      [required]="true"
+      [errorMessage]="'company.workingAreaType.edescRequired' | translate"
+      maxLength="200">
+    </app-glass-input>
+
+    <!-- Work Status (Radio) -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2 transition-colors duration-300">
+        {{ 'company.workingAreaType.workStatus' | translate }} <span class="text-red-500">*</span>
+      </label>
+      <div class="flex gap-4">
+        <label class="flex items-center cursor-pointer">
+          <input 
+            type="radio" 
+            formControlName="work_status" 
+            value="1"
+            class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+          <span class="ml-2 text-sm text-gray-700 dark:text-slate-300">{{ 'common.active' | translate }}</span>
+        </label>
+        <label class="flex items-center cursor-pointer">
+          <input 
+            type="radio" 
+            formControlName="work_status" 
+            value="0"
+            class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+          <span class="ml-2 text-sm text-gray-700 dark:text-slate-300">{{ 'common.inactive' | translate }}</span>
+        </label>
+      </div>
+    </div>
+  </form>
+
+</app-modal>

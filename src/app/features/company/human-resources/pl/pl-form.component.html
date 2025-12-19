@@ -1,0 +1,63 @@
+<app-modal
+  [show]="isOpen"
+  [title]="(isEditMode ? 'company.pl.edit' : 'company.pl.add') | translate"
+  (closeEvent)="onClose()"
+  (confirmEvent)="onSubmit()">
+  
+  <form [formGroup]="form" class="space-y-4 p-2">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <app-glass-input
+        [label]="'company.pl.plId' | translate"
+        formControlName="plid"
+        [required]="true"
+        [readonly]="isEditMode"
+        [errorMessage]="'company.pl.plIdRequired' | translate"
+        maxLength="10">
+      </app-glass-input>
+
+      <app-glass-input
+        [label]="'company.pl.companyId' | translate"
+        formControlName="companyid"
+        [required]="true"
+        [readonly]="true">
+      </app-glass-input>
+    </div>
+
+    <app-glass-input
+      [label]="'company.pl.tdesc' | translate"
+      formControlName="tdesc"
+      [required]="true"
+      [errorMessage]="'company.pl.tdescRequired' | translate"
+      maxLength="100">
+    </app-glass-input>
+
+    <app-glass-input
+      [label]="'company.pl.edesc' | translate"
+      formControlName="edesc"
+      [required]="true"
+      [errorMessage]="'company.pl.edescRequired' | translate"
+      maxLength="100">
+    </app-glass-input>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <app-glass-input
+        [label]="'company.pl.jobGradeId' | translate"
+        formControlName="jobgradeid"
+        maxLength="10">
+      </app-glass-input>
+
+      <app-glass-input
+        [label]="'company.pl.band' | translate"
+        formControlName="band"
+        maxLength="10">
+      </app-glass-input>
+
+      <app-glass-input
+        [label]="'company.pl.orderNo' | translate"
+        formControlName="order_no"
+        type="number">
+      </app-glass-input>
+    </div>
+  </form>
+
+</app-modal>

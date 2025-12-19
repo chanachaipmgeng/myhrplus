@@ -77,6 +77,14 @@ const routes: Routes = [
       {
         path: 'working-area',
         loadComponent: () => import('./human-resources/working-area/working-area-list.component').then(m => m.WorkingAreaListComponent)
+      },
+      {
+        path: 'working-area-type',
+        loadComponent: () => import('./human-resources/working-area-type/working-area-type-list.component').then(m => m.WorkingAreaTypeListComponent)
+      },
+      {
+        path: 'pl',
+        loadComponent: () => import('./human-resources/pl/pl-list.component').then(m => m.PLListComponent)
       }
     ]
   },
