@@ -56,9 +56,9 @@
         <button *ngFor="let level2Item of level2Items; let i = index"
                 (click)="selectLevel2Item(level2Item, selectedNavigationItem)"
                 [class.active]="selectedLevel2Item === level2Item"
-                [attr.aria-label]="level2Item.label"
+                [attr.aria-label]="translateLabel(level2Item.label, selectedNavigationItem ? selectedNavigationItem.id : undefined, 2)"
                 [attr.aria-current]="selectedLevel2Item === level2Item ? 'true' : 'false'"
-                [attr.title]="level2Item.label"
+                [attr.title]="translateLabel(level2Item.label, selectedNavigationItem ? selectedNavigationItem.id : undefined, 2)"
                 [style.animation-delay.ms]="i * 50"
                 class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl
                        transition-all duration-300 ease-out
@@ -93,7 +93,7 @@
           <!-- Tooltip -->
           <span class="module-tooltip
                        animate-fade-in
-                       [animation-delay:100ms]">{{ level2Item.label }}</span>
+                       [animation-delay:100ms]">{{ translateLabel(level2Item.label, selectedNavigationItem ? selectedNavigationItem.id : undefined, 2) }}</span>
         </button>
       </ng-container>
 
@@ -101,10 +101,10 @@
       <ng-container *ngIf="!selectedNavigationItem || level2Items.length === 0">
         <button *ngFor="let navItem of navigationItems; let i = index"
                 (click)="selectNavigationItem(navItem.id)"
-                [class.active]="selectedNavigationItem?.id === navItem.id"
-                [attr.aria-label]="navItem.label"
-                [attr.aria-current]="selectedNavigationItem?.id === navItem.id ? 'true' : 'false'"
-                [attr.title]="navItem.label"
+                [class.active]="selectedNavigationItem && selectedNavigationItem.id === navItem.id"
+                [attr.aria-label]="translateLabel(navItem.label, navItem.id, 1)"
+                [attr.aria-current]="selectedNavigationItem && selectedNavigationItem.id === navItem.id ? 'true' : 'false'"
+                [attr.title]="translateLabel(navItem.label, navItem.id, 1)"
                 [style.animation-delay.ms]="i * 50"
                 class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl
                        transition-all duration-300 ease-out
@@ -126,7 +126,7 @@
             {{ navItem.icon }}
           </span>
           <!-- Active Indicator -->
-          <span *ngIf="selectedNavigationItem?.id === navItem.id"
+          <span *ngIf="selectedNavigationItem && selectedNavigationItem.id === navItem.id"
                 class="active-indicator
                        animate-pulse"></span>
           <!-- Badge -->
@@ -139,7 +139,7 @@
           <!-- Tooltip -->
           <span class="module-tooltip
                        animate-fade-in
-                       [animation-delay:100ms]">{{ navItem.label }}</span>
+                       [animation-delay:100ms]">{{ translateLabel(navItem.label, navItem.id, 1) }}</span>
         </button>
       </ng-container>
 
@@ -203,10 +203,10 @@
           <h2 class="module-title text-xl font-bold thai-text
                      text-gray-800 dark:text-gray-100 theme-gemini:text-white
                      mb-1 transition-colors duration-300">
-            {{ selectedLevel2Item?.label || selectedNavigationItem?.label || ('layout.sidebar.menu' | translate) }}
+            {{ translateLabel((selectedLevel2Item ? selectedLevel2Item.label : (selectedNavigationItem ? selectedNavigationItem.label : '')) || '', selectedNavigationItem ? selectedNavigationItem.id : undefined, selectedLevel2Item ? 2 : 1) || ('layout.sidebar.menu' | translate) }}
           </h2>
           <p class="text-xs text-gray-500 dark:text-gray-400 theme-gemini:text-white/70" *ngIf="selectedNavigationItem">
-            {{ selectedNavigationItem.label }}
+            {{ translateLabel(selectedNavigationItem.label, selectedNavigationItem.id, 1) }}
           </p>
         </div>
 
@@ -243,8 +243,8 @@
         </div>
 
         <!-- Back Button (when in Level 3+) -->
-        <div class="mb-4" *ngIf="(selectedNavigationItem?.id === 'admin' && selectedLevel3Item) ||
-                                 (selectedNavigationItem?.id === 'ess' && (selectedLevel3Item || selectedLevel4Item))">
+        <div class="mb-4" *ngIf="(selectedNavigationItem && selectedNavigationItem.id === 'admin' && selectedLevel3Item) ||
+                                 (selectedNavigationItem && selectedNavigationItem.id === 'ess' && (selectedLevel3Item || selectedLevel4Item))">
           <button (click)="goBackToLevel2()"
                   class="back-button flex items-center gap-2 px-4 py-2 rounded-lg
                          transition-all duration-200 ease-out

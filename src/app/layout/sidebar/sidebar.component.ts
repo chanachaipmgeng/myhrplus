@@ -469,6 +469,87 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Translate navigation label
+   * Converts label to translation key and returns translated text
+   */
+  translateLabel(label: string, navId?: string, level?: number): string {
+    if (!label) return '';
+    
+    // Try to find translation key
+    // Pattern: navigation.{navId}.{labelKey} or navigation.{labelKey}
+    const labelKey = this.normalizeLabelToKey(label);
+    let translationKey = '';
+    
+    if (navId && level) {
+      // Try with navigation id and level
+      translationKey = `navigation.${navId}.level${level}.${labelKey}`;
+      const translated = this.translate.instant(translationKey);
+      if (translated !== translationKey) return translated;
+    }
+    
+    if (navId) {
+      // Try with navigation id only
+      translationKey = `navigation.${navId}.${labelKey}`;
+      const translated = this.translate.instant(translationKey);
+      if (translated !== translationKey) return translated;
+    }
+    
+    // Try generic navigation key
+    translationKey = `navigation.${labelKey}`;
+    const translated = this.translate.instant(translationKey);
+    if (translated !== translationKey) return translated;
+    
+    // If no translation found, return original label
+    return label;
+  }
+
+  /**
+   * Normalize label to translation key format
+   * Converts "ลงเวลา (Time)" to "time" or "Self Service" to "selfService"
+   */
+  private normalizeLabelToKey(label: string): string {
+    if (!label) return '';
+    
+    // First, try to extract English text from parentheses (e.g., "ลงเวลา (Time)" -> "Time")
+    const parenthesesMatch = label.match(/\(([^)]+)\)/);
+    if (parenthesesMatch && parenthesesMatch[1]) {
+      const englishText = parenthesesMatch[1].trim();
+      // Convert to camelCase
+      return englishText
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .split(' ')
+        .map((word, index) => {
+          if (index === 0) return word;
+          return word.charAt(0).toUpperCase() + word.slice(1);
+        })
+        .join('');
+    }
+    
+    // If no parentheses, process the whole label
+    let key = label
+      .replace(/\([^)]*\)/g, '') // Remove any remaining parentheses
+      .trim();
+    
+    // Convert to camelCase
+    key = key
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '') // Remove special characters
+      .replace(/\s+/g, ' ') // Normalize spaces
+      .trim()
+      .split(' ')
+      .map((word, index) => {
+        if (index === 0) return word;
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      })
+      .join('');
+    
+    return key;
+  }
+
+  /**
    * Get breadcrumb path for current navigation
    */
   getBreadcrumbPath(): Array<{ label: string; route?: string; level: number }> {
@@ -477,7 +558,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     // Level 1
     if (this.selectedNavigationItem) {
       path.push({
-        label: this.selectedNavigationItem.label,
+        label: this.translateLabel(this.selectedNavigationItem.label, this.selectedNavigationItem.id, 1),
         level: 1
       });
     }
@@ -485,7 +566,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     // Level 2 (only for Admin, not for ESS)
     if (this.selectedNavigationItem?.id === 'admin' && this.selectedLevel2Item) {
       path.push({
-        label: this.selectedLevel2Item.label,
+        label: this.translateLabel(this.selectedLevel2Item.label, this.selectedNavigationItem.id, 2),
         route: this.selectedLevel2Item.route,
         level: 2
       });
@@ -494,7 +575,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     // Level 3 (if active)
     if (this.selectedLevel3Item) {
       path.push({
-        label: this.selectedLevel3Item.label,
+        label: this.translateLabel(this.selectedLevel3Item.label, this.selectedNavigationItem?.id, 3),
         route: this.selectedLevel3Item.route,
         level: 3
       });
@@ -503,7 +584,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     // Level 4 (if active)
     if (this.selectedLevel4Item) {
       path.push({
-        label: this.selectedLevel4Item.label,
+        label: this.translateLabel(this.selectedLevel4Item.label, this.selectedNavigationItem?.id, 4),
         route: this.selectedLevel4Item.route,
         level: 4
       });
