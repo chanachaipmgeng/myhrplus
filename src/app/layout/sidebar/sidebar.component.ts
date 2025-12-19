@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy, ViewChild, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, HostListener, ElementRef, inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter, takeUntil, switchMap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { TranslateService } from '@ngx-translate/core';
 import { MenuService, MenuItem } from '../../core/services/menu.service';
 import { AuthService } from '../../core/services/auth.service';
 import { ThemeService } from '../../core/services/theme.service';
@@ -41,6 +42,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   @ViewChild('listview') listview!: ListViewComponent;
   @ViewChild('userMenuContainer', { static: false }) userMenuContainer!: ElementRef;
 
+  private translate = inject(TranslateService);
   menuItems: MenuItem[] = [];
   mainModules: MainModule[] = []; // Legacy - keep for backward compatibility
   navigationItems: NavigationItem[] = []; // New navigation structure (Level 1)
@@ -952,8 +954,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   getUserDisplayName(): string {
-    if (!this.currentUser) return 'ผู้ใช้';
-    return this.currentUser.fullname || this.currentUser.name || this.currentUser.username || 'ผู้ใช้';
+    if (!this.currentUser) return this.translate.instant('layout.sidebar.user');
+    return this.currentUser.fullname || this.currentUser.name || this.currentUser.username || this.translate.instant('layout.sidebar.user');
   }
 
   getUserRole(): string {

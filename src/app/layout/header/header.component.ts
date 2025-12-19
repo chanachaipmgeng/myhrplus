@@ -1,7 +1,8 @@
-import { Component, Output, EventEmitter, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, OnDestroy, ViewChild, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../core/services/auth.service';
 import { I18nService, Language } from '../../core/services/i18n.service';
 import { NotificationService, Notification } from '../../core/services/notification.service';
@@ -16,16 +17,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Output() toggleSidenav = new EventEmitter<void>();
   @ViewChild('omniSearch', { static: false }) omniSearch!: OmniSearchComponent;
 
+  private translate = inject(TranslateService);
   currentLanguage: Language = 'th';
   showLanguageMenu = false;
   showUserMenu = false;
   showNotificationMenu = false;
   private destroy$ = new Subject<void>();
 
-  languages: { value: Language; label: string; flag: string }[] = [
-    { value: 'th', label: 'ไทย', flag: '🇹🇭' },
-    { value: 'en', label: 'English', flag: '🇬🇧' }
-  ];
+  languages: { value: Language; label: string; flag: string }[] = [];
 
   notifications: Notification[] = [];
   unreadCount = 0;
@@ -43,6 +42,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // Initialize languages
+    this.languages = [
+      { value: 'th', label: this.translate.instant('common.languages.thai'), flag: '🇹🇭' },
+      { value: 'en', label: this.translate.instant('common.languages.english'), flag: '🇬🇧' }
+    ];
+    
+    // Update languages when language changes
+    this.translate.onLangChange.subscribe(() => {
+      this.languages = [
+        { value: 'th', label: this.translate.instant('common.languages.thai'), flag: '🇹🇭' },
+        { value: 'en', label: this.translate.instant('common.languages.english'), flag: '🇬🇧' }
+      ];
+    });
+    
     // Subscribe to notifications
     this.notificationService.notifications$.pipe(takeUntil(this.destroy$)).subscribe(notifications => {
       this.notifications = notifications;
@@ -151,11 +164,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const hours = Math.floor(diff / 3600000);
     const days = Math.floor(diff / 86400000);
 
-    if (minutes < 1) return 'เมื่อสักครู่';
-    if (minutes < 60) return `${minutes} นาทีที่แล้ว`;
-    if (hours < 24) return `${hours} ชั่วโมงที่แล้ว`;
-    if (days < 7) return `${days} วันที่แล้ว`;
-    return new Date(date).toLocaleDateString('th-TH');
+    if (minutes < 1) return this.translate.instant('common.timeAgo.justNow');
+    if (minutes < 60) return this.translate.instant('common.timeAgo.minutesAgo', { minutes });
+    if (hours < 24) return this.translate.instant('common.timeAgo.hoursAgo', { hours });
+    if (days < 7) return this.translate.instant('common.timeAgo.daysAgo', { days });
+    return new Date(date).toLocaleDateString(this.currentLanguage === 'th' ? 'th-TH' : 'en-US');
   }
 
   openOmniSearch(): void {

@@ -49,7 +49,7 @@
                        text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">
             home
           </span>
-          <span class="module-tooltip animate-fade-in">หน้าแรก</span>
+          <span class="module-tooltip animate-fade-in">{{ 'layout.sidebar.home' | translate }}</span>
         </button>
 
         <!-- Level 2 Items (children of selected Level 1) -->
@@ -203,7 +203,7 @@
           <h2 class="module-title text-xl font-bold thai-text
                      text-gray-800 dark:text-gray-100 theme-gemini:text-white
                      mb-1 transition-colors duration-300">
-            {{ selectedLevel2Item?.label || selectedNavigationItem?.label || 'เมนู' }}
+            {{ selectedLevel2Item?.label || selectedNavigationItem?.label || ('layout.sidebar.menu' | translate) }}
           </h2>
           <p class="text-xs text-gray-500 dark:text-gray-400 theme-gemini:text-white/70" *ngIf="selectedNavigationItem">
             {{ selectedNavigationItem.label }}
@@ -257,7 +257,7 @@
                          backdrop-blur-sm
                          border border-white/30 dark:border-gray-700/30 theme-gemini:border-white/20">
             <span class="material-icons text-base">arrow_back</span>
-            <span class="thai-text">กลับ</span>
+            <span class="thai-text">{{ 'layout.sidebar.back' | translate }}</span>
           </button>
         </div>
 
@@ -268,7 +268,7 @@
               type="text"
               [(ngModel)]="searchQuery"
               (input)="onSearchChange()"
-              [placeholder]="'ค้นหาเมนู...'"
+              [placeholder]="'layout.sidebar.searchMenuPlaceholder' | translate"
               class="search-input w-full px-4 py-3 pl-11 pr-11 rounded-xl
                      transition-all duration-300 ease-out
                      focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50
@@ -279,7 +279,7 @@
                      text-gray-800 dark:text-gray-200 theme-gemini:text-white
                      placeholder:text-gray-500 dark:placeholder:text-gray-400 theme-gemini:placeholder:text-white/50
                      group"
-              [attr.aria-label]="'ค้นหาเมนู'">
+              [attr.aria-label]="'layout.sidebar.searchMenu' | translate">
             <app-icon name="search" size="sm"
                       color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70
                              group-focus:text-blue-500 dark:group-focus:text-blue-400
@@ -294,7 +294,7 @@
                      hover:bg-gray-200/50 dark:hover:bg-gray-700/50 theme-gemini:hover:bg-white/20
                      hover:scale-110 active:scale-95
                      transition-all duration-200 ease-out"
-              [attr.aria-label]="'ล้างการค้นหา'"
+              [attr.aria-label]="'layout.sidebar.clearSearch' | translate"
               type="button">
               <app-icon name="close" size="sm"
                         color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70
@@ -353,10 +353,10 @@
           <app-icon name="search_off" size="lg" color="text-gray-400 dark:text-gray-600 theme-gemini:text-white/60"></app-icon>
         </div>
         <p class="empty-text thai-text text-center text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 font-medium mb-2">
-          ไม่พบเมนูที่ค้นหา
+          {{ 'layout.sidebar.noSearchResults' | translate }}
         </p>
         <p class="text-xs text-gray-500 dark:text-gray-500 theme-gemini:text-white/50 mb-4">
-          ลองค้นหาด้วยคำอื่น
+          {{ 'layout.sidebar.tryDifferentSearch' | translate }}
         </p>
         <button
           (click)="clearSearch()"
@@ -368,7 +368,7 @@
                  transition-all duration-300
                  border border-white/30 dark:border-gray-700/30 theme-gemini:border-white/20"
           type="button">
-          ล้างการค้นหา
+          {{ 'layout.sidebar.clearSearch' | translate }}
         </button>
       </div>
 
@@ -382,7 +382,7 @@
           <app-icon name="folder_open" size="lg" color="text-gray-400 dark:text-gray-600 theme-gemini:text-white/60"></app-icon>
         </div>
         <p class="empty-text thai-text text-center text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 font-medium">
-          ไม่มีเมนูในโหมดนี้
+          {{ 'layout.sidebar.noMenuInMode' | translate }}
         </p>
       </div>
     </div>
@@ -397,7 +397,7 @@
              (click)="toggleUserMenu()"
              (keydown.enter)="toggleUserMenu()"
              (keydown.space)="toggleUserMenu(); $event.preventDefault()"
-             [attr.aria-label]="'เมนูผู้ใช้งาน'"
+             [attr.aria-label]="'layout.sidebar.userMenu' | translate"
              [attr.aria-expanded]="showUserMenu"
              role="button"
              tabindex="0">
@@ -462,13 +462,13 @@
                       hover:translate-x-1 hover:scale-[1.02]
                       active:scale-[0.98]"
                (click)="showUserMenu = false"
-               [attr.aria-label]="'โปรไฟล์'">
+               [attr.aria-label]="'layout.sidebar.profile' | translate">
               <app-icon name="person" size="sm"
                         color="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70
                                group-hover:text-blue-500 dark:group-hover:text-blue-400
                                transition-colors duration-200"
                         class="group-hover:scale-110 transition-transform duration-200"></app-icon>
-              <span class="thai-text">โปรไฟล์</span>
+              <span class="thai-text">{{ 'layout.sidebar.profile' | translate }}</span>
             </a>
             <a routerLink="/portal/admin/settings"
                class="user-menu-item
@@ -476,13 +476,13 @@
                       hover:translate-x-1 hover:scale-[1.02]
                       active:scale-[0.98]"
                (click)="showUserMenu = false"
-               [attr.aria-label]="'ตั้งค่า'">
+               [attr.aria-label]="'layout.sidebar.settings' | translate">
               <app-icon name="settings" size="sm"
                         color="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70
                                group-hover:text-blue-500 dark:group-hover:text-blue-400
                                transition-colors duration-200"
                         class="group-hover:scale-110 transition-transform duration-200"></app-icon>
-              <span class="thai-text">ตั้งค่า</span>
+              <span class="thai-text">{{ 'layout.sidebar.settings' | translate }}</span>
             </a>
             <!-- Admin Menu Option (only show if user has admin role) -->
             <button *ngIf="hasAdminRole()"
@@ -491,14 +491,14 @@
                            hover:translate-x-1 hover:scale-[1.02]
                            active:scale-[0.98]"
                     (click)="switchToAdmin(); showUserMenu = false"
-                    [attr.aria-label]="'Admin'"
+                    [attr.aria-label]="'layout.sidebar.admin' | translate"
                     type="button">
               <app-icon name="shield-check" size="sm"
                         color="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70
                                group-hover:text-blue-500 dark:group-hover:text-blue-400
                                transition-colors duration-200"
                         class="group-hover:scale-110 transition-transform duration-200"></app-icon>
-              <span class="thai-text">Admin</span>
+              <span class="thai-text">{{ 'layout.sidebar.admin' | translate }}</span>
             </button>
             <div class="user-menu-divider"></div>
             <button
@@ -507,12 +507,12 @@
                      hover:translate-x-1 hover:scale-[1.02] hover:bg-red-50 dark:hover:bg-red-900/20
                      active:scale-[0.98]"
               (click)="logout()"
-              [attr.aria-label]="'ออกจากระบบ'"
+              [attr.aria-label]="'layout.sidebar.logout' | translate"
               type="button">
               <app-icon name="logout" size="sm"
                         color="text-red-500 dark:text-red-400
                                group-hover:scale-110 transition-transform duration-200"></app-icon>
-              <span class="thai-text">ออกจากระบบ</span>
+              <span class="thai-text">{{ 'layout.sidebar.logout' | translate }}</span>
             </button>
           </div>
         </div>

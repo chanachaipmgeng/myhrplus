@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -7,6 +8,7 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
+  translate = inject(TranslateService);
   appName = environment.appName;
   version = environment.version;
   currentYear = new Date().getFullYear();

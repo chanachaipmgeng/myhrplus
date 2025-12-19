@@ -8,8 +8,8 @@
       <button
         type="button"
         (click)="toggleSidenav.emit()"
-        [title]="'เมนู'"
-        [attr.aria-label]="'เปิด/ปิดเมนู'"
+        [title]="'layout.header.menu' | translate"
+        [attr.aria-label]="'layout.header.menuAriaLabel' | translate"
         [attr.aria-expanded]="false"
         class="header-icon-btn w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg
                transition-all duration-300 ease-out
@@ -28,7 +28,7 @@
       <!-- Logo Section -->
       <div class="flex items-center gap-2 md:gap-3 flex-shrink-0 min-w-0">
         <a routerLink="/portal"
-           [attr.aria-label]="'กลับไปหน้าหลัก'"
+           [attr.aria-label]="'layout.header.goToHome' | translate"
            class="inline-flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] md:w-10 md:h-10 rounded-lg
                     bg-gradient-to-br from-blue-500 to-indigo-600
                     dark:from-blue-600 dark:to-indigo-700
@@ -51,10 +51,10 @@
         </a>
         <div class="flex flex-col min-w-0 hidden sm:block">
           <span class="app-title thai-text font-semibold text-gray-800 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent text-sm md:text-lg leading-tight truncate">
-            ระบบบริหารทรัพยากรบุคคล
+            {{ 'layout.header.appTitle' | translate }}
           </span>
           <span class="app-title-en font-medium text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 text-xs hidden md:block">
-            HR System
+            {{ 'layout.header.appTitleEn' | translate }}
           </span>
         </div>
       </div>
@@ -65,7 +65,7 @@
       <button
         type="button"
         (click)="openOmniSearch()"
-        [attr.aria-label]="'ค้นหาเมนู (กด Ctrl+K)'"
+        [attr.aria-label]="'layout.header.searchMenuAriaLabel' | translate"
         class="omni-search-trigger w-full max-w-md px-4 py-2 rounded-lg
                bg-white/50 dark:bg-gray-800/50 theme-gemini:bg-gray-800/30
                border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
@@ -86,7 +86,7 @@
         <span class="flex-1 text-sm text-gray-500 dark:text-gray-400 theme-gemini:text-white/70 relative z-10
                      group-hover:text-gray-700 dark:group-hover:text-gray-300
                      transition-colors duration-300">
-          ค้นหาเมนู...
+          {{ 'layout.header.searchMenuPlaceholder' | translate }}
         </span>
         <kbd class="hidden lg:inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold
                     bg-gray-100 dark:bg-gray-700 theme-gemini:bg-gray-700/50
@@ -103,8 +103,8 @@
       <button
         type="button"
         (click)="openOmniSearch()"
-        [title]="'ค้นหาเมนู (Ctrl+K)'"
-        [attr.aria-label]="'ค้นหาเมนู (กด Ctrl+K)'"
+        [title]="'layout.header.searchMenuTitle' | translate"
+        [attr.aria-label]="'layout.header.searchMenuAriaLabel' | translate"
         class="header-icon-btn md:hidden w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg
                transition-all duration-300 ease-out
                hover:bg-gray-100 dark:hover:bg-gray-800 theme-gemini:hover:bg-white/10
@@ -125,8 +125,8 @@
         <button
           type="button"
           (click)="toggleLanguageMenu()"
-          [title]="'เปลี่ยนภาษา'"
-          [attr.aria-label]="'เปลี่ยนภาษา'"
+          [title]="'layout.header.changeLanguage' | translate"
+          [attr.aria-label]="'layout.header.changeLanguage' | translate"
           [attr.aria-expanded]="showLanguageMenu"
           [attr.aria-controls]="'language-menu'"
           class="header-icon-btn relative w-11 h-11 min-w-[44px] min-h-[44px] md:w-10 md:h-10 flex items-center justify-center rounded-lg
@@ -148,7 +148,7 @@
         <div *ngIf="showLanguageMenu"
              id="language-menu"
              role="menu"
-             [attr.aria-label]="'เมนูเลือกภาษา'"
+             [attr.aria-label]="'layout.header.languageMenuAriaLabel' | translate"
              class="language-dropdown absolute right-0 top-full mt-2 w-48
                     bg-white dark:bg-gray-800 theme-gemini:bg-gray-900/50
                     rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
@@ -164,7 +164,7 @@
               role="menuitem"
               (click)="changeLanguage(lang.value)"
               [class.active]="currentLanguage === lang.value"
-              [attr.aria-label]="'เปลี่ยนภาษาเป็น ' + lang.label"
+              [attr.aria-label]="('layout.header.changeLanguageTo' | translate) + ' ' + lang.label"
               [attr.aria-current]="currentLanguage === lang.value ? 'true' : 'false'"
               [style.animation-delay.ms]="i * 50"
               class="language-item w-full px-4 py-2.5 text-left flex items-center gap-3
@@ -189,8 +189,8 @@
         <button
           type="button"
           (click)="toggleNotificationMenu()"
-          [title]="'การแจ้งเตือน'"
-          [attr.aria-label]="'การแจ้งเตือน' + (unreadCount > 0 ? ' (' + unreadCount + ' รายการใหม่)' : '')"
+          [title]="'layout.header.notifications' | translate"
+          [attr.aria-label]="('layout.header.notifications' | translate) + (unreadCount > 0 ? ' (' + unreadCount + ' ' + ('layout.header.newItems' | translate) + ')' : '')"
           [attr.aria-expanded]="showNotificationMenu"
           [attr.aria-controls]="'notification-menu'"
           class="header-icon-btn relative w-11 h-11 min-w-[44px] min-h-[44px] md:w-10 md:h-10 flex items-center justify-center rounded-lg
@@ -207,7 +207,7 @@
                      group-hover:scale-110 group-hover:animate-bounce
                      transition-all duration-300 relative z-10"></app-icon>
           <span *ngIf="unreadCount > 0"
-                [attr.aria-label]="unreadCount + ' รายการใหม่'"
+                [attr.aria-label]="unreadCount + ' ' + ('layout.header.newItems' | translate)"
                 class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 dark:bg-red-400 rounded-full
                        flex items-center justify-center text-white text-xs font-bold shadow-lg
                        animate-pulse z-20
@@ -221,7 +221,7 @@
         <div *ngIf="showNotificationMenu"
              id="notification-menu"
              role="menu"
-             [attr.aria-label]="'เมนูการแจ้งเตือน'"
+             [attr.aria-label]="'layout.header.notificationMenuAriaLabel' | translate"
              class="notification-dropdown absolute right-0 top-full mt-2 w-80 md:w-96
                     bg-white dark:bg-gray-800 theme-gemini:bg-gray-900/50
                     rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
@@ -232,15 +232,15 @@
                     origin-top-right">
           <!-- Header -->
           <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30 flex items-center justify-between bg-gray-50 dark:bg-gray-900 theme-gemini:bg-gray-900/70">
-            <h3 class="font-semibold text-gray-800 dark:text-gray-200 theme-gemini:text-white/90 thai-text">การแจ้งเตือน</h3>
+            <h3 class="font-semibold text-gray-800 dark:text-gray-200 theme-gemini:text-white/90 thai-text">{{ 'layout.header.notifications' | translate }}</h3>
             <button
               *ngIf="unreadCount > 0"
               type="button"
               role="menuitem"
               (click)="markAllAsRead()"
-              [attr.aria-label]="'ทำเครื่องหมายว่าอ่านแล้วทั้งหมด'"
+              [attr.aria-label]="'layout.header.markAllAsRead' | translate"
               class="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
-              ทำเครื่องหมายว่าอ่านแล้วทั้งหมด
+              {{ 'layout.header.markAllAsRead' | translate }}
             </button>
           </div>
 
@@ -249,7 +249,7 @@
             <div *ngIf="notifications.length === 0"
                  class="p-8 text-center">
               <app-icon name="notifications_none" size="xl" color="text-gray-400 dark:text-gray-600 theme-gemini:text-white/60" class="mb-2 block mx-auto"></app-icon>
-              <p class="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70 thai-text text-sm">ไม่มีการแจ้งเตือน</p>
+              <p class="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70 thai-text text-sm">{{ 'layout.header.noNotifications' | translate }}</p>
             </div>
 
             <div *ngFor="let notification of notifications; let i = index"
@@ -259,7 +259,7 @@
                  (keydown.enter)="handleNotificationClick(notification)"
                  (keydown.space)="handleNotificationClick(notification); $event.preventDefault()"
                  [class.unread]="!notification.read"
-                 [attr.aria-label]="notification.title + (notification.read ? '' : ' (ยังไม่ได้อ่าน)')"
+                 [attr.aria-label]="notification.title + (notification.read ? '' : ' (' + ('layout.header.unread' | translate) + ')')"
                  [style.animation-delay.ms]="i * 30"
                  class="notification-item px-4 py-3 border-b border-gray-100 dark:border-gray-700 theme-gemini:border-blue-500/20
                         cursor-pointer
@@ -302,9 +302,9 @@
             <button
               type="button"
               role="menuitem"
-              [attr.aria-label]="'ดูการแจ้งเตือนทั้งหมด'"
+              [attr.aria-label]="'layout.header.viewAll' | translate"
               class="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
-              ดูทั้งหมด
+              {{ 'layout.header.viewAll' | translate }}
             </button>
           </div>
         </div>
@@ -315,8 +315,8 @@
         <button
           type="button"
           (click)="toggleUserMenu()"
-          [title]="'เมนูผู้ใช้'"
-          [attr.aria-label]="'เมนูผู้ใช้'"
+          [title]="'layout.header.userMenu' | translate"
+          [attr.aria-label]="'layout.header.userMenu' | translate"
           [attr.aria-expanded]="showUserMenu"
           [attr.aria-controls]="'user-menu'"
           class="header-icon-btn relative w-11 h-11 min-w-[44px] min-h-[44px] md:w-10 md:h-10 flex items-center justify-center rounded-lg
@@ -338,7 +338,7 @@
         <div *ngIf="showUserMenu"
              id="user-menu"
              role="menu"
-             [attr.aria-label]="'เมนูผู้ใช้'"
+             [attr.aria-label]="'layout.header.userMenu' | translate"
              class="user-dropdown absolute right-0 top-full mt-2 w-56
                     bg-white dark:bg-gray-800 theme-gemini:bg-gray-900/50
                     rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
@@ -352,7 +352,7 @@
               type="button"
               role="menuitem"
               (click)="onProfile()"
-              [attr.aria-label]="'เปิดโปรไฟล์'"
+              [attr.aria-label]="'layout.header.openProfile' | translate"
               class="user-menu-item w-full px-4 py-2.5 text-left flex items-center gap-3
                      hover:bg-gray-50 dark:hover:bg-gray-700 theme-gemini:hover:bg-white/20
                      hover:translate-x-1 hover:scale-[1.02]
@@ -361,13 +361,13 @@
                      animate-fade-in
                      [animation-delay:50ms]">
               <app-icon name="person" size="sm" color="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70"></app-icon>
-              <span class="thai-text text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">โปรไฟล์</span>
+              <span class="thai-text text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">{{ 'layout.header.profile' | translate }}</span>
             </button>
             <button
               type="button"
               role="menuitem"
               (click)="onPreferences()"
-              [attr.aria-label]="'เปิดการตั้งค่า'"
+              [attr.aria-label]="'layout.header.openSettings' | translate"
               class="user-menu-item w-full px-4 py-2.5 text-left flex items-center gap-3
                      hover:bg-gray-50 dark:hover:bg-gray-700 theme-gemini:hover:bg-white/20
                      hover:translate-x-1 hover:scale-[1.02]
@@ -376,14 +376,14 @@
                      animate-fade-in
                      [animation-delay:100ms]">
               <app-icon name="settings" size="sm" color="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70"></app-icon>
-              <span class="thai-text text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">การตั้งค่า</span>
+              <span class="thai-text text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">{{ 'layout.header.settings' | translate }}</span>
             </button>
             <div class="border-t border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30 my-1"></div>
             <button
               type="button"
               role="menuitem"
               (click)="onLogout()"
-              [attr.aria-label]="'ออกจากระบบ'"
+              [attr.aria-label]="'layout.header.logout' | translate"
               class="user-menu-item w-full px-4 py-2.5 text-left flex items-center gap-3
                      hover:bg-red-50 dark:hover:bg-red-900/20
                      hover:translate-x-1 hover:scale-[1.02]
@@ -393,7 +393,7 @@
                      animate-fade-in
                      [animation-delay:150ms]">
               <app-icon name="logout" size="sm" color="text-red-600 dark:text-red-400"></app-icon>
-              <span class="thai-text text-sm font-medium">ออกจากระบบ</span>
+              <span class="thai-text text-sm font-medium">{{ 'layout.header.logout' | translate }}</span>
             </button>
           </div>
         </div>

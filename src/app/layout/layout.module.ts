@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../shared/shared.module';
 import { SyncfusionModule } from '../shared/syncfusion/syncfusion.module';
 import { ThemeToggleComponent } from '../shared/components/theme-toggle/theme-toggle.component';
@@ -30,6 +31,7 @@ import { FooterComponent } from './footer/footer.component';
     CommonModule,
     RouterModule,
     FormsModule, // For ngModel in search input
+    TranslateModule, // For i18n translation
     // SharedModule,
     SyncfusionModule, // Syncfusion UI-KIT components
     ThemeToggleComponent, // Standalone component
