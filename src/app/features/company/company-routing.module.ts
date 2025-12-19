@@ -73,6 +73,10 @@ const routes: Routes = [
       {
         path: 'branch',
         loadComponent: () => import('./human-resources/branch/branch-list.component').then(m => m.BranchListComponent)
+      },
+      {
+        path: 'working-area',
+        loadComponent: () => import('./human-resources/working-area/working-area-list.component').then(m => m.WorkingAreaListComponent)
       }
     ]
   },
