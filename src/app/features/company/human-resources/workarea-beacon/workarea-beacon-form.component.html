@@ -1,0 +1,78 @@
+<app-modal
+  [show]="isOpen"
+  [title]="(isEditMode ? 'company.workareaBeacon.edit' : 'company.workareaBeacon.add') | translate"
+  (closeEvent)="onClose()"
+  (confirmEvent)="onSubmit()">
+  
+  <form [formGroup]="form" class="space-y-4 p-2">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <app-glass-input
+        [label]="'company.workareaBeacon.workAreaId' | translate"
+        formControlName="workareaid"
+        [required]="true"
+        [readonly]="isEditMode"
+        [errorMessage]="'company.workareaBeacon.workAreaIdRequired' | translate"
+        maxLength="10">
+      </app-glass-input>
+
+      <app-glass-input
+        [label]="'company.workareaBeacon.lineNo' | translate"
+        formControlName="line_no"
+        type="number"
+        [required]="true"
+        [readonly]="isEditMode"
+        [errorMessage]="'company.workareaBeacon.lineNoRequired' | translate">
+      </app-glass-input>
+
+      <app-glass-input
+        [label]="'company.workareaBeacon.companyId' | translate"
+        formControlName="companyid"
+        [required]="true"
+        [readonly]="true">
+      </app-glass-input>
+    </div>
+
+    <app-glass-input
+      [label]="'company.workareaBeacon.beaconUuid' | translate"
+      formControlName="beacon_uuid"
+      [required]="true"
+      [errorMessage]="'company.workareaBeacon.beaconUuidRequired' | translate"
+      maxLength="100">
+    </app-glass-input>
+
+    <app-glass-input
+      [label]="'company.workareaBeacon.beaconAddress' | translate"
+      formControlName="beacon_address"
+      [required]="true"
+      [errorMessage]="'company.workareaBeacon.beaconAddressRequired' | translate"
+      maxLength="100">
+    </app-glass-input>
+
+    <app-glass-input
+      [label]="'company.workareaBeacon.beaconName' | translate"
+      formControlName="beacon_name"
+      [required]="true"
+      [errorMessage]="'company.workareaBeacon.beaconNameRequired' | translate"
+      maxLength="100">
+    </app-glass-input>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <app-glass-input
+        [label]="'company.workareaBeacon.latitude' | translate"
+        formControlName="latitude"
+        [required]="true"
+        [errorMessage]="'company.workareaBeacon.latitudeRequired' | translate"
+        maxLength="30">
+      </app-glass-input>
+
+      <app-glass-input
+        [label]="'company.workareaBeacon.longitude' | translate"
+        formControlName="longitude"
+        [required]="true"
+        [errorMessage]="'company.workareaBeacon.longitudeRequired' | translate"
+        maxLength="30">
+      </app-glass-input>
+    </div>
+  </form>
+
+</app-modal>

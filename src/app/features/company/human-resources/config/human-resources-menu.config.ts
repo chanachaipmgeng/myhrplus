@@ -217,6 +217,36 @@ export const HUMAN_RESOURCES_MENU_ITEMS: HumanResourcesMenuItem[] = [
     description: 'Cost Center (PRU034)',
     category: 'branch-business-unit',
     badgeColor: 'green'
+  },
+  {
+    code: 'CO01A0219',
+    route: 'workarea-location',
+    icon: 'location_on',
+    labelThai: 'ทะเบียนละติจูดลองจิจูดสถานที่ทำงาน',
+    labelEnglish: 'Latitude Longitude Work Area',
+    description: 'Latitude Longitude Work Area (CS052)',
+    category: 'branch-business-unit',
+    badgeColor: 'green'
+  },
+  {
+    code: 'CO01A0220',
+    route: 'workarea-beacon',
+    icon: 'bluetooth_searching',
+    labelThai: 'ทะเบียนสถานที่ทำงานโดยใช้บีคอน',
+    labelEnglish: 'Work Area Location By Beacon',
+    description: 'Work Area Location By Beacon (CS053)',
+    category: 'branch-business-unit',
+    badgeColor: 'green'
+  },
+  {
+    code: 'CO01A0222',
+    route: 'brand-store',
+    icon: 'store',
+    labelThai: 'ทะเบียนสาขาสโตร์ (STORE)',
+    labelEnglish: 'Brand Store Table (STORE)',
+    description: 'Brand Store (CS050)',
+    category: 'branch-business-unit',
+    badgeColor: 'green'
   }
 ];
 

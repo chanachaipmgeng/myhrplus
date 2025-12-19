@@ -93,6 +93,18 @@ const routes: Routes = [
       {
         path: 'cost-center',
         loadComponent: () => import('./human-resources/cost-center/cost-center-list.component').then(m => m.CostCenterListComponent)
+      },
+      {
+        path: 'workarea-location',
+        loadComponent: () => import('./human-resources/workarea-location/workarea-location-list.component').then(m => m.WorkareaLocationListComponent)
+      },
+      {
+        path: 'workarea-beacon',
+        loadComponent: () => import('./human-resources/workarea-beacon/workarea-beacon-list.component').then(m => m.WorkareaBeaconListComponent)
+      },
+      {
+        path: 'brand-store',
+        loadComponent: () => import('./human-resources/brand-store/brand-store-list.component').then(m => m.BrandStoreListComponent)
       }
     ]
   },

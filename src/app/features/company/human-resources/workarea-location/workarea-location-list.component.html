@@ -1,0 +1,20 @@
+<app-page-header 
+  [title]="'company.workareaLocation.titleFull' | translate" 
+  [showBreadcrumbs]="true"
+  [actions]="headerActions">
+</app-page-header>
+
+<div class="p-6 bg-gray-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
+  <app-data-grid
+    [dataSource]="(data$ | async) || []"
+    [columns]="columns"
+    (rowSelected)="onEdit($event)">
+  </app-data-grid>
+</div>
+
+<app-workarea-location-form
+  [isOpen]="showModal"
+  [data]="selectedItem"
+  (close)="showModal = false"
+  (save)="onSaveSuccess()">
+</app-workarea-location-form>

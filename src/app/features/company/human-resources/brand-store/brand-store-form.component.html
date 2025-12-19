@@ -1,0 +1,43 @@
+<app-modal
+  [show]="isOpen"
+  [title]="(isEditMode ? 'company.brandStore.edit' : 'company.brandStore.add') | translate"
+  (closeEvent)="onClose()"
+  (confirmEvent)="onSubmit()">
+  
+  <form [formGroup]="form" class="space-y-4 p-2">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <app-glass-input
+        [label]="'company.brandStore.brandStoreId' | translate"
+        formControlName="brandstoreid"
+        [required]="true"
+        [readonly]="isEditMode"
+        [errorMessage]="'company.brandStore.brandStoreIdRequired' | translate"
+        maxLength="10">
+      </app-glass-input>
+
+      <app-glass-input
+        [label]="'company.brandStore.companyId' | translate"
+        formControlName="companyid"
+        [required]="true"
+        [readonly]="true">
+      </app-glass-input>
+    </div>
+
+    <app-glass-input
+      [label]="'company.brandStore.tdesc' | translate"
+      formControlName="tdesc"
+      [required]="true"
+      [errorMessage]="'company.brandStore.tdescRequired' | translate"
+      maxLength="100">
+    </app-glass-input>
+
+    <app-glass-input
+      [label]="'company.brandStore.edesc' | translate"
+      formControlName="edesc"
+      [required]="true"
+      [errorMessage]="'company.brandStore.edescRequired' | translate"
+      maxLength="100">
+    </app-glass-input>
+  </form>
+
+</app-modal>
