@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
@@ -38,6 +39,11 @@ export class TimeDashboardComponent implements OnInit, OnDestroy {
     this.checkDarkMode();
     this.initializeCharts();
     this.setupThemeObserver();
+    
+    // Re-initialize charts when language changes
+    this.translate.onLangChange.subscribe(() => {
+      this.initializeCharts();
+    });
   }
 
   ngOnDestroy(): void {
@@ -85,18 +91,22 @@ export class TimeDashboardComponent implements OnInit, OnDestroy {
   }
 
   private initializeCharts(): void {
+    const personLabel = this.translate.instant('common.person');
+    
     // Attendance Status Pie Chart
     const statusData = [
-      { name: 'มาทันเวลา', value: 3124 },
-      { name: 'มาสาย', value: 234 },
-      { name: 'ขาดงาน', value: 98 }
+      { name: this.translate.instant('time.dashboard.status.onTime'), value: 3124 },
+      { name: this.translate.instant('time.dashboard.status.late'), value: 234 },
+      { name: this.translate.instant('time.dashboard.status.absent'), value: 98 }
     ];
 
     this.attendanceStatusPieChartOption = {
       backgroundColor: this.getChartBackgroundColor(),
       tooltip: {
         trigger: 'item',
-        formatter: '{a} <br/>{b}: {c} คน ({d}%)',
+        formatter: (params: any) => {
+          return `${params.seriesName}<br/>${params.name}: ${params.value} ${personLabel} (${params.percent}%)`;
+        },
         backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)',
         borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
         textStyle: {
@@ -113,7 +123,7 @@ export class TimeDashboardComponent implements OnInit, OnDestroy {
         }
       },
       series: [{
-        name: 'สถานะการลงเวลา',
+        name: this.translate.instant('time.dashboard.charts.attendanceStatus'),
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: false,
@@ -124,7 +134,9 @@ export class TimeDashboardComponent implements OnInit, OnDestroy {
         },
         label: {
           show: true,
-          formatter: '{b}\n{c} คน',
+          formatter: (params: any) => {
+            return `${params.name}\n${params.value} ${personLabel}`;
+          },
           color: this.getChartTextColor()
         },
         emphasis: {
@@ -140,7 +152,15 @@ export class TimeDashboardComponent implements OnInit, OnDestroy {
 
     // Daily Attendance Bar Chart
     const dailyData = {
-      days: ['จันทร์', 'อังคาร', 'พุธ', 'พฤหัส', 'ศุกร์', 'เสาร์', 'อาทิตย์'],
+      days: [
+        this.translate.instant('time.dashboard.days.monday'),
+        this.translate.instant('time.dashboard.days.tuesday'),
+        this.translate.instant('time.dashboard.days.wednesday'),
+        this.translate.instant('time.dashboard.days.thursday'),
+        this.translate.instant('time.dashboard.days.friday'),
+        this.translate.instant('time.dashboard.days.saturday'),
+        this.translate.instant('time.dashboard.days.sunday')
+      ],
       attendance: [3456, 3423, 3489, 3456, 3434, 1234, 567],
       onTime: [3124, 3100, 3156, 3124, 3110, 1100, 500],
       late: [234, 234, 245, 234, 234, 98, 45],
@@ -161,7 +181,11 @@ export class TimeDashboardComponent implements OnInit, OnDestroy {
         }
       },
       legend: {
-        data: ['มาทันเวลา', 'มาสาย', 'ขาดงาน'],
+        data: [
+          this.translate.instant('time.dashboard.status.onTime'),
+          this.translate.instant('time.dashboard.status.late'),
+          this.translate.instant('time.dashboard.status.absent')
+        ],
         textStyle: {
           color: this.getChartTextColor()
         },
@@ -192,7 +216,7 @@ export class TimeDashboardComponent implements OnInit, OnDestroy {
       },
       yAxis: {
         type: 'value',
-        name: 'จำนวนพนักงาน',
+        name: this.translate.instant('time.dashboard.charts.employeeCount'),
         nameTextStyle: {
           color: this.getChartTextColor()
         },
@@ -212,7 +236,7 @@ export class TimeDashboardComponent implements OnInit, OnDestroy {
       },
       series: [
         {
-          name: 'มาทันเวลา',
+          name: this.translate.instant('time.dashboard.status.onTime'),
           type: 'bar',
           stack: 'attendance',
           data: dailyData.onTime,
@@ -221,7 +245,7 @@ export class TimeDashboardComponent implements OnInit, OnDestroy {
           }
         },
         {
-          name: 'มาสาย',
+          name: this.translate.instant('time.dashboard.status.late'),
           type: 'bar',
           stack: 'attendance',
           data: dailyData.late,
@@ -230,7 +254,7 @@ export class TimeDashboardComponent implements OnInit, OnDestroy {
           }
         },
         {
-          name: 'ขาดงาน',
+          name: this.translate.instant('time.dashboard.status.absent'),
           type: 'bar',
           stack: 'attendance',
           data: dailyData.absent,
@@ -243,7 +267,20 @@ export class TimeDashboardComponent implements OnInit, OnDestroy {
 
     // Attendance Trend Line Chart
     const trendData = {
-      months: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'],
+      months: [
+        this.translate.instant('common.months.jan'),
+        this.translate.instant('common.months.feb'),
+        this.translate.instant('common.months.mar'),
+        this.translate.instant('common.months.apr'),
+        this.translate.instant('common.months.may'),
+        this.translate.instant('common.months.jun'),
+        this.translate.instant('common.months.jul'),
+        this.translate.instant('common.months.aug'),
+        this.translate.instant('common.months.sep'),
+        this.translate.instant('common.months.oct'),
+        this.translate.instant('common.months.nov'),
+        this.translate.instant('common.months.dec')
+      ],
       attendanceRate: [95.2, 96.1, 95.8, 96.5, 96.2, 95.9, 96.8, 97.1, 96.5, 96.3, 96.7, 96.4],
       onTimeRate: [90.3, 91.2, 90.8, 91.5, 91.2, 90.9, 91.8, 92.1, 91.5, 91.3, 91.7, 91.4]
     };
@@ -266,7 +303,10 @@ export class TimeDashboardComponent implements OnInit, OnDestroy {
         }
       },
       legend: {
-        data: ['อัตราการลงเวลา', 'อัตรามาทันเวลา'],
+        data: [
+          this.translate.instant('time.dashboard.charts.attendanceRate'),
+          this.translate.instant('time.dashboard.charts.onTimeRate')
+        ],
         textStyle: {
           color: this.getChartTextColor()
         },
@@ -298,7 +338,7 @@ export class TimeDashboardComponent implements OnInit, OnDestroy {
       },
       yAxis: {
         type: 'value',
-        name: 'อัตรา (%)',
+        name: this.translate.instant('time.dashboard.charts.rate'),
         min: 85,
         max: 100,
         nameTextStyle: {
@@ -321,7 +361,7 @@ export class TimeDashboardComponent implements OnInit, OnDestroy {
       },
       series: [
         {
-          name: 'อัตราการลงเวลา',
+          name: this.translate.instant('time.dashboard.charts.attendanceRate'),
           type: 'line',
           smooth: true,
           data: trendData.attendanceRate,
@@ -343,7 +383,7 @@ export class TimeDashboardComponent implements OnInit, OnDestroy {
           }
         },
         {
-          name: 'อัตรามาทันเวลา',
+          name: this.translate.instant('time.dashboard.charts.onTimeRate'),
           type: 'line',
           smooth: true,
           data: trendData.onTimeRate,

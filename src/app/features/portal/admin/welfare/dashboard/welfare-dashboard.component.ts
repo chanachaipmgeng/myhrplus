@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
@@ -11,12 +12,14 @@ import { EChartsOption } from 'echarts';
   imports: [
     CommonModule,
     RouterModule,
+    TranslateModule,
     PageHeaderComponent,
     NgxEchartsModule
   ],
   templateUrl: './welfare-dashboard.component.html'
 })
 export class WelfareDashboardComponent implements OnInit, OnDestroy {
+  private translate = inject(TranslateService);
   private observer?: MutationObserver;
   isDarkMode = false;
 
@@ -85,20 +88,25 @@ export class WelfareDashboardComponent implements OnInit, OnDestroy {
   }
 
   private initializeCharts(): void {
+    const itemLabel = this.translate.instant('welfare.dashboard.charts.item');
+    const currencySymbol = this.translate.instant('common.currency');
+    
     // Benefit Type Pie Chart
     const benefitData = [
-      { name: 'สวัสดิการสุขภาพ', value: 156 },
-      { name: 'สวัสดิการการศึกษา', value: 98 },
-      { name: 'สวัสดิการกีฬา', value: 78 },
-      { name: 'สวัสดิการท่องเที่ยว', value: 134 },
-      { name: 'สวัสดิการอื่นๆ', value: 67 }
+      { name: this.translate.instant('welfare.dashboard.types.health'), value: 156 },
+      { name: this.translate.instant('welfare.dashboard.types.education'), value: 98 },
+      { name: this.translate.instant('welfare.dashboard.types.sports'), value: 78 },
+      { name: this.translate.instant('welfare.dashboard.types.travel'), value: 134 },
+      { name: this.translate.instant('welfare.dashboard.types.others'), value: 67 }
     ];
 
     this.benefitTypePieChartOption = {
       backgroundColor: this.getChartBackgroundColor(),
       tooltip: {
         trigger: 'item',
-        formatter: '{a} <br/>{b}: {c} รายการ ({d}%)',
+        formatter: (params: any) => {
+          return `${params.seriesName}<br/>${params.name}: ${params.value} ${itemLabel} (${params.percent}%)`;
+        },
         backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)',
         borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
         textStyle: {
@@ -115,7 +123,7 @@ export class WelfareDashboardComponent implements OnInit, OnDestroy {
         }
       },
       series: [{
-        name: 'ประเภทสวัสดิการ',
+        name: this.translate.instant('welfare.dashboard.charts.benefitType'),
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: false,
@@ -126,7 +134,9 @@ export class WelfareDashboardComponent implements OnInit, OnDestroy {
         },
         label: {
           show: true,
-          formatter: '{b}\n{c}',
+          formatter: (params: any) => {
+            return `${params.name}\n${params.value}`;
+          },
           color: this.getChartTextColor()
         },
         emphasis: {
@@ -142,7 +152,13 @@ export class WelfareDashboardComponent implements OnInit, OnDestroy {
 
     // Requisition Status Bar Chart
     const statusData = {
-      benefits: ['สุขภาพ', 'การศึกษา', 'กีฬา', 'ท่องเที่ยว', 'อื่นๆ'],
+      benefits: [
+        this.translate.instant('welfare.dashboard.types.health'),
+        this.translate.instant('welfare.dashboard.types.education'),
+        this.translate.instant('welfare.dashboard.types.sports'),
+        this.translate.instant('welfare.dashboard.types.travel'),
+        this.translate.instant('welfare.dashboard.types.others')
+      ],
       approved: [234, 189, 156, 134, 98],
       pending: [89, 78, 56, 45, 34],
       rejected: [12, 8, 5, 4, 3]
@@ -162,7 +178,11 @@ export class WelfareDashboardComponent implements OnInit, OnDestroy {
         }
       },
       legend: {
-        data: ['อนุมัติ', 'รออนุมัติ', 'ปฏิเสธ'],
+        data: [
+          this.translate.instant('welfare.dashboard.status.approved'),
+          this.translate.instant('welfare.dashboard.status.pending'),
+          this.translate.instant('welfare.dashboard.status.rejected')
+        ],
         textStyle: {
           color: this.getChartTextColor()
         },
@@ -193,7 +213,7 @@ export class WelfareDashboardComponent implements OnInit, OnDestroy {
       },
       yAxis: {
         type: 'value',
-        name: 'จำนวนรายการ',
+        name: this.translate.instant('welfare.dashboard.charts.itemCount'),
         nameTextStyle: {
           color: this.getChartTextColor()
         },
@@ -213,7 +233,7 @@ export class WelfareDashboardComponent implements OnInit, OnDestroy {
       },
       series: [
         {
-          name: 'อนุมัติ',
+          name: this.translate.instant('welfare.dashboard.status.approved'),
           type: 'bar',
           data: statusData.approved,
           itemStyle: {
@@ -221,7 +241,7 @@ export class WelfareDashboardComponent implements OnInit, OnDestroy {
           }
         },
         {
-          name: 'รออนุมัติ',
+          name: this.translate.instant('welfare.dashboard.status.pending'),
           type: 'bar',
           data: statusData.pending,
           itemStyle: {
@@ -229,7 +249,7 @@ export class WelfareDashboardComponent implements OnInit, OnDestroy {
           }
         },
         {
-          name: 'ปฏิเสธ',
+          name: this.translate.instant('welfare.dashboard.status.rejected'),
           type: 'bar',
           data: statusData.rejected,
           itemStyle: {
@@ -241,7 +261,20 @@ export class WelfareDashboardComponent implements OnInit, OnDestroy {
 
     // Budget Usage Line Chart
     const budgetData = {
-      months: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'],
+      months: [
+        this.translate.instant('common.months.jan'),
+        this.translate.instant('common.months.feb'),
+        this.translate.instant('common.months.mar'),
+        this.translate.instant('common.months.apr'),
+        this.translate.instant('common.months.may'),
+        this.translate.instant('common.months.jun'),
+        this.translate.instant('common.months.jul'),
+        this.translate.instant('common.months.aug'),
+        this.translate.instant('common.months.sep'),
+        this.translate.instant('common.months.oct'),
+        this.translate.instant('common.months.nov'),
+        this.translate.instant('common.months.dec')
+      ],
       used: [250000, 280000, 300000, 320000, 310000, 330000, 350000, 340000, 360000, 340000, 350000, 320000],
       remaining: [4750000, 4470000, 4170000, 3850000, 3540000, 3210000, 2860000, 2520000, 2160000, 1820000, 1470000, 1150000]
     };
@@ -253,7 +286,7 @@ export class WelfareDashboardComponent implements OnInit, OnDestroy {
         formatter: (params: any) => {
           let result = params[0].name + '<br/>';
           params.forEach((param: any) => {
-            result += `${param.seriesName}: ฿${(param.value / 1000).toFixed(0)}K<br/>`;
+            result += `${param.seriesName}: ${currencySymbol}${(param.value / 1000).toFixed(0)}K<br/>`;
           });
           return result;
         },
@@ -264,7 +297,10 @@ export class WelfareDashboardComponent implements OnInit, OnDestroy {
         }
       },
       legend: {
-        data: ['ใช้งบประมาณ', 'งบประมาณคงเหลือ'],
+        data: [
+          this.translate.instant('welfare.dashboard.charts.usedBudget'),
+          this.translate.instant('welfare.dashboard.charts.remainingBudget')
+        ],
         textStyle: {
           color: this.getChartTextColor()
         },
@@ -296,7 +332,7 @@ export class WelfareDashboardComponent implements OnInit, OnDestroy {
       },
       yAxis: {
         type: 'value',
-        name: 'จำนวนเงิน (บาท)',
+        name: this.translate.instant('welfare.dashboard.charts.amount'),
         nameTextStyle: {
           color: this.getChartTextColor()
         },
@@ -319,7 +355,7 @@ export class WelfareDashboardComponent implements OnInit, OnDestroy {
       },
       series: [
         {
-          name: 'ใช้งบประมาณ',
+          name: this.translate.instant('welfare.dashboard.charts.usedBudget'),
           type: 'line',
           smooth: true,
           data: budgetData.used,
@@ -341,7 +377,7 @@ export class WelfareDashboardComponent implements OnInit, OnDestroy {
           }
         },
         {
-          name: 'งบประมาณคงเหลือ',
+          name: this.translate.instant('welfare.dashboard.charts.remainingBudget'),
           type: 'line',
           smooth: true,
           data: budgetData.remaining,

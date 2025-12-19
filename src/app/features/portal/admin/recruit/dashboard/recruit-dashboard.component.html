@@ -42,13 +42,13 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
           <!-- Pie Chart: Position Status -->
           <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">สถานะตำแหน่งงาน</h3>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">{{ 'recruit.dashboard.charts.positionStatus' | translate }}</h3>
             <div echarts [options]="positionStatusPieChartOption" class="w-full" style="height: 400px;"></div>
           </div>
           
           <!-- Bar Chart: Application Status -->
           <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">สถานะการสมัครงาน</h3>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">{{ 'recruit.dashboard.charts.applicationStatus' | translate }}</h3>
             <div echarts [options]="applicationStatusBarChartOption" class="w-full" style="height: 400px;"></div>
           </div>
         </div>
@@ -57,7 +57,7 @@
         <div class="grid grid-cols-1 gap-5 mb-5">
           <!-- Funnel Chart: Recruitment Funnel -->
           <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">Funnel การสรรหา</h3>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">{{ 'recruit.dashboard.charts.recruitmentFunnel' | translate }}</h3>
             <div echarts [options]="recruitmentFunnelChartOption" class="w-full" style="height: 400px;"></div>
           </div>
         </div>
@@ -67,7 +67,7 @@
     <!-- Navigation Cards Section: 1 column (25%) -->
     <div class="lg:col-span-1">
       <div class="sticky top-5">
-        <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">เมนูหลัก</h2>
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">{{ 'recruit.dashboard.mainMenu.title' | translate }}</h2>
         <div class="space-y-4">
           <!-- Setup Card -->
           <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
@@ -75,10 +75,10 @@
             <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">settings</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">ตั้งค่า</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">ตั้งค่าการสรรหา, คณะกรรมการสัมภาษณ์ และระดับทักษะ</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'recruit.dashboard.mainMenu.setup.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'recruit.dashboard.mainMenu.setup.description' | translate }}</p>
             <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+              {{ 'recruit.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
@@ -88,10 +88,10 @@
             <div class="w-12 h-12 bg-green-50 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4 text-green-600 dark:text-green-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">swap_horiz</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">กระบวนการ</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการกระบวนการสรรหาและคัดเลือก</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'recruit.dashboard.mainMenu.process.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'recruit.dashboard.mainMenu.process.description' | translate }}</p>
             <div class="flex items-center text-green-600 dark:text-green-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+              {{ 'recruit.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
@@ -101,10 +101,10 @@
             <div class="w-12 h-12 bg-purple-50 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4 text-purple-600 dark:text-purple-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">work</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">บอร์ดงาน</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการตำแหน่งงานและการประกาศรับสมัคร</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'recruit.dashboard.mainMenu.jobboard.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'recruit.dashboard.mainMenu.jobboard.description' | translate }}</p>
             <div class="flex items-center text-purple-600 dark:text-purple-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+              {{ 'recruit.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
         </div>

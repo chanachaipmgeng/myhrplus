@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
@@ -38,6 +39,11 @@ export class SettingsDashboardComponent implements OnInit, OnDestroy {
     this.checkDarkMode();
     this.initializeCharts();
     this.setupThemeObserver();
+    
+    // Re-initialize charts when language changes
+    this.translate.onLangChange.subscribe(() => {
+      this.initializeCharts();
+    });
   }
 
   ngOnDestroy(): void {
@@ -87,17 +93,19 @@ export class SettingsDashboardComponent implements OnInit, OnDestroy {
   private initializeCharts(): void {
     // User Distribution Pie Chart
     const userData = [
-      { name: 'ผู้ใช้ทั่วไป', value: 850 },
-      { name: 'ผู้ดูแลระบบ', value: 45 },
-      { name: 'ผู้ใช้ระดับสูง', value: 120 },
-      { name: 'ผู้ใช้ระดับกลาง', value: 235 }
+      { name: this.translate.instant('settings.dashboard.userTypes.regular'), value: 850 },
+      { name: this.translate.instant('settings.dashboard.userTypes.admin'), value: 45 },
+      { name: this.translate.instant('settings.dashboard.userTypes.senior'), value: 120 },
+      { name: this.translate.instant('settings.dashboard.userTypes.middle'), value: 235 }
     ];
 
     this.userDistributionPieChartOption = {
       backgroundColor: this.getChartBackgroundColor(),
       tooltip: {
         trigger: 'item',
-        formatter: '{a} <br/>{b}: {c} ({d}%)',
+        formatter: (params: any) => {
+          return `${params.seriesName}<br/>${params.name}: ${params.value} (${params.percent}%)`;
+        },
         backgroundColor: this.isDarkMode ? '#1e293b' : '#ffffff',
         borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
         textStyle: {
@@ -113,7 +121,7 @@ export class SettingsDashboardComponent implements OnInit, OnDestroy {
       },
       series: [
         {
-          name: 'การกระจายผู้ใช้',
+          name: this.translate.instant('settings.dashboard.charts.userDistribution'),
           type: 'pie',
           radius: ['40%', '70%'],
           avoidLabelOverlap: false,
@@ -124,7 +132,9 @@ export class SettingsDashboardComponent implements OnInit, OnDestroy {
           },
           label: {
             show: true,
-            formatter: '{b}: {c}',
+            formatter: (params: any) => {
+              return `${params.name}: ${params.value}`;
+            },
             color: this.getChartTextColor()
           },
           emphasis: {
@@ -141,7 +151,14 @@ export class SettingsDashboardComponent implements OnInit, OnDestroy {
     };
 
     // System Access Bar Chart
-    const accessCategories = ['User Management', 'System Access', 'Email Reminder', 'Options', 'Excel Report', 'Master Data'];
+    const accessCategories = [
+      this.translate.instant('settings.dashboard.categories.userManagement'),
+      this.translate.instant('settings.dashboard.categories.systemAccess'),
+      this.translate.instant('settings.dashboard.categories.emailReminder'),
+      this.translate.instant('settings.dashboard.categories.options'),
+      this.translate.instant('settings.dashboard.categories.excelReport'),
+      this.translate.instant('settings.dashboard.categories.masterData')
+    ];
     const accessData = [20, 15, 12, 8, 5, 3];
 
     this.systemAccessBarChartOption = {
@@ -194,7 +211,7 @@ export class SettingsDashboardComponent implements OnInit, OnDestroy {
       },
       series: [
         {
-          name: 'จำนวนหน้าจอ',
+          name: this.translate.instant('settings.dashboard.charts.screenCount'),
           type: 'bar',
           data: accessData,
           itemStyle: {
@@ -213,7 +230,20 @@ export class SettingsDashboardComponent implements OnInit, OnDestroy {
     };
 
     // User Activity Line Chart
-    const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+    const months = [
+      this.translate.instant('common.months.jan'),
+      this.translate.instant('common.months.feb'),
+      this.translate.instant('common.months.mar'),
+      this.translate.instant('common.months.apr'),
+      this.translate.instant('common.months.may'),
+      this.translate.instant('common.months.jun'),
+      this.translate.instant('common.months.jul'),
+      this.translate.instant('common.months.aug'),
+      this.translate.instant('common.months.sep'),
+      this.translate.instant('common.months.oct'),
+      this.translate.instant('common.months.nov'),
+      this.translate.instant('common.months.dec')
+    ];
     const activeUsers = [750, 820, 780, 890, 920, 880, 950, 920, 890, 910, 892, 900];
     const newUsers = [45, 52, 38, 55, 48, 42, 60, 45, 50, 48, 52, 48];
 
@@ -228,7 +258,10 @@ export class SettingsDashboardComponent implements OnInit, OnDestroy {
         }
       },
       legend: {
-        data: ['ผู้ใช้ที่ใช้งาน', 'ผู้ใช้ใหม่'],
+        data: [
+          this.translate.instant('settings.dashboard.charts.activeUsers'),
+          this.translate.instant('settings.dashboard.charts.newUsers')
+        ],
         textStyle: {
           color: this.getChartTextColor()
         },
@@ -271,7 +304,7 @@ export class SettingsDashboardComponent implements OnInit, OnDestroy {
       },
       series: [
         {
-          name: 'ผู้ใช้ที่ใช้งาน',
+          name: this.translate.instant('settings.dashboard.charts.activeUsers'),
           type: 'line',
           stack: 'Total',
           smooth: true,
@@ -287,7 +320,7 @@ export class SettingsDashboardComponent implements OnInit, OnDestroy {
           }
         },
         {
-          name: 'ผู้ใช้ใหม่',
+          name: this.translate.instant('settings.dashboard.charts.newUsers'),
           type: 'line',
           stack: 'Total',
           smooth: true,

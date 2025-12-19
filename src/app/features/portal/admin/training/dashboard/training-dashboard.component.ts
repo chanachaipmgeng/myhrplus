@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
@@ -11,12 +12,14 @@ import { EChartsOption } from 'echarts';
   imports: [
     CommonModule,
     RouterModule,
+    TranslateModule,
     PageHeaderComponent,
     NgxEchartsModule
   ],
   templateUrl: './training-dashboard.component.html'
 })
 export class TrainingDashboardComponent implements OnInit, OnDestroy {
+  private translate = inject(TranslateService);
   private observer?: MutationObserver;
   isDarkMode = false;
 
@@ -38,6 +41,11 @@ export class TrainingDashboardComponent implements OnInit, OnDestroy {
     this.checkDarkMode();
     this.initializeCharts();
     this.setupThemeObserver();
+    
+    // Re-initialize charts when language changes
+    this.translate.onLangChange.subscribe(() => {
+      this.initializeCharts();
+    });
   }
 
   ngOnDestroy(): void {
@@ -85,21 +93,25 @@ export class TrainingDashboardComponent implements OnInit, OnDestroy {
   }
 
   private initializeCharts(): void {
+    const courseLabel = this.translate.instant('training.dashboard.charts.course');
+    
     // Course Category Pie Chart
     const categoryData = [
-      { name: 'ทักษะการทำงาน', value: 156 },
-      { name: 'การพัฒนาตนเอง', value: 98 },
-      { name: 'การจัดการ', value: 78 },
-      { name: 'เทคนิคเฉพาะ', value: 134 },
-      { name: 'ความปลอดภัย', value: 67 },
-      { name: 'อื่นๆ', value: 45 }
+      { name: this.translate.instant('training.dashboard.categories.workSkills'), value: 156 },
+      { name: this.translate.instant('training.dashboard.categories.selfDevelopment'), value: 98 },
+      { name: this.translate.instant('training.dashboard.categories.management'), value: 78 },
+      { name: this.translate.instant('training.dashboard.categories.technical'), value: 134 },
+      { name: this.translate.instant('training.dashboard.categories.safety'), value: 67 },
+      { name: this.translate.instant('training.dashboard.categories.others'), value: 45 }
     ];
 
     this.courseCategoryPieChartOption = {
       backgroundColor: this.getChartBackgroundColor(),
       tooltip: {
         trigger: 'item',
-        formatter: '{a} <br/>{b}: {c} หลักสูตร ({d}%)',
+        formatter: (params: any) => {
+          return `${params.seriesName}<br/>${params.name}: ${params.value} ${courseLabel} (${params.percent}%)`;
+        },
         backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)',
         borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
         textStyle: {
@@ -116,7 +128,7 @@ export class TrainingDashboardComponent implements OnInit, OnDestroy {
         }
       },
       series: [{
-        name: 'ประเภทหลักสูตร',
+        name: this.translate.instant('training.dashboard.charts.courseCategory'),
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: false,
@@ -127,7 +139,9 @@ export class TrainingDashboardComponent implements OnInit, OnDestroy {
         },
         label: {
           show: true,
-          formatter: '{b}\n{c}',
+          formatter: (params: any) => {
+            return `${params.name}\n${params.value}`;
+          },
           color: this.getChartTextColor()
         },
         emphasis: {
@@ -143,7 +157,14 @@ export class TrainingDashboardComponent implements OnInit, OnDestroy {
 
     // Training Status Bar Chart
     const statusData = {
-      courses: ['หลักสูตร A', 'หลักสูตร B', 'หลักสูตร C', 'หลักสูตร D', 'หลักสูตร E', 'หลักสูตร F'],
+      courses: [
+        this.translate.instant('training.dashboard.courses.courseA'),
+        this.translate.instant('training.dashboard.courses.courseB'),
+        this.translate.instant('training.dashboard.courses.courseC'),
+        this.translate.instant('training.dashboard.courses.courseD'),
+        this.translate.instant('training.dashboard.courses.courseE'),
+        this.translate.instant('training.dashboard.courses.courseF')
+      ],
       completed: [234, 189, 156, 134, 98, 67],
       inProgress: [89, 78, 56, 45, 34, 23],
       registered: [123, 98, 87, 76, 65, 54]
@@ -163,7 +184,11 @@ export class TrainingDashboardComponent implements OnInit, OnDestroy {
         }
       },
       legend: {
-        data: ['เสร็จสิ้น', 'กำลังอบรม', 'ลงทะเบียน'],
+        data: [
+          this.translate.instant('training.dashboard.status.completed'),
+          this.translate.instant('training.dashboard.status.inProgress'),
+          this.translate.instant('training.dashboard.status.registered')
+        ],
         textStyle: {
           color: this.getChartTextColor()
         },
@@ -197,7 +222,7 @@ export class TrainingDashboardComponent implements OnInit, OnDestroy {
       },
       yAxis: {
         type: 'value',
-        name: 'จำนวนผู้เข้าร่วม',
+        name: this.translate.instant('training.dashboard.charts.participantCount'),
         nameTextStyle: {
           color: this.getChartTextColor()
         },
@@ -217,7 +242,7 @@ export class TrainingDashboardComponent implements OnInit, OnDestroy {
       },
       series: [
         {
-          name: 'เสร็จสิ้น',
+          name: this.translate.instant('training.dashboard.status.completed'),
           type: 'bar',
           data: statusData.completed,
           itemStyle: {
@@ -225,7 +250,7 @@ export class TrainingDashboardComponent implements OnInit, OnDestroy {
           }
         },
         {
-          name: 'กำลังอบรม',
+          name: this.translate.instant('training.dashboard.status.inProgress'),
           type: 'bar',
           data: statusData.inProgress,
           itemStyle: {
@@ -233,7 +258,7 @@ export class TrainingDashboardComponent implements OnInit, OnDestroy {
           }
         },
         {
-          name: 'ลงทะเบียน',
+          name: this.translate.instant('training.dashboard.status.registered'),
           type: 'bar',
           data: statusData.registered,
           itemStyle: {
@@ -245,7 +270,20 @@ export class TrainingDashboardComponent implements OnInit, OnDestroy {
 
     // Training Trend Line Chart
     const trendData = {
-      months: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'],
+      months: [
+        this.translate.instant('common.months.jan'),
+        this.translate.instant('common.months.feb'),
+        this.translate.instant('common.months.mar'),
+        this.translate.instant('common.months.apr'),
+        this.translate.instant('common.months.may'),
+        this.translate.instant('common.months.jun'),
+        this.translate.instant('common.months.jul'),
+        this.translate.instant('common.months.aug'),
+        this.translate.instant('common.months.sep'),
+        this.translate.instant('common.months.oct'),
+        this.translate.instant('common.months.nov'),
+        this.translate.instant('common.months.dec')
+      ],
       participants: [456, 489, 523, 567, 534, 589, 612, 598, 634, 567, 589, 612],
       completions: [234, 256, 278, 289, 267, 298, 312, 301, 323, 289, 298, 312]
     };
@@ -261,7 +299,10 @@ export class TrainingDashboardComponent implements OnInit, OnDestroy {
         }
       },
       legend: {
-        data: ['ผู้เข้าร่วม', 'ผู้สำเร็จ'],
+        data: [
+          this.translate.instant('training.dashboard.charts.participants'),
+          this.translate.instant('training.dashboard.charts.completions')
+        ],
         textStyle: {
           color: this.getChartTextColor()
         },
@@ -293,7 +334,7 @@ export class TrainingDashboardComponent implements OnInit, OnDestroy {
       },
       yAxis: {
         type: 'value',
-        name: 'จำนวนคน',
+        name: this.translate.instant('training.dashboard.charts.personCount'),
         nameTextStyle: {
           color: this.getChartTextColor()
         },
@@ -313,7 +354,7 @@ export class TrainingDashboardComponent implements OnInit, OnDestroy {
       },
       series: [
         {
-          name: 'ผู้เข้าร่วม',
+          name: this.translate.instant('training.dashboard.charts.participants'),
           type: 'line',
           smooth: true,
           data: trendData.participants,
@@ -335,7 +376,7 @@ export class TrainingDashboardComponent implements OnInit, OnDestroy {
           }
         },
         {
-          name: 'ผู้สำเร็จ',
+          name: this.translate.instant('training.dashboard.charts.completions'),
           type: 'line',
           smooth: true,
           data: trendData.completions,
