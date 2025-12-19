@@ -4,90 +4,6 @@
 </app-page-header>
 
 <div class="p-5 bg-gray-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
-  <!-- Navigation Cards Section -->
-  <div class="mb-8">
-    <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">เมนูหลัก</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Master Card -->
-      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
-           [routerLink]="['master']">
-        <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
-          <i class="material-icons text-xl">folder</i>
-        </div>
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">ข้อมูลหลัก</h3>
-        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการข้อมูลหลักสวัสดิการ, งบประมาณ และสถานที่</p>
-        <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
-          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
-        </div>
-      </div>
-
-      <!-- Requisition Card -->
-      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
-           [routerLink]="['requisition']">
-        <div class="w-12 h-12 bg-green-50 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4 text-green-600 dark:text-green-400 transition-colors duration-300 group-hover:scale-110">
-          <i class="material-icons text-xl">shopping_cart</i>
-        </div>
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">การเบิกจ่าย</h3>
-        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการการเบิกจ่ายสวัสดิการ</p>
-        <div class="flex items-center text-green-600 dark:text-green-400 text-sm font-medium transition-colors duration-300">
-          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
-        </div>
-      </div>
-
-      <!-- History Card -->
-      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
-           [routerLink]="['history']">
-        <div class="w-12 h-12 bg-purple-50 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4 text-purple-600 dark:text-purple-400 transition-colors duration-300 group-hover:scale-110">
-          <i class="material-icons text-xl">history</i>
-        </div>
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">ประวัติ</h3>
-        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">ดูประวัติการเบิกจ่ายสวัสดิการ</p>
-        <div class="flex items-center text-purple-600 dark:text-purple-400 text-sm font-medium transition-colors duration-300">
-          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
-        </div>
-      </div>
-
-      <!-- Process Card -->
-      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
-           [routerLink]="['process']">
-        <div class="w-12 h-12 bg-orange-50 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mb-4 text-orange-600 dark:text-orange-400 transition-colors duration-300 group-hover:scale-110">
-          <i class="material-icons text-xl">settings</i>
-        </div>
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">กระบวนการ</h3>
-        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">ประมวลผลการเบิกจ่ายสวัสดิการ</p>
-        <div class="flex items-center text-orange-600 dark:text-orange-400 text-sm font-medium transition-colors duration-300">
-          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
-        </div>
-      </div>
-
-      <!-- Webboard Card -->
-      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
-           [routerLink]="['webboard']">
-        <div class="w-12 h-12 bg-teal-50 dark:bg-teal-900/30 rounded-lg flex items-center justify-center mb-4 text-teal-600 dark:text-teal-400 transition-colors duration-300 group-hover:scale-110">
-          <i class="material-icons text-xl">forum</i>
-        </div>
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">เว็บบอร์ด</h3>
-        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการเว็บบอร์ดสวัสดิการ</p>
-        <div class="flex items-center text-teal-600 dark:text-teal-400 text-sm font-medium transition-colors duration-300">
-          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
-        </div>
-      </div>
-
-      <!-- Employee Card -->
-      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
-           [routerLink]="['employee']">
-        <div class="w-12 h-12 bg-pink-50 dark:bg-pink-900/30 rounded-lg flex items-center justify-center mb-4 text-pink-600 dark:text-pink-400 transition-colors duration-300 group-hover:scale-110">
-          <i class="material-icons text-xl">person</i>
-        </div>
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">พนักงาน</h3>
-        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการข้อมูลสวัสดิการของพนักงาน</p>
-        <div class="flex items-center text-pink-600 dark:text-pink-400 text-sm font-medium transition-colors duration-300">
-          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Statistics Cards -->
   <div class="mb-8">
     <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">สถิติสวัสดิการ</h2>
@@ -115,31 +31,122 @@
     </div>
   </div>
 
-  <!-- Charts Section -->
-  <div class="mb-8">
-    <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">กราฟและสถิติ</h2>
-    
-    <!-- Charts Row 1 -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
-      <!-- Pie Chart: Benefit Type -->
-      <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">ประเภทสวัสดิการ</h3>
-        <div echarts [options]="benefitTypePieChartOption" class="w-full" style="height: 400px;"></div>
-      </div>
-      
-      <!-- Bar Chart: Requisition Status -->
-      <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">สถานะคำขอเบิกจ่าย</h3>
-        <div echarts [options]="requisitionStatusBarChartOption" class="w-full" style="height: 400px;"></div>
+  <!-- Main Content: Charts (3 parts) and Navigation (1 part) -->
+  <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+    <!-- Charts Section: 3 columns (75%) -->
+    <div class="lg:col-span-3">
+      <div class="mb-8">
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">กราฟและสถิติ</h2>
+        
+        <!-- Charts Row 1: 2 columns -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
+          <!-- Pie Chart: Benefit Type -->
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">ประเภทสวัสดิการ</h3>
+            <div echarts [options]="benefitTypePieChartOption" class="w-full" style="height: 400px;"></div>
+          </div>
+          
+          <!-- Bar Chart: Requisition Status -->
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">สถานะคำขอเบิกจ่าย</h3>
+            <div echarts [options]="requisitionStatusBarChartOption" class="w-full" style="height: 400px;"></div>
+          </div>
+        </div>
+
+        <!-- Charts Row 2: Full width -->
+        <div class="grid grid-cols-1 gap-5 mb-5">
+          <!-- Line Chart: Budget Usage -->
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">การใช้งบประมาณรายเดือน</h3>
+            <div echarts [options]="budgetUsageLineChartOption" class="w-full" style="height: 400px;"></div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Charts Row 2 -->
-    <div class="grid grid-cols-1 gap-5 mb-5">
-      <!-- Line Chart: Budget Usage -->
-      <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">การใช้งบประมาณรายเดือน</h3>
-        <div echarts [options]="budgetUsageLineChartOption" class="w-full" style="height: 400px;"></div>
+    <!-- Navigation Cards Section: 1 column (25%) -->
+    <div class="lg:col-span-1">
+      <div class="sticky top-5">
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">เมนูหลัก</h2>
+        <div class="space-y-4">
+          <!-- Master Card -->
+          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+               [routerLink]="['master']">
+            <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
+              <i class="material-icons text-xl">folder</i>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">ข้อมูลหลัก</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการข้อมูลหลักสวัสดิการ, งบประมาณ และสถานที่</p>
+            <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
+              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+            </div>
+          </div>
+
+          <!-- Requisition Card -->
+          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+               [routerLink]="['requisition']">
+            <div class="w-12 h-12 bg-green-50 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4 text-green-600 dark:text-green-400 transition-colors duration-300 group-hover:scale-110">
+              <i class="material-icons text-xl">shopping_cart</i>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">การเบิกจ่าย</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการการเบิกจ่ายสวัสดิการ</p>
+            <div class="flex items-center text-green-600 dark:text-green-400 text-sm font-medium transition-colors duration-300">
+              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+            </div>
+          </div>
+
+          <!-- History Card -->
+          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+               [routerLink]="['history']">
+            <div class="w-12 h-12 bg-purple-50 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4 text-purple-600 dark:text-purple-400 transition-colors duration-300 group-hover:scale-110">
+              <i class="material-icons text-xl">history</i>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">ประวัติ</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">ดูประวัติการเบิกจ่ายสวัสดิการ</p>
+            <div class="flex items-center text-purple-600 dark:text-purple-400 text-sm font-medium transition-colors duration-300">
+              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+            </div>
+          </div>
+
+          <!-- Process Card -->
+          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+               [routerLink]="['process']">
+            <div class="w-12 h-12 bg-orange-50 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mb-4 text-orange-600 dark:text-orange-400 transition-colors duration-300 group-hover:scale-110">
+              <i class="material-icons text-xl">settings</i>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">กระบวนการ</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">ประมวลผลการเบิกจ่ายสวัสดิการ</p>
+            <div class="flex items-center text-orange-600 dark:text-orange-400 text-sm font-medium transition-colors duration-300">
+              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+            </div>
+          </div>
+
+          <!-- Webboard Card -->
+          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+               [routerLink]="['webboard']">
+            <div class="w-12 h-12 bg-teal-50 dark:bg-teal-900/30 rounded-lg flex items-center justify-center mb-4 text-teal-600 dark:text-teal-400 transition-colors duration-300 group-hover:scale-110">
+              <i class="material-icons text-xl">forum</i>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">เว็บบอร์ด</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการเว็บบอร์ดสวัสดิการ</p>
+            <div class="flex items-center text-teal-600 dark:text-teal-400 text-sm font-medium transition-colors duration-300">
+              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+            </div>
+          </div>
+
+          <!-- Employee Card -->
+          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+               [routerLink]="['employee']">
+            <div class="w-12 h-12 bg-pink-50 dark:bg-pink-900/30 rounded-lg flex items-center justify-center mb-4 text-pink-600 dark:text-pink-400 transition-colors duration-300 group-hover:scale-110">
+              <i class="material-icons text-xl">person</i>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">พนักงาน</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการข้อมูลสวัสดิการของพนักงาน</p>
+            <div class="flex items-center text-pink-600 dark:text-pink-400 text-sm font-medium transition-colors duration-300">
+              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

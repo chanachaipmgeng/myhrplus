@@ -145,9 +145,17 @@ export class BenefitListComponent implements OnInit {
 
 ### A. Dashboard Structure
 Dashboard Component ต้องมีโครงสร้างดังนี้:
-1. **Navigation Cards Section:** แสดงเมนูย่อยของ Module
-2. **Statistics Cards Section:** แสดงสถิติสำคัญ (ถ้ามี)
-3. **Charts Section:** แสดงกราฟและสถิติด้วย ECharts (ถ้ามี)
+1. **Statistics Cards Section:** แสดงสถิติสำคัญด้านบนเต็มความกว้าง (ถ้ามี)
+2. **Main Content Section:** แบ่งเป็น 2 คอลัมน์:
+   - **Charts Section (75%):** แสดงกราฟและสถิติด้วย ECharts (ถ้ามี)
+   - **Navigation Cards Section (25%):** แสดงเมนูย่อยของ Module (sticky positioning)
+
+### A.1 Dashboard Layout Pattern
+ทุก Dashboard ต้องใช้ Layout Pattern แบบ 3:1 Column Ratio:
+- **Statistics Cards:** ด้านบนเต็มความกว้าง (`grid-cols-1 md:grid-cols-2 lg:grid-cols-5`)
+- **Main Content:** Grid 4 columns (`lg:grid-cols-4`)
+  - **Charts Section:** `lg:col-span-3` (75% ของความกว้าง)
+  - **Navigation Cards:** `lg:col-span-1` (25% ของความกว้าง) + `sticky top-5`
 
 ### B. ECharts Integration
 ```typescript
@@ -303,28 +311,6 @@ export class AppModule { }
 </app-page-header>
 
 <div class="p-5 bg-gray-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
-  <!-- Navigation Cards Section -->
-  <div class="mb-8">
-    <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">เมนูหลัก</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 
-                  hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 
-                  cursor-pointer border border-gray-100 dark:border-slate-700 group"
-           [routerLink]="['sub-module']">
-        <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center 
-                     justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 
-                     group-hover:scale-110">
-          <i class="material-icons text-xl">icon_name</i>
-        </div>
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">Title</h3>
-        <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">Description</p>
-        <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
-          เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Statistics Cards -->
   <div class="mb-8">
     <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">สถิติ</h2>
@@ -338,14 +324,60 @@ export class AppModule { }
     </div>
   </div>
 
-  <!-- Charts Section -->
-  <div class="mb-8">
-    <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">กราฟและสถิติ</h2>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
-      <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 
-                  border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">Chart Title</h3>
-        <div echarts [options]="chartOption" class="w-full" style="height: 400px;"></div>
+  <!-- Main Content: Charts (3 parts) and Navigation (1 part) -->
+  <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+    <!-- Charts Section: 3 columns (75%) -->
+    <div class="lg:col-span-3">
+      <div class="mb-8">
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">กราฟและสถิติ</h2>
+        
+        <!-- Charts Row 1: 2 columns -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 
+                      border border-gray-100 dark:border-slate-700 transition-colors duration-300">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">Chart Title</h3>
+            <div echarts [options]="chartOption" class="w-full" style="height: 400px;"></div>
+          </div>
+          
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 
+                      border border-gray-100 dark:border-slate-700 transition-colors duration-300">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">Chart Title 2</h3>
+            <div echarts [options]="chartOption2" class="w-full" style="height: 400px;"></div>
+          </div>
+        </div>
+
+        <!-- Charts Row 2: Full width -->
+        <div class="grid grid-cols-1 gap-5 mb-5">
+          <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 
+                      border border-gray-100 dark:border-slate-700 transition-colors duration-300">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">Chart Title 3</h3>
+            <div echarts [options]="chartOption3" class="w-full" style="height: 400px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Cards Section: 1 column (25%) -->
+    <div class="lg:col-span-1">
+      <div class="sticky top-5">
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">เมนูหลัก</h2>
+        <div class="space-y-4">
+          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 
+                      hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 
+                      cursor-pointer border border-gray-100 dark:border-slate-700 group"
+               [routerLink]="['sub-module']">
+            <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center 
+                         justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 
+                         group-hover:scale-110">
+              <i class="material-icons text-xl">icon_name</i>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">Title</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">Description</p>
+            <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
+              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -371,7 +403,8 @@ export class AppModule { }
 - [ ] ไม่มีการใช้ Syncfusion Component โดยตรง (ผ่าน Wrapper Shared เท่านั้น)
 - [ ] ไม่มี Linter Error (`npm run lint`)
 - [ ] ทดสอบเชื่อมต่อ API ผ่าน Service ที่สืบทอดจาก BaseApiService แล้ว
-- [ ] Dashboard Component มี Navigation Cards และ Statistics/Charts (ถ้ามี)
+- [ ] Dashboard Component มี Layout ตามมาตรฐาน: Statistics ด้านบน, Charts (75%) + Navigation (25%)
+- [ ] Navigation Cards Section ใช้ `sticky top-5` สำหรับการติดตามเมื่อ scroll
 - [ ] รองรับ Dark Mode ทั้งหมด (HTML และ Charts)
 - [ ] ใช้ Material Icons แทน Font Awesome
 - [ ] Chart Options ปรับตาม Dark Mode อัตโนมัติด้วย MutationObserver
