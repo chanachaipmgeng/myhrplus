@@ -1,23 +1,23 @@
 <app-modal
   [show]="isOpen"
-  [title]="isEditMode ? 'แก้ไขทะเบียนเอกสาร' : 'เพิ่มทะเบียนเอกสาร'"
+  [title]="(isEditMode ? 'company.companyPaper.edit' : 'company.companyPaper.add') | translate"
   (closeEvent)="onClose()"
   (confirmEvent)="onSubmit()">
   
   <form [formGroup]="form" class="space-y-4 p-2">
     <!-- Paper ID (PK) - Disable on Edit -->
     <app-glass-input
-      label="รหัสเอกสาร (Paper Code)"
+      [label]="'company.companyPaper.paperId' | translate"
       formControlName="paperid"
       [required]="true"
       [readonly]="isEditMode"
-      errorMessage="กรุณาระบุรหัสเอกสาร"
+      [errorMessage]="'company.companyPaper.paperIdRequired' | translate"
       maxLength="20">
     </app-glass-input>
 
     <!-- Company ID (Readonly) -->
     <app-glass-input
-      label="รหัสบริษัท (Company ID)"
+      [label]="'company.companyPaper.companyId' | translate"
       formControlName="companyid"
       [required]="true"
       [readonly]="true">
@@ -25,44 +25,43 @@
 
     <!-- Thai Description -->
     <app-glass-input
-      label="รายละเอียด (ไทย)"
+      [label]="'company.companyPaper.tdesc' | translate"
       formControlName="tdesc"
       [required]="true"
-      errorMessage="กรุณาระบุรายละเอียดภาษาไทย"
+      [errorMessage]="'company.companyPaper.tdescRequired' | translate"
       maxLength="200">
     </app-glass-input>
 
     <!-- English Description -->
     <app-glass-input
-      label="รายละเอียด (อังกฤษ)"
+      [label]="'company.companyPaper.edesc' | translate"
       formControlName="edesc"
-      errorMessage=""
       maxLength="200">
     </app-glass-input>
 
     <!-- Active in Jobboard -->
     <div>
       <label class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2 transition-colors duration-300">
-        สถานะการใช้งานใน Jobboard
+        {{ 'company.companyPaper.jbActive' | translate }}
       </label>
       <select 
         formControlName="jb_active" 
         class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-300">
-        <option value="0">ไม่</option>
-        <option value="1">ใช่</option>
+        <option value="0">{{ 'common.inactive' | translate }}</option>
+        <option value="1">{{ 'common.active' | translate }}</option>
       </select>
     </div>
 
     <!-- Display Attach File on Condensed History -->
     <div>
       <label class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2 transition-colors duration-300">
-        แสดงเอกสารแนบที่ประวัติย่อ
+        {{ 'company.companyPaper.attachfileActive' | translate }}
       </label>
       <select 
         formControlName="attachfile_active" 
         class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-300">
-        <option value="0">ไม่</option>
-        <option value="1">ใช่</option>
+        <option value="0">{{ 'common.inactive' | translate }}</option>
+        <option value="1">{{ 'common.active' | translate }}</option>
       </select>
     </div>
   </form>

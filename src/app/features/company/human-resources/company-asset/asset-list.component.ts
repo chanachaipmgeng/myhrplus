@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { DataGridComponent } from '@shared/components/data-grid/data-grid.component';
 import { AssetService } from '../../services/asset.service';
@@ -13,6 +14,7 @@ import { AssetFormComponent } from './asset-form.component';
   imports: [
     CommonModule,
     RouterModule,
+    TranslateModule,
     PageHeaderComponent,
     DataGridComponent,
     AssetFormComponent
@@ -21,28 +23,39 @@ import { AssetFormComponent } from './asset-form.component';
 })
 export class AssetListComponent implements OnInit {
   public service = inject(AssetService);
+  private translate = inject(TranslateService);
   
   data$ = this.service.getAll();
   showModal = false;
   selectedItem: Asset | null = null;
 
-  headerActions = [
-    {
-      label: 'เพิ่มใหม่',
-      variant: 'primary' as const,
-      onClick: () => this.onCreate()
-    }
-  ];
+  headerActions: any[] = [];
+  columns: any[] = [];
 
-  columns = [
-    { field: 'assetid', headerText: 'Asset Code', width: '100px' },
-    { field: 'tdesc', headerText: 'Asset Name (TH)', width: '200px' },
-    { field: 'astype', headerText: 'Type', width: '100px' },
-    { field: 'status', headerText: 'Status', width: '80px' },
-    { field: 'owner', headerText: 'Owner', width: '120px' }
-  ];
+  ngOnInit() {
+    // Wait for translations to load, then initialize
+    this.translate.get('common.addNew').subscribe(() => {
+      this.initializeTranslations();
+    });
+  }
 
-  ngOnInit() {}
+  private initializeTranslations() {
+    this.headerActions = [
+      {
+        label: this.translate.instant('common.addNew'),
+        variant: 'primary' as const,
+        onClick: () => this.onCreate()
+      }
+    ];
+
+    this.columns = [
+      { field: 'assetid', headerText: this.translate.instant('company.companyAsset.column.assetId'), width: '100px' },
+      { field: 'tdesc', headerText: this.translate.instant('company.companyAsset.column.tdesc'), width: '200px' },
+      { field: 'astype', headerText: this.translate.instant('company.companyAsset.column.astype'), width: '100px' },
+      { field: 'status', headerText: this.translate.instant('company.companyAsset.column.status'), width: '80px' },
+      { field: 'owner', headerText: this.translate.instant('company.companyAsset.column.owner'), width: '120px' }
+    ];
+  }
 
   onCreate() {
     this.selectedItem = null;

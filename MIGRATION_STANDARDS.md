@@ -497,10 +497,132 @@ import { TranslateModule } from '@ngx-translate/core';
 3. **ใช้ common keys** สำหรับข้อความที่ใช้ซ้ำ (เช่น `common.addNew`, `common.save`, `common.cancel`)
 4. **Translate dynamic values** ใน TypeScript (เช่น headerText, labels) ด้วย `TranslateService.instant()`
 5. **Translate static text** ใน HTML ด้วย `| translate` pipe
+6. **Wait for translations to load** ก่อนใช้ `translate.instant()` ใน property initializers โดยใช้ `translate.get().subscribe()` pattern
 
 ---
 
-## 7. Checklist ก่อนส่งงาน (Definition of Done)
+## 7. Dependency Injection & Circular Dependency Prevention
+
+### A. Circular Dependency Problem
+Circular Dependency เกิดขึ้นเมื่อ Service A inject Service B และ Service B inject Service A (หรือผ่าน chain) ทำให้ Angular DI ไม่สามารถสร้าง instance ได้
+
+**ตัวอย่างปัญหา:**
+- `ErrorService` inject `TranslateService` โดยตรง
+- `TranslateService` ใช้ HTTP client ที่ผ่าน `ErrorInterceptor`
+- `ErrorInterceptor` inject `ErrorService`
+- **Result:** Circular Dependency Error
+
+### B. Solution: Lazy Injection Pattern
+ใช้ `Injector` สำหรับ lazy injection แทน direct injection ใน constructor:
+
+```typescript
+import { Injectable, Injector } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ErrorService {
+  private translate?: TranslateService;
+
+  constructor(private injector: Injector) {
+    // Lazy inject TranslateService to avoid circular dependency
+    try {
+      const translateService = this.injector.get(TranslateService, null);
+      if (translateService) {
+        this.translate = translateService;
+        // Initialize service...
+      }
+    } catch (error) {
+      // Fallback if service is not available
+      console.warn('ErrorService: TranslateService not available');
+    }
+  }
+
+  private someMethod(): void {
+    // Use translate safely
+    if (this.translate) {
+      const message = this.translate.instant('key');
+    }
+  }
+}
+```
+
+### C. When to Use Lazy Injection
+ใช้ Lazy Injection เมื่อ:
+1. **Service อยู่ใน Interceptor chain** (เช่น `ErrorInterceptor`, `AuthInterceptor`)
+2. **Service ที่ inject อาจใช้ HTTP client** ที่ผ่าน Interceptor
+3. **Service ที่ inject อาจใช้ Service อื่นที่อยู่ใน chain เดียวกัน**
+
+### D. Best Practices
+1. **ตรวจสอบ Circular Dependency** ก่อนสร้าง Service ใหม่
+2. **ใช้ Lazy Injection** สำหรับ Services ที่อยู่ใน Interceptor chain
+3. **Handle null/undefined** เมื่อใช้ lazy-injected services
+4. **ใช้ try-catch** เมื่อ lazy inject เพื่อป้องกัน runtime errors
+
+---
+
+## 8. Console Logging & Debugging Best Practices
+
+### A. Console Log Levels
+ใช้ console log levels ตามความเหมาะสม:
+
+```typescript
+// ✅ Good: Use appropriate log levels
+console.error('Critical error occurred');        // สำหรับ errors ที่ต้องแก้ไข
+console.warn('Warning: Deprecated API used');    // สำหรับ warnings ที่ควรทราบ
+console.debug('Debug info:', data);              // สำหรับ debugging (development only)
+console.log('General information');              // สำหรับข้อมูลทั่วไป
+
+// ❌ Bad: Overuse of console.warn
+console.warn('No token found');                  // ควรเป็น console.debug
+```
+
+### B. Production vs Development Logging
+```typescript
+// Only log in development mode
+if (environment.production === false) {
+  console.debug('AuthInterceptor: No token found for request:', fullUrl);
+}
+
+// Skip logging for expected scenarios
+if (!fullUrl.includes('/public/') && 
+    !fullUrl.includes('/authen') && 
+    !fullUrl.includes('/system/get-db-list')) {
+  // Only warn in development
+  if (environment.production === false) {
+    console.debug('AuthInterceptor: No token found');
+  }
+}
+```
+
+### C. Common Warnings & Solutions
+
+**1. `history.pushState` Warning:**
+- **Cause:** Browser warning เกี่ยวกับการใช้ History API
+- **Impact:** ไม่กระทบการทำงาน
+- **Solution:** ไม่ต้องแก้ไข (เป็น browser behavior)
+
+**2. `AuthInterceptor: No token` Warnings:**
+- **Cause:** ยังไม่ได้ login หรือ token หมดอายุ
+- **Impact:** ไม่กระทบการทำงาน (เป็น expected behavior)
+- **Solution:** ใช้ `console.debug` แทน `console.warn` และ log เฉพาะใน development mode
+
+**3. `Circular dependency in DI detected`:**
+- **Cause:** Services inject กันเป็นวงกลม
+- **Impact:** Application จะไม่ทำงาน
+- **Solution:** ใช้ Lazy Injection Pattern (ดู Section 7)
+
+### D. Best Practices
+1. **ลด console.warn** สำหรับ expected scenarios (เช่น ไม่มี token เมื่อยังไม่ได้ login)
+2. **ใช้ console.debug** สำหรับ development-only logs
+3. **ตรวจสอบ environment.production** ก่อน log
+4. **Skip logging** สำหรับ public/auth endpoints
+5. **ใช้ console.error** เฉพาะสำหรับ critical errors
+
+---
+
+## 9. Checklist ก่อนส่งงาน (Definition of Done)
 
 - [ ] โครงสร้างโฟลเดอร์ถูกต้องตามมาตรฐาน
 - [ ] ใช้ Standalone Component ทั้งหมด
@@ -520,4 +642,9 @@ import { TranslateModule } from '@ngx-translate/core';
 - [ ] ใช้ `TranslateService.instant()` ใน TypeScript สำหรับ dynamic values (headerText, labels, headerActions)
 - [ ] เพิ่ม wording ใน `th.json` และ `en.json` สำหรับ Module ใหม่
 - [ ] Import `TranslateModule` ใน standalone components
+- [ ] ตรวจสอบ Circular Dependency ก่อนสร้าง Service ใหม่
+- [ ] ใช้ Lazy Injection Pattern สำหรับ Services ที่อยู่ใน Interceptor chain
+- [ ] ลด console.warn สำหรับ expected scenarios (เช่น ไม่มี token เมื่อยังไม่ได้ login)
+- [ ] ใช้ console.debug แทน console.warn สำหรับ development-only logs
+- [ ] ตรวจสอบ environment.production ก่อน log
 

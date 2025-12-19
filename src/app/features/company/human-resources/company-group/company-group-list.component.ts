@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { DataGridComponent } from '@shared/components/data-grid/data-grid.component';
 import { CompanyGroupService } from '../../services/company-group.service';
@@ -13,6 +14,7 @@ import { CompanyGroupFormComponent } from './company-group-form.component';
   imports: [
     CommonModule,
     RouterModule,
+    TranslateModule,
     PageHeaderComponent,
     DataGridComponent,
     CompanyGroupFormComponent
@@ -21,27 +23,37 @@ import { CompanyGroupFormComponent } from './company-group-form.component';
 })
 export class CompanyGroupListComponent implements OnInit {
   public service = inject(CompanyGroupService);
+  private translate = inject(TranslateService);
   
   data$ = this.service.getAll();
   showModal = false;
   selectedItem: CompanyGroup | null = null;
 
-  headerActions = [
-    {
-      label: 'เพิ่มใหม่',
-      variant: 'primary' as const,
-      onClick: () => this.onCreate()
-    }
-  ];
-
-  columns = [
-    { field: 'codeid', headerText: 'รหัส (Code)', width: '100px' },
-    { field: 'tdesc', headerText: 'รายละเอียด (ไทย)', width: '200px' },
-    { field: 'edesc', headerText: 'รายละเอียด (อังกฤษ)', width: '200px' },
-    { field: 'edit_date', headerText: 'วันที่แก้ไข', type: 'date' as const, width: '120px' }
-  ];
+  headerActions: any[] = [];
+  columns: any[] = [];
 
   ngOnInit() {
+    // Wait for translations to load, then initialize
+    this.translate.get('common.addNew').subscribe(() => {
+      this.initializeTranslations();
+    });
+  }
+
+  private initializeTranslations() {
+    this.headerActions = [
+      {
+        label: this.translate.instant('common.addNew'),
+        variant: 'primary' as const,
+        onClick: () => this.onCreate()
+      }
+    ];
+
+    this.columns = [
+      { field: 'codeid', headerText: this.translate.instant('company.companyGroup.column.codeId'), width: '100px' },
+      { field: 'tdesc', headerText: this.translate.instant('company.companyGroup.column.tdesc'), width: '200px' },
+      { field: 'edesc', headerText: this.translate.instant('company.companyGroup.column.edesc'), width: '200px' },
+      { field: 'edit_date', headerText: this.translate.instant('company.companyGroup.column.editDate'), type: 'date' as const, width: '120px' }
+    ];
   }
 
   onCreate() {

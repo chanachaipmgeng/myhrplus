@@ -1,31 +1,31 @@
 <app-modal
   [show]="isOpen"
-  [title]="isEditMode ? 'แก้ไขกลุ่มบริษัท' : 'เพิ่มกลุ่มบริษัท'"
+  [title]="(isEditMode ? 'company.companyGroup.edit' : 'company.companyGroup.add') | translate"
   (closeEvent)="onClose()"
   (confirmEvent)="onSubmit()">
   
   <form [formGroup]="form" class="space-y-4 p-2">
     <!-- Code (PK) -->
     <app-glass-input
-      label="รหัสกลุ่มบริษัท (Code)"
+      [label]="'company.companyGroup.codeId' | translate"
       formControlName="codeid"
       [required]="true"
       [readonly]="isEditMode"
-      errorMessage="กรุณาระบุรหัส 3 หลัก"
+      [errorMessage]="'company.companyGroup.codeIdRequired' | translate"
       maxLength="3">
     </app-glass-input>
 
     <!-- Thai Description -->
     <app-glass-input
-      label="รายละเอียด (ไทย)"
+      [label]="'company.companyGroup.tdesc' | translate"
       formControlName="tdesc"
       [required]="true"
-      errorMessage="กรุณาระบุรายละเอียดภาษาไทย">
+      [errorMessage]="'company.companyGroup.tdescRequired' | translate">
     </app-glass-input>
 
     <!-- English Description -->
     <app-glass-input
-      label="รายละเอียด (อังกฤษ)"
+      [label]="'company.companyGroup.edesc' | translate"
       formControlName="edesc">
     </app-glass-input>
   </form>

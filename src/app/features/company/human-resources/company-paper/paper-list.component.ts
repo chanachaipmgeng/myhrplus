@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { DataGridComponent } from '@shared/components/data-grid/data-grid.component';
 import { PaperService } from '../../services/paper.service';
@@ -13,6 +14,7 @@ import { PaperFormComponent } from './paper-form.component';
   imports: [
     CommonModule,
     RouterModule,
+    TranslateModule,
     PageHeaderComponent,
     DataGridComponent,
     PaperFormComponent
@@ -21,42 +23,59 @@ import { PaperFormComponent } from './paper-form.component';
 })
 export class PaperListComponent implements OnInit {
   public service = inject(PaperService);
+  private translate = inject(TranslateService);
   
   data$ = this.service.getAll();
   showModal = false;
   selectedItem: Paper | null = null;
 
-  headerActions = [
-    {
-      label: 'เพิ่มใหม่',
-      variant: 'primary' as const,
-      onClick: () => this.onCreate()
-    }
-  ];
-
-  columns = [
-    { field: 'paperid', headerText: 'รหัสเอกสาร (Code)', width: '150px' },
-    { field: 'tdesc', headerText: 'รายละเอียด (ไทย)', width: '250px' },
-    { field: 'edesc', headerText: 'รายละเอียด (อังกฤษ)', width: '250px' },
-    { 
-      field: 'jb_active', 
-      headerText: 'Active in Jobboard', 
-      width: '150px',
-      type: 'boolean' as const,
-      formatter: (value: string) => value === '1' ? 'ใช่' : 'ไม่'
-    },
-    { 
-      field: 'attachfile_active', 
-      headerText: 'แสดงเอกสารแนบ', 
-      width: '150px',
-      type: 'boolean' as const,
-      formatter: (value: string) => value === '1' ? 'ใช่' : 'ไม่'
-    },
-    { field: 'edit_date', headerText: 'วันที่แก้ไข', type: 'date' as const, width: '120px' }
-  ];
+  headerActions: any[] = [];
+  columns: any[] = [];
 
   ngOnInit() {
-    // Initial data load handled by async pipe
+    // Wait for translations to load, then initialize
+    this.translate.get('common.addNew').subscribe(() => {
+      this.initializeTranslations();
+    });
+  }
+
+  private initializeTranslations() {
+    this.headerActions = [
+      {
+        label: this.translate.instant('common.addNew'),
+        variant: 'primary' as const,
+        onClick: () => this.onCreate()
+      }
+    ];
+
+    this.columns = [
+      { field: 'paperid', headerText: this.translate.instant('company.companyPaper.column.paperId'), width: '150px' },
+      { field: 'tdesc', headerText: this.translate.instant('company.companyPaper.column.tdesc'), width: '250px' },
+      { field: 'edesc', headerText: this.translate.instant('company.companyPaper.column.edesc'), width: '250px' },
+      { 
+        field: 'jb_active', 
+        headerText: this.translate.instant('company.companyPaper.column.jbActive'), 
+        width: '150px',
+        type: 'boolean' as const,
+        formatter: (value: string) => {
+          return value === '1' 
+            ? this.translate.instant('common.active')
+            : this.translate.instant('common.inactive');
+        }
+      },
+      { 
+        field: 'attachfile_active', 
+        headerText: this.translate.instant('company.companyPaper.column.attachfileActive'), 
+        width: '150px',
+        type: 'boolean' as const,
+        formatter: (value: string) => {
+          return value === '1' 
+            ? this.translate.instant('common.active')
+            : this.translate.instant('common.inactive');
+        }
+      },
+      { field: 'edit_date', headerText: this.translate.instant('company.companyPaper.column.editDate'), type: 'date' as const, width: '120px' }
+    ];
   }
 
   onCreate() {

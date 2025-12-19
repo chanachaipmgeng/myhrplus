@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnChanges, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
 import { CompanyType } from '../../models/company-type.model';
@@ -12,6 +13,7 @@ import { CompanyTypeService } from '../../services/company-type.service';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    TranslateModule,
     ModalComponent,
     GlassInputComponent
   ],
