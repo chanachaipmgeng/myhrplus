@@ -14,9 +14,8 @@ import { AuthRoutingModule } from './auth-routing.module';
 
 @NgModule({
   declarations: [
-    LoginComponent,
-    ForgotPasswordComponent,
-    UnauthorizedComponent
+    LoginComponent
+    // ForgotPasswordComponent and UnauthorizedComponent are now standalone
   ],
   imports: [
     CommonModule,
@@ -27,6 +26,8 @@ import { AuthRoutingModule } from './auth-routing.module';
     // SharedModule,
     SyncfusionModule,
     IconComponent,
+    ForgotPasswordComponent,
+    UnauthorizedComponent,
     AuthRoutingModule
   ]
 })

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../../shared/shared.module';
 import { LayoutModule } from '../../layout/layout.module';
 import { EmpviewRoutingModule } from './empview-routing.module';
@@ -17,13 +18,15 @@ import { ModalComponent } from '../../shared/components/modal/modal.component';
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    // DashboardComponent is now standalone
   ],
   imports: [
     CommonModule,
     FormsModule,
+    TranslateModule,
     SharedModule,
     LayoutModule,
+    DashboardComponent, // Import standalone component
     EmpviewRoutingModule,
     // Standalone components
     PageLayoutComponent,

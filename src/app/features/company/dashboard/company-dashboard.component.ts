@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, inject, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
@@ -12,6 +13,7 @@ import { CompanyService } from '../services/company.service';
   imports: [
     CommonModule,
     RouterModule,
+    TranslateModule,
     PageHeaderComponent,
     NgxEchartsModule
   ],
@@ -19,6 +21,7 @@ import { CompanyService } from '../services/company.service';
 })
 export class CompanyDashboardComponent implements OnInit, OnDestroy {
   private service = inject(CompanyService);
+  private translate = inject(TranslateService);
   private observer?: MutationObserver;
   
   isDarkMode = false;
@@ -46,6 +49,11 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
     this.initializeCharts();
     this.loadDashboardData();
     this.setupThemeObserver();
+    
+    // Re-initialize charts when language changes
+    this.translate.onLangChange.subscribe(() => {
+      this.initializeCharts();
+    });
   }
 
   ngOnDestroy(): void {
@@ -98,22 +106,28 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
   }
 
   private initializeCharts(): void {
+    const currentLang = this.translate.currentLang || 'th';
+    const isThai = currentLang === 'th';
+    const personLabel = this.translate.instant('company.dashboard.charts.person');
+    
     // Division Pie Chart
     const divisionData = [
-      { name: 'ฝ่ายขาย', value: 342 },
-      { name: 'ฝ่ายการตลาด', value: 198 },
-      { name: 'ฝ่ายบัญชี', value: 156 },
-      { name: 'ฝ่ายทรัพยากรบุคคล', value: 89 },
-      { name: 'ฝ่ายไอที', value: 124 },
-      { name: 'ฝ่ายผลิต', value: 278 },
-      { name: 'ฝ่ายบริหาร', value: 60 }
+      { name: this.translate.instant('company.dashboard.charts.division.sales'), value: 342 },
+      { name: this.translate.instant('company.dashboard.charts.division.marketing'), value: 198 },
+      { name: this.translate.instant('company.dashboard.charts.division.accounting'), value: 156 },
+      { name: this.translate.instant('company.dashboard.charts.division.hr'), value: 89 },
+      { name: this.translate.instant('company.dashboard.charts.division.it'), value: 124 },
+      { name: this.translate.instant('company.dashboard.charts.division.production'), value: 278 },
+      { name: this.translate.instant('company.dashboard.charts.division.management'), value: 60 }
     ];
 
     this.divisionPieChartOption = {
       backgroundColor: this.getChartBackgroundColor(),
       tooltip: {
         trigger: 'item',
-        formatter: '{a} <br/>{b}: {c} คน ({d}%)',
+        formatter: (params: any) => {
+          return `${params.seriesName}<br/>${params.name}: ${params.value} ${personLabel} (${params.percent}%)`;
+        },
         backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)',
         borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
         textStyle: {
@@ -130,7 +144,7 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
         }
       },
       series: [{
-        name: 'จำนวนพนักงาน',
+        name: this.translate.instant('company.dashboard.charts.employeeCount'),
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: false,
@@ -141,7 +155,9 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
         },
         label: {
           show: true,
-          formatter: '{b}\n{c} คน',
+          formatter: (params: any) => {
+            return `${params.name}\n${params.value} ${personLabel}`;
+          },
           color: this.getChartTextColor()
         },
         emphasis: {
@@ -157,7 +173,16 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
 
     // Branch Bar Chart
     const branchData = {
-      names: ['สำนักงานใหญ่', 'สาขากรุงเทพ', 'สาขาเชียงใหม่', 'สาขาขอนแก่น', 'สาขาหาดใหญ่', 'สาขาเชียงราย', 'สาขานครราชสีมา', 'สาขาอุบลราชธานี'],
+      names: [
+        this.translate.instant('company.dashboard.charts.branch.headOffice'),
+        this.translate.instant('company.dashboard.charts.branch.bangkok'),
+        this.translate.instant('company.dashboard.charts.branch.chiangMai'),
+        this.translate.instant('company.dashboard.charts.branch.khonKaen'),
+        this.translate.instant('company.dashboard.charts.branch.hatYai'),
+        this.translate.instant('company.dashboard.charts.branch.chiangRai'),
+        this.translate.instant('company.dashboard.charts.branch.nakhonRatchasima'),
+        this.translate.instant('company.dashboard.charts.branch.ubonRatchathani')
+      ],
       values: [456, 234, 189, 156, 134, 78, 0, 0]
     };
 
@@ -221,7 +246,7 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
         }
       },
       series: [{
-        name: 'จำนวนพนักงาน',
+        name: this.translate.instant('company.dashboard.charts.employeeCount'),
         type: 'bar',
         data: branchData.values,
         itemStyle: {
@@ -247,7 +272,16 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
 
     // Department Bar Chart
     const departmentData = {
-      names: ['แผนกขาย', 'แผนกการตลาด', 'แผนกบัญชี', 'แผนก HR', 'แผนก IT', 'แผนกผลิต', 'แผนกจัดซื้อ', 'แผนกคลังสินค้า'],
+      names: [
+        this.translate.instant('company.dashboard.charts.department.sales'),
+        this.translate.instant('company.dashboard.charts.department.marketing'),
+        this.translate.instant('company.dashboard.charts.department.accounting'),
+        this.translate.instant('company.dashboard.charts.department.hr'),
+        this.translate.instant('company.dashboard.charts.department.it'),
+        this.translate.instant('company.dashboard.charts.department.production'),
+        this.translate.instant('company.dashboard.charts.department.procurement'),
+        this.translate.instant('company.dashboard.charts.department.warehouse')
+      ],
       values: [156, 98, 78, 45, 62, 139, 34, 28]
     };
 
@@ -292,7 +326,7 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
       },
       yAxis: {
         type: 'value',
-        name: 'จำนวนพนักงาน',
+        name: this.translate.instant('company.dashboard.charts.employeeCount'),
         nameTextStyle: {
           color: this.getChartTextColor()
         },
@@ -311,7 +345,7 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
         }
       },
       series: [{
-        name: 'จำนวนพนักงาน',
+        name: this.translate.instant('company.dashboard.charts.employeeCount'),
         type: 'bar',
         data: departmentData.values,
         itemStyle: {
@@ -337,7 +371,14 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
 
     // Position Bar Chart
     const positionData = {
-      names: ['C-Level', 'ผู้จัดการ', 'รองผู้จัดการ', 'หัวหน้าแผนก', 'หัวหน้างาน', 'พนักงาน'],
+      names: [
+        this.translate.instant('company.dashboard.charts.position.cLevel'),
+        this.translate.instant('company.dashboard.charts.position.manager'),
+        this.translate.instant('company.dashboard.charts.position.assistantManager'),
+        this.translate.instant('company.dashboard.charts.position.departmentHead'),
+        this.translate.instant('company.dashboard.charts.position.supervisor'),
+        this.translate.instant('company.dashboard.charts.position.employee')
+      ],
       values: [5, 45, 78, 156, 234, 678]
     };
 
@@ -379,7 +420,7 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
       },
       yAxis: {
         type: 'value',
-        name: 'จำนวนตำแหน่ง',
+        name: this.translate.instant('company.dashboard.charts.positionCount'),
         nameTextStyle: {
           color: this.getChartTextColor()
         },
@@ -398,7 +439,7 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
         }
       },
       series: [{
-        name: 'จำนวนตำแหน่ง',
+        name: this.translate.instant('company.dashboard.charts.positionCount'),
         type: 'bar',
         data: positionData.values,
         itemStyle: {
@@ -425,42 +466,42 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
     // Organization Tree Map
     const orgTreeMapData = [
       {
-        name: 'องค์กร',
+        name: this.translate.instant('company.dashboard.charts.organization'),
         children: [
           {
-            name: 'ฝ่ายขาย',
+            name: this.translate.instant('company.dashboard.charts.division.sales'),
             children: [
-              { name: 'แผนกขายในประเทศ', value: 156 },
-              { name: 'แผนกขายต่างประเทศ', value: 98 },
-              { name: 'แผนกบริการลูกค้า', value: 88 }
+              { name: this.translate.instant('company.dashboard.charts.department.domesticSales'), value: 156 },
+              { name: this.translate.instant('company.dashboard.charts.department.internationalSales'), value: 98 },
+              { name: this.translate.instant('company.dashboard.charts.department.customerService'), value: 88 }
             ]
           },
           {
-            name: 'ฝ่ายการตลาด',
+            name: this.translate.instant('company.dashboard.charts.division.marketing'),
             children: [
-              { name: 'แผนกการตลาด', value: 98 },
-              { name: 'แผนกประชาสัมพันธ์', value: 56 },
-              { name: 'แผนกวิจัยตลาด', value: 44 }
+              { name: this.translate.instant('company.dashboard.charts.department.marketing'), value: 98 },
+              { name: this.translate.instant('company.dashboard.charts.department.publicRelations'), value: 56 },
+              { name: this.translate.instant('company.dashboard.charts.department.marketResearch'), value: 44 }
             ]
           },
           {
-            name: 'ฝ่ายบัญชี',
+            name: this.translate.instant('company.dashboard.charts.division.accounting'),
             value: 156
           },
           {
-            name: 'ฝ่ายทรัพยากรบุคคล',
+            name: this.translate.instant('company.dashboard.charts.division.hr'),
             value: 89
           },
           {
-            name: 'ฝ่ายไอที',
+            name: this.translate.instant('company.dashboard.charts.division.it'),
             value: 124
           },
           {
-            name: 'ฝ่ายผลิต',
+            name: this.translate.instant('company.dashboard.charts.division.production'),
             value: 278
           },
           {
-            name: 'ฝ่ายบริหาร',
+            name: this.translate.instant('company.dashboard.charts.division.management'),
             value: 60
           }
         ]
@@ -492,7 +533,9 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
         },
         label: {
           show: true,
-          formatter: '{b}\n{c} คน',
+          formatter: (params: any) => {
+            return `${params.name}\n${params.value} ${personLabel}`;
+          },
           color: this.getChartTextColor()
         },
         upperLabel: {
@@ -516,7 +559,15 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
 
     // Location Bar Chart
     const locationData = {
-      names: ['สำนักงานใหญ่', 'โรงงาน A', 'โรงงาน B', 'คลังสินค้า', 'สาขา 1', 'สาขา 2', 'สาขา 3'],
+      names: [
+        this.translate.instant('company.dashboard.charts.location.headOffice'),
+        this.translate.instant('company.dashboard.charts.location.factoryA'),
+        this.translate.instant('company.dashboard.charts.location.factoryB'),
+        this.translate.instant('company.dashboard.charts.location.warehouse'),
+        this.translate.instant('company.dashboard.charts.location.branch1'),
+        this.translate.instant('company.dashboard.charts.location.branch2'),
+        this.translate.instant('company.dashboard.charts.location.branch3')
+      ],
       values: [456, 234, 189, 156, 134, 78, 0]
     };
 
@@ -561,7 +612,7 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
       },
       yAxis: {
         type: 'value',
-        name: 'จำนวนพนักงาน',
+        name: this.translate.instant('company.dashboard.charts.employeeCount'),
         nameTextStyle: {
           color: this.getChartTextColor()
         },
@@ -580,7 +631,7 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
         }
       },
       series: [{
-        name: 'จำนวนพนักงาน',
+        name: this.translate.instant('company.dashboard.charts.employeeCount'),
         type: 'bar',
         data: locationData.values,
         itemStyle: {
@@ -605,6 +656,19 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
     };
 
     // Sankey Diagram - Organization Flow
+    const salesDiv = this.translate.instant('company.dashboard.charts.division.sales');
+    const marketingDiv = this.translate.instant('company.dashboard.charts.division.marketing');
+    const accountingDiv = this.translate.instant('company.dashboard.charts.division.accounting');
+    const hrDiv = this.translate.instant('company.dashboard.charts.division.hr');
+    const itDiv = this.translate.instant('company.dashboard.charts.division.it');
+    const productionDiv = this.translate.instant('company.dashboard.charts.division.production');
+    const salesDept = this.translate.instant('company.dashboard.charts.department.sales');
+    const marketingDept = this.translate.instant('company.dashboard.charts.department.marketing');
+    const accountingDept = this.translate.instant('company.dashboard.charts.department.accounting');
+    const hrDept = this.translate.instant('company.dashboard.charts.department.hr');
+    const itDept = this.translate.instant('company.dashboard.charts.department.it');
+    const productionDept = this.translate.instant('company.dashboard.charts.department.production');
+    
     this.sankeyChartOption = {
       backgroundColor: this.getChartBackgroundColor(),
       tooltip: {
@@ -623,35 +687,35 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
           { name: 'COO' },
           { name: 'CFO' },
           { name: 'CTO' },
-          { name: 'ฝ่ายขาย' },
-          { name: 'ฝ่ายการตลาด' },
-          { name: 'ฝ่ายบัญชี' },
-          { name: 'ฝ่ายทรัพยากรบุคคล' },
-          { name: 'ฝ่ายไอที' },
-          { name: 'ฝ่ายผลิต' },
-          { name: 'แผนกขาย' },
-          { name: 'แผนกการตลาด' },
-          { name: 'แผนกบัญชี' },
-          { name: 'แผนก HR' },
-          { name: 'แผนก IT' },
-          { name: 'แผนกผลิต' }
+          { name: salesDiv },
+          { name: marketingDiv },
+          { name: accountingDiv },
+          { name: hrDiv },
+          { name: itDiv },
+          { name: productionDiv },
+          { name: salesDept },
+          { name: marketingDept },
+          { name: accountingDept },
+          { name: hrDept },
+          { name: itDept },
+          { name: productionDept }
         ],
         links: [
           { source: 'CEO', target: 'COO', value: 10 },
           { source: 'CEO', target: 'CFO', value: 8 },
           { source: 'CEO', target: 'CTO', value: 6 },
-          { source: 'COO', target: 'ฝ่ายขาย', value: 5 },
-          { source: 'COO', target: 'ฝ่ายการตลาด', value: 3 },
-          { source: 'COO', target: 'ฝ่ายผลิต', value: 2 },
-          { source: 'CFO', target: 'ฝ่ายบัญชี', value: 4 },
-          { source: 'CTO', target: 'ฝ่ายไอที', value: 3 },
-          { source: 'CTO', target: 'ฝ่ายทรัพยากรบุคคล', value: 2 },
-          { source: 'ฝ่ายขาย', target: 'แผนกขาย', value: 5 },
-          { source: 'ฝ่ายการตลาด', target: 'แผนกการตลาด', value: 3 },
-          { source: 'ฝ่ายบัญชี', target: 'แผนกบัญชี', value: 4 },
-          { source: 'ฝ่ายทรัพยากรบุคคล', target: 'แผนก HR', value: 2 },
-          { source: 'ฝ่ายไอที', target: 'แผนก IT', value: 3 },
-          { source: 'ฝ่ายผลิต', target: 'แผนกผลิต', value: 2 }
+          { source: 'COO', target: salesDiv, value: 5 },
+          { source: 'COO', target: marketingDiv, value: 3 },
+          { source: 'COO', target: productionDiv, value: 2 },
+          { source: 'CFO', target: accountingDiv, value: 4 },
+          { source: 'CTO', target: itDiv, value: 3 },
+          { source: 'CTO', target: hrDiv, value: 2 },
+          { source: salesDiv, target: salesDept, value: 5 },
+          { source: marketingDiv, target: marketingDept, value: 3 },
+          { source: accountingDiv, target: accountingDept, value: 4 },
+          { source: hrDiv, target: hrDept, value: 2 },
+          { source: itDiv, target: itDept, value: 3 },
+          { source: productionDiv, target: productionDept, value: 2 }
         ],
         emphasis: {
           focus: 'adjacency'

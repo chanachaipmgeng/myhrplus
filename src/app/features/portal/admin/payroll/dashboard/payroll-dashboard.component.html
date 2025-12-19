@@ -1,32 +1,32 @@
 <app-page-header 
-  title="Payroll Management" 
-  subtitle="ศูนย์กลางจัดการเงินเดือนและสวัสดิการ">
+  [title]="'payroll.dashboard.title' | translate" 
+  [subtitle]="'payroll.dashboard.subtitle' | translate">
 </app-page-header>
 
 <div class="p-5 bg-gray-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
   <!-- Statistics Cards -->
   <div class="mb-8">
-    <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">สถิติเงินเดือน</h2>
+    <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">{{ 'payroll.dashboard.statistics.title' | translate }}</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
       <div class="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-3xl font-bold mb-2">{{ (statistics.totalPayroll / 1000000).toFixed(1) }}M</div>
-        <div class="text-sm opacity-90">เงินเดือนรวม</div>
+        <div class="text-sm opacity-90">{{ 'payroll.dashboard.statistics.totalPayroll' | translate }}</div>
       </div>
       <div class="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-3xl font-bold mb-2">{{ (statistics.averageSalary / 1000).toFixed(0) }}K</div>
-        <div class="text-sm opacity-90">เงินเดือนเฉลี่ย</div>
+        <div class="text-sm opacity-90">{{ 'payroll.dashboard.statistics.averageSalary' | translate }}</div>
       </div>
       <div class="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.processed }}</div>
-        <div class="text-sm opacity-90">ประมวลผลแล้ว</div>
+        <div class="text-sm opacity-90">{{ 'payroll.dashboard.statistics.processed' | translate }}</div>
       </div>
       <div class="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.pending }}</div>
-        <div class="text-sm opacity-90">รออนุมัติ</div>
+        <div class="text-sm opacity-90">{{ 'payroll.dashboard.statistics.pending' | translate }}</div>
       </div>
       <div class="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-3xl font-bold mb-2">{{ (statistics.bonuses / 1000000).toFixed(1) }}M</div>
-        <div class="text-sm opacity-90">โบนัสรวม</div>
+        <div class="text-sm opacity-90">{{ 'payroll.dashboard.statistics.totalBonuses' | translate }}</div>
       </div>
     </div>
   </div>
@@ -36,19 +36,19 @@
     <!-- Charts Section: 3 columns (75%) -->
     <div class="lg:col-span-3">
       <div class="mb-8">
-        <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">กราฟและสถิติ</h2>
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">{{ 'payroll.dashboard.charts.title' | translate }}</h2>
         
         <!-- Charts Row 1: 2 columns -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
           <!-- Pie Chart: Payroll Distribution -->
           <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">การกระจายเงินเดือน</h3>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">{{ 'payroll.dashboard.charts.payrollDistribution' | translate }}</h3>
             <div echarts [options]="payrollDistributionPieChartOption" class="w-full" style="height: 400px;"></div>
           </div>
           
           <!-- Bar Chart: Salary Range -->
           <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">การกระจายเงินเดือนตามช่วง</h3>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">{{ 'payroll.dashboard.charts.salaryRangeDistribution' | translate }}</h3>
             <div echarts [options]="salaryRangeBarChartOption" class="w-full" style="height: 400px;"></div>
           </div>
         </div>
@@ -57,7 +57,7 @@
         <div class="grid grid-cols-1 gap-5 mb-5">
           <!-- Line Chart: Payroll Trend -->
           <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">แนวโน้มเงินเดือนรายเดือน</h3>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">{{ 'payroll.dashboard.charts.monthlyTrend' | translate }}</h3>
             <div echarts [options]="payrollTrendLineChartOption" class="w-full" style="height: 400px;"></div>
           </div>
         </div>
@@ -67,7 +67,7 @@
     <!-- Navigation Cards Section: 1 column (25%) -->
     <div class="lg:col-span-1">
       <div class="sticky top-5">
-        <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">เมนูหลัก</h2>
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">{{ 'payroll.dashboard.mainMenu.title' | translate }}</h2>
         <div class="space-y-4">
           <!-- Transaction Card -->
           <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
@@ -75,10 +75,10 @@
             <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">swap_horiz</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">รายการ</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการรายการเงินเดือนก่อนและหลังประมวลผล</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'payroll.dashboard.mainMenu.transaction.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'payroll.dashboard.mainMenu.transaction.description' | translate }}</p>
             <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+              {{ 'payroll.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
@@ -88,10 +88,10 @@
             <div class="w-12 h-12 bg-green-50 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4 text-green-600 dark:text-green-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">receipt</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">สลิปเงินเดือนอิเล็กทรอนิกส์</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการสลิปเงินเดือนออนไลน์</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'payroll.dashboard.mainMenu.ePayslip.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'payroll.dashboard.mainMenu.ePayslip.description' | translate }}</p>
             <div class="flex items-center text-green-600 dark:text-green-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+              {{ 'payroll.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
@@ -101,10 +101,10 @@
             <div class="w-12 h-12 bg-purple-50 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4 text-purple-600 dark:text-purple-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">file_upload</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">ส่งไฟล์ข้อความ</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">ส่งไฟล์ข้อมูลเงินเดือนไปยังระบบอื่น</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'payroll.dashboard.mainMenu.textFileTransfer.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'payroll.dashboard.mainMenu.textFileTransfer.description' | translate }}</p>
             <div class="flex items-center text-purple-600 dark:text-purple-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+              {{ 'payroll.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
@@ -114,10 +114,10 @@
             <div class="w-12 h-12 bg-orange-50 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mb-4 text-orange-600 dark:text-orange-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">tune</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">ตัวเลือก</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">ตั้งค่าและตัวเลือกเพิ่มเติม</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'payroll.dashboard.mainMenu.options.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'payroll.dashboard.mainMenu.options.description' | translate }}</p>
             <div class="flex items-center text-orange-600 dark:text-orange-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+              {{ 'payroll.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
@@ -127,10 +127,10 @@
             <div class="w-12 h-12 bg-teal-50 dark:bg-teal-900/30 rounded-lg flex items-center justify-center mb-4 text-teal-600 dark:text-teal-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">settings</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">ตั้งค่า</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">ตั้งค่าระบบเงินเดือน</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'payroll.dashboard.mainMenu.setup.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'payroll.dashboard.mainMenu.setup.description' | translate }}</p>
             <div class="flex items-center text-teal-600 dark:text-teal-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+              {{ 'payroll.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
         </div>

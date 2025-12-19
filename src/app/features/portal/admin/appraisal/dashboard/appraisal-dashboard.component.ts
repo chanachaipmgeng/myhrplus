@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
@@ -11,12 +12,14 @@ import { EChartsOption } from 'echarts';
   imports: [
     CommonModule,
     RouterModule,
+    TranslateModule,
     PageHeaderComponent,
     NgxEchartsModule
   ],
   templateUrl: './appraisal-dashboard.component.html'
 })
 export class AppraisalDashboardComponent implements OnInit, OnDestroy {
+  private translate = inject(TranslateService);
   private observer?: MutationObserver;
   isDarkMode = false;
 
@@ -38,6 +41,11 @@ export class AppraisalDashboardComponent implements OnInit, OnDestroy {
     this.checkDarkMode();
     this.initializeCharts();
     this.setupThemeObserver();
+    
+    // Re-initialize charts when language changes
+    this.translate.onLangChange.subscribe(() => {
+      this.initializeCharts();
+    });
   }
 
   ngOnDestroy(): void {
@@ -85,20 +93,24 @@ export class AppraisalDashboardComponent implements OnInit, OnDestroy {
   }
 
   private initializeCharts(): void {
+    const personLabel = this.translate.instant('common.person');
+    
     // Appraisal Grade Pie Chart
     const gradeData = [
-      { name: 'ดีเยี่ยม (5)', value: 456 },
-      { name: 'ดีมาก (4)', value: 1234 },
-      { name: 'ดี (3)', value: 987 },
-      { name: 'พอใช้ (2)', value: 567 },
-      { name: 'ต้องปรับปรุง (1)', value: 212 }
+      { name: this.translate.instant('appraisal.dashboard.grades.excellent'), value: 456 },
+      { name: this.translate.instant('appraisal.dashboard.grades.veryGood'), value: 1234 },
+      { name: this.translate.instant('appraisal.dashboard.grades.good'), value: 987 },
+      { name: this.translate.instant('appraisal.dashboard.grades.fair'), value: 567 },
+      { name: this.translate.instant('appraisal.dashboard.grades.needsImprovement'), value: 212 }
     ];
 
     this.appraisalGradePieChartOption = {
       backgroundColor: this.getChartBackgroundColor(),
       tooltip: {
         trigger: 'item',
-        formatter: '{a} <br/>{b}: {c} คน ({d}%)',
+        formatter: (params: any) => {
+          return `${params.seriesName}<br/>${params.name}: ${params.value} ${personLabel} (${params.percent}%)`;
+        },
         backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)',
         borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
         textStyle: {
@@ -115,7 +127,7 @@ export class AppraisalDashboardComponent implements OnInit, OnDestroy {
         }
       },
       series: [{
-        name: 'ระดับการประเมิน',
+        name: this.translate.instant('appraisal.dashboard.charts.appraisalGrade'),
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: false,
@@ -126,7 +138,9 @@ export class AppraisalDashboardComponent implements OnInit, OnDestroy {
         },
         label: {
           show: true,
-          formatter: '{b}\n{c} คน',
+          formatter: (params: any) => {
+            return `${params.name}\n${params.value} ${personLabel}`;
+          },
           color: this.getChartTextColor()
         },
         emphasis: {
@@ -142,7 +156,14 @@ export class AppraisalDashboardComponent implements OnInit, OnDestroy {
 
     // Performance Distribution Bar Chart
     const performanceData = {
-      departments: ['แผนกขาย', 'แผนกการตลาด', 'แผนกบัญชี', 'แผนก HR', 'แผนก IT', 'แผนกผลิต'],
+      departments: [
+        this.translate.instant('appraisal.dashboard.departments.sales'),
+        this.translate.instant('appraisal.dashboard.departments.marketing'),
+        this.translate.instant('appraisal.dashboard.departments.accounting'),
+        this.translate.instant('appraisal.dashboard.departments.hr'),
+        this.translate.instant('appraisal.dashboard.departments.it'),
+        this.translate.instant('appraisal.dashboard.departments.production')
+      ],
       average: [4.5, 4.3, 4.2, 4.1, 4.4, 4.0]
     };
 
@@ -190,7 +211,7 @@ export class AppraisalDashboardComponent implements OnInit, OnDestroy {
       },
       yAxis: {
         type: 'value',
-        name: 'คะแนนเฉลี่ย',
+        name: this.translate.instant('appraisal.dashboard.charts.averageScore'),
         min: 0,
         max: 5,
         nameTextStyle: {
@@ -211,7 +232,7 @@ export class AppraisalDashboardComponent implements OnInit, OnDestroy {
         }
       },
       series: [{
-        name: 'คะแนนเฉลี่ย',
+        name: this.translate.instant('appraisal.dashboard.charts.averageScore'),
         type: 'bar',
         data: performanceData.average,
         itemStyle: {
@@ -238,7 +259,20 @@ export class AppraisalDashboardComponent implements OnInit, OnDestroy {
 
     // Appraisal Trend Line Chart
     const trendData = {
-      months: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'],
+      months: [
+        this.translate.instant('common.months.jan'),
+        this.translate.instant('common.months.feb'),
+        this.translate.instant('common.months.mar'),
+        this.translate.instant('common.months.apr'),
+        this.translate.instant('common.months.may'),
+        this.translate.instant('common.months.jun'),
+        this.translate.instant('common.months.jul'),
+        this.translate.instant('common.months.aug'),
+        this.translate.instant('common.months.sep'),
+        this.translate.instant('common.months.oct'),
+        this.translate.instant('common.months.nov'),
+        this.translate.instant('common.months.dec')
+      ],
       completed: [234, 256, 278, 289, 267, 298, 312, 301, 323, 289, 298, 312],
       averageScore: [4.1, 4.2, 4.15, 4.25, 4.2, 4.3, 4.25, 4.3, 4.2, 4.25, 4.3, 4.2]
     };
@@ -254,7 +288,10 @@ export class AppraisalDashboardComponent implements OnInit, OnDestroy {
         }
       },
       legend: {
-        data: ['ประเมินเสร็จ', 'คะแนนเฉลี่ย'],
+        data: [
+          this.translate.instant('appraisal.dashboard.charts.completed'),
+          this.translate.instant('appraisal.dashboard.charts.averageScore')
+        ],
         textStyle: {
           color: this.getChartTextColor()
         },
@@ -287,7 +324,7 @@ export class AppraisalDashboardComponent implements OnInit, OnDestroy {
       yAxis: [
         {
           type: 'value',
-          name: 'จำนวนการประเมิน',
+          name: this.translate.instant('appraisal.dashboard.charts.appraisalCount'),
           nameTextStyle: {
             color: this.getChartTextColor()
           },
@@ -307,7 +344,7 @@ export class AppraisalDashboardComponent implements OnInit, OnDestroy {
         },
         {
           type: 'value',
-          name: 'คะแนนเฉลี่ย',
+          name: this.translate.instant('appraisal.dashboard.charts.averageScore'),
           min: 3.5,
           max: 5,
           nameTextStyle: {
@@ -326,7 +363,7 @@ export class AppraisalDashboardComponent implements OnInit, OnDestroy {
       ],
       series: [
         {
-          name: 'ประเมินเสร็จ',
+          name: this.translate.instant('appraisal.dashboard.charts.completed'),
           type: 'line',
           smooth: true,
           data: trendData.completed,
@@ -348,7 +385,7 @@ export class AppraisalDashboardComponent implements OnInit, OnDestroy {
           }
         },
         {
-          name: 'คะแนนเฉลี่ย',
+          name: this.translate.instant('appraisal.dashboard.charts.averageScore'),
           type: 'line',
           smooth: true,
           yAxisIndex: 1,

@@ -8,14 +8,16 @@ import { SettingHomeComponent } from './setting-home/setting-home.component';
 
 @NgModule({
   declarations: [
-    SettingHomeComponent
+    // SettingHomeComponent is now standalone
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule,
     SharedModule,
     LayoutModule,
+    SettingHomeComponent, // Import standalone component
     SettingRoutingModule
   ]
 })

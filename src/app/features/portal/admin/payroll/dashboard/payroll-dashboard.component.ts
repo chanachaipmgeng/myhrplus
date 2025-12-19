@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
@@ -11,12 +12,14 @@ import { EChartsOption } from 'echarts';
   imports: [
     CommonModule,
     RouterModule,
+    TranslateModule,
     PageHeaderComponent,
     NgxEchartsModule
   ],
   templateUrl: './payroll-dashboard.component.html'
 })
 export class PayrollDashboardComponent implements OnInit, OnDestroy {
+  private translate = inject(TranslateService);
   private observer?: MutationObserver;
   isDarkMode = false;
 
@@ -38,6 +41,11 @@ export class PayrollDashboardComponent implements OnInit, OnDestroy {
     this.checkDarkMode();
     this.initializeCharts();
     this.setupThemeObserver();
+    
+    // Re-initialize charts when language changes
+    this.translate.onLangChange.subscribe(() => {
+      this.initializeCharts();
+    });
   }
 
   ngOnDestroy(): void {
@@ -87,17 +95,20 @@ export class PayrollDashboardComponent implements OnInit, OnDestroy {
   private initializeCharts(): void {
     // Payroll Distribution Pie Chart
     const payrollData = [
-      { name: 'เงินเดือน', value: 110000000 },
-      { name: 'โบนัส', value: 15000000 },
-      { name: 'ค่าล่วงเวลา', value: 8000000 },
-      { name: 'ค่าสวัสดิการ', value: 2000000 }
+      { name: this.translate.instant('payroll.dashboard.types.salary'), value: 110000000 },
+      { name: this.translate.instant('payroll.dashboard.types.bonus'), value: 15000000 },
+      { name: this.translate.instant('payroll.dashboard.types.overtime'), value: 8000000 },
+      { name: this.translate.instant('payroll.dashboard.types.welfare'), value: 2000000 }
     ];
 
     this.payrollDistributionPieChartOption = {
       backgroundColor: this.getChartBackgroundColor(),
       tooltip: {
         trigger: 'item',
-        formatter: '{a} <br/>{b}: ฿{c} ({d}%)',
+        formatter: (params: any) => {
+          const currencySymbol = this.translate.instant('common.currency');
+          return `${params.seriesName}<br/>${params.name}: ${currencySymbol}${params.value.toLocaleString()} (${params.percent}%)`;
+        },
         backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)',
         borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
         textStyle: {
@@ -114,7 +125,7 @@ export class PayrollDashboardComponent implements OnInit, OnDestroy {
         }
       },
       series: [{
-        name: 'การกระจายเงินเดือน',
+        name: this.translate.instant('payroll.dashboard.charts.payrollDistribution'),
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: false,
@@ -186,7 +197,7 @@ export class PayrollDashboardComponent implements OnInit, OnDestroy {
       },
       yAxis: {
         type: 'value',
-        name: 'จำนวนพนักงาน',
+        name: this.translate.instant('payroll.dashboard.charts.employeeCount'),
         nameTextStyle: {
           color: this.getChartTextColor()
         },
@@ -205,7 +216,7 @@ export class PayrollDashboardComponent implements OnInit, OnDestroy {
         }
       },
       series: [{
-        name: 'จำนวนพนักงาน',
+        name: this.translate.instant('payroll.dashboard.charts.employeeCount'),
         type: 'bar',
         data: salaryData.values,
         itemStyle: {
@@ -231,7 +242,20 @@ export class PayrollDashboardComponent implements OnInit, OnDestroy {
 
     // Payroll Trend Line Chart
     const trendData = {
-      months: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'],
+      months: [
+        this.translate.instant('common.months.jan'),
+        this.translate.instant('common.months.feb'),
+        this.translate.instant('common.months.mar'),
+        this.translate.instant('common.months.apr'),
+        this.translate.instant('common.months.may'),
+        this.translate.instant('common.months.jun'),
+        this.translate.instant('common.months.jul'),
+        this.translate.instant('common.months.aug'),
+        this.translate.instant('common.months.sep'),
+        this.translate.instant('common.months.oct'),
+        this.translate.instant('common.months.nov'),
+        this.translate.instant('common.months.dec')
+      ],
       payroll: [118000000, 120000000, 122000000, 121000000, 123000000, 124000000, 125000000, 125500000, 125200000, 125000000, 125800000, 125000000],
       bonuses: [10000000, 12000000, 15000000, 14000000, 16000000, 15000000, 15000000, 18000000, 15000000, 15000000, 20000000, 15000000]
     };
@@ -241,9 +265,10 @@ export class PayrollDashboardComponent implements OnInit, OnDestroy {
       tooltip: {
         trigger: 'axis',
         formatter: (params: any) => {
+          const currencySymbol = this.translate.instant('common.currency');
           let result = params[0].name + '<br/>';
           params.forEach((param: any) => {
-            result += `${param.seriesName}: ฿${param.value.toLocaleString()}<br/>`;
+            result += `${param.seriesName}: ${currencySymbol}${param.value.toLocaleString()}<br/>`;
           });
           return result;
         },
@@ -254,7 +279,10 @@ export class PayrollDashboardComponent implements OnInit, OnDestroy {
         }
       },
       legend: {
-        data: ['เงินเดือนรวม', 'โบนัส'],
+        data: [
+          this.translate.instant('payroll.dashboard.charts.totalPayroll'),
+          this.translate.instant('payroll.dashboard.charts.bonus')
+        ],
         textStyle: {
           color: this.getChartTextColor()
         },
@@ -286,7 +314,7 @@ export class PayrollDashboardComponent implements OnInit, OnDestroy {
       },
       yAxis: {
         type: 'value',
-        name: 'จำนวนเงิน (บาท)',
+        name: this.translate.instant('payroll.dashboard.charts.amount'),
         nameTextStyle: {
           color: this.getChartTextColor()
         },
@@ -309,7 +337,7 @@ export class PayrollDashboardComponent implements OnInit, OnDestroy {
       },
       series: [
         {
-          name: 'เงินเดือนรวม',
+          name: this.translate.instant('payroll.dashboard.charts.totalPayroll'),
           type: 'line',
           smooth: true,
           data: trendData.payroll,
@@ -331,7 +359,7 @@ export class PayrollDashboardComponent implements OnInit, OnDestroy {
           }
         },
         {
-          name: 'โบนัส',
+          name: this.translate.instant('payroll.dashboard.charts.bonus'),
           type: 'line',
           smooth: true,
           data: trendData.bonuses,

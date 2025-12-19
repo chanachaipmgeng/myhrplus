@@ -1,16 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthService, DatabaseModel } from '../../../core/services/auth.service';
 import { NotificationService } from '../../../core/services/notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { SyncfusionModule } from '../../../shared/syncfusion/syncfusion.module';
 
 @Component({
   selector: 'app-forgot-password',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule, SyncfusionModule],
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
+  private translate = inject(TranslateService);
+  
   forgotPasswordForm: FormGroup;
   loading = false;
   dbList: DatabaseModel[] = [];
@@ -114,7 +121,7 @@ export class ForgotPasswordComponent implements OnInit {
           console.log('Forgot password result:', result);
           
           if (result.status) {
-            this.successMessage = 'ส่งรหัสผ่านไปยังอีเมลสำเร็จแล้ว';
+            this.successMessage = this.translate.instant('auth.forgotPassword.successMessage');
             this.notificationService.showSuccess(this.successMessage);
             // Clear form after success
             this.forgotPasswordForm.reset();
@@ -134,7 +141,7 @@ export class ForgotPasswordComponent implements OnInit {
             
             this.errorMessage = errorMessages.length > 0 
               ? errorMessages.join('\n') 
-              : 'ไม่สามารถส่งรหัสผ่านได้ กรุณาลองใหม่อีกครั้ง';
+              : this.translate.instant('auth.forgotPassword.error.sendFailed');
             this.notificationService.showError(this.errorMessage);
           }
           
@@ -145,15 +152,15 @@ export class ForgotPasswordComponent implements OnInit {
           this.loading = false;
 
           if (error.status === 401) {
-            this.errorMessage = 'ชื่อผู้ใช้หรืออีเมลไม่ถูกต้อง';
+            this.errorMessage = this.translate.instant('auth.forgotPassword.error.invalidCredentials');
             this.notificationService.showError(this.errorMessage);
           } else {
-            this.errorMessage = error.message || 'ไม่สามารถส่งรหัสผ่านได้ กรุณาลองใหม่อีกครั้ง';
+            this.errorMessage = error.message || this.translate.instant('auth.forgotPassword.error.sendFailed');
             this.notificationService.showError(this.errorMessage);
           }
         });
     } else {
-      this.notificationService.showWarning('กรุณากรอกข้อมูลให้ครบถ้วน');
+      this.notificationService.showWarning(this.translate.instant('auth.forgotPassword.error.incompleteData'));
     }
   }
 }

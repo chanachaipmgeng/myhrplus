@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
@@ -11,12 +12,14 @@ import { EChartsOption } from 'echarts';
   imports: [
     CommonModule,
     RouterModule,
+    TranslateModule,
     PageHeaderComponent,
     NgxEchartsModule
   ],
   templateUrl: './employees-dashboard.component.html'
 })
 export class EmployeesDashboardComponent implements OnInit, OnDestroy {
+  private translate = inject(TranslateService);
   private observer?: MutationObserver;
   isDarkMode = false;
 
@@ -38,6 +41,11 @@ export class EmployeesDashboardComponent implements OnInit, OnDestroy {
     this.checkDarkMode();
     this.initializeCharts();
     this.setupThemeObserver();
+    
+    // Re-initialize charts when language changes
+    this.translate.onLangChange.subscribe(() => {
+      this.initializeCharts();
+    });
   }
 
   ngOnDestroy(): void {
@@ -85,20 +93,24 @@ export class EmployeesDashboardComponent implements OnInit, OnDestroy {
   }
 
   private initializeCharts(): void {
+    const personLabel = this.translate.instant('common.person');
+    
     // Employee Status Pie Chart
     const statusData = [
-      { name: 'ทำงานปกติ', value: 3124 },
-      { name: 'ลาพักผ่อน', value: 156 },
-      { name: 'ลาป่วย', value: 89 },
-      { name: 'ลาออก', value: 12 },
-      { name: 'พักงาน', value: 75 }
+      { name: this.translate.instant('employees.dashboard.status.active'), value: 3124 },
+      { name: this.translate.instant('employees.dashboard.status.onLeave'), value: 156 },
+      { name: this.translate.instant('employees.dashboard.status.sickLeave'), value: 89 },
+      { name: this.translate.instant('employees.dashboard.status.resigned'), value: 12 },
+      { name: this.translate.instant('employees.dashboard.status.suspended'), value: 75 }
     ];
 
     this.employeeStatusPieChartOption = {
       backgroundColor: this.getChartBackgroundColor(),
       tooltip: {
         trigger: 'item',
-        formatter: '{a} <br/>{b}: {c} คน ({d}%)',
+        formatter: (params: any) => {
+          return `${params.seriesName}<br/>${params.name}: ${params.value} ${personLabel} (${params.percent}%)`;
+        },
         backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)',
         borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
         textStyle: {
@@ -115,7 +127,7 @@ export class EmployeesDashboardComponent implements OnInit, OnDestroy {
         }
       },
       series: [{
-        name: 'สถานะพนักงาน',
+        name: this.translate.instant('employees.dashboard.charts.employeeStatus'),
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: false,
@@ -126,7 +138,9 @@ export class EmployeesDashboardComponent implements OnInit, OnDestroy {
         },
         label: {
           show: true,
-          formatter: '{b}\n{c} คน',
+          formatter: (params: any) => {
+            return `${params.name}\n${params.value} ${personLabel}`;
+          },
           color: this.getChartTextColor()
         },
         emphasis: {
@@ -142,7 +156,16 @@ export class EmployeesDashboardComponent implements OnInit, OnDestroy {
 
     // Department Distribution Bar Chart
     const departmentData = {
-      names: ['แผนกขาย', 'แผนกการตลาด', 'แผนกบัญชี', 'แผนก HR', 'แผนก IT', 'แผนกผลิต', 'แผนกจัดซื้อ', 'แผนกคลังสินค้า'],
+      names: [
+        this.translate.instant('employees.dashboard.departments.sales'),
+        this.translate.instant('employees.dashboard.departments.marketing'),
+        this.translate.instant('employees.dashboard.departments.accounting'),
+        this.translate.instant('employees.dashboard.departments.hr'),
+        this.translate.instant('employees.dashboard.departments.it'),
+        this.translate.instant('employees.dashboard.departments.production'),
+        this.translate.instant('employees.dashboard.departments.procurement'),
+        this.translate.instant('employees.dashboard.departments.warehouse')
+      ],
       values: [456, 234, 189, 156, 134, 678, 98, 87]
     };
 
@@ -187,7 +210,7 @@ export class EmployeesDashboardComponent implements OnInit, OnDestroy {
       },
       yAxis: {
         type: 'value',
-        name: 'จำนวนพนักงาน',
+        name: this.translate.instant('employees.dashboard.charts.employeeCount'),
         nameTextStyle: {
           color: this.getChartTextColor()
         },
@@ -206,7 +229,7 @@ export class EmployeesDashboardComponent implements OnInit, OnDestroy {
         }
       },
       series: [{
-        name: 'จำนวนพนักงาน',
+        name: this.translate.instant('employees.dashboard.charts.employeeCount'),
         type: 'bar',
         data: departmentData.values,
         itemStyle: {
@@ -232,7 +255,20 @@ export class EmployeesDashboardComponent implements OnInit, OnDestroy {
 
     // Employee Growth Line Chart
     const growthData = {
-      months: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'],
+      months: [
+        this.translate.instant('common.months.jan'),
+        this.translate.instant('common.months.feb'),
+        this.translate.instant('common.months.mar'),
+        this.translate.instant('common.months.apr'),
+        this.translate.instant('common.months.may'),
+        this.translate.instant('common.months.jun'),
+        this.translate.instant('common.months.jul'),
+        this.translate.instant('common.months.aug'),
+        this.translate.instant('common.months.sep'),
+        this.translate.instant('common.months.oct'),
+        this.translate.instant('common.months.nov'),
+        this.translate.instant('common.months.dec')
+      ],
       employees: [3200, 3250, 3280, 3320, 3360, 3400, 3420, 3440, 3450, 3456, 3460, 3456],
       newHires: [45, 50, 30, 40, 40, 40, 20, 20, 10, 6, 4, 0]
     };
@@ -248,7 +284,10 @@ export class EmployeesDashboardComponent implements OnInit, OnDestroy {
         }
       },
       legend: {
-        data: ['จำนวนพนักงานทั้งหมด', 'พนักงานใหม่'],
+        data: [
+          this.translate.instant('employees.dashboard.charts.totalEmployees'),
+          this.translate.instant('employees.dashboard.charts.newHires')
+        ],
         textStyle: {
           color: this.getChartTextColor()
         },
@@ -281,7 +320,7 @@ export class EmployeesDashboardComponent implements OnInit, OnDestroy {
       yAxis: [
         {
           type: 'value',
-          name: 'จำนวนพนักงาน',
+          name: this.translate.instant('employees.dashboard.charts.employeeCount'),
           nameTextStyle: {
             color: this.getChartTextColor()
           },
@@ -301,7 +340,7 @@ export class EmployeesDashboardComponent implements OnInit, OnDestroy {
         },
         {
           type: 'value',
-          name: 'พนักงานใหม่',
+          name: this.translate.instant('employees.dashboard.charts.newHires'),
           nameTextStyle: {
             color: this.getChartTextColor()
           },
@@ -317,7 +356,7 @@ export class EmployeesDashboardComponent implements OnInit, OnDestroy {
       ],
       series: [
         {
-          name: 'จำนวนพนักงานทั้งหมด',
+          name: this.translate.instant('employees.dashboard.charts.totalEmployees'),
           type: 'line',
           smooth: true,
           data: growthData.employees,
@@ -339,7 +378,7 @@ export class EmployeesDashboardComponent implements OnInit, OnDestroy {
           }
         },
         {
-          name: 'พนักงานใหม่',
+          name: this.translate.instant('employees.dashboard.charts.newHires'),
           type: 'bar',
           yAxisIndex: 1,
           data: growthData.newHires,

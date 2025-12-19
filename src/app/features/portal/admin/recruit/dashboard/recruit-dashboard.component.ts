@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
@@ -11,12 +12,14 @@ import { EChartsOption } from 'echarts';
   imports: [
     CommonModule,
     RouterModule,
+    TranslateModule,
     PageHeaderComponent,
     NgxEchartsModule
   ],
   templateUrl: './recruit-dashboard.component.html'
 })
 export class RecruitDashboardComponent implements OnInit, OnDestroy {
+  private translate = inject(TranslateService);
   private observer?: MutationObserver;
   isDarkMode = false;
 
@@ -38,6 +41,11 @@ export class RecruitDashboardComponent implements OnInit, OnDestroy {
     this.checkDarkMode();
     this.initializeCharts();
     this.setupThemeObserver();
+    
+    // Re-initialize charts when language changes
+    this.translate.onLangChange.subscribe(() => {
+      this.initializeCharts();
+    });
   }
 
   ngOnDestroy(): void {
@@ -85,18 +93,23 @@ export class RecruitDashboardComponent implements OnInit, OnDestroy {
   }
 
   private initializeCharts(): void {
+    const positionLabel = this.translate.instant('recruit.dashboard.charts.position');
+    const personLabel = this.translate.instant('common.person');
+    
     // Position Status Pie Chart
     const statusData = [
-      { name: 'เปิดรับสมัคร', value: 12 },
-      { name: 'ปิดรับสมัคร', value: 8 },
-      { name: 'รออนุมัติ', value: 3 }
+      { name: this.translate.instant('recruit.dashboard.status.open'), value: 12 },
+      { name: this.translate.instant('recruit.dashboard.status.closed'), value: 8 },
+      { name: this.translate.instant('recruit.dashboard.status.pending'), value: 3 }
     ];
 
     this.positionStatusPieChartOption = {
       backgroundColor: this.getChartBackgroundColor(),
       tooltip: {
         trigger: 'item',
-        formatter: '{a} <br/>{b}: {c} ตำแหน่ง ({d}%)',
+        formatter: (params: any) => {
+          return `${params.seriesName}<br/>${params.name}: ${params.value} ${positionLabel} (${params.percent}%)`;
+        },
         backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)',
         borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
         textStyle: {
@@ -113,7 +126,7 @@ export class RecruitDashboardComponent implements OnInit, OnDestroy {
         }
       },
       series: [{
-        name: 'สถานะตำแหน่ง',
+        name: this.translate.instant('recruit.dashboard.charts.positionStatus'),
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: false,
@@ -124,7 +137,9 @@ export class RecruitDashboardComponent implements OnInit, OnDestroy {
         },
         label: {
           show: true,
-          formatter: '{b}\n{c}',
+          formatter: (params: any) => {
+            return `${params.name}\n${params.value}`;
+          },
           color: this.getChartTextColor()
         },
         emphasis: {
@@ -140,7 +155,13 @@ export class RecruitDashboardComponent implements OnInit, OnDestroy {
 
     // Application Status Bar Chart
     const applicationData = {
-      positions: ['ตำแหน่ง A', 'ตำแหน่ง B', 'ตำแหน่ง C', 'ตำแหน่ง D', 'ตำแหน่ง E'],
+      positions: [
+        this.translate.instant('recruit.dashboard.positions.positionA'),
+        this.translate.instant('recruit.dashboard.positions.positionB'),
+        this.translate.instant('recruit.dashboard.positions.positionC'),
+        this.translate.instant('recruit.dashboard.positions.positionD'),
+        this.translate.instant('recruit.dashboard.positions.positionE')
+      ],
       applied: [234, 189, 156, 134, 98],
       interviewed: [89, 78, 56, 45, 34],
       offered: [34, 28, 23, 18, 12],
@@ -161,7 +182,12 @@ export class RecruitDashboardComponent implements OnInit, OnDestroy {
         }
       },
       legend: {
-        data: ['สมัคร', 'สัมภาษณ์', 'เสนอตำแหน่ง', 'รับเข้าทำงาน'],
+        data: [
+          this.translate.instant('recruit.dashboard.charts.applied'),
+          this.translate.instant('recruit.dashboard.charts.interviewed'),
+          this.translate.instant('recruit.dashboard.charts.offered'),
+          this.translate.instant('recruit.dashboard.charts.hired')
+        ],
         textStyle: {
           color: this.getChartTextColor()
         },
@@ -195,7 +221,7 @@ export class RecruitDashboardComponent implements OnInit, OnDestroy {
       },
       yAxis: {
         type: 'value',
-        name: 'จำนวนคน',
+        name: this.translate.instant('recruit.dashboard.charts.personCount'),
         nameTextStyle: {
           color: this.getChartTextColor()
         },
@@ -215,7 +241,7 @@ export class RecruitDashboardComponent implements OnInit, OnDestroy {
       },
       series: [
         {
-          name: 'สมัคร',
+          name: this.translate.instant('recruit.dashboard.charts.applied'),
           type: 'bar',
           data: applicationData.applied,
           itemStyle: {
@@ -223,7 +249,7 @@ export class RecruitDashboardComponent implements OnInit, OnDestroy {
           }
         },
         {
-          name: 'สัมภาษณ์',
+          name: this.translate.instant('recruit.dashboard.charts.interviewed'),
           type: 'bar',
           data: applicationData.interviewed,
           itemStyle: {
@@ -231,7 +257,7 @@ export class RecruitDashboardComponent implements OnInit, OnDestroy {
           }
         },
         {
-          name: 'เสนอตำแหน่ง',
+          name: this.translate.instant('recruit.dashboard.charts.offered'),
           type: 'bar',
           data: applicationData.offered,
           itemStyle: {
@@ -239,7 +265,7 @@ export class RecruitDashboardComponent implements OnInit, OnDestroy {
           }
         },
         {
-          name: 'รับเข้าทำงาน',
+          name: this.translate.instant('recruit.dashboard.charts.hired'),
           type: 'bar',
           data: applicationData.hired,
           itemStyle: {
@@ -251,7 +277,13 @@ export class RecruitDashboardComponent implements OnInit, OnDestroy {
 
     // Recruitment Funnel Chart
     const funnelData = {
-      stages: ['สมัคร', 'คัดเลือก', 'สัมภาษณ์', 'เสนอตำแหน่ง', 'รับเข้าทำงาน'],
+      stages: [
+        this.translate.instant('recruit.dashboard.charts.applied'),
+        this.translate.instant('recruit.dashboard.charts.selected'),
+        this.translate.instant('recruit.dashboard.charts.interviewed'),
+        this.translate.instant('recruit.dashboard.charts.offered'),
+        this.translate.instant('recruit.dashboard.charts.hired')
+      ],
       values: [456, 234, 89, 34, 12]
     };
 
@@ -259,7 +291,9 @@ export class RecruitDashboardComponent implements OnInit, OnDestroy {
       backgroundColor: this.getChartBackgroundColor(),
       tooltip: {
         trigger: 'item',
-        formatter: '{a} <br/>{b}: {c} คน',
+        formatter: (params: any) => {
+          return `${params.seriesName}<br/>${params.name}: ${params.value} ${personLabel}`;
+        },
         backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)',
         borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
         textStyle: {
@@ -303,11 +337,11 @@ export class RecruitDashboardComponent implements OnInit, OnDestroy {
           }
         },
         data: [
-          { value: 456, name: 'สมัคร' },
-          { value: 234, name: 'คัดเลือก' },
-          { value: 89, name: 'สัมภาษณ์' },
-          { value: 34, name: 'เสนอตำแหน่ง' },
-          { value: 12, name: 'รับเข้าทำงาน' }
+          { value: 456, name: this.translate.instant('recruit.dashboard.charts.applied') },
+          { value: 234, name: this.translate.instant('recruit.dashboard.charts.selected') },
+          { value: 89, name: this.translate.instant('recruit.dashboard.charts.interviewed') },
+          { value: 34, name: this.translate.instant('recruit.dashboard.charts.offered') },
+          { value: 12, name: this.translate.instant('recruit.dashboard.charts.hired') }
         ]
       }]
     };

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { AuthService, User } from '../../../core/services/auth.service';
 import { HomeService, MenuCategory, MenuItem } from '../../home/home.service';
@@ -7,6 +9,8 @@ import { EmpviewService, LeaveBalance, Payslip, TimeAttendance } from '../servic
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
+  imports: [CommonModule, TranslateModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   animations: [
@@ -19,6 +23,8 @@ import { EmpviewService, LeaveBalance, Payslip, TimeAttendance } from '../servic
   ]
 })
 export class DashboardComponent implements OnInit {
+  private translate = inject(TranslateService);
+  
   currentUser: User | null = null;
   menuCategories: MenuCategory[] = [];
   loading = false;
@@ -42,23 +48,23 @@ export class DashboardComponent implements OnInit {
     return [
       {
         icon: '📅',
-        label: 'ยอดการลาคงเหลือ',
+        label: this.translate.instant('empview.dashboard.stats.leaveBalance'),
         value: this.stats.totalLeaveBalance,
-        suffix: ' วัน',
+        suffix: ' ' + this.translate.instant('empview.dashboard.stats.days'),
         iconBgClass: 'bg-indigo-100 dark:bg-indigo-900'
       },
       {
         icon: '💰',
-        label: 'สลิปเงินเดือน',
+        label: this.translate.instant('empview.dashboard.stats.payslips'),
         value: this.stats.recentPayslipsCount,
-        suffix: ' รายการ',
+        suffix: ' ' + this.translate.instant('empview.dashboard.stats.items'),
         iconBgClass: 'bg-cyan-100 dark:bg-cyan-900'
       },
       {
         icon: '⏰',
-        label: 'การลงเวลา',
+        label: this.translate.instant('empview.dashboard.stats.timeAttendance'),
         value: this.stats.workingHours,
-        suffix: ' ชั่วโมง',
+        suffix: ' ' + this.translate.instant('empview.dashboard.stats.hours'),
         iconBgClass: 'bg-pink-100 dark:bg-pink-900'
       }
     ];
@@ -68,7 +74,7 @@ export class DashboardComponent implements OnInit {
   get pageActions() {
     return [
       {
-        label: 'รีเฟรช',
+        label: this.translate.instant('empview.dashboard.actions.refresh'),
         icon: '🔄',
         variant: 'secondary' as const,
         onClick: () => this.loadDashboardData()
@@ -194,9 +200,9 @@ export class DashboardComponent implements OnInit {
 
   getGreeting(): string {
     const hour = new Date().getHours();
-    if (hour < 12) return 'สวัสดีตอนเช้า';
-    if (hour < 18) return 'สวัสดีตอนบ่าย';
-    return 'สวัสดีตอนเย็น';
+    if (hour < 12) return this.translate.instant('empview.dashboard.greeting.morning');
+    if (hour < 18) return this.translate.instant('empview.dashboard.greeting.afternoon');
+    return this.translate.instant('empview.dashboard.greeting.evening');
   }
 
   getGradientForCategory(code: string): string {
@@ -227,14 +233,15 @@ export class DashboardComponent implements OnInit {
   }
 
   getStatusText(status: string): string {
-    const statusMap: { [key: string]: string } = {
-      'Present': 'เข้างาน',
-      'Absent': 'ขาดงาน',
-      'Late': 'มาสาย',
-      'On Leave': 'ลางาน',
-      'No Record': 'ไม่มีข้อมูล'
+    const statusKeyMap: { [key: string]: string } = {
+      'Present': 'empview.dashboard.status.present',
+      'Absent': 'empview.dashboard.status.absent',
+      'Late': 'empview.dashboard.status.late',
+      'On Leave': 'empview.dashboard.status.onLeave',
+      'No Record': 'empview.dashboard.status.noRecord'
     };
-    return statusMap[status] || status;
+    const key = statusKeyMap[status] || status;
+    return this.translate.instant(key);
   }
 
   formatDate(dateString: string): string {

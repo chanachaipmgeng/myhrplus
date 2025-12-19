@@ -1,6 +1,6 @@
 <app-page-layout
-  [title]="getGreeting() + ', ' + (currentUser?.fullname || currentUser?.name || 'ผู้ใช้งาน') + '!'"
-  description="ยินดีต้อนรับสู่ระบบ HR Management"
+  [title]="getGreeting() + ', ' + (currentUser?.fullname || currentUser?.name || ('empview.dashboard.user' | translate)) + '!'"
+  [description]="'empview.dashboard.welcome' | translate"
   icon="🏠"
   [actions]="pageActions">
   
@@ -10,15 +10,15 @@
       <div class="flex flex-wrap gap-6" *ngIf="currentUser">
         <div class="flex items-center gap-2 px-5 py-3 bg-indigo-100/50 dark:bg-indigo-900/30 rounded-xl text-sm text-gray-700 dark:text-gray-300">
           <app-icon name="badge" size="sm" color="text-indigo-600 dark:text-indigo-400"></app-icon>
-          <span class="thai-text">รหัสพนักงาน: {{ currentUser.employeeid || currentUser.uid }}</span>
+          <span class="thai-text">{{ 'empview.dashboard.employeeId' | translate }}: {{ currentUser.employeeid || currentUser.uid }}</span>
         </div>
         <div class="flex items-center gap-2 px-5 py-3 bg-indigo-100/50 dark:bg-indigo-900/30 rounded-xl text-sm text-gray-700 dark:text-gray-300" *ngIf="currentUser['emp_position']">
           <app-icon name="work" size="sm" color="text-indigo-600 dark:text-indigo-400"></app-icon>
-          <span class="thai-text">ตำแหน่ง: {{ currentUser['emp_position'] }}</span>
+          <span class="thai-text">{{ 'empview.dashboard.position' | translate }}: {{ currentUser['emp_position'] }}</span>
         </div>
         <div class="flex items-center gap-2 px-5 py-3 bg-indigo-100/50 dark:bg-indigo-900/30 rounded-xl text-sm text-gray-700 dark:text-gray-300" *ngIf="currentUser['workarea']">
           <app-icon name="business" size="sm" color="text-indigo-600 dark:text-indigo-400"></app-icon>
-          <span class="thai-text">แผนก: {{ currentUser['workarea'] }}</span>
+          <span class="thai-text">{{ 'empview.dashboard.department' | translate }}: {{ currentUser['workarea'] }}</span>
         </div>
       </div>
     </div>
@@ -36,17 +36,17 @@
           <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
             <app-icon name="event" size="sm" color="text-white"></app-icon>
           </div>
-          <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 thai-text">ยอดการลาคงเหลือ</h3>
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 thai-text">{{ 'empview.dashboard.leaveBalance.title' | translate }}</h3>
         </div>
         <div class="mb-5">
           <div class="text-5xl font-bold text-gray-800 dark:text-gray-200 leading-none mb-2">{{ stats.totalLeaveBalance }}</div>
-          <div class="text-sm text-gray-600 dark:text-gray-400 thai-text">วัน</div>
+          <div class="text-sm text-gray-600 dark:text-gray-400 thai-text">{{ 'empview.dashboard.stats.days' | translate }}</div>
         </div>
         <div class="mb-4 pt-4 border-t border-gray-200 dark:border-gray-700" *ngIf="leaveBalances.length > 0">
           <div class="flex flex-col gap-2">
             <div *ngFor="let balance of leaveBalances.slice(0, 3)" class="flex justify-between items-center py-2">
               <span class="text-sm text-gray-600 dark:text-gray-400 thai-text">{{ balance.leaveTypeName }}</span>
-              <span class="font-semibold text-indigo-600 dark:text-indigo-400">{{ balance.balance }} วัน</span>
+              <span class="font-semibold text-indigo-600 dark:text-indigo-400">{{ balance.balance }} {{ 'empview.dashboard.stats.days' | translate }}</span>
             </div>
           </div>
         </div>
@@ -55,7 +55,7 @@
           size="md"
           [fullWidth]="true"
           (clicked)="router.navigate(['/portal/self-service/leave'])">
-          <span class="thai-text">ดูรายละเอียด</span>
+          <span class="thai-text">{{ 'empview.dashboard.viewDetails' | translate }}</span>
           <app-icon name="arrow_forward" size="sm" color="text-indigo-600 dark:text-indigo-400"></app-icon>
         </app-glass-button>
       </app-glass-card>
@@ -66,11 +66,11 @@
           <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center">
             <app-icon name="receipt" size="sm" color="text-white"></app-icon>
           </div>
-          <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 thai-text">สลิปเงินเดือน</h3>
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 thai-text">{{ 'empview.dashboard.payslips.title' | translate }}</h3>
         </div>
         <div class="mb-5">
           <div class="text-5xl font-bold text-gray-800 dark:text-gray-200 leading-none mb-2">{{ stats.recentPayslipsCount }}</div>
-          <div class="text-sm text-gray-600 dark:text-gray-400 thai-text">รายการล่าสุด</div>
+          <div class="text-sm text-gray-600 dark:text-gray-400 thai-text">{{ 'empview.dashboard.payslips.recentItems' | translate }}</div>
         </div>
         <div class="mb-4 pt-4 border-t border-gray-200 dark:border-gray-700" *ngIf="recentPayslips.length > 0">
           <div class="flex flex-col gap-3">
@@ -88,7 +88,7 @@
           size="md"
           [fullWidth]="true"
           (clicked)="router.navigate(['/portal/self-service/payslip'])">
-          <span class="thai-text">ดูทั้งหมด</span>
+          <span class="thai-text">{{ 'empview.dashboard.viewAll' | translate }}</span>
           <app-icon name="arrow_forward" size="sm" color="text-cyan-600 dark:text-cyan-400"></app-icon>
         </app-glass-button>
       </app-glass-card>
@@ -99,11 +99,11 @@
           <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center">
             <app-icon name="access_time" size="sm" color="text-white"></app-icon>
           </div>
-          <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 thai-text">การลงเวลา</h3>
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 thai-text">{{ 'empview.dashboard.timeAttendance.title' | translate }}</h3>
         </div>
         <div class="mb-5">
           <div class="text-5xl font-bold text-gray-800 dark:text-gray-200 leading-none mb-2">{{ stats.workingHours }}</div>
-          <div class="text-sm text-gray-600 dark:text-gray-400 thai-text">ชั่วโมง (วันนี้)</div>
+          <div class="text-sm text-gray-600 dark:text-gray-400 thai-text">{{ 'empview.dashboard.timeAttendance.todayHours' | translate }}</div>
         </div>
         <div class="mb-4 pt-4 border-t border-gray-200 dark:border-gray-700" *ngIf="timeAttendance.length > 0">
           <div class="mb-4">
@@ -143,7 +143,7 @@
           size="md"
           [fullWidth]="true"
           (clicked)="router.navigate(['/portal/self-service/attendance'])">
-          <span class="thai-text">ดูรายละเอียด</span>
+          <span class="thai-text">{{ 'empview.dashboard.viewDetails' | translate }}</span>
           <app-icon name="arrow_forward" size="sm" color="text-pink-600 dark:text-pink-400"></app-icon>
         </app-glass-button>
       </app-glass-card>
@@ -155,7 +155,7 @@
 
   <!-- Menu Categories -->
   <div *ngIf="!loading && menuCategories.length > 0" class="max-w-7xl mx-auto px-5">
-    <h2 class="text-3xl font-semibold mb-10 text-center text-gray-800 dark:text-gray-200 thai-text">เลือกเมนูที่ต้องการใช้งาน</h2>
+    <h2 class="text-3xl font-semibold mb-10 text-center text-gray-800 dark:text-gray-200 thai-text">{{ 'empview.dashboard.selectMenu' | translate }}</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <app-glass-card
@@ -177,7 +177,7 @@
 
           <div class="mt-6 pt-4 border-t border-white/20 flex items-center justify-between gap-3">
             <div class="text-sm opacity-90 text-white flex-1 thai-text">
-              คลิกเพื่อเข้าสู่ระบบ EMPVIEW
+              {{ 'empview.dashboard.clickToEnter' | translate }}
             </div>
             <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center transition-all duration-300 backdrop-blur-lg flex-shrink-0 hover:bg-white/30 hover:translate-x-1">
               <app-icon name="arrow_forward" size="md" color="text-white"></app-icon>
@@ -192,7 +192,7 @@
   <app-empty-state
     *ngIf="!loading && menuCategories.length === 0"
     icon="folder_open"
-    title="ไม่มีเมนูที่สามารถเข้าถึงได้"
-    description="กรุณาติดต่อผู้ดูแลระบบเพื่อขอสิทธิ์การเข้าถึง">
+    [title]="'empview.dashboard.emptyState.title' | translate"
+    [description]="'empview.dashboard.emptyState.description' | translate">
   </app-empty-state>
 </app-page-layout>

@@ -1,32 +1,32 @@
 <app-page-header 
-  title="Recruit Management" 
-  subtitle="ศูนย์กลางจัดการการสรรหาและคัดเลือกพนักงาน">
+  [title]="'recruit.dashboard.title' | translate" 
+  [subtitle]="'recruit.dashboard.subtitle' | translate">
 </app-page-header>
 
 <div class="p-5 bg-gray-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
   <!-- Statistics Cards -->
   <div class="mb-8">
-    <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">สถิติการสรรหา</h2>
+    <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">{{ 'recruit.dashboard.statistics.title' | translate }}</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
       <div class="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.totalPositions }}</div>
-        <div class="text-sm opacity-90">ตำแหน่งทั้งหมด</div>
+        <div class="text-sm opacity-90">{{ 'recruit.dashboard.statistics.totalPositions' | translate }}</div>
       </div>
       <div class="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.activeApplications }}</div>
-        <div class="text-sm opacity-90">ผู้สมัครที่เปิด</div>
+        <div class="text-sm opacity-90">{{ 'recruit.dashboard.statistics.activeApplications' | translate }}</div>
       </div>
       <div class="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.interviews }}</div>
-        <div class="text-sm opacity-90">สัมภาษณ์</div>
+        <div class="text-sm opacity-90">{{ 'recruit.dashboard.statistics.interviews' | translate }}</div>
       </div>
       <div class="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.offers }}</div>
-        <div class="text-sm opacity-90">เสนอตำแหน่ง</div>
+        <div class="text-sm opacity-90">{{ 'recruit.dashboard.statistics.offers' | translate }}</div>
       </div>
       <div class="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.hired }}</div>
-        <div class="text-sm opacity-90">รับเข้าทำงาน</div>
+        <div class="text-sm opacity-90">{{ 'recruit.dashboard.statistics.hired' | translate }}</div>
       </div>
     </div>
   </div>
@@ -36,7 +36,7 @@
     <!-- Charts Section: 3 columns (75%) -->
     <div class="lg:col-span-3">
       <div class="mb-8">
-        <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">กราฟและสถิติ</h2>
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">{{ 'recruit.dashboard.charts.title' | translate }}</h2>
         
         <!-- Charts Row 1: 2 columns -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">

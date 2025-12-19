@@ -1,32 +1,32 @@
 <app-page-header 
-  title="Admin Management" 
-  subtitle="ศูนย์กลางจัดการระบบสำหรับผู้ดูแลระบบ">
+  [title]="'admin.dashboard.title' | translate" 
+  [subtitle]="'admin.dashboard.subtitle' | translate">
 </app-page-header>
 
 <div class="p-5 bg-gray-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
   <!-- Statistics Cards -->
   <div class="mb-8">
-    <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">สถิติระบบ</h2>
+    <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">{{ 'admin.dashboard.statistics.title' | translate }}</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
       <div class="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.totalModules }}</div>
-        <div class="text-sm opacity-90">โมดูลทั้งหมด</div>
+        <div class="text-sm opacity-90">{{ 'admin.dashboard.statistics.totalModules' | translate }}</div>
       </div>
       <div class="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.activeUsers }}</div>
-        <div class="text-sm opacity-90">ผู้ใช้ที่ใช้งาน</div>
+        <div class="text-sm opacity-90">{{ 'admin.dashboard.statistics.activeUsers' | translate }}</div>
       </div>
       <div class="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.totalEmployees }}</div>
-        <div class="text-sm opacity-90">พนักงานทั้งหมด</div>
+        <div class="text-sm opacity-90">{{ 'admin.dashboard.statistics.totalEmployees' | translate }}</div>
       </div>
       <div class="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.pendingTasks }}</div>
-        <div class="text-sm opacity-90">งานที่รออนุมัติ</div>
+        <div class="text-sm opacity-90">{{ 'admin.dashboard.statistics.pendingTasks' | translate }}</div>
       </div>
       <div class="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.systemHealth }}%</div>
-        <div class="text-sm opacity-90">สุขภาพระบบ</div>
+        <div class="text-sm opacity-90">{{ 'admin.dashboard.statistics.systemHealth' | translate }}</div>
       </div>
     </div>
   </div>
@@ -36,19 +36,19 @@
     <!-- Charts Section: 3 columns (75%) -->
     <div class="lg:col-span-3">
       <div class="mb-8">
-        <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">กราฟและสถิติ</h2>
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">{{ 'admin.dashboard.charts.title' | translate }}</h2>
         
         <!-- Charts Row 1: 2 columns -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
           <!-- Pie Chart: Module Distribution -->
           <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">การกระจายการใช้งานโมดูล</h3>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">{{ 'admin.dashboard.charts.moduleDistribution' | translate }}</h3>
             <div echarts [options]="moduleDistributionPieChartOption" class="w-full" style="height: 400px;"></div>
           </div>
           
           <!-- Bar Chart: Activity Overview -->
           <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">ภาพรวมการใช้งานระบบ</h3>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">{{ 'admin.dashboard.charts.activityOverview' | translate }}</h3>
             <div echarts [options]="activityOverviewBarChartOption" class="w-full" style="height: 400px;"></div>
           </div>
         </div>
@@ -57,7 +57,7 @@
         <div class="grid grid-cols-1 gap-5 mb-5">
           <!-- Line Chart: User Activity -->
           <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">สถิติผู้ใช้รายสัปดาห์</h3>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">{{ 'admin.dashboard.charts.userActivityWeekly' | translate }}</h3>
             <div echarts [options]="userActivityLineChartOption" class="w-full" style="height: 400px;"></div>
           </div>
         </div>
@@ -67,7 +67,7 @@
     <!-- Navigation Cards Section: 1 column (25%) -->
     <div class="lg:col-span-1">
       <div class="sticky top-5">
-        <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">เมนูหลัก</h2>
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">{{ 'admin.dashboard.mainMenu.title' | translate }}</h2>
         <div class="space-y-4">
           <!-- Employees Card -->
           <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
@@ -75,10 +75,10 @@
             <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">people</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">จัดการพนักงาน</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการข้อมูลพนักงาน, สิทธิ์ และการเข้าถึงระบบ</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'admin.dashboard.mainMenu.employees.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'admin.dashboard.mainMenu.employees.description' | translate }}</p>
             <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+              {{ 'admin.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
@@ -88,10 +88,10 @@
             <div class="w-12 h-12 bg-green-50 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4 text-green-600 dark:text-green-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">business</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">จัดการบริษัท</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการข้อมูลบริษัท, สาขา, โครงสร้างองค์กร</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'admin.dashboard.mainMenu.company.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'admin.dashboard.mainMenu.company.description' | translate }}</p>
             <div class="flex items-center text-green-600 dark:text-green-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+              {{ 'admin.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
@@ -101,10 +101,10 @@
             <div class="w-12 h-12 bg-purple-50 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4 text-purple-600 dark:text-purple-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">account_balance_wallet</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">จัดการเงินเดือน</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการเงินเดือน, โบนัส และสวัสดิการ</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'admin.dashboard.mainMenu.payroll.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'admin.dashboard.mainMenu.payroll.description' | translate }}</p>
             <div class="flex items-center text-purple-600 dark:text-purple-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+              {{ 'admin.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
@@ -114,10 +114,10 @@
             <div class="w-12 h-12 bg-orange-50 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mb-4 text-orange-600 dark:text-orange-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">schedule</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">จัดการเวลา</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการการลงเวลา, OT และตารางงาน</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'admin.dashboard.mainMenu.time.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'admin.dashboard.mainMenu.time.description' | translate }}</p>
             <div class="flex items-center text-orange-600 dark:text-orange-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+              {{ 'admin.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
@@ -127,10 +127,10 @@
             <div class="w-12 h-12 bg-teal-50 dark:bg-teal-900/30 rounded-lg flex items-center justify-center mb-4 text-teal-600 dark:text-teal-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">school</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">จัดการการฝึกอบรม</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการหลักสูตร, การอบรม และใบรับรอง</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'admin.dashboard.mainMenu.training.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'admin.dashboard.mainMenu.training.description' | translate }}</p>
             <div class="flex items-center text-teal-600 dark:text-teal-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+              {{ 'admin.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
@@ -140,10 +140,10 @@
             <div class="w-12 h-12 bg-pink-50 dark:bg-pink-900/30 rounded-lg flex items-center justify-center mb-4 text-pink-600 dark:text-pink-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">favorite</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">จัดการสวัสดิการ</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการสวัสดิการและสิทธิประโยชน์</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'admin.dashboard.mainMenu.welfare.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'admin.dashboard.mainMenu.welfare.description' | translate }}</p>
             <div class="flex items-center text-pink-600 dark:text-pink-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+              {{ 'admin.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
@@ -153,10 +153,10 @@
             <div class="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center mb-4 text-indigo-600 dark:text-indigo-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">work</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">จัดการการสรรหา</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการตำแหน่งงาน, การสมัครงาน และการสัมภาษณ์</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'admin.dashboard.mainMenu.recruit.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'admin.dashboard.mainMenu.recruit.description' | translate }}</p>
             <div class="flex items-center text-indigo-600 dark:text-indigo-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+              {{ 'admin.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
@@ -166,10 +166,10 @@
             <div class="w-12 h-12 bg-yellow-50 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center mb-4 text-yellow-600 dark:text-yellow-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">assessment</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">จัดการการประเมิน</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">จัดการการประเมินผลงานและ KPI</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'admin.dashboard.mainMenu.appraisal.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'admin.dashboard.mainMenu.appraisal.description' | translate }}</p>
             <div class="flex items-center text-yellow-600 dark:text-yellow-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+              {{ 'admin.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
@@ -179,10 +179,10 @@
             <div class="w-12 h-12 bg-gray-50 dark:bg-gray-900/30 rounded-lg flex items-center justify-center mb-4 text-gray-600 dark:text-gray-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">settings</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">ตั้งค่าระบบ</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">ตั้งค่าระบบ, สิทธิ์ และการเข้าถึง</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'admin.dashboard.mainMenu.settings.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'admin.dashboard.mainMenu.settings.description' | translate }}</p>
             <div class="flex items-center text-gray-600 dark:text-gray-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
+              {{ 'admin.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
         </div>

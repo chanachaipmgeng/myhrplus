@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
@@ -11,12 +12,14 @@ import { EChartsOption } from 'echarts';
   imports: [
     CommonModule,
     RouterModule,
+    TranslateModule,
     PageHeaderComponent,
     NgxEchartsModule
   ],
   templateUrl: './admin-dashboard.component.html'
 })
 export class AdminDashboardComponent implements OnInit, OnDestroy {
+  private translate = inject(TranslateService);
   private observer?: MutationObserver;
   isDarkMode = false;
 
@@ -38,6 +41,11 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     this.checkDarkMode();
     this.initializeCharts();
     this.setupThemeObserver();
+    
+    // Re-initialize charts when language changes
+    this.translate.onLangChange.subscribe(() => {
+      this.initializeCharts();
+    });
   }
 
   ngOnDestroy(): void {
@@ -85,24 +93,28 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   }
 
   private initializeCharts(): void {
+    const itemsLabel = this.translate.instant('admin.dashboard.charts.items');
+    
     // Module Distribution Pie Chart
     const moduleData = [
-      { name: 'Employees', value: 1247 },
-      { name: 'Payroll', value: 892 },
-      { name: 'Time', value: 1567 },
-      { name: 'Training', value: 456 },
-      { name: 'Welfare', value: 678 },
-      { name: 'Recruit', value: 234 },
-      { name: 'Appraisal', value: 567 },
-      { name: 'Company', value: 345 },
-      { name: 'Settings', value: 123 }
+      { name: this.translate.instant('admin.dashboard.modules.employees'), value: 1247 },
+      { name: this.translate.instant('admin.dashboard.modules.payroll'), value: 892 },
+      { name: this.translate.instant('admin.dashboard.modules.time'), value: 1567 },
+      { name: this.translate.instant('admin.dashboard.modules.training'), value: 456 },
+      { name: this.translate.instant('admin.dashboard.modules.welfare'), value: 678 },
+      { name: this.translate.instant('admin.dashboard.modules.recruit'), value: 234 },
+      { name: this.translate.instant('admin.dashboard.modules.appraisal'), value: 567 },
+      { name: this.translate.instant('admin.dashboard.modules.company'), value: 345 },
+      { name: this.translate.instant('admin.dashboard.modules.settings'), value: 123 }
     ];
 
     this.moduleDistributionPieChartOption = {
       backgroundColor: this.getChartBackgroundColor(),
       tooltip: {
         trigger: 'item',
-        formatter: '{a} <br/>{b}: {c} รายการ ({d}%)',
+        formatter: (params: any) => {
+          return `${params.seriesName}<br/>${params.name}: ${params.value} ${itemsLabel} (${params.percent}%)`;
+        },
         backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)',
         borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
         textStyle: {
@@ -119,7 +131,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
         }
       },
       series: [{
-        name: 'การใช้งานโมดูล',
+        name: this.translate.instant('admin.dashboard.charts.moduleUsage'),
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: false,
@@ -146,7 +158,17 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
 
     // Activity Overview Bar Chart
     const activityData = {
-      names: ['Employees', 'Payroll', 'Time', 'Training', 'Welfare', 'Recruit', 'Appraisal', 'Company', 'Settings'],
+      names: [
+        this.translate.instant('admin.dashboard.modules.employees'),
+        this.translate.instant('admin.dashboard.modules.payroll'),
+        this.translate.instant('admin.dashboard.modules.time'),
+        this.translate.instant('admin.dashboard.modules.training'),
+        this.translate.instant('admin.dashboard.modules.welfare'),
+        this.translate.instant('admin.dashboard.modules.recruit'),
+        this.translate.instant('admin.dashboard.modules.appraisal'),
+        this.translate.instant('admin.dashboard.modules.company'),
+        this.translate.instant('admin.dashboard.modules.settings')
+      ],
       values: [1247, 892, 1567, 456, 678, 234, 567, 345, 123]
     };
 
@@ -191,7 +213,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
       },
       yAxis: {
         type: 'value',
-        name: 'จำนวนรายการ',
+        name: this.translate.instant('admin.dashboard.charts.itemCount'),
         nameTextStyle: {
           color: this.getChartTextColor()
         },
@@ -210,7 +232,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
         }
       },
       series: [{
-        name: 'จำนวนรายการ',
+        name: this.translate.instant('admin.dashboard.charts.itemCount'),
         type: 'bar',
         data: activityData.values,
         itemStyle: {
@@ -236,7 +258,15 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
 
     // User Activity Line Chart
     const userActivityData = {
-      dates: ['จันทร์', 'อังคาร', 'พุธ', 'พฤหัส', 'ศุกร์', 'เสาร์', 'อาทิตย์'],
+      dates: [
+        this.translate.instant('admin.dashboard.days.monday'),
+        this.translate.instant('admin.dashboard.days.tuesday'),
+        this.translate.instant('admin.dashboard.days.wednesday'),
+        this.translate.instant('admin.dashboard.days.thursday'),
+        this.translate.instant('admin.dashboard.days.friday'),
+        this.translate.instant('admin.dashboard.days.saturday'),
+        this.translate.instant('admin.dashboard.days.sunday')
+      ],
       activeUsers: [1247, 1356, 1289, 1423, 1389, 987, 756],
       newUsers: [23, 45, 34, 56, 43, 12, 8]
     };
@@ -252,7 +282,10 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
         }
       },
       legend: {
-        data: ['ผู้ใช้ที่ใช้งาน', 'ผู้ใช้ใหม่'],
+        data: [
+          this.translate.instant('admin.dashboard.charts.activeUsers'),
+          this.translate.instant('admin.dashboard.charts.newUsers')
+        ],
         textStyle: {
           color: this.getChartTextColor()
         },
@@ -284,7 +317,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
       },
       yAxis: {
         type: 'value',
-        name: 'จำนวนผู้ใช้',
+        name: this.translate.instant('admin.dashboard.charts.userCount'),
         nameTextStyle: {
           color: this.getChartTextColor()
         },
@@ -304,7 +337,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
       },
       series: [
         {
-          name: 'ผู้ใช้ที่ใช้งาน',
+          name: this.translate.instant('admin.dashboard.charts.activeUsers'),
           type: 'line',
           smooth: true,
           data: userActivityData.activeUsers,
@@ -326,7 +359,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
           }
         },
         {
-          name: 'ผู้ใช้ใหม่',
+          name: this.translate.instant('admin.dashboard.charts.newUsers'),
           type: 'line',
           smooth: true,
           data: userActivityData.newUsers,
