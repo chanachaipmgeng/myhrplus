@@ -247,6 +247,16 @@ export const HUMAN_RESOURCES_MENU_ITEMS: HumanResourcesMenuItem[] = [
     description: 'Brand Store (CS050)',
     category: 'branch-business-unit',
     badgeColor: 'green'
+  },
+  {
+    code: 'CO01A0223',
+    route: 'zone-type',
+    icon: 'map',
+    labelThai: 'ทะเบียน Zone Type',
+    labelEnglish: 'Zone Type Table',
+    description: 'Zone Type (CO050)',
+    category: 'branch-business-unit',
+    badgeColor: 'green'
   }
 ];
 

@@ -105,6 +105,10 @@ const routes: Routes = [
       {
         path: 'brand-store',
         loadComponent: () => import('./human-resources/brand-store/brand-store-list.component').then(m => m.BrandStoreListComponent)
+      },
+      {
+        path: 'zone-type',
+        loadComponent: () => import('./human-resources/zone-type/zone-type-list.component').then(m => m.ZoneTypeListComponent)
       }
     ]
   },

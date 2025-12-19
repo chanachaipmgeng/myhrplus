@@ -186,9 +186,9 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
                   { label: 'Latitude Longitude Work Area', route: '/portal/admin/company/human-resources/workarea-location', icon: 'location_on' },
                   { label: 'Work Area Location By Beacon', route: '/portal/admin/company/human-resources/workarea-beacon', icon: 'bluetooth_searching' },
                   { label: 'Brand Store Table (STORE)', route: '/portal/admin/company/human-resources/brand-store', icon: 'store' },
+                  { label: 'Zone Type Table', route: '/portal/admin/company/human-resources/zone-type', icon: 'map' },
                   { label: 'WorkArea', route: '/portal/admin/company/hr/branch-business-unit/workarea', icon: 'work' },
-                  { label: 'Brand Store Table (STORE)', route: '/portal/admin/company/hr/branch-business-unit/brand-store', icon: 'storefront' },
-                  { label: 'Zone Type Table', route: '/portal/admin/company/hr/branch-business-unit/zone-type', icon: 'map' }
+                  { label: 'Brand Store Table (STORE)', route: '/portal/admin/company/hr/branch-business-unit/brand-store', icon: 'storefront' }
                 ]
               },
               // 1.3 Reporting Line
@@ -288,42 +288,6 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
               { label: 'Regulation/Order/Notice Group Table', route: '/portal/admin/company/ess/regulation-group', icon: 'gavel' },
               { label: 'Regulation/Order/Notice Type Table', route: '/portal/admin/company/ess/regulation-type', icon: 'category' },
               { label: 'Regulation/Order/Notice Table', route: '/portal/admin/company/ess/regulation-table', icon: 'gavel' }
-            ]
-          },
-          // 4. Reports (CO02A)
-          {
-            label: 'Reports',
-            icon: 'assessment',
-            children: [ // Level 4
-              { label: 'ROI1001 - Business Type Setup', route: '/portal/admin/company/reports/roi1001', icon: 'assessment' },
-              { label: 'ROI1002 - Company Group Code', route: '/portal/admin/company/reports/roi1002', icon: 'assessment' },
-              { label: 'ROI1003 - Company Information Setup Report', route: '/portal/admin/company/reports/roi1003', icon: 'assessment' },
-              { label: 'ROI1004 - Branch Information Report', route: '/portal/admin/company/reports/roi1004', icon: 'assessment' },
-              { label: 'ROI1005 - Position', route: '/portal/admin/company/reports/roi1005', icon: 'assessment' },
-              { label: 'ROI1006 - Job Group Setup', route: '/portal/admin/company/reports/roi1006', icon: 'assessment' },
-              { label: 'ROI1007 - Job Code Detail', route: '/portal/admin/company/reports/roi1007', icon: 'assessment' },
-              { label: 'ROI1008 - CXO Report', route: '/portal/admin/company/reports/roi1008', icon: 'assessment' },
-              { label: 'ROI1009 - LINE Report', route: '/portal/admin/company/reports/roi1009', icon: 'assessment' },
-              { label: 'ROI1010 - DEPT Report', route: '/portal/admin/company/reports/roi1010', icon: 'assessment' },
-              { label: 'ROI1011 - TEAM Report', route: '/portal/admin/company/reports/roi1011', icon: 'assessment' },
-              { label: 'ROI1012 - T2 Report', route: '/portal/admin/company/reports/roi1012', icon: 'assessment' },
-              { label: 'ROI1012 - T3 Report', route: '/portal/admin/company/reports/roi1012-t3', icon: 'assessment' },
-              { label: 'ROI1012 - T4 Report', route: '/portal/admin/company/reports/roi1012-t4', icon: 'assessment' },
-              { label: 'ROI1013 - Working Area Setup', route: '/portal/admin/company/reports/roi1013', icon: 'assessment' },
-              { label: 'ROI1014 - Fund Type Setup', route: '/portal/admin/company/reports/roi1014', icon: 'assessment' },
-              { label: 'ROI1015 - Manpower Type', route: '/portal/admin/company/reports/roi1015', icon: 'assessment' },
-              { label: 'ROI1016 - Manpower Number', route: '/portal/admin/company/reports/roi1016', icon: 'assessment' },
-              { label: 'ROI1017 - Manpower Number Detail', route: '/portal/admin/company/reports/roi1017', icon: 'assessment' },
-              { label: 'RPI3030 - Approve Level (KCG)', route: '/portal/admin/company/reports/rpi3030', icon: 'assessment' },
-              { label: 'RPI3031 - Approve Level (KCG)', route: '/portal/admin/company/reports/rpi3031', icon: 'assessment' }
-            ]
-          },
-          // 5. Terms Of Use (CO05A)
-          {
-            label: 'Terms Of Use',
-            icon: 'menu_book',
-            children: [ // Level 4
-              { label: 'User Manual', route: '/portal/admin/company/terms/user-manual', icon: 'menu_book' }
             ]
           }
         ]
