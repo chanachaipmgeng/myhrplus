@@ -3,14 +3,11 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-// Components
-import { FileUploadComponent } from './components/file-upload/file-upload.component';
+// Components (Non-standalone)
 import { AvatarComponent } from './components/avatar/avatar.component';
-import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { DateRangePickerComponent } from './components/date-range-picker/date-range-picker.component';
 import { SkeletonLoaderComponent } from './components/skeleton-loader/skeleton-loader.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
-import { FormValidationMessagesComponent } from './components/form-validation-messages/form-validation-messages.component';
 // Standalone Components - Import only
 import { IconComponent } from './components/icon/icon.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
@@ -23,6 +20,9 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { ErrorStateComponent } from './components/error-state/error-state.component';
 import { StatusBadgeComponent } from './components/status-badge/status-badge.component';
 import { StepperComponent } from './components/stepper/stepper.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { FormValidationMessagesComponent } from './components/form-validation-messages/form-validation-messages.component';
 
 // Directives
 import { ClickOutsideDirective } from './directives/click-outside.directive';
@@ -33,14 +33,12 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { DateFormatPipe } from './pipes/date-format.pipe';
 
 const COMPONENTS = [
-  FileUploadComponent,
   AvatarComponent,
-  BreadcrumbsComponent,
   DateRangePickerComponent,
   SkeletonLoaderComponent,
-  ImageUploadComponent,
-  FormValidationMessagesComponent
+  ImageUploadComponent
   // Standalone components are imported/exported separately:
+  // FileUploadComponent, BreadcrumbsComponent, FormValidationMessagesComponent
   // ConfirmDialogComponent, ErrorStateComponent, StatusBadgeComponent, StepperComponent
   // SearchFilterComponent, TimelineComponent, NotificationComponent
   // IconComponent, BackToTopComponent, MenuItemComponent
@@ -80,6 +78,9 @@ const PIPES = [
     ErrorStateComponent,
     StatusBadgeComponent,
     StepperComponent,
+    FileUploadComponent,
+    BreadcrumbsComponent,
+    FormValidationMessagesComponent,
     // Standalone Directives
     LazyImageDirective
   ],
@@ -103,6 +104,9 @@ const PIPES = [
     ErrorStateComponent,
     StatusBadgeComponent,
     StepperComponent,
+    FileUploadComponent,
+    BreadcrumbsComponent,
+    FormValidationMessagesComponent,
     // Standalone Directives
     LazyImageDirective
   ]

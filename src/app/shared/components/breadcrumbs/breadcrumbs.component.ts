@@ -1,6 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { filter } from 'rxjs/operators';
+import { IconComponent } from '../icon/icon.component';
 
 export interface BreadcrumbItem {
   label: string;
@@ -10,10 +13,13 @@ export interface BreadcrumbItem {
 
 @Component({
   selector: 'app-breadcrumbs',
+  standalone: true,
+  imports: [CommonModule, TranslateModule, IconComponent],
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.scss']
 })
 export class BreadcrumbsComponent implements OnInit {
+  private translate = inject(TranslateService);
   @Input() items: BreadcrumbItem[] = [];
   @Input() separator: string = '/';
   @Input() showHome: boolean = true;
@@ -46,7 +52,7 @@ export class BreadcrumbsComponent implements OnInit {
     
     if (this.showHome) {
       breadcrumbs.push({
-        label: 'หน้าแรก',
+        label: this.translate.instant('common.home'),
         route: '/portal',
         icon: this.homeIcon
       });

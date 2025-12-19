@@ -1,9 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../core/services/auth.service';
 import { Pdpa, EmployeeConsent } from '../../../core/models/pdpa.model';
-import { SharedModule } from '../../shared.module';
 
 /**
  * PDPA Consent Modal Component
@@ -21,10 +20,15 @@ import { SharedModule } from '../../shared.module';
  */
 @Component({
   selector: 'app-pdpa-consent-modal',
+  standalone: true,
+  imports: [CommonModule, TranslateModule],
   templateUrl: './pdpa-consent-modal.component.html',
   styleUrls: ['./pdpa-consent-modal.component.scss']
 })
 export class PdpaConsentModalComponent implements OnInit {
+  private translate = inject(TranslateService);
+  private authService = inject(AuthService);
+  
   @Input() pdpa: Pdpa | null = null;
   @Input() employeeConsent: EmployeeConsent | null = null;
   @Input() employeeId: string = '';
@@ -32,11 +36,6 @@ export class PdpaConsentModalComponent implements OnInit {
 
   loading = false;
   errorMessage: string | null = null;
-
-  constructor(
-    private authService: AuthService,
-    public translate: TranslateService
-  ) {}
 
   ngOnInit(): void {
     // Set default language if not set
@@ -74,7 +73,7 @@ export class PdpaConsentModalComponent implements OnInit {
    */
   onSubmitConsent(): void {
     if (!this.pdpa || !this.employeeId) {
-      this.errorMessage = 'ข้อมูลไม่ครบถ้วน';
+      this.errorMessage = this.translate.instant('common.pdpa.incompleteData');
       return;
     }
 
@@ -94,12 +93,12 @@ export class PdpaConsentModalComponent implements OnInit {
         if (response && response.success !== false) {
           this.close.emit('consented');
         } else {
-          this.errorMessage = response?.message || 'เกิดข้อผิดพลาดในการบันทึกข้อมูล';
+          this.errorMessage = response?.message || this.translate.instant('common.pdpa.saveError');
         }
       })
       .catch((error) => {
         this.loading = false;
-        this.errorMessage = error?.message || 'เกิดข้อผิดพลาดในการบันทึกข้อมูล';
+        this.errorMessage = error?.message || this.translate.instant('common.pdpa.saveError');
         console.error('Error saving PDPA consent:', error);
       });
   }

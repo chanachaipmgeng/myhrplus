@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { IconComponent } from '../icon/icon.component';
 
@@ -15,13 +16,15 @@ export interface FilterOption {
 @Component({
   selector: 'app-search-filter',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, IconComponent],
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule, IconComponent],
   templateUrl: './search-filter.component.html',
   styleUrls: ['./search-filter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchFilterComponent implements OnInit {
-  @Input() placeholder: string = 'ค้นหา...';
+  private translate = inject(TranslateService);
+  
+  @Input() placeholder?: string;
   @Input() filters: FilterOption[] = [];
   @Input() showAdvanced: boolean = false;
   @Input() debounceTime: number = 300;
@@ -69,6 +72,10 @@ export class SearchFilterComponent implements OnInit {
         this.activeFilters = { ...values };
         this.filterChange.emit(this.activeFilters);
       });
+  }
+
+  get displayPlaceholder(): string {
+    return this.placeholder || this.translate.instant('common.search');
   }
 
   onClearSearch(): void {

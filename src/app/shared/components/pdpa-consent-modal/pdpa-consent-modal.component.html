@@ -2,12 +2,12 @@
   <div class="modal-header">
     <h5 class="modal-title">
       <i class="fa fa-shield-alt me-2"></i>
-      {{ 'PDPA Consent' | translate }}
+      {{ 'common.pdpa.title' | translate }}
     </h5>
     <button
       type="button"
       class="btn-close"
-      aria-label="Close"
+      [attr.aria-label]="'common.close' | translate"
       (click)="onExit()"
       [disabled]="loading">
     </button>
@@ -19,13 +19,13 @@
       <div class="col-md-6">
         <p class="text-muted mb-1" *ngIf="pdpa">
           <i class="fa fa-tag me-2"></i>
-          <strong>{{ 'Version' | translate }}:</strong> {{ pdpa.version }}
+          <strong>{{ 'common.pdpa.version' | translate }}:</strong> {{ pdpa.version }}
         </p>
       </div>
       <div class="col-md-6">
         <p class="text-muted mb-1" *ngIf="pdpa">
           <i class="fa fa-calendar me-2"></i>
-          <strong>{{ 'Date' | translate }}:</strong> {{ pdpa.startDate }}
+          <strong>{{ 'common.pdpa.date' | translate }}:</strong> {{ pdpa.startDate }}
         </p>
       </div>
     </div>
@@ -53,7 +53,7 @@
       (click)="onExit()"
       [disabled]="loading">
       <i class="fa fa-times me-2"></i>
-      {{ 'Exit' | translate }}
+      {{ 'common.pdpa.exit' | translate }}
     </button>
     <button
       type="button"
@@ -62,7 +62,7 @@
       [disabled]="loading">
       <span *ngIf="loading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
       <i *ngIf="!loading" class="fa fa-check me-2"></i>
-      {{ 'Consent' | translate }}
+      {{ 'common.pdpa.consent' | translate }}
     </button>
   </div>
 </div>

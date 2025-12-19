@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../../shared/shared.module';
 import { SyncfusionModule } from '../../shared/syncfusion/syncfusion.module';
+import { IconComponent } from '../../shared/components/icon/icon.component';
 
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
@@ -25,6 +26,7 @@ import { AuthRoutingModule } from './auth-routing.module';
     TranslateModule,
     // SharedModule,
     SyncfusionModule,
+    IconComponent,
     AuthRoutingModule
   ]
 })

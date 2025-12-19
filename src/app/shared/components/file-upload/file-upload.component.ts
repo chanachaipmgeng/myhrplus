@@ -1,11 +1,18 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { IconComponent } from '../icon/icon.component';
 
 @Component({
   selector: 'app-file-upload',
+  standalone: true,
+  imports: [CommonModule, TranslateModule, IconComponent],
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss']
 })
 export class FileUploadComponent {
+  private translate = inject(TranslateService);
+  
   @Input() accept = '*';
   @Input() multiple = false;
   @Input() maxSize = 10 * 1024 * 1024; // 10MB default
@@ -24,7 +31,9 @@ export class FileUploadComponent {
       // Validate file sizes
       const invalidFiles = files.filter(file => file.size > this.maxSize);
       if (invalidFiles.length > 0) {
-        this.error.emit(`File size exceeds maximum allowed size of ${this.maxSize / 1024 / 1024}MB`);
+        const maxSizeMB = this.maxSize / 1024 / 1024;
+        const errorMessage = this.translate.instant('common.fileUpload.error.maxSize', { maxSize: maxSizeMB });
+        this.error.emit(errorMessage);
         return;
       }
 

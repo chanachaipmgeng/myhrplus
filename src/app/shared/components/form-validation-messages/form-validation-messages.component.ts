@@ -1,5 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { AbstractControl, FormControl } from '@angular/forms';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { IconComponent } from '../icon/icon.component';
 
 export interface ValidationMessage {
   key: string;
@@ -9,10 +12,14 @@ export interface ValidationMessage {
 
 @Component({
   selector: 'app-form-validation-messages',
+  standalone: true,
+  imports: [CommonModule, TranslateModule, IconComponent],
   templateUrl: './form-validation-messages.component.html',
   styleUrls: ['./form-validation-messages.component.scss']
 })
 export class FormValidationMessagesComponent implements OnInit {
+  private translate = inject(TranslateService);
+  
   @Input() control!: AbstractControl | null;
   @Input() customMessages: { [key: string]: string } = {};
   @Input() showIcon = true;
@@ -21,31 +28,33 @@ export class FormValidationMessagesComponent implements OnInit {
 
   errors: ValidationMessage[] = [];
 
-  private defaultMessages: { [key: string]: string } = {
-    required: 'กรุณากรอกข้อมูลนี้',
-    email: 'รูปแบบอีเมลไม่ถูกต้อง',
-    minlength: 'ข้อมูลสั้นเกินไป',
-    maxlength: 'ข้อมูลยาวเกินไป',
-    min: 'ค่าต่ำเกินไป',
-    max: 'ค่าสูงเกินไป',
-    pattern: 'รูปแบบข้อมูลไม่ถูกต้อง',
-    url: 'รูปแบบ URL ไม่ถูกต้อง',
-    date: 'รูปแบบวันที่ไม่ถูกต้อง',
-    time: 'รูปแบบเวลาไม่ถูกต้อง',
-    phone: 'รูปแบบเบอร์โทรศัพท์ไม่ถูกต้อง',
-    password: 'รหัสผ่านไม่ถูกต้อง',
-    passwordMismatch: 'รหัสผ่านไม่ตรงกัน',
-    number: 'กรุณากรอกเป็นตัวเลข',
-    integer: 'กรุณากรอกเป็นจำนวนเต็ม',
-    positive: 'กรุณากรอกเป็นจำนวนบวก',
-    negative: 'กรุณากรอกเป็นจำนวนลบ',
-    decimal: 'กรุณากรอกเป็นทศนิยม',
-    alphanumeric: 'กรุณากรอกเป็นตัวอักษรและตัวเลขเท่านั้น',
-    alphabetic: 'กรุณากรอกเป็นตัวอักษรเท่านั้น',
-    creditCard: 'หมายเลขบัตรเครดิตไม่ถูกต้อง',
-    ip: 'รูปแบบ IP Address ไม่ถูกต้อง',
-    uuid: 'รูปแบบ UUID ไม่ถูกต้อง'
-  };
+  private getDefaultMessages(): { [key: string]: string } {
+    return {
+      required: this.translate.instant('common.validation.required'),
+      email: this.translate.instant('common.validation.email'),
+      minlength: this.translate.instant('common.validation.minlength'),
+      maxlength: this.translate.instant('common.validation.maxlength'),
+      min: this.translate.instant('common.validation.min'),
+      max: this.translate.instant('common.validation.max'),
+      pattern: this.translate.instant('common.validation.pattern'),
+      url: this.translate.instant('common.validation.url'),
+      date: this.translate.instant('common.validation.date'),
+      time: this.translate.instant('common.validation.time'),
+      phone: this.translate.instant('common.validation.phone'),
+      password: this.translate.instant('common.validation.password'),
+      passwordMismatch: this.translate.instant('common.validation.passwordMismatch'),
+      number: this.translate.instant('common.validation.number'),
+      integer: this.translate.instant('common.validation.integer'),
+      positive: this.translate.instant('common.validation.positive'),
+      negative: this.translate.instant('common.validation.negative'),
+      decimal: this.translate.instant('common.validation.decimal'),
+      alphanumeric: this.translate.instant('common.validation.alphanumeric'),
+      alphabetic: this.translate.instant('common.validation.alphabetic'),
+      creditCard: this.translate.instant('common.validation.creditCard'),
+      ip: this.translate.instant('common.validation.ip'),
+      uuid: this.translate.instant('common.validation.uuid')
+    };
+  }
 
   private defaultIcons: { [key: string]: string } = {
     required: 'error',
@@ -115,22 +124,32 @@ export class FormValidationMessagesComponent implements OnInit {
     }
 
     // Check default messages
-    if (this.defaultMessages[key]) {
-      return this.formatMessage(this.defaultMessages[key], errorValue);
+    const defaultMessages = this.getDefaultMessages();
+    if (defaultMessages[key]) {
+      return this.formatMessage(defaultMessages[key], errorValue);
     }
 
     // Fallback
-    return `ข้อผิดพลาด: ${key}`;
+    return this.translate.instant('common.validation.generic', { key });
   }
 
   private formatMessage(message: string, errorValue: any): string {
     if (errorValue && typeof errorValue === 'object') {
-      // Replace placeholders like {min}, {max}, {requiredLength}
-      return message
-        .replace('{min}', errorValue.min || '')
-        .replace('{max}', errorValue.max || '')
-        .replace('{requiredLength}', errorValue.requiredLength || '')
-        .replace('{actualLength}', errorValue.actualLength || '');
+      // Replace placeholders like {min}, {max}, {requiredLength}, {actualLength}
+      let formattedMessage = message;
+      if (errorValue.min !== undefined) {
+        formattedMessage = formattedMessage.replace('{min}', errorValue.min.toString());
+      }
+      if (errorValue.max !== undefined) {
+        formattedMessage = formattedMessage.replace('{max}', errorValue.max.toString());
+      }
+      if (errorValue.requiredLength !== undefined) {
+        formattedMessage = formattedMessage.replace('{requiredLength}', errorValue.requiredLength.toString());
+      }
+      if (errorValue.actualLength !== undefined) {
+        formattedMessage = formattedMessage.replace('{actualLength}', errorValue.actualLength.toString());
+      }
+      return formattedMessage;
     }
     return message;
   }

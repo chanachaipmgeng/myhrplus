@@ -11,7 +11,7 @@
     (click)="triggerFileInput()"
     class="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-indigo-700 text-white rounded-lg hover:from-blue-600 hover:to-indigo-700 dark:hover:from-blue-700 dark:hover:to-indigo-800 transition-all flex items-center gap-2 thai-text">
     <app-icon name="cloud_upload" size="sm" color="text-white"></app-icon>
-    <span>เลือกไฟล์{{ multiple ? ' (หลายไฟล์)' : '' }}</span>
+    <span>{{ multiple ? ('common.fileUpload.selectFiles' | translate) : ('common.fileUpload.selectFile' | translate) }}</span>
   </button>
 
   <div class="file-list mt-4 space-y-2" *ngIf="selectedFiles.length > 0">
