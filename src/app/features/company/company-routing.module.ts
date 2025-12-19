@@ -53,6 +53,22 @@ const routes: Routes = [
       {
         path: 'team',
         loadComponent: () => import('./human-resources/team/team-list.component').then(m => m.TeamListComponent)
+      },
+      {
+        path: 't2',
+        loadComponent: () => import('./human-resources/t2/t2-list.component').then(m => m.T2ListComponent)
+      },
+      {
+        path: 't3',
+        loadComponent: () => import('./human-resources/t3/t3-list.component').then(m => m.T3ListComponent)
+      },
+      {
+        path: 't4',
+        loadComponent: () => import('./human-resources/t4/t4-list.component').then(m => m.T4ListComponent)
+      },
+      {
+        path: 'company',
+        loadComponent: () => import('./human-resources/company/company-list.component').then(m => m.CompanyListComponent)
       }
     ]
   },

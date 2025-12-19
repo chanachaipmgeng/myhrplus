@@ -1,21 +1,22 @@
 import { Injectable, signal } from '@angular/core';
 import { BaseApiService } from '@core/services/base-api.service';
-// TODO: Create Company Model later
-export interface Company {
-  id: string;
-  code: string;
-  name: string;
-  status: string;
-}
+import { Company } from '../models/company.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompanyService extends BaseApiService<Company> {
-  protected baseUrl = 'hr/company';
+  protected baseUrl = 'hr/company/companies';
 
-  // Global State for Company Module
+  // State
   loading = signal<boolean>(false);
-  activeMenu = signal<string>('dashboard');
-}
 
+  // Override getAll to filter by iscompany='1'
+  override getAll(params?: any) {
+    const mergedParams = {
+      ...params,
+      iscompany: '1'
+    };
+    return super.getAll(mergedParams);
+  }
+}
