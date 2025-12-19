@@ -12,12 +12,14 @@ import { EChartsOption } from 'echarts';
   imports: [
     CommonModule,
     RouterModule,
+    TranslateModule,
     PageHeaderComponent,
     NgxEchartsModule
   ],
   templateUrl: './time-dashboard.component.html'
 })
 export class TimeDashboardComponent implements OnInit, OnDestroy {
+  private translate = inject(TranslateService);
   private observer?: MutationObserver;
   isDarkMode = false;
 

@@ -12,12 +12,14 @@ import { EChartsOption } from 'echarts';
   imports: [
     CommonModule,
     RouterModule,
+    TranslateModule,
     PageHeaderComponent,
     NgxEchartsModule
   ],
   templateUrl: './settings-dashboard.component.html'
 })
 export class SettingsDashboardComponent implements OnInit, OnDestroy {
+  private translate = inject(TranslateService);
   private observer?: MutationObserver;
   isDarkMode = false;
 
