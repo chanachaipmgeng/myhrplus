@@ -69,6 +69,10 @@ const routes: Routes = [
       {
         path: 'company',
         loadComponent: () => import('./human-resources/company/company-list.component').then(m => m.CompanyListComponent)
+      },
+      {
+        path: 'branch',
+        loadComponent: () => import('./human-resources/branch/branch-list.component').then(m => m.BranchListComponent)
       }
     ]
   },

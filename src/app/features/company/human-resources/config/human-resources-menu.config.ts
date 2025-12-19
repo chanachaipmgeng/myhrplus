@@ -157,6 +157,16 @@ export const HUMAN_RESOURCES_MENU_ITEMS: HumanResourcesMenuItem[] = [
     description: 'Company (PRU009)',
     category: 'branch-business-unit',
     badgeColor: 'green'
+  },
+  {
+    code: 'CO01A0210',
+    route: 'branch',
+    icon: 'store',
+    labelThai: 'ทะเบียนสาขาบริษัท',
+    labelEnglish: 'Branch',
+    description: 'Branch (PRU009_BRANCH)',
+    category: 'branch-business-unit',
+    badgeColor: 'green'
   }
 ];
 

@@ -177,7 +177,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
                   { label: 'T3', route: '/portal/admin/company/human-resources/t3', icon: 'label' },
                   { label: 'T4', route: '/portal/admin/company/human-resources/t4', icon: 'label' },
                   { label: 'Company', route: '/portal/admin/company/human-resources/company', icon: 'business' },
-                  { label: 'Branch', route: '/portal/admin/company/hr/branch-business-unit/branch', icon: 'store' },
+                  { label: 'Branch', route: '/portal/admin/company/human-resources/branch', icon: 'store' },
                   { label: 'Working Area Table', route: '/portal/admin/company/hr/branch-business-unit/working-area', icon: 'place' },
                   { label: 'Working Area Type Table', route: '/portal/admin/company/hr/branch-business-unit/working-area-type', icon: 'category' },
                   { label: 'PL Table', route: '/portal/admin/company/hr/branch-business-unit/pl-table', icon: 'table_chart' },
