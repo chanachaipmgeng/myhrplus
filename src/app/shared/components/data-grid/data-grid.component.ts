@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, inject, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { GridModule } from '@syncfusion/ej2-angular-grids';
 import {
   GridComponent,
@@ -21,6 +22,7 @@ import {
   SelectionService,
   VirtualScrollService
 } from '@syncfusion/ej2-angular-grids';
+import { L10n } from '@syncfusion/ej2-base';
 
 export interface DataGridColumn {
   field: string;
@@ -93,7 +95,8 @@ export interface DataGridConfig {
   templateUrl: './data-grid.component.html',
   styleUrls: ['./data-grid.component.scss']
 })
-export class DataGridComponent implements OnInit, OnDestroy {
+export class DataGridComponent implements OnInit, OnDestroy, OnChanges {
+  private translate = inject(TranslateService);
   @ViewChild('grid', { static: false }) grid!: GridComponent;
 
   // Data Source
@@ -163,7 +166,164 @@ export class DataGridComponent implements OnInit, OnDestroy {
   @Output() actionComplete = new EventEmitter<any>();
 
   ngOnInit(): void {
-    // Initialize if needed
+    this.setupLocalization();
+    // Subscribe to language changes
+    this.translate.onLangChange.subscribe(() => {
+      this.setupLocalization();
+      if (this.grid) {
+        this.grid.refresh();
+      }
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // Re-setup localization if language changes
+    if (changes && this.grid) {
+      this.setupLocalization();
+    }
+  }
+
+  /**
+   * Setup Syncfusion Grid localization based on current language
+   */
+  private setupLocalization(): void {
+    const currentLang = this.translate.currentLang || this.translate.defaultLang || 'th';
+    const isThai = currentLang === 'th';
+
+    // Syncfusion Grid localization
+    const gridLocale: any = {
+      'en': {
+        'grid': {
+          'EmptyRecord': 'No records to display',
+          'GroupDropArea': 'Drag a column header here to group its column',
+          'UnGroup': 'Click here to ungroup',
+          'EmptyDataSourceError': 'DataSource must not be empty at initial load since columns are generated from dataSource in AutoGenerate Column Grid',
+          'Item': 'item',
+          'Items': 'items',
+          'FilterButton': 'Filter',
+          'ClearButton': 'Clear',
+          'StartsWith': 'Starts With',
+          'EndsWith': 'Ends With',
+          'Contains': 'Contains',
+          'Equal': 'Equal',
+          'NotEqual': 'Not Equal',
+          'LessThan': 'Less Than',
+          'LessThanOrEqual': 'Less Than Or Equal',
+          'GreaterThan': 'Greater Than',
+          'GreaterThanOrEqual': 'Greater Than Or Equal',
+          'Between': 'Between',
+          'CustomFilter': 'Custom Filter',
+          'CustomFilterPlaceHolder': 'Enter value',
+          'CustomFilterDatePlaceHolder': 'Select a date',
+          'AND': 'AND',
+          'OR': 'OR',
+          'ShowRowsWhere': 'Show rows where:',
+          'CurrentPageInfo': '{0} of {1} pages',
+          'TotalItemsInfo': '({0} items)',
+          'FirstPageTooltip': 'Go to first page',
+          'LastPageTooltip': 'Go to last page',
+          'NextPageTooltip': 'Go to next page',
+          'PreviousPageTooltip': 'Go to previous page',
+          'NextPagerTooltip': 'Go to next pager',
+          'PreviousPagerTooltip': 'Go to previous pager',
+          'PagerDropDown': 'Items per page',
+          'PagerAllDropDown': 'Items',
+          'All': 'All',
+          'Add': 'Add',
+          'Edit': 'Edit',
+          'Delete': 'Delete',
+          'Update': 'Update',
+          'Cancel': 'Cancel',
+          'Save': 'Save',
+          'Search': 'Search',
+          'ExcelExport': 'Excel Export',
+          'PdfExport': 'PDF Export',
+          'CsvExport': 'CSV Export',
+          'Print': 'Print',
+          'ColumnChooser': 'Columns'
+        },
+        'pager': {
+          'currentPageInfo': '{0} of {1} pages',
+          'totalItemsInfo': '({0} items)',
+          'firstPageTooltip': 'Go to first page',
+          'lastPageTooltip': 'Go to last page',
+          'nextPageTooltip': 'Go to next page',
+          'previousPageTooltip': 'Go to previous page',
+          'nextPagerTooltip': 'Go to next pager',
+          'previousPagerTooltip': 'Go to previous pager',
+          'pagerDropDown': 'Items per page',
+          'pagerAllDropDown': 'Items',
+          'All': 'All'
+        }
+      },
+      'th': {
+        'grid': {
+          'EmptyRecord': 'ไม่มีข้อมูล',
+          'GroupDropArea': 'ลากหัวคอลัมน์มาวางที่นี่เพื่อจัดกลุ่ม',
+          'UnGroup': 'คลิกที่นี่เพื่อยกเลิกการจัดกลุ่ม',
+          'EmptyDataSourceError': 'DataSource ต้องไม่ว่างเปล่าเมื่อโหลดครั้งแรก เนื่องจากคอลัมน์จะถูกสร้างจาก dataSource ใน AutoGenerate Column Grid',
+          'Item': 'รายการ',
+          'Items': 'รายการ',
+          'FilterButton': 'กรอง',
+          'ClearButton': 'ล้าง',
+          'StartsWith': 'ขึ้นต้นด้วย',
+          'EndsWith': 'ลงท้ายด้วย',
+          'Contains': 'ประกอบด้วย',
+          'Equal': 'เท่ากับ',
+          'NotEqual': 'ไม่เท่ากับ',
+          'LessThan': 'น้อยกว่า',
+          'LessThanOrEqual': 'น้อยกว่าหรือเท่ากับ',
+          'GreaterThan': 'มากกว่า',
+          'GreaterThanOrEqual': 'มากกว่าหรือเท่ากับ',
+          'Between': 'ระหว่าง',
+          'CustomFilter': 'กรองแบบกำหนดเอง',
+          'CustomFilterPlaceHolder': 'กรอกค่า',
+          'CustomFilterDatePlaceHolder': 'เลือกวันที่',
+          'AND': 'และ',
+          'OR': 'หรือ',
+          'ShowRowsWhere': 'แสดงแถวที่:',
+          'CurrentPageInfo': '{0} จาก {1} หน้า',
+          'TotalItemsInfo': '({0} รายการ)',
+          'FirstPageTooltip': 'ไปหน้าแรก',
+          'LastPageTooltip': 'ไปหน้าสุดท้าย',
+          'NextPageTooltip': 'ไปหน้าถัดไป',
+          'PreviousPageTooltip': 'ไปหน้าก่อนหน้า',
+          'NextPagerTooltip': 'ไปหน้า pager ถัดไป',
+          'PreviousPagerTooltip': 'ไปหน้า pager ก่อนหน้า',
+          'PagerDropDown': 'รายการต่อหน้า',
+          'PagerAllDropDown': 'รายการ',
+          'All': 'ทั้งหมด',
+          'Add': 'เพิ่ม',
+          'Edit': 'แก้ไข',
+          'Delete': 'ลบ',
+          'Update': 'อัพเดท',
+          'Cancel': 'ยกเลิก',
+          'Save': 'บันทึก',
+          'Search': 'ค้นหา',
+          'ExcelExport': 'ส่งออก Excel',
+          'PdfExport': 'ส่งออก PDF',
+          'CsvExport': 'ส่งออก CSV',
+          'Print': 'พิมพ์',
+          'ColumnChooser': 'คอลัมน์'
+        },
+        'pager': {
+          'currentPageInfo': '{0} จาก {1} หน้า',
+          'totalItemsInfo': '({0} รายการ)',
+          'firstPageTooltip': 'ไปหน้าแรก',
+          'lastPageTooltip': 'ไปหน้าสุดท้าย',
+          'nextPageTooltip': 'ไปหน้าถัดไป',
+          'previousPageTooltip': 'ไปหน้าก่อนหน้า',
+          'nextPagerTooltip': 'ไปหน้า pager ถัดไป',
+          'previousPagerTooltip': 'ไปหน้า pager ก่อนหน้า',
+          'pagerDropDown': 'รายการต่อหน้า',
+          'pagerAllDropDown': 'รายการ',
+          'All': 'ทั้งหมด'
+        }
+      }
+    };
+
+    const locale = isThai ? 'th' : 'en';
+    L10n.load(gridLocale[locale]);
   }
 
   ngOnDestroy(): void {

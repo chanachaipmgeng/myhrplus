@@ -7,8 +7,8 @@ import { RouterModule } from '@angular/router';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { DateRangePickerComponent } from './components/date-range-picker/date-range-picker.component';
 import { SkeletonLoaderComponent } from './components/skeleton-loader/skeleton-loader.component';
-import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 // Standalone Components - Import only
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { IconComponent } from './components/icon/icon.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { NotificationComponent } from './components/notification/notification.component';
@@ -35,10 +35,9 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
 const COMPONENTS = [
   AvatarComponent,
   DateRangePickerComponent,
-  SkeletonLoaderComponent,
-  ImageUploadComponent
+  SkeletonLoaderComponent
   // Standalone components are imported/exported separately:
-  // FileUploadComponent, BreadcrumbsComponent, FormValidationMessagesComponent
+  // ImageUploadComponent, FileUploadComponent, BreadcrumbsComponent, FormValidationMessagesComponent
   // ConfirmDialogComponent, ErrorStateComponent, StatusBadgeComponent, StepperComponent
   // SearchFilterComponent, TimelineComponent, NotificationComponent
   // IconComponent, BackToTopComponent, MenuItemComponent
@@ -81,6 +80,7 @@ const PIPES = [
     FileUploadComponent,
     BreadcrumbsComponent,
     FormValidationMessagesComponent,
+    ImageUploadComponent,
     // Standalone Directives
     LazyImageDirective
   ],
@@ -107,6 +107,7 @@ const PIPES = [
     FileUploadComponent,
     BreadcrumbsComponent,
     FormValidationMessagesComponent,
+    ImageUploadComponent,
     // Standalone Directives
     LazyImageDirective
   ]

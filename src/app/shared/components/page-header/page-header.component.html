@@ -7,13 +7,16 @@
     <div class="flex items-start justify-between gap-4">
       <div class="flex-1">
         <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">
-          {{ title }}
+          <span *ngIf="translateTitle">{{ title | translate }}</span>
+          <span *ngIf="!translateTitle">{{ title }}</span>
         </h1>
         <h2 *ngIf="subtitle" class="text-xl font-semibold text-slate-700 dark:text-slate-300 mb-2">
-          {{ subtitle }}
+          <span *ngIf="translateSubtitle">{{ subtitle | translate }}</span>
+          <span *ngIf="!translateSubtitle">{{ subtitle }}</span>
         </h2>
         <p *ngIf="description" class="text-sm text-slate-600 dark:text-slate-400">
-          {{ description }}
+          <span *ngIf="translateDescription">{{ description | translate }}</span>
+          <span *ngIf="!translateDescription">{{ description }}</span>
         </p>
       </div>
 

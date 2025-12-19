@@ -1,11 +1,15 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import {
   createImageData,
   assessImageQuality,
   isImageQualitySufficient,
   ImageQualityAssessment
 } from '../../../core/utils/image-quality.utils';
+import { IconComponent } from '../icon/icon.component';
+import { LazyImageDirective } from '../../directives/lazy-image.directive';
 
 export interface ImageUploadConfig {
   maxSize?: number; // in MB
@@ -37,6 +41,8 @@ export interface UploadedImage {
 
 @Component({
   selector: 'app-image-upload',
+  standalone: true,
+  imports: [CommonModule, TranslateModule, IconComponent, LazyImageDirective],
   templateUrl: './image-upload.component.html',
   styleUrls: ['./image-upload.component.scss'],
   providers: [
@@ -48,8 +54,10 @@ export interface UploadedImage {
   ]
 })
 export class ImageUploadComponent implements OnInit, ControlValueAccessor {
-  @Input() label = 'อัปโหลดรูปภาพ';
-  @Input() placeholder = 'ลากไฟล์มาวางที่นี่หรือคลิกเพื่อเลือก';
+  private translate = inject(TranslateService);
+  
+  @Input() label?: string;
+  @Input() placeholder?: string;
   @Input() accept = 'image/*';
   @Input() multiple = false;
   @Input() disabled = false;
@@ -153,7 +161,7 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
     // Check max files
     const totalFiles = this.uploadedImages.length + files.length;
     if (totalFiles > this.config.maxFiles!) {
-      const error = `สามารถอัปโหลดได้สูงสุด ${this.config.maxFiles} ไฟล์`;
+      const error = this.translate.instant('common.imageUpload.error.maxFiles', { maxFiles: this.config.maxFiles });
       this.errors.push(error);
       this.error.emit(error);
       return;
@@ -162,7 +170,10 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
     for (const file of files) {
       // Check file type
       if (!this.config.allowedTypes!.includes(file.type)) {
-        const error = `ไฟล์ ${file.name} ไม่ใช่ประเภทที่รองรับ (${this.config.allowedTypes!.join(', ')})`;
+        const error = this.translate.instant('common.imageUpload.error.invalidType', {
+          fileName: file.name,
+          allowedTypes: this.config.allowedTypes!.join(', ')
+        });
         this.errors.push(error);
         this.error.emit(error);
         continue;
@@ -171,7 +182,10 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
       // Check file size
       const fileSizeMB = file.size / (1024 * 1024);
       if (fileSizeMB > this.config.maxSize!) {
-        const error = `ไฟล์ ${file.name} ใหญ่เกินไป (สูงสุด ${this.config.maxSize}MB)`;
+        const error = this.translate.instant('common.imageUpload.error.maxSize', {
+          fileName: file.name,
+          maxSize: this.config.maxSize
+        });
         this.errors.push(error);
         this.error.emit(error);
         continue;
@@ -210,7 +224,11 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
             const actualQualityIndex = qualityOrder.indexOf(qualityAssessment.quality);
 
             if (actualQualityIndex < minQualityIndex) {
-              const error = `คุณภาพภาพ ${file.name} ไม่เพียงพอ (${qualityAssessment.quality}). ${qualityAssessment.feedback}`;
+              const error = this.translate.instant('common.imageUpload.error.insufficientQuality', {
+                fileName: file.name,
+                quality: this.getQualityLabel(qualityAssessment.quality),
+                feedback: qualityAssessment.feedback
+              });
               this.errors.push(error);
               this.error.emit(error);
               continue;
@@ -219,7 +237,10 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
 
           // Warn if quality is poor but not required
           if (qualityAssessment.quality === 'poor' || qualityAssessment.quality === 'fair') {
-            const warning = `⚠️ คุณภาพภาพ ${file.name}: ${qualityAssessment.feedback}`;
+            const warning = this.translate.instant('common.imageUpload.warning.quality', {
+              fileName: file.name,
+              feedback: qualityAssessment.feedback
+            });
             this.errors.push(warning);
           }
         } catch (error) {
@@ -298,15 +319,23 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
     return this.uploadedImages.length < this.config.maxFiles!;
   }
 
+  get displayLabel(): string {
+    return this.label || this.translate.instant('common.imageUpload.label');
+  }
+
+  get displayPlaceholder(): string {
+    return this.placeholder || this.translate.instant('common.imageUpload.placeholder');
+  }
+
   // Quality Assessment Helpers
   getQualityLabel(quality: 'excellent' | 'good' | 'fair' | 'poor'): string {
-    const labels: Record<string, string> = {
-      'excellent': 'คุณภาพดีมาก',
-      'good': 'คุณภาพดี',
-      'fair': 'คุณภาพปานกลาง',
-      'poor': 'คุณภาพต่ำ'
+    const keyMap: Record<string, string> = {
+      'excellent': 'common.imageUpload.quality.excellent',
+      'good': 'common.imageUpload.quality.good',
+      'fair': 'common.imageUpload.quality.fair',
+      'poor': 'common.imageUpload.quality.poor'
     };
-    return labels[quality] || quality;
+    return this.translate.instant(keyMap[quality] || 'common.imageUpload.quality.good');
   }
 
   getQualityIcon(quality: 'excellent' | 'good' | 'fair' | 'poor'): string {

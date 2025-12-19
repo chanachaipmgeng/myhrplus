@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subject, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { IconComponent } from '../icon/icon.component';
@@ -9,17 +10,23 @@ export type NotificationType = 'success' | 'error' | 'warning' | 'info';
 @Component({
   selector: 'app-notification',
   standalone: true,
-  imports: [CommonModule, IconComponent],
+  imports: [CommonModule, TranslateModule, IconComponent],
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.scss']
 })
 export class NotificationComponent implements OnInit, OnDestroy {
+  private translate = inject(TranslateService);
+  
   @Input() message: string = '';
   @Input() type: NotificationType = 'info';
   @Input() duration: number = 3000;
   @Input() onClose?: () => void;
 
   private destroy$ = new Subject<void>();
+
+  get closeAriaLabel(): string {
+    return this.translate.instant('common.notification.close');
+  }
 
   get iconName(): string {
     const iconMap = {

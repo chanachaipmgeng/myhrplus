@@ -2351,5 +2351,20 @@
   "common.pdpa.version": "Version",
   "common.pdpa.date": "Date",
   "common.pdpa.exit": "Exit",
-  "common.pdpa.consent": "Consent"
+  "common.pdpa.consent": "Consent",
+  "common.imageUpload.label": "Upload Image",
+  "common.imageUpload.placeholder": "Drag and drop files here or click to select",
+  "common.imageUpload.supportedFormats": "Supported",
+  "common.imageUpload.maxSize": "Maximum",
+  "common.imageUpload.removeImage": "Remove Image",
+  "common.imageUpload.quality.excellent": "Excellent Quality",
+  "common.imageUpload.quality.good": "Good Quality",
+  "common.imageUpload.quality.fair": "Fair Quality",
+  "common.imageUpload.quality.poor": "Poor Quality",
+  "common.imageUpload.error.maxFiles": "Maximum {maxFiles} files can be uploaded",
+  "common.imageUpload.error.invalidType": "File {fileName} is not a supported type ({allowedTypes})",
+  "common.imageUpload.error.maxSize": "File {fileName} is too large (maximum {maxSize}MB)",
+  "common.imageUpload.error.insufficientQuality": "Image quality of {fileName} is insufficient ({quality}). {feedback}",
+  "common.imageUpload.warning.quality": "⚠️ Image quality of {fileName}: {feedback}",
+  "common.notification.close": "Close notification"
 }

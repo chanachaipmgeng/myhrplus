@@ -20,9 +20,9 @@
       
       <div class="upload-content">
         <app-icon name="cloud_upload" size="xl" color="text-gray-400 dark:text-gray-500" class="upload-icon mb-4"></app-icon>
-        <p class="upload-text thai-text text-gray-700 dark:text-gray-300 mb-2">{{ placeholder }}</p>
+        <p class="upload-text thai-text text-gray-700 dark:text-gray-300 mb-2">{{ displayPlaceholder }}</p>
         <p class="upload-hint text-sm text-slate-500 dark:text-slate-400">
-          รองรับ: {{ config.allowedTypes?.join(', ') }} (สูงสุด {{ config.maxSize }}MB)
+          {{ 'common.imageUpload.supportedFormats' | translate }}: {{ config.allowedTypes?.join(', ') }} ({{ 'common.imageUpload.maxSize' | translate }} {{ config.maxSize }}MB)
         </p>
       </div>
     </div>
@@ -46,7 +46,7 @@
             class="remove-button absolute top-2 right-2 p-2 bg-red-500 hover:bg-red-600 text-white rounded-full transition-colors"
             (click)="removeImage(i)"
             [disabled]="disabled"
-            [title]="'ลบรูปภาพ'">
+            [title]="'common.imageUpload.removeImage' | translate">
             <app-icon name="close" size="sm" color="text-white"></app-icon>
           </button>
         </div>

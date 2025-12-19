@@ -2232,5 +2232,20 @@
   "common.pdpa.version": "เวอร์ชัน",
   "common.pdpa.date": "วันที่",
   "common.pdpa.exit": "ออก",
-  "common.pdpa.consent": "ยินยอม"
+  "common.pdpa.consent": "ยินยอม",
+  "common.imageUpload.label": "อัปโหลดรูปภาพ",
+  "common.imageUpload.placeholder": "ลากไฟล์มาวางที่นี่หรือคลิกเพื่อเลือก",
+  "common.imageUpload.supportedFormats": "รองรับ",
+  "common.imageUpload.maxSize": "สูงสุด",
+  "common.imageUpload.removeImage": "ลบรูปภาพ",
+  "common.imageUpload.quality.excellent": "คุณภาพดีมาก",
+  "common.imageUpload.quality.good": "คุณภาพดี",
+  "common.imageUpload.quality.fair": "คุณภาพปานกลาง",
+  "common.imageUpload.quality.poor": "คุณภาพต่ำ",
+  "common.imageUpload.error.maxFiles": "สามารถอัปโหลดได้สูงสุด {maxFiles} ไฟล์",
+  "common.imageUpload.error.invalidType": "ไฟล์ {fileName} ไม่ใช่ประเภทที่รองรับ ({allowedTypes})",
+  "common.imageUpload.error.maxSize": "ไฟล์ {fileName} ใหญ่เกินไป (สูงสุด {maxSize}MB)",
+  "common.imageUpload.error.insufficientQuality": "คุณภาพภาพ {fileName} ไม่เพียงพอ ({quality}). {feedback}",
+  "common.imageUpload.warning.quality": "⚠️ คุณภาพภาพ {fileName}: {feedback}",
+  "common.notification.close": "ปิดการแจ้งเตือน"
 }
