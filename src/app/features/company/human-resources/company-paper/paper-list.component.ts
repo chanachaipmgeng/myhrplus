@@ -92,3 +92,4 @@ export class PaperListComponent implements OnInit {
     this.data$ = this.service.getAll(); // Refresh data
   }
 }
+

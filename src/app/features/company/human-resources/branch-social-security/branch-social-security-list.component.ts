@@ -73,3 +73,4 @@ export class BranchSocialSecurityListComponent implements OnInit {
     this.data$ = this.service.getAll(); // Refresh data
   }
 }
+

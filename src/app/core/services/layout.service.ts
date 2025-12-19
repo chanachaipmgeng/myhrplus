@@ -4,6 +4,12 @@ import { map, shareReplay } from 'rxjs/operators';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { StorageService } from './storage.service';
 
+export interface BreadcrumbItem {
+  label: string;
+  route?: string;
+  icon?: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,10 +17,12 @@ export class LayoutService {
   // State
   private _sidebarOpen = new BehaviorSubject<boolean>(true);
   private _hiddenHeader = new BehaviorSubject<string | null>(null);
+  private _breadcrumbs = new BehaviorSubject<BreadcrumbItem[]>([]);
 
   // Observables
   readonly sidebarOpen$ = this._sidebarOpen.asObservable();
   readonly hiddenHeader$ = this._hiddenHeader.asObservable();
+  readonly breadcrumbs$ = this._breadcrumbs.asObservable();
   
   // Breakpoint Observable
   readonly isHandset$: Observable<boolean>;
@@ -81,5 +89,19 @@ export class LayoutService {
     if (storedHidden !== this._hiddenHeader.value) {
       this._hiddenHeader.next(storedHidden);
     }
+  }
+
+  /**
+   * Set breadcrumb items
+   */
+  setBreadcrumbs(items: BreadcrumbItem[]): void {
+    this._breadcrumbs.next(items);
+  }
+
+  /**
+   * Get current breadcrumb items
+   */
+  getBreadcrumbs(): BreadcrumbItem[] {
+    return this._breadcrumbs.value;
   }
 }

@@ -9,6 +9,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { ThemeService } from '../../core/services/theme.service';
 import { MenuContextService } from '../../core/services/menu-context.service';
 import { MenuDataService } from '../../core/services/menu-data.service';
+import { LayoutService, BreadcrumbItem } from '../../core/services/layout.service';
 import { MenuContext, MenuGroup } from '../../core/models/menu.model';
 import {
   NAVIGATION_ITEMS,
@@ -102,7 +103,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     public themeService: ThemeService,
     private menuContextService: MenuContextService,
-    private menuDataService: MenuDataService
+    private menuDataService: MenuDataService,
+    private layoutService: LayoutService
   ) {
     // Subscribe to current user
     this.authService.currentUser$.subscribe(user => {
@@ -163,6 +165,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.activeRoute = event.url;
         // Update selected module based on current route
         this.updateSelectedModuleFromRoute();
+        // Update breadcrumbs
+        this.getBreadcrumbPath();
       });
   }
 
@@ -349,6 +353,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     // Clear search when switching items
     this.searchQuery = '';
+    
+    // Update breadcrumbs
+    this.getBreadcrumbPath();
   }
 
   /**
@@ -408,6 +415,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
     if (parentNavItem?.id === 'admin' && level2Item.route) {
       this.navigateToRoute(level2Item.route);
     }
+    
+    // Update breadcrumbs
+    this.getBreadcrumbPath();
   }
 
   /**
@@ -559,6 +569,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     if (this.selectedNavigationItem) {
       path.push({
         label: this.translateLabel(this.selectedNavigationItem.label, this.selectedNavigationItem.id, 1),
+        route: this.selectedNavigationItem.route,
         level: 1
       });
     }
@@ -590,7 +601,28 @@ export class SidebarComponent implements OnInit, OnDestroy {
       });
     }
 
+    // Update breadcrumbs in LayoutService
+    const breadcrumbItems: BreadcrumbItem[] = path.map(item => ({
+      label: item.label,
+      route: item.route,
+      icon: this.getBreadcrumbIcon(item.level)
+    }));
+    this.layoutService.setBreadcrumbs(breadcrumbItems);
+
     return path;
+  }
+
+  /**
+   * Get icon for breadcrumb item based on level
+   */
+  private getBreadcrumbIcon(level: number): string {
+    const iconMap: { [key: number]: string } = {
+      1: 'home',
+      2: 'business',
+      3: 'folder',
+      4: 'description'
+    };
+    return iconMap[level] || 'folder';
   }
 
   /**
@@ -670,6 +702,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
           // ESS doesn't use selectedLevel2Item - keep it null
           this.selectedLevel3Item = null;
           this.selectedLevel4Item = null;
+          // Update breadcrumbs
+          this.getBreadcrumbPath();
           return;
         }
 
@@ -684,6 +718,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
               // ESS doesn't use selectedLevel2Item - only update Level 3-4
               this.selectedLevel3Item = level3Item;
               this.selectedLevel4Item = null;
+              // Update breadcrumbs
+              this.getBreadcrumbPath();
               return;
             }
 
@@ -699,6 +735,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
                   // ESS doesn't use selectedLevel2Item - only update Level 3-4
                   this.selectedLevel3Item = level3Item;
                   this.selectedLevel4Item = level4Item;
+                  // Update breadcrumbs
+                  this.getBreadcrumbPath();
                   return;
                 }
               }
@@ -719,6 +757,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
           // Don't change selectedLevel2Item - only update Level 3-4
           this.selectedLevel3Item = level3Item;
           this.selectedLevel4Item = null;
+          // Update breadcrumbs
+          this.getBreadcrumbPath();
           return;
         }
 
@@ -733,6 +773,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
               // Don't change selectedLevel2Item - only update Level 3-4
               this.selectedLevel3Item = level3Item;
               this.selectedLevel4Item = level4Item;
+              // Update breadcrumbs
+              this.getBreadcrumbPath();
               return;
             }
           }
@@ -748,10 +790,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
           console.log('[Sidebar] Found Home Level 2 match:', level2Item.label);
           this.selectedLevel3Item = null;
           this.selectedLevel4Item = null;
+          // Update breadcrumbs
+          this.getBreadcrumbPath();
           return;
         }
       }
     }
+    
+    // Update breadcrumbs after route update
+    this.getBreadcrumbPath();
   }
 
   /**

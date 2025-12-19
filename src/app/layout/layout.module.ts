@@ -13,6 +13,7 @@ import { ContextSwitcherComponent } from '../shared/components/context-switcher/
 import { IconComponent } from '../shared/components/icon/icon.component';
 import { OmniSearchComponent } from '../shared/components/omni-search/omni-search.component';
 import { NestedMenuAccordionComponent } from '../shared/components/nested-menu-accordion/nested-menu-accordion.component';
+import { BreadcrumbsComponent } from '../shared/components/breadcrumbs/breadcrumbs.component';
 import { SwipeDirective } from '../shared/directives/swipe.directive';
 
 import { MainLayoutComponent } from './main-layout/main-layout.component';
@@ -41,6 +42,7 @@ import { FooterComponent } from './footer/footer.component';
     IconComponent, // Standalone component
     OmniSearchComponent, // Standalone component
     NestedMenuAccordionComponent, // Standalone component
+    BreadcrumbsComponent, // Standalone component
     SwipeDirective // Standalone directive
   ],
   exports: [

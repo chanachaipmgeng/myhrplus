@@ -84,3 +84,4 @@ export class DivisionListComponent implements OnInit {
     this.data$ = this.service.getAll(); // Refresh data
   }
 }
+

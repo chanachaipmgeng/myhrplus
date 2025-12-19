@@ -11,3 +11,4 @@ export class DivisionService extends BaseApiService<Division> {
   // State
   loading = signal<boolean>(false);
 }
+

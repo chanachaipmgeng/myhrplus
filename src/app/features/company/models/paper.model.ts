@@ -19,3 +19,4 @@ export interface PaperPayload {
   jb_active?: string;
   attachfile_active?: string;
 }
+

@@ -11,3 +11,4 @@ export class PaperService extends BaseApiService<Paper> {
   // State
   loading = signal<boolean>(false);
 }
+

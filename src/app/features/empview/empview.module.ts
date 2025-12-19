@@ -18,15 +18,13 @@ import { ModalComponent } from '../../shared/components/modal/modal.component';
 
 @NgModule({
   declarations: [
-    // DashboardComponent is now standalone
+    DashboardComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    TranslateModule,
     SharedModule,
     LayoutModule,
-    DashboardComponent, // Import standalone component
     EmpviewRoutingModule,
     // Standalone components
     PageLayoutComponent,

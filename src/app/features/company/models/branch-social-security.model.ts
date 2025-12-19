@@ -98,3 +98,4 @@ export interface Province {
   companyid?: string;
   runno?: number;
 }
+

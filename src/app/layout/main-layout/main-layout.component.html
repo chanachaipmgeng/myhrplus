@@ -37,11 +37,18 @@
         (toggleSidenav)="toggleSidebar()"
       ></app-header>
       
+      
+      
       <div style="margin-top: 50px;"
         class="relative flex-1 min-h-0 p-4 md:p-6 lg:p-8 animate-fade-in [animation-delay:100ms] content-area"
         [style.padding-bottom]="layout.hiddenHeader !== 'hidden' ? '60px' : '0'"
         [style.padding-bottom.md]="layout.hiddenHeader !== 'hidden' ? '68px' : '0'"
       >
+      <!-- Breadcrumb -->
+      <div class="breadcrumb-wrapper px-4 md:px-6 lg:px-8 pt-4 pb-2" 
+           *ngIf="layout.hiddenHeader !== 'hidden' && breadcrumbs.length > 0">
+        <app-breadcrumbs [items]="breadcrumbs" [autoGenerate]="false"></app-breadcrumbs>
+      </div>
         <div class="animate-slide-up [animation-delay:200ms]">
           <router-outlet></router-outlet>
         </div>

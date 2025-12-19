@@ -21,9 +21,9 @@ module.exports = {
         xs: '2px',
       },
       fontFamily: {
-        // Modern fonts: Noto Sans (supports both English & Thai), Poppins (English), Kanit (Thai)
-        // Keep Inter and Sarabun for backward compatibility
+        // Prompt font (supports both Thai & English)
         sans: [
+          'Prompt',
           'Noto Sans Thai',
           'Inter',
           'Sarabun',
@@ -31,8 +31,8 @@ module.exports = {
         ],
         mono: [...fontFamily.mono],
         // Separate font families for specific use cases
-        english: ['Inter', ...fontFamily.sans],
-        thai: ['Noto Sans Thai', 'Sarabun', ...fontFamily.sans],
+        english: ['Prompt', 'Inter', ...fontFamily.sans],
+        thai: ['Prompt', 'Noto Sans Thai', 'Sarabun', ...fontFamily.sans],
       },
       colors: {
         primary: {
