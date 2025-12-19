@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from './core/services/auth.service';
 import { ThemeService } from './core/services/theme.service';
 import { I18nService } from './core/services/i18n.service';
@@ -22,7 +23,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     private themeService: ThemeService,
     private i18nService: I18nService,
     private syncfusionThemeService: SyncfusionThemeService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +47,16 @@ export class AppComponent implements OnInit, AfterViewInit {
     // Initialize i18n service (language is loaded automatically)
     const currentLang = this.i18nService.getCurrentLanguage();
     document.documentElement.setAttribute('lang', currentLang);
+    
+    // Set default language for TranslateService
+    this.translateService.setDefaultLang('th');
+    this.translateService.use(currentLang);
+    
+    // Subscribe to language changes
+    this.i18nService.currentLanguage$.subscribe(lang => {
+      this.translateService.use(lang);
+      document.documentElement.setAttribute('lang', lang);
+    });
 
     // Initialize Syncfusion theme service
     this.syncfusionThemeService.initialize();

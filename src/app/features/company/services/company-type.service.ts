@@ -11,3 +11,4 @@ export class CompanyTypeService extends BaseApiService<CompanyType> {
   // State
   loading = signal<boolean>(false);
 }
+

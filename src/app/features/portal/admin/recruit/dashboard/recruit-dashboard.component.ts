@@ -313,3 +313,4 @@ export class RecruitDashboardComponent implements OnInit, OnDestroy {
     };
   }
 }
+

@@ -11,3 +11,4 @@ import { PageHeaderComponent } from '@shared/components/page-header/page-header.
 })
 export class HumanResourcesListComponent {
 }
+

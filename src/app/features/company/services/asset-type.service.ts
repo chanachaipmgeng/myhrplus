@@ -8,3 +8,4 @@ import { AssetType } from '../models/asset-type.model';
 export class AssetTypeService extends BaseApiService<AssetType> {
   protected baseUrl = 'hr/master/asset-type';
 }
+

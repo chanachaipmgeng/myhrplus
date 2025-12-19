@@ -29,6 +29,18 @@ const routes: Routes = [
       {
         path: 'company-asset',
         loadComponent: () => import('./human-resources/company-asset/asset-list.component').then(m => m.AssetListComponent)
+      },
+      {
+        path: 'company-paper',
+        loadComponent: () => import('./human-resources/company-paper/paper-list.component').then(m => m.PaperListComponent)
+      },
+      {
+        path: 'branch-social-security',
+        loadComponent: () => import('./human-resources/branch-social-security/branch-social-security-list.component').then(m => m.BranchSocialSecurityListComponent)
+      },
+      {
+        path: 'division',
+        loadComponent: () => import('./human-resources/division/division-list.component').then(m => m.DivisionListComponent)
       }
     ]
   },

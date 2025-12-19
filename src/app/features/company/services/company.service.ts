@@ -18,3 +18,4 @@ export class CompanyService extends BaseApiService<Company> {
   loading = signal<boolean>(false);
   activeMenu = signal<string>('dashboard');
 }
+

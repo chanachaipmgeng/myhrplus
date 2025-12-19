@@ -82,3 +82,4 @@ export class CompanyTypeFormComponent implements OnChanges {
     });
   }
 }
+

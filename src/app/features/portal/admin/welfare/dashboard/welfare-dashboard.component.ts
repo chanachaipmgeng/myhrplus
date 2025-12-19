@@ -366,3 +366,4 @@ export class WelfareDashboardComponent implements OnInit, OnDestroy {
     };
   }
 }
+

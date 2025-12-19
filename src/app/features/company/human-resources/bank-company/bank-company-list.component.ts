@@ -59,3 +59,4 @@ export class BankCompanyListComponent implements OnInit {
     this.showModal = false;
   }
 }
+

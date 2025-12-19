@@ -68,6 +68,12 @@ src/app/features/benefit/
     - Shadow: `shadow-sm dark:shadow-slate-900/50`
     - Transition: `transition-colors duration-300`
 5.  **Material Icons:** ใช้ Material Icons (`material-icons`) แทน Font Awesome สำหรับ consistency
+6.  **Internationalization (i18n):** ทุก Component ต้องใช้ `@ngx-translate/core` สำหรับการแปลภาษา
+    - ใช้ `| translate` pipe ใน HTML templates
+    - ใช้ `TranslateService.instant()` ใน TypeScript สำหรับ dynamic values (เช่น headerText, labels)
+    - เพิ่ม wording ใน `src/assets/i18n/th.json` และ `src/assets/i18n/en.json`
+    - Naming convention: `feature.component.key` (เช่น `company.division.title`)
+    - Import `TranslateModule` ใน standalone components
 
 ---
 
@@ -395,7 +401,106 @@ export class AppModule { }
 
 ---
 
-## 6. Checklist ก่อนส่งงาน (Definition of Done)
+## 6. Internationalization (i18n) Pattern
+
+### A. Setup
+- ใช้ `@ngx-translate/core` สำหรับการแปลภาษา
+- Translation files อยู่ที่ `src/assets/i18n/th.json` และ `src/assets/i18n/en.json`
+- `TranslateModule` ถูก setup แล้วใน `app.module.ts` (default language: 'th')
+
+### B. Naming Convention
+ใช้รูปแบบ `feature.component.key` สำหรับ translation keys:
+- `company.division.title` - Title สำหรับ Division module
+- `company.division.column.bu1Id` - Column header สำหรับ BU1 ID
+- `company.division.error.email` - Error message สำหรับ email validation
+- `common.addNew` - Common button label
+
+### C. Usage in Components
+
+**1. HTML Template (ใช้ `| translate` pipe):**
+```html
+<app-page-header 
+  [title]="'company.division.titleFull' | translate" 
+  [showBreadcrumbs]="true">
+</app-page-header>
+
+<app-glass-input
+  [label]="'company.division.bu1Id' | translate"
+  formControlName="bu1id"
+  [errorMessage]="'company.division.bu1IdRequired' | translate">
+</app-glass-input>
+```
+
+**2. TypeScript (ใช้ `TranslateService.instant()`):**
+```typescript
+import { TranslateService } from '@ngx-translate/core';
+
+export class DivisionListComponent implements OnInit {
+  private translate = inject(TranslateService);
+  
+  headerActions = [
+    {
+      label: this.translate.instant('common.addNew'),
+      variant: 'primary' as const,
+      onClick: () => this.onCreate()
+    }
+  ];
+
+  columns = [
+    { 
+      field: 'bu1id', 
+      headerText: this.translate.instant('company.division.column.bu1Id'), 
+      width: '120px' 
+    }
+  ];
+}
+```
+
+**3. Import TranslateModule:**
+```typescript
+import { TranslateModule } from '@ngx-translate/core';
+
+@Component({
+  selector: 'app-division-list',
+  standalone: true,
+  imports: [
+    CommonModule,
+    TranslateModule,  // เพิ่ม TranslateModule
+    // ... other imports
+  ]
+})
+```
+
+### D. Adding New Translations
+
+**1. เพิ่มใน `th.json`:**
+```json
+{
+  "company.division.title": "ทะเบียนฝ่าย",
+  "company.division.column.bu1Id": "รหัสฝ่าย (BU1 ID)",
+  "common.addNew": "เพิ่มใหม่"
+}
+```
+
+**2. เพิ่มใน `en.json`:**
+```json
+{
+  "company.division.title": "Division",
+  "company.division.column.bu1Id": "BU1 ID",
+  "common.addNew": "Add New"
+}
+```
+
+### E. Best Practices
+1. **ใช้ translation keys แทน hardcoded text** ในทุก Component
+2. **Group keys ตาม feature/module** เพื่อความง่ายในการจัดการ
+3. **ใช้ common keys** สำหรับข้อความที่ใช้ซ้ำ (เช่น `common.addNew`, `common.save`, `common.cancel`)
+4. **Translate dynamic values** ใน TypeScript (เช่น headerText, labels) ด้วย `TranslateService.instant()`
+5. **Translate static text** ใน HTML ด้วย `| translate` pipe
+
+---
+
+## 7. Checklist ก่อนส่งงาน (Definition of Done)
 
 - [ ] โครงสร้างโฟลเดอร์ถูกต้องตามมาตรฐาน
 - [ ] ใช้ Standalone Component ทั้งหมด
@@ -410,3 +515,9 @@ export class AppModule { }
 - [ ] Chart Options ปรับตาม Dark Mode อัตโนมัติด้วย MutationObserver
 - [ ] Theme detection ทำงานถูกต้อง (ตรวจสอบ `data-theme`, `.dark` class, และ `prefers-color-scheme`)
 - [ ] MutationObserver cleanup ใน `ngOnDestroy()` เพื่อป้องกัน memory leak
+- [ ] Route Animation ทำงานถูกต้องเมื่อเปลี่ยนหน้า (fade + slide effect)
+- [ ] ใช้ `| translate` pipe ใน HTML templates สำหรับทุกข้อความ
+- [ ] ใช้ `TranslateService.instant()` ใน TypeScript สำหรับ dynamic values (headerText, labels, headerActions)
+- [ ] เพิ่ม wording ใน `th.json` และ `en.json` สำหรับ Module ใหม่
+- [ ] Import `TranslateModule` ใน standalone components
+

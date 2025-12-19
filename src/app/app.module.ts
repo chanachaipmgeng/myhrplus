@@ -30,7 +30,7 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
     HttpClientModule,
     ReactiveFormsModule,
     TranslateModule.forRoot({
-      defaultLanguage: 'th'
+      fallbackLang: 'th'
     }),
     AppRoutingModule,
     CoreModule,

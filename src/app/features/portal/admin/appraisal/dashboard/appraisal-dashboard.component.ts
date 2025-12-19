@@ -374,3 +374,4 @@ export class AppraisalDashboardComponent implements OnInit, OnDestroy {
     };
   }
 }
+

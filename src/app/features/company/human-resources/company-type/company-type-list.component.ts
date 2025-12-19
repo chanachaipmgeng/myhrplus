@@ -62,3 +62,4 @@ export class CompanyTypeListComponent implements OnInit {
     this.showModal = false;
   }
 }
+

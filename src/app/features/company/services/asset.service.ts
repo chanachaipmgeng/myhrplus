@@ -17,3 +17,4 @@ export class AssetService extends BaseApiService<Asset> {
     return this.assetTypeService.getAll();
   }
 }
+

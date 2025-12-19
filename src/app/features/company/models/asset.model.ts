@@ -15,3 +15,4 @@ export interface Asset {
   owner_fname?: string;
   owner_lname?: string;
 }
+

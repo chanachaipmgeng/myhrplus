@@ -358,3 +358,4 @@ export class SelfServiceDashboardComponent implements OnInit, OnDestroy {
     };
   }
 }
+

@@ -13,3 +13,4 @@ export class EmployeeService extends BaseApiService<Employee> {
     return this.http.get<Partial<Employee>[]>(`${this.apiUrl}/options`);
   }
 }
+

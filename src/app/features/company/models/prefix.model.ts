@@ -6,3 +6,4 @@ export interface Prefix {
   sex?: string; // SEX_PREFIX
   jb_active?: string;
 }
+

@@ -7,3 +7,4 @@ export interface CompanyGroup {
   edit_time?: string;
   verified?: string;
 }
+

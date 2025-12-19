@@ -8,3 +8,4 @@ import { Prefix } from '../models/prefix.model';
 export class PrefixService extends BaseApiService<Prefix> {
   protected baseUrl = 'hr/master/prefix';
 }
+

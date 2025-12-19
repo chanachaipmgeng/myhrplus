@@ -159,7 +159,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
                   { label: 'Company Group', route: '/portal/admin/company/human-resources/company-group', icon: 'group_work' },
                   { label: "Bank's Company Information", route: '/portal/admin/company/human-resources/bank-company', icon: 'account_balance' },
                   { label: 'Company Assets Information', route: '/portal/admin/company/human-resources/company-asset', icon: 'inventory' },
-                  { label: 'Company Papers Information', route: '/portal/admin/company/hr/company-info/papers', icon: 'description' },
+                  { label: 'Company Papers Information', route: '/portal/admin/company/human-resources/company-paper', icon: 'description' },
                   { label: 'Company Structure', route: '/portal/admin/company/hr/company-info/structure', icon: 'account_tree' }
                 ]
               },
@@ -168,8 +168,8 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
                 label: 'Branch and Business Unit',
                 icon: 'account_tree',
                 children: [
-                  { label: 'Branch Social Security', route: '/portal/admin/company/hr/branch-business-unit/branch-social-security', icon: 'security' },
-                  { label: 'Division', route: '/portal/admin/company/hr/branch-business-unit/division', icon: 'business' },
+                  { label: 'Branch Social Security', route: '/portal/admin/company/human-resources/branch-social-security', icon: 'security' },
+                  { label: 'Division', route: '/portal/admin/company/human-resources/division', icon: 'business' },
                   { label: 'Department', route: '/portal/admin/company/hr/branch-business-unit/department', icon: 'folder' },
                   { label: 'Section', route: '/portal/admin/company/hr/branch-business-unit/section', icon: 'folder_open' },
                   { label: 'Team', route: '/portal/admin/company/hr/branch-business-unit/team', icon: 'group' },

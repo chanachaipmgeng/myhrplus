@@ -28,3 +28,4 @@ export interface BankCompany {
   bank_tdesc?: string;
   bank_edesc?: string;
 }
+

@@ -60,16 +60,15 @@ export class AuthInterceptor implements HttpInterceptor {
     // Add Authorization header if token exists
     if (token && token.trim() !== '') {
       headers['Authorization'] = `Bearer ${token}`;
-      // Debug log to verify token is being added
-      console.log('AuthInterceptor: Adding Authorization header for:', fullUrl);
     } else {
-      // Log warning if no token found for non-public endpoints
-      if (!fullUrl.includes('/public/') && !fullUrl.includes('/authen')) {
-        console.warn('AuthInterceptor: No token found for request:', fullUrl);
-        // Debug: Check what's in sessionStorage
-        if (typeof window !== 'undefined' && window.sessionStorage) {
-          const debugToken = sessionStorage.getItem('userToken');
-          console.warn('AuthInterceptor: sessionStorage userToken:', debugToken ? 'exists' : 'missing');
+      // Only log warning for non-public endpoints in development mode
+      // Skip logging for public/auth endpoints to reduce console noise
+      if (!fullUrl.includes('/public/') && 
+          !fullUrl.includes('/authen') && 
+          !fullUrl.includes('/system/get-db-list')) {
+        // Only warn in development or when explicitly debugging
+        if (environment.production === false) {
+          console.debug('AuthInterceptor: No token found for request:', fullUrl);
         }
       }
     }
@@ -143,13 +142,9 @@ export class AuthInterceptor implements HttpInterceptor {
     if (typeof window !== 'undefined' && window.sessionStorage) {
       const sessionToken = sessionStorage.getItem('userToken');
       if (sessionToken && sessionToken.trim() !== '') {
-        // Debug: Log token retrieval
-        console.log('AuthInterceptor: Token found in sessionStorage, length:', sessionToken.length);
         // Use token directly - server will validate it
         // Only skip if token is clearly invalid (empty or null)
         return sessionToken;
-      } else {
-        console.warn('AuthInterceptor: No token in sessionStorage (userToken key)');
       }
     }
 
@@ -157,13 +152,8 @@ export class AuthInterceptor implements HttpInterceptor {
     if (this.tokenManager) {
       const token = this.tokenManager.getToken();
       if (token && token.trim() !== '') {
-        console.log('AuthInterceptor: Token found in TokenManagerService, length:', token.length);
         return token;
-      } else {
-        console.warn('AuthInterceptor: No token in TokenManagerService');
       }
-    } else {
-      console.warn('AuthInterceptor: TokenManagerService not available');
     }
 
     return '';

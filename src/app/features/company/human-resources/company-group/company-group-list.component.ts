@@ -60,3 +60,4 @@ export class CompanyGroupListComponent implements OnInit {
     this.showModal = false;
   }
 }
+

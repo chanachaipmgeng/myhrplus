@@ -5,3 +5,4 @@ export interface AssetType {
   edesc: string;
   astype_status?: string; // ASSETTYPE_STATUS
 }
+

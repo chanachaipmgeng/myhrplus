@@ -19,3 +19,4 @@ export class BankCompanyService extends BaseApiService<BankCompany> {
     return this.http.get<any[]>('hr/master/branches'); // Assumption
   }
 }
+

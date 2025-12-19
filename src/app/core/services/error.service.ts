@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
@@ -28,16 +28,29 @@ export interface StructuredError {
 })
 export class ErrorService {
   private currentLang: 'th' | 'en' = 'th';
+  private translate?: TranslateService;
 
-  constructor(private translate: TranslateService) {
-    // Subscribe to language changes
-    this.translate.onLangChange.subscribe(event => {
-      this.currentLang = event.lang === 'th' ? 'th' : 'en';
-    });
+  constructor(private injector: Injector) {
+    // Lazy inject TranslateService to avoid circular dependency
+    // TranslateService might use HTTP client which goes through ErrorInterceptor
+    try {
+      const translateService = this.injector.get(TranslateService, null);
+      if (translateService) {
+        this.translate = translateService;
+        // Subscribe to language changes
+        this.translate.onLangChange.subscribe(event => {
+          this.currentLang = event.lang === 'th' ? 'th' : 'en';
+        });
 
-    // Get initial language
-    const currentLang = this.translate.currentLang || this.translate.defaultLang || 'th';
-    this.currentLang = currentLang === 'th' ? 'th' : 'en';
+        // Get initial language
+        const currentLang = this.translate.currentLang || this.translate.defaultLang || 'th';
+        this.currentLang = currentLang === 'th' ? 'th' : 'en';
+      }
+    } catch (error) {
+      // If TranslateService is not available, use default language
+      console.warn('ErrorService: TranslateService not available, using default language');
+      this.currentLang = 'th';
+    }
   }
 
   /**
@@ -184,8 +197,20 @@ export class ErrorService {
       return originalError.error.message;
     }
 
+    // Get current language safely
+    let lang = this.currentLang;
+    if (this.translate) {
+      try {
+        const currentLang = this.translate.currentLang || this.translate.defaultLang || 'th';
+        lang = currentLang === 'th' ? 'th' : 'en';
+      } catch (error) {
+        // If TranslateService is not ready, use default
+        lang = 'th';
+      }
+    }
+
     // Otherwise, use predefined message
-    return getErrorMessage(errorCode, this.currentLang);
+    return getErrorMessage(errorCode, lang);
   }
 
   /**

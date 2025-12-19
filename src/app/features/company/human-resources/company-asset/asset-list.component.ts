@@ -60,3 +60,4 @@ export class AssetListComponent implements OnInit {
     this.showModal = false;
   }
 }
+

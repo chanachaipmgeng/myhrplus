@@ -368,3 +368,4 @@ export class TimeDashboardComponent implements OnInit, OnDestroy {
     };
   }
 }
+
