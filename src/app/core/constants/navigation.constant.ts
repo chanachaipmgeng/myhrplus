@@ -181,7 +181,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
                   { label: 'Working Area Table', route: '/portal/admin/company/human-resources/working-area', icon: 'location_on' },
                   { label: 'Working Area Type Table', route: '/portal/admin/company/human-resources/working-area-type', icon: 'category' },
                   { label: 'PL Table', route: '/portal/admin/company/human-resources/pl', icon: 'table_chart' },
-                  { label: 'Approve Level Table', route: '/portal/admin/company/hr/branch-business-unit/approve-level', icon: 'verified' },
+                  { label: 'Approve Level Table', route: '/portal/admin/company/human-resources/approve-level', icon: 'verified' },
                   { label: 'Latitude Longitude Work Area', route: '/portal/admin/company/hr/branch-business-unit/lat-lng-work-area', icon: 'location_on' },
                   { label: 'Work Area Location By Beacon', route: '/portal/admin/company/hr/branch-business-unit/work-area-beacon', icon: 'bluetooth_searching' },
                   { label: 'WorkArea', route: '/portal/admin/company/hr/branch-business-unit/workarea', icon: 'work' },

@@ -1,0 +1,43 @@
+<app-modal
+  [show]="isOpen"
+  [title]="(isEditMode ? 'company.approveLevel.edit' : 'company.approveLevel.add') | translate"
+  (closeEvent)="onClose()"
+  (confirmEvent)="onSubmit()">
+  
+  <form [formGroup]="form" class="space-y-4 p-2">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <app-glass-input
+        [label]="'company.approveLevel.approveLevelId' | translate"
+        formControlName="approvelevelid"
+        [required]="true"
+        [readonly]="isEditMode"
+        [errorMessage]="'company.approveLevel.approveLevelIdRequired' | translate"
+        maxLength="20">
+      </app-glass-input>
+
+      <app-glass-input
+        [label]="'company.approveLevel.companyId' | translate"
+        formControlName="companyid"
+        [required]="true"
+        [readonly]="true">
+      </app-glass-input>
+    </div>
+
+    <app-glass-input
+      [label]="'company.approveLevel.tdesc' | translate"
+      formControlName="tdesc"
+      [required]="true"
+      [errorMessage]="'company.approveLevel.tdescRequired' | translate"
+      maxLength="100">
+    </app-glass-input>
+
+    <app-glass-input
+      [label]="'company.approveLevel.edesc' | translate"
+      formControlName="edesc"
+      [required]="true"
+      [errorMessage]="'company.approveLevel.edescRequired' | translate"
+      maxLength="100">
+    </app-glass-input>
+  </form>
+
+</app-modal>

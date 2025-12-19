@@ -197,6 +197,16 @@ export const HUMAN_RESOURCES_MENU_ITEMS: HumanResourcesMenuItem[] = [
     description: 'PL Table (CO030_PL)',
     category: 'branch-business-unit',
     badgeColor: 'green'
+  },
+  {
+    code: 'CO01A0213',
+    route: 'approve-level',
+    icon: 'verified',
+    labelThai: 'ทะเบียนสิทธิ์การอนุมัติ',
+    labelEnglish: 'Approve Level Table',
+    description: 'Approve Level (PRU_APPRVLEVEL)',
+    category: 'branch-business-unit',
+    badgeColor: 'green'
   }
 ];
 
