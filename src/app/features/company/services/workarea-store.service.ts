@@ -11,3 +11,4 @@ export class WorkareaStoreService extends BaseApiService<WorkareaStore> {
   // State
   loading = signal<boolean>(false);
 }
+

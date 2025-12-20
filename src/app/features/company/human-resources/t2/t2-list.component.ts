@@ -85,3 +85,4 @@ export class T2ListComponent implements OnInit {
     this.data$ = this.service.getAll(); // Refresh data
   }
 }
+

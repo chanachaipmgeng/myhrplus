@@ -65,3 +65,4 @@ export interface WorkareaStorePayload {
   remarks?: string;
   objective?: string;
 }
+

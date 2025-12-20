@@ -18,3 +18,4 @@ export class AssetService extends BaseApiService<Asset> {
   }
 }
 
+

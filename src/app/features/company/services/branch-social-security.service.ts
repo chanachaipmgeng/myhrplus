@@ -12,3 +12,4 @@ export class BranchSocialSecurityService extends BaseApiService<BranchSocialSecu
   loading = signal<boolean>(false);
 }
 
+

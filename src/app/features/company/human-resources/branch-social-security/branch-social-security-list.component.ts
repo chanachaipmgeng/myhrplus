@@ -74,3 +74,4 @@ export class BranchSocialSecurityListComponent implements OnInit {
   }
 }
 
+

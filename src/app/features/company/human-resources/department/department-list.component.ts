@@ -85,3 +85,4 @@ export class DepartmentListComponent implements OnInit {
     this.data$ = this.service.getAll(); // Refresh data
   }
 }
+

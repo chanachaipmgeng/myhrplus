@@ -20,3 +20,4 @@ export class BankCompanyService extends BaseApiService<BankCompany> {
   }
 }
 
+

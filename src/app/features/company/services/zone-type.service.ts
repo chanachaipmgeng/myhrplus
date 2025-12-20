@@ -11,3 +11,4 @@ export class ZoneTypeService extends BaseApiService<ZoneType> {
   // State
   loading = signal<boolean>(false);
 }
+

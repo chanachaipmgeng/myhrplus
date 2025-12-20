@@ -11,3 +11,4 @@ export class CostCenterService extends BaseApiService<CostCenter> {
   // State
   loading = signal<boolean>(false);
 }
+

@@ -20,3 +20,4 @@ export class CompanyService extends BaseApiService<Company> {
     return super.getAll(mergedParams);
   }
 }
+

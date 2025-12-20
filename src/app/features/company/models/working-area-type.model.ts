@@ -19,3 +19,4 @@ export interface WorkingAreaTypePayload {
   edesc: string;
   work_status?: string;
 }
+

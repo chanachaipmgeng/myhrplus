@@ -11,3 +11,4 @@ export class ApproveLevelService extends BaseApiService<ApproveLevel> {
   // State
   loading = signal<boolean>(false);
 }
+

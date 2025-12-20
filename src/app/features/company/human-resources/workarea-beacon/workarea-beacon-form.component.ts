@@ -96,3 +96,4 @@ export class WorkareaBeaconFormComponent implements OnChanges {
     });
   }
 }
+

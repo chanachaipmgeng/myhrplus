@@ -76,3 +76,4 @@ export class WorkareaBeaconListComponent implements OnInit {
     this.showModal = false;
   }
 }
+

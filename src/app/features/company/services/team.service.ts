@@ -11,3 +11,4 @@ export class TeamService extends BaseApiService<Team> {
   // State
   loading = signal<boolean>(false);
 }
+

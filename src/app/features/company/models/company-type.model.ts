@@ -15,3 +15,4 @@ export interface CompanyTypePayload {
   edesc: string;
 }
 
+

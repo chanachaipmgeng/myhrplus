@@ -140,3 +140,4 @@ export interface CompanyType {
   tdesc?: string;
   edesc?: string;
 }
+

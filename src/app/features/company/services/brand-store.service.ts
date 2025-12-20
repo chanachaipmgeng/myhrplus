@@ -11,3 +11,4 @@ export class BrandStoreService extends BaseApiService<BrandStore> {
   // State
   loading = signal<boolean>(false);
 }
+

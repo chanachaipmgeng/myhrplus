@@ -9,3 +9,4 @@ export class PrefixService extends BaseApiService<Prefix> {
   protected baseUrl = 'hr/master/prefix';
 }
 
+

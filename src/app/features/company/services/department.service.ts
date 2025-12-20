@@ -11,3 +11,4 @@ export class DepartmentService extends BaseApiService<Department> {
   // State
   loading = signal<boolean>(false);
 }
+

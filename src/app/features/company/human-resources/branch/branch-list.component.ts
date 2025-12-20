@@ -75,3 +75,4 @@ export class BranchListComponent implements OnInit {
     this.showModal = false;
   }
 }
+

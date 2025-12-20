@@ -19,3 +19,4 @@ export interface ZoneTypePayload {
   edesc: string;
   brand_support?: string;
 }
+

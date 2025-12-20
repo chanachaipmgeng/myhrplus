@@ -31,3 +31,4 @@ export interface JobGrade {
   edesc?: string;
   companyid?: string;
 }
+

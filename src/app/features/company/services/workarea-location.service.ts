@@ -11,3 +11,4 @@ export class WorkareaLocationService extends BaseApiService<WorkareaLocation> {
   // State
   loading = signal<boolean>(false);
 }
+

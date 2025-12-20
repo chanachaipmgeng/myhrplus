@@ -84,3 +84,4 @@ export class T4ListComponent implements OnInit {
     this.data$ = this.service.getAll();
   }
 }
+

@@ -17,3 +17,4 @@ export interface BrandStorePayload {
   tdesc: string;
   edesc: string;
 }
+

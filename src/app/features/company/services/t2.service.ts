@@ -11,3 +11,4 @@ export class T2Service extends BaseApiService<T2> {
   // State
   loading = signal<boolean>(false);
 }
+

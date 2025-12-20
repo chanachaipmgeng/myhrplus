@@ -6,3 +6,4 @@ export interface AssetType {
   astype_status?: string; // ASSETTYPE_STATUS
 }
 
+

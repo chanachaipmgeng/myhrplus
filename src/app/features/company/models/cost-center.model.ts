@@ -18,3 +18,4 @@ export interface CostCenterPayload {
   tdesc: string;
   edesc: string;
 }
+

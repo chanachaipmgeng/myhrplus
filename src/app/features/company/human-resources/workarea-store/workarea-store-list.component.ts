@@ -75,3 +75,4 @@ export class WorkareaStoreListComponent implements OnInit {
     this.showModal = false;
   }
 }
+

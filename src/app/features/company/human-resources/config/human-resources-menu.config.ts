@@ -283,3 +283,4 @@ export function getMenuItemsByCategory(category: HumanResourcesMenuItem['categor
 export function getCategories(): HumanResourcesMenuItem['category'][] {
   return Array.from(new Set(HUMAN_RESOURCES_MENU_ITEMS.map(item => item.category)));
 }
+

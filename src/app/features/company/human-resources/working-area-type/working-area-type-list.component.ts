@@ -83,3 +83,4 @@ export class WorkingAreaTypeListComponent implements OnInit {
     this.showModal = false;
   }
 }
+

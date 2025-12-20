@@ -37,3 +37,4 @@ export interface WorkingAreaPayload {
   ZONETYPEID?: string;
   GROUPID?: string;
 }
+

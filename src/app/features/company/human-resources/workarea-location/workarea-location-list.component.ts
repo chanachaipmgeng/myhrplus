@@ -76,3 +76,4 @@ export class WorkareaLocationListComponent implements OnInit {
     this.showModal = false;
   }
 }
+

@@ -11,3 +11,4 @@ export class SectionService extends BaseApiService<Section> {
   // State
   loading = signal<boolean>(false);
 }
+

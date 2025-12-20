@@ -84,3 +84,4 @@ export class T3ListComponent implements OnInit {
     this.data$ = this.service.getAll();
   }
 }
+

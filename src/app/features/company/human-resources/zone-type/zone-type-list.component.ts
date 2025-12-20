@@ -73,3 +73,4 @@ export class ZoneTypeListComponent implements OnInit {
     this.showModal = false;
   }
 }
+

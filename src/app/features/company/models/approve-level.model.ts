@@ -17,3 +17,4 @@ export interface ApproveLevelPayload {
   tdesc: string;
   edesc: string;
 }
+

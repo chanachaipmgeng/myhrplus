@@ -25,3 +25,4 @@ export interface WorkareaLocationPayload {
   longitude?: string;
   radius?: number;
 }
+

@@ -72,3 +72,4 @@ export class BrandStoreListComponent implements OnInit {
     this.showModal = false;
   }
 }
+

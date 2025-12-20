@@ -74,3 +74,4 @@ export class CompanyTypeListComponent implements OnInit {
   }
 }
 
+

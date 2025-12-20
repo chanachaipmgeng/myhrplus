@@ -11,3 +11,4 @@ export class PLService extends BaseApiService<PL> {
   // State
   loading = signal<boolean>(false);
 }
+

@@ -20,3 +20,4 @@ export class BranchService extends BaseApiService<Branch> {
     return super.getAll(mergedParams);
   }
 }
+

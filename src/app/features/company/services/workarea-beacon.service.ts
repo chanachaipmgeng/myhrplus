@@ -11,3 +11,4 @@ export class WorkareaBeaconService extends BaseApiService<WorkareaBeacon> {
   // State
   loading = signal<boolean>(false);
 }
+

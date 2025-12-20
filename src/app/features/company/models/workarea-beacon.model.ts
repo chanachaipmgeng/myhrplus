@@ -25,3 +25,4 @@ export interface WorkareaBeaconPayload {
   latitude?: string;
   longitude?: string;
 }
+
