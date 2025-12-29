@@ -35,144 +35,139 @@
     </app-glass-card>
   </section>
 
-  <!-- Sizes Section -->
+  <!-- Basic Usage Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Sizes
-    </h2>
-    <app-glass-card padding="p-6">
-      <div class="flex gap-8 items-center flex-wrap">
-        <div class="flex flex-col items-center gap-2">
-          <app-avatar name="User" size="xs"></app-avatar>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">xs</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-avatar name="User" size="sm"></app-avatar>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">sm</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-avatar name="User" size="md"></app-avatar>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">md</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-avatar name="User" size="lg"></app-avatar>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">lg</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-avatar name="User" size="xl"></app-avatar>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">xl</span>
-        </div>
-      </div>
-    </app-glass-card>
-  </section>
-
-  <!-- Status Section -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Status Indicators
-    </h2>
-    <app-glass-card padding="p-6">
-      <div class="flex gap-8 items-center flex-wrap">
-        <div class="flex flex-col items-center gap-2">
-          <app-avatar name="User" status="online"></app-avatar>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Online</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-avatar name="User" status="offline"></app-avatar>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Offline</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-avatar name="User" status="away"></app-avatar>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Away</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-avatar name="User" status="busy"></app-avatar>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Busy</span>
-        </div>
-      </div>
-    </app-glass-card>
-  </section>
-
-  <!-- Badges Section -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Badges
-    </h2>
-    <app-glass-card padding="p-6">
-      <div class="flex gap-8 items-center flex-wrap">
-        <div class="flex flex-col items-center gap-2">
-          <app-avatar name="User" [badge]="5"></app-avatar>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Number Badge</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-avatar name="User" badge="dot"></app-avatar>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Dot Badge</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-avatar name="User" [badge]="99"></app-avatar>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">99+ Badge</span>
-        </div>
-      </div>
-    </app-glass-card>
-  </section>
-
-  <!-- Shapes Section -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Shapes
-    </h2>
-    <app-glass-card padding="p-6">
-      <div class="flex gap-8 items-center flex-wrap">
-        <div class="flex flex-col items-center gap-2">
-          <app-avatar name="User" shape="circle"></app-avatar>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Circle</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-avatar name="User" shape="rounded"></app-avatar>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Rounded</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-avatar name="User" shape="square"></app-avatar>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Square</span>
-        </div>
-      </div>
-    </app-glass-card>
-  </section>
-
-  <!-- Code Examples -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Code Examples
+      Basic Usage
     </h2>
     
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
-    <app-code-viewer [code]="basicExample" language="html" title="Basic Avatar"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Sizes</h3>
-    <app-code-viewer [code]="sizesExample" language="html" title="Avatar Sizes"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Status</h3>
-    <app-code-viewer [code]="statusExample" language="html" title="Status Indicators"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Badges</h3>
-    <app-code-viewer [code]="badgeExample" language="html" title="Avatar Badges"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Shapes</h3>
-    <app-code-viewer [code]="shapesExample" language="html" title="Avatar Shapes"></app-code-viewer>
+    <app-glass-card padding="p-6">
+      <app-avatar name="John Doe"></app-avatar>
+    </app-glass-card>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
   </section>
 
-  <!-- API Documentation -->
+  <!-- Variants Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      API Documentation
+      Variants
     </h2>
-    <app-props-table [props]="props" title="Inputs"></app-props-table>
+    
+    <app-glass-card padding="p-6">
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Shapes</h3>
+          <div class="flex gap-8 items-center flex-wrap">
+            <div class="flex flex-col items-center gap-2">
+              <app-avatar name="User" shape="circle"></app-avatar>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Circle</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-avatar name="User" shape="rounded"></app-avatar>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Rounded</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-avatar name="User" shape="square"></app-avatar>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Square</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="shapesExample" language="html" title="Variants Example"></app-code-viewer>
+  </section>
+
+  <!-- States Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      States
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Sizes</h3>
+          <div class="flex gap-8 items-center flex-wrap">
+            <div class="flex flex-col items-center gap-2">
+              <app-avatar name="User" size="xs"></app-avatar>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">xs</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-avatar name="User" size="sm"></app-avatar>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">sm</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-avatar name="User" size="md"></app-avatar>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">md</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-avatar name="User" size="lg"></app-avatar>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">lg</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-avatar name="User" size="xl"></app-avatar>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">xl</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Status Indicators</h3>
+          <div class="flex gap-8 items-center flex-wrap">
+            <div class="flex flex-col items-center gap-2">
+              <app-avatar name="User" status="online"></app-avatar>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Online</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-avatar name="User" status="offline"></app-avatar>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Offline</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-avatar name="User" status="away"></app-avatar>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Away</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-avatar name="User" status="busy"></app-avatar>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Busy</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Badges</h3>
+          <div class="flex gap-8 items-center flex-wrap">
+            <div class="flex flex-col items-center gap-2">
+              <app-avatar name="User" [badge]="5"></app-avatar>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Number Badge</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-avatar name="User" badge="dot"></app-avatar>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Dot Badge</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-avatar name="User" [badge]="99"></app-avatar>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">99+ Badge</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="sizesExample" language="html" title="States Example"></app-code-viewer>
+    <app-code-viewer [code]="statusExample" language="html" title="Status Example"></app-code-viewer>
+    <app-code-viewer [code]="badgeExample" language="html" title="Badges Example"></app-code-viewer>
+  </section>
+
+  <!-- API Reference -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Reference
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props"></app-props-table>
+    </app-glass-card>
   </section>
 </div>
 

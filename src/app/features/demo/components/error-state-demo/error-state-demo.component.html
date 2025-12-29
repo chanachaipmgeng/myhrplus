@@ -22,11 +22,24 @@
     </app-error-state>
   </section>
 
-  <!-- Error Types Section -->
+  <!-- Basic Usage Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Error Types
+      Basic Usage
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <app-error-state type="network"></app-error-state>
+    </app-glass-card>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
+  </section>
+
+  <!-- Variants Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Variants
     </h2>
     
     <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6">
@@ -37,68 +50,56 @@
       <app-error-state type="notfound"></app-error-state>
       <app-error-state type="generic"></app-error-state>
     </div>
+    <app-code-viewer [code]="typesExample" language="html" title="Variants Example"></app-code-viewer>
   </section>
 
-  <!-- With Retry Section -->
+  <!-- Advanced Features Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      With Retry Button
-    </h2>
-    <app-error-state
-      type="network"
-      [showRetry]="true"
-      retryText="ลองอีกครั้ง"
-      (retry)="onRetry()">
-    </app-error-state>
-  </section>
-
-  <!-- Custom Error Section -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Custom Error
-    </h2>
-    <app-error-state
-      type="generic"
-      title="เกิดข้อผิดพลาด"
-      message="ไม่สามารถโหลดข้อมูลได้ กรุณาลองอีกครั้งในภายหลัง"
-      errorCode="ERR-500"
-      [showRetry]="true"
-      [showDetails]="true"
-      details="Error occurred at: 2024-01-15 10:30:00"
-      (retry)="onRetry()">
-    </app-error-state>
-  </section>
-
-  <!-- Code Examples -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Code Examples
+      Advanced Features
     </h2>
     
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
-    <app-code-viewer [code]="basicExample" language="html" title="Basic Error State"></app-code-viewer>
+    <div class="space-y-6">
+      <app-glass-card padding="p-6">
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Retry Button</h3>
+        <app-error-state
+          type="network"
+          [showRetry]="true"
+          retryText="ลองอีกครั้ง"
+          (retry)="onRetry()">
+        </app-error-state>
+      </app-glass-card>
 
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Error Types</h3>
-    <app-code-viewer [code]="typesExample" language="html" title="Different Error Types"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Retry</h3>
-    <app-code-viewer [code]="withRetryExample" language="html" title="Error State with Retry"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Custom Error</h3>
-    <app-code-viewer [code]="customExample" language="html" title="Custom Error State"></app-code-viewer>
+      <app-glass-card padding="p-6">
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Custom Error</h3>
+        <app-error-state
+          type="generic"
+          title="เกิดข้อผิดพลาด"
+          message="ไม่สามารถโหลดข้อมูลได้ กรุณาลองอีกครั้งในภายหลัง"
+          errorCode="ERR-500"
+          [showRetry]="true"
+          [showDetails]="true"
+          details="Error occurred at: 2024-01-15 10:30:00"
+          (retry)="onRetry()">
+        </app-error-state>
+      </app-glass-card>
+    </div>
+    <app-code-viewer [code]="withRetryExample" language="html" title="Advanced Features Example"></app-code-viewer>
+    <app-code-viewer [code]="customExample" language="html" title="Custom Error Example"></app-code-viewer>
   </section>
 
-  <!-- API Documentation -->
+  <!-- API Reference -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      API Documentation
+      API Reference
     </h2>
-    <app-props-table [props]="props" title="Inputs"></app-props-table>
-    <app-props-table [props]="outputs" title="Outputs"></app-props-table>
+    
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props" title="Inputs"></app-props-table>
+      <app-props-table [props]="outputs" title="Outputs"></app-props-table>
+    </app-glass-card>
   </section>
 </div>
 

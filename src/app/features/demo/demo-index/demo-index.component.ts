@@ -102,7 +102,15 @@ export class DemoIndexComponent {
     { name: 'Fullscreen', route: 'fullscreen', description: 'Fullscreen API component for entering/exiting fullscreen mode', category: 'Other', icon: '⛶' },
     { name: 'Back to Top', route: 'back-to-top', description: 'Back to top button component with smooth scroll', category: 'Other', icon: '⬆️' },
     { name: 'SweetAlert2', route: 'sweetalert2', description: 'SweetAlert2 integration for beautiful alert dialogs', category: 'Feedback', icon: '🎨' },
-    { name: 'Bar Rating', route: 'bar-rating', description: 'Bar rating component with customizable options', category: 'Form', icon: '⭐' }
+    { name: 'Bar Rating', route: 'bar-rating', description: 'Bar rating component with customizable options', category: 'Form', icon: '⭐' },
+    { name: 'Omni Search', route: 'omni-search', description: 'Universal search component for searching across menus and routes', category: 'Other', icon: '🔍' },
+    { name: 'Context Switcher', route: 'context-switcher', description: 'Context switcher for switching between menu contexts', category: 'Layout', icon: '🔄' },
+    { name: 'Nested Menu Accordion', route: 'nested-menu-accordion', description: 'Nested menu accordion with expand/collapse functionality', category: 'Layout', icon: '📋' },
+    { name: 'Pagination', route: 'pagination', description: 'Pagination component for navigating through large datasets', category: 'Data Display', icon: '📄' },
+    { name: 'Chip', route: 'chip', description: 'Chip component for displaying tags and removable items', category: 'Form', icon: '🏷️' },
+    { name: 'Alert', route: 'alert', description: 'Inline alert component for displaying important messages', category: 'Feedback', icon: '⚠️' },
+    { name: 'Accordion', route: 'accordion', description: 'Accordion component for collapsible content sections', category: 'Layout', icon: '📑' },
+    { name: 'Divider', route: 'divider', description: 'Divider component for separating content sections', category: 'Layout', icon: '➖' }
   ];
 
   get categories(): string[] {

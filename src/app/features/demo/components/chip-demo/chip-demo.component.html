@@ -1,0 +1,124 @@
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Chip Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+      Chip component for displaying tags, categories, or removable items with various variants and sizes.
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <div class="flex flex-wrap gap-2">
+          <app-chip
+            *ngFor="let chip of chips"
+            [label]="chip"
+            variant="primary">
+          </app-chip>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <app-chip
+            *ngFor="let chip of removableChips"
+            [label]="chip"
+            variant="success"
+            [removable]="true"
+            (removed)="onRemove(chip)">
+          </app-chip>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Basic Usage Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Basic Usage
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="flex flex-wrap gap-2">
+        <app-chip label="Angular"></app-chip>
+        <app-chip label="TypeScript" variant="primary"></app-chip>
+        <app-chip label="Success" variant="success"></app-chip>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
+  </section>
+
+  <!-- Variants Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Variants
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="flex flex-wrap gap-2">
+        <app-chip label="Default" variant="default"></app-chip>
+        <app-chip label="Primary" variant="primary"></app-chip>
+        <app-chip label="Success" variant="success"></app-chip>
+        <app-chip label="Warning" variant="warning"></app-chip>
+        <app-chip label="Danger" variant="danger"></app-chip>
+        <app-chip label="Info" variant="info"></app-chip>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="variantsExample" language="html" title="Variants Example"></app-code-viewer>
+  </section>
+
+  <!-- States Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      States
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <div class="flex flex-wrap gap-2">
+          <app-chip label="Small" size="sm"></app-chip>
+          <app-chip label="Medium" size="md"></app-chip>
+          <app-chip label="Large" size="lg"></app-chip>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <app-chip label="Normal"></app-chip>
+          <app-chip label="Disabled" [disabled]="true"></app-chip>
+          <app-chip label="With Icon" icon="star" variant="primary"></app-chip>
+          <app-chip label="Removable" [removable]="true" variant="success"></app-chip>
+        </div>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="sizesExample" language="html" title="Sizes Example"></app-code-viewer>
+    <app-code-viewer [code]="removableExample" language="html" title="Removable Example"></app-code-viewer>
+  </section>
+
+  <!-- API Reference -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Reference
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props"></app-props-table>
+    </app-glass-card>
+  </section>
+
+  <!-- Usage Example -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Usage Example
+    </h2>
+    <app-code-viewer [code]="usageExample" language="typescript" title="Event Handling"></app-code-viewer>
+  </section>
+</div>
+

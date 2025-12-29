@@ -14,7 +14,7 @@
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
       Live Demo
     </h2>
-    
+
     <app-glass-card padding="p-6">
       <div class="space-y-4">
         <app-glass-select
@@ -32,11 +32,11 @@
     </app-glass-card>
   </section>
 
-  <!-- Single Select Section -->
+  <!-- Basic Usage Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Single Select
+      Basic Usage
     </h2>
     <app-glass-card padding="p-6">
       <div class="space-y-4">
@@ -51,14 +51,23 @@
     <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
   </section>
 
-  <!-- Multiple Select Section -->
+  <!-- Variants Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Multiple Select
+      Variants
     </h2>
     <app-glass-card padding="p-6">
       <div class="space-y-4">
+        <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Single Select</h3>
+        <app-glass-select
+          label="เลือกประเทศ"
+          [options]="countryOptions"
+          [(ngModel)]="singleValue"
+          placeholder="เลือกประเทศ...">
+        </app-glass-select>
+
+        <h3 class="text-lg font-semibold mb-2 mt-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Multiple Select</h3>
         <app-glass-select
           label="เลือกหลายตัวเลือก"
           [options]="options"
@@ -75,19 +84,8 @@
             </span>
           </div>
         </div>
-      </div>
-    </app-glass-card>
-    <app-code-viewer [code]="multipleExample" language="html" title="Multiple Select"></app-code-viewer>
-  </section>
 
-  <!-- Searchable Select Section -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Searchable Select
-    </h2>
-    <app-glass-card padding="p-6">
-      <div class="space-y-4">
+        <h3 class="text-lg font-semibold mb-2 mt-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Searchable Select</h3>
         <app-glass-select
           label="ค้นหาตัวเลือก"
           [options]="countryOptions"
@@ -97,7 +95,8 @@
         </app-glass-select>
       </div>
     </app-glass-card>
-    <app-code-viewer [code]="searchableExample" language="html" title="Searchable Select"></app-code-viewer>
+    <app-code-viewer [code]="multipleExample" language="html" title="Variants Example"></app-code-viewer>
+    <app-code-viewer [code]="searchableExample" language="html" title="Searchable Select Example"></app-code-viewer>
   </section>
 
   <!-- States Section -->
@@ -134,7 +133,7 @@
     </app-glass-card>
   </section>
 
-  <!-- Props Table -->
+  <!-- API Reference -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">

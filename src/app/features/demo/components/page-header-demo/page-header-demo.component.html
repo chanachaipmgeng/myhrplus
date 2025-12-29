@@ -8,12 +8,29 @@
     </p>
   </div>
 
-  <!-- Basic Example -->
+  <!-- Live Demo Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Basic Example
+      Live Demo
     </h2>
+    
+    <app-glass-card padding="p-6">
+      <app-page-header
+        title="Interactive Page Header"
+        subtitle="Live Demo"
+        description="This is an interactive page header with title, subtitle, and description">
+      </app-page-header>
+    </app-glass-card>
+  </section>
+
+  <!-- Basic Usage Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Basic Usage
+    </h2>
+    
     <app-glass-card padding="p-6">
       <app-page-header
         title="Basic Page Header"
@@ -21,62 +38,57 @@
         description="This is a basic page header with title, subtitle, and description">
       </app-page-header>
     </app-glass-card>
-    <app-code-viewer [code]="basicExample" language="html" title="Basic Page Header"></app-code-viewer>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
   </section>
 
-  <!-- With Actions -->
+  <!-- Variants Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      With Actions
+      Variants
     </h2>
+    
+    <div class="space-y-6">
+      <app-glass-card padding="p-6">
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Actions</h3>
+        <app-page-header
+          title="Page with Actions"
+          subtitle="Actions Example"
+          description="This page header includes action buttons"
+          [actions]="actions">
+        </app-page-header>
+      </app-glass-card>
+
+      <app-glass-card padding="p-6">
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Without Breadcrumbs</h3>
+        <app-page-header
+          title="No Breadcrumbs"
+          subtitle="Breadcrumbs disabled"
+          [showBreadcrumbs]="false">
+        </app-page-header>
+      </app-glass-card>
+
+      <app-glass-card padding="p-6">
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Minimal Header</h3>
+        <app-page-header
+          title="Minimal Header"
+          [showBreadcrumbs]="false">
+        </app-page-header>
+      </app-glass-card>
+    </div>
+    <app-code-viewer [code]="withActionsExample" language="html" title="Variants Example"></app-code-viewer>
+  </section>
+
+  <!-- API Reference -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Reference
+    </h2>
+    
     <app-glass-card padding="p-6">
-      <app-page-header
-        title="Page with Actions"
-        subtitle="Actions Example"
-        description="This page header includes action buttons"
-        [actions]="actions">
-      </app-page-header>
+      <app-props-table [props]="props"></app-props-table>
     </app-glass-card>
-    <app-code-viewer [code]="withActionsExample" language="html" title="Page Header with Actions"></app-code-viewer>
-  </section>
-
-  <!-- Without Breadcrumbs -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Without Breadcrumbs
-    </h2>
-    <app-glass-card padding="p-6">
-      <app-page-header
-        title="No Breadcrumbs"
-        subtitle="Breadcrumbs disabled"
-        [showBreadcrumbs]="false">
-      </app-page-header>
-    </app-glass-card>
-  </section>
-
-  <!-- Minimal -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Minimal Header
-    </h2>
-    <app-glass-card padding="p-6">
-      <app-page-header
-        title="Minimal Header"
-        [showBreadcrumbs]="false">
-      </app-page-header>
-    </app-glass-card>
-  </section>
-
-  <!-- Props Table -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      API Documentation
-    </h2>
-    <app-props-table [props]="props" title="Inputs"></app-props-table>
   </section>
 </div>
 

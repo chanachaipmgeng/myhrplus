@@ -1,0 +1,134 @@
+/* Accordion Component Styles */
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  &.accordion-bordered {
+    .accordion-panel {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 0.5rem;
+      overflow: hidden;
+
+      .dark & {
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .theme-gemini & {
+        border-color: rgba(59, 130, 246, 0.3);
+      }
+    }
+  }
+}
+
+.accordion-panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: all 0.2s ease;
+
+  &.accordion-panel-expanded {
+    background: rgba(255, 255, 255, 0.1);
+
+    .dark & {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .theme-gemini & {
+      background: rgba(59, 130, 246, 0.15);
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+    }
+  }
+
+  &.accordion-panel-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.accordion-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: rgb(55, 65, 81);
+  font-size: 0.875rem;
+  font-weight: 500;
+
+  &:hover:not(:disabled) {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  &:focus {
+    outline: none;
+    ring: 2px;
+    ring-color: rgba(59, 130, 246, 0.5);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .dark & {
+    color: rgb(209, 213, 219);
+
+    &:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  .theme-gemini & {
+    color: rgb(147, 197, 253);
+
+    &:hover:not(:disabled) {
+      background: rgba(59, 130, 246, 0.1);
+    }
+  }
+}
+
+.accordion-icon {
+  flex-shrink: 0;
+}
+
+.accordion-title {
+  flex: 1;
+  min-width: 0;
+}
+
+.accordion-chevron {
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+
+  .accordion-panel-expanded & {
+    transform: rotate(180deg);
+  }
+}
+
+.accordion-content {
+  overflow: hidden;
+}
+
+.accordion-content-inner {
+  padding: 0 1rem 1rem 1rem;
+  color: rgb(75, 85, 99);
+  font-size: 0.875rem;
+  line-height: 1.5;
+
+  .dark & {
+    color: rgb(156, 163, 175);
+  }
+
+  .theme-gemini & {
+    color: rgb(191, 219, 254);
+  }
+}
+

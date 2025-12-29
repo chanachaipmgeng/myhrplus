@@ -61,38 +61,50 @@
     </app-glass-card>
   </section>
 
-  <!-- Code Examples -->
+  <!-- Basic Usage Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Code Examples
+      Basic Usage
     </h2>
     
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
-    <app-code-viewer [code]="basicExample" language="html" title="Basic Image Upload"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Multiple Images</h3>
-    <app-code-viewer [code]="multipleExample" language="html" title="Multiple Image Upload"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Configuration</h3>
-    <app-code-viewer [code]="withConfigExample" language="html" title="Image Upload with Config"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Quality Check</h3>
-    <app-code-viewer [code]="withQualityCheckExample" language="html" title="Image Upload with Quality Check"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Required Quality</h3>
-    <app-code-viewer [code]="withRequiredQualityExample" language="html" title="Image Upload with Required Quality"></app-code-viewer>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
   </section>
 
-  <!-- API Documentation -->
+  <!-- Variants Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      API Documentation
+      Variants
     </h2>
-    <app-props-table [props]="props" title="Inputs"></app-props-table>
-    <app-props-table [props]="configProps" title="ImageUploadConfig Properties (Quality Check)"></app-props-table>
-    <app-props-table [props]="outputs" title="Outputs"></app-props-table>
+    
+    <app-code-viewer [code]="multipleExample" language="html" title="Variants Example"></app-code-viewer>
+  </section>
+
+  <!-- Advanced Features Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Advanced Features
+    </h2>
+    
+    <app-code-viewer [code]="withConfigExample" language="html" title="Advanced Features Example"></app-code-viewer>
+    <app-code-viewer [code]="withQualityCheckExample" language="html" title="Quality Check Example"></app-code-viewer>
+    <app-code-viewer [code]="withRequiredQualityExample" language="html" title="Required Quality Example"></app-code-viewer>
+  </section>
+
+  <!-- API Reference -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Reference
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props" title="Inputs"></app-props-table>
+      <app-props-table [props]="configProps" title="ImageUploadConfig Properties (Quality Check)"></app-props-table>
+      <app-props-table [props]="outputs" title="Outputs"></app-props-table>
+    </app-glass-card>
   </section>
 </div>
 

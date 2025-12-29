@@ -45,15 +45,27 @@
     </app-glass-card>
   </section>
 
-  <!-- Examples Section -->
+  <!-- Basic Usage Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Examples
+      Basic Usage
     </h2>
     
-    <div class="space-y-8">
-      <!-- Star Rating -->
+    <app-glass-card padding="p-6">
+      <app-rating [rating]="3" [showValue]="true"></app-rating>
+    </app-glass-card>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
+  </section>
+
+  <!-- Variants Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Variants
+    </h2>
+    
+    <div class="space-y-6">
       <app-glass-card padding="p-6">
         <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Star Rating</h3>
         <app-rating
@@ -63,7 +75,6 @@
         </app-rating>
       </app-glass-card>
 
-      <!-- Heart Rating -->
       <app-glass-card padding="p-6">
         <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Heart Rating</h3>
         <app-rating
@@ -73,8 +84,18 @@
           (ratingChange)="heartRating = $event">
         </app-rating>
       </app-glass-card>
+    </div>
+    <app-code-viewer [code]="heartExample" language="html" title="Variants Example"></app-code-viewer>
+  </section>
 
-      <!-- Readonly Rating -->
+  <!-- States Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      States
+    </h2>
+    
+    <div class="space-y-6">
       <app-glass-card padding="p-6">
         <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Readonly Rating</h3>
         <app-rating
@@ -87,7 +108,6 @@
         </p>
       </app-glass-card>
 
-      <!-- Custom Max Rating -->
       <app-glass-card padding="p-6">
         <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Custom Max Rating (10 stars)</h3>
         <app-rating
@@ -98,39 +118,22 @@
         </app-rating>
       </app-glass-card>
     </div>
+    <app-code-viewer [code]="readonlyExample" language="html" title="States Example"></app-code-viewer>
+    <app-code-viewer [code]="withValueExample" language="html" title="With Value Display Example"></app-code-viewer>
+    <app-code-viewer [code]="customMaxExample" language="html" title="Custom Max Rating Example"></app-code-viewer>
   </section>
 
-  <!-- Code Examples -->
+  <!-- API Reference -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Code Examples
+      API Reference
     </h2>
     
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
-    <app-code-viewer [code]="basicExample" language="html" title="Basic Rating"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Readonly Rating</h3>
-    <app-code-viewer [code]="readonlyExample" language="html" title="Readonly Rating"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Heart Rating</h3>
-    <app-code-viewer [code]="heartExample" language="html" title="Heart Rating"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Value Display</h3>
-    <app-code-viewer [code]="withValueExample" language="html" title="Rating with Value"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Custom Max Rating</h3>
-    <app-code-viewer [code]="customMaxExample" language="html" title="Custom Max Rating"></app-code-viewer>
-  </section>
-
-  <!-- API Documentation -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      API Documentation
-    </h2>
-    <app-props-table [props]="props" title="Inputs"></app-props-table>
-    <app-props-table [props]="outputs" title="Outputs"></app-props-table>
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props" title="Inputs"></app-props-table>
+      <app-props-table [props]="outputs" title="Outputs"></app-props-table>
+    </app-glass-card>
   </section>
 </div>
 

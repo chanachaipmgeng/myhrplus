@@ -22,101 +22,111 @@
     </app-glass-card>
   </section>
 
-  <!-- Sizes Section -->
+  <!-- Basic Usage Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Sizes
-    </h2>
-    <app-glass-card padding="p-6">
-      <div class="flex gap-8 items-center flex-wrap">
-        <div class="flex flex-col items-center gap-2">
-          <app-spinner size="sm"></app-spinner>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Small</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-spinner size="md"></app-spinner>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Medium</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-spinner size="lg"></app-spinner>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Large</span>
-        </div>
-      </div>
-    </app-glass-card>
-  </section>
-
-  <!-- With Message Section -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      With Message
-    </h2>
-    <app-glass-card padding="p-6">
-      <div class="flex justify-center items-center min-h-[200px]">
-        <app-spinner message="กำลังโหลดข้อมูล กรุณารอสักครู่..."></app-spinner>
-      </div>
-    </app-glass-card>
-  </section>
-
-  <!-- Colors Section -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Colors
-    </h2>
-    <app-glass-card padding="p-6">
-      <div class="flex gap-8 items-center flex-wrap">
-        <div class="flex flex-col items-center gap-2">
-          <app-spinner color="text-blue-600"></app-spinner>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Blue</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-spinner color="text-green-600"></app-spinner>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Green</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-spinner color="text-red-600"></app-spinner>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Red</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-spinner color="text-purple-600"></app-spinner>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Purple</span>
-        </div>
-      </div>
-    </app-glass-card>
-  </section>
-
-  <!-- Code Examples -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Code Examples
+      Basic Usage
     </h2>
     
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
-    <app-code-viewer [code]="basicExample" language="html" title="Basic Spinner"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Sizes</h3>
-    <app-code-viewer [code]="sizesExample" language="html" title="Spinner Sizes"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Message</h3>
-    <app-code-viewer [code]="withMessageExample" language="html" title="Spinner with Message"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Full Screen</h3>
-    <app-code-viewer [code]="fullScreenExample" language="html" title="Full Screen Spinner"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Colors</h3>
-    <app-code-viewer [code]="colorsExample" language="html" title="Spinner Colors"></app-code-viewer>
+    <app-glass-card padding="p-6">
+      <app-spinner></app-spinner>
+    </app-glass-card>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
   </section>
 
-  <!-- API Documentation -->
+  <!-- Variants Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      API Documentation
+      Variants
     </h2>
-    <app-props-table [props]="props" title="Inputs"></app-props-table>
+    
+    <app-glass-card padding="p-6">
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Message</h3>
+          <div class="flex justify-center items-center min-h-[200px]">
+            <app-spinner message="กำลังโหลดข้อมูล กรุณารอสักครู่..."></app-spinner>
+          </div>
+        </div>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="withMessageExample" language="html" title="Variants Example"></app-code-viewer>
+  </section>
+
+  <!-- States Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      States
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Sizes</h3>
+          <div class="flex gap-8 items-center flex-wrap">
+            <div class="flex flex-col items-center gap-2">
+              <app-spinner size="sm"></app-spinner>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Small</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-spinner size="md"></app-spinner>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Medium</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-spinner size="lg"></app-spinner>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Large</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Colors</h3>
+          <div class="flex gap-8 items-center flex-wrap">
+            <div class="flex flex-col items-center gap-2">
+              <app-spinner color="text-blue-600"></app-spinner>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Blue</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-spinner color="text-green-600"></app-spinner>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Green</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-spinner color="text-red-600"></app-spinner>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Red</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-spinner color="text-purple-600"></app-spinner>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Purple</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="sizesExample" language="html" title="States Example"></app-code-viewer>
+    <app-code-viewer [code]="colorsExample" language="html" title="Colors Example"></app-code-viewer>
+  </section>
+
+  <!-- Advanced Features Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Advanced Features
+    </h2>
+    <app-code-viewer [code]="fullScreenExample" language="html" title="Full Screen Spinner Example"></app-code-viewer>
+  </section>
+
+  <!-- API Reference -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Reference
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props"></app-props-table>
+    </app-glass-card>
   </section>
 </div>
 

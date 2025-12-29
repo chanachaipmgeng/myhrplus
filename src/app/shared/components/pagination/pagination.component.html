@@ -1,0 +1,93 @@
+<div class="pagination-container" [class.disabled]="disabled">
+  <!-- Total Items Display -->
+  <div *ngIf="showTotalItems && totalItems > 0" class="pagination-info">
+    <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
+      Showing {{ startItem }}-{{ endItem }} of {{ totalItems }}
+    </span>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="pagination-controls">
+    <!-- First Page Button -->
+    <button
+      type="button"
+      class="pagination-button"
+      [class.disabled]="isFirstPage || disabled"
+      [disabled]="isFirstPage || disabled"
+      (click)="goToFirst()"
+      [attr.aria-label]="'Go to first page'"
+      [attr.aria-disabled]="isFirstPage || disabled">
+      <app-icon name="first_page" size="sm"></app-icon>
+    </button>
+
+    <!-- Previous Page Button -->
+    <button
+      type="button"
+      class="pagination-button"
+      [class.disabled]="isFirstPage || disabled"
+      [disabled]="isFirstPage || disabled"
+      (click)="goToPrevious()"
+      [attr.aria-label]="'Go to previous page'"
+      [attr.aria-disabled]="isFirstPage || disabled">
+      <app-icon name="chevron_left" size="sm"></app-icon>
+    </button>
+
+    <!-- Page Numbers -->
+    <div class="pagination-pages">
+      <button
+        *ngFor="let page of pages; trackBy: trackByPage"
+        type="button"
+        class="pagination-page-button"
+        [class.active]="page === currentPage"
+        [class.disabled]="disabled"
+        [disabled]="disabled"
+        (click)="goToPage(page)"
+        [attr.aria-label]="'Go to page ' + page"
+        [attr.aria-current]="page === currentPage ? 'page' : null">
+        {{ page }}
+      </button>
+    </div>
+
+    <!-- Next Page Button -->
+    <button
+      type="button"
+      class="pagination-button"
+      [class.disabled]="isLastPage || disabled"
+      [disabled]="isLastPage || disabled"
+      (click)="goToNext()"
+      [attr.aria-label]="'Go to next page'"
+      [attr.aria-disabled]="isLastPage || disabled">
+      <app-icon name="chevron_right" size="sm"></app-icon>
+    </button>
+
+    <!-- Last Page Button -->
+    <button
+      type="button"
+      class="pagination-button"
+      [class.disabled]="isLastPage || disabled"
+      [disabled]="isLastPage || disabled"
+      (click)="goToLast()"
+      [attr.aria-label]="'Go to last page'"
+      [attr.aria-disabled]="isLastPage || disabled">
+      <app-icon name="last_page" size="sm"></app-icon>
+    </button>
+  </div>
+
+  <!-- Page Size Selector -->
+  <div *ngIf="showPageSizeSelector" class="pagination-page-size">
+    <label class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mr-2">
+      Items per page:
+    </label>
+    <select
+      [value]="itemsPerPage"
+      (change)="onPageSizeChange($event)"
+      [disabled]="disabled"
+      class="pagination-page-size-select"
+      [attr.aria-label]="'Items per page'">
+      <option *ngFor="let size of pageSizeOptions" [value]="size">
+        {{ size }}
+      </option>
+    </select>
+  </div>
+</div>
+

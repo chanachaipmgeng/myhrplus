@@ -1,52 +1,65 @@
-<div class="w-full py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <app-glass-card padding="p-6">
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-        Syncfusion Autocomplete Component
-      </h1>
-      <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
-        An autocomplete input component with filtering, highlighting, and customizable suggestions.
-      </p>
-    </div>
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Syncfusion Autocomplete Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+      An autocomplete input component with filtering, highlighting, and customizable suggestions.
+    </p>
+  </div>
 
-    <div class="space-y-8">
-      <!-- Basic Autocomplete -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-          Autocomplete
-        </h2>
-        <div class="mt-4 max-w-lg">
-          <app-autocomplete
-            #autocomplete
-            [dataSource]="currentDataSource"
-            [fields]="currentFields"
-            [placeholder]="placeholder"
-            [allowFiltering]="allowFiltering"
-            [filterType]="filterType"
-            [minLength]="minLength"
-            [showClearButton]="showClearButton"
-            [highlight]="highlight"
-            [sortOrder]="sortOrder"
-            [enabled]="enabled"
-            [readonly]="readonly"
-            [width]="'100%'"
-            (change)="onChange($event)"
-            (select)="onSelect($event)"
-            (filtering)="onFiltering($event)"
-            (open)="onOpen($event)"
-            (close)="onClose($event)">
-          </app-autocomplete>
-        </div>
-      </section>
+  <!-- Live Demo Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="mt-4 max-w-lg">
+        <app-autocomplete
+          #autocomplete
+          [dataSource]="currentDataSource"
+          [fields]="currentFields"
+          [placeholder]="placeholder"
+          [allowFiltering]="allowFiltering"
+          [filterType]="filterType"
+          [minLength]="minLength"
+          [showClearButton]="showClearButton"
+          [highlight]="highlight"
+          [sortOrder]="sortOrder"
+          [enabled]="enabled"
+          [readonly]="readonly"
+          [width]="'100%'"
+          (change)="onChange($event)"
+          (select)="onSelect($event)"
+          (filtering)="onFiltering($event)"
+          (open)="onOpen($event)"
+          (close)="onClose($event)">
+        </app-autocomplete>
+      </div>
+    </app-glass-card>
+  </section>
 
-      <!-- Controls -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-          Controls
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6 mt-4">
+  <!-- Basic Usage Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Basic Usage
+    </h2>
+    
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
+  </section>
+
+  <!-- Advanced Features Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Advanced Features
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6">
           <div class="p-4 bg-white/5 dark:bg-black/20 theme-gemini:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-gemini:border-blue-500/30">
             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 mb-2">
               Actions
@@ -230,18 +243,21 @@
               step="1"
               class="px-4 py-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 rounded-lg text-gray-700 dark:text-gray-300 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
           </div>
-        </div>
-      </section>
+      </div>
+    </app-glass-card>
+  </section>
 
-      <!-- Code Example -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-          Usage Example
-        </h2>
-        <app-code-viewer [code]="basicExample" language="html" title="Autocomplete Usage"></app-code-viewer>
-      </section>
-    </div>
-  </app-glass-card>
+  <!-- API Reference -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Reference
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <p class="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
+        Autocomplete component supports various inputs and outputs. See Syncfusion documentation for complete API reference.
+      </p>
+    </app-glass-card>
+  </section>
 </div>
-

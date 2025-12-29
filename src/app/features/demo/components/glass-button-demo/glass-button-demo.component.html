@@ -74,40 +74,65 @@
     </div>
   </section>
 
+  <!-- Basic Usage Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Basic Usage
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <app-glass-button variant="primary">Click Me</app-glass-button>
+    </app-glass-card>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
+  </section>
+
   <!-- Variants Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
       Variants
     </h2>
-    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6 mb-6">
-      <app-glass-card padding="p-6">
+    
+    <app-glass-card padding="p-6">
+      <div class="flex flex-wrap items-center gap-4">
         <app-glass-button variant="primary">Primary Button</app-glass-button>
-      </app-glass-card>
-
-      <app-glass-card padding="p-6">
         <app-glass-button variant="secondary">Secondary Button</app-glass-button>
-      </app-glass-card>
-
-      <app-glass-card padding="p-6">
         <app-glass-button variant="danger">Danger Button</app-glass-button>
-      </app-glass-card>
-    </div>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="variantsExample" language="html" title="Variants Example"></app-code-viewer>
   </section>
 
-  <!-- Sizes Section -->
+  <!-- States Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Sizes
+      States
     </h2>
+    
     <app-glass-card padding="p-6">
-      <div class="flex flex-wrap items-center gap-4">
-        <app-glass-button variant="primary" size="sm">Small</app-glass-button>
-        <app-glass-button variant="primary" size="md">Medium</app-glass-button>
-        <app-glass-button variant="primary" size="lg">Large</app-glass-button>
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Sizes</h3>
+          <div class="flex flex-wrap items-center gap-4">
+            <app-glass-button variant="primary" size="sm">Small</app-glass-button>
+            <app-glass-button variant="primary" size="md">Medium</app-glass-button>
+            <app-glass-button variant="primary" size="lg">Large</app-glass-button>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Button States</h3>
+          <div class="flex flex-wrap gap-4">
+            <app-glass-button variant="primary">Normal</app-glass-button>
+            <app-glass-button variant="primary" [disabled]="true">Disabled</app-glass-button>
+            <app-glass-button variant="primary" [loading]="true">Loading</app-glass-button>
+          </div>
+        </div>
       </div>
     </app-glass-card>
+    <app-code-viewer [code]="sizesExample" language="html" title="Sizes Example"></app-code-viewer>
+    <app-code-viewer [code]="statesExample" language="html" title="States Example"></app-code-viewer>
   </section>
 
   <!-- States Section -->
@@ -125,37 +150,26 @@
     </app-glass-card>
   </section>
 
-  <!-- Code Examples -->
+  <!-- Advanced Features Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Code Examples
+      Advanced Features
     </h2>
-    
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
-    <app-code-viewer [code]="basicExample" language="html" title="Basic Button"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Variants</h3>
-    <app-code-viewer [code]="variantsExample" language="html" title="Button Variants"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Sizes</h3>
-    <app-code-viewer [code]="sizesExample" language="html" title="Button Sizes"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">States</h3>
-    <app-code-viewer [code]="statesExample" language="html" title="Button States"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Event Handling</h3>
-    <app-code-viewer [code]="eventExample" language="html" title="Button Click Event"></app-code-viewer>
+    <app-code-viewer [code]="eventExample" language="html" title="Event Handling"></app-code-viewer>
   </section>
 
-  <!-- API Documentation -->
+  <!-- API Reference -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      API Documentation
+      API Reference
     </h2>
-    <app-props-table [props]="props" title="Inputs"></app-props-table>
-    <app-props-table [props]="outputs" title="Outputs"></app-props-table>
+    
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props" title="Inputs"></app-props-table>
+      <app-props-table [props]="outputs" title="Outputs"></app-props-table>
+    </app-glass-card>
   </section>
 </div>
 

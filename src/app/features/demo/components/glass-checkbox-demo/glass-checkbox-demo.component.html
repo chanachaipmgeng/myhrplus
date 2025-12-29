@@ -30,12 +30,29 @@
     </app-glass-card>
   </section>
 
+  <!-- Basic Usage Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Basic Usage
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <app-glass-checkbox
+        label="Basic Checkbox"
+        [(ngModel)]="checked1">
+      </app-glass-checkbox>
+    </app-glass-card>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
+  </section>
+
   <!-- States Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
       States
     </h2>
+    
     <app-glass-card padding="p-6">
       <div class="space-y-4">
         <app-glass-checkbox
@@ -57,29 +74,12 @@
         <app-glass-checkbox
           label="Indeterminate Checkbox"
           [(ngModel)]="indeterminate"
-          [indeterminate]="indeterminate">
-        </app-glass-checkbox>
-      </div>
-    </app-glass-card>
-    <app-code-viewer [code]="statesExample" language="html" title="States Example"></app-code-viewer>
-  </section>
-
-  <!-- Indeterminate Section -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Indeterminate State
-    </h2>
-    <app-glass-card padding="p-6">
-      <div class="space-y-4">
-        <app-glass-checkbox
-          label="Select All Items"
-          [(ngModel)]="indeterminate"
           [indeterminate]="indeterminate"
           hint="Useful for 'select all' functionality">
         </app-glass-checkbox>
       </div>
     </app-glass-card>
+    <app-code-viewer [code]="statesExample" language="html" title="States Example"></app-code-viewer>
     <app-code-viewer [code]="indeterminateExample" language="html" title="Indeterminate Example"></app-code-viewer>
   </section>
 
@@ -108,12 +108,13 @@
     </app-glass-card>
   </section>
 
-  <!-- Props Table -->
+  <!-- API Reference -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
       API Reference
     </h2>
+    
     <app-glass-card padding="p-6">
       <app-props-table [props]="props"></app-props-table>
     </app-glass-card>

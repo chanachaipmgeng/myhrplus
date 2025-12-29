@@ -1,0 +1,125 @@
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Alert Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+      Inline alert component for displaying important messages with variants and dismissible support.
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <app-alert
+          *ngIf="showAlert"
+          variant="info"
+          title="Dismissible Alert"
+          message="This alert can be dismissed by clicking the X button."
+          [dismissible]="true"
+          (dismissed)="onDismiss()">
+        </app-alert>
+        <button
+          *ngIf="!showAlert"
+          (click)="showAlert = true"
+          class="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600">
+          Show Alert Again
+        </button>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Basic Usage Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Basic Usage
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <app-alert
+          variant="info"
+          message="This is a basic info alert">
+        </app-alert>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
+  </section>
+
+  <!-- Variants Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Variants
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <app-alert variant="success" message="Operation completed successfully"></app-alert>
+        <app-alert variant="error" message="An error occurred while processing your request"></app-alert>
+        <app-alert variant="warning" message="Please review your input before submitting"></app-alert>
+        <app-alert variant="info" message="Here is some useful information"></app-alert>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="variantsExample" language="html" title="Variants Example"></app-code-viewer>
+  </section>
+
+  <!-- States Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      States
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <app-alert
+          variant="info"
+          title="With Title"
+          message="This alert has both title and message">
+        </app-alert>
+        <app-alert
+          variant="success"
+          title="Dismissible"
+          message="This alert can be dismissed"
+          [dismissible]="true">
+        </app-alert>
+        <app-alert
+          variant="warning"
+          message="Without icon"
+          [showIcon]="false">
+        </app-alert>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="dismissibleExample" language="html" title="Dismissible Example"></app-code-viewer>
+  </section>
+
+  <!-- API Reference -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Reference
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props"></app-props-table>
+    </app-glass-card>
+  </section>
+
+  <!-- Usage Example -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Usage Example
+    </h2>
+    <app-code-viewer [code]="usageExample" language="typescript" title="Event Handling"></app-code-viewer>
+  </section>
+</div>
+

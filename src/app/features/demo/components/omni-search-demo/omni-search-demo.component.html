@@ -1,0 +1,83 @@
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Omni Search Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+      Universal search component for searching across menus, routes, and actions with keyboard navigation support.
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mb-4">
+          Press <kbd class="px-2 py-1 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-blue-500/30 rounded text-sm">Ctrl+K</kbd> or <kbd class="px-2 py-1 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-blue-500/30 rounded text-sm">Cmd+K</kbd> to open search, or click the search button below.
+        </p>
+        <app-omni-search
+          (resultSelected)="onResultSelected($event)">
+        </app-omni-search>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Features Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Features
+    </h2>
+    <app-glass-card padding="p-6">
+      <ul class="space-y-2 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">
+        <li class="flex items-start gap-2">
+          <span class="text-primary-500 dark:text-primary-400 theme-gemini:text-blue-400">✓</span>
+          <span>Search across all menu items and routes</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-primary-500 dark:text-primary-400 theme-gemini:text-blue-400">✓</span>
+          <span>Keyboard navigation (Arrow keys, Enter, Escape)</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-primary-500 dark:text-primary-400 theme-gemini:text-blue-400">✓</span>
+          <span>Debounced search for performance</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-primary-500 dark:text-primary-400 theme-gemini:text-blue-400">✓</span>
+          <span>Grouped results by category</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-primary-500 dark:text-primary-400 theme-gemini:text-blue-400">✓</span>
+          <span>Highlighted search terms</span>
+        </li>
+      </ul>
+    </app-glass-card>
+  </section>
+
+  <!-- Props Table -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Reference
+    </h2>
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props"></app-props-table>
+    </app-glass-card>
+  </section>
+
+  <!-- Usage Example -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Usage Example
+    </h2>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
+    <app-code-viewer [code]="usageExample" language="typescript" title="Event Handling"></app-code-viewer>
+  </section>
+</div>
+

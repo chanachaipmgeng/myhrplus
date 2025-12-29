@@ -47,21 +47,29 @@
     </app-glass-card>
   </section>
 
-  <!-- Examples Section -->
+  <!-- Basic Usage Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Examples
+      Basic Usage
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <app-loading [show]="true"></app-loading>
+    </app-glass-card>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
+  </section>
+
+  <!-- Variants Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Variants
     </h2>
     
     <div class="space-y-6">
       <app-glass-card padding="p-6">
-        <h3 class="text-lg font-semibold mb-4">Basic Loading</h3>
-        <app-loading [show]="true"></app-loading>
-      </app-glass-card>
-
-      <app-glass-card padding="p-6">
-        <h3 class="text-lg font-semibold mb-4">Loading with Message</h3>
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Loading with Message</h3>
         <app-loading
           [show]="true"
           message="กำลังโหลดข้อมูล กรุณารอสักครู่...">
@@ -69,7 +77,7 @@
       </app-glass-card>
 
       <app-glass-card padding="p-6">
-        <h3 class="text-lg font-semibold mb-4">Custom Container</h3>
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Custom Container</h3>
         <app-loading
           [show]="true"
           message="Loading in custom container"
@@ -77,32 +85,20 @@
         </app-loading>
       </app-glass-card>
     </div>
-  </section>
-
-  <!-- Code Examples -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Code Examples
-    </h2>
-    
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
-    <app-code-viewer [code]="basicExample" language="html" title="Basic Loading"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Message</h3>
-    <app-code-viewer [code]="withMessageExample" language="html" title="Loading with Message"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Conditional Loading</h3>
+    <app-code-viewer [code]="withMessageExample" language="html" title="Variants Example"></app-code-viewer>
     <app-code-viewer [code]="conditionalExample" language="typescript" title="Conditional Loading Example"></app-code-viewer>
   </section>
 
-  <!-- API Documentation -->
+  <!-- API Reference -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      API Documentation
+      API Reference
     </h2>
-    <app-props-table [props]="props" title="Inputs"></app-props-table>
+    
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props"></app-props-table>
+    </app-glass-card>
   </section>
 </div>
 

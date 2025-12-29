@@ -27,94 +27,94 @@
     </app-glass-card>
   </section>
 
-  <!-- Sizes Section -->
+  <!-- Basic Usage Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Sizes
-    </h2>
-    <app-glass-card padding="p-6">
-      <div class="flex gap-6 items-center flex-wrap">
-        <div class="flex flex-col items-center gap-2">
-          <app-icon name="star" size="xs"></app-icon>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">xs</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-icon name="star" size="sm"></app-icon>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">sm</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-icon name="star" size="md"></app-icon>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">md</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-icon name="star" size="lg"></app-icon>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">lg</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-icon name="star" size="xl"></app-icon>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">xl</span>
-        </div>
-      </div>
-    </app-glass-card>
-  </section>
-
-  <!-- Colors Section -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Colors
-    </h2>
-    <app-glass-card padding="p-6">
-      <div class="flex gap-6 items-center flex-wrap">
-        <div class="flex flex-col items-center gap-2">
-          <app-icon name="favorite" color="text-red-500"></app-icon>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Red</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-icon name="check_circle" color="text-green-500"></app-icon>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Green</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-icon name="warning" color="text-yellow-500"></app-icon>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Yellow</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-icon name="info" color="text-blue-500"></app-icon>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Blue</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <app-icon name="palette" color="text-purple-500"></app-icon>
-          <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Purple</span>
-        </div>
-      </div>
-    </app-glass-card>
-  </section>
-
-  <!-- Code Examples -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Code Examples
+      Basic Usage
     </h2>
     
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
-    <app-code-viewer [code]="basicExample" language="html" title="Basic Icons"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Sizes</h3>
-    <app-code-viewer [code]="sizesExample" language="html" title="Icon Sizes"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Colors</h3>
-    <app-code-viewer [code]="colorsExample" language="html" title="Icon Colors"></app-code-viewer>
+    <app-glass-card padding="p-6">
+      <app-icon name="star" size="lg"></app-icon>
+    </app-glass-card>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
   </section>
 
-  <!-- API Documentation -->
+  <!-- States Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      API Documentation
+      States
     </h2>
-    <app-props-table [props]="props" title="Inputs"></app-props-table>
+    
+    <app-glass-card padding="p-6">
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Sizes</h3>
+          <div class="flex gap-6 items-center flex-wrap">
+            <div class="flex flex-col items-center gap-2">
+              <app-icon name="star" size="xs"></app-icon>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">xs</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-icon name="star" size="sm"></app-icon>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">sm</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-icon name="star" size="md"></app-icon>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">md</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-icon name="star" size="lg"></app-icon>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">lg</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-icon name="star" size="xl"></app-icon>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">xl</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Colors</h3>
+          <div class="flex gap-6 items-center flex-wrap">
+            <div class="flex flex-col items-center gap-2">
+              <app-icon name="favorite" color="text-red-500"></app-icon>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Red</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-icon name="check_circle" color="text-green-500"></app-icon>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Green</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-icon name="warning" color="text-yellow-500"></app-icon>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Yellow</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-icon name="info" color="text-blue-500"></app-icon>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Blue</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-icon name="palette" color="text-purple-500"></app-icon>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Purple</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="sizesExample" language="html" title="States Example"></app-code-viewer>
+    <app-code-viewer [code]="colorsExample" language="html" title="Colors Example"></app-code-viewer>
+  </section>
+
+  <!-- API Reference -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Reference
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props"></app-props-table>
+    </app-glass-card>
   </section>
 </div>
 

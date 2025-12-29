@@ -1,0 +1,118 @@
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Divider Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+      Divider component for separating content sections horizontally or vertically with optional text labels.
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <p class="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Content above divider</p>
+        <app-divider></app-divider>
+        <p class="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Content below divider</p>
+        <app-divider text="OR"></app-divider>
+        <p class="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">More content</p>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Basic Usage Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Basic Usage
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <p>Content section 1</p>
+        <app-divider></app-divider>
+        <p>Content section 2</p>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
+  </section>
+
+  <!-- Variants Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Variants
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <p>Weak divider</p>
+        <app-divider variant="weak"></app-divider>
+        <p>Default divider</p>
+        <app-divider variant="default"></app-divider>
+        <p>Strong divider</p>
+        <app-divider variant="strong"></app-divider>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="variantsExample" language="html" title="Variants Example"></app-code-viewer>
+  </section>
+
+  <!-- States Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      States
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <div>
+          <p class="mb-2">Horizontal with text</p>
+          <app-divider text="OR"></app-divider>
+        </div>
+        <div>
+          <p class="mb-2">Horizontal with custom text</p>
+          <app-divider text="Section Title"></app-divider>
+        </div>
+        <div>
+          <p class="mb-2">Vertical divider</p>
+          <div class="flex items-center gap-4 h-20">
+            <span>Left</span>
+            <app-divider orientation="vertical"></app-divider>
+            <span>Right</span>
+          </div>
+        </div>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="textExample" language="html" title="With Text Example"></app-code-viewer>
+    <app-code-viewer [code]="verticalExample" language="html" title="Vertical Example"></app-code-viewer>
+  </section>
+
+  <!-- API Reference -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Reference
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props"></app-props-table>
+    </app-glass-card>
+  </section>
+
+  <!-- Usage Example -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Usage Example
+    </h2>
+    <app-code-viewer [code]="usageExample" language="html" title="Usage Examples"></app-code-viewer>
+  </section>
+</div>
+

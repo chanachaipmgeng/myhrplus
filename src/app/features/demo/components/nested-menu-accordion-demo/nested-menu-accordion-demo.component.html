@@ -1,0 +1,90 @@
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Nested Menu Accordion Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+      Nested menu accordion component for displaying hierarchical navigation with expand/collapse functionality and smooth animations.
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mb-4">
+          Click on menu items with children to expand/collapse nested items.
+        </p>
+        <div class="max-w-md">
+          <app-nested-menu-accordion
+            [items]="sampleMenuItems"
+            [activeRoute]="''">
+          </app-nested-menu-accordion>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Features Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Features
+    </h2>
+    <app-glass-card padding="p-6">
+      <ul class="space-y-2 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">
+        <li class="flex items-start gap-2">
+          <span class="text-primary-500 dark:text-primary-400 theme-gemini:text-blue-400">✓</span>
+          <span>Unlimited nesting levels</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-primary-500 dark:text-primary-400 theme-gemini:text-blue-400">✓</span>
+          <span>Smooth expand/collapse animations</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-primary-500 dark:text-primary-400 theme-gemini:text-blue-400">✓</span>
+          <span>Active route highlighting</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-primary-500 dark:text-primary-400 theme-gemini:text-blue-400">✓</span>
+          <span>Icon support for menu items</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-primary-500 dark:text-primary-400 theme-gemini:text-blue-400">✓</span>
+          <span>Translation support</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-primary-500 dark:text-primary-400 theme-gemini:text-blue-400">✓</span>
+          <span>Responsive design</span>
+        </li>
+      </ul>
+    </app-glass-card>
+  </section>
+
+  <!-- Props Table -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Reference
+    </h2>
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props"></app-props-table>
+    </app-glass-card>
+  </section>
+
+  <!-- Usage Example -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Usage Example
+    </h2>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
+    <app-code-viewer [code]="dataExample" language="typescript" title="Data Structure"></app-code-viewer>
+  </section>
+</div>
+

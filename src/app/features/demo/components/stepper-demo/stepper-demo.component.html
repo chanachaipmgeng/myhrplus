@@ -41,61 +41,64 @@
     </app-glass-card>
   </section>
 
-  <!-- Vertical Orientation Section -->
+  <!-- Basic Usage Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Vertical Orientation
+      Basic Usage
     </h2>
+    
     <app-glass-card padding="p-6">
       <app-stepper
         [steps]="steps"
-        [currentStep]="currentStepVertical"
-        orientation="vertical"
-        (stepChange)="currentStepVertical = $event">
+        [currentStep]="currentStep"
+        (stepChange)="onStepChange($event)">
       </app-stepper>
     </app-glass-card>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
   </section>
 
-  <!-- With Optional Steps Section -->
+  <!-- Variants Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      With Optional Steps
-    </h2>
-    <app-glass-card padding="p-6">
-      <app-stepper
-        [steps]="stepsWithOptional"
-        [currentStep]="0">
-      </app-stepper>
-    </app-glass-card>
-  </section>
-
-  <!-- Code Examples -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Code Examples
+      Variants
     </h2>
     
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
-    <app-code-viewer [code]="basicExample" language="html" title="Basic Stepper"></app-code-viewer>
+    <div class="space-y-6">
+      <app-glass-card padding="p-6">
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Vertical Orientation</h3>
+        <app-stepper
+          [steps]="steps"
+          [currentStep]="currentStepVertical"
+          orientation="vertical"
+          (stepChange)="currentStepVertical = $event">
+        </app-stepper>
+      </app-glass-card>
 
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Vertical Orientation</h3>
-    <app-code-viewer [code]="verticalExample" language="html" title="Vertical Stepper"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Linear Mode</h3>
-    <app-code-viewer [code]="linearExample" language="html" title="Linear Stepper"></app-code-viewer>
+      <app-glass-card padding="p-6">
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Optional Steps</h3>
+        <app-stepper
+          [steps]="stepsWithOptional"
+          [currentStep]="0">
+        </app-stepper>
+      </app-glass-card>
+    </div>
+    <app-code-viewer [code]="verticalExample" language="html" title="Variants Example"></app-code-viewer>
+    <app-code-viewer [code]="linearExample" language="html" title="Linear Mode Example"></app-code-viewer>
   </section>
 
-  <!-- API Documentation -->
+  <!-- API Reference -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      API Documentation
+      API Reference
     </h2>
-    <app-props-table [props]="props" title="Inputs"></app-props-table>
-    <app-props-table [props]="outputs" title="Outputs"></app-props-table>
+    
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props" title="Inputs"></app-props-table>
+      <app-props-table [props]="outputs" title="Outputs"></app-props-table>
+    </app-glass-card>
   </section>
 </div>
 

@@ -1,0 +1,52 @@
+<div class="accordion" [class.accordion-bordered]="variant === 'bordered'">
+  <div
+    *ngFor="let panel of panels; let i = index; trackBy: trackByIndex"
+    class="accordion-panel"
+    [class.accordion-panel-expanded]="isExpanded(i)"
+    [class.accordion-panel-disabled]="panel.disabled">
+    
+    <!-- Panel Header -->
+    <button
+      type="button"
+      class="accordion-header"
+      [disabled]="panel.disabled"
+      (click)="togglePanel(i)"
+      [attr.aria-expanded]="isExpanded(i)"
+      [attr.aria-controls]="'panel-content-' + i"
+      [attr.aria-disabled]="panel.disabled"
+      [attr.id]="'panel-header-' + i">
+      
+      <!-- Icon (if provided) -->
+      <app-icon
+        *ngIf="showIcons && panel.icon"
+        [name]="panel.icon"
+        size="sm"
+        class="accordion-icon">
+      </app-icon>
+      
+      <!-- Title -->
+      <span class="accordion-title">{{ panel.title }}</span>
+      
+      <!-- Expand/Collapse Icon -->
+      <app-icon
+        [name]="isExpanded(i) ? 'expand_less' : 'expand_more'"
+        size="sm"
+        class="accordion-chevron">
+      </app-icon>
+    </button>
+    
+    <!-- Panel Content -->
+    <div
+      [id]="'panel-content-' + i"
+      class="accordion-content"
+      [@slideToggle]="isExpanded(i) ? 'expanded' : 'collapsed'"
+      [attr.aria-labelledby]="'panel-header-' + i"
+      [attr.role]="'region'">
+      <div class="accordion-content-inner">
+        {{ panel.content }}
+        <ng-content [select]="'[panel=' + i + ']'"></ng-content>
+      </div>
+    </div>
+  </div>
+</div>
+

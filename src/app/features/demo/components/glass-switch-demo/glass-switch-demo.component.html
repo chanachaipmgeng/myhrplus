@@ -30,12 +30,29 @@
     </app-glass-card>
   </section>
 
-  <!-- Size Variants Section -->
+  <!-- Basic Usage Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Size Variants
+      Basic Usage
     </h2>
+    
+    <app-glass-card padding="p-6">
+      <app-glass-switch
+        label="Basic Switch"
+        [(ngModel)]="switch1">
+      </app-glass-switch>
+    </app-glass-card>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
+  </section>
+
+  <!-- Variants Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Variants
+    </h2>
+    
     <app-glass-card padding="p-6">
       <div class="space-y-4">
         <app-glass-switch
@@ -57,7 +74,7 @@
         </app-glass-switch>
       </div>
     </app-glass-card>
-    <app-code-viewer [code]="sizesExample" language="html" title="Size Variants Example"></app-code-viewer>
+    <app-code-viewer [code]="sizesExample" language="html" title="Variants Example"></app-code-viewer>
   </section>
 
   <!-- States Section -->
@@ -113,12 +130,13 @@
     </app-glass-card>
   </section>
 
-  <!-- Props Table -->
+  <!-- API Reference -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
       API Reference
     </h2>
+    
     <app-glass-card padding="p-6">
       <app-props-table [props]="props"></app-props-table>
     </app-glass-card>

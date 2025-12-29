@@ -91,6 +91,28 @@ export class GlassRadioDemoComponent {
   [(ngModel)]="selected">
 </app-glass-radio>`;
 
+  statesExample = `<app-glass-radio
+  label="Unchecked Radio"
+  value="unchecked"
+  name="options"
+  [checked]="false">
+</app-glass-radio>
+
+<app-glass-radio
+  label="Checked Radio"
+  value="checked"
+  name="options"
+  [checked]="true">
+</app-glass-radio>
+
+<app-glass-radio
+  label="Disabled Radio"
+  value="disabled"
+  name="options"
+  [disabled]="true"
+  [checked]="true">
+</app-glass-radio>`;
+
   reactiveFormExample = `// In component.ts
 form = this.fb.group({
   gender: ['', Validators.required]

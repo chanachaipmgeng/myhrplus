@@ -72,6 +72,14 @@ import { SweetAlert2DemoComponent } from './components/sweetalert2-demo/sweetale
 import { BarRatingDemoComponent } from './components/bar-rating-demo/bar-rating-demo.component';
 import { MigrationGuideDemoComponent } from './components/migration-guide-demo/migration-guide-demo.component';
 import { StaggerDemoComponent } from './components/stagger-demo/stagger-demo.component';
+import { OmniSearchDemoComponent } from './components/omni-search-demo/omni-search-demo.component';
+import { ContextSwitcherDemoComponent } from './components/context-switcher-demo/context-switcher-demo.component';
+import { NestedMenuAccordionDemoComponent } from './components/nested-menu-accordion-demo/nested-menu-accordion-demo.component';
+import { PaginationDemoComponent } from './components/pagination-demo/pagination-demo.component';
+import { ChipDemoComponent } from './components/chip-demo/chip-demo.component';
+import { AlertDemoComponent } from './components/alert-demo/alert-demo.component';
+import { AccordionDemoComponent } from './components/accordion-demo/accordion-demo.component';
+import { DividerDemoComponent } from './components/divider-demo/divider-demo.component';
 // ThemeSwitcherDemoComponent removed
 
 const routes: Routes = [
@@ -362,6 +370,38 @@ const routes: Routes = [
       {
         path: 'stagger',
         component: StaggerDemoComponent
+      },
+      {
+        path: 'omni-search',
+        component: OmniSearchDemoComponent
+      },
+      {
+        path: 'context-switcher',
+        component: ContextSwitcherDemoComponent
+      },
+      {
+        path: 'nested-menu-accordion',
+        component: NestedMenuAccordionDemoComponent
+      },
+      {
+        path: 'pagination',
+        component: PaginationDemoComponent
+      },
+      {
+        path: 'chip',
+        component: ChipDemoComponent
+      },
+      {
+        path: 'alert',
+        component: AlertDemoComponent
+      },
+      {
+        path: 'accordion',
+        component: AccordionDemoComponent
+      },
+      {
+        path: 'divider',
+        component: DividerDemoComponent
       }
       // {
       //   path: 'theme-switcher',

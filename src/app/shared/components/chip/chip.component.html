@@ -1,0 +1,48 @@
+<span
+  class="chip"
+  [class.chip-sm]="size === 'sm'"
+  [class.chip-md]="size === 'md'"
+  [class.chip-lg]="size === 'lg'"
+  [class.chip-default]="variant === 'default'"
+  [class.chip-primary]="variant === 'primary'"
+  [class.chip-success]="variant === 'success'"
+  [class.chip-warning]="variant === 'warning'"
+  [class.chip-danger]="variant === 'danger'"
+  [class.chip-info]="variant === 'info'"
+  [class.chip-disabled]="disabled"
+  [class.chip-clickable]="!disabled"
+  (click)="onClick($event)"
+  [attr.role]="disabled ? null : 'button'"
+  [attr.tabindex]="disabled ? null : 0"
+  [attr.aria-disabled]="disabled">
+  
+  <!-- Avatar -->
+  <img
+    *ngIf="avatar"
+    [src]="avatar"
+    [alt]="label"
+    class="chip-avatar">
+  
+  <!-- Icon -->
+  <app-icon
+    *ngIf="icon && !avatar"
+    [name]="icon"
+    [size]="size === 'sm' ? 'xs' : size === 'md' ? 'sm' : 'md'"
+    class="chip-icon">
+  </app-icon>
+  
+  <!-- Label -->
+  <span class="chip-label">{{ label }}</span>
+  
+  <!-- Remove Button -->
+  <button
+    *ngIf="removable"
+    type="button"
+    class="chip-remove"
+    (click)="onRemove($event)"
+    [disabled]="disabled"
+    [attr.aria-label]="'Remove ' + label">
+    <app-icon name="close" size="xs"></app-icon>
+  </button>
+</span>
+

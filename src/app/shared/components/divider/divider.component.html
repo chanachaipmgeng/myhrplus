@@ -1,0 +1,16 @@
+<div
+  class="divider"
+  [class.divider-horizontal]="orientation === 'horizontal'"
+  [class.divider-vertical]="orientation === 'vertical'"
+  [class.divider-default]="variant === 'default'"
+  [class.divider-strong]="variant === 'strong'"
+  [class.divider-weak]="variant === 'weak'"
+  [class.divider-with-text]="!!text"
+  [attr.role]="'separator'"
+  [attr.aria-orientation]="orientation">
+  
+  <span *ngIf="text && orientation === 'horizontal'" class="divider-text">
+    {{ text }}
+  </span>
+</div>
+

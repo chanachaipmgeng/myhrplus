@@ -25,16 +25,27 @@
     </app-glass-card>
   </section>
 
-  <!-- Features Section -->
+  <!-- Basic Usage Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Features
+      Basic Usage
+    </h2>
+    
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
+    <app-code-viewer [code]="usageExample" language="html" title="Usage Example"></app-code-viewer>
+  </section>
+
+  <!-- Advanced Features Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Advanced Features
     </h2>
     
     <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6">
       <app-glass-card padding="p-6">
-        <h3 class="text-lg font-semibold mb-2">Theme Modes</h3>
+        <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Theme Modes</h3>
         <ul class="list-none p-0 m-0">
           <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Light Mode</li>
           <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Dark Mode</li>
@@ -43,7 +54,7 @@
       </app-glass-card>
 
       <app-glass-card padding="p-6">
-        <h3 class="text-lg font-semibold mb-2">Theme Colors</h3>
+        <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Theme Colors</h3>
         <ul class="list-none p-0 m-0">
           <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Blue (default)</li>
           <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Indigo</li>
@@ -57,7 +68,7 @@
       </app-glass-card>
 
       <app-glass-card padding="p-6">
-        <h3 class="text-lg font-semibold mb-2">Features</h3>
+        <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Features</h3>
         <ul class="list-none p-0 m-0">
           <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Persistent settings</li>
           <li class="py-2 text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 before:content-['✓'] before:text-primary-500 dark:before:text-primary-400 theme-gemini:before:bg-gradient-to-r theme-gemini:before:from-blue-400 theme-gemini:before:via-cyan-400 theme-gemini:before:to-blue-500 theme-gemini:before:bg-clip-text theme-gemini:before:text-transparent before:font-bold before:mr-2">Dropdown menus</li>
@@ -66,31 +77,16 @@
         </ul>
       </app-glass-card>
     </div>
+    <app-code-viewer [code]="serviceExample" language="typescript" title="Advanced Features Example"></app-code-viewer>
   </section>
 
-  <!-- Code Examples -->
+  <!-- API Reference -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Code Examples
+      API Reference
     </h2>
     
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
-    <app-code-viewer [code]="basicExample" language="html" title="Basic Theme Toggle"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Usage</h3>
-    <app-code-viewer [code]="usageExample" language="html" title="Theme Toggle Usage"></app-code-viewer>
-
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Using ThemeService</h3>
-    <app-code-viewer [code]="serviceExample" language="typescript" title="ThemeService Usage"></app-code-viewer>
-  </section>
-
-  <!-- API Documentation -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      API Documentation
-    </h2>
     <app-glass-card padding="p-6">
       <p class="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
         Theme Toggle component has no inputs or outputs. It uses ThemeService internally to manage theme state.
