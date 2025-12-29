@@ -353,7 +353,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     // Clear search when switching items
     this.searchQuery = '';
-    
+
     // Update breadcrumbs
     this.getBreadcrumbPath();
   }
@@ -415,7 +415,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     if (parentNavItem?.id === 'admin' && level2Item.route) {
       this.navigateToRoute(level2Item.route);
     }
-    
+
     // Update breadcrumbs
     this.getBreadcrumbPath();
   }
@@ -484,31 +484,31 @@ export class SidebarComponent implements OnInit, OnDestroy {
    */
   translateLabel(label: string, navId?: string, level?: number): string {
     if (!label) return '';
-    
+
     // Try to find translation key
     // Pattern: navigation.{navId}.{labelKey} or navigation.{labelKey}
     const labelKey = this.normalizeLabelToKey(label);
     let translationKey = '';
-    
+
     if (navId && level) {
       // Try with navigation id and level
       translationKey = `navigation.${navId}.level${level}.${labelKey}`;
       const translated = this.translate.instant(translationKey);
       if (translated !== translationKey) return translated;
     }
-    
+
     if (navId) {
       // Try with navigation id only
       translationKey = `navigation.${navId}.${labelKey}`;
       const translated = this.translate.instant(translationKey);
       if (translated !== translationKey) return translated;
     }
-    
+
     // Try generic navigation key
     translationKey = `navigation.${labelKey}`;
     const translated = this.translate.instant(translationKey);
     if (translated !== translationKey) return translated;
-    
+
     // If no translation found, return original label
     return label;
   }
@@ -519,7 +519,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
    */
   private normalizeLabelToKey(label: string): string {
     if (!label) return '';
-    
+
     // First, try to extract English text from parentheses (e.g., "ลงเวลา (Time)" -> "Time")
     const parenthesesMatch = label.match(/\(([^)]+)\)/);
     if (parenthesesMatch && parenthesesMatch[1]) {
@@ -537,12 +537,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
         })
         .join('');
     }
-    
+
     // If no parentheses, process the whole label
     let key = label
       .replace(/\([^)]*\)/g, '') // Remove any remaining parentheses
       .trim();
-    
+
     // Convert to camelCase
     key = key
       .toLowerCase()
@@ -555,7 +555,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
         return word.charAt(0).toUpperCase() + word.slice(1);
       })
       .join('');
-    
+
     return key;
   }
 
@@ -796,7 +796,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
         }
       }
     }
-    
+
     // Update breadcrumbs after route update
     this.getBreadcrumbPath();
   }
@@ -908,7 +908,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
       'home': '/portal',
       'ess': '/portal/self-service/time',
       'admin': '/portal/admin/employees',
-      'empview': '/dashboard',
       'workflow': '/workflow/home',
       'company': '/company/home',
       'personal': '/personal/home',

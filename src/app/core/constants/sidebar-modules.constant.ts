@@ -150,9 +150,6 @@ export const PREDEFINED_MODULES: MainModule[] = [
 
 export const MODULE_ROUTE_MAP: { [key: string]: string } = {
   'home': 'home',
-  'dashboard': 'empview',
-  'empview': 'empview',
-  'employee': 'empview',
   'workflow': 'workflow',
   'company': 'company',
   'personal': 'personal',

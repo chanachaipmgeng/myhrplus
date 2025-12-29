@@ -310,6 +310,21 @@ export class ModelNameService {
 - **Retry Logic**: Automatic retry for 5xx errors (max 3 retries) via `ApiService`
 - **Caching**: Use `useCache: true` parameter in `ApiService.get()` for cacheable responses
 
+## UX/UI Best Practices for HR System
+- **Skeleton Loading**: Use `<app-skeleton-loader>` for data tables and heavy lists instead of simple spinners. This improves perceived performance.
+- **Staggered Animations**: Use `animate-fade-in-up` with staggered delays for lists to create a waterfall effect.
+- **Feedback**: Use `NotificationService` (Toast/Snackbar) for success/error messages instead of full page alerts or redirects.
+- **Glassmorphism Consistency**: Ensure all cards and containers use `<app-glass-card>` or `.glass-card` class to maintain design consistency.
+- **Backgrounds**: **DO NOT** use solid background colors (e.g., `bg-white`, `bg-gray-50`) on main page containers. Let the global theme gradient show through. Use transparent or semi-transparent backgrounds (e.g., `bg-white/50` or `glass-card`).
+
+## Refactoring from JSP
+- **Smart vs Dumb Components**: Separate business logic (Smart) from presentation logic (Dumb).
+  - **Smart (Container)**: Fetches data, handles state, calls services.
+  - **Dumb (Presentational)**: Receives data via `@Input`, emits events via `@Output`.
+- **No Direct DOM Manipulation**: Avoid `document.getElementById` or jQuery. Use Angular `ViewChild`, `Renderer2`, or directives.
+- **Strict Typing**: Create Interfaces/Models that match the JSP/Database schema. Do not use `any`.
+- **State Management**: Use `BehaviorSubject` or `Signals` in Services to hold state between route changes (e.g., filtered list view).
+
 ## Styling Standards
 
 ### SCSS to Tailwind Migration Strategy
@@ -630,6 +645,8 @@ export class ComponentNameDemoComponent {
 - [ ] Relative imports used (not path aliases)
 - [ ] RxJS operators used correctly
 - [ ] Syncfusion components imported via `SyncfusionModule`
+- [ ] UX/UI standards followed (Skeleton loaders, Staggered animations, Toast feedback)
+- [ ] No solid backgrounds on page containers (Transparent/Glass only)
 
 ---
 
@@ -654,7 +671,6 @@ export class ComponentNameDemoComponent {
 
 ---
 
-**Last Updated**: 2024-12-20
+**Last Updated**: 2024-12-29
 **Angular Version**: 17.0.0+
 **TypeScript Version**: 5.2.2+
-

@@ -1,0 +1,183 @@
+<app-page-header title="JSP to Angular Migration Guide" subtitle="Component Mapping & Layout Examples"></app-page-header>
+
+<div class="space-y-8 animate-fade-in-up">
+  <!-- Introduction -->
+  <app-glass-card padding="p-6">
+    <div class="relative z-10">
+      <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100 flex items-center gap-2">
+        <app-icon name="info" size="md" class="text-blue-500"></app-icon>
+        Overview
+      </h2>
+      <p class="text-gray-600 dark:text-gray-300 mb-4">
+        This guide demonstrates how to migrate legacy JSP components to modern Angular Glass Morphism components.
+        Follow these patterns to ensure consistency across the application.
+      </p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        <div class="p-4 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-100 dark:border-red-800">
+          <h3 class="font-bold text-red-600 dark:text-red-400 mb-2">❌ Legacy JSP Pattern</h3>
+          <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 space-y-1">
+            <li>Solid backgrounds (bg-white)</li>
+            <li>Direct DOM manipulation ($('#id'))</li>
+            <li>Bootstrap class names (form-control, card)</li>
+            <li>Spinner loaders</li>
+            <li>Hardcoded text</li>
+          </ul>
+        </div>
+        
+        <div class="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-800">
+          <h3 class="font-bold text-green-600 dark:text-green-400 mb-2">✅ Modern Angular Pattern</h3>
+          <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 space-y-1">
+            <li>Glass backgrounds (.glass-card)</li>
+            <li>Angular directives & bindings</li>
+            <li>Glass components (app-glass-input)</li>
+            <li>Skeleton loaders</li>
+            <li>i18n Translation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </app-glass-card>
+
+  <!-- Component Mapping -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    
+    <!-- Input Field -->
+    <app-glass-card padding="p-6" [animate]="true">
+      <div class="relative z-10">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Input Fields</h3>
+          <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-xs font-medium">Form Controls</span>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Legacy -->
+          <div class="p-4 rounded-lg border border-dashed border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+            <div class="text-xs font-mono text-gray-500 mb-2">Legacy JSP (Bootstrap)</div>
+            <div class="form-group">
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Employee Name</label>
+              <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Enter name">
+            </div>
+          </div>
+
+          <!-- Modern -->
+          <div class="p-4 rounded-lg border border-blue-200 dark:border-blue-900/50 bg-blue-50/50 dark:bg-blue-900/10">
+            <div class="text-xs font-mono text-blue-600 dark:text-blue-400 mb-2">Angular Glass</div>
+            <app-glass-input
+              label="Employee Name"
+              placeholder="Enter name"
+              [icon]="'person'"
+              [(ngModel)]="demoValue">
+            </app-glass-input>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <app-code-viewer [code]="inputCode" language="html"></app-code-viewer>
+        </div>
+      </div>
+    </app-glass-card>
+
+    <!-- Buttons -->
+    <app-glass-card padding="p-6" [animate]="true">
+      <div class="relative z-10">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Buttons</h3>
+          <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full text-xs font-medium">Actions</span>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Legacy -->
+          <div class="p-4 rounded-lg border border-dashed border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+            <div class="text-xs font-mono text-gray-500 mb-2">Legacy JSP (Bootstrap)</div>
+            <div class="flex gap-2">
+              <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save</button>
+              <button class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300">Cancel</button>
+            </div>
+          </div>
+
+          <!-- Modern -->
+          <div class="p-4 rounded-lg border border-blue-200 dark:border-blue-900/50 bg-blue-50/50 dark:bg-blue-900/10">
+            <div class="text-xs font-mono text-blue-600 dark:text-blue-400 mb-2">Angular Glass</div>
+            <div class="flex gap-3">
+              <app-glass-button variant="primary" icon="save">Save Changes</app-glass-button>
+              <app-glass-button variant="secondary" icon="close">Cancel</app-glass-button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <app-code-viewer [code]="buttonCode" language="html"></app-code-viewer>
+        </div>
+      </div>
+    </app-glass-card>
+
+    <!-- Cards & Containers -->
+    <app-glass-card padding="p-6" [animate]="true">
+      <div class="relative z-10">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Containers</h3>
+          <span class="px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-full text-xs font-medium">Layout</span>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Legacy -->
+          <div class="p-4 rounded-lg border border-dashed border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+            <div class="text-xs font-mono text-gray-500 mb-2">Legacy JSP (.card)</div>
+            <div class="bg-white border border-gray-200 rounded p-4 shadow-sm">
+              <div class="font-bold mb-2 text-gray-800">Card Title</div>
+              <div class="text-gray-600">Card content goes here...</div>
+            </div>
+          </div>
+
+          <!-- Modern -->
+          <div class="p-4 rounded-lg border border-blue-200 dark:border-blue-900/50 bg-blue-50/50 dark:bg-blue-900/10">
+            <div class="text-xs font-mono text-blue-600 dark:text-blue-400 mb-2">Angular Glass</div>
+            <app-glass-card>
+              <div class="relative z-10">
+                <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Glass Card</h4>
+                <p class="text-gray-600 dark:text-gray-300">Content adapts to glass theme...</p>
+              </div>
+            </app-glass-card>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <app-code-viewer [code]="cardCode" language="html"></app-code-viewer>
+        </div>
+      </div>
+    </app-glass-card>
+
+    <!-- Loading State -->
+    <app-glass-card padding="p-6" [animate]="true">
+      <div class="relative z-10">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Loading State</h3>
+          <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-full text-xs font-medium">UX</span>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Legacy -->
+          <div class="p-4 rounded-lg border border-dashed border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+            <div class="text-xs font-mono text-gray-500 mb-2">Legacy JSP (Spinner)</div>
+            <div class="flex justify-center p-4">
+              <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+            </div>
+          </div>
+
+          <!-- Modern -->
+          <div class="p-4 rounded-lg border border-blue-200 dark:border-blue-900/50 bg-blue-50/50 dark:bg-blue-900/10">
+            <div class="text-xs font-mono text-blue-600 dark:text-blue-400 mb-2">Angular Glass</div>
+            <app-skeleton-loader type="text" [rows]="3"></app-skeleton-loader>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <app-code-viewer [code]="loadingCode" language="html"></app-code-viewer>
+        </div>
+      </div>
+    </app-glass-card>
+
+  </div>
+</div>
+

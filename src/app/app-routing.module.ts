@@ -45,12 +45,6 @@ const routes: Routes = [
         redirectTo: '/portal',
         pathMatch: 'full'
       },
-      // Dashboard (Empview) → Self-Service
-      {
-        path: 'dashboard',
-        redirectTo: '/portal/self-service',
-        pathMatch: 'full'
-      },
       // Personal → Admin/Employees
       {
         path: 'personal',
