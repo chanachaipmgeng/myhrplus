@@ -36,10 +36,12 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <app-glass-card
-        *ngFor="let category of menuCategories"
+        *ngFor="let category of menuCategories; let i = index"
         padding="p-8"
         customClass="cursor-pointer min-h-[200px] flex flex-col"
         [style.background]="getGradientForCategory(category.code)"
+        [appStagger]="i"
+        [staggerDelay]="0.1"
         [animate]="'fade-in'">
           <div class="relative z-10 p-8 flex-1 flex flex-col text-white cursor-pointer" (click)="navigateToCategory(category)" [attr.aria-label]="category.thaiTitle">
             <div class="flex items-center gap-4 mb-6">

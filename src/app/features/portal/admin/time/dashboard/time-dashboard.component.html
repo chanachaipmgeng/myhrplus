@@ -3,28 +3,28 @@
   [subtitle]="'time.dashboard.subtitle' | translate">
 </app-page-header>
 
-<div class="p-5 bg-gray-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
+<div class="p-5 min-h-screen transition-colors duration-300">
   <!-- Statistics Cards -->
   <div class="mb-8">
-    <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">{{ 'time.dashboard.statistics.title' | translate }}</h2>
+    <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">{{ 'time.dashboard.statistics.title' | translate }}</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
-      <div class="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
+      <div class="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white p-5 rounded-lg shadow-md dark:shadow-gray-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.totalAttendance }}</div>
         <div class="text-sm opacity-90">{{ 'time.dashboard.statistics.totalAttendance' | translate }}</div>
       </div>
-      <div class="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
+      <div class="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white p-5 rounded-lg shadow-md dark:shadow-gray-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.onTime }}</div>
         <div class="text-sm opacity-90">{{ 'time.dashboard.statistics.onTime' | translate }}</div>
       </div>
-      <div class="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
+      <div class="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white p-5 rounded-lg shadow-md dark:shadow-gray-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.late }}</div>
         <div class="text-sm opacity-90">{{ 'time.dashboard.statistics.late' | translate }}</div>
       </div>
-      <div class="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
+      <div class="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white p-5 rounded-lg shadow-md dark:shadow-gray-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.absent }}</div>
         <div class="text-sm opacity-90">{{ 'time.dashboard.statistics.absent' | translate }}</div>
       </div>
-      <div class="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
+      <div class="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white p-5 rounded-lg shadow-md dark:shadow-gray-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.overtime }}</div>
         <div class="text-sm opacity-90">{{ 'time.dashboard.statistics.overtime' | translate }}</div>
       </div>
@@ -36,19 +36,19 @@
     <!-- Charts Section: 3 columns (75%) -->
     <div class="lg:col-span-3">
       <div class="mb-8">
-        <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">{{ 'time.dashboard.charts.title' | translate }}</h2>
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">{{ 'time.dashboard.charts.title' | translate }}</h2>
         
         <!-- Charts Row 1: 2 columns -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
           <!-- Pie Chart: Attendance Status -->
-          <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">{{ 'time.dashboard.charts.attendanceStatus' | translate }}</h3>
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 p-5 rounded-lg shadow-sm dark:shadow-gray-900/50 border border-gray-100 dark:border-gray-700 transition-colors duration-300">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5 transition-colors duration-300">{{ 'time.dashboard.charts.attendanceStatus' | translate }}</h3>
             <div echarts [options]="attendanceStatusPieChartOption" class="w-full" style="height: 400px;"></div>
           </div>
           
           <!-- Bar Chart: Daily Attendance -->
-          <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">{{ 'time.dashboard.charts.dailyAttendance' | translate }}</h3>
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 p-5 rounded-lg shadow-sm dark:shadow-gray-900/50 border border-gray-100 dark:border-gray-700 transition-colors duration-300">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5 transition-colors duration-300">{{ 'time.dashboard.charts.dailyAttendance' | translate }}</h3>
             <div echarts [options]="dailyAttendanceBarChartOption" class="w-full" style="height: 400px;"></div>
           </div>
         </div>
@@ -56,8 +56,8 @@
         <!-- Charts Row 2: Full width -->
         <div class="grid grid-cols-1 gap-5 mb-5">
           <!-- Line Chart: Attendance Trend -->
-          <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">{{ 'time.dashboard.charts.monthlyTrend' | translate }}</h3>
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 p-5 rounded-lg shadow-sm dark:shadow-gray-900/50 border border-gray-100 dark:border-gray-700 transition-colors duration-300">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5 transition-colors duration-300">{{ 'time.dashboard.charts.monthlyTrend' | translate }}</h3>
             <div echarts [options]="attendanceTrendLineChartOption" class="w-full" style="height: 400px;"></div>
           </div>
         </div>
@@ -67,107 +67,107 @@
     <!-- Navigation Cards Section: 1 column (25%) -->
     <div class="lg:col-span-1">
       <div class="sticky top-5">
-        <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">{{ 'time.dashboard.mainMenu.title' | translate }}</h2>
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">{{ 'time.dashboard.mainMenu.title' | translate }}</h2>
         <div class="space-y-4">
           <!-- Daily Attendance Card -->
-          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 rounded-xl shadow-sm dark:shadow-gray-900/50 p-6 hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-gray-700 group"
                [routerLink]="['daily-attendance']">
             <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">calendar_today</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'time.dashboard.mainMenu.dailyAttendance.title' | translate }}</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'time.dashboard.mainMenu.dailyAttendance.description' | translate }}</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'time.dashboard.mainMenu.dailyAttendance.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'time.dashboard.mainMenu.dailyAttendance.description' | translate }}</p>
             <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
               {{ 'time.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
           <!-- Transaction Card -->
-          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 rounded-xl shadow-sm dark:shadow-gray-900/50 p-6 hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-gray-700 group"
                [routerLink]="['transaction']">
             <div class="w-12 h-12 bg-green-50 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4 text-green-600 dark:text-green-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">swap_horiz</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'time.dashboard.mainMenu.transaction.title' | translate }}</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'time.dashboard.mainMenu.transaction.description' | translate }}</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'time.dashboard.mainMenu.transaction.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'time.dashboard.mainMenu.transaction.description' | translate }}</p>
             <div class="flex items-center text-green-600 dark:text-green-400 text-sm font-medium transition-colors duration-300">
               {{ 'time.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
           <!-- Data Before Processing Card -->
-          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 rounded-xl shadow-sm dark:shadow-gray-900/50 p-6 hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-gray-700 group"
                [routerLink]="['data-before-processing']">
             <div class="w-12 h-12 bg-purple-50 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4 text-purple-600 dark:text-purple-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">play_circle_outline</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'time.dashboard.mainMenu.dataBeforeProcessing.title' | translate }}</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'time.dashboard.mainMenu.dataBeforeProcessing.description' | translate }}</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'time.dashboard.mainMenu.dataBeforeProcessing.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'time.dashboard.mainMenu.dataBeforeProcessing.description' | translate }}</p>
             <div class="flex items-center text-purple-600 dark:text-purple-400 text-sm font-medium transition-colors duration-300">
               {{ 'time.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
           <!-- On Process Card -->
-          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 rounded-xl shadow-sm dark:shadow-gray-900/50 p-6 hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-gray-700 group"
                [routerLink]="['on-process']">
             <div class="w-12 h-12 bg-orange-50 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mb-4 text-orange-600 dark:text-orange-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">play_circle</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'time.dashboard.mainMenu.onProcess.title' | translate }}</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'time.dashboard.mainMenu.onProcess.description' | translate }}</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'time.dashboard.mainMenu.onProcess.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'time.dashboard.mainMenu.onProcess.description' | translate }}</p>
             <div class="flex items-center text-orange-600 dark:text-orange-400 text-sm font-medium transition-colors duration-300">
               {{ 'time.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
           <!-- Data After Processing Card -->
-          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 rounded-xl shadow-sm dark:shadow-gray-900/50 p-6 hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-gray-700 group"
                [routerLink]="['data-after-processing']">
             <div class="w-12 h-12 bg-teal-50 dark:bg-teal-900/30 rounded-lg flex items-center justify-center mb-4 text-teal-600 dark:text-teal-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">check_circle</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'time.dashboard.mainMenu.dataAfterProcessing.title' | translate }}</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'time.dashboard.mainMenu.dataAfterProcessing.description' | translate }}</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'time.dashboard.mainMenu.dataAfterProcessing.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'time.dashboard.mainMenu.dataAfterProcessing.description' | translate }}</p>
             <div class="flex items-center text-teal-600 dark:text-teal-400 text-sm font-medium transition-colors duration-300">
               {{ 'time.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
           <!-- History Card -->
-          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 rounded-xl shadow-sm dark:shadow-gray-900/50 p-6 hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-gray-700 group"
                [routerLink]="['history']">
             <div class="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center mb-4 text-indigo-600 dark:text-indigo-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">history</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'time.dashboard.mainMenu.history.title' | translate }}</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'time.dashboard.mainMenu.history.description' | translate }}</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'time.dashboard.mainMenu.history.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'time.dashboard.mainMenu.history.description' | translate }}</p>
             <div class="flex items-center text-indigo-600 dark:text-indigo-400 text-sm font-medium transition-colors duration-300">
               {{ 'time.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
           <!-- Roster Card -->
-          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 rounded-xl shadow-sm dark:shadow-gray-900/50 p-6 hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-gray-700 group"
                [routerLink]="['roster']">
             <div class="w-12 h-12 bg-pink-50 dark:bg-pink-900/30 rounded-lg flex items-center justify-center mb-4 text-pink-600 dark:text-pink-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">calendar_month</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'time.dashboard.mainMenu.roster.title' | translate }}</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'time.dashboard.mainMenu.roster.description' | translate }}</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'time.dashboard.mainMenu.roster.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'time.dashboard.mainMenu.roster.description' | translate }}</p>
             <div class="flex items-center text-pink-600 dark:text-pink-400 text-sm font-medium transition-colors duration-300">
               {{ 'time.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
           <!-- Setup Card -->
-          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 rounded-xl shadow-sm dark:shadow-gray-900/50 p-6 hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-gray-700 group"
                [routerLink]="['setup']">
             <div class="w-12 h-12 bg-gray-50 dark:bg-gray-900/30 rounded-lg flex items-center justify-center mb-4 text-gray-600 dark:text-gray-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">settings</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'time.dashboard.mainMenu.setup.title' | translate }}</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'time.dashboard.mainMenu.setup.description' | translate }}</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'time.dashboard.mainMenu.setup.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'time.dashboard.mainMenu.setup.description' | translate }}</p>
             <div class="flex items-center text-gray-600 dark:text-gray-400 text-sm font-medium transition-colors duration-300">
               {{ 'time.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>

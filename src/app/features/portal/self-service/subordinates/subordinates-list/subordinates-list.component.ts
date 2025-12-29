@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../../../../../shared/shared.module';
 import { PageLayoutComponent } from '../../../../../shared/components/page-layout/page-layout.component';
 import { GlassCardComponent } from '../../../../../shared/components/glass-card/glass-card.component';
-import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
 
 interface Subordinate {
   id: string;
@@ -21,15 +21,15 @@ interface Subordinate {
   imports: [
     CommonModule,
     RouterModule,
+    SharedModule,
     PageLayoutComponent,
-    GlassCardComponent,
-    LoadingComponent
+    GlassCardComponent
   ],
   templateUrl: './subordinates-list.component.html',
   styleUrls: ['./subordinates-list.component.scss']
 })
 export class SubordinatesListComponent implements OnInit {
-  isLoading = false;
+  isLoading = signal(false);
   subordinates: Subordinate[] = [];
 
   constructor() { }
@@ -39,8 +39,11 @@ export class SubordinatesListComponent implements OnInit {
   }
 
   private loadSubordinates(): void {
-    // Mock data
-    this.subordinates = [
+    this.isLoading.set(true);
+    // Simulate API call
+    setTimeout(() => {
+      // Mock data
+      this.subordinates = [
       {
         id: '1',
         employeeId: 'EMP002',
@@ -68,7 +71,9 @@ export class SubordinatesListComponent implements OnInit {
         department: 'แผนก IT',
         email: 'malee@company.com'
       }
-    ];
+      ];
+      this.isLoading.set(false);
+    }, 1000);
   }
 }
 

@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { LayoutModule } from '../../layout/layout.module';
 import { AppraisalRoutingModule } from './appraisal-routing.module';
+import { GlassCardComponent } from '../../shared/components/glass-card/glass-card.component';
 
 import { AppraisalHomeComponent } from './appraisal-home/appraisal-home.component';
 
@@ -17,7 +18,8 @@ import { AppraisalHomeComponent } from './appraisal-home/appraisal-home.componen
     ReactiveFormsModule,
     SharedModule,
     LayoutModule,
-    AppraisalRoutingModule
+    AppraisalRoutingModule,
+    GlassCardComponent
   ]
 })
 export class AppraisalModule { }

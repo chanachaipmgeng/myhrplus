@@ -20,19 +20,19 @@
         <div class="relative">
           <button
             (click)="toggleLanguageMenu()"
-            class="nav-link p-2 text-slate-700 dark:text-slate-200 hover:bg-white/30 dark:hover:bg-slate-700/30 rounded-lg transition-all duration-200"
+            class="nav-link p-2 text-gray-700 dark:text-gray-200 hover:bg-white/30 dark:hover:bg-slate-700/30 rounded-lg transition-all duration-200"
             type="button"
             [title]="'เปลี่ยนภาษา'">
             <span class="flag-emoji">{{ getFlagEmoji(selectedLanguageIcon) }}</span>
           </button>
           <div
             *ngIf="showLanguageMenu"
-            class="absolute right-0 mt-2 w-56 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
+            class="absolute right-0 mt-2 w-56 bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
             <button
               *ngFor="let lang of languages"
               (click)="changeLanguage(lang); showLanguageMenu = false"
               [class.active]="selectedLanguage === lang.code"
-              class="w-full px-4 py-2 text-left text-slate-700 dark:text-slate-200 hover:bg-white/40 dark:hover:bg-slate-700/40 transition-all duration-200 flex items-center justify-between">
+              class="w-full px-4 py-2 text-left text-gray-700 dark:text-gray-200 hover:bg-white/40 dark:hover:bg-gray-700/40 transition-all duration-200 flex items-center justify-between">
               <div class="flex items-center gap-2">
                 <span class="flag-emoji">{{ getFlagEmoji(lang.icon) }}</span>
                 <span>{{ lang.language }}<span *ngIf="lang.type"> ({{ lang.type }})</span></span>
@@ -46,11 +46,11 @@
       <!-- Workflow Notifications -->
       <div class="nav-item">
         <button
-          class="nav-link p-2 text-slate-700 dark:text-slate-200 hover:bg-white/30 dark:hover:bg-slate-700/30 rounded-lg transition-all duration-200 relative"
+          class="nav-link p-2 text-gray-700 dark:text-gray-200 hover:bg-white/30 dark:hover:bg-slate-700/30 rounded-lg transition-all duration-200 relative"
           (click)="navigateToWorkflow()"
           [title]="'การแจ้งเตือน'">
           <div class="notification">
-            <app-icon name="mail" size="md" color="text-slate-700 dark:text-slate-200"></app-icon>
+            <app-icon name="mail" size="md" color="text-gray-700 dark:text-gray-200"></app-icon>
             <span class="badge badge-danger absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center" *ngIf="countNewNote > 0">
               {{ countNewNote > 99 ? '99+' : countNewNote }}
             </span>
@@ -61,11 +61,11 @@
       <!-- Private Messages -->
       <div class="nav-item">
         <button
-          class="nav-link p-2 text-slate-700 dark:text-slate-200 hover:bg-white/30 dark:hover:bg-slate-700/30 rounded-lg transition-all duration-200 relative"
+          class="nav-link p-2 text-gray-700 dark:text-gray-200 hover:bg-white/30 dark:hover:bg-slate-700/30 rounded-lg transition-all duration-200 relative"
           (click)="navigateToPrivateMessage()"
           [title]="'ข้อความส่วนตัว'">
           <div class="notification">
-            <app-icon name="chat" size="md" color="text-slate-700 dark:text-slate-200"></app-icon>
+            <app-icon name="chat" size="md" color="text-gray-700 dark:text-gray-200"></app-icon>
             <span class="badge badge-danger absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center" *ngIf="countNewMessage > 0">
               {{ countNewMessage > 99 ? '99+' : countNewMessage }}
             </span>
@@ -76,10 +76,10 @@
       <!-- Chat AI -->
       <div class="nav-item">
         <button
-          class="nav-link p-2 text-slate-700 dark:text-slate-200 hover:bg-white/30 dark:hover:bg-slate-700/30 rounded-lg transition-all duration-200"
+          class="nav-link p-2 text-gray-700 dark:text-gray-200 hover:bg-white/30 dark:hover:bg-slate-700/30 rounded-lg transition-all duration-200"
           (click)="navigateToChatAI()"
           [title]="'Chat AI'">
-          <app-icon name="smart_toy" size="md" color="text-slate-700 dark:text-slate-200"></app-icon>
+          <app-icon name="smart_toy" size="md" color="text-gray-700 dark:text-gray-200"></app-icon>
         </button>
       </div>
 
@@ -88,7 +88,7 @@
         <div class="relative">
           <button
             (click)="toggleUserMenu()"
-            class="nav-link user-profile p-2 text-slate-700 dark:text-slate-200 hover:bg-white/30 dark:hover:bg-slate-700/30 rounded-lg transition-all duration-200"
+            class="nav-link user-profile p-2 text-gray-700 dark:text-gray-200 hover:bg-white/30 dark:hover:bg-slate-700/30 rounded-lg transition-all duration-200"
             type="button">
             <img
               [src]="getProfilePictureUrl()"
@@ -97,7 +97,7 @@
           </button>
           <div
             *ngIf="showUserMenu"
-            class="absolute right-0 mt-2 w-64 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
+            class="absolute right-0 mt-2 w-64 bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
             <div class="user-header p-4 border-b border-gray-200 dark:border-gray-700">
               <div class="user-avatar mb-3">
                 <img
@@ -106,43 +106,43 @@
                   class="avatar-large w-16 h-16 rounded-full object-cover mx-auto">
               </div>
               <div class="user-info text-center">
-                <h4 class="user-name thai-text font-semibold text-slate-800 dark:text-slate-100">{{ getFullname() }}</h4>
-                <p class="user-email text-sm text-slate-600 dark:text-slate-400">{{ getEmail() }}</p>
+                <h4 class="user-name thai-text font-semibold text-gray-800 dark:text-gray-100">{{ getFullname() }}</h4>
+                <p class="user-email text-sm text-gray-600 dark:text-gray-400">{{ getEmail() }}</p>
               </div>
             </div>
             <div class="py-2">
               <button
                 (click)="navigateToProfile(); showUserMenu = false"
-                class="w-full px-4 py-2 text-left text-slate-700 dark:text-slate-200 hover:bg-white/40 dark:hover:bg-slate-700/40 transition-all duration-200 flex items-center gap-3">
-                <app-icon name="person" size="sm" color="text-slate-600 dark:text-slate-400"></app-icon>
+                class="w-full px-4 py-2 text-left text-gray-700 dark:text-gray-200 hover:bg-white/40 dark:hover:bg-gray-700/40 transition-all duration-200 flex items-center gap-3">
+                <app-icon name="person" size="sm" color="text-gray-600 dark:text-gray-400"></app-icon>
                 <span class="thai-text">โปรไฟล์</span>
               </button>
               <button
                 *ngIf="checkRole"
                 (click)="navigateToHRManagement(); showUserMenu = false"
-                class="w-full px-4 py-2 text-left text-slate-700 dark:text-slate-200 hover:bg-white/40 dark:hover:bg-slate-700/40 transition-all duration-200 flex items-center gap-3">
-                <app-icon name="settings" size="sm" color="text-slate-600 dark:text-slate-400"></app-icon>
+                class="w-full px-4 py-2 text-left text-gray-700 dark:text-gray-200 hover:bg-white/40 dark:hover:bg-gray-700/40 transition-all duration-200 flex items-center gap-3">
+                <app-icon name="settings" size="sm" color="text-gray-600 dark:text-gray-400"></app-icon>
                 <span class="thai-text">HR Management</span>
               </button>
               <button
                 (click)="navigateToSettings(); showUserMenu = false"
-                class="w-full px-4 py-2 text-left text-slate-700 dark:text-slate-200 hover:bg-white/40 dark:hover:bg-slate-700/40 transition-all duration-200 flex items-center gap-3">
-                <app-icon name="edit" size="sm" color="text-slate-600 dark:text-slate-400"></app-icon>
+                class="w-full px-4 py-2 text-left text-gray-700 dark:text-gray-200 hover:bg-white/40 dark:hover:bg-gray-700/40 transition-all duration-200 flex items-center gap-3">
+                <app-icon name="edit" size="sm" color="text-gray-600 dark:text-gray-400"></app-icon>
                 <span class="thai-text">การตั้งค่า</span>
               </button>
               <button
                 *ngIf="wfMenu"
                 (click)="navigateToWorkflowAdmin(); showUserMenu = false"
-                class="w-full px-4 py-2 text-left text-slate-700 dark:text-slate-200 hover:bg-white/40 dark:hover:bg-slate-700/40 transition-all duration-200 flex items-center gap-3">
-                <app-icon name="folder_managed" size="sm" color="text-slate-600 dark:text-slate-400"></app-icon>
+                class="w-full px-4 py-2 text-left text-gray-700 dark:text-gray-200 hover:bg-white/40 dark:hover:bg-gray-700/40 transition-all duration-200 flex items-center gap-3">
+                <app-icon name="folder_managed" size="sm" color="text-gray-600 dark:text-gray-400"></app-icon>
                 <span class="thai-text">จัดการเอกสาร</span>
               </button>
             </div>
             <div class="border-t border-gray-200 dark:border-gray-700 py-2">
               <button
                 (click)="logout(); showUserMenu = false"
-                class="w-full px-4 py-2 text-left text-slate-700 dark:text-slate-200 hover:bg-white/40 dark:hover:bg-slate-700/40 transition-all duration-200 flex items-center gap-3">
-                <app-icon name="logout" size="sm" color="text-slate-600 dark:text-slate-400"></app-icon>
+                class="w-full px-4 py-2 text-left text-gray-700 dark:text-gray-200 hover:bg-white/40 dark:hover:bg-gray-700/40 transition-all duration-200 flex items-center gap-3">
+                <app-icon name="logout" size="sm" color="text-gray-600 dark:text-gray-400"></app-icon>
                 <span class="thai-text">ออกจากระบบ</span>
               </button>
             </div>
@@ -192,27 +192,27 @@
                     </div>
                   </div>
                   <div class="profile-info-section">
-                    <h3 class="profile-name thai-text text-xl font-semibold text-slate-800 dark:text-slate-100 mb-4">{{ getFullname() }}</h3>
+                    <h3 class="profile-name thai-text text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">{{ getFullname() }}</h3>
                     <div class="profile-details space-y-3">
                       <div class="detail-item">
-                        <span class="detail-label thai-text text-sm text-slate-600 dark:text-slate-400">กลุ่มผู้ใช้</span>
-                        <span class="detail-value text-sm font-medium text-slate-800 dark:text-slate-100">{{ user_level || '-' }}</span>
+                        <span class="detail-label thai-text text-sm text-gray-600 dark:text-gray-400">กลุ่มผู้ใช้</span>
+                        <span class="detail-value text-sm font-medium text-gray-800 dark:text-gray-100">{{ user_level || '-' }}</span>
                       </div>
                       <div class="detail-item">
-                        <span class="detail-label thai-text text-sm text-slate-600 dark:text-slate-400">บทบาท</span>
-                        <span class="detail-value text-sm font-medium text-slate-800 dark:text-slate-100">{{ user_role || '-' }}</span>
+                        <span class="detail-label thai-text text-sm text-gray-600 dark:text-gray-400">บทบาท</span>
+                        <span class="detail-value text-sm font-medium text-gray-800 dark:text-gray-100">{{ user_role || '-' }}</span>
                       </div>
                       <div class="detail-item" *ngIf="setCharacterPass">
-                        <span class="detail-label thai-text text-sm text-slate-600 dark:text-slate-400">รหัสผ่านหมดอายุ</span>
-                        <span class="detail-value text-sm font-medium text-slate-800 dark:text-slate-100">
+                        <span class="detail-label thai-text text-sm text-gray-600 dark:text-gray-400">รหัสผ่านหมดอายุ</span>
+                        <span class="detail-value text-sm font-medium text-gray-800 dark:text-gray-100">
                           {{ setCharacterPass.expireDate && setCharacterPass.passwordStatus !== '1'
                             ? (setCharacterPass.expireDate | date: 'dd-MM-yyyy')
                             : '-' }}
                         </span>
                       </div>
                       <div class="detail-item" *ngIf="setCharacterPass">
-                        <span class="detail-label thai-text text-sm text-slate-600 dark:text-slate-400">สถานะรหัสผ่าน</span>
-                        <span class="detail-value text-sm font-medium text-slate-800 dark:text-slate-100">
+                        <span class="detail-label thai-text text-sm text-gray-600 dark:text-gray-400">สถานะรหัสผ่าน</span>
+                        <span class="detail-value text-sm font-medium text-gray-800 dark:text-gray-100">
                           {{ setCharacterPass.passwordStatus ? getDesc(setCharacterPass.passwordStatus) : '-' }}
                         </span>
                       </div>
@@ -228,7 +228,7 @@
             <div class="settings-card glass-card-weak p-6 rounded-lg anim-fade-in">
               <div class="settings-layout grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div class="settings-form-section">
-                  <h4 class="form-title thai-text text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">รหัสผ่านใหม่</h4>
+                  <h4 class="form-title thai-text text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">รหัสผ่านใหม่</h4>
                   <div class="space-y-4">
                     <div>
                       <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 thai-text">รหัสผ่านเก่า</label>
@@ -266,7 +266,7 @@
                     </div>
                   </div>
                   <div class="border-t border-gray-200 dark:border-gray-700 my-4"></div>
-                  <h4 class="form-title thai-text text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">ภาษา</h4>
+                  <h4 class="form-title thai-text text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">ภาษา</h4>
                   <div class="radio-group space-y-2">
                     <label class="flex items-center gap-2 cursor-pointer">
                       <input
@@ -288,7 +288,7 @@
                 </div>
                 <div class="password-rules-section">
                   <div class="password-rules">
-                    <h6 class="thai-text text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">ข้อกำหนดรหัสผ่าน</h6>
+                    <h6 class="thai-text text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">ข้อกำหนดรหัสผ่าน</h6>
                     <div class="space-y-2">
                       <div class="flex items-center gap-2" [class.text-green-600]="hasValidLength()" [class.text-gray-600]="!hasValidLength()">
                         <app-icon [name]="hasValidLength() ? 'check_circle' : 'radio_button_unchecked'" size="sm"></app-icon>
@@ -342,13 +342,13 @@
 <div *ngIf="showAlertModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" (click)="closeModal()">
   <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full m-4" (click)="$event.stopPropagation()">
     <div class="modal-header p-4 border-b border-gray-200 dark:border-gray-700">
-    <h5 class="modal-title thai-text text-lg font-semibold text-slate-800 dark:text-slate-100">แจ้งเตือน</h5>
+    <h5 class="modal-title thai-text text-lg font-semibold text-gray-800 dark:text-gray-100">แจ้งเตือน</h5>
     <button type="button" class="close p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors" (click)="closeModal()" aria-label="Close">
       <app-icon name="close" size="md"></app-icon>
     </button>
   </div>
   <div class="modal-body p-4">
-    <p class="text-slate-700 dark:text-slate-300 thai-text">{{ msg }}</p>
+    <p class="text-gray-700 dark:text-gray-300 thai-text">{{ msg }}</p>
   </div>
   <div class="modal-footer p-4 border-t border-gray-200 dark:border-gray-700 flex justify-end">
     <button type="button" class="btn btn-info px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors" (click)="closeModal()">
@@ -361,13 +361,13 @@
 <div *ngIf="showConfirmModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" (click)="closeModal()">
   <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full m-4" (click)="$event.stopPropagation()">
     <div class="modal-header p-4 border-b border-gray-200 dark:border-gray-700">
-    <h5 class="modal-title thai-text text-lg font-semibold text-slate-800 dark:text-slate-100">แจ้งเตือน</h5>
+    <h5 class="modal-title thai-text text-lg font-semibold text-gray-800 dark:text-gray-100">แจ้งเตือน</h5>
     <button type="button" class="close p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors" (click)="closeModal()" aria-label="Close">
       <app-icon name="close" size="md"></app-icon>
     </button>
   </div>
   <div class="modal-body p-4">
-    <p class="text-slate-700 dark:text-slate-300 thai-text">{{ msg }}</p>
+    <p class="text-gray-700 dark:text-gray-300 thai-text">{{ msg }}</p>
   </div>
   <div class="modal-footer p-4 border-t border-gray-200 dark:border-gray-700 flex justify-end">
     <button type="button" class="btn btn-info px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors" (click)="closeModal()">
@@ -381,13 +381,13 @@
 <div *ngIf="showErrorModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" (click)="closeModal()">
   <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full m-4" (click)="$event.stopPropagation()">
     <div class="modal-header p-4 border-b border-gray-200 dark:border-gray-700">
-    <h5 class="modal-title thai-text text-lg font-semibold text-slate-800 dark:text-slate-100">แจ้งเตือน</h5>
+    <h5 class="modal-title thai-text text-lg font-semibold text-gray-800 dark:text-gray-100">แจ้งเตือน</h5>
     <button type="button" class="close p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors" (click)="closeModal()" aria-label="Close">
       <app-icon name="close" size="md"></app-icon>
     </button>
   </div>
   <div class="modal-body p-4">
-    <p class="text-slate-700 dark:text-slate-300 thai-text">{{ msg }}</p>
+    <p class="text-gray-700 dark:text-gray-300 thai-text">{{ msg }}</p>
   </div>
   <div class="modal-footer p-4 border-t border-gray-200 dark:border-gray-700 flex justify-end">
     <button type="button" class="btn btn-info px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors" (click)="closeModal()">

@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { SharedModule } from '@shared/shared.module';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { DataGridComponent } from '@shared/components/data-grid/data-grid.component';
 import { BranchSocialSecurityService } from '../../services/branch-social-security.service';
@@ -15,6 +16,7 @@ import { BranchSocialSecurityFormComponent } from './branch-social-security-form
     CommonModule,
     RouterModule,
     TranslateModule,
+    SharedModule,
     PageHeaderComponent,
     DataGridComponent,
     BranchSocialSecurityFormComponent
@@ -24,7 +26,7 @@ import { BranchSocialSecurityFormComponent } from './branch-social-security-form
 export class BranchSocialSecurityListComponent implements OnInit {
   public service = inject(BranchSocialSecurityService);
   private translate = inject(TranslateService);
-  
+
   data$ = this.service.getAll();
   showModal = false;
   selectedItem: BranchSocialSecurity | null = null;

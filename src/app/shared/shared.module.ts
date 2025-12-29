@@ -27,6 +27,7 @@ import { FormValidationMessagesComponent } from './components/form-validation-me
 // Directives
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { LazyImageDirective } from './directives/lazy-image.directive'; // Standalone directive
+import { StaggerDirective } from './directives/stagger.directive'; // Standalone directive
 
 // Pipes
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
@@ -82,7 +83,8 @@ const PIPES = [
     FormValidationMessagesComponent,
     ImageUploadComponent,
     // Standalone Directives
-    LazyImageDirective
+    LazyImageDirective,
+    StaggerDirective
   ],
   exports: [
     CommonModule,
@@ -109,7 +111,8 @@ const PIPES = [
     FormValidationMessagesComponent,
     ImageUploadComponent,
     // Standalone Directives
-    LazyImageDirective
+    LazyImageDirective,
+    StaggerDirective
   ]
 })
 export class SharedModule { }

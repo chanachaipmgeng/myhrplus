@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <!-- Statistics Cards Section -->
     <section>
-      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Statistics Cards</h2>
+      <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200">Statistics Cards</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <app-statistics-card
           *ngFor="let stat of statistics"
@@ -17,25 +17,25 @@
 
     <!-- Glass Cards Section -->
     <section>
-      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Glass Cards</h2>
+      <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200">Glass Cards</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <app-glass-card variant="default" padding="p-6">
-          <h3 class="text-xl font-semibold mb-2 text-slate-800 dark:text-slate-200">Default Glass Card</h3>
-          <p class="text-slate-600 dark:text-slate-400">
+          <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200">Default Glass Card</h3>
+          <p class="text-gray-600 dark:text-gray-400">
             Glass card with default styling. Perfect for general content display.
           </p>
         </app-glass-card>
 
         <app-glass-card variant="strong" padding="p-6">
-          <h3 class="text-xl font-semibold mb-2 text-slate-800 dark:text-slate-200">Strong Glass Card</h3>
-          <p class="text-slate-600 dark:text-slate-400">
+          <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200">Strong Glass Card</h3>
+          <p class="text-gray-600 dark:text-gray-400">
             Glass card with stronger blur effect. More opaque and prominent.
           </p>
         </app-glass-card>
 
         <app-glass-card variant="weak" padding="p-6">
-          <h3 class="text-xl font-semibold mb-2 text-slate-800 dark:text-slate-200">Weak Glass Card</h3>
-          <p class="text-slate-600 dark:text-slate-400">
+          <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200">Weak Glass Card</h3>
+          <p class="text-gray-600 dark:text-gray-400">
             Glass card with subtle blur effect. More transparent and lightweight.
           </p>
         </app-glass-card>
@@ -44,11 +44,11 @@
 
     <!-- Buttons Section -->
     <section>
-      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Glass Buttons</h2>
+      <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200">Glass Buttons</h2>
       <app-glass-card padding="p-6">
         <div class="space-y-6">
           <div>
-            <h3 class="text-lg font-medium mb-4 text-slate-700 dark:text-slate-300">Variants</h3>
+            <h3 class="text-lg font-medium mb-4 text-gray-700 dark:text-gray-300">Variants</h3>
             <div class="flex flex-wrap gap-4">
               <app-glass-button variant="primary" (clicked)="onButtonClick('primary')" [loading]="buttonLoading">
                 Primary Button
@@ -63,7 +63,7 @@
           </div>
 
           <div>
-            <h3 class="text-lg font-medium mb-4 text-slate-700 dark:text-slate-300">Sizes</h3>
+            <h3 class="text-lg font-medium mb-4 text-gray-700 dark:text-gray-300">Sizes</h3>
             <div class="flex flex-wrap items-center gap-4">
               <app-glass-button variant="primary" size="sm">Small</app-glass-button>
               <app-glass-button variant="primary" size="md">Medium</app-glass-button>
@@ -72,7 +72,7 @@
           </div>
 
           <div>
-            <h3 class="text-lg font-medium mb-4 text-slate-700 dark:text-slate-300">States</h3>
+            <h3 class="text-lg font-medium mb-4 text-gray-700 dark:text-gray-300">States</h3>
             <div class="flex flex-wrap gap-4">
               <app-glass-button variant="primary">Normal</app-glass-button>
               <app-glass-button variant="primary" [disabled]="true">Disabled</app-glass-button>
@@ -85,7 +85,7 @@
 
     <!-- Form Inputs Section -->
     <section>
-      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Glass Inputs</h2>
+      <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200">Glass Inputs</h2>
       <app-glass-card padding="p-6">
         <form [formGroup]="demoForm" (ngSubmit)="onSubmit()" class="space-y-6">
           <app-glass-input
@@ -129,20 +129,20 @@
 
     <!-- Tabs Section -->
     <section>
-      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Tabs</h2>
+      <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200">Tabs</h2>
       <app-glass-card padding="p-6">
         <app-tabs [tabs]="tabs" [activeTab]="activeTab" (activeTabChange)="onTabChange($event)">
           <div *ngIf="activeTab === 'tab1'" class="p-4">
             <h3 class="text-lg font-semibold mb-2">Tab 1 Content</h3>
-            <p class="text-slate-600 dark:text-slate-400">This is the content for Tab 1.</p>
+            <p class="text-gray-600 dark:text-gray-400">This is the content for Tab 1.</p>
           </div>
           <div *ngIf="activeTab === 'tab2'" class="p-4">
             <h3 class="text-lg font-semibold mb-2">Tab 2 Content</h3>
-            <p class="text-slate-600 dark:text-slate-400">This is the content for Tab 2 with badge.</p>
+            <p class="text-gray-600 dark:text-gray-400">This is the content for Tab 2 with badge.</p>
           </div>
           <div *ngIf="activeTab === 'tab3'" class="p-4">
             <h3 class="text-lg font-semibold mb-2">Tab 3 Content</h3>
-            <p class="text-slate-600 dark:text-slate-400">This is the content for Tab 3.</p>
+            <p class="text-gray-600 dark:text-gray-400">This is the content for Tab 3.</p>
           </div>
         </app-tabs>
       </app-glass-card>
@@ -150,7 +150,7 @@
 
     <!-- Progress Bar Section -->
     <section>
-      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Progress Bars</h2>
+      <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200">Progress Bars</h2>
       <app-glass-card padding="p-6">
         <div class="space-y-6">
           <app-progress-bar
@@ -185,11 +185,11 @@
 
     <!-- Rating Section -->
     <section>
-      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Rating</h2>
+      <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200">Rating</h2>
       <app-glass-card padding="p-6">
         <div class="space-y-6">
           <div>
-            <h3 class="text-lg font-medium mb-4 text-slate-700 dark:text-slate-300">Star Rating</h3>
+            <h3 class="text-lg font-medium mb-4 text-gray-700 dark:text-gray-300">Star Rating</h3>
             <app-rating
               [rating]="rating"
               [showValue]="true"
@@ -198,7 +198,7 @@
           </div>
 
           <div>
-            <h3 class="text-lg font-medium mb-4 text-slate-700 dark:text-slate-300">Heart Rating</h3>
+            <h3 class="text-lg font-medium mb-4 text-gray-700 dark:text-gray-300">Heart Rating</h3>
             <app-rating
               [rating]="heartRating"
               icon="heart"
@@ -208,7 +208,7 @@
           </div>
 
           <div>
-            <h3 class="text-lg font-medium mb-4 text-slate-700 dark:text-slate-300">Readonly Rating</h3>
+            <h3 class="text-lg font-medium mb-4 text-gray-700 dark:text-gray-300">Readonly Rating</h3>
             <app-rating [rating]="4" [readonly]="true" [showValue]="true"></app-rating>
           </div>
         </div>
@@ -217,11 +217,11 @@
 
     <!-- Loading Section -->
     <section>
-      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Loading States</h2>
+      <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200">Loading States</h2>
       <app-glass-card padding="p-6">
         <div class="space-y-6">
           <div>
-            <h3 class="text-lg font-medium mb-4 text-slate-700 dark:text-slate-300">Loading Component</h3>
+            <h3 class="text-lg font-medium mb-4 text-gray-700 dark:text-gray-300">Loading Component</h3>
             <app-loading [show]="showLoading" message="กำลังโหลดข้อมูล..."></app-loading>
             <app-glass-button variant="primary" (clicked)="showLoadingDemo()" class="mt-4">
               Show Loading (3 seconds)
@@ -233,7 +233,7 @@
 
     <!-- Empty State Section -->
     <section>
-      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Empty States</h2>
+      <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200">Empty States</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <app-empty-state
           icon="📭"
@@ -253,7 +253,7 @@
 
     <!-- Modal Section -->
     <section>
-      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Modal</h2>
+      <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200">Modal</h2>
       <app-glass-card padding="p-6">
         <div class="space-y-4">
           <app-glass-button variant="primary" (clicked)="openModal()">
@@ -266,7 +266,7 @@
             [closable]="true"
             (closeEvent)="closeModal()"
             (confirmEvent)="closeModal()">
-            <p class="text-slate-600 dark:text-slate-400">
+            <p class="text-gray-600 dark:text-gray-400">
               This is a modal dialog example. You can add any content here.
             </p>
           </app-modal>
@@ -276,7 +276,7 @@
 
     <!-- Tooltip Section -->
     <section>
-      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Tooltips</h2>
+      <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200">Tooltips</h2>
       <app-glass-card padding="p-6">
         <div class="flex flex-wrap gap-4">
           <app-tooltip text="This is a tooltip" position="bottom">
@@ -292,10 +292,10 @@
 
     <!-- Interactive Demo Section -->
     <section>
-      <h2 class="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-200">Interactive Demo</h2>
+      <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200">Interactive Demo</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <app-glass-card padding="p-6">
-          <h3 class="text-lg font-medium mb-4 text-slate-700 dark:text-slate-300">Card Variant Selection</h3>
+          <h3 class="text-lg font-medium mb-4 text-gray-700 dark:text-gray-300">Card Variant Selection</h3>
           <div class="space-y-4">
             <div class="flex gap-2">
               <app-glass-button
@@ -321,7 +321,7 @@
               </app-glass-button>
             </div>
             <app-glass-card [variant]="selectedCard" padding="p-4">
-              <p class="text-slate-600 dark:text-slate-400">
+              <p class="text-gray-600 dark:text-gray-400">
                 Selected variant: <strong>{{ selectedCard }}</strong>
               </p>
             </app-glass-card>
@@ -329,7 +329,7 @@
         </app-glass-card>
 
         <app-glass-card padding="p-6">
-          <h3 class="text-lg font-medium mb-4 text-slate-700 dark:text-slate-300">Input Demo</h3>
+          <h3 class="text-lg font-medium mb-4 text-gray-700 dark:text-gray-300">Input Demo</h3>
           <div class="space-y-4">
             <app-glass-input
               label="Demo Input"
@@ -337,9 +337,9 @@
               placeholder="Type something..."
               hint="This is a demo input field">
             </app-glass-input>
-            <div *ngIf="inputValue" class="p-4 bg-slate-100 dark:bg-slate-800 rounded-lg">
-              <p class="text-sm text-slate-600 dark:text-slate-400">Current value:</p>
-              <p class="font-mono text-slate-800 dark:text-slate-200">{{ inputValue }}</p>
+            <div *ngIf="inputValue" class="p-4 bg-gray-100/50 dark:bg-gray-800/50 rounded-lg">
+              <p class="text-sm text-gray-600 dark:text-gray-400">Current value:</p>
+              <p class="font-mono text-gray-800 dark:text-gray-200">{{ inputValue }}</p>
             </div>
           </div>
         </app-glass-card>

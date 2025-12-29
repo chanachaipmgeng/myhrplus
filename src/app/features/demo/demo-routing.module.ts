@@ -65,6 +65,8 @@ import { FullscreenDemoComponent } from './components/fullscreen-demo/fullscreen
 import { BackToTopDemoComponent } from './components/back-to-top-demo/back-to-top-demo.component';
 import { SweetAlert2DemoComponent } from './components/sweetalert2-demo/sweetalert2-demo.component';
 import { BarRatingDemoComponent } from './components/bar-rating-demo/bar-rating-demo.component';
+import { MigrationGuideDemoComponent } from './components/migration-guide-demo/migration-guide-demo.component';
+import { StaggerDemoComponent } from './components/stagger-demo/stagger-demo.component';
 // ThemeSwitcherDemoComponent removed
 
 const routes: Routes = [
@@ -327,6 +329,14 @@ const routes: Routes = [
       {
         path: 'bar-rating',
         component: BarRatingDemoComponent
+      },
+      {
+        path: 'migration-guide',
+        component: MigrationGuideDemoComponent
+      },
+      {
+        path: 'stagger',
+        component: StaggerDemoComponent
       }
       // {
       //   path: 'theme-switcher',

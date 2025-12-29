@@ -3,28 +3,28 @@
   [subtitle]="'company.dashboard.subtitle' | translate">
 </app-page-header>
 
-<div class="p-5 bg-gray-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
+<div class="p-5 min-h-screen transition-colors duration-300">
   <!-- Statistics Cards -->
   <div class="mb-8">
-    <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">{{ 'company.dashboard.statistics.title' | translate }}</h2>
+    <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">{{ 'company.dashboard.statistics.title' | translate }}</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
-      <div class="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
+      <div class="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white p-5 rounded-lg shadow-md dark:shadow-gray-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.branches }}</div>
         <div class="text-sm opacity-90">{{ 'company.dashboard.statistics.branches' | translate }}</div>
       </div>
-      <div class="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
+      <div class="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white p-5 rounded-lg shadow-md dark:shadow-gray-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.divisions }}</div>
         <div class="text-sm opacity-90">{{ 'company.dashboard.statistics.divisions' | translate }}</div>
       </div>
-      <div class="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
+      <div class="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white p-5 rounded-lg shadow-md dark:shadow-gray-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.departments }}</div>
         <div class="text-sm opacity-90">{{ 'company.dashboard.statistics.departments' | translate }}</div>
       </div>
-      <div class="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
+      <div class="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white p-5 rounded-lg shadow-md dark:shadow-gray-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.positions }}</div>
         <div class="text-sm opacity-90">{{ 'company.dashboard.statistics.positions' | translate }}</div>
       </div>
-      <div class="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white p-5 rounded-lg shadow-md dark:shadow-slate-900/50 text-center hover:scale-105 transition-transform duration-300">
+      <div class="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white p-5 rounded-lg shadow-md dark:shadow-gray-900/50 text-center hover:scale-105 transition-transform duration-300">
         <div class="text-4xl font-bold mb-2">{{ statistics.locations }}</div>
         <div class="text-sm opacity-90">{{ 'company.dashboard.statistics.locations' | translate }}</div>
       </div>
@@ -36,19 +36,19 @@
     <!-- Charts Section: 3 columns (75%) -->
     <div class="lg:col-span-3">
       <div class="mb-8">
-        <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">{{ 'company.dashboard.charts.title' | translate }}</h2>
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">{{ 'company.dashboard.charts.title' | translate }}</h2>
         
         <!-- Charts Row 1: 2 columns -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
           <!-- Pie Chart: Organization Structure -->
-          <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.divisionStructure' | translate }}</h3>
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 p-5 rounded-lg shadow-sm dark:shadow-gray-900/50 border border-gray-100 dark:border-gray-700 transition-colors duration-300">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.divisionStructure' | translate }}</h3>
             <div echarts [options]="divisionPieChartOption" class="w-full" style="height: 400px;"></div>
           </div>
           
           <!-- Bar Chart: Branches -->
-          <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.employeesByBranch' | translate }}</h3>
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 p-5 rounded-lg shadow-sm dark:shadow-gray-900/50 border border-gray-100 dark:border-gray-700 transition-colors duration-300">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.employeesByBranch' | translate }}</h3>
             <div echarts [options]="branchBarChartOption" class="w-full" style="height: 400px;"></div>
           </div>
         </div>
@@ -56,14 +56,14 @@
         <!-- Charts Row 2: 2 columns -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
           <!-- Bar Chart: Departments -->
-          <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.employeesByDepartment' | translate }}</h3>
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 p-5 rounded-lg shadow-sm dark:shadow-gray-900/50 border border-gray-100 dark:border-gray-700 transition-colors duration-300">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.employeesByDepartment' | translate }}</h3>
             <div echarts [options]="departmentBarChartOption" class="w-full" style="height: 400px;"></div>
           </div>
           
           <!-- Bar Chart: Positions -->
-          <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.positionsByLevel' | translate }}</h3>
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 p-5 rounded-lg shadow-sm dark:shadow-gray-900/50 border border-gray-100 dark:border-gray-700 transition-colors duration-300">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.positionsByLevel' | translate }}</h3>
             <div echarts [options]="positionBarChartOption" class="w-full" style="height: 400px;"></div>
           </div>
         </div>
@@ -71,14 +71,14 @@
         <!-- Charts Row 3: 2 columns -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
           <!-- Tree Map: Organization Hierarchy -->
-          <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.orgTreeMap' | translate }}</h3>
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 p-5 rounded-lg shadow-sm dark:shadow-gray-900/50 border border-gray-100 dark:border-gray-700 transition-colors duration-300">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.orgTreeMap' | translate }}</h3>
             <div echarts [options]="orgTreeMapChartOption" class="w-full" style="height: 400px;"></div>
           </div>
           
           <!-- Bar Chart: Work Locations -->
-          <div class="bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 transition-colors duration-300">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.workLocationDistribution' | translate }}</h3>
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 p-5 rounded-lg shadow-sm dark:shadow-gray-900/50 border border-gray-100 dark:border-gray-700 transition-colors duration-300">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.workLocationDistribution' | translate }}</h3>
             <div echarts [options]="locationBarChartOption" class="w-full" style="height: 400px;"></div>
           </div>
         </div>
@@ -88,55 +88,55 @@
     <!-- Navigation Cards Section: 1 column (25%) -->
     <div class="lg:col-span-1">
       <div class="sticky top-5">
-        <h2 class="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-4 transition-colors duration-300">{{ 'company.dashboard.mainMenu.title' | translate }}</h2>
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">{{ 'company.dashboard.mainMenu.title' | translate }}</h2>
         <div class="space-y-4">
           <!-- Human Resources Card -->
-          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 rounded-xl shadow-sm dark:shadow-gray-900/50 p-6 hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-gray-700 group"
                [routerLink]="['human-resources']">
             <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">business</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'company.dashboard.mainMenu.humanResources.title' | translate }}</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'company.dashboard.mainMenu.humanResources.description' | translate }}</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'company.dashboard.mainMenu.humanResources.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'company.dashboard.mainMenu.humanResources.description' | translate }}</p>
             <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
               {{ 'company.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
           <!-- Approve Setup Card -->
-          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 rounded-xl shadow-sm dark:shadow-gray-900/50 p-6 hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-gray-700 group"
                [routerLink]="['approve']">
             <div class="w-12 h-12 bg-green-50 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4 text-green-600 dark:text-green-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">check_circle</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'company.dashboard.mainMenu.approveSetup.title' | translate }}</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'company.dashboard.mainMenu.approveSetup.description' | translate }}</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'company.dashboard.mainMenu.approveSetup.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'company.dashboard.mainMenu.approveSetup.description' | translate }}</p>
             <div class="flex items-center text-green-600 dark:text-green-400 text-sm font-medium transition-colors duration-300">
               {{ 'company.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
           <!-- ESS Setup Card -->
-          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 rounded-xl shadow-sm dark:shadow-gray-900/50 p-6 hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-gray-700 group"
                [routerLink]="['ess-setup']">
             <div class="w-12 h-12 bg-purple-50 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4 text-purple-600 dark:text-purple-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">phone_android</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'company.dashboard.mainMenu.essSetup.title' | translate }}</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'company.dashboard.mainMenu.essSetup.description' | translate }}</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'company.dashboard.mainMenu.essSetup.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'company.dashboard.mainMenu.essSetup.description' | translate }}</p>
             <div class="flex items-center text-purple-600 dark:text-purple-400 text-sm font-medium transition-colors duration-300">
               {{ 'company.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>
           </div>
 
           <!-- Reports Card -->
-          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm dark:shadow-slate-900/50 p-6 hover:shadow-md dark:hover:shadow-slate-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-slate-700 group"
+          <div class="glass-card bg-white/50 dark:bg-gray-800/50 rounded-xl shadow-sm dark:shadow-gray-900/50 p-6 hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-gray-700 group"
                [routerLink]="['reports']">
             <div class="w-12 h-12 bg-orange-50 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mb-4 text-orange-600 dark:text-orange-400 transition-colors duration-300 group-hover:scale-110">
               <i class="material-icons text-xl">assessment</i>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-2 transition-colors duration-300">{{ 'company.dashboard.mainMenu.reports.title' | translate }}</h3>
-            <p class="text-sm text-gray-500 dark:text-slate-400 mb-4 transition-colors duration-300">{{ 'company.dashboard.mainMenu.reports.description' | translate }}</p>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'company.dashboard.mainMenu.reports.title' | translate }}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'company.dashboard.mainMenu.reports.description' | translate }}</p>
             <div class="flex items-center text-orange-600 dark:text-orange-400 text-sm font-medium transition-colors duration-300">
               {{ 'company.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
             </div>

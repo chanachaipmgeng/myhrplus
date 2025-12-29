@@ -1,11 +1,14 @@
-<app-page-header title="JSP to Angular Migration Guide" subtitle="Component Mapping & Layout Examples"></app-page-header>
+<app-page-header 
+  title="JSP to Angular Migration Guide" 
+  subtitle="Component Mapping & Best Practices">
+</app-page-header>
 
-<div class="space-y-8 animate-fade-in-up">
+<div class="p-6 space-y-8">
   <!-- Introduction -->
-  <app-glass-card padding="p-6">
+  <app-glass-card padding="p-6" [animate]="'fade-in'">
     <div class="relative z-10">
       <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100 flex items-center gap-2">
-        <app-icon name="info" size="md" class="text-blue-500"></app-icon>
+        <app-icon name="info" size="md" color="text-blue-500 dark:text-blue-400"></app-icon>
         Overview
       </h2>
       <p class="text-gray-600 dark:text-gray-300 mb-4">
@@ -15,24 +18,32 @@
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
         <div class="p-4 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-100 dark:border-red-800">
-          <h3 class="font-bold text-red-600 dark:text-red-400 mb-2">❌ Legacy JSP Pattern</h3>
+          <h3 class="font-bold text-red-600 dark:text-red-400 mb-2 flex items-center gap-2">
+            <app-icon name="close" size="sm"></app-icon>
+            Legacy JSP Pattern
+          </h3>
           <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 space-y-1">
-            <li>Solid backgrounds (bg-white)</li>
+            <li>Solid backgrounds (bg-white, bg-gray-50)</li>
             <li>Direct DOM manipulation ($('#id'))</li>
             <li>Bootstrap class names (form-control, card)</li>
             <li>Spinner loaders</li>
             <li>Hardcoded text</li>
+            <li>Page refresh on navigation</li>
           </ul>
         </div>
         
         <div class="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-800">
-          <h3 class="font-bold text-green-600 dark:text-green-400 mb-2">✅ Modern Angular Pattern</h3>
+          <h3 class="font-bold text-green-600 dark:text-green-400 mb-2 flex items-center gap-2">
+            <app-icon name="check_circle" size="sm"></app-icon>
+            Modern Angular Pattern
+          </h3>
           <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 space-y-1">
-            <li>Glass backgrounds (.glass-card)</li>
+            <li>Transparent/Glass backgrounds</li>
             <li>Angular directives & bindings</li>
-            <li>Glass components (app-glass-input)</li>
+            <li>Glass components (app-glass-*)</li>
             <li>Skeleton loaders</li>
             <li>i18n Translation</li>
+            <li>SPA routing (no page refresh)</li>
           </ul>
         </div>
       </div>
@@ -43,7 +54,7 @@
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
     
     <!-- Input Field -->
-    <app-glass-card padding="p-6" [animate]="true">
+    <app-glass-card padding="p-6" [animate]="'fade-in'">
       <div class="relative z-10">
         <div class="flex justify-between items-center mb-6">
           <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Input Fields</h3>
@@ -53,7 +64,7 @@
         <div class="space-y-6">
           <!-- Legacy -->
           <div class="p-4 rounded-lg border border-dashed border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
-            <div class="text-xs font-mono text-gray-500 mb-2">Legacy JSP (Bootstrap)</div>
+            <div class="text-xs font-mono text-gray-500 mb-2">❌ Legacy JSP (Bootstrap)</div>
             <div class="form-group">
               <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Employee Name</label>
               <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Enter name">
@@ -62,11 +73,10 @@
 
           <!-- Modern -->
           <div class="p-4 rounded-lg border border-blue-200 dark:border-blue-900/50 bg-blue-50/50 dark:bg-blue-900/10">
-            <div class="text-xs font-mono text-blue-600 dark:text-blue-400 mb-2">Angular Glass</div>
+            <div class="text-xs font-mono text-blue-600 dark:text-blue-400 mb-2">✅ Angular Glass</div>
             <app-glass-input
               label="Employee Name"
               placeholder="Enter name"
-              [icon]="'person'"
               [(ngModel)]="demoValue">
             </app-glass-input>
           </div>
@@ -79,7 +89,7 @@
     </app-glass-card>
 
     <!-- Buttons -->
-    <app-glass-card padding="p-6" [animate]="true">
+    <app-glass-card padding="p-6" [animate]="'fade-in'">
       <div class="relative z-10">
         <div class="flex justify-between items-center mb-6">
           <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Buttons</h3>
@@ -89,7 +99,7 @@
         <div class="space-y-6">
           <!-- Legacy -->
           <div class="p-4 rounded-lg border border-dashed border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
-            <div class="text-xs font-mono text-gray-500 mb-2">Legacy JSP (Bootstrap)</div>
+            <div class="text-xs font-mono text-gray-500 mb-2">❌ Legacy JSP (Bootstrap)</div>
             <div class="flex gap-2">
               <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save</button>
               <button class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300">Cancel</button>
@@ -98,7 +108,7 @@
 
           <!-- Modern -->
           <div class="p-4 rounded-lg border border-blue-200 dark:border-blue-900/50 bg-blue-50/50 dark:bg-blue-900/10">
-            <div class="text-xs font-mono text-blue-600 dark:text-blue-400 mb-2">Angular Glass</div>
+            <div class="text-xs font-mono text-blue-600 dark:text-blue-400 mb-2">✅ Angular Glass</div>
             <div class="flex gap-3">
               <app-glass-button variant="primary" icon="save">Save Changes</app-glass-button>
               <app-glass-button variant="secondary" icon="close">Cancel</app-glass-button>
@@ -113,7 +123,7 @@
     </app-glass-card>
 
     <!-- Cards & Containers -->
-    <app-glass-card padding="p-6" [animate]="true">
+    <app-glass-card padding="p-6" [animate]="'fade-in'">
       <div class="relative z-10">
         <div class="flex justify-between items-center mb-6">
           <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Containers</h3>
@@ -123,7 +133,7 @@
         <div class="space-y-6">
           <!-- Legacy -->
           <div class="p-4 rounded-lg border border-dashed border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
-            <div class="text-xs font-mono text-gray-500 mb-2">Legacy JSP (.card)</div>
+            <div class="text-xs font-mono text-gray-500 mb-2">❌ Legacy JSP (.card)</div>
             <div class="bg-white border border-gray-200 rounded p-4 shadow-sm">
               <div class="font-bold mb-2 text-gray-800">Card Title</div>
               <div class="text-gray-600">Card content goes here...</div>
@@ -132,8 +142,8 @@
 
           <!-- Modern -->
           <div class="p-4 rounded-lg border border-blue-200 dark:border-blue-900/50 bg-blue-50/50 dark:bg-blue-900/10">
-            <div class="text-xs font-mono text-blue-600 dark:text-blue-400 mb-2">Angular Glass</div>
-            <app-glass-card>
+            <div class="text-xs font-mono text-blue-600 dark:text-blue-400 mb-2">✅ Angular Glass</div>
+            <app-glass-card padding="p-4">
               <div class="relative z-10">
                 <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Glass Card</h4>
                 <p class="text-gray-600 dark:text-gray-300">Content adapts to glass theme...</p>
@@ -149,7 +159,7 @@
     </app-glass-card>
 
     <!-- Loading State -->
-    <app-glass-card padding="p-6" [animate]="true">
+    <app-glass-card padding="p-6" [animate]="'fade-in'">
       <div class="relative z-10">
         <div class="flex justify-between items-center mb-6">
           <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Loading State</h3>
@@ -159,15 +169,15 @@
         <div class="space-y-6">
           <!-- Legacy -->
           <div class="p-4 rounded-lg border border-dashed border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
-            <div class="text-xs font-mono text-gray-500 mb-2">Legacy JSP (Spinner)</div>
+            <div class="text-xs font-mono text-gray-500 mb-2">❌ Legacy JSP (Spinner)</div>
             <div class="flex justify-center p-4">
-              <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+              <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 dark:border-gray-100"></div>
             </div>
           </div>
 
           <!-- Modern -->
           <div class="p-4 rounded-lg border border-blue-200 dark:border-blue-900/50 bg-blue-50/50 dark:bg-blue-900/10">
-            <div class="text-xs font-mono text-blue-600 dark:text-blue-400 mb-2">Angular Glass</div>
+            <div class="text-xs font-mono text-blue-600 dark:text-blue-400 mb-2">✅ Angular Glass (Skeleton)</div>
             <app-skeleton-loader type="text" [rows]="3"></app-skeleton-loader>
           </div>
         </div>
@@ -179,5 +189,137 @@
     </app-glass-card>
 
   </div>
-</div>
 
+  <!-- Background Refinement Section -->
+  <app-glass-card padding="p-6" [animate]="'fade-in'">
+    <div class="relative z-10">
+      <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100 flex items-center gap-2">
+        <app-icon name="palette" size="md" color="text-blue-500 dark:text-blue-400"></app-icon>
+        Background Refinement
+      </h2>
+      <p class="text-gray-600 dark:text-gray-300 mb-6">
+        <strong>Critical Rule:</strong> Do NOT use solid background colors on main page containers. 
+        Let the global theme gradient show through for a beautiful, cohesive design.
+      </p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Bad Example -->
+        <div class="p-4 rounded-lg border-2 border-red-300 dark:border-red-700 bg-red-50/50 dark:bg-red-900/20">
+          <h3 class="font-bold text-red-600 dark:text-red-400 mb-3 flex items-center gap-2">
+            <app-icon name="error" size="sm"></app-icon>
+            ❌ Bad: Solid Background
+          </h3>
+          <div class="p-4 bg-gray-50 dark:bg-slate-900 rounded border border-gray-200 dark:border-gray-700 mb-4">
+            <p class="text-sm text-gray-600 dark:text-gray-400">This blocks the theme gradient</p>
+          </div>
+          <app-code-viewer [code]="backgroundCode.split('\n\n')[0]" language="html"></app-code-viewer>
+        </div>
+
+        <!-- Good Example -->
+        <div class="p-4 rounded-lg border-2 border-green-300 dark:border-green-700 bg-green-50/50 dark:bg-green-900/20">
+          <h3 class="font-bold text-green-600 dark:text-green-400 mb-3 flex items-center gap-2">
+            <app-icon name="check_circle" size="sm"></app-icon>
+            ✅ Good: Transparent Background
+          </h3>
+          <div class="p-4 rounded border border-gray-200 dark:border-gray-700 mb-4">
+            <p class="text-sm text-gray-600 dark:text-gray-400">Theme gradient shows through</p>
+          </div>
+          <app-code-viewer [code]="backgroundCode.split('\n\n')[1]" language="html"></app-code-viewer>
+        </div>
+      </div>
+    </div>
+  </app-glass-card>
+
+  <!-- Standard Layout Pattern -->
+  <app-glass-card padding="p-6" [animate]="'fade-in'">
+    <div class="relative z-10">
+      <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100 flex items-center gap-2">
+        <app-icon name="view_module" size="md" color="text-blue-500 dark:text-blue-400"></app-icon>
+        Standard List Page Layout
+      </h2>
+      <p class="text-gray-600 dark:text-gray-300 mb-6">
+        Use this pattern for all Master Data List pages (Department, Branch, Company, etc.)
+      </p>
+
+      <div class="p-4 rounded-lg border border-blue-200 dark:border-blue-900/50 bg-blue-50/50 dark:bg-blue-900/10 mb-6">
+        <div class="text-xs font-mono text-blue-600 dark:text-blue-400 mb-4">✅ Standard Pattern</div>
+        <div class="space-y-4">
+          <div class="p-3 bg-white/50 dark:bg-gray-800/50 rounded border border-gray-200 dark:border-gray-700">
+            <div class="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1">Page Header</div>
+            <div class="h-8 bg-gray-200 dark:bg-gray-700 rounded"></div>
+          </div>
+          <div class="p-3 bg-white/50 dark:bg-gray-800/50 rounded border border-gray-200 dark:border-gray-700">
+            <div class="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1">Content Area (Transparent)</div>
+            <div class="space-y-2">
+              <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+              <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+              <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <app-code-viewer [code]="layoutCode" language="html"></app-code-viewer>
+    </div>
+  </app-glass-card>
+
+  <!-- Best Practices Checklist -->
+  <app-glass-card padding="p-6" [animate]="'fade-in'">
+    <div class="relative z-10">
+      <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100 flex items-center gap-2">
+        <app-icon name="checklist" size="md" color="text-blue-500 dark:text-blue-400"></app-icon>
+        Migration Checklist
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex items-start gap-3 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+          <app-icon name="check_circle" size="sm" color="text-green-600 dark:text-green-400"></app-icon>
+          <div>
+            <div class="font-semibold text-green-700 dark:text-green-300">Use Standalone Components</div>
+            <div class="text-sm text-gray-600 dark:text-gray-400">All new components must be standalone: true</div>
+          </div>
+        </div>
+        
+        <div class="flex items-start gap-3 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+          <app-icon name="check_circle" size="sm" color="text-green-600 dark:text-green-400"></app-icon>
+          <div>
+            <div class="font-semibold text-green-700 dark:text-green-300">Transparent Backgrounds</div>
+            <div class="text-sm text-gray-600 dark:text-gray-400">Remove bg-white, bg-gray-50 from containers</div>
+          </div>
+        </div>
+        
+        <div class="flex items-start gap-3 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+          <app-icon name="check_circle" size="sm" color="text-green-600 dark:text-green-400"></app-icon>
+          <div>
+            <div class="font-semibold text-green-700 dark:text-green-300">Skeleton Loading</div>
+            <div class="text-sm text-gray-600 dark:text-gray-400">Use app-skeleton-loader instead of spinner</div>
+          </div>
+        </div>
+        
+        <div class="flex items-start gap-3 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+          <app-icon name="check_circle" size="sm" color="text-green-600 dark:text-green-400"></app-icon>
+          <div>
+            <div class="font-semibold text-green-700 dark:text-green-300">Reactive Forms</div>
+            <div class="text-sm text-gray-600 dark:text-gray-400">Use FormGroup/FormControl, not ngModel</div>
+          </div>
+        </div>
+        
+        <div class="flex items-start gap-3 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+          <app-icon name="check_circle" size="sm" color="text-green-600 dark:text-green-400"></app-icon>
+          <div>
+            <div class="font-semibold text-green-700 dark:text-green-300">BaseApiService</div>
+            <div class="text-sm text-gray-600 dark:text-gray-400">Extend BaseApiService for all services</div>
+          </div>
+        </div>
+        
+        <div class="flex items-start gap-3 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+          <app-icon name="check_circle" size="sm" color="text-green-600 dark:text-green-400"></app-icon>
+          <div>
+            <div class="font-semibold text-green-700 dark:text-green-300">i18n Translation</div>
+            <div class="text-sm text-gray-600 dark:text-gray-400">Use | translate pipe and TranslateService</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </app-glass-card>
+</div>

@@ -28,8 +28,8 @@
             </div>
           </app-glass-card>
         } @else {
-          @for (request of leaveRequests; track request.id) {
-            <app-glass-card>
+          @for (request of leaveRequests; track request.id; let i = $index) {
+            <app-glass-card [appStagger]="i" [staggerDelay]="0.1">
               <div class="p-6">
                 <div class="flex items-start justify-between">
                   <div class="flex-1">

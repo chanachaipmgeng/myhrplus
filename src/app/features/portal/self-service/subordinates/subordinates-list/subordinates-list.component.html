@@ -6,8 +6,8 @@
     { label: 'ลูกน้อง', link: '/portal/self-service/subordinates' }
   ]">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-4">
-    @if (isLoading) {
-      <app-loading></app-loading>
+    @if (isLoading()) {
+      <app-skeleton-loader type="list" [rows]="5" [showAvatar]="true"></app-skeleton-loader>
     } @else {
       @if (subordinates.length === 0) {
         <app-glass-card>
@@ -17,8 +17,8 @@
           </div>
         </app-glass-card>
       } @else {
-        @for (sub of subordinates; track sub.id) {
-          <app-glass-card>
+        @for (sub of subordinates; track sub.id; let i = $index) {
+          <app-glass-card [appStagger]="i" [staggerDelay]="0.1">
             <div class="p-6">
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-4">
@@ -45,4 +45,3 @@
     }
   </div>
 </app-page-layout>
-

@@ -2,13 +2,15 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '@shared/shared.module';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
 import { HUMAN_RESOURCES_MENU_ITEMS, HumanResourcesMenuItem, getMenuItemsByCategory } from './config/human-resources-menu.config';
 
 @Component({
   selector: 'app-human-resources-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, PageHeaderComponent],
+  imports: [CommonModule, RouterModule, TranslateModule, SharedModule, PageHeaderComponent, GlassCardComponent],
   templateUrl: './human-resources-list.component.html'
 })
 export class HumanResourcesListComponent {

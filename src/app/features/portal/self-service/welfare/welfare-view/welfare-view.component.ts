@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../../../../../shared/shared.module';
 import { PageLayoutComponent } from '../../../../../shared/components/page-layout/page-layout.component';
 import { GlassCardComponent } from '../../../../../shared/components/glass-card/glass-card.component';
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
@@ -22,6 +23,7 @@ interface WelfareItem {
   imports: [
     CommonModule,
     RouterModule,
+    SharedModule,
     PageLayoutComponent,
     GlassCardComponent,
     LoadingComponent,

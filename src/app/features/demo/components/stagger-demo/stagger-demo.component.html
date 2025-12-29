@@ -1,0 +1,131 @@
+<div class="w-full py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <app-page-header
+    title="Stagger Directive"
+    subtitle="Directive สำหรับจัดการ staggered animation delays อัตโนมัติ">
+  </app-page-header>
+
+  <div class="space-y-8 animate-fade-in-up">
+    <!-- Introduction -->
+    <app-glass-card padding="p-6">
+      <div class="relative z-10">
+        <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100 flex items-center gap-2">
+          <app-icon name="info" size="md" class="text-blue-500"></app-icon>
+          Overview
+        </h2>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+          `appStagger` directive ช่วยให้การเพิ่ม staggered animations ให้กับ list items เป็นเรื่องง่าย
+          โดยไม่ต้องเขียน `[style.animation-delay]` ซ้ำๆ ทุกครั้ง
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+          <div class="p-4 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-100 dark:border-red-800">
+            <h3 class="font-bold text-red-600 dark:text-red-400 mb-2">❌ Manual Way</h3>
+            <pre class="text-xs text-gray-600 dark:text-gray-400 overflow-x-auto"><code>@for (item of items; track item.id; let i = $index) {
+  &lt;div 
+    class="animate-fade-in-up"
+    [style.animation-delay]="(i * 0.1) + 's'"&gt;
+    <!-- content -->
+  &lt;/div&gt;
+}</code></pre>
+          </div>
+
+          <div class="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-800">
+            <h3 class="font-bold text-green-600 dark:text-green-400 mb-2">✅ With appStagger</h3>
+            <pre class="text-xs text-gray-600 dark:text-gray-400 overflow-x-auto"><code>@for (item of items; track item.id; let i = $index) {
+  &lt;div [appStagger]="i" [staggerDelay]="0.1"&gt;
+    <!-- content -->
+  &lt;/div&gt;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </app-glass-card>
+
+    <!-- Props Table -->
+    <app-glass-card padding="p-6">
+      <div class="relative z-10">
+        <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">Props</h2>
+        <app-props-table [props]="props"></app-props-table>
+      </div>
+    </app-glass-card>
+
+    <!-- Live Demo -->
+    <app-glass-card padding="p-6">
+      <div class="relative z-10">
+        <h2 class="text-xl font-bold mb-6 text-gray-800 dark:text-gray-100">Live Demo</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          @for (item of items; track item.id; let i = $index) {
+            <app-glass-card [appStagger]="i" [staggerDelay]="0.1">
+              <div class="p-4">
+                <div class="flex items-center gap-3 mb-2">
+                  <div [ngClass]="'w-10 h-10 rounded-full flex items-center justify-center ' + getColorClass(item.color)">
+                    <span [ngClass]="'font-bold ' + getTextColorClass(item.color)">{{ i + 1 }}</span>
+                  </div>
+                  <h3 class="font-semibold text-gray-800 dark:text-gray-100">{{ item.title }}</h3>
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-400">{{ item.description }}</p>
+              </div>
+            </app-glass-card>
+          }
+        </div>
+
+        <div class="p-4 glass-card rounded-lg">
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
+            <strong>Note:</strong> Items จะแสดงผลแบบ staggered (ทีละตัว) โดยมี delay 0.1s ต่อ item
+          </p>
+        </div>
+      </div>
+    </app-glass-card>
+
+    <!-- Code Examples -->
+    <app-glass-card padding="p-6">
+      <div class="relative z-10">
+        <h2 class="text-xl font-bold mb-6 text-gray-800 dark:text-gray-100">Code Examples</h2>
+
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300">Basic Usage</h3>
+            <app-code-viewer [code]="basicExample" language="html" title="Basic Stagger Usage"></app-code-viewer>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300">Custom Delay</h3>
+            <app-code-viewer [code]="customDelayExample" language="html" title="Custom Delay Interval"></app-code-viewer>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300">Complete Example</h3>
+            <app-code-viewer [code]="fullExample" language="html" title="Complete Example with Glass Card"></app-code-viewer>
+          </div>
+        </div>
+      </div>
+    </app-glass-card>
+
+    <!-- Best Practices -->
+    <app-glass-card padding="p-6">
+      <div class="relative z-10">
+        <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">Best Practices</h2>
+        <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+          <li class="flex items-start gap-2">
+            <app-icon name="check_circle" size="sm" class="text-green-500 mt-1 flex-shrink-0"></app-icon>
+            <span>ใช้ <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs">staggerDelay="0.1"</code> สำหรับ list items ทั่วไป</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <app-icon name="check_circle" size="sm" class="text-green-500 mt-1 flex-shrink-0"></app-icon>
+            <span>ใช้ <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs">staggerDelay="0.05"</code> สำหรับ lists ที่มี items มาก (10+ items)</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <app-icon name="check_circle" size="sm" class="text-green-500 mt-1 flex-shrink-0"></app-icon>
+            <span>ใช้ <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs">staggerDelay="0.15"</code> สำหรับ lists ที่มี items น้อย (3-5 items) เพื่อให้เห็น effect ชัดเจน</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <app-icon name="check_circle" size="sm" class="text-green-500 mt-1 flex-shrink-0"></app-icon>
+            <span>Directive นี้จะเพิ่ม class <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs">animate-fade-in-up</code> และ set <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs">animation-delay</code> อัตโนมัติ</span>
+          </li>
+        </ul>
+      </div>
+    </app-glass-card>
+  </div>
+</div>
+

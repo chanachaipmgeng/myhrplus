@@ -6,63 +6,73 @@
 
 <div class="p-6 min-h-screen transition-colors duration-300">
   <!-- Company Information Section -->
-  <h3 class="text-lg font-bold text-gray-800 dark:text-slate-100 mb-4 border-b dark:border-slate-700 pb-2 transition-colors duration-300">
+  <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-4 border-b dark:border-gray-700 pb-2 transition-colors duration-300">
     {{ 'company.humanResources.sections.companyInformation' | translate }}
   </h3>
   
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-    <a *ngFor="let item of companyInformationItems"
-       [routerLink]="[item.route]" 
-       class="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md dark:hover:shadow-slate-900/50 transition-all duration-300 group cursor-pointer"
-       [ngClass]="getHoverBorderColorClass(item.badgeColor)">
-      <div class="flex items-center justify-between mb-2">
-        <span class="text-xs font-semibold px-2 py-1 rounded transition-colors duration-300"
-              [ngClass]="getBadgeColorClass(item.badgeColor)">
-          {{ item.code }}
-        </span>
-        <i class="material-icons text-gray-400 dark:text-slate-500 transition-colors duration-300"
-           [ngClass]="getHoverIconColorClass(item.badgeColor)">
-          {{ item.icon }}
-        </i>
-      </div>
-      <h4 class="font-medium text-gray-800 dark:text-slate-100 transition-colors duration-300"
-          [ngClass]="getHoverTextColorClass(item.badgeColor)">
-        {{ item.labelThai }}
-      </h4>
-      <p class="text-xs text-gray-500 dark:text-slate-400 mt-1 transition-colors duration-300">
-        {{ item.description }}
-      </p>
-    </a>
+    <app-glass-card
+      *ngFor="let item of companyInformationItems; let i = index"
+      padding="p-4"
+      customClass="border border-gray-200/50 dark:border-gray-700/50 hover:shadow-md transition-all duration-300 group cursor-pointer"
+      [appStagger]="i"
+      [staggerDelay]="0.05"
+      [ngClass]="getHoverBorderColorClass(item.badgeColor)">
+      <a [routerLink]="[item.route]" class="block">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold px-2 py-1 rounded transition-colors duration-300"
+                [ngClass]="getBadgeColorClass(item.badgeColor)">
+            {{ item.code }}
+          </span>
+          <i class="material-icons text-gray-400 dark:text-gray-500 transition-colors duration-300"
+             [ngClass]="getHoverIconColorClass(item.badgeColor)">
+            {{ item.icon }}
+          </i>
+        </div>
+        <h4 class="font-medium text-gray-800 dark:text-gray-100 transition-colors duration-300"
+            [ngClass]="getHoverTextColorClass(item.badgeColor)">
+          {{ item.labelThai }}
+        </h4>
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 transition-colors duration-300">
+          {{ item.description }}
+        </p>
+      </a>
+    </app-glass-card>
   </div>
 
   <!-- Branch and Business Unit Section -->
-  <h3 class="text-lg font-bold text-gray-800 dark:text-slate-100 mb-4 mt-8 border-b dark:border-slate-700 pb-2 transition-colors duration-300">
+  <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-4 mt-8 border-b dark:border-gray-700 pb-2 transition-colors duration-300">
     {{ 'company.humanResources.sections.branchBusinessUnit' | translate }}
   </h3>
   
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-    <a *ngFor="let item of branchBusinessUnitItems"
-       [routerLink]="[item.route]" 
-       class="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md dark:hover:shadow-slate-900/50 transition-all duration-300 group cursor-pointer"
-       [ngClass]="getHoverBorderColorClass(item.badgeColor)">
-      <div class="flex items-center justify-between mb-2">
-        <span class="text-xs font-semibold px-2 py-1 rounded transition-colors duration-300"
-              [ngClass]="getBadgeColorClass(item.badgeColor)">
-          {{ item.code }}
-        </span>
-        <i class="material-icons text-gray-400 dark:text-slate-500 transition-colors duration-300"
-           [ngClass]="getHoverIconColorClass(item.badgeColor)">
-          {{ item.icon }}
-        </i>
-      </div>
-      <h4 class="font-medium text-gray-800 dark:text-slate-100 transition-colors duration-300"
-          [ngClass]="getHoverTextColorClass(item.badgeColor)">
-        {{ item.labelThai }}
-      </h4>
-      <p class="text-xs text-gray-500 dark:text-slate-400 mt-1 transition-colors duration-300">
-        {{ item.description }}
-      </p>
-    </a>
+    <app-glass-card
+      *ngFor="let item of branchBusinessUnitItems; let i = index"
+      padding="p-4"
+      customClass="border border-gray-200/50 dark:border-gray-700/50 hover:shadow-md transition-all duration-300 group cursor-pointer"
+      [appStagger]="i"
+      [staggerDelay]="0.05"
+      [ngClass]="getHoverBorderColorClass(item.badgeColor)">
+      <a [routerLink]="[item.route]" class="block">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold px-2 py-1 rounded transition-colors duration-300"
+                [ngClass]="getBadgeColorClass(item.badgeColor)">
+            {{ item.code }}
+          </span>
+          <i class="material-icons text-gray-400 dark:text-gray-500 transition-colors duration-300"
+             [ngClass]="getHoverIconColorClass(item.badgeColor)">
+            {{ item.icon }}
+          </i>
+        </div>
+        <h4 class="font-medium text-gray-800 dark:text-gray-100 transition-colors duration-300"
+            [ngClass]="getHoverTextColorClass(item.badgeColor)">
+          {{ item.labelThai }}
+        </h4>
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 transition-colors duration-300">
+          {{ item.description }}
+        </p>
+      </a>
+    </app-glass-card>
   </div>
 </div>
 

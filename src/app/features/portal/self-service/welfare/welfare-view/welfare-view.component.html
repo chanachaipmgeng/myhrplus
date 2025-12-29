@@ -15,8 +15,8 @@
       @if (isLoading) {
         <app-loading></app-loading>
       } @else {
-        @for (item of welfareItems; track item.id) {
-          <app-glass-card>
+        @for (item of welfareItems; track item.id; let i = $index) {
+          <app-glass-card [appStagger]="i" [staggerDelay]="0.1">
             <div class="p-6">
               <div class="flex items-start justify-between">
                 <div class="flex-1">

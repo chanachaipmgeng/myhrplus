@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../../../../../shared/shared.module';
 import { PageLayoutComponent } from '../../../../../shared/components/page-layout/page-layout.component';
 import { GlassCardComponent } from '../../../../../shared/components/glass-card/glass-card.component';
 import { GlassButtonComponent } from '../../../../../shared/components/glass-button/glass-button.component';
@@ -23,6 +24,7 @@ interface LeaveRequest {
   imports: [
     CommonModule,
     RouterModule,
+    SharedModule,
     PageLayoutComponent,
     GlassCardComponent,
     GlassButtonComponent,

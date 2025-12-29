@@ -5,10 +5,13 @@
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div
-      *ngFor="let item of menuItems"
-      class="menu-card p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105"
-      [class]="item.color"
+    <app-glass-card
+      *ngFor="let item of menuItems; let i = index"
+      [appStagger]="i"
+      [staggerDelay]="0.1"
+      padding="p-6"
+      customClass="rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105"
+      [style.background]="item.color"
       (click)="navigateTo(item.route)">
       <div class="flex items-center gap-4">
         <div class="icon-container text-white text-4xl">
@@ -19,7 +22,7 @@
           <p class="text-white text-sm opacity-90">{{ item.description }}</p>
         </div>
       </div>
-    </div>
+    </app-glass-card>
   </div>
 </div>
 

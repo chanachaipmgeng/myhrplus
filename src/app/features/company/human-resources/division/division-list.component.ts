@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { SharedModule } from '@shared/shared.module';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { DataGridComponent } from '@shared/components/data-grid/data-grid.component';
 import { DivisionService } from '../../services/division.service';
@@ -15,6 +16,7 @@ import { DivisionFormComponent } from './division-form.component';
     CommonModule,
     RouterModule,
     TranslateModule,
+    SharedModule,
     PageHeaderComponent,
     DataGridComponent,
     DivisionFormComponent
@@ -24,7 +26,7 @@ import { DivisionFormComponent } from './division-form.component';
 export class DivisionListComponent implements OnInit {
   public service = inject(DivisionService);
   private translate = inject(TranslateService);
-  
+
   data$ = this.service.getAll();
   showModal = false;
   selectedItem: Division | null = null;
@@ -53,13 +55,13 @@ export class DivisionListComponent implements OnInit {
       { field: 'tdesc', headerText: this.translate.instant('company.division.column.tdesc'), width: '200px' },
       { field: 'edesc', headerText: this.translate.instant('company.division.column.edesc'), width: '200px' },
       { field: 'short_name', headerText: this.translate.instant('company.division.column.shortName'), width: '100px' },
-      { 
-        field: 'active', 
-        headerText: this.translate.instant('company.division.column.active'), 
+      {
+        field: 'active',
+        headerText: this.translate.instant('company.division.column.active'),
         width: '100px',
         type: 'boolean' as const,
         formatter: (value: string) => {
-          return value === '1' 
+          return value === '1'
             ? this.translate.instant('common.active')
             : this.translate.instant('common.inactive');
         }

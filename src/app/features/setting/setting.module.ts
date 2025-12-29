@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../../shared/shared.module';
 import { LayoutModule } from '../../layout/layout.module';
 import { SettingRoutingModule } from './setting-routing.module';
 import { SettingHomeComponent } from './setting-home/setting-home.component';
+import { GlassCardComponent } from '../../shared/components/glass-card/glass-card.component';
 
 @NgModule({
   declarations: [
-    // SettingHomeComponent is now standalone
+    SettingHomeComponent
   ],
   imports: [
     CommonModule,
@@ -17,8 +19,8 @@ import { SettingHomeComponent } from './setting-home/setting-home.component';
     TranslateModule,
     SharedModule,
     LayoutModule,
-    SettingHomeComponent, // Import standalone component
-    SettingRoutingModule
+    SettingRoutingModule,
+    GlassCardComponent
   ]
 })
 export class SettingModule { }

@@ -4,12 +4,16 @@
   [actions]="headerActions">
 </app-page-header>
 
-<div class="p-6">
-  <app-data-grid
-    [dataSource]="(data$ | async) || []"
-    [columns]="columns"
-    (rowSelected)="onEdit($event)">
-  </app-data-grid>
+<div class="p-6 min-h-screen transition-colors duration-300">
+  @if (service.loading()) {
+    <app-skeleton-loader type="table" [rows]="10" [columns]="columns.length || 5"></app-skeleton-loader>
+  } @else {
+    <app-data-grid
+      [dataSource]="(data$ | async) || []"
+      [columns]="columns"
+      (rowSelected)="onEdit($event)">
+    </app-data-grid>
+  }
 </div>
 
 <app-company-type-form
@@ -18,5 +22,3 @@
   (close)="showModal = false"
   (save)="onSaveSuccess()">
 </app-company-type-form>
-
-

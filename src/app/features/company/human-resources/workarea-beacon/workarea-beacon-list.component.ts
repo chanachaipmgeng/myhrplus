@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { SharedModule } from '@shared/shared.module';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { DataGridComponent } from '@shared/components/data-grid/data-grid.component';
 import { WorkareaBeaconService } from '../../services/workarea-beacon.service';
@@ -15,6 +16,7 @@ import { WorkareaBeaconFormComponent } from './workarea-beacon-form.component';
     CommonModule,
     RouterModule,
     TranslateModule,
+    SharedModule,
     PageHeaderComponent,
     DataGridComponent,
     WorkareaBeaconFormComponent

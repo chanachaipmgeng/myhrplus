@@ -89,6 +89,7 @@ export class DemoIndexComponent {
     { name: 'Form Validation Messages', route: 'form-validation-messages', description: 'Form validation messages component', category: 'Form', icon: '✅' },
 
     // Other
+    { name: 'Migration Guide', route: 'migration-guide', description: 'JSP to Angular migration guide with component mapping and best practices', category: 'Other', icon: '📚' },
     { name: 'Icon', route: 'icon', description: 'Material Icons wrapper component', category: 'Other', icon: '🎨' },
     { name: 'Avatar', route: 'avatar', description: 'Avatar component with status', category: 'Other', icon: '👤' },
     { name: 'Theme Toggle', route: 'theme-toggle', description: 'Theme mode and color toggle', category: 'Other', icon: '🎨' },

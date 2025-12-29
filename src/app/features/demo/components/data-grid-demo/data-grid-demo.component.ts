@@ -1,16 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '../../../../shared/shared.module';
 import { DataGridComponent, DataGridColumn } from '../../../../shared/components/data-grid/data-grid.component';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
+import { GlassButtonComponent } from '../../../../shared/components/glass-button/glass-button.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-data-grid-demo',
   standalone: true,
-  imports: [CommonModule, DataGridComponent, GlassCardComponent],
+  imports: [CommonModule, SharedModule, DataGridComponent, GlassCardComponent, GlassButtonComponent, CodeViewerComponent],
   templateUrl: './data-grid-demo.component.html',
   styleUrls: ['./data-grid-demo.component.scss']
 })
 export class DataGridDemoComponent {
+  // Loading state for skeleton loader demo
+  isLoading = signal(false);
   // Sample data
   gridData: any[] = [
     { id: 1, name: 'John Doe', email: 'john@example.com', department: 'IT', salary: 50000, joinDate: new Date('2023-01-15'), active: true },
@@ -88,5 +93,61 @@ export class DataGridDemoComponent {
   onDataBound(event: any): void {
     console.log('Data bound:', event);
   }
+
+  // Toggle loading state for demo
+  toggleLoading(): void {
+    this.isLoading.set(!this.isLoading());
+    if (this.isLoading()) {
+      setTimeout(() => {
+        this.isLoading.set(false);
+      }, 2000);
+    }
+  }
+
+  // Code examples for display
+  basicExample = `// TypeScript
+import { DataGridColumn } from '../../shared/components/data-grid/data-grid.component';
+
+columns: DataGridColumn[] = [
+  { field: 'id', headerText: 'ID', width: 80, type: 'number' },
+  { field: 'name', headerText: 'ชื่อ', width: 150, type: 'string' },
+  { field: 'email', headerText: 'อีเมล', width: 200, type: 'string' }
+];
+
+gridData: any[] = [
+  { id: 1, name: 'John Doe', email: 'john@example.com' },
+  { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
+];
+
+// HTML
+<app-data-grid
+  [dataSource]="gridData"
+  [columns]="columns"
+  [allowPaging]="true"
+  [allowSorting]="true"
+  [allowFiltering]="true"
+  [showToolbar]="true"
+  [height]="'600px'"
+  (rowSelected)="onRowSelected($event)">
+</app-data-grid>`;
+
+  skeletonLoadingExample = `// HTML with Skeleton Loading (Best Practice)
+// ใน production code ใช้ service.loading() จาก BaseApiService
+@if (service.loading()) {
+  <app-skeleton-loader type="table" [rows]="10" [columns]="columns.length"></app-skeleton-loader>
+} @else {
+  <app-data-grid
+    [dataSource]="(data$ | async) || []"
+    [columns]="columns"
+    (rowSelected)="onEdit($event)">
+  </app-data-grid>
+}
+
+// หรือใช้ signal สำหรับ local loading state
+@if (isLoading()) {
+  <app-skeleton-loader type="table" [rows]="10" [columns]="columns.length"></app-skeleton-loader>
+} @else {
+  <app-data-grid [dataSource]="gridData" [columns]="columns"></app-data-grid>
+}`;
 }
 
