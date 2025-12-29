@@ -1,35 +1,73 @@
 <div class="w-full py-12">
   <div class="text-center mb-12">
-    <h1 class="text-4xl md:text-3xl sm:text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Component Demo Showcase
-    </h1>
-    <p class="text-lg text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 max-w-2xl mx-auto">
+    <div class="flex items-center justify-center gap-3 mb-4">
+      <span class="text-5xl md:text-4xl sm:text-3xl animate-bounce">🎨</span>
+      <h1 class="text-4xl md:text-3xl sm:text-2xl font-bold m-0 
+                text-gray-900 dark:text-gray-100 
+                theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 
+                theme-gemini:bg-clip-text theme-gemini:text-transparent">
+        Component Demo Showcase
+      </h1>
+    </div>
+    <p class="text-lg text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 max-w-2xl mx-auto leading-relaxed">
       ตัวอย่างการใช้งาน Components ทั้งหมดพร้อมโค้ดตัวอย่างและ API Documentation
     </p>
+    <div class="mt-6 flex items-center justify-center gap-4 text-sm text-gray-500 dark:text-gray-400 theme-gemini:text-white/60">
+      <span class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+        <span>{{ components.length }} Components</span>
+      </span>
+      <span class="text-gray-300 dark:text-gray-600">•</span>
+      <span class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+        <span>{{ categories.length }} Categories</span>
+      </span>
+    </div>
   </div>
 
   <div class="flex flex-col gap-12">
     @for (category of categories; track category) {
       <section class="mb-8">
-        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-          {{ category }}
-        </h2>
+        <div class="flex items-center justify-between mb-6 pb-3 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30">
+          <h2 class="text-2xl font-semibold m-0
+                     text-gray-800 dark:text-gray-200 
+                     theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 
+                     theme-gemini:bg-clip-text theme-gemini:text-transparent">
+            {{ category }}
+          </h2>
+          <span class="text-sm font-medium px-3 py-1 rounded-full
+                      bg-gray-100 dark:bg-gray-800 theme-gemini:bg-blue-500/20
+                      text-gray-600 dark:text-gray-400 theme-gemini:text-blue-300">
+            {{ getComponentsByCategory(category).length }} components
+          </span>
+        </div>
         <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-[repeat(auto-fill,minmax(240px,1fr))] lg:grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-6 md:gap-4">
           @for (component of getComponentsByCategory(category); track component.route) {
             <a [routerLink]="['/demo', component.route]" 
-               class="block no-underline text-inherit transition-transform hover:-translate-y-1">
-              <app-glass-card padding="p-6" customClass="h-full hover-scale transition-smooth">
+               class="group block no-underline text-inherit 
+                      transition-all duration-300 
+                      hover:-translate-y-2 hover:scale-[1.02]
+                      focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:rounded-lg">
+              <app-glass-card padding="p-6" customClass="h-full transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/10">
                 <div class="flex flex-col items-center text-center h-full">
-                  <div class="text-5xl mb-4">{{ component.icon }}</div>
-                  <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+                  <div class="text-5xl mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">{{ component.icon }}</div>
+                  <h3 class="text-xl font-semibold mb-2 
+                             text-gray-900 dark:text-gray-100 
+                             theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 
+                             theme-gemini:bg-clip-text theme-gemini:text-transparent
+                             transition-colors duration-200 group-hover:text-primary-600 dark:group-hover:text-primary-400">
                     {{ component.name }}
                   </h3>
-                  <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mb-4 flex-1">
+                  <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mb-4 flex-1 leading-relaxed">
                     {{ component.description }}
                   </p>
-                  <span class="text-sm font-medium text-primary-600 dark:text-primary-400 theme-gemini:text-blue-400 theme-gemini:drop-shadow-[0_0_8px_rgba(59,130,246,0.5)] mt-auto">
-                    View Demo →
+                  <span class="text-sm font-medium 
+                              text-primary-600 dark:text-primary-400 
+                              theme-gemini:text-blue-400 theme-gemini:drop-shadow-[0_0_8px_rgba(59,130,246,0.5)] 
+                              mt-auto inline-flex items-center gap-1
+                              transition-all duration-200 group-hover:gap-2">
+                    View Demo 
+                    <span class="transition-transform duration-200 group-hover:translate-x-1">→</span>
                   </span>
                 </div>
               </app-glass-card>

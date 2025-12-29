@@ -79,108 +79,124 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
       name: 'Glass Components',
       icon: '🪟',
       components: [
-        { name: 'Glass Card', route: 'glass-card', description: 'Glass morphism card', icon: '🪟' },
-        { name: 'Glass Button', route: 'glass-button', description: 'Glass morphism button', icon: '🔘' },
-        { name: 'Glass Input', route: 'glass-input', description: 'Glass morphism input', icon: '📝' }
+        { name: 'Glass Card', route: 'glass-card', description: 'Glass morphism card component with variants', icon: '🪟' },
+        { name: 'Glass Button', route: 'glass-button', description: 'Glass morphism button with variants and states', icon: '🔘' },
+        { name: 'Glass Input', route: 'glass-input', description: 'Glass morphism input field with validation', icon: '📝' },
+        { name: 'Glass Select', route: 'glass-select', description: 'Glass morphism select dropdown with search and multi-select', icon: '📋' },
+        { name: 'Glass Checkbox', route: 'glass-checkbox', description: 'Glass morphism checkbox with validation', icon: '☑️' },
+        { name: 'Glass Radio', route: 'glass-radio', description: 'Glass morphism radio button with validation', icon: '🔘' },
+        { name: 'Glass Textarea', route: 'glass-textarea', description: 'Glass morphism textarea with auto-resize and counter', icon: '📄' },
+        { name: 'Glass Switch', route: 'glass-switch', description: 'Glass morphism toggle switch component', icon: '🔀' }
       ]
     },
     {
       name: 'Layout',
       icon: '📐',
       components: [
-        { name: 'Page Layout', route: 'page-layout', description: 'Standard page layout', icon: '📄' },
-        { name: 'Tabs', route: 'tabs', description: 'Tab navigation', icon: '📑' },
+        { name: 'Page Layout', route: 'page-layout', description: 'Standard page layout with header, breadcrumb, and actions', icon: '📄' },
+        { name: 'Page Header', route: 'page-header', description: 'Page header with title, subtitle, breadcrumbs, and actions', icon: '📋' },
+        { name: 'Tabs', route: 'tabs', description: 'Tab navigation component', icon: '📑' },
         { name: 'Breadcrumbs', route: 'breadcrumbs', description: 'Breadcrumb navigation', icon: '🍞' },
-        { name: 'Stepper', route: 'stepper', description: 'Step-by-step navigation', icon: '👣' },
-        { name: 'Page Header', route: 'page-header', description: 'Page header with actions', icon: '📋' },
-        { name: 'Progressive Disclosure', route: 'progressive-disclosure', description: 'Expand/collapse component', icon: '📖' }
+        { name: 'Stepper', route: 'stepper', description: 'Step-by-step navigation component', icon: '👣' },
+        { name: 'Progressive Disclosure', route: 'progressive-disclosure', description: 'Expand/collapse component with animations', icon: '📖' },
+        { name: 'Context Switcher', route: 'context-switcher', description: 'Context switcher for switching between menu contexts', icon: '🔄' },
+        { name: 'Nested Menu Accordion', route: 'nested-menu-accordion', description: 'Nested menu accordion with expand/collapse functionality', icon: '📋' },
+        { name: 'Accordion', route: 'accordion', description: 'Accordion component for collapsible content sections', icon: '📑' },
+        { name: 'Divider', route: 'divider', description: 'Divider component for separating content sections', icon: '➖' }
       ]
     },
     {
       name: 'Data Display',
       icon: '📊',
       components: [
-        { name: 'Statistics Card', route: 'statistics-card', description: 'Statistics card', icon: '📊' },
-        { name: 'Statistics Grid', route: 'statistics-grid', description: 'Statistics grid', icon: '📈' },
-        { name: 'Data Table', route: 'data-table', description: 'Data table', icon: '📋' },
-        { name: 'Data Grid', route: 'data-grid', description: 'Enterprise data grid', icon: '📊' },
-        { name: 'Pivot Table', route: 'pivot-table', description: 'Pivot table', icon: '📊' },
-        { name: 'Timeline', route: 'timeline', description: 'Timeline component', icon: '⏱️' },
-        { name: 'Calendar', route: 'calendar', description: 'Calendar component', icon: '📅' },
-        { name: 'Scheduler', route: 'scheduler', description: 'Scheduler component', icon: '📆' },
-        { name: 'Chart', route: 'chart', description: 'Chart component', icon: '📈' },
-        { name: 'Tree Grid', route: 'tree-grid', description: 'Tree grid', icon: '🌳' },
-        { name: 'Spreadsheet', route: 'spreadsheet', description: 'Spreadsheet', icon: '📊' },
-        { name: 'PDF Viewer', route: 'pdf-viewer', description: 'PDF viewer', icon: '📄' },
-        { name: 'Diagrams', route: 'diagrams', description: 'Diagrams', icon: '📊' },
-        { name: 'Carousel', route: 'carousel', description: 'Carousel', icon: '🎠' },
-        { name: 'Gantt Chart', route: 'gantt', description: 'Gantt chart', icon: '📊' },
-        { name: 'File Manager', route: 'file-manager', description: 'File manager', icon: '📁' }
+        { name: 'Statistics Card', route: 'statistics-card', description: 'Card for displaying statistics with icons', icon: '📊' },
+        { name: 'Statistics Grid', route: 'statistics-grid', description: 'Grid layout for statistics cards', icon: '📈' },
+        { name: 'Data Grid', route: 'data-grid', description: 'Enterprise data grid with advanced features (Syncfusion)', icon: '📊' },
+        { name: 'Pivot Table', route: 'pivot-table', description: 'Pivot table for data analysis (Syncfusion)', icon: '📊' },
+        { name: 'Timeline', route: 'timeline', description: 'Timeline component for displaying events', icon: '⏱️' },
+        { name: 'Calendar', route: 'calendar', description: 'Calendar component with events management', icon: '📅' },
+        { name: 'Scheduler', route: 'scheduler', description: 'Scheduler component for calendar and events (Syncfusion)', icon: '📆' },
+        { name: 'Chart', route: 'chart', description: 'Chart component for data visualization (Syncfusion)', icon: '📈' },
+        { name: 'Tree Grid', route: 'tree-grid', description: 'Hierarchical tree grid component with expand/collapse (Syncfusion)', icon: '🌳' },
+        { name: 'Spreadsheet', route: 'spreadsheet', description: 'Excel-like spreadsheet component with formulas, charts, and formatting (Syncfusion)', icon: '📊' },
+        { name: 'PDF Viewer', route: 'pdf-viewer', description: 'PDF viewer component with annotation, form filling, and text search (Syncfusion)', icon: '📄' },
+        { name: 'Diagrams', route: 'diagrams', description: 'Diagram component for flowcharts, organizational charts, and network diagrams (Syncfusion)', icon: '📊' },
+        { name: 'Carousel', route: 'carousel', description: 'Carousel component for displaying slides with navigation and autoplay (Syncfusion)', icon: '🎠' },
+        { name: 'Gantt Chart', route: 'gantt', description: 'Project management Gantt chart component with timeline, dependencies, and progress tracking (Syncfusion)', icon: '📊' },
+        { name: 'File Manager', route: 'file-manager', description: 'File management component for browsing, uploading, downloading, and managing files and folders (Syncfusion)', icon: '📁' },
+        { name: 'Pagination', route: 'pagination', description: 'Pagination component for navigating through large datasets', icon: '📄' }
       ]
     },
     {
       name: 'Form & Input',
       icon: '📝',
       components: [
-        { name: 'Progress Bar', route: 'progress-bar', description: 'Progress bar', icon: '📊' },
-        { name: 'Rating', route: 'rating', description: 'Rating component', icon: '⭐' },
-        { name: 'Date Range Picker', route: 'date-range-picker', description: 'Date range picker', icon: '📅' },
-        { name: 'Rich Text Editor', route: 'rich-text-editor', description: 'Rich text editor', icon: '✏️' },
-        { name: 'Query Builder', route: 'query-builder', description: 'Query builder', icon: '🔍' },
-        { name: 'Document Editor', route: 'document-editor', description: 'Document editor', icon: '📄' },
-        { name: 'Speech to Text', route: 'speech-to-text', description: 'Speech to text', icon: '🎤' },
-        { name: 'Image Editor', route: 'image-editor', description: 'Image editor', icon: '🖼️' },
-        { name: 'Signature', route: 'signature', description: 'Signature pad', icon: '✍️' },
-        { name: 'Uploader', route: 'syncfusion-uploader', description: 'File uploader', icon: '📤' },
-        { name: 'Autocomplete', route: 'autocomplete', description: 'Autocomplete', icon: '🔍' },
-        { name: 'Smart TextArea', route: 'smart-textarea', description: 'Smart textarea', icon: '💬' },
-        { name: 'AI Assist View', route: 'ai-assist-view', description: 'AI assistant', icon: '🤖' },
-        { name: 'Search Filter', route: 'search-filter', description: 'Search filter', icon: '🔍' },
-        { name: 'File Upload', route: 'file-upload', description: 'File upload', icon: '📁' },
-        { name: 'Image Upload', route: 'image-upload', description: 'Image upload', icon: '🖼️' },
-        { name: 'Form Validation', route: 'form-validation-messages', description: 'Form validation', icon: '✅' },
-        { name: 'Mask Toggle', route: 'mask-toggle', description: 'Mask toggle', icon: '👁️' },
-        { name: 'Contextual Help', route: 'contextual-help', description: 'Contextual help', icon: '❓' }
+        { name: 'Progress Bar', route: 'progress-bar', description: 'Progress bar with variants', icon: '📊' },
+        { name: 'Rating', route: 'rating', description: 'Star and heart rating component', icon: '⭐' },
+        { name: 'Date Range Picker', route: 'date-range-picker', description: 'Date range picker component', icon: '📅' },
+        { name: 'Rich Text Editor', route: 'rich-text-editor', description: 'Rich text editor component (Syncfusion)', icon: '✏️' },
+        { name: 'Query Builder', route: 'query-builder', description: 'Query builder component for creating filter conditions (Syncfusion)', icon: '🔍' },
+        { name: 'Document Editor', route: 'document-editor', description: 'Word-like document editor component (Syncfusion)', icon: '📄' },
+        { name: 'Speech to Text', route: 'speech-to-text', description: 'Speech to text conversion component (Syncfusion)', icon: '🎤' },
+        { name: 'Image Editor', route: 'image-editor', description: 'Image editing component with crop, filter, transform (Syncfusion)', icon: '🖼️' },
+        { name: 'Signature', route: 'signature', description: 'Digital signature pad component for capturing signatures (Syncfusion)', icon: '✍️' },
+        { name: 'Syncfusion Uploader', route: 'syncfusion-uploader', description: 'File upload component with drag & drop, progress tracking, pause/resume, and multiple file support (Syncfusion)', icon: '📤' },
+        { name: 'Autocomplete', route: 'autocomplete', description: 'Autocomplete input component with filtering, highlighting, and customizable suggestions (Syncfusion)', icon: '🔍' },
+        { name: 'Smart TextArea', route: 'smart-textarea', description: 'Intelligent textarea component with AI-powered suggestions and customizable features (Syncfusion)', icon: '💬' },
+        { name: 'AI Assist View', route: 'ai-assist-view', description: 'AI-powered assistant interface component with suggestions, prompt handling, and interactive chat features (Syncfusion)', icon: '🤖' },
+        { name: 'Search Filter', route: 'search-filter', description: 'Search and filter component', icon: '🔍' },
+        { name: 'File Upload', route: 'file-upload', description: 'File upload component', icon: '📁' },
+        { name: 'Image Upload', route: 'image-upload', description: 'Image upload component', icon: '🖼️' },
+        { name: 'Form Validation Messages', route: 'form-validation-messages', description: 'Form validation messages component', icon: '✅' },
+        { name: 'Mask Toggle', route: 'mask-toggle', description: 'Toggle masked/unmasked display of sensitive data (PDPA/GDPR compliance)', icon: '👁️' },
+        { name: 'Contextual Help', route: 'contextual-help', description: 'Contextual help component with tooltips', icon: '❓' },
+        { name: 'NgSelect', route: 'ng-select', description: 'NgSelect dropdown component with search, multi-select, and custom templates', icon: '🔽' },
+        { name: 'Bar Rating', route: 'bar-rating', description: 'Bar rating component with customizable options', icon: '⭐' },
+        { name: 'Chip', route: 'chip', description: 'Chip component for displaying tags and removable items', icon: '🏷️' }
       ]
     },
     {
       name: 'Feedback',
       icon: '💬',
       components: [
-        { name: 'Modal', route: 'modal', description: 'Modal dialog', icon: '🪟' },
-        { name: 'Notification', route: 'notification', description: 'Notification', icon: '🔔' },
-        { name: 'Tooltip', route: 'tooltip', description: 'Tooltip', icon: '💡' },
-        { name: 'Confirm Dialog', route: 'confirm-dialog', description: 'Confirm dialog', icon: '❓' }
+        { name: 'Modal', route: 'modal', description: 'Modal dialog component', icon: '🪟' },
+        { name: 'Notification', route: 'notification', description: 'Toast notification component', icon: '🔔' },
+        { name: 'Tooltip', route: 'tooltip', description: 'Tooltip component', icon: '💡' },
+        { name: 'Confirm Dialog', route: 'confirm-dialog', description: 'Confirmation dialog component', icon: '❓' },
+        { name: 'Alert', route: 'alert', description: 'Inline alert component for displaying important messages', icon: '⚠️' },
+        { name: 'SweetAlert2', route: 'sweetalert2', description: 'SweetAlert2 integration for beautiful alert dialogs', icon: '🎨' }
       ]
     },
     {
       name: 'Status',
       icon: '📌',
       components: [
-        { name: 'Status Badge', route: 'status-badge', description: 'Status badge', icon: '🏷️' },
-        { name: 'Empty State', route: 'empty-state', description: 'Empty state', icon: '📭' },
-        { name: 'Error State', route: 'error-state', description: 'Error state', icon: '❌' }
+        { name: 'Status Badge', route: 'status-badge', description: 'Status badge with variants', icon: '🏷️' },
+        { name: 'Empty State', route: 'empty-state', description: 'Empty state component', icon: '📭' },
+        { name: 'Error State', route: 'error-state', description: 'Error state component', icon: '❌' }
       ]
     },
     {
       name: 'Loading',
       icon: '⏳',
       components: [
-        { name: 'Loading', route: 'loading', description: 'Loading component', icon: '⏳' },
-        { name: 'Spinner', route: 'spinner', description: 'Spinner', icon: '🌀' },
-        { name: 'Loading Spinner', route: 'loading-spinner', description: 'Loading spinner', icon: '⚙️' },
-        { name: 'Skeleton Loader', route: 'skeleton-loader', description: 'Skeleton loader', icon: '💀' }
+        { name: 'Loading', route: 'loading', description: 'Loading component with message', icon: '⏳' },
+        { name: 'Spinner', route: 'spinner', description: 'Spinner component with sizes', icon: '🌀' },
+        { name: 'Loading Spinner', route: 'loading-spinner', description: 'Loading spinner component', icon: '⚙️' },
+        { name: 'Skeleton Loader', route: 'skeleton-loader', description: 'Skeleton loading placeholder', icon: '💀' }
       ]
     },
     {
       name: 'Other',
       icon: '🎨',
       components: [
-        { name: 'Icon', route: 'icon', description: 'Material Icons', icon: '🎨' },
-        { name: 'Avatar', route: 'avatar', description: 'Avatar', icon: '👤' },
-        { name: 'Theme Toggle', route: 'theme-toggle', description: 'Theme toggle', icon: '🎨' },
-        { name: 'Theme Switcher', route: 'theme-switcher', description: 'Theme switcher', icon: '🎨' },
-        { name: 'Back to Top', route: 'back-to-top', description: 'Back to top', icon: '⬆️' }
+        { name: 'Icon', route: 'icon', description: 'Material Icons wrapper component', icon: '🎨' },
+        { name: 'Avatar', route: 'avatar', description: 'Avatar component with status', icon: '👤' },
+        { name: 'Theme Toggle', route: 'theme-toggle', description: 'Theme mode and color toggle', icon: '🎨' },
+        { name: 'Back to Top', route: 'back-to-top', description: 'Back to top button component with smooth scroll', icon: '⬆️' },
+        { name: 'Fullscreen', route: 'fullscreen', description: 'Fullscreen API component for entering/exiting fullscreen mode', icon: '⛶' },
+        { name: 'Omni Search', route: 'omni-search', description: 'Universal search component for searching across menus and routes', icon: '🔍' },
+        { name: 'Migration Guide', route: 'migration-guide', description: 'JSP to Angular migration guide with component mapping and best practices', icon: '📚' }
       ]
     }
   ];
@@ -209,12 +225,22 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
       this.router.events
         .pipe(filter(event => event instanceof NavigationEnd))
         .subscribe((event: any) => {
-          this.currentRoute = event.urlAfterRedirects.replace('/demo/', '');
+          const url = event.urlAfterRedirects;
+          if (url === '/demo' || url === '/demo/') {
+            this.currentRoute = '';
+          } else {
+            this.currentRoute = url.replace('/demo/', '');
+          }
         })
     );
 
     // Set initial route
-    this.currentRoute = this.router.url.replace('/demo/', '');
+    const initialUrl = this.router.url;
+    if (initialUrl === '/demo' || initialUrl === '/demo/') {
+      this.currentRoute = '';
+    } else {
+      this.currentRoute = initialUrl.replace('/demo/', '');
+    }
   }
 
   ngOnDestroy(): void {
@@ -264,11 +290,23 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
 
   // Navigation
   navigateToComponent(route: string): void {
-    this.router.navigate(['/demo', route]);
-    this.closeSidebar();
+    if (route === '') {
+      this.router.navigate(['/demo']);
+    } else {
+      this.router.navigate(['/demo', route]);
+    }
+    // Don't close sidebar when navigating
+  }
+
+  navigateToHome(): void {
+    this.router.navigate(['/demo']);
+    // Don't close sidebar when navigating
   }
 
   isActiveRoute(route: string): boolean {
+    if (route === '') {
+      return this.currentRoute === '' || this.currentRoute === '/demo';
+    }
     return this.currentRoute === route || this.currentRoute.startsWith(route + '/');
   }
 }
