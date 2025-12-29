@@ -1,48 +1,59 @@
-<div class="w-full py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <app-glass-card padding="p-6">
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-        Spreadsheet Component Demo
-      </h1>
-      <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
-        A comprehensive spreadsheet component with Excel-like functionality including formulas, formatting, charts, and more.
-      </p>
-    </div>
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Spreadsheet Component Demo
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+      A comprehensive spreadsheet component with Excel-like functionality including formulas, formatting, charts, and more.
+    </p>
+  </div>
 
-    <div class="space-y-8">
-      <!-- Basic Usage -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-          Basic Usage
-        </h2>
-        <pre class="bg-gray-100 dark:bg-gray-800 theme-gemini:bg-gray-900/50 p-4 rounded-lg overflow-x-auto border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30"><code class="text-sm font-mono text-gray-800 dark:text-gray-200 theme-gemini:text-white/90">// TypeScript
-import {{ '{' }} SpreadsheetComponent {{ '}' }} from '../../shared/components/spreadsheet/spreadsheet.component';
+  <!-- Live Demo -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <app-spreadsheet
+        #spreadsheet
+        [sheets]="sheets"
+        [allowOpen]="true"
+        [allowSave]="true"
+        [allowEditing]="true"
+        [allowInsert]="true"
+        [allowDelete]="true"
+        [allowUndoRedo]="true"
+        [allowFindAndReplace]="true"
+        [allowSorting]="true"
+        [allowFiltering]="true"
+        [allowResizing]="true"
+        [allowHyperlink]="true"
+        [allowChart]="true"
+        [allowImage]="true"
+        [allowConditionalFormat]="true"
+        [allowDataValidation]="true"
+        [showSheetTabs]="true"
+        [showRibbon]="true"
+        [showFormulaBar]="true"
+        [height]="'600px'"
+        [width]="'100%'">
+      </app-spreadsheet>
+    </app-glass-card>
+  </section>
 
-&#64;ViewChild('spreadsheet') spreadsheet!: SpreadsheetComponent;
-
-sheets = [
-  {{ '{' }}
-    name: 'Sheet1',
-    ranges: [{{ '{' }} dataSource: dataArray {{ '}' }}]
-  {{ '}' }}
-];
-
-// HTML
-&lt;app-spreadsheet
-  #spreadsheet
-  [sheets]="sheets"
-  [height]="'600px'"
-  [width]="'100%'"&gt;
-&lt;/app-spreadsheet&gt;</code></pre>
-      </section>
-
+  <!-- Advanced Features -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Advanced Features
+    </h2>
+    
+    <app-glass-card padding="p-6">
       <!-- Actions -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-          Actions
-        </h2>
+      <div class="mb-6">
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Actions</h3>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <button
             type="button"
@@ -136,58 +147,22 @@ sheets = [
             Add Sheet
           </button>
         </div>
-      </section>
+      </div>
+    </app-glass-card>
+  </section>
 
-      <!-- Spreadsheet -->
-      <section class="mb-12">
-        <app-spreadsheet
-          #spreadsheet
-          [sheets]="sheets"
-          [allowOpen]="true"
-          [allowSave]="true"
-          [allowEditing]="true"
-          [allowInsert]="true"
-          [allowDelete]="true"
-          [allowUndoRedo]="true"
-          [allowFindAndReplace]="true"
-          [allowSorting]="true"
-          [allowFiltering]="true"
-          [allowResizing]="true"
-          [allowHyperlink]="true"
-          [allowChart]="true"
-          [allowImage]="true"
-          [allowConditionalFormat]="true"
-          [allowDataValidation]="true"
-          [showSheetTabs]="true"
-          [showRibbon]="true"
-          [showFormulaBar]="true"
-          [height]="'600px'"
-          [width]="'100%'">
-        </app-spreadsheet>
-      </section>
-
-      <!-- Features -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-          Features
-        </h2>
-        <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 theme-gemini:text-white/80">
-          <li>Excel-like editing and formatting</li>
-          <li>Formula support (SUM, AVERAGE, COUNT, etc.)</li>
-          <li>Charts and graphs</li>
-          <li>Conditional formatting</li>
-          <li>Data validation</li>
-          <li>Cell merging and freezing</li>
-          <li>Sorting and filtering</li>
-          <li>Import/Export (Excel, CSV, PDF)</li>
-          <li>Undo/Redo functionality</li>
-          <li>Multiple sheets support</li>
-          <li>Hyperlinks and images</li>
-          <li>Find and replace</li>
-        </ul>
-      </section>
-    </div>
-  </app-glass-card>
+  <!-- Basic Usage -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Basic Usage
+    </h2>
+    
+    <app-code-viewer
+      title="Spreadsheet"
+      language="html"
+      [code]="basicExample">
+    </app-code-viewer>
+  </section>
 </div>
 

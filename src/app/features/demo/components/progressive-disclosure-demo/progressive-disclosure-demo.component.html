@@ -105,13 +105,16 @@
     </app-glass-card>
   </section>
 
-  <!-- Props Table -->
+  <!-- API Reference -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      API Documentation
+      API Reference
     </h2>
-    <app-props-table [props]="props" title="Inputs"></app-props-table>
+    
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props" title="Inputs"></app-props-table>
+    </app-glass-card>
   </section>
 </div>
 

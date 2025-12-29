@@ -1,108 +1,114 @@
-<div class="w-full py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <app-glass-card padding="p-6">
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-        Image Editor Component Demo
-      </h1>
-      <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
-        Component สำหรับแก้ไขรูปภาพจาก Syncfusion พร้อม Glass Morphism styling และ features ครบถ้วน
-      </p>
-    </div>
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Image Editor Component Demo
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+      An image editing component from Syncfusion with Glass Morphism styling and full features.
+    </p>
+  </div>
 
-    <!-- Toolbar -->
-    <section class="mb-6">
-      <div class="flex flex-wrap gap-2 items-center">
-        <button
-          type="button"
-          class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors"
-          (click)="loadSampleImage()">
-          Load Sample Image
-        </button>
-        <button
-          type="button"
-          class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors"
-          (click)="exportAsPng()">
-          Export PNG
-        </button>
-        <button
-          type="button"
-          class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors"
-          (click)="exportAsJpeg()">
-          Export JPEG
-        </button>
-        <button
-          type="button"
-          class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors"
-          (click)="exportAsSvg()">
-          Export SVG
-        </button>
-        <div class="flex gap-2 ml-auto">
+  <!-- Live Demo -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <!-- Toolbar -->
+      <div class="mb-6">
+        <div class="flex flex-wrap gap-2 items-center">
+          <button
+            type="button"
+            class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors"
+            (click)="loadSampleImage()">
+            Load Sample Image
+          </button>
+          <button
+            type="button"
+            class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors"
+            (click)="exportAsPng()">
+            Export PNG
+          </button>
+          <button
+            type="button"
+            class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors"
+            (click)="exportAsJpeg()">
+            Export JPEG
+          </button>
+          <button
+            type="button"
+            class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors"
+            (click)="exportAsSvg()">
+            Export SVG
+          </button>
+          <div class="flex gap-2 ml-auto">
+            <button
+              type="button"
+              class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
+              (click)="undoAction()">
+              Undo
+            </button>
+            <button
+              type="button"
+              class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
+              (click)="redoAction()">
+              Redo
+            </button>
+            <button
+              type="button"
+              class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
+              (click)="resetImage()">
+              Reset
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Transform Controls -->
+      <div class="mb-6">
+        <div class="flex flex-wrap gap-2">
           <button
             type="button"
             class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
-            (click)="undoAction()">
-            Undo
+            (click)="rotateLeft()">
+            Rotate Left
           </button>
           <button
             type="button"
             class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
-            (click)="redoAction()">
-            Redo
+            (click)="rotateRight()">
+            Rotate Right
           </button>
           <button
             type="button"
             class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
-            (click)="resetImage()">
-            Reset
+            (click)="flipHorizontal()">
+            Flip Horizontal
+          </button>
+          <button
+            type="button"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
+            (click)="flipVertical()">
+            Flip Vertical
+          </button>
+          <button
+            type="button"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
+            (click)="zoomIn()">
+            Zoom In
+          </button>
+          <button
+            type="button"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
+            (click)="zoomOut()">
+            Zoom Out
           </button>
         </div>
       </div>
-    </section>
 
-    <!-- Transform Controls -->
-    <section class="mb-6">
-      <div class="flex flex-wrap gap-2">
-        <button
-          type="button"
-          class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
-          (click)="rotateLeft()">
-          Rotate Left
-        </button>
-        <button
-          type="button"
-          class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
-          (click)="rotateRight()">
-          Rotate Right
-        </button>
-        <button
-          type="button"
-          class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
-          (click)="flipHorizontal()">
-          Flip Horizontal
-        </button>
-        <button
-          type="button"
-          class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
-          (click)="flipVertical()">
-          Flip Vertical
-        </button>
-        <button
-          type="button"
-          class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
-          (click)="zoomIn()">
-          Zoom In
-        </button>
-        <button
-          type="button"
-          class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
-          (click)="zoomOut()">
-          Zoom Out
-        </button>
-      </div>
-    </section>
-
-    <!-- Image Editor -->
-    <section class="mb-12">
+      <!-- Image Editor -->
       <app-image-editor
         #editor
         [width]="'100%'"
@@ -114,46 +120,21 @@
         (toolbarItemClicked)="onToolbarItemClicked($event)"
         (imageChanged)="onImageChanged($event)">
       </app-image-editor>
-    </section>
+    </app-glass-card>
+  </section>
 
-    <!-- Usage Example -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                 text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-        ตัวอย่างการใช้งาน
-      </h2>
-      <pre class="bg-gray-100 dark:bg-gray-800 theme-gemini:bg-gray-900/50 p-4 rounded-lg overflow-x-auto border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30"><code class="text-sm font-mono text-gray-800 dark:text-gray-200 theme-gemini:text-white/90">// TypeScript
-import {{ '{' }} ImageEditorComponent {{ '}' }} from '../../shared/components/image-editor/image-editor.component';
-
-&#64;ViewChild('editor') editor!: ImageEditorComponent;
-
-// Open image
-openImage(url: string): void {{ '{' }}
-  this.editor.open(url);
-{{ '}' }}
-
-// Export
-exportAsPng(): void {{ '{' }}
-  this.editor.export('PNG', 'image');
-{{ '}' }}
-
-// Transform
-rotateLeft(): void {{ '{' }}
-  this.editor.transform('RotateLeft');
-{{ '}' }}
-
-// HTML
-&lt;app-image-editor
-  #editor
-  [width]="'100%'"
-  [height]="'600px'"
-  [src]="imageUrl"
-  [toolbar]="toolbarItems"
-  [allowUndoRedo]="true"
-  (created)="onCreated($event)"
-  (imageLoaded)="onImageLoaded($event)"&gt;
-&lt;/app-image-editor&gt;</code></pre>
-    </section>
-  </app-glass-card>
+  <!-- Basic Usage -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Basic Usage
+    </h2>
+    
+    <app-code-viewer
+      title="Image Editor"
+      language="html"
+      [code]="basicExample">
+    </app-code-viewer>
+  </section>
 </div>
 

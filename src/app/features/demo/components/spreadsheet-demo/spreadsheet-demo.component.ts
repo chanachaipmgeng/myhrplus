@@ -2,11 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SpreadsheetComponent } from '../../../../shared/components/spreadsheet/spreadsheet.component';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-spreadsheet-demo',
   standalone: true,
-  imports: [CommonModule, SpreadsheetComponent, GlassCardComponent],
+  imports: [CommonModule, SpreadsheetComponent, GlassCardComponent, CodeViewerComponent],
   templateUrl: './spreadsheet-demo.component.html',
   styleUrls: ['./spreadsheet-demo.component.scss']
 })
@@ -97,6 +98,32 @@ export class SpreadsheetDemoComponent {
   addSheet(): void {
     this.spreadsheet?.addSheet();
   }
+
+  // Code examples
+  basicExample = `<app-spreadsheet
+  #spreadsheet
+  [sheets]="sheets"
+  [allowOpen]="true"
+  [allowSave]="true"
+  [allowEditing]="true"
+  [allowInsert]="true"
+  [allowDelete]="true"
+  [allowUndoRedo]="true"
+  [allowFindAndReplace]="true"
+  [allowSorting]="true"
+  [allowFiltering]="true"
+  [allowResizing]="true"
+  [allowHyperlink]="true"
+  [allowChart]="true"
+  [allowImage]="true"
+  [allowConditionalFormat]="true"
+  [allowDataValidation]="true"
+  [showSheetTabs]="true"
+  [showRibbon]="true"
+  [showFormulaBar]="true"
+  [height]="'600px'"
+  [width]="'100%'">
+</app-spreadsheet>`;
 }
 
 

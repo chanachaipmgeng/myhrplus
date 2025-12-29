@@ -2,11 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PdfViewerComponent } from '../../../../shared/components/pdf-viewer/pdf-viewer.component';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-pdf-viewer-demo',
   standalone: true,
-  imports: [CommonModule, PdfViewerComponent, GlassCardComponent],
+  imports: [CommonModule, PdfViewerComponent, GlassCardComponent, CodeViewerComponent],
   templateUrl: './pdf-viewer-demo.component.html',
   styleUrls: ['./pdf-viewer-demo.component.scss']
 })
@@ -87,6 +88,23 @@ export class PdfViewerDemoComponent {
     const total = this.pdfviewer?.getTotalPages() || 0;
     return `${current} / ${total}`;
   }
+
+  // Code examples
+  basicExample = `<app-pdf-viewer
+  #pdfviewer
+  [documentPath]="documentPath"
+  [serviceUrl]="serviceUrl"
+  [enableToolbar]="true"
+  [enableNavigation]="true"
+  [enableThumbnail]="true"
+  [enableBookmark]="true"
+  [enableTextSelection]="true"
+  [enableTextSearch]="true"
+  [enablePrint]="true"
+  [enableDownload]="true"
+  [height]="'800px'"
+  [width]="'100%'">
+</app-pdf-viewer>`;
 }
 
 

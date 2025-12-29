@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SchedulerComponent, SchedulerEvent } from '../../../../shared/components/scheduler/scheduler.component';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { View } from '@syncfusion/ej2-angular-schedule';
 
 @Component({
   selector: 'app-scheduler-demo',
   standalone: true,
-  imports: [CommonModule, SchedulerComponent, GlassCardComponent],
+  imports: [CommonModule, SchedulerComponent, GlassCardComponent, CodeViewerComponent],
   templateUrl: './scheduler-demo.component.html',
   styleUrls: ['./scheduler-demo.component.scss']
 })
@@ -99,5 +100,25 @@ export class SchedulerDemoComponent {
   onActionComplete(event: any): void {
     console.log('Action completed:', event);
   }
+
+  // Code examples
+  basicExample = `<app-scheduler
+  [eventSettings]="eventSettings"
+  [currentView]="'Month'"
+  [views]="['Day', 'Week', 'Month']"
+  [selectedDate]="selectedDate"
+  [startHour]="'09:00'"
+  [endHour]="'18:00'"
+  [allowDragAndDrop]="true"
+  [allowResizing]="true"
+  [allowExcelExport]="true"
+  [allowICalendarExport]="true"
+  [allowPrint]="true"
+  [height]="'600px'"
+  [width]="'100%'"
+  (eventClick)="onEventClick($event)"
+  (eventDoubleClick)="onEventDoubleClick($event)"
+  (cellClick)="onCellClick($event)">
+</app-scheduler>`;
 }
 

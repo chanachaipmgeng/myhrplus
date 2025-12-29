@@ -1,43 +1,48 @@
-<div class="w-full py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <app-glass-card padding="p-6">
-    <div class="space-y-8">
-      <!-- Header -->
-      <div class="mb-8">
-        <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-          Signature Component Demo
-        </h1>
-        <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
-          A signature pad component for capturing digital signatures with undo/redo, save, and download capabilities.
-        </p>
-      </div>
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Signature Component Demo
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+      A signature pad component for capturing digital signatures with undo/redo, save, and download capabilities.
+    </p>
+  </div>
 
-      <!-- Basic Usage -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-          Basic Usage
-        </h2>
-        <pre class="bg-gray-100 dark:bg-gray-800 theme-gemini:bg-gray-900/50 p-4 rounded-lg overflow-x-auto border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30"><code class="text-sm font-mono text-gray-800 dark:text-gray-200 theme-gemini:text-white/90">// TypeScript
-import {{ '{' }} SignatureComponent {{ '}' }} from '../../shared/components/signature/signature.component';
+  <!-- Live Demo -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <app-signature
+        #signature
+        [backgroundColor]="backgroundColor"
+        [strokeColor]="strokeColor"
+        [minStrokeWidth]="minStrokeWidth"
+        [maxStrokeWidth]="maxStrokeWidth"
+        [velocity]="velocity"
+        [isReadOnly]="isReadOnly"
+        [saveWithBackground]="saveWithBackground"
+        [allowClear]="true"
+        [height]="'400px'"
+        [width]="'100%'">
+      </app-signature>
+    </app-glass-card>
+  </section>
 
-&#64;ViewChild('signature') signature!: SignatureComponent;
-
-// HTML
-&lt;app-signature
-  #signature
-  [backgroundColor]="'#ffffff'"
-  [strokeColor]="'#000000'"
-  [height]="'300px'"
-  [width]="'100%'"&gt;
-&lt;/app-signature&gt;</code></pre>
-      </section>
-
+  <!-- Advanced Features -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Advanced Features
+    </h2>
+    
+    <app-glass-card padding="p-6">
       <!-- Settings -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-          Settings
-        </h2>
+      <div class="mb-6">
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Settings</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 mb-2">
@@ -92,14 +97,11 @@ import {{ '{' }} SignatureComponent {{ '}' }} from '../../shared/components/sign
             <span class="text-sm text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Save with Background</span>
           </label>
         </div>
-      </section>
+      </div>
 
       <!-- Actions -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-          Actions
-        </h2>
+      <div class="mb-6">
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Actions</h3>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <button
             type="button"
@@ -144,48 +146,22 @@ import {{ '{' }} SignatureComponent {{ '}' }} from '../../shared/components/sign
             Check Empty
           </button>
         </div>
-      </section>
-
-      <!-- Signature -->
-      <div class="mb-8">
-        <app-signature
-          #signature
-          [backgroundColor]="backgroundColor"
-          [strokeColor]="strokeColor"
-          [minStrokeWidth]="minStrokeWidth"
-          [maxStrokeWidth]="maxStrokeWidth"
-          [velocity]="velocity"
-          [isReadOnly]="isReadOnly"
-          [saveWithBackground]="saveWithBackground"
-          [allowClear]="true"
-          [height]="'400px'"
-          [width]="'100%'">
-        </app-signature>
       </div>
+    </app-glass-card>
+  </section>
 
-      <!-- Features -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-          Features
-        </h2>
-        <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 theme-gemini:text-white/80">
-          <li>Digital signature capture</li>
-          <li>Customizable stroke color and width</li>
-          <li>Background color customization</li>
-          <li>Undo/Redo functionality</li>
-          <li>Clear signature</li>
-          <li>Save as base64 string</li>
-          <li>Save as blob/image</li>
-          <li>Download as image</li>
-          <li>Read-only mode</li>
-          <li>Check if signature is empty</li>
-          <li>Load signature from base64 or URL</li>
-          <li>Glass Morphism styling</li>
-          <li>Dark Mode support</li>
-        </ul>
-      </section>
-    </div>
-  </app-glass-card>
+  <!-- Basic Usage -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Basic Usage
+    </h2>
+    
+    <app-code-viewer
+      title="Signature"
+      language="html"
+      [code]="basicExample">
+    </app-code-viewer>
+  </section>
 </div>
 

@@ -2,11 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SignatureComponent } from '../../../../shared/components/signature/signature.component';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-signature-demo',
   standalone: true,
-  imports: [CommonModule, SignatureComponent, GlassCardComponent],
+  imports: [CommonModule, SignatureComponent, GlassCardComponent, CodeViewerComponent],
   templateUrl: './signature-demo.component.html',
   styleUrls: ['./signature-demo.component.scss']
 })
@@ -93,5 +94,20 @@ export class SignatureDemoComponent {
   toggleReadOnly(): void {
     this.isReadOnly = !this.isReadOnly;
   }
+
+  // Code examples
+  basicExample = `<app-signature
+  #signature
+  [backgroundColor]="'#ffffff'"
+  [strokeColor]="'#000000'"
+  [minStrokeWidth]="0.5"
+  [maxStrokeWidth]="2.5"
+  [velocity]="0.7"
+  [isReadOnly]="false"
+  [saveWithBackground]="true"
+  [allowClear]="true"
+  [height]="'400px'"
+  [width]="'100%'">
+</app-signature>`;
 }
 

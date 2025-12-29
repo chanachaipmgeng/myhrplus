@@ -2,11 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ImageEditorComponent } from '../../../../shared/components/image-editor/image-editor.component';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-image-editor-demo',
   standalone: true,
-  imports: [CommonModule, ImageEditorComponent, GlassCardComponent],
+  imports: [CommonModule, ImageEditorComponent, GlassCardComponent, CodeViewerComponent],
   templateUrl: './image-editor-demo.component.html',
   styleUrls: ['./image-editor-demo.component.scss']
 })
@@ -116,5 +117,18 @@ export class ImageEditorDemoComponent {
       this.editor.zoomOut();
     }
   }
+
+  // Code examples
+  basicExample = `<app-image-editor
+  #editor
+  [width]="'100%'"
+  [height]="'600px'"
+  [toolbar]="['Annotate', 'Crop', 'Transform', 'Finetune', 'Filter', 'ZoomIn', 'ZoomOut', 'Reset', 'Save']"
+  [allowUndoRedo]="true"
+  (created)="onCreated($event)"
+  (imageLoaded)="onImageLoaded($event)"
+  (toolbarItemClicked)="onToolbarItemClicked($event)"
+  (imageChanged)="onImageChanged($event)">
+</app-image-editor>`;
 }
 

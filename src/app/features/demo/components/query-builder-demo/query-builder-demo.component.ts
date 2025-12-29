@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QueryBuilderComponent, QueryBuilderColumn } from '../../../../shared/components/query-builder/query-builder.component';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { RuleModel } from '@syncfusion/ej2-angular-querybuilder';
 
 @Component({
   selector: 'app-query-builder-demo',
   standalone: true,
-  imports: [CommonModule, QueryBuilderComponent, GlassCardComponent],
+  imports: [CommonModule, QueryBuilderComponent, GlassCardComponent, CodeViewerComponent],
   templateUrl: './query-builder-demo.component.html',
   styleUrls: ['./query-builder-demo.component.scss']
 })
@@ -133,5 +134,22 @@ export class QueryBuilderDemoComponent {
   onCreated(event: any): void {
     console.log('Query Builder created:', event);
   }
+
+  // Code examples
+  basicExample = `<app-query-builder
+  [dataSource]="sampleData"
+  [columns]="columns"
+  [rule]="initialRule"
+  [width]="'100%'"
+  [height]="'500px'"
+  [allowValidation]="true"
+  [enableNotCondition]="true"
+  [maxGroupCount]="5"
+  [displayMode]="'Horizontal'"
+  [showButtons]="true"
+  (ruleChange)="onRuleChange($event)"
+  (change)="onChange($event)"
+  (created)="onCreated($event)">
+</app-query-builder>`;
 }
 

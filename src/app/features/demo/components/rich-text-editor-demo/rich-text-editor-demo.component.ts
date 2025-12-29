@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RichTextEditorComponent } from '../../../../shared/components/rich-text-editor/rich-text-editor.component';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-rich-text-editor-demo',
   standalone: true,
-  imports: [CommonModule, RichTextEditorComponent, GlassCardComponent],
+  imports: [CommonModule, RichTextEditorComponent, GlassCardComponent, CodeViewerComponent],
   templateUrl: './rich-text-editor-demo.component.html',
   styleUrls: ['./rich-text-editor-demo.component.scss']
 })
@@ -70,5 +71,18 @@ export class RichTextEditorDemoComponent {
   onBlur(event: any): void {
     console.log('Editor blurred:', event);
   }
+
+  // Code examples
+  basicExample = `<app-rich-text-editor
+  [value]="editorValue"
+  [toolbarSettings]="toolbarSettings"
+  [height]="'400px'"
+  [width]="'100%'"
+  [enableResize]="true"
+  [showCharCount]="true"
+  [maxLength]="5000"
+  (change)="onValueChange($event)"
+  (created)="onCreated($event)">
+</app-rich-text-editor>`;
 }
 

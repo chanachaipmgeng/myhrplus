@@ -18,11 +18,11 @@
     <app-statistics-grid [stats]="stats"></app-statistics-grid>
   </section>
 
-  <!-- Grid Layouts Section -->
+  <!-- Variants -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Grid Layouts
+      Variants
     </h2>
     
     <div class="space-y-8">
@@ -49,14 +49,14 @@
     </div>
   </section>
 
-  <!-- Code Examples -->
+  <!-- Basic Usage -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Code Examples
+      Basic Usage
     </h2>
     
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Statistics Grid</h3>
     <app-code-viewer [code]="basicExample" language="html" title="Basic Statistics Grid"></app-code-viewer>
 
     <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Custom Grid Layout</h3>
@@ -66,13 +66,16 @@
     <app-code-viewer [code]="dataExample" language="typescript" title="Statistics Data Structure"></app-code-viewer>
   </section>
 
-  <!-- API Documentation -->
+  <!-- API Reference -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      API Documentation
+      API Reference
     </h2>
-    <app-props-table [props]="props" title="Inputs"></app-props-table>
+    
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props" title="Inputs"></app-props-table>
+    </app-glass-card>
   </section>
 </div>
 

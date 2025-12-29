@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { PivotTableComponent } from '../../../../shared/components/pivot-table/pivot-table.component';
 import { IDataOptions } from '@syncfusion/ej2-angular-pivotview';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-pivot-table-demo',
   standalone: true,
-  imports: [CommonModule, PivotTableComponent, GlassCardComponent],
+  imports: [CommonModule, PivotTableComponent, GlassCardComponent, CodeViewerComponent],
   templateUrl: './pivot-table-demo.component.html',
   styleUrls: ['./pivot-table-demo.component.scss']
 })
@@ -63,5 +64,17 @@ export class PivotTableDemoComponent {
     values: [{ name: 'Sales', caption: 'Total Sales' }],
     formatSettings: [{ name: 'Sales', format: 'C0' }]
   };
+
+  // Code examples
+  basicExample = `<app-pivot-table
+  [dataSource]="pivotData"
+  [width]="'100%'"
+  [height]="'600px'"
+  [showToolbar]="true"
+  [showGroupingBar]="true"
+  [showFieldList]="false"
+  [allowCalculatedField]="true"
+  [allowConditionalFormatting]="true">
+</app-pivot-table>`;
 }
 

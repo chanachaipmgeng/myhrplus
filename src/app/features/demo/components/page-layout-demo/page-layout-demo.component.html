@@ -31,59 +31,51 @@
     </app-glass-card>
   </section>
 
-  <!-- Basic Example Section -->
+  <!-- Variants -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Basic Example
-    </h2>
-    <app-glass-card padding="p-6">
-      <app-page-layout
-        title="Basic Page"
-        description="Simple page layout without breadcrumbs or actions">
-        <p class="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic page content</p>
-      </app-page-layout>
-    </app-glass-card>
-  </section>
-
-  <!-- With Breadcrumb Section -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      With Breadcrumb
-    </h2>
-    <app-glass-card padding="p-6">
-      <app-page-layout
-        title="Page with Breadcrumb"
-        [breadcrumb]="breadcrumb">
-        <p class="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Page with breadcrumb navigation</p>
-      </app-page-layout>
-    </app-glass-card>
-  </section>
-
-  <!-- With Actions Section -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      With Actions
-    </h2>
-    <app-glass-card padding="p-6">
-      <app-page-layout
-        title="Page with Actions"
-        [actions]="actions">
-        <p class="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Page with action buttons</p>
-      </app-page-layout>
-    </app-glass-card>
-  </section>
-
-  <!-- Code Examples -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Code Examples
+      Variants
     </h2>
     
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
+    <div class="space-y-6">
+      <app-glass-card padding="p-6">
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Example</h3>
+        <app-page-layout
+          title="Basic Page"
+          description="Simple page layout without breadcrumbs or actions">
+          <p class="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic page content</p>
+        </app-page-layout>
+      </app-glass-card>
+
+      <app-glass-card padding="p-6">
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Breadcrumb</h3>
+        <app-page-layout
+          title="Page with Breadcrumb"
+          [breadcrumb]="breadcrumb">
+          <p class="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Page with breadcrumb navigation</p>
+        </app-page-layout>
+      </app-glass-card>
+
+      <app-glass-card padding="p-6">
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Actions</h3>
+        <app-page-layout
+          title="Page with Actions"
+          [actions]="actions">
+          <p class="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Page with action buttons</p>
+        </app-page-layout>
+      </app-glass-card>
+    </div>
+  </section>
+
+  <!-- Basic Usage -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Basic Usage
+    </h2>
+    
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Page Layout</h3>
     <app-code-viewer [code]="basicExample" language="html" title="Basic Page Layout"></app-code-viewer>
 
     <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Breadcrumb</h3>
@@ -96,13 +88,16 @@
     <app-code-viewer [code]="fullExample" language="html" title="Full Page Layout"></app-code-viewer>
   </section>
 
-  <!-- API Documentation -->
+  <!-- API Reference -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      API Documentation
+      API Reference
     </h2>
-    <app-props-table [props]="props" title="Inputs"></app-props-table>
+    
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props" title="Inputs"></app-props-table>
+    </app-glass-card>
   </section>
 </div>
 

@@ -2,11 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SyncfusionUploaderWrapperComponent } from '../../../../shared/components/syncfusion-uploader/syncfusion-uploader.component';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-syncfusion-uploader-demo',
   standalone: true,
-  imports: [CommonModule, SyncfusionUploaderWrapperComponent, GlassCardComponent],
+  imports: [CommonModule, SyncfusionUploaderWrapperComponent, GlassCardComponent, CodeViewerComponent],
   templateUrl: './syncfusion-uploader-demo.component.html',
   styleUrls: ['./syncfusion-uploader-demo.component.scss']
 })
@@ -125,5 +126,25 @@ export class SyncfusionUploaderDemoComponent {
       this.allowedExtensions = target.value;
     }
   }
+
+  // Code examples
+  basicExample = `<app-syncfusion-uploader
+  #uploader
+  [asyncSettings]="asyncSettings"
+  [allowedExtensions]="'.pdf,.doc,.jpg,.png'"
+  [autoUpload]="false"
+  [multiple]="true"
+  [maxFileSize]="10485760"
+  [minFileSize]="0"
+  [showFileList]="true"
+  [sequentialUpload]="false"
+  [directoryUpload]="false"
+  [width]="'100%'"
+  (uploading)="onUploading($event)"
+  (success)="onSuccess($event)"
+  (failure)="onFailure($event)"
+  (fileSelected)="onFileSelected($event)"
+  (progress)="onProgress($event)">
+</app-syncfusion-uploader>`;
 }
 

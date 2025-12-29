@@ -1,20 +1,21 @@
-<div class="w-full py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <app-glass-card padding="p-6">
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-        Speech to Text Component Demo
-      </h1>
-      <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
-        Component สำหรับแปลงเสียงเป็นข้อความจาก Syncfusion พร้อม Glass Morphism styling และ features ครบถ้วน
-      </p>
-    </div>
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Speech to Text Component Demo
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+      A speech-to-text conversion component from Syncfusion with Glass Morphism styling and full features.
+    </p>
+  </div>
 
-    <!-- Full Featured Example -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                 text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-        ตัวอย่างแบบเต็มรูปแบบ
-      </h2>
+  <!-- Live Demo -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
+    
+    <app-glass-card padding="p-6">
       <app-speech-to-text
         [locale]="'en-US'"
         [continuous]="false"
@@ -30,64 +31,40 @@
         (error)="onError($event)"
         (valueChange)="onValueChange($event)">
       </app-speech-to-text>
-    </section>
+    </app-glass-card>
+  </section>
 
-    <!-- Basic Example -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                 text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-        ตัวอย่างแบบพื้นฐาน
-      </h2>
+  <!-- Variants -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Variants
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Continuous Mode (Thai)</h3>
       <app-speech-to-text
         [locale]="'th-TH'"
         [continuous]="true"
         [showUI]="true"
-        [placeholder]="'พูดเพื่อแปลงเป็นข้อความ...'"
+        [placeholder]="'Speak to convert to text...'"
         [rows]="5">
       </app-speech-to-text>
-    </section>
+    </app-glass-card>
+  </section>
 
-    <!-- Usage Example -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                 text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-        ตัวอย่างการใช้งาน
-      </h2>
-      <pre class="bg-gray-100 dark:bg-gray-800 theme-gemini:bg-gray-900/50 p-4 rounded-lg overflow-x-auto border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30"><code class="text-sm font-mono text-gray-800 dark:text-gray-200 theme-gemini:text-white/90">// TypeScript
-import {{ '{' }} SpeechToTextComponent {{ '}' }} from '../../shared/components/speech-to-text/speech-to-text.component';
-
-&#64;Component({{ '{' }}
-  selector: 'app-example',
-  template: `...`
-{{ '}' }})
-export class ExampleComponent {{ '{' }}
-  onTranscriptChanged(event: any): void {{ '{' }}
-    console.log('Transcript:', event.transcript);
-  {{ '}' }}
-{{ '}' }}
-
-// HTML
-&lt;app-speech-to-text
-  [locale]="'en-US'"
-  [continuous]="false"
-  [interimResults]="true"
-  [showUI]="true"
-  [placeholder]="'Text from speech will appear here...'"
-  (transcriptChanged)="onTranscriptChanged($event)"
-  (started)="onStarted($event)"
-  (stopped)="onStopped($event)"
-  (error)="onError($event)"&gt;
-&lt;/app-speech-to-text&gt;
-
-// Methods
-start(): void - Start listening
-stop(): void - Stop listening
-clear(): void - Clear text
-isListeningNow(): boolean - Check if listening
-isSupported(): boolean - Check if supported
-getValue(): string - Get current value
-setValue(value: string): void - Set value</code></pre>
-    </section>
-  </app-glass-card>
+  <!-- Basic Usage -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Basic Usage
+    </h2>
+    
+    <app-code-viewer
+      title="Speech to Text"
+      language="html"
+      [code]="basicExample">
+    </app-code-viewer>
+  </section>
 </div>
 
