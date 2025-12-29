@@ -1,7 +1,7 @@
-<div class="w-full py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="w-full py-12">
   <div class="mb-8">
     <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      NgSelect
+      NgSelect Component Demo
     </h1>
     <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
       Select dropdown component with search, multi-select, and custom templates support.
@@ -72,31 +72,21 @@
     </app-glass-card>
   </section>
 
-  <!-- Code Examples Section -->
+  <!-- Basic Usage -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Code Examples
+      Basic Usage
     </h2>
     
-    <app-glass-card padding="p-6">
-      <div class="space-y-6">
-        <div>
-          <h3 class="text-lg font-semibold mb-2">Basic Select</h3>
-          <app-code-viewer [code]="basicExample" language="html"></app-code-viewer>
-        </div>
-        
-        <div>
-          <h3 class="text-lg font-semibold mb-2">Searchable Select</h3>
-          <app-code-viewer [code]="searchableExample" language="html"></app-code-viewer>
-        </div>
-        
-        <div>
-          <h3 class="text-lg font-semibold mb-2">Multi Select</h3>
-          <app-code-viewer [code]="multiSelectExample" language="html"></app-code-viewer>
-        </div>
-      </div>
-    </app-glass-card>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Select</h3>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Select"></app-code-viewer>
+    
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Searchable Select</h3>
+    <app-code-viewer [code]="searchableExample" language="html" title="Searchable Select"></app-code-viewer>
+    
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Multi Select</h3>
+    <app-code-viewer [code]="multiSelectExample" language="html" title="Multi Select"></app-code-viewer>
   </section>
 </div>
 

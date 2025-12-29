@@ -59,6 +59,15 @@ export class StaggerDemoComponent {
   ];
 
   // Code examples
+  manualExample = `<!-- Manual way (without directive) -->
+@for (item of items; track item.id; let i = $index) {
+  <div 
+    class="animate-fade-in-up"
+    [style.animation-delay]="(i * 0.1) + 's'">
+    <!-- content -->
+  </div>
+}`;
+
   basicExample = `<!-- With @for (Angular 17+) -->
 @for (item of items; track item.id; let i = $index) {
   <div [appStagger]="i" [staggerDelay]="0.1">
