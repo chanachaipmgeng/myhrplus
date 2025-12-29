@@ -2,11 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TreeGridComponent, TreeGridColumn } from '../../../../shared/components/tree-grid/tree-grid.component';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-tree-grid-demo',
   standalone: true,
-  imports: [CommonModule, TreeGridComponent, GlassCardComponent],
+  imports: [CommonModule, TreeGridComponent, GlassCardComponent, CodeViewerComponent],
   templateUrl: './tree-grid-demo.component.html',
   styleUrls: ['./tree-grid-demo.component.scss']
 })
@@ -243,5 +244,20 @@ export class TreeGridDemoComponent {
       this.treegrid.clearSearch();
     }
   }
+
+  // Code examples
+  basicExample = `<app-tree-grid
+  #treegrid
+  [dataSource]="sampleData"
+  [columns]="columns"
+  [childMapping]="'subtasks'"
+  [allowPaging]="true"
+  [allowSorting]="true"
+  [allowFiltering]="true"
+  [allowSelection]="true"
+  [height]="'500px'"
+  [width]="'100%'"
+  (rowSelected)="onRowSelected($event)">
+</app-tree-grid>`;
 }
 

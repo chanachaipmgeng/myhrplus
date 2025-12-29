@@ -1,20 +1,21 @@
-<div class="w-full py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <app-glass-card padding="p-6">
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-        Data Grid Component Demo
-      </h1>
-      <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
-        Component สำหรับแสดงข้อมูลแบบตารางจาก Syncfusion พร้อม Glass Morphism styling และ features ครบถ้วน
-      </p>
-    </div>
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Data Grid Component Demo
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+      A comprehensive data grid component for displaying tabular data with Syncfusion integration and Glass Morphism styling.
+    </p>
+  </div>
 
-    <!-- Full Featured Example -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                 text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-        ตัวอย่างแบบเต็มรูปแบบ
-      </h2>
+  <!-- Live Demo -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
+    
+    <app-glass-card padding="p-6">
       <app-data-grid
         [dataSource]="gridData"
         [columns]="columns"
@@ -36,76 +37,80 @@
         (cellSave)="onCellSave($event)"
         (dataBound)="onDataBound($event)">
       </app-data-grid>
-    </section>
+    </app-glass-card>
+  </section>
 
-    <!-- Basic Example -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                 text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-        ตัวอย่างแบบพื้นฐาน
-      </h2>
-      <app-data-grid
-        [dataSource]="basicData"
-        [columns]="basicColumns"
-        [allowPaging]="true"
-        [allowSorting]="true"
-        [allowFiltering]="true"
-        [allowGrouping]="false"
-        [allowSelection]="false"
-        [showToolbar]="false"
-        [height]="'400px'"
-        [width]="'100%'">
-      </app-data-grid>
-    </section>
-
-    <!-- Skeleton Loading Example -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                 text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-        ตัวอย่าง Skeleton Loading
-      </h2>
+  <!-- Variants -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Variants
+    </h2>
+    
+    <!-- Basic Grid -->
+    <div class="mb-8">
+      <h3 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Grid</h3>
+      <app-glass-card padding="p-6">
+        <app-data-grid
+          [dataSource]="basicData"
+          [columns]="basicColumns"
+          [allowPaging]="true"
+          [allowSorting]="true"
+          [allowFiltering]="true"
+          [allowGrouping]="false"
+          [allowSelection]="false"
+          [showToolbar]="false"
+          [height]="'400px'"
+          [width]="'100%'">
+        </app-data-grid>
+      </app-glass-card>
+    </div>
+    
+    <!-- With Skeleton Loading -->
+    <div class="mb-8">
+      <h3 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Skeleton Loading</h3>
       <div class="mb-4">
         <app-glass-button 
           variant="primary"
           (clicked)="toggleLoading()">
-          {{ isLoading() ? 'กำลังโหลด...' : 'แสดง Skeleton Loading' }}
+          {{ isLoading() ? 'Loading...' : 'Show Skeleton Loading' }}
         </app-glass-button>
       </div>
       <div class="min-h-[400px]">
         @if (isLoading()) {
           <app-skeleton-loader type="table" [rows]="8" [columns]="columns.length"></app-skeleton-loader>
         } @else {
-          <app-data-grid
-            [dataSource]="gridData"
-            [columns]="columns"
-            [allowPaging]="true"
-            [allowSorting]="true"
-            [allowFiltering]="true"
-            [height]="'400px'"
-            [width]="'100%'">
-          </app-data-grid>
+          <app-glass-card padding="p-6">
+            <app-data-grid
+              [dataSource]="gridData"
+              [columns]="columns"
+              [allowPaging]="true"
+              [allowSorting]="true"
+              [allowFiltering]="true"
+              [height]="'400px'"
+              [width]="'100%'">
+            </app-data-grid>
+          </app-glass-card>
         }
       </div>
       <div class="mt-4 p-4 glass-card rounded-lg">
         <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
-          <strong>Best Practice:</strong> ใช้ Skeleton Loader แทน Spinner เมื่อโหลดข้อมูลตาราง เพื่อให้ผู้ใช้เห็นโครงสร้างของข้อมูลที่จะแสดง
+          <strong>Best Practice:</strong> Use Skeleton Loader instead of Spinner when loading table data to show users the structure of the data that will be displayed.
         </p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Usage Example -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                 text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-        ตัวอย่างการใช้งาน
-      </h2>
-      
-      <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
-      <app-code-viewer [code]="basicExample" language="html" title="Basic Data Grid"></app-code-viewer>
+  <!-- Basic Usage -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Basic Usage
+    </h2>
+    
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Data Grid"></app-code-viewer>
 
-      <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Skeleton Loading</h3>
-      <app-code-viewer [code]="skeletonLoadingExample" language="html" title="Data Grid with Skeleton Loading"></app-code-viewer>
-    </section>
-  </app-glass-card>
+    <app-code-viewer [code]="skeletonLoadingExample" language="html" title="Data Grid with Skeleton Loading"></app-code-viewer>
+  </section>
 </div>
 

@@ -8,13 +8,14 @@
     </p>
   </div>
 
-  <!-- Basic Example -->
+  <!-- Live Demo Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Basic Example
+      Live Demo
     </h2>
-    <app-glass-card padding="p-6" variant="weak">
+    
+    <app-glass-card padding="p-6">
       <div class="space-y-4">
         <div class="flex items-center gap-4">
           <span class="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 font-medium w-32">Mobile:</span>
@@ -25,16 +26,26 @@
         </div>
       </div>
     </app-glass-card>
-    <app-code-viewer [code]="basicExample" language="html" title="Basic Mask Toggle"></app-code-viewer>
   </section>
 
-  <!-- Different Field Types -->
+  <!-- Basic Usage Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Different Field Types
+      Basic Usage
     </h2>
-    <app-glass-card padding="p-6" variant="weak">
+    
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
+  </section>
+
+  <!-- Variants Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Variants
+    </h2>
+    
+    <app-glass-card padding="p-6">
       <div class="space-y-4">
         <div class="flex items-center gap-4">
           <span class="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 font-medium w-32">Mobile:</span>
@@ -71,13 +82,14 @@
     </app-glass-card>
   </section>
 
-  <!-- Usage Note -->
+  <!-- Advanced Features Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Usage Note
+      Advanced Features
     </h2>
-    <app-glass-card padding="p-6" variant="weak">
+    
+    <app-glass-card padding="p-6">
       <div class="space-y-2 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">
         <p>• This component uses <code class="px-2 py-1 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-gray-700/50 rounded">FieldMaskingService</code> to apply masking rules</p>
         <p>• Click the eye icon to toggle between masked and unmasked view</p>
@@ -87,13 +99,16 @@
     </app-glass-card>
   </section>
 
-  <!-- Props Table -->
+  <!-- API Reference -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      API Documentation
+      API Reference
     </h2>
-    <app-props-table [props]="props" title="Inputs"></app-props-table>
+    
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props"></app-props-table>
+    </app-glass-card>
   </section>
 </div>
 

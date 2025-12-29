@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChartComponent, ChartSeries } from '../../../../shared/components/chart/chart.component';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-chart-demo',
   standalone: true,
-  imports: [CommonModule, ChartComponent, GlassCardComponent],
+  imports: [CommonModule, ChartComponent, GlassCardComponent, CodeViewerComponent],
   templateUrl: './chart-demo.component.html',
   styleUrls: ['./chart-demo.component.scss']
 })
@@ -158,5 +159,20 @@ export class ChartDemoComponent {
   onTooltipRender(event: any): void {
     console.log('Tooltip render:', event);
   }
+
+  // Code examples
+  basicExample = `<app-chart
+  [dataSource]="salesData"
+  [series]="columnSeries"
+  [primaryXAxis]="{ valueType: 'Category', title: 'Month' }"
+  [primaryYAxis]="{ valueType: 'Double', title: 'Sales' }"
+  title="Monthly Sales"
+  [legendSettings]="{ visible: true, position: 'Top' }"
+  [tooltip]="{ enable: true }"
+  [height]="'400px'"
+  [width]="'100%'"
+  (pointClick)="onPointClick($event)"
+  (loaded)="onLoaded($event)">
+</app-chart>`;
 }
 

@@ -324,38 +324,39 @@
     </app-glass-card>
   </div>
 
-  <!-- Code Examples -->
+  <!-- Basic Usage -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
                text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      Code Examples
+      Basic Usage
+    </h2>
+    
+    <app-code-viewer
+      title="Basic Calendar"
+      language="html"
+      [code]="basicUsageCode">
+    </app-code-viewer>
+
+    <app-code-viewer
+      title="With Event Management"
+      language="typescript"
+      [code]="eventManagementCode">
+    </app-code-viewer>
+  </section>
+
+  <!-- API Reference -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Reference
     </h2>
     
     <app-glass-card padding="p-6">
-      <app-code-viewer
-        title="Basic Usage"
-        language="typescript"
-        [code]="basicUsageCode">
-      </app-code-viewer>
-
-      <app-code-viewer
-        title="With Event Management"
-        language="typescript"
-        [code]="eventManagementCode">
-      </app-code-viewer>
+      <app-props-table
+        title="Calendar Component Properties"
+        [props]="calendarProps">
+      </app-props-table>
     </app-glass-card>
-  </section>
-
-  <!-- API Documentation -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-      API Documentation
-    </h2>
-    <app-props-table
-      title="Calendar Component Properties"
-      [props]="calendarProps">
-    </app-props-table>
   </section>
 </div>
 
