@@ -4,10 +4,10 @@
     <!-- Welcome Section -->
     <app-glass-card padding="p-10" customClass="my-10" [animate]="'fade-in'">
       <div class="relative z-10">
-        <h1 class="text-5xl font-bold mb-4 thai-text bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent animate-fade-in-up gemini-title">
+        <h1 class="text-3xl md:text-5xl font-bold mb-4 thai-text bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent animate-fade-in-up gemini-title">
           {{ getGreeting() }}, {{ currentUser?.fullname || currentUser?.name || 'ผู้ใช้งาน' }}!
         </h1>
-        <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 thai-text animate-fade-in-up">
+        <p class="text-base md:text-xl text-gray-600 dark:text-gray-300 mb-6 md:mb-8 thai-text animate-fade-in-up">
           ยินดีต้อนรับสู่ระบบ HR Management
         </p>
         <div class="flex flex-wrap gap-6 animate-fade-in-up" *ngIf="currentUser">
@@ -32,25 +32,32 @@
 
     <!-- Menu Categories -->
     <div *ngIf="!loading && menuCategories.length > 0" class="max-w-7xl mx-auto">
-      <h2 class="text-3xl font-semibold mb-10 text-center text-gray-800 dark:text-gray-200 thai-text">เลือกเมนูที่ต้องการใช้งาน</h2>
+      <h2 class="text-2xl md:text-3xl font-semibold mb-6 md:mb-10 text-center text-gray-800 dark:text-gray-200 thai-text">เลือกเมนูที่ต้องการใช้งาน</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <app-glass-card
         *ngFor="let category of menuCategories; let i = index"
-        padding="p-8"
-        customClass="cursor-pointer min-h-[200px] flex flex-col"
+        padding="p-6 md:p-8"
+        customClass="cursor-pointer min-h-[200px] flex flex-col active:scale-95"
         [style.background]="getGradientForCategory(category.code)"
         [appStagger]="i"
         [staggerDelay]="0.1"
-        [animate]="'fade-in'">
-          <div class="relative z-10 p-8 flex-1 flex flex-col text-white cursor-pointer" (click)="navigateToCategory(category)" [attr.aria-label]="category.thaiTitle">
+        [animate]="'fade-in'"
+        [attr.aria-label]="category.thaiTitle + ': ' + category.englishTitle"
+        [attr.role]="'button'"
+        [attr.tabindex]="0">
+          <div class="relative z-10 p-6 md:p-8 flex-1 flex flex-col text-white cursor-pointer" 
+               (click)="navigateToCategory(category)" 
+               (keydown.enter)="navigateToCategory(category)"
+               (keydown.space)="navigateToCategory(category); $event.preventDefault()"
+               [attr.aria-label]="category.thaiTitle">
             <div class="flex items-center gap-4 mb-6">
               <div class="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center transition-all duration-300 backdrop-blur-lg flex-shrink-0 hover:scale-110 hover:rotate-6">
                 <app-icon [name]="category.icon" size="lg" color="text-white"></app-icon>
               </div>
               <div class="flex-1">
-                <h3 class="text-2xl font-bold mb-1 text-white thai-text">{{ category.thaiTitle }}</h3>
-                <p class="text-sm opacity-90 text-white font-medium">{{ category.englishTitle }}</p>
+                <h3 class="text-xl md:text-2xl font-bold mb-1 text-white thai-text">{{ category.thaiTitle }}</h3>
+                <p class="text-xs md:text-sm opacity-90 text-white font-medium">{{ category.englishTitle }}</p>
               </div>
             </div>
 

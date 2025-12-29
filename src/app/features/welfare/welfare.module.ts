@@ -11,6 +11,7 @@ import { GlassButtonComponent } from '../../shared/components/glass-button/glass
 import { GlassInputComponent } from '../../shared/components/glass-input/glass-input.component';
 import { LoadingComponent } from '../../shared/components/loading/loading.component';
 import { EmptyStateComponent } from '../../shared/components/empty-state/empty-state.component';
+import { PageHeaderComponent } from '../../shared/components/page-header/page-header.component';
 
 import { WelfareHomeComponent } from './welfare-home/welfare-home.component';
 
@@ -31,7 +32,8 @@ import { WelfareHomeComponent } from './welfare-home/welfare-home.component';
     GlassButtonComponent,
     GlassInputComponent,
     LoadingComponent,
-    EmptyStateComponent
+    EmptyStateComponent,
+    PageHeaderComponent
   ]
 })
 export class WelfareModule { }

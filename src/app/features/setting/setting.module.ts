@@ -7,6 +7,7 @@ import { LayoutModule } from '../../layout/layout.module';
 import { SettingRoutingModule } from './setting-routing.module';
 import { SettingHomeComponent } from './setting-home/setting-home.component';
 import { GlassCardComponent } from '../../shared/components/glass-card/glass-card.component';
+import { PageHeaderComponent } from '../../shared/components/page-header/page-header.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { GlassCardComponent } from '../../shared/components/glass-card/glass-car
     SharedModule,
     LayoutModule,
     SettingRoutingModule,
-    GlassCardComponent
+    GlassCardComponent,
+    PageHeaderComponent
   ]
 })
 export class SettingModule { }

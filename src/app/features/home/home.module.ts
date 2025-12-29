@@ -15,6 +15,7 @@ import { StatisticsCardComponent } from '../../shared/components/statistics-card
 import { StatisticsGridComponent } from '../../shared/components/statistics-grid/statistics-grid.component';
 import { LoadingComponent } from '../../shared/components/loading/loading.component';
 import { EmptyStateComponent } from '../../shared/components/empty-state/empty-state.component';
+import { LazyImageDirective } from '../../shared/directives/lazy-image.directive';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { EmptyStateComponent } from '../../shared/components/empty-state/empty-s
     StatisticsCardComponent,
     StatisticsGridComponent,
     LoadingComponent,
-    EmptyStateComponent
+    EmptyStateComponent,
+    // Standalone directives
+    LazyImageDirective
   ]
 })
 export class HomeModule { }

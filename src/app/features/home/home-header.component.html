@@ -91,7 +91,7 @@
             class="nav-link user-profile p-2 text-gray-700 dark:text-gray-200 hover:bg-white/30 dark:hover:bg-slate-700/30 rounded-lg transition-all duration-200"
             type="button">
             <img
-              [src]="getProfilePictureUrl()"
+              [appLazyImage]="getProfilePictureUrl()"
               [alt]="getFullname()"
               class="profile-picture w-8 h-8 rounded-full object-cover">
           </button>
@@ -101,7 +101,7 @@
             <div class="user-header p-4 border-b border-gray-200 dark:border-gray-700">
               <div class="user-avatar mb-3">
                 <img
-                  [src]="getProfilePictureUrl()"
+                  [appLazyImage]="getProfilePictureUrl()"
                   [alt]="getFullname()"
                   class="avatar-large w-16 h-16 rounded-full object-cover mx-auto">
               </div>
@@ -188,7 +188,7 @@
                 <div class="profile-layout">
                   <div class="profile-avatar-section">
                     <div class="profile-pic-wrapper">
-                      <img [src]="getProfilePictureUrl()" class="profile-pic w-32 h-32 rounded-full object-cover" [alt]="getFullname()">
+                      <img [appLazyImage]="getProfilePictureUrl()" class="profile-pic w-32 h-32 rounded-full object-cover" [alt]="getFullname()">
                     </div>
                   </div>
                   <div class="profile-info-section">

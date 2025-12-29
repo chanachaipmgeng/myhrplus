@@ -312,10 +312,38 @@ export class ModelNameService {
 
 ## UX/UI Best Practices for HR System
 - **Skeleton Loading**: Use `<app-skeleton-loader>` for data tables and heavy lists instead of simple spinners. This improves perceived performance.
-- **Staggered Animations**: Use `animate-fade-in-up` with staggered delays for lists to create a waterfall effect.
+  - Pattern: `@if (service.loading()) { <app-skeleton-loader> } @else { content }`
+- **Staggered Animations**: Use `appStagger` directive for automatic delay management.
+  - Usage: `[appStagger]="i" [staggerDelay]="0.1"` (0.1s for cards, 0.05s for small items)
+  - Standard: `animate-fade-in-up` class is applied automatically
 - **Feedback**: Use `NotificationService` (Toast/Snackbar) for success/error messages instead of full page alerts or redirects.
-- **Glassmorphism Consistency**: Ensure all cards and containers use `<app-glass-card>` or `.glass-card` class to maintain design consistency.
-- **Backgrounds**: **DO NOT** use solid background colors (e.g., `bg-white`, `bg-gray-50`) on main page containers. Let the global theme gradient show through. Use transparent or semi-transparent backgrounds (e.g., `bg-white/50` or `glass-card`).
+- **Glassmorphism Consistency**: Ensure all cards and containers use `<app-glass-card>` component instead of `<div class="glass-card">` to maintain design consistency.
+- **Backgrounds**: **DO NOT** use solid background colors (e.g., `bg-white`, `bg-gray-50`, `bg-slate-900`) on main page containers. Let the global theme gradient show through. Use transparent or semi-transparent backgrounds (e.g., `bg-white/50` or `glass-card`).
+- **Page Header Standardization**: Always use `<app-page-header>` component instead of custom headers.
+  - Usage: `<app-page-header [title]="..." [subtitle]="..." [showBreadcrumbs]="true">`
+  - Supports translation: `[translateTitle]="true"` and `[translateSubtitle]="true"`
+- **Container Padding Standardization**:
+  - Main Layout: `p-4 md:p-6 lg:p-8` in content-area
+  - Feature Components: Use `-mx-4 md:-mx-6 lg:-mx-8` to remove padding from main-layout
+  - Content Sections: Use `px-4 md:px-6 lg:px-8` for content
+  - **DO NOT** use container class names (e.g., `personal-home-container`) - use consistent pattern everywhere
+- **Grid Patterns Standardization**:
+  - Small cards: `grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6`
+  - Medium cards: `grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6`
+  - Large cards: `grid-cols-1 lg:grid-cols-2 gap-6`
+- **Mobile Optimization**:
+  - Responsive text: `text-lg md:text-xl`, `text-xs md:text-sm`
+  - Responsive icons: `text-3xl md:text-4xl`
+  - Responsive padding: `p-4 md:p-6`
+  - Touch feedback: `active:scale-95` for interactive elements
+- **Accessibility**:
+  - Add `[attr.aria-label]` to interactive elements
+  - Add `[attr.role]="'button'"` and `[attr.tabindex]="0"` for clickable elements
+  - Support keyboard navigation: `(keydown.enter)` and `(keydown.space)`
+- **Performance**:
+  - Use lazy loading for images: `[appLazyImage]="imageUrl"` instead of `[src]`
+  - Reduce animation intensity on mobile (use CSS media queries)
+  - Support `prefers-reduced-motion` for animations
 
 ## Refactoring from JSP
 - **Smart vs Dumb Components**: Separate business logic (Smart) from presentation logic (Dumb).

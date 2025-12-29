@@ -77,6 +77,15 @@
      /* Smooth scroll */
      scroll-behavior: smooth;
 
+     /* Header offset - when header is visible */
+     &.content-area-with-header {
+       margin-top: 50px; /* Fixed header height offset */
+       
+       @include respond-to-down('md') {
+         margin-top: 56px; /* Slightly taller on mobile */
+       }
+     }
+
 
      /* Custom scrollbar */
      &::-webkit-scrollbar {
@@ -195,6 +204,8 @@
        &::before,
        &::after {
          opacity: 0.3;
+         /* Reduce animation intensity on mobile */
+         animation-duration: 12s;
        }
      }
 

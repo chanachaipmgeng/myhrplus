@@ -1,25 +1,33 @@
-<div class="setting-home-container p-6">
-  <div class="mb-6">
-    <h1 class="text-3xl font-bold mb-2">{{ 'setting.dashboard.title' | translate }}</h1>
-    <p class="text-gray-600 dark:text-gray-400">{{ 'setting.dashboard.subtitle' | translate }}</p>
-  </div>
+<div class="-mx-4 md:-mx-6 lg:-mx-8">
+  <app-page-header
+    [title]="'setting.dashboard.title' | translate"
+    [subtitle]="'setting.dashboard.subtitle' | translate"
+    [translateTitle]="true"
+    [translateSubtitle]="true"
+    [showBreadcrumbs]="true">
+  </app-page-header>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-6 lg:px-8">
     <app-glass-card
       *ngFor="let item of menuItems; let i = index"
       [appStagger]="i"
       [staggerDelay]="0.1"
-      padding="p-6"
-      customClass="rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105"
+      padding="p-4 md:p-6"
+      customClass="rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 active:scale-95"
       [style.background]="item.color"
-      (click)="navigateTo(item.route)">
+      [attr.aria-label]="item.title + ': ' + item.description"
+      [attr.role]="'button'"
+      [attr.tabindex]="0"
+      (click)="navigateTo(item.route)"
+      (keydown.enter)="navigateTo(item.route)"
+      (keydown.space)="navigateTo(item.route); $event.preventDefault()">
       <div class="flex items-center gap-4">
-        <div class="icon-container text-white text-4xl">
+        <div class="icon-container text-white text-3xl md:text-4xl">
           <span [class]="item.icon"></span>
         </div>
         <div class="flex-1">
-          <h3 class="text-xl font-semibold text-white mb-1">{{ item.title }}</h3>
-          <p class="text-white text-sm opacity-90">{{ item.description }}</p>
+          <h3 class="text-lg md:text-xl font-semibold text-white mb-1">{{ item.title }}</h3>
+          <p class="text-white text-xs md:text-sm opacity-90">{{ item.description }}</p>
         </div>
       </div>
     </app-glass-card>

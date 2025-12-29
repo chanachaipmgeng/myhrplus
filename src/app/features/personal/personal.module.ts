@@ -6,6 +6,7 @@ import { LayoutModule } from '../../layout/layout.module';
 import { PersonalRoutingModule } from './personal-routing.module';
 import { PersonalHomeComponent } from './personal-home/personal-home.component';
 import { GlassCardComponent } from '../../shared/components/glass-card/glass-card.component';
+import { PageHeaderComponent } from '../../shared/components/page-header/page-header.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { GlassCardComponent } from '../../shared/components/glass-card/glass-car
     SharedModule,
     LayoutModule,
     PersonalRoutingModule,
-    GlassCardComponent
+    GlassCardComponent,
+    PageHeaderComponent
   ]
 })
 export class PersonalModule { }

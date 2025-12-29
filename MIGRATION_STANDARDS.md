@@ -167,16 +167,21 @@ export class BenefitListComponent implements OnInit {
 
 **benefit-list.component.html**
 ```html
-<app-page-header title="Benefits" (actionClick)="onCreate()"></app-page-header>
+<app-page-header 
+  [title]="'benefit.title' | translate"
+  [showBreadcrumbs]="true"
+  [actions]="headerActions">
+</app-page-header>
 
-<!-- Transparent Container for Global Theme -->
-<div class="p-6"> 
+<!-- Standardized Container Pattern -->
+<div class="-mx-4 md:-mx-6 lg:-mx-8 px-4 md:px-6 lg:px-8 transition-colors duration-300">
   <!-- Loading State -->
   @if (service.loading()) {
-    <app-skeleton-loader count="5"></app-skeleton-loader>
+    <app-skeleton-loader type="table" [rows]="10" [columns]="columns.length || 5"></app-skeleton-loader>
   } @else {
     <app-data-grid 
-      [data]="(data$ | async) || []" 
+      [dataSource]="(data$ | async) || []"
+      [columns]="columns"
       (rowSelected)="onEdit($event)">
     </app-data-grid>
   }

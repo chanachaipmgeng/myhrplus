@@ -5,6 +5,7 @@ import { LayoutModule } from '../../layout/layout.module';
 import { WorkflowRoutingModule } from './workflow-routing.module';
 import { WorkflowHomeComponent } from './workflow-home/workflow-home.component';
 import { GlassCardComponent } from '../../shared/components/glass-card/glass-card.component';
+import { PageHeaderComponent } from '../../shared/components/page-header/page-header.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { GlassCardComponent } from '../../shared/components/glass-card/glass-car
     SharedModule,
     LayoutModule,
     WorkflowRoutingModule,
-    GlassCardComponent
+    GlassCardComponent,
+    PageHeaderComponent
   ]
 })
 export class WorkflowModule { }
