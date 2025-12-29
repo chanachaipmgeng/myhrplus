@@ -38,10 +38,13 @@
 }
 
 .filter-chip {
-  @apply bg-primary-500/10 dark:bg-primary-500/20 border border-primary-500/30 dark:border-primary-500/40 text-primary-600 dark:text-primary-400 transition-smooth min-h-[32px] px-3 py-1 inline-flex items-center gap-1;
+  background-color: rgba(var(--primary-rgb), 0.1);
+  border-color: rgba(var(--primary-rgb), 0.3);
+  color: rgb(var(--primary-rgb));
+  @apply transition-smooth min-h-[32px] px-3 py-1 inline-flex items-center gap-1;
   
   &:hover {
-    @apply bg-primary-500/15 dark:bg-primary-500/30;
+    background-color: rgba(var(--primary-rgb), 0.15);
   }
   
   button {
@@ -157,7 +160,7 @@ body.theme-gemini {
   }
   
   .filter-toggle.active {
-    filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.4));
+    filter: drop-shadow(0 0 4px rgba(var(--primary-rgb), 0.4));
   }
 }
 

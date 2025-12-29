@@ -19,7 +19,7 @@
       class="context-tab flex-1 px-4 py-2 rounded-md transition-all duration-300 text-sm
              text-gray-700 dark:text-gray-300 theme-gemini:text-white/80
              hover:bg-black/5 dark:hover:bg-white/10 theme-gemini:hover:bg-blue-500/10
-             focus:outline-none focus:ring-2 focus:ring-primary-500/20"
+             focus:outline-none focus:ring-2 focus:ring-primary/20"
       [attr.aria-label]="context.label"
       [attr.aria-pressed]="currentContext === context.value">
       <div class="flex items-center justify-center gap-2">
@@ -27,7 +27,7 @@
           [name]="context.icon"
           size="sm"
           [color]="currentContext === context.value 
-            ? 'text-primary-600 dark:text-primary-400 theme-gemini:text-blue-400' 
+            ? 'text-primary' 
             : 'text-gray-600 dark:text-gray-400 theme-gemini:text-white/70'">
         </app-icon>
         <span class="hidden sm:inline">{{ context.label }}</span>

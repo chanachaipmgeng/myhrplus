@@ -10,8 +10,8 @@
 
 /* Active State */
 .active {
-  @apply bg-primary-500/10 text-primary-600;
-  @apply dark:bg-primary-500/20 dark:text-primary-400;
+  @apply bg-primary/10 text-primary;
+  @apply dark:bg-primary/20 dark:text-primary;
 }
 
 /* Gemini Theme */
@@ -37,7 +37,7 @@ body.theme-gemini {
       rgba(var(--primary-rgb), 0.2),
       rgba(var(--primary-rgb), 0.2)
     ) !important;
-    @apply bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent;
+    color: rgb(var(--primary-rgb));
     -webkit-background-clip: text;
   }
   

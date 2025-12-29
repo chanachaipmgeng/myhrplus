@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 })
 export class SpinnerComponent {
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
-  @Input() color: string = 'text-primary-600';
+  @Input() color: string = 'text-primary';
   @Input() message?: string;
   @Input() fullScreen: boolean = false;
 

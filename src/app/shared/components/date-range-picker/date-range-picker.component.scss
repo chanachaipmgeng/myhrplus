@@ -22,7 +22,7 @@
   
   &:hover {
     color: rgb(var(--primary-rgb)) !important;
-    @apply bg-primary-500/10;
+    background-color: rgba(var(--primary-rgb), 0.1);
   }
   
   @media (min-width: 768px) {
@@ -80,7 +80,7 @@
     @apply w-full px-4 py-2 text-left min-h-[44px] transition-colors;
     
     &:hover {
-      @apply bg-primary-500/10 dark:bg-primary-500/20;
+      background-color: rgba(var(--primary-rgb), 0.1);
     }
   }
 }
@@ -130,12 +130,12 @@ body.theme-gemini {
   }
   
   .preset-btn:hover {
-    filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.4));
+    filter: drop-shadow(0 0 4px rgba(var(--primary-rgb), 0.4));
   }
   
   .absolute {
     @apply glass-gemini shadow-gemini;
-    border-color: rgba(59, 130, 246, 0.3);
+    border-color: rgba(var(--primary-rgb), 0.3);
   }
 }
 

@@ -17,26 +17,24 @@
       @apply glass-weak dark:glass-dark-weak rounded-lg p-8 text-center transition-smooth border-2 border-dashed border-white/30 dark:border-white/20;
 
       &:hover {
-        @apply border-primary-500/50 dark:border-primary-500/60;
-        background: rgba(79, 70, 229, 0.05);
-
-        .dark & {
-          background: rgba(79, 70, 229, 0.1);
-        }
+        border-color: rgba(var(--primary-rgb), 0.5);
+        background: rgba(var(--primary-rgb), 0.05);
       }
 
       .e-upload-drag-hover {
-        @apply border-primary-500/80 dark:border-primary-500/90;
-        background: rgba(79, 70, 229, 0.1);
-
-        .dark & {
-          background: rgba(79, 70, 229, 0.15);
-        }
+        border-color: rgba(var(--primary-rgb), 0.8);
+        background: rgba(var(--primary-rgb), 0.1);
       }
 
       .e-btn {
-        @apply bg-primary-600 border border-primary-600 text-white rounded-lg px-6 py-3 font-semibold transition-smooth hover:bg-primary-700 hover:-translate-y-0.5 active:translate-y-0;
-        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+        background-color: rgb(var(--primary-rgb));
+        border-color: rgb(var(--primary-rgb));
+        @apply text-white rounded-lg px-6 py-3 font-semibold transition-smooth hover:-translate-y-0.5 active:translate-y-0;
+        box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.4);
+        
+        &:hover {
+          background-color: rgba(var(--primary-rgb), 0.9);
+        }
       }
 
       .e-upload-text {

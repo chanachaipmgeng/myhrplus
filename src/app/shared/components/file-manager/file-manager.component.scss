@@ -48,7 +48,8 @@
           @apply text-slate-800 dark:text-slate-300 p-2 rounded-md transition-smooth hover:bg-white/10 dark:hover:bg-white/5;
 
           &.e-active {
-            @apply bg-primary-500/20 dark:bg-primary-500/30 text-primary-600 dark:text-indigo-400;
+            background-color: rgba(var(--primary-rgb), 0.2);
+            color: rgb(var(--primary-rgb));
           }
         }
       }
@@ -65,7 +66,8 @@
           @apply glass-weak dark:glass-dark-weak rounded-lg mb-2 p-3 transition-smooth hover:translate-x-1 hover:shadow-md;
 
           &.e-active {
-            @apply bg-primary-500/20 dark:bg-primary-500/30 border-primary-500/40 dark:border-primary-500/50;
+            background-color: rgba(var(--primary-rgb), 0.2);
+            border-color: rgba(var(--primary-rgb), 0.4);
           }
 
           .e-file-name {
@@ -99,7 +101,12 @@
           @apply bg-white/5 dark:bg-black/10 border-b border-white/10 dark:border-white/5 transition-smooth hover:bg-white/10 dark:hover:bg-white/5;
 
           &.e-selected {
-            @apply bg-primary-500/20 dark:bg-primary-500/30 border-primary-500/40 dark:border-primary-500/50;
+            background: rgba(var(--primary-rgb), 0.2);
+            border-color: rgba(var(--primary-rgb), 0.4);
+            .dark & {
+              background: rgba(var(--primary-rgb), 0.3);
+              border-color: rgba(var(--primary-rgb), 0.5);
+            }
           }
 
           .e-rowcell {
@@ -114,7 +121,10 @@
       @apply glass-weak dark:glass-dark-weak rounded-lg p-3 mb-4 border border-white/20 dark:border-white/10;
 
       .e-breadcrumb-item {
-        @apply text-slate-800 dark:text-slate-300 transition-colors hover:text-primary-600;
+        @apply text-slate-800 dark:text-slate-300 transition-colors;
+        &:hover {
+          color: rgb(var(--primary-rgb));
+        }
       }
     }
   }

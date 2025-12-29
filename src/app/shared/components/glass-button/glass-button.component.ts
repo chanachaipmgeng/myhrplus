@@ -25,8 +25,9 @@ export class GlassButtonComponent {
     const baseClasses = 'inline-flex items-center justify-center rounded-md font-medium transition-smooth cursor-pointer border border-transparent relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed hover-lift active-scale';
 
     // Variant classes with Tailwind utilities
+    // Using CSS variables for primary color to support dynamic theme colors
     const variantClasses = {
-      'primary': 'bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-md hover:from-primary-600 hover:to-primary-700 hover:shadow-lg glow-primary dark:from-primary-600 dark:to-primary-700 theme-gemini:from-primary-400 theme-gemini:to-primary-600 theme-gemini:shadow-gemini',
+      'primary': 'bg-gradient-primary text-white shadow-md hover:bg-gradient-primary hover:shadow-lg glow-primary transition-all duration-200',
       'secondary': 'glass text-slate-700 shadow-sm hover:glass-strong hover:shadow-md hover-scale-sm dark:glass-dark dark:text-slate-200 dark:hover:glass-dark-strong theme-gemini:glass-gemini theme-gemini:text-white theme-gemini:hover:glass-gemini-strong',
       'danger': 'bg-gradient-to-r from-error-500 to-error-600 text-white shadow-md hover:from-error-600 hover:to-error-700 hover:shadow-lg glow-error dark:from-error-600 dark:to-error-700'
     }[this.variant];

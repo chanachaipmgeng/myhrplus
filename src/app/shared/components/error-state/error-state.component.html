@@ -14,7 +14,7 @@
     </div>
     <div class="text-sm text-slate-600 dark:text-slate-400 mb-4 sm:mb-3 text-left" *ngIf="showDetails && details">
       <details class="cursor-pointer p-3 sm:p-2 rounded-md glass-weak dark:glass-dark-weak border border-white/20 dark:border-slate-700/30 transition-smooth">
-        <summary class="thai-text font-medium p-2 min-h-[44px] flex items-center hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+        <summary class="thai-text font-medium p-2 min-h-[44px] flex items-center hover:text-primary transition-colors">
           {{ 'common.moreDetails' | translate }}
         </summary>
         <p class="mt-2 thai-text">{{ details }}</p>
@@ -23,7 +23,7 @@
     <button
       *ngIf="showRetry"
       (click)="onRetry()"
-      class="mt-4 sm:mt-3 w-full sm:w-auto min-h-[44px] px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors flex items-center justify-center gap-2 glass-button hover-lift active-scale">
+      class="mt-4 sm:mt-3 w-full sm:w-auto min-h-[44px] px-4 py-2 bg-primary hover:bg-primary/80 text-white rounded-lg transition-colors flex items-center justify-center gap-2 glass-button hover-lift active-scale">
       <app-icon name="refresh" size="sm"></app-icon>
       <span class="thai-text">{{ displayRetryText }}</span>
     </button>

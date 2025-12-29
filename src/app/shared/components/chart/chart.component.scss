@@ -44,7 +44,7 @@
     }
 
     body.theme-gemini & .e-chart-tooltip {
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 40px rgba(59, 130, 246, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(var(--primary-rgb), 0.2), 0 0 40px rgba(var(--primary-rgb), 0.1);
     }
 
     /* Axis */
@@ -92,7 +92,7 @@
 
       body.theme-gemini & &.e-column-series .e-point,
       body.theme-gemini & &.e-bar-series .e-point {
-        filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.3));
+        filter: drop-shadow(0 0 4px rgba(var(--primary-rgb), 0.3));
       }
 
       /* Area Series */

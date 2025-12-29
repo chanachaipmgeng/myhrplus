@@ -47,7 +47,7 @@ export class TimelineComponent {
       success: '#22c55e',
       error: '#ef4444',
       warning: '#f59e0b',
-      info: '#3b82f6',
+      info: 'var(--primary-color)',
       default: '#64748b'
     };
     return colorMap[status || 'default'] || colorMap['default'];

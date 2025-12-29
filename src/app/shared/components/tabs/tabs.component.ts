@@ -85,7 +85,7 @@ export class TabsComponent {
   
   getTabClasses(tabId: string): string {
     const base = 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-300 hover-lift-sm transition-smooth theme-gemini:text-white/70';
-    const active = 'border-primary-500 text-primary-600 dark:text-primary-400 relative theme-gemini:border-primary-400 theme-gemini:text-primary-300';
+    const active = 'border-primary text-primary relative';
     return this.activeTab === tabId ? active : base;
   }
 

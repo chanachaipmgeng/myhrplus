@@ -17,7 +17,7 @@
     class="flex-shrink-0 w-5 h-5 min-w-[20px] min-h-[20px] md:min-w-[18px] md:min-h-[18px] rounded-full border-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 relative"
     [ngClass]="{
       'glass border-gray-300 dark:border-gray-600 theme-gemini:border-white/30 hover:glass-strong dark:glass-dark dark:hover:glass-dark-strong theme-gemini:glass-gemini theme-gemini:hover:glass-gemini-strong': !checked && !hasError,
-      'border-primary-500 dark:border-primary-600 theme-gemini:border-blue-500 focus:ring-primary-500 dark:focus:ring-primary-600 theme-gemini:focus:ring-blue-500': checked && !hasError,
+      'border-primary focus:ring-primary': checked && !hasError,
       'border-red-500 dark:border-red-400 theme-gemini:border-red-400 focus:ring-red-500 dark:focus:ring-red-400 theme-gemini:focus:ring-red-400 animate-shake': hasError
     }">
     <!-- Inner Circle -->
@@ -25,7 +25,7 @@
       *ngIf="checked"
       class="absolute inset-0 flex items-center justify-center">
       <span
-        class="w-2.5 h-2.5 md:w-2 md:h-2 rounded-full bg-primary-500 dark:bg-primary-400 theme-gemini:bg-blue-400 animate-scale-in">
+        class="w-2.5 h-2.5 md:w-2 md:h-2 rounded-full bg-primary animate-scale-in">
       </span>
     </span>
   </button>

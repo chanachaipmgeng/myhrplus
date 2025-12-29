@@ -93,7 +93,7 @@
           (click)="selectOption(option)"
           class="w-full text-left px-4 py-2 text-sm transition-colors flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-700 theme-gemini:hover:bg-blue-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
           [ngClass]="{
-            'bg-primary-50 dark:bg-primary-900/30 theme-gemini:bg-blue-500/30 text-primary-700 dark:text-primary-300 theme-gemini:text-blue-300': isSelected(option),
+            'bg-primary/10 dark:bg-primary/20 theme-gemini:bg-primary/30 text-primary dark:text-primary theme-gemini:text-primary': isSelected(option),
             'text-gray-700 dark:text-gray-300 theme-gemini:text-white': !isSelected(option) && !option.disabled,
             'text-gray-400 dark:text-gray-500 theme-gemini:text-white/40': option.disabled
           }">
@@ -102,7 +102,7 @@
             <app-icon 
               [name]="isSelected(option) ? 'check_box' : 'check_box_outline_blank'"
               size="sm"
-              [color]="isSelected(option) ? 'text-primary-600 dark:text-primary-400 theme-gemini:text-blue-400' : 'text-gray-400 dark:text-gray-500 theme-gemini:text-white/60'">
+              [color]="isSelected(option) ? 'text-primary' : 'text-gray-400 dark:text-gray-500 theme-gemini:text-white/60'">
             </app-icon>
           </span>
           <!-- Radio for single select -->
@@ -110,7 +110,7 @@
             <app-icon 
               [name]="isSelected(option) ? 'radio_button_checked' : 'radio_button_unchecked'"
               size="sm"
-              [color]="isSelected(option) ? 'text-primary-600 dark:text-primary-400 theme-gemini:text-blue-400' : 'text-gray-400 dark:text-gray-500 theme-gemini:text-white/60'">
+              [color]="isSelected(option) ? 'text-primary' : 'text-gray-400 dark:text-gray-500 theme-gemini:text-white/60'">
             </app-icon>
           </span>
           <span class="flex-1 truncate">{{ option.label }}</span>

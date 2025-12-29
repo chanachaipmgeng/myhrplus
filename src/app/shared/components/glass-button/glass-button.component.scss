@@ -32,13 +32,14 @@ button:focus-visible {
 
 /* Gemini 1.5 Theme - Glass Button */
 /* Moved from global styles.scss to improve encapsulation */
+/* Updated to use dynamic primary color from CSS variables */
 [data-theme='gemini'] :host,
 body.theme-gemini :host {
   ::ng-deep .glass-button-primary {
     background: linear-gradient(135deg,
-      var(--gradient-primary-start) 0%,
-      var(--gradient-primary-mid) 50%,
-      var(--gradient-primary-end) 100%
+      rgba(var(--primary-rgb), 0.8) 0%,
+      rgba(var(--primary-rgb), 0.9) 50%,
+      rgba(var(--primary-rgb), 1) 100%
     ) !important;
     border: 1px solid var(--glass-border-strong) !important;
     box-shadow:
@@ -47,9 +48,9 @@ body.theme-gemini :host {
 
     &:hover:not(:disabled) {
       background: linear-gradient(135deg,
-        var(--gradient-primary-hover-start) 0%,
-        var(--gradient-primary-hover-mid) 50%,
-        var(--gradient-primary-hover-end) 100%
+        rgba(var(--primary-rgb), 0.9) 0%,
+        rgba(var(--primary-rgb), 1) 50%,
+        rgba(var(--primary-rgb), 1) 100%
       ) !important;
       box-shadow:
         0 6px 20px rgba(var(--primary-rgb), 0.4),

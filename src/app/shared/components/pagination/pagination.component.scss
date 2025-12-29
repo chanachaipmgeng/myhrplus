@@ -54,7 +54,7 @@
   &:focus {
     outline: none;
     ring: 2px;
-    ring-color: rgba(59, 130, 246, 0.5);
+    ring-color: rgba(var(--primary-rgb), 0.5);
   }
 
   &.disabled {
@@ -76,14 +76,14 @@
 
   // Gemini theme
   .theme-gemini & {
-    border-color: rgba(59, 130, 246, 0.3);
-    background: rgba(59, 130, 246, 0.1);
-    color: rgb(147, 197, 253);
+    border-color: rgba(var(--primary-rgb), 0.3);
+    background: rgba(var(--primary-rgb), 0.1);
+    color: rgb(var(--primary-rgb));
 
     &:hover:not(.disabled) {
-      background: rgba(59, 130, 246, 0.2);
-      border-color: rgba(59, 130, 246, 0.5);
-      box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+      background: rgba(var(--primary-rgb), 0.2);
+      border-color: rgba(var(--primary-rgb), 0.5);
+      box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.3);
     }
   }
 }
@@ -124,13 +124,13 @@
   &:focus {
     outline: none;
     ring: 2px;
-    ring-color: rgba(59, 130, 246, 0.5);
+    ring-color: rgba(var(--primary-rgb), 0.5);
   }
 
   &.active {
-    background: rgba(59, 130, 246, 0.2);
-    border-color: rgba(59, 130, 246, 0.5);
-    color: rgb(37, 99, 235);
+    background: rgba(var(--primary-rgb), 0.2);
+    border-color: rgba(var(--primary-rgb), 0.5);
+    color: rgb(var(--primary-rgb));
     font-weight: 600;
   }
 
@@ -151,29 +151,29 @@
     }
 
     &.active {
-      background: rgba(59, 130, 246, 0.3);
-      border-color: rgba(59, 130, 246, 0.5);
-      color: rgb(147, 197, 253);
+      background: rgba(var(--primary-rgb), 0.3);
+      border-color: rgba(var(--primary-rgb), 0.5);
+      color: rgb(var(--primary-rgb));
     }
   }
 
   // Gemini theme
   .theme-gemini & {
-    border-color: rgba(59, 130, 246, 0.3);
-    background: rgba(59, 130, 246, 0.1);
-    color: rgb(147, 197, 253);
+    border-color: rgba(var(--primary-rgb), 0.3);
+    background: rgba(var(--primary-rgb), 0.1);
+    color: rgb(var(--primary-rgb));
 
     &:hover:not(.disabled):not(.active) {
-      background: rgba(59, 130, 246, 0.2);
-      border-color: rgba(59, 130, 246, 0.5);
-      box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+      background: rgba(var(--primary-rgb), 0.2);
+      border-color: rgba(var(--primary-rgb), 0.5);
+      box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.3);
     }
 
     &.active {
-      background: rgba(59, 130, 246, 0.4);
-      border-color: rgba(59, 130, 246, 0.6);
-      color: rgb(191, 219, 254);
-      box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+      background: rgba(var(--primary-rgb), 0.4);
+      border-color: rgba(var(--primary-rgb), 0.6);
+      color: rgb(var(--primary-rgb));
+      box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.4);
     }
   }
 }
@@ -203,7 +203,7 @@
   &:focus {
     outline: none;
     ring: 2px;
-    ring-color: rgba(59, 130, 246, 0.5);
+    ring-color: rgba(var(--primary-rgb), 0.5);
   }
 
   &:disabled {
@@ -225,14 +225,14 @@
 
   // Gemini theme
   .theme-gemini & {
-    border-color: rgba(59, 130, 246, 0.3);
-    background: rgba(59, 130, 246, 0.1);
-    color: rgb(147, 197, 253);
+    border-color: rgba(var(--primary-rgb), 0.3);
+    background: rgba(var(--primary-rgb), 0.1);
+    color: rgb(var(--primary-rgb));
 
     &:hover:not(:disabled) {
-      background: rgba(59, 130, 246, 0.2);
-      border-color: rgba(59, 130, 246, 0.5);
-      box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+      background: rgba(var(--primary-rgb), 0.2);
+      border-color: rgba(var(--primary-rgb), 0.5);
+      box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.3);
     }
   }
 }

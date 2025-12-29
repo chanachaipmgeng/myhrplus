@@ -10,7 +10,8 @@
 :host ::ng-deep .cal-month-view,
 :host ::ng-deep .cal-week-view,
 :host ::ng-deep .cal-day-view {
-  @apply glass dark:glass-dark theme-gemini:glass-gemini rounded-xl border border-primary-500/20 dark:border-primary-400/20;
+  @apply glass dark:glass-dark theme-gemini:glass-gemini rounded-xl;
+  border-color: rgba(var(--primary-rgb), 0.2);
 }
 
 [data-theme='gemini'] :host ::ng-deep .cal-month-view,
@@ -31,10 +32,10 @@ body.theme-gemini :host ::ng-deep .cal-header {
   @apply bg-clip-text text-transparent;
   /* Using CSS Variables for gradient */
   background: linear-gradient(to right,
-    var(--gradient-primary-start),
-    var(--gradient-primary-mid),
-    var(--gradient-primary-end),
-    rgb(37, 99, 235)
+    rgba(var(--primary-rgb), 0.8),
+    rgba(var(--primary-rgb), 0.9),
+    rgba(var(--primary-rgb), 1),
+    rgb(var(--primary-rgb))
   );
   background-color: rgba(var(--primary-rgb), 0.2);
   border-bottom-color: rgba(var(--primary-rgb), 0.3);
@@ -67,15 +68,16 @@ body.theme-gemini :host ::ng-deep .cal-day-number {
   @apply bg-clip-text text-transparent;
   /* Using CSS Variables for gradient */
   background: linear-gradient(to right,
-    var(--gradient-primary-start),
-    var(--gradient-primary-mid),
-    var(--gradient-primary-end),
-    rgb(37, 99, 235)
+    rgba(var(--primary-rgb), 0.8),
+    rgba(var(--primary-rgb), 0.9),
+    rgba(var(--primary-rgb), 1),
+    rgb(var(--primary-rgb))
   );
 }
 
 :host ::ng-deep .cal-today {
-  @apply bg-primary-600/30 dark:bg-primary-500/30 border-2 border-primary-500 dark:border-primary-400;
+  background-color: rgba(var(--primary-rgb), 0.3);
+  border: 2px solid rgb(var(--primary-rgb));
 }
 
 [data-theme='gemini'] :host ::ng-deep .cal-today,
@@ -90,7 +92,12 @@ body.theme-gemini :host ::ng-deep .cal-today {
 }
 
 :host ::ng-deep .cal-event {
-  @apply bg-primary-600 text-white rounded-md px-2 py-1 text-sm overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer transition-smooth hover:bg-primary-700 hover:scale-105;
+  background-color: rgb(var(--primary-rgb));
+  @apply text-white rounded-md px-2 py-1 text-sm overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer transition-smooth hover:scale-105;
+  
+  &:hover {
+    background-color: rgba(var(--primary-rgb), 0.9);
+  }
 }
 
 [data-theme='gemini'] :host ::ng-deep .cal-event,
@@ -115,13 +122,13 @@ body.theme-gemini :host ::ng-deep .cal-event {
 
 /* Event Colors */
 :host ::ng-deep .cal-event.category-meeting {
-  @apply bg-primary-600;
+  background-color: rgb(var(--primary-rgb));
 }
 :host ::ng-deep .cal-event.category-task {
   @apply bg-success-600;
 }
 :host ::ng-deep .cal-event.category-personal {
-  @apply bg-primary-700;
+  background-color: rgba(var(--primary-rgb), 0.8);
 }
 :host ::ng-deep .cal-event.category-holiday {
   @apply bg-error-600;

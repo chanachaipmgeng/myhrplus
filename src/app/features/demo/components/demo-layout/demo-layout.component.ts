@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
@@ -56,7 +56,9 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
   ];
 
   // Theme
-  currentTheme: { mode: ThemeMode; color: ThemeColor } = { mode: 'light', color: 'blue' };
+  currentTheme: { mode: ThemeMode; color: ThemeColor; primaryColor: string } = { mode: 'light', color: 'blue', primaryColor: '#3b82f6' };
+  showColorPicker = false;
+  customPrimaryColor = '#3b82f6';
   themeModes: { value: ThemeMode; label: string; icon: string }[] = [
     { value: 'light', label: 'Light', icon: '☀️' },
     { value: 'dark', label: 'Dark', icon: '🌙' },
@@ -216,7 +218,12 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
     // Subscribe to theme changes
     this.subscriptions.push(
       this.themeService.theme$.subscribe(theme => {
-        this.currentTheme = { mode: theme.mode, color: theme.color };
+        this.currentTheme = { 
+          mode: theme.mode, 
+          color: theme.color,
+          primaryColor: this.rgbToHex(theme.primaryColor)
+        };
+        this.customPrimaryColor = this.rgbToHex(theme.primaryColor);
       })
     );
 
@@ -282,10 +289,70 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
 
   changeThemeColor(color: ThemeColor): void {
     this.themeService.setColor(color);
+    // Update custom color to match selected theme color
+    const selectedColor = this.themeColors.find(c => c.value === color);
+    if (selectedColor) {
+      this.customPrimaryColor = selectedColor.color;
+    }
   }
 
   toggleThemeMode(): void {
     this.themeService.toggleMode();
+  }
+
+  // Color picker methods
+  toggleColorPicker(): void {
+    this.showColorPicker = !this.showColorPicker;
+  }
+
+  onCustomColorChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    let hexColor = input.value.trim();
+    
+    // Ensure hex color starts with #
+    if (!hexColor.startsWith('#')) {
+      hexColor = '#' + hexColor;
+    }
+    
+    // Validate hex color format
+    if (/^#[0-9A-Fa-f]{6}$/.test(hexColor)) {
+      this.customPrimaryColor = hexColor;
+      const rgb = this.hexToRgb(hexColor);
+      if (rgb) {
+        this.themeService.setPrimaryColor(rgb);
+      }
+    } else if (input.type === 'color') {
+      // Color picker always returns valid hex
+      this.customPrimaryColor = hexColor;
+      const rgb = this.hexToRgb(hexColor);
+      if (rgb) {
+        this.themeService.setPrimaryColor(rgb);
+      }
+    }
+  }
+
+  // Convert hex color to RGB format (for ThemeService)
+  private hexToRgb(hex: string): string | null {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    if (result) {
+      const r = parseInt(result[1], 16);
+      const g = parseInt(result[2], 16);
+      const b = parseInt(result[3], 16);
+      return `${r}, ${g}, ${b}`;
+    }
+    return null;
+  }
+
+  // Convert RGB format to hex color (for display)
+  private rgbToHex(rgb: string): string {
+    const parts = rgb.split(',').map(p => parseInt(p.trim(), 10));
+    if (parts.length === 3) {
+      const r = parts[0].toString(16).padStart(2, '0');
+      const g = parts[1].toString(16).padStart(2, '0');
+      const b = parts[2].toString(16).padStart(2, '0');
+      return `#${r}${g}${b}`;
+    }
+    return '#3b82f6'; // Default blue
   }
 
   // Navigation
@@ -308,6 +375,15 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
       return this.currentRoute === '' || this.currentRoute === '/demo';
     }
     return this.currentRoute === route || this.currentRoute.startsWith(route + '/');
+  }
+
+  // Close color picker when clicking outside
+  @HostListener('document:click', ['$event'])
+  handleDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    if (this.showColorPicker && !target.closest('.color-picker-container')) {
+      this.showColorPicker = false;
+    }
   }
 }
 

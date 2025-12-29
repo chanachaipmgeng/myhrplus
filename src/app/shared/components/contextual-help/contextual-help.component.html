@@ -5,34 +5,34 @@
   (click)="toggleTooltip()">
   
   <!-- Default Variant -->
-  <div *ngIf="variant === 'default'" class="help-trigger inline-flex items-center gap-1 p-1 rounded-md transition-smooth hover:bg-primary-500/10 sm:min-w-[44px] sm:min-h-[44px] sm:justify-center">
+  <div *ngIf="variant === 'default'" class="help-trigger inline-flex items-center gap-1 p-1 rounded-md transition-smooth hover:bg-primary/10 sm:min-w-[44px] sm:min-h-[44px] sm:justify-center">
     <app-icon 
       [name]="icon" 
       size="sm" 
       color="text-slate-500 dark:text-slate-400"
-      class="help-icon transition-smooth flex-shrink-0 hover:text-primary-600 dark:hover:text-primary-400">
+      class="help-icon transition-smooth flex-shrink-0 hover:text-primary">
     </app-icon>
-    <span *ngIf="text" class="help-text thai-text text-sm text-gray-600 dark:text-gray-400 transition-colors hover:text-primary-600 dark:hover:text-primary-400 sm:hidden">{{ text }}</span>
+    <span *ngIf="text" class="help-text thai-text text-sm text-gray-600 dark:text-gray-400 transition-colors hover:text-primary sm:hidden">{{ text }}</span>
   </div>
   
   <!-- Inline Variant -->
-  <div *ngIf="variant === 'inline'" class="help-inline inline-flex items-center gap-1 p-1 rounded-md transition-smooth hover:bg-primary-500/10 sm:min-w-[44px] sm:min-h-[44px] sm:justify-center">
-    <span class="help-text thai-text text-sm text-gray-600 dark:text-gray-400 transition-colors hover:text-primary-600 dark:hover:text-primary-400 sm:hidden">{{ text }}</span>
+  <div *ngIf="variant === 'inline'" class="help-inline inline-flex items-center gap-1 p-1 rounded-md transition-smooth hover:bg-primary/10 sm:min-w-[44px] sm:min-h-[44px] sm:justify-center">
+    <span class="help-text thai-text text-sm text-gray-600 dark:text-gray-400 transition-colors hover:text-primary sm:hidden">{{ text }}</span>
     <app-icon 
       [name]="icon" 
       size="sm" 
       color="text-slate-500 dark:text-slate-400"
-      class="help-icon transition-smooth flex-shrink-0 hover:text-primary-600 dark:hover:text-primary-400">
+      class="help-icon transition-smooth flex-shrink-0 hover:text-primary">
     </app-icon>
   </div>
   
   <!-- Icon Only Variant -->
-  <div *ngIf="variant === 'icon-only'" class="help-icon-only inline-flex items-center justify-center w-6 h-6 rounded-full transition-smooth hover:bg-primary-500/10">
+  <div *ngIf="variant === 'icon-only'" class="help-icon-only inline-flex items-center justify-center w-6 h-6 rounded-full transition-smooth hover:bg-primary/10">
     <app-icon 
       [name]="icon" 
       size="sm" 
       color="text-slate-500 dark:text-slate-400"
-      class="help-icon transition-smooth flex-shrink-0 hover:text-primary-600 dark:hover:text-primary-400 hover:scale-110">
+      class="help-icon transition-smooth flex-shrink-0 hover:text-primary hover:scale-110">
     </app-icon>
   </div>
   

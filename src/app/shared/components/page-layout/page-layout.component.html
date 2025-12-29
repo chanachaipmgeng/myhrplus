@@ -6,7 +6,7 @@
       <nav class="flex items-center gap-2 mb-4 text-sm flex-wrap">
         @for (item of breadcrumb; track item.label; let isLast = $last) {
           @if (item.link && !isLast) {
-            <a [href]="item.link" class="flex items-center gap-1 text-slate-500 dark:text-slate-400 no-underline transition-smooth px-2 py-1 rounded-md hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-500/5 dark:hover:bg-primary-500/10 theme-gemini:glass-gemini-weak">
+            <a [href]="item.link" class="flex items-center gap-1 text-slate-500 dark:text-slate-400 no-underline transition-smooth px-2 py-1 rounded-md hover:text-primary hover:bg-primary/5 dark:hover:bg-primary/10 theme-gemini:glass-gemini-weak">
               @if (item.icon) {
                 <span class="text-base">{{ item.icon }}</span>
               }
@@ -14,7 +14,7 @@
             </a>
             <span class="text-slate-500 dark:text-slate-400 opacity-50">›</span>
           } @else {
-            <span class="flex items-center gap-1 text-slate-900 dark:text-slate-100 font-semibold px-2 py-1 theme-gemini:bg-gradient-to-r theme-gemini:from-primary-400 theme-gemini:to-primary-600 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+            <span class="flex items-center gap-1 text-slate-900 dark:text-slate-100 font-semibold px-2 py-1 theme-gemini:text-primary">
               @if (item.icon) {
                 <span class="text-base">{{ item.icon }}</span>
               }
@@ -29,12 +29,12 @@
     <div class="flex justify-between items-start gap-8 flex-wrap">
       <div class="flex items-start gap-4 flex-1">
         @if (icon) {
-          <span class="text-[2.5rem] leading-none p-3 bg-gradient-to-br from-primary-600 to-primary-400 dark:from-primary-500 dark:to-primary-300 rounded-2xl shadow-lg flex items-center justify-center theme-gemini:glass-gemini theme-gemini:shadow-gemini theme-gemini:bg-gradient-to-br theme-gemini:from-primary-600 theme-gemini:to-primary-400">
+          <span class="text-[2.5rem] leading-none p-3 bg-gradient-primary rounded-2xl shadow-lg flex items-center justify-center theme-gemini:glass-gemini theme-gemini:shadow-gemini">
             {{ icon }}
           </span>
         }
         <div>
-          <h1 class="text-4xl md:text-2xl font-bold text-slate-900 dark:text-slate-100 m-0 leading-snug mb-6 theme-gemini:bg-gradient-to-r theme-gemini:from-primary-400 theme-gemini:to-primary-600 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+          <h1 class="text-4xl md:text-2xl font-bold text-slate-900 dark:text-slate-100 m-0 leading-snug mb-6 theme-gemini:text-primary">
             {{ title }}
           </h1>
           @if (description) {
@@ -80,7 +80,7 @@
 
   <!-- Page Footer -->
   @if (showFooter) {
-    <div class="mt-8 pt-8 border-t border-slate-300/20 dark:border-slate-700/30 theme-gemini:border-primary-500/30">
+    <div class="mt-8 pt-8 border-t border-slate-300/20 dark:border-slate-700/30 theme-gemini:border-primary/30">
       <ng-content select="[footer]"></ng-content>
     </div>
   }

@@ -31,7 +31,10 @@
       @include syncfusion-glass-header;
 
       .e-headercell {
-        @apply bg-transparent border-b border-white/10 dark:border-slate-700/30 text-gray-700 dark:text-gray-300 font-semibold p-3 transition-smooth hover:bg-primary-500/5 dark:hover:bg-primary-500/10;
+        @apply bg-transparent border-b border-white/10 dark:border-slate-700/30 text-gray-700 dark:text-gray-300 font-semibold p-3 transition-smooth;
+        &:hover {
+          background-color: rgba(var(--primary-rgb), 0.05);
+        }
       }
     }
 
@@ -40,10 +43,13 @@
     /* Grid Content */
     .e-gridcontent {
       .e-row {
-        @apply bg-transparent border-b border-white/5 dark:border-slate-700/10 transition-smooth hover:bg-primary-500/5 dark:hover:bg-primary-500/10;
+        @apply bg-transparent border-b border-white/5 dark:border-slate-700/10 transition-smooth;
+        &:hover {
+          background-color: rgba(var(--primary-rgb), 0.05);
+        }
 
         &.e-selected {
-          @apply bg-primary-500/15 dark:bg-primary-500/25;
+          background-color: rgba(var(--primary-rgb), 0.15);
         }
 
         .e-rowcell {
@@ -62,7 +68,7 @@
     }
 
     body.theme-gemini & .e-row.e-selected {
-      box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+      box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.3);
     }
 
     /* Pager */
@@ -79,10 +85,17 @@
         .e-lastpage,
         .e-firstpagedisabled,
         .e-firstpage {
-          @apply bg-transparent border border-white/10 dark:border-slate-700/30 text-gray-700 dark:text-gray-300 min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 transition-smooth hover:bg-primary-500/10 dark:hover:bg-primary-500/20 hover:border-primary-500/30 hover:text-primary-600;
+          @apply bg-transparent border border-white/10 dark:border-slate-700/30 text-gray-700 dark:text-gray-300 min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 transition-smooth;
+          &:hover {
+            background-color: rgba(var(--primary-rgb), 0.1);
+            border-color: rgba(var(--primary-rgb), 0.3);
+            color: rgb(var(--primary-rgb));
+          }
 
           &.e-active {
-            @apply bg-primary-600 border-primary-600 text-white;
+            background-color: rgb(var(--primary-rgb));
+            border-color: rgb(var(--primary-rgb));
+            @apply text-white;
           }
         }
       }

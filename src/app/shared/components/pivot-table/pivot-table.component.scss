@@ -21,7 +21,15 @@
 
       .e-toolbar-item {
         .e-btn {
-          @apply glass-weak dark:glass-dark-weak text-gray-700 dark:text-gray-300 transition-smooth hover:bg-primary-500/10 dark:hover:bg-primary-500/20 hover:border-primary-500/30 hover:text-primary-600 focus:ring-2 focus:ring-primary-500/20;
+          @apply glass-weak dark:glass-dark-weak text-gray-700 dark:text-gray-300 transition-smooth focus:ring-2;
+          &:hover {
+            background-color: rgba(var(--primary-rgb), 0.1);
+            border-color: rgba(var(--primary-rgb), 0.3);
+            color: rgb(var(--primary-rgb));
+          }
+          &:focus {
+            --tw-ring-color: rgba(var(--primary-rgb), 0.2);
+          }
           background: rgba(255, 255, 255, 0.1);
           border: 1px solid rgba(255, 255, 255, 0.2);
 
@@ -34,7 +42,7 @@
     }
 
     body.theme-gemini & .e-toolbar {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 30px rgba(59, 130, 246, 0.1);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(var(--primary-rgb), 0.2), 0 0 30px rgba(var(--primary-rgb), 0.1);
     }
 
     /* Grouping Bar */
@@ -46,7 +54,11 @@
       .e-grouping-bar-columns,
       .e-grouping-bar-values {
         .e-grouping-bar-item {
-          @apply glass-weak dark:glass-dark-weak rounded-sm px-3 py-2 m-1 transition-smooth hover:bg-primary-500/10 dark:hover:bg-primary-500/20 hover:border-primary-500/30;
+          @apply glass-weak dark:glass-dark-weak rounded-sm px-3 py-2 m-1 transition-smooth;
+          &:hover {
+            background-color: rgba(var(--primary-rgb), 0.1);
+            border-color: rgba(var(--primary-rgb), 0.3);
+          }
           background: rgba(255, 255, 255, 0.1);
           border: 1px solid rgba(255, 255, 255, 0.2);
 
@@ -59,7 +71,7 @@
     }
 
     body.theme-gemini & .e-grouping-bar {
-      background: rgba(147, 197, 253, 0.1);
+      background: rgba(var(--primary-rgb), 0.1);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
     }
@@ -78,7 +90,10 @@
 
       .e-gridcontent {
         .e-row {
-          @apply bg-transparent border-b border-white/5 dark:border-slate-700/10 transition-smooth hover:bg-primary-500/5 dark:hover:bg-primary-500/10;
+          @apply bg-transparent border-b border-white/5 dark:border-slate-700/10 transition-smooth;
+          &:hover {
+            background-color: rgba(var(--primary-rgb), 0.05);
+          }
 
           .e-rowcell {
             @apply bg-transparent text-gray-900 dark:text-gray-100;
@@ -92,7 +107,7 @@
     }
 
     body.theme-gemini & .e-grid {
-      background: rgba(147, 197, 253, 0.05);
+      background: rgba(var(--primary-rgb), 0.05);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
     }
