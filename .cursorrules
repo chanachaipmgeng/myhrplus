@@ -458,6 +458,13 @@ export class ModelNameService {
 - **Test Framework**: Jasmine + Karma
 - **Coverage**: Aim for 80%+ coverage on critical paths
 
+### Demo Component Code Examples
+- **Code Viewer**: Always use `app-code-viewer` component for code examples
+- **Language Tags**: Specify language for code examples (html, typescript, scss)
+- **Titles**: Provide descriptive titles for code examples
+- **Placement**: Code examples should be in "Basic Usage" section
+- **Format**: Do not use `<pre>` tags, always use `app-code-viewer`
+
 ## Internationalization (i18n)
 
 ### Translation Files
@@ -542,6 +549,12 @@ export class ModelNameService {
 - **Module READMEs**: Include README.md for complex modules
 - **API Documentation**: Document API endpoints and models
 
+### Demo Component API Reference
+- **Component**: Always use `app-props-table` component
+- **Title**: Always provide a title (e.g., "Inputs", "Outputs")
+- **Wrapping**: Props table should be wrapped in `app-glass-card padding="p-6"`
+- **Section Name**: Use "API Reference" (not "API Documentation" or "Props Table")
+
 ## Demo System
 
 ### Demo Components
@@ -549,6 +562,29 @@ export class ModelNameService {
 - **Purpose**: Showcase all shared components with live examples
 - **Structure**: Each component has a demo component (e.g., `glass-card-demo.component.ts`)
 - **Access**: Route `/demo` (no AuthGuard required)
+- **Standard Structure**: All demo components must follow the standard structure defined in `DEMO_COMPONENT_TEMPLATE.md`
+- **Required Sections**:
+  - Header with title and description
+  - Live Demo section
+  - Basic Usage section (with code examples)
+  - API Reference section (with props table)
+- **Optional Sections** (include where applicable):
+  - Variants section
+  - States section
+  - Validation section
+  - Advanced Features section
+  - Reactive Forms section
+- **Section Naming**: Use standard names:
+  - "Live Demo" (not "Examples" or "Demo")
+  - "Basic Usage" (not "Usage Example" or "Code Examples")
+  - "Variants" (not "Types" or "Examples")
+  - "Advanced Features" (not "Features" or "Controls")
+  - "API Reference" (not "API Documentation" or "Props Table")
+- **Code Examples**: Always use `app-code-viewer` component (not `<pre>` tags)
+- **Props Tables**: Always use `app-props-table` component with proper title
+- **Language**: All demo components must be in English
+- **Structure**: All sections wrapped in `<section class="mb-12">`
+- **Content**: All demo content wrapped in `<app-glass-card padding="p-6">`
 - **Pattern**:
   - Demo components are standalone
   - Include code examples, props tables, and live demos
@@ -678,14 +714,26 @@ export class ComponentNameDemoComponent {
 
 ---
 
-## Recent Updates (2024-12-20)
+## Recent Updates
 
-### SCSS to Tailwind Migration
+### Demo Components Standardization Complete (2024-12-29)
+- ✅ **Completed**: All ~75+ demo components standardized
+- ✅ **Structure**: Consistent structure across all components
+- ✅ **Patterns**: Standard section naming, code examples, and API reference
+- ✅ **Quality**: Production ready, zero linter errors
+- ✅ **Documentation**: Complete documentation and templates
+- ✅ **Components Created**: 5 new components (Pagination, Chip, Alert, Accordion, Divider)
+- ✅ **Standardization**: All demo components follow `DEMO_COMPONENT_TEMPLATE.md`
+- ✅ **Code Examples**: All use `app-code-viewer` component (no `<pre>` tags)
+- ✅ **API Reference**: All use `app-props-table` component with proper titles
+- ✅ **Language**: All demo components in English
+
+### SCSS to Tailwind Migration (2024-12-20)
 - ✅ **Completed**: Simple utility classes migrated to Tailwind
 - ✅ **Strategy**: Migrate simple utilities, keep complex styles (gradients, animations, pseudo-elements) in SCSS
 - ✅ **Result**: Reduced SCSS bundle size, better maintainability, consistent styling
 
-### Layout Background Improvements
+### Layout Background Improvements (2024-12-20)
 - ✅ **Fixed**: Background duplication between body and main-content
 - ✅ **Added**: Pattern animations (`patternShimmer`) for all layout components
 - ✅ **Added**: Subtle gradient animations (`gradientShift`) for Light/Dark mode
@@ -693,7 +741,7 @@ export class ComponentNameDemoComponent {
 - ✅ **Optimized**: Mobile performance (background-attachment: scroll on mobile)
 - ✅ **Accessibility**: Full `prefers-reduced-motion` support
 
-### Color Consistency
+### Color Consistency (2024-12-20)
 - ✅ **Standardized**: Use `gray-*` instead of `slate-*` for consistency
 - ✅ **Theme Support**: Full `theme-gemini:` variant support across all components
 
