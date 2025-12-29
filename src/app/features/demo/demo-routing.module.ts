@@ -5,6 +5,11 @@ import { DemoIndexComponent } from './demo-index/demo-index.component';
 import { GlassCardDemoComponent } from './components/glass-card-demo/glass-card-demo.component';
 import { GlassButtonDemoComponent } from './components/glass-button-demo/glass-button-demo.component';
 import { GlassInputDemoComponent } from './components/glass-input-demo/glass-input-demo.component';
+import { GlassSelectDemoComponent } from './components/glass-select-demo/glass-select-demo.component';
+import { GlassCheckboxDemoComponent } from './components/glass-checkbox-demo/glass-checkbox-demo.component';
+import { GlassRadioDemoComponent } from './components/glass-radio-demo/glass-radio-demo.component';
+import { GlassTextareaDemoComponent } from './components/glass-textarea-demo/glass-textarea-demo.component';
+import { GlassSwitchDemoComponent } from './components/glass-switch-demo/glass-switch-demo.component';
 import { ModalDemoComponent } from './components/modal-demo/modal-demo.component';
 import { TabsDemoComponent } from './components/tabs-demo/tabs-demo.component';
 import { ProgressBarDemoComponent } from './components/progress-bar-demo/progress-bar-demo.component';
@@ -89,6 +94,26 @@ const routes: Routes = [
       {
         path: 'glass-input',
         component: GlassInputDemoComponent
+      },
+      {
+        path: 'glass-select',
+        component: GlassSelectDemoComponent
+      },
+      {
+        path: 'glass-checkbox',
+        component: GlassCheckboxDemoComponent
+      },
+      {
+        path: 'glass-radio',
+        component: GlassRadioDemoComponent
+      },
+      {
+        path: 'glass-textarea',
+        component: GlassTextareaDemoComponent
+      },
+      {
+        path: 'glass-switch',
+        component: GlassSwitchDemoComponent
       },
       {
         path: 'modal',

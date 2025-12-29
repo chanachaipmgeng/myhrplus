@@ -24,6 +24,11 @@ export class DemoIndexComponent {
     { name: 'Glass Card', route: 'glass-card', description: 'Glass morphism card component with variants', category: 'Glass', icon: '🪟' },
     { name: 'Glass Button', route: 'glass-button', description: 'Glass morphism button with variants and states', category: 'Glass', icon: '🔘' },
     { name: 'Glass Input', route: 'glass-input', description: 'Glass morphism input field with validation', category: 'Glass', icon: '📝' },
+    { name: 'Glass Select', route: 'glass-select', description: 'Glass morphism select dropdown with search and multi-select', category: 'Glass', icon: '📋' },
+    { name: 'Glass Checkbox', route: 'glass-checkbox', description: 'Glass morphism checkbox with validation', category: 'Glass', icon: '☑️' },
+    { name: 'Glass Radio', route: 'glass-radio', description: 'Glass morphism radio button with validation', category: 'Glass', icon: '🔘' },
+    { name: 'Glass Textarea', route: 'glass-textarea', description: 'Glass morphism textarea with auto-resize and counter', category: 'Glass', icon: '📄' },
+    { name: 'Glass Switch', route: 'glass-switch', description: 'Glass morphism toggle switch component', category: 'Glass', icon: '🔀' },
 
     // Layout Components
     { name: 'Page Layout', route: 'page-layout', description: 'Standard page layout with header, breadcrumb, and actions', category: 'Layout', icon: '📄' },

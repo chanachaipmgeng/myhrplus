@@ -1,0 +1,139 @@
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Glass Textarea Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+      Glass morphism textarea component with auto-resize, character counter, and validation support.
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <app-glass-textarea
+          label="Interactive Textarea"
+          placeholder="Type something..."
+          [(ngModel)]="textareaValue"
+          hint="This is a live demo textarea">
+        </app-glass-textarea>
+
+        <div *ngIf="textareaValue" class="p-4 bg-primary-50/50 dark:bg-primary-900/30 theme-gemini:glass-gemini-weak rounded-md border border-primary-200/50 dark:border-primary-700/50 theme-gemini:border-blue-500/30">
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Current value:</p>
+          <p class="font-mono text-gray-800 dark:text-gray-200 theme-gemini:text-white/90 whitespace-pre-wrap">{{ textareaValue }}</p>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Auto Resize Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Auto Resize
+    </h2>
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <app-glass-textarea
+          label="Auto Resize Textarea"
+          [autoResize]="true"
+          placeholder="Type and watch it grow..."
+          [(ngModel)]="autoResizeValue"
+          hint="Textarea will automatically resize based on content">
+        </app-glass-textarea>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="autoResizeExample" language="html" title="Auto Resize Example"></app-code-viewer>
+  </section>
+
+  <!-- Character Counter Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Character Counter
+    </h2>
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <app-glass-textarea
+          label="Message with Counter"
+          [maxLength]="200"
+          [showCounter]="true"
+          placeholder="Enter message (max 200 characters)..."
+          [(ngModel)]="counterValue"
+          hint="Character counter will show remaining characters">
+        </app-glass-textarea>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="counterExample" language="html" title="Character Counter Example"></app-code-viewer>
+  </section>
+
+  <!-- States Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      States
+    </h2>
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <app-glass-textarea
+          label="Normal Textarea"
+          placeholder="Normal state">
+        </app-glass-textarea>
+
+        <app-glass-textarea
+          label="Disabled Textarea"
+          [disabled]="true"
+          value="Cannot edit this">
+        </app-glass-textarea>
+
+        <app-glass-textarea
+          label="Readonly Textarea"
+          [readonly]="true"
+          value="Readonly value">
+        </app-glass-textarea>
+
+        <app-glass-textarea
+          label="Required Textarea"
+          [required]="true"
+          [(ngModel)]="requiredValue"
+          hint="This field is required">
+        </app-glass-textarea>
+
+        <app-glass-textarea
+          label="Error State"
+          [required]="true"
+          errorMessage="กรุณากรอกข้อมูล"
+          [(ngModel)]="errorValue">
+        </app-glass-textarea>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
+  </section>
+
+  <!-- Props Table -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Reference
+    </h2>
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props"></app-props-table>
+    </app-glass-card>
+  </section>
+
+  <!-- Reactive Forms Example -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Reactive Forms
+    </h2>
+    <app-code-viewer [code]="reactiveFormExample" language="typescript" title="Reactive Forms Usage"></app-code-viewer>
+  </section>
+</div>
+

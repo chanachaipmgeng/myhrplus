@@ -1,0 +1,157 @@
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Glass Select Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+      Glass morphism select dropdown component with search, multi-select, and validation support.
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <app-glass-select
+          label="เลือกตัวเลือก"
+          [options]="options"
+          [(ngModel)]="singleValue"
+          hint="เลือกตัวเลือกจากรายการ">
+        </app-glass-select>
+
+        <div *ngIf="singleValue" class="p-4 bg-primary-50/50 dark:bg-primary-900/30 theme-gemini:glass-gemini-weak rounded-md border border-primary-200/50 dark:border-primary-700/50 theme-gemini:border-blue-500/30">
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Selected value:</p>
+          <p class="font-mono text-gray-800 dark:text-gray-200 theme-gemini:text-white/90">{{ singleValue }}</p>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Single Select Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Single Select
+    </h2>
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <app-glass-select
+          label="เลือกประเทศ"
+          [options]="countryOptions"
+          [(ngModel)]="singleValue"
+          placeholder="เลือกประเทศ...">
+        </app-glass-select>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
+  </section>
+
+  <!-- Multiple Select Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Multiple Select
+    </h2>
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <app-glass-select
+          label="เลือกหลายตัวเลือก"
+          [options]="options"
+          [multiple]="true"
+          [(ngModel)]="multiValue"
+          hint="สามารถเลือกได้หลายตัวเลือก">
+        </app-glass-select>
+
+        <div *ngIf="multiValue && multiValue.length > 0" class="p-4 bg-primary-50/50 dark:bg-primary-900/30 theme-gemini:glass-gemini-weak rounded-md border border-primary-200/50 dark:border-primary-700/50 theme-gemini:border-blue-500/30">
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mb-2">Selected values:</p>
+          <div class="flex flex-wrap gap-2">
+            <span *ngFor="let val of multiValue" class="px-2 py-1 bg-primary-100 dark:bg-primary-800 theme-gemini:bg-blue-500/30 text-primary-700 dark:text-primary-300 theme-gemini:text-blue-300 rounded text-sm">
+              {{ val }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="multipleExample" language="html" title="Multiple Select"></app-code-viewer>
+  </section>
+
+  <!-- Searchable Select Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Searchable Select
+    </h2>
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <app-glass-select
+          label="ค้นหาตัวเลือก"
+          [options]="countryOptions"
+          [searchable]="true"
+          [(ngModel)]="searchableValue"
+          hint="พิมพ์เพื่อค้นหา">
+        </app-glass-select>
+      </div>
+    </app-glass-card>
+    <app-code-viewer [code]="searchableExample" language="html" title="Searchable Select"></app-code-viewer>
+  </section>
+
+  <!-- States Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      States
+    </h2>
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <app-glass-select
+          label="Required Select"
+          [options]="options"
+          [required]="true"
+          [(ngModel)]="requiredValue"
+          hint="This field is required">
+        </app-glass-select>
+
+        <app-glass-select
+          label="Disabled Select"
+          [options]="options"
+          [disabled]="true"
+          [(ngModel)]="singleValue">
+        </app-glass-select>
+
+        <app-glass-select
+          label="Error State"
+          [options]="options"
+          [required]="true"
+          errorMessage="กรุณาเลือกตัวเลือก"
+          [(ngModel)]="errorValue">
+        </app-glass-select>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Props Table -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      API Reference
+    </h2>
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props"></app-props-table>
+    </app-glass-card>
+  </section>
+
+  <!-- Reactive Forms Example -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Reactive Forms
+    </h2>
+    <app-code-viewer [code]="reactiveFormExample" language="typescript" title="Reactive Forms Usage"></app-code-viewer>
+  </section>
+</div>
+

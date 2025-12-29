@@ -1,0 +1,65 @@
+<div class="flex items-start gap-3">
+  <!-- Radio Button -->
+  <button
+    type="button"
+    [id]="radioId"
+    [name]="name"
+    [disabled]="disabled"
+    [attr.aria-label]="ariaLabel || label"
+    [attr.aria-describedby]="describedByIds || null"
+    [attr.aria-invalid]="hasError"
+    [attr.aria-required]="required"
+    [attr.aria-checked]="checked"
+    (click)="select()"
+    (blur)="onBlur()"
+    (keydown.enter)="select()"
+    (keydown.space)="select(); $event.preventDefault()"
+    class="flex-shrink-0 w-5 h-5 min-w-[20px] min-h-[20px] md:min-w-[18px] md:min-h-[18px] rounded-full border-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 relative"
+    [ngClass]="{
+      'glass border-gray-300 dark:border-gray-600 theme-gemini:border-white/30 hover:glass-strong dark:glass-dark dark:hover:glass-dark-strong theme-gemini:glass-gemini theme-gemini:hover:glass-gemini-strong': !checked && !hasError,
+      'border-primary-500 dark:border-primary-600 theme-gemini:border-blue-500 focus:ring-primary-500 dark:focus:ring-primary-600 theme-gemini:focus:ring-blue-500': checked && !hasError,
+      'border-red-500 dark:border-red-400 theme-gemini:border-red-400 focus:ring-red-500 dark:focus:ring-red-400 theme-gemini:focus:ring-red-400 animate-shake': hasError
+    }">
+    <!-- Inner Circle -->
+    <span
+      *ngIf="checked"
+      class="absolute inset-0 flex items-center justify-center">
+      <span
+        class="w-2.5 h-2.5 md:w-2 md:h-2 rounded-full bg-primary-500 dark:bg-primary-400 theme-gemini:bg-blue-400 animate-scale-in">
+      </span>
+    </span>
+  </button>
+
+  <!-- Label -->
+  <div class="flex-1 min-w-0">
+    <label
+      [for]="radioId"
+      (click)="select()"
+      class="block text-sm font-medium text-gray-700 dark:text-gray-200 theme-gemini:text-white/90 cursor-pointer select-none"
+      [ngClass]="{
+        'cursor-not-allowed opacity-50': disabled,
+        'text-red-500 dark:text-red-400 theme-gemini:text-red-400': hasError
+      }">
+      {{ label }}
+      <span *ngIf="required" class="text-red-500 dark:text-red-400 theme-gemini:text-red-400 ml-1" aria-label="จำเป็น">*</span>
+    </label>
+
+    <!-- Hint Message -->
+    <div *ngIf="hint && !hasError" 
+         [id]="hintId" 
+         class="text-gray-500 dark:text-gray-400 theme-gemini:text-white/60 text-xs mt-1">
+      {{ hint }}
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="hasError && errorMessage" 
+         [id]="errorMessageId" 
+         role="alert" 
+         class="flex items-center gap-1.5 text-red-500 dark:text-red-400 theme-gemini:text-red-400 text-sm mt-1 animate-fade-in" 
+         aria-live="polite">
+      <app-icon name="error" size="xs" color="text-red-500 dark:text-red-400 theme-gemini:text-red-400"></app-icon>
+      <span class="thai-text">{{ errorMessage }}</span>
+    </div>
+  </div>
+</div>
+

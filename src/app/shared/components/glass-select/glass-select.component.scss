@@ -1,0 +1,15 @@
+/* ============================================
+   Glass Select Component Styles
+   ============================================
+   Migrated to Tailwind - Minimal SCSS for component-specific styles only
+   ============================================ */
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* Component uses Tailwind classes directly in HTML */
+/* All styles handled by Tailwind utilities and plugins */
+/* Animations (fade-in-down, shake) handled by Tailwind keyframes */
+

@@ -1,0 +1,73 @@
+<div class="flex items-start gap-3">
+  <!-- Checkbox Button -->
+  <button
+    type="button"
+    [id]="checkboxId"
+    [disabled]="disabled"
+    [attr.aria-label]="ariaLabel || label"
+    [attr.aria-describedby]="describedByIds || null"
+    [attr.aria-invalid]="hasError"
+    [attr.aria-required]="required"
+    [attr.aria-checked]="indeterminate ? 'mixed' : checked"
+    (click)="toggle()"
+    (blur)="onBlur()"
+    (keydown.enter)="toggle()"
+    (keydown.space)="toggle(); $event.preventDefault()"
+    class="flex-shrink-0 w-5 h-5 min-w-[20px] min-h-[20px] md:min-w-[18px] md:min-h-[18px] rounded border-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
+    [ngClass]="{
+      'glass border-gray-300 dark:border-gray-600 theme-gemini:border-white/30 hover:glass-strong dark:glass-dark dark:hover:glass-dark-strong theme-gemini:glass-gemini theme-gemini:hover:glass-gemini-strong': displayState === 'unchecked' && !hasError,
+      'bg-primary-500 border-primary-500 dark:bg-primary-600 dark:border-primary-600 theme-gemini:bg-blue-500 theme-gemini:border-blue-500 hover:bg-primary-600 dark:hover:bg-primary-700 theme-gemini:hover:bg-blue-600': displayState === 'checked' && !hasError,
+      'bg-primary-400 border-primary-400 dark:bg-primary-500 dark:border-primary-500 theme-gemini:bg-blue-400 theme-gemini:border-blue-400': displayState === 'indeterminate' && !hasError,
+      'border-red-500 dark:border-red-400 theme-gemini:border-red-400 focus:ring-red-500 dark:focus:ring-red-400 theme-gemini:focus:ring-red-400 animate-shake': hasError
+    }">
+    <!-- Check Icon -->
+    <app-icon
+      *ngIf="displayState === 'checked'"
+      name="check"
+      size="xs"
+      color="text-white"
+      class="absolute inset-0 flex items-center justify-center">
+    </app-icon>
+    <!-- Indeterminate Icon -->
+    <app-icon
+      *ngIf="displayState === 'indeterminate'"
+      name="remove"
+      size="xs"
+      color="text-white"
+      class="absolute inset-0 flex items-center justify-center">
+    </app-icon>
+  </button>
+
+  <!-- Label -->
+  <div class="flex-1 min-w-0">
+    <label
+      [for]="checkboxId"
+      (click)="toggle()"
+      class="block text-sm font-medium text-gray-700 dark:text-gray-200 theme-gemini:text-white/90 cursor-pointer select-none"
+      [ngClass]="{
+        'cursor-not-allowed opacity-50': disabled,
+        'text-red-500 dark:text-red-400 theme-gemini:text-red-400': hasError
+      }">
+      {{ label }}
+      <span *ngIf="required" class="text-red-500 dark:text-red-400 theme-gemini:text-red-400 ml-1" aria-label="จำเป็น">*</span>
+    </label>
+
+    <!-- Hint Message -->
+    <div *ngIf="hint && !hasError" 
+         [id]="hintId" 
+         class="text-gray-500 dark:text-gray-400 theme-gemini:text-white/60 text-xs mt-1">
+      {{ hint }}
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="hasError && errorMessage" 
+         [id]="errorMessageId" 
+         role="alert" 
+         class="flex items-center gap-1.5 text-red-500 dark:text-red-400 theme-gemini:text-red-400 text-sm mt-1 animate-fade-in" 
+         aria-live="polite">
+      <app-icon name="error" size="xs" color="text-red-500 dark:text-red-400 theme-gemini:text-red-400"></app-icon>
+      <span class="thai-text">{{ errorMessage }}</span>
+    </div>
+  </div>
+</div>
+
