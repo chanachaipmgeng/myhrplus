@@ -2,11 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GanttComponent, GanttTask, GanttColumn } from '../../../../shared/components/gantt/gantt.component';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-gantt-demo',
   standalone: true,
-  imports: [CommonModule, GanttComponent, GlassCardComponent],
+  imports: [CommonModule, GanttComponent, GlassCardComponent, CodeViewerComponent],
   templateUrl: './gantt-demo.component.html',
   styleUrls: ['./gantt-demo.component.scss']
 })
@@ -233,6 +234,25 @@ export class GanttDemoComponent {
   onDataBound(event: any): void {
     console.log('Data bound:', event);
   }
+
+  // Code examples
+  basicExample = `<app-gantt
+  #gantt
+  [dataSource]="ganttData"
+  [taskFields]="taskFields"
+  [columns]="columns"
+  [allowSelection]="true"
+  [allowSorting]="true"
+  [allowFiltering]="true"
+  [allowEditing]="true"
+  [enableToolbar]="true"
+  [allowExcelExport]="true"
+  [allowPdfExport]="true"
+  [height]="'600px'"
+  [width]="'100%'"
+  (actionBegin)="onActionBegin($event)"
+  (rowSelected)="onRowSelected($event)">
+</app-gantt>`;
 }
 
 

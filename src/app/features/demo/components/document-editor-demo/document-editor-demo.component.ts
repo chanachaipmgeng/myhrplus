@@ -2,11 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DocumentEditorComponent } from '../../../../shared/components/document-editor/document-editor.component';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-document-editor-demo',
   standalone: true,
-  imports: [CommonModule, DocumentEditorComponent, GlassCardComponent],
+  imports: [CommonModule, DocumentEditorComponent, GlassCardComponent, CodeViewerComponent],
   templateUrl: './document-editor-demo.component.html',
   styleUrls: ['./document-editor-demo.component.scss']
 })
@@ -107,5 +108,23 @@ export class DocumentEditorDemoComponent {
       this.editor.setZoomFactor(1);
     }
   }
+
+  // Code examples
+  basicExample = `<app-document-editor
+  #editor
+  [width]="'100%'"
+  [height]="'600px'"
+  [enableSpellCheck]="true"
+  [enableEditor]="true"
+  [enableEditorHistory]="true"
+  [enableContextMenu]="true"
+  [zoomFactor]="1"
+  [enablePrint]="true"
+  [enableWordExport]="true"
+  [enableSfdtExport]="true"
+  (created)="onCreated($event)"
+  (documentChange)="onDocumentChange($event)"
+  (selectionChange)="onSelectionChange($event)">
+</app-document-editor>`;
 }
 

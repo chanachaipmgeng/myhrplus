@@ -1,56 +1,57 @@
-<div class="w-full py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <app-glass-card padding="p-6">
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-        Syncfusion File Manager Component
-      </h1>
-      <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed mb-4">
-        A comprehensive file management component for browsing, uploading, downloading, and managing files and folders with a modern interface.
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Syncfusion File Manager Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed mb-4">
+      A comprehensive file management component for browsing, uploading, downloading, and managing files and folders with a modern interface.
+    </p>
+    <div class="mt-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 theme-gemini:bg-yellow-500/10 border border-yellow-200 dark:border-yellow-800 theme-gemini:border-yellow-500/30 rounded-lg">
+      <p class="text-sm text-yellow-800 dark:text-yellow-200 theme-gemini:text-yellow-200">
+        <strong>Note:</strong> This demo uses Syncfusion's sample service. For production use, configure your own file server endpoint.
       </p>
-      <div class="mt-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 theme-gemini:bg-yellow-500/10 border border-yellow-200 dark:border-yellow-800 theme-gemini:border-yellow-500/30 rounded-lg">
-        <p class="text-sm text-yellow-800 dark:text-yellow-200 theme-gemini:text-yellow-200">
-          <strong>Note:</strong> This demo uses Syncfusion's sample service. For production use, configure your own file server endpoint.
-        </p>
-      </div>
     </div>
+  </div>
 
-    <div class="space-y-8">
-      <!-- Basic File Manager -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-          File Manager
-        </h2>
-        <div class="p-4 bg-white/5 dark:bg-black/20 theme-gemini:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-gemini:border-blue-500/30">
-          <div class="mt-4 rounded-lg overflow-hidden">
-          <app-file-manager
-            #filemanager
-            [ajaxSettings]="ajaxSettings"
-            [view]="view"
-            [allowMultiSelection]="allowMultiSelection"
-            [showFileExtension]="showFileExtension"
-            [showHiddenItems]="showHiddenItems"
-            [showThumbnail]="showThumbnail"
-            [enablePersistence]="enablePersistence"
-            [height]="'600px'"
-            [width]="'100%'"
-            (fileLoad)="onFileLoad($event)"
-            (fileOpen)="onFileOpen($event)"
-            (fileSelect)="onFileSelect($event)"
-            (beforeUpload)="onBeforeUpload($event)"
-            (successFileUpload)="onSuccessFileUpload($event)"
-            (failureFileUpload)="onFailureFileUpload($event)">
-          </app-file-manager>
-          </div>
-        </div>
-      </section>
+  <!-- Live Demo -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <div class="rounded-lg overflow-hidden">
+        <app-file-manager
+          #filemanager
+          [ajaxSettings]="ajaxSettings"
+          [view]="view"
+          [allowMultiSelection]="allowMultiSelection"
+          [showFileExtension]="showFileExtension"
+          [showHiddenItems]="showHiddenItems"
+          [showThumbnail]="showThumbnail"
+          [enablePersistence]="enablePersistence"
+          [height]="'600px'"
+          [width]="'100%'"
+          (fileLoad)="onFileLoad($event)"
+          (fileOpen)="onFileOpen($event)"
+          (fileSelect)="onFileSelect($event)"
+          (beforeUpload)="onBeforeUpload($event)"
+          (successFileUpload)="onSuccessFileUpload($event)"
+          (failureFileUpload)="onFailureFileUpload($event)">
+        </app-file-manager>
+      </div>
+    </app-glass-card>
+  </section>
 
-      <!-- Controls -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-          Controls
-        </h2>
+  <!-- Advanced Features -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Advanced Features
+    </h2>
+    
+    <app-glass-card padding="p-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6 mt-4">
           <div class="p-4 bg-white/5 dark:bg-black/20 theme-gemini:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-gemini:border-blue-500/30 flex flex-col gap-2">
             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 mb-2">
@@ -133,32 +134,22 @@
             </div>
           </div>
         </div>
-      </section>
+      </app-glass-card>
+    </section>
 
-      <!-- Code Example -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-          Usage Example
-        </h2>
-        <div class="mt-4">
-          <pre class="bg-gray-900 dark:bg-gray-800 theme-gemini:bg-gray-900/50 text-gray-100 dark:text-gray-200 theme-gemini:text-white/90 p-4 rounded-lg overflow-x-auto border border-gray-700 dark:border-gray-600 theme-gemini:border-blue-500/30"><code class="text-sm font-mono">&lt;app-file-manager
-  [ajaxSettings]="ajaxSettings"
-  [view]="'Details'"
-  [allowMultiSelection]="true"
-  [showFileExtension]="true"
-  [showThumbnail]="true"
-  [height]="'600px'"
-  [width]="'100%'"
-  (fileLoad)="onFileLoad($event)"
-  (fileOpen)="onFileOpen($event)"
-  (fileSelect)="onFileSelect($event)"
-  (successFileUpload)="onSuccessFileUpload($event)"&gt;
-&lt;/app-file-manager&gt;</code></pre>
-        </div>
-      </section>
-    </div>
-  </app-glass-card>
+  <!-- Basic Usage -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Basic Usage
+    </h2>
+    
+    <app-code-viewer
+      title="File Manager"
+      language="html"
+      [code]="basicExample">
+    </app-code-viewer>
+  </section>
 </div>
 
 

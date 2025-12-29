@@ -1,64 +1,56 @@
-<div class="w-full py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <app-glass-card padding="p-6">
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-        Diagrams Component Demo
-      </h1>
-      <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
-        A comprehensive diagram component for creating flowcharts, organizational charts, network diagrams, and more.
-      </p>
-    </div>
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Diagrams Component Demo
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+      A comprehensive diagram component for creating flowcharts, organizational charts, network diagrams, and more.
+    </p>
+  </div>
 
-    <div class="space-y-8">
-      <!-- Basic Usage -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-          Basic Usage
-        </h2>
-        <pre class="bg-gray-100 dark:bg-gray-800 theme-gemini:bg-gray-900/50 p-4 rounded-lg overflow-x-auto border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30"><code class="text-sm font-mono text-gray-800 dark:text-gray-200 theme-gemini:text-white/90">// TypeScript
-import {{ '{' }} DiagramsComponent {{ '}' }} from '../../shared/components/diagrams/diagrams.component';
-import {{ '{' }} NodeModel, ConnectorModel {{ '}' }} from '&#64;syncfusion/ej2-angular-diagrams';
+  <!-- Live Demo -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Live Demo
+    </h2>
+    
+    <app-glass-card padding="p-6">
+      <app-diagrams
+        #diagram
+        [nodes]="nodes"
+        [connectors]="connectors"
+        [pageSettings]="{
+          width: 1000,
+          height: 1000,
+          orientation: 'Landscape',
+          showPageBreaks: false
+        }"
+        [snapSettings]="{
+          horizontalGridlines: { lineColor: '#e0e0e0' },
+          verticalGridlines: { lineColor: '#e0e0e0' },
+          constraints: 0
+        }"
+        [rulerSettings]="{
+          showRulers: true
+        }"
+        [height]="'600px'"
+        [width]="'100%'">
+      </app-diagrams>
+    </app-glass-card>
+  </section>
 
-&#64;ViewChild('diagram') diagram!: DiagramsComponent;
-
-nodes: NodeModel[] = [
-  {{ '{' }}
-    id: 'node1',
-    offsetX: 100,
-    offsetY: 100,
-    width: 100,
-    height: 50,
-    shape: {{ '{' }} type: 'Basic', shape: 'Rectangle' {{ '}' }},
-    annotations: [{{ '{' }} content: 'Node 1' {{ '}' }}]
-  {{ '}' }}
-];
-
-connectors: ConnectorModel[] = [
-  {{ '{' }}
-    id: 'connector1',
-    sourceID: 'node1',
-    targetID: 'node2',
-    type: 'Orthogonal'
-  {{ '}' }}
-];
-
-// HTML
-&lt;app-diagrams
-  #diagram
-  [nodes]="nodes"
-  [connectors]="connectors"
-  [height]="'600px'"
-  [width]="'100%'"&gt;
-&lt;/app-diagrams&gt;</code></pre>
-      </section>
-
+  <!-- Advanced Features -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Advanced Features
+    </h2>
+    
+    <app-glass-card padding="p-6">
       <!-- Actions -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-          Actions
-        </h2>
+      <div class="mb-6">
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Actions</h3>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
           <button
             type="button"
@@ -183,57 +175,22 @@ connectors: ConnectorModel[] = [
             Save as JSON
           </button>
         </div>
-      </section>
+      </div>
+    </app-glass-card>
+  </section>
 
-      <!-- Diagram -->
-      <section class="mb-12">
-        <app-diagrams
-          #diagram
-          [nodes]="nodes"
-          [connectors]="connectors"
-          [pageSettings]="{
-            width: 1000,
-            height: 1000,
-            orientation: 'Landscape',
-            showPageBreaks: false
-          }"
-          [snapSettings]="{
-            horizontalGridlines: { lineColor: '#e0e0e0' },
-            verticalGridlines: { lineColor: '#e0e0e0' },
-            constraints: 0
-          }"
-          [rulerSettings]="{
-            showRulers: true
-          }"
-          [height]="'600px'"
-          [width]="'100%'">
-        </app-diagrams>
-      </section>
-
-      <!-- Features -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                   text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
-          Features
-        </h2>
-        <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 theme-gemini:text-white/80">
-          <li>Flowcharts and organizational charts</li>
-          <li>Network diagrams and mind maps</li>
-          <li>BPMN diagrams</li>
-          <li>UML diagrams</li>
-          <li>Node and connector creation</li>
-          <li>Drag and drop support</li>
-          <li>Zoom and pan</li>
-          <li>Undo/Redo functionality</li>
-          <li>Copy/Paste operations</li>
-          <li>Export (Image, SVG)</li>
-          <li>Print support</li>
-          <li>Grid and ruler settings</li>
-          <li>Layout algorithms</li>
-          <li>Data binding support</li>
-        </ul>
-      </section>
-    </div>
-  </app-glass-card>
+  <!-- Basic Usage -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      Basic Usage
+    </h2>
+    
+    <app-code-viewer
+      title="Diagrams Component"
+      language="html"
+      [code]="basicExample">
+    </app-code-viewer>
+  </section>
 </div>
 

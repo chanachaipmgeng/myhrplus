@@ -2,11 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FileManagerComponent, FileManagerAjaxSettings } from '../../../../shared/components/file-manager/file-manager.component';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-file-manager-demo',
   standalone: true,
-  imports: [CommonModule, FileManagerComponent, GlassCardComponent],
+  imports: [CommonModule, FileManagerComponent, GlassCardComponent, CodeViewerComponent],
   templateUrl: './file-manager-demo.component.html',
   styleUrls: ['./file-manager-demo.component.scss']
 })
@@ -85,6 +86,22 @@ export class FileManagerDemoComponent {
     console.log('Upload failed:', event);
     alert('File upload failed!');
   }
+
+  // Code examples
+  basicExample = `<app-file-manager
+  #filemanager
+  [ajaxSettings]="ajaxSettings"
+  [view]="'Details'"
+  [allowMultiSelection]="true"
+  [showFileExtension]="true"
+  [showThumbnail]="true"
+  [height]="'600px'"
+  [width]="'100%'"
+  (fileLoad)="onFileLoad($event)"
+  (fileOpen)="onFileOpen($event)"
+  (fileSelect)="onFileSelect($event)"
+  (successFileUpload)="onSuccessFileUpload($event)">
+</app-file-manager>`;
 }
 
 

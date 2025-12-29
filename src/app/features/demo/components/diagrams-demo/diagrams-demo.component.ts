@@ -2,12 +2,13 @@ import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DiagramsComponent } from '../../../../shared/components/diagrams/diagrams.component';
 import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { NodeModel, ConnectorModel } from '@syncfusion/ej2-angular-diagrams';
 
 @Component({
   selector: 'app-diagrams-demo',
   standalone: true,
-  imports: [CommonModule, DiagramsComponent, GlassCardComponent],
+  imports: [CommonModule, DiagramsComponent, GlassCardComponent, CodeViewerComponent],
   templateUrl: './diagrams-demo.component.html',
   styleUrls: ['./diagrams-demo.component.scss']
 })
@@ -222,6 +223,29 @@ export class DiagramsDemoComponent {
     ];
     this.diagram?.refresh();
   }
+
+  // Code examples
+  basicExample = `<app-diagrams
+  #diagram
+  [nodes]="nodes"
+  [connectors]="connectors"
+  [pageSettings]="{
+    width: 1000,
+    height: 1000,
+    orientation: 'Landscape',
+    showPageBreaks: false
+  }"
+  [snapSettings]="{
+    horizontalGridlines: { lineColor: '#e0e0e0' },
+    verticalGridlines: { lineColor: '#e0e0e0' },
+    constraints: 0
+  }"
+  [rulerSettings]="{
+    showRulers: true
+  }"
+  [height]="'600px'"
+  [width]="'100%'">
+</app-diagrams>`;
 }
 
 
