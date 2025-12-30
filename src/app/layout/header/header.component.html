@@ -159,7 +159,7 @@
                      active:scale-[0.98]
                      transition-all duration-200 ease-out
                      animate-fade-in">
-              <span class="text-lg">{{ lang.flag }}</span>
+              <img [src]="lang.flagPath" [alt]="lang.label" class="w-5 h-5 rounded-sm object-cover" />
               <span class="flex-1 thai-text text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">{{ lang.label }}</span>
               <app-icon *ngIf="currentLanguage === lang.value" name="check" size="sm" color="text-blue-500 theme-gemini:text-blue-400"></app-icon>
             </button>

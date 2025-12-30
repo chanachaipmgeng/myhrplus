@@ -1,0 +1,159 @@
+{
+  "missing": {
+    "en": [],
+    "lo": [],
+    "my": [],
+    "vi": [],
+    "zh": []
+  },
+  "untranslated": {
+    "en": [
+      "systemcode.coursekind.null",
+      "changemoney.format.undefined",
+      "changemoney.format.0",
+      "systemcode.child.amount.tax",
+      "systemcode.child.bdate.before.2561",
+      "systemcode.parents.extends.child",
+      "systemcode.life.insurance.premium2",
+      "systemcode.ssf3",
+      "systemcode.ltf3",
+      "systemcode.super.saving.fund2",
+      "systemcode.description.leave.1",
+      "systemcode.description.leave.2",
+      "systemcode.description.leave.3",
+      "systemcode.description.leave.3.1",
+      "systemcode.description.leave.4",
+      "menu.table-candidate",
+      "ot_type",
+      "FIX_TIME",
+      "LEAVE_FORMAT",
+      "Ability.1",
+      "New  Req",
+      "date-detail",
+      "Applicant",
+      "Auto Assign by  Req",
+      "Old Bank Name",
+      "Generating payslip, please wait...",
+      "Loading Data...",
+      "menu.company.profile",
+      "menu.company.visionMission",
+      "menu.company.orgchart",
+      "menu.company.calendar",
+      "menu.company.employeeList",
+      "menu.company.policy",
+      "menu.appraisal.abilityEvaluation"
+    ],
+    "lo": [
+      "systemcode.coursekind.null",
+      "changemoney.format.undefined",
+      "changemoney.format.0",
+      "systemcode.child.amount.tax",
+      "systemcode.child.bdate.before.2561",
+      "systemcode.parents.extends.child",
+      "systemcode.life.insurance.premium2",
+      "ot_type",
+      "FIX_TIME",
+      "LEAVE_FORMAT"
+    ],
+    "my": [
+      "systemcode.coursekind.null",
+      "changemoney.format.undefined",
+      "changemoney.format.0",
+      "systemcode.child.amount.tax",
+      "systemcode.child.bdate.before.2561",
+      "systemcode.parents.extends.child",
+      "systemcode.life.insurance.premium2",
+      "ot_type",
+      "FIX_TIME",
+      "LEAVE_FORMAT"
+    ],
+    "vi": [
+      "systemcode.coursekind.null",
+      "changemoney.format.undefined",
+      "changemoney.format.0",
+      "systemcode.child.amount.tax",
+      "systemcode.child.bdate.before.2561",
+      "systemcode.parents.extends.child",
+      "systemcode.life.insurance.premium2",
+      "ot_type",
+      "FIX_TIME",
+      "LEAVE_FORMAT"
+    ],
+    "zh": [
+      "systemcode.coursekind.null",
+      "changemoney.format.undefined",
+      "changemoney.format.0",
+      "systemcode.child.amount.tax",
+      "systemcode.child.bdate.before.2561",
+      "systemcode.parents.extends.child",
+      "systemcode.life.insurance.premium2",
+      "ot_type",
+      "FIX_TIME",
+      "LEAVE_FORMAT"
+    ]
+  },
+  "total": {
+    "en": {
+      "total": 3618,
+      "reference": 3486,
+      "missing": 0,
+      "untranslated": 34,
+      "translated": 3584
+    },
+    "lo": {
+      "total": 3632,
+      "reference": 3486,
+      "missing": 0,
+      "untranslated": 10,
+      "translated": 3622
+    },
+    "my": {
+      "total": 3632,
+      "reference": 3486,
+      "missing": 0,
+      "untranslated": 10,
+      "translated": 3622
+    },
+    "vi": {
+      "total": 3632,
+      "reference": 3486,
+      "missing": 0,
+      "untranslated": 10,
+      "translated": 3622
+    },
+    "zh": {
+      "total": 3632,
+      "reference": 3486,
+      "missing": 0,
+      "untranslated": 10,
+      "translated": 3622
+    }
+  },
+  "summary": {
+    "en": {
+      "completeness": 99.02,
+      "translated": 3452,
+      "total": 3486
+    },
+    "lo": {
+      "completeness": 99.71,
+      "translated": 3476,
+      "total": 3486
+    },
+    "my": {
+      "completeness": 99.71,
+      "translated": 3476,
+      "total": 3486
+    },
+    "vi": {
+      "completeness": 99.71,
+      "translated": 3476,
+      "total": 3486
+    },
+    "zh": {
+      "completeness": 99.71,
+      "translated": 3476,
+      "total": 3486
+    }
+  }
+}

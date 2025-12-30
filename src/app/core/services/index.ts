@@ -47,7 +47,6 @@ export * from './storage.service';
 export * from './encryption.service';
 export * from './field-masking.service';
 export * from './device-detection.service';
-export * from './i18n.service';
 export * from './swaplang-code.service';
 
 // System Services

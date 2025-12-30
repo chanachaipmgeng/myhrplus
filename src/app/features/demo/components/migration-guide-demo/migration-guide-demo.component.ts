@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@shared/shared.module';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
@@ -17,6 +18,7 @@ import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
   imports: [
     CommonModule,
     FormsModule,
+    TranslateModule,
     SharedModule,
     PageHeaderComponent,
     GlassCardComponent,

@@ -4,10 +4,12 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '@core/services';
-import { I18nService, Language } from '@core/services';
+import { StorageService } from '@core/services';
 import { NotificationService, Notification } from '@core/services';
 import { OmniSearchComponent } from '@shared/components/omni-search/omni-search.component';
 import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
+import { STORAGE_KEYS } from '@core/constants/storage-keys.constant';
+import { Language, isSupportedLanguage, getFlagPath } from '@core/types/language.type';
 
 @Component({
   selector: 'app-header',
@@ -25,7 +27,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   showNotificationMenu = false;
   private destroy$ = new Subject<void>();
 
-  languages: { value: Language; label: string; flag: string }[] = [];
+  languages: { value: Language; label: string; flagPath: string }[] = [];
 
   notifications: Notification[] = [];
   unreadCount = 0;
@@ -33,30 +35,30 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     public authService: AuthService,
     private router: Router,
-    public i18nService: I18nService,
+    private storageService: StorageService,
     private notificationService: NotificationService
   ) {
+    // Initialize current language
+    this.currentLanguage = (this.translate.currentLang as Language) || 'th';
+
     // Subscribe to language changes
-    this.i18nService.currentLanguage$.pipe(takeUntil(this.destroy$)).subscribe(lang => {
-      this.currentLanguage = lang;
+    this.translate.onLangChange.pipe(takeUntil(this.destroy$)).subscribe(event => {
+      const lang = event.lang as Language;
+      if (isSupportedLanguage(lang)) {
+        this.currentLanguage = lang;
+      }
     });
   }
 
   ngOnInit(): void {
     // Initialize languages
-    this.languages = [
-      { value: 'th', label: this.translate.instant('common.languages.thai'), flag: '🇹🇭' },
-      { value: 'en', label: this.translate.instant('common.languages.english'), flag: '🇬🇧' }
-    ];
-    
+    this.updateLanguages();
+
     // Update languages when language changes
     this.translate.onLangChange.subscribe(() => {
-      this.languages = [
-        { value: 'th', label: this.translate.instant('common.languages.thai'), flag: '🇹🇭' },
-        { value: 'en', label: this.translate.instant('common.languages.english'), flag: '🇬🇧' }
-      ];
+      this.updateLanguages();
     });
-    
+
     // Subscribe to notifications
     this.notificationService.notifications$.pipe(takeUntil(this.destroy$)).subscribe(notifications => {
       this.notifications = notifications;
@@ -109,8 +111,36 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.showUserMenu = false;
   }
 
+  /**
+   * Update languages list with translations
+   */
+  private updateLanguages(): void {
+    this.languages = [
+      { value: 'th', label: this.translate.instant('common.languages.thai'), flagPath: getFlagPath('th') },
+      { value: 'en', label: this.translate.instant('common.languages.english'), flagPath: getFlagPath('en') },
+      { value: 'lo', label: this.translate.instant('common.languages.lao'), flagPath: getFlagPath('lo') },
+      { value: 'my', label: this.translate.instant('common.languages.myanmar'), flagPath: getFlagPath('my') },
+      { value: 'vi', label: this.translate.instant('common.languages.vietnamese'), flagPath: getFlagPath('vi') },
+      { value: 'zh', label: this.translate.instant('common.languages.chinese'), flagPath: getFlagPath('zh') }
+    ];
+  }
+
   changeLanguage(language: Language): void {
-    this.i18nService.setLanguage(language);
+    // Validate language
+    if (!isSupportedLanguage(language)) {
+      console.warn(`Language ${language} is not supported.`);
+      return;
+    }
+
+    // Change language
+    this.translate.use(language);
+
+    // Save to storage
+    this.storageService.setItem(STORAGE_KEYS.LANGUAGE, language);
+
+    // Update document language attribute
+    document.documentElement.setAttribute('lang', language);
+
     this.showLanguageMenu = false;
   }
 

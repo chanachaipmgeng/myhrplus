@@ -2052,7 +2052,7 @@
   "menu.main.company": "ບໍລິສັດ",
   "menu.company.profile": "ໂປຣໄຟລ໌ບໍລິສັດ",
   "menu.company.visionMission": "ວິໄສທັດ/ພາລະກິດ",
-  "menu.company.orgchart": "ແຜນຜັງองค์กร",
+  "menu.company.orgchart": "ໂຄງສ້າງອົງກອນ",
   "menu.company.calendar": "ປະຕິທິນປະຈຳປີ",
   "menu.company.employeeList": "ລາຍຊື່ພະນັກງານ",
   "menu.company.policy": "ນະໂຍບາຍ/ລະບຽບ/ກົດລະບຽບ",
@@ -3285,8 +3285,12 @@
   "common.timeAgo.minutesAgo": "{{minutes}} minutes ago",
   "common.timeAgo.hoursAgo": "{{hours}} hours ago",
   "common.timeAgo.daysAgo": "{{days}} days ago",
-  "common.languages.thai": "Thai",
+  "common.languages.thai": "ພາສາໄທ",
   "common.languages.english": "English",
+  "common.languages.lao": "ລາວ",
+  "common.languages.myanmar": "ມຽນມາ",
+  "common.languages.vietnamese": "ຫວຽດນາມ",
+  "common.languages.chinese": "ຈີນ",
   "navigation.home": "Home",
   "navigation.selfService": "Self Service",
   "navigation.admin": "Admin",
@@ -3344,6 +3348,9 @@
       "employeeId": "รหัสพนักงาน",
       "nameSurname": "ชื่อ-นามสกุล",
       "status": "สถานภาพ"
+    },
+    "languages": {
+      "thai": "ພາສາໄທ"
     }
   },
   "common.actions.add": "Add",
@@ -3651,5 +3658,41 @@
   "features.auth.login.signIn": "Sign In with HR System",
   "features.auth.login.signingIn": "Signing in...",
   "features.auth.login.error.usernameRequired": "Please enter your username",
-  "features.auth.login.error.passwordRequired": "Please enter your password"
+  "features.auth.login.error.passwordRequired": "Please enter your password",
+  "systemcode": {
+    "coursekind": {
+      "null": ""
+    },
+    "child": {
+      "amount": {
+        "tax": ""
+      },
+      "bdate": {
+        "before": {
+          "2561": ""
+        }
+      }
+    },
+    "parents": {
+      "extends": {
+        "child": ""
+      }
+    },
+    "life": {
+      "insurance": {
+        "premium2": ""
+      }
+    }
+  },
+  "changemoney": {
+    "format": {
+      "0": "",
+      "undefined": ""
+    }
+  },
+  "menu": {
+    "company": {
+      "orgchart": "ໂຄງສ້າງອົງກອນ"
+    }
+  }
 }

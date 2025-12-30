@@ -9,6 +9,7 @@ import { GlassInputComponent } from '@shared/components/glass-input/glass-input.
 import { GlassSelectComponent } from '@shared/components/glass-select/glass-select.component';
 import { GlassCheckboxComponent } from '@shared/components/glass-checkbox/glass-checkbox.component';
 import { GlassButtonComponent } from '@shared/components/glass-button/glass-button.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
 import { AlertComponent } from '@shared/components/alert/alert.component';
 import { ThemeToggleComponent } from '@shared/components/theme-toggle/theme-toggle.component';
 
@@ -34,6 +35,7 @@ import { AuthRoutingModule } from './auth-routing.module';
     GlassSelectComponent,
     GlassCheckboxComponent,
     GlassButtonComponent,
+    GlassCardComponent,
     AlertComponent,
     ThemeToggleComponent,
     ForgotPasswordComponent,

@@ -3,10 +3,12 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from './core/services/auth.service';
 import { ThemeService } from './core/services/theme.service';
-import { I18nService } from './core/services/i18n.service';
+import { StorageService } from './core/services/storage.service';
 import { SyncfusionThemeService } from './shared/syncfusion/syncfusion-theme.service';
 import { NotificationService } from './core/services/notification.service';
 import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
+import { STORAGE_KEYS } from '@core/constants/storage-keys.constant';
+import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES, isSupportedLanguage, Language } from '@core/types/language.type';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +24,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     private router: Router,
     private authService: AuthService,
     private themeService: ThemeService,
-    private i18nService: I18nService,
+    private storageService: StorageService,
     private syncfusionThemeService: SyncfusionThemeService,
     private notificationService: NotificationService,
     private translateService: TranslateService
@@ -45,18 +47,28 @@ export class AppComponent implements OnInit, AfterViewInit {
       body.classList.add(`theme-${theme.color}`);
     });
 
-    // Initialize i18n service (language is loaded automatically)
-    const currentLang = this.i18nService.getCurrentLanguage();
-    document.documentElement.setAttribute('lang', currentLang);
+    // Initialize language from storage
+    const savedLang = this.storageService.getItem<Language>(STORAGE_KEYS.LANGUAGE);
+    const currentLang = (savedLang && isSupportedLanguage(savedLang)) ? savedLang : DEFAULT_LANGUAGE;
     
     // Set default language for TranslateService
-    this.translateService.setDefaultLang('th');
+    this.translateService.setDefaultLang(DEFAULT_LANGUAGE);
+    // Add all supported languages
+    this.translateService.addLangs(SUPPORTED_LANGUAGES);
     this.translateService.use(currentLang);
     
+    // Update document language attribute
+    document.documentElement.setAttribute('lang', currentLang);
+    
     // Subscribe to language changes
-    this.i18nService.currentLanguage$.subscribe(lang => {
-      this.translateService.use(lang);
-      document.documentElement.setAttribute('lang', lang);
+    this.translateService.onLangChange.subscribe(event => {
+      const lang = event.lang as Language;
+      if (isSupportedLanguage(lang)) {
+        // Save to storage
+        this.storageService.setItem(STORAGE_KEYS.LANGUAGE, lang);
+        // Update document language attribute
+        document.documentElement.setAttribute('lang', lang);
+      }
     });
 
     // Initialize Syncfusion theme service

@@ -3,16 +3,56 @@
   <div class="login-controls">
     <div class="login-controls-group">
       <!-- Language Switcher -->
-      <app-glass-button
-        type="button"
-        variant="secondary"
-        size="sm"
-        (clicked)="toggleLanguage()"
-        [ariaLabel]="currentLang === 'th' ? 'Switch to English' : 'เปลี่ยนเป็นภาษาไทย'"
-        customClass="control-button language-button">
-        <span class="control-icon">{{ currentLang === 'th' ? '🇹🇭' : '🇬🇧' }}</span>
-        <span class="control-text">{{ currentLang === 'th' ? 'ไทย' : 'EN' }}</span>
-      </app-glass-button>
+      <div class="relative" appClickOutside (appClickOutside)="closeLanguageMenu()">
+        <app-glass-button
+          type="button"
+          variant="secondary"
+          size="sm"
+          (clicked)="toggleLanguageMenu()"
+          [ariaLabel]="'layout.header.changeLanguage' | translate"
+          [title]="'layout.header.changeLanguage' | translate"
+          [attr.aria-expanded]="showLanguageMenu"
+          [attr.aria-controls]="'language-menu'"
+          customClass="control-button language-button">
+          <img [src]="currentLanguage.flagPath" [alt]="currentLanguage.name" class="control-icon w-5 h-5 rounded-sm object-cover" />
+          <span class="control-text">{{ currentLanguage.name }}</span>
+        </app-glass-button>
+
+        <!-- Language Dropdown -->
+        <app-glass-card
+          *ngIf="showLanguageMenu"
+          variant="strong"
+          padding="p-0"
+          customClass="language-dropdown absolute right-0 top-full mt-2 w-48
+                       rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                       z-50 overflow-hidden
+                       backdrop-blur-xl
+                       animate-scale-in
+                       [animation-duration:200ms]
+                       origin-top-right">
+          <div id="language-menu" role="menu" [attr.aria-label]="'layout.header.languageMenuAriaLabel' | translate" class="py-1">
+            <button
+              *ngFor="let lang of availableLanguages; let i = index"
+              type="button"
+              role="menuitem"
+              (click)="changeLanguage(lang.code)"
+              [class.active]="currentLang === lang.code"
+              [attr.aria-label]="('layout.header.changeLanguageTo' | translate) + ' ' + lang.name"
+              [attr.aria-current]="currentLang === lang.code ? 'true' : 'false'"
+              [style.animation-delay.ms]="i * 50"
+              class="language-item w-full px-4 py-2.5 text-left flex items-center gap-3
+                     hover:bg-gray-50 dark:hover:bg-gray-700 theme-gemini:hover:bg-white/20
+                     hover:translate-x-1 hover:scale-[1.02]
+                     active:scale-[0.98]
+                     transition-all duration-200 ease-out
+                     animate-fade-in">
+              <img [src]="lang.flagPath" [alt]="lang.name" class="w-5 h-5 rounded-sm object-cover" />
+              <span class="flex-1 thai-text text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">{{ lang.name }}</span>
+              <app-icon *ngIf="currentLang === lang.code" name="check" size="sm" color="text-blue-500 theme-gemini:text-blue-400"></app-icon>
+            </button>
+          </div>
+        </app-glass-card>
+      </div>
 
       <!-- Theme Toggle -->
       <app-theme-toggle></app-theme-toggle>

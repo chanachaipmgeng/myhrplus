@@ -6,12 +6,15 @@ import { NotificationService } from '@core/services';
 import { MenuService } from '@core/services';
 import { EmployeeService, SetCharacter } from '@core/services';
 import { SwaplangCodeService } from '@core/services';
+import { StorageService } from '@core/services';
 import { TranslateService } from '@ngx-translate/core';
 import { ThemeService } from '@core/services';
 import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from '@env/environment';
 import jwt_decode from 'jwt-decode';
 import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
+import { STORAGE_KEYS } from '@core/constants/storage-keys.constant';
+import { Language, isSupportedLanguage, DEFAULT_LANGUAGE, getFlagPath } from '@core/types/language.type';
 
 @Component({
   selector: 'app-login',
@@ -33,11 +36,20 @@ export class LoginComponent implements OnInit {
   dbSelectOptions: Array<{ value: string; label: string; disabled?: boolean }> = [];
 
   // Language
-  currentLang: string = 'th';
+  currentLang: Language = 'th';
+  showLanguageMenu = false;
   availableLanguages = [
-    { code: 'th', name: 'ไทย', flag: '🇹🇭' },
-    { code: 'en', name: 'English', flag: '🇬🇧' }
+    { code: 'th' as Language, name: 'ไทย', flagPath: getFlagPath('th') },
+    { code: 'en' as Language, name: 'English', flagPath: getFlagPath('en') },
+    { code: 'lo' as Language, name: 'ລາວ', flagPath: getFlagPath('lo') },
+    { code: 'my' as Language, name: 'မြန်မာ', flagPath: getFlagPath('my') },
+    { code: 'vi' as Language, name: 'Tiếng Việt', flagPath: getFlagPath('vi') },
+    { code: 'zh' as Language, name: '中文', flagPath: getFlagPath('zh') }
   ];
+
+  get currentLanguage() {
+    return this.availableLanguages.find(lang => lang.code === this.currentLang) || this.availableLanguages[0];
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -49,6 +61,7 @@ export class LoginComponent implements OnInit {
     private employeeService: EmployeeService,
     private swapLangService: SwaplangCodeService,
     private translate: TranslateService,
+    private storageService: StorageService,
     private themeService: ThemeService
   ) {
     this.loginForm = this.fb.group({
@@ -73,10 +86,16 @@ export class LoginComponent implements OnInit {
     // Load database list
     this.loadDatabases();
 
-    // Initialize language
-    this.currentLang = this.translate.currentLang || 'th';
+    // Initialize language from storage
+    const savedLang = this.storageService.getItem<Language>(STORAGE_KEYS.LANGUAGE);
+    this.currentLang = (savedLang && isSupportedLanguage(savedLang)) ? savedLang : (this.translate.currentLang as Language) || DEFAULT_LANGUAGE;
+
+    // Subscribe to language changes
     this.translate.onLangChange.subscribe(event => {
-      this.currentLang = event.lang;
+      const lang = event.lang as Language;
+      if (isSupportedLanguage(lang)) {
+        this.currentLang = lang;
+      }
     });
 
   }
@@ -132,10 +151,32 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/auth/forgot-password']);
   }
 
-  toggleLanguage(): void {
-    const newLang = this.currentLang === 'th' ? 'en' : 'th';
-    this.translate.use(newLang);
-    this.currentLang = newLang;
+  toggleLanguageMenu(): void {
+    this.showLanguageMenu = !this.showLanguageMenu;
+  }
+
+  closeLanguageMenu(): void {
+    this.showLanguageMenu = false;
+  }
+
+  changeLanguage(language: Language): void {
+    // Validate language
+    if (!isSupportedLanguage(language)) {
+      console.warn(`Language ${language} is not supported.`);
+      return;
+    }
+
+    // Change language
+    this.translate.use(language);
+
+    // Save to storage
+    this.storageService.setItem(STORAGE_KEYS.LANGUAGE, language);
+
+    // Update document language attribute
+    document.documentElement.setAttribute('lang', language);
+
+    this.currentLang = language;
+    this.showLanguageMenu = false;
   }
 
   onUsernameChange(value: string): void {
