@@ -21,16 +21,66 @@
             {{ 'company.dashboard.welcome.subtitle' | translate }}
           </p>
         </div>
-        <div class="flex items-center gap-2 px-3 md:px-4 py-2 bg-indigo-100/50 dark:bg-indigo-900/30 rounded-xl text-xs md:text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">
-          <app-icon name="business" size="sm" color="text-indigo-600 dark:text-indigo-400"></app-icon>
-          <span class="thai-text">{{ 'company.dashboard.welcome.companyInfo' | translate }}</span>
+        <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 px-3 md:px-4 py-2 bg-indigo-100/50 dark:bg-indigo-900/30 rounded-xl text-xs md:text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">
+            <app-icon name="business" size="sm" color="text-indigo-600 dark:text-indigo-400"></app-icon>
+            <span class="thai-text">{{ 'company.dashboard.welcome.companyInfo' | translate }}</span>
+          </div>
+          <!-- Dashboard Customization Button -->
+          <div class="relative">
+            <button
+              (click)="showCustomizationMenu = !showCustomizationMenu"
+              (clickOutside)="showCustomizationMenu = false"
+              class="p-2 rounded-lg bg-indigo-100/50 dark:bg-indigo-900/30 hover:bg-indigo-200/50 dark:hover:bg-indigo-800/50 transition-colors"
+              [attr.aria-label]="'company.dashboard.customize' | translate"
+              [attr.aria-expanded]="showCustomizationMenu">
+              <app-icon name="tune" size="sm" color="text-indigo-600 dark:text-indigo-400"></app-icon>
+            </button>
+            <!-- Customization Menu -->
+            <div
+              *ngIf="showCustomizationMenu"
+              class="fixed right-4 top-24 w-64 bg-white/98 dark:bg-gray-900/98 backdrop-blur-md rounded-xl shadow-2xl border-2 border-gray-300/70 dark:border-gray-600/70 z-[1000] p-4"
+              style="backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);"
+              (click)="$event.stopPropagation()">
+              <div class="flex items-center justify-between mb-3 pb-3 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100">{{ 'company.dashboard.customize.title' | translate }}</h3>
+                <button
+                  (click)="showCustomizationMenu = false"
+                  class="p-1.5 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                  [attr.aria-label]="'Close menu'">
+                  <app-icon name="close" size="xs" color="text-gray-600 dark:text-gray-400"></app-icon>
+                </button>
+              </div>
+              <div class="space-y-2 mb-3 max-h-64 overflow-y-auto">
+                <div
+                  *ngFor="let section of dashboardSections"
+                  class="flex items-center justify-between p-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer"
+                  (click)="toggleSection(section.id)">
+                  <label class="flex items-center gap-3 cursor-pointer flex-1">
+                    <input
+                      type="checkbox"
+                      [checked]="section.visible"
+                      (change)="toggleSection(section.id)"
+                      (click)="$event.stopPropagation()"
+                      class="w-4 h-4 text-indigo-600 bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 cursor-pointer">
+                    <span class="text-sm font-medium text-gray-800 dark:text-gray-200">{{ section.label | translate }}</span>
+                  </label>
+                </div>
+              </div>
+              <button
+                (click)="resetDashboardLayout()"
+                class="w-full px-4 py-2.5 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 rounded-lg transition-colors shadow-md hover:shadow-lg">
+                {{ 'company.dashboard.customize.reset' | translate }}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </app-glass-card>
 
     <!-- Statistics Cards -->
-    <div class="mb-6 md:mb-8">
-      <h2 class="text-lg md:text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3 md:mb-4 transition-colors duration-300">{{ 'company.dashboard.statistics.title' | translate }}</h2>
+    <section class="mb-6 md:mb-8" [attr.aria-labelledby]="'statistics-title'">
+      <h2 id="statistics-title" class="text-lg md:text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3 md:mb-4 transition-colors duration-300">{{ 'company.dashboard.statistics.title' | translate }}</h2>
 
       <!-- Loading State -->
       <div *ngIf="isLoading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 lg:gap-5">
@@ -44,15 +94,28 @@
           [routerLink]="[statistics.branches.route]"
           [appStagger]="0"
           [staggerDelay]="0.05"
-          class="cursor-pointer group">
+          class="cursor-pointer group"
+          role="button"
+          [attr.aria-label]="('company.dashboard.statistics.branches' | translate) + ': ' + statistics.branches.value + ', ' + (statistics.branches.change >= 0 ? '+' : '') + statistics.branches.change + ' ' + ('company.dashboard.statistics.trend' | translate)"
+          [attr.aria-describedby]="'branches-card-description'"
+          [attr.tabindex]="0"
+          (keydown.enter)="navigateToRoute(statistics.branches.route)"
+          (keydown.space)="navigateToRoute(statistics.branches.route); $event.preventDefault()">
           <app-glass-card
             padding="p-4 md:p-5"
-            customClass="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white text-center hover:scale-105 hover:shadow-xl transition-all duration-300">
-            <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2">{{ statistics.branches.value }}</div>
-            <div class="text-xs md:text-sm opacity-90 mb-2">{{ 'company.dashboard.statistics.branches' | translate }}</div>
+            customClass="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white text-center hover:scale-105 hover:shadow-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-indigo-400 focus-within:ring-offset-2">
+            <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2" [attr.aria-hidden]="true">{{ statistics.branches.value }}</div>
+            <div class="text-xs md:text-sm opacity-90 mb-2" id="branches-card-description">{{ 'company.dashboard.statistics.branches' | translate }}</div>
+            <!-- Comparison View -->
+            <div *ngIf="comparisonMode" class="text-xs opacity-70 mb-1">
+              <span>{{ 'company.dashboard.comparison.previous' | translate }}: {{ previousPeriodStatistics.branches }}</span>
+            </div>
             <div class="flex items-center justify-center gap-1 text-xs opacity-80">
-              <app-icon name="trending_up" size="xs" color="text-white"></app-icon>
-              <span>+{{ statistics.branches.change }} {{ 'company.dashboard.statistics.trend' | translate }}</span>
+              <app-icon [name]="statistics.branches.change >= 0 ? 'trending_up' : 'trending_down'" size="xs" color="text-white"></app-icon>
+              <span>{{ statistics.branches.change >= 0 ? '+' : '' }}{{ statistics.branches.change }} {{ 'company.dashboard.statistics.trend' | translate }}</span>
+              <span *ngIf="comparisonMode" class="ml-1">
+                ({{ getComparisonPercentage(statistics.branches.value, previousPeriodStatistics.branches) >= 0 ? '+' : '' }}{{ getComparisonPercentage(statistics.branches.value, previousPeriodStatistics.branches) }}%)
+              </span>
             </div>
           </app-glass-card>
         </div>
@@ -62,15 +125,28 @@
           [routerLink]="[statistics.divisions.route]"
           [appStagger]="1"
           [staggerDelay]="0.05"
-          class="cursor-pointer group">
+          class="cursor-pointer group"
+          role="button"
+          [attr.aria-label]="('company.dashboard.statistics.divisions' | translate) + ': ' + statistics.divisions.value + ', ' + (statistics.divisions.change >= 0 ? '+' : '') + statistics.divisions.change + ' ' + ('company.dashboard.statistics.trend' | translate)"
+          [attr.aria-describedby]="'divisions-card-description'"
+          [attr.tabindex]="0"
+          (keydown.enter)="navigateToRoute(statistics.divisions.route)"
+          (keydown.space)="navigateToRoute(statistics.divisions.route); $event.preventDefault()">
           <app-glass-card
             padding="p-4 md:p-5"
-            customClass="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white text-center hover:scale-105 hover:shadow-xl transition-all duration-300">
-            <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2">{{ statistics.divisions.value }}</div>
-            <div class="text-xs md:text-sm opacity-90 mb-2">{{ 'company.dashboard.statistics.divisions' | translate }}</div>
+            customClass="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white text-center hover:scale-105 hover:shadow-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-pink-400 focus-within:ring-offset-2">
+            <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2" [attr.aria-hidden]="true">{{ statistics.divisions.value }}</div>
+            <div class="text-xs md:text-sm opacity-90 mb-2" id="divisions-card-description">{{ 'company.dashboard.statistics.divisions' | translate }}</div>
+            <!-- Comparison View -->
+            <div *ngIf="comparisonMode" class="text-xs opacity-70 mb-1">
+              <span>{{ 'company.dashboard.comparison.previous' | translate }}: {{ previousPeriodStatistics.divisions }}</span>
+            </div>
             <div class="flex items-center justify-center gap-1 text-xs opacity-80">
-              <app-icon name="trending_up" size="xs" color="text-white"></app-icon>
-              <span>+{{ statistics.divisions.change }} {{ 'company.dashboard.statistics.trend' | translate }}</span>
+              <app-icon [name]="statistics.divisions.change >= 0 ? 'trending_up' : 'trending_down'" size="xs" color="text-white"></app-icon>
+              <span>{{ statistics.divisions.change >= 0 ? '+' : '' }}{{ statistics.divisions.change }} {{ 'company.dashboard.statistics.trend' | translate }}</span>
+              <span *ngIf="comparisonMode" class="ml-1">
+                ({{ getComparisonPercentage(statistics.divisions.value, previousPeriodStatistics.divisions) >= 0 ? '+' : '' }}{{ getComparisonPercentage(statistics.divisions.value, previousPeriodStatistics.divisions) }}%)
+              </span>
             </div>
           </app-glass-card>
         </div>
@@ -80,15 +156,28 @@
           [routerLink]="[statistics.departments.route]"
           [appStagger]="2"
           [staggerDelay]="0.05"
-          class="cursor-pointer group">
+          class="cursor-pointer group"
+          role="button"
+          [attr.aria-label]="('company.dashboard.statistics.departments' | translate) + ': ' + statistics.departments.value + ', ' + (statistics.departments.change >= 0 ? '+' : '') + statistics.departments.change + ' ' + ('company.dashboard.statistics.trend' | translate)"
+          [attr.aria-describedby]="'departments-card-description'"
+          [attr.tabindex]="0"
+          (keydown.enter)="navigateToRoute(statistics.departments.route)"
+          (keydown.space)="navigateToRoute(statistics.departments.route); $event.preventDefault()">
           <app-glass-card
             padding="p-4 md:p-5"
-            customClass="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white text-center hover:scale-105 hover:shadow-xl transition-all duration-300">
-            <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2">{{ statistics.departments.value }}</div>
-            <div class="text-xs md:text-sm opacity-90 mb-2">{{ 'company.dashboard.statistics.departments' | translate }}</div>
-            <div class="flex items-center justify-center gap-1 text-xs opacity-80">
-              <app-icon name="trending_up" size="xs" color="text-white"></app-icon>
-              <span>+{{ statistics.departments.change }} {{ 'company.dashboard.statistics.trend' | translate }}</span>
+            customClass="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white text-center hover:scale-105 hover:shadow-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-blue-400 focus-within:ring-offset-2">
+            <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2" [attr.aria-hidden]="true">{{ statistics.departments.value }}</div>
+            <div class="text-xs md:text-sm opacity-90 mb-2" id="departments-card-description">{{ 'company.dashboard.statistics.departments' | translate }}</div>
+            <!-- Comparison View -->
+            <div *ngIf="comparisonMode" class="text-xs opacity-70 mb-1">
+              <span>{{ 'company.dashboard.comparison.previous' | translate }}: {{ previousPeriodStatistics.departments }}</span>
+            </div>
+            <div class="flex items-center justify-center gap-1 text-xs opacity-80" [attr.aria-label]="(statistics.departments.change >= 0 ? '+' : '') + statistics.departments.change + ' ' + ('company.dashboard.statistics.trend' | translate) + (comparisonMode ? ', ' + (getComparisonPercentage(statistics.departments.value, previousPeriodStatistics.departments) >= 0 ? '+' : '') + getComparisonPercentage(statistics.departments.value, previousPeriodStatistics.departments) + '%' : '')">
+              <app-icon [name]="statistics.departments.change >= 0 ? 'trending_up' : 'trending_down'" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
+              <span>{{ statistics.departments.change >= 0 ? '+' : '' }}{{ statistics.departments.change }} {{ 'company.dashboard.statistics.trend' | translate }}</span>
+              <span *ngIf="comparisonMode" class="ml-1" [attr.aria-label]="'company.dashboard.comparison.percentageChange' | translate">
+                ({{ getComparisonPercentage(statistics.departments.value, previousPeriodStatistics.departments) >= 0 ? '+' : '' }}{{ getComparisonPercentage(statistics.departments.value, previousPeriodStatistics.departments) }}%)
+              </span>
             </div>
           </app-glass-card>
         </div>
@@ -98,15 +187,28 @@
           [routerLink]="[statistics.positions.route]"
           [appStagger]="3"
           [staggerDelay]="0.05"
-          class="cursor-pointer group">
+          class="cursor-pointer group"
+          role="button"
+          [attr.aria-label]="('company.dashboard.statistics.positions' | translate) + ': ' + statistics.positions.value + ', ' + (statistics.positions.change >= 0 ? '+' : '') + statistics.positions.change + ' ' + ('company.dashboard.statistics.trend' | translate)"
+          [attr.aria-describedby]="'positions-card-description'"
+          [attr.tabindex]="0"
+          (keydown.enter)="navigateToRoute(statistics.positions.route)"
+          (keydown.space)="navigateToRoute(statistics.positions.route); $event.preventDefault()">
           <app-glass-card
             padding="p-4 md:p-5"
-            customClass="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white text-center hover:scale-105 hover:shadow-xl transition-all duration-300">
-            <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2">{{ statistics.positions.value }}</div>
-            <div class="text-xs md:text-sm opacity-90 mb-2">{{ 'company.dashboard.statistics.positions' | translate }}</div>
-            <div class="flex items-center justify-center gap-1 text-xs opacity-80">
-              <app-icon name="trending_up" size="xs" color="text-white"></app-icon>
-              <span>+{{ statistics.positions.change }} {{ 'company.dashboard.statistics.trend' | translate }}</span>
+            customClass="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white text-center hover:scale-105 hover:shadow-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-green-400 focus-within:ring-offset-2">
+            <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2" [attr.aria-hidden]="true">{{ statistics.positions.value }}</div>
+            <div class="text-xs md:text-sm opacity-90 mb-2" id="positions-card-description">{{ 'company.dashboard.statistics.positions' | translate }}</div>
+            <!-- Comparison View -->
+            <div *ngIf="comparisonMode" class="text-xs opacity-70 mb-1">
+              <span>{{ 'company.dashboard.comparison.previous' | translate }}: {{ previousPeriodStatistics.positions }}</span>
+            </div>
+            <div class="flex items-center justify-center gap-1 text-xs opacity-80" [attr.aria-label]="(statistics.positions.change >= 0 ? '+' : '') + statistics.positions.change + ' ' + ('company.dashboard.statistics.trend' | translate) + (comparisonMode ? ', ' + (getComparisonPercentage(statistics.positions.value, previousPeriodStatistics.positions) >= 0 ? '+' : '') + getComparisonPercentage(statistics.positions.value, previousPeriodStatistics.positions) + '%' : '')">
+              <app-icon [name]="statistics.positions.change >= 0 ? 'trending_up' : 'trending_down'" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
+              <span>{{ statistics.positions.change >= 0 ? '+' : '' }}{{ statistics.positions.change }} {{ 'company.dashboard.statistics.trend' | translate }}</span>
+              <span *ngIf="comparisonMode" class="ml-1" [attr.aria-label]="'company.dashboard.comparison.percentageChange' | translate">
+                ({{ getComparisonPercentage(statistics.positions.value, previousPeriodStatistics.positions) >= 0 ? '+' : '' }}{{ getComparisonPercentage(statistics.positions.value, previousPeriodStatistics.positions) }}%)
+              </span>
             </div>
           </app-glass-card>
         </div>
@@ -116,23 +218,36 @@
           [routerLink]="[statistics.locations.route]"
           [appStagger]="4"
           [staggerDelay]="0.05"
-          class="cursor-pointer group">
+          class="cursor-pointer group"
+          role="button"
+          [attr.aria-label]="('company.dashboard.statistics.locations' | translate) + ': ' + statistics.locations.value + ', ' + (statistics.locations.change >= 0 ? '+' : '') + statistics.locations.change + ' ' + ('company.dashboard.statistics.trend' | translate)"
+          [attr.aria-describedby]="'locations-card-description'"
+          [attr.tabindex]="0"
+          (keydown.enter)="navigateToRoute(statistics.locations.route)"
+          (keydown.space)="navigateToRoute(statistics.locations.route); $event.preventDefault()">
           <app-glass-card
             padding="p-4 md:p-5"
-            customClass="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white text-center hover:scale-105 hover:shadow-xl transition-all duration-300">
-            <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2">{{ statistics.locations.value }}</div>
-            <div class="text-xs md:text-sm opacity-90 mb-2">{{ 'company.dashboard.statistics.locations' | translate }}</div>
-            <div class="flex items-center justify-center gap-1 text-xs opacity-80">
-              <app-icon name="trending_up" size="xs" color="text-white"></app-icon>
-              <span>+{{ statistics.locations.change }} {{ 'company.dashboard.statistics.trend' | translate }}</span>
+            customClass="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white text-center hover:scale-105 hover:shadow-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-yellow-400 focus-within:ring-offset-2">
+            <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2" [attr.aria-hidden]="true">{{ statistics.locations.value }}</div>
+            <div class="text-xs md:text-sm opacity-90 mb-2" id="locations-card-description">{{ 'company.dashboard.statistics.locations' | translate }}</div>
+            <!-- Comparison View -->
+            <div *ngIf="comparisonMode" class="text-xs opacity-70 mb-1">
+              <span>{{ 'company.dashboard.comparison.previous' | translate }}: {{ previousPeriodStatistics.locations }}</span>
+            </div>
+            <div class="flex items-center justify-center gap-1 text-xs opacity-80" [attr.aria-label]="(statistics.locations.change >= 0 ? '+' : '') + statistics.locations.change + ' ' + ('company.dashboard.statistics.trend' | translate) + (comparisonMode ? ', ' + (getComparisonPercentage(statistics.locations.value, previousPeriodStatistics.locations) >= 0 ? '+' : '') + getComparisonPercentage(statistics.locations.value, previousPeriodStatistics.locations) + '%' : '')">
+              <app-icon [name]="statistics.locations.change >= 0 ? 'trending_up' : 'trending_down'" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
+              <span>{{ statistics.locations.change >= 0 ? '+' : '' }}{{ statistics.locations.change }} {{ 'company.dashboard.statistics.trend' | translate }}</span>
+              <span *ngIf="comparisonMode" class="ml-1" [attr.aria-label]="'company.dashboard.comparison.percentageChange' | translate">
+                ({{ getComparisonPercentage(statistics.locations.value, previousPeriodStatistics.locations) >= 0 ? '+' : '' }}{{ getComparisonPercentage(statistics.locations.value, previousPeriodStatistics.locations) }}%)
+              </span>
             </div>
           </app-glass-card>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Quick Actions Bar -->
-    <div class="mb-6 md:mb-8">
+    <div *ngIf="isSectionVisible('quickActions')" class="mb-6 md:mb-8">
       <app-glass-card padding="p-4 md:p-5" customClass="mb-4">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div class="flex-1">
@@ -151,7 +266,25 @@
               </button>
             </div>
           </div>
-          <div class="w-full md:w-auto">
+          <div class="w-full md:w-auto flex flex-col md:flex-row items-start md:items-center gap-3">
+            <!-- Comparison Mode Toggle -->
+            <div class="flex items-center gap-2 px-3 py-2 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg border border-indigo-200 dark:border-indigo-800">
+              <app-glass-switch
+                [(ngModel)]="comparisonMode"
+                (ngModelChange)="toggleComparisonMode()"
+                [label]="'company.dashboard.comparison.enable' | translate"
+                size="sm">
+              </app-glass-switch>
+              <select
+                *ngIf="comparisonMode"
+                [(ngModel)]="comparisonPeriod"
+                (ngModelChange)="loadComparisonData(); initializeCharts()"
+                class="ml-2 px-2 py-1 text-xs bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <option value="previous">{{ 'company.dashboard.comparison.previousPeriod' | translate }}</option>
+                <option value="year-over-year">{{ 'company.dashboard.comparison.yearOverYear' | translate }}</option>
+              </select>
+            </div>
+            <!-- Date Range Picker -->
             <app-date-range-picker
               [startDate]="dateRange.start"
               [endDate]="dateRange.end"
@@ -164,7 +297,7 @@
     </div>
 
     <!-- Main Content: Charts (3 parts) and Navigation (1 part) -->
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
+    <div *ngIf="isSectionVisible('charts')" class="grid grid-cols-1 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
       <!-- Charts Section: 3 columns (75%) -->
       <div class="lg:col-span-3">
         <div class="mb-6 md:mb-8">
@@ -194,9 +327,10 @@
                 <h3 class="text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">{{ 'company.dashboard.charts.divisionStructure' | translate }}</h3>
                 <button
                   (click)="exportChart('division', 'pdf')"
-                  class="p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                  [attr.aria-label]="'Export chart'">
-                  <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400"></app-icon>
+                  class="p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  [attr.aria-label]="('Export' | translate) + ' ' + ('company.dashboard.charts.divisionStructure' | translate) + ' PDF'"
+                  [attr.tabindex]="0">
+                  <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400" [attr.aria-hidden]="true"></app-icon>
                 </button>
               </div>
               <div echarts [options]="divisionPieChartOption" class="w-full" style="height: 280px; min-height: 280px;" [style.height.md]="'300px'"></div>
@@ -213,7 +347,7 @@
                   <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400"></app-icon>
                 </button>
               </div>
-              <div echarts [options]="branchBarChartOption" class="w-full" style="height: 280px; min-height: 280px;" [style.height.md]="'300px'"></div>
+              <div echarts [options]="branchBarChartOption" class="w-full" style="height: 280px; min-height: 280px;" [style.height.md]="'300px'" role="img" [attr.aria-label]="'company.dashboard.charts.employeesByBranch' | translate"></div>
             </app-glass-card>
           </div>
 
@@ -230,7 +364,7 @@
                   <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400"></app-icon>
                 </button>
               </div>
-              <div echarts [options]="departmentBarChartOption" class="w-full" style="height: 280px; min-height: 280px;" [style.height.md]="'300px'"></div>
+              <div echarts [options]="departmentBarChartOption" class="w-full" style="height: 280px; min-height: 280px;" [style.height.md]="'300px'" role="img" [attr.aria-label]="'company.dashboard.charts.employeesByDepartment' | translate"></div>
             </app-glass-card>
 
             <!-- Bar Chart: Positions -->
@@ -244,7 +378,7 @@
                   <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400"></app-icon>
                 </button>
               </div>
-              <div echarts [options]="positionBarChartOption" class="w-full" style="height: 280px; min-height: 280px;" [style.height.md]="'300px'"></div>
+              <div echarts [options]="positionBarChartOption" class="w-full" style="height: 280px; min-height: 280px;" [style.height.md]="'300px'" role="img" [attr.aria-label]="'company.dashboard.charts.positionsByLevel' | translate"></div>
             </app-glass-card>
           </div>
 
@@ -261,7 +395,7 @@
                   <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400"></app-icon>
                 </button>
               </div>
-              <div echarts [options]="orgTreeMapChartOption" class="w-full" style="height: 280px; min-height: 280px;" [style.height.md]="'300px'"></div>
+              <div echarts [options]="orgTreeMapChartOption" class="w-full" style="height: 280px; min-height: 280px;" [style.height.md]="'300px'" role="img" [attr.aria-label]="'company.dashboard.charts.orgTreeMap' | translate"></div>
             </app-glass-card>
 
             <!-- Bar Chart: Work Locations -->
@@ -275,7 +409,7 @@
                   <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400"></app-icon>
                 </button>
               </div>
-              <div echarts [options]="locationBarChartOption" class="w-full" style="height: 280px; min-height: 280px;" [style.height.md]="'300px'"></div>
+              <div echarts [options]="locationBarChartOption" class="w-full" style="height: 280px; min-height: 280px;" [style.height.md]="'300px'" role="img" [attr.aria-label]="'company.dashboard.charts.workLocationDistribution' | translate"></div>
             </app-glass-card>
           </div>
         </div>
@@ -371,10 +505,10 @@
     </div>
 
     <!-- Recent Activities & Pending Tasks -->
-    <div class="-mx-4 md:-mx-6 lg:-mx-8 mt-6 md:mt-8">
+    <div *ngIf="isSectionVisible('recentActivities') || isSectionVisible('pendingTasks')" class="-mx-4 md:-mx-6 lg:-mx-8 mt-6 md:mt-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 px-4 md:px-6 lg:px-8">
         <!-- Recent Activities -->
-        <app-glass-card padding="p-4 md:p-6" customClass="hover:shadow-lg transition-shadow duration-300">
+        <app-glass-card *ngIf="isSectionVisible('recentActivities')" padding="p-4 md:p-6" customClass="hover:shadow-lg transition-shadow duration-300">
           <div class="flex items-center justify-between mb-3 md:mb-4">
             <h3 class="text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">{{ 'company.dashboard.activities.title' | translate }}</h3>
             <div class="flex items-center gap-2">
@@ -411,7 +545,7 @@
         </app-glass-card>
 
         <!-- Pending Tasks -->
-        <app-glass-card padding="p-4 md:p-6" customClass="hover:shadow-lg transition-shadow duration-300">
+        <app-glass-card *ngIf="isSectionVisible('pendingTasks')" padding="p-4 md:p-6" customClass="hover:shadow-lg transition-shadow duration-300">
           <div class="flex items-center justify-between mb-3 md:mb-4">
             <h3 class="text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">{{ 'company.dashboard.tasks.title' | translate }}</h3>
             <button

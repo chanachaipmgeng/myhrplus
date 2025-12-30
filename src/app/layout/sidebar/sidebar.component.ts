@@ -183,11 +183,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
       if (adminItem.children && adminItem.children.length > 0) {
         this.level2Items = [...adminItem.children];
         console.log('[Sidebar] Auto-loaded Admin Level 2 items:', this.level2Items.map(item => ({
-          label: item.label,
-          icon: item.icon,
+      label: item.label,
+      icon: item.icon,
           route: item.route,
-          childrenCount: item.children?.length || 0
-        })));
+      childrenCount: item.children?.length || 0
+    })));
       }
     }
 
@@ -214,13 +214,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     // Get Level 2 items from selected Level 1 item
     if (this.selectedNavigationItem.children && this.selectedNavigationItem.children.length > 0) {
-      this.level2Items = [...this.selectedNavigationItem.children];
-      console.log('[Sidebar] Loaded Level 2 items for', this.selectedNavigationItem.id + ':', this.level2Items.map(item => ({
-        label: item.label,
-        icon: item.icon,
-        route: item.route,
-        childrenCount: item.children?.length || 0
-      })));
+    this.level2Items = [...this.selectedNavigationItem.children];
+    console.log('[Sidebar] Loaded Level 2 items for', this.selectedNavigationItem.id + ':', this.level2Items.map(item => ({
+      label: item.label,
+      icon: item.icon,
+      route: item.route,
+      childrenCount: item.children?.length || 0
+    })));
     } else {
       this.level2Items = [];
       console.log('[Sidebar] No Level 2 items available for:', this.selectedNavigationItem.id);
@@ -638,20 +638,20 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
 
       // For Home: Search in Level 2 items
-      if (this.selectedNavigationItem?.id === 'home' && this.selectedNavigationItem.children) {
-        for (const level2Item of this.selectedNavigationItem.children) {
+    if (this.selectedNavigationItem?.id === 'home' && this.selectedNavigationItem.children) {
+      for (const level2Item of this.selectedNavigationItem.children) {
           // Map portal routes to actual routes
           const mappedRoute = this.mapPortalRoute(level2Item.route || '');
           if (mappedRoute && route.startsWith(mappedRoute)) {
-            console.log('[Sidebar] Found Home Level 2 match:', level2Item.label);
-            this.selectedLevel3Item = null;
-            this.selectedLevel4Item = null;
-            // Update breadcrumbs
-            this.getBreadcrumbPath();
-            return;
-          }
+          console.log('[Sidebar] Found Home Level 2 match:', level2Item.label);
+          this.selectedLevel3Item = null;
+          this.selectedLevel4Item = null;
+          // Update breadcrumbs
+          this.getBreadcrumbPath();
+          return;
         }
       }
+    }
 
     // Update breadcrumbs after route update
     this.getBreadcrumbPath();

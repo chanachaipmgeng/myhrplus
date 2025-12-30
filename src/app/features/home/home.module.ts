@@ -19,6 +19,7 @@ import { PageHeaderComponent } from '@shared/components/page-header/page-header.
 import { IconComponent } from '@shared/components/icon/icon.component';
 import { LazyImageDirective } from '@shared/directives/lazy-image.directive';
 import { StaggerDirective } from '@shared/directives/stagger.directive';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { StaggerDirective } from '@shared/directives/stagger.directive';
     CommonModule,
     RouterModule,
     FormsModule,
-    SharedModule,
+    SharedModule, // Contains DateRangePickerComponent and SkeletonLoaderComponent (non-standalone)
     LayoutModule,
     HomeRoutingModule,
     // Standalone components
@@ -44,7 +45,13 @@ import { StaggerDirective } from '@shared/directives/stagger.directive';
     IconComponent,
     // Standalone directives
     LazyImageDirective,
-    StaggerDirective
+    StaggerDirective,
+    // Charts
+    NgxEchartsModule
+  ],
+  exports: [
+    HomeComponent,
+    HomeHeaderComponent
   ]
 })
 export class HomeModule { }

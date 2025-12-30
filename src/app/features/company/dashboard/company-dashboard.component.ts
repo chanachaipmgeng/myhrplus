@@ -1,17 +1,19 @@
 import { Component, OnInit, OnDestroy, inject, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
 import { GlassButtonComponent } from '@shared/components/glass-button/glass-button.component';
+import { GlassSwitchComponent } from '@shared/components/glass-switch/glass-switch.component';
 import { IconComponent } from '@shared/components/icon/icon.component';
 import { SharedModule } from '@shared/shared.module';
 import { StaggerDirective } from '@shared/directives/stagger.directive';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
 import { CompanyService } from '../services/company.service';
-import { AuthService, User, LayoutService, BreadcrumbItem } from '@core/services';
+import { AuthService, User, LayoutService, BreadcrumbItem, DashboardPreferencesService } from '@core/services';
 
 @Component({
   selector: 'app-company-dashboard',
@@ -19,10 +21,12 @@ import { AuthService, User, LayoutService, BreadcrumbItem } from '@core/services
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
     TranslateModule,
     PageHeaderComponent,
     GlassCardComponent,
     GlassButtonComponent,
+    GlassSwitchComponent,
     IconComponent,
     SharedModule,
     StaggerDirective,
@@ -35,10 +39,23 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
   private translate = inject(TranslateService);
   private authService = inject(AuthService);
   private layoutService = inject(LayoutService);
+  private dashboardPreferences = inject(DashboardPreferencesService);
+  private router = inject(Router);
   private observer?: MutationObserver;
 
   isDarkMode = false;
   currentUser: User | null = null;
+  readonly DASHBOARD_ID = 'company-dashboard';
+
+  // Dashboard Customization
+  showCustomizationMenu = false;
+  dashboardSections = [
+    { id: 'statistics', label: 'company.dashboard.sections.statistics', visible: true },
+    { id: 'quickActions', label: 'company.dashboard.sections.quickActions', visible: true },
+    { id: 'charts', label: 'company.dashboard.sections.charts', visible: true },
+    { id: 'recentActivities', label: 'company.dashboard.sections.recentActivities', visible: true },
+    { id: 'pendingTasks', label: 'company.dashboard.sections.pendingTasks', visible: true }
+  ];
 
   // Statistics with trend data
   statistics = {
@@ -75,6 +92,19 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
   dateRange = {
     start: new Date(new Date().setMonth(new Date().getMonth() - 1)),
     end: new Date()
+  };
+
+  // Comparison Mode
+  comparisonMode = false;
+  comparisonPeriod: 'previous' | 'year-over-year' = 'previous';
+
+  // Previous Period Data for Comparison
+  previousPeriodStatistics = {
+    branches: 10,
+    divisions: 7,
+    departments: 21,
+    positions: 141,
+    locations: 16
   };
 
   // Quick Actions
@@ -166,6 +196,7 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
 
     this.currentUser = this.authService.getCurrentUser();
     this.checkDarkMode();
+    this.loadDashboardPreferences();
     this.initializeCharts();
     this.loadDashboardData();
     this.setupThemeObserver();
@@ -175,6 +206,114 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
       this.setBreadcrumbs();
       this.initializeCharts();
     });
+  }
+
+  /**
+   * Load dashboard preferences from storage
+   */
+  private loadDashboardPreferences(): void {
+    this.dashboardSections.forEach(section => {
+      const isVisible = this.dashboardPreferences.isSectionVisible(this.DASHBOARD_ID, section.id);
+      section.visible = isVisible;
+    });
+  }
+
+  /**
+   * Toggle section visibility
+   */
+  toggleSection(sectionId: string): void {
+    const section = this.dashboardSections.find(s => s.id === sectionId);
+    if (section) {
+      const newVisibility = this.dashboardPreferences.toggleSection(this.DASHBOARD_ID, sectionId);
+      section.visible = newVisibility;
+    }
+  }
+
+  /**
+   * Reset dashboard to default layout
+   */
+  resetDashboardLayout(): void {
+    this.dashboardPreferences.resetPreferences(this.DASHBOARD_ID);
+    this.dashboardSections.forEach(section => {
+      section.visible = true;
+    });
+  }
+
+  /**
+   * Check if section is visible
+   */
+  isSectionVisible(sectionId: string): boolean {
+    const section = this.dashboardSections.find(s => s.id === sectionId);
+    return section ? section.visible : true;
+  }
+
+  /**
+   * Toggle comparison mode
+   */
+  toggleComparisonMode(): void {
+    this.comparisonMode = !this.comparisonMode;
+    if (this.comparisonMode) {
+      this.loadComparisonData();
+      this.initializeCharts();
+    }
+  }
+
+  /**
+   * Load comparison data for previous period
+   */
+  loadComparisonData(): void {
+    // In a real app, this would fetch data from API
+    // For now, using mock data
+    const currentMonth = new Date().getMonth();
+    const currentYear = new Date().getFullYear();
+
+    if (this.comparisonPeriod === 'previous') {
+      // Previous month data (mock)
+      this.previousPeriodStatistics = {
+        branches: this.statistics.branches.value - this.statistics.branches.change,
+        divisions: this.statistics.divisions.value - this.statistics.divisions.change,
+        departments: this.statistics.departments.value - this.statistics.departments.change,
+        positions: this.statistics.positions.value - this.statistics.positions.change,
+        locations: this.statistics.locations.value - this.statistics.locations.change
+      };
+    } else {
+      // Year-over-year data (mock)
+      this.previousPeriodStatistics = {
+        branches: Math.round(this.statistics.branches.value * 0.85),
+        divisions: Math.round(this.statistics.divisions.value * 0.88),
+        departments: Math.round(this.statistics.departments.value * 0.90),
+        positions: Math.round(this.statistics.positions.value * 0.92),
+        locations: Math.round(this.statistics.locations.value * 0.89)
+      };
+    }
+  }
+
+  /**
+   * Get comparison percentage
+   */
+  getComparisonPercentage(current: number, previous: number): number {
+    if (previous === 0) return 0;
+    return Math.round(((current - previous) / previous) * 100);
+  }
+
+  /**
+   * Get comparison change indicator
+   */
+  getComparisonChange(current: number, previous: number): { value: number; isPositive: boolean } {
+    const change = current - previous;
+    return {
+      value: Math.abs(change),
+      isPositive: change >= 0
+    };
+  }
+
+  /**
+   * Navigate to route (for keyboard navigation)
+   */
+  navigateToRoute(route: string): void {
+    if (route) {
+      this.router.navigate([route]);
+    }
   }
 
   private setBreadcrumbs(): void {
@@ -222,6 +361,38 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
     // Export individual chart
     console.log(`Exporting ${chartType} chart as ${format}...`);
     // TODO: Implement individual chart export
+  }
+
+  /**
+   * Filter activities
+   */
+  filterActivities(): void {
+    // TODO: Implement filter functionality
+    console.log('Filtering activities...');
+  }
+
+  /**
+   * View all activities
+   */
+  viewAllActivities(): void {
+    // TODO: Navigate to activities page
+    console.log('Viewing all activities...');
+  }
+
+  /**
+   * Filter approvals
+   */
+  filterApprovals(): void {
+    // TODO: Implement filter functionality
+    console.log('Filtering approvals...');
+  }
+
+  /**
+   * View all approvals
+   */
+  viewAllApprovals(): void {
+    // TODO: Navigate to approvals page
+    console.log('Viewing all approvals...');
   }
 
   ngOnDestroy(): void {
@@ -273,7 +444,7 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
     return this.isDarkMode ? '#334155' : '#f1f5f9';
   }
 
-  private initializeCharts(): void {
+  initializeCharts(): void {
     const currentLang = this.translate.currentLang || 'th';
     const isThai = currentLang === 'th';
     const personLabel = this.translate.instant('company.dashboard.charts.person');
@@ -355,7 +526,8 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
         this.translate.instant('company.dashboard.charts.branch.nakhonRatchasima'),
         this.translate.instant('company.dashboard.charts.branch.ubonRatchathani')
       ],
-      values: [456, 234, 189, 156, 134, 78, 0, 0]
+      values: [456, 234, 189, 156, 134, 78, 0, 0],
+      previousValues: this.comparisonMode ? [420, 220, 175, 145, 125, 70, 0, 0] : undefined
     };
 
     this.branchBarChartOption = {
@@ -421,7 +593,75 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
           }
         }
       },
-      series: [{
+      series: this.comparisonMode && branchData.previousValues ? [
+        {
+          name: this.translate.instant('company.dashboard.comparison.current'),
+          type: 'bar',
+          data: branchData.values,
+          itemStyle: {
+            borderRadius: [4, 4, 0, 0],
+            color: {
+              type: 'linear',
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                { offset: 0, color: '#83bff6' },
+                { offset: 0.5, color: '#188df0' },
+                { offset: 1, color: '#188df0' }
+              ]
+            }
+          },
+          label: {
+            show: true,
+            position: 'top',
+            color: this.getChartTextColor()
+          },
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowOffsetY: 0,
+              shadowColor: 'rgba(24, 141, 240, 0.5)'
+            }
+          }
+        },
+        {
+          name: this.translate.instant('company.dashboard.comparison.previous'),
+          type: 'bar',
+          data: branchData.previousValues,
+          itemStyle: {
+            borderRadius: [4, 4, 0, 0],
+            color: {
+              type: 'linear',
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                { offset: 0, color: '#94a3b8' },
+                { offset: 0.5, color: '#64748b' },
+                { offset: 1, color: '#64748b' }
+              ]
+            },
+            opacity: 0.7
+          },
+          label: {
+            show: true,
+            position: 'top',
+            color: this.getChartTextColor()
+          },
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowOffsetY: 0,
+              shadowColor: 'rgba(148, 163, 184, 0.5)'
+            }
+          }
+        }
+      ] : [{
         name: this.translate.instant('company.dashboard.charts.employeeCount'),
         type: 'bar',
         data: branchData.values,
@@ -443,7 +683,17 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
           show: true,
           position: 'top'
         }
-      }]
+      }],
+      legend: this.comparisonMode && branchData.previousValues ? {
+        data: [
+          this.translate.instant('company.dashboard.comparison.current'),
+          this.translate.instant('company.dashboard.comparison.previous')
+        ],
+        top: 'top',
+        textStyle: {
+          color: this.getChartTextColor()
+        }
+      } : undefined
     };
 
     // Department Bar Chart

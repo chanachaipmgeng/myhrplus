@@ -39,6 +39,7 @@ export * from './nav.service';
 export * from './menu.service';
 export * from './menu-context.service';
 export * from './theme.service';
+export * from './dashboard-preferences.service';
 
 // Utility Services
 export * from './cache.service';

@@ -1,4 +1,4 @@
-<div class="-mx-4 md:-mx-6 lg:-mx-8">
+<div class="-mx-4 md:-mx-6 lg:-mx-8" role="main" [attr.aria-label]="'Dashboard'">
   <div class="p-4 md:p-6 lg:p-8 min-h-screen transition-colors duration-300">
     <!-- Simplified Page Header with Welcome Section -->
     <app-glass-card padding="p-5 md:p-6" customClass="mb-6 md:mb-8" [animate]="'fade-in'">
@@ -113,7 +113,7 @@
       </div>
     </div>
 
-    <!-- Quick Actions Bar -->
+    <!-- Quick Actions Bar with Date Range Picker -->
     <div class="mb-6 md:mb-8">
       <app-glass-card padding="p-4 md:p-5" customClass="mb-4">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -132,6 +132,14 @@
                 <span class="thai-text">{{ action.label }}</span>
               </button>
             </div>
+          </div>
+          <div class="w-full md:w-auto">
+            <app-date-range-picker
+              [startDate]="dateRange.start"
+              [endDate]="dateRange.end"
+              (rangeChange)="onDateRangeChange($event)"
+              [showPresets]="true">
+            </app-date-range-picker>
           </div>
         </div>
       </app-glass-card>
@@ -172,12 +180,7 @@
                 <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400"></app-icon>
               </button>
             </div>
-            <div class="h-64 md:h-72 flex items-center justify-center text-gray-400 dark:text-gray-500">
-              <div class="text-center">
-                <app-icon name="bar_chart" size="xl" color="text-gray-400 dark:text-gray-500"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟการลงเวลา</p>
-              </div>
-            </div>
+            <div echarts [options]="attendanceChartOption" class="h-64 md:h-72"></div>
           </app-glass-card>
 
           <!-- Employee Distribution Chart -->
@@ -191,12 +194,7 @@
                 <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400"></app-icon>
               </button>
             </div>
-            <div class="h-64 md:h-72 flex items-center justify-center text-gray-400 dark:text-gray-500">
-              <div class="text-center">
-                <app-icon name="pie_chart" size="xl" color="text-gray-400 dark:text-gray-500"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟการกระจาย</p>
-              </div>
-            </div>
+            <div echarts [options]="distributionChartOption" class="h-64 md:h-72"></div>
           </app-glass-card>
         </div>
 
@@ -213,12 +211,7 @@
                 <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400"></app-icon>
               </button>
             </div>
-            <div class="h-64 md:h-72 flex items-center justify-center text-gray-400 dark:text-gray-500">
-              <div class="text-center">
-                <app-icon name="event" size="xl" color="text-gray-400 dark:text-gray-500"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟคำขอลา</p>
-              </div>
-            </div>
+            <div echarts [options]="leaveChartOption" class="h-64 md:h-72"></div>
           </app-glass-card>
 
           <!-- Payroll Chart -->
@@ -232,12 +225,7 @@
                 <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400"></app-icon>
               </button>
             </div>
-            <div class="h-64 md:h-72 flex items-center justify-center text-gray-400 dark:text-gray-500">
-              <div class="text-center">
-                <app-icon name="trending_up" size="xl" color="text-gray-400 dark:text-gray-500"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟเงินเดือน</p>
-              </div>
-            </div>
+            <div echarts [options]="payrollChartOption" class="h-64 md:h-72"></div>
           </app-glass-card>
         </div>
       </div>

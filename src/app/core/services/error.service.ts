@@ -29,26 +29,87 @@ export interface StructuredError {
 export class ErrorService {
   private currentLang: 'th' | 'en' = 'th';
   private translate?: TranslateService;
+  private translateInitialized = false;
 
   constructor(private injector: Injector) {
     // Lazy inject TranslateService to avoid circular dependency
     // TranslateService might use HTTP client which goes through ErrorInterceptor
-    try {
-      const translateService = this.injector.get(TranslateService, null);
-      if (translateService) {
-        this.translate = translateService;
-        // Subscribe to language changes
-        this.translate.onLangChange.subscribe(event => {
-          this.currentLang = event.lang === 'th' ? 'th' : 'en';
-        });
+    this.initializeTranslateService();
+  }
 
-        // Get initial language
-        const currentLang = this.translate.currentLang || this.translate.defaultLang || 'th';
-        this.currentLang = currentLang === 'th' ? 'th' : 'en';
+  /**
+   * Initialize TranslateService with retry mechanism
+   * Uses lazy initialization to avoid circular dependency issues
+   */
+  private initializeTranslateService(): void {
+    try {
+      // Try to get TranslateService (may be null if not yet initialized)
+      let translateService: TranslateService | null = null;
+      try {
+        translateService = this.injector.get(TranslateService);
+      } catch (e) {
+        // TranslateService not available yet
+        translateService = null;
+      }
+      if (translateService) {
+        this.setupTranslateService(translateService);
+      } else {
+        // TranslateService not available yet, try again after a short delay
+        // This is normal during app initialization
+        setTimeout(() => {
+          if (!this.translateInitialized) {
+            this.retryTranslateServiceInit();
+          }
+        }, 100);
       }
     } catch (error) {
       // If TranslateService is not available, use default language
-      console.warn('ErrorService: TranslateService not available, using default language');
+      // This is expected during app initialization, no need to log
+      this.currentLang = 'th';
+      
+      // Retry after delay
+      setTimeout(() => {
+        if (!this.translateInitialized) {
+          this.retryTranslateServiceInit();
+        }
+      }, 100);
+    }
+  }
+
+  /**
+   * Setup TranslateService once available
+   */
+  private setupTranslateService(translateService: TranslateService): void {
+    this.translate = translateService;
+    this.translateInitialized = true;
+    
+    // Subscribe to language changes
+    this.translate.onLangChange.subscribe(event => {
+      this.currentLang = event.lang === 'th' ? 'th' : 'en';
+    });
+
+    // Get initial language
+    const currentLang = this.translate.currentLang || this.translate.defaultLang || 'th';
+    this.currentLang = currentLang === 'th' ? 'th' : 'en';
+  }
+
+  /**
+   * Retry TranslateService initialization
+   */
+  private retryTranslateServiceInit(): void {
+    try {
+      let translateService: TranslateService | null = null;
+      try {
+        translateService = this.injector.get(TranslateService);
+      } catch (e) {
+        translateService = null;
+      }
+      if (translateService && !this.translateInitialized) {
+        this.setupTranslateService(translateService);
+      }
+    } catch (error) {
+      // Silently fail, use default language
+      // This is expected if TranslateService is not available
       this.currentLang = 'th';
     }
   }
