@@ -21,6 +21,12 @@ export class PersonalHomeComponent implements OnInit, OnDestroy {
     pendingApprovals: 8
   };
 
+  // Date Range for Charts
+  dateRange = {
+    start: new Date(new Date().setMonth(new Date().getMonth() - 6)),
+    end: new Date()
+  };
+
   // Chart Options
   employeeGrowthChartOption: EChartsOption = {};
   employeeDistributionChartOption: EChartsOption = {};
@@ -344,6 +350,15 @@ export class PersonalHomeComponent implements OnInit, OnDestroy {
       'e-icons e-briefcase': 'business'
     };
     return iconMap[iconClass] || 'folder';
+  }
+
+  onDateRangeChange(range: {start: Date | null, end: Date | null}): void {
+    if (range.start && range.end) {
+      this.dateRange.start = range.start;
+      this.dateRange.end = range.end;
+      // Reload charts with new date range
+      this.initializeCharts();
+    }
   }
 }
 

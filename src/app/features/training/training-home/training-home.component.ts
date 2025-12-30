@@ -8,6 +8,7 @@ import { IconComponent } from '@shared/components/icon/icon.component';
 import { StaggerDirective } from '@shared/directives/stagger.directive';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
+import { SharedModule } from '@shared/shared.module';
 
 @Component({
   selector: 'app-training-home',
@@ -19,7 +20,8 @@ import { EChartsOption } from 'echarts';
     GlassCardComponent,
     IconComponent,
     StaggerDirective,
-    NgxEchartsModule
+    NgxEchartsModule,
+    SharedModule
   ],
   templateUrl: './training-home.component.html',
   styleUrls: ['./training-home.component.scss']
@@ -35,6 +37,12 @@ export class TrainingHomeComponent implements OnInit, OnDestroy {
     enrolled: 324,
     completed: 289,
     certificates: 267
+  };
+
+  // Date Range for Charts
+  dateRange = {
+    start: new Date(new Date().setMonth(new Date().getMonth() - 6)),
+    end: new Date()
   };
 
   // Chart Options
@@ -351,6 +359,15 @@ export class TrainingHomeComponent implements OnInit, OnDestroy {
   navigateToRoute(route: string): void {
     if (route) {
       this.router.navigate([route]);
+    }
+  }
+
+  onDateRangeChange(range: {start: Date | null, end: Date | null}): void {
+    if (range.start && range.end) {
+      this.dateRange.start = range.start;
+      this.dateRange.end = range.end;
+      // Reload charts with new date range
+      this.initializeCharts();
     }
   }
 }

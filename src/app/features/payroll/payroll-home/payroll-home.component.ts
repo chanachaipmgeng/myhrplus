@@ -8,6 +8,7 @@ import { IconComponent } from '@shared/components/icon/icon.component';
 import { StaggerDirective } from '@shared/directives/stagger.directive';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
+import { SharedModule } from '@shared/shared.module';
 
 @Component({
   selector: 'app-payroll-home',
@@ -19,7 +20,8 @@ import { EChartsOption } from 'echarts';
     GlassCardComponent,
     IconComponent,
     StaggerDirective,
-    NgxEchartsModule
+    NgxEchartsModule,
+    SharedModule
   ],
   templateUrl: './payroll-home.component.html',
   styleUrls: ['./payroll-home.component.scss']
@@ -82,6 +84,12 @@ export class PayrollHomeComponent implements OnInit, OnDestroy {
       route: '/payroll'
     }
   ];
+
+  // Date Range for Charts
+  dateRange = {
+    start: new Date(new Date().setMonth(new Date().getMonth() - 6)),
+    end: new Date()
+  };
 
   // Chart Options
   payrollTrendChartOption: EChartsOption = {};
@@ -392,6 +400,15 @@ export class PayrollHomeComponent implements OnInit, OnDestroy {
         }
       }]
     };
+  }
+
+  onDateRangeChange(range: {start: Date | null, end: Date | null}): void {
+    if (range.start && range.end) {
+      this.dateRange.start = range.start;
+      this.dateRange.end = range.end;
+      // Reload charts with new date range
+      this.initializeCharts();
+    }
   }
 
   navigateTo(route: string): void {

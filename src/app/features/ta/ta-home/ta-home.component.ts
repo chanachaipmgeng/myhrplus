@@ -22,6 +22,12 @@ export class TaHomeComponent implements OnInit, OnDestroy {
     absentToday: 5
   };
 
+  // Date Range for Charts
+  dateRange = {
+    start: new Date(new Date().setDate(new Date().getDate() - 7)),
+    end: new Date()
+  };
+
   // Chart Options
   attendanceTrendChartOption: EChartsOption = {};
   leaveRequestsChartOption: EChartsOption = {};
@@ -366,6 +372,15 @@ export class TaHomeComponent implements OnInit, OnDestroy {
       'e-icons e-chart': 'bar_chart'
     };
     return iconMap[iconClass] || 'folder';
+  }
+
+  onDateRangeChange(range: {start: Date | null, end: Date | null}): void {
+    if (range.start && range.end) {
+      this.dateRange.start = range.start;
+      this.dateRange.end = range.end;
+      // Reload charts with new date range
+      this.initializeCharts();
+    }
   }
 }
 

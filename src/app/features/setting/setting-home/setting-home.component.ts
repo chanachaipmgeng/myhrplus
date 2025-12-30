@@ -9,6 +9,7 @@ import { IconComponent } from '@shared/components/icon/icon.component';
 import { StaggerDirective } from '@shared/directives/stagger.directive';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
+import { SharedModule } from '@shared/shared.module';
 
 @Component({
   selector: 'app-setting-home',
@@ -21,7 +22,8 @@ import { EChartsOption } from 'echarts';
     GlassCardComponent,
     IconComponent,
     StaggerDirective,
-    NgxEchartsModule
+    NgxEchartsModule,
+    SharedModule
   ],
   templateUrl: './setting-home.component.html',
   styleUrls: ['./setting-home.component.scss']
@@ -36,6 +38,12 @@ export class SettingHomeComponent implements OnInit, OnDestroy {
     totalRoles: 12,
     totalMenus: 156,
     activeSettings: 48
+  };
+
+  // Date Range for Charts
+  dateRange = {
+    start: new Date(new Date().setMonth(new Date().getMonth() - 6)),
+    end: new Date()
   };
 
   // Chart Options
@@ -359,6 +367,15 @@ export class SettingHomeComponent implements OnInit, OnDestroy {
   navigateToRoute(route: string): void {
     if (route) {
       this.router.navigate([route]);
+    }
+  }
+
+  onDateRangeChange(range: {start: Date | null, end: Date | null}): void {
+    if (range.start && range.end) {
+      this.dateRange.start = range.start;
+      this.dateRange.end = range.end;
+      // Reload charts with new date range
+      this.initializeCharts();
     }
   }
 }

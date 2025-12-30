@@ -8,6 +8,7 @@ import { IconComponent } from '@shared/components/icon/icon.component';
 import { StaggerDirective } from '@shared/directives/stagger.directive';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
+import { SharedModule } from '@shared/shared.module';
 
 @Component({
   selector: 'app-appraisal-home',
@@ -19,7 +20,8 @@ import { EChartsOption } from 'echarts';
     GlassCardComponent,
     IconComponent,
     StaggerDirective,
-    NgxEchartsModule
+    NgxEchartsModule,
+    SharedModule
   ],
   templateUrl: './appraisal-home.component.html',
   styleUrls: ['./appraisal-home.component.scss']
@@ -34,6 +36,12 @@ export class AppraisalHomeComponent implements OnInit, OnDestroy {
     inProgress: 42,
     completed: 114,
     averageScore: 4.2
+  };
+
+  // Date Range for Charts
+  dateRange = {
+    start: new Date(new Date().setMonth(new Date().getMonth() - 6)),
+    end: new Date()
   };
 
   // Chart Options
@@ -354,6 +362,15 @@ export class AppraisalHomeComponent implements OnInit, OnDestroy {
   navigateToRoute(route: string): void {
     if (route) {
       this.router.navigate([route]);
+    }
+  }
+
+  onDateRangeChange(range: {start: Date | null, end: Date | null}): void {
+    if (range.start && range.end) {
+      this.dateRange.start = range.start;
+      this.dateRange.end = range.end;
+      // Reload charts with new date range
+      this.initializeCharts();
     }
   }
 }

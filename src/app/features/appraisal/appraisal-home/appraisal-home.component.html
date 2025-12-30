@@ -106,6 +106,26 @@
       </div>
     </section>
 
+    <!-- Quick Actions Bar with Date Range Picker -->
+    <section class="mb-6" aria-labelledby="appraisal-actions-title">
+      <app-glass-card padding="p-4 md:p-5" customClass="mb-6">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div>
+            <h2 id="appraisal-actions-title" class="text-lg md:text-xl font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">กราฟและรายงาน</h2>
+            <p class="text-sm text-gray-600 dark:text-gray-400 thai-text">เลือกช่วงวันที่เพื่อดูข้อมูลการประเมินผล</p>
+          </div>
+          <div class="w-full md:w-auto">
+            <app-date-range-picker
+              [startDate]="dateRange.start"
+              [endDate]="dateRange.end"
+              (rangeChange)="onDateRangeChange($event)"
+              [showPresets]="true">
+            </app-date-range-picker>
+          </div>
+        </div>
+      </app-glass-card>
+    </section>
+
     <!-- Workspace Grid: Charts and Quick Actions -->
     <section class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8" aria-labelledby="appraisal-charts-title">
       <!-- Charts Section: 3 columns (75%) -->
