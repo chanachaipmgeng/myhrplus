@@ -16,13 +16,11 @@ export class ThemeToggleComponent implements OnInit {
   currentMode: ThemeMode = 'light';
   currentColor: ThemeColor = 'blue';
   currentModeIcon = 'light_mode';
-  showModeMenu = false;
   showColorMenu = false;
   showColorPicker = false;
   customPrimaryColor = '#3b82f6'; // Default blue
   hexColorInput = '#3b82f6';
 
-  @ViewChild('modeButton') modeButton?: ElementRef<HTMLButtonElement>;
   @ViewChild('colorButton') colorButton?: ElementRef<HTMLButtonElement>;
   @ViewChild('colorPickerContainer') colorPickerContainer?: ElementRef<HTMLDivElement>;
 
@@ -50,15 +48,8 @@ export class ThemeToggleComponent implements OnInit {
     });
   }
 
-  toggleModeMenu(): void {
-    this.showModeMenu = !this.showModeMenu;
-    this.showColorMenu = false;
-    this.showColorPicker = false;
-  }
-
   toggleColorMenu(): void {
     this.showColorMenu = !this.showColorMenu;
-    this.showModeMenu = false;
     this.showColorPicker = false;
   }
 
@@ -73,13 +64,12 @@ export class ThemeToggleComponent implements OnInit {
     } else {
       this.showColorMenu = false;
     }
-    this.showModeMenu = false;
   }
 
   setMode(mode: ThemeMode): void {
     this.themeService.setMode(mode);
     this.updateModeIcon();
-    this.showModeMenu = false;
+    // Don't close menus when changing mode
   }
 
   setColor(color: ThemeColor): void {
@@ -123,7 +113,6 @@ export class ThemeToggleComponent implements OnInit {
     this.themeService.resetTheme();
     this.showColorPicker = false;
     this.showColorMenu = false;
-    this.showModeMenu = false;
   }
 
   private hexToRgb(hex: string): string | null {
@@ -168,7 +157,6 @@ export class ThemeToggleComponent implements OnInit {
     if (!target.closest('.theme-toggle-container')) {
       // Small delay to allow button click to register
       setTimeout(() => {
-        this.showModeMenu = false;
         this.showColorMenu = false;
         this.showColorPicker = false;
       }, 100);
@@ -178,7 +166,6 @@ export class ThemeToggleComponent implements OnInit {
   @HostListener('keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent): void {
     if (event.key === 'Escape') {
-      this.showModeMenu = false;
       this.showColorMenu = false;
       this.showColorPicker = false;
     }
