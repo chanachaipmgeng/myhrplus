@@ -3327,27 +3327,27 @@
   "navigation.manpowerAnalyst": "Manpower Analyst",
   "common": {
     "actions": {
-      "save": "บันทึก",
-      "delete": "ลบเอกสาร",
-      "edit": "แก้ไข",
-      "add": "เพิ่ม",
-      "close": "ปิด",
-      "search": "ค้นหา",
-      "export": "ส่งออก",
-      "import": "นำเข้า",
-      "clear": "ล้างข้อมูล",
-      "ok": "ตกลง",
-      "yes": "ใช่",
-      "no": "ไม่",
-      "next": "ถัดไป",
-      "transfer": "โอนเอกสาร"
+      "save": "保存",
+      "delete": "删除",
+      "edit": "编辑",
+      "add": "添加",
+      "close": "关闭",
+      "search": "搜索",
+      "export": "导出",
+      "import": "导入",
+      "clear": "清除数据",
+      "ok": "确定",
+      "yes": "是",
+      "no": "否",
+      "next": "下一步",
+      "transfer": "转移文档"
     },
     "labels": {
-      "detail": "รายละเอียด",
-      "no": "ลำดับที่",
-      "employeeId": "รหัสพนักงาน",
-      "nameSurname": "ชื่อ-นามสกุล",
-      "status": "สถานภาพ"
+      "detail": "详情",
+      "no": "序号",
+      "employeeId": "员工编号",
+      "nameSurname": "姓名",
+      "status": "状态"
     }
   },
   "common.actions.add": "Add",

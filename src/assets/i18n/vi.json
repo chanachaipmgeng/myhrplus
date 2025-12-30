@@ -3327,27 +3327,27 @@
   "navigation.manpowerAnalyst": "Manpower Analyst",
   "common": {
     "actions": {
-      "save": "บันทึก",
-      "delete": "ลบเอกสาร",
-      "edit": "แก้ไข",
-      "add": "เพิ่ม",
-      "close": "ปิด",
-      "search": "ค้นหา",
-      "export": "ส่งออก",
-      "import": "นำเข้า",
-      "clear": "ล้างข้อมูล",
-      "ok": "ตกลง",
-      "yes": "ใช่",
-      "no": "ไม่",
-      "next": "ถัดไป",
-      "transfer": "โอนเอกสาร"
+      "save": "Lưu",
+      "delete": "Xóa",
+      "edit": "Chỉnh sửa",
+      "add": "Thêm",
+      "close": "Đóng",
+      "search": "Tìm kiếm",
+      "export": "Xuất",
+      "import": "Nhập",
+      "clear": "Xóa dữ liệu",
+      "ok": "Đồng ý",
+      "yes": "Có",
+      "no": "Không",
+      "next": "Tiếp theo",
+      "transfer": "Chuyển tài liệu"
     },
     "labels": {
-      "detail": "รายละเอียด",
-      "no": "ลำดับที่",
-      "employeeId": "รหัสพนักงาน",
-      "nameSurname": "ชื่อ-นามสกุล",
-      "status": "สถานภาพ"
+      "detail": "Chi tiết",
+      "no": "Số thứ tự",
+      "employeeId": "Mã nhân viên",
+      "nameSurname": "Họ và tên",
+      "status": "Trạng thái"
     }
   },
   "common.actions.add": "Add",
