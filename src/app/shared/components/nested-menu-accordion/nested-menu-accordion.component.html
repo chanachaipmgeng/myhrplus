@@ -19,7 +19,7 @@
       <!-- Icon -->
       <span *ngIf="item.icon" 
             [class]="getIconClass(item.icon)"
-            class="menu-item-icon"></span>
+            class="menu-item-icon">{{ isMaterialIcon(item.icon) ? item.icon : '' }}</span>
       
       <!-- Label -->
       <span class="menu-item-label">{{ translateLabel(item.label) }}</span>
@@ -49,7 +49,7 @@
       <!-- Icon -->
       <span *ngIf="item.icon" 
             [class]="getIconClass(item.icon)"
-            class="menu-item-icon"></span>
+            class="menu-item-icon">{{ isMaterialIcon(item.icon) ? item.icon : '' }}</span>
       
       <!-- Label -->
       <span class="menu-item-label">{{ translateLabel(item.label) }}</span>

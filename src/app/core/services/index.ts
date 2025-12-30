@@ -37,7 +37,6 @@ export * from './loading.service';
 export * from './layout.service';
 export * from './nav.service';
 export * from './menu.service';
-export * from './menu-data.service';
 export * from './menu-context.service';
 export * from './theme.service';
 

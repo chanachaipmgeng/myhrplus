@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MenuContextService } from '@core/services';
-import { MenuData, MenuGroup, MenuItem, SearchResult, MenuContext } from '@core/models/menu.model';
+import { MenuGroup, MenuItem, SearchResult, MenuContext } from '@core/models/menu.model';
 import { GlassCardComponent } from '../glass-card/glass-card.component';
 import { IconComponent } from '../icon/icon.component';
 
@@ -28,37 +28,16 @@ export class OmniSearchComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   // Menu data structure
-  menuData: MenuData = {
-    personal: [
-      {
-        groupName: 'Employee Self Service',
-        items: [
-          { name: 'การลงเวลา (Time Attendance)', icon: 'clock', route: '/ta' },
-          { name: 'การขอเอกสาร (Request)', icon: 'file-text', route: '/ta' },
-          { name: 'ข้อมูลลูกน้อง (My Team)', icon: 'users', route: '/home' }
-        ]
-      }
-    ],
-    admin: [
-      {
-        groupName: 'Admin Management',
-        items: [
-          { name: 'จัดการข้อมูลบริษัท', icon: 'building', route: '/company' },
-          {
-            name: 'จัดการข้อมูลพนักงาน',
-            icon: 'user-check',
-            route: '/personal',
-            children: [
-              { name: 'ข้อมูลการทำงาน', icon: 'briefcase', route: '/personal' },
-              { name: 'รายงาน (Reports)', icon: 'file-text', route: '/personal' },
-              { name: 'ทะเบียนประวัติ', icon: 'folder', route: '/personal' }
-            ]
-          },
-          { name: 'จัดการเงินเดือน', icon: 'dollar-sign', route: '/payroll' }
-        ]
-      }
-    ]
-  };
+  menuData: MenuGroup[] = [
+    {
+      groupName: 'Employee Self Service',
+      items: [
+        { name: 'การลงเวลา (Time Attendance)', icon: 'clock', route: '/ta' },
+        { name: 'การขอเอกสาร (Request)', icon: 'file-text', route: '/ta' },
+        { name: 'ข้อมูลลูกน้อง (My Team)', icon: 'users', route: '/home' }
+      ]
+    }
+  ];
 
   constructor(
     private router: Router,
@@ -156,12 +135,8 @@ export class OmniSearchComponent implements OnInit, OnDestroy {
     const results: SearchResult[] = [];
     const lowerQuery = query.toLowerCase();
 
-    // Get current context
-    const currentContext = this.menuContextService.getCurrentContextValue();
-    const contextData = this.menuData[currentContext];
-
-    // Search in current context
-    contextData.forEach(group => {
+    // Search in menu data
+    this.menuData.forEach(group => {
       group.items.forEach(item => {
         // Search in item name (Level 2)
         if (this.fuzzyMatch(item.name, lowerQuery)) {
@@ -169,8 +144,8 @@ export class OmniSearchComponent implements OnInit, OnDestroy {
             name: item.name,
             icon: item.icon,
             route: item.route || '',
-            breadcrumb: `${this.getContextLabel(currentContext)} > ${group.groupName} > ${item.name}`,
-            context: currentContext,
+            breadcrumb: `${group.groupName} > ${item.name}`,
+            context: 'personal',
             groupName: group.groupName,
             level: 2
           });
@@ -184,8 +159,8 @@ export class OmniSearchComponent implements OnInit, OnDestroy {
                 name: child.name,
                 icon: child.icon,
                 route: child.route || '',
-                breadcrumb: `${this.getContextLabel(currentContext)} > ${group.groupName} > ${item.name} > ${child.name}`,
-                context: currentContext,
+                breadcrumb: `${group.groupName} > ${item.name} > ${child.name}`,
+                context: 'personal',
                 groupName: group.groupName,
                 level: 3
               });
@@ -212,12 +187,6 @@ export class OmniSearchComponent implements OnInit, OnDestroy {
     return text.toLowerCase().includes(query);
   }
 
-  /**
-   * Get context label
-   */
-  private getContextLabel(context: MenuContext): string {
-    return context === 'personal' ? 'Personal' : 'Admin';
-  }
 
   /**
    * Select search result

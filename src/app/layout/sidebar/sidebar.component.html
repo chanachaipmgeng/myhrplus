@@ -27,38 +27,16 @@
 
     <!-- Navigation Icons (Rail) -->
     <div class="flex flex-col gap-3 flex-1 w-full px-2">
-      <!-- Level 2 Items - Show when Level 1 is selected -->
-      <ng-container *ngIf="selectedNavigationItem && level2Items.length > 0">
-        <!-- Home Button -->
-        <button (click)="goToHome()"
-                class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl
-                       transition-all duration-300 ease-out
-                       hover:scale-110 hover:shadow-lg hover:-translate-y-0.5
-                       active:scale-95
-                       relative group
-                       animate-fade-in
-                       cursor-pointer
-                       border-0 bg-transparent
-                       mb-2">
-          <div class="absolute inset-0 rounded-xl
-                      bg-gradient-to-br from-blue-500/0 to-indigo-500/0
-                      group-hover:from-blue-500/10 group-hover:to-indigo-500/10
-                      transition-all duration-300"></div>
-          <span class="material-icons text-xl transition-all duration-300 relative z-10
-                       group-hover:scale-110 group-hover:rotate-6
-                       text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">
-            home
-          </span>
-          <span class="module-tooltip animate-fade-in">{{ 'layout.sidebar.home' | translate }}</span>
-        </button>
+      <!-- Level 2 Items - Show Admin Level 2 items directly (no Level 1 selection) -->
+      <ng-container *ngIf="level2Items.length > 0">
 
-        <!-- Level 2 Items (children of selected Level 1) -->
+        <!-- Level 2 Items (Admin Level 2 items shown directly) -->
         <button *ngFor="let level2Item of level2Items; let i = index"
                 (click)="selectLevel2Item(level2Item, selectedNavigationItem)"
                 [class.active]="selectedLevel2Item === level2Item"
-                [attr.aria-label]="translateLabel(level2Item.label, selectedNavigationItem ? selectedNavigationItem.id : undefined, 2)"
+                [attr.aria-label]="translateLabel(level2Item.label, 'admin', 2)"
                 [attr.aria-current]="selectedLevel2Item === level2Item ? 'true' : 'false'"
-                [attr.title]="translateLabel(level2Item.label, selectedNavigationItem ? selectedNavigationItem.id : undefined, 2)"
+                [attr.title]="translateLabel(level2Item.label, 'admin', 2)"
                 [style.animation-delay.ms]="i * 50"
                 class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl
                        transition-all duration-300 ease-out
@@ -93,55 +71,10 @@
           <!-- Tooltip -->
           <span class="module-tooltip
                        animate-fade-in
-                       [animation-delay:100ms]">{{ translateLabel(level2Item.label, selectedNavigationItem ? selectedNavigationItem.id : undefined, 2) }}</span>
+                       [animation-delay:100ms]">{{ translateLabel(level2Item.label, 'admin', 2) }}</span>
         </button>
       </ng-container>
 
-      <!-- Level 1 Items (Home, ESS, Admin) - Show when no Level 1 is selected or no Level 2 items -->
-      <ng-container *ngIf="!selectedNavigationItem || level2Items.length === 0">
-        <button *ngFor="let navItem of navigationItems; let i = index"
-                (click)="selectNavigationItem(navItem.id)"
-                [class.active]="selectedNavigationItem && selectedNavigationItem.id === navItem.id"
-                [attr.aria-label]="translateLabel(navItem.label, navItem.id, 1)"
-                [attr.aria-current]="selectedNavigationItem && selectedNavigationItem.id === navItem.id ? 'true' : 'false'"
-                [attr.title]="translateLabel(navItem.label, navItem.id, 1)"
-                [style.animation-delay.ms]="i * 50"
-                class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl
-                       transition-all duration-300 ease-out
-                       hover:scale-110 hover:shadow-lg hover:-translate-y-0.5
-                       active:scale-95
-                       relative group
-                       animate-fade-in
-                       cursor-pointer
-                       border-0 bg-transparent">
-          <!-- Hover Background -->
-          <div class="absolute inset-0 rounded-xl
-                      bg-gradient-to-br from-blue-500/0 to-indigo-500/0
-                      group-hover:from-blue-500/10 group-hover:to-indigo-500/10
-                      transition-all duration-300"></div>
-          <!-- Icon -->
-          <span class="material-icons text-xl transition-all duration-300 relative z-10
-                       group-hover:scale-110 group-hover:rotate-6
-                       text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">
-            {{ navItem.icon }}
-          </span>
-          <!-- Active Indicator -->
-          <span *ngIf="selectedNavigationItem && selectedNavigationItem.id === navItem.id"
-                class="active-indicator
-                       animate-pulse"></span>
-          <!-- Badge -->
-          <span *ngIf="navItem.badge"
-                class="absolute top-0 right-0 w-5 h-5 rounded-full
-                       flex items-center justify-center text-xs font-bold
-                       bg-red-500 text-white
-                       transform translate-x-1 -translate-y-1
-                       z-20">{{ navItem.badge }}</span>
-          <!-- Tooltip -->
-          <span class="module-tooltip
-                       animate-fade-in
-                       [animation-delay:100ms]">{{ translateLabel(navItem.label, navItem.id, 1) }}</span>
-        </button>
-      </ng-container>
 
       <!-- Fallback to legacy modules if navigationItems is empty -->
       <ng-container *ngIf="navigationItems.length === 0">
@@ -203,7 +136,7 @@
           <h2 class="module-title text-xl font-bold thai-text
                      text-gray-800 dark:text-gray-100 theme-gemini:text-white
                      mb-1 transition-colors duration-300">
-            {{ translateLabel((selectedLevel2Item ? selectedLevel2Item.label : (selectedNavigationItem ? selectedNavigationItem.label : '')) || '', selectedNavigationItem ? selectedNavigationItem.id : undefined, selectedLevel2Item ? 2 : 1) || ('layout.sidebar.menu' | translate) }}
+            {{ translateLabel((selectedLevel2Item ? selectedLevel2Item.label : (selectedNavigationItem ? selectedNavigationItem.label : '')) || '', 'admin', selectedLevel2Item ? 2 : 1) || ('layout.sidebar.menu' | translate) }}
           </h2>
           <p class="text-xs text-gray-500 dark:text-gray-400 theme-gemini:text-white/70" *ngIf="selectedNavigationItem">
             {{ translateLabel(selectedNavigationItem.label, selectedNavigationItem.id, 1) }}
@@ -211,8 +144,7 @@
         </div>
 
         <!-- Back Button (when in Level 3+) -->
-        <div class="mb-4" *ngIf="(selectedNavigationItem && selectedNavigationItem.id === 'admin' && selectedLevel3Item) ||
-                                 (selectedNavigationItem && selectedNavigationItem.id === 'ess' && (selectedLevel3Item || selectedLevel4Item))">
+        <div class="mb-4" *ngIf="selectedNavigationItem?.id === 'admin' && selectedLevel3Item">
           <button (click)="goBackToLevel2()"
                   class="back-button flex items-center gap-2 px-4 py-2 rounded-lg
                          transition-all duration-200 ease-out
@@ -278,7 +210,7 @@
             [activeRoute]="activeRoute"
             [level]="3"
             [expandedItems]="expandedLevel3Items"
-            [navId]="selectedNavigationItem ? selectedNavigationItem.id : undefined"
+            [navId]="'admin'"
             (itemClick)="onAccordionItemClick($event)"
             (toggleExpand)="onAccordionToggleExpand($event)">
           </app-nested-menu-accordion>
@@ -314,7 +246,7 @@
 
       <!-- Empty State - No Menu Items -->
       <app-empty-state
-        *ngIf="!isLoading && !searchQuery && navigationChildren.length === 0 && displayMenuItems.length === 0"
+        *ngIf="!isLoading && !searchQuery && navigationChildren.length === 0 && filteredMenuItems.length === 0"
         [icon]="'folder_open'"
         [title]="'layout.sidebar.noMenuInMode' | translate">
       </app-empty-state>
@@ -400,22 +332,6 @@
                         class="group-hover:scale-110 transition-transform duration-200"></app-icon>
               <span class="thai-text">{{ 'layout.sidebar.settings' | translate }}</span>
             </a>
-            <!-- Admin Menu Option (only show if user has admin role) -->
-            <button *ngIf="hasAdminRole()"
-                    class="user-menu-item
-                           transition-all duration-200 ease-out
-                           hover:translate-x-1 hover:scale-[1.02]
-                           active:scale-[0.98]"
-                    (click)="switchToAdmin(); showUserMenu = false"
-                    [attr.aria-label]="'layout.sidebar.admin' | translate"
-                    type="button">
-              <app-icon name="shield-check" size="sm"
-                        color="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70
-                               group-hover:text-blue-500 dark:group-hover:text-blue-400
-                               transition-colors duration-200"
-                        class="group-hover:scale-110 transition-transform duration-200"></app-icon>
-              <span class="thai-text">{{ 'layout.sidebar.admin' | translate }}</span>
-            </button>
             <div class="user-menu-divider"></div>
             <button
               class="user-menu-item text-red-500 dark:text-red-400
@@ -436,4 +352,15 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
 

@@ -92,6 +92,14 @@ export class NestedMenuAccordionComponent {
   }
 
   /**
+   * Check if icon is Material Icon
+   */
+  isMaterialIcon(iconName: string): boolean {
+    const materialIcons = ['folder_open', 'folder-open'];
+    return materialIcons.includes(iconName?.toLowerCase());
+  }
+
+  /**
    * Get icon class from icon name
    */
   getIconClass(iconName?: string): string {
@@ -108,6 +116,7 @@ export class NestedMenuAccordionComponent {
       'person_check': 'e-icons e-user-check',
       'work': 'e-icons e-briefcase',
       'folder': 'e-icons e-folder',
+      'folder_open': 'material-icons',
       'attach_money': 'e-icons e-money',
       'menu': 'e-icons e-menu',
       'home': 'e-icons e-home',

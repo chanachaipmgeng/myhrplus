@@ -10,7 +10,6 @@ import { ThemeToggleComponent } from '@shared/components/theme-toggle/theme-togg
 import { GlassButtonComponent } from '@shared/components/glass-button/glass-button.component';
 import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
 import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
-import { ContextSwitcherComponent } from '@shared/components/context-switcher/context-switcher.component';
 import { IconComponent } from '@shared/components/icon/icon.component';
 import { OmniSearchComponent } from '@shared/components/omni-search/omni-search.component';
 import { NestedMenuAccordionComponent } from '@shared/components/nested-menu-accordion/nested-menu-accordion.component';
@@ -41,7 +40,6 @@ import { FooterComponent } from './footer/footer.component';
     GlassButtonComponent, // Standalone component
     GlassCardComponent, // Standalone component
     GlassInputComponent, // Standalone component
-    ContextSwitcherComponent, // Standalone component
     IconComponent, // Standalone component
     OmniSearchComponent, // Standalone component
     NestedMenuAccordionComponent, // Standalone component

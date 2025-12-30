@@ -7,10 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MenuService, MenuItem } from '@core/services';
 import { AuthService } from '@core/services';
 import { ThemeService } from '@core/services';
-import { MenuContextService } from '@core/services';
-import { MenuDataService } from '@core/services';
 import { LayoutService, BreadcrumbItem } from '@core/services';
-import { MenuContext, MenuGroup } from '@core/models/menu.model';
 import {
   NAVIGATION_ITEMS,
   NavigationItem,
@@ -47,11 +44,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
   menuItems: MenuItem[] = [];
   mainModules: MainModule[] = []; // Legacy - keep for backward compatibility
   navigationItems: NavigationItem[] = []; // New navigation structure (Level 1)
-  level2Items: NavigationChild[] = []; // Level 2 items for Rail (Left Icon Bar) - all Level 2 items from all Level 1
-  allLevel2Items: NavigationChild[] = []; // All Level 2 items from all navigation items (for direct display in Rail)
+  level2Items: NavigationChild[] = []; // Level 2 items for Rail (Left Icon Bar)
   selectedModule: string | null = null;
   selectedModuleData: MainModule | null = null;
-  selectedNavigationItem: NavigationItem | null = null; // Selected Level 1 item (ESS, Admin, etc.)
+  selectedNavigationItem: NavigationItem | null = null; // Selected Level 1 item (Home, Admin, etc.)
   selectedLevel2Item: NavigationChild | null = null; // Selected Level 2 item
   selectedLevel3Item: NavigationChild | null = null; // Selected Level 3 item
   selectedLevel4Item: NavigationChild | null = null; // Selected Level 4 item
@@ -92,18 +88,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
   showUserMenu: boolean = false;
   avatarImageLoaded: boolean = false;
 
-  // Context switching
-  currentContext: MenuContext = 'personal';
-  menuGroups: MenuGroup[] = [];
-  displayMenuItems: NestedMenuItem[] = [];
-
   constructor(
     private router: Router,
     private menuService: MenuService,
     private authService: AuthService,
     public themeService: ThemeService,
-    private menuContextService: MenuContextService,
-    private menuDataService: MenuDataService,
     private layoutService: LayoutService
   ) {
     // Subscribe to current user
@@ -134,20 +123,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.isDarkMode = isDark;
     });
     this.isDarkMode = this.themeService.isDarkMode();
-
-    // Subscribe to context changes
-    this.menuContextService.getCurrentContext()
-      .pipe(
-        takeUntil(this.destroy$),
-        switchMap(context => {
-          this.currentContext = context;
-          return this.menuDataService.getMenuGroups(context);
-        })
-      )
-      .subscribe(groups => {
-        this.menuGroups = groups;
-        this.buildDisplayMenuItems();
-      });
 
     // Load menu from service (legacy)
     this.loadMenu();
@@ -190,66 +165,66 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Load navigation items based on user roles
-   * Only auto-select if no route is active (initial load)
+   * Load navigation items - Auto-load Admin Level 2 items directly
+   * No Level 1 selection needed - show Admin Level 2 items immediately
    */
   private loadNavigationItems(): void {
-    if (!this.currentUser) {
-      this.navigationItems = [];
-      this.level2Items = [];
-      this.allLevel2Items = [];
-      console.log('[Sidebar] No current user, clearing navigation items');
-      return;
-    }
+    // Always load all navigation items - admin by default
+    // No role filtering - everyone sees admin menu
+    this.navigationItems = getNavigationItemsByRoles([]);
 
-    // Get user roles
-    const userRoles = this.getUserRoles();
-    console.log('[Sidebar] Current user roles:', userRoles);
+    // Auto-select Admin and load Level 2 items directly
+    const adminItem = this.navigationItems.find(item => item.id === 'admin');
+    if (adminItem) {
+      this.selectedNavigationItem = adminItem;
+      this.selectedModule = 'admin';
 
-    // Filter navigation items by roles (Level 1: Home, ESS, Admin)
-    this.navigationItems = getNavigationItemsByRoles(userRoles);
-    console.log('[Sidebar] Loaded navigation items (Level 1):', this.navigationItems.map(item => ({
-      id: item.id,
-      label: item.label,
-      icon: item.icon,
-      childrenCount: item.children?.length || 0
-    })));
-
-    // Only auto-select if no active route and no selection exists
-    // This prevents overriding user's current navigation
-    if (this.navigationItems.length > 0 && !this.selectedNavigationItem && !this.activeRoute) {
-      const essItem = this.navigationItems.find(item => item.id === 'ess');
-      if (essItem) {
-        // Default to ESS (Empview) only on initial load
-        console.log('[Sidebar] Auto-selecting ESS as default (initial load)');
-        this.selectNavigationItem('ess');
-      } else {
-        // Fallback to first available item
-        console.log('[Sidebar] Auto-selecting first available item:', this.navigationItems[0].id);
-        this.selectNavigationItem(this.navigationItems[0].id);
+      // Load Level 2 items directly
+      if (adminItem.children && adminItem.children.length > 0) {
+        this.level2Items = [...adminItem.children];
+        console.log('[Sidebar] Auto-loaded Admin Level 2 items:', this.level2Items.map(item => ({
+          label: item.label,
+          icon: item.icon,
+          route: item.route,
+          childrenCount: item.children?.length || 0
+        })));
       }
     }
+
+    console.log('[Sidebar] Loaded navigation items - Admin Level 2 shown directly');
   }
 
   /**
    * Load Level 2 items for selected Level 1 item
    * Level 2 items are displayed in Rail for the selected Level 1
+   * Home doesn't have Level 2 items
    */
   private loadLevel2Items(): void {
-    if (!this.selectedNavigationItem || !this.selectedNavigationItem.children) {
+    if (!this.selectedNavigationItem) {
       this.level2Items = [];
-      console.log('[Sidebar] No Level 2 items available for:', this.selectedNavigationItem?.id);
+      return;
+    }
+
+    // Home doesn't have Level 2 items
+    if (this.selectedNavigationItem.id === 'home') {
+      this.level2Items = [];
+      console.log('[Sidebar] Home selected - no Level 2 items');
       return;
     }
 
     // Get Level 2 items from selected Level 1 item
-    this.level2Items = [...this.selectedNavigationItem.children];
-    console.log('[Sidebar] Loaded Level 2 items for', this.selectedNavigationItem.id + ':', this.level2Items.map(item => ({
-      label: item.label,
-      icon: item.icon,
-      route: item.route,
-      childrenCount: item.children?.length || 0
-    })));
+    if (this.selectedNavigationItem.children && this.selectedNavigationItem.children.length > 0) {
+      this.level2Items = [...this.selectedNavigationItem.children];
+      console.log('[Sidebar] Loaded Level 2 items for', this.selectedNavigationItem.id + ':', this.level2Items.map(item => ({
+        label: item.label,
+        icon: item.icon,
+        route: item.route,
+        childrenCount: item.children?.length || 0
+      })));
+    } else {
+      this.level2Items = [];
+      console.log('[Sidebar] No Level 2 items available for:', this.selectedNavigationItem.id);
+    }
 
     // Clear Level 2 selection when switching Level 1
     this.selectedLevel2Item = null;
@@ -279,51 +254,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
     return null;
   }
 
-  /**
-   * Get user roles array
-   */
-  private getUserRoles(): string[] {
-    if (!this.currentUser) {
-      // Return default roles for testing
-      return ['user'];
-    }
-
-    // Try different role properties
-    const roles: string[] = [];
-
-    if (this.currentUser.roles && Array.isArray(this.currentUser.roles)) {
-      roles.push(...this.currentUser.roles);
-    }
-
-    if (this.currentUser.user_role) {
-      roles.push(this.currentUser.user_role);
-    }
-
-    // Check if user is admin (you may need to adjust this logic based on your auth system)
-    if (this.currentUser.user_level === 'admin' ||
-        this.currentUser.role_level === 'admin' ||
-        this.currentUser.emp_position === 'admin' ||
-        roles.some(r => r.toLowerCase() === 'admin')) {
-      roles.push('admin');
-    }
-
-    // If user has 'All' role, also add 'user' and 'admin' for compatibility
-    if (roles.some(r => r.toLowerCase() === 'all')) {
-      roles.push('user', 'admin');
-    }
-
-    // Default to 'user' if no roles found
-    if (roles.length === 0) {
-      roles.push('user');
-    }
-
-    const uniqueRoles = [...new Set(roles)]; // Remove duplicates
-    console.log('[Sidebar] getUserRoles: Raw roles from user =', roles, '-> Unique =', uniqueRoles);
-    return uniqueRoles;
-  }
 
   /**
-   * Select Level 1 item (Rail icon clicked - Home, ESS, Admin)
+   * Select Level 1 item (Rail icon clicked - Home, Admin)
    */
   selectNavigationItem(itemId: string): void {
     console.log('[Sidebar] Selecting Level 1 item:', itemId);
@@ -365,7 +298,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   /**
    * Select Level 2 item (Rail icon clicked - direct selection from Rail)
-   * For ESS: This should navigate directly (ESS doesn't use selectedLevel2Item)
    * For Admin: This sets selectedLevel2Item and shows Level 3 items
    */
   selectLevel2Item(level2Item: NavigationChild, parentNavItem: NavigationItem | null): void {
@@ -380,19 +312,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
       childrenCount: level2Item.children?.length || 0,
       parentId: parentNavItem?.id
     });
-
-    // For ESS: Navigate directly if route exists, don't set selectedLevel2Item
-    if (parentNavItem?.id === 'ess') {
-      if (level2Item.route) {
-        this.navigateToRoute(level2Item.route);
-        // ESS doesn't use selectedLevel2Item - keep it null
-        this.selectedLevel3Item = null;
-        this.selectedLevel4Item = null;
-        this.expandedLevel3Items.clear();
-        this.searchQuery = '';
-        return;
-      }
-    }
 
     // For Admin: Set selected Level 2 item
     this.selectedLevel2Item = level2Item;
@@ -428,8 +347,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   /**
    * Get navigation children for recursive menu component
-   * For ESS: Returns Level 2 items (children of selected Level 1) - ESS doesn't use selectedLevel2Item
    * For Admin: Returns Level 3 items (children of selected Level 2) - Admin requires Level 2 selection
+   * For Home: Returns Level 2 items (children of selected Level 1)
    * Uses caching to prevent infinite loops from change detection
    */
   getNavigationChildren(): NavigationChild[] {
@@ -443,19 +362,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     let result: NavigationChild[] = [];
 
-    // For ESS: Return Level 2 items (children of selected Level 1)
-    // ESS doesn't use selectedLevel2Item - it shows all Level 2 items in Rail
-    if (this.selectedNavigationItem?.id === 'ess' && this.selectedNavigationItem.children) {
-      result = [...this.selectedNavigationItem.children];
-      console.log('[Sidebar] getNavigationChildren (ESS - Level 2):', result.map(item => ({
-        label: item.label,
-        route: item.route,
-        childrenCount: item.children?.length || 0
-      })));
-    }
     // For Admin: Return Level 3 items (children of selected Level 2)
     // Admin requires Level 2 selection first
-    else if (this.selectedNavigationItem?.id === 'admin' && this.selectedLevel2Item && this.selectedLevel2Item.children) {
+    if (this.selectedNavigationItem?.id === 'admin' && this.selectedLevel2Item && this.selectedLevel2Item.children) {
       result = [...this.selectedLevel2Item.children];
       console.log('[Sidebar] getNavigationChildren (Admin - Level 3):', result.map(item => ({
         label: item.label,
@@ -580,7 +489,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       });
     }
 
-    // Level 2 (only for Admin, not for ESS)
+    // Level 2 (only for Admin)
     if (this.selectedNavigationItem?.id === 'admin' && this.selectedLevel2Item) {
       path.push({
         label: this.translateLabel(this.selectedLevel2Item.label, this.selectedNavigationItem.id, 2),
@@ -653,19 +562,16 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   /**
    * Handle accordion item click
-   * For ESS: Level 2 items are shown in accordion (Level 3-4 as children)
    * For Admin: Level 3 items are shown in accordion (Level 4 as children)
    * NOTE: Items with routes now use routerLink, so this is only called for parent groups
    */
   onAccordionItemClick(item: NavigationChild): void {
-    const isEss = this.selectedNavigationItem?.id === 'ess';
-    const level = isEss ? 2 : 3;
+    const level = 3; // Admin uses Level 3
 
     console.log('[Sidebar] Accordion item clicked:', {
       label: item.label,
       route: item.route,
-      level: level,
-      isEss: isEss
+      level: level
     });
 
     // Items with routes use routerLink directly, so this should only be called for parent groups
@@ -690,68 +596,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   /**
    * Update selected items based on route
-   * For ESS: Find in Level 2 children (Level 3-4) - ESS doesn't use selectedLevel2Item
    * For Admin: Find in Level 3 children (Level 4) - Admin requires Level 2 selection
-   * IMPORTANT: Does NOT change selectedLevel2Item for ESS - only updates Level 3-4 selections
    */
   private updateSelectedItemsFromRoute(route: string): void {
     console.log('[Sidebar] updateSelectedItemsFromRoute: Searching for route =', route);
-
-    // For ESS: Search in Level 2 items (selectedNavigationItem.children)
-    // ESS shows all Level 2 items in Rail, doesn't use selectedLevel2Item
-    if (this.selectedNavigationItem?.id === 'ess' && this.selectedNavigationItem.children) {
-      console.log('[Sidebar] Searching in ESS Level 2 items');
-      for (const level2Item of this.selectedNavigationItem.children) {
-        // Check direct Level 2 route match
-        if (level2Item.route && route.startsWith(level2Item.route)) {
-          console.log('[Sidebar] Found ESS Level 2 match:', level2Item.label);
-          // ESS doesn't use selectedLevel2Item - keep it null
-          this.selectedLevel3Item = null;
-          this.selectedLevel4Item = null;
-          // Update breadcrumbs
-          this.getBreadcrumbPath();
-          return;
-        }
-
-        // Check Level 3
-        if (level2Item.children) {
-          for (const level3Item of level2Item.children) {
-            if (level3Item.route && route.startsWith(level3Item.route)) {
-              console.log('[Sidebar] Found ESS Level 3 match:', {
-                level2Label: level2Item.label,
-                level3Label: level3Item.label
-              });
-              // ESS doesn't use selectedLevel2Item - only update Level 3-4
-              this.selectedLevel3Item = level3Item;
-              this.selectedLevel4Item = null;
-              // Update breadcrumbs
-              this.getBreadcrumbPath();
-              return;
-            }
-
-            // Check Level 4
-            if (level3Item.children) {
-              for (const level4Item of level3Item.children) {
-                if (level4Item.route && route.startsWith(level4Item.route)) {
-                  console.log('[Sidebar] Found ESS Level 4 match:', {
-                    level2Label: level2Item.label,
-                    level3Label: level3Item.label,
-                    level4Label: level4Item.label
-                  });
-                  // ESS doesn't use selectedLevel2Item - only update Level 3-4
-                  this.selectedLevel3Item = level3Item;
-                  this.selectedLevel4Item = level4Item;
-                  // Update breadcrumbs
-                  this.getBreadcrumbPath();
-                  return;
-                }
-              }
-            }
-          }
-        }
-      }
-      console.log('[Sidebar] No ESS match found for route:', route);
-    }
 
     // For Admin: Search in Level 3 items (selectedLevel2Item.children)
     // IMPORTANT: Only search within current selectedLevel2Item - don't change it
@@ -789,7 +637,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       console.log('[Sidebar] No Admin match found for route:', route);
     }
 
-      // For Home: Similar to ESS
+      // For Home: Search in Level 2 items
       if (this.selectedNavigationItem?.id === 'home' && this.selectedNavigationItem.children) {
         for (const level2Item of this.selectedNavigationItem.children) {
           // Map portal routes to actual routes
@@ -811,7 +659,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   /**
    * Go back to Level 2 (from Level 3+)
-   * For ESS: Clear Level 3-4 selections (show Level 2 items)
    * For Admin: Clear Level 3-4 selections (show Level 3 items of selected Level 2)
    */
   goBackToLevel2(): void {
@@ -914,7 +761,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
   getModuleHomeRoute(moduleId: string): string {
     const moduleHomeRoutes: { [key: string]: string } = {
       'home': '/home',
-      'ess': '/ta',
       'admin': '/personal',
       // 'workflow': '/workflow/home', // Workflow module removed
       'company': '/company',
@@ -939,12 +785,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   onSearchChange(): void {
-    this.filterMenuItems();
+    // Search is handled by navigationChildren filtering in template
+    // No need for separate filter method since we use navigation.constant.ts
   }
 
   clearSearch(): void {
     this.searchQuery = '';
-    this.filterMenuItems();
+    // Search is handled by navigationChildren filtering in template
+    // No need for separate filter method since we use navigation.constant.ts
   }
 
   /**
@@ -962,6 +810,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       'person_check': 'e-icons e-user-check',
       'work': 'e-icons e-briefcase',
       'folder': 'e-icons e-folder',
+      'folder_open': 'material-icons',
       'attach_money': 'e-icons e-money',
       'menu': 'e-icons e-menu',
       'home': 'e-icons e-home',
@@ -986,45 +835,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     return iconMap[iconName.toLowerCase()] || 'e-icons e-folder';
   }
 
-  /**
-   * Build display menu items from menu groups (Level 2 only, Level 3 shown as tabs)
-   */
-  private buildDisplayMenuItems(): void {
-    this.displayMenuItems = [];
-
-    this.menuGroups.forEach(group => {
-      group.items.forEach(item => {
-        // Only add Level 2 items (children will be shown as tabs in content)
-        const menuItem: NestedMenuItem = {
-          text: item.name,
-          id: `menu-${group.groupName}-${item.name}`,
-          iconCss: this.getIconClass(item.icon),
-          route: item.route || item.url || ''
-        };
-
-        // Note: We don't add children here - they'll be shown as tabs in content area
-        this.displayMenuItems.push(menuItem);
-      });
-    });
-
-    // Update filtered items
-    this.filterMenuItems();
-  }
-
-  /**
-   * Filter menu items based on search query
-   */
-  private filterMenuItems(): void {
-    if (!this.searchQuery || this.searchQuery.trim() === '') {
-      this.filteredMenuItems = [...this.displayMenuItems];
-      return;
-    }
-
-    const query = this.searchQuery.toLowerCase().trim();
-    this.filteredMenuItems = this.displayMenuItems.filter(item =>
-      item.text?.toLowerCase().includes(query)
-    );
-  }
 
   navigateToHome(): void {
     this.router.navigate(['/home']).catch(() => {
@@ -1161,14 +971,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     console.log('[Sidebar] updateSelectedModuleFromRoute: Active route =', this.activeRoute);
 
-    // For ESS: If Level 1 is already selected, only update Level 3-4
-    // ESS doesn't use selectedLevel2Item
-    if (this.selectedNavigationItem?.id === 'ess') {
-      console.log('[Sidebar] ESS already selected, only updating Level 3-4');
-      this.updateSelectedItemsFromRoute(this.activeRoute);
-      return;
-    }
-
     // For Admin: If Level 1 and Level 2 are already selected, only update Level 3-4
     if (this.selectedNavigationItem?.id === 'admin' && this.selectedLevel2Item) {
       console.log('[Sidebar] Admin Level 1 and Level 2 already selected, only updating Level 3-4');
@@ -1199,16 +1001,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
             route: level2Item.route
           });
 
-          // For ESS: Don't set selectedLevel2Item, just select Level 1
-          if (navItem.id === 'ess') {
-            if (this.selectedNavigationItem?.id !== navItem.id) {
-              this.selectNavigationItem(navItem.id);
-            }
-            // ESS doesn't use selectedLevel2Item
-            this.updateSelectedItemsFromRoute(this.activeRoute);
-            return;
-          }
-
           // For Admin: Set both Level 1 and Level 2
           if (navItem.id === 'admin') {
             if (this.selectedNavigationItem?.id !== navItem.id) {
@@ -1232,15 +1024,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
                 level3Label: level3Item.label,
                 route: level3Item.route
               });
-
-              // For ESS: Don't set selectedLevel2Item
-              if (navItem.id === 'ess') {
-                if (this.selectedNavigationItem?.id !== navItem.id) {
-                  this.selectNavigationItem(navItem.id);
-                }
-                this.updateSelectedItemsFromRoute(this.activeRoute);
-                return;
-              }
 
               // For Admin: Set both Level 1 and Level 2
               if (navItem.id === 'admin') {
@@ -1266,15 +1049,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
                     level4Label: level4Item.label,
                     route: level4Item.route
                   });
-
-                  // For ESS: Don't set selectedLevel2Item
-                  if (navItem.id === 'ess') {
-                    if (this.selectedNavigationItem?.id !== navItem.id) {
-                      this.selectNavigationItem(navItem.id);
-                    }
-                    this.updateSelectedItemsFromRoute(this.activeRoute);
-                    return;
-                  }
 
                   // For Admin: Set both Level 1 and Level 2
                   if (navItem.id === 'admin') {
@@ -1571,38 +1345,4 @@ export class SidebarComponent implements OnInit, OnDestroy {
     };
   }
 
-  /**
-   * Go to Home (switch back to ESS)
-   */
-  goToHome(): void {
-    // Switch back to ESS
-    const essItem = this.navigationItems.find(item => item.id === 'ess');
-    if (essItem) {
-      this.selectNavigationItem('ess');
-    } else {
-      // Fallback: clear selection
-      this.selectedNavigationItem = null;
-      this.level2Items = [];
-      this.selectedLevel2Item = null;
-    }
-    this.searchQuery = '';
-  }
-
-  /**
-   * Check if user has admin role
-   */
-  hasAdminRole(): boolean {
-    const userRoles = this.getUserRoles();
-    return userRoles.some(role => role.toLowerCase() === 'admin' || role.toLowerCase() === 'all');
-  }
-
-  /**
-   * Switch to Admin menu
-   */
-  switchToAdmin(): void {
-    const adminItem = this.navigationItems.find(item => item.id === 'admin');
-    if (adminItem) {
-      this.selectNavigationItem('admin');
-    }
-  }
 }

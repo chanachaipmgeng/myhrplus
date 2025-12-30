@@ -16,18 +16,13 @@ export interface MenuGroup {
   items: MenuItem[];
 }
 
-export interface MenuData {
-  personal: MenuGroup[]; // Employee Self Service
-  admin: MenuGroup[]; // Admin Management
-}
-
-export type MenuContext = 'personal' | 'admin';
+export type MenuContext = 'personal';
 
 export interface SearchResult {
   name: string;
   icon: string;
   route: string;
-  breadcrumb: string; // e.g., "Admin > พนักงาน > รายงาน"
+  breadcrumb: string; // e.g., "Employee Self Service > พนักงาน > รายงาน"
   context: MenuContext;
   groupName: string;
   level: 1 | 2 | 3; // Menu level

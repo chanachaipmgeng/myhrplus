@@ -32,94 +32,21 @@ export interface NavigationItem {
  */
 export const NAVIGATION_ITEMS: NavigationItem[] = [
   // กลุ่ม 0: Home (ทุกคนมีสิทธิ์เห็น)
-  {
-    id: 'home',
-    label: 'Home',
-    icon: 'home',
-    roles: ['user', 'admin'],
-    route: '/home', // Dashboard route - หน้าแรกของโมดูล
-    children: [
-      {
-        label: 'Dashboard',
-        route: '/home',
-        icon: 'dashboard'
-      },
-      {
-        label: 'หน้าแรก',
-        route: '/home',
-        icon: 'home'
-      }
-    ]
-  },
-  // กลุ่ม 1: Employee Self Service (ทุกคนมีสิทธิ์เห็น)
-  {
-    id: 'ess',
-    label: 'Self Service',
-    icon: 'person',    // icon หลักใน Rail ซ้ายสุด (ใช้ person แทน user-circle)
-    roles: ['user', 'admin'],
-    route: '/ta', // Dashboard route - หน้าแรกของโมดูล
-    children: [              // Level 2 - รายการที่จะไปโผล่ใน Drawer (Rail ที่ 2)
-      {
-        label: 'Dashboard',
-        route: '/ta',
-        icon: 'dashboard'
-      },
-      {
-        label: 'ลงเวลา (Time)',
-        route: '/ta',
-        icon: 'access_time'
-      },
-      {
-        label: 'ขอเอกสาร (Request)',
-        route: '/ta',
-        icon: 'description'
-      },
-      {
-        label: 'สลิปเงินเดือน (Payslip)',
-        route: '/payroll',
-        icon: 'receipt'
-      },
-      {
-        label: 'ตรวจสอบข้อมูลตัวเอง',
-        route: '/home',
-        icon: 'person'
-      },
-      {
-        label: 'ลูกน้อง',
-        route: '/home',
-        icon: 'people'
-      },
-      {
-        label: 'สวัสดิการ',
-        route: '/welfare',
-        icon: 'favorite'
-      },
-      {
-        label: 'ลาพักผ่อน',
-        route: '/ta',
-        icon: 'event'
-      },
-      {
-        label: 'การลงเวลา',
-        route: '/ta',
-        icon: 'access_time'
-      },
-      {
-        label: 'สถิติ',
-        route: '/ta',
-        icon: 'bar_chart'
-      }
-    ]
-  },
 
-  // กลุ่ม 2: Admin (เห็นเฉพาะผู้ที่มีสิทธิ์)
+
+  // กลุ่ม 1: Admin (ทุกคนเห็น - เป็น admin ตั้งแต่แรก)
   {
     id: 'admin',
     label: 'Admin',
-    icon: 'shield-check',   // icon หลักใน Rail ซ้ายสุด
-    roles: ['admin'],       // User ทั่วไปจะไม่เห็น Icon นี้
-    route: '/personal', // Dashboard route - หน้าแรกของโมดูล (default to personal)
+    icon: 'home',   // icon หลักใน Rail ซ้ายสุด
+    roles: ['user', 'admin'], // ทุกคนเห็น (เป็น admin ตั้งแต่แรก)
+    route: '/home', // Dashboard route - หน้าแรกของโมดูล (default to home)
     children: [
+      {
+        label: 'Home',
+        route: '/home',
+        icon: 'home'
+      },
       // Level 2: Company Management (มี Level 3-4)
       {
         label: 'Company Management',
@@ -1168,36 +1095,12 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
  * @returns Filtered navigation items
  */
 export function getNavigationItemsByRoles(userRoles: string[]): NavigationItem[] {
-  // Normalize roles to lowercase for comparison
-  const normalizedUserRoles = userRoles.map(role => role.toLowerCase());
-
-  // Check if user has 'All' role (should see everything)
-  const hasAllRole = normalizedUserRoles.includes('all');
-
-  return NAVIGATION_ITEMS.filter(item => {
-    // If user has 'All' role, show all items
-    if (hasAllRole) {
-      return true;
-    }
-
-    // Check if user has any of the required roles (case-insensitive)
-    return item.roles.some(role => normalizedUserRoles.includes(role.toLowerCase()));
-  }).map(item => {
-    // Filter children by roles if specified
+  // Always return all navigation items - admin by default
+  // No role filtering - everyone sees admin menu
+  return NAVIGATION_ITEMS.map(item => {
+    // Return all children without filtering
     if (item.children) {
-      const filteredChildren = item.children.filter(child => {
-        // If user has 'All' role, show all children
-        if (hasAllRole) {
-          return true;
-        }
-
-        if (!child.roles || child.roles.length === 0) {
-          return true; // No role restriction
-        }
-        // Check roles (case-insensitive)
-        return child.roles.some(role => normalizedUserRoles.includes(role.toLowerCase()));
-      });
-      return { ...item, children: filteredChildren };
+      return { ...item, children: item.children };
     }
     return item;
   });

@@ -12,7 +12,7 @@ export class MenuContextService {
   constructor() {
     // Load saved context from localStorage
     const savedContext = localStorage.getItem(this.STORAGE_KEY) as MenuContext;
-    if (savedContext && (savedContext === 'personal' || savedContext === 'admin')) {
+    if (savedContext && savedContext === 'personal') {
       this.currentContext$.next(savedContext);
     }
   }
@@ -31,8 +31,8 @@ export class MenuContextService {
   }
 
   toggleContext(): void {
-    const newContext: MenuContext = this.currentContext$.value === 'personal' ? 'admin' : 'personal';
-    this.setContext(newContext);
+    // Only personal context is available, no toggle needed
+    this.setContext('personal');
   }
 }
 

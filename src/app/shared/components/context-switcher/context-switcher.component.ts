@@ -23,12 +23,6 @@ export class ContextSwitcherComponent implements OnInit, OnDestroy {
       label: 'Personal',
       icon: 'person',
       description: 'Employee Self Service'
-    },
-    {
-      value: 'admin',
-      label: 'Admin',
-      icon: 'admin_panel_settings',
-      description: 'Admin Management'
     }
   ];
 
