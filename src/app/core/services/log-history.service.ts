@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { environment } from '@env/environment';
 import { ApiService, ApiResponse } from './api.service';
 import { StructuredError } from './error.service';
 import { ErrorCode } from '../constants/error-codes.constant';

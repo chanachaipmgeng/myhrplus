@@ -17,7 +17,7 @@ import { MyStatus, Status } from './status.model';
 import { BaseModel, TranslateService } from './base.model';
 import { Prefix } from './prefix.model';
 import { MyPl, Pl } from './pl.model';
-import { environment } from '../../../environments/environment';
+import { environment } from '@env/environment';
 
 /**
  * Salary type model

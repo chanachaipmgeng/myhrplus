@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AuthService, User } from '@core/services';
 import { EmployeeService, SetCharacter, Role } from '@core/services';
-import { environment } from '../../../environments/environment';
+import { environment } from '@env/environment';
 import jwt_decode from 'jwt-decode';
 
 export interface ConfigModel {

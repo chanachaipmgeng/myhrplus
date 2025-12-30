@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, User } from '@core/services';
 import { EChartsOption } from 'echarts';
@@ -85,7 +85,6 @@ export class PersonalHomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  @HostListener('window:resize', [])
   private checkDarkMode(): void {
     const html = document.documentElement;
     this.isDarkMode = html.getAttribute('data-theme') === 'dark' ||
@@ -107,6 +106,53 @@ export class PersonalHomeComponent implements OnInit, OnDestroy {
 
   private getSplitLineColor(): string {
     return this.isDarkMode ? '#334155' : '#f1f5f9';
+  }
+
+  /**
+   * Get primary color from CSS variable
+   */
+  private getPrimaryColor(): string {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return '#3b82f6'; // Fallback
+    }
+    const style = getComputedStyle(document.documentElement);
+    const primaryRgb = style.getPropertyValue('--primary-rgb').trim();
+    if (primaryRgb) {
+      const [r, g, b] = primaryRgb.split(',').map(v => parseInt(v.trim(), 10));
+      return `rgb(${r}, ${g}, ${b})`;
+    }
+    return '#3b82f6'; // Fallback
+  }
+
+  /**
+   * Get primary color as hex
+   */
+  private getPrimaryColorHex(): string {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return '#3b82f6'; // Fallback
+    }
+    const style = getComputedStyle(document.documentElement);
+    const primaryColor = style.getPropertyValue('--primary-color').trim();
+    if (primaryColor) {
+      return primaryColor;
+    }
+    return '#3b82f6'; // Fallback
+  }
+
+  /**
+   * Get primary color RGB array for rgba usage
+   */
+  private getPrimaryColorRgb(): [number, number, number] {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return [59, 130, 246]; // Fallback
+    }
+    const style = getComputedStyle(document.documentElement);
+    const primaryRgb = style.getPropertyValue('--primary-rgb').trim();
+    if (primaryRgb) {
+      const [r, g, b] = primaryRgb.split(',').map(v => parseInt(v.trim(), 10));
+      return [r, g, b];
+    }
+    return [59, 130, 246]; // Fallback
   }
 
   private initializeCharts(): void {
@@ -149,9 +195,9 @@ export class PersonalHomeComponent implements OnInit, OnDestroy {
             type: 'linear',
             x: 0, y: 0, x2: 0, y2: 1,
             colorStops: [
-              { offset: 0, color: '#3b82f6' },
-              { offset: 0.5, color: '#2563eb' },
-              { offset: 1, color: '#2563eb' }
+              { offset: 0, color: this.getPrimaryColorHex() },
+              { offset: 0.5, color: this.getPrimaryColorHex() },
+              { offset: 1, color: this.getPrimaryColorHex() }
             ]
           }
         },
@@ -247,14 +293,14 @@ export class PersonalHomeComponent implements OnInit, OnDestroy {
           type: 'bar',
           stack: 'total',
           data: maleData,
-          itemStyle: { color: '#3b82f6' }
+          itemStyle: { color: this.getPrimaryColorHex() }
         },
         {
           name: 'หญิง',
           type: 'bar',
           stack: 'total',
           data: femaleData,
-          itemStyle: { color: '#ec4899' }
+          itemStyle: { color: '#ec4899' } // Keep pink for female, or use secondary color if available
         }
       ]
     };
@@ -298,14 +344,17 @@ export class PersonalHomeComponent implements OnInit, OnDestroy {
             color: {
               type: 'linear',
               x: 0, y: 0, x2: 0, y2: 1,
-              colorStops: [
-                { offset: 0, color: 'rgba(59, 130, 246, 0.3)' },
-                { offset: 1, color: 'rgba(59, 130, 246, 0.05)' }
-              ]
+              colorStops: (() => {
+                const [r, g, b] = this.getPrimaryColorRgb();
+                return [
+                  { offset: 0, color: `rgba(${r}, ${g}, ${b}, 0.3)` },
+                  { offset: 1, color: `rgba(${r}, ${g}, ${b}, 0.05)` }
+                ];
+              })()
             }
           },
-          itemStyle: { color: '#3b82f6' },
-          lineStyle: { color: '#3b82f6', width: 2 },
+          itemStyle: { color: this.getPrimaryColorHex() },
+          lineStyle: { color: this.getPrimaryColorHex(), width: 2 },
           data: activeData
         },
         {
@@ -328,10 +377,6 @@ export class PersonalHomeComponent implements OnInit, OnDestroy {
         }
       ]
     };
-  }
-
-  navigateTo(route: string): void {
-    this.router.navigate([route]);
   }
 
   /**
@@ -361,11 +406,6 @@ export class PersonalHomeComponent implements OnInit, OnDestroy {
     }
   }
 }
-
-
-
-
-
 
 
 

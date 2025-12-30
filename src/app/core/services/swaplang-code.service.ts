@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
+import { environment } from '@env/environment';
 import { SwaplangCodeModel } from '../models/swaplangCode.model';
 import { TranslateService } from '@ngx-translate/core';
 import { ApiService, ApiResponse } from './api.service';

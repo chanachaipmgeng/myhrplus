@@ -4,7 +4,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 import jwt_decode from 'jwt-decode';
 import { StorageService } from './storage.service';
 import { ApiService, ApiResponse } from './api.service';
-import { environment } from '../../../environments/environment';
+import { environment } from '@env/environment';
 
 export interface TokenValidationResult {
   isValid: boolean;

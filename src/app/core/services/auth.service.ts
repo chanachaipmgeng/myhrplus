@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError, timer, Subscription } from 'rxjs';
 import { map, catchError, tap, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
+import { environment } from '@env/environment';
 import { StorageService } from './storage.service';
 import { ApiService, ApiResponse } from './api.service';
 import jwt_decode from 'jwt-decode';

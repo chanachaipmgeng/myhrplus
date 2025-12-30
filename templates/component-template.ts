@@ -6,23 +6,21 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 // Layout Components
-import { PageLayoutComponent } from '../../shared/components/page-layout/page-layout.component';
-import { PageHeaderComponent } from '../../shared/components/page-header/page-header.component';
-import { ContentLayoutComponent } from '../../shared/components/content-layout/content-layout.component';
+import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
+import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { ContentLayoutComponent } from '@shared/components/content-layout/content-layout.component';
 
 // UI Components
-import { GlassCardComponent } from '../../shared/components/glass-card/glass-card.component';
-import { GlassButtonComponent } from '../../shared/components/glass-button/glass-button.component';
-import { GlassInputComponent } from '../../shared/components/glass-input/glass-input.component';
-import { LoadingComponent } from '../../shared/components/loading/loading.component';
-import { EmptyStateComponent } from '../../shared/components/empty-state/empty-state.component';
-import { SkeletonLoaderComponent } from '../../shared/components/skeleton-loader/skeleton-loader.component';
-import { NotificationComponent } from '../../shared/components/notification/notification.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { GlassButtonComponent } from '@shared/components/glass-button/glass-button.component';
+import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
+import { LoadingComponent } from '@shared/components/loading/loading.component';
+import { EmptyStateComponent } from '@shared/components/empty-state/empty-state.component';
+import { SkeletonLoaderComponent } from '@shared/components/skeleton-loader/skeleton-loader.component';
+import { NotificationComponent } from '@shared/components/notification/notification.component';
 
 // Services
-import { ApiService } from '../../core/services/api.service';
-import { NotificationService } from '../../core/services/notification.service';
-import { StorageService } from '../../core/services/storage.service';
+import { ApiService, NotificationService, StorageService } from '@core/services';
 
 /**
  * Component Name Component

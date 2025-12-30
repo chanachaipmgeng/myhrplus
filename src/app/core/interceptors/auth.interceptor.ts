@@ -11,7 +11,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { TokenManagerService } from '../services/token-manager.service';
 import { CacheService } from '../services/cache.service';
-import { environment } from '../../../environments/environment';
+import { environment } from '@env/environment';
 
 /**
  * HTTP Interceptor for:

@@ -14,7 +14,7 @@ import {
   NavigationChild,
   getNavigationItemsByRoles
 } from '@core/constants';
-import { environment } from '../../../environments/environment';
+import { environment } from '@env/environment';
 import { ListViewComponent } from '@syncfusion/ej2-angular-lists';
 import { NestedMenuAccordionComponent } from '@shared/components/nested-menu-accordion/nested-menu-accordion.component';
 import { PREDEFINED_MODULES, MODULE_ROUTE_MAP, NestedMenuItem, MainModule } from '@core/constants';
