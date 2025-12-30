@@ -75,6 +75,27 @@ export class HomeComponent implements OnInit {
     }
   ];
 
+  quickActions = [
+    {
+      label: 'ดูรายงาน',
+      icon: 'assessment',
+      route: '/home',
+      color: 'blue'
+    },
+    {
+      label: 'ส่งออกข้อมูล',
+      icon: 'download',
+      action: 'export',
+      color: 'green'
+    },
+    {
+      label: 'ตั้งค่า',
+      icon: 'settings',
+      route: '/setting',
+      color: 'purple'
+    }
+  ];
+
   constructor(
     private authService: AuthService,
     private homeService: HomeService,
@@ -110,5 +131,46 @@ export class HomeComponent implements OnInit {
     if (hour < 12) return 'สวัสดีตอนเช้า';
     if (hour < 18) return 'สวัสดีตอนบ่าย';
     return 'สวัสดีตอนเย็น';
+  }
+
+  exportDashboard(): void {
+    // Export dashboard data
+    console.log('Exporting dashboard...');
+    // TODO: Implement export functionality
+  }
+
+  exportCharts(format: 'pdf' | 'excel'): void {
+    // Export charts
+    console.log(`Exporting charts as ${format}...`);
+    // TODO: Implement chart export functionality
+  }
+
+  exportChart(chartType: string, format: 'pdf' | 'excel'): void {
+    // Export individual chart
+    console.log(`Exporting ${chartType} chart as ${format}...`);
+    // TODO: Implement individual chart export
+  }
+
+  viewAllActivities(): void {
+    // Navigate to activities page
+    console.log('View all activities...');
+    // TODO: Implement navigation
+  }
+
+  filterActivities(): void {
+    // Filter activities
+    console.log('Filter activities...');
+    // TODO: Implement filter functionality
+  }
+
+  viewAllApprovals(): void {
+    // Navigate to approvals page
+    this.router.navigate(['/ta']);
+  }
+
+  filterApprovals(): void {
+    // Filter approvals
+    console.log('Filter approvals...');
+    // TODO: Implement filter functionality
   }
 }

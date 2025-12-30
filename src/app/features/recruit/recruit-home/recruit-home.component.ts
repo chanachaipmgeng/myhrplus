@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService, User } from '@core/services';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
@@ -12,6 +12,7 @@ import { StaggerDirective } from '@shared/directives/stagger.directive';
   standalone: true,
   imports: [
     CommonModule,
+    RouterModule,
     PageHeaderComponent,
     GlassCardComponent,
     IconComponent,
@@ -22,6 +23,13 @@ import { StaggerDirective } from '@shared/directives/stagger.directive';
 })
 export class RecruitHomeComponent implements OnInit {
   currentUser: User | null = null;
+
+  statistics = {
+    totalJobs: 24,
+    totalApplicants: 342,
+    interviews: 48,
+    hired: 12
+  };
 
   menuItems = [
     {

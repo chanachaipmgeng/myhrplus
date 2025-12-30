@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthService, User } from '@core/services';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -13,6 +13,7 @@ import { StaggerDirective } from '@shared/directives/stagger.directive';
   standalone: true,
   imports: [
     CommonModule,
+    RouterModule,
     TranslateModule,
     PageHeaderComponent,
     GlassCardComponent,
@@ -24,6 +25,13 @@ import { StaggerDirective } from '@shared/directives/stagger.directive';
 })
 export class SettingHomeComponent implements OnInit {
   currentUser: User | null = null;
+
+  statistics = {
+    totalUsers: 1245,
+    totalRoles: 12,
+    totalMenus: 156,
+    activeSettings: 48
+  };
 
   menuItems = [
     {

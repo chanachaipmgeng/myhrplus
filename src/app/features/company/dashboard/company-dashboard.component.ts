@@ -4,7 +4,9 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { GlassButtonComponent } from '@shared/components/glass-button/glass-button.component';
 import { IconComponent } from '@shared/components/icon/icon.component';
+import { SharedModule } from '@shared/shared.module';
 import { StaggerDirective } from '@shared/directives/stagger.directive';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
@@ -20,7 +22,9 @@ import { AuthService, User, LayoutService, BreadcrumbItem } from '@core/services
     TranslateModule,
     PageHeaderComponent,
     GlassCardComponent,
+    GlassButtonComponent,
     IconComponent,
+    SharedModule,
     StaggerDirective,
     NgxEchartsModule
   ],
@@ -36,14 +40,70 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
   isDarkMode = false;
   currentUser: User | null = null;
 
-  // Statistics
+  // Statistics with trend data
   statistics = {
-    branches: 12,
-    divisions: 8,
-    departments: 24,
-    positions: 156,
-    locations: 18
+    branches: {
+      value: 12,
+      change: 2,
+      route: '/company/human-resources/branch'
+    },
+    divisions: {
+      value: 8,
+      change: 1,
+      route: '/company/human-resources/division'
+    },
+    departments: {
+      value: 24,
+      change: 3,
+      route: '/company/human-resources/department'
+    },
+    positions: {
+      value: 156,
+      change: 15,
+      route: '/company/human-resources'
+    },
+    locations: {
+      value: 18,
+      change: 2,
+      route: '/company/human-resources/working-area'
+    }
   };
+
+  isLoading = false;
+
+  // Date Range for Charts
+  dateRange = {
+    start: new Date(new Date().setMonth(new Date().getMonth() - 1)),
+    end: new Date()
+  };
+
+  // Quick Actions
+  quickActions = [
+    {
+      label: 'company.dashboard.quickActions.addBranch',
+      icon: 'add_business',
+      route: '/company/human-resources/branch',
+      color: 'indigo'
+    },
+    {
+      label: 'company.dashboard.quickActions.addDepartment',
+      icon: 'add',
+      route: '/company/human-resources/department',
+      color: 'blue'
+    },
+    {
+      label: 'company.dashboard.quickActions.viewReports',
+      icon: 'assessment',
+      route: '/company/reports',
+      color: 'green'
+    },
+    {
+      label: 'company.dashboard.quickActions.exportData',
+      icon: 'download',
+      action: 'export',
+      color: 'purple'
+    }
+  ];
 
   // Chart Options
   divisionPieChartOption: EChartsOption = {};
@@ -137,6 +197,33 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
     this.layoutService.setBreadcrumbs(breadcrumbs);
   }
 
+  onDateRangeChange(range: {start: Date | null, end: Date | null}): void {
+    if (range.start && range.end) {
+      this.dateRange.start = range.start;
+      this.dateRange.end = range.end;
+      // Reload charts with new date range
+      this.loadDashboardData();
+    }
+  }
+
+  exportDashboard(): void {
+    // Export dashboard data
+    console.log('Exporting dashboard...');
+    // TODO: Implement export functionality
+  }
+
+  exportCharts(format: 'pdf' | 'excel'): void {
+    // Export charts
+    console.log(`Exporting charts as ${format}...`);
+    // TODO: Implement chart export functionality
+  }
+
+  exportChart(chartType: string, format: 'pdf' | 'excel'): void {
+    // Export individual chart
+    console.log(`Exporting ${chartType} chart as ${format}...`);
+    // TODO: Implement individual chart export
+  }
+
   ngOnDestroy(): void {
     if (this.observer) {
       this.observer.disconnect();
@@ -209,11 +296,15 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
         formatter: (params: any) => {
           return `${params.seriesName}<br/>${params.name}: ${params.value} ${personLabel} (${params.percent}%)`;
         },
-        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)',
+        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
         borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
+        borderWidth: 1,
+        padding: [10, 15],
         textStyle: {
-          color: this.getChartTextColor()
-        }
+          color: this.getChartTextColor(),
+          fontSize: 13
+        },
+        extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px;'
       },
       legend: {
         orient: 'vertical',
@@ -274,11 +365,15 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
         axisPointer: {
           type: 'shadow'
         },
-        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)',
+        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
         borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
+        borderWidth: 1,
+        padding: [10, 15],
         textStyle: {
-          color: this.getChartTextColor()
-        }
+          color: this.getChartTextColor(),
+          fontSize: 13
+        },
+        extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px;'
       },
       grid: {
         left: '3%',
@@ -373,11 +468,15 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
         axisPointer: {
           type: 'shadow'
         },
-        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)',
+        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
         borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
+        borderWidth: 1,
+        padding: [10, 15],
         textStyle: {
-          color: this.getChartTextColor()
-        }
+          color: this.getChartTextColor(),
+          fontSize: 13
+        },
+        extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px;'
       },
       grid: {
         left: '3%',
@@ -470,11 +569,15 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
         axisPointer: {
           type: 'shadow'
         },
-        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)',
+        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
         borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
+        borderWidth: 1,
+        padding: [10, 15],
         textStyle: {
-          color: this.getChartTextColor()
-        }
+          color: this.getChartTextColor(),
+          fontSize: 13
+        },
+        extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px;'
       },
       grid: {
         left: '3%',
@@ -592,11 +695,15 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
     this.orgTreeMapChartOption = {
       backgroundColor: this.getChartBackgroundColor(),
       tooltip: {
-        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)',
+        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
         borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
+        borderWidth: 1,
+        padding: [10, 15],
         textStyle: {
-          color: this.getChartTextColor()
-        }
+          color: this.getChartTextColor(),
+          fontSize: 13
+        },
+        extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px;'
       },
       series: [{
         type: 'treemap',
@@ -659,11 +766,15 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
         axisPointer: {
           type: 'shadow'
         },
-        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)',
+        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
         borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
+        borderWidth: 1,
+        padding: [10, 15],
         textStyle: {
-          color: this.getChartTextColor()
-        }
+          color: this.getChartTextColor(),
+          fontSize: 13
+        },
+        extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px;'
       },
       grid: {
         left: '3%',
@@ -755,11 +866,15 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
       tooltip: {
         trigger: 'item',
         triggerOn: 'mousemove',
-        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)',
+        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
         borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
+        borderWidth: 1,
+        padding: [10, 15],
         textStyle: {
-          color: this.getChartTextColor()
-        }
+          color: this.getChartTextColor(),
+          fontSize: 13
+        },
+        extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px;'
       },
       series: [{
         type: 'sankey',

@@ -1,34 +1,112 @@
 <div class="-mx-4 md:-mx-6 lg:-mx-8">
-  <app-page-header
-    title="Appraisal Management"
-    subtitle="จัดการการประเมินผลการทำงาน"
-    [showBreadcrumbs]="true">
-  </app-page-header>
-
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-6 lg:px-8">
-    <app-glass-card
-      *ngFor="let item of menuItems; let i = index"
-      [appStagger]="i"
-      [staggerDelay]="0.1"
-      padding="p-4 md:p-6"
-      customClass="rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 active:scale-95"
-      [style.background]="item.color"
-      [attr.aria-label]="item.title + ': ' + item.description"
-      [attr.role]="'button'"
-      [attr.tabindex]="0"
-      (click)="navigateTo(item.route)"
-      (keydown.enter)="navigateTo(item.route)"
-      (keydown.space)="navigateTo(item.route); $event.preventDefault()">
-      <div class="flex items-center gap-4">
-        <div class="icon-container text-white">
-          <app-icon [name]="item.icon" size="xl" color="text-white"></app-icon>
-        </div>
+  <div class="p-4 md:p-6 lg:p-8 min-h-screen transition-colors duration-300">
+    <!-- Simplified Page Header with Welcome Section -->
+    <app-glass-card padding="p-5 md:p-6" customClass="mb-6 md:mb-8" [animate]="'fade-in'">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div class="flex-1">
-          <h3 class="text-lg md:text-xl font-semibold text-white mb-1">{{ item.title }}</h3>
-          <p class="text-white text-xs md:text-sm opacity-90">{{ item.description }}</p>
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-purple-500 to-pink-600 dark:from-purple-600 dark:to-pink-700 rounded-xl flex items-center justify-center shadow-lg">
+              <app-icon name="assessment" size="md" color="text-white"></app-icon>
+            </div>
+            <div>
+              <h1 class="text-xl md:text-2xl lg:text-3xl font-bold thai-text bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Appraisal Management
+              </h1>
+              <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 thai-text mt-1">
+                จัดการการประเมินผลการทำงาน
+              </p>
+            </div>
+          </div>
+          <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 thai-text mt-2">
+            จัดการการประเมินผลงานและ KPI ของพนักงาน
+          </p>
         </div>
       </div>
     </app-glass-card>
+    <!-- Statistics Cards -->
+    <div class="mb-8">
+      <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">สถิติการประเมินผล</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <app-glass-card
+          padding="p-5"
+          customClass="bg-gradient-to-br from-blue-500 to-cyan-600 dark:from-blue-600 dark:to-cyan-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [appStagger]="0"
+          [staggerDelay]="0.05"
+          [routerLink]="['/appraisal']">
+          <div class="text-4xl font-bold mb-2">{{ statistics.totalAppraisals }}</div>
+          <div class="text-sm opacity-90">การประเมินทั้งหมด</div>
+          <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
+            <app-icon name="assessment" size="xs" color="text-white"></app-icon>
+            <span>รายการ</span>
+          </div>
+        </app-glass-card>
+        <app-glass-card
+          padding="p-5"
+          customClass="bg-gradient-to-br from-green-500 to-emerald-600 dark:from-green-600 dark:to-emerald-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [appStagger]="1"
+          [staggerDelay]="0.05"
+          [routerLink]="['/appraisal']">
+          <div class="text-4xl font-bold mb-2">{{ statistics.inProgress }}</div>
+          <div class="text-sm opacity-90">กำลังประเมิน</div>
+          <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
+            <app-icon name="pending" size="xs" color="text-white"></app-icon>
+            <span>รายการ</span>
+          </div>
+        </app-glass-card>
+        <app-glass-card
+          padding="p-5"
+          customClass="bg-gradient-to-br from-purple-500 to-pink-600 dark:from-purple-600 dark:to-pink-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [appStagger]="2"
+          [staggerDelay]="0.05"
+          [routerLink]="['/appraisal']">
+          <div class="text-4xl font-bold mb-2">{{ statistics.completed }}</div>
+          <div class="text-sm opacity-90">ประเมินเสร็จสิ้น</div>
+          <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
+            <app-icon name="check_circle" size="xs" color="text-white"></app-icon>
+            <span>รายการ</span>
+          </div>
+        </app-glass-card>
+        <app-glass-card
+          padding="p-5"
+          customClass="bg-gradient-to-br from-orange-500 to-red-600 dark:from-orange-600 dark:to-red-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [appStagger]="3"
+          [staggerDelay]="0.05"
+          [routerLink]="['/appraisal']">
+          <div class="text-4xl font-bold mb-2">{{ statistics.averageScore }}</div>
+          <div class="text-sm opacity-90">คะแนนเฉลี่ย</div>
+          <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
+            <app-icon name="star" size="xs" color="text-white"></app-icon>
+            <span>คะแนน</span>
+          </div>
+        </app-glass-card>
+      </div>
+    </div>
+
+    <!-- Main Content: Menu Cards -->
+    <div class="mb-8">
+      <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">เมนูหลัก</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          *ngFor="let item of menuItems; let i = index"
+          [routerLink]="[item.route]"
+          [appStagger]="i"
+          [staggerDelay]="0.1"
+          class="cursor-pointer group">
+          <app-glass-card
+            padding="p-6"
+            customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 h-full">
+            <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
+              <app-icon [name]="item.icon" size="lg" color="text-blue-600 dark:text-blue-400"></app-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ item.title }}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ item.description }}</p>
+            <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
+              เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-blue-600 dark:text-blue-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
+            </div>
+          </app-glass-card>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
