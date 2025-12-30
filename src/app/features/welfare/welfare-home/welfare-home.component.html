@@ -87,33 +87,105 @@
       </div>
     </section>
 
-    <!-- Main Content: Menu Cards -->
-    <section class="mb-8" aria-labelledby="welfare-menu-title">
-      <h2 id="welfare-menu-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">เมนูหลัก</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div
-          *ngFor="let item of menuItems; let i = index"
-          [appStagger]="i"
-          [staggerDelay]="0.1"
-          class="cursor-pointer group focus:outline-none focus:ring-2 focus:ring-blue-400"
-          role="button"
-          [attr.tabindex]="0"
-          [attr.aria-label]="item.title + ': ' + item.description"
-          (click)="navigateToRoute(item.route)"
-          (keydown.enter)="navigateToRoute(item.route)"
-          (keydown.space)="navigateToRoute(item.route); $event.preventDefault()">
-          <app-glass-card
-            padding="p-6"
-            customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 h-full focus-within:ring-2 focus-within:ring-blue-400 focus-within:ring-offset-2">
-            <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
-              <app-icon [name]="item.icon" size="lg" color="text-blue-600 dark:text-blue-400" [attr.aria-hidden]="true"></app-icon>
+    <!-- Workspace Grid: Charts and Quick Actions -->
+    <section class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8" aria-labelledby="welfare-charts-title">
+      <!-- Charts Section: 3 columns (75%) -->
+      <div class="lg:col-span-3">
+        <h2 id="welfare-charts-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">กราฟและรายงาน</h2>
+
+        <!-- Charts Row 1: 2 columns -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
+          <!-- Welfare Enrollment Chart -->
+          <app-glass-card padding="p-5" customClass="hover:shadow-lg transition-shadow duration-300">
+            <div class="flex items-center justify-between mb-5">
+              <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การลงทะเบียนสวัสดิการ 6 เดือน</h3>
+              <app-icon name="bar_chart" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ item.title }}</h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ item.description }}</p>
-            <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-blue-600 dark:text-blue-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300" [attr.aria-hidden]="true"></app-icon>
+            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟการลงทะเบียนสวัสดิการ 6 เดือน">
+              <div class="text-center">
+                <app-icon name="show_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
+                <p class="mt-2 text-sm thai-text">กราฟการลงทะเบียนสวัสดิการ</p>
+              </div>
             </div>
           </app-glass-card>
+
+          <!-- Welfare Distribution Chart -->
+          <app-glass-card padding="p-5" customClass="hover:shadow-lg transition-shadow duration-300">
+            <div class="flex items-center justify-between mb-5">
+              <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การกระจายสวัสดิการ</h3>
+              <app-icon name="pie_chart" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
+            </div>
+            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟการกระจายสวัสดิการ">
+              <div class="text-center">
+                <app-icon name="donut_large" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
+                <p class="mt-2 text-sm thai-text">กราฟการกระจายสวัสดิการ</p>
+              </div>
+            </div>
+          </app-glass-card>
+        </div>
+
+        <!-- Charts Row 2: 2 columns -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
+          <!-- Welfare by Department Chart -->
+          <app-glass-card padding="p-5" customClass="hover:shadow-lg transition-shadow duration-300">
+            <div class="flex items-center justify-between mb-5">
+              <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">สวัสดิการตามแผนก</h3>
+              <app-icon name="account_tree" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
+            </div>
+            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟสวัสดิการตามแผนก">
+              <div class="text-center">
+                <app-icon name="stacked_bar_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
+                <p class="mt-2 text-sm thai-text">กราฟสวัสดิการตามแผนก</p>
+              </div>
+            </div>
+          </app-glass-card>
+
+          <!-- Welfare Usage Chart -->
+          <app-glass-card padding="p-5" customClass="hover:shadow-lg transition-shadow duration-300">
+            <div class="flex items-center justify-between mb-5">
+              <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การใช้งานสวัสดิการ</h3>
+              <app-icon name="favorite" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
+            </div>
+            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟการใช้งานสวัสดิการ">
+              <div class="text-center">
+                <app-icon name="area_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
+                <p class="mt-2 text-sm thai-text">กราฟการใช้งานสวัสดิการ</p>
+              </div>
+            </div>
+          </app-glass-card>
+        </div>
+      </div>
+
+      <!-- Quick Actions Section: 1 column (25%) -->
+      <div class="lg:col-span-1">
+        <div class="sticky top-5">
+          <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">เมนูหลัก</h3>
+          <div class="space-y-4">
+            <div
+              *ngFor="let item of menuItems; let i = index"
+              [appStagger]="i"
+              [staggerDelay]="0.1"
+              class="cursor-pointer group focus:outline-none focus:ring-2 focus:ring-blue-400"
+              role="button"
+              [attr.tabindex]="0"
+              [attr.aria-label]="item.title + ': ' + item.description"
+              (click)="navigateToRoute(item.route)"
+              (keydown.enter)="navigateToRoute(item.route)"
+              (keydown.space)="navigateToRoute(item.route); $event.preventDefault()">
+              <app-glass-card
+                padding="p-6"
+                customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 focus-within:ring-2 focus-within:ring-blue-400 focus-within:ring-offset-2">
+                <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
+                  <app-icon [name]="item.icon" size="lg" color="text-blue-600 dark:text-blue-400" [attr.aria-hidden]="true"></app-icon>
+                </div>
+                <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ item.title }}</h4>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ item.description }}</p>
+                <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
+                  เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-blue-600 dark:text-blue-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300" [attr.aria-hidden]="true"></app-icon>
+                </div>
+              </app-glass-card>
+            </div>
+          </div>
         </div>
       </div>
     </section>
