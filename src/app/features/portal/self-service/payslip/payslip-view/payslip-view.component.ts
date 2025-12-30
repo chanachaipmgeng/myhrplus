@@ -5,6 +5,8 @@ import { PageLayoutComponent } from '../../../../../shared/components/page-layou
 import { GlassCardComponent } from '../../../../../shared/components/glass-card/glass-card.component';
 import { GlassButtonComponent } from '../../../../../shared/components/glass-button/glass-button.component';
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
+import { EmptyStateComponent } from '../../../../../shared/components/empty-state/empty-state.component';
+import { IconComponent } from '../../../../../shared/components/icon/icon.component';
 
 interface Payslip {
   id: string;
@@ -25,7 +27,9 @@ interface Payslip {
     PageLayoutComponent,
     GlassCardComponent,
     GlassButtonComponent,
-    LoadingComponent
+    LoadingComponent,
+    EmptyStateComponent,
+    IconComponent
   ],
   templateUrl: './payslip-view.component.html',
   styleUrls: ['./payslip-view.component.scss']

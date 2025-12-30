@@ -5,6 +5,9 @@ import { PageLayoutComponent } from '../../../../../shared/components/page-layou
 import { GlassCardComponent } from '../../../../../shared/components/glass-card/glass-card.component';
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
 import { StatisticsGridComponent } from '../../../../../shared/components/statistics-grid/statistics-grid.component';
+import { EmptyStateComponent } from '../../../../../shared/components/empty-state/empty-state.component';
+import { StatusBadgeComponent } from '../../../../../shared/components/status-badge/status-badge.component';
+import { IconComponent } from '../../../../../shared/components/icon/icon.component';
 
 interface EditTimeRecord {
   id: string;
@@ -24,7 +27,10 @@ interface EditTimeRecord {
     PageLayoutComponent,
     GlassCardComponent,
     LoadingComponent,
-    StatisticsGridComponent
+    StatisticsGridComponent,
+    EmptyStateComponent,
+    StatusBadgeComponent,
+    IconComponent
   ],
   templateUrl: './edit-time-statistic.component.html',
   styleUrls: ['./edit-time-statistic.component.scss']
@@ -91,15 +97,6 @@ export class EditTimeStatisticComponent implements OnInit {
         status: 'pending'
       }
     ];
-  }
-
-  getStatusClass(status: string): string {
-    const classes: { [key: string]: string } = {
-      pending: 'bg-yellow-500/20 text-yellow-700 dark:text-yellow-400',
-      approved: 'bg-green-500/20 text-green-700 dark:text-green-400',
-      rejected: 'bg-red-500/20 text-red-700 dark:text-red-400'
-    };
-    return classes[status] || '';
   }
 
   getStatusLabel(status: string): string {

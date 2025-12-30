@@ -6,9 +6,12 @@ import { IconComponent } from '../icon/icon.component';
 export type StatusType = 
   | 'pending' | 'approved' | 'rejected' | 'cancelled'
   | 'draft' | 'submitted' | 'reviewed' | 'completed'
-  | 'active' | 'inactive' | 'suspended'
+  | 'active' | 'inactive' | 'suspended' | 'expired'
   | 'registered' | 'ongoing' | 'finished'
-  | 'success' | 'error' | 'warning' | 'info';
+  | 'success' | 'error' | 'warning' | 'info'
+  | 'present' | 'late' | 'absent' | 'leave'
+  | 'early' | 'missing'
+  | 'ready' | 'downloaded';
 
 @Component({
   selector: 'app-status-badge',
@@ -41,13 +44,22 @@ export class StatusBadgeComponent {
       active: 'common.active',
       inactive: 'common.inactive',
       suspended: 'common.status.suspended',
+      expired: 'common.status.expired',
       registered: 'common.status.registered',
       ongoing: 'common.status.ongoing',
       finished: 'common.status.finished',
       success: 'common.status.success',
       error: 'common.status.error',
       warning: 'common.status.warning',
-      info: 'common.status.info'
+      info: 'common.status.info',
+      present: 'common.status.present',
+      late: 'common.status.late',
+      absent: 'common.status.absent',
+      leave: 'common.status.leave',
+      early: 'common.status.early',
+      missing: 'common.status.missing',
+      ready: 'common.status.ready',
+      downloaded: 'common.status.downloaded'
     };
     return this.translate.instant(keyMap[this.status] || this.status);
   }
@@ -65,13 +77,22 @@ export class StatusBadgeComponent {
       active: 'check_circle',
       inactive: 'remove_circle',
       suspended: 'pause_circle',
+      expired: 'event_busy',
       registered: 'how_to_reg',
       ongoing: 'sync',
       finished: 'flag',
       success: 'check_circle',
       error: 'error',
       warning: 'warning',
-      info: 'info'
+      info: 'info',
+      present: 'check_circle',
+      late: 'schedule',
+      absent: 'cancel',
+      leave: 'event',
+      early: 'schedule',
+      missing: 'error',
+      ready: 'check_circle',
+      downloaded: 'download_done'
     };
     return iconMap[this.status] || 'circle';
   }
@@ -89,13 +110,22 @@ export class StatusBadgeComponent {
       active: 'green',
       inactive: 'gray',
       suspended: 'orange',
+      expired: 'gray',
       registered: 'blue',
       ongoing: 'blue',
       finished: 'green',
       success: 'green',
       error: 'red',
       warning: 'amber',
-      info: 'blue'
+      info: 'blue',
+      present: 'green',
+      late: 'amber',
+      absent: 'red',
+      leave: 'blue',
+      early: 'blue',
+      missing: 'red',
+      ready: 'green',
+      downloaded: 'gray'
     };
     return colorMap[this.status] || 'gray';
   }

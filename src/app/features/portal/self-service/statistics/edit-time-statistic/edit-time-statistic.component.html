@@ -17,12 +17,11 @@
         <app-loading></app-loading>
       } @else {
         @if (editTimeRecords.length === 0) {
-          <app-glass-card>
-            <div class="p-6 text-center">
-              <span class="material-icons text-6xl text-gray-400 mb-4">check_circle</span>
-              <p class="text-gray-600 dark:text-gray-400">ไม่มีประวัติการแก้ไขเวลา</p>
-            </div>
-          </app-glass-card>
+          <app-empty-state
+            [icon]="'check_circle'"
+            [title]="'ไม่มีประวัติการแก้ไขเวลา'"
+            [description]="'คุณยังไม่มีการแก้ไขเวลา'">
+          </app-empty-state>
         } @else {
           @for (record of editTimeRecords; track record.id) {
             <app-glass-card>
@@ -33,17 +32,15 @@
                       <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
                         {{ record.date | date:'dd/MM/yyyy' }}
                       </h3>
-                      <span class="px-3 py-1 rounded-full text-sm font-medium {{ getStatusClass(record.status) }}">
-                        {{ getStatusLabel(record.status) }}
-                      </span>
+                      <app-status-badge [status]="record.status" [label]="getStatusLabel(record.status)"></app-status-badge>
                     </div>
                     <div class="flex items-center gap-4 mb-2">
                       <span class="text-gray-600 dark:text-gray-400">
                         เวลาเดิม: <span class="font-medium">{{ record.originalTime }}</span>
                       </span>
-                      <span class="material-icons text-gray-400">arrow_forward</span>
+                      <app-icon name="arrow_forward" size="sm" color="text-gray-400"></app-icon>
                       <span class="text-gray-900 dark:text-gray-100">
-                        เวลาใหม่: <span class="font-semibold text-primary-600 dark:text-primary-400">{{ record.editedTime }}</span>
+                        เวลาใหม่: <span class="font-semibold text-primary dark:text-primary">{{ record.editedTime }}</span>
                       </span>
                     </div>
                     <p class="text-sm text-gray-500 dark:text-gray-500">เหตุผล: {{ record.reason }}</p>

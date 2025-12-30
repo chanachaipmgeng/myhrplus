@@ -5,6 +5,7 @@ import { PageLayoutComponent } from '../../../../../shared/components/page-layou
 import { GlassCardComponent } from '../../../../../shared/components/glass-card/glass-card.component';
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
 import { StatisticsGridComponent } from '../../../../../shared/components/statistics-grid/statistics-grid.component';
+import { StatusBadgeComponent } from '../../../../../shared/components/status-badge/status-badge.component';
 
 interface AttendanceRecord {
   date: string;
@@ -23,7 +24,8 @@ interface AttendanceRecord {
     PageLayoutComponent,
     GlassCardComponent,
     LoadingComponent,
-    StatisticsGridComponent
+    StatisticsGridComponent,
+    StatusBadgeComponent
   ],
   templateUrl: './attendance-view.component.html',
   styleUrls: ['./attendance-view.component.scss']

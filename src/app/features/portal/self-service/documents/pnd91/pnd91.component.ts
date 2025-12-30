@@ -5,6 +5,9 @@ import { PageLayoutComponent } from '../../../../../shared/components/page-layou
 import { GlassCardComponent } from '../../../../../shared/components/glass-card/glass-card.component';
 import { GlassButtonComponent } from '../../../../../shared/components/glass-button/glass-button.component';
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
+import { EmptyStateComponent } from '../../../../../shared/components/empty-state/empty-state.component';
+import { StatusBadgeComponent } from '../../../../../shared/components/status-badge/status-badge.component';
+import { IconComponent } from '../../../../../shared/components/icon/icon.component';
 
 interface Pnd91Document {
   id: string;
@@ -24,7 +27,10 @@ interface Pnd91Document {
     PageLayoutComponent,
     GlassCardComponent,
     GlassButtonComponent,
-    LoadingComponent
+    LoadingComponent,
+    EmptyStateComponent,
+    StatusBadgeComponent,
+    IconComponent
   ],
   templateUrl: './pnd91.component.html',
   styleUrls: ['./pnd91.component.scss']
@@ -66,15 +72,6 @@ export class Pnd91Component implements OnInit {
         status: 'pending'
       }
     ];
-  }
-
-  getStatusClass(status: string): string {
-    const classes: { [key: string]: string } = {
-      pending: 'bg-yellow-500/20 text-yellow-700 dark:text-yellow-400',
-      ready: 'bg-green-500/20 text-green-700 dark:text-green-400',
-      downloaded: 'bg-gray-500/20 text-gray-700 dark:text-gray-400'
-    };
-    return classes[status] || '';
   }
 
   getStatusLabel(status: string): string {

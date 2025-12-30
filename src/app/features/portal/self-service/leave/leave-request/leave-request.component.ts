@@ -7,6 +7,9 @@ import { GlassCardComponent } from '../../../../../shared/components/glass-card/
 import { GlassButtonComponent } from '../../../../../shared/components/glass-button/glass-button.component';
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
 import { StatisticsGridComponent } from '../../../../../shared/components/statistics-grid/statistics-grid.component';
+import { EmptyStateComponent } from '../../../../../shared/components/empty-state/empty-state.component';
+import { StatusBadgeComponent } from '../../../../../shared/components/status-badge/status-badge.component';
+import { IconComponent } from '../../../../../shared/components/icon/icon.component';
 
 interface LeaveRequest {
   id: string;
@@ -29,7 +32,10 @@ interface LeaveRequest {
     GlassCardComponent,
     GlassButtonComponent,
     LoadingComponent,
-    StatisticsGridComponent
+    StatisticsGridComponent,
+    EmptyStateComponent,
+    StatusBadgeComponent,
+    IconComponent
   ],
   templateUrl: './leave-request.component.html',
   styleUrls: ['./leave-request.component.scss']

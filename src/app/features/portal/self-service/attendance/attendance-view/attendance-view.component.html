@@ -43,9 +43,11 @@
                       {{ record.workingHours > 0 ? record.workingHours + ' ชม.' : '-' }}
                     </td>
                     <td class="px-4 py-3">
-                      <span class="px-3 py-1 rounded-full text-xs font-medium {{ getStatusClass(record.status) }}">
-                        {{ getStatusLabel(record.status) }}
-                      </span>
+                      <app-status-badge
+                        [status]="record.status"
+                        [label]="getStatusLabel(record.status)"
+                        size="sm">
+                      </app-status-badge>
                     </td>
                   </tr>
                 }

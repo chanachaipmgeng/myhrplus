@@ -5,6 +5,7 @@ import { PageLayoutComponent } from '../../../../../shared/components/page-layou
 import { GlassCardComponent } from '../../../../../shared/components/glass-card/glass-card.component';
 import { GlassButtonComponent } from '../../../../../shared/components/glass-button/glass-button.component';
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
+import { IconComponent } from '../../../../../shared/components/icon/icon.component';
 
 @Component({
   selector: 'app-timestamp',
@@ -15,7 +16,8 @@ import { LoadingComponent } from '../../../../../shared/components/loading/loadi
     PageLayoutComponent,
     GlassCardComponent,
     GlassButtonComponent,
-    LoadingComponent
+    LoadingComponent,
+    IconComponent
   ],
   templateUrl: './timestamp.component.html',
   styleUrls: ['./timestamp.component.scss']

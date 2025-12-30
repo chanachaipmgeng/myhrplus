@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../../../../shared/shared.module';
 import { PageLayoutComponent } from '../../../../../shared/components/page-layout/page-layout.component';
 import { GlassCardComponent } from '../../../../../shared/components/glass-card/glass-card.component';
+import { EmptyStateComponent } from '../../../../../shared/components/empty-state/empty-state.component';
 
 interface Subordinate {
   id: string;
@@ -23,7 +24,8 @@ interface Subordinate {
     RouterModule,
     SharedModule,
     PageLayoutComponent,
-    GlassCardComponent
+    GlassCardComponent,
+    EmptyStateComponent
   ],
   templateUrl: './subordinates-list.component.html',
   styleUrls: ['./subordinates-list.component.scss']

@@ -10,7 +10,7 @@
     <!-- Current Time Display -->
     <app-glass-card>
       <div class="p-6 text-center">
-        <div class="text-6xl font-bold text-primary-600 dark:text-primary-400 mb-2">
+        <div class="text-6xl font-bold text-primary mb-2">
           {{ currentTime | date:'HH:mm:ss' }}
         </div>
         <div class="text-lg text-gray-600 dark:text-gray-400">
@@ -24,21 +24,21 @@
       <div class="p-6">
         <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">สถานะวันนี้</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="p-4 rounded-lg bg-primary-500/10 dark:bg-primary-500/20">
+          <div class="p-4 rounded-lg bg-primary/10">
             <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">เวลาเข้า</div>
-            <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">
+            <div class="text-2xl font-bold text-primary">
               {{ todayStatus.checkIn || '-' }}
             </div>
           </div>
-          <div class="p-4 rounded-lg bg-primary-500/10 dark:bg-primary-500/20">
+          <div class="p-4 rounded-lg bg-primary/10">
             <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">เวลาออก</div>
-            <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">
+            <div class="text-2xl font-bold text-primary">
               {{ todayStatus.checkOut || '-' }}
             </div>
           </div>
-          <div class="p-4 rounded-lg bg-primary-500/10 dark:bg-primary-500/20">
+          <div class="p-4 rounded-lg bg-primary/10">
             <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">ชั่วโมงทำงาน</div>
-            <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">
+            <div class="text-2xl font-bold text-primary">
               {{ todayStatus.workingHours }} ชม.
             </div>
           </div>
@@ -52,14 +52,14 @@
         variant="primary"
         [disabled]="!!todayStatus.checkIn && !todayStatus.checkOut"
         (clicked)="checkIn()">
-        <span class="material-icons mr-2">login</span>
+        <app-icon name="login" size="sm" customClass="mr-2"></app-icon>
         เข้างาน
       </app-glass-button>
       <app-glass-button
         variant="secondary"
         [disabled]="!todayStatus.checkIn || !!todayStatus.checkOut"
         (clicked)="checkOut()">
-        <span class="material-icons mr-2">logout</span>
+        <app-icon name="logout" size="sm" customClass="mr-2"></app-icon>
         ออกงาน
       </app-glass-button>
     </div>

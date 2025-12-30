@@ -8,46 +8,46 @@
   <div class="mb-8">
     <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">{{ 'settings.dashboard.statistics.title' | translate }}</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
-      <app-glass-card
-        padding="p-5"
-        customClass="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+      <app-statistics-card
+        [icon]="'people'"
+        [label]="'settings.dashboard.statistics.totalUsers' | translate"
+        [value]="statistics.totalUsers"
+        iconBgClass="bg-indigo-100 dark:bg-indigo-900"
         [appStagger]="0"
         [staggerDelay]="0.05">
-        <div class="text-4xl font-bold mb-2">{{ statistics.totalUsers }}</div>
-        <div class="text-sm opacity-90">{{ 'settings.dashboard.statistics.totalUsers' | translate }}</div>
-      </app-glass-card>
-      <app-glass-card
-        padding="p-5"
-        customClass="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+      </app-statistics-card>
+      <app-statistics-card
+        [icon]="'person'"
+        [label]="'settings.dashboard.statistics.activeUsers' | translate"
+        [value]="statistics.activeUsers"
+        iconBgClass="bg-pink-100 dark:bg-pink-900"
         [appStagger]="1"
         [staggerDelay]="0.05">
-        <div class="text-4xl font-bold mb-2">{{ statistics.activeUsers }}</div>
-        <div class="text-sm opacity-90">{{ 'settings.dashboard.statistics.activeUsers' | translate }}</div>
-      </app-glass-card>
-      <app-glass-card
-        padding="p-5"
-        customClass="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+      </app-statistics-card>
+      <app-statistics-card
+        [icon]="'security'"
+        [label]="'settings.dashboard.statistics.systemAccess' | translate"
+        [value]="statistics.systemAccess"
+        iconBgClass="bg-blue-100 dark:bg-blue-900"
         [appStagger]="2"
         [staggerDelay]="0.05">
-        <div class="text-4xl font-bold mb-2">{{ statistics.systemAccess }}</div>
-        <div class="text-sm opacity-90">{{ 'settings.dashboard.statistics.systemAccess' | translate }}</div>
-      </app-glass-card>
-      <app-glass-card
-        padding="p-5"
-        customClass="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+      </app-statistics-card>
+      <app-statistics-card
+        [icon]="'email'"
+        [label]="'settings.dashboard.statistics.emailReminders' | translate"
+        [value]="statistics.emailReminders"
+        iconBgClass="bg-green-100 dark:bg-green-900"
         [appStagger]="3"
         [staggerDelay]="0.05">
-        <div class="text-4xl font-bold mb-2">{{ statistics.emailReminders }}</div>
-        <div class="text-sm opacity-90">{{ 'settings.dashboard.statistics.emailReminders' | translate }}</div>
-      </app-glass-card>
-      <app-glass-card
-        padding="p-5"
-        customClass="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+      </app-statistics-card>
+      <app-statistics-card
+        [icon]="'health_and_safety'"
+        [label]="'settings.dashboard.statistics.systemHealth' | translate"
+        [value]="statistics.systemHealth + '%'"
+        iconBgClass="bg-yellow-100 dark:bg-yellow-900"
         [appStagger]="4"
         [staggerDelay]="0.05">
-        <div class="text-4xl font-bold mb-2">{{ statistics.systemHealth }}%</div>
-        <div class="text-sm opacity-90">{{ 'settings.dashboard.statistics.systemHealth' | translate }}</div>
-      </app-glass-card>
+      </app-statistics-card>
     </div>
   </div>
 

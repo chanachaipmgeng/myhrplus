@@ -7,6 +7,7 @@ import { GlassCardComponent } from '../../../../../shared/components/glass-card/
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
 import { StatisticsCardComponent } from '../../../../../shared/components/statistics-card/statistics-card.component';
 import { StatisticsGridComponent } from '../../../../../shared/components/statistics-grid/statistics-grid.component';
+import { StatusBadgeComponent } from '../../../../../shared/components/status-badge/status-badge.component';
 
 interface WelfareItem {
   id: string;
@@ -28,7 +29,8 @@ interface WelfareItem {
     GlassCardComponent,
     LoadingComponent,
     StatisticsCardComponent,
-    StatisticsGridComponent
+    StatisticsGridComponent,
+    StatusBadgeComponent
   ],
   templateUrl: './welfare-view.component.html',
   styleUrls: ['./welfare-view.component.scss']

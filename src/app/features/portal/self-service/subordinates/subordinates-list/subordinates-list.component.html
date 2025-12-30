@@ -10,21 +10,22 @@
       <app-skeleton-loader type="list" [rows]="5" [showAvatar]="true"></app-skeleton-loader>
     } @else {
       @if (subordinates.length === 0) {
-        <app-glass-card>
-          <div class="p-6 text-center">
-            <span class="material-icons text-6xl text-gray-400 mb-4">people</span>
-            <p class="text-gray-600 dark:text-gray-400">ไม่มีลูกน้อง</p>
-          </div>
-        </app-glass-card>
+        <app-empty-state
+          [icon]="'people'"
+          [title]="'ไม่มีลูกน้อง'"
+          [description]="'คุณยังไม่มีลูกน้องในระบบ'">
+        </app-empty-state>
       } @else {
         @for (sub of subordinates; track sub.id; let i = $index) {
           <app-glass-card [appStagger]="i" [staggerDelay]="0.1">
             <div class="p-6">
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-4">
-                  <div class="w-12 h-12 rounded-full bg-primary-500/20 flex items-center justify-center">
-                    <span class="material-icons text-primary-600 dark:text-primary-400">person</span>
-                  </div>
+                  <app-avatar
+                    [name]="sub.firstName + ' ' + sub.lastName"
+                    size="md"
+                    shape="circle">
+                  </app-avatar>
                   <div>
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
                       {{ sub.firstName }} {{ sub.lastName }}

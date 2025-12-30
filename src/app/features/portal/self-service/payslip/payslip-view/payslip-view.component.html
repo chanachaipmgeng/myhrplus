@@ -10,12 +10,11 @@
       <app-loading></app-loading>
     } @else {
       @if (payslips.length === 0) {
-        <app-glass-card>
-          <div class="p-6 text-center">
-            <span class="material-icons text-6xl text-gray-400 mb-4">receipt</span>
-            <p class="text-gray-600 dark:text-gray-400">ยังไม่มีสลิปเงินเดือน</p>
-          </div>
-        </app-glass-card>
+        <app-empty-state
+          [icon]="'receipt'"
+          [title]="'ยังไม่มีสลิปเงินเดือน'"
+          [description]="'คุณยังไม่มีสลิปเงินเดือนในระบบ'">
+        </app-empty-state>
       } @else {
         @for (payslip of payslips; track payslip.id) {
           <app-glass-card>
@@ -28,7 +27,7 @@
                   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400">เงินเดือนรวม</p>
-                      <p class="text-xl font-bold text-primary-600 dark:text-primary-400">
+                      <p class="text-xl font-bold text-primary dark:text-primary">
                         {{ payslip.grossSalary | number:'1.2-2' }} บาท
                       </p>
                     </div>
@@ -47,7 +46,7 @@
                   </div>
                 </div>
                 <app-glass-button variant="primary" (clicked)="downloadPayslip(payslip)">
-                  <span class="material-icons mr-2">download</span>
+                  <app-icon name="download" size="sm" customClass="mr-2"></app-icon>
                   ดาวน์โหลด
                 </app-glass-button>
               </div>

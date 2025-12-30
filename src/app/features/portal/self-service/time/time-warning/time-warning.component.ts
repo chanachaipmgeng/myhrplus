@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { PageLayoutComponent } from '../../../../../shared/components/page-layout/page-layout.component';
 import { GlassCardComponent } from '../../../../../shared/components/glass-card/glass-card.component';
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
+import { EmptyStateComponent } from '../../../../../shared/components/empty-state/empty-state.component';
+import { StatusBadgeComponent } from '../../../../../shared/components/status-badge/status-badge.component';
 
 interface TimeWarning {
   id: string;
@@ -21,7 +23,9 @@ interface TimeWarning {
     RouterModule,
     PageLayoutComponent,
     GlassCardComponent,
-    LoadingComponent
+    LoadingComponent,
+    EmptyStateComponent,
+    StatusBadgeComponent
   ],
   templateUrl: './time-warning.component.html',
   styleUrls: ['./time-warning.component.scss']

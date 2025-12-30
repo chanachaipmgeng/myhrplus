@@ -8,46 +8,46 @@
   <div class="mb-8">
     <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">{{ 'payroll.dashboard.statistics.title' | translate }}</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
-      <app-glass-card
-        padding="p-5"
-        customClass="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+      <app-statistics-card
+        [icon]="'payments'"
+        [label]="'payroll.dashboard.statistics.totalPayroll' | translate"
+        [value]="(statistics.totalPayroll / 1000000).toFixed(1) + 'M'"
+        iconBgClass="bg-indigo-100 dark:bg-indigo-900"
         [appStagger]="0"
         [staggerDelay]="0.05">
-        <div class="text-3xl font-bold mb-2">{{ (statistics.totalPayroll / 1000000).toFixed(1) }}M</div>
-        <div class="text-sm opacity-90">{{ 'payroll.dashboard.statistics.totalPayroll' | translate }}</div>
-      </app-glass-card>
-      <app-glass-card
-        padding="p-5"
-        customClass="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+      </app-statistics-card>
+      <app-statistics-card
+        [icon]="'account_balance_wallet'"
+        [label]="'payroll.dashboard.statistics.averageSalary' | translate"
+        [value]="(statistics.averageSalary / 1000).toFixed(0) + 'K'"
+        iconBgClass="bg-pink-100 dark:bg-pink-900"
         [appStagger]="1"
         [staggerDelay]="0.05">
-        <div class="text-3xl font-bold mb-2">{{ (statistics.averageSalary / 1000).toFixed(0) }}K</div>
-        <div class="text-sm opacity-90">{{ 'payroll.dashboard.statistics.averageSalary' | translate }}</div>
-      </app-glass-card>
-      <app-glass-card
-        padding="p-5"
-        customClass="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+      </app-statistics-card>
+      <app-statistics-card
+        [icon]="'check_circle'"
+        [label]="'payroll.dashboard.statistics.processed' | translate"
+        [value]="statistics.processed"
+        iconBgClass="bg-blue-100 dark:bg-blue-900"
         [appStagger]="2"
         [staggerDelay]="0.05">
-        <div class="text-4xl font-bold mb-2">{{ statistics.processed }}</div>
-        <div class="text-sm opacity-90">{{ 'payroll.dashboard.statistics.processed' | translate }}</div>
-      </app-glass-card>
-      <app-glass-card
-        padding="p-5"
-        customClass="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+      </app-statistics-card>
+      <app-statistics-card
+        [icon]="'schedule'"
+        [label]="'payroll.dashboard.statistics.pending' | translate"
+        [value]="statistics.pending"
+        iconBgClass="bg-green-100 dark:bg-green-900"
         [appStagger]="3"
         [staggerDelay]="0.05">
-        <div class="text-4xl font-bold mb-2">{{ statistics.pending }}</div>
-        <div class="text-sm opacity-90">{{ 'payroll.dashboard.statistics.pending' | translate }}</div>
-      </app-glass-card>
-      <app-glass-card
-        padding="p-5"
-        customClass="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+      </app-statistics-card>
+      <app-statistics-card
+        [icon]="'card_giftcard'"
+        [label]="'payroll.dashboard.statistics.totalBonuses' | translate"
+        [value]="(statistics.bonuses / 1000000).toFixed(1) + 'M'"
+        iconBgClass="bg-yellow-100 dark:bg-yellow-900"
         [appStagger]="4"
         [staggerDelay]="0.05">
-        <div class="text-3xl font-bold mb-2">{{ (statistics.bonuses / 1000000).toFixed(1) }}M</div>
-        <div class="text-sm opacity-90">{{ 'payroll.dashboard.statistics.totalBonuses' | translate }}</div>
-      </app-glass-card>
+      </app-statistics-card>
     </div>
   </div>
 

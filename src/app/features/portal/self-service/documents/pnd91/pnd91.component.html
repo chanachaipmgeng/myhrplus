@@ -12,16 +12,15 @@
       <app-loading></app-loading>
     } @else {
       @if (documents.length === 0) {
-        <app-glass-card>
-          <div class="p-6 text-center">
-            <span class="material-icons text-6xl text-gray-400 mb-4">description</span>
-            <p class="text-gray-600 dark:text-gray-400 mb-4">ยังไม่มีเอกสาร PND91</p>
-            <app-glass-button variant="primary" (clicked)="requestDocument()">
-              <span class="material-icons mr-2">add</span>
-              ขอเอกสารใหม่
-            </app-glass-button>
-          </div>
-        </app-glass-card>
+        <app-empty-state
+          [icon]="'description'"
+          [title]="'ยังไม่มีเอกสาร PND91'"
+          [description]="'คุณสามารถขอเอกสาร PND91 ได้โดยคลิกปุ่มด้านล่าง'">
+          <app-glass-button variant="primary" (clicked)="requestDocument()">
+            <app-icon name="add" size="sm" customClass="mr-2"></app-icon>
+            ขอเอกสารใหม่
+          </app-glass-button>
+        </app-empty-state>
       } @else {
         @for (doc of documents; track doc.id) {
           <app-glass-card>
@@ -32,9 +31,7 @@
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
                       PND91 ปี {{ doc.year }}
                     </h3>
-                    <span class="px-3 py-1 rounded-full text-sm font-medium {{ getStatusClass(doc.status) }}">
-                      {{ getStatusLabel(doc.status) }}
-                    </span>
+                    <app-status-badge [status]="doc.status" [label]="getStatusLabel(doc.status)"></app-status-badge>
                   </div>
                   <p class="text-gray-600 dark:text-gray-400 mb-2">ระยะเวลา: {{ doc.period }}</p>
                   <p class="text-sm text-gray-500 dark:text-gray-500">
@@ -43,7 +40,7 @@
                 </div>
                 @if (doc.status === 'ready') {
                   <app-glass-button variant="primary" (clicked)="downloadDocument(doc)">
-                    <span class="material-icons mr-2">download</span>
+                    <app-icon name="download" size="sm" customClass="mr-2"></app-icon>
                     ดาวน์โหลด
                   </app-glass-button>
                 }
