@@ -1,31 +1,5 @@
 {
-  "BU_DESC": "{{eng}}",
   "system.approve": "ວັນທີອະນຸມັດ",
-  "systemcode": {
-    "child": {
-      "amount": {
-        "tax": ""
-      },
-      "bdate": {
-        "before": {
-          "2561": ""
-        }
-      }
-    },
-    "coursekind": {
-      "null": ""
-    },
-    "life": {
-      "insurance": {
-        "premium2": ""
-      }
-    },
-    "parents": {
-      "extends": {
-        "child": ""
-      }
-    }
-  },
   "systemcode.actual.cost": "ງົບປະມານຕົວຈິງ",
   "systemcode.add": "ເພີ່ມ",
   "systemcode.addr.dist.edesc": "ອຳເພີອັງກິດ ",
@@ -840,6 +814,7 @@
   "bu7": "Bu 7",
   "Bu7": "ພາກສ່ວນຍ່ອຍ#4",
   "bu7Std": "ພາກສ່ວນຍ່ອຍ #4",
+  "BU_DESC": "{{eng}}",
   "Business Unit": "ໜ່ວຍທຸລະກິດ",
   "Business Unit 1": "ໜ່ວຍທຸລະກິດ 1",
   "Business Unit 1 ID": "ລະຫັດໜ່ວຍທຸລະກິດ 1",
@@ -2117,19 +2092,6 @@
   "features.auth.forgotPassword.successMessage": "ສົ່ງລະຫັດຜ່ານໄປຍັງອີເມວສຳເລັດແລ້ວ",
   "features.auth.forgotPassword.title": "ລືມລະຫັດຜ່ານ?",
   "features.auth.forgotPassword.username": "ຊື່ຜູ້ໃຊ້",
-  "features.auth.login.description": "ກະລຸນາເຂົ້າສູ່ລະບົບເພື່ອໃຊ້ງານລະບົບ HR",
-  "features.auth.login.error.passwordRequired": "ກະລຸນາປ້ອນລະຫັດຜ່ານ",
-  "features.auth.login.error.usernameRequired": "ກະລຸນາປ້ອນຊື່ຜູ້ໃຊ້",
-  "features.auth.login.forgotPassword": "ລືມລະຫັດຜ່ານ?",
-  "features.auth.login.password": "ລະຫັດຜ່ານ",
-  "features.auth.login.rememberMe": "ຈື່ຈຳຂ້ອຍ",
-  "features.auth.login.selectDatabase": "ເລືອກຖານຂໍ້ມູນ",
-  "features.auth.login.signIn": "ເຂົ້າສູ່ລະບົບດ້ວຍລະບົບ HR",
-  "features.auth.login.signingIn": "ກຳລັງເຂົ້າສູ່ລະບົບ...",
-  "features.auth.login.subtitle": "ລະບົບຈັດການຊັບພະຍາກອນມະນຸດທີ່ຄົບວົງຈອນ ເພື່ອເພີ່ມປະສິດທິພາບການເຮັດວຽກຂອງທ່ານ",
-  "features.auth.login.title": "ເຂົ້າສູ່ລະບົບ",
-  "features.auth.login.username": "ຊື່ຜູ້ໃຊ້ຫຼືອີເມວ",
-  "features.auth.login.welcome": "ຍິນດີຕ້ອນຮັບສູ່ myHR",
   "features.auth.unauthorized.goBack": "ກັບຄືນ",
   "features.auth.unauthorized.goToDashboard": "ໄປທີ່ແດຊບອດ",
   "features.auth.unauthorized.message": "ທ່ານບໍ່ມີສິດເຂົ້າເຖິງຊັບພະຍາກອນນີ້.",
@@ -3286,6 +3248,31 @@
   "swipe.card.in.holiday": "ຕອກບັດໃນວັນພັກ",
   "Swipe Time By Supervisor details": "ລາຍລະອຽດເວລາຕອກບັດໂດຍຜູ້ຄຸມງານ",
   "Swipe Time Details": "ລາຍລະອຽດເວລາຕອກບັດ",
+  "systemcode": {
+    "child": {
+      "amount": {
+        "tax": ""
+      },
+      "bdate": {
+        "before": {
+          "2561": ""
+        }
+      }
+    },
+    "coursekind": {
+      "null": ""
+    },
+    "life": {
+      "insurance": {
+        "premium2": ""
+      }
+    },
+    "parents": {
+      "extends": {
+        "child": ""
+      }
+    }
+  },
   "systemcpde.welfare.history.approvestatus.0": "ບໍ່ອະນຸມັດ",
   "systemcpde.welfare.history.approvestatus.1": "ອະນຸມັດ",
   "systemcpde.welfare.history.approvestatus.2": "ສົ່ງຄືນ",
