@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
 import { SyncfusionModule } from '@shared/syncfusion/syncfusion.module';
@@ -29,6 +30,7 @@ interface ComponentInfo {
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule,
     SyncfusionModule,
     TranslateModule,
@@ -60,6 +62,7 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
   currentTheme: { mode: ThemeMode; color: ThemeColor; primaryColor: string } = { mode: 'light', color: 'blue', primaryColor: '#3b82f6' };
   showColorPicker = false;
   customPrimaryColor = '#3b82f6';
+  hexColorInput = '#3b82f6';
   themeModes: { value: ThemeMode; label: string; icon: string }[] = [
     { value: 'light', label: 'Light', icon: '☀️' },
     { value: 'dark', label: 'Dark', icon: '🌙' },
@@ -209,7 +212,7 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private translate: TranslateService,
-    private themeService: ThemeService
+    public themeService: ThemeService
   ) {}
 
   ngOnInit(): void {
@@ -225,6 +228,7 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
           primaryColor: this.rgbToHex(theme.primaryColor)
         };
         this.customPrimaryColor = this.rgbToHex(theme.primaryColor);
+        this.hexColorInput = this.customPrimaryColor;
       })
     );
 
@@ -302,7 +306,10 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
   }
 
   // Color picker methods
-  toggleColorPicker(): void {
+  toggleColorPicker(event?: Event): void {
+    if (event) {
+      event.stopPropagation();
+    }
     this.showColorPicker = !this.showColorPicker;
   }
 
@@ -318,12 +325,35 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
     // Validate hex color format
     if (/^#[0-9A-Fa-f]{6}$/.test(hexColor)) {
       this.customPrimaryColor = hexColor;
+      this.hexColorInput = hexColor;
       const rgb = this.hexToRgb(hexColor);
       if (rgb) {
         this.themeService.setPrimaryColor(rgb);
       }
     } else if (input.type === 'color') {
       // Color picker always returns valid hex
+      this.customPrimaryColor = hexColor;
+      this.hexColorInput = hexColor;
+      const rgb = this.hexToRgb(hexColor);
+      if (rgb) {
+        this.themeService.setPrimaryColor(rgb);
+      }
+    }
+  }
+
+  onHexInputChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    let hexColor = input.value.trim();
+    
+    // Ensure hex color starts with #
+    if (!hexColor.startsWith('#')) {
+      hexColor = '#' + hexColor;
+    }
+    
+    this.hexColorInput = hexColor;
+    
+    // Validate and apply
+    if (/^#[0-9A-Fa-f]{6}$/.test(hexColor)) {
       this.customPrimaryColor = hexColor;
       const rgb = this.hexToRgb(hexColor);
       if (rgb) {
@@ -382,8 +412,12 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
   @HostListener('document:click', ['$event'])
   handleDocumentClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
+    // Don't close if clicking inside color picker container
     if (this.showColorPicker && !target.closest('.color-picker-container')) {
-      this.showColorPicker = false;
+      // Small delay to allow button click to register
+      setTimeout(() => {
+        this.showColorPicker = false;
+      }, 100);
     }
   }
 }
