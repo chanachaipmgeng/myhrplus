@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '../../../../../shared/shared.module';
-import { PageLayoutComponent } from '../../../../../shared/components/page-layout/page-layout.component';
-import { GlassCardComponent } from '../../../../../shared/components/glass-card/glass-card.component';
-import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
-import { StatisticsCardComponent } from '../../../../../shared/components/statistics-card/statistics-card.component';
-import { StatisticsGridComponent } from '../../../../../shared/components/statistics-grid/statistics-grid.component';
-import { StatusBadgeComponent } from '../../../../../shared/components/status-badge/status-badge.component';
+import { SharedModule } from '@shared/shared.module';
+import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { LoadingComponent } from '@shared/components/loading/loading.component';
+import { StatisticsCardComponent } from '@shared/components/statistics-card/statistics-card.component';
+import { StatisticsGridComponent } from '@shared/components/statistics-grid/statistics-grid.component';
+import { StatusBadgeComponent } from '@shared/components/status-badge/status-badge.component';
+import { StaggerDirective } from '@shared/directives/stagger.directive';
 
 interface WelfareItem {
   id: string;
@@ -30,7 +31,8 @@ interface WelfareItem {
     LoadingComponent,
     StatisticsCardComponent,
     StatisticsGridComponent,
-    StatusBadgeComponent
+    StatusBadgeComponent,
+    StaggerDirective
   ],
   templateUrl: './welfare-view.component.html',
   styleUrls: ['./welfare-view.component.scss']
@@ -38,7 +40,7 @@ interface WelfareItem {
 export class WelfareViewComponent implements OnInit {
   isLoading = false;
   welfareItems: WelfareItem[] = [];
-  
+
   statisticsCards = [
     {
       icon: '💰',

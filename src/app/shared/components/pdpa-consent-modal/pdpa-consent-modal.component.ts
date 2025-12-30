@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { AuthService } from '../../../core/services/auth.service';
-import { Pdpa, EmployeeConsent } from '../../../core/models/pdpa.model';
+import { AuthService } from '@core/services';
+import { Pdpa, EmployeeConsent } from '@core/models/pdpa.model';
 
 /**
  * PDPA Consent Modal Component

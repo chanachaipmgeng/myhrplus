@@ -1,12 +1,12 @@
 import { Component, OnInit, HostListener, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ThemeService, ThemeMode, ThemeColor } from '../../../core/services/theme.service';
-import { SharedModule } from '../../shared.module';
+import { ThemeService, ThemeMode, ThemeColor } from '@core/services';
+import { IconComponent } from '../icon/icon.component';
 
 @Component({
   selector: 'app-theme-toggle',
   standalone: true,
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, IconComponent],
   templateUrl: './theme-toggle.component.html',
   styleUrls: ['./theme-toggle.component.scss']
 })

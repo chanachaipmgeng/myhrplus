@@ -1,10 +1,11 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '../../../../../shared/shared.module';
-import { PageLayoutComponent } from '../../../../../shared/components/page-layout/page-layout.component';
-import { GlassCardComponent } from '../../../../../shared/components/glass-card/glass-card.component';
-import { EmptyStateComponent } from '../../../../../shared/components/empty-state/empty-state.component';
+import { SharedModule } from '@shared/shared.module';
+import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { EmptyStateComponent } from '@shared/components/empty-state/empty-state.component';
+import { StaggerDirective } from '@shared/directives/stagger.directive';
 
 interface Subordinate {
   id: string;
@@ -25,7 +26,8 @@ interface Subordinate {
     SharedModule,
     PageLayoutComponent,
     GlassCardComponent,
-    EmptyStateComponent
+    EmptyStateComponent,
+    StaggerDirective
   ],
   templateUrl: './subordinates-list.component.html',
   styleUrls: ['./subordinates-list.component.scss']

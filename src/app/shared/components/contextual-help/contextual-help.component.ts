@@ -1,12 +1,12 @@
 import { Component, Input, TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TooltipComponent } from '../tooltip/tooltip.component';
-import { SharedModule } from '../../shared.module';
+import { IconComponent } from '../icon/icon.component';
 
 @Component({
   selector: 'app-contextual-help',
   standalone: true,
-  imports: [CommonModule, TooltipComponent, SharedModule],
+  imports: [CommonModule, TooltipComponent, IconComponent],
   templateUrl: './contextual-help.component.html',
   styleUrls: ['./contextual-help.component.scss']
 })

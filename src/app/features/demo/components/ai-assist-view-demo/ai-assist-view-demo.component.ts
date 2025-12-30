@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AIAssistViewComponent } from '../../../../shared/components/ai-assist-view/ai-assist-view.component';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { AIAssistViewComponent } from '@shared/components/ai-assist-view/ai-assist-view.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-ai-assist-view-demo',

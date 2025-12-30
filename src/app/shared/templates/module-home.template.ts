@@ -3,7 +3,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService, User } from '../../../core/services/auth.service';
+import { AuthService, User } from '@core/services';
 
 @Component({
   selector: 'app-module-home',

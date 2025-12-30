@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TabsComponent, Tab } from '../../../../shared/components/tabs/tabs.component';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { PropsTableComponent, PropDefinition } from '../../shared/props-table/props-table.component';
+import { TabsComponent, Tab } from '@shared/components/tabs/tabs.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
+import { PropsTableComponent, PropDefinition } from '@features/demo/shared/props-table/props-table.component';
 
 @Component({
   selector: 'app-tabs-demo',

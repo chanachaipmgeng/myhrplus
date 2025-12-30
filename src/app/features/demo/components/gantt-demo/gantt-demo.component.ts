@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GanttComponent, GanttTask, GanttColumn } from '../../../../shared/components/gantt/gantt.component';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { GanttComponent, GanttTask, GanttColumn } from '@shared/components/gantt/gantt.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-gantt-demo',

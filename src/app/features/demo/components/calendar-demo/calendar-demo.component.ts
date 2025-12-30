@@ -10,12 +10,12 @@ import {
   isSameMonth,
   format
 } from 'date-fns';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { GlassButtonComponent } from '../../../../shared/components/glass-button/glass-button.component';
-import { CalendarComponent } from '../../../../shared/components/calendar/calendar.component';
-import { CalendarService, CalendarEventMeta } from '../../../../core/services/calendar.service';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { PropsTableComponent, PropDefinition } from '../../shared/props-table/props-table.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { GlassButtonComponent } from '@shared/components/glass-button/glass-button.component';
+import { CalendarComponent } from '@shared/components/calendar/calendar.component';
+import { CalendarService, CalendarEventMeta } from '@core/services';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
+import { PropsTableComponent, PropDefinition } from '@features/demo/shared/props-table/props-table.component';
 
 @Component({
   selector: 'app-calendar-demo',
@@ -113,7 +113,7 @@ export class MyCalendarComponent {
 }`;
 
   eventManagementCode = `import { Component } from '@angular/core';
-import { CalendarService, CalendarEventMeta } from '@core/services/calendar.service';
+import { CalendarService, CalendarEventMeta } from '@core/services';
 import { CalendarEvent } from 'angular-calendar';
 
 @Component({

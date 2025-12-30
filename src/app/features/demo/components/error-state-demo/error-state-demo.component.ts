@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../../../shared/shared.module';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { PropsTableComponent, PropDefinition } from '../../shared/props-table/props-table.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { ErrorStateComponent } from '@shared/components/error-state/error-state.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
+import { PropsTableComponent, PropDefinition } from '@features/demo/shared/props-table/props-table.component';
 
 @Component({
   selector: 'app-error-state-demo',
   standalone: true,
-  imports: [CommonModule, SharedModule, GlassCardComponent, CodeViewerComponent, PropsTableComponent],
+  imports: [CommonModule, GlassCardComponent, ErrorStateComponent, CodeViewerComponent, PropsTableComponent],
   templateUrl: './error-state-demo.component.html',
   styleUrls: ['./error-state-demo.component.scss']
 })

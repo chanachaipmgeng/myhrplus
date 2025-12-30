@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { FieldMaskingService } from '../../core/services/field-masking.service';
+import { FieldMaskingService } from '@core/services';
 
 /**
  * Pipe for masking sensitive data fields (PDPA/GDPR compliance)

@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../../../shared/shared.module';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { PropsTableComponent, PropDefinition } from '../../shared/props-table/props-table.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { SpinnerComponent } from '@shared/components/spinner/spinner.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
+import { PropsTableComponent, PropDefinition } from '@features/demo/shared/props-table/props-table.component';
 
 @Component({
   selector: 'app-spinner-demo',
   standalone: true,
-  imports: [CommonModule, SharedModule, GlassCardComponent, CodeViewerComponent, PropsTableComponent],
+  imports: [CommonModule, GlassCardComponent, SpinnerComponent, CodeViewerComponent, PropsTableComponent],
   templateUrl: './spinner-demo.component.html',
   styleUrls: ['./spinner-demo.component.scss']
 })

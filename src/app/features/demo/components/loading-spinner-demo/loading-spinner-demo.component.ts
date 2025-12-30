@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../../../shared/shared.module';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { GlassButtonComponent } from '../../../../shared/components/glass-button/glass-button.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { PropsTableComponent, PropDefinition } from '../../shared/props-table/props-table.component';
-import { LoadingService } from '../../../../core/services/loading.service';
+import { SharedModule } from '@shared/shared.module';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { GlassButtonComponent } from '@shared/components/glass-button/glass-button.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
+import { PropsTableComponent, PropDefinition } from '@features/demo/shared/props-table/props-table.component';
+import { LoadingService } from '@core/services';
 
 @Component({
   selector: 'app-loading-spinner-demo',
@@ -28,7 +28,7 @@ export class LoadingSpinnerDemoComponent {
   basicExample = `<app-loading-spinner></app-loading-spinner>`;
 
   serviceExample = `// In component.ts
-import { LoadingService } from '@core/services/loading.service';
+import { LoadingService } from '@core/services';
 
 constructor(private loadingService: LoadingService) {}
 

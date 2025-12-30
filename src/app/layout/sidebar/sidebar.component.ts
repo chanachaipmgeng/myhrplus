@@ -4,23 +4,23 @@ import { filter, takeUntil, switchMap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { TranslateService } from '@ngx-translate/core';
-import { MenuService, MenuItem } from '../../core/services/menu.service';
-import { AuthService } from '../../core/services/auth.service';
-import { ThemeService } from '../../core/services/theme.service';
-import { MenuContextService } from '../../core/services/menu-context.service';
-import { MenuDataService } from '../../core/services/menu-data.service';
-import { LayoutService, BreadcrumbItem } from '../../core/services/layout.service';
-import { MenuContext, MenuGroup } from '../../core/models/menu.model';
+import { MenuService, MenuItem } from '@core/services';
+import { AuthService } from '@core/services';
+import { ThemeService } from '@core/services';
+import { MenuContextService } from '@core/services';
+import { MenuDataService } from '@core/services';
+import { LayoutService, BreadcrumbItem } from '@core/services';
+import { MenuContext, MenuGroup } from '@core/models/menu.model';
 import {
   NAVIGATION_ITEMS,
   NavigationItem,
   NavigationChild,
   getNavigationItemsByRoles
-} from '../../core/constants/navigation.constant';
+} from '@core/constants';
 import { environment } from '../../../environments/environment';
 import { ListViewComponent } from '@syncfusion/ej2-angular-lists';
-import { NestedMenuAccordionComponent } from '../../shared/components/nested-menu-accordion/nested-menu-accordion.component';
-import { PREDEFINED_MODULES, MODULE_ROUTE_MAP, NestedMenuItem, MainModule } from '../../core/constants/sidebar-modules.constant';
+import { NestedMenuAccordionComponent } from '@shared/components/nested-menu-accordion/nested-menu-accordion.component';
+import { PREDEFINED_MODULES, MODULE_ROUTE_MAP, NestedMenuItem, MainModule } from '@core/constants';
 
 @Component({
   selector: 'app-sidebar',

@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, FormControl, Validators } from '@angular/forms';
-import { SharedModule } from '../../../../shared/shared.module';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { GlassInputComponent } from '../../../../shared/components/glass-input/glass-input.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { PropsTableComponent, PropDefinition } from '../../shared/props-table/props-table.component';
+import { ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
+import { FormValidationMessagesComponent } from '@shared/components/form-validation-messages/form-validation-messages.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
+import { PropsTableComponent, PropDefinition } from '@features/demo/shared/props-table/props-table.component';
 
 @Component({
   selector: 'app-form-validation-messages-demo',
   standalone: true,
-  imports: [CommonModule, FormsModule, SharedModule, GlassCardComponent, GlassInputComponent, CodeViewerComponent, PropsTableComponent],
+  imports: [CommonModule, ReactiveFormsModule, GlassCardComponent, GlassInputComponent, FormValidationMessagesComponent, CodeViewerComponent, PropsTableComponent],
   templateUrl: './form-validation-messages-demo.component.html',
   styleUrls: ['./form-validation-messages-demo.component.scss']
 })

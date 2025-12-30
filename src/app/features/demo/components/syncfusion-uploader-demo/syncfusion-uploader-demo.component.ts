@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SyncfusionUploaderWrapperComponent } from '../../../../shared/components/syncfusion-uploader/syncfusion-uploader.component';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { SyncfusionUploaderWrapperComponent } from '@shared/components/syncfusion-uploader/syncfusion-uploader.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-syncfusion-uploader-demo',

@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../../../shared/shared.module';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { PropsTableComponent, PropDefinition } from '../../shared/props-table/props-table.component';
-import { TimelineItem } from '../../../../shared/components/timeline/timeline.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { TimelineComponent, TimelineItem } from '@shared/components/timeline/timeline.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
+import { PropsTableComponent, PropDefinition } from '@features/demo/shared/props-table/props-table.component';
 
 @Component({
   selector: 'app-timeline-demo',
   standalone: true,
-  imports: [CommonModule, SharedModule, GlassCardComponent, CodeViewerComponent, PropsTableComponent],
+  imports: [CommonModule, GlassCardComponent, TimelineComponent, CodeViewerComponent, PropsTableComponent],
   templateUrl: './timeline-demo.component.html',
   styleUrls: ['./timeline-demo.component.scss']
 })

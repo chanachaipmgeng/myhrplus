@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../../../shared/shared.module';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { PropsTableComponent, PropDefinition } from '../../shared/props-table/props-table.component';
-import { DatePreset } from '../../../../shared/components/date-range-picker/date-range-picker.component';
+import { SharedModule } from '@shared/shared.module';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
+import { PropsTableComponent, PropDefinition } from '@features/demo/shared/props-table/props-table.component';
+import { DatePreset } from '@shared/components/date-range-picker/date-range-picker.component';
 
 @Component({
   selector: 'app-date-range-picker-demo',

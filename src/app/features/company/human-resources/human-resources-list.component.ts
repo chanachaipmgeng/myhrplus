@@ -5,12 +5,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@shared/shared.module';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { StaggerDirective } from '@shared/directives/stagger.directive';
 import { HUMAN_RESOURCES_MENU_ITEMS, HumanResourcesMenuItem, getMenuItemsByCategory } from './config/human-resources-menu.config';
 
 @Component({
   selector: 'app-human-resources-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, SharedModule, PageHeaderComponent, GlassCardComponent],
+  imports: [CommonModule, RouterModule, TranslateModule, SharedModule, PageHeaderComponent, GlassCardComponent, StaggerDirective],
   templateUrl: './human-resources-list.component.html'
 })
 export class HumanResourcesListComponent {

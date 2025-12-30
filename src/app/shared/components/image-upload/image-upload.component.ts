@@ -7,7 +7,7 @@ import {
   assessImageQuality,
   isImageQualitySufficient,
   ImageQualityAssessment
-} from '../../../core/utils/image-quality.utils';
+} from '@core/utils/image-quality.utils';
 import { IconComponent } from '../icon/icon.component';
 import { LazyImageDirective } from '../../directives/lazy-image.directive';
 

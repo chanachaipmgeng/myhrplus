@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService, LoginRequest, DatabaseModel } from '../../../core/services/auth.service';
-import { NotificationService } from '../../../core/services/notification.service';
-import { MenuService } from '../../../core/services/menu.service';
-import { EmployeeService, SetCharacter } from '../../../core/services/employee.service';
-import { SwaplangCodeService } from '../../../core/services/swaplang-code.service';
+import { AuthService, LoginRequest, DatabaseModel } from '@core/services';
+import { NotificationService } from '@core/services';
+import { MenuService } from '@core/services';
+import { EmployeeService, SetCharacter } from '@core/services';
+import { SwaplangCodeService } from '@core/services';
 import { TranslateService } from '@ngx-translate/core';
-import { ThemeService } from '../../../core/services/theme.service';
+import { ThemeService } from '@core/services';
 import { HttpErrorResponse } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
+import { environment } from '@env/environment';
 import jwt_decode from 'jwt-decode';
 
 @Component({

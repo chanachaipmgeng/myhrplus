@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '../../../core/services/api.service';
-import { environment } from '../../../../environments/environment';
+import { ApiService } from '@core/services';
+import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
 
 export interface LeaveRequest {

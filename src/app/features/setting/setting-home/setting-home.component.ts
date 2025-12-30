@@ -2,11 +2,11 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { AuthService, User } from '../../../core/services/auth.service';
-import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
-import { GlassCardComponent } from '../../../shared/components/glass-card/glass-card.component';
-import { IconComponent } from '../../../shared/components/icon/icon.component';
-import { StaggerDirective } from '../../../shared/directives/stagger.directive';
+import { AuthService, User } from '@core/services';
+import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { IconComponent } from '@shared/components/icon/icon.component';
+import { StaggerDirective } from '@shared/directives/stagger.directive';
 
 @Component({
   selector: 'app-setting-home',

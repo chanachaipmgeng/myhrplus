@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FieldMaskingService } from '../../../core/services/field-masking.service';
+import { FieldMaskingService } from '@core/services';
 
 /**
  * Component for toggling masked/unmasked display of sensitive data

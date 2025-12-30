@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../../../shared/shared.module';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { PropsTableComponent, PropDefinition } from '../../shared/props-table/props-table.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { StatusBadgeComponent } from '@shared/components/status-badge/status-badge.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
+import { PropsTableComponent, PropDefinition } from '@features/demo/shared/props-table/props-table.component';
 
 @Component({
   selector: 'app-status-badge-demo',
   standalone: true,
-  imports: [CommonModule, SharedModule, GlassCardComponent, CodeViewerComponent, PropsTableComponent],
+  imports: [CommonModule, GlassCardComponent, StatusBadgeComponent, CodeViewerComponent, PropsTableComponent],
   templateUrl: './status-badge-demo.component.html',
   styleUrls: ['./status-badge-demo.component.scss']
 })

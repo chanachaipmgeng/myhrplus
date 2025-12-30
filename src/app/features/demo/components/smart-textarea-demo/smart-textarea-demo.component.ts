@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SmartTextAreaComponent } from '../../../../shared/components/smart-textarea/smart-textarea.component';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { SmartTextAreaComponent } from '@shared/components/smart-textarea/smart-textarea.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-smart-textarea-demo',

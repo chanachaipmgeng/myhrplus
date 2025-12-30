@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../../../shared/shared.module';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { PropsTableComponent, PropDefinition } from '../../shared/props-table/props-table.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { FileUploadComponent } from '@shared/components/file-upload/file-upload.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
+import { PropsTableComponent, PropDefinition } from '@features/demo/shared/props-table/props-table.component';
 
 @Component({
   selector: 'app-file-upload-demo',
   standalone: true,
-  imports: [CommonModule, SharedModule, GlassCardComponent, CodeViewerComponent, PropsTableComponent],
+  imports: [CommonModule, GlassCardComponent, FileUploadComponent, CodeViewerComponent, PropsTableComponent],
   templateUrl: './file-upload-demo.component.html',
   styleUrls: ['./file-upload-demo.component.scss']
 })

@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { SharedModule } from '../../shared.module';
+import { BreadcrumbsComponent } from '../breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'app-page-header',
   standalone: true,
-  imports: [CommonModule, TranslateModule, SharedModule],
+  imports: [CommonModule, TranslateModule, BreadcrumbsComponent],
   templateUrl: './page-header.component.html',
   styleUrls: ['./page-header.component.scss']
 })

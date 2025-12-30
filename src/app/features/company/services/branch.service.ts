@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { BaseApiService } from '@core/services/base-api.service';
+import { BaseApiService } from '@core/services';
 import { Branch } from '../models/branch.model';
 
 @Injectable({

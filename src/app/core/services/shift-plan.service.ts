@@ -95,8 +95,15 @@ export class ShiftPlanService {
     ).pipe(
       map((response: ApiResponse<ShiftplanModel[]>) => {
         const data = response.data || (response as unknown as ShiftplanModel[]);
-        const items = Array.isArray(data) ? data : [];
-        return (items as { items?: ShiftplanModel[] })[0]?.items || items;
+        if (Array.isArray(data)) {
+          // Check if first item has 'items' property (nested structure)
+          if (data.length > 0 && typeof data[0] === 'object' && data[0] !== null && 'items' in data[0]) {
+            const firstItem = data[0] as { items?: ShiftplanModel[] };
+            return firstItem.items || [];
+          }
+          return data;
+        }
+        return [];
       })
     );
   }
@@ -112,8 +119,15 @@ export class ShiftPlanService {
     ).pipe(
       map((response: ApiResponse<ListExchangeShiftPlanningModel[]>) => {
         const data = response.data || (response as unknown as ListExchangeShiftPlanningModel[]);
-        const items = Array.isArray(data) ? data : [];
-        return (items as { items?: ListExchangeShiftPlanningModel[] })[0]?.items || items;
+        if (Array.isArray(data)) {
+          // Check if first item has 'items' property (nested structure)
+          if (data.length > 0 && typeof data[0] === 'object' && data[0] !== null && 'items' in data[0]) {
+            const firstItem = data[0] as { items?: ListExchangeShiftPlanningModel[] };
+            return firstItem.items || [];
+          }
+          return data;
+        }
+        return [];
       })
     );
   }

@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '../../../../../shared/shared.module';
-import { PageLayoutComponent } from '../../../../../shared/components/page-layout/page-layout.component';
-import { GlassCardComponent } from '../../../../../shared/components/glass-card/glass-card.component';
-import { GlassButtonComponent } from '../../../../../shared/components/glass-button/glass-button.component';
-import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
-import { StatisticsGridComponent } from '../../../../../shared/components/statistics-grid/statistics-grid.component';
-import { EmptyStateComponent } from '../../../../../shared/components/empty-state/empty-state.component';
-import { StatusBadgeComponent } from '../../../../../shared/components/status-badge/status-badge.component';
-import { IconComponent } from '../../../../../shared/components/icon/icon.component';
+import { SharedModule } from '@shared/shared.module';
+import { PageLayoutComponent } from '@shared/components/page-layout/page-layout.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { GlassButtonComponent } from '@shared/components/glass-button/glass-button.component';
+import { LoadingComponent } from '@shared/components/loading/loading.component';
+import { StatisticsGridComponent } from '@shared/components/statistics-grid/statistics-grid.component';
+import { EmptyStateComponent } from '@shared/components/empty-state/empty-state.component';
+import { StatusBadgeComponent } from '@shared/components/status-badge/status-badge.component';
+import { IconComponent } from '@shared/components/icon/icon.component';
+import { StaggerDirective } from '@shared/directives/stagger.directive';
 
 interface LeaveRequest {
   id: string;
@@ -35,7 +36,8 @@ interface LeaveRequest {
     StatisticsGridComponent,
     EmptyStateComponent,
     StatusBadgeComponent,
-    IconComponent
+    IconComponent,
+    StaggerDirective
   ],
   templateUrl: './leave-request.component.html',
   styleUrls: ['./leave-request.component.scss']
@@ -43,7 +45,7 @@ interface LeaveRequest {
 export class LeaveRequestComponent implements OnInit {
   isLoading = false;
   leaveRequests: LeaveRequest[] = [];
-  
+
   statisticsCards = [
     {
       icon: '📅',

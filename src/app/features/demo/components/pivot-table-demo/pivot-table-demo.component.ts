@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PivotTableComponent } from '../../../../shared/components/pivot-table/pivot-table.component';
+import { PivotTableComponent } from '@shared/components/pivot-table/pivot-table.component';
 import { IDataOptions } from '@syncfusion/ej2-angular-pivotview';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-pivot-table-demo',

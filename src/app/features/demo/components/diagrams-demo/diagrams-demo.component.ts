@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DiagramsComponent } from '../../../../shared/components/diagrams/diagrams.component';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { DiagramsComponent } from '@shared/components/diagrams/diagrams.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
 import { NodeModel, ConnectorModel } from '@syncfusion/ej2-angular-diagrams';
 
 @Component({

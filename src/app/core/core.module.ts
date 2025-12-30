@@ -2,18 +2,17 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AuthService } from './services/auth.service';
-import { ApiService } from './services/api.service';
-import { ErrorService } from './services/error.service';
-import { LoadingService } from './services/loading.service';
-import { NotificationService } from './services/notification.service';
-import { StorageService } from './services/storage.service';
-import { MenuService } from './services/menu.service';
-import { CacheService } from './services/cache.service';
-import { I18nService } from './services/i18n.service';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { HasPermissionDirective } from './directives/has-permission.directive';
 
+/**
+ * CoreModule
+ * 
+ * Provides core directives and modules for the application.
+ * 
+ * Note: All services use `providedIn: 'root'` and should NOT be declared here
+ * to avoid duplicate service instances and follow Angular best practices.
+ */
 @NgModule({
   declarations: [
     HasRoleDirective,
@@ -26,18 +25,8 @@ import { HasPermissionDirective } from './directives/has-permission.directive';
   exports: [
     HasRoleDirective,
     HasPermissionDirective
-  ],
-  providers: [
-    AuthService,
-    ApiService,
-    ErrorService,
-    LoadingService,
-    NotificationService,
-    StorageService,
-    MenuService,
-    CacheService,
-    I18nService
   ]
+  // ✅ Removed providers array - all services use providedIn: 'root'
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

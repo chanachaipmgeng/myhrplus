@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { LayoutModule } from '../../layout/layout.module';
 import { SettingRoutingModule } from './setting-routing.module';
 import { SettingHomeComponent } from './setting-home/setting-home.component';

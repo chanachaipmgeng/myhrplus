@@ -4,8 +4,8 @@ import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { MenuContextService } from '../../../core/services/menu-context.service';
-import { MenuData, MenuGroup, MenuItem, SearchResult, MenuContext } from '../../../core/models/menu.model';
+import { MenuContextService } from '@core/services';
+import { MenuData, MenuGroup, MenuItem, SearchResult, MenuContext } from '@core/models/menu.model';
 import { GlassCardComponent } from '../glass-card/glass-card.component';
 import { IconComponent } from '../icon/icon.component';
 

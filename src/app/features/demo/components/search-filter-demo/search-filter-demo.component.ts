@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../../../shared/shared.module';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { PropsTableComponent, PropDefinition } from '../../shared/props-table/props-table.component';
-import { FilterOption } from '../../../../shared/components/search-filter/search-filter.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { SearchFilterComponent, FilterOption } from '@shared/components/search-filter/search-filter.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
+import { PropsTableComponent, PropDefinition } from '@features/demo/shared/props-table/props-table.component';
 
 @Component({
   selector: 'app-search-filter-demo',
   standalone: true,
-  imports: [CommonModule, SharedModule, GlassCardComponent, CodeViewerComponent, PropsTableComponent],
+  imports: [CommonModule, GlassCardComponent, SearchFilterComponent, CodeViewerComponent, PropsTableComponent],
   templateUrl: './search-filter-demo.component.html',
   styleUrls: ['./search-filter-demo.component.scss']
 })

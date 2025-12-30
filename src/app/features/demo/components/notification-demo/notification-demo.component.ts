@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../../../shared/shared.module';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { GlassButtonComponent } from '../../../../shared/components/glass-button/glass-button.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { PropsTableComponent, PropDefinition } from '../../shared/props-table/props-table.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { GlassButtonComponent } from '@shared/components/glass-button/glass-button.component';
+import { NotificationComponent } from '@shared/components/notification/notification.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
+import { PropsTableComponent, PropDefinition } from '@features/demo/shared/props-table/props-table.component';
 
 @Component({
   selector: 'app-notification-demo',
   standalone: true,
-  imports: [CommonModule, SharedModule, GlassCardComponent, GlassButtonComponent, CodeViewerComponent, PropsTableComponent],
+  imports: [CommonModule, GlassCardComponent, GlassButtonComponent, NotificationComponent, CodeViewerComponent, PropsTableComponent],
   templateUrl: './notification-demo.component.html',
   styleUrls: ['./notification-demo.component.scss']
 })

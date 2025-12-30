@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MenuContextService } from '../../../core/services/menu-context.service';
-import { MenuContext } from '../../../core/models/menu.model';
+import { MenuContextService } from '@core/services';
+import { MenuContext } from '@core/models/menu.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { IconComponent } from '../icon/icon.component';

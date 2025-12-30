@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AuthService, User } from '../../core/services/auth.service';
-import { EmployeeService, SetCharacter, Role } from '../../core/services/employee.service';
+import { AuthService, User } from '@core/services';
+import { EmployeeService, SetCharacter, Role } from '@core/services';
 import { environment } from '../../../environments/environment';
 import jwt_decode from 'jwt-decode';
 

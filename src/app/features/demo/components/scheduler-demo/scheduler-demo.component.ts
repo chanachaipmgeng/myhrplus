@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SchedulerComponent, SchedulerEvent } from '../../../../shared/components/scheduler/scheduler.component';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { SchedulerComponent, SchedulerEvent } from '@shared/components/scheduler/scheduler.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
 import { View } from '@syncfusion/ej2-angular-schedule';
 
 @Component({

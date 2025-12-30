@@ -189,55 +189,61 @@ export class CompanyService {
 
   // Private conversion methods
   private convertCompanyHistory(dataModel: CompanyHistoryModel | unknown): CompanyHistoryModel {
+    const model = dataModel as CompanyHistoryModel;
     return {
-      mcomId: dataModel.mcomId,
-      topic: dataModel.topic,
-      etopic: dataModel.etopic,
-      tdesc: dataModel.tdesc,
-      edesc: dataModel.edesc
+      mcomId: model.mcomId,
+      topic: model.topic,
+      etopic: model.etopic,
+      tdesc: model.tdesc,
+      edesc: model.edesc
     };
   }
 
   private convertHoliday(dataModel: Holiday | unknown): Holiday {
+    const model = dataModel as Holiday;
     return {
-      listOfDayoff: dataModel.listOfDayoff,
-      listOfPublicHoliday: dataModel.listOfPublicHoliday
+      listOfDayoff: model.listOfDayoff,
+      listOfPublicHoliday: model.listOfPublicHoliday
     };
   }
 
   private convertPublicHoliday(dataModel: PublicHoliday | unknown): PublicHoliday {
+    const model = dataModel as PublicHoliday;
     return {
-      holidayId: dataModel.holidayId,
-      tdesc: dataModel.tdesc,
-      edesc: dataModel.edesc,
-      dateId: dataModel.dateId
+      holidayId: model.holidayId,
+      tdesc: model.tdesc,
+      edesc: model.edesc,
+      dateId: model.dateId
     };
   }
 
   private convertVission(dataModel: VissionModel | unknown): VissionModel {
+    const model = dataModel as VissionModel;
     return {
-      vissionId: dataModel.vissionId,
-      tdesc: dataModel.tdesc,
-      edesc: dataModel.edesc,
-      years: dataModel.years
+      vissionId: model.vissionId,
+      tdesc: model.tdesc,
+      edesc: model.edesc,
+      years: model.years
     };
   }
 
   private convertMission(dataModel: MissionModel | unknown): MissionModel {
+    const model = dataModel as MissionModel;
     return {
-      missionId: dataModel.missionId,
-      tdesc: dataModel.tdesc,
-      edesc: dataModel.edesc,
-      years: dataModel.years
+      missionId: model.missionId,
+      tdesc: model.tdesc,
+      edesc: model.edesc,
+      years: model.years
     };
   }
 
   private convertPolicy(dataModel: Policy | unknown): Policy {
+    const model = dataModel as Policy;
     return {
-      ...dataModel,
-      policyId: dataModel.policyId,
-      tdesc: dataModel.tdesc,
-      edesc: dataModel.edesc
+      ...model,
+      policyId: model.policyId,
+      tdesc: model.tdesc,
+      edesc: model.edesc
     };
   }
 }

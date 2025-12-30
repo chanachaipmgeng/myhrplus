@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { GlassCardComponent } from '../../../shared/components/glass-card/glass-card.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
 
 interface ComponentInfo {
   name: string;

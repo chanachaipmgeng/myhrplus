@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../../../shared/shared.module';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { PropsTableComponent, PropDefinition } from '../../shared/props-table/props-table.component';
-import { ImageUploadConfig, UploadedImage } from '../../../../shared/components/image-upload/image-upload.component';
-import { ImageQualityAssessment } from '../../../../core/utils/image-quality.utils';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { ImageUploadComponent, ImageUploadConfig, UploadedImage } from '@shared/components/image-upload/image-upload.component';
+import { ImageQualityAssessment } from '@core/utils/image-quality.utils';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
+import { PropsTableComponent, PropDefinition } from '@features/demo/shared/props-table/props-table.component';
 
 @Component({
   selector: 'app-image-upload-demo',
   standalone: true,
-  imports: [CommonModule, SharedModule, GlassCardComponent, CodeViewerComponent, PropsTableComponent],
+  imports: [CommonModule, GlassCardComponent, ImageUploadComponent, CodeViewerComponent, PropsTableComponent],
   templateUrl: './image-upload-demo.component.html',
   styleUrls: ['./image-upload-demo.component.scss']
 })

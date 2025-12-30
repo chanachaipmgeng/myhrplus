@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { QueryBuilderComponent, QueryBuilderColumn } from '../../../../shared/components/query-builder/query-builder.component';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { QueryBuilderComponent, QueryBuilderColumn } from '@shared/components/query-builder/query-builder.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
 import { RuleModel } from '@syncfusion/ej2-angular-querybuilder';
 
 @Component({

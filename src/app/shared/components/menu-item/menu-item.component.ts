@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { NavigationChild } from '../../../core/constants/navigation.constant';
+import { NavigationChild } from '@core/constants';
 import { IconComponent } from '../icon/icon.component';
 
 @Component({

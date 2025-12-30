@@ -9,7 +9,7 @@ import {
   OnInit
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { FieldMaskingService } from '../../core/services/field-masking.service';
+import { FieldMaskingService } from '@core/services';
 
 /**
  * Directive for masking input fields (PDPA/GDPR compliance)

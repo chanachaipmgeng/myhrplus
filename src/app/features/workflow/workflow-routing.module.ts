@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { WorkflowHomeComponent } from './workflow-home/workflow-home.component';
-import { ROUTES } from '../../core/constants/routes.constant';
+import { ROUTES } from '@core/constants';
 
 const routes: Routes = [
   {

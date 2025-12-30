@@ -3,50 +3,40 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-// Components (Non-standalone)
+// Legacy Non-Standalone Components (to be migrated to standalone)
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { DateRangePickerComponent } from './components/date-range-picker/date-range-picker.component';
 import { SkeletonLoaderComponent } from './components/skeleton-loader/skeleton-loader.component';
-// Standalone Components - Import only
-import { ImageUploadComponent } from './components/image-upload/image-upload.component';
-import { IconComponent } from './components/icon/icon.component';
-import { SpinnerComponent } from './components/spinner/spinner.component';
-import { NotificationComponent } from './components/notification/notification.component';
-import { BackToTopComponent } from './components/back-to-top/back-to-top.component';
-import { MenuItemComponent } from './components/menu-item/menu-item.component';
-import { SearchFilterComponent } from './components/search-filter/search-filter.component';
-import { TimelineComponent } from './components/timeline/timeline.component';
-import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-import { ErrorStateComponent } from './components/error-state/error-state.component';
-import { StatusBadgeComponent } from './components/status-badge/status-badge.component';
-import { StepperComponent } from './components/stepper/stepper.component';
-import { FileUploadComponent } from './components/file-upload/file-upload.component';
-import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
-import { FormValidationMessagesComponent } from './components/form-validation-messages/form-validation-messages.component';
 
-// Directives
+// Standalone Components used by legacy components
+import { IconComponent } from './components/icon/icon.component';
+
+// Directives (Non-Standalone)
 import { ClickOutsideDirective } from './directives/click-outside.directive';
-import { LazyImageDirective } from './directives/lazy-image.directive'; // Standalone directive
-import { StaggerDirective } from './directives/stagger.directive'; // Standalone directive
 
 // Pipes
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { DateFormatPipe } from './pipes/date-format.pipe';
 
-const COMPONENTS = [
+/**
+ * Shared Module
+ *
+ * Legacy module for non-standalone components, directives, and pipes.
+ *
+ * Note: Most components are now standalone. For standalone components, use:
+ * - Import directly: `import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';`
+ * - Or use SharedStandaloneModule: `import { SharedStandaloneModule } from '@shared/shared-standalone.module';`
+ *
+ * This module will be deprecated once all components are migrated to standalone.
+ */
+const LEGACY_COMPONENTS = [
   AvatarComponent,
   DateRangePickerComponent,
   SkeletonLoaderComponent
-  // Standalone components are imported/exported separately:
-  // ImageUploadComponent, FileUploadComponent, BreadcrumbsComponent, FormValidationMessagesComponent
-  // ConfirmDialogComponent, ErrorStateComponent, StatusBadgeComponent, StepperComponent
-  // SearchFilterComponent, TimelineComponent, NotificationComponent
-  // IconComponent, BackToTopComponent, MenuItemComponent
 ];
 
 const DIRECTIVES = [
   ClickOutsideDirective
-  // LazyImageDirective removed - now standalone directive
 ];
 
 const PIPES = [
@@ -56,63 +46,28 @@ const PIPES = [
 
 @NgModule({
   declarations: [
-    ...COMPONENTS,
+    ...LEGACY_COMPONENTS,
     ...DIRECTIVES,
     ...PIPES
-    // BackToTopComponent is standalone, not declared here
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
-    // Standalone Components
-    SpinnerComponent,
-    IconComponent,
-    BackToTopComponent,
-    MenuItemComponent,
-    NotificationComponent,
-    SearchFilterComponent,
-    TimelineComponent,
-    ConfirmDialogComponent,
-    ErrorStateComponent,
-    StatusBadgeComponent,
-    StepperComponent,
-    FileUploadComponent,
-    BreadcrumbsComponent,
-    FormValidationMessagesComponent,
-    ImageUploadComponent,
-    // Standalone Directives
-    LazyImageDirective,
-    StaggerDirective
+    // Standalone components used by legacy components
+    IconComponent
   ],
   exports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
-    ...COMPONENTS,
+    ...LEGACY_COMPONENTS,
     ...DIRECTIVES,
     ...PIPES,
-    // Standalone Components
-    SpinnerComponent,
-    IconComponent,
-    BackToTopComponent,
-    MenuItemComponent,
-    NotificationComponent,
-    SearchFilterComponent,
-    TimelineComponent,
-    ConfirmDialogComponent,
-    ErrorStateComponent,
-    StatusBadgeComponent,
-    StepperComponent,
-    FileUploadComponent,
-    BreadcrumbsComponent,
-    FormValidationMessagesComponent,
-    ImageUploadComponent,
-    // Standalone Directives
-    LazyImageDirective,
-    StaggerDirective
+    // Export standalone components for use in legacy components
+    IconComponent
   ]
 })
 export class SharedModule { }

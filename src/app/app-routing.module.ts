@@ -39,6 +39,13 @@ const routes: Routes = [
       // ============================================
       // Legacy Routes - Redirect to Portal Structure
       // ============================================
+      // NOTE: These legacy routes are kept for backward compatibility.
+      // They redirect old routes to the new portal structure.
+      //
+      // ⚠️ DEPRECATED: These routes may be removed in the future.
+      // Consider monitoring usage before removal.
+      // If no external links or bookmarks use them, they can be safely removed.
+      //
       // Home → Portal
       {
         path: 'home',

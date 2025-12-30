@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { AuthService, DatabaseModel } from '../../../core/services/auth.service';
-import { NotificationService } from '../../../core/services/notification.service';
+import { AuthService, DatabaseModel } from '@core/services';
+import { NotificationService } from '@core/services';
 import { HttpErrorResponse } from '@angular/common/http';
-import { GlassInputComponent } from '../../../shared/components/glass-input/glass-input.component';
-import { GlassSelectComponent } from '../../../shared/components/glass-select/glass-select.component';
-import { GlassButtonComponent } from '../../../shared/components/glass-button/glass-button.component';
-import { AlertComponent } from '../../../shared/components/alert/alert.component';
-import { IconComponent } from '../../../shared/components/icon/icon.component';
+import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
+import { GlassSelectComponent } from '@shared/components/glass-select/glass-select.component';
+import { GlassButtonComponent } from '@shared/components/glass-button/glass-button.component';
+import { AlertComponent } from '@shared/components/alert/alert.component';
+import { IconComponent } from '@shared/components/icon/icon.component';
 
 @Component({
   selector: 'app-forgot-password',

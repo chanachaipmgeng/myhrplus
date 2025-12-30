@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ThemeToggleComponent } from '../../../../shared/components/theme-toggle/theme-toggle.component';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { PropsTableComponent, PropDefinition } from '../../shared/props-table/props-table.component';
+import { ThemeToggleComponent } from '@shared/components/theme-toggle/theme-toggle.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
+import { PropsTableComponent, PropDefinition } from '@features/demo/shared/props-table/props-table.component';
 
 @Component({
   selector: 'app-theme-toggle-demo',
@@ -33,7 +33,7 @@ export class ThemeToggleDemoComponent {
 <app-theme-toggle></app-theme-toggle>`;
 
   serviceExample = `// You can also use ThemeService directly
-import { ThemeService } from '@core/services/theme.service';
+import { ThemeService } from '@core/services';
 
 constructor(private themeService: ThemeService) {}
 

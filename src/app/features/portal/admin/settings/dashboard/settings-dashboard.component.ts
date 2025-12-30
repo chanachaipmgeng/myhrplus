@@ -49,7 +49,7 @@ export class SettingsDashboardComponent implements OnInit, OnDestroy {
     this.checkDarkMode();
     this.initializeCharts();
     this.setupThemeObserver();
-    
+
     // Re-initialize charts when language changes
     this.translate.onLangChange.subscribe(() => {
       this.initializeCharts();
@@ -79,7 +79,7 @@ export class SettingsDashboardComponent implements OnInit, OnDestroy {
 
   private checkDarkMode(): void {
     const html = document.documentElement;
-    this.isDarkMode = html.getAttribute('data-theme') === 'dark' || 
+    this.isDarkMode = html.getAttribute('data-theme') === 'dark' ||
                       html.classList.contains('dark') ||
                       window.matchMedia('(prefers-color-scheme: dark)').matches;
   }

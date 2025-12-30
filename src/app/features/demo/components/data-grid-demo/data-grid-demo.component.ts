@@ -1,10 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../../../shared/shared.module';
-import { DataGridComponent, DataGridColumn } from '../../../../shared/components/data-grid/data-grid.component';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { GlassButtonComponent } from '../../../../shared/components/glass-button/glass-button.component';
-import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
+import { SharedModule } from '@shared/shared.module';
+import { DataGridComponent, DataGridColumn } from '@shared/components/data-grid/data-grid.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { GlassButtonComponent } from '@shared/components/glass-button/glass-button.component';
+import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
 
 @Component({
   selector: 'app-data-grid-demo',
@@ -106,7 +106,7 @@ export class DataGridDemoComponent {
 
   // Code examples for display
   basicExample = `// TypeScript
-import { DataGridColumn } from '../../shared/components/data-grid/data-grid.component';
+import { DataGridColumn } from '@shared/components/data-grid/data-grid.component';
 
 columns: DataGridColumn[] = [
   { field: 'id', headerText: 'ID', width: 80, type: 'number' },

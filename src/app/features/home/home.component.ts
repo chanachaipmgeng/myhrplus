@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { AuthService, User } from '../../core/services/auth.service';
+import { AuthService, User } from '@core/services';
 import { HomeService, MenuCategory, MenuItem } from './home.service';
 
 @Component({

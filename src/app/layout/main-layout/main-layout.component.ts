@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { SidebarComponent as EjsSidebar } from '@syncfusion/ej2-angular-navigations';
-import { LayoutService, BreadcrumbItem } from '../../core/services/layout.service';
+import { LayoutService, BreadcrumbItem } from '@core/services';
 
 @Component({
   selector: 'app-main-layout',

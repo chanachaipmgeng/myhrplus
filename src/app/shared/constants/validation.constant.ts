@@ -3,7 +3,7 @@
  * Constants สำหรับ validation rules
  */
 
-import { APP_CONFIG } from '../../core/constants/app-config.constant';
+import { APP_CONFIG } from '@core/constants';
 
 export const VALIDATION = {
   // Password

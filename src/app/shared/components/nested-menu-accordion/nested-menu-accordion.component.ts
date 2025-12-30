@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { NavigationChild } from '../../../core/constants/navigation.constant';
+import { NavigationChild } from '@core/constants';
 import { IconComponent } from '../icon/icon.component';
 
 @Component({

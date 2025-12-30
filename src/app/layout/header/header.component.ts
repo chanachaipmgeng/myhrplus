@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
-import { AuthService } from '../../core/services/auth.service';
-import { I18nService, Language } from '../../core/services/i18n.service';
-import { NotificationService, Notification } from '../../core/services/notification.service';
-import { OmniSearchComponent } from '../../shared/components/omni-search/omni-search.component';
+import { AuthService } from '@core/services';
+import { I18nService, Language } from '@core/services';
+import { NotificationService, Notification } from '@core/services';
+import { OmniSearchComponent } from '@shared/components/omni-search/omni-search.component';
 
 @Component({
   selector: 'app-header',

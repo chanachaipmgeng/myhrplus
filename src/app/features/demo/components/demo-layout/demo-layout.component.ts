@@ -2,11 +2,11 @@ import { Component, OnInit, OnDestroy, ViewChild, HostListener } from '@angular/
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
-import { SyncfusionModule } from '../../../../shared/syncfusion/syncfusion.module';
+import { SyncfusionModule } from '@shared/syncfusion/syncfusion.module';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { ThemeService, ThemeMode, ThemeColor } from '../../../../core/services/theme.service';
-import { GlassCardComponent } from '../../../../shared/components/glass-card/glass-card.component';
-import { GlassButtonComponent } from '../../../../shared/components/glass-button/glass-button.component';
+import { ThemeService, ThemeMode, ThemeColor } from '@core/services';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { GlassButtonComponent } from '@shared/components/glass-button/glass-button.component';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 

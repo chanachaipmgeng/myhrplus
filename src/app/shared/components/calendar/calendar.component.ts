@@ -25,7 +25,7 @@ import {
   format
 } from 'date-fns';
 import { GlassButtonComponent } from '../glass-button/glass-button.component';
-import { CalendarService, CalendarEventMeta } from '../../../core/services/calendar.service';
+import { CalendarService, CalendarEventMeta } from '@core/services';
 
 @Component({
   selector: 'app-calendar',
