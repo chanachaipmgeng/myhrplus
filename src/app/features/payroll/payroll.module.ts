@@ -16,9 +16,7 @@ import { PageHeaderComponent } from '../../shared/components/page-header/page-he
 import { PayrollHomeComponent } from './payroll-home/payroll-home.component';
 
 @NgModule({
-  declarations: [
-    PayrollHomeComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     FormsModule,
@@ -32,7 +30,8 @@ import { PayrollHomeComponent } from './payroll-home/payroll-home.component';
     GlassInputComponent,
     LoadingComponent,
     EmptyStateComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    PayrollHomeComponent
   ]
 })
 export class PayrollModule { }

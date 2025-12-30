@@ -4,8 +4,13 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../../shared/shared.module';
-import { SyncfusionModule } from '../../shared/syncfusion/syncfusion.module';
 import { IconComponent } from '../../shared/components/icon/icon.component';
+import { GlassInputComponent } from '../../shared/components/glass-input/glass-input.component';
+import { GlassSelectComponent } from '../../shared/components/glass-select/glass-select.component';
+import { GlassCheckboxComponent } from '../../shared/components/glass-checkbox/glass-checkbox.component';
+import { GlassButtonComponent } from '../../shared/components/glass-button/glass-button.component';
+import { AlertComponent } from '../../shared/components/alert/alert.component';
+import { ThemeToggleComponent } from '../../shared/components/theme-toggle/theme-toggle.component';
 
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
@@ -23,9 +28,14 @@ import { AuthRoutingModule } from './auth-routing.module';
     FormsModule,
     RouterModule,
     TranslateModule,
-    // SharedModule,
-    SyncfusionModule,
+    SharedModule,
     IconComponent,
+    GlassInputComponent,
+    GlassSelectComponent,
+    GlassCheckboxComponent,
+    GlassButtonComponent,
+    AlertComponent,
+    ThemeToggleComponent,
     ForgotPasswordComponent,
     UnauthorizedComponent,
     AuthRoutingModule

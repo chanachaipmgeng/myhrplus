@@ -1,9 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService, User } from '../../../core/services/auth.service';
+import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
+import { GlassCardComponent } from '../../../shared/components/glass-card/glass-card.component';
+import { IconComponent } from '../../../shared/components/icon/icon.component';
+import { StaggerDirective } from '../../../shared/directives/stagger.directive';
 
 @Component({
   selector: 'app-workflow-home',
+  standalone: true,
+  imports: [
+    CommonModule,
+    PageHeaderComponent,
+    GlassCardComponent,
+    IconComponent,
+    StaggerDirective
+  ],
   templateUrl: './workflow-home.component.html',
   styleUrls: ['./workflow-home.component.scss']
 })
@@ -15,21 +28,21 @@ export class WorkflowHomeComponent implements OnInit {
     {
       title: 'การขอเอกสาร',
       description: 'ยื่นคำขอเอกสารต่างๆ',
-      icon: 'e-icons e-file',
+      icon: 'description',
       route: '/workflow/requests',
       color: 'bg-blue-500'
     },
     {
       title: 'เอกสารรออนุมัติ',
       description: 'เอกสารที่รอการอนุมัติ',
-      icon: 'e-icons e-check',
+      icon: 'check_circle',
       route: '/workflow/pending',
       color: 'bg-yellow-500'
     },
     {
       title: 'ประวัติการขอ',
       description: 'ดูประวัติการขอเอกสาร',
-      icon: 'e-icons e-history',
+      icon: 'history',
       route: '/workflow/history',
       color: 'bg-green-500'
     }

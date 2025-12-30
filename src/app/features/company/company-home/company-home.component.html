@@ -1,15 +1,24 @@
-<div class="company-home-container p-6">
-  <div class="mb-6">
-    <h1 class="text-3xl font-bold mb-2">Company Management</h1>
-    <p class="text-gray-600 dark:text-gray-400">จัดการข้อมูลในองค์กร</p>
-  </div>
+<div class="-mx-4 md:-mx-6 lg:-mx-8">
+  <app-page-header
+    title="Company Management"
+    subtitle="จัดการข้อมูลในองค์กร"
+    [showBreadcrumbs]="true">
+  </app-page-header>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div
-      *ngFor="let item of menuItems"
-      class="menu-card p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105"
-      [class]="item.color"
-      (click)="navigateTo(item.route)">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-6 lg:px-8">
+    <app-glass-card
+      *ngFor="let item of menuItems; let i = index"
+      [appStagger]="i"
+      [staggerDelay]="0.1"
+      padding="p-4 md:p-6"
+      customClass="rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 active:scale-95"
+      [style.background]="getGradientForItem(item.color)"
+      [attr.aria-label]="item.title + ': ' + item.description"
+      [attr.role]="'button'"
+      [attr.tabindex]="0"
+      (click)="navigateTo(item.route)"
+      (keydown.enter)="navigateTo(item.route)"
+      (keydown.space)="navigateTo(item.route); $event.preventDefault()">
       <div class="flex items-center gap-4">
         <div class="icon-container text-white text-4xl">
           <span [class]="item.icon"></span>
@@ -19,7 +28,7 @@
           <p class="text-white text-sm opacity-90">{{ item.description }}</p>
         </div>
       </div>
-    </div>
+    </app-glass-card>
   </div>
 </div>
 

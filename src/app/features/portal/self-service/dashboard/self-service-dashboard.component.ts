@@ -2,6 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { IconComponent } from '@shared/components/icon/icon.component';
+import { StaggerDirective } from '@shared/directives/stagger.directive';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
 
@@ -12,6 +15,9 @@ import { EChartsOption } from 'echarts';
     CommonModule,
     RouterModule,
     PageHeaderComponent,
+    GlassCardComponent,
+    IconComponent,
+    StaggerDirective,
     NgxEchartsModule
   ],
   templateUrl: './self-service-dashboard.component.html'

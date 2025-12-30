@@ -26,15 +26,13 @@ export class LoginComponent implements OnInit {
   errorMessage: string = '';
   rememberMe: boolean = false;
 
-  // For Syncfusion components
+  // For reusable components
   username: string = '';
   password: string = '';
-  dbFields: object = { text: 'dbDisplay', value: 'db' };
-  dbDataSource: any[] = [];
+  dbSelectOptions: Array<{ value: string; label: string; disabled?: boolean }> = [];
 
-  // Language and Theme
+  // Language
   currentLang: string = 'th';
-  isDarkMode: boolean = false;
   availableLanguages = [
     { code: 'th', name: 'ไทย', flag: '🇹🇭' },
     { code: 'en', name: 'English', flag: '🇬🇧' }
@@ -80,11 +78,6 @@ export class LoginComponent implements OnInit {
       this.currentLang = event.lang;
     });
 
-    // Initialize theme
-    this.themeService.isDarkMode$.subscribe(isDark => {
-      this.isDarkMode = isDark;
-    });
-    this.isDarkMode = this.themeService.isDarkMode();
   }
 
   loadRememberedCredentials(): void {
@@ -107,11 +100,11 @@ export class LoginComponent implements OnInit {
     this.authService.getDatabase().subscribe({
       next: (result) => {
         this.dbList = result;
-        // Prepare data for Syncfusion DropDownList
-        this.dbDataSource = result.map(db => ({
-          db: db.db,
-          dbName: db.dbName,
-          dbDisplay: db.dbDisplay || db.dbName || db.db
+        // Prepare data for Glass Select
+        this.dbSelectOptions = result.map(db => ({
+          value: db.db,
+          label: db.dbDisplay || db.dbName || db.db,
+          disabled: false
         }));
 
         if (result && result.length > 0) {
@@ -126,10 +119,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onDbChange(args: any): void {
-    if (args.value) {
-      this.dbSelected = args.value;
-      this.loginForm.patchValue({ dbName: args.value });
+  onDbChangeSelect(value: string): void {
+    if (value) {
+      this.dbSelected = value;
+      this.loginForm.patchValue({ dbName: value });
     }
   }
 
@@ -142,10 +135,6 @@ export class LoginComponent implements OnInit {
     const newLang = this.currentLang === 'th' ? 'en' : 'th';
     this.translate.use(newLang);
     this.currentLang = newLang;
-  }
-
-  toggleDarkMode(): void {
-    this.themeService.toggleMode();
   }
 
   onUsernameChange(value: string): void {

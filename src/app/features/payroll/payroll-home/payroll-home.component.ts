@@ -1,9 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService, User } from '../../../core/services/auth.service';
+import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
+import { GlassCardComponent } from '../../../shared/components/glass-card/glass-card.component';
+import { IconComponent } from '../../../shared/components/icon/icon.component';
+import { StaggerDirective } from '../../../shared/directives/stagger.directive';
 
 @Component({
   selector: 'app-payroll-home',
+  standalone: true,
+  imports: [
+    CommonModule,
+    PageHeaderComponent,
+    GlassCardComponent,
+    IconComponent,
+    StaggerDirective
+  ],
   templateUrl: './payroll-home.component.html',
   styleUrls: ['./payroll-home.component.scss']
 })
@@ -14,21 +27,21 @@ export class PayrollHomeComponent implements OnInit {
     {
       title: 'จัดการเงินเดือน',
       description: 'จัดการข้อมูลเงินเดือนพนักงาน',
-      icon: 'e-icons e-money',
+      icon: 'payments',
       route: '/portal/admin/payroll',
       color: 'bg-green-500'
     },
     {
       title: 'สลิปเงินเดือน',
       description: 'ดูและจัดการสลิปเงินเดือน',
-      icon: 'e-icons e-receipt',
+      icon: 'receipt',
       route: '/portal/admin/payroll',
       color: 'bg-blue-500'
     },
     {
       title: 'รายงาน',
       description: 'รายงานเงินเดือน',
-      icon: 'e-icons e-chart',
+      icon: 'assessment',
       route: '/portal/admin/payroll',
       color: 'bg-purple-500'
     }

@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { IconComponent } from '@shared/components/icon/icon.component';
+import { StaggerDirective } from '@shared/directives/stagger.directive';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
 
@@ -14,6 +17,9 @@ import { EChartsOption } from 'echarts';
     RouterModule,
     TranslateModule,
     PageHeaderComponent,
+    GlassCardComponent,
+    IconComponent,
+    StaggerDirective,
     NgxEchartsModule
   ],
   templateUrl: './payroll-dashboard.component.html'

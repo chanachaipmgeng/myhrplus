@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { StatisticsCardComponent } from '@shared/components/statistics-card/statistics-card.component';
+import { IconComponent } from '@shared/components/icon/icon.component';
+import { StaggerDirective } from '@shared/directives/stagger.directive';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
 
@@ -14,6 +18,10 @@ import { EChartsOption } from 'echarts';
     RouterModule,
     TranslateModule,
     PageHeaderComponent,
+    GlassCardComponent,
+    StatisticsCardComponent,
+    IconComponent,
+    StaggerDirective,
     NgxEchartsModule
   ],
   templateUrl: './time-dashboard.component.html'

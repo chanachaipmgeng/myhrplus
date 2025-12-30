@@ -231,54 +231,39 @@
 
         <!-- Search Box -->
         <div class="search-container mb-4 relative animate-fade-in" *ngIf="navigationChildren.length > 3 || filteredMenuItems.length > 3">
-          <div class="relative">
-            <input
-              type="text"
-              [(ngModel)]="searchQuery"
-              (input)="onSearchChange()"
-              [placeholder]="'layout.sidebar.searchMenuPlaceholder' | translate"
-              class="search-input w-full px-4 py-3 pl-11 pr-11 rounded-xl
-                     transition-all duration-300 ease-out
-                     focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50
-                     hover:scale-[1.01] hover:shadow-lg
-                     bg-white/60 dark:bg-gray-800/60 theme-gemini:bg-gray-800/40
-                     backdrop-blur-md
-                     border border-white/30 dark:border-gray-700/30 theme-gemini:border-white/20
-                     text-gray-800 dark:text-gray-200 theme-gemini:text-white
-                     placeholder:text-gray-500 dark:placeholder:text-gray-400 theme-gemini:placeholder:text-white/50
-                     group"
-              [attr.aria-label]="'layout.sidebar.searchMenu' | translate">
-            <app-icon name="search" size="sm"
-                      color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70
-                             group-focus:text-blue-500 dark:group-focus:text-blue-400
-                             transition-colors duration-300"
-                      class="search-icon absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none
-                             group-focus:scale-110 transition-transform duration-300"></app-icon>
-            <button
-              *ngIf="searchQuery"
-              (click)="clearSearch()"
-              class="clear-search-btn absolute right-2 top-1/2 -translate-y-1/2
-                     w-8 h-8 flex items-center justify-center rounded-lg
-                     hover:bg-gray-200/50 dark:hover:bg-gray-700/50 theme-gemini:hover:bg-white/20
-                     hover:scale-110 active:scale-95
-                     transition-all duration-200 ease-out"
-              [attr.aria-label]="'layout.sidebar.clearSearch' | translate"
-              type="button">
-              <app-icon name="close" size="sm"
-                        color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70
-                               hover:text-red-500 dark:hover:text-red-400
-                               transition-colors duration-200"></app-icon>
-            </button>
-          </div>
+          <app-glass-input
+            type="text"
+            [(ngModel)]="searchQuery"
+            (input)="onSearchChange()"
+            [placeholder]="'layout.sidebar.searchMenuPlaceholder' | translate"
+            [ariaLabel]="'layout.sidebar.searchMenu' | translate"
+            customClass="w-full pr-11">
+            <ng-container *ngIf="searchQuery">
+              <button
+                (click)="clearSearch()"
+                class="absolute right-2 top-1/2 -translate-y-1/2
+                       w-8 h-8 flex items-center justify-center rounded-lg
+                       hover:bg-gray-200/50 dark:hover:bg-gray-700/50 theme-gemini:hover:bg-white/20
+                       hover:scale-110 active:scale-95
+                       transition-all duration-200 ease-out"
+                [attr.aria-label]="'layout.sidebar.clearSearch' | translate"
+                type="button">
+                <app-icon name="close" size="sm"
+                          color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70
+                                 hover:text-red-500 dark:hover:text-red-400
+                                 transition-colors duration-200"></app-icon>
+              </button>
+            </ng-container>
+          </app-glass-input>
         </div>
       </div>
 
       <!-- Loading State -->
-      <div *ngIf="isLoading" class="loading-state space-y-3">
-        <div class="skeleton-loader flex items-center gap-3 p-3 rounded-lg bg-white/10 dark:bg-gray-800/20 theme-gemini:bg-white/5 animate-pulse" *ngFor="let item of [1,2,3,4,5]">
-          <div class="skeleton-icon w-8 h-8 rounded-lg bg-white/20 dark:bg-gray-700/30 theme-gemini:bg-white/10"></div>
-          <div class="skeleton-text flex-1 h-4 rounded bg-white/20 dark:bg-gray-700/30 theme-gemini:bg-white/10"></div>
-        </div>
+      <div *ngIf="isLoading" class="space-y-3">
+        <app-skeleton-loader
+          [type]="'list'"
+          [rows]="5">
+        </app-skeleton-loader>
       </div>
 
       <!-- Module Menu Items - Using Nested Accordion -->
@@ -313,47 +298,26 @@
       </ejs-listview>
 
       <!-- Search No Results -->
-      <div *ngIf="!isLoading && searchQuery && navigationChildren.length === 0 && filteredMenuItems.length === 0"
-           class="empty-menu-state flex flex-col items-center justify-center py-16
-                  bg-white/10 dark:bg-gray-800/10 theme-gemini:bg-white/5
-                  backdrop-blur-sm rounded-xl
-                  border border-white/20 dark:border-gray-700/20 theme-gemini:border-white/10">
-        <div class="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 theme-gemini:bg-white/10 flex items-center justify-center mb-4">
-          <app-icon name="search_off" size="lg" color="text-gray-400 dark:text-gray-600 theme-gemini:text-white/60"></app-icon>
-        </div>
-        <p class="empty-text thai-text text-center text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 font-medium mb-2">
-          {{ 'layout.sidebar.noSearchResults' | translate }}
-        </p>
-        <p class="text-xs text-gray-500 dark:text-gray-500 theme-gemini:text-white/50 mb-4">
-          {{ 'layout.sidebar.tryDifferentSearch' | translate }}
-        </p>
-        <button
-          (click)="clearSearch()"
-          class="px-4 py-2 rounded-lg
-                 bg-white/20 dark:bg-gray-800/30 theme-gemini:bg-white/10
-                 hover:bg-white/30 dark:hover:bg-gray-700/40 theme-gemini:hover:bg-white/20
-                 text-sm font-medium
-                 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90
-                 transition-all duration-300
-                 border border-white/30 dark:border-gray-700/30 theme-gemini:border-white/20"
-          type="button">
+      <app-empty-state
+        *ngIf="!isLoading && searchQuery && navigationChildren.length === 0 && filteredMenuItems.length === 0"
+        [icon]="'search_off'"
+        [title]="'layout.sidebar.noSearchResults' | translate"
+        [description]="'layout.sidebar.tryDifferentSearch' | translate">
+        <app-glass-button
+          variant="secondary"
+          size="sm"
+          [ariaLabel]="'layout.sidebar.clearSearch' | translate"
+          (clicked)="clearSearch()">
           {{ 'layout.sidebar.clearSearch' | translate }}
-        </button>
-      </div>
+        </app-glass-button>
+      </app-empty-state>
 
       <!-- Empty State - No Menu Items -->
-      <div *ngIf="!isLoading && !searchQuery && navigationChildren.length === 0 && displayMenuItems.length === 0"
-           class="empty-menu-state flex flex-col items-center justify-center py-16
-                  bg-white/10 dark:bg-gray-800/10 theme-gemini:bg-white/5
-                  backdrop-blur-sm rounded-xl
-                  border border-white/20 dark:border-gray-700/20 theme-gemini:border-white/10">
-        <div class="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 theme-gemini:bg-white/10 flex items-center justify-center mb-4">
-          <app-icon name="folder_open" size="lg" color="text-gray-400 dark:text-gray-600 theme-gemini:text-white/60"></app-icon>
-        </div>
-        <p class="empty-text thai-text text-center text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 font-medium">
-          {{ 'layout.sidebar.noMenuInMode' | translate }}
-        </p>
-      </div>
+      <app-empty-state
+        *ngIf="!isLoading && !searchQuery && navigationChildren.length === 0 && displayMenuItems.length === 0"
+        [icon]="'folder_open'"
+        [title]="'layout.sidebar.noMenuInMode' | translate">
+      </app-empty-state>
     </div>
 
     <!-- User Avatar Section - Bottom of Menu Panel -->
@@ -371,31 +335,14 @@
              role="button"
              tabindex="0">
           <!-- Avatar -->
-          <div class="user-avatar relative flex-shrink-0">
-            <div class="avatar-circle w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm
-                         transition-all duration-300 ease-out
-                         group-hover:scale-110 group-hover:shadow-xl group-hover:ring-2 group-hover:ring-blue-500/50
-                         relative overflow-hidden"
-                 [style.background]="getAvatarColor()">
-              <!-- Shimmer Effect -->
-              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent
-                          -translate-x-full group-hover:translate-x-full
-                          transition-transform duration-1000 ease-in-out"></div>
-              <img *ngIf="getAvatarUrl()"
-                   [src]="getAvatarUrl()"
-                   [alt]="getUserDisplayName()"
-                   class="w-full h-full rounded-full object-cover relative z-10
-                          group-hover:scale-110 transition-transform duration-300"
-                   (load)="onAvatarImageLoad()"
-                   (error)="onAvatarImageError($event)">
-              <span class="avatar-initials relative z-10
-                           group-hover:scale-110 transition-transform duration-300"
-                    [class.hidden]="avatarImageLoaded && getAvatarUrl()">
-                {{ getInitials() }}
-              </span>
-            </div>
-            <!-- Online Status Indicator -->
-            <span class="status-indicator"></span>
+          <div class="group-hover:scale-110 group-hover:shadow-xl group-hover:ring-2 group-hover:ring-blue-500/50
+                      transition-all duration-300 ease-out">
+            <app-avatar
+              [src]="getAvatarUrl() || ''"
+              [name]="getUserDisplayName()"
+              size="md"
+              [status]="'online'">
+            </app-avatar>
           </div>
 
           <!-- User Info -->

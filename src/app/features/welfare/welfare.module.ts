@@ -16,9 +16,7 @@ import { PageHeaderComponent } from '../../shared/components/page-header/page-he
 import { WelfareHomeComponent } from './welfare-home/welfare-home.component';
 
 @NgModule({
-  declarations: [
-    WelfareHomeComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     FormsModule,
@@ -33,7 +31,8 @@ import { WelfareHomeComponent } from './welfare-home/welfare-home.component';
     GlassInputComponent,
     LoadingComponent,
     EmptyStateComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    WelfareHomeComponent
   ]
 })
 export class WelfareModule { }

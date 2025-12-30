@@ -8,26 +8,36 @@
   <div class="mb-8">
     <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">{{ 'training.dashboard.statistics.title' | translate }}</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
-      <div class="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white p-5 rounded-lg shadow-md dark:shadow-gray-900/50 text-center hover:scale-105 transition-transform duration-300">
-        <div class="text-4xl font-bold mb-2">{{ statistics.totalCourses }}</div>
-        <div class="text-sm opacity-90">{{ 'training.dashboard.statistics.totalCourses' | translate }}</div>
-      </div>
-      <div class="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white p-5 rounded-lg shadow-md dark:shadow-gray-900/50 text-center hover:scale-105 transition-transform duration-300">
-        <div class="text-4xl font-bold mb-2">{{ statistics.activeTrainings }}</div>
-        <div class="text-sm opacity-90">{{ 'training.dashboard.statistics.activeTrainings' | translate }}</div>
-      </div>
-      <div class="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white p-5 rounded-lg shadow-md dark:shadow-gray-900/50 text-center hover:scale-105 transition-transform duration-300">
-        <div class="text-4xl font-bold mb-2">{{ statistics.completed }}</div>
-        <div class="text-sm opacity-90">{{ 'training.dashboard.statistics.completed' | translate }}</div>
-      </div>
-      <div class="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white p-5 rounded-lg shadow-md dark:shadow-gray-900/50 text-center hover:scale-105 transition-transform duration-300">
-        <div class="text-4xl font-bold mb-2">{{ statistics.inProgress }}</div>
-        <div class="text-sm opacity-90">{{ 'training.dashboard.statistics.inProgress' | translate }}</div>
-      </div>
-      <div class="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white p-5 rounded-lg shadow-md dark:shadow-gray-900/50 text-center hover:scale-105 transition-transform duration-300">
-        <div class="text-4xl font-bold mb-2">{{ statistics.certificates }}</div>
-        <div class="text-sm opacity-90">{{ 'training.dashboard.statistics.certificates' | translate }}</div>
-      </div>
+      <app-statistics-card
+        icon="menu_book"
+        [label]="'training.dashboard.statistics.totalCourses' | translate"
+        [value]="statistics.totalCourses"
+        iconBgClass="bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400">
+      </app-statistics-card>
+      <app-statistics-card
+        icon="play_circle"
+        [label]="'training.dashboard.statistics.activeTrainings' | translate"
+        [value]="statistics.activeTrainings"
+        iconBgClass="bg-pink-50 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400">
+      </app-statistics-card>
+      <app-statistics-card
+        icon="check_circle"
+        [label]="'training.dashboard.statistics.completed' | translate"
+        [value]="statistics.completed"
+        iconBgClass="bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+      </app-statistics-card>
+      <app-statistics-card
+        icon="hourglass_bottom"
+        [label]="'training.dashboard.statistics.inProgress' | translate"
+        [value]="statistics.inProgress"
+        iconBgClass="bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400">
+      </app-statistics-card>
+      <app-statistics-card
+        icon="workspace_premium"
+        [label]="'training.dashboard.statistics.certificates' | translate"
+        [value]="statistics.certificates"
+        iconBgClass="bg-yellow-50 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400">
+      </app-statistics-card>
     </div>
   </div>
 
@@ -41,25 +51,25 @@
         <!-- Charts Row 1: 2 columns -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
           <!-- Pie Chart: Course Category -->
-          <div class="glass-card bg-white/50 dark:bg-gray-800/50 p-5 rounded-lg shadow-sm dark:shadow-gray-900/50 border border-gray-100 dark:border-gray-700 transition-colors duration-300">
+          <app-glass-card padding="p-5">
             <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5 transition-colors duration-300">{{ 'training.dashboard.charts.courseCategory' | translate }}</h3>
             <div echarts [options]="courseCategoryPieChartOption" class="w-full" style="height: 400px;"></div>
-          </div>
+          </app-glass-card>
           
           <!-- Bar Chart: Training Status -->
-          <div class="glass-card bg-white/50 dark:bg-gray-800/50 p-5 rounded-lg shadow-sm dark:shadow-gray-900/50 border border-gray-100 dark:border-gray-700 transition-colors duration-300">
+          <app-glass-card padding="p-5">
             <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5 transition-colors duration-300">{{ 'training.dashboard.charts.trainingStatus' | translate }}</h3>
             <div echarts [options]="trainingStatusBarChartOption" class="w-full" style="height: 400px;"></div>
-          </div>
+          </app-glass-card>
         </div>
 
         <!-- Charts Row 2: Full width -->
         <div class="grid grid-cols-1 gap-5 mb-5">
           <!-- Line Chart: Training Trend -->
-          <div class="glass-card bg-white/50 dark:bg-gray-800/50 p-5 rounded-lg shadow-sm dark:shadow-gray-900/50 border border-gray-100 dark:border-gray-700 transition-colors duration-300">
+          <app-glass-card padding="p-5">
             <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5 transition-colors duration-300">{{ 'training.dashboard.charts.monthlyTrend' | translate }}</h3>
             <div echarts [options]="trainingTrendLineChartOption" class="w-full" style="height: 400px;"></div>
-          </div>
+          </app-glass-card>
         </div>
       </div>
     </div>
@@ -70,55 +80,83 @@
         <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">{{ 'training.dashboard.mainMenu.title' | translate }}</h2>
         <div class="space-y-4">
           <!-- Setup Card -->
-          <div class="glass-card bg-white/50 dark:bg-gray-800/50 rounded-xl shadow-sm dark:shadow-gray-900/50 p-6 hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-gray-700 group"
-               [routerLink]="['setup']">
-            <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
-              <i class="material-icons text-xl">settings</i>
-            </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'training.dashboard.mainMenu.setup.title' | translate }}</h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'training.dashboard.mainMenu.setup.description' | translate }}</p>
-            <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
-              {{ 'training.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
-            </div>
+          <div
+            [routerLink]="['setup']"
+            [appStagger]="0"
+            [staggerDelay]="0.1"
+            class="cursor-pointer group">
+            <app-glass-card
+              padding="p-6"
+              customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300">
+              <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
+                <app-icon name="settings" size="lg" color="text-blue-600 dark:text-blue-400"></app-icon>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'training.dashboard.mainMenu.setup.title' | translate }}</h3>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'training.dashboard.mainMenu.setup.description' | translate }}</p>
+              <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
+                {{ 'training.dashboard.mainMenu.enterMenu' | translate }} <app-icon name="arrow_forward" size="sm" color="text-blue-600 dark:text-blue-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
+              </div>
+            </app-glass-card>
           </div>
 
           <!-- Evaluation Process Card -->
-          <div class="glass-card bg-white/50 dark:bg-gray-800/50 rounded-xl shadow-sm dark:shadow-gray-900/50 p-6 hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-gray-700 group"
-               [routerLink]="['evaluation-process']">
-            <div class="w-12 h-12 bg-green-50 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4 text-green-600 dark:text-green-400 transition-colors duration-300 group-hover:scale-110">
-              <i class="material-icons text-xl">assessment</i>
-            </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'training.dashboard.mainMenu.evaluationProcess.title' | translate }}</h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'training.dashboard.mainMenu.evaluationProcess.description' | translate }}</p>
-            <div class="flex items-center text-green-600 dark:text-green-400 text-sm font-medium transition-colors duration-300">
-              {{ 'training.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
-            </div>
+          <div
+            [routerLink]="['evaluation-process']"
+            [appStagger]="1"
+            [staggerDelay]="0.1"
+            class="cursor-pointer group">
+            <app-glass-card
+              padding="p-6"
+              customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300">
+              <div class="w-12 h-12 bg-green-50 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4 text-green-600 dark:text-green-400 transition-colors duration-300 group-hover:scale-110">
+                <app-icon name="assessment" size="lg" color="text-green-600 dark:text-green-400"></app-icon>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'training.dashboard.mainMenu.evaluationProcess.title' | translate }}</h3>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'training.dashboard.mainMenu.evaluationProcess.description' | translate }}</p>
+              <div class="flex items-center text-green-600 dark:text-green-400 text-sm font-medium transition-colors duration-300">
+                {{ 'training.dashboard.mainMenu.enterMenu' | translate }} <app-icon name="arrow_forward" size="sm" color="text-green-600 dark:text-green-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
+              </div>
+            </app-glass-card>
           </div>
 
           <!-- Transaction Card -->
-          <div class="glass-card bg-white/50 dark:bg-gray-800/50 rounded-xl shadow-sm dark:shadow-gray-900/50 p-6 hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-gray-700 group"
-               [routerLink]="['transaction']">
-            <div class="w-12 h-12 bg-purple-50 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4 text-purple-600 dark:text-purple-400 transition-colors duration-300 group-hover:scale-110">
-              <i class="material-icons text-xl">swap_horiz</i>
-            </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'training.dashboard.mainMenu.transaction.title' | translate }}</h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'training.dashboard.mainMenu.transaction.description' | translate }}</p>
-            <div class="flex items-center text-purple-600 dark:text-purple-400 text-sm font-medium transition-colors duration-300">
-              {{ 'training.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
-            </div>
+          <div
+            [routerLink]="['transaction']"
+            [appStagger]="2"
+            [staggerDelay]="0.1"
+            class="cursor-pointer group">
+            <app-glass-card
+              padding="p-6"
+              customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300">
+              <div class="w-12 h-12 bg-purple-50 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4 text-purple-600 dark:text-purple-400 transition-colors duration-300 group-hover:scale-110">
+                <app-icon name="swap_horiz" size="lg" color="text-purple-600 dark:text-purple-400"></app-icon>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'training.dashboard.mainMenu.transaction.title' | translate }}</h3>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'training.dashboard.mainMenu.transaction.description' | translate }}</p>
+              <div class="flex items-center text-purple-600 dark:text-purple-400 text-sm font-medium transition-colors duration-300">
+                {{ 'training.dashboard.mainMenu.enterMenu' | translate }} <app-icon name="arrow_forward" size="sm" color="text-purple-600 dark:text-purple-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
+              </div>
+            </app-glass-card>
           </div>
 
           <!-- History Card -->
-          <div class="glass-card bg-white/50 dark:bg-gray-800/50 rounded-xl shadow-sm dark:shadow-gray-900/50 p-6 hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 cursor-pointer border border-gray-100 dark:border-gray-700 group"
-               [routerLink]="['history']">
-            <div class="w-12 h-12 bg-orange-50 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mb-4 text-orange-600 dark:text-orange-400 transition-colors duration-300 group-hover:scale-110">
-              <i class="material-icons text-xl">history</i>
-            </div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'training.dashboard.mainMenu.history.title' | translate }}</h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'training.dashboard.mainMenu.history.description' | translate }}</p>
-            <div class="flex items-center text-orange-600 dark:text-orange-400 text-sm font-medium transition-colors duration-300">
-              {{ 'training.dashboard.mainMenu.enterMenu' | translate }} <i class="material-icons text-sm ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</i>
-            </div>
+          <div
+            [routerLink]="['history']"
+            [appStagger]="3"
+            [staggerDelay]="0.1"
+            class="cursor-pointer group">
+            <app-glass-card
+              padding="p-6"
+              customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300">
+              <div class="w-12 h-12 bg-orange-50 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mb-4 text-orange-600 dark:text-orange-400 transition-colors duration-300 group-hover:scale-110">
+                <app-icon name="history" size="lg" color="text-orange-600 dark:text-orange-400"></app-icon>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'training.dashboard.mainMenu.history.title' | translate }}</h3>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'training.dashboard.mainMenu.history.description' | translate }}</p>
+              <div class="flex items-center text-orange-600 dark:text-orange-400 text-sm font-medium transition-colors duration-300">
+                {{ 'training.dashboard.mainMenu.enterMenu' | translate }} <app-icon name="arrow_forward" size="sm" color="text-orange-600 dark:text-orange-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
+              </div>
+            </app-glass-card>
           </div>
         </div>
       </div>

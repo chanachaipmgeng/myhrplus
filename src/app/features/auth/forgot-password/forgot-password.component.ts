@@ -1,17 +1,31 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthService, DatabaseModel } from '../../../core/services/auth.service';
 import { NotificationService } from '../../../core/services/notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { SyncfusionModule } from '../../../shared/syncfusion/syncfusion.module';
+import { GlassInputComponent } from '../../../shared/components/glass-input/glass-input.component';
+import { GlassSelectComponent } from '../../../shared/components/glass-select/glass-select.component';
+import { GlassButtonComponent } from '../../../shared/components/glass-button/glass-button.component';
+import { AlertComponent } from '../../../shared/components/alert/alert.component';
+import { IconComponent } from '../../../shared/components/icon/icon.component';
 
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TranslateModule, SyncfusionModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    TranslateModule,
+    GlassInputComponent,
+    GlassSelectComponent,
+    GlassButtonComponent,
+    AlertComponent,
+    IconComponent
+  ],
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss']
 })
@@ -25,11 +39,10 @@ export class ForgotPasswordComponent implements OnInit {
   errorMessage: string = '';
   successMessage: string = '';
   
-  // For Syncfusion components
+  // For reusable components
   username: string = '';
   email: string = '';
-  dbFields: object = { text: 'dbDisplay', value: 'db' };
-  dbDataSource: any[] = [];
+  dbSelectOptions: Array<{ value: string; label: string; disabled?: boolean }> = [];
 
   constructor(
     private fb: FormBuilder,
@@ -53,11 +66,11 @@ export class ForgotPasswordComponent implements OnInit {
     this.authService.getDatabase().subscribe({
       next: (result) => {
         this.dbList = result;
-        // Prepare data for Syncfusion DropDownList
-        this.dbDataSource = result.map(db => ({
-          db: db.db,
-          dbName: db.dbName,
-          dbDisplay: db.dbDisplay || db.dbName || db.db
+        // Prepare data for Glass Select
+        this.dbSelectOptions = result.map(db => ({
+          value: db.db,
+          label: db.dbDisplay || db.dbName || db.db,
+          disabled: false
         }));
 
         if (result && result.length > 0) {
@@ -73,11 +86,22 @@ export class ForgotPasswordComponent implements OnInit {
     });
   }
 
-  onDbChange(args: any): void {
-    if (args.value) {
-      this.dbSelected = args.value;
-      this.forgotPasswordForm.patchValue({ dbName: args.value });
+  onDbChangeSelect(value: string): void {
+    if (value) {
+      this.dbSelected = value;
+      this.forgotPasswordForm.patchValue({ dbName: value });
     }
+  }
+
+  getEmailErrorMessage(): string {
+    const emailControl = this.forgotPasswordForm.get('email');
+    if (emailControl?.hasError('email') && emailControl?.touched) {
+      return this.translate.instant('auth.forgotPassword.error.emailInvalid');
+    }
+    if (!this.email && emailControl?.touched && !emailControl?.hasError('email')) {
+      return this.translate.instant('auth.forgotPassword.error.emailRequired');
+    }
+    return '';
   }
 
   onUsernameChange(value: string): void {

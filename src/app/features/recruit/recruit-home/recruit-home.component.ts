@@ -1,9 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService, User } from '../../../core/services/auth.service';
+import { PageHeaderComponent } from '../../../shared/components/page-header/page-header.component';
+import { GlassCardComponent } from '../../../shared/components/glass-card/glass-card.component';
+import { IconComponent } from '../../../shared/components/icon/icon.component';
+import { StaggerDirective } from '../../../shared/directives/stagger.directive';
 
 @Component({
   selector: 'app-recruit-home',
+  standalone: true,
+  imports: [
+    CommonModule,
+    PageHeaderComponent,
+    GlassCardComponent,
+    IconComponent,
+    StaggerDirective
+  ],
   templateUrl: './recruit-home.component.html',
   styleUrls: ['./recruit-home.component.scss']
 })
@@ -14,28 +27,28 @@ export class RecruitHomeComponent implements OnInit {
     {
       title: 'ประกาศรับสมัคร',
       description: 'จัดการประกาศรับสมัครงาน',
-      icon: 'e-icons e-file',
+      icon: 'description',
       route: '/portal/admin/recruit',
       color: 'bg-blue-500'
     },
     {
       title: 'จัดการผู้สมัคร',
       description: 'จัดการข้อมูลผู้สมัครงาน',
-      icon: 'e-icons e-people',
+      icon: 'people',
       route: '/portal/admin/recruit',
       color: 'bg-green-500'
     },
     {
       title: 'นัดสัมภาษณ์',
       description: 'จัดการนัดสัมภาษณ์',
-      icon: 'e-icons e-calendar',
+      icon: 'calendar_today',
       route: '/portal/admin/recruit',
       color: 'bg-purple-500'
     },
     {
       title: 'รายงาน',
       description: 'รายงานการรับสมัคร',
-      icon: 'e-icons e-chart',
+      icon: 'assessment',
       route: '/portal/admin/recruit',
       color: 'bg-indigo-500'
     }

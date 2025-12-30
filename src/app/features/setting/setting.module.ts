@@ -6,13 +6,9 @@ import { SharedModule } from '../../shared/shared.module';
 import { LayoutModule } from '../../layout/layout.module';
 import { SettingRoutingModule } from './setting-routing.module';
 import { SettingHomeComponent } from './setting-home/setting-home.component';
-import { GlassCardComponent } from '../../shared/components/glass-card/glass-card.component';
-import { PageHeaderComponent } from '../../shared/components/page-header/page-header.component';
 
 @NgModule({
-  declarations: [
-    SettingHomeComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     FormsModule,
@@ -21,8 +17,7 @@ import { PageHeaderComponent } from '../../shared/components/page-header/page-he
     SharedModule,
     LayoutModule,
     SettingRoutingModule,
-    GlassCardComponent,
-    PageHeaderComponent
+    SettingHomeComponent
   ]
 })
 export class SettingModule { }

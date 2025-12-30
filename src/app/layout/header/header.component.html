@@ -5,25 +5,20 @@
   <div class="flex items-center justify-between py-3 md:py-4">
     <div class="flex items-center gap-2 md:gap-4 flex-1 min-w-0">
       <!-- Menu Toggle Button -->
-      <button
+      <app-glass-button
         type="button"
-        (click)="toggleSidenav.emit()"
+        variant="secondary"
+        size="sm"
+        [ariaLabel]="'layout.header.menuAriaLabel' | translate"
         [title]="'layout.header.menu' | translate"
-        [attr.aria-label]="'layout.header.menuAriaLabel' | translate"
-        [attr.aria-expanded]="false"
-        class="header-icon-btn w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg
-               transition-all duration-300 ease-out
-               hover:bg-gray-100 dark:hover:bg-gray-800 theme-gemini:hover:bg-white/10
-               hover:scale-110 active:scale-95
-               hover:shadow-lg hover:-translate-y-0.5
-               focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
-               group relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-indigo-500/0
-                    group-hover:from-blue-500/10 group-hover:to-indigo-500/10
-                    transition-all duration-300 rounded-lg"></div>
+        customClass="w-11 h-11 min-w-[44px] min-h-[44px] p-0 rounded-lg
+                     hover:scale-110 active:scale-95
+                     hover:shadow-lg hover:-translate-y-0.5
+                     group relative overflow-hidden"
+        (clicked)="toggleSidenav.emit()">
         <app-icon name="menu" size="md" color="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90
                    group-hover:scale-110 transition-transform duration-300"></app-icon>
-      </button>
+      </app-glass-button>
 
       <!-- Logo Section -->
       <div class="flex items-center gap-2 md:gap-3 flex-shrink-0 min-w-0">
@@ -100,64 +95,55 @@
 
     <div class="flex items-center gap-2 md:gap-3 flex-shrink-0">
       <!-- Omni-Search Button (Mobile) -->
-      <button
+      <app-glass-button
         type="button"
-        (click)="openOmniSearch()"
+        variant="secondary"
+        size="sm"
+        [ariaLabel]="'layout.header.searchMenuAriaLabel' | translate"
         [title]="'layout.header.searchMenuTitle' | translate"
-        [attr.aria-label]="'layout.header.searchMenuAriaLabel' | translate"
-        class="header-icon-btn md:hidden w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg
-               transition-all duration-300 ease-out
-               hover:bg-gray-100 dark:hover:bg-gray-800 theme-gemini:hover:bg-white/10
-               hover:scale-110 active:scale-95
-               hover:shadow-lg hover:-translate-y-0.5
-               focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
-               group relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-indigo-500/0
-                    group-hover:from-blue-500/10 group-hover:to-indigo-500/10
-                    transition-all duration-300 rounded-lg"></div>
+        customClass="md:hidden w-11 h-11 min-w-[44px] min-h-[44px] p-0 rounded-lg
+                     hover:scale-110 active:scale-95
+                     hover:shadow-lg hover:-translate-y-0.5
+                     group relative overflow-hidden"
+        (clicked)="openOmniSearch()">
         <app-icon name="search" size="md" color="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90
                    group-hover:scale-110 group-hover:text-blue-500 dark:group-hover:text-blue-400
                    transition-all duration-300 relative z-10"></app-icon>
-      </button>
+      </app-glass-button>
 
       <!-- Language Switcher -->
       <div class="relative" appClickOutside (appClickOutside)="closeLanguageMenu()">
-        <button
+        <app-glass-button
           type="button"
-          (click)="toggleLanguageMenu()"
+          variant="secondary"
+          size="sm"
+          [ariaLabel]="'layout.header.changeLanguage' | translate"
           [title]="'layout.header.changeLanguage' | translate"
-          [attr.aria-label]="'layout.header.changeLanguage' | translate"
           [attr.aria-expanded]="showLanguageMenu"
           [attr.aria-controls]="'language-menu'"
-          class="header-icon-btn relative w-11 h-11 min-w-[44px] min-h-[44px] md:w-10 md:h-10 flex items-center justify-center rounded-lg
-                 transition-all duration-300 ease-out
-                 hover:bg-gray-100 dark:hover:bg-gray-800 theme-gemini:hover:bg-white/10
-                 hover:scale-110 active:scale-95
-                 hover:shadow-lg hover:-translate-y-0.5
-                 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
-                 group overflow-hidden">
-          <div class="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-indigo-500/0
-                      group-hover:from-blue-500/10 group-hover:to-indigo-500/10
-                      transition-all duration-300 rounded-lg"></div>
+          customClass="w-11 h-11 min-w-[44px] min-h-[44px] md:w-10 md:h-10 p-0 rounded-lg
+                       hover:scale-110 active:scale-95
+                       hover:shadow-lg hover:-translate-y-0.5
+                       group overflow-hidden"
+          (clicked)="toggleLanguageMenu()">
           <app-icon name="language" size="md" color="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90
                      group-hover:scale-110 group-hover:rotate-12
                      transition-all duration-300 relative z-10"></app-icon>
-        </button>
+        </app-glass-button>
 
         <!-- Language Dropdown -->
-        <div *ngIf="showLanguageMenu"
-             id="language-menu"
-             role="menu"
-             [attr.aria-label]="'layout.header.languageMenuAriaLabel' | translate"
-             class="language-dropdown absolute right-0 top-full mt-2 w-48
-                    bg-white dark:bg-gray-800 theme-gemini:bg-gray-900/50
-                    rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                    z-50 overflow-hidden
-                    backdrop-blur-xl
-                    animate-scale-in
-                    [animation-duration:200ms]
-                    origin-top-right">
-          <div class="py-1">
+        <app-glass-card
+          *ngIf="showLanguageMenu"
+          variant="strong"
+          padding="p-0"
+          customClass="language-dropdown absolute right-0 top-full mt-2 w-48
+                       rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                       z-50 overflow-hidden
+                       backdrop-blur-xl
+                       animate-scale-in
+                       [animation-duration:200ms]
+                       origin-top-right">
+          <div id="language-menu" role="menu" [attr.aria-label]="'layout.header.languageMenuAriaLabel' | translate" class="py-1">
             <button
               *ngFor="let lang of languages; let i = index"
               type="button"
@@ -178,7 +164,7 @@
               <app-icon *ngIf="currentLanguage === lang.value" name="check" size="sm" color="text-blue-500 theme-gemini:text-blue-400"></app-icon>
             </button>
           </div>
-        </div>
+        </app-glass-card>
       </div>
 
       <!-- Theme Toggle -->
@@ -186,23 +172,19 @@
 
       <!-- Notifications -->
       <div class="relative" appClickOutside (appClickOutside)="closeNotificationMenu()">
-        <button
+        <app-glass-button
           type="button"
-          (click)="toggleNotificationMenu()"
+          variant="secondary"
+          size="sm"
+          [ariaLabel]="('layout.header.notifications' | translate) + (unreadCount > 0 ? ' (' + unreadCount + ' ' + ('layout.header.newItems' | translate) + ')' : '')"
           [title]="'layout.header.notifications' | translate"
-          [attr.aria-label]="('layout.header.notifications' | translate) + (unreadCount > 0 ? ' (' + unreadCount + ' ' + ('layout.header.newItems' | translate) + ')' : '')"
           [attr.aria-expanded]="showNotificationMenu"
           [attr.aria-controls]="'notification-menu'"
-          class="header-icon-btn relative w-11 h-11 min-w-[44px] min-h-[44px] md:w-10 md:h-10 flex items-center justify-center rounded-lg
-                 transition-all duration-300 ease-out
-                 hover:bg-gray-100 dark:hover:bg-gray-800 theme-gemini:hover:bg-white/10
-                 hover:scale-110 active:scale-95
-                 hover:shadow-lg hover:-translate-y-0.5
-                 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
-                 group overflow-hidden">
-          <div class="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-indigo-500/0
-                      group-hover:from-blue-500/10 group-hover:to-indigo-500/10
-                      transition-all duration-300 rounded-lg"></div>
+          customClass="w-11 h-11 min-w-[44px] min-h-[44px] md:w-10 md:h-10 p-0 rounded-lg relative
+                       hover:scale-110 active:scale-95
+                       hover:shadow-lg hover:-translate-y-0.5
+                       group overflow-hidden"
+          (clicked)="toggleNotificationMenu()">
           <app-icon name="notifications" size="md" color="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90
                      group-hover:scale-110 group-hover:animate-bounce
                      transition-all duration-300 relative z-10"></app-icon>
@@ -215,21 +197,21 @@
                        transition-all duration-300">
             {{ unreadCount > 9 ? '9+' : unreadCount }}
           </span>
-        </button>
+        </app-glass-button>
 
         <!-- Notification Dropdown -->
-        <div *ngIf="showNotificationMenu"
-             id="notification-menu"
-             role="menu"
-             [attr.aria-label]="'layout.header.notificationMenuAriaLabel' | translate"
-             class="notification-dropdown absolute right-0 top-full mt-2 w-80 md:w-96
-                    bg-white dark:bg-gray-800 theme-gemini:bg-gray-900/50
-                    rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                    z-50 max-h-96 overflow-hidden flex flex-col
-                    backdrop-blur-xl
-                    animate-scale-in
-                    [animation-duration:200ms]
-                    origin-top-right">
+        <app-glass-card
+          *ngIf="showNotificationMenu"
+          variant="strong"
+          padding="p-0"
+          customClass="notification-dropdown absolute right-0 top-full mt-2 w-80 md:w-96
+                       rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                       z-50 max-h-96 overflow-hidden flex flex-col
+                       backdrop-blur-xl
+                       animate-scale-in
+                       [animation-duration:200ms]
+                       origin-top-right">
+          <div id="notification-menu" role="menu" [attr.aria-label]="'layout.header.notificationMenuAriaLabel' | translate" class="flex flex-col">
           <!-- Header -->
           <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30 flex items-center justify-between bg-gray-50 dark:bg-gray-900 theme-gemini:bg-gray-900/70">
             <h3 class="font-semibold text-gray-800 dark:text-gray-200 theme-gemini:text-white/90 thai-text">{{ 'layout.header.notifications' | translate }}</h3>
@@ -307,47 +289,43 @@
               {{ 'layout.header.viewAll' | translate }}
             </button>
           </div>
-        </div>
+          </div>
+        </app-glass-card>
       </div>
 
       <!-- User Menu -->
       <div class="relative" appClickOutside (appClickOutside)="closeUserMenu()">
-        <button
+        <app-glass-button
           type="button"
-          (click)="toggleUserMenu()"
+          variant="secondary"
+          size="sm"
+          [ariaLabel]="'layout.header.userMenu' | translate"
           [title]="'layout.header.userMenu' | translate"
-          [attr.aria-label]="'layout.header.userMenu' | translate"
           [attr.aria-expanded]="showUserMenu"
           [attr.aria-controls]="'user-menu'"
-          class="header-icon-btn relative w-11 h-11 min-w-[44px] min-h-[44px] md:w-10 md:h-10 flex items-center justify-center rounded-lg
-                 transition-all duration-300 ease-out
-                 hover:bg-gray-100 dark:hover:bg-gray-800 theme-gemini:hover:bg-white/10
-                 hover:scale-110 active:scale-95
-                 hover:shadow-lg hover:-translate-y-0.5
-                 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
-                 group overflow-hidden">
-          <div class="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-indigo-500/0
-                      group-hover:from-blue-500/10 group-hover:to-indigo-500/10
-                      transition-all duration-300 rounded-lg"></div>
+          customClass="w-11 h-11 min-w-[44px] min-h-[44px] md:w-10 md:h-10 p-0 rounded-lg relative
+                       hover:scale-110 active:scale-95
+                       hover:shadow-lg hover:-translate-y-0.5
+                       group overflow-hidden"
+          (clicked)="toggleUserMenu()">
           <app-icon name="account_circle" size="md" color="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90
                      group-hover:scale-110
                      transition-all duration-300 relative z-10"></app-icon>
-        </button>
+        </app-glass-button>
 
         <!-- User Menu Dropdown -->
-        <div *ngIf="showUserMenu"
-             id="user-menu"
-             role="menu"
-             [attr.aria-label]="'layout.header.userMenu' | translate"
-             class="user-dropdown absolute right-0 top-full mt-2 w-56
-                    bg-white dark:bg-gray-800 theme-gemini:bg-gray-900/50
-                    rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-                    z-50 overflow-hidden
-                    backdrop-blur-xl
-                    animate-scale-in
-                    [animation-duration:200ms]
-                    origin-top-right">
-          <div class="py-1">
+        <app-glass-card
+          *ngIf="showUserMenu"
+          variant="strong"
+          padding="p-0"
+          customClass="user-dropdown absolute right-0 top-full mt-2 w-56
+                       rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                       z-50 overflow-hidden
+                       backdrop-blur-xl
+                       animate-scale-in
+                       [animation-duration:200ms]
+                       origin-top-right">
+          <div id="user-menu" role="menu" [attr.aria-label]="'layout.header.userMenu' | translate" class="py-1">
             <button
               type="button"
               role="menuitem"
@@ -396,7 +374,7 @@
               <span class="thai-text text-sm font-medium">{{ 'layout.header.logout' | translate }}</span>
             </button>
           </div>
-        </div>
+        </app-glass-card>
       </div>
     </div>
   </div>

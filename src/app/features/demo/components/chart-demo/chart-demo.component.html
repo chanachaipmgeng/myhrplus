@@ -62,21 +62,6 @@
     <!-- Line Chart -->
     <div class="mb-8">
       <h3 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Line Chart</h3>
-      <app-chart
-        [dataSource]="salesData"
-        [series]="columnSeries"
-        [primaryXAxis]="primaryXAxis"
-        [primaryYAxis]="primaryYAxis"
-        title="ยอดขายรายเดือน"
-        [legendSettings]="{ visible: true, position: 'Top' }"
-        [tooltip]="{ enable: true }"
-        [height]="'400px'"
-        [width]="'100%'"
-        (pointClick)="onPointClick($event)"
-        (loaded)="onLoaded($event)">
-      </app-chart>
-    </section>
-
       <app-glass-card padding="p-6">
         <app-chart
           [dataSource]="revenueData"

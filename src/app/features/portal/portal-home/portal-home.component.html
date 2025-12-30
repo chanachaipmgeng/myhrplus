@@ -1,72 +1,66 @@
-<div class="portal-home-container">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <!-- Header -->
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">
-        หน้าแรก
-      </h1>
-      <p class="mt-2 text-gray-600 dark:text-gray-400">
-        ดูข้อมูลต่างๆโดยรวมของตัวเอง และ quick links ต่างๆ
-      </p>
-    </div>
+<div class="-mx-4 md:-mx-6 lg:-mx-8">
+  <app-page-header
+    title="หน้าแรก"
+    subtitle="ดูข้อมูลต่างๆโดยรวมของตัวเอง และ quick links ต่างๆ"
+    [showBreadcrumbs]="true">
+  </app-page-header>
 
-    <!-- Quick Links Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Self Service Quick Links -->
-      <div class="glass-card p-6">
-        <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-          Self Service
-        </h2>
-        <div class="space-y-3">
-          <div class="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50 opacity-50">
-            <span class="material-icons text-20">access_time</span>
-            <span class="text-gray-500 dark:text-gray-500">ลงเวลา (Coming Soon)</span>
-          </div>
-          <div class="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50 opacity-50">
-            <span class="material-icons text-20">description</span>
-            <span class="text-gray-500 dark:text-gray-500">ขอเอกสาร (Coming Soon)</span>
-          </div>
-          <div class="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50 opacity-50">
-            <span class="material-icons text-20">receipt</span>
-            <span class="text-gray-500 dark:text-gray-500">สลิปเงินเดือน (Coming Soon)</span>
-          </div>
+  <!-- Quick Links Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-6 lg:px-8">
+    <!-- Self Service Quick Links -->
+    <app-glass-card padding="p-6">
+      <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+        Self Service
+      </h2>
+      <div class="space-y-3">
+        <div class="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50 opacity-50">
+          <app-icon name="access_time" size="md" color="text-gray-500"></app-icon>
+          <span class="text-gray-500 dark:text-gray-500">ลงเวลา (Coming Soon)</span>
+        </div>
+        <div class="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50 opacity-50">
+          <app-icon name="description" size="md" color="text-gray-500"></app-icon>
+          <span class="text-gray-500 dark:text-gray-500">ขอเอกสาร (Coming Soon)</span>
+        </div>
+        <div class="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50 opacity-50">
+          <app-icon name="receipt" size="md" color="text-gray-500"></app-icon>
+          <span class="text-gray-500 dark:text-gray-500">สลิปเงินเดือน (Coming Soon)</span>
         </div>
       </div>
+    </app-glass-card>
 
-      <!-- Statistics Card -->
-      <div class="glass-card p-6">
-        <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-          สถิติ
-        </h2>
-        <div class="space-y-3">
-          <div class="flex items-center justify-between p-3 rounded-lg bg-primary-500/10 dark:bg-primary-500/20">
-            <span class="text-gray-700 dark:text-gray-300">วันลาคงเหลือ</span>
-            <span class="text-lg font-semibold text-primary-600 dark:text-primary-400">15 วัน</span>
-          </div>
-          <div class="flex items-center justify-between p-3 rounded-lg bg-primary-500/10 dark:bg-primary-500/20">
-            <span class="text-gray-700 dark:text-gray-300">OT ชั่วโมง (เดือนนี้)</span>
-            <span class="text-lg font-semibold text-primary-600 dark:text-primary-400">20 ชม.</span>
-          </div>
+    <!-- Statistics Card -->
+    <app-glass-card padding="p-6">
+      <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+        สถิติ
+      </h2>
+      <div class="space-y-3">
+        <div class="flex items-center justify-between p-3 rounded-lg bg-primary/10 dark:bg-primary/20">
+          <span class="text-gray-700 dark:text-gray-300">วันลาคงเหลือ</span>
+          <span class="text-lg font-semibold text-primary dark:text-primary-light">15 วัน</span>
+        </div>
+        <div class="flex items-center justify-between p-3 rounded-lg bg-primary/10 dark:bg-primary/20">
+          <span class="text-gray-700 dark:text-gray-300">OT ชั่วโมง (เดือนนี้)</span>
+          <span class="text-lg font-semibold text-primary dark:text-primary-light">20 ชม.</span>
         </div>
       </div>
+    </app-glass-card>
 
-      <!-- Recent Activity Card -->
-      <div class="glass-card p-6">
-        <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-          กิจกรรมล่าสุด
-        </h2>
-        <div class="space-y-3">
-          <div class="p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
-            <p class="text-sm text-gray-600 dark:text-gray-400">ลงเวลาเข้า</p>
-            <p class="text-xs text-gray-500 dark:text-gray-500">เมื่อวาน 08:30</p>
-          </div>
-          <div class="p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
-            <p class="text-sm text-gray-600 dark:text-gray-400">ขอเอกสาร</p>
-            <p class="text-xs text-gray-500 dark:text-gray-500">2 วันที่แล้ว</p>
-          </div>
+    <!-- Recent Activity Card -->
+    <app-glass-card padding="p-6">
+      <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+        กิจกรรมล่าสุด
+      </h2>
+      <div class="space-y-3">
+        <div class="p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
+          <p class="text-sm text-gray-600 dark:text-gray-400">ลงเวลาเข้า</p>
+          <p class="text-xs text-gray-500 dark:text-gray-500">เมื่อวาน 08:30</p>
+        </div>
+        <div class="p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
+          <p class="text-sm text-gray-600 dark:text-gray-400">ขอเอกสาร</p>
+          <p class="text-xs text-gray-500 dark:text-gray-500">2 วันที่แล้ว</p>
         </div>
       </div>
-    </div>
+    </app-glass-card>
   </div>
 </div>
 

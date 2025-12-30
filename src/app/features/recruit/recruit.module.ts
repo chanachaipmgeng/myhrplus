@@ -16,9 +16,7 @@ import { PageHeaderComponent } from '../../shared/components/page-header/page-he
 import { RecruitHomeComponent } from './recruit-home/recruit-home.component';
 
 @NgModule({
-  declarations: [
-    RecruitHomeComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     FormsModule,
@@ -33,7 +31,8 @@ import { RecruitHomeComponent } from './recruit-home/recruit-home.component';
     GlassInputComponent,
     LoadingComponent,
     EmptyStateComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    RecruitHomeComponent
   ]
 })
 export class RecruitModule { }

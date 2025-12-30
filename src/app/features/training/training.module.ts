@@ -16,9 +16,7 @@ import { PageHeaderComponent } from '../../shared/components/page-header/page-he
 import { TrainingHomeComponent } from './training-home/training-home.component';
 
 @NgModule({
-  declarations: [
-    TrainingHomeComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     FormsModule,
@@ -33,7 +31,8 @@ import { TrainingHomeComponent } from './training-home/training-home.component';
     GlassInputComponent,
     LoadingComponent,
     EmptyStateComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    TrainingHomeComponent
   ]
 })
 export class TrainingModule { }
