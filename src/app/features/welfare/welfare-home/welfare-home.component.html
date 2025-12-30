@@ -1,5 +1,5 @@
 <div class="-mx-4 md:-mx-6 lg:-mx-8">
-  <div class="p-4 md:p-6 lg:p-8 min-h-screen transition-colors duration-300">
+  <div class="p-4 md:p-6 lg:p-8 min-h-screen transition-colors duration-300" role="main">
     <!-- Simplified Page Header with Welcome Section -->
     <app-glass-card padding="p-5 md:p-6" customClass="mb-6 md:mb-8" [animate]="'fade-in'">
       <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -24,76 +24,99 @@
       </div>
     </app-glass-card>
     <!-- Statistics Cards -->
-    <div class="mb-8">
-      <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">สถิติสวัสดิการ</h2>
+    <section class="mb-8" aria-labelledby="welfare-statistics-title">
+      <h2 id="welfare-statistics-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">สถิติสวัสดิการ</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         <app-glass-card
           padding="p-5"
-          customClass="bg-gradient-to-br from-pink-500 to-rose-600 dark:from-pink-600 dark:to-rose-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          customClass="bg-gradient-to-br from-pink-500 to-rose-600 dark:from-pink-600 dark:to-rose-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer focus-within:ring-2 focus-within:ring-pink-400 focus-within:ring-offset-2"
           [appStagger]="0"
           [staggerDelay]="0.05"
-          [routerLink]="['/welfare']">
+          role="button"
+          [attr.tabindex]="0"
+          [attr.aria-label]="'สวัสดิการทั้งหมด: ' + statistics.totalWelfares + ' รายการ'"
+          [attr.aria-describedby]="'welfare-stat-desc-0'"
+          (click)="navigateToRoute('/welfare')"
+          (keydown.enter)="navigateToRoute('/welfare')"
+          (keydown.space)="navigateToRoute('/welfare'); $event.preventDefault()">
           <div class="text-4xl font-bold mb-2">{{ statistics.totalWelfares }}</div>
-          <div class="text-sm opacity-90">สวัสดิการทั้งหมด</div>
+          <div class="text-sm opacity-90" id="welfare-stat-desc-0">สวัสดิการทั้งหมด</div>
           <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
-            <app-icon name="favorite" size="xs" color="text-white"></app-icon>
+            <app-icon name="favorite" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
             <span>รายการ</span>
           </div>
         </app-glass-card>
         <app-glass-card
           padding="p-5"
-          customClass="bg-gradient-to-br from-purple-500 to-pink-600 dark:from-purple-600 dark:to-pink-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          customClass="bg-gradient-to-br from-purple-500 to-pink-600 dark:from-purple-600 dark:to-pink-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer focus-within:ring-2 focus-within:ring-purple-400 focus-within:ring-offset-2"
           [appStagger]="1"
           [staggerDelay]="0.05"
-          [routerLink]="['/welfare']">
+          role="button"
+          [attr.tabindex]="0"
+          [attr.aria-label]="'ผู้ลงทะเบียน: ' + statistics.enrolled + ' คน'"
+          [attr.aria-describedby]="'welfare-stat-desc-1'"
+          (click)="navigateToRoute('/welfare')"
+          (keydown.enter)="navigateToRoute('/welfare')"
+          (keydown.space)="navigateToRoute('/welfare'); $event.preventDefault()">
           <div class="text-4xl font-bold mb-2">{{ statistics.enrolled }}</div>
-          <div class="text-sm opacity-90">ผู้ลงทะเบียน</div>
+          <div class="text-sm opacity-90" id="welfare-stat-desc-1">ผู้ลงทะเบียน</div>
           <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
-            <app-icon name="people" size="xs" color="text-white"></app-icon>
+            <app-icon name="people" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
             <span>คน</span>
           </div>
         </app-glass-card>
         <app-glass-card
           padding="p-5"
-          customClass="bg-gradient-to-br from-indigo-500 to-blue-600 dark:from-indigo-600 dark:to-blue-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          customClass="bg-gradient-to-br from-indigo-500 to-blue-600 dark:from-indigo-600 dark:to-blue-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer focus-within:ring-2 focus-within:ring-indigo-400 focus-within:ring-offset-2"
           [appStagger]="2"
           [staggerDelay]="0.05"
-          [routerLink]="['/welfare']">
+          role="button"
+          [attr.tabindex]="0"
+          [attr.aria-label]="'สวัสดิการที่เปิด: ' + statistics.active + ' รายการ'"
+          [attr.aria-describedby]="'welfare-stat-desc-2'"
+          (click)="navigateToRoute('/welfare')"
+          (keydown.enter)="navigateToRoute('/welfare')"
+          (keydown.space)="navigateToRoute('/welfare'); $event.preventDefault()">
           <div class="text-4xl font-bold mb-2">{{ statistics.active }}</div>
-          <div class="text-sm opacity-90">สวัสดิการที่เปิด</div>
+          <div class="text-sm opacity-90" id="welfare-stat-desc-2">สวัสดิการที่เปิด</div>
           <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
-            <app-icon name="check_circle" size="xs" color="text-white"></app-icon>
+            <app-icon name="check_circle" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
             <span>รายการ</span>
           </div>
         </app-glass-card>
       </div>
-    </div>
+    </section>
 
     <!-- Main Content: Menu Cards -->
-    <div class="mb-8">
-      <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">เมนูหลัก</h2>
+    <section class="mb-8" aria-labelledby="welfare-menu-title">
+      <h2 id="welfare-menu-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">เมนูหลัก</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div
           *ngFor="let item of menuItems; let i = index"
-          [routerLink]="[item.route]"
           [appStagger]="i"
           [staggerDelay]="0.1"
-          class="cursor-pointer group">
+          class="cursor-pointer group focus:outline-none focus:ring-2 focus:ring-blue-400"
+          role="button"
+          [attr.tabindex]="0"
+          [attr.aria-label]="item.title + ': ' + item.description"
+          (click)="navigateToRoute(item.route)"
+          (keydown.enter)="navigateToRoute(item.route)"
+          (keydown.space)="navigateToRoute(item.route); $event.preventDefault()">
           <app-glass-card
             padding="p-6"
-            customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 h-full">
+            customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 h-full focus-within:ring-2 focus-within:ring-blue-400 focus-within:ring-offset-2">
             <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
-              <app-icon [name]="item.icon" size="lg" color="text-blue-600 dark:text-blue-400"></app-icon>
+              <app-icon [name]="item.icon" size="lg" color="text-blue-600 dark:text-blue-400" [attr.aria-hidden]="true"></app-icon>
             </div>
             <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ item.title }}</h3>
             <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ item.description }}</p>
             <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-blue-600 dark:text-blue-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
+              เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-blue-600 dark:text-blue-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300" [attr.aria-hidden]="true"></app-icon>
             </div>
           </app-glass-card>
         </div>
       </div>
-    </div>
+    </section>
   </div>
 </div>
 

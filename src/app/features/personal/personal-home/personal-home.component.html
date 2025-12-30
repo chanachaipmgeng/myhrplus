@@ -1,4 +1,4 @@
-<div class="-mx-4 md:-mx-6 lg:-mx-8">
+<div class="-mx-4 md:-mx-6 lg:-mx-8" role="main" [attr.aria-label]="'Personal Management'">
   <div class="p-4 md:p-6 lg:p-8 min-h-screen transition-colors duration-300">
     <!-- Simplified Page Header with Welcome Section -->
     <app-glass-card padding="p-5 md:p-6" customClass="mb-6 md:mb-8" [animate]="'fade-in'">
@@ -24,76 +24,116 @@
       </div>
     </app-glass-card>
     <!-- Statistics Cards -->
-    <div class="mb-8">
-      <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">สถิติข้อมูลพนักงาน</h2>
+    <section class="mb-8" [attr.aria-labelledby]="'statistics-title'">
+      <h2 id="statistics-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">สถิติข้อมูลพนักงาน</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
-        <app-glass-card
-          padding="p-5"
-          customClass="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+        <div
           [appStagger]="0"
-          [staggerDelay]="0.05">
-          <div class="text-4xl font-bold mb-2">{{ statistics.totalEmployees }}</div>
-          <div class="text-sm opacity-90">พนักงานทั้งหมด</div>
-        </app-glass-card>
-        <app-glass-card
-          padding="p-5"
-          customClass="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [staggerDelay]="0.05"
+          class="cursor-pointer group"
+          role="button"
+          [attr.aria-label]="'พนักงานทั้งหมด: ' + statistics.totalEmployees"
+          [attr.aria-describedby]="'total-employees-description'"
+          [attr.tabindex]="0">
+          <app-glass-card
+            padding="p-5"
+            customClass="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white text-center hover:scale-105 transition-transform duration-300 focus-within:ring-2 focus-within:ring-indigo-400 focus-within:ring-offset-2">
+            <div class="text-4xl font-bold mb-2" [attr.aria-hidden]="true">{{ statistics.totalEmployees }}</div>
+            <div class="text-sm opacity-90" id="total-employees-description">พนักงานทั้งหมด</div>
+          </app-glass-card>
+        </div>
+        <div
           [appStagger]="1"
-          [staggerDelay]="0.05">
-          <div class="text-4xl font-bold mb-2">{{ statistics.activeEmployees }}</div>
-          <div class="text-sm opacity-90">พนักงานที่ทำงาน</div>
-        </app-glass-card>
-        <app-glass-card
-          padding="p-5"
-          customClass="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [staggerDelay]="0.05"
+          class="cursor-pointer group"
+          role="button"
+          [attr.aria-label]="'พนักงานที่ทำงาน: ' + statistics.activeEmployees"
+          [attr.aria-describedby]="'active-employees-description'"
+          [attr.tabindex]="0">
+          <app-glass-card
+            padding="p-5"
+            customClass="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white text-center hover:scale-105 transition-transform duration-300 focus-within:ring-2 focus-within:ring-pink-400 focus-within:ring-offset-2">
+            <div class="text-4xl font-bold mb-2" [attr.aria-hidden]="true">{{ statistics.activeEmployees }}</div>
+            <div class="text-sm opacity-90" id="active-employees-description">พนักงานที่ทำงาน</div>
+          </app-glass-card>
+        </div>
+        <div
           [appStagger]="2"
-          [staggerDelay]="0.05">
-          <div class="text-4xl font-bold mb-2">{{ statistics.newEmployees }}</div>
-          <div class="text-sm opacity-90">พนักงานใหม่ (เดือนนี้)</div>
-        </app-glass-card>
-        <app-glass-card
-          padding="p-5"
-          customClass="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [staggerDelay]="0.05"
+          class="cursor-pointer group"
+          role="button"
+          [attr.aria-label]="'พนักงานใหม่ (เดือนนี้): ' + statistics.newEmployees"
+          [attr.aria-describedby]="'new-employees-description'"
+          [attr.tabindex]="0">
+          <app-glass-card
+            padding="p-5"
+            customClass="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white text-center hover:scale-105 transition-transform duration-300 focus-within:ring-2 focus-within:ring-blue-400 focus-within:ring-offset-2">
+            <div class="text-4xl font-bold mb-2" [attr.aria-hidden]="true">{{ statistics.newEmployees }}</div>
+            <div class="text-sm opacity-90" id="new-employees-description">พนักงานใหม่ (เดือนนี้)</div>
+          </app-glass-card>
+        </div>
+        <div
           [appStagger]="3"
-          [staggerDelay]="0.05">
-          <div class="text-4xl font-bold mb-2">{{ statistics.onLeave }}</div>
-          <div class="text-sm opacity-90">พนักงานที่ลาออก</div>
-        </app-glass-card>
-        <app-glass-card
-          padding="p-5"
-          customClass="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [staggerDelay]="0.05"
+          class="cursor-pointer group"
+          role="button"
+          [attr.aria-label]="'พนักงานที่ลาออก: ' + statistics.onLeave"
+          [attr.aria-describedby]="'on-leave-description'"
+          [attr.tabindex]="0">
+          <app-glass-card
+            padding="p-5"
+            customClass="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white text-center hover:scale-105 transition-transform duration-300 focus-within:ring-2 focus-within:ring-green-400 focus-within:ring-offset-2">
+            <div class="text-4xl font-bold mb-2" [attr.aria-hidden]="true">{{ statistics.onLeave }}</div>
+            <div class="text-sm opacity-90" id="on-leave-description">พนักงานที่ลาออก</div>
+          </app-glass-card>
+        </div>
+        <div
           [appStagger]="4"
-          [staggerDelay]="0.05">
-          <div class="text-4xl font-bold mb-2">{{ statistics.pendingApprovals }}</div>
-          <div class="text-sm opacity-90">รออนุมัติ</div>
-        </app-glass-card>
+          [staggerDelay]="0.05"
+          class="cursor-pointer group"
+          role="button"
+          [attr.aria-label]="'รออนุมัติ: ' + statistics.pendingApprovals"
+          [attr.aria-describedby]="'pending-approvals-description'"
+          [attr.tabindex]="0">
+          <app-glass-card
+            padding="p-5"
+            customClass="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white text-center hover:scale-105 transition-transform duration-300 focus-within:ring-2 focus-within:ring-yellow-400 focus-within:ring-offset-2">
+            <div class="text-4xl font-bold mb-2" [attr.aria-hidden]="true">{{ statistics.pendingApprovals }}</div>
+            <div class="text-sm opacity-90" id="pending-approvals-description">รออนุมัติ</div>
+          </app-glass-card>
+        </div>
       </div>
-    </div>
+    </section>
 
     <!-- Main Content: Menu Cards -->
-    <div class="mb-8">
-      <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">เมนูหลัก</h2>
+    <section class="mb-8" [attr.aria-labelledby]="'menu-title'">
+      <h2 id="menu-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">เมนูหลัก</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div
           *ngFor="let item of menuItems; let i = index"
           [routerLink]="[item.route]"
           [appStagger]="i"
           [staggerDelay]="0.1"
-          class="cursor-pointer group">
+          class="cursor-pointer group"
+          role="button"
+          [attr.aria-label]="item.title + ' - ' + item.description"
+          [attr.tabindex]="0"
+          (keydown.enter)="navigateToRoute(item.route)"
+          (keydown.space)="navigateToRoute(item.route); $event.preventDefault()">
           <app-glass-card
             padding="p-6"
-            customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 h-full">
-            <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
+            customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 h-full focus-within:ring-2 focus-within:ring-blue-400 focus-within:ring-offset-2">
+            <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110" [attr.aria-hidden]="true">
               <app-icon [name]="getIconName(item.icon)" size="lg" color="text-blue-600 dark:text-blue-400"></app-icon>
             </div>
             <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ item.title }}</h3>
             <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ item.description }}</p>
             <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-blue-600 dark:text-blue-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
+              เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-blue-600 dark:text-blue-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300" [attr.aria-hidden]="true"></app-icon>
             </div>
           </app-glass-card>
         </div>
       </div>
-    </div>
+    </section>
   </div>
 </div>

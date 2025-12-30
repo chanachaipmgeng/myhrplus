@@ -63,6 +63,15 @@ export class CompanyHomeComponent implements OnInit {
     this.router.navigate([route]);
   }
 
+  /**
+   * Navigate to route (for keyboard navigation)
+   */
+  navigateToRoute(route: string): void {
+    if (route) {
+      this.router.navigate([route]);
+    }
+  }
+
   getIconName(iconClass: string): string {
     // Convert e-icons class to icon name
     const iconMap: { [key: string]: string } = {

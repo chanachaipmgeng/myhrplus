@@ -1,5 +1,5 @@
 <div class="-mx-4 md:-mx-6 lg:-mx-8">
-  <div class="p-4 md:p-6 lg:p-8 min-h-screen transition-colors duration-300">
+  <div class="p-4 md:p-6 lg:p-8 min-h-screen transition-colors duration-300" role="main">
     <!-- Simplified Page Header with Welcome Section -->
     <app-glass-card padding="p-5 md:p-6" customClass="mb-6 md:mb-8" [animate]="'fade-in'">
       <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -24,76 +24,122 @@
       </div>
     </app-glass-card>
     <!-- Statistics Cards -->
-    <div class="mb-8">
-      <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">สถิติการลงเวลา</h2>
+    <section class="mb-8" aria-labelledby="ta-statistics-title">
+      <h2 id="ta-statistics-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">สถิติการลงเวลา</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
         <app-glass-card
           padding="p-5"
-          customClass="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          customClass="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer focus-within:ring-2 focus-within:ring-indigo-400 focus-within:ring-offset-2"
           [appStagger]="0"
-          [staggerDelay]="0.05">
+          [staggerDelay]="0.05"
+          role="button"
+          [attr.tabindex]="0"
+          [attr.aria-label]="'ลงเวลาวันนี้: ' + statistics.todayAttendance"
+          [attr.aria-describedby]="'ta-stat-desc-0'"
+          (click)="navigateToRoute('/ta')"
+          (keydown.enter)="navigateToRoute('/ta')"
+          (keydown.space)="navigateToRoute('/ta'); $event.preventDefault()">
           <div class="text-4xl font-bold mb-2">{{ statistics.todayAttendance }}</div>
-          <div class="text-sm opacity-90">ลงเวลาวันนี้</div>
+          <div class="text-sm opacity-90" id="ta-stat-desc-0">ลงเวลาวันนี้</div>
+          <app-icon name="access_time" size="sm" color="text-white" customClass="mt-2" [attr.aria-hidden]="true"></app-icon>
         </app-glass-card>
         <app-glass-card
           padding="p-5"
-          customClass="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          customClass="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer focus-within:ring-2 focus-within:ring-pink-400 focus-within:ring-offset-2"
           [appStagger]="1"
-          [staggerDelay]="0.05">
+          [staggerDelay]="0.05"
+          role="button"
+          [attr.tabindex]="0"
+          [attr.aria-label]="'คำขอลารออนุมัติ: ' + statistics.pendingLeaves"
+          [attr.aria-describedby]="'ta-stat-desc-1'"
+          (click)="navigateToRoute('/ta')"
+          (keydown.enter)="navigateToRoute('/ta')"
+          (keydown.space)="navigateToRoute('/ta'); $event.preventDefault()">
           <div class="text-4xl font-bold mb-2">{{ statistics.pendingLeaves }}</div>
-          <div class="text-sm opacity-90">คำขอลารออนุมัติ</div>
+          <div class="text-sm opacity-90" id="ta-stat-desc-1">คำขอลารออนุมัติ</div>
+          <app-icon name="event" size="sm" color="text-white" customClass="mt-2" [attr.aria-hidden]="true"></app-icon>
         </app-glass-card>
         <app-glass-card
           padding="p-5"
-          customClass="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          customClass="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer focus-within:ring-2 focus-within:ring-blue-400 focus-within:ring-offset-2"
           [appStagger]="2"
-          [staggerDelay]="0.05">
+          [staggerDelay]="0.05"
+          role="button"
+          [attr.tabindex]="0"
+          [attr.aria-label]="'คำขอ OT รออนุมัติ: ' + statistics.pendingOT"
+          [attr.aria-describedby]="'ta-stat-desc-2'"
+          (click)="navigateToRoute('/ta')"
+          (keydown.enter)="navigateToRoute('/ta')"
+          (keydown.space)="navigateToRoute('/ta'); $event.preventDefault()">
           <div class="text-4xl font-bold mb-2">{{ statistics.pendingOT }}</div>
-          <div class="text-sm opacity-90">คำขอ OT รออนุมัติ</div>
+          <div class="text-sm opacity-90" id="ta-stat-desc-2">คำขอ OT รออนุมัติ</div>
+          <app-icon name="schedule" size="sm" color="text-white" customClass="mt-2" [attr.aria-hidden]="true"></app-icon>
         </app-glass-card>
         <app-glass-card
           padding="p-5"
-          customClass="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          customClass="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer focus-within:ring-2 focus-within:ring-green-400 focus-within:ring-offset-2"
           [appStagger]="3"
-          [staggerDelay]="0.05">
+          [staggerDelay]="0.05"
+          role="button"
+          [attr.tabindex]="0"
+          [attr.aria-label]="'มาสายวันนี้: ' + statistics.lateToday"
+          [attr.aria-describedby]="'ta-stat-desc-3'"
+          (click)="navigateToRoute('/ta')"
+          (keydown.enter)="navigateToRoute('/ta')"
+          (keydown.space)="navigateToRoute('/ta'); $event.preventDefault()">
           <div class="text-4xl font-bold mb-2">{{ statistics.lateToday }}</div>
-          <div class="text-sm opacity-90">มาสายวันนี้</div>
+          <div class="text-sm opacity-90" id="ta-stat-desc-3">มาสายวันนี้</div>
+          <app-icon name="warning" size="sm" color="text-white" customClass="mt-2" [attr.aria-hidden]="true"></app-icon>
         </app-glass-card>
         <app-glass-card
           padding="p-5"
-          customClass="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          customClass="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer focus-within:ring-2 focus-within:ring-yellow-400 focus-within:ring-offset-2"
           [appStagger]="4"
-          [staggerDelay]="0.05">
+          [staggerDelay]="0.05"
+          role="button"
+          [attr.tabindex]="0"
+          [attr.aria-label]="'ขาดงานวันนี้: ' + statistics.absentToday"
+          [attr.aria-describedby]="'ta-stat-desc-4'"
+          (click)="navigateToRoute('/ta')"
+          (keydown.enter)="navigateToRoute('/ta')"
+          (keydown.space)="navigateToRoute('/ta'); $event.preventDefault()">
           <div class="text-4xl font-bold mb-2">{{ statistics.absentToday }}</div>
-          <div class="text-sm opacity-90">ขาดงานวันนี้</div>
+          <div class="text-sm opacity-90" id="ta-stat-desc-4">ขาดงานวันนี้</div>
+          <app-icon name="cancel" size="sm" color="text-white" customClass="mt-2" [attr.aria-hidden]="true"></app-icon>
         </app-glass-card>
       </div>
-    </div>
+    </section>
 
     <!-- Main Content: Menu Cards -->
-    <div class="mb-8">
-      <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">เมนูหลัก</h2>
+    <section class="mb-8" aria-labelledby="ta-menu-title">
+      <h2 id="ta-menu-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">เมนูหลัก</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div
           *ngFor="let item of menuItems; let i = index"
-          [routerLink]="[item.route]"
           [appStagger]="i"
           [staggerDelay]="0.1"
-          class="cursor-pointer group">
+          class="cursor-pointer group"
+          role="button"
+          [attr.tabindex]="0"
+          [attr.aria-label]="item.title + ': ' + item.description"
+          (click)="navigateToRoute(item.route)"
+          (keydown.enter)="navigateToRoute(item.route)"
+          (keydown.space)="navigateToRoute(item.route); $event.preventDefault()"
+          class="focus:outline-none focus:ring-2 focus:ring-blue-400">
           <app-glass-card
             padding="p-6"
-            customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 h-full">
+            customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 h-full focus-within:ring-2 focus-within:ring-blue-400 focus-within:ring-offset-2">
             <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
-              <app-icon [name]="getIconName(item.icon)" size="lg" color="text-blue-600 dark:text-blue-400"></app-icon>
+              <app-icon [name]="getIconName(item.icon)" size="lg" color="text-blue-600 dark:text-blue-400" [attr.aria-hidden]="true"></app-icon>
             </div>
             <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ item.title }}</h3>
             <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ item.description }}</p>
             <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
-              เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-blue-600 dark:text-blue-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
+              เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-blue-600 dark:text-blue-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300" [attr.aria-hidden]="true"></app-icon>
             </div>
           </app-glass-card>
         </div>
       </div>
-    </div>
+    </section>
   </div>
 </div>

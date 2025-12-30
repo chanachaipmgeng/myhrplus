@@ -198,6 +198,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     // TODO: Implement filter functionality
   }
 
+  /**
+   * Navigate to route (for keyboard navigation)
+   */
+  navigateToRoute(route: string): void {
+    if (route) {
+      this.router.navigate([route]);
+    }
+  }
+
   onDateRangeChange(range: {start: Date | null, end: Date | null}): void {
     if (range.start && range.end) {
       this.dateRange.start = range.start;

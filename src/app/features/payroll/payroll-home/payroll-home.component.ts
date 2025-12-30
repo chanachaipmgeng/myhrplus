@@ -104,6 +104,15 @@ export class PayrollHomeComponent implements OnInit {
   navigateTo(route: string): void {
     this.router.navigate([route]);
   }
+
+  /**
+   * Navigate to route (for keyboard navigation)
+   */
+  navigateToRoute(route: string): void {
+    if (route) {
+      this.router.navigate([route]);
+    }
+  }
 }
 
 
