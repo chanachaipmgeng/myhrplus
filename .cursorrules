@@ -510,13 +510,26 @@ export class ModelNameService {
 
 ### Translation Files
 - **Location**: `src/assets/i18n/` and `src/locale/`
-- **Languages**: en, th, lo, my, vi, zh
+- **Languages**: en, th, lo, my, vi, zh (6 languages fully supported)
 - **Format**: JSON files with nested keys
 - **Usage**: Use `@ngx-translate/core` TranslateService
 
-### Translation Keys
-- **Naming**: `feature.component.key` (e.g., `home.welcome.message`)
+### Translation Keys Structure
+- **Naming**: `feature.component.key` (e.g., `features.auth.login.welcome`)
 - **Nested Objects**: Use dot notation for nested translations
+- **Namespaces**:
+  - `common.*` - Common translations (actions, labels, messages, etc.)
+  - `layout.*` - Layout component translations (header, sidebar, footer)
+  - `features.*` - Feature-specific translations (auth, company, personal, etc.)
+  - `menu.*` - Menu translations
+
+### Translation Completeness
+- **Status**: ✅ All layout.* and features.* keys translated in lo, my, vi, zh
+- **Total Keys**: 291 keys (41 layout + 250 features) per language
+- **Translation Scripts**: 
+  - `scripts/translate-features-auth-keys.js` - Translate auth keys
+  - `scripts/translate-all-features-layout-keys.js` - Translate all layout and features keys
+- **Documentation**: See `TRANSLATION_COMPLETE_SUMMARY.md` for details
 
 ## Security
 
@@ -853,7 +866,18 @@ export class ComponentNameDemoComponent {
 
 ---
 
-**Last Updated**: 2024-12-29  
-**Status**: ✅ All Architecture Improvements Completed  
+### Translation Complete (2024-12-30)
+- ✅ **Completed**: All layout.* and features.* keys translated in lo, my, vi, zh
+- ✅ **Total Keys**: 291 keys (41 layout + 250 features) per language
+- ✅ **Translation Scripts**: 
+  - `scripts/translate-features-auth-keys.js` - Translate auth keys
+  - `scripts/translate-all-features-layout-keys.js` - Translate all layout and features keys
+- ✅ **Documentation**: `TRANSLATION_COMPLETE_SUMMARY.md` created with complete translation status
+- ✅ **Status**: All features and layout components ready for multi-language testing
+
+---
+
+**Last Updated**: 2024-12-30  
+**Status**: ✅ All Architecture Improvements Completed + Translation Complete  
 **Angular Version**: 17.0.0+  
 **TypeScript Version**: 5.2.2+
