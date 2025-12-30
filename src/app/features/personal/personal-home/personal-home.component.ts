@@ -15,14 +15,14 @@ export class PersonalHomeComponent implements OnInit {
       title: 'จัดการข้อมูลพนักงาน',
       description: 'จัดการข้อมูลส่วนบุคคลของพนักงาน',
       icon: 'e-icons e-user',
-      route: '/portal/admin/employees',
+      route: '/personal',
       color: 'bg-blue-500'
     },
     {
       title: 'โครงสร้างองค์กร',
       description: 'จัดการโครงสร้างองค์กร',
       icon: 'e-icons e-briefcase',
-      route: '/portal/admin/company',
+      route: '/company',
       color: 'bg-green-500'
     }
   ];

@@ -15,7 +15,7 @@ const routes: Routes = [
     data: {
       title: 'Setting Management Home',
       breadcrumbs: [
-        { label: 'Setting Management', route: ROUTES.SETTING.BASE },
+        { label: 'Setting Management', route: ROUTES.LEGACY.SETTING.BASE },
         { label: 'Home' }
       ]
     }

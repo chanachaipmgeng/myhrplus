@@ -1,7 +1,7 @@
 # HR System Angular Migration
 
-**เวอร์ชัน**: 2.2.0  
-**อัปเดตล่าสุด**: 2024-12-20
+**เวอร์ชัน**: 2.3.0  
+**อัปเดตล่าสุด**: 2024-12-29
 
 ## 📋 ภาพรวม
 
@@ -151,6 +151,7 @@ angular-hr-migration/
 
 ### Main Documentation
 - **[DOCUMENTATION_INDEX.md](./DOCUMENTATION_INDEX.md)** ⭐ - คู่มือเอกสารทั้งหมด (อัปเดตล่าสุด)
+- **[ROUTES_RESTRUCTURE_COMPLETE.md](./ROUTES_RESTRUCTURE_COMPLETE.md)** ✅ - Routes Restructure Complete (2024-12-29)
 - **[TAILWIND_MIGRATION_COMPLETE.md](./TAILWIND_MIGRATION_COMPLETE.md)** ✅ - Tailwind Migration Complete Summary
 - **[TAILWIND_FULL_MIGRATION_GUIDE.md](./TAILWIND_FULL_MIGRATION_GUIDE.md)** - Tailwind Full Migration Guide
 - **[UX_UI_DESIGN_SYSTEM_RULES.md](./UX_UI_DESIGN_SYSTEM_RULES.md)** - UX/UI Design System Rules
@@ -265,4 +266,16 @@ Proprietary - Enterprise PT
 ---
 
 **Maintainer**: Development Team  
-**Last Updated**: 2024-12-20
+**Last Updated**: 2024-12-29
+
+---
+
+## 🔄 Recent Changes (2024-12-29)
+
+### Routes Restructure ✅
+- ✅ **Removed `/portal` routes** - All `/portal` routes have been removed from the application
+- ✅ **Direct module routes** - Now using direct routes: `/home`, `/personal`, `/ta`, `/payroll`, `/training`, `/appraisal`, `/recruit`, `/welfare`, `/company`, `/setting`
+- ✅ **Updated navigation** - Sidebar and header updated to use new routes
+- ✅ **Backward compatibility** - Legacy route mapping still supported via `mapLegacyRoute()` function
+
+**See**: [ROUTES_RESTRUCTURE_COMPLETE.md](./ROUTES_RESTRUCTURE_COMPLETE.md) for complete details.

@@ -58,8 +58,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Get return url from route parameters or default to '/portal' (Portal)
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/portal';
+    // Get return url from route parameters or default to '/home' (Home)
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
 
     // If already logged in, redirect
     if (this.authService.isAuthenticated()) {
@@ -303,14 +303,14 @@ console.log(decodedToken); console.log(accountActive);
                         this.swapLangService.saveSwaplang(swapResult);
                         this.notificationService.showSuccess('Login successful');
                         this.menuService.clearCache();
-                        // Navigate to portal admin company as per new system
-                        this.router.navigate(['/portal/admin/company']);
+                        // Navigate to company module as per backend management system
+                        this.router.navigate(['/company']);
                       }, (error) => {
                         console.error('Error loading swap language:', error);
                         // Proceed anyway
                         this.notificationService.showSuccess('Login successful');
                         this.menuService.clearCache();
-                        this.router.navigate(['/portal/admin/company']);
+                        this.router.navigate(['/company']);
                       });
                     }
                   } catch (error) {

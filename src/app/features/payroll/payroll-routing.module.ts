@@ -15,7 +15,7 @@ const routes: Routes = [
     data: {
       title: 'Payroll Management Home',
       breadcrumbs: [
-        { label: 'Payroll Management', route: ROUTES.PAYROLL.BASE },
+        { label: 'Payroll Management', route: ROUTES.LEGACY.PAYROLL.BASE },
         { label: 'Home' }
       ]
     }

@@ -15,7 +15,7 @@ const routes: Routes = [
     data: {
       title: 'Appraisal Management Home',
       breadcrumbs: [
-        { label: 'Appraisal Management', route: ROUTES.APPRAISAL.BASE },
+        { label: 'Appraisal Management', route: ROUTES.LEGACY.APPRAISAL.BASE },
         { label: 'Home' }
       ]
     }

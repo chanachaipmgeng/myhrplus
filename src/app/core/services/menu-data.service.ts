@@ -16,9 +16,9 @@ export class MenuDataService {
         {
           groupName: 'Employee Self Service',
           items: [
-            { name: 'การลงเวลา (Time Attendance)', icon: 'access_time', route: '/portal/self-service/attendance' },
-            { name: 'การขอเอกสาร (Request)', icon: 'description', route: '/portal/self-service/documents' },
-            { name: 'ข้อมูลลูกน้อง (My Team)', icon: 'people', route: '/portal/self-service/subordinates' }
+            { name: 'การลงเวลา (Time Attendance)', icon: 'access_time', route: '/ta' },
+            { name: 'การขอเอกสาร (Request)', icon: 'description', route: '/ta' },
+            { name: 'ข้อมูลลูกน้อง (My Team)', icon: 'people', route: '/home' }
           ]
         }
       ],
@@ -26,18 +26,18 @@ export class MenuDataService {
         {
           groupName: 'Admin Management',
           items: [
-            { name: 'จัดการข้อมูลบริษัท', icon: 'business', route: '/portal/admin/company' },
+            { name: 'จัดการข้อมูลบริษัท', icon: 'business', route: '/company' },
             {
               name: 'จัดการข้อมูลพนักงาน',
               icon: 'person_check',
-              route: '/portal/admin/employees',
+              route: '/personal',
               children: [
-                { name: 'ข้อมูลการทำงาน', icon: 'work', route: '/portal/admin/employees' },
-                { name: 'รายงาน (Reports)', icon: 'description', route: '/portal/admin/employees/reports' },
-                { name: 'ทะเบียนประวัติ', icon: 'folder', route: '/portal/admin/employees/master/list' }
+                { name: 'ข้อมูลการทำงาน', icon: 'work', route: '/personal' },
+                { name: 'รายงาน (Reports)', icon: 'description', route: '/personal' },
+                { name: 'ทะเบียนประวัติ', icon: 'folder', route: '/personal' }
               ]
             },
-            { name: 'จัดการเงินเดือน', icon: 'attach_money', route: '/portal/admin/payroll' }
+            { name: 'จัดการเงินเดือน', icon: 'attach_money', route: '/payroll' }
           ]
         }
       ]

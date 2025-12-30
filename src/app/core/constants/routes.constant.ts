@@ -650,13 +650,14 @@ export const ROUTES = {
   },
 
   // Other Routes
-  WORKFLOW: {
-    BASE: '/workflow',
-    HOME: '/workflow/home',
-    INBOX: '/workflow/inbox',
-    SENTBOX: '/workflow/sentbox',
-    CREATE: '/workflow/create'
-  },
+  // NOTE: Workflow module has been removed
+  // WORKFLOW: {
+  //   BASE: '/workflow',
+  //   HOME: '/workflow/home',
+  //   INBOX: '/workflow/inbox',
+  //   SENTBOX: '/workflow/sentbox',
+  //   CREATE: '/workflow/create'
+  // },
 
   // Demo
   DEMO: '/demo',

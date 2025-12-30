@@ -70,18 +70,14 @@ export class NestedMenuAccordionComponent {
   }
 
   /**
-   * Handle item click
+   * Handle item click (for items with children only)
+   * Items with routes use routerLink instead
    */
   onItemClick(item: NavigationChild, event: Event): void {
+    // This method is only called for items with children
+    // Items with routes use routerLink directly
     if (this.hasChildren(item)) {
-      // If has children, toggle expand instead of navigate
       this.onToggleExpand(item, event);
-      return;
-    }
-
-    // If has route, emit click event
-    if (item.route) {
-      this.itemClick.emit(item);
     }
   }
 

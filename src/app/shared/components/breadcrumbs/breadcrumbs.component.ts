@@ -53,7 +53,7 @@ export class BreadcrumbsComponent implements OnInit {
     if (this.showHome) {
       breadcrumbs.push({
         label: this.translate.instant('common.home'),
-        route: '/portal',
+        route: '/home',
         icon: this.homeIcon
       });
     }

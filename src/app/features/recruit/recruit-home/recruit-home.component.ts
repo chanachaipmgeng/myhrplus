@@ -28,28 +28,28 @@ export class RecruitHomeComponent implements OnInit {
       title: 'ประกาศรับสมัคร',
       description: 'จัดการประกาศรับสมัครงาน',
       icon: 'description',
-      route: '/portal/admin/recruit',
+      route: '/recruit',
       color: 'bg-blue-500'
     },
     {
       title: 'จัดการผู้สมัคร',
       description: 'จัดการข้อมูลผู้สมัครงาน',
       icon: 'people',
-      route: '/portal/admin/recruit',
+      route: '/recruit',
       color: 'bg-green-500'
     },
     {
       title: 'นัดสัมภาษณ์',
       description: 'จัดการนัดสัมภาษณ์',
       icon: 'calendar_today',
-      route: '/portal/admin/recruit',
+      route: '/recruit',
       color: 'bg-purple-500'
     },
     {
       title: 'รายงาน',
       description: 'รายงานการรับสมัคร',
       icon: 'assessment',
-      route: '/portal/admin/recruit',
+      route: '/recruit',
       color: 'bg-indigo-500'
     }
   ];

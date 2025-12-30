@@ -27,15 +27,15 @@ export class OmniSearchComponent implements OnInit, OnDestroy {
   selectedIndex = -1;
   private destroy$ = new Subject<void>();
 
-  // Menu data structure - Use portal routes
+  // Menu data structure
   menuData: MenuData = {
     personal: [
       {
         groupName: 'Employee Self Service',
         items: [
-          { name: 'การลงเวลา (Time Attendance)', icon: 'clock', route: '/portal/self-service/attendance' },
-          { name: 'การขอเอกสาร (Request)', icon: 'file-text', route: '/portal/self-service/documents' },
-          { name: 'ข้อมูลลูกน้อง (My Team)', icon: 'users', route: '/portal/self-service/subordinates' }
+          { name: 'การลงเวลา (Time Attendance)', icon: 'clock', route: '/ta' },
+          { name: 'การขอเอกสาร (Request)', icon: 'file-text', route: '/ta' },
+          { name: 'ข้อมูลลูกน้อง (My Team)', icon: 'users', route: '/home' }
         ]
       }
     ],
@@ -43,18 +43,18 @@ export class OmniSearchComponent implements OnInit, OnDestroy {
       {
         groupName: 'Admin Management',
         items: [
-          { name: 'จัดการข้อมูลบริษัท', icon: 'building', route: '/portal/admin/company' },
+          { name: 'จัดการข้อมูลบริษัท', icon: 'building', route: '/company' },
           {
             name: 'จัดการข้อมูลพนักงาน',
             icon: 'user-check',
-            route: '/portal/admin/employees',
+            route: '/personal',
             children: [
-              { name: 'ข้อมูลการทำงาน', icon: 'briefcase', route: '/portal/admin/employees' },
-              { name: 'รายงาน (Reports)', icon: 'file-text', route: '/portal/admin/employees/reports' },
-              { name: 'ทะเบียนประวัติ', icon: 'folder', route: '/portal/admin/employees/master/list' }
+              { name: 'ข้อมูลการทำงาน', icon: 'briefcase', route: '/personal' },
+              { name: 'รายงาน (Reports)', icon: 'file-text', route: '/personal' },
+              { name: 'ทะเบียนประวัติ', icon: 'folder', route: '/personal' }
             ]
           },
-          { name: 'จัดการเงินเดือน', icon: 'dollar-sign', route: '/portal/admin/payroll' }
+          { name: 'จัดการเงินเดือน', icon: 'dollar-sign', route: '/payroll' }
         ]
       }
     ]

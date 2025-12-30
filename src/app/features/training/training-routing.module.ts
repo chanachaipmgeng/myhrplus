@@ -15,7 +15,7 @@ const routes: Routes = [
     data: {
       title: 'Training Management Home',
       breadcrumbs: [
-        { label: 'Training Management', route: ROUTES.TRAINING.BASE },
+        { label: 'Training Management', route: ROUTES.LEGACY.TRAINING.BASE },
         { label: 'Home' }
       ]
     }

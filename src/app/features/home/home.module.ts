@@ -16,6 +16,7 @@ import { StatisticsGridComponent } from '@shared/components/statistics-grid/stat
 import { LoadingComponent } from '@shared/components/loading/loading.component';
 import { EmptyStateComponent } from '@shared/components/empty-state/empty-state.component';
 import { LazyImageDirective } from '@shared/directives/lazy-image.directive';
+import { StaggerDirective } from '@shared/directives/stagger.directive';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { LazyImageDirective } from '@shared/directives/lazy-image.directive';
     LoadingComponent,
     EmptyStateComponent,
     // Standalone directives
-    LazyImageDirective
+    LazyImageDirective,
+    StaggerDirective
   ]
 })
 export class HomeModule { }

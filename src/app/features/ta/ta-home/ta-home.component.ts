@@ -16,56 +16,56 @@ export class TaHomeComponent implements OnInit {
       title: 'การลงเวลา',
       description: 'ดูข้อมูลการลงเวลา',
       icon: 'e-icons e-clock',
-      route: '/portal/admin/time',
+      route: '/ta',
       color: 'bg-blue-500'
     },
     {
       title: 'คำขอลา',
       description: 'ยื่นคำขอลา',
       icon: 'e-icons e-calendar',
-      route: '/portal/admin/time',
+      route: '/ta',
       color: 'bg-green-500'
     },
     {
       title: 'คำขอ OT',
       description: 'ยื่นคำขอทำงานล่วงเวลา',
       icon: 'e-icons e-time',
-      route: '/portal/admin/time',
+      route: '/ta',
       color: 'bg-yellow-500'
     },
     {
       title: 'คำขอแก้ไขเวลา',
       description: 'ยื่นคำขอแก้ไขเวลา',
       icon: 'e-icons e-edit',
-      route: '/portal/admin/time',
+      route: '/ta',
       color: 'bg-purple-500'
     },
     {
       title: 'คำขอเปลี่ยนกะ',
       description: 'ยื่นคำขอเปลี่ยนกะ',
       icon: 'e-icons e-sync',
-      route: '/portal/admin/time',
+      route: '/ta',
       color: 'bg-pink-500'
     },
     {
       title: 'คำขอแลกกะ',
       description: 'ยื่นคำขอแลกกะ',
       icon: 'e-icons e-exchange',
-      route: '/portal/admin/time',
+      route: '/ta',
       color: 'bg-indigo-500'
     },
     {
       title: 'อนุมัติ',
       description: 'อนุมัติคำขอต่างๆ',
       icon: 'e-icons e-check',
-      route: '/portal/admin/time',
+      route: '/ta',
       color: 'bg-teal-500'
     },
     {
       title: 'รายงาน',
       description: 'ดูรายงานการลงเวลา',
       icon: 'e-icons e-chart',
-      route: '/portal/admin/time',
+      route: '/ta',
       color: 'bg-orange-500'
     }
   ];

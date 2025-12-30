@@ -28,21 +28,21 @@ export class PayrollHomeComponent implements OnInit {
       title: 'จัดการเงินเดือน',
       description: 'จัดการข้อมูลเงินเดือนพนักงาน',
       icon: 'payments',
-      route: '/portal/admin/payroll',
+      route: '/payroll',
       color: 'bg-green-500'
     },
     {
       title: 'สลิปเงินเดือน',
       description: 'ดูและจัดการสลิปเงินเดือน',
       icon: 'receipt',
-      route: '/portal/admin/payroll',
+      route: '/payroll',
       color: 'bg-blue-500'
     },
     {
       title: 'รายงาน',
       description: 'รายงานเงินเดือน',
       icon: 'assessment',
-      route: '/portal/admin/payroll',
+      route: '/payroll',
       color: 'bg-purple-500'
     }
   ];

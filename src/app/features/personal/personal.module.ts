@@ -7,6 +7,7 @@ import { PersonalRoutingModule } from './personal-routing.module';
 import { PersonalHomeComponent } from './personal-home/personal-home.component';
 import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { StaggerDirective } from '@shared/directives/stagger.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PageHeaderComponent } from '@shared/components/page-header/page-header.
     LayoutModule,
     PersonalRoutingModule,
     GlassCardComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    StaggerDirective
   ]
 })
 export class PersonalModule { }

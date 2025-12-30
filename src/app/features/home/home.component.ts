@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
 
   navigateToCategory(category: MenuCategory): void {
     // Navigate to portal for all main menu items
-    this.router.navigate(['/portal']);
+    this.router.navigate(['/home']);
   }
 
   getGreeting(): string {

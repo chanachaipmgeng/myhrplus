@@ -10,7 +10,7 @@ const routes: Routes = [
     data: {
       title: 'หน้าแรก',
       breadcrumbs: [
-        { label: 'หน้าแรก', route: ROUTES.HOME }
+        { label: 'หน้าแรก', route: ROUTES.LEGACY.HOME }
       ]
     }
   }

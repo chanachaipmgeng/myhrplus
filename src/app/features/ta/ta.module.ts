@@ -13,6 +13,7 @@ import { GlassInputComponent } from '@shared/components/glass-input/glass-input.
 import { LoadingComponent } from '@shared/components/loading/loading.component';
 import { EmptyStateComponent } from '@shared/components/empty-state/empty-state.component';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { StaggerDirective } from '@shared/directives/stagger.directive';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { PageHeaderComponent } from '@shared/components/page-header/page-header.
     GlassInputComponent,
     LoadingComponent,
     EmptyStateComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    StaggerDirective
   ]
 })
 export class TaModule { }

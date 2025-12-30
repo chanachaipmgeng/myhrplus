@@ -99,12 +99,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onProfile(): void {
-    this.router.navigate(['/portal/self-service/profile']);
+    this.router.navigate(['/home']);
     this.showUserMenu = false;
   }
 
   onPreferences(): void {
-    this.router.navigate(['/portal/self-service/profile']);
+    this.router.navigate(['/home']);
     this.showUserMenu = false;
   }
 

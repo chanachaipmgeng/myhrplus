@@ -181,21 +181,21 @@ export class MenuService {
     // Remove /hr prefix and .jsp extension
     let route = jspPath.replace('/hr/', '').replace('.jsp', '');
 
-    // Map common paths to portal routes
-    // Personal workflows → Portal Admin Employees
-    if (route.includes('PERSONAL/PWF001')) return '/portal/admin/employees';
-    if (route.includes('PERSONAL/PWF014')) return '/portal/admin/employees';
-    // TA workflows → Portal Admin Time
-    if (route.includes('TA/TAU_CSCWF_001')) return '/portal/admin/time';
-    if (route.includes('TA/TAU_CSCWF_005')) return '/portal/admin/time';
-    if (route.includes('TA/TAU_CSCWF_007')) return '/portal/admin/time';
-    if (route.includes('TA/TAU_CSCWF_009')) return '/portal/admin/time';
-    if (route.includes('TA/TAU_CSCWF_021')) return '/portal/admin/time';
-    // Training workflows → Portal Admin Training
-    if (route.includes('TRAINING/TRAWF_004')) return '/portal/admin/training';
-    if (route.includes('TRAINING/TRAWF_009')) return '/portal/admin/training';
-    // Welfare workflows → Portal Admin Welfare
-    if (route.includes('WELFARE/WELWF001')) return '/portal/admin/welfare';
+    // Map common paths to routes
+    // Personal workflows → Personal
+    if (route.includes('PERSONAL/PWF001')) return '/personal';
+    if (route.includes('PERSONAL/PWF014')) return '/personal';
+    // TA workflows → TA
+    if (route.includes('TA/TAU_CSCWF_001')) return '/ta';
+    if (route.includes('TA/TAU_CSCWF_005')) return '/ta';
+    if (route.includes('TA/TAU_CSCWF_007')) return '/ta';
+    if (route.includes('TA/TAU_CSCWF_009')) return '/ta';
+    if (route.includes('TA/TAU_CSCWF_021')) return '/ta';
+    // Training workflows → Training
+    if (route.includes('TRAINING/TRAWF_004')) return '/training';
+    if (route.includes('TRAINING/TRAWF_009')) return '/training';
+    // Welfare workflows → Welfare
+    if (route.includes('WELFARE/WELWF001')) return '/welfare';
 
     // Generic conversion
     route = route.toLowerCase().replace(/\//g, '/');
@@ -224,50 +224,50 @@ export class MenuService {
     const user = this.authService.getCurrentUser();
     const menuItems: MenuItem[] = [
       {
-        name: 'Portal',
-        path: '/portal',
-        id: 'portal',
+        name: 'Home',
+        path: '/home',
+        id: 'home',
         tdesc: 'หน้าแรก',
-        edesc: 'Portal',
+        edesc: 'Home',
         icon: 'home',
-        route: '/portal'
+        route: '/home'
       }
     ];
 
-    // Add modules based on user permissions - Use portal routes
+    // Add modules based on user permissions
     if (this.hasModuleAccess('PERSONAL', user)) {
       menuItems.push({
         name: 'Employees',
-        path: '/portal/admin/employees',
+        path: '/personal',
         id: 'employees',
         tdesc: 'จัดการพนักงาน',
         edesc: 'Employee Management',
         icon: 'person',
-        route: '/portal/admin/employees'
+        route: '/personal'
       });
     }
 
     if (this.hasModuleAccess('TA', user)) {
       menuItems.push({
         name: 'Time Management',
-        path: '/portal/admin/time',
+        path: '/ta',
         id: 'time',
         tdesc: 'จัดการเวลา',
         edesc: 'Time Management',
         icon: 'access_time',
-        route: '/portal/admin/time'
+        route: '/ta'
       });
     }
 
     if (this.hasModuleAccess('PAYROLL', user)) {
       menuItems.push({
         name: 'Payroll',
-        path: '/portal/admin/payroll',
+        path: '/payroll',
         id: 'payroll',
         tdesc: 'จัดการเงินเดือน',
         edesc: 'Payroll Management',
         icon: 'account_balance_wallet',
-        route: '/portal/admin/payroll'
+        route: '/payroll'
       });
     }
 
@@ -286,60 +286,60 @@ export class MenuService {
     if (this.hasModuleAccess('TRAINING', user)) {
       menuItems.push({
         name: 'Training',
-        path: '/portal/admin/training',
+        path: '/training',
         id: 'training',
         tdesc: 'จัดการการฝึกอบรม',
         edesc: 'Training Management',
         icon: 'school',
-        route: '/portal/admin/training'
+        route: '/training'
       });
     }
 
     if (this.hasModuleAccess('APPRAISAL', user)) {
       menuItems.push({
         name: 'Appraisal',
-        path: '/portal/admin/appraisal',
+        path: '/appraisal',
         id: 'appraisal',
         tdesc: 'จัดการการประเมิน',
         edesc: 'Appraisal Management',
         icon: 'assessment',
-        route: '/portal/admin/appraisal'
+        route: '/appraisal'
       });
     }
 
     if (this.hasModuleAccess('WELFARE', user)) {
       menuItems.push({
         name: 'Welfare',
-        path: '/portal/admin/welfare',
+        path: '/welfare',
         id: 'welfare',
         tdesc: 'จัดการสวัสดิการ',
         edesc: 'Welfare Management',
         icon: 'favorite',
-        route: '/portal/admin/welfare'
+        route: '/welfare'
       });
     }
 
     if (this.hasModuleAccess('RECRUIT', user)) {
       menuItems.push({
         name: 'Recruitment',
-        path: '/portal/admin/recruit',
+        path: '/recruit',
         id: 'recruit',
         tdesc: 'จัดการการสรรหา',
         edesc: 'Recruitment Management',
         icon: 'people',
-        route: '/portal/admin/recruit'
+        route: '/recruit'
       });
     }
 
     if (this.hasModuleAccess('COMPANY', user)) {
       menuItems.push({
         name: 'Company',
-        path: '/portal/admin/company',
+        path: '/company',
         id: 'company',
         tdesc: 'จัดการบริษัท',
         edesc: 'Company Management',
         icon: 'business',
-        route: '/portal/admin/company'
+        route: '/company'
       });
     }
 

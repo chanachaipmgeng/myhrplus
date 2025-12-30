@@ -28,21 +28,21 @@ export class WelfareHomeComponent implements OnInit {
       title: 'สวัสดิการ',
       description: 'จัดการสวัสดิการพนักงาน',
       icon: 'favorite',
-      route: '/portal/admin/welfare',
+      route: '/welfare',
       color: 'bg-pink-500'
     },
     {
       title: 'ลงทะเบียนสวัสดิการ',
       description: 'ลงทะเบียนสวัสดิการ',
       icon: 'check_circle',
-      route: '/portal/admin/welfare',
+      route: '/welfare',
       color: 'bg-purple-500'
     },
     {
       title: 'รายงาน',
       description: 'รายงานสวัสดิการ',
       icon: 'assessment',
-      route: '/portal/admin/welfare',
+      route: '/welfare',
       color: 'bg-indigo-500'
     }
   ];

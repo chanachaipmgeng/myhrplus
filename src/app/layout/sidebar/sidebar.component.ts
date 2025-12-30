@@ -354,6 +354,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
     // Clear search when switching items
     this.searchQuery = '';
 
+    // Navigate to route if exists (for Home)
+    if (navItem.route && navItem.id === 'home') {
+      this.navigateToRoute(navItem.route);
+    }
+
     // Update breadcrumbs
     this.getBreadcrumbPath();
   }
@@ -411,8 +416,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
     // Clear search when switching items
     this.searchQuery = '';
 
-    // For Admin: If Level 2 item has route, navigate to it
-    if (parentNavItem?.id === 'admin' && level2Item.route) {
+    // For Admin: If Level 2 item has route and no children, navigate to it
+    // If it has children, don't navigate (let user select Level 3 item)
+    if (parentNavItem?.id === 'admin' && level2Item.route && (!level2Item.children || level2Item.children.length === 0)) {
       this.navigateToRoute(level2Item.route);
     }
 
@@ -649,6 +655,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
    * Handle accordion item click
    * For ESS: Level 2 items are shown in accordion (Level 3-4 as children)
    * For Admin: Level 3 items are shown in accordion (Level 4 as children)
+   * NOTE: Items with routes now use routerLink, so this is only called for parent groups
    */
   onAccordionItemClick(item: NavigationChild): void {
     const isEss = this.selectedNavigationItem?.id === 'ess';
@@ -661,16 +668,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
       isEss: isEss
     });
 
-    if (item.route) {
-      // Navigate to route
-      this.navigateToRoute(item.route);
-
-      // Update selected items based on route depth
-      this.updateSelectedItemsFromRoute(item.route);
-    } else if (item.children && item.children.length > 0) {
+    // Items with routes use routerLink directly, so this should only be called for parent groups
+    if (item.children && item.children.length > 0 && !item.route) {
       // If item has children but no route, it's a parent group
       // Toggle expansion is handled by accordion component
       console.log('[Sidebar] Accordion item is a parent group, expansion handled by component');
+    } else if (item.route) {
+      // Fallback: If route exists, navigate (shouldn't happen with routerLink, but keep for safety)
+      this.navigateToRoute(item.route);
+      this.updateSelectedItemsFromRoute(item.route);
     }
   }
 
@@ -783,19 +789,21 @@ export class SidebarComponent implements OnInit, OnDestroy {
       console.log('[Sidebar] No Admin match found for route:', route);
     }
 
-    // For Home: Similar to ESS
-    if (this.selectedNavigationItem?.id === 'home' && this.selectedNavigationItem.children) {
-      for (const level2Item of this.selectedNavigationItem.children) {
-        if (level2Item.route && route.startsWith(level2Item.route)) {
-          console.log('[Sidebar] Found Home Level 2 match:', level2Item.label);
-          this.selectedLevel3Item = null;
-          this.selectedLevel4Item = null;
-          // Update breadcrumbs
-          this.getBreadcrumbPath();
-          return;
+      // For Home: Similar to ESS
+      if (this.selectedNavigationItem?.id === 'home' && this.selectedNavigationItem.children) {
+        for (const level2Item of this.selectedNavigationItem.children) {
+          // Map portal routes to actual routes
+          const mappedRoute = this.mapPortalRoute(level2Item.route || '');
+          if (mappedRoute && route.startsWith(mappedRoute)) {
+            console.log('[Sidebar] Found Home Level 2 match:', level2Item.label);
+            this.selectedLevel3Item = null;
+            this.selectedLevel4Item = null;
+            // Update breadcrumbs
+            this.getBreadcrumbPath();
+            return;
+          }
         }
       }
-    }
 
     // Update breadcrumbs after route update
     this.getBreadcrumbPath();
@@ -905,23 +913,22 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   getModuleHomeRoute(moduleId: string): string {
     const moduleHomeRoutes: { [key: string]: string } = {
-      'home': '/portal',
-      'ess': '/portal/self-service/time',
-      'admin': '/portal/admin/employees',
-      'workflow': '/workflow/home',
-      'company': '/company/home',
-      'personal': '/personal/home',
-      'ta': '/ta/home',
-      'payroll': '/payroll/home',
-      'welfare': '/welfare/home',
-      'training': '/training/home',
-      'recruit': '/recruit/home',
-      'appraisal': '/appraisal/home',
-      'setting': '/setting/home',
-      'portal-home': '/portal'
+      'home': '/home',
+      'ess': '/ta',
+      'admin': '/personal',
+      // 'workflow': '/workflow/home', // Workflow module removed
+      'company': '/company',
+      'personal': '/personal',
+      'ta': '/ta',
+      'payroll': '/payroll',
+      'welfare': '/welfare',
+      'training': '/training',
+      'recruit': '/recruit',
+      'appraisal': '/appraisal',
+      'setting': '/setting'
     };
 
-    return moduleHomeRoutes[moduleId] || '/portal';
+    return moduleHomeRoutes[moduleId] || '/home';
   }
 
   private navigateToModuleHome(moduleId: string): void {
@@ -1020,7 +1027,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   navigateToHome(): void {
-    this.router.navigate(['/portal']).catch(() => {
+    this.router.navigate(['/home']).catch(() => {
       this.router.navigate(['/']).catch(() => {});
     });
   }
@@ -1107,15 +1114,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   navigateToProfile(): void {
     this.showUserMenu = false;
-    this.router.navigate(['/portal/self-service/profile']).catch(() => {
-      this.router.navigate(['/portal']).catch(() => {});
+    this.router.navigate(['/home']).catch(() => {
+      this.router.navigate(['/']).catch(() => {});
     });
   }
 
   navigateToSettings(): void {
     this.showUserMenu = false;
-    this.router.navigate(['/portal/admin/settings']).catch(() => {
-      this.router.navigate(['/portal']).catch(() => {});
+    this.router.navigate(['/setting']).catch(() => {
+      this.router.navigate(['/home']).catch(() => {});
     });
   }
 
@@ -1175,7 +1182,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       if (!navItem.children) continue;
 
       // Check if route matches Level 1 item directly (for Home)
-      if (navItem.id === 'home' && this.activeRoute.startsWith('/portal')) {
+      if (navItem.id === 'home' && (this.activeRoute.startsWith('/home') || this.activeRoute === '/')) {
         if (this.selectedNavigationItem?.id !== navItem.id) {
           this.selectNavigationItem(navItem.id);
         }
@@ -1382,21 +1389,40 @@ export class SidebarComponent implements OnInit, OnDestroy {
    */
   private mapLegacyRoute(route: string): string {
     const routeMap: { [key: string]: string } = {
-      '/home': '/portal',
-      '/company/manage': '/portal/admin/company',
-      '/company/home': '/portal/admin/company',
-      '/personal/home': '/portal/admin/employees',
-      '/ta/home': '/portal/admin/time',
-      '/payroll/home': '/portal/admin/payroll',
-      '/training/home': '/portal/admin/training',
-      '/welfare/home': '/portal/admin/welfare',
-      '/recruit/home': '/portal/admin/recruit',
-      '/appraisal/home': '/portal/admin/appraisal',
-      '/setting/home': '/portal/admin/settings',
-      '/settings/home': '/portal/admin/settings'
+      '/portal': '/home',
+      '/portal/self-service': '/ta',
+      '/portal/self-service/time': '/ta',
+      '/portal/self-service/profile': '/home',
+      '/portal/admin/company': '/company',
+      '/portal/admin/employees': '/personal',
+      '/portal/admin/time': '/ta',
+      '/portal/admin/payroll': '/payroll',
+      '/portal/admin/training': '/training',
+      '/portal/admin/welfare': '/welfare',
+      '/portal/admin/recruit': '/recruit',
+      '/portal/admin/appraisal': '/appraisal',
+      '/portal/admin/settings': '/setting',
+      '/company/manage': '/company',
+      '/company/home': '/company',
+      '/personal/home': '/personal',
+      '/ta/home': '/ta',
+      '/payroll/home': '/payroll',
+      '/training/home': '/training',
+      '/welfare/home': '/welfare',
+      '/recruit/home': '/recruit',
+      '/appraisal/home': '/appraisal',
+      '/setting/home': '/setting',
+      '/settings/home': '/setting'
     };
 
     return routeMap[route] || route;
+  }
+
+  /**
+   * Map portal routes to actual routes
+   */
+  private mapPortalRoute(route: string): string {
+    return this.mapLegacyRoute(route);
   }
 
   private findMenuItemById(id: string): NestedMenuItem | null {
@@ -1460,14 +1486,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
           // If navigation failed, try to find alternative route
           console.warn(`Navigation to ${route} failed, trying alternative routes...`);
           // Try redirecting to home if route doesn't exist
-          if (route === '/home') {
-            this.router.navigate(['/portal']).catch(() => {
+          if (route === '/home' || route === '/portal') {
+            this.router.navigate(['/home']).catch(() => {
               this.router.navigate(['/']).catch(() => {});
             });
           } else if (route === '/company/manage') {
-            // Redirect to company home
-            this.router.navigate(['/company/home']).catch(() => {
-              this.router.navigate(['/portal/admin/company']).catch(() => {});
+            // Redirect to company
+            this.router.navigate(['/company']).catch(() => {
+              this.router.navigate(['/home']).catch(() => {});
             });
           }
         }
@@ -1475,13 +1501,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
       (error) => {
         console.error('Navigation error:', error);
         // Try alternative routes
-        if (route === '/home' || route === '/dashboard') {
-          this.router.navigate(['/portal']).catch(() => {
+        if (route === '/home' || route === '/dashboard' || route === '/portal') {
+          this.router.navigate(['/home']).catch(() => {
             this.router.navigate(['/']).catch(() => {});
           });
         } else if (route === '/company/manage') {
-          this.router.navigate(['/portal/admin/company']).catch(() => {
-            this.router.navigate(['/portal']).catch(() => {});
+          this.router.navigate(['/company']).catch(() => {
+            this.router.navigate(['/home']).catch(() => {});
           });
         }
       }

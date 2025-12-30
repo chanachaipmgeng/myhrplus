@@ -21,98 +21,55 @@ const routes: Routes = [
     component: MainLayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      // Default redirect to portal
+      // Default redirect to home
       {
         path: '',
-        redirectTo: 'portal',
+        redirectTo: 'home',
         pathMatch: 'full'
       },
 
       // ============================================
-      // Portal Group (Primary Routes)
+      // Feature Modules (Backend Management System)
       // ============================================
-      {
-        path: 'portal',
-        loadChildren: () => import('./features/portal/portal.module').then(m => m.PortalModule)
-      },
-
-      // ============================================
-      // Legacy Routes - Redirect to Portal Structure
-      // ============================================
-      // NOTE: These legacy routes are kept for backward compatibility.
-      // They redirect old routes to the new portal structure.
-      //
-      // ⚠️ DEPRECATED: These routes may be removed in the future.
-      // Consider monitoring usage before removal.
-      // If no external links or bookmarks use them, they can be safely removed.
-      //
-      // Home → Portal
       {
         path: 'home',
-        redirectTo: '/portal',
-        pathMatch: 'full'
+        loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)
       },
-      // Personal → Admin/Employees
       {
         path: 'personal',
-        redirectTo: '/portal/admin/employees',
-        pathMatch: 'full'
+        loadChildren: () => import('./features/personal/personal.module').then(m => m.PersonalModule)
       },
-      // TA → Admin/Time
       {
         path: 'ta',
-        redirectTo: '/portal/admin/time',
-        pathMatch: 'full'
+        loadChildren: () => import('./features/ta/ta.module').then(m => m.TaModule)
       },
-      // Payroll → Admin/Payroll
       {
         path: 'payroll',
-        redirectTo: '/portal/admin/payroll',
-        pathMatch: 'full'
+        loadChildren: () => import('./features/payroll/payroll.module').then(m => m.PayrollModule)
       },
-      // Training → Admin/Training
       {
         path: 'training',
-        redirectTo: '/portal/admin/training',
-        pathMatch: 'full'
+        loadChildren: () => import('./features/training/training.module').then(m => m.TrainingModule)
       },
-      // Appraisal → Admin/Appraisal
       {
         path: 'appraisal',
-        redirectTo: '/portal/admin/appraisal',
-        pathMatch: 'full'
+        loadChildren: () => import('./features/appraisal/appraisal.module').then(m => m.AppraisalModule)
       },
-      // Recruit → Admin/Recruit
       {
         path: 'recruit',
-        redirectTo: '/portal/admin/recruit',
-        pathMatch: 'full'
+        loadChildren: () => import('./features/recruit/recruit.module').then(m => m.RecruitModule)
       },
-      // Welfare → Admin/Welfare
       {
         path: 'welfare',
-        redirectTo: '/portal/admin/welfare',
-        pathMatch: 'full'
+        loadChildren: () => import('./features/welfare/welfare.module').then(m => m.WelfareModule)
       },
-      // Company → Admin/Company
       {
         path: 'company',
-        redirectTo: '/portal/admin/company',
-        pathMatch: 'full'
+        loadChildren: () => import('./features/company/company.module').then(m => m.CompanyModule)
       },
-      // Setting → Admin/Settings
       {
         path: 'setting',
-        redirectTo: '/portal/admin/settings',
-        pathMatch: 'full'
-      },
-
-      // ============================================
-      // Other Routes (TBD - might stay or migrate)
-      // ============================================
-      {
-        path: 'workflow',
-        loadChildren: () => import('./features/workflow/workflow.module').then(m => m.WorkflowModule)
+        loadChildren: () => import('./features/setting/setting.module').then(m => m.SettingModule)
       }
     ]
   },
@@ -123,7 +80,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: ROUTES.PORTAL.HOME
+    redirectTo: ROUTES.LEGACY.HOME
   }
 ];
 

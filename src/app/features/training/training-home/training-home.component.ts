@@ -28,35 +28,35 @@ export class TrainingHomeComponent implements OnInit {
       title: 'หลักสูตรการฝึกอบรม',
       description: 'จัดการหลักสูตรการฝึกอบรม',
       icon: 'menu_book',
-      route: '/portal/admin/training',
+      route: '/training',
       color: 'bg-blue-500'
     },
     {
       title: 'ลงทะเบียนอบรม',
       description: 'ลงทะเบียนการฝึกอบรม',
       icon: 'check_circle',
-      route: '/portal/admin/training',
+      route: '/training',
       color: 'bg-green-500'
     },
     {
       title: 'ประวัติการอบรม',
       description: 'ดูประวัติการฝึกอบรม',
       icon: 'history',
-      route: '/portal/admin/training',
+      route: '/training',
       color: 'bg-purple-500'
     },
     {
       title: 'ใบรับรอง',
       description: 'จัดการใบรับรองการอบรม',
       icon: 'description',
-      route: '/portal/admin/training',
+      route: '/training',
       color: 'bg-yellow-500'
     },
     {
       title: 'รายงาน',
       description: 'รายงานการฝึกอบรม',
       icon: 'assessment',
-      route: '/portal/admin/training',
+      route: '/training',
       color: 'bg-indigo-500'
     }
   ];

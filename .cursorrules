@@ -298,10 +298,23 @@ export class ModelNameService {
   - `RoleGuard`: Checks user roles/permissions
   - `TokenAuthGuard`: Handles token-based authentication via URL parameters
 - **Route Constants**: Use `ROUTES` constant from `src/app/core/constants/routes.constant`
-  - Example: `this.router.navigate([ROUTES.HOME]);`
-  - Use nested route constants: `ROUTES.TA.LEAVE_REQUEST`
+  - Example: `this.router.navigate([ROUTES.LEGACY.HOME]);`
+  - Use nested route constants: `ROUTES.LEGACY.TA.LEAVE_REQUEST`
+  - **Current Route Structure** (as of 2024-12-29):
+    - `/home` - Home module
+    - `/personal` - Personal module
+    - `/ta` - Time Attendance module
+    - `/payroll` - Payroll module
+    - `/training` - Training module
+    - `/appraisal` - Appraisal module
+    - `/recruit` - Recruit module
+    - `/welfare` - Welfare module
+    - `/company` - Company module
+    - `/setting` - Setting module
+    - `/demo` - Demo module (no AuthGuard)
+  - **⚠️ IMPORTANT**: `/portal` routes have been removed. Use direct module routes instead.
 - **Route Data**: Use route data for passing static configuration
-- **Wildcard Route**: Always include `{ path: '**', redirectTo: ROUTES.HOME }` at the end
+- **Wildcard Route**: Always include `{ path: '**', redirectTo: ROUTES.LEGACY.HOME }` at the end
 
 ### HTTP & API
 - **Base URL**: Use `environment.jbossUrl` for `/hr` endpoints, `environment.baseUrl` for `/plus` endpoints
@@ -741,6 +754,26 @@ export class ComponentNameDemoComponent {
 ---
 
 ## Recent Updates
+
+### Routes Restructure - Portal Routes Removed (2024-12-29)
+- ✅ **Completed**: All `/portal` routes have been removed from the application
+- ✅ **New Structure**: Direct module routes are now used:
+  - `/home` instead of `/portal`
+  - `/personal` instead of `/portal/admin/employees`
+  - `/ta` instead of `/portal/admin/time` or `/portal/self-service/time`
+  - `/payroll` instead of `/portal/admin/payroll`
+  - `/company` instead of `/portal/admin/company`
+  - `/setting` instead of `/portal/admin/settings`
+  - And other direct module routes
+- ✅ **Updated Files**: 
+  - `app-routing.module.ts` - Removed portal routes, using direct module routes
+  - `navigation.constant.ts` - Updated all routes to use direct module paths
+  - `sidebar.component.ts` - Updated route mapping and navigation logic
+  - `header.component.ts` - Updated navigation routes
+  - All service files - Updated route references
+- ✅ **Route Constants**: `ROUTES.LEGACY.*` constants are used for backward compatibility mapping
+- ✅ **Navigation**: Sidebar and header now use direct routes matching `app-routing.module.ts`
+- ⚠️ **Migration Note**: Legacy `/portal/*` routes are automatically mapped to new routes via `mapLegacyRoute()` function
 
 ### Dynamic Primary Color Support Complete (2024-12-29)
 - ✅ **Completed**: All 48+ components now support dynamic primary color changes

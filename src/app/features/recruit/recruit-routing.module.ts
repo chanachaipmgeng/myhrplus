@@ -15,7 +15,7 @@ const routes: Routes = [
     data: {
       title: 'Recruit Management Home',
       breadcrumbs: [
-        { label: 'Recruit Management', route: ROUTES.RECRUIT.BASE },
+        { label: 'Recruit Management', route: ROUTES.LEGACY.RECRUIT.BASE },
         { label: 'Home' }
       ]
     }

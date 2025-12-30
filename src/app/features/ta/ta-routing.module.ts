@@ -15,7 +15,7 @@ const routes: Routes = [
     data: {
       title: 'Time Management Home',
       breadcrumbs: [
-        { label: 'Time Management', route: ROUTES.TA.BASE },
+        { label: 'Time Management', route: ROUTES.LEGACY.TA.BASE },
         { label: 'Home' }
       ]
     }

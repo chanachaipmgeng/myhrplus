@@ -9,15 +9,13 @@
        [class.navigable]="!hasChildren(item) && !!item.route">
     
     <!-- Menu Item Content -->
-    <div class="menu-item-content"
-         (click)="onItemClick(item, $event)"
-         [attr.aria-expanded]="hasChildren(item) ? isExpanded(item) : null"
-         [attr.aria-current]="isActive(item) ? 'page' : null"
-         role="button"
-         [attr.tabindex]="0"
-         (keydown.enter)="onItemClick(item, $event)"
-         (keydown.space)="onItemClick(item, $event); $event.preventDefault()">
-      
+    <a *ngIf="!hasChildren(item) && item.route"
+       [routerLink]="item.route"
+       routerLinkActive="active"
+       [routerLinkActiveOptions]="{exact: false}"
+       class="menu-item-content"
+       [attr.aria-current]="isActive(item) ? 'page' : null"
+       [attr.tabindex]="0">
       <!-- Icon -->
       <span *ngIf="item.icon" 
             [class]="getIconClass(item.icon)"
@@ -33,13 +31,41 @@
         {{ item.badge }}
       </span>
       
-      <!-- Action Icon (Chevron for expandable, Arrow for navigable) -->
+      <!-- Action Icon (Arrow for navigable) -->
+      <span class="menu-item-action">
+        <span *ngIf="item.route" 
+              class="e-icons e-arrow-right arrow-icon"></span>
+      </span>
+    </a>
+    
+    <div *ngIf="hasChildren(item)"
+         class="menu-item-content"
+         (click)="onToggleExpand(item, $event)"
+         [attr.aria-expanded]="isExpanded(item)"
+         role="button"
+         [attr.tabindex]="0"
+         (keydown.enter)="onToggleExpand(item, $event)"
+         (keydown.space)="onToggleExpand(item, $event); $event.preventDefault()">
+      <!-- Icon -->
+      <span *ngIf="item.icon" 
+            [class]="getIconClass(item.icon)"
+            class="menu-item-icon"></span>
+      
+      <!-- Label -->
+      <span class="menu-item-label">{{ translateLabel(item.label) }}</span>
+      
+      <!-- Badge -->
+      <span *ngIf="item.badge" 
+            class="menu-item-badge"
+            [style.background-color]="item.badgeColor || '#ef4444'">
+        {{ item.badge }}
+      </span>
+      
+      <!-- Action Icon (Chevron for expandable) -->
       <span class="menu-item-action">
         <span *ngIf="hasChildren(item)" 
               class="e-icons e-chevron-down chevron-icon"
               [class.rotated]="isExpanded(item)"></span>
-        <span *ngIf="!hasChildren(item) && item.route" 
-              class="e-icons e-arrow-right arrow-icon"></span>
       </span>
     </div>
     

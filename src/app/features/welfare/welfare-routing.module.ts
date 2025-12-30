@@ -15,7 +15,7 @@ const routes: Routes = [
     data: {
       title: 'Welfare Management Home',
       breadcrumbs: [
-        { label: 'Welfare Management', route: ROUTES.WELFARE.BASE },
+        { label: 'Welfare Management', route: ROUTES.LEGACY.WELFARE.BASE },
         { label: 'Home' }
       ]
     }

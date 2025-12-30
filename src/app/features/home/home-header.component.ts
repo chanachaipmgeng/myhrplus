@@ -233,7 +233,8 @@ export class HomeHeaderComponent implements OnInit, OnDestroy {
   }
 
   navigateToProfile(): void {
-    this.router.navigate(['/portal/self-service/profile']);
+    // Profile navigation - to be implemented
+    // this.router.navigate(['/personal']);
   }
 
   navigateToSettings(): void {
@@ -496,12 +497,13 @@ export class HomeHeaderComponent implements OnInit, OnDestroy {
   }
 
   navigateToWorkflowAdmin(): void {
-    // Navigate to workflow admin menu
-    this.router.navigate(['/workflow/admin']);
+    // Workflow module removed - navigation disabled
+    // this.router.navigate(['/workflow/admin']);
   }
 
   navigateToWorkflow(): void {
-    this.router.navigate(['/workflow/myhr-in-box']);
+    // Workflow module removed - navigation disabled
+    // this.router.navigate(['/workflow/myhr-in-box']);
   }
 
   navigateToPrivateMessage(): void {
