@@ -10,6 +10,14 @@ import { AuthService, User } from '@core/services';
 export class PersonalHomeComponent implements OnInit {
   currentUser: User | null = null;
 
+  statistics = {
+    totalEmployees: 1250,
+    activeEmployees: 1180,
+    newEmployees: 12,
+    onLeave: 5,
+    pendingApprovals: 8
+  };
+
   menuItems = [
     {
       title: 'จัดการข้อมูลพนักงาน',
@@ -39,6 +47,15 @@ export class PersonalHomeComponent implements OnInit {
 
   navigateTo(route: string): void {
     this.router.navigate([route]);
+  }
+
+  getIconName(iconClass: string): string {
+    // Convert e-icons class to icon name
+    const iconMap: { [key: string]: string } = {
+      'e-icons e-user': 'person',
+      'e-icons e-briefcase': 'business'
+    };
+    return iconMap[iconClass] || 'folder';
   }
 }
 

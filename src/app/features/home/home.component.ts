@@ -19,8 +19,61 @@ import { HomeService, MenuCategory, MenuItem } from './home.service';
 })
 export class HomeComponent implements OnInit {
   currentUser: User | null = null;
-  menuCategories: MenuCategory[] = [];
   loading = false;
+
+  statistics = {
+    totalEmployees: 1250,
+    newEmployeesThisMonth: 12,
+    todayAttendance: 1180,
+    attendanceRate: 94.4,
+    pendingApprovals: 23,
+    activePayroll: 1245,
+    totalBranches: 18
+  };
+
+  recentActivities = [
+    {
+      title: 'พนักงานใหม่เข้าทำงาน: นายสมชาย ใจดี',
+      time: '2 ชั่วโมงที่แล้ว',
+      icon: 'person_add'
+    },
+    {
+      title: 'อนุมัติคำขอลา: นางสาวสมหญิง รักงาน',
+      time: '5 ชั่วโมงที่แล้ว',
+      icon: 'check_circle'
+    },
+    {
+      title: 'อัพเดทข้อมูลเงินเดือน: เดือนมกราคม 2025',
+      time: '1 วันที่แล้ว',
+      icon: 'attach_money'
+    },
+    {
+      title: 'เพิ่มสาขาใหม่: สาขากรุงเทพมหานคร',
+      time: '2 วันที่แล้ว',
+      icon: 'business'
+    }
+  ];
+
+  pendingApprovals = [
+    {
+      title: 'คำขอลา',
+      count: 15,
+      icon: 'event',
+      route: '/ta'
+    },
+    {
+      title: 'คำขอ OT',
+      count: 5,
+      icon: 'schedule',
+      route: '/ta'
+    },
+    {
+      title: 'คำขอแก้ไขเวลา',
+      count: 3,
+      icon: 'edit',
+      route: '/ta'
+    }
+  ];
 
   constructor(
     private authService: AuthService,
@@ -31,35 +84,25 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadMenuCategories();
+    this.loadDashboardData();
   }
 
-  private loadMenuCategories(): void {
+  private loadDashboardData(): void {
     this.loading = true;
-
-    // Load menu from API
-    this.homeService.loadMenuFromAPI().subscribe({
-      next: (categories) => {
-        this.menuCategories = categories;
-        this.loading = false;
-      },
-      error: (error) => {
-        console.error('Error loading menu categories:', error);
-        this.menuCategories = [];
-        this.loading = false;
-      }
-    });
-  }
-
-  navigateToMenuItem(item: MenuItem): void {
-    if (item.route || item.path) {
-      this.router.navigate([item.route || item.path]);
-    }
-  }
-
-  navigateToCategory(category: MenuCategory): void {
-    // Navigate to portal for all main menu items
-    this.router.navigate(['/home']);
+    // TODO: Load real data from API
+    // this.homeService.getDashboardStatistics().subscribe({
+    //   next: (data) => {
+    //     this.statistics = data;
+    //     this.loading = false;
+    //   },
+    //   error: (error) => {
+    //     console.error('Error loading dashboard data:', error);
+    //     this.loading = false;
+    //   }
+    // });
+    setTimeout(() => {
+      this.loading = false;
+    }, 500);
   }
 
   getGreeting(): string {
@@ -67,21 +110,5 @@ export class HomeComponent implements OnInit {
     if (hour < 12) return 'สวัสดีตอนเช้า';
     if (hour < 18) return 'สวัสดีตอนบ่าย';
     return 'สวัสดีตอนเย็น';
-  }
-
-  getGradientForCategory(code: string): string {
-    const gradientMap: { [key: string]: string } = {
-      'EM00A': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      'EM01A': 'linear-gradient(135deg, #434343 0%, #000000 100%)',
-      'EM02A': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      'EM03A': 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-      'EM04A': 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-      'EM05A': 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-      'EM06A': 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
-      'EM07A': 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
-      'EM08A': 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
-      'EM09A': 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
-    };
-    return gradientMap[code] || 'linear-gradient(135deg, #bdc3c7 0%, #2c3e50 100%)';
   }
 }

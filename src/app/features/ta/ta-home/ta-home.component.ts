@@ -11,6 +11,14 @@ export class TaHomeComponent implements OnInit {
   currentUser: User | null = null;
   loading = false;
 
+  statistics = {
+    todayAttendance: 1180,
+    pendingLeaves: 15,
+    pendingOT: 8,
+    lateToday: 12,
+    absentToday: 5
+  };
+
   menuItems = [
     {
       title: 'การลงเวลา',
@@ -82,6 +90,21 @@ export class TaHomeComponent implements OnInit {
 
   navigateTo(route: string): void {
     this.router.navigate([route]);
+  }
+
+  getIconName(iconClass: string): string {
+    // Convert e-icons class to icon name
+    const iconMap: { [key: string]: string } = {
+      'e-icons e-clock': 'access_time',
+      'e-icons e-calendar': 'event',
+      'e-icons e-time': 'schedule',
+      'e-icons e-edit': 'edit',
+      'e-icons e-sync': 'sync',
+      'e-icons e-exchange': 'swap_horiz',
+      'e-icons e-check': 'check_circle',
+      'e-icons e-chart': 'bar_chart'
+    };
+    return iconMap[iconClass] || 'folder';
   }
 }
 

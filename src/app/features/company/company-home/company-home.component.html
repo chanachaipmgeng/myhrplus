@@ -5,43 +5,78 @@
     [showBreadcrumbs]="true">
   </app-page-header>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-6 lg:px-8">
-    <app-glass-card
-      *ngFor="let item of menuItems; let i = index"
-      [appStagger]="i"
-      [staggerDelay]="0.1"
-      padding="p-4 md:p-6"
-      customClass="rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 active:scale-95"
-      [style.background]="getGradientForItem(item.color)"
-      [attr.aria-label]="item.title + ': ' + item.description"
-      [attr.role]="'button'"
-      [attr.tabindex]="0"
-      (click)="navigateTo(item.route)"
-      (keydown.enter)="navigateTo(item.route)"
-      (keydown.space)="navigateTo(item.route); $event.preventDefault()">
-      <div class="flex items-center gap-4">
-        <div class="icon-container text-white text-4xl">
-          <span [class]="item.icon"></span>
-        </div>
-        <div class="flex-1">
-          <h3 class="text-xl font-semibold text-white mb-1">{{ item.title }}</h3>
-          <p class="text-white text-sm opacity-90">{{ item.description }}</p>
+  <div class="p-5 min-h-screen transition-colors duration-300">
+    <!-- Statistics Cards -->
+    <div class="mb-8">
+      <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">สถิติข้อมูลองค์กร</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
+        <app-glass-card
+          padding="p-5"
+          customClass="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [appStagger]="0"
+          [staggerDelay]="0.05">
+          <div class="text-4xl font-bold mb-2">{{ statistics.branches }}</div>
+          <div class="text-sm opacity-90">สาขา</div>
+        </app-glass-card>
+        <app-glass-card
+          padding="p-5"
+          customClass="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [appStagger]="1"
+          [staggerDelay]="0.05">
+          <div class="text-4xl font-bold mb-2">{{ statistics.divisions }}</div>
+          <div class="text-sm opacity-90">แผนก</div>
+        </app-glass-card>
+        <app-glass-card
+          padding="p-5"
+          customClass="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [appStagger]="2"
+          [staggerDelay]="0.05">
+          <div class="text-4xl font-bold mb-2">{{ statistics.departments }}</div>
+          <div class="text-sm opacity-90">หน่วยงาน</div>
+        </app-glass-card>
+        <app-glass-card
+          padding="p-5"
+          customClass="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [appStagger]="3"
+          [staggerDelay]="0.05">
+          <div class="text-4xl font-bold mb-2">{{ statistics.positions }}</div>
+          <div class="text-sm opacity-90">ตำแหน่งงาน</div>
+        </app-glass-card>
+        <app-glass-card
+          padding="p-5"
+          customClass="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [appStagger]="4"
+          [staggerDelay]="0.05">
+          <div class="text-4xl font-bold mb-2">{{ statistics.locations }}</div>
+          <div class="text-sm opacity-90">สถานที่ทำงาน</div>
+        </app-glass-card>
+      </div>
+    </div>
+
+    <!-- Main Content: Menu Cards -->
+    <div class="mb-8">
+      <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">เมนูหลัก</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          *ngFor="let item of menuItems; let i = index"
+          [routerLink]="[item.route]"
+          [appStagger]="i"
+          [staggerDelay]="0.1"
+          class="cursor-pointer group">
+          <app-glass-card
+            padding="p-6"
+            customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 h-full">
+            <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
+              <app-icon [name]="getIconName(item.icon)" size="lg" color="text-blue-600 dark:text-blue-400"></app-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ item.title }}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ item.description }}</p>
+            <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
+              เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-blue-600 dark:text-blue-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
+            </div>
+          </app-glass-card>
         </div>
       </div>
-    </app-glass-card>
+    </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

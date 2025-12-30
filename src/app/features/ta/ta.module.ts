@@ -12,7 +12,9 @@ import { GlassButtonComponent } from '@shared/components/glass-button/glass-butt
 import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
 import { LoadingComponent } from '@shared/components/loading/loading.component';
 import { EmptyStateComponent } from '@shared/components/empty-state/empty-state.component';
+import { RouterModule } from '@angular/router';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { IconComponent } from '@shared/components/icon/icon.component';
 import { StaggerDirective } from '@shared/directives/stagger.directive';
 
 @NgModule({
@@ -23,6 +25,7 @@ import { StaggerDirective } from '@shared/directives/stagger.directive';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
     SharedModule,
     LayoutModule,
     TaRoutingModule,
@@ -34,6 +37,7 @@ import { StaggerDirective } from '@shared/directives/stagger.directive';
     LoadingComponent,
     EmptyStateComponent,
     PageHeaderComponent,
+    IconComponent,
     StaggerDirective
   ]
 })

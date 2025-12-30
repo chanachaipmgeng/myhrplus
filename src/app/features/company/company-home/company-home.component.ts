@@ -10,6 +10,14 @@ import { AuthService, User } from '@core/services';
 export class CompanyHomeComponent implements OnInit {
   currentUser: User | null = null;
 
+  statistics = {
+    branches: 12,
+    divisions: 8,
+    departments: 24,
+    positions: 156,
+    locations: 18
+  };
+
   menuItems = [
     {
       title: 'ข้อมูลบริษัท',
@@ -55,14 +63,15 @@ export class CompanyHomeComponent implements OnInit {
     this.router.navigate([route]);
   }
 
-  getGradientForItem(color: string): string {
-    const gradientMap: { [key: string]: string } = {
-      'bg-blue-500': 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
-      'bg-green-500': 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-      'bg-purple-500': 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
-      'bg-yellow-500': 'linear-gradient(135deg, #eab308 0%, #ca8a04 100%)'
+  getIconName(iconClass: string): string {
+    // Convert e-icons class to icon name
+    const iconMap: { [key: string]: string } = {
+      'e-icons e-briefcase': 'business',
+      'e-icons e-organization': 'account_tree',
+      'e-icons e-folder': 'folder',
+      'e-icons e-user': 'person'
     };
-    return gradientMap[color] || 'linear-gradient(135deg, #6b7280 0%, #4b5563 100%)';
+    return iconMap[iconClass] || 'folder';
   }
 }
 

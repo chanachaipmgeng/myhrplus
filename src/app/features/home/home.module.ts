@@ -15,6 +15,8 @@ import { StatisticsCardComponent } from '@shared/components/statistics-card/stat
 import { StatisticsGridComponent } from '@shared/components/statistics-grid/statistics-grid.component';
 import { LoadingComponent } from '@shared/components/loading/loading.component';
 import { EmptyStateComponent } from '@shared/components/empty-state/empty-state.component';
+import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
+import { IconComponent } from '@shared/components/icon/icon.component';
 import { LazyImageDirective } from '@shared/directives/lazy-image.directive';
 import { StaggerDirective } from '@shared/directives/stagger.directive';
 
@@ -38,6 +40,8 @@ import { StaggerDirective } from '@shared/directives/stagger.directive';
     StatisticsGridComponent,
     LoadingComponent,
     EmptyStateComponent,
+    PageHeaderComponent,
+    IconComponent,
     // Standalone directives
     LazyImageDirective,
     StaggerDirective
