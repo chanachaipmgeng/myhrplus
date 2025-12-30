@@ -335,9 +335,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
     // Clear search when switching items
     this.searchQuery = '';
 
-    // For Admin: If Level 2 item has route and no children, navigate to it
-    // If it has children, don't navigate (let user select Level 3 item)
-    if (parentNavItem?.id === 'admin' && level2Item.route && (!level2Item.children || level2Item.children.length === 0)) {
+    // For Admin: If Level 2 item has route, navigate to it immediately
+    // If it has children, still navigate to the route (user can see Level 3 items in the menu)
+    if (parentNavItem?.id === 'admin' && level2Item.route) {
       this.navigateToRoute(level2Item.route);
     }
 
