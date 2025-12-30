@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener, ElementRef, ViewChild } from '@angular
 import { CommonModule } from '@angular/common';
 import { ThemeService, ThemeMode, ThemeColor } from '@core/services';
 import { IconComponent } from '../icon/icon.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-theme-toggle',

@@ -1,6 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from '../icon/icon.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export interface TimelineItem {
   title: string;

@@ -6,6 +6,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
 import { BankCompany } from '../../models/bank-company.model';
 import { BankCompanyService } from '../../services/bank-company.service';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-bank-company-form',

@@ -8,6 +8,7 @@ import { DataGridComponent } from '@shared/components/data-grid/data-grid.compon
 import { DepartmentService } from '../../services/department.service';
 import { Department } from '../../models/department.model';
 import { DepartmentFormComponent } from './department-form.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-department-list',
@@ -36,7 +37,7 @@ export class DepartmentListComponent implements OnInit {
 
   ngOnInit() {
     // Wait for translations to load, then initialize
-    this.translate.get('common.addNew').subscribe(() => {
+    this.translate.get(TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW).subscribe(() => {
       this.initializeTranslations();
     });
   }
@@ -44,32 +45,32 @@ export class DepartmentListComponent implements OnInit {
   private initializeTranslations() {
     this.headerActions = [
       {
-        label: this.translate.instant('common.addNew'),
+        label: this.translate.instant(TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW),
         variant: 'primary' as const,
         onClick: () => this.onCreate()
       }
     ];
 
     this.columns = [
-      { field: 'bu2id', headerText: this.translate.instant('company.department.column.bu2Id'), width: '120px' },
-      { field: 'parent', headerText: this.translate.instant('company.department.column.parent'), width: '120px' },
-      { field: 'tdesc', headerText: this.translate.instant('company.department.column.tdesc'), width: '200px' },
-      { field: 'edesc', headerText: this.translate.instant('company.department.column.edesc'), width: '200px' },
-      { field: 'short_name', headerText: this.translate.instant('company.department.column.shortName'), width: '100px' },
+      { field: 'bu2id', headerText: this.translate.instant('features.company.entities.department.column.bu2Id'), width: '120px' },
+      { field: 'parent', headerText: this.translate.instant('features.company.entities.department.column.parent'), width: '120px' },
+      { field: 'tdesc', headerText: this.translate.instant('features.company.entities.department.column.tdesc'), width: '200px' },
+      { field: 'edesc', headerText: this.translate.instant('features.company.entities.department.column.edesc'), width: '200px' },
+      { field: 'short_name', headerText: this.translate.instant('features.company.entities.department.column.shortName'), width: '100px' },
       { 
         field: 'active', 
-        headerText: this.translate.instant('company.department.column.active'), 
+        headerText: this.translate.instant('features.company.entities.department.column.active'), 
         width: '100px',
         type: 'boolean' as const,
         formatter: (value: string) => {
           return value === '1' 
-            ? this.translate.instant('common.active')
-            : this.translate.instant('common.inactive');
+            ? this.translate.instant(TRANSLATION_KEYS.COMMON.STATUS.ACTIVE)
+            : this.translate.instant(TRANSLATION_KEYS.COMMON.STATUS.INACTIVE);
         }
       },
-      { field: 'build_date', headerText: this.translate.instant('company.department.column.buildDate'), type: 'date' as const, width: '120px' },
-      { field: 'expire_date', headerText: this.translate.instant('company.department.column.expireDate'), type: 'date' as const, width: '120px' },
-      { field: 'edit_date', headerText: this.translate.instant('company.department.column.editDate'), type: 'date' as const, width: '120px' }
+      { field: 'build_date', headerText: this.translate.instant('features.company.entities.department.column.buildDate'), type: 'date' as const, width: '120px' },
+      { field: 'expire_date', headerText: this.translate.instant('features.company.entities.department.column.expireDate'), type: 'date' as const, width: '120px' },
+      { field: 'edit_date', headerText: this.translate.instant('features.company.entities.department.column.editDate'), type: 'date' as const, width: '120px' }
     ];
   }
 

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { GlassCardComponent } from '../glass-card/glass-card.component';
 import { GlassButtonComponent } from '../glass-button/glass-button.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export interface EmptyStateAction {
   label: string;
@@ -39,7 +40,7 @@ export class EmptyStateComponent {
   }
 
   get displayTitle(): string {
-    return this.title || this.translate.instant('common.noData');
+    return this.title || this.translate.instant(TRANSLATION_KEYS.COMMON.LABELS.NO_DATA);
   }
 
   get displayDescription(): string {

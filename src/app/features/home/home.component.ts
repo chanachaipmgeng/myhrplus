@@ -4,6 +4,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { AuthService, User } from '@core/services';
 import { HomeService, MenuCategory, MenuItem } from './home.service';
 import { EChartsOption } from 'echarts';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-home',

@@ -6,6 +6,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
 import { BranchSocialSecurity } from '../../models/branch-social-security.model';
 import { BranchSocialSecurityService } from '../../services/branch-social-security.service';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-branch-social-security-form',

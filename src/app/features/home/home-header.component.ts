@@ -7,6 +7,7 @@ import { AuthService, User } from '@core/services';
 import { EmployeeService, SetCharacter, Role } from '@core/services';
 import { environment } from '@env/environment';
 import jwt_decode from 'jwt-decode';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export interface ConfigModel {
   code: string;

@@ -4,6 +4,7 @@ import { PivotTableComponent } from '@shared/components/pivot-table/pivot-table.
 import { IDataOptions } from '@syncfusion/ej2-angular-pivotview';
 import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
 import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-pivot-table-demo',

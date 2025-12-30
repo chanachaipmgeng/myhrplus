@@ -6,6 +6,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
 import { CompanyGroup } from '../../models/company-group.model';
 import { CompanyGroupService } from '../../services/company-group.service';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-company-group-form',

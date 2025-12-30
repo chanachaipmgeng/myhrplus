@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, HostListener, QueryList, ViewChildren, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export interface Tab {
   id: string;

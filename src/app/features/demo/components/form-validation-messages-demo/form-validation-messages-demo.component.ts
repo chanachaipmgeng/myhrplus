@@ -6,6 +6,7 @@ import { GlassInputComponent } from '@shared/components/glass-input/glass-input.
 import { FormValidationMessagesComponent } from '@shared/components/form-validation-messages/form-validation-messages.component';
 import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
 import { PropsTableComponent, PropDefinition } from '@features/demo/shared/props-table/props-table.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-form-validation-messages-demo',

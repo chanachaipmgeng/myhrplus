@@ -4,6 +4,7 @@ import { QueryBuilderComponent, QueryBuilderColumn } from '@shared/components/qu
 import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
 import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
 import { RuleModel } from '@syncfusion/ej2-angular-querybuilder';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-query-builder-demo',

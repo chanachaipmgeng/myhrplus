@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SpeechToTextModule, TextAreaModule, TextAreaComponent } from '@syncfusion/ej2-angular-inputs';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export interface SpeechToTextConfig {
   locale?: string;

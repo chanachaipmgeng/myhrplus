@@ -6,6 +6,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
 import { T4 } from '../../models/t4.model';
 import { T4Service } from '../../services/t4.service';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-t4-form',
@@ -20,6 +21,10 @@ import { T4Service } from '../../services/t4.service';
   templateUrl: './t4-form.component.html'
 })
 export class T4FormComponent implements OnChanges {
+  // Expose TRANSLATION_KEYS to template
+
+  readonly TRANSLATION_KEYS = TRANSLATION_KEYS;
+
   @Input() isOpen = false;
   @Input() data: T4 | null = null;
   @Output() close = new EventEmitter<void>();
@@ -34,8 +39,8 @@ export class T4FormComponent implements OnChanges {
 
   get activeOptions() {
     return [
-      { value: '1', label: this.translate.instant('common.active') },
-      { value: '0', label: this.translate.instant('common.inactive') }
+      { value: '1', label: this.translate.instant(TRANSLATION_KEYS.COMMON.STATUS.ACTIVE) },
+      { value: '0', label: this.translate.instant(TRANSLATION_KEYS.COMMON.STATUS.INACTIVE) }
     ];
   }
 

@@ -4,6 +4,7 @@ import { SchedulerComponent, SchedulerEvent } from '@shared/components/scheduler
 import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
 import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
 import { View } from '@syncfusion/ej2-angular-schedule';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-scheduler-demo',

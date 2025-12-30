@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarouselModule } from '@syncfusion/ej2-angular-navigations';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 import {
   CarouselComponent as SyncfusionCarouselComponent
 } from '@syncfusion/ej2-angular-navigations';

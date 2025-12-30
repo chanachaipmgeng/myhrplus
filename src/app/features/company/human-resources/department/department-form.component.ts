@@ -6,6 +6,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
 import { Department } from '../../models/department.model';
 import { DepartmentService } from '../../services/department.service';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-department-form',
@@ -20,6 +21,10 @@ import { DepartmentService } from '../../services/department.service';
   templateUrl: './department-form.component.html'
 })
 export class DepartmentFormComponent implements OnChanges {
+  // Expose TRANSLATION_KEYS to template
+
+  readonly TRANSLATION_KEYS = TRANSLATION_KEYS;
+
   @Input() isOpen = false;
   @Input() data: Department | null = null;
   @Output() close = new EventEmitter<void>();
@@ -35,8 +40,8 @@ export class DepartmentFormComponent implements OnChanges {
   // Options for Active radio
   get activeOptions() {
     return [
-      { value: '1', label: this.translate.instant('common.active') },
-      { value: '0', label: this.translate.instant('common.inactive') }
+      { value: '1', label: this.translate.instant(TRANSLATION_KEYS.COMMON.STATUS.ACTIVE) },
+      { value: '0', label: this.translate.instant(TRANSLATION_KEYS.COMMON.STATUS.INACTIVE) }
     ];
   }
 

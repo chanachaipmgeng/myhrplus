@@ -14,6 +14,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
 import { CompanyService } from '../services/company.service';
 import { AuthService, User, LayoutService, BreadcrumbItem, DashboardPreferencesService } from '@core/services';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-company-dashboard',

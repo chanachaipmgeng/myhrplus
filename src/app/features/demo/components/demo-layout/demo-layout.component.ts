@@ -9,6 +9,7 @@ import { GlassCardComponent } from '@shared/components/glass-card/glass-card.com
 import { GlassButtonComponent } from '@shared/components/glass-button/glass-button.component';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 interface ComponentGroup {
   name: string;

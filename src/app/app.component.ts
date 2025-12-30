@@ -6,6 +6,7 @@ import { ThemeService } from './core/services/theme.service';
 import { I18nService } from './core/services/i18n.service';
 import { SyncfusionThemeService } from './shared/syncfusion/syncfusion-theme.service';
 import { NotificationService } from './core/services/notification.service';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-root',

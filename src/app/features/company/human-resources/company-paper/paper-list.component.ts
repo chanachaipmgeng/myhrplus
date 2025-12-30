@@ -8,6 +8,7 @@ import { DataGridComponent } from '@shared/components/data-grid/data-grid.compon
 import { PaperService } from '../../services/paper.service';
 import { Paper } from '../../models/paper.model';
 import { PaperFormComponent } from './paper-form.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-paper-list',
@@ -36,7 +37,7 @@ export class PaperListComponent implements OnInit {
 
   ngOnInit() {
     // Wait for translations to load, then initialize
-    this.translate.get('common.addNew').subscribe(() => {
+    this.translate.get(TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW).subscribe(() => {
       this.initializeTranslations();
     });
   }
@@ -44,7 +45,7 @@ export class PaperListComponent implements OnInit {
   private initializeTranslations() {
     this.headerActions = [
       {
-        label: this.translate.instant('common.addNew'),
+        label: this.translate.instant(TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW),
         variant: 'primary' as const,
         onClick: () => this.onCreate()
       }
@@ -61,8 +62,8 @@ export class PaperListComponent implements OnInit {
         type: 'boolean' as const,
         formatter: (value: string) => {
           return value === '1' 
-            ? this.translate.instant('common.active')
-            : this.translate.instant('common.inactive');
+            ? this.translate.instant(TRANSLATION_KEYS.COMMON.STATUS.ACTIVE)
+            : this.translate.instant(TRANSLATION_KEYS.COMMON.STATUS.INACTIVE);
         }
       },
       { 
@@ -72,8 +73,8 @@ export class PaperListComponent implements OnInit {
         type: 'boolean' as const,
         formatter: (value: string) => {
           return value === '1' 
-            ? this.translate.instant('common.active')
-            : this.translate.instant('common.inactive');
+            ? this.translate.instant(TRANSLATION_KEYS.COMMON.STATUS.ACTIVE)
+            : this.translate.instant(TRANSLATION_KEYS.COMMON.STATUS.INACTIVE);
         }
       },
       { field: 'edit_date', headerText: this.translate.instant('company.companyPaper.column.editDate'), type: 'date' as const, width: '120px' }

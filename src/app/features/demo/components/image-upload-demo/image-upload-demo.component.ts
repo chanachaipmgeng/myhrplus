@@ -5,6 +5,7 @@ import { ImageUploadComponent, ImageUploadConfig, UploadedImage } from '@shared/
 import { ImageQualityAssessment } from '@core/utils/image-quality.utils';
 import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
 import { PropsTableComponent, PropDefinition } from '@features/demo/shared/props-table/props-table.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-image-upload-demo',

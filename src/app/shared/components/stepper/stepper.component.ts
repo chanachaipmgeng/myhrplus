@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit, inject } from '@angular
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IconComponent } from '../icon/icon.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export interface StepperStep {
   label: string;
@@ -30,6 +31,9 @@ export class StepperComponent implements OnInit {
 
   @Output() stepChange = new EventEmitter<number>();
   @Output() complete = new EventEmitter<void>();
+
+  // Expose TRANSLATION_KEYS to template
+  readonly TRANSLATION_KEYS = TRANSLATION_KEYS;
 
   ngOnInit(): void {
     // Validate current step

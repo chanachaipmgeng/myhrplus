@@ -4,6 +4,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subject, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { IconComponent } from '../icon/icon.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export type NotificationType = 'success' | 'error' | 'warning' | 'info';
 

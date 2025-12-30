@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GanttModule } from '@syncfusion/ej2-angular-gantt';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 import {
   GanttComponent as SyncfusionGanttComponent,
   SelectionService,

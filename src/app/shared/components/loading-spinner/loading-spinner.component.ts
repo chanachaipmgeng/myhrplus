@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoadingService } from '@core/services';
 import { Observable } from 'rxjs';
 import { SpinnerComponent } from '../spinner/spinner.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-loading-spinner',

@@ -10,6 +10,7 @@ import { StaggerDirective } from '@shared/directives/stagger.directive';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
 import { SharedModule } from '@shared/shared.module';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-setting-home',

@@ -11,6 +11,7 @@ import { GlassSelectComponent } from '@shared/components/glass-select/glass-sele
 import { GlassButtonComponent } from '@shared/components/glass-button/glass-button.component';
 import { AlertComponent } from '@shared/components/alert/alert.component';
 import { IconComponent } from '@shared/components/icon/icon.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-forgot-password',

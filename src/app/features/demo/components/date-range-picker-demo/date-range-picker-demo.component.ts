@@ -5,6 +5,7 @@ import { GlassCardComponent } from '@shared/components/glass-card/glass-card.com
 import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
 import { PropsTableComponent, PropDefinition } from '@features/demo/shared/props-table/props-table.component';
 import { DatePreset } from '@shared/components/date-range-picker/date-range-picker.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-date-range-picker-demo',

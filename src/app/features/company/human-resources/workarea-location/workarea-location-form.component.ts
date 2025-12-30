@@ -6,6 +6,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
 import { WorkareaLocation } from '../../models/workarea-location.model';
 import { WorkareaLocationService } from '../../services/workarea-location.service';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-workarea-location-form',

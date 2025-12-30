@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlassButtonComponent } from '../glass-button/glass-button.component';
 import { fadeIn, slideInDown } from '@core/animations/animations';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export interface BreadcrumbItem {
   label: string;

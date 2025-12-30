@@ -8,6 +8,7 @@ import { ZoneType } from '../../models/zone-type.model';
 import { ZoneTypeService } from '../../services/zone-type.service';
 import { BrandStoreService } from '../../services/brand-store.service';
 import { Observable } from 'rxjs';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-zone-type-form',
@@ -22,6 +23,9 @@ import { Observable } from 'rxjs';
   templateUrl: './zone-type-form.component.html'
 })
 export class ZoneTypeFormComponent implements OnChanges {
+  // Expose TRANSLATION_KEYS to template
+  readonly TRANSLATION_KEYS = TRANSLATION_KEYS;
+  
   @Input() isOpen = false;
   @Input() data: ZoneType | null = null;
   @Output() close = new EventEmitter<void>();

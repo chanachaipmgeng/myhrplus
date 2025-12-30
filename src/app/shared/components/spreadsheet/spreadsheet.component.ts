@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SpreadsheetModule } from '@syncfusion/ej2-angular-spreadsheet';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 import {
   SpreadsheetComponent as SyncfusionSpreadsheetComponent
 } from '@syncfusion/ej2-angular-spreadsheet';

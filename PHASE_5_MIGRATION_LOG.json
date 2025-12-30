@@ -1,0 +1,1431 @@
+{
+  "timestamp": "2025-12-30T14:24:00.402Z",
+  "total": 227,
+  "migrated": 226,
+  "skipped": 1,
+  "files": [
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\app.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\appraisal\\appraisal-home\\appraisal-home.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\auth\\forgot-password\\forgot-password.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\auth\\login\\login.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\auth\\unauthorized\\unauthorized.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\company-home\\company-home.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\dashboard\\company-dashboard.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\approve-level\\approve-level-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\approve-level\\approve-level-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\bank-company\\bank-company-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\bank-company\\bank-company-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\branch\\branch-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\branch\\branch-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW",
+        "Migrated 'company.branch.* → 'features.company.entities.branch.*"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\branch-social-security\\branch-social-security-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\branch-social-security\\branch-social-security-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW",
+        "Migrated 'company.branchSocialSecurity.* → 'features.company.entities.branchSocialSecurity.*"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\brand-store\\brand-store-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\brand-store\\brand-store-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\company\\company-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\company\\company-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\company-asset\\asset-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\company-asset\\asset-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\company-group\\company-group-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\company-group\\company-group-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\company-paper\\paper-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\company-paper\\paper-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW",
+        "Migrated 'common.active' → TRANSLATION_KEYS.COMMON.STATUS.ACTIVE",
+        "Migrated 'common.inactive' → TRANSLATION_KEYS.COMMON.STATUS.INACTIVE"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\company-type\\company-type-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\company-type\\company-type-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\cost-center\\cost-center-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\cost-center\\cost-center-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\department\\department-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.active' → TRANSLATION_KEYS.COMMON.STATUS.ACTIVE",
+        "Migrated 'common.inactive' → TRANSLATION_KEYS.COMMON.STATUS.INACTIVE"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\department\\department-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW",
+        "Migrated 'common.active' → TRANSLATION_KEYS.COMMON.STATUS.ACTIVE",
+        "Migrated 'common.inactive' → TRANSLATION_KEYS.COMMON.STATUS.INACTIVE",
+        "Migrated 'company.department.* → 'features.company.entities.department.*"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\division\\division-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.active' → TRANSLATION_KEYS.COMMON.STATUS.ACTIVE",
+        "Migrated 'common.inactive' → TRANSLATION_KEYS.COMMON.STATUS.INACTIVE"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\human-resources-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\pl\\pl-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\pl\\pl-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\section\\section-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.active' → TRANSLATION_KEYS.COMMON.STATUS.ACTIVE",
+        "Migrated 'common.inactive' → TRANSLATION_KEYS.COMMON.STATUS.INACTIVE"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\section\\section-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW",
+        "Migrated 'common.active' → TRANSLATION_KEYS.COMMON.STATUS.ACTIVE",
+        "Migrated 'common.inactive' → TRANSLATION_KEYS.COMMON.STATUS.INACTIVE",
+        "Migrated 'company.section.* → 'features.company.entities.section.*"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\t2\\t2-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.active' → TRANSLATION_KEYS.COMMON.STATUS.ACTIVE",
+        "Migrated 'common.inactive' → TRANSLATION_KEYS.COMMON.STATUS.INACTIVE"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\t2\\t2-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW",
+        "Migrated 'common.active' → TRANSLATION_KEYS.COMMON.STATUS.ACTIVE",
+        "Migrated 'common.inactive' → TRANSLATION_KEYS.COMMON.STATUS.INACTIVE"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\t3\\t3-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.active' → TRANSLATION_KEYS.COMMON.STATUS.ACTIVE",
+        "Migrated 'common.inactive' → TRANSLATION_KEYS.COMMON.STATUS.INACTIVE"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\t3\\t3-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW",
+        "Migrated 'common.active' → TRANSLATION_KEYS.COMMON.STATUS.ACTIVE",
+        "Migrated 'common.inactive' → TRANSLATION_KEYS.COMMON.STATUS.INACTIVE"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\t4\\t4-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.active' → TRANSLATION_KEYS.COMMON.STATUS.ACTIVE",
+        "Migrated 'common.inactive' → TRANSLATION_KEYS.COMMON.STATUS.INACTIVE"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\t4\\t4-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW",
+        "Migrated 'common.active' → TRANSLATION_KEYS.COMMON.STATUS.ACTIVE",
+        "Migrated 'common.inactive' → TRANSLATION_KEYS.COMMON.STATUS.INACTIVE"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\team\\team-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.active' → TRANSLATION_KEYS.COMMON.STATUS.ACTIVE",
+        "Migrated 'common.inactive' → TRANSLATION_KEYS.COMMON.STATUS.INACTIVE"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\team\\team-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW",
+        "Migrated 'common.active' → TRANSLATION_KEYS.COMMON.STATUS.ACTIVE",
+        "Migrated 'common.inactive' → TRANSLATION_KEYS.COMMON.STATUS.INACTIVE"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\workarea-beacon\\workarea-beacon-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\workarea-beacon\\workarea-beacon-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\workarea-location\\workarea-location-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\workarea-location\\workarea-location-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\workarea-store\\workarea-store-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\workarea-store\\workarea-store-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\working-area\\working-area-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\working-area\\working-area-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\working-area-type\\working-area-type-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.active' → TRANSLATION_KEYS.COMMON.STATUS.ACTIVE",
+        "Migrated 'common.inactive' → TRANSLATION_KEYS.COMMON.STATUS.INACTIVE"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\working-area-type\\working-area-type-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW",
+        "Migrated 'common.active' → TRANSLATION_KEYS.COMMON.STATUS.ACTIVE",
+        "Migrated 'common.inactive' → TRANSLATION_KEYS.COMMON.STATUS.INACTIVE"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\zone-type\\zone-type-form.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\company\\human-resources\\zone-type\\zone-type-list.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.addNew' → TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\accordion-demo\\accordion-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\ai-assist-view-demo\\ai-assist-view-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\alert-demo\\alert-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\autocomplete-demo\\autocomplete-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\avatar-demo\\avatar-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\back-to-top-demo\\back-to-top-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\bar-rating-demo\\bar-rating-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\breadcrumbs-demo\\breadcrumbs-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\calendar-demo\\calendar-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\carousel-demo\\carousel-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\chart-demo\\chart-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\chip-demo\\chip-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\confirm-dialog-demo\\confirm-dialog-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\context-switcher-demo\\context-switcher-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\contextual-help-demo\\contextual-help-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\data-grid-demo\\data-grid-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\date-range-picker-demo\\date-range-picker-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\demo-layout\\demo-layout.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\diagrams-demo\\diagrams-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\divider-demo\\divider-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\document-editor-demo\\document-editor-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\empty-state-demo\\empty-state-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\error-state-demo\\error-state-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\file-manager-demo\\file-manager-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\file-upload-demo\\file-upload-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\form-validation-messages-demo\\form-validation-messages-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\fullscreen-demo\\fullscreen-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\gantt-demo\\gantt-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\glass-button-demo\\glass-button-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\glass-card-demo\\glass-card-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\glass-checkbox-demo\\glass-checkbox-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\glass-input-demo\\glass-input-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\glass-radio-demo\\glass-radio-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\glass-select-demo\\glass-select-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\glass-switch-demo\\glass-switch-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\glass-textarea-demo\\glass-textarea-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\icon-demo\\icon-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\image-editor-demo\\image-editor-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\image-upload-demo\\image-upload-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\loading-demo\\loading-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\loading-spinner-demo\\loading-spinner-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\mask-toggle-demo\\mask-toggle-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\migration-guide-demo\\migration-guide-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\modal-demo\\modal-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\nested-menu-accordion-demo\\nested-menu-accordion-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\ng-select-demo\\ng-select-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\notification-demo\\notification-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\omni-search-demo\\omni-search-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\page-header-demo\\page-header-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\page-layout-demo\\page-layout-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\pagination-demo\\pagination-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\pdf-viewer-demo\\pdf-viewer-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\pivot-table-demo\\pivot-table-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\progress-bar-demo\\progress-bar-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\progressive-disclosure-demo\\progressive-disclosure-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\query-builder-demo\\query-builder-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\rating-demo\\rating-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\rich-text-editor-demo\\rich-text-editor-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\scheduler-demo\\scheduler-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\search-filter-demo\\search-filter-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\signature-demo\\signature-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\skeleton-loader-demo\\skeleton-loader-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\smart-textarea-demo\\smart-textarea-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\speech-to-text-demo\\speech-to-text-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\spinner-demo\\spinner-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\spreadsheet-demo\\spreadsheet-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\stagger-demo\\stagger-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\statistics-card-demo\\statistics-card-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\statistics-grid-demo\\statistics-grid-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\status-badge-demo\\status-badge-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\stepper-demo\\stepper-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\sweetalert2-demo\\sweetalert2-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\syncfusion-uploader-demo\\syncfusion-uploader-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\tabs-demo\\tabs-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\theme-toggle-demo\\theme-toggle-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\timeline-demo\\timeline-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\tooltip-demo\\tooltip-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\components\\tree-grid-demo\\tree-grid-demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\demo-index\\demo-index.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\demo.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\shared\\code-viewer\\code-viewer.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\demo\\shared\\props-table\\props-table.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\home\\home-header.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\home\\home.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\payroll\\payroll-home\\payroll-home.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\personal\\personal-home\\personal-home.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\recruit\\recruit-home\\recruit-home.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\setting\\setting-home\\setting-home.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\ta\\ta-home\\ta-home.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\training\\training-home\\training-home.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\features\\welfare\\welfare-home\\welfare-home.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\layout\\footer\\footer.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\layout\\header\\header.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\layout\\main-layout\\main-layout.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\layout\\sidebar\\sidebar.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\accordion\\accordion.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\ai-assist-view\\ai-assist-view.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\alert\\alert.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\autocomplete\\autocomplete.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\avatar\\avatar.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\back-to-top\\back-to-top.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\breadcrumbs\\breadcrumbs.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\calendar\\calendar.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\carousel\\carousel.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\chart\\chart.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\chip\\chip.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\confirm-dialog\\confirm-dialog.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.cancel' → TRANSLATION_KEYS.COMMON.ACTIONS.CANCEL"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\content-layout\\content-layout.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\context-switcher\\context-switcher.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\contextual-help\\contextual-help.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\data-grid\\data-grid.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\date-range-picker\\date-range-picker.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\diagrams\\diagrams.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\divider\\divider.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\document-editor\\document-editor.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\empty-state\\empty-state.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.noData' → TRANSLATION_KEYS.COMMON.LABELS.NO_DATA"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\error-state\\error-state.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\file-manager\\file-manager.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\file-upload\\file-upload.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\form-validation-messages\\form-validation-messages.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\gantt\\gantt.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\glass-button\\glass-button.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\glass-card\\glass-card.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\glass-checkbox\\glass-checkbox.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\glass-input\\glass-input.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\glass-radio\\glass-radio.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\glass-select\\glass-select.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\glass-switch\\glass-switch.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\glass-textarea\\glass-textarea.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\icon\\icon.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\image-editor\\image-editor.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\image-upload\\image-upload.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\loading\\loading.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\loading-spinner\\loading-spinner.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\mask-toggle\\mask-toggle.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\menu-item\\menu-item.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\modal\\modal.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.cancel' → TRANSLATION_KEYS.COMMON.ACTIONS.CANCEL",
+        "Migrated 'common.close' → TRANSLATION_KEYS.COMMON.ACTIONS.CLOSE"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\nested-menu-accordion\\nested-menu-accordion.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\notification\\notification.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\omni-search\\omni-search.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\page-header\\page-header.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\page-layout\\page-layout.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\pagination\\pagination.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\pdf-viewer\\pdf-viewer.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\pdpa-consent-modal\\pdpa-consent-modal.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\pivot-table\\pivot-table.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\progress-bar\\progress-bar.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\progressive-disclosure\\progressive-disclosure.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\query-builder\\query-builder.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\rating\\rating.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\rich-text-editor\\rich-text-editor.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\scheduler\\scheduler.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\search-filter\\search-filter.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.search' → TRANSLATION_KEYS.COMMON.ACTIONS.SEARCH"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\signature\\signature.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\skeleton-loader\\skeleton-loader.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\smart-textarea\\smart-textarea.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\speech-to-text\\speech-to-text.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\spinner\\spinner.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\spreadsheet\\spreadsheet.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\statistics-card\\statistics-card.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\statistics-grid\\statistics-grid.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\status-badge\\status-badge.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import",
+        "Migrated 'common.active' → TRANSLATION_KEYS.COMMON.STATUS.ACTIVE",
+        "Migrated 'common.inactive' → TRANSLATION_KEYS.COMMON.STATUS.INACTIVE"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\stepper\\stepper.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\syncfusion-uploader\\syncfusion-uploader.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\tabs\\tabs.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\theme-toggle\\theme-toggle.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\timeline\\timeline.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\tooltip\\tooltip.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    },
+    {
+      "file": "D:\\Project\\EnterprisePT\\myHrAppServer\\webapps\\MYHRPLUS_STD\\angular-hr-migration\\myhrplus\\src\\app\\shared\\components\\tree-grid\\tree-grid.component.ts",
+      "changes": [
+        "Added TRANSLATION_KEYS import"
+      ]
+    }
+  ]
+}

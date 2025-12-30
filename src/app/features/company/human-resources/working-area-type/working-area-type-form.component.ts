@@ -6,6 +6,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
 import { WorkingAreaType } from '../../models/working-area-type.model';
 import { WorkingAreaTypeService } from '../../services/working-area-type.service';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-working-area-type-form',
@@ -20,6 +21,10 @@ import { WorkingAreaTypeService } from '../../services/working-area-type.service
   templateUrl: './working-area-type-form.component.html'
 })
 export class WorkingAreaTypeFormComponent implements OnChanges {
+  // Expose TRANSLATION_KEYS to template
+
+  readonly TRANSLATION_KEYS = TRANSLATION_KEYS;
+
   @Input() isOpen = false;
   @Input() data: WorkingAreaType | null = null;
   @Output() close = new EventEmitter<void>();
@@ -34,8 +39,8 @@ export class WorkingAreaTypeFormComponent implements OnChanges {
 
   get workStatusOptions() {
     return [
-      { value: '1', label: this.translate.instant('common.active') },
-      { value: '0', label: this.translate.instant('common.inactive') }
+      { value: '1', label: this.translate.instant(TRANSLATION_KEYS.COMMON.STATUS.ACTIVE) },
+      { value: '0', label: this.translate.instant(TRANSLATION_KEYS.COMMON.STATUS.INACTIVE) }
     ];
   }
 

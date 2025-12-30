@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export interface AIAssistViewConfig {
   promptHandler?: (options: any) => void;

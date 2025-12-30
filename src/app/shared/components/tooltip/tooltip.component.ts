@@ -1,5 +1,6 @@
 import { Component, Input, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-tooltip',

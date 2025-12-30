@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StatisticsCardComponent } from '../statistics-card/statistics-card.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export interface StatCard {
   icon: string;

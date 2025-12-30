@@ -10,12 +10,12 @@
       {{ message || defaultMessage }}
     </p>
     <div class="text-xs sm:text-[10px] text-red-600 dark:text-red-400 font-mono mb-4 sm:mb-3 px-4 sm:px-3 py-2 rounded-md bg-red-500/10 dark:bg-red-500/15 border border-red-500/20 dark:border-red-500/30 theme-gemini:glass-gemini-weak theme-gemini:border-red-500/40 transition-smooth" *ngIf="errorCode">
-      {{ 'common.errorCode' | translate }}: {{ errorCode }}
+      {{ TRANSLATION_KEYS.COMMON.LABELS.ERROR_CODE | translate }}: {{ errorCode }}
     </div>
     <div class="text-sm text-slate-600 dark:text-slate-400 mb-4 sm:mb-3 text-left" *ngIf="showDetails && details">
       <details class="cursor-pointer p-3 sm:p-2 rounded-md glass-weak dark:glass-dark-weak border border-white/20 dark:border-slate-700/30 transition-smooth">
         <summary class="thai-text font-medium p-2 min-h-[44px] flex items-center hover:text-primary transition-colors">
-          {{ 'common.moreDetails' | translate }}
+          {{ TRANSLATION_KEYS.COMMON.ACTIONS.MORE_DETAILS | translate }}
         </summary>
         <p class="mt-2 thai-text">{{ details }}</p>
       </details>

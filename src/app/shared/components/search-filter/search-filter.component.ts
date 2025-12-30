@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, FormControl } from '@angul
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { IconComponent } from '../icon/icon.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export interface FilterOption {
   key: string;
@@ -75,7 +76,7 @@ export class SearchFilterComponent implements OnInit {
   }
 
   get displayPlaceholder(): string {
-    return this.placeholder || this.translate.instant('common.search');
+    return this.placeholder || this.translate.instant(TRANSLATION_KEYS.COMMON.ACTIONS.SEARCH);
   }
 
   onClearSearch(): void {

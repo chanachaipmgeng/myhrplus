@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DocumentEditorModule } from '@syncfusion/ej2-angular-documenteditor';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 import {
   DocumentEditorComponent as SyncfusionDocumentEditorComponent,
   DocumentEditorSettingsModel,

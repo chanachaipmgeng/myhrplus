@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export interface ConfirmDialogData {
   title: string;
@@ -25,7 +26,7 @@ export class ConfirmDialogComponent {
   constructor() {
     if (this.data) {
       this.data.confirmText = this.data.confirmText || this.translate.instant('common.confirm');
-      this.data.cancelText = this.data.cancelText || this.translate.instant('common.cancel');
+      this.data.cancelText = this.data.cancelText || this.translate.instant(TRANSLATION_KEYS.COMMON.ACTIONS.CANCEL);
     }
   }
 
@@ -34,7 +35,7 @@ export class ConfirmDialogComponent {
   }
 
   get displayCancelText(): string {
-    return this.data?.cancelText || this.translate.instant('common.cancel');
+    return this.data?.cancelText || this.translate.instant(TRANSLATION_KEYS.COMMON.ACTIONS.CANCEL);
   }
 
   onCancel(): void {

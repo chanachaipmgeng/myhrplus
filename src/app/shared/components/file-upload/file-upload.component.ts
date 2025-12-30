@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, inject }
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IconComponent } from '../icon/icon.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-file-upload',

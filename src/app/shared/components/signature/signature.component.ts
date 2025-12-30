@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SignatureModule } from '@syncfusion/ej2-angular-inputs';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 import {
   SignatureComponent as SyncfusionSignatureComponent
 } from '@syncfusion/ej2-angular-inputs';

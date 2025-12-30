@@ -23,6 +23,7 @@ import {
   VirtualScrollService
 } from '@syncfusion/ej2-angular-grids';
 import { L10n } from '@syncfusion/ej2-base';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export interface DataGridColumn {
   field: string;

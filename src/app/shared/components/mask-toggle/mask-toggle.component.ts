@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FieldMaskingService } from '@core/services';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 /**
  * Component for toggling masked/unmasked display of sensitive data

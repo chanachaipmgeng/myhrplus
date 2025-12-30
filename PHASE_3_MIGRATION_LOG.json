@@ -1,0 +1,2491 @@
+{
+  "timestamp": "2025-12-30T14:17:50.697Z",
+  "th": {
+    "total": 309,
+    "company": 216,
+    "menu": 59,
+    "auth": 34,
+    "migrated": [
+      {
+        "old": "company.branchSocialSecurity.title",
+        "new": "features.company.entities.branchSocialSecurity.title"
+      },
+      {
+        "old": "company.branchSocialSecurity.titleFull",
+        "new": "features.company.entities.branchSocialSecurity.titleFull"
+      },
+      {
+        "old": "company.branchSocialSecurity.add",
+        "new": "features.company.entities.branchSocialSecurity.add"
+      },
+      {
+        "old": "company.branchSocialSecurity.edit",
+        "new": "features.company.entities.branchSocialSecurity.edit"
+      },
+      {
+        "old": "company.branchSocialSecurity.branchNo",
+        "new": "features.company.entities.branchSocialSecurity.branchNo"
+      },
+      {
+        "old": "company.branchSocialSecurity.branchNoRequired",
+        "new": "features.company.entities.branchSocialSecurity.branchNoRequired"
+      },
+      {
+        "old": "company.branchSocialSecurity.companyId",
+        "new": "features.company.entities.branchSocialSecurity.companyId"
+      },
+      {
+        "old": "company.branchSocialSecurity.tdesc",
+        "new": "features.company.entities.branchSocialSecurity.tdesc"
+      },
+      {
+        "old": "company.branchSocialSecurity.tdescRequired",
+        "new": "features.company.entities.branchSocialSecurity.tdescRequired"
+      },
+      {
+        "old": "company.branchSocialSecurity.edesc",
+        "new": "features.company.entities.branchSocialSecurity.edesc"
+      },
+      {
+        "old": "company.branchSocialSecurity.addressThai",
+        "new": "features.company.entities.branchSocialSecurity.addressThai"
+      },
+      {
+        "old": "company.branchSocialSecurity.addressEng",
+        "new": "features.company.entities.branchSocialSecurity.addressEng"
+      },
+      {
+        "old": "company.branchSocialSecurity.location",
+        "new": "features.company.entities.branchSocialSecurity.location"
+      },
+      {
+        "old": "company.branchSocialSecurity.contact",
+        "new": "features.company.entities.branchSocialSecurity.contact"
+      },
+      {
+        "old": "company.branchSocialSecurity.socialSecurity",
+        "new": "features.company.entities.branchSocialSecurity.socialSecurity"
+      },
+      {
+        "old": "company.branchSocialSecurity.village",
+        "new": "features.company.entities.branchSocialSecurity.village"
+      },
+      {
+        "old": "company.branchSocialSecurity.roomNo",
+        "new": "features.company.entities.branchSocialSecurity.roomNo"
+      },
+      {
+        "old": "company.branchSocialSecurity.floor",
+        "new": "features.company.entities.branchSocialSecurity.floor"
+      },
+      {
+        "old": "company.branchSocialSecurity.address",
+        "new": "features.company.entities.branchSocialSecurity.address"
+      },
+      {
+        "old": "company.branchSocialSecurity.soi",
+        "new": "features.company.entities.branchSocialSecurity.soi"
+      },
+      {
+        "old": "company.branchSocialSecurity.moo",
+        "new": "features.company.entities.branchSocialSecurity.moo"
+      },
+      {
+        "old": "company.branchSocialSecurity.road",
+        "new": "features.company.entities.branchSocialSecurity.road"
+      },
+      {
+        "old": "company.branchSocialSecurity.subdistrict",
+        "new": "features.company.entities.branchSocialSecurity.subdistrict"
+      },
+      {
+        "old": "company.branchSocialSecurity.zipcode",
+        "new": "features.company.entities.branchSocialSecurity.zipcode"
+      },
+      {
+        "old": "company.branchSocialSecurity.districtId",
+        "new": "features.company.entities.branchSocialSecurity.districtId"
+      },
+      {
+        "old": "company.branchSocialSecurity.tel",
+        "new": "features.company.entities.branchSocialSecurity.tel"
+      },
+      {
+        "old": "company.branchSocialSecurity.fax",
+        "new": "features.company.entities.branchSocialSecurity.fax"
+      },
+      {
+        "old": "company.branchSocialSecurity.socialCode",
+        "new": "features.company.entities.branchSocialSecurity.socialCode"
+      },
+      {
+        "old": "company.branchSocialSecurity.socialSubCode",
+        "new": "features.company.entities.branchSocialSecurity.socialSubCode"
+      },
+      {
+        "old": "company.branchSocialSecurity.socSignName",
+        "new": "features.company.entities.branchSocialSecurity.socSignName"
+      },
+      {
+        "old": "company.branchSocialSecurity.socSignPos",
+        "new": "features.company.entities.branchSocialSecurity.socSignPos"
+      },
+      {
+        "old": "company.branchSocialSecurity.column.branchNo",
+        "new": "features.company.entities.branchSocialSecurity.column.branchNo"
+      },
+      {
+        "old": "company.branchSocialSecurity.column.tdesc",
+        "new": "features.company.entities.branchSocialSecurity.column.tdesc"
+      },
+      {
+        "old": "company.branchSocialSecurity.column.edesc",
+        "new": "features.company.entities.branchSocialSecurity.column.edesc"
+      },
+      {
+        "old": "company.branchSocialSecurity.column.socialCode",
+        "new": "features.company.entities.branchSocialSecurity.column.socialCode"
+      },
+      {
+        "old": "company.branchSocialSecurity.column.socialSubCode",
+        "new": "features.company.entities.branchSocialSecurity.column.socialSubCode"
+      },
+      {
+        "old": "company.branchSocialSecurity.column.tel",
+        "new": "features.company.entities.branchSocialSecurity.column.tel"
+      },
+      {
+        "old": "company.branchSocialSecurity.column.editDate",
+        "new": "features.company.entities.branchSocialSecurity.column.editDate"
+      },
+      {
+        "old": "company.branchSocialSecurity.error.numbersOnly",
+        "new": "features.company.entities.branchSocialSecurity.error.numbersOnly"
+      },
+      {
+        "old": "company.division.title",
+        "new": "features.company.entities.division.title"
+      },
+      {
+        "old": "company.division.titleFull",
+        "new": "features.company.entities.division.titleFull"
+      },
+      {
+        "old": "company.division.add",
+        "new": "features.company.entities.division.add"
+      },
+      {
+        "old": "company.division.edit",
+        "new": "features.company.entities.division.edit"
+      },
+      {
+        "old": "company.division.bu1Id",
+        "new": "features.company.entities.division.bu1Id"
+      },
+      {
+        "old": "company.division.bu1IdRequired",
+        "new": "features.company.entities.division.bu1IdRequired"
+      },
+      {
+        "old": "company.division.companyId",
+        "new": "features.company.entities.division.companyId"
+      },
+      {
+        "old": "company.division.branchId",
+        "new": "features.company.entities.division.branchId"
+      },
+      {
+        "old": "company.division.tdesc",
+        "new": "features.company.entities.division.tdesc"
+      },
+      {
+        "old": "company.division.tdescRequired",
+        "new": "features.company.entities.division.tdescRequired"
+      },
+      {
+        "old": "company.division.edesc",
+        "new": "features.company.entities.division.edesc"
+      },
+      {
+        "old": "company.division.tshortName",
+        "new": "features.company.entities.division.tshortName"
+      },
+      {
+        "old": "company.division.eshortName",
+        "new": "features.company.entities.division.eshortName"
+      },
+      {
+        "old": "company.division.active",
+        "new": "features.company.entities.division.active"
+      },
+      {
+        "old": "company.division.activeActive",
+        "new": "features.company.entities.division.activeActive"
+      },
+      {
+        "old": "company.division.activeInactive",
+        "new": "features.company.entities.division.activeInactive"
+      },
+      {
+        "old": "company.division.buildDate",
+        "new": "features.company.entities.division.buildDate"
+      },
+      {
+        "old": "company.division.expireDate",
+        "new": "features.company.entities.division.expireDate"
+      },
+      {
+        "old": "company.division.bu1Sup",
+        "new": "features.company.entities.division.bu1Sup"
+      },
+      {
+        "old": "company.division.objective",
+        "new": "features.company.entities.division.objective"
+      },
+      {
+        "old": "company.division.remark",
+        "new": "features.company.entities.division.remark"
+      },
+      {
+        "old": "company.division.extention",
+        "new": "features.company.entities.division.extention"
+      },
+      {
+        "old": "company.division.consolidate",
+        "new": "features.company.entities.division.consolidate"
+      },
+      {
+        "old": "company.division.analcode",
+        "new": "features.company.entities.division.analcode"
+      },
+      {
+        "old": "company.division.sortNumber",
+        "new": "features.company.entities.division.sortNumber"
+      },
+      {
+        "old": "company.division.website",
+        "new": "features.company.entities.division.website"
+      },
+      {
+        "old": "company.division.email",
+        "new": "features.company.entities.division.email"
+      },
+      {
+        "old": "company.division.column.bu1Id",
+        "new": "features.company.entities.division.column.bu1Id"
+      },
+      {
+        "old": "company.division.column.tdesc",
+        "new": "features.company.entities.division.column.tdesc"
+      },
+      {
+        "old": "company.division.column.edesc",
+        "new": "features.company.entities.division.column.edesc"
+      },
+      {
+        "old": "company.division.column.shortName",
+        "new": "features.company.entities.division.column.shortName"
+      },
+      {
+        "old": "company.division.column.active",
+        "new": "features.company.entities.division.column.active"
+      },
+      {
+        "old": "company.division.column.buildDate",
+        "new": "features.company.entities.division.column.buildDate"
+      },
+      {
+        "old": "company.division.column.expireDate",
+        "new": "features.company.entities.division.column.expireDate"
+      },
+      {
+        "old": "company.division.column.editDate",
+        "new": "features.company.entities.division.column.editDate"
+      },
+      {
+        "old": "company.division.error.numbersOnly",
+        "new": "features.company.entities.division.error.numbersOnly"
+      },
+      {
+        "old": "company.division.error.email",
+        "new": "features.company.entities.division.error.email"
+      },
+      {
+        "old": "company.department.title",
+        "new": "features.company.entities.department.title"
+      },
+      {
+        "old": "company.department.titleFull",
+        "new": "features.company.entities.department.titleFull"
+      },
+      {
+        "old": "company.department.add",
+        "new": "features.company.entities.department.add"
+      },
+      {
+        "old": "company.department.edit",
+        "new": "features.company.entities.department.edit"
+      },
+      {
+        "old": "company.department.bu2Id",
+        "new": "features.company.entities.department.bu2Id"
+      },
+      {
+        "old": "company.department.bu2IdRequired",
+        "new": "features.company.entities.department.bu2IdRequired"
+      },
+      {
+        "old": "company.department.companyId",
+        "new": "features.company.entities.department.companyId"
+      },
+      {
+        "old": "company.department.parent",
+        "new": "features.company.entities.department.parent"
+      },
+      {
+        "old": "company.department.parentRequired",
+        "new": "features.company.entities.department.parentRequired"
+      },
+      {
+        "old": "company.department.tdesc",
+        "new": "features.company.entities.department.tdesc"
+      },
+      {
+        "old": "company.department.tdescRequired",
+        "new": "features.company.entities.department.tdescRequired"
+      },
+      {
+        "old": "company.department.edesc",
+        "new": "features.company.entities.department.edesc"
+      },
+      {
+        "old": "company.department.edescRequired",
+        "new": "features.company.entities.department.edescRequired"
+      },
+      {
+        "old": "company.department.tshortName",
+        "new": "features.company.entities.department.tshortName"
+      },
+      {
+        "old": "company.department.eshortName",
+        "new": "features.company.entities.department.eshortName"
+      },
+      {
+        "old": "company.department.active",
+        "new": "features.company.entities.department.active"
+      },
+      {
+        "old": "company.department.buildDate",
+        "new": "features.company.entities.department.buildDate"
+      },
+      {
+        "old": "company.department.expireDate",
+        "new": "features.company.entities.department.expireDate"
+      },
+      {
+        "old": "company.department.bu2Sup",
+        "new": "features.company.entities.department.bu2Sup"
+      },
+      {
+        "old": "company.department.objective",
+        "new": "features.company.entities.department.objective"
+      },
+      {
+        "old": "company.department.remark",
+        "new": "features.company.entities.department.remark"
+      },
+      {
+        "old": "company.department.extention",
+        "new": "features.company.entities.department.extention"
+      },
+      {
+        "old": "company.department.consolidate",
+        "new": "features.company.entities.department.consolidate"
+      },
+      {
+        "old": "company.department.analcode",
+        "new": "features.company.entities.department.analcode"
+      },
+      {
+        "old": "company.department.sortNumber",
+        "new": "features.company.entities.department.sortNumber"
+      },
+      {
+        "old": "company.department.website",
+        "new": "features.company.entities.department.website"
+      },
+      {
+        "old": "company.department.email",
+        "new": "features.company.entities.department.email"
+      },
+      {
+        "old": "company.department.column.bu2Id",
+        "new": "features.company.entities.department.column.bu2Id"
+      },
+      {
+        "old": "company.department.column.parent",
+        "new": "features.company.entities.department.column.parent"
+      },
+      {
+        "old": "company.department.column.tdesc",
+        "new": "features.company.entities.department.column.tdesc"
+      },
+      {
+        "old": "company.department.column.edesc",
+        "new": "features.company.entities.department.column.edesc"
+      },
+      {
+        "old": "company.department.column.shortName",
+        "new": "features.company.entities.department.column.shortName"
+      },
+      {
+        "old": "company.department.column.active",
+        "new": "features.company.entities.department.column.active"
+      },
+      {
+        "old": "company.department.column.buildDate",
+        "new": "features.company.entities.department.column.buildDate"
+      },
+      {
+        "old": "company.department.column.expireDate",
+        "new": "features.company.entities.department.column.expireDate"
+      },
+      {
+        "old": "company.department.column.editDate",
+        "new": "features.company.entities.department.column.editDate"
+      },
+      {
+        "old": "company.department.error.numbersOnly",
+        "new": "features.company.entities.department.error.numbersOnly"
+      },
+      {
+        "old": "company.department.error.email",
+        "new": "features.company.entities.department.error.email"
+      },
+      {
+        "old": "company.section.title",
+        "new": "features.company.entities.section.title"
+      },
+      {
+        "old": "company.section.titleFull",
+        "new": "features.company.entities.section.titleFull"
+      },
+      {
+        "old": "company.section.add",
+        "new": "features.company.entities.section.add"
+      },
+      {
+        "old": "company.section.edit",
+        "new": "features.company.entities.section.edit"
+      },
+      {
+        "old": "company.section.bu3Id",
+        "new": "features.company.entities.section.bu3Id"
+      },
+      {
+        "old": "company.section.bu3IdRequired",
+        "new": "features.company.entities.section.bu3IdRequired"
+      },
+      {
+        "old": "company.section.companyId",
+        "new": "features.company.entities.section.companyId"
+      },
+      {
+        "old": "company.section.parent",
+        "new": "features.company.entities.section.parent"
+      },
+      {
+        "old": "company.section.parentRequired",
+        "new": "features.company.entities.section.parentRequired"
+      },
+      {
+        "old": "company.section.tdesc",
+        "new": "features.company.entities.section.tdesc"
+      },
+      {
+        "old": "company.section.tdescRequired",
+        "new": "features.company.entities.section.tdescRequired"
+      },
+      {
+        "old": "company.section.edesc",
+        "new": "features.company.entities.section.edesc"
+      },
+      {
+        "old": "company.section.edescRequired",
+        "new": "features.company.entities.section.edescRequired"
+      },
+      {
+        "old": "company.section.tshortName",
+        "new": "features.company.entities.section.tshortName"
+      },
+      {
+        "old": "company.section.eshortName",
+        "new": "features.company.entities.section.eshortName"
+      },
+      {
+        "old": "company.section.active",
+        "new": "features.company.entities.section.active"
+      },
+      {
+        "old": "company.section.buildDate",
+        "new": "features.company.entities.section.buildDate"
+      },
+      {
+        "old": "company.section.expireDate",
+        "new": "features.company.entities.section.expireDate"
+      },
+      {
+        "old": "company.section.bu3Sup",
+        "new": "features.company.entities.section.bu3Sup"
+      },
+      {
+        "old": "company.section.objective",
+        "new": "features.company.entities.section.objective"
+      },
+      {
+        "old": "company.section.remark",
+        "new": "features.company.entities.section.remark"
+      },
+      {
+        "old": "company.section.extention",
+        "new": "features.company.entities.section.extention"
+      },
+      {
+        "old": "company.section.consolidate",
+        "new": "features.company.entities.section.consolidate"
+      },
+      {
+        "old": "company.section.analcode",
+        "new": "features.company.entities.section.analcode"
+      },
+      {
+        "old": "company.section.sortNumber",
+        "new": "features.company.entities.section.sortNumber"
+      },
+      {
+        "old": "company.section.website",
+        "new": "features.company.entities.section.website"
+      },
+      {
+        "old": "company.section.email",
+        "new": "features.company.entities.section.email"
+      },
+      {
+        "old": "company.section.column.bu3Id",
+        "new": "features.company.entities.section.column.bu3Id"
+      },
+      {
+        "old": "company.section.column.parent",
+        "new": "features.company.entities.section.column.parent"
+      },
+      {
+        "old": "company.section.column.tdesc",
+        "new": "features.company.entities.section.column.tdesc"
+      },
+      {
+        "old": "company.section.column.edesc",
+        "new": "features.company.entities.section.column.edesc"
+      },
+      {
+        "old": "company.section.column.shortName",
+        "new": "features.company.entities.section.column.shortName"
+      },
+      {
+        "old": "company.section.column.active",
+        "new": "features.company.entities.section.column.active"
+      },
+      {
+        "old": "company.section.column.buildDate",
+        "new": "features.company.entities.section.column.buildDate"
+      },
+      {
+        "old": "company.section.column.expireDate",
+        "new": "features.company.entities.section.column.expireDate"
+      },
+      {
+        "old": "company.section.column.editDate",
+        "new": "features.company.entities.section.column.editDate"
+      },
+      {
+        "old": "company.section.error.numbersOnly",
+        "new": "features.company.entities.section.error.numbersOnly"
+      },
+      {
+        "old": "company.section.error.email",
+        "new": "features.company.entities.section.error.email"
+      },
+      {
+        "old": "company.branch.title",
+        "new": "features.company.entities.branch.title"
+      },
+      {
+        "old": "company.branch.titleFull",
+        "new": "features.company.entities.branch.titleFull"
+      },
+      {
+        "old": "company.branch.add",
+        "new": "features.company.entities.branch.add"
+      },
+      {
+        "old": "company.branch.edit",
+        "new": "features.company.entities.branch.edit"
+      },
+      {
+        "old": "company.branch.branchId",
+        "new": "features.company.entities.branch.branchId"
+      },
+      {
+        "old": "company.branch.branchIdRequired",
+        "new": "features.company.entities.branch.branchIdRequired"
+      },
+      {
+        "old": "company.branch.companyId",
+        "new": "features.company.entities.branch.companyId"
+      },
+      {
+        "old": "company.branch.headCompany",
+        "new": "features.company.entities.branch.headCompany"
+      },
+      {
+        "old": "company.branch.headCompanyRequired",
+        "new": "features.company.entities.branch.headCompanyRequired"
+      },
+      {
+        "old": "company.branch.tdesc",
+        "new": "features.company.entities.branch.tdesc"
+      },
+      {
+        "old": "company.branch.tdescRequired",
+        "new": "features.company.entities.branch.tdescRequired"
+      },
+      {
+        "old": "company.branch.edesc",
+        "new": "features.company.entities.branch.edesc"
+      },
+      {
+        "old": "company.branch.edescRequired",
+        "new": "features.company.entities.branch.edescRequired"
+      },
+      {
+        "old": "company.branch.comType",
+        "new": "features.company.entities.branch.comType"
+      },
+      {
+        "old": "company.branch.branchNo",
+        "new": "features.company.entities.branch.branchNo"
+      },
+      {
+        "old": "company.branch.section.basic",
+        "new": "features.company.entities.branch.section.basic"
+      },
+      {
+        "old": "company.branch.section.tax",
+        "new": "features.company.entities.branch.section.tax"
+      },
+      {
+        "old": "company.branch.section.socialSecurity",
+        "new": "features.company.entities.branch.section.socialSecurity"
+      },
+      {
+        "old": "company.branch.section.addressThai",
+        "new": "features.company.entities.branch.section.addressThai"
+      },
+      {
+        "old": "company.branch.section.addressEnglish",
+        "new": "features.company.entities.branch.section.addressEnglish"
+      },
+      {
+        "old": "company.branch.section.contact",
+        "new": "features.company.entities.branch.section.contact"
+      },
+      {
+        "old": "company.branch.section.other",
+        "new": "features.company.entities.branch.section.other"
+      },
+      {
+        "old": "company.branch.taxId",
+        "new": "features.company.entities.branch.taxId"
+      },
+      {
+        "old": "company.branch.taxId2",
+        "new": "features.company.entities.branch.taxId2"
+      },
+      {
+        "old": "company.branch.taxBranchId",
+        "new": "features.company.entities.branch.taxBranchId"
+      },
+      {
+        "old": "company.branch.taxSignName",
+        "new": "features.company.entities.branch.taxSignName"
+      },
+      {
+        "old": "company.branch.taxSignPos",
+        "new": "features.company.entities.branch.taxSignPos"
+      },
+      {
+        "old": "company.branch.socBranchId",
+        "new": "features.company.entities.branch.socBranchId"
+      },
+      {
+        "old": "company.branch.socialCode",
+        "new": "features.company.entities.branch.socialCode"
+      },
+      {
+        "old": "company.branch.socSignName",
+        "new": "features.company.entities.branch.socSignName"
+      },
+      {
+        "old": "company.branch.socSignPos",
+        "new": "features.company.entities.branch.socSignPos"
+      },
+      {
+        "old": "company.branch.taddr",
+        "new": "features.company.entities.branch.taddr"
+      },
+      {
+        "old": "company.branch.tvillage",
+        "new": "features.company.entities.branch.tvillage"
+      },
+      {
+        "old": "company.branch.troomNo",
+        "new": "features.company.entities.branch.troomNo"
+      },
+      {
+        "old": "company.branch.tfloor",
+        "new": "features.company.entities.branch.tfloor"
+      },
+      {
+        "old": "company.branch.tsoi",
+        "new": "features.company.entities.branch.tsoi"
+      },
+      {
+        "old": "company.branch.tmoo",
+        "new": "features.company.entities.branch.tmoo"
+      },
+      {
+        "old": "company.branch.troad",
+        "new": "features.company.entities.branch.troad"
+      },
+      {
+        "old": "company.branch.tsubdistrict",
+        "new": "features.company.entities.branch.tsubdistrict"
+      },
+      {
+        "old": "company.branch.eaddr",
+        "new": "features.company.entities.branch.eaddr"
+      },
+      {
+        "old": "company.branch.evillage",
+        "new": "features.company.entities.branch.evillage"
+      },
+      {
+        "old": "company.branch.eroomNo",
+        "new": "features.company.entities.branch.eroomNo"
+      },
+      {
+        "old": "company.branch.efloor",
+        "new": "features.company.entities.branch.efloor"
+      },
+      {
+        "old": "company.branch.esoi",
+        "new": "features.company.entities.branch.esoi"
+      },
+      {
+        "old": "company.branch.emoo",
+        "new": "features.company.entities.branch.emoo"
+      },
+      {
+        "old": "company.branch.eroad",
+        "new": "features.company.entities.branch.eroad"
+      },
+      {
+        "old": "company.branch.esubdistrict",
+        "new": "features.company.entities.branch.esubdistrict"
+      },
+      {
+        "old": "company.branch.zipcode",
+        "new": "features.company.entities.branch.zipcode"
+      },
+      {
+        "old": "company.branch.districtId",
+        "new": "features.company.entities.branch.districtId"
+      },
+      {
+        "old": "company.branch.tel",
+        "new": "features.company.entities.branch.tel"
+      },
+      {
+        "old": "company.branch.fax",
+        "new": "features.company.entities.branch.fax"
+      },
+      {
+        "old": "company.branch.website",
+        "new": "features.company.entities.branch.website"
+      },
+      {
+        "old": "company.branch.brandTdesc",
+        "new": "features.company.entities.branch.brandTdesc"
+      },
+      {
+        "old": "company.branch.brandEdesc",
+        "new": "features.company.entities.branch.brandEdesc"
+      },
+      {
+        "old": "company.branch.consolidate",
+        "new": "features.company.entities.branch.consolidate"
+      },
+      {
+        "old": "company.branch.branchTax",
+        "new": "features.company.entities.branch.branchTax"
+      },
+      {
+        "old": "company.branch.column.branchId",
+        "new": "features.company.entities.branch.column.branchId"
+      },
+      {
+        "old": "company.branch.column.tdesc",
+        "new": "features.company.entities.branch.column.tdesc"
+      },
+      {
+        "old": "company.branch.column.edesc",
+        "new": "features.company.entities.branch.column.edesc"
+      },
+      {
+        "old": "company.branch.column.companyId",
+        "new": "features.company.entities.branch.column.companyId"
+      },
+      {
+        "old": "company.branch.column.headCompany",
+        "new": "features.company.entities.branch.column.headCompany"
+      },
+      {
+        "old": "company.branch.column.comType",
+        "new": "features.company.entities.branch.column.comType"
+      },
+      {
+        "old": "company.branch.column.tel",
+        "new": "features.company.entities.branch.column.tel"
+      },
+      {
+        "old": "company.branch.column.editDate",
+        "new": "features.company.entities.branch.column.editDate"
+      },
+      {
+        "old": "menu.home",
+        "new": "menu.main.home"
+      },
+      {
+        "old": "menu.company",
+        "new": "menu.main.company"
+      },
+      {
+        "old": "menu.company-profile",
+        "new": "menu.company.profile"
+      },
+      {
+        "old": "menu.vision-mission",
+        "new": "menu.company.visionMission"
+      },
+      {
+        "old": "menu.orgchart",
+        "new": "menu.company.orgchart"
+      },
+      {
+        "old": "menu.calendar-company",
+        "new": "menu.company.calendar"
+      },
+      {
+        "old": "menu.employee-list",
+        "new": "menu.company.employeeList"
+      },
+      {
+        "old": "menu.policy",
+        "new": "menu.company.policy"
+      },
+      {
+        "old": "menu.employee",
+        "new": "menu.main.employee"
+      },
+      {
+        "old": "menu.employee-profile",
+        "new": "menu.personal.profile"
+      },
+      {
+        "old": "menu.employee-work-information",
+        "new": "menu.personal.workInformation"
+      },
+      {
+        "old": "menu.employee-timestamp",
+        "new": "menu.personal.timestamp"
+      },
+      {
+        "old": "menu.employee-time-warning",
+        "new": "menu.personal.timeWarning"
+      },
+      {
+        "old": "menu.employee-attendance",
+        "new": "menu.personal.attendance"
+      },
+      {
+        "old": "menu.employee-payslip",
+        "new": "menu.personal.payslip"
+      },
+      {
+        "old": "menu.employee-twi50",
+        "new": "menu.personal.twi50"
+      },
+      {
+        "old": "menu.employee-pnd91",
+        "new": "menu.personal.pnd91"
+      },
+      {
+        "old": "menu.employee-leaverole",
+        "new": "menu.personal.leaveRole"
+      },
+      {
+        "old": "menu.employee-otstatistic",
+        "new": "menu.personal.otStatistic"
+      },
+      {
+        "old": "menu.employee-leavestatistic",
+        "new": "menu.personal.leaveStatistic"
+      },
+      {
+        "old": "menu.employee-edittimestatistic",
+        "new": "menu.personal.editTimeStatistic"
+      },
+      {
+        "old": "menu.working-history-data",
+        "new": "menu.personal.workingHistoryData"
+      },
+      {
+        "old": "menu.empview-welfare",
+        "new": "menu.welfare.main"
+      },
+      {
+        "old": "menu.welfare-data",
+        "new": "menu.welfare.data"
+      },
+      {
+        "old": "menu.welfare-check",
+        "new": "menu.welfare.check"
+      },
+      {
+        "old": "menu.welfare-history",
+        "new": "menu.welfare.history"
+      },
+      {
+        "old": "menu.welfare-history-year",
+        "new": "menu.welfare.historyYear"
+      },
+      {
+        "old": "menu.hr-management",
+        "new": "menu.main.hrManagement"
+      },
+      {
+        "old": "menu.empview-traning",
+        "new": "menu.training.main"
+      },
+      {
+        "old": "menu.traning-plan",
+        "new": "menu.training.plan"
+      },
+      {
+        "old": "menu.traning-history",
+        "new": "menu.training.history"
+      },
+      {
+        "old": "menu.traning-recommend",
+        "new": "menu.training.recommend"
+      },
+      {
+        "old": "menu.empview-emp-supervisor",
+        "new": "menu.supervisor.main"
+      },
+      {
+        "old": "menu.sup-emp-list",
+        "new": "menu.supervisor.empList"
+      },
+      {
+        "old": "menu.sup-emp-detail",
+        "new": "menu.supervisor.empDetail"
+      },
+      {
+        "old": "menu.sup-timestamp",
+        "new": "menu.supervisor.timestamp"
+      },
+      {
+        "old": "menu.working-time-detail-device",
+        "new": "menu.supervisor.workingTimeDetailDevice"
+      },
+      {
+        "old": "menu.sup-time-warning",
+        "new": "menu.supervisor.timeWarning"
+      },
+      {
+        "old": "menu.setup-shift-employees",
+        "new": "menu.supervisor.setupShiftEmployees"
+      },
+      {
+        "old": "menu.daily-time-attendance",
+        "new": "menu.supervisor.dailyTimeAttendance"
+      },
+      {
+        "old": "menu.working-time-detail-history",
+        "new": "menu.supervisor.workingTimeDetailHistory"
+      },
+      {
+        "old": "menu.set-dayoff",
+        "new": "menu.supervisor.setDayoff"
+      },
+      {
+        "old": "menu.sup-timeattendance",
+        "new": "menu.supervisor.timeAttendance"
+      },
+      {
+        "old": "menu.subordinate-group",
+        "new": "menu.supervisor.subordinateGroup"
+      },
+      {
+        "old": "menu.workingtime-pattern",
+        "new": "menu.supervisor.workingTimePattern"
+      },
+      {
+        "old": "menu.import-mtime2",
+        "new": "menu.supervisor.importMtime2"
+      },
+      {
+        "old": "menu.sup-leavestatistic",
+        "new": "menu.supervisor.leaveStatistic"
+      },
+      {
+        "old": "menu.sup-leavestatistic2",
+        "new": "menu.supervisor.leaveStatistic2"
+      },
+      {
+        "old": "menu.sup-training-history",
+        "new": "menu.supervisor.trainingHistory"
+      },
+      {
+        "old": "menu.empview-workflow",
+        "new": "menu.workflow.main"
+      },
+      {
+        "old": "menu.myhr-create-doc",
+        "new": "menu.workflow.createDoc"
+      },
+      {
+        "old": "menu.myhr-in-box",
+        "new": "menu.workflow.inBox"
+      },
+      {
+        "old": "menu.myhr-center-box",
+        "new": "menu.workflow.centerBox"
+      },
+      {
+        "old": "menu.myhr-out-box",
+        "new": "menu.workflow.outBox"
+      },
+      {
+        "old": "menu.myhr-delete-doc",
+        "new": "menu.workflow.deleteDoc"
+      },
+      {
+        "old": "menu.myhr-move-doc",
+        "new": "menu.workflow.moveDoc"
+      },
+      {
+        "old": "menu.myhr-manage-doc",
+        "new": "menu.workflow.manageDoc"
+      },
+      {
+        "old": "menu.appraisal",
+        "new": "menu.main.appraisal"
+      },
+      {
+        "old": "menu.ability.evaluation.tkc",
+        "new": "menu.appraisal.abilityEvaluation"
+      },
+      {
+        "old": "auth.unauthorized.title",
+        "new": "features.auth.unauthorized.title"
+      },
+      {
+        "old": "auth.unauthorized.message",
+        "new": "features.auth.unauthorized.message"
+      },
+      {
+        "old": "auth.unauthorized.goToDashboard",
+        "new": "features.auth.unauthorized.goToDashboard"
+      },
+      {
+        "old": "auth.unauthorized.goBack",
+        "new": "features.auth.unauthorized.goBack"
+      },
+      {
+        "old": "auth.forgotPassword.title",
+        "new": "features.auth.forgotPassword.title"
+      },
+      {
+        "old": "auth.forgotPassword.subtitle",
+        "new": "features.auth.forgotPassword.subtitle"
+      },
+      {
+        "old": "auth.forgotPassword.recoverTitle",
+        "new": "features.auth.forgotPassword.recoverTitle"
+      },
+      {
+        "old": "auth.forgotPassword.recoverSubtitle",
+        "new": "features.auth.forgotPassword.recoverSubtitle"
+      },
+      {
+        "old": "auth.forgotPassword.selectDatabase",
+        "new": "features.auth.forgotPassword.selectDatabase"
+      },
+      {
+        "old": "auth.forgotPassword.username",
+        "new": "features.auth.forgotPassword.username"
+      },
+      {
+        "old": "auth.forgotPassword.email",
+        "new": "features.auth.forgotPassword.email"
+      },
+      {
+        "old": "auth.forgotPassword.sendPassword",
+        "new": "features.auth.forgotPassword.sendPassword"
+      },
+      {
+        "old": "auth.forgotPassword.sending",
+        "new": "features.auth.forgotPassword.sending"
+      },
+      {
+        "old": "auth.forgotPassword.backToLogin",
+        "new": "features.auth.forgotPassword.backToLogin"
+      },
+      {
+        "old": "auth.forgotPassword.successMessage",
+        "new": "features.auth.forgotPassword.successMessage"
+      },
+      {
+        "old": "auth.forgotPassword.error.usernameRequired",
+        "new": "features.auth.forgotPassword.error.usernameRequired"
+      },
+      {
+        "old": "auth.forgotPassword.error.emailRequired",
+        "new": "features.auth.forgotPassword.error.emailRequired"
+      },
+      {
+        "old": "auth.forgotPassword.error.emailInvalid",
+        "new": "features.auth.forgotPassword.error.emailInvalid"
+      },
+      {
+        "old": "auth.forgotPassword.error.invalidCredentials",
+        "new": "features.auth.forgotPassword.error.invalidCredentials"
+      },
+      {
+        "old": "auth.forgotPassword.error.sendFailed",
+        "new": "features.auth.forgotPassword.error.sendFailed"
+      },
+      {
+        "old": "auth.forgotPassword.error.incompleteData",
+        "new": "features.auth.forgotPassword.error.incompleteData"
+      },
+      {
+        "old": "auth.login.welcome",
+        "new": "features.auth.login.welcome"
+      },
+      {
+        "old": "auth.login.subtitle",
+        "new": "features.auth.login.subtitle"
+      },
+      {
+        "old": "auth.login.title",
+        "new": "features.auth.login.title"
+      },
+      {
+        "old": "auth.login.description",
+        "new": "features.auth.login.description"
+      },
+      {
+        "old": "auth.login.username",
+        "new": "features.auth.login.username"
+      },
+      {
+        "old": "auth.login.password",
+        "new": "features.auth.login.password"
+      },
+      {
+        "old": "auth.login.selectDatabase",
+        "new": "features.auth.login.selectDatabase"
+      },
+      {
+        "old": "auth.login.rememberMe",
+        "new": "features.auth.login.rememberMe"
+      },
+      {
+        "old": "auth.login.forgotPassword",
+        "new": "features.auth.login.forgotPassword"
+      },
+      {
+        "old": "auth.login.signIn",
+        "new": "features.auth.login.signIn"
+      },
+      {
+        "old": "auth.login.signingIn",
+        "new": "features.auth.login.signingIn"
+      },
+      {
+        "old": "auth.login.error.usernameRequired",
+        "new": "features.auth.login.error.usernameRequired"
+      },
+      {
+        "old": "auth.login.error.passwordRequired",
+        "new": "features.auth.login.error.passwordRequired"
+      }
+    ]
+  },
+  "en": {
+    "total": 309,
+    "company": 216,
+    "menu": 59,
+    "auth": 34,
+    "migrated": [
+      {
+        "old": "company.branchSocialSecurity.title",
+        "new": "features.company.entities.branchSocialSecurity.title"
+      },
+      {
+        "old": "company.branchSocialSecurity.titleFull",
+        "new": "features.company.entities.branchSocialSecurity.titleFull"
+      },
+      {
+        "old": "company.branchSocialSecurity.add",
+        "new": "features.company.entities.branchSocialSecurity.add"
+      },
+      {
+        "old": "company.branchSocialSecurity.edit",
+        "new": "features.company.entities.branchSocialSecurity.edit"
+      },
+      {
+        "old": "company.branchSocialSecurity.branchNo",
+        "new": "features.company.entities.branchSocialSecurity.branchNo"
+      },
+      {
+        "old": "company.branchSocialSecurity.branchNoRequired",
+        "new": "features.company.entities.branchSocialSecurity.branchNoRequired"
+      },
+      {
+        "old": "company.branchSocialSecurity.companyId",
+        "new": "features.company.entities.branchSocialSecurity.companyId"
+      },
+      {
+        "old": "company.branchSocialSecurity.tdesc",
+        "new": "features.company.entities.branchSocialSecurity.tdesc"
+      },
+      {
+        "old": "company.branchSocialSecurity.tdescRequired",
+        "new": "features.company.entities.branchSocialSecurity.tdescRequired"
+      },
+      {
+        "old": "company.branchSocialSecurity.edesc",
+        "new": "features.company.entities.branchSocialSecurity.edesc"
+      },
+      {
+        "old": "company.branchSocialSecurity.addressThai",
+        "new": "features.company.entities.branchSocialSecurity.addressThai"
+      },
+      {
+        "old": "company.branchSocialSecurity.addressEng",
+        "new": "features.company.entities.branchSocialSecurity.addressEng"
+      },
+      {
+        "old": "company.branchSocialSecurity.location",
+        "new": "features.company.entities.branchSocialSecurity.location"
+      },
+      {
+        "old": "company.branchSocialSecurity.contact",
+        "new": "features.company.entities.branchSocialSecurity.contact"
+      },
+      {
+        "old": "company.branchSocialSecurity.socialSecurity",
+        "new": "features.company.entities.branchSocialSecurity.socialSecurity"
+      },
+      {
+        "old": "company.branchSocialSecurity.village",
+        "new": "features.company.entities.branchSocialSecurity.village"
+      },
+      {
+        "old": "company.branchSocialSecurity.roomNo",
+        "new": "features.company.entities.branchSocialSecurity.roomNo"
+      },
+      {
+        "old": "company.branchSocialSecurity.floor",
+        "new": "features.company.entities.branchSocialSecurity.floor"
+      },
+      {
+        "old": "company.branchSocialSecurity.address",
+        "new": "features.company.entities.branchSocialSecurity.address"
+      },
+      {
+        "old": "company.branchSocialSecurity.soi",
+        "new": "features.company.entities.branchSocialSecurity.soi"
+      },
+      {
+        "old": "company.branchSocialSecurity.moo",
+        "new": "features.company.entities.branchSocialSecurity.moo"
+      },
+      {
+        "old": "company.branchSocialSecurity.road",
+        "new": "features.company.entities.branchSocialSecurity.road"
+      },
+      {
+        "old": "company.branchSocialSecurity.subdistrict",
+        "new": "features.company.entities.branchSocialSecurity.subdistrict"
+      },
+      {
+        "old": "company.branchSocialSecurity.zipcode",
+        "new": "features.company.entities.branchSocialSecurity.zipcode"
+      },
+      {
+        "old": "company.branchSocialSecurity.districtId",
+        "new": "features.company.entities.branchSocialSecurity.districtId"
+      },
+      {
+        "old": "company.branchSocialSecurity.tel",
+        "new": "features.company.entities.branchSocialSecurity.tel"
+      },
+      {
+        "old": "company.branchSocialSecurity.fax",
+        "new": "features.company.entities.branchSocialSecurity.fax"
+      },
+      {
+        "old": "company.branchSocialSecurity.socialCode",
+        "new": "features.company.entities.branchSocialSecurity.socialCode"
+      },
+      {
+        "old": "company.branchSocialSecurity.socialSubCode",
+        "new": "features.company.entities.branchSocialSecurity.socialSubCode"
+      },
+      {
+        "old": "company.branchSocialSecurity.socSignName",
+        "new": "features.company.entities.branchSocialSecurity.socSignName"
+      },
+      {
+        "old": "company.branchSocialSecurity.socSignPos",
+        "new": "features.company.entities.branchSocialSecurity.socSignPos"
+      },
+      {
+        "old": "company.branchSocialSecurity.column.branchNo",
+        "new": "features.company.entities.branchSocialSecurity.column.branchNo"
+      },
+      {
+        "old": "company.branchSocialSecurity.column.tdesc",
+        "new": "features.company.entities.branchSocialSecurity.column.tdesc"
+      },
+      {
+        "old": "company.branchSocialSecurity.column.edesc",
+        "new": "features.company.entities.branchSocialSecurity.column.edesc"
+      },
+      {
+        "old": "company.branchSocialSecurity.column.socialCode",
+        "new": "features.company.entities.branchSocialSecurity.column.socialCode"
+      },
+      {
+        "old": "company.branchSocialSecurity.column.socialSubCode",
+        "new": "features.company.entities.branchSocialSecurity.column.socialSubCode"
+      },
+      {
+        "old": "company.branchSocialSecurity.column.tel",
+        "new": "features.company.entities.branchSocialSecurity.column.tel"
+      },
+      {
+        "old": "company.branchSocialSecurity.column.editDate",
+        "new": "features.company.entities.branchSocialSecurity.column.editDate"
+      },
+      {
+        "old": "company.branchSocialSecurity.error.numbersOnly",
+        "new": "features.company.entities.branchSocialSecurity.error.numbersOnly"
+      },
+      {
+        "old": "company.division.title",
+        "new": "features.company.entities.division.title"
+      },
+      {
+        "old": "company.division.titleFull",
+        "new": "features.company.entities.division.titleFull"
+      },
+      {
+        "old": "company.division.add",
+        "new": "features.company.entities.division.add"
+      },
+      {
+        "old": "company.division.edit",
+        "new": "features.company.entities.division.edit"
+      },
+      {
+        "old": "company.division.bu1Id",
+        "new": "features.company.entities.division.bu1Id"
+      },
+      {
+        "old": "company.division.bu1IdRequired",
+        "new": "features.company.entities.division.bu1IdRequired"
+      },
+      {
+        "old": "company.division.companyId",
+        "new": "features.company.entities.division.companyId"
+      },
+      {
+        "old": "company.division.branchId",
+        "new": "features.company.entities.division.branchId"
+      },
+      {
+        "old": "company.division.tdesc",
+        "new": "features.company.entities.division.tdesc"
+      },
+      {
+        "old": "company.division.tdescRequired",
+        "new": "features.company.entities.division.tdescRequired"
+      },
+      {
+        "old": "company.division.edesc",
+        "new": "features.company.entities.division.edesc"
+      },
+      {
+        "old": "company.division.tshortName",
+        "new": "features.company.entities.division.tshortName"
+      },
+      {
+        "old": "company.division.eshortName",
+        "new": "features.company.entities.division.eshortName"
+      },
+      {
+        "old": "company.division.active",
+        "new": "features.company.entities.division.active"
+      },
+      {
+        "old": "company.division.activeActive",
+        "new": "features.company.entities.division.activeActive"
+      },
+      {
+        "old": "company.division.activeInactive",
+        "new": "features.company.entities.division.activeInactive"
+      },
+      {
+        "old": "company.division.buildDate",
+        "new": "features.company.entities.division.buildDate"
+      },
+      {
+        "old": "company.division.expireDate",
+        "new": "features.company.entities.division.expireDate"
+      },
+      {
+        "old": "company.division.bu1Sup",
+        "new": "features.company.entities.division.bu1Sup"
+      },
+      {
+        "old": "company.division.objective",
+        "new": "features.company.entities.division.objective"
+      },
+      {
+        "old": "company.division.remark",
+        "new": "features.company.entities.division.remark"
+      },
+      {
+        "old": "company.division.extention",
+        "new": "features.company.entities.division.extention"
+      },
+      {
+        "old": "company.division.consolidate",
+        "new": "features.company.entities.division.consolidate"
+      },
+      {
+        "old": "company.division.analcode",
+        "new": "features.company.entities.division.analcode"
+      },
+      {
+        "old": "company.division.sortNumber",
+        "new": "features.company.entities.division.sortNumber"
+      },
+      {
+        "old": "company.division.website",
+        "new": "features.company.entities.division.website"
+      },
+      {
+        "old": "company.division.email",
+        "new": "features.company.entities.division.email"
+      },
+      {
+        "old": "company.division.column.bu1Id",
+        "new": "features.company.entities.division.column.bu1Id"
+      },
+      {
+        "old": "company.division.column.tdesc",
+        "new": "features.company.entities.division.column.tdesc"
+      },
+      {
+        "old": "company.division.column.edesc",
+        "new": "features.company.entities.division.column.edesc"
+      },
+      {
+        "old": "company.division.column.shortName",
+        "new": "features.company.entities.division.column.shortName"
+      },
+      {
+        "old": "company.division.column.active",
+        "new": "features.company.entities.division.column.active"
+      },
+      {
+        "old": "company.division.column.buildDate",
+        "new": "features.company.entities.division.column.buildDate"
+      },
+      {
+        "old": "company.division.column.expireDate",
+        "new": "features.company.entities.division.column.expireDate"
+      },
+      {
+        "old": "company.division.column.editDate",
+        "new": "features.company.entities.division.column.editDate"
+      },
+      {
+        "old": "company.division.error.numbersOnly",
+        "new": "features.company.entities.division.error.numbersOnly"
+      },
+      {
+        "old": "company.division.error.email",
+        "new": "features.company.entities.division.error.email"
+      },
+      {
+        "old": "company.department.title",
+        "new": "features.company.entities.department.title"
+      },
+      {
+        "old": "company.department.titleFull",
+        "new": "features.company.entities.department.titleFull"
+      },
+      {
+        "old": "company.department.add",
+        "new": "features.company.entities.department.add"
+      },
+      {
+        "old": "company.department.edit",
+        "new": "features.company.entities.department.edit"
+      },
+      {
+        "old": "company.department.bu2Id",
+        "new": "features.company.entities.department.bu2Id"
+      },
+      {
+        "old": "company.department.bu2IdRequired",
+        "new": "features.company.entities.department.bu2IdRequired"
+      },
+      {
+        "old": "company.department.companyId",
+        "new": "features.company.entities.department.companyId"
+      },
+      {
+        "old": "company.department.parent",
+        "new": "features.company.entities.department.parent"
+      },
+      {
+        "old": "company.department.parentRequired",
+        "new": "features.company.entities.department.parentRequired"
+      },
+      {
+        "old": "company.department.tdesc",
+        "new": "features.company.entities.department.tdesc"
+      },
+      {
+        "old": "company.department.tdescRequired",
+        "new": "features.company.entities.department.tdescRequired"
+      },
+      {
+        "old": "company.department.edesc",
+        "new": "features.company.entities.department.edesc"
+      },
+      {
+        "old": "company.department.edescRequired",
+        "new": "features.company.entities.department.edescRequired"
+      },
+      {
+        "old": "company.department.tshortName",
+        "new": "features.company.entities.department.tshortName"
+      },
+      {
+        "old": "company.department.eshortName",
+        "new": "features.company.entities.department.eshortName"
+      },
+      {
+        "old": "company.department.active",
+        "new": "features.company.entities.department.active"
+      },
+      {
+        "old": "company.department.buildDate",
+        "new": "features.company.entities.department.buildDate"
+      },
+      {
+        "old": "company.department.expireDate",
+        "new": "features.company.entities.department.expireDate"
+      },
+      {
+        "old": "company.department.bu2Sup",
+        "new": "features.company.entities.department.bu2Sup"
+      },
+      {
+        "old": "company.department.objective",
+        "new": "features.company.entities.department.objective"
+      },
+      {
+        "old": "company.department.remark",
+        "new": "features.company.entities.department.remark"
+      },
+      {
+        "old": "company.department.extention",
+        "new": "features.company.entities.department.extention"
+      },
+      {
+        "old": "company.department.consolidate",
+        "new": "features.company.entities.department.consolidate"
+      },
+      {
+        "old": "company.department.analcode",
+        "new": "features.company.entities.department.analcode"
+      },
+      {
+        "old": "company.department.sortNumber",
+        "new": "features.company.entities.department.sortNumber"
+      },
+      {
+        "old": "company.department.website",
+        "new": "features.company.entities.department.website"
+      },
+      {
+        "old": "company.department.email",
+        "new": "features.company.entities.department.email"
+      },
+      {
+        "old": "company.department.column.bu2Id",
+        "new": "features.company.entities.department.column.bu2Id"
+      },
+      {
+        "old": "company.department.column.parent",
+        "new": "features.company.entities.department.column.parent"
+      },
+      {
+        "old": "company.department.column.tdesc",
+        "new": "features.company.entities.department.column.tdesc"
+      },
+      {
+        "old": "company.department.column.edesc",
+        "new": "features.company.entities.department.column.edesc"
+      },
+      {
+        "old": "company.department.column.shortName",
+        "new": "features.company.entities.department.column.shortName"
+      },
+      {
+        "old": "company.department.column.active",
+        "new": "features.company.entities.department.column.active"
+      },
+      {
+        "old": "company.department.column.buildDate",
+        "new": "features.company.entities.department.column.buildDate"
+      },
+      {
+        "old": "company.department.column.expireDate",
+        "new": "features.company.entities.department.column.expireDate"
+      },
+      {
+        "old": "company.department.column.editDate",
+        "new": "features.company.entities.department.column.editDate"
+      },
+      {
+        "old": "company.department.error.numbersOnly",
+        "new": "features.company.entities.department.error.numbersOnly"
+      },
+      {
+        "old": "company.department.error.email",
+        "new": "features.company.entities.department.error.email"
+      },
+      {
+        "old": "company.section.title",
+        "new": "features.company.entities.section.title"
+      },
+      {
+        "old": "company.section.titleFull",
+        "new": "features.company.entities.section.titleFull"
+      },
+      {
+        "old": "company.section.add",
+        "new": "features.company.entities.section.add"
+      },
+      {
+        "old": "company.section.edit",
+        "new": "features.company.entities.section.edit"
+      },
+      {
+        "old": "company.section.bu3Id",
+        "new": "features.company.entities.section.bu3Id"
+      },
+      {
+        "old": "company.section.bu3IdRequired",
+        "new": "features.company.entities.section.bu3IdRequired"
+      },
+      {
+        "old": "company.section.companyId",
+        "new": "features.company.entities.section.companyId"
+      },
+      {
+        "old": "company.section.parent",
+        "new": "features.company.entities.section.parent"
+      },
+      {
+        "old": "company.section.parentRequired",
+        "new": "features.company.entities.section.parentRequired"
+      },
+      {
+        "old": "company.section.tdesc",
+        "new": "features.company.entities.section.tdesc"
+      },
+      {
+        "old": "company.section.tdescRequired",
+        "new": "features.company.entities.section.tdescRequired"
+      },
+      {
+        "old": "company.section.edesc",
+        "new": "features.company.entities.section.edesc"
+      },
+      {
+        "old": "company.section.edescRequired",
+        "new": "features.company.entities.section.edescRequired"
+      },
+      {
+        "old": "company.section.tshortName",
+        "new": "features.company.entities.section.tshortName"
+      },
+      {
+        "old": "company.section.eshortName",
+        "new": "features.company.entities.section.eshortName"
+      },
+      {
+        "old": "company.section.active",
+        "new": "features.company.entities.section.active"
+      },
+      {
+        "old": "company.section.buildDate",
+        "new": "features.company.entities.section.buildDate"
+      },
+      {
+        "old": "company.section.expireDate",
+        "new": "features.company.entities.section.expireDate"
+      },
+      {
+        "old": "company.section.bu3Sup",
+        "new": "features.company.entities.section.bu3Sup"
+      },
+      {
+        "old": "company.section.objective",
+        "new": "features.company.entities.section.objective"
+      },
+      {
+        "old": "company.section.remark",
+        "new": "features.company.entities.section.remark"
+      },
+      {
+        "old": "company.section.extention",
+        "new": "features.company.entities.section.extention"
+      },
+      {
+        "old": "company.section.consolidate",
+        "new": "features.company.entities.section.consolidate"
+      },
+      {
+        "old": "company.section.analcode",
+        "new": "features.company.entities.section.analcode"
+      },
+      {
+        "old": "company.section.sortNumber",
+        "new": "features.company.entities.section.sortNumber"
+      },
+      {
+        "old": "company.section.website",
+        "new": "features.company.entities.section.website"
+      },
+      {
+        "old": "company.section.email",
+        "new": "features.company.entities.section.email"
+      },
+      {
+        "old": "company.section.column.bu3Id",
+        "new": "features.company.entities.section.column.bu3Id"
+      },
+      {
+        "old": "company.section.column.parent",
+        "new": "features.company.entities.section.column.parent"
+      },
+      {
+        "old": "company.section.column.tdesc",
+        "new": "features.company.entities.section.column.tdesc"
+      },
+      {
+        "old": "company.section.column.edesc",
+        "new": "features.company.entities.section.column.edesc"
+      },
+      {
+        "old": "company.section.column.shortName",
+        "new": "features.company.entities.section.column.shortName"
+      },
+      {
+        "old": "company.section.column.active",
+        "new": "features.company.entities.section.column.active"
+      },
+      {
+        "old": "company.section.column.buildDate",
+        "new": "features.company.entities.section.column.buildDate"
+      },
+      {
+        "old": "company.section.column.expireDate",
+        "new": "features.company.entities.section.column.expireDate"
+      },
+      {
+        "old": "company.section.column.editDate",
+        "new": "features.company.entities.section.column.editDate"
+      },
+      {
+        "old": "company.section.error.numbersOnly",
+        "new": "features.company.entities.section.error.numbersOnly"
+      },
+      {
+        "old": "company.section.error.email",
+        "new": "features.company.entities.section.error.email"
+      },
+      {
+        "old": "company.branch.title",
+        "new": "features.company.entities.branch.title"
+      },
+      {
+        "old": "company.branch.titleFull",
+        "new": "features.company.entities.branch.titleFull"
+      },
+      {
+        "old": "company.branch.add",
+        "new": "features.company.entities.branch.add"
+      },
+      {
+        "old": "company.branch.edit",
+        "new": "features.company.entities.branch.edit"
+      },
+      {
+        "old": "company.branch.branchId",
+        "new": "features.company.entities.branch.branchId"
+      },
+      {
+        "old": "company.branch.branchIdRequired",
+        "new": "features.company.entities.branch.branchIdRequired"
+      },
+      {
+        "old": "company.branch.companyId",
+        "new": "features.company.entities.branch.companyId"
+      },
+      {
+        "old": "company.branch.headCompany",
+        "new": "features.company.entities.branch.headCompany"
+      },
+      {
+        "old": "company.branch.headCompanyRequired",
+        "new": "features.company.entities.branch.headCompanyRequired"
+      },
+      {
+        "old": "company.branch.tdesc",
+        "new": "features.company.entities.branch.tdesc"
+      },
+      {
+        "old": "company.branch.tdescRequired",
+        "new": "features.company.entities.branch.tdescRequired"
+      },
+      {
+        "old": "company.branch.edesc",
+        "new": "features.company.entities.branch.edesc"
+      },
+      {
+        "old": "company.branch.edescRequired",
+        "new": "features.company.entities.branch.edescRequired"
+      },
+      {
+        "old": "company.branch.comType",
+        "new": "features.company.entities.branch.comType"
+      },
+      {
+        "old": "company.branch.branchNo",
+        "new": "features.company.entities.branch.branchNo"
+      },
+      {
+        "old": "company.branch.section.basic",
+        "new": "features.company.entities.branch.section.basic"
+      },
+      {
+        "old": "company.branch.section.tax",
+        "new": "features.company.entities.branch.section.tax"
+      },
+      {
+        "old": "company.branch.section.socialSecurity",
+        "new": "features.company.entities.branch.section.socialSecurity"
+      },
+      {
+        "old": "company.branch.section.addressThai",
+        "new": "features.company.entities.branch.section.addressThai"
+      },
+      {
+        "old": "company.branch.section.addressEnglish",
+        "new": "features.company.entities.branch.section.addressEnglish"
+      },
+      {
+        "old": "company.branch.section.contact",
+        "new": "features.company.entities.branch.section.contact"
+      },
+      {
+        "old": "company.branch.section.other",
+        "new": "features.company.entities.branch.section.other"
+      },
+      {
+        "old": "company.branch.taxId",
+        "new": "features.company.entities.branch.taxId"
+      },
+      {
+        "old": "company.branch.taxId2",
+        "new": "features.company.entities.branch.taxId2"
+      },
+      {
+        "old": "company.branch.taxBranchId",
+        "new": "features.company.entities.branch.taxBranchId"
+      },
+      {
+        "old": "company.branch.taxSignName",
+        "new": "features.company.entities.branch.taxSignName"
+      },
+      {
+        "old": "company.branch.taxSignPos",
+        "new": "features.company.entities.branch.taxSignPos"
+      },
+      {
+        "old": "company.branch.socBranchId",
+        "new": "features.company.entities.branch.socBranchId"
+      },
+      {
+        "old": "company.branch.socialCode",
+        "new": "features.company.entities.branch.socialCode"
+      },
+      {
+        "old": "company.branch.socSignName",
+        "new": "features.company.entities.branch.socSignName"
+      },
+      {
+        "old": "company.branch.socSignPos",
+        "new": "features.company.entities.branch.socSignPos"
+      },
+      {
+        "old": "company.branch.taddr",
+        "new": "features.company.entities.branch.taddr"
+      },
+      {
+        "old": "company.branch.tvillage",
+        "new": "features.company.entities.branch.tvillage"
+      },
+      {
+        "old": "company.branch.troomNo",
+        "new": "features.company.entities.branch.troomNo"
+      },
+      {
+        "old": "company.branch.tfloor",
+        "new": "features.company.entities.branch.tfloor"
+      },
+      {
+        "old": "company.branch.tsoi",
+        "new": "features.company.entities.branch.tsoi"
+      },
+      {
+        "old": "company.branch.tmoo",
+        "new": "features.company.entities.branch.tmoo"
+      },
+      {
+        "old": "company.branch.troad",
+        "new": "features.company.entities.branch.troad"
+      },
+      {
+        "old": "company.branch.tsubdistrict",
+        "new": "features.company.entities.branch.tsubdistrict"
+      },
+      {
+        "old": "company.branch.eaddr",
+        "new": "features.company.entities.branch.eaddr"
+      },
+      {
+        "old": "company.branch.evillage",
+        "new": "features.company.entities.branch.evillage"
+      },
+      {
+        "old": "company.branch.eroomNo",
+        "new": "features.company.entities.branch.eroomNo"
+      },
+      {
+        "old": "company.branch.efloor",
+        "new": "features.company.entities.branch.efloor"
+      },
+      {
+        "old": "company.branch.esoi",
+        "new": "features.company.entities.branch.esoi"
+      },
+      {
+        "old": "company.branch.emoo",
+        "new": "features.company.entities.branch.emoo"
+      },
+      {
+        "old": "company.branch.eroad",
+        "new": "features.company.entities.branch.eroad"
+      },
+      {
+        "old": "company.branch.esubdistrict",
+        "new": "features.company.entities.branch.esubdistrict"
+      },
+      {
+        "old": "company.branch.zipcode",
+        "new": "features.company.entities.branch.zipcode"
+      },
+      {
+        "old": "company.branch.districtId",
+        "new": "features.company.entities.branch.districtId"
+      },
+      {
+        "old": "company.branch.tel",
+        "new": "features.company.entities.branch.tel"
+      },
+      {
+        "old": "company.branch.fax",
+        "new": "features.company.entities.branch.fax"
+      },
+      {
+        "old": "company.branch.website",
+        "new": "features.company.entities.branch.website"
+      },
+      {
+        "old": "company.branch.brandTdesc",
+        "new": "features.company.entities.branch.brandTdesc"
+      },
+      {
+        "old": "company.branch.brandEdesc",
+        "new": "features.company.entities.branch.brandEdesc"
+      },
+      {
+        "old": "company.branch.consolidate",
+        "new": "features.company.entities.branch.consolidate"
+      },
+      {
+        "old": "company.branch.branchTax",
+        "new": "features.company.entities.branch.branchTax"
+      },
+      {
+        "old": "company.branch.column.branchId",
+        "new": "features.company.entities.branch.column.branchId"
+      },
+      {
+        "old": "company.branch.column.tdesc",
+        "new": "features.company.entities.branch.column.tdesc"
+      },
+      {
+        "old": "company.branch.column.edesc",
+        "new": "features.company.entities.branch.column.edesc"
+      },
+      {
+        "old": "company.branch.column.companyId",
+        "new": "features.company.entities.branch.column.companyId"
+      },
+      {
+        "old": "company.branch.column.headCompany",
+        "new": "features.company.entities.branch.column.headCompany"
+      },
+      {
+        "old": "company.branch.column.comType",
+        "new": "features.company.entities.branch.column.comType"
+      },
+      {
+        "old": "company.branch.column.tel",
+        "new": "features.company.entities.branch.column.tel"
+      },
+      {
+        "old": "company.branch.column.editDate",
+        "new": "features.company.entities.branch.column.editDate"
+      },
+      {
+        "old": "menu.home",
+        "new": "menu.main.home"
+      },
+      {
+        "old": "menu.company",
+        "new": "menu.main.company"
+      },
+      {
+        "old": "menu.company-profile",
+        "new": "menu.company.profile"
+      },
+      {
+        "old": "menu.vision-mission",
+        "new": "menu.company.visionMission"
+      },
+      {
+        "old": "menu.orgchart",
+        "new": "menu.company.orgchart"
+      },
+      {
+        "old": "menu.calendar-company",
+        "new": "menu.company.calendar"
+      },
+      {
+        "old": "menu.employee-list",
+        "new": "menu.company.employeeList"
+      },
+      {
+        "old": "menu.policy",
+        "new": "menu.company.policy"
+      },
+      {
+        "old": "menu.employee",
+        "new": "menu.main.employee"
+      },
+      {
+        "old": "menu.employee-profile",
+        "new": "menu.personal.profile"
+      },
+      {
+        "old": "menu.employee-work-information",
+        "new": "menu.personal.workInformation"
+      },
+      {
+        "old": "menu.employee-timestamp",
+        "new": "menu.personal.timestamp"
+      },
+      {
+        "old": "menu.employee-time-warning",
+        "new": "menu.personal.timeWarning"
+      },
+      {
+        "old": "menu.employee-attendance",
+        "new": "menu.personal.attendance"
+      },
+      {
+        "old": "menu.employee-payslip",
+        "new": "menu.personal.payslip"
+      },
+      {
+        "old": "menu.employee-twi50",
+        "new": "menu.personal.twi50"
+      },
+      {
+        "old": "menu.employee-pnd91",
+        "new": "menu.personal.pnd91"
+      },
+      {
+        "old": "menu.employee-leaverole",
+        "new": "menu.personal.leaveRole"
+      },
+      {
+        "old": "menu.employee-otstatistic",
+        "new": "menu.personal.otStatistic"
+      },
+      {
+        "old": "menu.employee-leavestatistic",
+        "new": "menu.personal.leaveStatistic"
+      },
+      {
+        "old": "menu.employee-edittimestatistic",
+        "new": "menu.personal.editTimeStatistic"
+      },
+      {
+        "old": "menu.working-history-data",
+        "new": "menu.personal.workingHistoryData"
+      },
+      {
+        "old": "menu.empview-welfare",
+        "new": "menu.welfare.main"
+      },
+      {
+        "old": "menu.welfare-data",
+        "new": "menu.welfare.data"
+      },
+      {
+        "old": "menu.welfare-check",
+        "new": "menu.welfare.check"
+      },
+      {
+        "old": "menu.welfare-history",
+        "new": "menu.welfare.history"
+      },
+      {
+        "old": "menu.welfare-history-year",
+        "new": "menu.welfare.historyYear"
+      },
+      {
+        "old": "menu.empview-traning",
+        "new": "menu.training.main"
+      },
+      {
+        "old": "menu.traning-plan",
+        "new": "menu.training.plan"
+      },
+      {
+        "old": "menu.traning-history",
+        "new": "menu.training.history"
+      },
+      {
+        "old": "menu.traning-recommend",
+        "new": "menu.training.recommend"
+      },
+      {
+        "old": "menu.empview-emp-supervisor",
+        "new": "menu.supervisor.main"
+      },
+      {
+        "old": "menu.sup-emp-list",
+        "new": "menu.supervisor.empList"
+      },
+      {
+        "old": "menu.sup-emp-detail",
+        "new": "menu.supervisor.empDetail"
+      },
+      {
+        "old": "menu.sup-timestamp",
+        "new": "menu.supervisor.timestamp"
+      },
+      {
+        "old": "menu.working-time-detail-device",
+        "new": "menu.supervisor.workingTimeDetailDevice"
+      },
+      {
+        "old": "menu.set-dayoff",
+        "new": "menu.supervisor.setDayoff"
+      },
+      {
+        "old": "menu.subordinate-group",
+        "new": "menu.supervisor.subordinateGroup"
+      },
+      {
+        "old": "menu.workingtime-pattern",
+        "new": "menu.supervisor.workingTimePattern"
+      },
+      {
+        "old": "menu.import-mtime2",
+        "new": "menu.supervisor.importMtime2"
+      },
+      {
+        "old": "menu.sup-time-warning",
+        "new": "menu.supervisor.timeWarning"
+      },
+      {
+        "old": "menu.setup-shift-employees",
+        "new": "menu.supervisor.setupShiftEmployees"
+      },
+      {
+        "old": "menu.daily-time-attendance",
+        "new": "menu.supervisor.dailyTimeAttendance"
+      },
+      {
+        "old": "menu.working-time-detail-history",
+        "new": "menu.supervisor.workingTimeDetailHistory"
+      },
+      {
+        "old": "menu.sup-timeattendance",
+        "new": "menu.supervisor.timeAttendance"
+      },
+      {
+        "old": "menu.sup-leavestatistic",
+        "new": "menu.supervisor.leaveStatistic"
+      },
+      {
+        "old": "menu.sup-leavestatistic2",
+        "new": "menu.supervisor.leaveStatistic2"
+      },
+      {
+        "old": "menu.sup-training-history",
+        "new": "menu.supervisor.trainingHistory"
+      },
+      {
+        "old": "menu.empview-workflow",
+        "new": "menu.workflow.main"
+      },
+      {
+        "old": "menu.myhr-create-doc",
+        "new": "menu.workflow.createDoc"
+      },
+      {
+        "old": "menu.myhr-in-box",
+        "new": "menu.workflow.inBox"
+      },
+      {
+        "old": "menu.myhr-center-box",
+        "new": "menu.workflow.centerBox"
+      },
+      {
+        "old": "menu.myhr-out-box",
+        "new": "menu.workflow.outBox"
+      },
+      {
+        "old": "menu.myhr-delete-doc",
+        "new": "menu.workflow.deleteDoc"
+      },
+      {
+        "old": "menu.myhr-move-doc",
+        "new": "menu.workflow.moveDoc"
+      },
+      {
+        "old": "menu.myhr-manage-doc",
+        "new": "menu.workflow.manageDoc"
+      },
+      {
+        "old": "menu.hr-management",
+        "new": "menu.main.hrManagement"
+      },
+      {
+        "old": "menu.appraisal",
+        "new": "menu.main.appraisal"
+      },
+      {
+        "old": "menu.ability.evaluation.tkc",
+        "new": "menu.appraisal.abilityEvaluation"
+      },
+      {
+        "old": "auth.unauthorized.title",
+        "new": "features.auth.unauthorized.title"
+      },
+      {
+        "old": "auth.unauthorized.message",
+        "new": "features.auth.unauthorized.message"
+      },
+      {
+        "old": "auth.unauthorized.goToDashboard",
+        "new": "features.auth.unauthorized.goToDashboard"
+      },
+      {
+        "old": "auth.unauthorized.goBack",
+        "new": "features.auth.unauthorized.goBack"
+      },
+      {
+        "old": "auth.forgotPassword.title",
+        "new": "features.auth.forgotPassword.title"
+      },
+      {
+        "old": "auth.forgotPassword.subtitle",
+        "new": "features.auth.forgotPassword.subtitle"
+      },
+      {
+        "old": "auth.forgotPassword.recoverTitle",
+        "new": "features.auth.forgotPassword.recoverTitle"
+      },
+      {
+        "old": "auth.forgotPassword.recoverSubtitle",
+        "new": "features.auth.forgotPassword.recoverSubtitle"
+      },
+      {
+        "old": "auth.forgotPassword.selectDatabase",
+        "new": "features.auth.forgotPassword.selectDatabase"
+      },
+      {
+        "old": "auth.forgotPassword.username",
+        "new": "features.auth.forgotPassword.username"
+      },
+      {
+        "old": "auth.forgotPassword.email",
+        "new": "features.auth.forgotPassword.email"
+      },
+      {
+        "old": "auth.forgotPassword.sendPassword",
+        "new": "features.auth.forgotPassword.sendPassword"
+      },
+      {
+        "old": "auth.forgotPassword.sending",
+        "new": "features.auth.forgotPassword.sending"
+      },
+      {
+        "old": "auth.forgotPassword.backToLogin",
+        "new": "features.auth.forgotPassword.backToLogin"
+      },
+      {
+        "old": "auth.forgotPassword.successMessage",
+        "new": "features.auth.forgotPassword.successMessage"
+      },
+      {
+        "old": "auth.forgotPassword.error.usernameRequired",
+        "new": "features.auth.forgotPassword.error.usernameRequired"
+      },
+      {
+        "old": "auth.forgotPassword.error.emailRequired",
+        "new": "features.auth.forgotPassword.error.emailRequired"
+      },
+      {
+        "old": "auth.forgotPassword.error.emailInvalid",
+        "new": "features.auth.forgotPassword.error.emailInvalid"
+      },
+      {
+        "old": "auth.forgotPassword.error.invalidCredentials",
+        "new": "features.auth.forgotPassword.error.invalidCredentials"
+      },
+      {
+        "old": "auth.forgotPassword.error.sendFailed",
+        "new": "features.auth.forgotPassword.error.sendFailed"
+      },
+      {
+        "old": "auth.forgotPassword.error.incompleteData",
+        "new": "features.auth.forgotPassword.error.incompleteData"
+      },
+      {
+        "old": "auth.login.welcome",
+        "new": "features.auth.login.welcome"
+      },
+      {
+        "old": "auth.login.subtitle",
+        "new": "features.auth.login.subtitle"
+      },
+      {
+        "old": "auth.login.title",
+        "new": "features.auth.login.title"
+      },
+      {
+        "old": "auth.login.description",
+        "new": "features.auth.login.description"
+      },
+      {
+        "old": "auth.login.username",
+        "new": "features.auth.login.username"
+      },
+      {
+        "old": "auth.login.password",
+        "new": "features.auth.login.password"
+      },
+      {
+        "old": "auth.login.selectDatabase",
+        "new": "features.auth.login.selectDatabase"
+      },
+      {
+        "old": "auth.login.rememberMe",
+        "new": "features.auth.login.rememberMe"
+      },
+      {
+        "old": "auth.login.forgotPassword",
+        "new": "features.auth.login.forgotPassword"
+      },
+      {
+        "old": "auth.login.signIn",
+        "new": "features.auth.login.signIn"
+      },
+      {
+        "old": "auth.login.signingIn",
+        "new": "features.auth.login.signingIn"
+      },
+      {
+        "old": "auth.login.error.usernameRequired",
+        "new": "features.auth.login.error.usernameRequired"
+      },
+      {
+        "old": "auth.login.error.passwordRequired",
+        "new": "features.auth.login.error.passwordRequired"
+      }
+    ]
+  }
+}

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 // import { BarRatingModule } from 'ngx-bar-rating'; // Note: ngx-bar-rating package needs to be installed: npm install ngx-bar-rating
 import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
 import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-bar-rating-demo',

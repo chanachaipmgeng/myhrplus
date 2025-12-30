@@ -8,6 +8,7 @@ import { DataGridComponent } from '@shared/components/data-grid/data-grid.compon
 import { CompanyTypeService } from '../../services/company-type.service';
 import { CompanyType } from '../../models/company-type.model';
 import { CompanyTypeFormComponent } from './company-type-form.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-company-type-list',
@@ -36,7 +37,7 @@ export class CompanyTypeListComponent implements OnInit {
 
   ngOnInit() {
     // Wait for translations to load, then initialize
-    this.translate.get('common.addNew').subscribe(() => {
+    this.translate.get(TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW).subscribe(() => {
       this.initializeTranslations();
     });
   }
@@ -44,7 +45,7 @@ export class CompanyTypeListComponent implements OnInit {
   private initializeTranslations() {
     this.headerActions = [
       {
-        label: this.translate.instant('common.addNew'),
+        label: this.translate.instant(TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW),
         variant: 'primary' as const,
         onClick: () => this.onCreate()
       }

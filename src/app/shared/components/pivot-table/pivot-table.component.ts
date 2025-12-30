@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PivotViewModule } from '@syncfusion/ej2-angular-pivotview';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 import {
   IDataOptions,
   IDataSet,

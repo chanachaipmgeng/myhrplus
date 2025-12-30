@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angu
 import { CommonModule } from '@angular/common';
 import { IconComponent } from '../icon/icon.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export interface AccordionPanel {
   title: string;

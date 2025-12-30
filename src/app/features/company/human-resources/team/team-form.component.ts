@@ -6,6 +6,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
 import { Team } from '../../models/team.model';
 import { TeamService } from '../../services/team.service';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-team-form',
@@ -20,6 +21,10 @@ import { TeamService } from '../../services/team.service';
   templateUrl: './team-form.component.html'
 })
 export class TeamFormComponent implements OnChanges {
+  // Expose TRANSLATION_KEYS to template
+
+  readonly TRANSLATION_KEYS = TRANSLATION_KEYS;
+
   @Input() isOpen = false;
   @Input() data: Team | null = null;
   @Output() close = new EventEmitter<void>();
@@ -35,8 +40,8 @@ export class TeamFormComponent implements OnChanges {
   // Options for Active radio
   get activeOptions() {
     return [
-      { value: '1', label: this.translate.instant('common.active') },
-      { value: '0', label: this.translate.instant('common.inactive') }
+      { value: '1', label: this.translate.instant(TRANSLATION_KEYS.COMMON.STATUS.ACTIVE) },
+      { value: '0', label: this.translate.instant(TRANSLATION_KEYS.COMMON.STATUS.INACTIVE) }
     ];
   }
 

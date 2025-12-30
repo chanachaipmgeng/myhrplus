@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FileManagerModule } from '@syncfusion/ej2-angular-filemanager';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 import {
   FileManagerComponent as SyncfusionFileManagerComponent,
   NavigationPaneSettingsModel,

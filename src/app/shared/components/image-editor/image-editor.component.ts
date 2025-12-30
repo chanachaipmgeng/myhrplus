@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ImageEditorModule } from '@syncfusion/ej2-angular-image-editor';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 import {
   ImageEditorComponent as SyncfusionImageEditorComponent
 } from '@syncfusion/ej2-angular-image-editor';

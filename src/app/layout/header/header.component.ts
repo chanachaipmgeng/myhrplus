@@ -7,6 +7,7 @@ import { AuthService } from '@core/services';
 import { I18nService, Language } from '@core/services';
 import { NotificationService, Notification } from '@core/services';
 import { OmniSearchComponent } from '@shared/components/omni-search/omni-search.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-header',

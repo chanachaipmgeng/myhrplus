@@ -4,6 +4,7 @@ import { GlassCardComponent } from '@shared/components/glass-card/glass-card.com
 import { TimelineComponent, TimelineItem } from '@shared/components/timeline/timeline.component';
 import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
 import { PropsTableComponent, PropDefinition } from '@features/demo/shared/props-table/props-table.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-timeline-demo',

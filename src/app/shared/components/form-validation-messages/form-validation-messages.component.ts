@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AbstractControl, FormControl } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IconComponent } from '../icon/icon.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export interface ValidationMessage {
   key: string;

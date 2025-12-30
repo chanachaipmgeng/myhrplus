@@ -29,6 +29,7 @@ export * from './error-codes.constant';
 export * from './log-levels.constant';
 export * from './navigation.constant';
 export * from './sidebar-modules.constant';
+export * from './translation-keys.constant';
 
 // Screen Constants
 // Note: These files contain duplicate function names (getAllScreens, getScreenByMenuCode, etc.)

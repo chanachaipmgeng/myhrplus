@@ -115,6 +115,7 @@ export class MyCalendarComponent {
   eventManagementCode = `import { Component } from '@angular/core';
 import { CalendarService, CalendarEventMeta } from '@core/services';
 import { CalendarEvent } from 'angular-calendar';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-calendar-with-service',

@@ -5,6 +5,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IconComponent } from '@shared/components/icon/icon.component';
 import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
 import { GlassButtonComponent } from '@shared/components/glass-button/glass-button.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-unauthorized',

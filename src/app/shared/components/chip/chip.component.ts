@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from '../icon/icon.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export type ChipVariant = 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info';
 export type ChipSize = 'sm' | 'md' | 'lg';

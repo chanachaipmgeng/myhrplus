@@ -1,5 +1,6 @@
 import { ViewportScroller, CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener } from '@angular/core';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-back-to-top',

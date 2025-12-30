@@ -19,6 +19,7 @@ import {
   PrintService
 } from '@syncfusion/ej2-angular-schedule';
 import { EventSettingsModel, View } from '@syncfusion/ej2-angular-schedule';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export interface SchedulerEvent {
   Id?: number | string;

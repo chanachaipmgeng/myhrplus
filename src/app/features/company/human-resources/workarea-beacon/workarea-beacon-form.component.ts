@@ -6,6 +6,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
 import { WorkareaBeacon } from '../../models/workarea-beacon.model';
 import { WorkareaBeaconService } from '../../services/workarea-beacon.service';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-workarea-beacon-form',

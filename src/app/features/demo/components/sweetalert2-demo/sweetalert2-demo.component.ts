@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 // import Swal from 'sweetalert2'; // Note: sweetalert2 package needs to be installed: npm install sweetalert2
 import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
 import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 // Dynamic import for sweetalert2 (will be loaded when needed)
 let SwalInstance: any;

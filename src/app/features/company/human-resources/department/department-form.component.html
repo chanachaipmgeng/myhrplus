@@ -1,23 +1,23 @@
 <app-modal
   [show]="isOpen"
-  [title]="(isEditMode ? 'company.department.edit' : 'company.department.add') | translate"
+  [title]="(isEditMode ? 'features.company.entities.department.edit' : 'features.company.entities.department.add') | translate"
   (closeEvent)="onClose()"
   (confirmEvent)="onSubmit()">
   
   <form [formGroup]="form" class="space-y-4 p-2">
     <!-- BU2 ID (PK) -->
     <app-glass-input
-      [label]="'company.department.bu2Id' | translate"
+      [label]="'features.company.entities.department.bu2Id' | translate"
       formControlName="bu2id"
       [required]="true"
       [readonly]="isEditMode"
-      [errorMessage]="'company.department.bu2IdRequired' | translate"
+      [errorMessage]="'features.company.entities.department.bu2IdRequired' | translate"
       maxLength="10">
     </app-glass-input>
 
     <!-- Company ID (Readonly) -->
     <app-glass-input
-      [label]="'company.department.companyId' | translate"
+      [label]="'features.company.entities.department.companyId' | translate"
       formControlName="companyid"
       [required]="true"
       [readonly]="true">
@@ -25,41 +25,41 @@
 
     <!-- Parent (Division - Required) -->
     <app-glass-input
-      [label]="'company.department.parent' | translate"
+      [label]="'features.company.entities.department.parent' | translate"
       formControlName="parent"
       [required]="true"
-      [errorMessage]="'company.department.parentRequired' | translate"
+      [errorMessage]="'features.company.entities.department.parentRequired' | translate"
       maxLength="10">
     </app-glass-input>
 
     <!-- Thai Description -->
     <app-glass-input
-      [label]="'company.department.tdesc' | translate"
+      [label]="'features.company.entities.department.tdesc' | translate"
       formControlName="tdesc"
       [required]="true"
-      [errorMessage]="'company.department.tdescRequired' | translate"
+      [errorMessage]="'features.company.entities.department.tdescRequired' | translate"
       maxLength="200">
     </app-glass-input>
 
     <!-- English Description -->
     <app-glass-input
-      [label]="'company.department.edesc' | translate"
+      [label]="'features.company.entities.department.edesc' | translate"
       formControlName="edesc"
       [required]="true"
-      [errorMessage]="'company.department.edescRequired' | translate"
+      [errorMessage]="'features.company.entities.department.edescRequired' | translate"
       maxLength="200">
     </app-glass-input>
 
     <!-- Short Name -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <app-glass-input
-        [label]="'company.department.tshortName' | translate"
+        [label]="'features.company.entities.department.tshortName' | translate"
         formControlName="tshort_name"
         maxLength="10">
       </app-glass-input>
 
       <app-glass-input
-        [label]="'company.department.eshortName' | translate"
+        [label]="'features.company.entities.department.eshortName' | translate"
         formControlName="eshort_name"
         maxLength="10">
       </app-glass-input>
@@ -68,7 +68,7 @@
     <!-- Active (Radio) -->
     <div>
       <label class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2 transition-colors duration-300">
-        {{ 'company.department.active' | translate }} <span class="text-red-500">*</span>
+        {{ 'features.company.entities.department.active' | translate }} <span class="text-red-500">*</span>
       </label>
       <div class="flex gap-4">
         <label class="flex items-center cursor-pointer">
@@ -77,7 +77,7 @@
             formControlName="active" 
             value="1"
             class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-          <span class="ml-2 text-sm text-gray-700 dark:text-slate-300">{{ 'common.active' | translate }}</span>
+          <span class="ml-2 text-sm text-gray-700 dark:text-slate-300">{{ TRANSLATION_KEYS.COMMON.STATUS.ACTIVE | translate }}</span>
         </label>
         <label class="flex items-center cursor-pointer">
           <input 
@@ -85,7 +85,7 @@
             formControlName="active" 
             value="0"
             class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-          <span class="ml-2 text-sm text-gray-700 dark:text-slate-300">{{ 'common.inactive' | translate }}</span>
+          <span class="ml-2 text-sm text-gray-700 dark:text-slate-300">{{ TRANSLATION_KEYS.COMMON.STATUS.INACTIVE | translate }}</span>
         </label>
       </div>
     </div>
@@ -93,14 +93,14 @@
     <!-- Dates -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <app-glass-input
-        [label]="'company.department.buildDate' | translate"
+        [label]="'features.company.entities.department.buildDate' | translate"
         formControlName="build_date"
         type="date"
         [required]="true">
       </app-glass-input>
 
       <app-glass-input
-        [label]="'company.department.expireDate' | translate"
+        [label]="'features.company.entities.department.expireDate' | translate"
         formControlName="expire_date"
         type="date">
       </app-glass-input>
@@ -108,7 +108,7 @@
 
     <!-- Supervisor -->
     <app-glass-input
-      [label]="'company.department.bu2Sup' | translate"
+      [label]="'features.company.entities.department.bu2Sup' | translate"
       formControlName="bu2sup"
       maxLength="10">
     </app-glass-input>
@@ -116,7 +116,7 @@
     <!-- Objective & Remark -->
     <div>
       <label class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2 transition-colors duration-300">
-        {{ 'company.department.objective' | translate }}
+        {{ 'features.company.entities.department.objective' | translate }}
       </label>
       <textarea 
         formControlName="objective"
@@ -128,7 +128,7 @@
 
     <div>
       <label class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2 transition-colors duration-300">
-        {{ 'company.department.remark' | translate }}
+        {{ 'features.company.entities.department.remark' | translate }}
       </label>
       <textarea 
         formControlName="remark"
@@ -141,43 +141,43 @@
     <!-- Additional Fields -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <app-glass-input
-        [label]="'company.department.extention' | translate"
+        [label]="'features.company.entities.department.extention' | translate"
         formControlName="extention"
         type="tel"
         maxLength="10"
-        [errorMessage]="'company.department.error.numbersOnly' | translate">
+        [errorMessage]="'features.company.entities.department.error.numbersOnly' | translate">
       </app-glass-input>
 
       <app-glass-input
-        [label]="'company.department.consolidate' | translate"
+        [label]="'features.company.entities.department.consolidate' | translate"
         formControlName="consolidate"
         maxLength="10">
       </app-glass-input>
 
       <app-glass-input
-        [label]="'company.department.analcode' | translate"
+        [label]="'features.company.entities.department.analcode' | translate"
         formControlName="analcode"
         maxLength="15">
       </app-glass-input>
 
       <app-glass-input
-        [label]="'company.department.sortNumber' | translate"
+        [label]="'features.company.entities.department.sortNumber' | translate"
         formControlName="sort_number"
         type="number">
       </app-glass-input>
 
       <app-glass-input
-        [label]="'company.department.website' | translate"
+        [label]="'features.company.entities.department.website' | translate"
         formControlName="website"
         maxLength="100">
       </app-glass-input>
 
       <app-glass-input
-        [label]="'company.department.email' | translate"
+        [label]="'features.company.entities.department.email' | translate"
         formControlName="email"
         type="email"
         maxLength="30"
-        [errorMessage]="'company.department.error.email' | translate">
+        [errorMessage]="'features.company.entities.department.error.email' | translate">
       </app-glass-input>
     </div>
   </form>

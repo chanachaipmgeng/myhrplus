@@ -8,6 +8,7 @@ import { DataGridComponent } from '@shared/components/data-grid/data-grid.compon
 import { WorkingAreaTypeService } from '../../services/working-area-type.service';
 import { WorkingAreaType } from '../../models/working-area-type.model';
 import { WorkingAreaTypeFormComponent } from './working-area-type-form.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-working-area-type-list',
@@ -35,7 +36,7 @@ export class WorkingAreaTypeListComponent implements OnInit {
   columns: any[] = [];
 
   ngOnInit() {
-    this.translate.get('common.addNew').subscribe(() => {
+    this.translate.get(TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW).subscribe(() => {
       this.initializeTranslations();
     });
   }
@@ -43,7 +44,7 @@ export class WorkingAreaTypeListComponent implements OnInit {
   private initializeTranslations() {
     this.headerActions = [
       {
-        label: this.translate.instant('common.addNew'),
+        label: this.translate.instant(TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW),
         variant: 'primary' as const,
         onClick: () => this.onCreate()
       }
@@ -61,8 +62,8 @@ export class WorkingAreaTypeListComponent implements OnInit {
         type: 'boolean' as const,
         formatter: (value: string) => {
           return value === '1' 
-            ? this.translate.instant('common.active')
-            : this.translate.instant('common.inactive');
+            ? this.translate.instant(TRANSLATION_KEYS.COMMON.STATUS.ACTIVE)
+            : this.translate.instant(TRANSLATION_KEYS.COMMON.STATUS.INACTIVE);
         }
       },
       { field: 'edit_date', headerText: this.translate.instant('company.workingAreaType.column.editDate'), type: 'date' as const, width: '120px' }

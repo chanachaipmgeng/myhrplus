@@ -2,6 +2,7 @@ import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IconComponent } from '../icon/icon.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export type StatusType = 
   | 'pending' | 'approved' | 'rejected' | 'cancelled'
@@ -41,8 +42,8 @@ export class StatusBadgeComponent {
       submitted: 'common.status.submitted',
       reviewed: 'common.status.reviewed',
       completed: 'common.status.completed',
-      active: 'common.active',
-      inactive: 'common.inactive',
+      active: TRANSLATION_KEYS.COMMON.STATUS.ACTIVE,
+      inactive: TRANSLATION_KEYS.COMMON.STATUS.INACTIVE,
       suspended: 'common.status.suspended',
       expired: 'common.status.expired',
       registered: 'common.status.registered',

@@ -8,6 +8,7 @@ import { DataGridComponent } from '@shared/components/data-grid/data-grid.compon
 import { WorkareaBeaconService } from '../../services/workarea-beacon.service';
 import { WorkareaBeacon } from '../../models/workarea-beacon.model';
 import { WorkareaBeaconFormComponent } from './workarea-beacon-form.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-workarea-beacon-list',
@@ -35,7 +36,7 @@ export class WorkareaBeaconListComponent implements OnInit {
   columns: any[] = [];
 
   ngOnInit() {
-    this.translate.get('common.addNew').subscribe(() => {
+    this.translate.get(TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW).subscribe(() => {
       this.initializeTranslations();
     });
   }
@@ -43,7 +44,7 @@ export class WorkareaBeaconListComponent implements OnInit {
   private initializeTranslations() {
     this.headerActions = [
       {
-        label: this.translate.instant('common.addNew'),
+        label: this.translate.instant(TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW),
         variant: 'primary' as const,
         onClick: () => this.onCreate()
       }

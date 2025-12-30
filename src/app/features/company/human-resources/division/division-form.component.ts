@@ -6,6 +6,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
 import { Division } from '../../models/division.model';
 import { DivisionService } from '../../services/division.service';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-division-form',
@@ -35,8 +36,8 @@ export class DivisionFormComponent implements OnChanges {
   // Options for Active radio
   get activeOptions() {
     return [
-      { value: '1', label: this.translate.instant('common.active') },
-      { value: '0', label: this.translate.instant('common.inactive') }
+      { value: '1', label: this.translate.instant(TRANSLATION_KEYS.COMMON.STATUS.ACTIVE) },
+      { value: '0', label: this.translate.instant(TRANSLATION_KEYS.COMMON.STATUS.INACTIVE) }
     ];
   }
 

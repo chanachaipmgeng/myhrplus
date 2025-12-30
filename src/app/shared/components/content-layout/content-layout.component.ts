@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavService } from '@core/services';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-content-layout',

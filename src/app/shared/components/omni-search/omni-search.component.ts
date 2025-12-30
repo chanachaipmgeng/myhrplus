@@ -8,6 +8,7 @@ import { MenuContextService } from '@core/services';
 import { MenuGroup, MenuItem, SearchResult, MenuContext } from '@core/models/menu.model';
 import { GlassCardComponent } from '../glass-card/glass-card.component';
 import { IconComponent } from '../icon/icon.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-omni-search',

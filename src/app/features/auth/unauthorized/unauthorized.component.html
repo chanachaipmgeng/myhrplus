@@ -3,22 +3,22 @@
     <div class="error-content">
       <app-icon name="lock" size="xl" color="text-red-600 dark:text-red-400" class="mb-4"></app-icon>
       <h1 class="text-6xl font-bold text-gray-800 dark:text-gray-100 mb-2">403</h1>
-      <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-4">{{ 'auth.unauthorized.title' | translate }}</h2>
-      <p class="text-gray-600 dark:text-gray-400 mb-6 thai-text">{{ 'auth.unauthorized.message' | translate }}</p>
+      <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-4">{{ 'features.auth.unauthorized.title' | translate }}</h2>
+      <p class="text-gray-600 dark:text-gray-400 mb-6 thai-text">{{ 'features.auth.unauthorized.message' | translate }}</p>
       <div class="actions flex flex-col sm:flex-row gap-3 justify-center">
         <app-glass-button
           variant="primary"
           (clicked)="goHome()"
-          [ariaLabel]="'auth.unauthorized.goToDashboard' | translate">
+          [ariaLabel]="'features.auth.unauthorized.goToDashboard' | translate">
           <app-icon name="home" size="sm" color="text-white"></app-icon>
-          <span>{{ 'auth.unauthorized.goToDashboard' | translate }}</span>
+          <span>{{ 'features.auth.unauthorized.goToDashboard' | translate }}</span>
         </app-glass-button>
         <app-glass-button
           variant="secondary"
           (clicked)="goBack()"
-          [ariaLabel]="'auth.unauthorized.goBack' | translate">
+          [ariaLabel]="'features.auth.unauthorized.goBack' | translate">
           <app-icon name="arrow_back" size="sm"></app-icon>
-          <span>{{ 'auth.unauthorized.goBack' | translate }}</span>
+          <span>{{ 'features.auth.unauthorized.goBack' | translate }}</span>
         </app-glass-button>
       </div>
     </div>

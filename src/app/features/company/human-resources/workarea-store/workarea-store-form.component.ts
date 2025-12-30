@@ -10,6 +10,7 @@ import { BrandStoreService } from '../../services/brand-store.service';
 import { ZoneTypeService } from '../../services/zone-type.service';
 import { WorkingAreaTypeService } from '../../services/working-area-type.service';
 import { Observable } from 'rxjs';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-workarea-store-form',
@@ -24,6 +25,10 @@ import { Observable } from 'rxjs';
   templateUrl: './workarea-store-form.component.html'
 })
 export class WorkareaStoreFormComponent implements OnChanges {
+  // Expose TRANSLATION_KEYS to template
+
+  readonly TRANSLATION_KEYS = TRANSLATION_KEYS;
+
   @Input() isOpen = false;
   @Input() data: WorkareaStore | null = null;
   @Output() close = new EventEmitter<void>();

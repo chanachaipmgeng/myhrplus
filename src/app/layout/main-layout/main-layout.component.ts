@@ -4,6 +4,7 @@ import { take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { SidebarComponent as EjsSidebar } from '@syncfusion/ej2-angular-navigations';
 import { LayoutService, BreadcrumbItem } from '@core/services';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-main-layout',

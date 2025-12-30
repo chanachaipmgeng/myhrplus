@@ -8,6 +8,7 @@ import { DataGridComponent } from '@shared/components/data-grid/data-grid.compon
 import { BranchService } from '../../services/branch.service';
 import { Branch } from '../../models/branch.model';
 import { BranchFormComponent } from './branch-form.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-branch-list',
@@ -35,7 +36,7 @@ export class BranchListComponent implements OnInit {
   columns: any[] = [];
 
   ngOnInit() {
-    this.translate.get('common.addNew').subscribe(() => {
+    this.translate.get(TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW).subscribe(() => {
       this.initializeTranslations();
     });
   }
@@ -43,21 +44,21 @@ export class BranchListComponent implements OnInit {
   private initializeTranslations() {
     this.headerActions = [
       {
-        label: this.translate.instant('common.addNew'),
+        label: this.translate.instant(TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW),
         variant: 'primary' as const,
         onClick: () => this.onCreate()
       }
     ];
 
     this.columns = [
-      { field: 'branchid', headerText: this.translate.instant('company.branch.column.branchId'), width: '120px' },
-      { field: 'tdesc', headerText: this.translate.instant('company.branch.column.tdesc'), width: '200px' },
-      { field: 'edesc', headerText: this.translate.instant('company.branch.column.edesc'), width: '200px' },
-      { field: 'companyid', headerText: this.translate.instant('company.branch.column.companyId'), width: '100px' },
-      { field: 'headcompany', headerText: this.translate.instant('company.branch.column.headCompany'), width: '120px' },
-      { field: 'com_type', headerText: this.translate.instant('company.branch.column.comType'), width: '100px' },
-      { field: 'tel', headerText: this.translate.instant('company.branch.column.tel'), width: '120px' },
-      { field: 'edit_date', headerText: this.translate.instant('company.branch.column.editDate'), type: 'date' as const, width: '120px' }
+      { field: 'branchid', headerText: this.translate.instant('features.company.entities.branch.column.branchId'), width: '120px' },
+      { field: 'tdesc', headerText: this.translate.instant('features.company.entities.branch.column.tdesc'), width: '200px' },
+      { field: 'edesc', headerText: this.translate.instant('features.company.entities.branch.column.edesc'), width: '200px' },
+      { field: 'companyid', headerText: this.translate.instant('features.company.entities.branch.column.companyId'), width: '100px' },
+      { field: 'headcompany', headerText: this.translate.instant('features.company.entities.branch.column.headCompany'), width: '120px' },
+      { field: 'com_type', headerText: this.translate.instant('features.company.entities.branch.column.comType'), width: '100px' },
+      { field: 'tel', headerText: this.translate.instant('features.company.entities.branch.column.tel'), width: '120px' },
+      { field: 'edit_date', headerText: this.translate.instant('features.company.entities.branch.column.editDate'), type: 'date' as const, width: '120px' }
     ];
   }
 

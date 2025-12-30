@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, OnChanges, A
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { GlassButtonComponent } from '../glass-button/glass-button.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-modal',
@@ -172,7 +173,7 @@ export class ModalComponent implements OnInit, OnDestroy, OnChanges, AfterViewIn
   }
 
   get displayCancelText(): string {
-    return this.cancelText || this.translate.instant('common.cancel');
+    return this.cancelText || this.translate.instant(TRANSLATION_KEYS.COMMON.ACTIONS.CANCEL);
   }
 
   get displayConfirmText(): string {
@@ -180,7 +181,7 @@ export class ModalComponent implements OnInit, OnDestroy, OnChanges, AfterViewIn
   }
 
   get closeAriaLabel(): string {
-    return this.translate.instant('common.close');
+    return this.translate.instant(TRANSLATION_KEYS.COMMON.ACTIONS.CLOSE);
   }
 }
 

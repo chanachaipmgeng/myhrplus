@@ -6,6 +6,7 @@ import { IconComponent } from '@shared/components/icon/icon.component';
 import { StaggerDirective } from '@shared/directives/stagger.directive';
 import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
 import { PropsTableComponent, PropDefinition } from '@features/demo/shared/props-table/props-table.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-stagger-demo',

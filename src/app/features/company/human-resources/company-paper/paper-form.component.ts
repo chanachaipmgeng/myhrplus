@@ -6,6 +6,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
 import { Paper } from '../../models/paper.model';
 import { PaperService } from '../../services/paper.service';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-paper-form',
@@ -20,6 +21,10 @@ import { PaperService } from '../../services/paper.service';
   templateUrl: './paper-form.component.html'
 })
 export class PaperFormComponent implements OnChanges {
+  // Expose TRANSLATION_KEYS to template
+
+  readonly TRANSLATION_KEYS = TRANSLATION_KEYS;
+
   @Input() isOpen = false;
   @Input() data: Paper | null = null;
   @Output() close = new EventEmitter<void>();

@@ -6,6 +6,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
 import { T2 } from '../../models/t2.model';
 import { T2Service } from '../../services/t2.service';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-t2-form',
@@ -20,6 +21,10 @@ import { T2Service } from '../../services/t2.service';
   templateUrl: './t2-form.component.html'
 })
 export class T2FormComponent implements OnChanges {
+  // Expose TRANSLATION_KEYS to template
+
+  readonly TRANSLATION_KEYS = TRANSLATION_KEYS;
+
   @Input() isOpen = false;
   @Input() data: T2 | null = null;
   @Output() close = new EventEmitter<void>();
@@ -35,8 +40,8 @@ export class T2FormComponent implements OnChanges {
   // Options for Active radio
   get activeOptions() {
     return [
-      { value: '1', label: this.translate.instant('common.active') },
-      { value: '0', label: this.translate.instant('common.inactive') }
+      { value: '1', label: this.translate.instant(TRANSLATION_KEYS.COMMON.STATUS.ACTIVE) },
+      { value: '0', label: this.translate.instant(TRANSLATION_KEYS.COMMON.STATUS.INACTIVE) }
     ];
   }
 

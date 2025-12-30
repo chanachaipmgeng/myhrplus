@@ -22,7 +22,7 @@
         <app-icon name="cloud_upload" size="xl" color="text-gray-400 dark:text-gray-500" class="upload-icon mb-4"></app-icon>
         <p class="upload-text thai-text text-gray-700 dark:text-gray-300 mb-2">{{ displayPlaceholder }}</p>
         <p class="upload-hint text-sm text-slate-500 dark:text-slate-400">
-          {{ 'common.imageUpload.supportedFormats' | translate }}: {{ config.allowedTypes?.join(', ') }} ({{ 'common.imageUpload.maxSize' | translate }} {{ config.maxSize }}MB)
+          {{ TRANSLATION_KEYS.COMMON.IMAGE_UPLOAD.SUPPORTED_FORMATS | translate }}: {{ config.allowedTypes?.join(', ') }} ({{ TRANSLATION_KEYS.COMMON.IMAGE_UPLOAD.MAX_SIZE | translate }} {{ config.maxSize }}MB)
         </p>
       </div>
     </div>

@@ -34,6 +34,7 @@ export class ThemeToggleDemoComponent {
 
   serviceExample = `// You can also use ThemeService directly
 import { ThemeService } from '@core/services';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 constructor(private themeService: ThemeService) {}
 

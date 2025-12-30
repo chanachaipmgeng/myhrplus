@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from '@env/environment';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-footer',

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-avatar',

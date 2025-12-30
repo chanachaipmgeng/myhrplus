@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SpeechToTextComponent } from '@shared/components/speech-to-text/speech-to-text.component';
 import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
 import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-speech-to-text-demo',

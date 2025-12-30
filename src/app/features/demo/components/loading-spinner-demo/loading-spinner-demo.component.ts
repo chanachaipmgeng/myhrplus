@@ -29,6 +29,7 @@ export class LoadingSpinnerDemoComponent {
 
   serviceExample = `// In component.ts
 import { LoadingService } from '@core/services';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 constructor(private loadingService: LoadingService) {}
 

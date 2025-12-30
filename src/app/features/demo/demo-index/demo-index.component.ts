@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 interface ComponentInfo {
   name: string;

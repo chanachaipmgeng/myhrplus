@@ -5,6 +5,7 @@ import { GlassButtonComponent } from '@shared/components/glass-button/glass-butt
 import { StepperComponent, StepperStep } from '@shared/components/stepper/stepper.component';
 import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
 import { PropsTableComponent, PropDefinition } from '@features/demo/shared/props-table/props-table.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-stepper-demo',

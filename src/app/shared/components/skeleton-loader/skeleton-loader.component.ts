@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export type SkeletonType = 'text' | 'card' | 'table' | 'list' | 'avatar' | 'custom';
 

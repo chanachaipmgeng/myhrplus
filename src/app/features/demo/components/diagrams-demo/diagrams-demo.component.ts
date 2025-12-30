@@ -4,6 +4,7 @@ import { DiagramsComponent } from '@shared/components/diagrams/diagrams.componen
 import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
 import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
 import { NodeModel, ConnectorModel } from '@syncfusion/ej2-angular-diagrams';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-diagrams-demo',

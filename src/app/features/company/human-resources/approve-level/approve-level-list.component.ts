@@ -8,6 +8,7 @@ import { DataGridComponent } from '@shared/components/data-grid/data-grid.compon
 import { ApproveLevelService } from '../../services/approve-level.service';
 import { ApproveLevel } from '../../models/approve-level.model';
 import { ApproveLevelFormComponent } from './approve-level-form.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-approve-level-list',
@@ -35,7 +36,7 @@ export class ApproveLevelListComponent implements OnInit {
   columns: any[] = [];
 
   ngOnInit() {
-    this.translate.get('common.addNew').subscribe(() => {
+    this.translate.get(TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW).subscribe(() => {
       this.initializeTranslations();
     });
   }
@@ -43,7 +44,7 @@ export class ApproveLevelListComponent implements OnInit {
   private initializeTranslations() {
     this.headerActions = [
       {
-        label: this.translate.instant('common.addNew'),
+        label: this.translate.instant(TRANSLATION_KEYS.COMMON.ACTIONS.ADD_NEW),
         variant: 'primary' as const,
         onClick: () => this.onCreate()
       }

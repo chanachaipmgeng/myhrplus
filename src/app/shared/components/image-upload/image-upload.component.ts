@@ -10,6 +10,7 @@ import {
 } from '@core/utils/image-quality.utils';
 import { IconComponent } from '../icon/icon.component';
 import { LazyImageDirective } from '../../directives/lazy-image.directive';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export interface ImageUploadConfig {
   maxSize?: number; // in MB
@@ -55,6 +56,9 @@ export interface UploadedImage {
 })
 export class ImageUploadComponent implements OnInit, ControlValueAccessor {
   private translate = inject(TranslateService);
+  
+  // Expose TRANSLATION_KEYS to template
+  readonly TRANSLATION_KEYS = TRANSLATION_KEYS;
   
   @Input() label?: string;
   @Input() placeholder?: string;

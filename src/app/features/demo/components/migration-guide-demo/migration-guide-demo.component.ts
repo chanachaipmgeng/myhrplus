@@ -9,6 +9,7 @@ import { GlassButtonComponent } from '@shared/components/glass-button/glass-butt
 import { IconComponent } from '@shared/components/icon/icon.component';
 import { DataGridComponent } from '@shared/components/data-grid/data-grid.component';
 import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-migration-guide-demo',

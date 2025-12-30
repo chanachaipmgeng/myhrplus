@@ -107,6 +107,7 @@ export class DataGridDemoComponent {
   // Code examples for display
   basicExample = `// TypeScript
 import { DataGridColumn } from '@shared/components/data-grid/data-grid.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 columns: DataGridColumn[] = [
   { field: 'id', headerText: 'ID', width: 80, type: 'number' },

@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IconComponent } from '../icon/icon.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export type ErrorType = 'network' | 'server' | 'validation' | 'permission' | 'notfound' | 'generic';
 
@@ -14,6 +15,9 @@ export type ErrorType = 'network' | 'server' | 'validation' | 'permission' | 'no
 })
 export class ErrorStateComponent {
   private translate = inject(TranslateService);
+  
+  // Expose TRANSLATION_KEYS to template
+  readonly TRANSLATION_KEYS = TRANSLATION_KEYS;
   
   @Input() type: ErrorType = 'generic';
   @Input() title: string = '';

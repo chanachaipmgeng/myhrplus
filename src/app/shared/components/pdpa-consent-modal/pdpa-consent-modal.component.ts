@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthService } from '@core/services';
 import { Pdpa, EmployeeConsent } from '@core/models/pdpa.model';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 /**
  * PDPA Consent Modal Component
@@ -27,6 +28,9 @@ import { Pdpa, EmployeeConsent } from '@core/models/pdpa.model';
 })
 export class PdpaConsentModalComponent implements OnInit {
   private translate = inject(TranslateService);
+  
+  // Expose TRANSLATION_KEYS to template
+  readonly TRANSLATION_KEYS = TRANSLATION_KEYS;
   private authService = inject(AuthService);
   
   @Input() pdpa: Pdpa | null = null;

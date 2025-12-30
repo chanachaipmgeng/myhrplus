@@ -1,23 +1,23 @@
 <app-modal
   [show]="isOpen"
-  [title]="(isEditMode ? 'company.branchSocialSecurity.edit' : 'company.branchSocialSecurity.add') | translate"
+  [title]="(isEditMode ? 'features.company.entities.branchSocialSecurity.edit' : 'features.company.entities.branchSocialSecurity.add') | translate"
   (closeEvent)="onClose()"
   (confirmEvent)="onSubmit()">
   
   <form [formGroup]="form" class="space-y-4 p-2">
     <!-- Branch No (PK) -->
     <app-glass-input
-      [label]="'company.branchSocialSecurity.branchNo' | translate"
+      [label]="'features.company.entities.branchSocialSecurity.branchNo' | translate"
       formControlName="branch_no"
       [required]="true"
       [readonly]="isEditMode"
-      [errorMessage]="'company.branchSocialSecurity.branchNoRequired' | translate"
+      [errorMessage]="'features.company.entities.branchSocialSecurity.branchNoRequired' | translate"
       maxLength="10">
     </app-glass-input>
 
     <!-- Company ID (Readonly) -->
     <app-glass-input
-      [label]="'company.branchSocialSecurity.companyId' | translate"
+      [label]="'features.company.entities.branchSocialSecurity.companyId' | translate"
       formControlName="companyid"
       [required]="true"
       [readonly]="true">
@@ -25,71 +25,71 @@
 
     <!-- Thai Description -->
     <app-glass-input
-      [label]="'company.branchSocialSecurity.tdesc' | translate"
+      [label]="'features.company.entities.branchSocialSecurity.tdesc' | translate"
       formControlName="tdesc"
       [required]="true"
-      [errorMessage]="'company.branchSocialSecurity.tdescRequired' | translate"
+      [errorMessage]="'features.company.entities.branchSocialSecurity.tdescRequired' | translate"
       maxLength="100">
     </app-glass-input>
 
     <!-- English Description -->
     <app-glass-input
-      [label]="'company.branchSocialSecurity.edesc' | translate"
+      [label]="'features.company.entities.branchSocialSecurity.edesc' | translate"
       formControlName="edesc"
       [required]="true"
-      [errorMessage]="'company.branchSocialSecurity.tdescRequired' | translate"
+      [errorMessage]="'features.company.entities.branchSocialSecurity.tdescRequired' | translate"
       maxLength="100">
     </app-glass-input>
 
     <!-- Divider: Thai Address -->
     <div class="border-t border-gray-200 dark:border-slate-700 pt-4 mt-4">
-      <h4 class="text-sm font-semibold text-gray-700 dark:text-slate-300 mb-3">{{ 'company.branchSocialSecurity.addressThai' | translate }}</h4>
+      <h4 class="text-sm font-semibold text-gray-700 dark:text-slate-300 mb-3">{{ 'features.company.entities.branchSocialSecurity.addressThai' | translate }}</h4>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <app-glass-input
-          [label]="'company.branchSocialSecurity.village' | translate"
+          [label]="'features.company.entities.branchSocialSecurity.village' | translate"
           formControlName="tvillage"
           maxLength="50">
         </app-glass-input>
 
         <app-glass-input
-          [label]="'company.branchSocialSecurity.roomNo' | translate"
+          [label]="'features.company.entities.branchSocialSecurity.roomNo' | translate"
           formControlName="troom_no"
           maxLength="20">
         </app-glass-input>
 
         <app-glass-input
-          [label]="'company.branchSocialSecurity.floor' | translate"
+          [label]="'features.company.entities.branchSocialSecurity.floor' | translate"
           formControlName="tfloor"
           maxLength="10">
         </app-glass-input>
 
         <app-glass-input
-          [label]="'company.branchSocialSecurity.address' | translate"
+          [label]="'features.company.entities.branchSocialSecurity.address' | translate"
           formControlName="taddr"
           maxLength="20">
         </app-glass-input>
 
         <app-glass-input
-          [label]="'company.branchSocialSecurity.soi' | translate"
+          [label]="'features.company.entities.branchSocialSecurity.soi' | translate"
           formControlName="tsoi"
           maxLength="50">
         </app-glass-input>
 
         <app-glass-input
-          [label]="'company.branchSocialSecurity.moo' | translate"
+          [label]="'features.company.entities.branchSocialSecurity.moo' | translate"
           formControlName="tmoo"
           maxLength="10">
         </app-glass-input>
 
         <app-glass-input
-          [label]="'company.branchSocialSecurity.road' | translate"
+          [label]="'features.company.entities.branchSocialSecurity.road' | translate"
           formControlName="troad"
           maxLength="50">
         </app-glass-input>
 
         <app-glass-input
-          [label]="'company.branchSocialSecurity.subdistrict' | translate"
+          [label]="'features.company.entities.branchSocialSecurity.subdistrict' | translate"
           formControlName="tsubdistrict"
           maxLength="50">
         </app-glass-input>
@@ -98,53 +98,53 @@
 
     <!-- Divider: English Address -->
     <div class="border-t border-gray-200 dark:border-slate-700 pt-4 mt-4">
-      <h4 class="text-sm font-semibold text-gray-700 dark:text-slate-300 mb-3">{{ 'company.branchSocialSecurity.addressEng' | translate }}</h4>
+      <h4 class="text-sm font-semibold text-gray-700 dark:text-slate-300 mb-3">{{ 'features.company.entities.branchSocialSecurity.addressEng' | translate }}</h4>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <app-glass-input
-          [label]="('company.branchSocialSecurity.village' | translate) + ' (Eng.)'"
+          [label]="('features.company.entities.branchSocialSecurity.village' | translate) + ' (Eng.)'"
           formControlName="evillage"
           maxLength="50">
         </app-glass-input>
 
         <app-glass-input
-          [label]="('company.branchSocialSecurity.roomNo' | translate) + ' (Eng.)'"
+          [label]="('features.company.entities.branchSocialSecurity.roomNo' | translate) + ' (Eng.)'"
           formControlName="eroom_no"
           maxLength="20">
         </app-glass-input>
 
         <app-glass-input
-          [label]="('company.branchSocialSecurity.floor' | translate) + ' (Eng.)'"
+          [label]="('features.company.entities.branchSocialSecurity.floor' | translate) + ' (Eng.)'"
           formControlName="efloor"
           maxLength="10">
         </app-glass-input>
 
         <app-glass-input
-          [label]="('company.branchSocialSecurity.address' | translate) + ' (Eng.)'"
+          [label]="('features.company.entities.branchSocialSecurity.address' | translate) + ' (Eng.)'"
           formControlName="eaddr"
           maxLength="20">
         </app-glass-input>
 
         <app-glass-input
-          [label]="('company.branchSocialSecurity.soi' | translate) + ' (Eng.)'"
+          [label]="('features.company.entities.branchSocialSecurity.soi' | translate) + ' (Eng.)'"
           formControlName="esoi"
           maxLength="50">
         </app-glass-input>
 
         <app-glass-input
-          [label]="('company.branchSocialSecurity.moo' | translate) + ' (Eng.)'"
+          [label]="('features.company.entities.branchSocialSecurity.moo' | translate) + ' (Eng.)'"
           formControlName="emoo"
           maxLength="10">
         </app-glass-input>
 
         <app-glass-input
-          [label]="('company.branchSocialSecurity.road' | translate) + ' (Eng.)'"
+          [label]="('features.company.entities.branchSocialSecurity.road' | translate) + ' (Eng.)'"
           formControlName="eroad"
           maxLength="50">
         </app-glass-input>
 
         <app-glass-input
-          [label]="('company.branchSocialSecurity.subdistrict' | translate) + ' (Eng.)'"
+          [label]="('features.company.entities.branchSocialSecurity.subdistrict' | translate) + ' (Eng.)'"
           formControlName="esubdistrict"
           maxLength="50">
         </app-glass-input>
@@ -153,18 +153,18 @@
 
     <!-- Location -->
     <div class="border-t border-gray-200 dark:border-slate-700 pt-4 mt-4">
-      <h4 class="text-sm font-semibold text-gray-700 dark:text-slate-300 mb-3">{{ 'company.branchSocialSecurity.location' | translate }}</h4>
+      <h4 class="text-sm font-semibold text-gray-700 dark:text-slate-300 mb-3">{{ 'features.company.entities.branchSocialSecurity.location' | translate }}</h4>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <app-glass-input
-          [label]="'company.branchSocialSecurity.zipcode' | translate"
+          [label]="'features.company.entities.branchSocialSecurity.zipcode' | translate"
           formControlName="zipcode"
           [readonly]="true"
           maxLength="5">
         </app-glass-input>
 
         <app-glass-input
-          [label]="'company.branchSocialSecurity.districtId' | translate"
+          [label]="'features.company.entities.branchSocialSecurity.districtId' | translate"
           formControlName="districtid"
           [readonly]="true"
           maxLength="10">
@@ -174,54 +174,54 @@
 
     <!-- Contact -->
     <div class="border-t border-gray-200 dark:border-slate-700 pt-4 mt-4">
-      <h4 class="text-sm font-semibold text-gray-700 dark:text-slate-300 mb-3">{{ 'company.branchSocialSecurity.contact' | translate }}</h4>
+      <h4 class="text-sm font-semibold text-gray-700 dark:text-slate-300 mb-3">{{ 'features.company.entities.branchSocialSecurity.contact' | translate }}</h4>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <app-glass-input
-          [label]="'company.branchSocialSecurity.tel' | translate"
+          [label]="'features.company.entities.branchSocialSecurity.tel' | translate"
           formControlName="tel"
           type="tel"
           maxLength="10"
-          [errorMessage]="'company.branchSocialSecurity.error.numbersOnly' | translate">
+          [errorMessage]="'features.company.entities.branchSocialSecurity.error.numbersOnly' | translate">
         </app-glass-input>
 
         <app-glass-input
-          [label]="'company.branchSocialSecurity.fax' | translate"
+          [label]="'features.company.entities.branchSocialSecurity.fax' | translate"
           formControlName="fax"
           type="tel"
           maxLength="10"
-          [errorMessage]="'company.branchSocialSecurity.error.numbersOnly' | translate">
+          [errorMessage]="'features.company.entities.branchSocialSecurity.error.numbersOnly' | translate">
         </app-glass-input>
       </div>
     </div>
 
     <!-- Social Security -->
     <div class="border-t border-gray-200 dark:border-slate-700 pt-4 mt-4">
-      <h4 class="text-sm font-semibold text-gray-700 dark:text-slate-300 mb-3">{{ 'company.branchSocialSecurity.socialSecurity' | translate }}</h4>
+      <h4 class="text-sm font-semibold text-gray-700 dark:text-slate-300 mb-3">{{ 'features.company.entities.branchSocialSecurity.socialSecurity' | translate }}</h4>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <app-glass-input
-          [label]="'company.branchSocialSecurity.socialCode' | translate"
+          [label]="'features.company.entities.branchSocialSecurity.socialCode' | translate"
           formControlName="social_code"
           maxLength="13"
-          [errorMessage]="'company.branchSocialSecurity.error.numbersOnly' | translate">
+          [errorMessage]="'features.company.entities.branchSocialSecurity.error.numbersOnly' | translate">
         </app-glass-input>
 
         <app-glass-input
-          [label]="'company.branchSocialSecurity.socialSubCode' | translate"
+          [label]="'features.company.entities.branchSocialSecurity.socialSubCode' | translate"
           formControlName="social_sub_code"
           maxLength="6"
-          [errorMessage]="'company.branchSocialSecurity.error.numbersOnly' | translate">
+          [errorMessage]="'features.company.entities.branchSocialSecurity.error.numbersOnly' | translate">
         </app-glass-input>
 
         <app-glass-input
-          [label]="'company.branchSocialSecurity.socSignName' | translate"
+          [label]="'features.company.entities.branchSocialSecurity.socSignName' | translate"
           formControlName="soc_sign_name"
           maxLength="100">
         </app-glass-input>
 
         <app-glass-input
-          [label]="'company.branchSocialSecurity.socSignPos' | translate"
+          [label]="'features.company.entities.branchSocialSecurity.socSignPos' | translate"
           formControlName="soc_sign_pos"
           maxLength="50">
         </app-glass-input>

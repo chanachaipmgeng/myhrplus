@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlassCardComponent } from '../glass-card/glass-card.component';
 import { SpinnerComponent } from '../spinner/spinner.component';
+import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
   selector: 'app-loading',
