@@ -1,198 +1,288 @@
-<app-page-header 
-  [title]="'company.dashboard.title' | translate" 
-  [subtitle]="'company.dashboard.subtitle' | translate">
-</app-page-header>
+<div class="-mx-4 md:-mx-6 lg:-mx-8">
+  <div class="p-4 md:p-6 lg:p-8 min-h-screen transition-colors duration-300">
+    <!-- Enhanced Page Header with Welcome Section -->
+    <app-glass-card padding="p-6 md:p-8" customClass="mb-6 md:mb-8" [animate]="'fade-in'">
+      <div class="flex flex-col gap-4 md:gap-6">
+        <!-- Page Title Section -->
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex-1">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 rounded-xl flex items-center justify-center shadow-lg">
+                <app-icon name="business" size="md" color="text-white"></app-icon>
+              </div>
+              <div>
+                <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold thai-text bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                  {{ 'company.dashboard.title' | translate }}
+                </h1>
+                <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 thai-text mt-1">
+                  {{ 'company.dashboard.subtitle' | translate }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 px-3 md:px-4 py-2 bg-indigo-100/50 dark:bg-indigo-900/30 rounded-xl text-xs md:text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">
+            <app-icon name="business" size="sm" color="text-indigo-600 dark:text-indigo-400"></app-icon>
+            <span class="thai-text">{{ 'company.dashboard.welcome.companyInfo' | translate }}</span>
+          </div>
+        </div>
 
-<div class="p-5 min-h-screen transition-colors duration-300">
-  <!-- Statistics Cards -->
-  <div class="mb-8">
-    <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">{{ 'company.dashboard.statistics.title' | translate }}</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
-      <app-glass-card
-        padding="p-5"
-        customClass="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
-        [appStagger]="0"
-        [staggerDelay]="0.05">
-        <div class="text-4xl font-bold mb-2">{{ statistics.branches }}</div>
-        <div class="text-sm opacity-90">{{ 'company.dashboard.statistics.branches' | translate }}</div>
-      </app-glass-card>
-      <app-glass-card
-        padding="p-5"
-        customClass="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
-        [appStagger]="1"
-        [staggerDelay]="0.05">
-        <div class="text-4xl font-bold mb-2">{{ statistics.divisions }}</div>
-        <div class="text-sm opacity-90">{{ 'company.dashboard.statistics.divisions' | translate }}</div>
-      </app-glass-card>
-      <app-glass-card
-        padding="p-5"
-        customClass="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
-        [appStagger]="2"
-        [staggerDelay]="0.05">
-        <div class="text-4xl font-bold mb-2">{{ statistics.departments }}</div>
-        <div class="text-sm opacity-90">{{ 'company.dashboard.statistics.departments' | translate }}</div>
-      </app-glass-card>
-      <app-glass-card
-        padding="p-5"
-        customClass="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
-        [appStagger]="3"
-        [staggerDelay]="0.05">
-        <div class="text-4xl font-bold mb-2">{{ statistics.positions }}</div>
-        <div class="text-sm opacity-90">{{ 'company.dashboard.statistics.positions' | translate }}</div>
-      </app-glass-card>
-      <app-glass-card
-        padding="p-5"
-        customClass="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
-        [appStagger]="4"
-        [staggerDelay]="0.05">
-        <div class="text-4xl font-bold mb-2">{{ statistics.locations }}</div>
-        <div class="text-sm opacity-90">{{ 'company.dashboard.statistics.locations' | translate }}</div>
-      </app-glass-card>
+        <!-- Welcome Message Section -->
+        <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+          <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div class="flex-1">
+              <h2 class="text-lg md:text-xl lg:text-2xl font-semibold mb-2 thai-text text-gray-800 dark:text-gray-100">
+                {{ 'company.dashboard.welcome.title' | translate }}
+              </h2>
+              <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 thai-text">
+                {{ 'company.dashboard.welcome.subtitle' | translate }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-glass-card>
+
+    <!-- Statistics Cards -->
+    <div class="mb-6 md:mb-8">
+      <h2 class="text-lg md:text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3 md:mb-4 transition-colors duration-300">{{ 'company.dashboard.statistics.title' | translate }}</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 lg:gap-5">
+        <app-glass-card
+          padding="p-4 md:p-5"
+          customClass="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [appStagger]="0"
+          [staggerDelay]="0.05">
+          <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2">{{ statistics.branches }}</div>
+          <div class="text-xs md:text-sm opacity-90">{{ 'company.dashboard.statistics.branches' | translate }}</div>
+        </app-glass-card>
+        <app-glass-card
+          padding="p-4 md:p-5"
+          customClass="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [appStagger]="1"
+          [staggerDelay]="0.05">
+          <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2">{{ statistics.divisions }}</div>
+          <div class="text-xs md:text-sm opacity-90">{{ 'company.dashboard.statistics.divisions' | translate }}</div>
+        </app-glass-card>
+        <app-glass-card
+          padding="p-4 md:p-5"
+          customClass="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [appStagger]="2"
+          [staggerDelay]="0.05">
+          <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2">{{ statistics.departments }}</div>
+          <div class="text-xs md:text-sm opacity-90">{{ 'company.dashboard.statistics.departments' | translate }}</div>
+        </app-glass-card>
+        <app-glass-card
+          padding="p-4 md:p-5"
+          customClass="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [appStagger]="3"
+          [staggerDelay]="0.05">
+          <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2">{{ statistics.positions }}</div>
+          <div class="text-xs md:text-sm opacity-90">{{ 'company.dashboard.statistics.positions' | translate }}</div>
+        </app-glass-card>
+        <app-glass-card
+          padding="p-4 md:p-5"
+          customClass="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [appStagger]="4"
+          [staggerDelay]="0.05">
+          <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2">{{ statistics.locations }}</div>
+          <div class="text-xs md:text-sm opacity-90">{{ 'company.dashboard.statistics.locations' | translate }}</div>
+        </app-glass-card>
+      </div>
     </div>
-  </div>
 
-  <!-- Main Content: Charts (3 parts) and Navigation (1 part) -->
-  <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-    <!-- Charts Section: 3 columns (75%) -->
-    <div class="lg:col-span-3">
-      <div class="mb-8">
-        <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">{{ 'company.dashboard.charts.title' | translate }}</h2>
-        
-        <!-- Charts Row 1: 2 columns -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
-          <!-- Pie Chart: Organization Structure -->
-          <app-glass-card padding="p-5">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.divisionStructure' | translate }}</h3>
-            <div echarts [options]="divisionPieChartOption" class="w-full" style="height: 400px;"></div>
-          </app-glass-card>
-          
-          <!-- Bar Chart: Branches -->
-          <app-glass-card padding="p-5">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.employeesByBranch' | translate }}</h3>
-            <div echarts [options]="branchBarChartOption" class="w-full" style="height: 400px;"></div>
-          </app-glass-card>
+    <!-- Main Content: Charts (3 parts) and Navigation (1 part) -->
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
+      <!-- Charts Section: 3 columns (75%) -->
+      <div class="lg:col-span-3">
+        <div class="mb-6 md:mb-8">
+          <h2 class="text-lg md:text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3 md:mb-4 transition-colors duration-300">{{ 'company.dashboard.charts.title' | translate }}</h2>
+
+          <!-- Charts Row 1: 2 columns -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-5 mb-4 md:mb-5">
+            <!-- Pie Chart: Organization Structure -->
+            <app-glass-card padding="p-4 md:p-5">
+              <h3 class="text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3 md:mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.divisionStructure' | translate }}</h3>
+              <div echarts [options]="divisionPieChartOption" class="w-full" style="height: 300px; min-height: 300px;"></div>
+            </app-glass-card>
+
+            <!-- Bar Chart: Branches -->
+            <app-glass-card padding="p-4 md:p-5">
+              <h3 class="text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3 md:mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.employeesByBranch' | translate }}</h3>
+              <div echarts [options]="branchBarChartOption" class="w-full" style="height: 300px; min-height: 300px;"></div>
+            </app-glass-card>
+          </div>
+
+          <!-- Charts Row 2: 2 columns -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-5 mb-4 md:mb-5">
+            <!-- Bar Chart: Departments -->
+            <app-glass-card padding="p-4 md:p-5">
+              <h3 class="text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3 md:mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.employeesByDepartment' | translate }}</h3>
+              <div echarts [options]="departmentBarChartOption" class="w-full" style="height: 300px; min-height: 300px;"></div>
+            </app-glass-card>
+
+            <!-- Bar Chart: Positions -->
+            <app-glass-card padding="p-4 md:p-5">
+              <h3 class="text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3 md:mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.positionsByLevel' | translate }}</h3>
+              <div echarts [options]="positionBarChartOption" class="w-full" style="height: 300px; min-height: 300px;"></div>
+            </app-glass-card>
+          </div>
+
+          <!-- Charts Row 3: 2 columns -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-5 mb-4 md:mb-5">
+            <!-- Tree Map: Organization Hierarchy -->
+            <app-glass-card padding="p-4 md:p-5">
+              <h3 class="text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3 md:mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.orgTreeMap' | translate }}</h3>
+              <div echarts [options]="orgTreeMapChartOption" class="w-full" style="height: 300px; min-height: 300px;"></div>
+            </app-glass-card>
+
+            <!-- Bar Chart: Work Locations -->
+            <app-glass-card padding="p-4 md:p-5">
+              <h3 class="text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3 md:mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.workLocationDistribution' | translate }}</h3>
+              <div echarts [options]="locationBarChartOption" class="w-full" style="height: 300px; min-height: 300px;"></div>
+            </app-glass-card>
+          </div>
         </div>
+      </div>
 
-        <!-- Charts Row 2: 2 columns -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
-          <!-- Bar Chart: Departments -->
-          <app-glass-card padding="p-5">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.employeesByDepartment' | translate }}</h3>
-            <div echarts [options]="departmentBarChartOption" class="w-full" style="height: 400px;"></div>
-          </app-glass-card>
-          
-          <!-- Bar Chart: Positions -->
-          <app-glass-card padding="p-5">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.positionsByLevel' | translate }}</h3>
-            <div echarts [options]="positionBarChartOption" class="w-full" style="height: 400px;"></div>
-          </app-glass-card>
-        </div>
+      <!-- Navigation Cards Section: 1 column (25%) -->
+      <div class="lg:col-span-1">
+        <div class="sticky top-4 md:top-5">
+          <h2 class="text-lg md:text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3 md:mb-4 transition-colors duration-300">{{ 'company.dashboard.mainMenu.title' | translate }}</h2>
+          <div class="space-y-3 md:space-y-4">
+            <!-- Human Resources Card -->
+            <div
+              [routerLink]="['human-resources']"
+              [appStagger]="0"
+              [staggerDelay]="0.1"
+              class="cursor-pointer group">
+              <app-glass-card
+                padding="p-4 md:p-6"
+                customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300">
+                <div class="w-10 h-10 md:w-12 md:h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-3 md:mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
+                  <app-icon name="business" size="md" color="text-blue-600 dark:text-blue-400"></app-icon>
+                </div>
+                <h3 class="text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 mb-1 md:mb-2 transition-colors duration-300">{{ 'company.dashboard.mainMenu.humanResources.title' | translate }}</h3>
+                <p class="text-xs md:text-sm text-gray-500 dark:text-gray-400 mb-3 md:mb-4 transition-colors duration-300">{{ 'company.dashboard.mainMenu.humanResources.description' | translate }}</p>
+                <div class="flex items-center text-blue-600 dark:text-blue-400 text-xs md:text-sm font-medium transition-colors duration-300">
+                  {{ 'company.dashboard.mainMenu.enterMenu' | translate }} <app-icon name="arrow_forward" size="sm" color="text-blue-600 dark:text-blue-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
+                </div>
+              </app-glass-card>
+            </div>
 
-        <!-- Charts Row 3: 2 columns -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
-          <!-- Tree Map: Organization Hierarchy -->
-          <app-glass-card padding="p-5">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.orgTreeMap' | translate }}</h3>
-            <div echarts [options]="orgTreeMapChartOption" class="w-full" style="height: 400px;"></div>
-          </app-glass-card>
-          
-          <!-- Bar Chart: Work Locations -->
-          <app-glass-card padding="p-5">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5 transition-colors duration-300">{{ 'company.dashboard.charts.workLocationDistribution' | translate }}</h3>
-            <div echarts [options]="locationBarChartOption" class="w-full" style="height: 400px;"></div>
-          </app-glass-card>
+            <!-- Approve Setup Card -->
+            <div
+              [routerLink]="['approve']"
+              [appStagger]="1"
+              [staggerDelay]="0.1"
+              class="cursor-pointer group">
+              <app-glass-card
+                padding="p-4 md:p-6"
+                customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300">
+                <div class="w-10 h-10 md:w-12 md:h-12 bg-green-50 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3 md:mb-4 text-green-600 dark:text-green-400 transition-colors duration-300 group-hover:scale-110">
+                  <app-icon name="check_circle" size="md" color="text-green-600 dark:text-green-400"></app-icon>
+                </div>
+                <h3 class="text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 mb-1 md:mb-2 transition-colors duration-300">{{ 'company.dashboard.mainMenu.approveSetup.title' | translate }}</h3>
+                <p class="text-xs md:text-sm text-gray-500 dark:text-gray-400 mb-3 md:mb-4 transition-colors duration-300">{{ 'company.dashboard.mainMenu.approveSetup.description' | translate }}</p>
+                <div class="flex items-center text-green-600 dark:text-green-400 text-xs md:text-sm font-medium transition-colors duration-300">
+                  {{ 'company.dashboard.mainMenu.enterMenu' | translate }} <app-icon name="arrow_forward" size="sm" color="text-green-600 dark:text-green-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
+                </div>
+              </app-glass-card>
+            </div>
+
+            <!-- ESS Setup Card -->
+            <div
+              [routerLink]="['ess-setup']"
+              [appStagger]="2"
+              [staggerDelay]="0.1"
+              class="cursor-pointer group">
+              <app-glass-card
+                padding="p-4 md:p-6"
+                customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300">
+                <div class="w-10 h-10 md:w-12 md:h-12 bg-purple-50 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-3 md:mb-4 text-purple-600 dark:text-purple-400 transition-colors duration-300 group-hover:scale-110">
+                  <app-icon name="phone_android" size="md" color="text-purple-600 dark:text-purple-400"></app-icon>
+                </div>
+                <h3 class="text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 mb-1 md:mb-2 transition-colors duration-300">{{ 'company.dashboard.mainMenu.essSetup.title' | translate }}</h3>
+                <p class="text-xs md:text-sm text-gray-500 dark:text-gray-400 mb-3 md:mb-4 transition-colors duration-300">{{ 'company.dashboard.mainMenu.essSetup.description' | translate }}</p>
+                <div class="flex items-center text-purple-600 dark:text-purple-400 text-xs md:text-sm font-medium transition-colors duration-300">
+                  {{ 'company.dashboard.mainMenu.enterMenu' | translate }} <app-icon name="arrow_forward" size="sm" color="text-purple-600 dark:text-purple-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
+                </div>
+              </app-glass-card>
+            </div>
+
+            <!-- Reports Card -->
+            <div
+              [routerLink]="['reports']"
+              [appStagger]="3"
+              [staggerDelay]="0.1"
+              class="cursor-pointer group">
+              <app-glass-card
+                padding="p-4 md:p-6"
+                customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300">
+                <div class="w-10 h-10 md:w-12 md:h-12 bg-orange-50 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mb-3 md:mb-4 text-orange-600 dark:text-orange-400 transition-colors duration-300 group-hover:scale-110">
+                  <app-icon name="assessment" size="md" color="text-orange-600 dark:text-orange-400"></app-icon>
+                </div>
+                <h3 class="text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 mb-1 md:mb-2 transition-colors duration-300">{{ 'company.dashboard.mainMenu.reports.title' | translate }}</h3>
+                <p class="text-xs md:text-sm text-gray-500 dark:text-gray-400 mb-3 md:mb-4 transition-colors duration-300">{{ 'company.dashboard.mainMenu.reports.description' | translate }}</p>
+                <div class="flex items-center text-orange-600 dark:text-orange-400 text-xs md:text-sm font-medium transition-colors duration-300">
+                  {{ 'company.dashboard.mainMenu.enterMenu' | translate }} <app-icon name="arrow_forward" size="sm" color="text-orange-600 dark:text-orange-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
+                </div>
+              </app-glass-card>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Navigation Cards Section: 1 column (25%) -->
-    <div class="lg:col-span-1">
-      <div class="sticky top-5">
-        <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">{{ 'company.dashboard.mainMenu.title' | translate }}</h2>
-        <div class="space-y-4">
-          <!-- Human Resources Card -->
-          <div
-            [routerLink]="['human-resources']"
-            [appStagger]="0"
-            [staggerDelay]="0.1"
-            class="cursor-pointer group">
-            <app-glass-card
-              padding="p-6"
-              customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300">
-              <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
-                <app-icon name="business" size="lg" color="text-blue-600 dark:text-blue-400"></app-icon>
+    <!-- Recent Activities & Pending Tasks -->
+    <div class="-mx-4 md:-mx-6 lg:-mx-8 mt-6 md:mt-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 px-4 md:px-6 lg:px-8">
+        <!-- Recent Activities -->
+        <app-glass-card padding="p-4 md:p-6">
+          <h3 class="text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3 md:mb-4 transition-colors duration-300">{{ 'company.dashboard.activities.title' | translate }}</h3>
+          <div class="space-y-4">
+            <div *ngFor="let activity of recentActivities; let i = index"
+                 class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-200"
+                 [appStagger]="i"
+                 [staggerDelay]="0.05">
+              <div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center flex-shrink-0">
+                <app-icon [name]="activity.icon" size="sm" color="text-indigo-600 dark:text-indigo-400"></app-icon>
               </div>
-              <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'company.dashboard.mainMenu.humanResources.title' | translate }}</h3>
-              <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'company.dashboard.mainMenu.humanResources.description' | translate }}</p>
-              <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
-                {{ 'company.dashboard.mainMenu.enterMenu' | translate }} <app-icon name="arrow_forward" size="sm" color="text-blue-600 dark:text-blue-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-gray-800 dark:text-gray-100 thai-text">{{ activity.title }}</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ activity.time }}</p>
               </div>
-            </app-glass-card>
+            </div>
+            <div *ngIf="recentActivities.length === 0" class="text-center py-8 text-gray-400 dark:text-gray-500">
+              <app-icon name="inbox" size="xl" color="text-gray-400 dark:text-gray-500"></app-icon>
+              <p class="mt-2 text-sm thai-text">{{ 'company.dashboard.activities.empty' | translate }}</p>
+            </div>
           </div>
+        </app-glass-card>
 
-          <!-- Approve Setup Card -->
-          <div
-            [routerLink]="['approve']"
-            [appStagger]="1"
-            [staggerDelay]="0.1"
-            class="cursor-pointer group">
-            <app-glass-card
-              padding="p-6"
-              customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300">
-              <div class="w-12 h-12 bg-green-50 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4 text-green-600 dark:text-green-400 transition-colors duration-300 group-hover:scale-110">
-                <app-icon name="check_circle" size="lg" color="text-green-600 dark:text-green-400"></app-icon>
+        <!-- Pending Tasks -->
+        <app-glass-card padding="p-4 md:p-6">
+          <h3 class="text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3 md:mb-4 transition-colors duration-300">{{ 'company.dashboard.tasks.title' | translate }}</h3>
+          <div class="space-y-4">
+            <div *ngFor="let task of pendingTasks; let i = index"
+                 class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-200 cursor-pointer"
+                 [appStagger]="i"
+                 [staggerDelay]="0.05"
+                 [routerLink]="[task.route]">
+              <div class="w-10 h-10 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center flex-shrink-0">
+                <app-icon [name]="task.icon" size="sm" color="text-yellow-600 dark:text-yellow-400"></app-icon>
               </div>
-              <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'company.dashboard.mainMenu.approveSetup.title' | translate }}</h3>
-              <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'company.dashboard.mainMenu.approveSetup.description' | translate }}</p>
-              <div class="flex items-center text-green-600 dark:text-green-400 text-sm font-medium transition-colors duration-300">
-                {{ 'company.dashboard.mainMenu.enterMenu' | translate }} <app-icon name="arrow_forward" size="sm" color="text-green-600 dark:text-green-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-gray-800 dark:text-gray-100 thai-text">{{ task.title }}</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ task.count }} {{ 'company.dashboard.tasks.items' | translate }}</p>
               </div>
-            </app-glass-card>
+              <app-icon name="arrow_forward" size="sm" color="text-gray-400 dark:text-gray-500"></app-icon>
+            </div>
+            <div *ngIf="pendingTasks.length === 0" class="text-center py-8 text-gray-400 dark:text-gray-500">
+              <app-icon name="check_circle" size="xl" color="text-gray-400 dark:text-gray-500"></app-icon>
+              <p class="mt-2 text-sm thai-text">{{ 'company.dashboard.tasks.empty' | translate }}</p>
+            </div>
           </div>
-
-          <!-- ESS Setup Card -->
-          <div
-            [routerLink]="['ess-setup']"
-            [appStagger]="2"
-            [staggerDelay]="0.1"
-            class="cursor-pointer group">
-            <app-glass-card
-              padding="p-6"
-              customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300">
-              <div class="w-12 h-12 bg-purple-50 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4 text-purple-600 dark:text-purple-400 transition-colors duration-300 group-hover:scale-110">
-                <app-icon name="phone_android" size="lg" color="text-purple-600 dark:text-purple-400"></app-icon>
-              </div>
-              <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'company.dashboard.mainMenu.essSetup.title' | translate }}</h3>
-              <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'company.dashboard.mainMenu.essSetup.description' | translate }}</p>
-              <div class="flex items-center text-purple-600 dark:text-purple-400 text-sm font-medium transition-colors duration-300">
-                {{ 'company.dashboard.mainMenu.enterMenu' | translate }} <app-icon name="arrow_forward" size="sm" color="text-purple-600 dark:text-purple-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
-              </div>
-            </app-glass-card>
-          </div>
-
-          <!-- Reports Card -->
-          <div
-            [routerLink]="['reports']"
-            [appStagger]="3"
-            [staggerDelay]="0.1"
-            class="cursor-pointer group">
-            <app-glass-card
-              padding="p-6"
-              customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300">
-              <div class="w-12 h-12 bg-orange-50 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mb-4 text-orange-600 dark:text-orange-400 transition-colors duration-300 group-hover:scale-110">
-                <app-icon name="assessment" size="lg" color="text-orange-600 dark:text-orange-400"></app-icon>
-              </div>
-              <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ 'company.dashboard.mainMenu.reports.title' | translate }}</h3>
-              <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ 'company.dashboard.mainMenu.reports.description' | translate }}</p>
-              <div class="flex items-center text-orange-600 dark:text-orange-400 text-sm font-medium transition-colors duration-300">
-                {{ 'company.dashboard.mainMenu.enterMenu' | translate }} <app-icon name="arrow_forward" size="sm" color="text-orange-600 dark:text-orange-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
-              </div>
-            </app-glass-card>
-          </div>
-        </div>
+        </app-glass-card>
       </div>
     </div>
   </div>
 </div>
-
-

@@ -5,43 +5,304 @@
     [showBreadcrumbs]="true">
   </app-page-header>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-6 lg:px-8">
-    <app-glass-card
-      *ngFor="let item of menuItems; let i = index"
-      [appStagger]="i"
-      [staggerDelay]="0.1"
-      padding="p-4 md:p-6"
-      customClass="rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 active:scale-95"
-      [style.background]="item.color"
-      [attr.aria-label]="item.title + ': ' + item.description"
-      [attr.role]="'button'"
-      [attr.tabindex]="0"
-      (click)="navigateTo(item.route)"
-      (keydown.enter)="navigateTo(item.route)"
-      (keydown.space)="navigateTo(item.route); $event.preventDefault()">
-      <div class="flex items-center gap-4">
-        <div class="icon-container text-white">
-          <app-icon [name]="item.icon" size="xl" color="text-white"></app-icon>
+  <div class="p-5 min-h-screen transition-colors duration-300">
+    <!-- Welcome Section -->
+    <app-glass-card padding="p-6 md:p-8" customClass="mb-8" [animate]="'fade-in'">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-2xl md:text-3xl font-bold mb-2 thai-text bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+            ระบบเงินเดือนและสวัสดิการ
+          </h1>
+          <p class="text-gray-600 dark:text-gray-300 thai-text">
+            จัดการข้อมูลเงินเดือน สลิปเงินเดือน และสวัสดิการพนักงาน
+          </p>
         </div>
-        <div class="flex-1">
-          <h3 class="text-lg md:text-xl font-semibold text-white mb-1">{{ item.title }}</h3>
-          <p class="text-white text-xs md:text-sm opacity-90">{{ item.description }}</p>
+        <div class="flex items-center gap-2 px-4 py-2 bg-green-100/50 dark:bg-green-900/30 rounded-xl text-sm text-gray-700 dark:text-gray-300">
+          <app-icon name="calendar_today" size="sm" color="text-green-600 dark:text-green-400"></app-icon>
+          <span class="thai-text">รอบเงินเดือน: {{ currentPayrollPeriod }}</span>
         </div>
       </div>
     </app-glass-card>
+
+    <!-- Statistics Cards -->
+    <div class="mb-8">
+      <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">สถิติเงินเดือน</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
+        <app-glass-card
+          padding="p-5"
+          customClass="bg-gradient-to-br from-green-500 to-emerald-600 dark:from-green-600 dark:to-emerald-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [appStagger]="0"
+          [staggerDelay]="0.05"
+          [routerLink]="['/payroll']">
+          <div class="text-4xl font-bold mb-2">{{ statistics.totalPayroll }}</div>
+          <div class="text-sm opacity-90">เงินเดือนทั้งหมด</div>
+          <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
+            <app-icon name="attach_money" size="xs" color="text-white"></app-icon>
+            <span>บาท</span>
+          </div>
+        </app-glass-card>
+        <app-glass-card
+          padding="p-5"
+          customClass="bg-gradient-to-br from-blue-500 to-cyan-600 dark:from-blue-600 dark:to-cyan-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [appStagger]="1"
+          [staggerDelay]="0.05"
+          [routerLink]="['/payroll']">
+          <div class="text-4xl font-bold mb-2">{{ statistics.totalEmployees }}</div>
+          <div class="text-sm opacity-90">พนักงานที่จ่าย</div>
+          <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
+            <app-icon name="people" size="xs" color="text-white"></app-icon>
+            <span>คน</span>
+          </div>
+        </app-glass-card>
+        <app-glass-card
+          padding="p-5"
+          customClass="bg-gradient-to-br from-purple-500 to-pink-600 dark:from-purple-600 dark:to-pink-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [appStagger]="2"
+          [staggerDelay]="0.05"
+          [routerLink]="['/payroll']">
+          <div class="text-4xl font-bold mb-2">{{ statistics.pendingPayroll }}</div>
+          <div class="text-sm opacity-90">รอจ่าย</div>
+          <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
+            <app-icon name="pending" size="xs" color="text-white"></app-icon>
+            <span>รายการ</span>
+          </div>
+        </app-glass-card>
+        <app-glass-card
+          padding="p-5"
+          customClass="bg-gradient-to-br from-orange-500 to-red-600 dark:from-orange-600 dark:to-red-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [appStagger]="3"
+          [staggerDelay]="0.05"
+          [routerLink]="['/payroll']">
+          <div class="text-4xl font-bold mb-2">{{ statistics.completedPayroll }}</div>
+          <div class="text-sm opacity-90">จ่ายแล้ว</div>
+          <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
+            <app-icon name="check_circle" size="xs" color="text-white"></app-icon>
+            <span>รายการ</span>
+          </div>
+        </app-glass-card>
+        <app-glass-card
+          padding="p-5"
+          customClass="bg-gradient-to-br from-yellow-500 to-amber-600 dark:from-yellow-600 dark:to-amber-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer"
+          [appStagger]="4"
+          [staggerDelay]="0.05"
+          [routerLink]="['/payroll']">
+          <div class="text-4xl font-bold mb-2">{{ statistics.averageSalary }}</div>
+          <div class="text-sm opacity-90">เงินเดือนเฉลี่ย</div>
+          <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
+            <app-icon name="trending_up" size="xs" color="text-white"></app-icon>
+            <span>บาท/คน</span>
+          </div>
+        </app-glass-card>
+      </div>
+    </div>
+
+    <!-- Workspace Grid: Charts and Quick Actions -->
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+      <!-- Charts Section: 3 columns (75%) -->
+      <div class="lg:col-span-3">
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">กราฟและรายงาน</h2>
+        
+        <!-- Charts Row 1: 2 columns -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
+          <!-- Payroll Trend Chart -->
+          <app-glass-card padding="p-5">
+            <div class="flex items-center justify-between mb-5">
+              <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">แนวโน้มเงินเดือน 6 เดือน</h3>
+              <app-icon name="bar_chart" size="md" color="text-gray-400 dark:text-gray-500"></app-icon>
+            </div>
+            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+              <div class="text-center">
+                <app-icon name="show_chart" size="xl" color="text-gray-400 dark:text-gray-500"></app-icon>
+                <p class="mt-2 text-sm thai-text">กราฟแนวโน้มเงินเดือน</p>
+              </div>
+            </div>
+          </app-glass-card>
+          
+          <!-- Salary Distribution Chart -->
+          <app-glass-card padding="p-5">
+            <div class="flex items-center justify-between mb-5">
+              <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การกระจายเงินเดือน</h3>
+              <app-icon name="pie_chart" size="md" color="text-gray-400 dark:text-gray-500"></app-icon>
+            </div>
+            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+              <div class="text-center">
+                <app-icon name="donut_large" size="xl" color="text-gray-400 dark:text-gray-500"></app-icon>
+                <p class="mt-2 text-sm thai-text">กราฟการกระจายเงินเดือน</p>
+              </div>
+            </div>
+          </app-glass-card>
+        </div>
+
+        <!-- Charts Row 2: 2 columns -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
+          <!-- Department Payroll Chart -->
+          <app-glass-card padding="p-5">
+            <div class="flex items-center justify-between mb-5">
+              <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">เงินเดือนตามแผนก</h3>
+              <app-icon name="account_tree" size="md" color="text-gray-400 dark:text-gray-500"></app-icon>
+            </div>
+            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+              <div class="text-center">
+                <app-icon name="stacked_bar_chart" size="xl" color="text-gray-400 dark:text-gray-500"></app-icon>
+                <p class="mt-2 text-sm thai-text">กราฟเงินเดือนตามแผนก</p>
+              </div>
+            </div>
+          </app-glass-card>
+          
+          <!-- Benefits Chart -->
+          <app-glass-card padding="p-5">
+            <div class="flex items-center justify-between mb-5">
+              <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">สวัสดิการและหักเงิน</h3>
+              <app-icon name="savings" size="md" color="text-gray-400 dark:text-gray-500"></app-icon>
+            </div>
+            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+              <div class="text-center">
+                <app-icon name="account_balance_wallet" size="xl" color="text-gray-400 dark:text-gray-500"></app-icon>
+                <p class="mt-2 text-sm thai-text">กราฟสวัสดิการ</p>
+              </div>
+            </div>
+          </app-glass-card>
+        </div>
+      </div>
+
+      <!-- Quick Actions Section: 1 column (25%) -->
+      <div class="lg:col-span-1">
+        <div class="sticky top-5">
+          <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">เมนูหลัก</h2>
+          <div class="space-y-4">
+            <!-- Payroll Management -->
+            <div
+              [routerLink]="['/payroll']"
+              [appStagger]="0"
+              [staggerDelay]="0.1"
+              class="cursor-pointer group">
+              <app-glass-card
+                padding="p-6"
+                customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300">
+                <div class="w-12 h-12 bg-green-50 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4 text-green-600 dark:text-green-400 transition-colors duration-300 group-hover:scale-110">
+                  <app-icon name="payments" size="lg" color="text-green-600 dark:text-green-400"></app-icon>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">จัดการเงินเดือน</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">จัดการข้อมูลเงินเดือนพนักงาน</p>
+                <div class="flex items-center text-green-600 dark:text-green-400 text-sm font-medium transition-colors duration-300">
+                  เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-green-600 dark:text-green-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
+                </div>
+              </app-glass-card>
+            </div>
+
+            <!-- Pay Slip -->
+            <div
+              [routerLink]="['/payroll']"
+              [appStagger]="1"
+              [staggerDelay]="0.1"
+              class="cursor-pointer group">
+              <app-glass-card
+                padding="p-6"
+                customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300">
+                <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110">
+                  <app-icon name="receipt" size="lg" color="text-blue-600 dark:text-blue-400"></app-icon>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">สลิปเงินเดือน</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">ดูและจัดการสลิปเงินเดือน</p>
+                <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
+                  เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-blue-600 dark:text-blue-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
+                </div>
+              </app-glass-card>
+            </div>
+
+            <!-- Reports -->
+            <div
+              [routerLink]="['/payroll']"
+              [appStagger]="2"
+              [staggerDelay]="0.1"
+              class="cursor-pointer group">
+              <app-glass-card
+                padding="p-6"
+                customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300">
+                <div class="w-12 h-12 bg-purple-50 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4 text-purple-600 dark:text-purple-400 transition-colors duration-300 group-hover:scale-110">
+                  <app-icon name="assessment" size="lg" color="text-purple-600 dark:text-purple-400"></app-icon>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">รายงาน</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">รายงานเงินเดือนและสวัสดิการ</p>
+                <div class="flex items-center text-purple-600 dark:text-purple-400 text-sm font-medium transition-colors duration-300">
+                  เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-purple-600 dark:text-purple-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
+                </div>
+              </app-glass-card>
+            </div>
+
+            <!-- Benefits -->
+            <div
+              [routerLink]="['/payroll']"
+              [appStagger]="3"
+              [staggerDelay]="0.1"
+              class="cursor-pointer group">
+              <app-glass-card
+                padding="p-6"
+                customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300">
+                <div class="w-12 h-12 bg-orange-50 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mb-4 text-orange-600 dark:text-orange-400 transition-colors duration-300 group-hover:scale-110">
+                  <app-icon name="savings" size="lg" color="text-orange-600 dark:text-orange-400"></app-icon>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">สวัสดิการ</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">จัดการสวัสดิการพนักงาน</p>
+                <div class="flex items-center text-orange-600 dark:text-orange-400 text-sm font-medium transition-colors duration-300">
+                  เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-orange-600 dark:text-orange-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"></app-icon>
+                </div>
+              </app-glass-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activities & Pending Tasks -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Recent Payroll Activities -->
+      <app-glass-card padding="p-6">
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">กิจกรรมล่าสุด</h3>
+        <div class="space-y-4">
+          <div *ngFor="let activity of recentActivities; let i = index" 
+               class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-200"
+               [appStagger]="i"
+               [staggerDelay]="0.05">
+            <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center flex-shrink-0">
+              <app-icon [name]="activity.icon" size="sm" color="text-green-600 dark:text-green-400"></app-icon>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-800 dark:text-gray-100 thai-text">{{ activity.title }}</p>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ activity.time }}</p>
+            </div>
+          </div>
+          <div *ngIf="recentActivities.length === 0" class="text-center py-8 text-gray-400 dark:text-gray-500">
+            <app-icon name="inbox" size="xl" color="text-gray-400 dark:text-gray-500"></app-icon>
+            <p class="mt-2 text-sm thai-text">ไม่มีกิจกรรมล่าสุด</p>
+          </div>
+        </div>
+      </app-glass-card>
+
+      <!-- Pending Payroll Tasks -->
+      <app-glass-card padding="p-6">
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">งานที่ต้องทำ</h3>
+        <div class="space-y-4">
+          <div *ngFor="let task of pendingTasks; let i = index" 
+               class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-200 cursor-pointer"
+               [appStagger]="i"
+               [staggerDelay]="0.05"
+               [routerLink]="[task.route]">
+            <div class="w-10 h-10 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center flex-shrink-0">
+              <app-icon [name]="task.icon" size="sm" color="text-yellow-600 dark:text-yellow-400"></app-icon>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-800 dark:text-gray-100 thai-text">{{ task.title }}</p>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ task.count }} รายการ</p>
+            </div>
+            <app-icon name="arrow_forward" size="sm" color="text-gray-400 dark:text-gray-500"></app-icon>
+          </div>
+          <div *ngIf="pendingTasks.length === 0" class="text-center py-8 text-gray-400 dark:text-gray-500">
+            <app-icon name="check_circle" size="xl" color="text-gray-400 dark:text-gray-500"></app-icon>
+            <p class="mt-2 text-sm thai-text">ไม่มีงานที่ต้องทำ</p>
+          </div>
+        </div>
+      </app-glass-card>
+    </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

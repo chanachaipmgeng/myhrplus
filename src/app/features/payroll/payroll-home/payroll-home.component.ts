@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService, User } from '@core/services';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
@@ -12,6 +12,7 @@ import { StaggerDirective } from '@shared/directives/stagger.directive';
   standalone: true,
   imports: [
     CommonModule,
+    RouterModule,
     PageHeaderComponent,
     GlassCardComponent,
     IconComponent,
@@ -23,27 +24,57 @@ import { StaggerDirective } from '@shared/directives/stagger.directive';
 export class PayrollHomeComponent implements OnInit {
   currentUser: User | null = null;
 
-  menuItems = [
+  currentPayrollPeriod = 'มกราคม 2025';
+
+  statistics = {
+    totalPayroll: 12500000,
+    totalEmployees: 1245,
+    pendingPayroll: 15,
+    completedPayroll: 1230,
+    averageSalary: 10040
+  };
+
+  recentActivities = [
     {
-      title: 'จัดการเงินเดือน',
-      description: 'จัดการข้อมูลเงินเดือนพนักงาน',
-      icon: 'payments',
-      route: '/payroll',
-      color: 'bg-green-500'
+      title: 'จ่ายเงินเดือน: รอบมกราคม 2025',
+      time: '2 ชั่วโมงที่แล้ว',
+      icon: 'payments'
     },
     {
-      title: 'สลิปเงินเดือน',
-      description: 'ดูและจัดการสลิปเงินเดือน',
+      title: 'สร้างสลิปเงินเดือน: 1,230 รายการ',
+      time: '5 ชั่วโมงที่แล้ว',
+      icon: 'receipt'
+    },
+    {
+      title: 'อัพเดทข้อมูลสวัสดิการ: ประกันสังคม',
+      time: '1 วันที่แล้ว',
+      icon: 'savings'
+    },
+    {
+      title: 'อนุมัติการจ่ายเงินเดือน: รอบมกราคม',
+      time: '2 วันที่แล้ว',
+      icon: 'check_circle'
+    }
+  ];
+
+  pendingTasks = [
+    {
+      title: 'รอจ่ายเงินเดือน',
+      count: 15,
+      icon: 'pending',
+      route: '/payroll'
+    },
+    {
+      title: 'รอสร้างสลิป',
+      count: 8,
       icon: 'receipt',
-      route: '/payroll',
-      color: 'bg-blue-500'
+      route: '/payroll'
     },
     {
-      title: 'รายงาน',
-      description: 'รายงานเงินเดือน',
-      icon: 'assessment',
-      route: '/payroll',
-      color: 'bg-purple-500'
+      title: 'รออนุมัติ',
+      count: 5,
+      icon: 'approval',
+      route: '/payroll'
     }
   ];
 
@@ -55,6 +86,19 @@ export class PayrollHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadPayrollData();
+  }
+
+  private loadPayrollData(): void {
+    // TODO: Load real data from API
+    // this.payrollService.getDashboardStatistics().subscribe({
+    //   next: (data) => {
+    //     this.statistics = data;
+    //   },
+    //   error: (error) => {
+    //     console.error('Error loading payroll data:', error);
+    //   }
+    // });
   }
 
   navigateTo(route: string): void {

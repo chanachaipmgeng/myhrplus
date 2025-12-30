@@ -9,6 +9,7 @@ import { StaggerDirective } from '@shared/directives/stagger.directive';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
 import { CompanyService } from '../services/company.service';
+import { AuthService, User, LayoutService, BreadcrumbItem } from '@core/services';
 
 @Component({
   selector: 'app-company-dashboard',
@@ -28,9 +29,12 @@ import { CompanyService } from '../services/company.service';
 export class CompanyDashboardComponent implements OnInit, OnDestroy {
   private service = inject(CompanyService);
   private translate = inject(TranslateService);
+  private authService = inject(AuthService);
+  private layoutService = inject(LayoutService);
   private observer?: MutationObserver;
-  
+
   isDarkMode = false;
+  currentUser: User | null = null;
 
   // Statistics
   statistics = {
@@ -50,16 +54,87 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
   locationBarChartOption: EChartsOption = {};
   sankeyChartOption: EChartsOption = {};
 
+  // Recent Activities
+  recentActivities = [
+    {
+      title: 'อัพเดทข้อมูลสาขา: สำนักงานใหญ่',
+      time: '1 ชั่วโมงที่แล้ว',
+      icon: 'business'
+    },
+    {
+      title: 'เพิ่มแผนกใหม่: แผนกการตลาด',
+      time: '3 ชั่วโมงที่แล้ว',
+      icon: 'add_business'
+    },
+    {
+      title: 'อัพเดทตำแหน่งงาน: 15 ตำแหน่ง',
+      time: '1 วันที่แล้ว',
+      icon: 'work'
+    },
+    {
+      title: 'เพิ่มสถานที่ทำงาน: โรงงาน A',
+      time: '2 วันที่แล้ว',
+      icon: 'location_on'
+    }
+  ];
+
+  // Pending Tasks
+  pendingTasks = [
+    {
+      title: 'รออนุมัติการเพิ่มแผนก',
+      count: 3,
+      icon: 'pending',
+      route: '/company/human-resources'
+    },
+    {
+      title: 'รออัพเดทข้อมูลสาขา',
+      count: 5,
+      icon: 'update',
+      route: '/company/human-resources'
+    },
+    {
+      title: 'รอตรวจสอบโครงสร้างองค์กร',
+      count: 2,
+      icon: 'verified',
+      route: '/company/human-resources'
+    }
+  ];
+
   ngOnInit(): void {
+    // Set breadcrumb items via LayoutService
+    this.setBreadcrumbs();
+
+    this.currentUser = this.authService.getCurrentUser();
     this.checkDarkMode();
     this.initializeCharts();
     this.loadDashboardData();
     this.setupThemeObserver();
-    
-    // Re-initialize charts when language changes
+
+    // Re-initialize charts and breadcrumbs when language changes
     this.translate.onLangChange.subscribe(() => {
+      this.setBreadcrumbs();
       this.initializeCharts();
     });
+  }
+
+  private setBreadcrumbs(): void {
+    const breadcrumbs: BreadcrumbItem[] = [
+      {
+        label: this.translate.instant('company.dashboard.breadcrumb.home'),
+        route: '/home',
+        icon: 'home'
+      },
+      {
+        label: this.translate.instant('company.dashboard.breadcrumb.company'),
+        route: '/company',
+        icon: 'business'
+      },
+      {
+        label: this.translate.instant('company.dashboard.breadcrumb.dashboard'),
+        icon: 'dashboard'
+      }
+    ];
+    this.layoutService.setBreadcrumbs(breadcrumbs);
   }
 
   ngOnDestroy(): void {
@@ -90,7 +165,7 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
   private checkDarkMode(): void {
     // Check if dark mode is active via data-theme attribute or class
     const html = document.documentElement;
-    this.isDarkMode = html.getAttribute('data-theme') === 'dark' || 
+    this.isDarkMode = html.getAttribute('data-theme') === 'dark' ||
                       html.classList.contains('dark') ||
                       window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
@@ -115,7 +190,7 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
     const currentLang = this.translate.currentLang || 'th';
     const isThai = currentLang === 'th';
     const personLabel = this.translate.instant('company.dashboard.charts.person');
-    
+
     // Division Pie Chart
     const divisionData = [
       { name: this.translate.instant('company.dashboard.charts.division.sales'), value: 342 },
@@ -674,7 +749,7 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
     const hrDept = this.translate.instant('company.dashboard.charts.department.hr');
     const itDept = this.translate.instant('company.dashboard.charts.department.it');
     const productionDept = this.translate.instant('company.dashboard.charts.department.production');
-    
+
     this.sankeyChartOption = {
       backgroundColor: this.getChartBackgroundColor(),
       tooltip: {
