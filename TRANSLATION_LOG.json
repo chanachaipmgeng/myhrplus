@@ -1,0 +1,35 @@
+{
+  "timestamp": "2025-12-30T14:43:32.829Z",
+  "reference": "en",
+  "source": "th",
+  "results": [
+    {
+      "lang": "lo",
+      "translated": 1433,
+      "kept": 8,
+      "skipped": 2188,
+      "total": 3629
+    },
+    {
+      "lang": "my",
+      "translated": 1426,
+      "kept": 7,
+      "skipped": 2196,
+      "total": 3629
+    },
+    {
+      "lang": "vi",
+      "translated": 1421,
+      "kept": 7,
+      "skipped": 2201,
+      "total": 3629
+    },
+    {
+      "lang": "zh",
+      "translated": 1421,
+      "kept": 7,
+      "skipped": 2201,
+      "total": 3629
+    }
+  ]
+}

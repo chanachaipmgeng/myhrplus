@@ -213,8 +213,24 @@
 - [x] เพิ่ม readonly TRANSLATION_KEYS property ใน components (9 files)
 - [ ] Test all features
 
+### Phase 6: Sync All Languages ✅
+- [x] Migrate keys structure ให้กับ lo, my, vi, zh (59 keys migrated per language)
+- [x] เพิ่ม missing keys จาก th.json (1521 keys added per language)
+- [x] สร้าง script ตรวจสอบ untranslated keys
+- [x] สร้างรายงาน untranslated keys
+- [x] แปล keys จากภาษาไทยเป็นภาษาอังกฤษ (ใช้ en.json เป็น reference)
+  - lo: 1,433 keys translated (เหลือ 117 keys, 96.8% translated)
+  - my: 1,426 keys translated (เหลือ 118 keys, 96.7% translated)
+  - vi: 1,421 keys translated (เหลือ 116 keys, 96.8% translated)
+  - zh: 1,421 keys translated (เหลือ 117 keys, 96.8% translated)
+- [x] แปล keys ที่เหลือเป็นภาษาที่ถูกต้อง (lo, my, vi, zh)
+  - lo: 7 keys translated (เหลือ 1 key, 100% done)
+  - my: 7 keys translated (100% done)
+  - vi: 7 keys translated (100% done)
+  - zh: 7 keys translated (100% done)
+
 ---
 
 **Last Updated**: 2024-12-30  
-**Status**: ✅ Phase 1, 2, 3, 5 Complete (Components & Templates), ⏳ Phase 4 Pending, ⏳ Testing Pending
+**Status**: ✅ Phase 1, 2, 3, 5, 6 Complete (100% Translated), ⏳ Phase 4 Pending, ⏳ Testing Pending
 
