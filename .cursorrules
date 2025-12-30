@@ -349,6 +349,7 @@ export class ModelNameService {
   - Small cards: `grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6`
   - Medium cards: `grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6`
   - Large cards: `grid-cols-1 lg:grid-cols-2 gap-6`
+  - **Workspace Grid**: `grid grid-cols-1 lg:grid-cols-4 gap-6` (Charts: `lg:col-span-3`, Quick Actions: `lg:col-span-1`)
 - **Mobile Optimization**:
   - Responsive text: `text-lg md:text-xl`, `text-xs md:text-sm`
   - Responsive icons: `text-3xl md:text-4xl`
@@ -358,6 +359,10 @@ export class ModelNameService {
   - Add `[attr.aria-label]` to interactive elements
   - Add `[attr.role]="'button'"` and `[attr.tabindex]="0"` for clickable elements
   - Support keyboard navigation: `(keydown.enter)` and `(keydown.space)`
+  - Use semantic HTML: `<section>`, `<ul>`, `<li>` for content blocks
+  - Add `role="main"` to main content container
+  - Add `role="img"` and `aria-label` to chart containers
+  - Add `aria-labelledby` linking to heading IDs for sections
 - **Performance**:
   - Use lazy loading for images: `[appLazyImage]="imageUrl"` instead of `[src]`
   - Reduce animation intensity on mobile (use CSS media queries)
@@ -824,6 +829,27 @@ export class ComponentNameDemoComponent {
 - ✅ **TypeScript Errors**: Fixed all type errors in `company.service.ts` and `shift-plan.service.ts`
 - ✅ **Bundle Size**: Reduced ~75-140KB through optimizations
 - ✅ **Code Quality**: Improved maintainability by 40%, consistency by 50%
+
+### Dashboard Workspace Standardization Complete (2024-12-29)
+- ✅ **Completed**: All 11 module dashboards now have standardized workspace layout
+- ✅ **Structure**: Statistics Cards → Workspace Grid (Charts 75% + Quick Actions 25%)
+- ✅ **Charts**: Placeholder charts ready for ECharts integration (4 charts per dashboard in 2x2 grid)
+- ✅ **Quick Actions**: Sticky sidebar with menu cards (1 column, 25% width)
+- ✅ **Page Headers**: Custom `app-glass-card` based welcome section with gradient icon box
+- ✅ **Accessibility**: Full ARIA support, semantic HTML, keyboard navigation on all dashboards
+- ✅ **Documentation**: `DASHBOARD_WORKSPACE_STANDARDIZATION.md` created with complete guidelines
+- ✅ **Dashboards Updated**:
+  - `home.component` - Full workspace with ECharts
+  - `ta-home.component` - Workspace with placeholder charts
+  - `payroll-home.component` - Workspace with placeholder charts
+  - `training-home.component` - Workspace with placeholder charts
+  - `appraisal-home.component` - Workspace with placeholder charts
+  - `recruit-home.component` - Workspace with placeholder charts
+  - `welfare-home.component` - Workspace with placeholder charts
+  - `setting-home.component` - Workspace with placeholder charts
+  - `company-home.component` - Workspace with placeholder charts
+  - `personal-home.component` - Workspace with placeholder charts
+  - `company-dashboard.component` - Full workspace with ECharts and customization
 
 ---
 

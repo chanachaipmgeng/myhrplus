@@ -1,10 +1,17 @@
 # 🎨 UX/UI Design System Rules & Guidelines
 
-**เวอร์ชัน**: 1.1.0  
-**วันที่อัปเดต**: 2024-12-20  
+**เวอร์ชัน**: 1.2.0  
+**วันที่อัปเดต**: 2024-12-29  
 **สถานะ**: ✅ Active
 
-## 📝 Recent Updates (2024-12-20)
+## 📝 Recent Updates (2024-12-29)
+- ✅ Added Dashboard Workspace Layout standardization guidelines
+- ✅ Added workspace grid structure (Charts 75% + Quick Actions 25%)
+- ✅ Added page header standardization for dashboards (custom glass-card welcome section)
+- ✅ Added accessibility requirements for dashboard components
+- ✅ Added chart placeholder structure guidelines
+
+## 📝 Previous Updates (2024-12-20)
 - ✅ Added background pattern animations guidelines
 - ✅ Added gradient animation guidelines
 - ✅ Updated color palette (gray-* instead of slate-*)
@@ -129,6 +136,129 @@
 - Responsive grid
 - Consistent spacing
 - Animation support
+
+---
+
+## 📊 Dashboard Workspace Layout
+
+### Standard Structure
+
+All module dashboards must follow this standard workspace layout structure:
+
+1. **Page Header Section** - Custom `app-glass-card` based welcome section
+2. **Statistics Cards Section** - Grid of statistics cards
+3. **Workspace Grid** - Charts (75%) + Quick Actions (25%)
+
+### Page Header (Dashboard)
+
+For dashboard pages, use a custom `app-glass-card` based welcome section instead of `<app-page-header>`:
+
+```html
+<app-glass-card padding="p-5 md:p-6" customClass="mb-6 md:mb-8" [animate]="'fade-in'">
+  <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+    <div class="flex-1">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-[color]-500 to-[color]-600 dark:from-[color]-600 dark:to-[color]-700 rounded-xl flex items-center justify-center shadow-lg">
+          <app-icon name="[icon]" size="md" color="text-white"></app-icon>
+        </div>
+        <div>
+          <h1 class="text-xl md:text-2xl lg:text-3xl font-bold thai-text bg-gradient-to-r from-[color]-600 to-[color]-600 bg-clip-text text-transparent">
+            Module Title
+          </h1>
+          <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 thai-text mt-1">
+            Module Subtitle
+          </p>
+        </div>
+      </div>
+      <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 thai-text mt-2">
+        Module Description
+      </p>
+    </div>
+    <!-- Optional: Info Badge -->
+  </div>
+</app-glass-card>
+```
+
+### Workspace Grid
+
+```html
+<section class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8" aria-labelledby="[module]-charts-title">
+  <!-- Charts Section: 3 columns (75%) -->
+  <div class="lg:col-span-3">
+    <h2 id="[module]-charts-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">
+      กราฟและรายงาน
+    </h2>
+    
+    <!-- Charts Row 1: 2 columns -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
+      <!-- Chart 1 & 2 -->
+    </div>
+
+    <!-- Charts Row 2: 2 columns -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
+      <!-- Chart 3 & 4 -->
+    </div>
+  </div>
+
+  <!-- Quick Actions Section: 1 column (25%) -->
+  <div class="lg:col-span-1">
+    <div class="sticky top-5">
+      <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">เมนูหลัก</h3>
+      <div class="space-y-4">
+        <!-- Menu Cards -->
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+### Required TypeScript Method
+
+All dashboard components must include:
+
+```typescript
+/**
+ * Navigate to route (for keyboard navigation)
+ */
+navigateToRoute(route: string): void {
+  if (route) {
+    this.router.navigate([route]);
+  }
+}
+```
+
+### Module Color Themes
+
+| Module | Gradient From | Gradient To |
+|--------|---------------|-------------|
+| Home | `from-indigo-500` | `to-purple-600` |
+| Personal | `from-blue-500` | `to-cyan-600` |
+| TA | `from-teal-500` | `to-cyan-600` |
+| Payroll | `from-green-500` | `to-emerald-600` |
+| Training | `from-blue-500` | `to-cyan-600` |
+| Appraisal | `from-purple-500` | `to-pink-600` |
+| Recruit | `from-orange-500` | `to-red-600` |
+| Welfare | `from-pink-500` | `to-rose-600` |
+| Setting | `from-gray-500` | `to-slate-600` |
+| Company | `from-indigo-500` | `to-purple-600` |
+
+### Accessibility Requirements
+
+- `role="main"` on main content container
+- `role="button"` on clickable statistics cards and menu cards
+- `role="img"` and `aria-label` on chart containers
+- `role="list"` and `role="listitem"` on activity/task lists
+- `aria-labelledby` on sections linking to heading IDs
+- `aria-label` on all interactive elements
+- `aria-describedby` linking to descriptive elements
+- `aria-hidden="true"` on decorative icons
+- `tabindex="0"` on all interactive elements
+- `(keydown.enter)` and `(keydown.space)` handlers
+- Semantic HTML: `<section>`, `<ul>`, `<li>`
+
+### Documentation
+
+For complete guidelines, see `DASHBOARD_WORKSPACE_STANDARDIZATION.md`.
 
 ---
 
