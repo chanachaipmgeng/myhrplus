@@ -2496,6 +2496,8 @@
   "common.imageUpload.placeholder": "ลากไฟล์มาวางที่นี่หรือคลิกเพื่อเลือก",
   "common.imageUpload.supportedFormats": "รองรับ",
   "common.imageUpload.maxSize": "สูงสุด",
+  "common.image_upload.supported_formats": "รองรับ",
+  "common.image_upload.max_size": "สูงสุด",
   "common.imageUpload.removeImage": "ลบรูปภาพ",
   "common.imageUpload.quality.excellent": "คุณภาพดีมาก",
   "common.imageUpload.quality.good": "คุณภาพดี",
@@ -3142,11 +3144,21 @@
       "no": "ลำดับที่",
       "employeeId": "รหัสพนักงาน",
       "nameSurname": "ชื่อ-นามสกุล",
-      "status": "สถานภาพ"
-    }
+      "status": "สถานภาพ",
+      "no_data": "ไม่มีข้อมูล",
+      "error_code": "รหัสข้อผิดพลาด"
+    },
+    "home": "หน้าแรก",
+    "confirm": "ยืนยัน",
+    "retry": "ลองอีกครั้ง",
+    "all": "ทั้งหมด",
+    "clearAll": "ล้างทั้งหมด",
+    "noDataDescription": "ไม่พบข้อมูล"
   },
+  "common.actions": "การดำเนินการ",
   "common.actions.add": "เพิ่ม",
   "common.actions.addNew": "เพิ่มใหม่",
+  "common.actions.add_new": "เพิ่มใหม่",
   "common.actions.edit": "แก้ไข",
   "common.actions.delete": "ลบ",
   "common.actions.save": "บันทึก",
@@ -3171,6 +3183,7 @@
   "common.actions.next": "ถัดไป",
   "common.actions.optional": "ไม่บังคับ",
   "common.actions.moreDetails": "รายละเอียดเพิ่มเติม",
+  "common.actions.more_details": "รายละเอียดเพิ่มเติม",
   "common.actions.transfer": "โอน",
   "common.labels.no": "ลำดับที่",
   "common.labels.employeeId": "รหัสพนักงาน",
@@ -3497,6 +3510,12 @@
   "features.auth.forgotPassword.error.invalidCredentials": "ชื่อผู้ใช้หรืออีเมลไม่ถูกต้อง",
   "features.auth.forgotPassword.error.sendFailed": "ไม่สามารถส่งรหัสผ่านได้ กรุณาลองใหม่อีกครั้ง",
   "features.auth.forgotPassword.error.incompleteData": "กรุณากรอกข้อมูลให้ครบถ้วน",
+  "auth.forgotPassword.error.emailInvalid": "กรุณากรอกอีเมลให้ถูกต้อง",
+  "auth.forgotPassword.error.emailRequired": "กรุณากรอกอีเมล",
+  "auth.forgotPassword.successMessage": "ส่งรหัสผ่านไปยังอีเมลสำเร็จแล้ว",
+  "auth.forgotPassword.error.sendFailed": "ไม่สามารถส่งรหัสผ่านได้ กรุณาลองใหม่อีกครั้ง",
+  "auth.forgotPassword.error.invalidCredentials": "ชื่อผู้ใช้หรืออีเมลไม่ถูกต้อง",
+  "auth.forgotPassword.error.incompleteData": "กรุณากรอกข้อมูลให้ครบถ้วน",
   "features.auth.login.welcome": "Welcome to myHR",
   "features.auth.login.subtitle": "ระบบจัดการทรัพยากรบุคคลที่ครบวงจร เพื่อเพิ่มประสิทธิภาพการทำงานของคุณ",
   "features.auth.login.title": "เข้าสู่ระบบ",
@@ -3509,5 +3528,24 @@
   "features.auth.login.signIn": "เข้าสู่ระบบด้วยระบบ HR",
   "features.auth.login.signingIn": "กำลังเข้าสู่ระบบ...",
   "features.auth.login.error.usernameRequired": "กรุณากรอกชื่อผู้ใช้",
-  "features.auth.login.error.passwordRequired": "กรุณากรอกรหัสผ่าน"
+  "features.auth.login.error.passwordRequired": "กรุณากรอกรหัสผ่าน",
+  "features": {
+    "auth": {
+      "forgotPassword": {
+        "success": "สำเร็จ",
+        "error": {
+          "title": "เกิดข้อผิดพลาด"
+        }
+      },
+      "login": {
+        "error": {
+          "title": "เกิดข้อผิดพลาด"
+        }
+      }
+    }
+  },
+  "Export": "ส่งออก",
+  "module": {
+    "title": "โมดูล"
+  }
 }

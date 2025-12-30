@@ -1,10 +1,131 @@
 {
   "missing": {
-    "en": [],
-    "lo": [],
-    "my": [],
-    "vi": [],
-    "zh": []
+    "en": [
+      "common.image_upload.supported_formats",
+      "common.image_upload.max_size",
+      "common.labels.no_data",
+      "common.labels.error_code",
+      "common.home",
+      "common.confirm",
+      "common.retry",
+      "common.all",
+      "common.clearAll",
+      "common.noDataDescription",
+      "common.actions",
+      "common.actions.add_new",
+      "common.actions.more_details",
+      "auth.forgotPassword.error.emailInvalid",
+      "auth.forgotPassword.error.emailRequired",
+      "auth.forgotPassword.successMessage",
+      "auth.forgotPassword.error.sendFailed",
+      "auth.forgotPassword.error.invalidCredentials",
+      "auth.forgotPassword.error.incompleteData",
+      "features.auth.forgotPassword.success",
+      "features.auth.forgotPassword.error.title",
+      "features.auth.login.error.title",
+      "Export",
+      "module.title"
+    ],
+    "lo": [
+      "common.image_upload.supported_formats",
+      "common.image_upload.max_size",
+      "common.labels.no_data",
+      "common.labels.error_code",
+      "common.home",
+      "common.confirm",
+      "common.retry",
+      "common.all",
+      "common.clearAll",
+      "common.noDataDescription",
+      "common.actions",
+      "common.actions.add_new",
+      "common.actions.more_details",
+      "auth.forgotPassword.error.emailInvalid",
+      "auth.forgotPassword.error.emailRequired",
+      "auth.forgotPassword.successMessage",
+      "auth.forgotPassword.error.sendFailed",
+      "auth.forgotPassword.error.invalidCredentials",
+      "auth.forgotPassword.error.incompleteData",
+      "features.auth.forgotPassword.success",
+      "features.auth.forgotPassword.error.title",
+      "features.auth.login.error.title",
+      "module.title"
+    ],
+    "my": [
+      "common.image_upload.supported_formats",
+      "common.image_upload.max_size",
+      "common.labels.no_data",
+      "common.labels.error_code",
+      "common.home",
+      "common.confirm",
+      "common.retry",
+      "common.all",
+      "common.clearAll",
+      "common.noDataDescription",
+      "common.actions",
+      "common.actions.add_new",
+      "common.actions.more_details",
+      "auth.forgotPassword.error.emailInvalid",
+      "auth.forgotPassword.error.emailRequired",
+      "auth.forgotPassword.successMessage",
+      "auth.forgotPassword.error.sendFailed",
+      "auth.forgotPassword.error.invalidCredentials",
+      "auth.forgotPassword.error.incompleteData",
+      "features.auth.forgotPassword.success",
+      "features.auth.forgotPassword.error.title",
+      "features.auth.login.error.title",
+      "module.title"
+    ],
+    "vi": [
+      "common.image_upload.supported_formats",
+      "common.image_upload.max_size",
+      "common.labels.no_data",
+      "common.labels.error_code",
+      "common.home",
+      "common.confirm",
+      "common.retry",
+      "common.all",
+      "common.clearAll",
+      "common.noDataDescription",
+      "common.actions",
+      "common.actions.add_new",
+      "common.actions.more_details",
+      "auth.forgotPassword.error.emailInvalid",
+      "auth.forgotPassword.error.emailRequired",
+      "auth.forgotPassword.successMessage",
+      "auth.forgotPassword.error.sendFailed",
+      "auth.forgotPassword.error.invalidCredentials",
+      "auth.forgotPassword.error.incompleteData",
+      "features.auth.forgotPassword.success",
+      "features.auth.forgotPassword.error.title",
+      "features.auth.login.error.title",
+      "module.title"
+    ],
+    "zh": [
+      "common.image_upload.supported_formats",
+      "common.image_upload.max_size",
+      "common.labels.no_data",
+      "common.labels.error_code",
+      "common.home",
+      "common.confirm",
+      "common.retry",
+      "common.all",
+      "common.clearAll",
+      "common.noDataDescription",
+      "common.actions",
+      "common.actions.add_new",
+      "common.actions.more_details",
+      "auth.forgotPassword.error.emailInvalid",
+      "auth.forgotPassword.error.emailRequired",
+      "auth.forgotPassword.successMessage",
+      "auth.forgotPassword.error.sendFailed",
+      "auth.forgotPassword.error.invalidCredentials",
+      "auth.forgotPassword.error.incompleteData",
+      "features.auth.forgotPassword.success",
+      "features.auth.forgotPassword.error.title",
+      "features.auth.login.error.title",
+      "module.title"
+    ]
   },
   "untranslated": {
     "en": [
@@ -95,65 +216,65 @@
   "total": {
     "en": {
       "total": 3618,
-      "reference": 3486,
-      "missing": 0,
+      "reference": 3510,
+      "missing": 24,
       "untranslated": 34,
-      "translated": 3584
+      "translated": 3560
     },
     "lo": {
       "total": 3632,
-      "reference": 3486,
-      "missing": 0,
+      "reference": 3510,
+      "missing": 23,
       "untranslated": 10,
-      "translated": 3622
+      "translated": 3599
     },
     "my": {
       "total": 3632,
-      "reference": 3486,
-      "missing": 0,
+      "reference": 3510,
+      "missing": 23,
       "untranslated": 10,
-      "translated": 3622
+      "translated": 3599
     },
     "vi": {
       "total": 3632,
-      "reference": 3486,
-      "missing": 0,
+      "reference": 3510,
+      "missing": 23,
       "untranslated": 10,
-      "translated": 3622
+      "translated": 3599
     },
     "zh": {
       "total": 3632,
-      "reference": 3486,
-      "missing": 0,
+      "reference": 3510,
+      "missing": 23,
       "untranslated": 10,
-      "translated": 3622
+      "translated": 3599
     }
   },
   "summary": {
     "en": {
-      "completeness": 99.02,
+      "completeness": 98.35,
       "translated": 3452,
-      "total": 3486
+      "total": 3510
     },
     "lo": {
-      "completeness": 99.71,
-      "translated": 3476,
-      "total": 3486
+      "completeness": 99.06,
+      "translated": 3477,
+      "total": 3510
     },
     "my": {
-      "completeness": 99.71,
-      "translated": 3476,
-      "total": 3486
+      "completeness": 99.06,
+      "translated": 3477,
+      "total": 3510
     },
     "vi": {
-      "completeness": 99.71,
-      "translated": 3476,
-      "total": 3486
+      "completeness": 99.06,
+      "translated": 3477,
+      "total": 3510
     },
     "zh": {
-      "completeness": 99.71,
-      "translated": 3476,
-      "total": 3486
+      "completeness": 99.06,
+      "translated": 3477,
+      "total": 3510
     }
   }
 }
