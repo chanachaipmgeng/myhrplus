@@ -120,12 +120,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">ความคืบหน้าการประเมินผล</h3>
               <app-icon name="assessment" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟความคืบหน้าการประเมินผล">
-              <div class="text-center">
-                <app-icon name="bar_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟความคืบหน้าการประเมิน</p>
-              </div>
-            </div>
+            <div echarts [options]="progressChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟความคืบหน้าการประเมินผล'"></div>
           </app-glass-card>
           
           <!-- Score Distribution Chart -->
@@ -134,12 +129,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การกระจายคะแนน</h3>
               <app-icon name="pie_chart" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟการกระจายคะแนน">
-              <div class="text-center">
-                <app-icon name="donut_large" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟการกระจายคะแนน</p>
-              </div>
-            </div>
+            <div echarts [options]="scoreDistributionChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟการกระจายคะแนน'"></div>
           </app-glass-card>
         </div>
 
@@ -151,12 +141,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">ผลการดำเนินงาน KPI</h3>
               <app-icon name="trending_up" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟผลการดำเนินงาน KPI">
-              <div class="text-center">
-                <app-icon name="show_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟผลการดำเนินงาน KPI</p>
-              </div>
-            </div>
+            <div echarts [options]="kpiPerformanceChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟผลการดำเนินงาน KPI'"></div>
           </app-glass-card>
           
           <!-- Department Comparison Chart -->
@@ -165,12 +150,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">เปรียบเทียบตามแผนก</h3>
               <app-icon name="account_tree" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟเปรียบเทียบตามแผนก">
-              <div class="text-center">
-                <app-icon name="stacked_bar_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟเปรียบเทียบตามแผนก</p>
-              </div>
-            </div>
+            <div echarts [options]="departmentComparisonChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟเปรียบเทียบตามแผนก'"></div>
           </app-glass-card>
         </div>
       </div>

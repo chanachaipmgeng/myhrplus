@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, User } from '@core/services';
+import { EChartsOption } from 'echarts';
 
 @Component({
   selector: 'app-ta-home',
   templateUrl: './ta-home.component.html',
   styleUrls: ['./ta-home.component.scss']
 })
-export class TaHomeComponent implements OnInit {
+export class TaHomeComponent implements OnInit, OnDestroy {
   currentUser: User | null = null;
   loading = false;
+  isDarkMode = false;
+  private observer?: MutationObserver;
 
   statistics = {
     todayAttendance: 1180,
@@ -18,6 +21,12 @@ export class TaHomeComponent implements OnInit {
     lateToday: 12,
     absentToday: 5
   };
+
+  // Chart Options
+  attendanceTrendChartOption: EChartsOption = {};
+  leaveRequestsChartOption: EChartsOption = {};
+  otRequestsChartOption: EChartsOption = {};
+  attendanceRateChartOption: EChartsOption = {};
 
   menuItems = [
     {
@@ -86,6 +95,249 @@ export class TaHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.checkDarkMode();
+    this.initializeCharts();
+    this.setupThemeObserver();
+  }
+
+  ngOnDestroy(): void {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+  }
+
+  private setupThemeObserver(): void {
+    const html = document.documentElement;
+    this.observer = new MutationObserver(() => {
+      const wasDarkMode = this.isDarkMode;
+      this.checkDarkMode();
+      if (wasDarkMode !== this.isDarkMode) {
+        this.initializeCharts();
+      }
+    });
+
+    this.observer.observe(html, {
+      attributes: true,
+      attributeFilter: ['class', 'data-theme']
+    });
+  }
+
+  @HostListener('window:resize', [])
+  private checkDarkMode(): void {
+    const html = document.documentElement;
+    this.isDarkMode = html.getAttribute('data-theme') === 'dark' ||
+                      html.classList.contains('dark') ||
+                      window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+
+  private getChartTextColor(): string {
+    return this.isDarkMode ? '#e2e8f0' : '#1e293b';
+  }
+
+  private getChartBackgroundColor(): string {
+    return this.isDarkMode ? 'transparent' : '#ffffff';
+  }
+
+  private getAxisLineColor(): string {
+    return this.isDarkMode ? '#475569' : '#e2e8f0';
+  }
+
+  private getSplitLineColor(): string {
+    return this.isDarkMode ? '#334155' : '#f1f5f9';
+  }
+
+  private initializeCharts(): void {
+    // Attendance Trend Chart (Last 7 days)
+    const attendanceDays = ['จันทร์', 'อังคาร', 'พุธ', 'พฤหัส', 'ศุกร์', 'เสาร์', 'อาทิตย์'];
+    const attendanceData = [1180, 1195, 1178, 1205, 1189, 890, 650];
+
+    this.attendanceTrendChartOption = {
+      backgroundColor: this.getChartBackgroundColor(),
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: { type: 'shadow' },
+        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+        borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
+        borderWidth: 1,
+        padding: [10, 15],
+        textStyle: { color: this.getChartTextColor(), fontSize: 13 },
+        extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px;'
+      },
+      grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+      xAxis: {
+        type: 'category',
+        data: attendanceDays,
+        axisLabel: { color: this.getChartTextColor() },
+        axisLine: { lineStyle: { color: this.getAxisLineColor() } }
+      },
+      yAxis: {
+        type: 'value',
+        name: 'จำนวนคน',
+        nameTextStyle: { color: this.getChartTextColor() },
+        axisLabel: { color: this.getChartTextColor() },
+        splitLine: { lineStyle: { color: this.getSplitLineColor() } }
+      },
+      series: [{
+        name: 'การลงเวลา',
+        type: 'bar',
+        data: attendanceData,
+        itemStyle: {
+          color: {
+            type: 'linear',
+            x: 0, y: 0, x2: 0, y2: 1,
+            colorStops: [
+              { offset: 0, color: '#14b8a6' },
+              { offset: 0.5, color: '#0d9488' },
+              { offset: 1, color: '#0d9488' }
+            ]
+          }
+        },
+        label: { show: true, position: 'top' }
+      }]
+    };
+
+    // Leave Requests Chart (Pie Chart)
+    const leaveTypes = ['ลาป่วย', 'ลาพักผ่อน', 'ลากิจ', 'ลาคลอด', 'อื่นๆ'];
+    const leaveData = [45, 78, 32, 12, 8];
+
+    this.leaveRequestsChartOption = {
+      backgroundColor: this.getChartBackgroundColor(),
+      tooltip: {
+        trigger: 'item',
+        formatter: (params: any) => `${params.seriesName}<br/>${params.name}: ${params.value} รายการ (${params.percent}%)`,
+        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+        borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
+        borderWidth: 1,
+        padding: [10, 15],
+        textStyle: { color: this.getChartTextColor(), fontSize: 13 },
+        extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px;'
+      },
+      legend: {
+        orient: 'vertical',
+        left: 'left',
+        top: 'middle',
+        textStyle: { fontSize: 12, color: this.getChartTextColor() }
+      },
+      series: [{
+        name: 'คำขอลา',
+        type: 'pie',
+        radius: ['40%', '70%'],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: this.isDarkMode ? '#1e293b' : '#fff',
+          borderWidth: 2
+        },
+        label: {
+          show: true,
+          formatter: (params: any) => `${params.name}\n${params.value} รายการ`,
+          color: this.getChartTextColor()
+        },
+        emphasis: {
+          label: { show: true, fontSize: 14, fontWeight: 'bold' }
+        },
+        data: leaveTypes.map((name, index) => ({ name, value: leaveData[index] }))
+      }]
+    };
+
+    // OT Requests Chart (Bar Chart)
+    const otDays = ['จันทร์', 'อังคาร', 'พุธ', 'พฤหัส', 'ศุกร์', 'เสาร์', 'อาทิตย์'];
+    const otData = [12, 15, 8, 20, 18, 5, 3];
+
+    this.otRequestsChartOption = {
+      backgroundColor: this.getChartBackgroundColor(),
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: { type: 'shadow' },
+        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+        borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
+        borderWidth: 1,
+        padding: [10, 15],
+        textStyle: { color: this.getChartTextColor(), fontSize: 13 },
+        extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px;'
+      },
+      grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+      xAxis: {
+        type: 'category',
+        data: otDays,
+        axisLabel: { color: this.getChartTextColor() },
+        axisLine: { lineStyle: { color: this.getAxisLineColor() } }
+      },
+      yAxis: {
+        type: 'value',
+        name: 'จำนวนรายการ',
+        nameTextStyle: { color: this.getChartTextColor() },
+        axisLabel: { color: this.getChartTextColor() },
+        splitLine: { lineStyle: { color: this.getSplitLineColor() } }
+      },
+      series: [{
+        name: 'คำขอ OT',
+        type: 'bar',
+        data: otData,
+        itemStyle: {
+          color: {
+            type: 'linear',
+            x: 0, y: 0, x2: 0, y2: 1,
+            colorStops: [
+              { offset: 0, color: '#f59e0b' },
+              { offset: 0.5, color: '#d97706' },
+              { offset: 1, color: '#d97706' }
+            ]
+          }
+        },
+        label: { show: true, position: 'top' }
+      }]
+    };
+
+    // Attendance Rate Chart (Area Chart)
+    const rateDays = ['จันทร์', 'อังคาร', 'พุธ', 'พฤหัส', 'ศุกร์', 'เสาร์', 'อาทิตย์'];
+    const rateData = [94.2, 95.1, 93.8, 96.0, 94.5, 71.0, 52.0];
+
+    this.attendanceRateChartOption = {
+      backgroundColor: this.getChartBackgroundColor(),
+      tooltip: {
+        trigger: 'axis',
+        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+        borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
+        borderWidth: 1,
+        padding: [10, 15],
+        textStyle: { color: this.getChartTextColor(), fontSize: 13 },
+        extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px;'
+      },
+      grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+      xAxis: {
+        type: 'category',
+        data: rateDays,
+        axisLabel: { color: this.getChartTextColor() },
+        axisLine: { lineStyle: { color: this.getAxisLineColor() } }
+      },
+      yAxis: {
+        type: 'value',
+        name: 'เปอร์เซ็นต์',
+        nameTextStyle: { color: this.getChartTextColor() },
+        axisLabel: { color: this.getChartTextColor(), formatter: '{value}%' },
+        splitLine: { lineStyle: { color: this.getSplitLineColor() } }
+      },
+      series: [{
+        name: 'อัตราการลงเวลา',
+        type: 'line',
+        smooth: true,
+        areaStyle: {
+          color: {
+            type: 'linear',
+            x: 0, y: 0, x2: 0, y2: 1,
+            colorStops: [
+              { offset: 0, color: 'rgba(20, 184, 166, 0.3)' },
+              { offset: 1, color: 'rgba(20, 184, 166, 0.05)' }
+            ]
+          }
+        },
+        itemStyle: { color: '#14b8a6' },
+        lineStyle: { color: '#14b8a6', width: 2 },
+        data: rateData,
+        label: { show: true, formatter: '{c}%', color: this.getChartTextColor() }
+      }]
+    };
   }
 
   navigateTo(route: string): void {

@@ -144,12 +144,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">แนวโน้มเงินเดือน 6 เดือน</h3>
               <app-icon name="bar_chart" size="md" color="text-gray-400 dark:text-gray-500"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
-              <div class="text-center">
-                <app-icon name="show_chart" size="xl" color="text-gray-400 dark:text-gray-500"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟแนวโน้มเงินเดือน</p>
-              </div>
-            </div>
+            <div echarts [options]="payrollTrendChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟแนวโน้มเงินเดือน 6 เดือน'"></div>
           </app-glass-card>
           
           <!-- Salary Distribution Chart -->
@@ -158,12 +153,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การกระจายเงินเดือน</h3>
               <app-icon name="pie_chart" size="md" color="text-gray-400 dark:text-gray-500"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
-              <div class="text-center">
-                <app-icon name="donut_large" size="xl" color="text-gray-400 dark:text-gray-500"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟการกระจายเงินเดือน</p>
-              </div>
-            </div>
+            <div echarts [options]="salaryDistributionChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟการกระจายเงินเดือน'"></div>
           </app-glass-card>
         </div>
 
@@ -175,12 +165,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">เงินเดือนตามแผนก</h3>
               <app-icon name="account_tree" size="md" color="text-gray-400 dark:text-gray-500"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
-              <div class="text-center">
-                <app-icon name="stacked_bar_chart" size="xl" color="text-gray-400 dark:text-gray-500"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟเงินเดือนตามแผนก</p>
-              </div>
-            </div>
+            <div echarts [options]="departmentPayrollChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟเงินเดือนตามแผนก'"></div>
           </app-glass-card>
           
           <!-- Benefits Chart -->
@@ -189,12 +174,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">สวัสดิการและหักเงิน</h3>
               <app-icon name="savings" size="md" color="text-gray-400 dark:text-gray-500"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
-              <div class="text-center">
-                <app-icon name="account_balance_wallet" size="xl" color="text-gray-400 dark:text-gray-500"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟสวัสดิการ</p>
-              </div>
-            </div>
+            <div echarts [options]="benefitsChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟสวัสดิการและหักเงิน'"></div>
           </app-glass-card>
         </div>
       </div>

@@ -124,12 +124,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">โครงสร้างองค์กร</h3>
               <app-icon name="account_tree" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟโครงสร้างองค์กร">
-              <div class="text-center">
-                <app-icon name="bar_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟโครงสร้างองค์กร</p>
-              </div>
-            </div>
+            <div echarts [options]="orgStructureChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟโครงสร้างองค์กร'"></div>
           </app-glass-card>
 
           <!-- Department Distribution Chart -->
@@ -138,12 +133,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การกระจายตามแผนก</h3>
               <app-icon name="pie_chart" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟการกระจายตามแผนก">
-              <div class="text-center">
-                <app-icon name="donut_large" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟการกระจายตามแผนก</p>
-              </div>
-            </div>
+            <div echarts [options]="departmentDistributionChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟการกระจายตามแผนก'"></div>
           </app-glass-card>
         </div>
 
@@ -155,12 +145,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">พนักงานตามสาขา</h3>
               <app-icon name="business" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟพนักงานตามสาขา">
-              <div class="text-center">
-                <app-icon name="stacked_bar_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟพนักงานตามสาขา</p>
-              </div>
-            </div>
+            <div echarts [options]="employeeByBranchChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟพนักงานตามสาขา'"></div>
           </app-glass-card>
 
           <!-- Position Distribution Chart -->
@@ -169,12 +154,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การกระจายตำแหน่งงาน</h3>
               <app-icon name="person" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟการกระจายตำแหน่งงาน">
-              <div class="text-center">
-                <app-icon name="area_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟการกระจายตำแหน่งงาน</p>
-              </div>
-            </div>
+            <div echarts [options]="positionDistributionChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟการกระจายตำแหน่งงาน'"></div>
           </app-glass-card>
         </div>
       </div>

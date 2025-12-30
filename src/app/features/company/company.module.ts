@@ -7,6 +7,7 @@ import { GlassCardComponent } from '@shared/components/glass-card/glass-card.com
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { IconComponent } from '@shared/components/icon/icon.component';
 import { StaggerDirective } from '@shared/directives/stagger.directive';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { StaggerDirective } from '@shared/directives/stagger.directive';
     GlassCardComponent,
     PageHeaderComponent,
     IconComponent,
-    StaggerDirective
+    StaggerDirective,
+    NgxEchartsModule
   ]
 })
 export class CompanyModule { }

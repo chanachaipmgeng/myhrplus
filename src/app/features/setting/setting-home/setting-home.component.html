@@ -120,12 +120,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">กิจกรรมผู้ใช้ 6 เดือน</h3>
               <app-icon name="bar_chart" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟกิจกรรมผู้ใช้ 6 เดือน">
-              <div class="text-center">
-                <app-icon name="show_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟกิจกรรมผู้ใช้</p>
-              </div>
-            </div>
+            <div echarts [options]="userActivityChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟกิจกรรมผู้ใช้ 6 เดือน'"></div>
           </app-glass-card>
           
           <!-- Role Distribution Chart -->
@@ -134,12 +129,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การกระจายบทบาท</h3>
               <app-icon name="pie_chart" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟการกระจายบทบาท">
-              <div class="text-center">
-                <app-icon name="donut_large" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟการกระจายบทบาท</p>
-              </div>
-            </div>
+            <div echarts [options]="roleDistributionChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟการกระจายบทบาท'"></div>
           </app-glass-card>
         </div>
 
@@ -151,12 +141,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การใช้งานเมนู</h3>
               <app-icon name="menu" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟการใช้งานเมนู">
-              <div class="text-center">
-                <app-icon name="stacked_bar_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟการใช้งานเมนู</p>
-              </div>
-            </div>
+            <div echarts [options]="menuUsageChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟการใช้งานเมนู'"></div>
           </app-glass-card>
           
           <!-- System Settings Chart -->
@@ -165,12 +150,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การตั้งค่าระบบ</h3>
               <app-icon name="settings" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟการตั้งค่าระบบ">
-              <div class="text-center">
-                <app-icon name="area_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟการตั้งค่าระบบ</p>
-              </div>
-            </div>
+            <div echarts [options]="systemSettingsChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟการตั้งค่าระบบ'"></div>
           </app-glass-card>
         </div>
       </div>

@@ -119,12 +119,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การเติบโตของพนักงาน 6 เดือน</h3>
               <app-icon name="bar_chart" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟการเติบโตของพนักงาน 6 เดือน">
-              <div class="text-center">
-                <app-icon name="show_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟการเติบโตของพนักงาน</p>
-              </div>
-            </div>
+            <div echarts [options]="employeeGrowthChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟการเติบโตของพนักงาน 6 เดือน'"></div>
           </app-glass-card>
 
           <!-- Employee Distribution Chart -->
@@ -133,12 +128,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การกระจายพนักงานตามแผนก</h3>
               <app-icon name="pie_chart" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟการกระจายพนักงานตามแผนก">
-              <div class="text-center">
-                <app-icon name="donut_large" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟการกระจายพนักงาน</p>
-              </div>
-            </div>
+            <div echarts [options]="employeeDistributionChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟการกระจายพนักงานตามแผนก'"></div>
           </app-glass-card>
         </div>
 
@@ -150,12 +140,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การกระจายตามอายุ</h3>
               <app-icon name="account_tree" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟการกระจายตามอายุ">
-              <div class="text-center">
-                <app-icon name="stacked_bar_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟการกระจายตามอายุ</p>
-              </div>
-            </div>
+            <div echarts [options]="employeeByAgeChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟการกระจายตามอายุ'"></div>
           </app-glass-card>
 
           <!-- Employee Status Chart -->
@@ -164,12 +149,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">สถานะพนักงาน</h3>
               <app-icon name="person" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟสถานะพนักงาน">
-              <div class="text-center">
-                <app-icon name="area_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟสถานะพนักงาน</p>
-              </div>
-            </div>
+            <div echarts [options]="employeeStatusChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟสถานะพนักงาน'"></div>
           </app-glass-card>
         </div>
       </div>

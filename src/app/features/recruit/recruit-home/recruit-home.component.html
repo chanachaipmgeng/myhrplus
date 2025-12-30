@@ -120,12 +120,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">จำนวนผู้สมัคร 6 เดือน</h3>
               <app-icon name="bar_chart" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟจำนวนผู้สมัคร 6 เดือน">
-              <div class="text-center">
-                <app-icon name="show_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟจำนวนผู้สมัคร</p>
-              </div>
-            </div>
+            <div echarts [options]="applicationsChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟจำนวนผู้สมัคร 6 เดือน'"></div>
           </app-glass-card>
           
           <!-- Application Status Chart -->
@@ -134,12 +129,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">สถานะการสมัครงาน</h3>
               <app-icon name="pie_chart" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟสถานะการสมัครงาน">
-              <div class="text-center">
-                <app-icon name="donut_large" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟสถานะการสมัคร</p>
-              </div>
-            </div>
+            <div echarts [options]="applicationStatusChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟสถานะการสมัครงาน'"></div>
           </app-glass-card>
         </div>
 
@@ -151,12 +141,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">ตารางนัดสัมภาษณ์</h3>
               <app-icon name="calendar_today" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟตารางนัดสัมภาษณ์">
-              <div class="text-center">
-                <app-icon name="stacked_bar_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟตารางนัดสัมภาษณ์</p>
-              </div>
-            </div>
+            <div echarts [options]="interviewScheduleChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟตารางนัดสัมภาษณ์'"></div>
           </app-glass-card>
           
           <!-- Hiring Rate Chart -->
@@ -165,12 +150,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">อัตราการรับเข้าทำงาน</h3>
               <app-icon name="trending_up" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟอัตราการรับเข้าทำงาน">
-              <div class="text-center">
-                <app-icon name="area_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟอัตราการรับเข้าทำงาน</p>
-              </div>
-            </div>
+            <div echarts [options]="hiringRateChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟอัตราการรับเข้าทำงาน'"></div>
           </app-glass-card>
         </div>
       </div>

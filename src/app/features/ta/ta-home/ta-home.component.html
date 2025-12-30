@@ -124,12 +124,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">แนวโน้มการลงเวลา 7 วัน</h3>
               <app-icon name="show_chart" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟแนวโน้มการลงเวลา 7 วัน">
-              <div class="text-center">
-                <app-icon name="bar_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟแนวโน้มการลงเวลา</p>
-              </div>
-            </div>
+            <div echarts [options]="attendanceTrendChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟแนวโน้มการลงเวลา 7 วัน'"></div>
           </app-glass-card>
           
           <!-- Leave Requests Chart -->
@@ -138,12 +133,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">คำขอลาเดือนนี้</h3>
               <app-icon name="event" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟคำขอลาเดือนนี้">
-              <div class="text-center">
-                <app-icon name="pie_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟคำขอลา</p>
-              </div>
-            </div>
+            <div echarts [options]="leaveRequestsChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟคำขอลาเดือนนี้'"></div>
           </app-glass-card>
         </div>
 
@@ -155,12 +145,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">คำขอ OT เดือนนี้</h3>
               <app-icon name="schedule" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟคำขอ OT เดือนนี้">
-              <div class="text-center">
-                <app-icon name="stacked_bar_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟคำขอ OT</p>
-              </div>
-            </div>
+            <div echarts [options]="otRequestsChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟคำขอ OT เดือนนี้'"></div>
           </app-glass-card>
           
           <!-- Attendance Rate Chart -->
@@ -169,12 +154,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">อัตราการลงเวลา</h3>
               <app-icon name="trending_up" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟอัตราการลงเวลา">
-              <div class="text-center">
-                <app-icon name="area_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟอัตราการลงเวลา</p>
-              </div>
-            </div>
+            <div echarts [options]="attendanceRateChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟอัตราการลงเวลา'"></div>
           </app-glass-card>
         </div>
       </div>

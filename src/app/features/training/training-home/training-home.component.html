@@ -139,12 +139,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การลงทะเบียนอบรม 6 เดือน</h3>
               <app-icon name="bar_chart" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟการลงทะเบียนอบรม 6 เดือน">
-              <div class="text-center">
-                <app-icon name="show_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟการลงทะเบียนอบรม</p>
-              </div>
-            </div>
+            <div echarts [options]="enrollmentChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟการลงทะเบียนอบรม 6 เดือน'"></div>
           </app-glass-card>
           
           <!-- Course Completion Chart -->
@@ -153,12 +148,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">อัตราการสำเร็จการอบรม</h3>
               <app-icon name="pie_chart" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟอัตราการสำเร็จการอบรม">
-              <div class="text-center">
-                <app-icon name="donut_large" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟอัตราการสำเร็จ</p>
-              </div>
-            </div>
+            <div echarts [options]="completionChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟอัตราการสำเร็จการอบรม'"></div>
           </app-glass-card>
         </div>
 
@@ -170,12 +160,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การอบรมตามแผนก</h3>
               <app-icon name="account_tree" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟการอบรมตามแผนก">
-              <div class="text-center">
-                <app-icon name="stacked_bar_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟการอบรมตามแผนก</p>
-              </div>
-            </div>
+            <div echarts [options]="departmentTrainingChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟการอบรมตามแผนก'"></div>
           </app-glass-card>
           
           <!-- Certificate Issuance Chart -->
@@ -184,12 +169,7 @@
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การออกใบรับรอง</h3>
               <app-icon name="description" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
             </div>
-            <div class="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-800/50 rounded-lg" role="img" aria-label="กราฟการออกใบรับรอง">
-              <div class="text-center">
-                <app-icon name="area_chart" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-                <p class="mt-2 text-sm thai-text">กราฟการออกใบรับรอง</p>
-              </div>
-            </div>
+            <div echarts [options]="certificateChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟการออกใบรับรอง'"></div>
           </app-glass-card>
         </div>
       </div>

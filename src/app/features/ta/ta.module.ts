@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
 import { IconComponent } from '@shared/components/icon/icon.component';
 import { StaggerDirective } from '@shared/directives/stagger.directive';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,9 @@ import { StaggerDirective } from '@shared/directives/stagger.directive';
     EmptyStateComponent,
     PageHeaderComponent,
     IconComponent,
-    StaggerDirective
+    StaggerDirective,
+    // Charts
+    NgxEchartsModule
   ]
 })
 export class TaModule { }

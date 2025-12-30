@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, User } from '@core/services';
+import { EChartsOption } from 'echarts';
 
 @Component({
   selector: 'app-personal-home',
   templateUrl: './personal-home.component.html',
   styleUrls: ['./personal-home.component.scss']
 })
-export class PersonalHomeComponent implements OnInit {
+export class PersonalHomeComponent implements OnInit, OnDestroy {
   currentUser: User | null = null;
+  isDarkMode = false;
+  private observer?: MutationObserver;
 
   statistics = {
     totalEmployees: 1250,
@@ -17,6 +20,12 @@ export class PersonalHomeComponent implements OnInit {
     onLeave: 5,
     pendingApprovals: 8
   };
+
+  // Chart Options
+  employeeGrowthChartOption: EChartsOption = {};
+  employeeDistributionChartOption: EChartsOption = {};
+  employeeByAgeChartOption: EChartsOption = {};
+  employeeStatusChartOption: EChartsOption = {};
 
   menuItems = [
     {
@@ -43,6 +52,276 @@ export class PersonalHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.checkDarkMode();
+    this.initializeCharts();
+    this.setupThemeObserver();
+  }
+
+  ngOnDestroy(): void {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+  }
+
+  private setupThemeObserver(): void {
+    const html = document.documentElement;
+    this.observer = new MutationObserver(() => {
+      const wasDarkMode = this.isDarkMode;
+      this.checkDarkMode();
+      if (wasDarkMode !== this.isDarkMode) {
+        this.initializeCharts();
+      }
+    });
+
+    this.observer.observe(html, {
+      attributes: true,
+      attributeFilter: ['class', 'data-theme']
+    });
+  }
+
+  @HostListener('window:resize', [])
+  private checkDarkMode(): void {
+    const html = document.documentElement;
+    this.isDarkMode = html.getAttribute('data-theme') === 'dark' ||
+                      html.classList.contains('dark') ||
+                      window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+
+  private getChartTextColor(): string {
+    return this.isDarkMode ? '#e2e8f0' : '#1e293b';
+  }
+
+  private getChartBackgroundColor(): string {
+    return this.isDarkMode ? 'transparent' : '#ffffff';
+  }
+
+  private getAxisLineColor(): string {
+    return this.isDarkMode ? '#475569' : '#e2e8f0';
+  }
+
+  private getSplitLineColor(): string {
+    return this.isDarkMode ? '#334155' : '#f1f5f9';
+  }
+
+  private initializeCharts(): void {
+    // Employee Growth Chart (Last 6 months)
+    const months = ['ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+    const growthData = [1200, 1215, 1228, 1235, 1242, 1250];
+
+    this.employeeGrowthChartOption = {
+      backgroundColor: this.getChartBackgroundColor(),
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: { type: 'shadow' },
+        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+        borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
+        borderWidth: 1,
+        padding: [10, 15],
+        textStyle: { color: this.getChartTextColor(), fontSize: 13 },
+        extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px;'
+      },
+      grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+      xAxis: {
+        type: 'category',
+        data: months,
+        axisLabel: { color: this.getChartTextColor() },
+        axisLine: { lineStyle: { color: this.getAxisLineColor() } }
+      },
+      yAxis: {
+        type: 'value',
+        name: 'จำนวนคน',
+        nameTextStyle: { color: this.getChartTextColor() },
+        axisLabel: { color: this.getChartTextColor() },
+        splitLine: { lineStyle: { color: this.getSplitLineColor() } }
+      },
+      series: [{
+        name: 'การเติบโตของพนักงาน',
+        type: 'bar',
+        data: growthData,
+        itemStyle: {
+          color: {
+            type: 'linear',
+            x: 0, y: 0, x2: 0, y2: 1,
+            colorStops: [
+              { offset: 0, color: '#3b82f6' },
+              { offset: 0.5, color: '#2563eb' },
+              { offset: 1, color: '#2563eb' }
+            ]
+          }
+        },
+        label: { show: true, position: 'top' }
+      }]
+    };
+
+    // Employee Distribution Chart (Pie Chart)
+    const departments = ['ฝ่ายขาย', 'ฝ่ายการตลาด', 'ฝ่ายบัญชี', 'ฝ่าย HR', 'ฝ่าย IT', 'ฝ่ายผลิต', 'อื่นๆ'];
+    const deptData = [342, 198, 156, 89, 124, 278, 63];
+
+    this.employeeDistributionChartOption = {
+      backgroundColor: this.getChartBackgroundColor(),
+      tooltip: {
+        trigger: 'item',
+        formatter: (params: any) => `${params.seriesName}<br/>${params.name}: ${params.value} คน (${params.percent}%)`,
+        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+        borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
+        borderWidth: 1,
+        padding: [10, 15],
+        textStyle: { color: this.getChartTextColor(), fontSize: 13 },
+        extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px;'
+      },
+      legend: {
+        orient: 'vertical',
+        left: 'left',
+        top: 'middle',
+        textStyle: { fontSize: 12, color: this.getChartTextColor() }
+      },
+      series: [{
+        name: 'การกระจายพนักงาน',
+        type: 'pie',
+        radius: ['40%', '70%'],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: this.isDarkMode ? '#1e293b' : '#fff',
+          borderWidth: 2
+        },
+        label: {
+          show: true,
+          formatter: (params: any) => `${params.name}\n${params.value} คน`,
+          color: this.getChartTextColor()
+        },
+        emphasis: {
+          label: { show: true, fontSize: 14, fontWeight: 'bold' }
+        },
+        data: departments.map((name, index) => ({ name, value: deptData[index] }))
+      }]
+    };
+
+    // Employee by Age Chart (Stacked Bar Chart)
+    const ageRanges = ['20-30', '31-40', '41-50', '51-60', '> 60'];
+    const maleData = [156, 342, 198, 78, 12];
+    const femaleData = [142, 298, 168, 65, 8];
+
+    this.employeeByAgeChartOption = {
+      backgroundColor: this.getChartBackgroundColor(),
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: { type: 'shadow' },
+        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+        borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
+        borderWidth: 1,
+        padding: [10, 15],
+        textStyle: { color: this.getChartTextColor(), fontSize: 13 },
+        formatter: (params: any) => {
+          let result = `${params[0].name}<br/>`;
+          params.forEach((param: any) => {
+            result += `${param.seriesName}: ${param.value} คน<br/>`;
+          });
+          return result;
+        },
+        extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px;'
+      },
+      grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+      xAxis: {
+        type: 'category',
+        data: ageRanges,
+        axisLabel: { color: this.getChartTextColor() },
+        axisLine: { lineStyle: { color: this.getAxisLineColor() } }
+      },
+      yAxis: {
+        type: 'value',
+        name: 'จำนวนคน',
+        nameTextStyle: { color: this.getChartTextColor() },
+        axisLabel: { color: this.getChartTextColor() },
+        splitLine: { lineStyle: { color: this.getSplitLineColor() } }
+      },
+      series: [
+        {
+          name: 'ชาย',
+          type: 'bar',
+          stack: 'total',
+          data: maleData,
+          itemStyle: { color: '#3b82f6' }
+        },
+        {
+          name: 'หญิง',
+          type: 'bar',
+          stack: 'total',
+          data: femaleData,
+          itemStyle: { color: '#ec4899' }
+        }
+      ]
+    };
+
+    // Employee Status Chart (Area Chart)
+    const statusMonths = ['ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+    const activeData = [1180, 1185, 1190, 1175, 1180, 1180];
+    const onLeaveData = [5, 4, 6, 8, 5, 5];
+
+    this.employeeStatusChartOption = {
+      backgroundColor: this.getChartBackgroundColor(),
+      tooltip: {
+        trigger: 'axis',
+        backgroundColor: this.isDarkMode ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+        borderColor: this.isDarkMode ? '#475569' : '#e2e8f0',
+        borderWidth: 1,
+        padding: [10, 15],
+        textStyle: { color: this.getChartTextColor(), fontSize: 13 },
+        extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 8px;'
+      },
+      grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+      xAxis: {
+        type: 'category',
+        data: statusMonths,
+        axisLabel: { color: this.getChartTextColor() },
+        axisLine: { lineStyle: { color: this.getAxisLineColor() } }
+      },
+      yAxis: {
+        type: 'value',
+        name: 'จำนวนคน',
+        nameTextStyle: { color: this.getChartTextColor() },
+        axisLabel: { color: this.getChartTextColor() },
+        splitLine: { lineStyle: { color: this.getSplitLineColor() } }
+      },
+      series: [
+        {
+          name: 'ทำงาน',
+          type: 'line',
+          smooth: true,
+          areaStyle: {
+            color: {
+              type: 'linear',
+              x: 0, y: 0, x2: 0, y2: 1,
+              colorStops: [
+                { offset: 0, color: 'rgba(59, 130, 246, 0.3)' },
+                { offset: 1, color: 'rgba(59, 130, 246, 0.05)' }
+              ]
+            }
+          },
+          itemStyle: { color: '#3b82f6' },
+          lineStyle: { color: '#3b82f6', width: 2 },
+          data: activeData
+        },
+        {
+          name: 'ลาพัก',
+          type: 'line',
+          smooth: true,
+          areaStyle: {
+            color: {
+              type: 'linear',
+              x: 0, y: 0, x2: 0, y2: 1,
+              colorStops: [
+                { offset: 0, color: 'rgba(236, 72, 153, 0.3)' },
+                { offset: 1, color: 'rgba(236, 72, 153, 0.05)' }
+              ]
+            }
+          },
+          itemStyle: { color: '#ec4899' },
+          lineStyle: { color: '#ec4899', width: 2 },
+          data: onLeaveData
+        }
+      ]
+    };
   }
 
   navigateTo(route: string): void {
