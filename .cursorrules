@@ -415,8 +415,43 @@ export class ModelNameService {
 ### SCSS
 - **File Structure**: One SCSS file per component (`component-name.component.scss`)
 - **Global Styles**: Use `src/styles.scss` for global styles
-- **Design Tokens**: Use variables from `src/styles/_design-tokens.scss`
+- **Design Tokens**: Use CSS variables from `src/styles/_design-tokens.scss`
+  - **Spacing Scale**: `--spacing-xs` to `--spacing-3xl` (0.25rem increments)
+  - **Typography Scale**: `--font-size-xs` to `--font-size-5xl`, `--font-weight-*`, `--line-height-*`
+  - **Border Radius**: `--radius-none` to `--radius-full`
+  - **Shadows**: `--shadow-sm` to `--shadow-2xl` (with dark mode overrides)
+  - **Transitions**: `--transition-fast` to `--transition-slower`, `--ease-*`
+  - **Touch Targets**: `--touch-target-min` (44px), `--touch-target-comfortable` (48px)
+  - **Z-Index Scale**: `--z-base` to `--z-toast`
+- **Typography System**: Use utility classes from `src/styles/_typography.scss`
+  - **Headings**: `.h1` to `.h6` (responsive)
+  - **Body Text**: `.body-large`, `.body-base`, `.body-small`, `.body-xs`
+  - **Utilities**: `.text-truncate`, `.text-ellipsis-2`, `.text-ellipsis-3`
+- **Component Variants**: Use utility classes from `src/styles/_component-variants.scss`
+  - **Buttons**: `.btn`, `.btn-primary`, `.btn-outline`, `.btn-ghost`, `.btn-sm`, `.btn-lg`, `.btn-block`
+  - **Cards**: `.card`, `.card-hover`, `.card-header`, `.card-title`, `.card-body`, `.card-footer`, `.card-outlined`, `.card-elevated`
+  - **Inputs**: `.form-input`, `.form-label`, `.form-error`, `.form-hint`
+  - **Badges**: `.badge`, `.badge-primary`, `.badge-success`, `.badge-danger`, `.badge-warning`, `.badge-info`
+- **Micro-interactions**: Use utility classes from `src/styles/_micro-interactions.scss`
+  - **Hover**: `.micro-hover`, `.micro-hover-lift`, `.micro-hover-scale`, `.micro-hover-glow`
+  - **Active**: `.micro-active`, `.micro-active-scale`
+  - **Focus**: `.micro-focus`
+  - **Component-specific**: `.btn-micro`, `.card-micro`, `.input-micro`, `.link-micro`, `.icon-micro`
+- **Responsive Utilities**: Use utility classes from `src/styles/_responsive-utilities.scss`
+  - **Tables**: `.responsive-table`, `.table-mobile`, `.table-desktop`, `.table-card`
+  - **Visibility**: `.mobile-only`, `.desktop-only`
+  - **Typography**: `.responsive-text`, `.responsive-heading`
+  - **Grid**: `.responsive-grid`
+  - **Safe Areas**: `.safe-area-top`, `.safe-area-bottom`, `.safe-area-left`, `.safe-area-right`, `.safe-area-all`
+- **Toast Styles**: Use styles from `src/styles/_toast.scss` (integrated with `NotificationService`)
 - **Mixins**: Use mixins from `src/styles/_mixins.scss`
+  - **Animation Utilities**: `.hover-lift`, `.hover-glow`, `.hover-scale`, `.fade-in`, `.fade-out`, `.fade-in-up`, `.fade-in-down`, `.slide-in-right`, `.slide-in-left`, `.scale-in`, `.scale-out`, `.pulse`, `.shimmer`, `.bounce`, `.spin`, `.stagger-item`
+- **Accessibility**: Use comprehensive styles from `src/styles/accessibility.scss`
+  - **Screen Reader**: `.sr-only`, `.sr-only-focusable`
+  - **Focus States**: Proper `:focus-visible` styling
+  - **Skip Links**: `.skip-link`
+  - **ARIA Support**: `[role="status"]`, `[role="alert"]`, `[aria-live]`
+  - **WCAG 2.1 AA Compliance**: Full support
 - **Nesting**: Maximum 3 levels deep
 - **BEM-like Naming**: Use for component-specific styles
 - **Background Management**: Avoid duplication - body background should be transparent, let main-content handle its own background
@@ -455,6 +490,14 @@ export class ModelNameService {
   - **Never hardcode**: Avoid `#3b82f6`, `#0ea5e9`, `rgba(59, 130, 246, ...)`, or Tailwind `primary-*` classes
   - **Pattern for SCSS**: `rgba(var(--primary-rgb), 0.2)` for backgrounds, `rgb(var(--primary-rgb))` for solid colors
   - **Pattern for HTML**: Use utility classes like `bg-primary`, `text-primary`, `border-primary`
+- **Semantic Colors**: Use CSS variables for semantic colors (from `src/styles.scss`)
+  - **Primary**: `--color-primary-rgb-value` (59, 130, 246), `rgb(var(--color-primary-rgb-value))`
+  - **Secondary**: `--color-secondary-rgb-value` (96, 165, 250)
+  - **Success**: `--color-success-rgb-value` (34, 197, 94)
+  - **Info**: `--color-info-rgb-value` (76, 117, 207)
+  - **Warning**: `--color-warning-rgb-value` (234, 179, 8)
+  - **Danger**: `--color-danger-rgb-value` (244, 63, 94)
+  - **Usage in SCSS**: `rgba(var(--color-success-rgb-value), 0.1)` for backgrounds, `rgb(var(--color-success-rgb-value))` for solid colors
 - **Theme System**:
   - **Theme Modes**: `light`, `dark`, `auto` (3 modes)
   - **Theme Colors**: `myhr` (default), `blue`, `indigo`, `purple`, `green`, `orange`, `red`, `teal`, `pink` (9 colors)
@@ -783,9 +826,16 @@ export class ComponentNameDemoComponent {
 5. **Update Documentation**: Update relevant README files
 6. **Follow Naming**: Use established naming conventions
 7. **Style Consistently**: Follow SCSS and Tailwind patterns
+   - **Use CSS Variables**: Use design tokens from `_design-tokens.scss` for spacing, typography, shadows, transitions
+   - **Use Utility Classes**: Use typography, component variants, micro-interactions, responsive utilities from respective files
+   - **Use Semantic Colors**: Use CSS variables for semantic colors (`--color-success-rgb-value`, `--color-danger-rgb-value`, etc.)
+   - **Use Animation Utilities**: Use animation utilities from `_mixins.scss` (`.hover-lift`, `.fade-in`, `.pulse`, etc.)
 8. **Handle Errors**: Implement proper error handling
 9. **Consider Performance**: Optimize for performance
 10. **Accessibility**: Ensure WCAG compliance
+   - Use accessibility utilities from `accessibility.scss`
+   - Support reduced motion preferences
+   - Proper ARIA labels and roles
 
 ### Standalone vs Module Components Decision
 - **Use Standalone**:
@@ -838,6 +888,13 @@ export class ComponentNameDemoComponent {
 - [ ] **Mobile Touch Targets**: All buttons have `min-h-[44px]` and `min-w-[44px]`
 - [ ] **Accessibility**: All buttons have `type="button"`, ARIA labels, and keyboard navigation
 - [ ] **Color Usage**: No hardcoded blue/indigo colors (`bg-blue-*`, `text-blue-*`, `border-blue-*`) - Use `bg-primary`, `text-primary`, `border-primary` instead
+- [ ] **Semantic Colors**: Uses CSS variables for semantic colors (`--color-success-rgb-value`, `--color-danger-rgb-value`, etc.)
+- [ ] **Design Tokens**: Uses CSS variables from `_design-tokens.scss` for spacing, typography, shadows, transitions
+- [ ] **Typography**: Uses utility classes from `_typography.scss` (`.h1`-`.h6`, `.body-base`, `.text-truncate`, etc.)
+- [ ] **Component Variants**: Uses utility classes from `_component-variants.scss` (`.btn`, `.card`, `.form-input`, `.badge`)
+- [ ] **Micro-interactions**: Uses utility classes from `_micro-interactions.scss` (`.micro-hover`, `.btn-micro`, `.card-micro`)
+- [ ] **Responsive Utilities**: Uses utility classes from `_responsive-utilities.scss` (`.responsive-table`, `.mobile-only`, `.desktop-only`)
+- [ ] **Animation Utilities**: Uses utility classes from `_mixins.scss` (`.hover-lift`, `.fade-in`, `.pulse`, `.shimmer`)
 - [ ] **Demo Components**: All demo components use `theme-myhr:from-primary` instead of `theme-myhr:from-blue-400` for gradient text
 - [ ] **Responsive Breakpoints**: Use `md:` and `lg:` breakpoints, avoid unnecessary `sm:` breakpoints
 - [ ] **Omni-Search**: Uses `NAVIGATION_ITEMS` from `navigation.constant.ts` (not hardcoded menu data)
@@ -1034,9 +1091,33 @@ export class ComponentNameDemoComponent {
   - Better alignment with project branding (MyHR)
   - All components and styles properly updated
 
+### Assets SCSS Standardization Complete (2025-01-01)
+- ✅ **Phase 1-3 Implementation**: Migrated all useful patterns from `src/assets/scss/` to `src/styles/`
+  - **Design Tokens**: Merged CSS variables (30+ variables) into `src/styles/_design-tokens.scss`
+  - **Typography System**: Created `src/styles/_typography.scss` with utility classes
+  - **Accessibility**: Merged comprehensive WCAG 2.1 AA compliance into `src/styles/accessibility.scss`
+  - **Animations**: Merged animation utilities into `src/styles/_mixins.scss`
+  - **Component Variants**: Created `src/styles/_component-variants.scss` (Button, Card, Input, Badge)
+  - **Micro-interactions**: Created `src/styles/_micro-interactions.scss` with utility classes
+  - **Toast Styles**: Created `src/styles/_toast.scss` (integrated with `NotificationService`)
+  - **Responsive Utilities**: Created `src/styles/_responsive-utilities.scss` for mobile-first design
+- ✅ **Semantic Colors**: Added CSS variables for semantic colors in `src/styles.scss`
+  - `--color-primary-rgb-value`, `--color-secondary-rgb-value`, `--color-success-rgb-value`
+  - `--color-info-rgb-value`, `--color-warning-rgb-value`, `--color-danger-rgb-value`
+- ✅ **Cleanup**: Removed all unused template files from `src/assets/scss/`
+  - **Deleted**: 11 source files (migrated), 7 template folders (91 files)
+  - **Total**: 102 files removed
+  - **Result**: `src/assets/scss/` directory is now empty
+- ✅ **Impact**:
+  - Standardized CSS variables and utility classes across the application
+  - 100+ utility classes available for common patterns
+  - Full WCAG 2.1 AA compliance
+  - Cleaner codebase structure
+  - Better maintainability and consistency
+
 ---
 
 **Last Updated**: 2025-01-01
-**Status**: ✅ All Architecture Improvements Completed + Translation Complete + Code Fixes Complete + Background Style Options Complete + Theme Renamed to MyHR
+**Status**: ✅ All Architecture Improvements Completed + Translation Complete + Code Fixes Complete + Background Style Options Complete + Theme Renamed to MyHR + Assets SCSS Standardization Complete
 **Angular Version**: 17.0.0+
 **TypeScript Version**: 5.2.2+
