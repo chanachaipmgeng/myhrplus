@@ -26,7 +26,7 @@
                'bg-primary border-primary text-white shadow-lg': getStepStatus(i) === 'active',
                'bg-green-500 border-green-500 text-white': getStepStatus(i) === 'completed'
              }"
-             [style.box-shadow]="getStepStatus(i) === 'active' ? '0 10px 15px -3px rgba(var(--primary-rgb), 0.2)' : null">
+             [class.shadow-primary-lg]="getStepStatus(i) === 'active'">
           <div
             *ngIf="showStepIcons && step.icon && !isStepCompleted(i)"
             class="step-icon">
@@ -62,9 +62,8 @@
       <!-- Step Connector (for vertical) -->
       <div
         *ngIf="orientation === 'vertical' && i < steps.length - 1"
-        class="absolute left-5 top-12 w-0.5 bg-slate-200 dark:bg-slate-700 transition-smooth"
-        [class.bg-primary]="isStepCompleted(i)"
-        [style.height]="'calc(100% + 1.5rem)'">
+        class="absolute left-5 top-12 w-0.5 bg-slate-200 dark:bg-slate-700 transition-smooth h-[calc(100%+1.5rem)]"
+        [class.bg-primary]="isStepCompleted(i)">
       </div>
     </div>
   </div>

@@ -39,7 +39,7 @@
               [class.active]="currentLang === lang.code"
               [attr.aria-label]="('layout.header.changeLanguageTo' | translate) + ' ' + lang.name"
               [attr.aria-current]="currentLang === lang.code ? 'true' : 'false'"
-              [style.animation-delay.ms]="i * 50"
+              [style.--animation-delay]="(i * 50) + 'ms'"
               class="language-item w-full px-4 py-2.5 text-left flex items-center gap-3
                      hover:bg-gray-50 dark:hover:bg-gray-700 theme-gemini:hover:bg-white/20
                      hover:translate-x-1 hover:scale-[1.02]

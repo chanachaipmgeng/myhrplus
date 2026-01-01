@@ -124,6 +124,9 @@ module.exports = {
         '3xl': '40px',
       },
       boxShadow: {
+        // Primary color shadows
+        'primary': '0 4px 6px -1px rgba(var(--primary-rgb), 0.2), 0 2px 4px -1px rgba(var(--primary-rgb), 0.1)',
+        'primary-lg': '0 10px 15px -3px rgba(var(--primary-rgb), 0.2), 0 4px 6px -2px rgba(var(--primary-rgb), 0.1)',
         // Standard shadows (already in Tailwind, but ensure consistency)
         'sm': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
         'md': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',

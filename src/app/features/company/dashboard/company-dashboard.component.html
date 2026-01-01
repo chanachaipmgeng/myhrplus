@@ -15,7 +15,7 @@
       [userInfo]="getCompanyUserInfo()"
       [actions]="getCompanyActions()">
     </app-page-header>
-    
+
     <!-- Dashboard Customization Menu (kept separate for better UX) -->
     <div class="relative mb-6">
       <button
@@ -32,8 +32,7 @@
             <!-- Customization Menu -->
             <div
               *ngIf="showCustomizationMenu"
-              class="fixed right-4 top-24 w-64 bg-white/98 dark:bg-gray-900/98 backdrop-blur-md rounded-xl shadow-2xl border-2 border-gray-300/70 dark:border-gray-600/70 z-[1000] p-4"
-              style="backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);"
+              class="fixed right-4 top-24 w-64 bg-white/98 dark:bg-gray-900/98 backdrop-blur-xl rounded-xl shadow-2xl border-2 border-gray-300/70 dark:border-gray-600/70 z-[1000] p-4"
               (click)="$event.stopPropagation()">
               <div class="flex items-center justify-between mb-3 pb-3 border-b border-gray-200 dark:border-gray-700">
                 <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100">{{ 'company.dashboard.customize.title' | translate }}</h3>
@@ -323,7 +322,7 @@
                   <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400" [attr.aria-hidden]="true"></app-icon>
                 </button>
               </div>
-              <div echarts [options]="divisionPieChartOption" class="w-full" style="height: 280px; min-height: 280px;" [style.height.md]="'300px'"></div>
+              <div echarts [options]="divisionPieChartOption" class="w-full h-[280px] min-h-[280px] md:h-[300px]"></div>
             </app-glass-card>
 
             <!-- Bar Chart: Branches -->
@@ -337,7 +336,7 @@
                   <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400"></app-icon>
                 </button>
               </div>
-              <div echarts [options]="branchBarChartOption" class="w-full" style="height: 280px; min-height: 280px;" [style.height.md]="'300px'" role="img" [attr.aria-label]="'company.dashboard.charts.employeesByBranch' | translate"></div>
+              <div echarts [options]="branchBarChartOption" class="w-full h-[280px] min-h-[280px] md:h-[300px]" role="img" [attr.aria-label]="'company.dashboard.charts.employeesByBranch' | translate"></div>
             </app-glass-card>
           </div>
 
@@ -354,7 +353,7 @@
                   <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400"></app-icon>
                 </button>
               </div>
-              <div echarts [options]="departmentBarChartOption" class="w-full" style="height: 280px; min-height: 280px;" [style.height.md]="'300px'" role="img" [attr.aria-label]="'company.dashboard.charts.employeesByDepartment' | translate"></div>
+              <div echarts [options]="departmentBarChartOption" class="w-full h-[280px] min-h-[280px] md:h-[300px]" role="img" [attr.aria-label]="'company.dashboard.charts.employeesByDepartment' | translate"></div>
             </app-glass-card>
 
             <!-- Bar Chart: Positions -->
@@ -368,7 +367,7 @@
                   <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400"></app-icon>
                 </button>
               </div>
-              <div echarts [options]="positionBarChartOption" class="w-full" style="height: 280px; min-height: 280px;" [style.height.md]="'300px'" role="img" [attr.aria-label]="'company.dashboard.charts.positionsByLevel' | translate"></div>
+              <div echarts [options]="positionBarChartOption" class="w-full h-[280px] min-h-[280px] md:h-[300px]" role="img" [attr.aria-label]="'company.dashboard.charts.positionsByLevel' | translate"></div>
             </app-glass-card>
           </div>
 
@@ -385,7 +384,7 @@
                   <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400"></app-icon>
                 </button>
               </div>
-              <div echarts [options]="orgTreeMapChartOption" class="w-full" style="height: 280px; min-height: 280px;" [style.height.md]="'300px'" role="img" [attr.aria-label]="'company.dashboard.charts.orgTreeMap' | translate"></div>
+              <div echarts [options]="orgTreeMapChartOption" class="w-full h-[280px] min-h-[280px] md:h-[300px]" role="img" [attr.aria-label]="'company.dashboard.charts.orgTreeMap' | translate"></div>
             </app-glass-card>
 
             <!-- Bar Chart: Work Locations -->
@@ -399,7 +398,7 @@
                   <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400"></app-icon>
                 </button>
               </div>
-              <div echarts [options]="locationBarChartOption" class="w-full" style="height: 280px; min-height: 280px;" [style.height.md]="'300px'" role="img" [attr.aria-label]="'company.dashboard.charts.workLocationDistribution' | translate"></div>
+              <div echarts [options]="locationBarChartOption" class="w-full h-[280px] min-h-[280px] md:h-[300px]" role="img" [attr.aria-label]="'company.dashboard.charts.workLocationDistribution' | translate"></div>
             </app-glass-card>
           </div>
         </div>

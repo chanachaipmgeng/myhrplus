@@ -71,6 +71,8 @@
 /* Language Item */
 .language-item {
   position: relative;
+  animation: languageItemFadeIn 0.3s ease-out both;
+  animation-delay: var(--animation-delay, 0ms);
 
   /* Active indicator - Using CSS Variables */
   &.active {
@@ -89,9 +91,22 @@
   }
 }
 
+@keyframes languageItemFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 /* Notification Item */
 .notification-item {
   position: relative;
+  animation: notificationItemFadeIn 0.3s ease-out both;
+  animation-delay: var(--animation-delay, 0ms);
 
   /* Unread indicator - Using CSS Variables */
   &.unread {
@@ -112,6 +127,17 @@
   /* Pulse animation for unread */
   &.unread .notification-icon {
     animation: pulse 2s ease-in-out infinite;
+  }
+}
+
+@keyframes notificationItemFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 

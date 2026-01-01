@@ -152,7 +152,7 @@
               [class.active]="currentLanguage === lang.value"
               [attr.aria-label]="('layout.header.changeLanguageTo' | translate) + ' ' + lang.label"
               [attr.aria-current]="currentLanguage === lang.value ? 'true' : 'false'"
-              [style.animation-delay.ms]="i * 50"
+              [style.--animation-delay]="(i * 50) + 'ms'"
               class="language-item w-full px-4 py-2.5 text-left flex items-center gap-3
                      hover:bg-gray-50 dark:hover:bg-gray-700 theme-gemini:hover:bg-white/20
                      hover:translate-x-1 hover:scale-[1.02]
@@ -242,7 +242,7 @@
                  (keydown.space)="handleNotificationClick(notification); $event.preventDefault()"
                  [class.unread]="!notification.read"
                  [attr.aria-label]="notification.title + (notification.read ? '' : ' (' + ('layout.header.unread' | translate) + ')')"
-                 [style.animation-delay.ms]="i * 30"
+                 [style.--animation-delay]="(i * 30) + 'ms'"
                  class="notification-item px-4 py-3 border-b border-gray-100 dark:border-gray-700 theme-gemini:border-blue-500/20
                         cursor-pointer
                         transition-all duration-200 ease-out
