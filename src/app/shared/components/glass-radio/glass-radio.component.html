@@ -25,7 +25,7 @@
       *ngIf="checked"
       class="absolute inset-0 flex items-center justify-center">
       <span
-        class="w-2.5 h-2.5 md:w-2 md:h-2 rounded-full bg-primary animate-scale-in">
+        class="w-2.5 h-2.5 md:w-2 md:h-2 rounded-full bg-primary scale-in">
       </span>
     </span>
   </button>
@@ -55,7 +55,7 @@
     <div *ngIf="hasError && errorMessage"
          [id]="errorMessageId"
          role="alert"
-         class="flex items-center gap-1.5 text-red-500 dark:text-red-400 theme-myhr:text-red-400 text-sm mt-1 animate-fade-in"
+         class="flex items-center gap-1.5 text-red-500 dark:text-red-400 theme-myhr:text-red-400 text-sm mt-1 fade-in"
          aria-live="polite">
       <app-icon name="error" size="xs" color="text-red-500 dark:text-red-400 theme-myhr:text-red-400"></app-icon>
       <span class="thai-text">{{ errorMessage }}</span>

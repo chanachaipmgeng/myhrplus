@@ -13,12 +13,5 @@
 /* Component uses Tailwind classes directly in HTML */
 /* All glass morphism, hover effects, and animations handled by Tailwind utilities */
 /* Dark mode and Myhr theme handled via Tailwind dark: and theme-myhr: variants */
-
-.animate-slide-down {
-  @include slide-down();
-}
-
-.animate-scale-in {
-  @include scale-in();
-}
+/* Animation classes are now handled by utility classes from _mixins.scss (fade-in, fade-in-up, fade-in-down, scale-in) */
 

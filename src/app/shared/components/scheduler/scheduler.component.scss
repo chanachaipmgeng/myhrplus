@@ -58,7 +58,7 @@
       &:hover {
         background: rgba(var(--primary-rgb), 0.3);
         border-color: rgba(var(--primary-rgb), 0.6);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--shadow-md);
 
         .dark & {
           background: rgba(var(--primary-rgb), 0.4);

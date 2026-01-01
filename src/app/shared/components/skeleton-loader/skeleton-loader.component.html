@@ -1,4 +1,4 @@
-<div class="w-full animate-fade-in motion-safe:animate-none" [ngClass]="['skeleton-' + type, 'animate-' + animation]">
+<div class="w-full fade-in motion-safe:animate-none" [ngClass]="['skeleton-' + type, 'animate-' + animation]">
   <!-- Text Skeleton -->
   <ng-container *ngIf="type === 'text'">
     <div *ngFor="let row of getRowsArray(); let i = index" 

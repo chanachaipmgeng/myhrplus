@@ -41,7 +41,7 @@ export class TaHomeComponent implements OnInit, OnDestroy {
       description: 'ดูข้อมูลการลงเวลา',
       icon: 'e-icons e-clock',
       route: '/ta',
-      color: 'bg-blue-500'
+      color: 'bg-primary'
     },
     {
       title: 'คำขอลา',

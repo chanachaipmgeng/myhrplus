@@ -23,7 +23,7 @@ export class GlassButtonComponent {
   @Output() clicked = new EventEmitter<MouseEvent>();
 
   get buttonClasses(): string {
-    const baseClasses = 'inline-flex items-center justify-center rounded-md font-medium transition-smooth cursor-pointer border border-transparent relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed hover-lift active-scale';
+    const baseClasses = 'inline-flex items-center justify-center rounded-md font-medium transition-smooth cursor-pointer border border-transparent relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed btn-micro hover-lift active-scale';
 
     // Check if customClass contains gradient - if so, skip glass background for secondary variant
     const hasGradient = this.customClass.includes('bg-gradient-');

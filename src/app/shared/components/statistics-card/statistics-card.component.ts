@@ -17,7 +17,7 @@ export class StatisticsCardComponent {
   @Input() value!: string | number;
   @Input() suffix?: string;
   @Input() change?: number;
-  @Input() iconBgClass: string = 'bg-blue-100 dark:bg-blue-900';
+  @Input() iconBgClass: string = 'bg-primary/10 dark:bg-primary/20';
   @Input() iconColor?: string;
   @Input() variant: 'default' | 'gradient' = 'gradient'; // Default to gradient for beautiful look
 
@@ -34,8 +34,8 @@ export class StatisticsCardComponent {
       return 'text-indigo-600 dark:text-indigo-400';
     } else if (this.iconBgClass.includes('pink')) {
       return 'text-pink-600 dark:text-pink-400';
-    } else if (this.iconBgClass.includes('blue')) {
-      return 'text-blue-600 dark:text-blue-400';
+    } else if (this.iconBgClass.includes('blue') || this.iconBgClass.includes('primary')) {
+      return 'text-primary dark:text-primary';
     } else if (this.iconBgClass.includes('green')) {
       return 'text-green-600 dark:text-green-400';
     } else if (this.iconBgClass.includes('yellow')) {
@@ -51,7 +51,7 @@ export class StatisticsCardComponent {
     }
 
     // Default color
-    return 'text-blue-600 dark:text-blue-400';
+    return 'text-primary dark:text-primary';
   }
 
   get gradientClass(): string {
@@ -62,8 +62,8 @@ export class StatisticsCardComponent {
       return 'bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700';
     } else if (this.iconBgClass.includes('pink')) {
       return 'bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600';
-    } else if (this.iconBgClass.includes('blue')) {
-      return 'bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500';
+    } else if (this.iconBgClass.includes('blue') || this.iconBgClass.includes('primary')) {
+      return 'bg-gradient-to-br from-primary to-primary dark:from-primary dark:to-primary';
     } else if (this.iconBgClass.includes('green')) {
       return 'bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500';
     } else if (this.iconBgClass.includes('yellow')) {
@@ -79,13 +79,13 @@ export class StatisticsCardComponent {
     }
 
     // Default gradient
-    return 'bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500';
+    return 'bg-gradient-to-br from-primary to-primary dark:from-primary dark:to-primary';
   }
 
   get cardCustomClass(): string {
     const baseClasses = this.variant === 'gradient'
-      ? `${this.gradientClass} text-white hover:scale-105 transition-transform duration-300 cursor-pointer`
-      : 'hover-lift transition-smooth';
+      ? `${this.gradientClass} text-white card-micro hover:scale-105 transition-transform duration-300 cursor-pointer`
+      : 'card-micro hover-lift transition-smooth';
     return baseClasses;
   }
 

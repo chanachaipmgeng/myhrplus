@@ -21,7 +21,7 @@ export class ThemeToggleComponent implements OnInit {
   currentModeIcon = 'light_mode';
   showThemeMenu = false;
   showColorPicker = false;
-  customPrimaryColor = '#3b82f6'; // Will be updated from theme
+  customPrimaryColor = 'rgb(59, 130, 246)'; // Will be updated from theme
   hexColorInput = '#3b82f6';
 
   // Accordion states
@@ -182,10 +182,10 @@ export class ThemeToggleComponent implements OnInit {
       const b = parts[2].toString(16).padStart(2, '0');
       return `#${r}${g}${b}`;
     }
-    // Get default from CSS variable or fallback to blue
+    // Get default from CSS variable or fallback to primary color
     const defaultColor = getComputedStyle(document.documentElement)
       .getPropertyValue('--primary-color')
-      .trim() || '#3b82f6';
+      .trim() || 'rgb(59, 130, 246)';
     return defaultColor;
   }
 

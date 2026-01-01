@@ -76,10 +76,10 @@
 }
 
 .error-title {
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
   color: rgb(var(--gray-900));
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-md);
 
   .dark &,
   [data-theme='dark'] & {
@@ -91,12 +91,12 @@
   }
 
   @media (min-width: 768px) {
-    font-size: 2.5rem;
+    font-size: var(--font-size-3xl);
   }
 }
 
 .error-description {
-  font-size: 1.125rem;
+  font-size: var(--font-size-lg);
   line-height: 1.6;
   color: rgb(var(--gray-600));
 
@@ -110,7 +110,7 @@
   }
 
   @media (min-width: 768px) {
-    font-size: 1.25rem;
+    font-size: var(--font-size-xl);
   }
 }
 
@@ -121,48 +121,48 @@
 }
 
 .btn-primary {
-  padding: 0.875rem 1.5rem;
-  border-radius: 0.75rem;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-xl);
   background: rgb(var(--primary-rgb));
   color: white;
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
   min-height: 48px;
   min-width: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
+  gap: var(--spacing-sm);
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-md);
 
   &:hover {
     background: rgba(var(--primary-rgb), 0.9);
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(var(--primary-rgb), 0.4);
+    box-shadow: var(--shadow-lg);
   }
 
   &:active {
     transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.3);
+    box-shadow: var(--shadow-sm);
   }
 }
 
 .btn-secondary {
-  padding: 0.875rem 1.5rem;
-  border-radius: 0.75rem;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-xl);
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(var(--gray-300), 0.3);
   color: rgb(var(--gray-900));
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
   min-height: 48px;
   min-width: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  transition: all 0.2s ease;
+  gap: var(--spacing-sm);
+  transition: all var(--transition-base);
   backdrop-filter: blur(10px);
 
   .dark &,

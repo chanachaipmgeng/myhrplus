@@ -3,12 +3,12 @@
 .accordion {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--spacing-sm);
 
   &.accordion-bordered {
     .accordion-panel {
       border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 0.5rem;
+      border-radius: var(--radius-lg);
       overflow: hidden;
 
       .dark & {
@@ -25,9 +25,9 @@
 .accordion-panel {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
-  border-radius: 0.5rem;
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  transition: all 0.2s ease;
+  transition: all var(--transition-base);
 
   &.accordion-panel-expanded {
     background: rgba(255, 255, 255, 0.1);
@@ -51,17 +51,17 @@
 .accordion-header {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: var(--spacing-md);
   width: 100%;
-  padding: 1rem;
+  padding: var(--spacing-md);
   border: none;
   background: transparent;
   text-align: left;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all var(--transition-base);
   color: rgb(55, 65, 81);
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
 
   &:hover:not(:disabled) {
     background: rgba(0, 0, 0, 0.05);
@@ -106,7 +106,7 @@
 
 .accordion-chevron {
   flex-shrink: 0;
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-slow);
 
   .accordion-panel-expanded & {
     transform: rotate(180deg);
@@ -118,9 +118,9 @@
 }
 
 .accordion-content-inner {
-  padding: 0 1rem 1rem 1rem;
+  padding: 0 var(--spacing-md) var(--spacing-md) var(--spacing-md);
   color: rgb(75, 85, 99);
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   line-height: 1.5;
 
   .dark & {

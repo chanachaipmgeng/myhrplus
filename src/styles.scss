@@ -1,4 +1,23 @@
 /* ============================================
+   Montserrat Font (Local Variable Font)
+   ============================================ */
+@font-face {
+  font-family: 'Montserrat';
+  src: url('assets/font/Montserrat/Montserrat-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900; /* Variable font weight range */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('assets/font/Montserrat/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900; /* Variable font weight range */
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ============================================
    Google Fonts Import
    ============================================ */
 /* Prompt font (Thai & English support) */
@@ -446,7 +465,7 @@ body.theme-myhr:not(.dark) {
 html, body {
   height: 100%;
   /* Prompt font (Thai & English support) */
-  font-family: 'Prompt', 'Noto Sans Thai', 'Inter', 'Sarabun', system-ui, sans-serif;
+  font-family: 'Montserrat', 'Prompt', 'Noto Sans Thai', 'Inter', 'Sarabun', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -898,7 +917,7 @@ body.theme-pink {
    ============================================ */
 /* Typography Scale ตาม Design System */
 h1 {
-  font-family: 'Prompt', 'Noto Sans Thai', sans-serif;
+  font-family: 'Montserrat', 'Prompt', 'Noto Sans Thai', sans-serif;
   font-size: 2.25rem; /* 36px */
   font-weight: 700; /* Bold */
   line-height: 1.375;
@@ -907,7 +926,7 @@ h1 {
 }
 
 h2 {
-  font-family: 'Prompt', 'Noto Sans Thai', sans-serif;
+  font-family: 'Montserrat', 'Prompt', 'Noto Sans Thai', sans-serif;
   font-size: 1.5rem; /* 24px */
   font-weight: 600; /* Semibold */
   line-height: 1.375;
@@ -916,7 +935,7 @@ h2 {
 }
 
 h3 {
-  font-family: 'Prompt', 'Noto Sans Thai', sans-serif;
+  font-family: 'Montserrat', 'Prompt', 'Noto Sans Thai', sans-serif;
   font-size: 1.25rem; /* 20px */
   font-weight: 600; /* Semibold */
   line-height: 1.375;
@@ -925,7 +944,7 @@ h3 {
 }
 
 h4 {
-  font-family: 'Prompt', 'Noto Sans Thai', sans-serif;
+  font-family: 'Montserrat', 'Prompt', 'Noto Sans Thai', sans-serif;
   font-size: 1.125rem; /* 18px */
   font-weight: 600; /* Semibold */
   line-height: 1.375;
@@ -934,7 +953,7 @@ h4 {
 }
 
 h5, h6 {
-  font-family: 'Prompt', 'Noto Sans Thai', sans-serif;
+  font-family: 'Montserrat', 'Prompt', 'Noto Sans Thai', sans-serif;
   font-weight: 600;
   line-height: 1.375;
   color: #1e293b;
@@ -1000,14 +1019,14 @@ body.theme-myhr .myhr-text-glow {
 }
 
 p {
-  font-family: 'Prompt', 'Noto Sans Thai', 'Sarabun', sans-serif;
+  font-family: 'Montserrat', 'Prompt', 'Noto Sans Thai', 'Sarabun', sans-serif;
   font-size: 1rem; /* 16px */
   font-weight: 400; /* Normal */
   line-height: 1.625;
 }
 
 span, div, a, button, input, textarea, select {
-  font-family: 'Prompt', 'Noto Sans Thai', 'Sarabun', sans-serif;
+  font-family: 'Montserrat', 'Prompt', 'Noto Sans Thai', 'Sarabun', sans-serif;
 }
 
 code, pre, kbd, samp {
@@ -1016,7 +1035,7 @@ code, pre, kbd, samp {
 
 /* Thai text specific */
 .thai-text {
-  font-family: 'Prompt', 'Noto Sans Thai', 'Sarabun', sans-serif;
+  font-family: 'Montserrat', 'Prompt', 'Noto Sans Thai', 'Sarabun', sans-serif;
 }
 
 /* ============================================

@@ -5,11 +5,11 @@
     @apply relative;
 
     &.active-item {
-      @apply bg-blue-500/20 dark:bg-blue-500/30 border-l-2 border-blue-500;
+      @apply bg-primary/20 dark:bg-primary/30 border-l-2 border-primary;
 
       // Myhr theme variant (cannot use in @apply)
       body.theme-myhr & {
-        @apply bg-blue-500/20;
+        @apply bg-primary/20;
       }
     }
 

@@ -15,7 +15,7 @@ import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 })
 export class GlassCardDemoComponent {
   selectedVariant: 'default' | 'strong' | 'weak' = 'default';
-  selectedAnimation: 'fade-in' | 'slide-up' | 'slide-down' | 'scale-in' | null = null;
+  selectedAnimation: 'fade-in' | 'fade-in-up' | 'fade-in-down' | 'scale-in' | null = null;
 
   props: PropDefinition[] = [
     {
@@ -27,7 +27,7 @@ export class GlassCardDemoComponent {
     },
     {
       name: 'animate',
-      type: "'fade-in' | 'slide-up' | 'slide-down' | 'scale-in' | null",
+      type: "'fade-in' | 'fade-in-up' | 'fade-in-down' | 'scale-in' | null",
       default: 'null',
       description: 'Animation type on mount',
       required: false
@@ -75,8 +75,8 @@ export class GlassCardDemoComponent {
 <app-glass-card 
   variant="default" 
   padding="p-6"
-  animate="slide-up">
-  Slide up animation
+  animate="fade-in-up">
+  Fade in up animation
 </app-glass-card>`;
 
   customExample = `<app-glass-card 

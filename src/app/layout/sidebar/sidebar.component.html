@@ -1,4 +1,4 @@
-<div class="two-layer-sidebar h-full flex animate-fade-in" [class.dark]="isDarkMode">
+<div class="two-layer-sidebar h-full flex fade-in" [class.dark]="isDarkMode">
   <!-- Left Icon Bar - Module Icons -->
   <div class="icon-bar flex flex-col items-center py-4 border-r
               transition-all duration-300 ease-in-out
@@ -9,8 +9,8 @@
       <a routerLink="/home"
          class="logo-container w-12 h-12 rounded-xl flex items-center justify-center shadow-lg
                 transition-all duration-300 ease-out
-                hover:scale-110 hover:shadow-xl hover:-translate-y-1
-                active:scale-95
+                hover-lift-lg
+                micro-active-scale
                 bg-white/10 dark:bg-gray-900/20 theme-myhr:bg-gray-900/30
                 backdrop-blur-sm
                 border border-white/20 dark:border-gray-700/20 theme-myhr:border-primary/30
@@ -43,10 +43,10 @@
                 [style.animation-delay.ms]="i * 50"
                 class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl
                        transition-all duration-300 ease-out
-                       hover:scale-110 hover:shadow-lg hover:-translate-y-0.5
-                       active:scale-95
+                hover-lift
+                micro-active-scale
                        relative group
-                       animate-fade-in
+                       fade-in
                        cursor-pointer
                        border-0 bg-transparent">
           <!-- Hover Background -->
@@ -56,14 +56,14 @@
                       transition-all duration-300"></div>
           <!-- Icon -->
           <span class="material-icons text-xl transition-all duration-300 relative z-10
-                       group-hover:scale-110 group-hover:rotate-6
+                       icon-micro group-hover:rotate-6
                        text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">
             {{ level2Item.icon || 'folder' }}
           </span>
           <!-- Active Indicator -->
           <span *ngIf="selectedLevel2Item === level2Item"
                 class="active-indicator
-                       animate-pulse"></span>
+                       pulse"></span>
           <!-- Badge -->
           <span *ngIf="level2Item.badge"
                 class="absolute top-0 right-0 w-5 h-5 rounded-full
@@ -73,7 +73,7 @@
                        z-20">{{ level2Item.badge }}</span>
           <!-- Tooltip -->
           <span class="module-tooltip
-                       animate-fade-in
+                       fade-in
                        [animation-delay:100ms]">{{ translateLabel(level2Item.label, 'admin', 2) }}</span>
         </button>
       </ng-container>
@@ -92,10 +92,10 @@
            [style.animation-delay.ms]="i * 50"
            class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl
                   transition-all duration-300 ease-out
-                  hover:scale-110 hover:shadow-lg hover:-translate-y-0.5
-                  active:scale-95
+                hover-lift
+                micro-active-scale
                   relative group
-                  animate-fade-in">
+                  fade-in">
           <!-- Hover Background -->
           <div class="absolute inset-0 rounded-xl
                       bg-gradient-to-br from-blue-500/0 to-indigo-500/0
@@ -104,20 +104,20 @@
           <span *ngIf="module.iconCss"
                 [class]="module.iconCss"
                 class="text-xl transition-all duration-300 relative z-10
-                       group-hover:scale-110 group-hover:rotate-6
+                       icon-micro group-hover:rotate-6
                        text-gray-700 dark:text-gray-300 theme-myhr:text-white/90"></span>
           <span *ngIf="!module.iconCss"
                 class="text-xl transition-all duration-300 relative z-10
-                       group-hover:scale-110 group-hover:rotate-6
+                       icon-micro group-hover:rotate-6
                        text-gray-700 dark:text-gray-300 theme-myhr:text-white/90
                        e-icons e-folder"></span>
           <!-- Active Indicator -->
           <span *ngIf="selectedModule === module.id"
                 class="active-indicator
-                       animate-pulse"></span>
+                       pulse"></span>
           <!-- Tooltip -->
           <span class="module-tooltip
-                       animate-fade-in
+                       fade-in
                        [animation-delay:100ms]">{{ module.name }}</span>
         </a>
       </ng-container>
@@ -153,7 +153,7 @@
                          transition-all duration-200 ease-out
                          bg-white/20 dark:bg-gray-800/30 theme-myhr:bg-white/10
                          hover:bg-white/30 dark:hover:bg-gray-700/40 theme-myhr:hover:bg-white/20
-                         hover:scale-[1.02] active:scale-[0.98]
+                         hover-lift-sm micro-active-scale
                          text-sm font-medium
                          text-gray-700 dark:text-gray-300 theme-myhr:text-white/90
                          cursor-pointer border-0
@@ -165,7 +165,7 @@
         </div>
 
         <!-- Search Box -->
-        <div class="search-container mb-4 relative animate-fade-in" *ngIf="shouldShowSearchBox()">
+        <div class="search-container mb-4 relative fade-in" *ngIf="shouldShowSearchBox()">
           <app-glass-input
             type="text"
             [(ngModel)]="searchQuery"

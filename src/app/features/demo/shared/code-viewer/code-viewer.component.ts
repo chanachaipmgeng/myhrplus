@@ -8,11 +8,11 @@ import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
   imports: [CommonModule],
   template: `
     <div class="glass dark:glass-dark theme-myhr:glass-myhr rounded-lg overflow-hidden my-4 shadow-glass">
-      <div class="flex justify-between items-center px-4 py-3 bg-white/5 dark:bg-gray-800/50 theme-myhr:bg-blue-500/10 border-b border-white/10 dark:border-gray-700/50 theme-myhr:border-blue-500/30">
-        <span class="text-sm font-medium text-gray-700 dark:text-gray-300 theme-myhr:bg-gradient-to-r theme-myhr:from-blue-400 theme-myhr:via-cyan-400 theme-myhr:to-blue-500 theme-myhr:bg-clip-text theme-myhr:text-transparent">{{ title }}</span>
+      <div class="flex justify-between items-center px-4 py-3 bg-white/5 dark:bg-gray-800/50 theme-myhr:bg-primary/10 border-b border-white/10 dark:border-gray-700/50 theme-myhr:border-primary/30">
+        <span class="text-sm font-medium text-gray-700 dark:text-gray-300 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">{{ title }}</span>
         <button
-          class="px-3 py-1 text-xs bg-primary-500/10 dark:bg-primary-500/20 theme-myhr:bg-blue-500/20 text-primary-600 dark:text-primary-400 theme-myhr:text-blue-400 border border-primary-500/20 dark:border-primary-500/40 theme-myhr:border-blue-500/30 rounded-md cursor-pointer transition-smooth
-                 hover:bg-primary-500/20 dark:hover:bg-primary-500/30 theme-myhr:hover:bg-blue-500/30 theme-myhr:hover:shadow-myhr-sm
+          class="px-3 py-1 text-xs bg-primary-500/10 dark:bg-primary-500/20 theme-myhr:bg-primary/20 text-primary-600 dark:text-primary-400 theme-myhr:text-primary border border-primary-500/20 dark:border-primary-500/40 theme-myhr:border-primary/30 rounded-md cursor-pointer transition-smooth
+                 hover:bg-primary-500/20 dark:hover:bg-primary-500/30 theme-myhr:hover:bg-primary/30 theme-myhr:hover:shadow-myhr-sm
                  focus:outline-none focus:ring-2 focus:ring-primary-500/20"
           (click)="copyCode()"
           [attr.aria-label]="'Copy code'">

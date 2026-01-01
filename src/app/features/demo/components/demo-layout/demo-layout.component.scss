@@ -21,7 +21,7 @@
       background: rgba(15, 23, 42, 0.95);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(var(--primary-rgb), 0.2), 0 0 30px rgba(var(--primary-rgb), 0.1);
+      box-shadow: var(--shadow-lg), 0 0 0 1px rgba(var(--primary-rgb), 0.2), 0 0 30px rgba(var(--primary-rgb), 0.1);
     }
   }
 }
@@ -41,7 +41,7 @@
 
   &::-webkit-scrollbar-thumb {
     background: rgba(156, 163, 175, 0.5);
-    border-radius: 3px;
+    border-radius: var(--radius-sm);
     transition: background 0.2s ease;
 
     &:hover {

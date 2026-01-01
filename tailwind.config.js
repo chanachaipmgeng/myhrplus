@@ -21,8 +21,9 @@ module.exports = {
         xs: '2px',
       },
       fontFamily: {
-        // Prompt font (supports both Thai & English)
+        // Montserrat as primary font (local variable font)
         sans: [
+          'Montserrat',
           'Prompt',
           'Noto Sans Thai',
           'Inter',
@@ -31,8 +32,8 @@ module.exports = {
         ],
         mono: [...fontFamily.mono],
         // Separate font families for specific use cases
-        english: ['Prompt', 'Inter', ...fontFamily.sans],
-        thai: ['Prompt', 'Noto Sans Thai', 'Sarabun', ...fontFamily.sans],
+        english: ['Montserrat', 'Prompt', 'Inter', ...fontFamily.sans],
+        thai: ['Montserrat', 'Prompt', 'Noto Sans Thai', 'Sarabun', ...fontFamily.sans],
       },
       colors: {
         primary: {

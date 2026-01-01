@@ -11,7 +11,7 @@ import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 })
 export class GlassCardComponent {
   @Input() variant: 'default' | 'strong' | 'weak' | 'none' = 'default';
-  @Input() animate: 'fade-in' | 'slide-up' | 'slide-down' | 'scale-in' | null = null;
+  @Input() animate: 'fade-in' | 'fade-in-up' | 'fade-in-down' | 'scale-in' | null = null;
   @Input() padding: string = 'p-6';
   @Input() customClass: string = '';
 
@@ -44,8 +44,8 @@ export class GlassCardComponent {
 
     // Base classes with hover effect and transitions
     const baseClasses = hasGradient || this.variant === 'none'
-      ? 'rounded-lg shadow-md hover-lift transition-smooth'
-      : `${glassClass} rounded-lg shadow-glass hover-lift transition-smooth dark:glass-dark`;
+      ? 'rounded-lg shadow-md card-micro hover-lift transition-smooth'
+      : `${glassClass} rounded-lg shadow-glass card-micro hover-lift transition-smooth dark:glass-dark`;
 
     return `${baseClasses} ${geminiClasses} ${this.padding} ${this.customClass}`.trim();
   }

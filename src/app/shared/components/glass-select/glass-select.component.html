@@ -18,7 +18,7 @@
       [attr.aria-haspopup]="true"
       (click)="toggleDropdown()"
       (blur)="validate()"
-      class="glass rounded-md px-4 py-3 md:py-2.5 pr-10 text-base md:text-sm min-h-[44px] md:min-h-0 text-gray-900 dark:text-gray-100 theme-myhr:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 theme-myhr:placeholder:text-white/60 shadow-sm transition-all duration-300 focus:glass-strong focus:shadow-md focus:scale-[1.01] hover:shadow-md hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed dark:glass-dark dark:focus:glass-dark-strong theme-myhr:glass-myhr theme-myhr:focus:glass-myhr-strong w-full text-left flex items-center justify-between"
+      class="glass rounded-md px-4 py-3 md:py-2.5 pr-10 text-base md:text-sm min-h-[44px] md:min-h-0 text-gray-900 dark:text-gray-100 theme-myhr:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 theme-myhr:placeholder:text-white/60 shadow-sm input-micro transition-all duration-300 focus:glass-strong focus:shadow-md focus:scale-[1.01] hover:shadow-md hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed dark:glass-dark dark:focus:glass-dark-strong theme-myhr:glass-myhr theme-myhr:focus:glass-myhr-strong w-full text-left flex items-center justify-between"
       [ngClass]="{
         'border-red-500 dark:border-red-400 theme-myhr:border-red-400': hasError,
         'border-green-500 dark:border-green-400 theme-myhr:border-green-400': isValid && showSuccess && !hasError,
@@ -72,7 +72,7 @@
 
     <!-- Dropdown Menu -->
     <div *ngIf="isOpen"
-         class="absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 theme-myhr:bg-gray-900/95 backdrop-blur-xl rounded-md shadow-lg border border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30 max-h-60 overflow-auto animate-fade-in-down">
+         class="absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 theme-myhr:bg-gray-900/95 backdrop-blur-xl rounded-md shadow-lg border border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30 max-h-60 overflow-auto fade-in-down">
       <!-- Search Input (if searchable) -->
       <div *ngIf="searchable && options.length > 5"
            class="sticky top-0 p-2 bg-white dark:bg-gray-800 theme-myhr:bg-gray-900/95 border-b border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30">
@@ -130,7 +130,7 @@
   <div *ngIf="hasError && errorMessage"
        [id]="errorMessageId"
        role="alert"
-       class="flex items-center gap-1.5 text-red-500 dark:text-red-400 theme-myhr:text-red-400 text-sm mt-1 animate-fade-in"
+       class="flex items-center gap-1.5 text-red-500 dark:text-red-400 theme-myhr:text-red-400 text-sm mt-1 fade-in"
        aria-live="polite">
     <app-icon name="error" size="xs" color="text-red-500 dark:text-red-400 theme-myhr:text-red-400"></app-icon>
     <span class="thai-text">{{ errorMessage }}</span>
@@ -140,7 +140,7 @@
   <div *ngIf="isValid && showSuccess && successMessage && !hasError"
        [id]="successMessageId"
        role="status"
-       class="flex items-center gap-1.5 text-green-500 dark:text-green-400 theme-myhr:text-green-400 text-sm mt-1 animate-fade-in"
+       class="flex items-center gap-1.5 text-green-500 dark:text-green-400 theme-myhr:text-green-400 text-sm mt-1 fade-in"
        aria-live="polite">
     <app-icon name="check_circle" size="xs" color="text-green-500 dark:text-green-400 theme-myhr:text-green-400"></app-icon>
     <span class="thai-text">{{ successMessage }}</span>
