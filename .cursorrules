@@ -453,6 +453,18 @@ export class ModelNameService {
 - **Typography**: Use font families from design tokens (Noto Sans, Poppins, Inter, Sarabun, Kanit)
 - **Spacing**: Use Tailwind spacing scale (0.25rem increments)
 - **Breakpoints**: Use standard breakpoints (xs: 0px, sm: 640px, md: 768px, lg: 1024px, xl: 1280px, 2xl: 1536px)
+  - **Mobile-First**: Always use mobile-first approach (`grid-cols-1 md:grid-cols-2 lg:grid-cols-3`)
+  - **Standard Patterns**:
+    - Small cards: `grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6`
+    - Medium cards: `grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6`
+    - Large cards: `grid-cols-1 lg:grid-cols-2 gap-6`
+    - Padding: `p-4 md:p-6 lg:p-8`
+  - **Breakpoint Selection**:
+    - `sm:` (640px) - Mobile landscape, small tablets
+    - `md:` (768px) - Tablets, 2-column grids
+    - `lg:` (1024px) - Desktop, 3-4 column grids
+    - `xl:` (1280px) - Large desktops (use only when needed)
+  - **Documentation**: See `RESPONSIVE_BREAKPOINTS_STANDARD.md` for complete guidelines
 - **Glassmorphism**: Follow glassmorphism design patterns with backdrop-filter and transparency
 - **Background Patterns**: Use pattern overlays with subtle animations (`patternShimmer`) for visual depth
 - **Gradient Animations**: Use subtle gradient shifts (`gradientShift`) for Light/Dark mode backgrounds
@@ -550,7 +562,7 @@ export class ModelNameService {
 ### Translation Completeness
 - **Status**: ✅ All layout.* and features.* keys translated in lo, my, vi, zh
 - **Total Keys**: 291 keys (41 layout + 250 features) per language
-- **Translation Scripts**: 
+- **Translation Scripts**:
   - `scripts/translate-features-auth-keys.js` - Translate auth keys
   - `scripts/translate-all-features-layout-keys.js` - Translate all layout and features keys
 - **Documentation**: See `TRANSLATION_COMPLETE_SUMMARY.md` for details
@@ -814,7 +826,7 @@ export class ComponentNameDemoComponent {
   - `/company` instead of `/portal/admin/company`
   - `/setting` instead of `/portal/admin/settings`
   - And other direct module routes
-- ✅ **Updated Files**: 
+- ✅ **Updated Files**:
   - `app-routing.module.ts` - Removed portal routes, using direct module routes
   - `navigation.constant.ts` - Updated all routes to use direct module paths
   - `sidebar.component.ts` - Updated route mapping and navigation logic
@@ -861,7 +873,7 @@ export class ComponentNameDemoComponent {
   - Empty States Standardization (6 files) - All use `<app-empty-state>` component
   - Error Messages Standardization (4 files) - All use `<app-form-validation-messages>` component
 - ✅ **Documentation**: `PHASE_1_SUMMARY.md` and `PHASE_2_SUMMARY.md` created
-- ✅ **Impact**: 
+- ✅ **Impact**:
   - Consistency improved across all feature components
   - Maintainability improved (single source of truth for UI patterns)
   - UX improved (consistent user experience)
@@ -920,7 +932,7 @@ export class ComponentNameDemoComponent {
 ### Translation Complete (2024-12-30)
 - ✅ **Completed**: All layout.* and features.* keys translated in lo, my, vi, zh
 - ✅ **Total Keys**: 291 keys (41 layout + 250 features) per language
-- ✅ **Translation Scripts**: 
+- ✅ **Translation Scripts**:
   - `scripts/translate-features-auth-keys.js` - Translate auth keys
   - `scripts/translate-all-features-layout-keys.js` - Translate all layout and features keys
 - ✅ **Documentation**: `TRANSLATION_COMPLETE_SUMMARY.md` created with complete translation status
@@ -928,7 +940,7 @@ export class ComponentNameDemoComponent {
 
 ---
 
-**Last Updated**: 2024-12-30  
-**Status**: ✅ All Architecture Improvements Completed + Translation Complete  
-**Angular Version**: 17.0.0+  
+**Last Updated**: 2024-12-30
+**Status**: ✅ All Architecture Improvements Completed + Translation Complete
+**Angular Version**: 17.0.0+
 **TypeScript Version**: 5.2.2+
