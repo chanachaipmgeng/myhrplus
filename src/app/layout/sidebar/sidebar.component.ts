@@ -4,7 +4,6 @@ import { filter, takeUntil, switchMap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { TranslateService } from '@ngx-translate/core';
-import { MenuService, MenuItem } from '@core/services';
 import { AuthService } from '@core/services';
 import { ThemeService } from '@core/services';
 import { LayoutService, BreadcrumbItem } from '@core/services';
@@ -15,9 +14,8 @@ import {
   getNavigationItemsByRoles
 } from '@core/constants';
 import { environment } from '@env/environment';
-import { ListViewComponent } from '@syncfusion/ej2-angular-lists';
 import { NestedMenuAccordionComponent } from '@shared/components/nested-menu-accordion/nested-menu-accordion.component';
-import { PREDEFINED_MODULES, MODULE_ROUTE_MAP, NestedMenuItem, MainModule } from '@core/constants';
+import { MODULE_ROUTE_MAP, NestedMenuItem, MainModule } from '@core/constants';
 import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 @Component({
@@ -38,11 +36,8 @@ import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
   ]
 })
 export class SidebarComponent implements OnInit, OnDestroy {
-  @ViewChild('listview') listview!: ListViewComponent;
-
   private translate = inject(TranslateService);
-  menuItems: MenuItem[] = [];
-  mainModules: MainModule[] = []; // Legacy - keep for backward compatibility
+  mainModules: MainModule[] = []; // Legacy fallback - keep for backward compatibility
   navigationItems: NavigationItem[] = []; // New navigation structure (Level 1)
   level2Items: NavigationChild[] = []; // Level 2 items for Rail (Left Icon Bar)
   selectedModule: string | null = null;
@@ -65,15 +60,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
   get navigationChildren(): NavigationChild[] {
     return this.getNavigationChildren();
   }
-  listViewFields: any = {
-    id: 'id',
-    text: 'text',
-    iconCss: 'iconCss',
-    child: 'child',
-    badge: 'badge',
-    badgeColor: 'badgeColor',
-    route: 'route'
-  };
   activeRoute: string = '';
   private destroy$ = new Subject<void>();
   isDarkMode: boolean = false;
@@ -82,13 +68,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   // Search functionality
   searchQuery: string = '';
-  filteredMenuItems: NestedMenuItem[] = [];
-  isLoading: boolean = false;
+  filteredMenuItems: NestedMenuItem[] = []; // Legacy fallback - keep for backward compatibility
+  isLoadingNavigation: boolean = false; // For new navigation items (synchronous)
 
 
   constructor(
     private router: Router,
-    private menuService: MenuService,
     private authService: AuthService,
     public themeService: ThemeService,
     private layoutService: LayoutService
@@ -96,9 +81,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
     // Subscribe to current user
     this.authService.currentUser$.subscribe(user => {
       this.currentUser = user;
-      // Reload menu when user changes
+      // Reload navigation when user changes
       if (user) {
-        this.loadMenu();
         this.loadNavigationItems();
       } else {
         this.navigationItems = [];
@@ -122,52 +106,51 @@ export class SidebarComponent implements OnInit, OnDestroy {
     });
     this.isDarkMode = this.themeService.isDarkMode();
 
-    // Load menu from service (legacy)
-    this.loadMenu();
-
-    // Load new navigation structure
+    // Load new navigation structure (synchronous, fast)
+    // Set loading state briefly to show skeleton during initialization
+    this.isLoadingNavigation = true;
     this.loadNavigationItems();
+    // Navigation items load immediately, but keep loading state briefly for smooth transition
+    setTimeout(() => {
+      this.isLoadingNavigation = false;
+    }, 50); // Very brief delay for smooth UI transition
 
-    // Track active route
+    // Track active route changes (including initial route on page refresh)
     this.router.events
       .pipe(
-        filter(event => event instanceof NavigationEnd),
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
         takeUntil(this.destroy$)
       )
-      .subscribe((event: any) => {
-        this.activeRoute = event.url;
+      .subscribe((event) => {
+        // Use urlAfterRedirects to get the final URL after any redirects
+        this.activeRoute = event.urlAfterRedirects || event.url;
+        console.log('[Sidebar] NavigationEnd - URL:', this.activeRoute, 'urlAfterRedirects:', event.urlAfterRedirects, 'originalUrl:', event.url);
         // Update selected module based on current route
         this.updateSelectedModuleFromRoute();
         // Breadcrumbs are now handled by main-layout component
       });
+
+    // Initialize active route from current URL (for page refresh)
+    // This ensures menu is active immediately when page is refreshed
+    // Use router.url which should match the current URL
+    this.activeRoute = this.router.url;
+    console.log('[Sidebar] Initial route from router.url:', this.activeRoute);
+
+    // Update selected module based on current route immediately after navigation items are loaded
+    // loadNavigationItems() is synchronous, so we can call updateSelectedModuleFromRoute() directly
+    this.updateSelectedModuleFromRoute();
   }
 
-  private loadMenu(): void {
-    this.isLoading = true;
-    this.menuService.loadMenu().subscribe({
-      next: (menu) => {
-        // Menu is already filtered by permissions in MenuService
-        this.menuItems = menu;
-        this.groupMenuByModule();
-        // Auto-select first module if available
-        if (this.mainModules.length > 0 && !this.selectedModule) {
-          this.selectModule(this.mainModules[0].id);
-        }
-        this.isLoading = false;
-      },
-      error: () => {
-        this.isLoading = false;
-      }
-    });
-  }
 
   /**
    * Load navigation items - Auto-load Admin Level 2 items directly
    * No Level 1 selection needed - show Admin Level 2 items immediately
+   * This is synchronous and fast, so no loading state needed
    */
   private loadNavigationItems(): void {
     // Always load all navigation items - admin by default
     // No role filtering - everyone sees admin menu
+    // This is synchronous and fast - no need for loading state
     this.navigationItems = getNavigationItemsByRoles([]);
 
     // Auto-select Admin and load Level 2 items directly
@@ -180,15 +163,18 @@ export class SidebarComponent implements OnInit, OnDestroy {
       if (adminItem.children && adminItem.children.length > 0) {
         this.level2Items = [...adminItem.children];
         console.log('[Sidebar] Auto-loaded Admin Level 2 items:', this.level2Items.map(item => ({
-      label: item.label,
-      icon: item.icon,
+          label: item.label,
+          icon: item.icon,
           route: item.route,
-      childrenCount: item.children?.length || 0
-    })));
+          childrenCount: item.children?.length || 0
+        })));
       }
     }
 
     console.log('[Sidebar] Loaded navigation items - Admin Level 2 shown directly');
+
+    // Navigation items loaded immediately - clear loading state
+    this.isLoadingNavigation = false;
   }
 
   /**
@@ -332,9 +318,24 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.searchQuery = '';
 
     // For Admin: If Level 2 item has route, navigate to it immediately
-    // If it has children, still navigate to the route (user can see Level 3 items in the menu)
+    // BUT only if current route is NOT deeper than Level 2 route
+    // This prevents navigation when user is already on a deeper route (e.g., /company/human-resources/company-type)
     if (parentNavItem?.id === 'admin' && level2Item.route) {
-      this.navigateToRoute(level2Item.route);
+      const currentRoute = this.router.url;
+      const level2Route = level2Item.route;
+
+      // Check if current route is deeper than Level 2 route
+      // e.g., /company/human-resources/company-type is deeper than /company
+      const isDeeperRoute = currentRoute.startsWith(level2Route + '/');
+      const isExactMatch = currentRoute === level2Route;
+
+      // Only navigate if:
+      // 1. Current route exactly matches Level 2 route, OR
+      // 2. Current route doesn't start with Level 2 route (different route entirely)
+      // Do NOT navigate if current route is deeper than Level 2 route
+      if (isExactMatch || (!isDeeperRoute && !isExactMatch)) {
+        this.navigateToRoute(level2Route);
+      }
     }
     // Breadcrumbs are now handled by main-layout component
   }
@@ -601,6 +602,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
               if (parentLevel3) {
                 this.selectedLevel3Item = parentLevel3;
                 console.log('[Sidebar] Set Level 3 parent from exact match:', parentLevel3.label);
+                // Expand Level 3 parent when Level 4 child is active
+                this.expandedLevel3Items.add(parentLevel3.label);
               }
               this.selectedLevel4Item = item;
               this.selectedLevel5Item = null;
@@ -609,10 +612,19 @@ export class SidebarComponent implements OnInit, OnDestroy {
               if (parentLevel3) {
                 this.selectedLevel3Item = parentLevel3;
                 console.log('[Sidebar] Set Level 3 parent from Level 5 exact match:', parentLevel3.label);
+                // Expand Level 3 parent when Level 5 child is active
+                this.expandedLevel3Items.add(parentLevel3.label);
               }
               if (parentLevel4) {
                 this.selectedLevel4Item = parentLevel4;
                 console.log('[Sidebar] Set Level 4 parent from Level 5 exact match:', parentLevel4.label);
+                // Expand Level 4 parent when Level 5 child is active (Level 5 is child of Level 4)
+                // Note: expandedLevel3Items Set is used for both Level 3 and Level 4 items
+                this.expandedLevel3Items.add(parentLevel4.label);
+                // Also ensure Level 3 parent is expanded (Level 4 is child of Level 3)
+                if (parentLevel3) {
+                  this.expandedLevel3Items.add(parentLevel3.label);
+                }
               }
               this.selectedLevel5Item = item;
               console.log('[Sidebar] Set Level 5 item:', item.label);
@@ -643,11 +655,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
                 // Set Level 3 parent (Human Resources) even if it has no route
                 this.selectedLevel3Item = item;
                 console.log('[Sidebar] Set Level 3 parent from children search:', item.label);
+                // Expand Level 3 item when child is active
+                this.expandedLevel3Items.add(item.label);
               } else if (level === 4) {
                 // Set Level 3 and Level 4 parents
                 if (currentParentLevel3) {
                   this.selectedLevel3Item = currentParentLevel3;
                   console.log('[Sidebar] Set Level 3 parent from children search:', currentParentLevel3.label);
+                  // Expand Level 3 parent when Level 4 child is active
+                  this.expandedLevel3Items.add(currentParentLevel3.label);
                 }
                 this.selectedLevel4Item = item;
                 console.log('[Sidebar] Set Level 4 parent from children search:', item.label);
@@ -681,6 +697,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
               if (parentLevel3) {
                 this.selectedLevel3Item = parentLevel3;
                 console.log('[Sidebar] Set Level 3 parent from prefix match:', parentLevel3.label);
+                // Expand Level 3 parent when Level 4 child is active
+                this.expandedLevel3Items.add(parentLevel3.label);
               }
               this.selectedLevel4Item = item;
               this.selectedLevel5Item = null;
@@ -741,52 +759,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.searchQuery = '';
   }
 
-  private groupMenuByModule(): void {
-    // Use predefined modules from constant
-    const predefinedModules = [...PREDEFINED_MODULES];
-
-    // Create module map - preserve existing menuItems from predefined modules
-    const moduleMap = new Map<string, MainModule>();
-    predefinedModules.forEach(module => {
-      moduleMap.set(module.id, { ...module, menuItems: [...module.menuItems] });
-    });
-
-    // Group menu items by module from MenuService
-    this.menuItems.forEach(item => {
-      const moduleCode = this.getModuleCodeFromRoute(item.route || item.path || '');
-      const moduleId = this.mapRouteToModuleId(moduleCode);
-
-      if (moduleMap.has(moduleId)) {
-        const module = moduleMap.get(moduleId)!;
-        const menuItem: NestedMenuItem = {
-          text: item.edesc || item.name || '',
-          id: item.route || `menu-${moduleId}-${module.menuItems.length}`,
-          iconCss: this.getIconClass(item.icon || 'folder'),
-          route: item.route
-        };
-
-        // Add children if exists
-        if (this.hasChildren(item) && item.children) {
-          menuItem.child = item.children.map((child, childIndex) => ({
-            text: child.edesc || child.name || '',
-            id: child.route || `child-${moduleId}-${module.menuItems.length}-${childIndex}`,
-            iconCss: this.getIconClass(child.icon || 'folder'),
-            route: child.route
-          }));
-        }
-
-        module.menuItems.push(menuItem);
-      }
-    });
-
-    // Always show all predefined modules (ordered) with merged menuItems
-    this.mainModules = Array.from(moduleMap.values());
-
-    // Initialize filtered menu items if module is already selected
-    if (this.selectedModuleData) {
-      this.filteredMenuItems = this.selectedModuleData.menuItems;
-    }
-  }
 
   private mapRouteToModuleId(moduleCode: string): string {
     return MODULE_ROUTE_MAP[moduleCode.toLowerCase()] || 'home';
@@ -802,34 +774,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
 
-  selectModule(moduleId: string): void {
-    this.selectedModule = moduleId;
-    this.selectedModuleData = this.mainModules.find(m => m.id === moduleId) || null;
-    // Clear search when switching modules
-    this.searchQuery = '';
-    // Filter menu items after module is selected
-    if (this.selectedModuleData && this.selectedModuleData.menuItems) {
-      // Ensure menuItems is an array and all items have required properties
-      this.filteredMenuItems = (this.selectedModuleData.menuItems || []).map(item => ({
-        text: item.text || '',
-        id: item.id || `menu-${Date.now()}-${Math.random()}`,
-        iconCss: item.iconCss || 'e-icons e-folder',
-        route: item.route || '',
-        badge: item.badge,
-        badgeColor: item.badgeColor,
-        child: item.child ? item.child.map(child => ({
-          text: child.text || '',
-          id: child.id || `child-${Date.now()}-${Math.random()}`,
-          iconCss: child.iconCss || 'e-icons e-folder',
-          route: child.route || ''
-        })) : undefined
-      }));
-      // Don't navigate here - let routerLink handle navigation
-      // RouterLink will automatically navigate to the route
-    } else {
-      this.filteredMenuItems = [];
-    }
-  }
 
   getModuleHomeRoute(moduleId: string): string {
     const moduleHomeRoutes: { [key: string]: string } = {
@@ -1024,92 +968,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     console.log('[Sidebar] No navigation match found for route:', this.activeRoute);
 
-    // Fallback to legacy module selection
-    const moduleCode = this.getModuleCodeFromRoute(this.activeRoute);
-    const moduleId = this.mapRouteToModuleId(moduleCode);
-    if (moduleId && moduleId !== this.selectedModule) {
-      // Update selected module without navigating (routerLink already handled navigation)
-      this.selectedModule = moduleId;
-      this.selectedModuleData = this.mainModules.find(m => m.id === moduleId) || null;
-      // Clear search when switching modules
-      this.searchQuery = '';
-      // Filter menu items after module is selected
-      if (this.selectedModuleData && this.selectedModuleData.menuItems) {
-        // Ensure menuItems is an array and all items have required properties
-        this.filteredMenuItems = (this.selectedModuleData.menuItems || []).map(item => ({
-          text: item.text || '',
-          id: item.id || `menu-${Date.now()}-${Math.random()}`,
-          iconCss: item.iconCss || 'e-icons e-folder',
-          route: item.route || '',
-          badge: item.badge,
-          badgeColor: item.badgeColor,
-          child: item.child ? item.child.map(child => ({
-            text: child.text || '',
-            id: child.id || `child-${Date.now()}-${Math.random()}`,
-            iconCss: child.iconCss || 'e-icons e-folder',
-            route: child.route || ''
-          })) : undefined
-        }));
-      } else {
-        this.filteredMenuItems = [];
-      }
-    }
+    // Legacy fallback removed - navigation structure handles all routes
   }
 
-  onMenuItemSelect(args: any): void {
-    if (!args) {
-      return;
-    }
-
-    // Syncfusion ListView sends data in different formats:
-    // - args.data (the selected item data with route) - MOST RELIABLE
-    // - args.item (the selected item DOM element)
-    // - args.text (the text of selected item)
-
-    // Get route from args.data first (most reliable based on error log)
-    let route = args.data?.route;
-
-    // If still no route, try to find it in the filteredMenuItems by id or text
-    if (!route) {
-      const itemId = args.data?.id;
-      const itemText = args.text || args.data?.text;
-
-      if (itemId) {
-        const menuItem = this.findMenuItemById(itemId);
-        if (menuItem && menuItem.route) {
-          route = menuItem.route;
-        }
-      } else if (itemText) {
-        const menuItem = this.findMenuItemByText(itemText);
-        if (menuItem && menuItem.route) {
-          route = menuItem.route;
-        }
-      }
-    }
-
-    // Navigate to route if found
-    if (route) {
-      // Map legacy routes to new routes if needed
-      const mappedRoute = this.mapLegacyRoute(route);
-      this.navigateToRoute(mappedRoute);
-    } else {
-      // If no route found, check if it's a parent item with children (should expand instead)
-      const hasChildren = args.data?.child && args.data.child.length > 0;
-      if (hasChildren) {
-        // This is a parent item, should expand/collapse instead of navigate
-        // Syncfusion ListView handles this automatically, so we can ignore
-        return;
-      }
-
-      // Log warning only if it's not a parent item
-      console.warn('No route found for menu item:', {
-        text: args.text || args.data?.text,
-        id: args.data?.id,
-        hasChildren: hasChildren,
-        data: args.data
-      });
-    }
-  }
 
   /**
    * Map legacy routes to new routes
@@ -1152,49 +1013,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     return this.mapLegacyRoute(route);
   }
 
-  private findMenuItemById(id: string): NestedMenuItem | null {
-    if (!this.filteredMenuItems || this.filteredMenuItems.length === 0) {
-      return null;
-    }
-
-    // Search in current filtered items
-    for (const item of this.filteredMenuItems) {
-      if (item.id === id) {
-        return item;
-      }
-      // Search in children if exists
-      if (item.child) {
-        for (const child of item.child) {
-          if (child.id === id) {
-            return child;
-          }
-        }
-      }
-    }
-    return null;
-  }
-
-  private findMenuItemByText(text: string): NestedMenuItem | null {
-    if (!this.filteredMenuItems || this.filteredMenuItems.length === 0) {
-      return null;
-    }
-
-    // Search in current filtered items
-    for (const item of this.filteredMenuItems) {
-      if (item.text === text) {
-        return item;
-      }
-      // Search in children if exists
-      if (item.child) {
-        for (const child of item.child) {
-          if (child.text === text) {
-            return child;
-          }
-        }
-      }
-    }
-    return null;
-  }
 
   private navigateToRoute(route: string): void {
     if (!route) {
@@ -1251,29 +1069,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     return this.activeRoute.startsWith(route);
   }
 
-  hasChildren(item: MenuItem): boolean {
-    return !!(item.children && item.children.length > 0);
-  }
-
-  navigate(route: string): void {
-    if (route) {
-      this.router.navigate([route]);
-    }
-  }
-
-  /**
-   * Handle route change from menu item component
-   */
-  onRouteChange(route: string): void {
-    this.activeRoute = route;
-    // Update selected module based on route
-    this.updateSelectedModuleFromRoute();
-  }
-
-  toggleChildren(item: MenuItem): void {
-    // Toggle children visibility if needed
-    // This can be enhanced with expand/collapse functionality
-  }
 
   /**
    * Get logo path based on current theme

@@ -165,7 +165,7 @@
         </div>
 
         <!-- Search Box -->
-        <div class="search-container mb-4 relative animate-fade-in" *ngIf="navigationChildren.length > 3 || filteredMenuItems.length > 3">
+        <div class="search-container mb-4 relative animate-fade-in" *ngIf="navigationChildren.length > 3">
           <app-glass-input
             type="text"
             [(ngModel)]="searchQuery"
@@ -194,7 +194,7 @@
       </div>
 
       <!-- Loading State -->
-      <div *ngIf="isLoading" class="space-y-3">
+      <div *ngIf="isLoadingNavigation" class="space-y-3">
         <app-skeleton-loader
           [type]="'list'"
           [rows]="5">
@@ -203,7 +203,7 @@
 
       <!-- Module Menu Items - Using Nested Accordion -->
       <!-- Show Level 3 items when Level 2 is selected (Level 4 as children) -->
-      <ng-container *ngIf="!isLoading && navigationChildren.length > 0">
+      <ng-container *ngIf="!isLoadingNavigation && navigationChildren.length > 0">
         <div class="nested-menu-container
                     bg-white/20 dark:bg-gray-800/20 theme-gemini:bg-white/5
                     backdrop-blur-sm rounded-xl
@@ -220,21 +220,9 @@
         </div>
       </ng-container>
 
-      <!-- Fallback to Legacy ListView (if no navigation children) -->
-      <ejs-listview
-        *ngIf="!isLoading && navigationChildren.length === 0 && filteredMenuItems && filteredMenuItems.length > 0"
-        #listview
-        [dataSource]="filteredMenuItems"
-        [fields]="listViewFields"
-        [showIcon]="true"
-        [showCheckBox]="false"
-        (select)="onMenuItemSelect($event)"
-        class="syncfusion-module-menu">
-      </ejs-listview>
-
       <!-- Search No Results -->
       <app-empty-state
-        *ngIf="!isLoading && searchQuery && navigationChildren.length === 0 && filteredMenuItems.length === 0"
+        *ngIf="!isLoadingNavigation && searchQuery && navigationChildren.length === 0"
         [icon]="'search_off'"
         [title]="'layout.sidebar.noSearchResults' | translate"
         [description]="'layout.sidebar.tryDifferentSearch' | translate">
@@ -249,7 +237,7 @@
 
       <!-- Empty State - No Menu Items -->
       <app-empty-state
-        *ngIf="!isLoading && !searchQuery && navigationChildren.length === 0 && filteredMenuItems.length === 0"
+        *ngIf="!isLoadingNavigation && !searchQuery && navigationChildren.length === 0"
         [icon]="'folder_open'"
         [title]="'layout.sidebar.noMenuInMode' | translate">
       </app-empty-state>

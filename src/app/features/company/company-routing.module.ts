@@ -4,16 +4,8 @@ import { CompanyDashboardComponent } from './dashboard/company-dashboard.compone
 
 const routes: Routes = [
   {
-    path: '',
-    component: CompanyDashboardComponent
-  },
-  {
     path: 'human-resources',
     children: [
-      {
-        path: '',
-        loadComponent: () => import('./human-resources/human-resources-list.component').then(m => m.HumanResourcesListComponent)
-      },
       {
         path: 'company-type',
         loadComponent: () => import('./human-resources/company-type/company-type-list.component').then(m => m.CompanyTypeListComponent)
@@ -113,13 +105,30 @@ const routes: Routes = [
       {
         path: 'workarea-store',
         loadComponent: () => import('./human-resources/workarea-store/workarea-store-list.component').then(m => m.WorkareaStoreListComponent)
+      },
+      // Default route for human-resources - must be last to avoid matching child routes
+      {
+        path: '',
+        pathMatch: 'full',
+        loadComponent: () => import('./human-resources/human-resources-list.component').then(m => m.HumanResourcesListComponent)
       }
     ]
+  },
+  // Dashboard route
+  {
+    path: 'dashboard',
+    component: CompanyDashboardComponent
   },
   // Placeholder routes
   { path: 'approve', component: CompanyDashboardComponent },
   { path: 'ess-setup', component: CompanyDashboardComponent },
-  { path: 'reports', component: CompanyDashboardComponent }
+  { path: 'reports', component: CompanyDashboardComponent },
+  // Default route - redirect to dashboard to avoid matching child routes
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'dashboard'
+  }
 ];
 
 @NgModule({

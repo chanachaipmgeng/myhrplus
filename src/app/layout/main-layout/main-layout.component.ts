@@ -53,8 +53,11 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
       .subscribe(event => {
         // Type guard: event is NavigationEnd after filter
         if (event instanceof NavigationEnd) {
+          const currentUrl = event.urlAfterRedirects || event.url;
+          console.log('[MainLayout] NavigationEnd - URL:', currentUrl, 'urlAfterRedirects:', event.urlAfterRedirects);
+          
           // Generate breadcrumb path directly from navigation constants
-          const breadcrumbPath = getBreadcrumbPathFromNavigation(event.urlAfterRedirects || event.url);
+          const breadcrumbPath = getBreadcrumbPathFromNavigation(currentUrl);
 
           if (breadcrumbPath.length > 0) {
             // Map to BreadcrumbItem format with icons
