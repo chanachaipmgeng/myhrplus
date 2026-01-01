@@ -165,7 +165,7 @@
         </div>
 
         <!-- Search Box -->
-        <div class="search-container mb-4 relative animate-fade-in" *ngIf="navigationChildren.length > 3">
+        <div class="search-container mb-4 relative animate-fade-in" *ngIf="shouldShowSearchBox()">
           <app-glass-input
             type="text"
             [(ngModel)]="searchQuery"

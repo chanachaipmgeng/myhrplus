@@ -347,11 +347,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
    * Uses caching to prevent infinite loops from change detection
    */
   getNavigationChildren(): NavigationChild[] {
-    // Create cache key based on current state
-    const cacheKey = `${this.selectedNavigationItem?.id || 'none'}-${this.selectedLevel2Item?.label || 'none'}`;
+    // Create cache key based on current state (include search query)
+    const cacheKey = `${this.selectedNavigationItem?.id || 'none'}-${this.selectedLevel2Item?.label || 'none'}-${this.searchQuery || ''}`;
 
-    // Return cached result if key matches
-    if (this._cachedNavigationChildrenKey === cacheKey && this._cachedNavigationChildren.length >= 0) {
+    // Return cached result if key matches (only if no search query)
+    if (!this.searchQuery && this._cachedNavigationChildrenKey === cacheKey && this._cachedNavigationChildren.length >= 0) {
       return this._cachedNavigationChildren;
     }
 
@@ -381,11 +381,97 @@ export class SidebarComponent implements OnInit, OnDestroy {
       console.log('[Sidebar] getNavigationChildren: No items available');
     }
 
-    // Cache result
-    this._cachedNavigationChildren = result;
-    this._cachedNavigationChildrenKey = cacheKey;
+    // Filter by search query if provided
+    if (this.searchQuery && this.searchQuery.trim()) {
+      const query = this.searchQuery.trim().toLowerCase();
+      // Clear expanded items before filtering (will be repopulated by filterNavigationItems)
+      this.expandedLevel3Items.clear();
+      result = this.filterNavigationItems(result, query);
+      console.log('[Sidebar] Filtered navigation items by search query:', query, 'Results:', result.length, 'Expanded items:', Array.from(this.expandedLevel3Items));
+    }
+
+    // Cache result (only if no search query)
+    if (!this.searchQuery) {
+      this._cachedNavigationChildren = result;
+      this._cachedNavigationChildrenKey = cacheKey;
+    }
 
     return result;
+  }
+
+  /**
+   * Filter navigation items recursively by search query
+   * Searches in label (original and translated), route, and children
+   * Also expands parent items when children match
+   */
+  private filterNavigationItems(items: NavigationChild[], query: string, parentLabel?: string): NavigationChild[] {
+    if (!query || !items || items.length === 0) {
+      return items;
+    }
+
+    const filtered: NavigationChild[] = [];
+
+    for (const item of items) {
+      // Check if current item matches
+      // Search in: original label, translated label (multiple levels), and route
+      const originalLabel = item.label?.toLowerCase() || '';
+      const routePath = item.route?.toLowerCase() || '';
+
+      // Try to get translated label with different level parameters
+      const translatedLabel3 = this.translateLabel(item.label, this.selectedNavigationItem?.id, 3).toLowerCase();
+      const translatedLabel4 = this.translateLabel(item.label, this.selectedNavigationItem?.id, 4).toLowerCase();
+      const translatedLabel5 = this.translateLabel(item.label, this.selectedNavigationItem?.id, 5).toLowerCase();
+      const translatedLabelNoLevel = this.translateLabel(item.label, this.selectedNavigationItem?.id).toLowerCase();
+
+      // Also try direct translation key lookup
+      const labelKey = this.normalizeLabelToKey(item.label);
+      const directTranslation = this.translate.instant(`navigation.${labelKey}`).toLowerCase();
+      const directTranslationWithNav = this.selectedNavigationItem?.id
+        ? this.translate.instant(`navigation.${this.selectedNavigationItem.id}.${labelKey}`).toLowerCase()
+        : '';
+
+      const originalLabelMatch = originalLabel.includes(query);
+      const translatedLabelMatch = translatedLabel3.includes(query) ||
+                                   translatedLabel4.includes(query) ||
+                                   translatedLabel5.includes(query) ||
+                                   translatedLabelNoLevel.includes(query) ||
+                                   directTranslation.includes(query) ||
+                                   directTranslationWithNav.includes(query);
+      const routeMatch = routePath.includes(query);
+
+      // Recursively filter children
+      let filteredChildren: NavigationChild[] = [];
+      let hasMatchingChildren = false;
+      if (item.children && item.children.length > 0) {
+        filteredChildren = this.filterNavigationItems(item.children, query, item.label);
+        hasMatchingChildren = filteredChildren.length > 0;
+      }
+
+      // Include item if:
+      // 1. Current item matches (original label, translated label, or route)
+      // 2. Has matching children
+      const itemMatches = originalLabelMatch || translatedLabelMatch || routeMatch;
+      if (itemMatches || hasMatchingChildren) {
+        // If children match but current item doesn't, expand parent to show children
+        if (hasMatchingChildren && !itemMatches && parentLabel) {
+          this.expandedLevel3Items.add(parentLabel);
+          console.log('[Sidebar] Auto-expanding parent item for search:', parentLabel);
+        }
+
+        // If current item has matching children, expand it
+        if (hasMatchingChildren) {
+          this.expandedLevel3Items.add(item.label);
+          console.log('[Sidebar] Auto-expanding item with matching children:', item.label);
+        }
+
+        filtered.push({
+          ...item,
+          children: filteredChildren.length > 0 ? filteredChildren : item.children
+        });
+      }
+    }
+
+    return filtered;
   }
 
   /**
@@ -802,14 +888,41 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   onSearchChange(): void {
-    // Search is handled by navigationChildren filtering in template
-    // No need for separate filter method since we use navigation.constant.ts
+    // Invalidate cache when search changes
+    this._cachedNavigationChildrenKey = '';
+    // Filtering is handled in getNavigationChildren() method
+    // The navigationChildren getter will automatically filter when accessed
   }
 
   clearSearch(): void {
     this.searchQuery = '';
-    // Search is handled by navigationChildren filtering in template
-    // No need for separate filter method since we use navigation.constant.ts
+    // Invalidate cache when clearing search
+    this._cachedNavigationChildrenKey = '';
+    // Filtering is handled in getNavigationChildren() method
+  }
+
+  /**
+   * Determine if search box should be shown
+   * Show search box if:
+   * 1. There are navigation children (before filtering) > 3, OR
+   * 2. User is currently searching (has searchQuery)
+   */
+  shouldShowSearchBox(): boolean {
+    // If user is searching, always show search box
+    if (this.searchQuery && this.searchQuery.trim()) {
+      return true;
+    }
+
+    // Get original navigation children (without search filter)
+    let originalCount = 0;
+    if (this.selectedNavigationItem?.id === 'admin' && this.selectedLevel2Item && this.selectedLevel2Item.children) {
+      originalCount = this.selectedLevel2Item.children.length;
+    } else if (this.selectedNavigationItem?.id === 'home' && this.selectedNavigationItem.children) {
+      originalCount = this.selectedNavigationItem.children.length;
+    }
+
+    // Show search box if there are more than 3 items
+    return originalCount > 3;
   }
 
   /**
