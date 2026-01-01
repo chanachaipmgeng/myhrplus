@@ -24,7 +24,7 @@
           variant="strong"
           padding="p-0"
           customClass="language-dropdown absolute right-0 top-full mt-2 w-48
-                       rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                       rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
                        z-50 overflow-hidden
                        backdrop-blur-xl
                        animate-scale-in
@@ -48,7 +48,7 @@
                      animate-fade-in">
               <img [src]="lang.flagPath" [alt]="lang.name" class="w-5 h-5 rounded-sm object-cover" />
               <span class="flex-1 thai-text text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">{{ lang.name }}</span>
-              <app-icon *ngIf="currentLang === lang.code" name="check" size="sm" color="text-blue-500 theme-gemini:text-blue-400"></app-icon>
+              <app-icon *ngIf="currentLang === lang.code" name="check" size="sm" color="text-primary theme-gemini:text-primary"></app-icon>
             </button>
           </div>
         </app-glass-card>
@@ -195,7 +195,7 @@
               variant="primary"
               size="lg"
               [loading]="loading"
-              [disabled]="loading || !username || !password"
+              [disabled]="loading || !loginForm.get('username')?.value || !loginForm.get('password')?.value"
               [fullWidth]="true"
               [ariaLabel]="'features.auth.login.signIn' | translate">
               {{ loading ? ('features.auth.login.signingIn' | translate) : ('features.auth.login.signIn' | translate) }}

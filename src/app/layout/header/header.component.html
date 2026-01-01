@@ -1,4 +1,4 @@
-<header class="glass-nav bg-white/20 dark:bg-gray-900/20 theme-gemini:bg-gray-900/25 backdrop-blur-xl border-b border-white/20 dark:border-gray-700/20 theme-gemini:border-blue-500/30 shadow-2xl transition-all duration-500 ease-in-out fixed top-0 left-0 right-0 z-50 gemini-header px-3 sm:px-4 md:px-6
+<header class="glass-nav bg-white/20 dark:bg-gray-900/20 theme-gemini:bg-gray-900/25 backdrop-blur-xl border-b border-white/20 dark:border-gray-700/20 theme-gemini:border-primary/30 shadow-2xl transition-all duration-500 ease-in-out fixed top-0 left-0 right-0 z-50 gemini-header px-3 sm:px-4 md:px-6
             animate-fade-in
             hover:shadow-3xl
             [&:hover]:bg-white/25 dark:[&:hover]:bg-gray-900/30 theme-gemini:[&:hover]:bg-gray-900/30">
@@ -45,7 +45,7 @@
           </app-icon>
         </a>
         <div class="flex flex-col min-w-0 hidden sm:block">
-          <span class="app-title thai-text font-semibold text-gray-800 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent text-sm md:text-lg leading-tight truncate">
+          <span class="app-title thai-text font-semibold text-gray-800 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent text-sm md:text-lg leading-tight truncate">
             {{ 'layout.header.appTitle' | translate }}
           </span>
           <span class="app-title-en font-medium text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 text-xs hidden md:block">
@@ -63,7 +63,7 @@
         [attr.aria-label]="'layout.header.searchMenuAriaLabel' | translate"
         class="omni-search-trigger w-full max-w-md px-4 py-2 rounded-lg
                bg-white/50 dark:bg-gray-800/50 theme-gemini:bg-gray-800/30
-               border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+               border border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
                text-left flex items-center gap-3
                hover:bg-white/70 dark:hover:bg-gray-800/70 theme-gemini:hover:bg-gray-800/50
                hover:scale-[1.02] hover:shadow-lg hover:-translate-y-0.5
@@ -72,11 +72,11 @@
                focus:outline-none focus:ring-2 focus:ring-blue-500/20
                group relative overflow-hidden">
         <!-- Hover Glow Effect -->
-        <div class="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-blue-500/0
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0
                     opacity-0 group-hover:opacity-100
                     transition-opacity duration-300"></div>
         <app-icon name="search" size="sm" color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70
-                   group-hover:scale-110 group-hover:text-blue-500 dark:group-hover:text-blue-400
+                   group-hover:scale-110 group-hover:text-primary dark:group-hover:text-primary
                    transition-all duration-300 relative z-10"></app-icon>
         <span class="flex-1 text-sm text-gray-500 dark:text-gray-400 theme-gemini:text-white/70 relative z-10
                      group-hover:text-gray-700 dark:group-hover:text-gray-300
@@ -86,7 +86,7 @@
         <kbd class="hidden lg:inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold
                     bg-gray-100 dark:bg-gray-700 theme-gemini:bg-gray-700/50
                     text-gray-600 dark:text-gray-300 theme-gemini:text-white/70
-                    border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 rounded">
+                    border border-gray-300 dark:border-gray-600 theme-gemini:border-primary/30 rounded">
           <span>Ctrl</span>
           <span>K</span>
         </kbd>
@@ -107,7 +107,7 @@
                      group relative overflow-hidden"
         (clicked)="openOmniSearch()">
         <app-icon name="search" size="md" color="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90
-                   group-hover:scale-110 group-hover:text-blue-500 dark:group-hover:text-blue-400
+                   group-hover:scale-110 group-hover:text-primary dark:group-hover:text-primary
                    transition-all duration-300 relative z-10"></app-icon>
       </app-glass-button>
 
@@ -137,7 +137,7 @@
           variant="strong"
           padding="p-0"
           customClass="language-dropdown absolute right-0 top-full mt-2 w-48
-                       rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                       rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
                        z-50 overflow-hidden
                        backdrop-blur-xl
                        animate-scale-in
@@ -161,7 +161,7 @@
                      animate-fade-in">
               <img [src]="lang.flagPath" [alt]="lang.label" class="w-5 h-5 rounded-sm object-cover" />
               <span class="flex-1 thai-text text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">{{ lang.label }}</span>
-              <app-icon *ngIf="currentLanguage === lang.value" name="check" size="sm" color="text-blue-500 theme-gemini:text-blue-400"></app-icon>
+              <app-icon *ngIf="currentLanguage === lang.value" name="check" size="sm" color="text-primary theme-gemini:text-primary"></app-icon>
             </button>
           </div>
         </app-glass-card>
@@ -205,7 +205,7 @@
           variant="strong"
           padding="p-0"
           customClass="notification-dropdown absolute right-0 top-full mt-2 w-80 md:w-96
-                       rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                       rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
                        z-50 max-h-96 overflow-hidden flex flex-col
                        backdrop-blur-xl
                        animate-scale-in
@@ -213,7 +213,7 @@
                        origin-top-right">
           <div id="notification-menu" role="menu" [attr.aria-label]="'layout.header.notificationMenuAriaLabel' | translate" class="flex flex-col">
           <!-- Header -->
-          <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30 flex items-center justify-between bg-gray-50 dark:bg-gray-900 theme-gemini:bg-gray-900/70">
+          <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30 flex items-center justify-between bg-gray-50 dark:bg-gray-900 theme-gemini:bg-gray-900/70">
             <h3 class="font-semibold text-gray-800 dark:text-gray-200 theme-gemini:text-white/90 thai-text">{{ 'layout.header.notifications' | translate }}</h3>
             <button
               *ngIf="unreadCount > 0"
@@ -221,7 +221,7 @@
               role="menuitem"
               (click)="markAllAsRead()"
               [attr.aria-label]="'layout.header.markAllAsRead' | translate"
-              class="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
+              class="text-xs text-primary dark:text-primary hover:text-primary/80 dark:hover:text-primary/80 transition-colors">
               {{ 'layout.header.markAllAsRead' | translate }}
             </button>
           </div>
@@ -243,7 +243,7 @@
                  [class.unread]="!notification.read"
                  [attr.aria-label]="notification.title + (notification.read ? '' : ' (' + ('layout.header.unread' | translate) + ')')"
                  [style.--animation-delay]="(i * 30) + 'ms'"
-                 class="notification-item px-4 py-3 border-b border-gray-100 dark:border-gray-700 theme-gemini:border-blue-500/20
+                 class="notification-item px-4 py-3 border-b border-gray-100 dark:border-gray-700 theme-gemini:border-primary/20
                         cursor-pointer
                         transition-all duration-200 ease-out
                         hover:bg-gray-50 dark:hover:bg-gray-700/50 theme-gemini:hover:bg-white/10
@@ -265,7 +265,7 @@
                       {{ notification.title }}
                     </h4>
                     <span *ngIf="!notification.read"
-                          class="flex-shrink-0 w-2 h-2 bg-blue-500 theme-gemini:bg-blue-400 rounded-full mt-1"></span>
+                          class="flex-shrink-0 w-2 h-2 bg-primary theme-gemini:bg-primary rounded-full mt-1"></span>
                   </div>
                   <p class="text-xs text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 thai-text line-clamp-2 mb-1">
                     {{ notification.message }}
@@ -280,12 +280,12 @@
 
           <!-- Footer -->
           <div *ngIf="notifications.length > 0"
-               class="px-4 py-2 border-t border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30 bg-gray-50 dark:bg-gray-900 theme-gemini:bg-gray-900/70 text-center">
+               class="px-4 py-2 border-t border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30 bg-gray-50 dark:bg-gray-900 theme-gemini:bg-gray-900/70 text-center">
             <button
               type="button"
               role="menuitem"
               [attr.aria-label]="'layout.header.viewAll' | translate"
-              class="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
+              class="text-xs text-primary dark:text-primary hover:text-primary/80 dark:hover:text-primary/80 transition-colors">
               {{ 'layout.header.viewAll' | translate }}
             </button>
           </div>
@@ -319,7 +319,7 @@
           variant="strong"
           padding="p-0"
           customClass="user-dropdown absolute right-0 top-full mt-2 w-56
-                       rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
+                       rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
                        z-50 overflow-hidden
                        backdrop-blur-xl
                        animate-scale-in
@@ -356,7 +356,7 @@
               <app-icon name="settings" size="sm" color="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70"></app-icon>
               <span class="thai-text text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">{{ 'layout.header.settings' | translate }}</span>
             </button>
-            <div class="border-t border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30 my-1"></div>
+            <div class="border-t border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30 my-1"></div>
             <button
               type="button"
               role="menuitem"

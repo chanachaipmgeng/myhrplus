@@ -62,12 +62,12 @@
       <div *ngIf="userInfo && userInfo.length > 0" class="flex flex-wrap gap-2">
         <div 
           *ngFor="let info of userInfo"
-          class="flex items-center gap-2 px-3 md:px-4 py-2 bg-indigo-100/50 dark:bg-indigo-900/30 rounded-xl text-xs md:text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">
+          class="flex items-center gap-2 px-3 md:px-4 py-2 bg-primary/10 dark:bg-primary/10 rounded-xl text-xs md:text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">
           <app-icon 
             *ngIf="info.icon"
             [name]="info.icon" 
             size="sm" 
-            [color]="info.iconColor || 'text-indigo-600 dark:text-indigo-400'">
+            [color]="info.iconColor || 'text-primary dark:text-primary'">
           </app-icon>
           <span class="thai-text">{{ info.label }}: {{ info.value }}</span>
         </div>

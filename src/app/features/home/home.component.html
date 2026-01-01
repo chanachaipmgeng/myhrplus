@@ -302,14 +302,14 @@
               (keydown.space)="navigateToRoute('/personal'); $event.preventDefault()">
               <app-glass-card
                 padding="p-6"
-                customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 focus-within:ring-2 focus-within:ring-blue-400 focus-within:ring-offset-2">
-                <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:scale-110" [attr.aria-hidden]="true">
-                  <app-icon name="person" size="lg" color="text-blue-600 dark:text-blue-400"></app-icon>
+                customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2">
+                <div class="w-12 h-12 bg-primary/10 dark:bg-primary/10 rounded-lg flex items-center justify-center mb-4 text-primary dark:text-primary transition-colors duration-300 group-hover:scale-110" [attr.aria-hidden]="true">
+                  <app-icon name="person" size="lg" color="text-primary dark:text-primary"></app-icon>
                 </div>
                 <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">จัดการข้อมูลพนักงาน</h3>
                 <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">จัดการข้อมูลส่วนบุคคลของพนักงาน</p>
-                <div class="flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium transition-colors duration-300">
-                  เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-blue-600 dark:text-blue-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300" [attr.aria-hidden]="true"></app-icon>
+                <div class="flex items-center text-primary dark:text-primary text-sm font-medium transition-colors duration-300">
+                  เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-primary dark:text-primary" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300" [attr.aria-hidden]="true"></app-icon>
                 </div>
               </app-glass-card>
             </div>
@@ -428,8 +428,8 @@
                class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-200 cursor-pointer"
                [appStagger]="i"
                [staggerDelay]="0.05">
-            <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0">
-              <app-icon [name]="activity.icon" size="sm" color="text-blue-600 dark:text-blue-400"></app-icon>
+            <div class="w-10 h-10 rounded-full bg-primary/10 dark:bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <app-icon [name]="activity.icon" size="sm" color="text-primary dark:text-primary"></app-icon>
             </div>
             <div class="flex-1 min-w-0">
               <p class="text-sm font-medium text-gray-800 dark:text-gray-100 thai-text">{{ activity.title }}</p>

@@ -6,7 +6,7 @@
         <button
           type="button"
           class="flex items-center justify-center w-10 h-10 border-none bg-transparent rounded-lg cursor-pointer transition-smooth
-                 hover:bg-black/5 dark:hover:bg-white/10 theme-gemini:hover:bg-blue-500/10
+                 hover:bg-black/5 dark:hover:bg-white/10 theme-gemini:hover:bg-primary/10
                  focus:outline-none focus:ring-2 focus:ring-primary-500/20"
           (click)="toggleSidebar()"
           [attr.aria-label]="'Toggle sidebar'">
@@ -15,7 +15,7 @@
         <div class="flex items-center gap-3">
           <span class="text-2xl md:text-xl">🎨</span>
           <h1 class="text-xl md:text-base font-semibold text-gray-900 dark:text-gray-100 
-                    theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 
+                    theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary 
                     theme-gemini:bg-clip-text theme-gemini:text-transparent m-0">
             Component Demo Showcase
           </h1>
@@ -91,7 +91,7 @@
                         animate-fade-in">
               <div class="flex items-center justify-between mb-3">
                 <label class="block text-sm font-semibold text-gray-900 dark:text-gray-100
-                              theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 
+                              theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary 
                               theme-gemini:bg-clip-text theme-gemini:text-transparent">
                   Custom Primary Color
                 </label>
@@ -175,7 +175,7 @@
           <div class="flex items-center gap-3">
             <span class="text-2xl">🎨</span>
             <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 
-                      theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 
+                      theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary 
                       theme-gemini:bg-clip-text theme-gemini:text-transparent m-0">
               Components
             </h2>
@@ -183,7 +183,7 @@
           <button
             type="button"
             class="flex items-center justify-center w-8 h-8 border-none bg-transparent rounded-md cursor-pointer transition-all duration-200
-                   hover:bg-black/5 dark:hover:bg-white/10 theme-gemini:hover:bg-blue-500/10 hover:scale-110
+                   hover:bg-black/5 dark:hover:bg-white/10 theme-gemini:hover:bg-primary/10 hover:scale-110
                    focus:outline-none focus:ring-2 focus:ring-primary-500/20 active:scale-95"
             (click)="closeSidebar()"
             aria-label="Close sidebar">
@@ -199,11 +199,11 @@
               class="flex items-center gap-3 px-4 py-3 text-gray-900 dark:text-gray-100 no-underline transition-all duration-200 cursor-pointer
                      border-l-[3px] border-transparent rounded-lg
                      hover:bg-black/5 dark:hover:bg-white/5 hover:border-primary-500 hover:translate-x-1
-                     theme-gemini:hover:bg-blue-500/10 theme-gemini:hover:border-blue-400
+                     theme-gemini:hover:bg-primary/10 theme-gemini:hover:border-primary
                      focus:outline-none focus:ring-2 focus:ring-primary-500/20"
               [ngClass]="{
-                'bg-blue-500/10 dark:bg-blue-500/20 border-primary-500 font-medium shadow-sm': currentRoute === '',
-                'theme-gemini:bg-blue-500/20 theme-gemini:border-blue-400 theme-gemini:shadow-[0_0_8px_rgba(59,130,246,0.3)]': currentRoute === ''
+                'bg-primary/10 dark:bg-primary/20 border-primary-500 font-medium shadow-sm': currentRoute === '',
+                'theme-gemini:bg-primary/20 theme-gemini:border-primary theme-gemini:shadow-[0_0_8px_rgba(var(--primary-rgb),0.3)]': currentRoute === ''
               }">
               <span class="text-lg flex-shrink-0">🏠</span>
               <span class="text-sm flex-1 font-medium">Demo Home</span>
@@ -216,7 +216,7 @@
                        backdrop-blur-sm border-b border-black/5 dark:border-white/5">
               <span class="text-xl">{{ group.icon }}</span>
               <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100 
-                         theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 
+                         theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary 
                          theme-gemini:bg-clip-text theme-gemini:text-transparent
                          m-0 uppercase tracking-wider">
                 {{ group.name }}
@@ -232,11 +232,11 @@
                   class="flex items-center gap-3 px-6 py-3 text-gray-900 dark:text-gray-100 no-underline transition-all duration-200 cursor-pointer
                          border-l-[3px] border-transparent
                          hover:bg-black/5 dark:hover:bg-white/5 hover:border-primary-500 hover:translate-x-1
-                         theme-gemini:hover:bg-blue-500/10 theme-gemini:hover:border-blue-400
+                         theme-gemini:hover:bg-primary/10 theme-gemini:hover:border-primary
                          focus:outline-none focus:ring-2 focus:ring-primary-500/20"
                   [ngClass]="{
-                    'bg-blue-500/10 dark:bg-blue-500/20 border-primary-500 font-medium shadow-sm': isActiveRoute(component.route),
-                    'theme-gemini:bg-blue-500/20 theme-gemini:border-blue-400 theme-gemini:shadow-[0_0_8px_rgba(59,130,246,0.3)]': isActiveRoute(component.route)
+                    'bg-primary/10 dark:bg-primary/20 border-primary-500 font-medium shadow-sm': isActiveRoute(component.route),
+                    'theme-gemini:bg-primary/20 theme-gemini:border-primary theme-gemini:shadow-[0_0_8px_rgba(var(--primary-rgb),0.3)]': isActiveRoute(component.route)
                   }">
                   <span class="text-lg flex-shrink-0">{{ component.icon }}</span>
                   <span class="text-sm flex-1 truncate">{{ component.name }}</span>

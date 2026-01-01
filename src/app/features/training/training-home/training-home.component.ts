@@ -190,9 +190,9 @@ export class TrainingHomeComponent implements OnInit, OnDestroy {
             type: 'linear',
             x: 0, y: 0, x2: 0, y2: 1,
             colorStops: [
-              { offset: 0, color: '#3b82f6' },
-              { offset: 0.5, color: '#2563eb' },
-              { offset: 1, color: '#2563eb' }
+              { offset: 0, color: this.getPrimaryColor() },
+              { offset: 0.5, color: this.getPrimaryColor() },
+              { offset: 1, color: this.getPrimaryColor() }
             ]
           }
         },
@@ -288,7 +288,7 @@ export class TrainingHomeComponent implements OnInit, OnDestroy {
           type: 'bar',
           stack: 'total',
           data: enrolled,
-          itemStyle: { color: '#3b82f6' }
+          itemStyle: { color: this.getPrimaryColor() }
         },
         {
           name: 'สำเร็จแล้ว',
@@ -338,13 +338,13 @@ export class TrainingHomeComponent implements OnInit, OnDestroy {
             type: 'linear',
             x: 0, y: 0, x2: 0, y2: 1,
             colorStops: [
-              { offset: 0, color: 'rgba(59, 130, 246, 0.3)' },
-              { offset: 1, color: 'rgba(59, 130, 246, 0.05)' }
+              { offset: 0, color: `rgba(${this.getPrimaryRgb()}, 0.3)` },
+              { offset: 1, color: `rgba(${this.getPrimaryRgb()}, 0.05)` }
             ]
           }
         },
-        itemStyle: { color: '#3b82f6' },
-        lineStyle: { color: '#3b82f6', width: 2 },
+        itemStyle: { color: this.getPrimaryColor() },
+        lineStyle: { color: this.getPrimaryColor(), width: 2 },
         data: certData,
         label: { show: true, color: this.getChartTextColor() }
       }]
@@ -371,6 +371,36 @@ export class TrainingHomeComponent implements OnInit, OnDestroy {
       // Reload charts with new date range
       this.initializeCharts();
     }
+  }
+
+  /**
+   * Get primary color from CSS variable
+   */
+  private getPrimaryColor(): string {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return '#3b82f6'; // Fallback
+    }
+    const style = getComputedStyle(document.documentElement);
+    const primaryColor = style.getPropertyValue('--primary-color').trim();
+    if (primaryColor) {
+      return primaryColor;
+    }
+    return '#3b82f6'; // Fallback
+  }
+
+  /**
+   * Get primary RGB from CSS variable
+   */
+  private getPrimaryRgb(): string {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return '59, 130, 246'; // Fallback
+    }
+    const style = getComputedStyle(document.documentElement);
+    const primaryRgb = style.getPropertyValue('--primary-rgb').trim();
+    if (primaryRgb) {
+      return primaryRgb;
+    }
+    return '59, 130, 246'; // Fallback
   }
 }
 

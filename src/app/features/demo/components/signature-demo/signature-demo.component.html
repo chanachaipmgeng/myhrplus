@@ -1,6 +1,6 @@
 <div class="w-full py-12">
   <div class="mb-8">
-    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
       Signature Component Demo
     </h1>
     <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
@@ -10,8 +10,8 @@
 
   <!-- Live Demo -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
       Live Demo
     </h2>
     
@@ -34,8 +34,8 @@
 
   <!-- Advanced Features -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
       Advanced Features
     </h2>
     
@@ -53,12 +53,12 @@
                 type="color"
                 [value]="strokeColor"
                 (change)="onStrokeColorChange($event)"
-                class="w-16 h-10 rounded-lg border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 cursor-pointer">
+                class="w-16 h-10 rounded-lg border border-gray-300 dark:border-gray-600 theme-gemini:border-primary/30 cursor-pointer">
               <input
                 type="text"
                 [value]="strokeColor"
                 (change)="onStrokeColorChange($event)"
-                class="flex-1 px-4 py-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 rounded-lg text-gray-700 dark:text-gray-300 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
+                class="flex-1 px-4 py-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
             </div>
           </div>
           <div>
@@ -70,12 +70,12 @@
                 type="color"
                 [value]="backgroundColor"
                 (change)="onBackgroundColorChange($event)"
-                class="w-16 h-10 rounded-lg border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 cursor-pointer">
+                class="w-16 h-10 rounded-lg border border-gray-300 dark:border-gray-600 theme-gemini:border-primary/30 cursor-pointer">
               <input
                 type="text"
                 [value]="backgroundColor"
                 (change)="onBackgroundColorChange($event)"
-                class="flex-1 px-4 py-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-blue-500/30 rounded-lg text-gray-700 dark:text-gray-300 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
+                class="flex-1 px-4 py-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
             </div>
           </div>
         </div>
@@ -129,7 +129,7 @@
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+            class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
             (click)="saveAsBase64()">
             Copy Base64
           </button>
@@ -152,8 +152,8 @@
 
   <!-- Basic Usage -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
       Basic Usage
     </h2>
     

@@ -190,17 +190,28 @@ export class LoginComponent implements OnInit {
   }
 
   onPasswordKeyUp(event: KeyboardEvent): void {
-    if (event.key === 'Enter' && this.username && this.password) {
+    const username = this.loginForm.get('username')?.value || '';
+    const password = this.loginForm.get('password')?.value || '';
+    if (event.key === 'Enter' && username && password) {
       this.onSubmit();
     }
   }
 
   onSubmit(): void {
-    // Update form values from component properties
+    // Get values from form controls
+    const username = this.loginForm.get('username')?.value || '';
+    const password = this.loginForm.get('password')?.value || '';
+    const dbName = this.loginForm.get('dbName')?.value || this.dbSelected;
+
+    // Update component properties for consistency
+    this.username = username;
+    this.password = password;
+
+    // Update form values
     this.loginForm.patchValue({
-      username: this.username,
-      password: this.password,
-      dbName: this.dbSelected
+      username: username,
+      password: password,
+      dbName: dbName
     });
 
     if (this.loginForm.valid) {
@@ -209,14 +220,14 @@ export class LoginComponent implements OnInit {
 
       // Clear session if username changed
       const currentUsername = sessionStorage.getItem('userName');
-      if (currentUsername && currentUsername !== this.username) {
+      if (currentUsername && currentUsername !== username) {
         sessionStorage.clear();
       }
 
       const credentials: LoginRequest = {
-        username: this.username,
-        password: this.password,
-        dbName: this.dbSelected || this.loginForm.value.dbName,
+        username: username,
+        password: password,
+        dbName: dbName,
         dbcomp: '100',
         lang: 'th'
       };
@@ -227,12 +238,12 @@ export class LoginComponent implements OnInit {
 
           if (result && result.accessToken) {
             // Save userName to sessionStorage
-            sessionStorage.setItem('userName', this.username);
+            sessionStorage.setItem('userName', username);
 
             // Save credentials if Remember Me is checked
             if (this.rememberMe) {
-              localStorage.setItem('savedUsername', this.username);
-              localStorage.setItem('savedPassword', this.password);
+              localStorage.setItem('savedUsername', username);
+              localStorage.setItem('savedPassword', password);
               localStorage.setItem('rememberMe', 'true');
             } else {
               localStorage.removeItem('savedUsername');

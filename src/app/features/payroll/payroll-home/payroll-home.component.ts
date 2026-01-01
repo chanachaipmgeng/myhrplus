@@ -340,7 +340,7 @@ export class PayrollHomeComponent implements OnInit, OnDestroy {
           type: 'bar',
           stack: 'total',
           data: bonuses,
-          itemStyle: { color: '#3b82f6' }
+          itemStyle: { color: this.getPrimaryColor() }
         }
       ]
     };
@@ -435,6 +435,21 @@ export class PayrollHomeComponent implements OnInit, OnDestroy {
       icon: 'calendar_today',
       iconColor: 'text-green-600 dark:text-green-400'
     }];
+  }
+
+  /**
+   * Get primary color from CSS variable
+   */
+  private getPrimaryColor(): string {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return '#3b82f6'; // Fallback
+    }
+    const style = getComputedStyle(document.documentElement);
+    const primaryColor = style.getPropertyValue('--primary-color').trim();
+    if (primaryColor) {
+      return primaryColor;
+    }
+    return '#3b82f6'; // Fallback
   }
 }
 

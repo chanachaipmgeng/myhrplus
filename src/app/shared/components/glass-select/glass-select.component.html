@@ -72,10 +72,10 @@
 
     <!-- Dropdown Menu -->
     <div *ngIf="isOpen"
-         class="absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 theme-gemini:bg-gray-900/95 backdrop-blur-xl rounded-md shadow-lg border border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30 max-h-60 overflow-auto animate-fade-in-down">
+         class="absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 theme-gemini:bg-gray-900/95 backdrop-blur-xl rounded-md shadow-lg border border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30 max-h-60 overflow-auto animate-fade-in-down">
       <!-- Search Input (if searchable) -->
       <div *ngIf="searchable && options.length > 5"
-           class="sticky top-0 p-2 bg-white dark:bg-gray-800 theme-gemini:bg-gray-900/95 border-b border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30">
+           class="sticky top-0 p-2 bg-white dark:bg-gray-800 theme-gemini:bg-gray-900/95 border-b border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30">
         <input
           type="text"
           [value]="searchTerm"
@@ -92,7 +92,7 @@
           type="button"
           [disabled]="option.disabled"
           (click)="selectOption(option)"
-          class="w-full text-left px-4 py-2 text-sm transition-colors flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-700 theme-gemini:hover:bg-blue-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
+          class="w-full text-left px-4 py-2 text-sm transition-colors flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-700 theme-gemini:hover:bg-primary/20 disabled:opacity-50 disabled:cursor-not-allowed"
           [ngClass]="{
             'bg-primary/10 dark:bg-primary/20 theme-gemini:bg-primary/30 text-primary dark:text-primary theme-gemini:text-primary': isSelected(option),
             'text-gray-700 dark:text-gray-300 theme-gemini:text-white': !isSelected(option) && !option.disabled,
