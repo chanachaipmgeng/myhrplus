@@ -211,18 +211,21 @@ src/assets/font/Montserrat/
 
 ### Optimization Opportunities
 1. **Remove Static Fonts** (if not needed)
-   - ลบ `static/` folder เพื่อลด bundle size
+   - ลบ `static/` folder เพื่อลด bundle size (~2-3MB)
    - Test กับ browsers ต่างๆ ก่อน
+   - **Status**: ⚠️ Pending - เก็บไว้สำหรับ backward compatibility
 
-2. **Add Font Preloading**
-   ```html
-   <link rel="preload" href="/assets/font/Montserrat/Montserrat-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
-   ```
+2. **Add Font Preloading** ✅ COMPLETED
+   - เพิ่ม font preloading ใน `index.html` เพื่อปรับปรุง loading performance
+   - Preload ทั้ง normal และ italic variants
+   - **Status**: ✅ Implemented
+   - **Implementation**: Added `<link rel="preload">` tags in `src/index.html`
 
 3. **Convert to WOFF2** (Optional)
-   - WOFF2 มีขนาดเล็กกว่า TTF
+   - WOFF2 มีขนาดเล็กกว่า TTF (~30-40% smaller)
    - รองรับ compression ดีกว่า
    - ต้อง convert fonts ก่อน
+   - **Status**: ⚠️ Pending - TTF ใช้งานได้ดีอยู่แล้ว
 
 ---
 
@@ -243,6 +246,7 @@ src/assets/font/Montserrat/
 ---
 
 **Last Updated**: 2025-01-01  
-**Status**: ✅ **COMPLETE**  
-**Font Stack**: Montserrat → Prompt → Noto Sans Thai → Inter → Sarabun → system-ui
+**Status**: ✅ **COMPLETE** (Including Font Preloading)  
+**Font Stack**: Montserrat → Prompt → Noto Sans Thai → Inter → Sarabun → system-ui  
+**Performance**: Font preloading enabled for faster initial load
 
