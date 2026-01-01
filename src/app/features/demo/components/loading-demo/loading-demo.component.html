@@ -1,24 +1,28 @@
 <div class="w-full py-12">
   <div class="mb-8">
     <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
-      Loading Component
+      Loading Components
     </h1>
     <p class="text-base text-gray-600 dark:text-gray-400 theme-myhr:text-white/80 leading-relaxed">
-      Loading component with spinner and optional message. Perfect for showing loading states during data fetching or async operations.
+      Complete guide to all loading components: Local Loading, Global Loading, Basic Spinner, and Skeleton Loading. Choose the right component for your use case.
     </p>
   </div>
 
-  <!-- Live Demo Section -->
+  <!-- Section 1: Local Loading (LoadingComponent) -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
                text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
-      Live Demo
+      1. Local Loading (LoadingComponent)
     </h2>
+    <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-6">
+      Component-level loading state. Perfect for showing loading within a specific component or container.
+    </p>
 
-    <app-glass-card padding="p-6">
-      <div class="space-y-4">
+    <!-- Live Demo -->
+    <app-glass-card padding="p-6" class="mb-6">
+      <div class="space-y-6">
         <div>
-          <h3 class="text-lg font-semibold mb-4">Basic Loading</h3>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic Loading</h3>
           <app-loading [show]="showLoading"></app-loading>
           <app-glass-button
             variant="primary"
@@ -30,7 +34,7 @@
         </div>
 
         <div>
-          <h3 class="text-lg font-semibold mb-4">Loading with Message</h3>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Loading with Message</h3>
           <app-loading
             [show]="showLoadingWithMessage"
             [message]="loadingMessage">
@@ -45,61 +49,209 @@
         </div>
       </div>
     </app-glass-card>
-  </section>
 
-  <!-- Basic Usage Section -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
-      Basic Usage
-    </h2>
+    <!-- Code Examples -->
+    <app-code-viewer [code]="loadingBasicExample" language="html" title="Basic Usage"></app-code-viewer>
+    <app-code-viewer [code]="loadingWithMessageExample" language="html" title="With Message"></app-code-viewer>
+    <app-code-viewer [code]="loadingConditionalExample" language="typescript" title="Conditional Loading"></app-code-viewer>
 
-    <app-glass-card padding="p-6">
-      <app-loading [show]="true"></app-loading>
+    <!-- API Reference -->
+    <app-glass-card padding="p-6" class="mt-6">
+      <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">API Reference</h3>
+      <app-props-table [props]="loadingProps" title="LoadingComponent Props"></app-props-table>
     </app-glass-card>
-    <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
   </section>
 
-  <!-- Variants Section -->
+  <!-- Section 2: Global Loading (LoadingSpinnerComponent) -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
                text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
-      Variants
+      2. Global Loading (LoadingSpinnerComponent)
     </h2>
+    <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-6">
+      Application-level loading state. Uses LoadingService to show/hide loading across the entire application. Add this component once in your app component or layout.
+    </p>
 
-    <div class="space-y-6">
-      <app-glass-card padding="p-6">
-        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Loading with Message</h3>
-        <app-loading
-          [show]="true"
-          message="กำลังโหลดข้อมูล กรุณารอสักครู่...">
-        </app-loading>
-      </app-glass-card>
+    <!-- Live Demo -->
+    <app-glass-card padding="p-6" class="mb-6">
+      <div class="mb-6">
+        <p class="text-gray-700 dark:text-gray-300 theme-myhr:text-white/90 mb-4">
+          คลิกปุ่มด้านล่างเพื่อแสดง global loading spinner (จะปิดอัตโนมัติใน 3 วินาที)
+        </p>
+        <app-glass-button variant="primary" (clicked)="showGlobalLoading()">
+          แสดง Global Loading Spinner
+        </app-glass-button>
+      </div>
+      <app-loading-spinner></app-loading-spinner>
+    </app-glass-card>
 
-      <app-glass-card padding="p-6">
-        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Custom Container</h3>
-        <app-loading
-          [show]="true"
-          message="Loading in custom container"
-          containerClass="min-h-[300px]">
-        </app-loading>
-      </app-glass-card>
-    </div>
-    <app-code-viewer [code]="withMessageExample" language="html" title="Variants Example"></app-code-viewer>
-    <app-code-viewer [code]="conditionalExample" language="typescript" title="Conditional Loading Example"></app-code-viewer>
+    <!-- Code Examples -->
+    <app-code-viewer [code]="loadingSpinnerBasicExample" language="html" title="Basic Usage"></app-code-viewer>
+    <app-code-viewer [code]="loadingSpinnerServiceExample" language="typescript" title="Using LoadingService"></app-code-viewer>
+
+    <!-- API Reference -->
+    <app-glass-card padding="p-6" class="mt-6">
+      <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">API Reference</h3>
+      <app-props-table [props]="loadingSpinnerProps" title="LoadingSpinnerComponent Props"></app-props-table>
+    </app-glass-card>
   </section>
 
-  <!-- API Reference -->
+  <!-- Section 3: Basic Spinner (SpinnerComponent) -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
                text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
-      API Reference
+      3. Basic Spinner (SpinnerComponent)
+    </h2>
+    <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-6">
+      Standalone spinner component with customizable size, color, and message. Supports full-screen overlay mode.
+    </p>
+
+    <!-- Live Demo -->
+    <app-glass-card padding="p-6" class="mb-6">
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic Spinner</h3>
+          <div class="flex justify-center items-center min-h-[200px]">
+            <app-spinner message="กำลังโหลดข้อมูล..."></app-spinner>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Sizes</h3>
+          <div class="flex gap-8 items-center flex-wrap justify-center">
+            <div class="flex flex-col items-center gap-2">
+              <app-spinner size="sm"></app-spinner>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">Small</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-spinner size="md"></app-spinner>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">Medium</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <app-spinner size="lg"></app-spinner>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">Large</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-glass-card>
+
+    <!-- Code Examples -->
+    <app-code-viewer [code]="spinnerBasicExample" language="html" title="Basic Usage"></app-code-viewer>
+    <app-code-viewer [code]="spinnerSizesExample" language="html" title="Sizes"></app-code-viewer>
+    <app-code-viewer [code]="spinnerWithMessageExample" language="html" title="With Message"></app-code-viewer>
+    <app-code-viewer [code]="spinnerFullScreenExample" language="html" title="Full Screen Overlay"></app-code-viewer>
+
+    <!-- API Reference -->
+    <app-glass-card padding="p-6" class="mt-6">
+      <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">API Reference</h3>
+      <app-props-table [props]="spinnerProps" title="SpinnerComponent Props"></app-props-table>
+    </app-glass-card>
+
+    <!-- Link to Spinner Demo -->
+    <app-glass-card padding="p-6" class="mt-6">
+      <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">
+        📖 <strong>For more Spinner examples:</strong> See <a routerLink="/demo/ui/spinner" class="text-primary hover:underline">Spinner Demo</a>
+      </p>
+    </app-glass-card>
+  </section>
+
+  <!-- Section 4: Skeleton Loading (SkeletonLoaderComponent) -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      4. Skeleton Loading (SkeletonLoaderComponent)
+    </h2>
+    <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-6">
+      Content placeholder while loading. Shows the structure of content that will appear, improving perceived performance.
+    </p>
+
+    <!-- Live Demo -->
+    <app-glass-card padding="p-6" class="mb-6">
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Text Skeleton</h3>
+          <app-skeleton-loader type="text" [rows]="3"></app-skeleton-loader>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Card Skeleton</h3>
+          <app-skeleton-loader type="card"></app-skeleton-loader>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Table Skeleton</h3>
+          <app-skeleton-loader type="table" [rows]="3" [columns]="4"></app-skeleton-loader>
+        </div>
+      </div>
+    </app-glass-card>
+
+    <!-- Code Examples -->
+    <app-code-viewer [code]="skeletonLoaderBasicExample" language="html" title="Basic Usage"></app-code-viewer>
+    <app-code-viewer [code]="skeletonLoaderTypesExample" language="html" title="Types"></app-code-viewer>
+    <app-code-viewer [code]="skeletonLoaderUsageExample" language="html" title="Best Practice: With Data Grid"></app-code-viewer>
+
+    <!-- API Reference -->
+    <app-glass-card padding="p-6" class="mt-6">
+      <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">API Reference</h3>
+      <app-props-table [props]="skeletonLoaderProps" title="SkeletonLoaderComponent Props"></app-props-table>
+    </app-glass-card>
+
+    <!-- Link to Skeleton Loader Demo -->
+    <app-glass-card padding="p-6" class="mt-6">
+      <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">
+        📖 <strong>For more Skeleton Loader examples:</strong> See <a routerLink="/demo/ui/skeleton-loader" class="text-primary hover:underline">Skeleton Loader Demo</a>
+      </p>
+    </app-glass-card>
+  </section>
+
+  <!-- When to Use Which -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      When to Use Which?
     </h2>
 
     <app-glass-card padding="p-6">
-      <app-props-table [props]="props"></app-props-table>
+      <div class="space-y-4">
+        <div class="p-4 bg-blue-50 dark:bg-blue-900/20 theme-myhr:bg-blue-900/30 border border-blue-200 dark:border-blue-800 theme-myhr:border-blue-700 rounded-lg">
+          <h3 class="font-semibold text-blue-900 dark:text-blue-100 theme-myhr:text-blue-200 mb-2">LoadingComponent (Local Loading)</h3>
+          <p class="text-sm text-blue-800 dark:text-blue-200 theme-myhr:text-blue-300">
+            ✅ Use for component-level loading states<br>
+            ✅ When you need to show loading within a specific container<br>
+            ✅ For forms, cards, or sections that load independently
+          </p>
+        </div>
+
+        <div class="p-4 bg-green-50 dark:bg-green-900/20 theme-myhr:bg-green-900/30 border border-green-200 dark:border-green-800 theme-myhr:border-green-700 rounded-lg">
+          <h3 class="font-semibold text-green-900 dark:text-green-100 theme-myhr:text-green-200 mb-2">LoadingSpinnerComponent (Global Loading)</h3>
+          <p class="text-sm text-green-800 dark:text-green-200 theme-myhr:text-green-300">
+            ✅ Use for application-level loading states<br>
+            ✅ When multiple components need to show loading simultaneously<br>
+            ✅ For API calls that affect the entire application<br>
+            ✅ Add once in app.component.html or main layout
+          </p>
+        </div>
+
+        <div class="p-4 bg-purple-50 dark:bg-purple-900/20 theme-myhr:bg-purple-900/30 border border-purple-200 dark:border-purple-800 theme-myhr:border-purple-700 rounded-lg">
+          <h3 class="font-semibold text-purple-900 dark:text-purple-100 theme-myhr:text-purple-200 mb-2">SpinnerComponent (Basic Spinner)</h3>
+          <p class="text-sm text-purple-800 dark:text-purple-200 theme-myhr:text-purple-300">
+            ✅ Use for simple, standalone spinner needs<br>
+            ✅ When you need custom size, color, or full-screen overlay<br>
+            ✅ For buttons, inline loading, or custom loading states
+          </p>
+        </div>
+
+        <div class="p-4 bg-orange-50 dark:bg-orange-900/20 theme-myhr:bg-orange-900/30 border border-orange-200 dark:border-orange-800 theme-myhr:border-orange-700 rounded-lg">
+          <h3 class="font-semibold text-orange-900 dark:text-orange-100 theme-myhr:text-orange-200 mb-2">SkeletonLoaderComponent (Skeleton Loading)</h3>
+          <p class="text-sm text-orange-800 dark:text-orange-200 theme-myhr:text-orange-300">
+            ✅ Use for content placeholders while loading<br>
+            ✅ When you want to show the structure of content that will appear<br>
+            ✅ For data tables, lists, cards, or any structured content<br>
+            ✅ Improves perceived performance
+          </p>
+        </div>
+      </div>
     </app-glass-card>
   </section>
 </div>
-
-

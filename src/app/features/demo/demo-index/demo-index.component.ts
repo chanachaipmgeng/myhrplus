@@ -58,9 +58,8 @@ export class DemoIndexComponent {
     { name: 'Error State', route: 'error-state', description: 'Error state component', category: 'Status', icon: '❌' },
 
     // Loading
-    { name: 'Loading', route: 'loading', description: 'Loading component with message', category: 'Loading', icon: '⏳' },
+    { name: 'Loading', route: 'loading', description: 'Complete guide to all loading components (Local, Global, Spinner, Skeleton)', category: 'Loading', icon: '⏳' },
     { name: 'Spinner', route: 'spinner', description: 'Spinner component with sizes', category: 'Loading', icon: '🌀' },
-    { name: 'Loading Spinner', route: 'loading-spinner', description: 'Loading spinner component', category: 'Loading', icon: '⚙️' },
     { name: 'Skeleton Loader', route: 'skeleton-loader', description: 'Skeleton loading placeholder', category: 'Loading', icon: '💀' },
 
     // Form
@@ -103,7 +102,6 @@ export class DemoIndexComponent {
     { name: 'Fullscreen', route: 'fullscreen', description: 'Fullscreen API component for entering/exiting fullscreen mode', category: 'Other', icon: '⛶' },
     { name: 'Back to Top', route: 'back-to-top', description: 'Back to top button component with smooth scroll', category: 'Other', icon: '⬆️' },
     { name: 'SweetAlert2', route: 'sweetalert2', description: 'SweetAlert2 integration for beautiful alert dialogs', category: 'Feedback', icon: '🎨' },
-    { name: 'Bar Rating', route: 'bar-rating', description: 'Bar rating component with customizable options', category: 'Form', icon: '⭐' },
     { name: 'Omni Search', route: 'omni-search', description: 'Universal search component for searching across menus and routes', category: 'Other', icon: '🔍' },
     { name: 'Context Switcher', route: 'context-switcher', description: 'Context switcher for switching between menu contexts', category: 'Layout', icon: '🔄' },
     { name: 'Nested Menu Accordion', route: 'nested-menu-accordion', description: 'Nested menu accordion with expand/collapse functionality', category: 'Layout', icon: '📋' },

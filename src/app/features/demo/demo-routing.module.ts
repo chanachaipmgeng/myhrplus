@@ -87,7 +87,7 @@ const routes: Routes = [
       { path: 'search-filter', redirectTo: 'ui/search-filter', pathMatch: 'full' },
       { path: 'date-range-picker', redirectTo: 'ui/date-range-picker', pathMatch: 'full' },
       { path: 'skeleton-loader', redirectTo: 'ui/skeleton-loader', pathMatch: 'full' },
-      { path: 'loading-spinner', redirectTo: 'ui/loading-spinner', pathMatch: 'full' },
+      { path: 'loading-spinner', redirectTo: 'ui/loading', pathMatch: 'full' },
       { path: 'page-header', redirectTo: 'ui/page-header', pathMatch: 'full' },
       { path: 'page-layout', redirectTo: 'ui/page-layout', pathMatch: 'full' },
       { path: 'icon', redirectTo: 'ui/icon', pathMatch: 'full' },
@@ -134,7 +134,6 @@ const routes: Routes = [
       { path: 'nested-menu-accordion', redirectTo: 'advanced/nested-menu-accordion', pathMatch: 'full' },
       { path: 'fullscreen', redirectTo: 'advanced/fullscreen', pathMatch: 'full' },
       { path: 'sweetalert2', redirectTo: 'advanced/sweetalert2', pathMatch: 'full' },
-      { path: 'bar-rating', redirectTo: 'advanced/bar-rating', pathMatch: 'full' },
       { path: 'migration-guide', redirectTo: 'advanced/migration-guide', pathMatch: 'full' },
       { path: 'stagger', redirectTo: 'advanced/stagger', pathMatch: 'full' },
       { path: 'ng-select', redirectTo: 'advanced/ng-select', pathMatch: 'full' }

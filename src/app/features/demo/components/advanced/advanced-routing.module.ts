@@ -56,10 +56,6 @@ const routes: Routes = [
     loadComponent: () => import('../sweetalert2-demo/sweetalert2-demo.component').then(m => m.SweetAlert2DemoComponent)
   },
   {
-    path: 'bar-rating',
-    loadComponent: () => import('../bar-rating-demo/bar-rating-demo.component').then(m => m.BarRatingDemoComponent)
-  },
-  {
     path: 'migration-guide',
     loadComponent: () => import('../migration-guide-demo/migration-guide-demo.component').then(m => m.MigrationGuideDemoComponent)
   },

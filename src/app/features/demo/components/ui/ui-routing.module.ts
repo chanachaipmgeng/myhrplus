@@ -96,10 +96,6 @@ const routes: Routes = [
     loadComponent: () => import('../skeleton-loader-demo/skeleton-loader-demo.component').then(m => m.SkeletonLoaderDemoComponent)
   },
   {
-    path: 'loading-spinner',
-    loadComponent: () => import('../loading-spinner-demo/loading-spinner-demo.component').then(m => m.LoadingSpinnerDemoComponent)
-  },
-  {
     path: 'page-header',
     loadComponent: () => import('../page-header-demo/page-header-demo.component').then(m => m.PageHeaderDemoComponent)
   },

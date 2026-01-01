@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-// import { NgSelectModule } from '@ng-select/ng-select'; // Note: @ng-select/ng-select package needs to be installed: npm install @ng-select/ng-select
+import { NgSelectModule } from '@ng-select/ng-select';
 import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
 import { CodeViewerComponent } from '@features/demo/shared/code-viewer/code-viewer.component';
 import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
@@ -14,7 +14,7 @@ interface City {
 @Component({
   selector: 'app-ng-select-demo',
   standalone: true,
-  imports: [CommonModule, FormsModule, GlassCardComponent, CodeViewerComponent], // NgSelectModule removed - install @ng-select/ng-select first
+  imports: [CommonModule, FormsModule, NgSelectModule, GlassCardComponent, CodeViewerComponent],
   templateUrl: './ng-select-demo.component.html',
   styleUrls: ['./ng-select-demo.component.scss']
 })

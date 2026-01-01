@@ -157,7 +157,6 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
         { name: 'Mask Toggle', route: 'mask-toggle', description: 'Toggle masked/unmasked display of sensitive data (PDPA/GDPR compliance)', icon: '👁️' },
         { name: 'Contextual Help', route: 'contextual-help', description: 'Contextual help component with tooltips', icon: '❓' },
         { name: 'NgSelect', route: 'ng-select', description: 'NgSelect dropdown component with search, multi-select, and custom templates', icon: '🔽' },
-        { name: 'Bar Rating', route: 'bar-rating', description: 'Bar rating component with customizable options', icon: '⭐' },
         { name: 'Chip', route: 'chip', description: 'Chip component for displaying tags and removable items', icon: '🏷️' }
       ]
     },
@@ -186,9 +185,8 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
       name: 'Loading',
       icon: '⏳',
       components: [
-        { name: 'Loading', route: 'loading', description: 'Loading component with message', icon: '⏳' },
+        { name: 'Loading', route: 'loading', description: 'Complete guide to all loading components (Local, Global, Spinner, Skeleton)', icon: '⏳' },
         { name: 'Spinner', route: 'spinner', description: 'Spinner component with sizes', icon: '🌀' },
-        { name: 'Loading Spinner', route: 'loading-spinner', description: 'Loading spinner component', icon: '⚙️' },
         { name: 'Skeleton Loader', route: 'skeleton-loader', description: 'Skeleton loading placeholder', icon: '💀' }
       ]
     },
