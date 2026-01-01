@@ -1,21 +1,21 @@
-<div class="unauthorized-container min-h-screen flex items-center justify-center p-4 md:p-6 lg:p-8">
-  <div class="unauthorized-content w-full max-w-6xl">
+<div class="not-found-container min-h-screen flex items-center justify-center p-4 md:p-6 lg:p-8">
+  <div class="not-found-content w-full max-w-6xl">
     <div class="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12">
-      <!-- Left Side: Icon and 403 Number -->
+      <!-- Left Side: Icon and 404 Number -->
       <div class="flex items-center gap-6 lg:gap-8 flex-shrink-0">
         <!-- Error Icon Circle -->
-        <div class="error-icon-circle unauthorized-icon animate-fade-in-up">
+        <div class="error-icon-circle animate-fade-in-up">
           <app-icon
-            name="lock"
+            name="error_outline"
             size="xl"
             color="text-white"
             class="text-6xl md:text-7xl">
           </app-icon>
         </div>
 
-        <!-- 403 Number -->
-        <h1 class="error-number unauthorized-number animate-fade-in-up [animation-delay:100ms]">
-          403
+        <!-- 404 Number -->
+        <h1 class="error-number animate-fade-in-up [animation-delay:100ms]">
+          404
         </h1>
       </div>
 
@@ -24,10 +24,10 @@
         <!-- Error Message -->
         <div class="error-message-section mb-8 animate-fade-in-up [animation-delay:200ms]">
           <h2 class="error-title mb-4">
-            {{ 'features.auth.unauthorized.title' | translate }}
+            {{ 'features.notFound.title' | translate }}
           </h2>
           <p class="error-description">
-            {{ 'features.auth.unauthorized.message' | translate }}
+            {{ 'features.notFound.description' | translate }}
           </p>
         </div>
 
@@ -38,7 +38,7 @@
             (click)="goHome()"
             class="btn-primary">
             <app-icon name="home" size="sm" color="text-white"></app-icon>
-            <span>{{ 'features.auth.unauthorized.goToDashboard' | translate }}</span>
+            <span>{{ 'features.notFound.goHome' | translate }}</span>
           </button>
 
           <button
@@ -46,10 +46,11 @@
             (click)="goBack()"
             class="btn-secondary">
             <app-icon name="arrow_back" size="sm"></app-icon>
-            <span>{{ 'features.auth.unauthorized.goBack' | translate }}</span>
+            <span>{{ 'features.notFound.goBack' | translate }}</span>
           </button>
         </div>
       </div>
     </div>
   </div>
 </div>
+

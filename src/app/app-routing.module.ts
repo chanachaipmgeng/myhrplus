@@ -70,6 +70,16 @@ const routes: Routes = [
       {
         path: 'setting',
         loadChildren: () => import('./features/setting/setting.module').then(m => m.SettingModule)
+      },
+      // 404 Not Found Page (inside main layout)
+      {
+        path: 'not-found',
+        loadComponent: () => import('./features/not-found/not-found.component').then(m => m.NotFoundComponent)
+      },
+      // 500 Error Page (inside main layout)
+      {
+        path: 'error',
+        loadComponent: () => import('./features/error/error.component').then(m => m.ErrorComponent)
       }
     ]
   },
@@ -78,9 +88,10 @@ const routes: Routes = [
     loadChildren: () => import('./features/demo/demo.module').then(m => m.DemoModule)
     // Removed AuthGuard to allow access without login for demo purposes
   },
+  // Wildcard route - redirect to 404
   {
     path: '**',
-    redirectTo: ROUTES.LEGACY.HOME
+    redirectTo: '/not-found'
   }
 ];
 

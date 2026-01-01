@@ -324,12 +324,19 @@ export class OmniSearchComponent implements OnInit, OnDestroy {
       this.resultSelected.emit(result);
       // Navigate to route - this will trigger NavigationEnd event
       // which sidebar already listens to, so sidebar will update automatically
-      this.router.navigate([result.route]).then(() => {
+      this.router.navigate([result.route]).then((success) => {
+        if (!success) {
+          // Navigation failed - route might not exist
+          console.warn('[OmniSearch] Navigation failed, redirecting to 404:', result.route);
+          this.router.navigate(['/not-found']);
+        }
         // Navigation completed - sidebar should have updated via router.events subscription
         // The sidebar component subscribes to router.events and calls updateSelectedModuleFromRoute()
         // when NavigationEnd event is fired, so no additional action needed here
       }).catch(error => {
         console.error('[OmniSearch] Navigation error:', error);
+        // Redirect to 404 on navigation error
+        this.router.navigate(['/not-found']);
       });
       this.close();
     } else {

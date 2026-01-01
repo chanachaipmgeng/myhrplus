@@ -1,4 +1,4 @@
-.unauthorized-container {
+.error-container {
   background: transparent;
   position: relative;
   overflow: hidden;
@@ -6,31 +6,31 @@
   min-height: 100vh;
 }
 
-.unauthorized-content {
+.error-content {
   position: relative;
   z-index: 1;
 }
 
-// Error Icon Circle - Unauthorized (Red/Orange theme)
-.error-icon-circle.unauthorized-icon {
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.3) 0%, rgba(239, 68, 68, 0.1) 100%);
-  border: 3px solid rgba(239, 68, 68, 0.5);
-  box-shadow: 0 0 40px rgba(239, 68, 68, 0.4),
-              0 0 80px rgba(239, 68, 68, 0.2),
-              inset 0 0 20px rgba(239, 68, 68, 0.1);
-  animation: pulseGlowUnauthorized 2s ease-in-out infinite;
+// Error Icon Circle - Error (Orange/Yellow theme)
+.error-icon-circle.error-icon {
+  background: linear-gradient(135deg, rgba(251, 146, 60, 0.3) 0%, rgba(251, 146, 60, 0.1) 100%);
+  border: 3px solid rgba(251, 146, 60, 0.5);
+  box-shadow: 0 0 40px rgba(251, 146, 60, 0.4),
+              0 0 80px rgba(251, 146, 60, 0.2),
+              inset 0 0 20px rgba(251, 146, 60, 0.1);
+  animation: pulseGlowError 2s ease-in-out infinite;
 }
 
-@keyframes pulseGlowUnauthorized {
+@keyframes pulseGlowError {
   0%, 100% {
-    box-shadow: 0 0 40px rgba(239, 68, 68, 0.4),
-                0 0 80px rgba(239, 68, 68, 0.2),
-                inset 0 0 20px rgba(239, 68, 68, 0.1);
+    box-shadow: 0 0 40px rgba(251, 146, 60, 0.4),
+                0 0 80px rgba(251, 146, 60, 0.2),
+                inset 0 0 20px rgba(251, 146, 60, 0.1);
   }
   50% {
-    box-shadow: 0 0 60px rgba(239, 68, 68, 0.6),
-                0 0 120px rgba(239, 68, 68, 0.3),
-                inset 0 0 30px rgba(239, 68, 68, 0.2);
+    box-shadow: 0 0 60px rgba(251, 146, 60, 0.6),
+                0 0 120px rgba(251, 146, 60, 0.3),
+                inset 0 0 30px rgba(251, 146, 60, 0.2);
   }
 }
 
@@ -53,13 +53,13 @@
   }
 }
 
-// Error Number - Unauthorized (Red theme)
-.error-number.unauthorized-number {
-  background: linear-gradient(135deg, rgb(239, 68, 68) 0%, rgba(239, 68, 68, 0.8) 100%);
+// Error Number - Error (Orange theme)
+.error-number.error-number-500 {
+  background: linear-gradient(135deg, rgb(251, 146, 60) 0%, rgba(251, 146, 60, 0.8) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 30px rgba(239, 68, 68, 0.3);
+  text-shadow: 0 0 30px rgba(251, 146, 60, 0.3);
 }
 
 // Error Number (base styles)
@@ -240,7 +240,7 @@
 
 // Responsive adjustments
 @media (max-width: 1023px) {
-  .unauthorized-content {
+  .error-content {
     .flex {
       flex-direction: column;
       align-items: center;
@@ -256,3 +256,4 @@
     }
   }
 }
+
