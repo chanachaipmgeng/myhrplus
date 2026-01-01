@@ -300,7 +300,7 @@ export class ModelNameService {
 - **Route Constants**: Use `ROUTES` constant from `src/app/core/constants/routes.constant`
   - Example: `this.router.navigate([ROUTES.LEGACY.HOME]);`
   - Use nested route constants: `ROUTES.LEGACY.TA.LEAVE_REQUEST`
-  - **Current Route Structure** (as of 2024-12-29):
+  - **Current Route Structure** (as of 2024-12-30):
     - `/home` - Home module
     - `/personal` - Personal module
     - `/ta` - Time Attendance module
@@ -312,9 +312,12 @@ export class ModelNameService {
     - `/company` - Company module
     - `/setting` - Setting module
     - `/demo` - Demo module (no AuthGuard)
+    - `/not-found` - 404 Not Found page (inside main layout)
+    - `/error` - 500 Error page (inside main layout)
+    - `/unauthorized` - 403 Unauthorized page (in auth module)
   - **⚠️ IMPORTANT**: `/portal` routes have been removed. Use direct module routes instead.
 - **Route Data**: Use route data for passing static configuration
-- **Wildcard Route**: Always include `{ path: '**', redirectTo: ROUTES.LEGACY.HOME }` at the end
+- **Wildcard Route**: Always include `{ path: '**', redirectTo: '/not-found' }` at the end (redirects to 404 page)
 
 ### HTTP & API
 - **Base URL**: Use `environment.jbossUrl` for `/hr` endpoints, `environment.baseUrl` for `/plus` endpoints
@@ -822,10 +825,29 @@ export class ComponentNameDemoComponent {
 - [ ] **Color Usage**: No hardcoded blue/indigo colors (`bg-blue-*`, `text-blue-*`, `border-blue-*`) - Use `bg-primary`, `text-primary`, `border-primary` instead
 - [ ] **Demo Components**: All demo components use `theme-gemini:from-primary` instead of `theme-gemini:from-blue-400` for gradient text
 - [ ] **Responsive Breakpoints**: Use `md:` and `lg:` breakpoints, avoid unnecessary `sm:` breakpoints
+- [ ] **Omni-Search**: Uses `NAVIGATION_ITEMS` from `navigation.constant.ts` (not hardcoded menu data)
+- [ ] **Error Pages**: All error pages (404, 403, 500) use consistent full-screen layout with 2-column design
 
 ---
 
 ## Recent Updates
+
+### Omni-Search and Error Pages Implementation (2024-12-30)
+- ✅ **Omni-Search Enhancement**: 
+  - ค้นหาจาก NAVIGATION_ITEMS แทน hardcode menu (ค้นหาได้ทุกเมนูในทุกโมดูล)
+  - ค้นหาได้ทุก level (1-5) แบบ recursive
+  - รองรับการแปล label (ภาษาไทยและอังกฤษ)
+  - Auto-expand parent menus เมื่อค้นหาเจอ child menu
+  - Sidebar active อัตโนมัติเมื่อเลือกเมนู
+  - Module change detection (reset selections เมื่อเปลี่ยนโมดูล)
+  - การจัดการเมนูที่ไม่มี route (หา route ของ child แรก)
+- ✅ **Error Pages Implementation**:
+  - หน้า 404 Not Found (full-screen layout, blue theme)
+  - หน้า 403 Unauthorized (ปรับปรุงเป็น full-screen layout, red theme)
+  - หน้า 500 Error (full-screen layout, orange theme)
+  - ทั้ง 3 หน้าใช้รูปแบบเดียวกัน (2-column design: icon+number ทางซ้าย, ข้อความ+ปุ่ม ทางขวา)
+  - รองรับ translation และ responsive design
+- ✅ **Documentation**: `OMNI_SEARCH_AND_ERROR_PAGES_IMPLEMENTATION_SUMMARY.md` created
 
 ### Routes Restructure - Portal Routes Removed (2024-12-29)
 - ✅ **Completed**: All `/portal` routes have been removed from the application
