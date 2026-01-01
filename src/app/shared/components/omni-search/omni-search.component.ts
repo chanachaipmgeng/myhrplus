@@ -190,12 +190,15 @@ export class OmniSearchComponent implements OnInit, OnDestroy {
       const currentBreadcrumb = breadcrumbPath ? `${breadcrumbPath} > ${translatedLabel}` : translatedLabel;
 
       if (labelMatch || routeMatch) {
+        // Find first available route (current item or first child with route)
+        const availableRoute = this.findFirstAvailableRoute(child);
+
         // Ensure level is within valid range (1-5)
         const validLevel = Math.min(Math.max(level, 1), 5) as 1 | 2 | 3 | 4 | 5;
         results.push({
           name: translatedLabel,
           icon: child.icon || 'folder',
-          route: child.route || '',
+          route: availableRoute,
           breadcrumb: currentBreadcrumb,
           context: 'admin',
           groupName: parentNavItem.label,
@@ -290,12 +293,49 @@ export class OmniSearchComponent implements OnInit, OnDestroy {
 
 
   /**
+   * Find first available route in navigation item (recursively)
+   * If item has route, return it. Otherwise, find first child with route.
+   */
+  private findFirstAvailableRoute(item: NavigationChild): string {
+    // If item has route, return it
+    if (item.route) {
+      return item.route;
+    }
+
+    // If item has children, recursively find first child with route
+    if (item.children && item.children.length > 0) {
+      for (const child of item.children) {
+        const childRoute = this.findFirstAvailableRoute(child);
+        if (childRoute) {
+          return childRoute;
+        }
+      }
+    }
+
+    // No route found
+    return '';
+  }
+
+  /**
    * Select search result
    */
   selectResult(result: SearchResult): void {
     if (result.route) {
       this.resultSelected.emit(result);
-      this.router.navigate([result.route]);
+      // Navigate to route - this will trigger NavigationEnd event
+      // which sidebar already listens to, so sidebar will update automatically
+      this.router.navigate([result.route]).then(() => {
+        // Navigation completed - sidebar should have updated via router.events subscription
+        // The sidebar component subscribes to router.events and calls updateSelectedModuleFromRoute()
+        // when NavigationEnd event is fired, so no additional action needed here
+      }).catch(error => {
+        console.error('[OmniSearch] Navigation error:', error);
+      });
+      this.close();
+    } else {
+      // If no route available, just close the search
+      // The item will still be visible in sidebar but won't navigate
+      console.log('[OmniSearch] Selected item has no route:', result.name);
       this.close();
     }
   }

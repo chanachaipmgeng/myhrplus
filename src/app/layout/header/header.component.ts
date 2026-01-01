@@ -257,6 +257,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Handle Omni-Search result selection
+   * Navigate to route and let sidebar update via router events
+   */
+  onOmniSearchResult(result: any): void {
+    // Navigation is already handled by OmniSearchComponent
+    // Sidebar will automatically update via router.events subscription
+    // But we can trigger a manual update if needed by navigating
+    if (result && result.route) {
+      // The router navigation in OmniSearchComponent will trigger NavigationEnd event
+      // which sidebar already listens to, so sidebar will update automatically
+      console.log('[Header] Omni-Search result selected:', result);
+    }
+  }
+
+  /**
    * Get logo path based on current theme
    */
   getLogoPath(): string {

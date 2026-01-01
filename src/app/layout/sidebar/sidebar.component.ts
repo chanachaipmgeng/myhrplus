@@ -981,21 +981,58 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     console.log('[Sidebar] updateSelectedModuleFromRoute: Active route =', this.activeRoute);
 
-    // For Admin: If Level 1 and Level 2 are already selected, only update Level 3-4
+    // Check if we need to change module (Level 1) by checking if current route matches selected module
+    let needsModuleChange = true;
     if (this.selectedNavigationItem?.id === 'admin' && this.selectedLevel2Item) {
-      console.log('[Sidebar] Admin Level 1 and Level 2 already selected, only updating Level 3-4');
-      this.updateSelectedItemsFromRoute(this.activeRoute);
-      return;
+      // Check if current route still belongs to the selected Level 2 item
+      const currentLevel2Route = this.selectedLevel2Item.route;
+      if (currentLevel2Route && this.activeRoute.startsWith(currentLevel2Route)) {
+        // Still in the same Level 2 module, only update Level 3-4
+        console.log('[Sidebar] Still in same Level 2 module, only updating Level 3-4');
+        this.updateSelectedItemsFromRoute(this.activeRoute);
+        return;
+      } else {
+        // Route changed to different module, need to reset and reselect
+        console.log('[Sidebar] Route changed to different module, resetting selections');
+        needsModuleChange = true;
+      }
+    } else if (this.selectedNavigationItem?.id === 'home') {
+      // Check if current route still belongs to home module
+      if (this.activeRoute.startsWith('/home') || this.activeRoute === '/') {
+        // Still in home module
+        console.log('[Sidebar] Still in home module, only updating Level 3-4');
+        this.updateSelectedItemsFromRoute(this.activeRoute);
+        return;
+      } else {
+        // Route changed to different module, need to reset and reselect
+        console.log('[Sidebar] Route changed from home to different module, resetting selections');
+        needsModuleChange = true;
+      }
     }
 
-    // Try to find matching navigation item first (including nested children up to 4 levels)
-    // Only change Level 1 and Level 2 if they are not already selected
+    // If module change is needed, reset selections first
+    if (needsModuleChange) {
+      console.log('[Sidebar] Resetting selections for module change');
+      // Reset all selections to force full reselection
+      this.selectedNavigationItem = null;
+      this.selectedLevel2Item = null;
+      this.selectedLevel3Item = null;
+      this.selectedLevel4Item = null;
+      this.selectedLevel5Item = null;
+      this.expandedLevel3Items.clear();
+      this._cachedNavigationChildren = [];
+      this._cachedNavigationChildrenKey = '';
+    }
+
+    // Try to find matching navigation item first (including nested children up to 5 levels)
+    // After reset, we need to find the correct module and set all levels
     for (const navItem of this.navigationItems) {
       if (!navItem.children) continue;
 
       // Check if route matches Level 1 item directly (for Home)
       if (navItem.id === 'home' && (this.activeRoute.startsWith('/home') || this.activeRoute === '/')) {
-        if (this.selectedNavigationItem?.id !== navItem.id) {
+        // Always select if not already selected (or if we just reset)
+        if (!this.selectedNavigationItem || this.selectedNavigationItem.id !== navItem.id) {
           this.selectNavigationItem(navItem.id);
         }
         this.updateSelectedItemsFromRoute(this.activeRoute);
@@ -1003,52 +1040,65 @@ export class SidebarComponent implements OnInit, OnDestroy {
       }
 
       for (const level2Item of navItem.children) {
-        // Check Level 2 route
+        // Check Level 2 route - use startsWith to match all child routes
         if (level2Item.route && this.activeRoute.startsWith(level2Item.route)) {
           console.log('[Sidebar] Found Level 2 match:', {
             navItemId: navItem.id,
             level2Label: level2Item.label,
-            route: level2Item.route
+            route: level2Item.route,
+            activeRoute: this.activeRoute
           });
 
           // For Admin: Set both Level 1 and Level 2
           if (navItem.id === 'admin') {
-            if (this.selectedNavigationItem?.id !== navItem.id) {
+            // Always select Level 1 if not already selected (or if we just reset)
+            if (!this.selectedNavigationItem || this.selectedNavigationItem.id !== navItem.id) {
+              console.log('[Sidebar] Selecting Level 1 (Admin)');
               this.selectNavigationItem(navItem.id);
             }
-            if (this.selectedLevel2Item !== level2Item) {
+            // Always select Level 2 if not already selected (or if different)
+            if (!this.selectedLevel2Item || this.selectedLevel2Item !== level2Item) {
+              console.log('[Sidebar] Selecting Level 2:', level2Item.label);
               this.selectLevel2Item(level2Item, navItem);
             }
+            // Now update Level 3-5 items
             this.updateSelectedItemsFromRoute(this.activeRoute);
             return;
           }
         }
 
-        // Check Level 3 routes
+        // Check Level 3 routes (and deeper levels recursively)
         if (level2Item.children) {
           for (const level3Item of level2Item.children) {
+            // Check Level 3 route
             if (level3Item.route && this.activeRoute.startsWith(level3Item.route)) {
               console.log('[Sidebar] Found Level 3 match:', {
                 navItemId: navItem.id,
                 level2Label: level2Item.label,
                 level3Label: level3Item.label,
-                route: level3Item.route
+                route: level3Item.route,
+                activeRoute: this.activeRoute
               });
 
               // For Admin: Set both Level 1 and Level 2
               if (navItem.id === 'admin') {
-                if (this.selectedNavigationItem?.id !== navItem.id) {
+                // Always select Level 1 if not already selected (or if we just reset)
+                if (!this.selectedNavigationItem || this.selectedNavigationItem.id !== navItem.id) {
+                  console.log('[Sidebar] Selecting Level 1 (Admin) from Level 3 match');
                   this.selectNavigationItem(navItem.id);
                 }
-                if (this.selectedLevel2Item !== level2Item) {
+                // Always select Level 2 if not already selected (or if different)
+                if (!this.selectedLevel2Item || this.selectedLevel2Item !== level2Item) {
+                  console.log('[Sidebar] Selecting Level 2 from Level 3 match:', level2Item.label);
                   this.selectLevel2Item(level2Item, navItem);
                 }
+                // Now update Level 3-5 items
                 this.updateSelectedItemsFromRoute(this.activeRoute);
                 return;
               }
             }
 
-            // Check Level 4 routes
+            // Check Level 4 routes (recursively)
             if (level3Item.children) {
               for (const level4Item of level3Item.children) {
                 if (level4Item.route && this.activeRoute.startsWith(level4Item.route)) {
@@ -1057,19 +1107,59 @@ export class SidebarComponent implements OnInit, OnDestroy {
                     level2Label: level2Item.label,
                     level3Label: level3Item.label,
                     level4Label: level4Item.label,
-                    route: level4Item.route
+                    route: level4Item.route,
+                    activeRoute: this.activeRoute
                   });
 
                   // For Admin: Set both Level 1 and Level 2
                   if (navItem.id === 'admin') {
-                    if (this.selectedNavigationItem?.id !== navItem.id) {
+                    // Always select Level 1 if not already selected (or if we just reset)
+                    if (!this.selectedNavigationItem || this.selectedNavigationItem.id !== navItem.id) {
+                      console.log('[Sidebar] Selecting Level 1 (Admin) from Level 4 match');
                       this.selectNavigationItem(navItem.id);
                     }
-                    if (this.selectedLevel2Item !== level2Item) {
+                    // Always select Level 2 if not already selected (or if different)
+                    if (!this.selectedLevel2Item || this.selectedLevel2Item !== level2Item) {
+                      console.log('[Sidebar] Selecting Level 2 from Level 4 match:', level2Item.label);
                       this.selectLevel2Item(level2Item, navItem);
                     }
+                    // Now update Level 3-5 items
                     this.updateSelectedItemsFromRoute(this.activeRoute);
                     return;
+                  }
+                }
+
+                // Check Level 5 routes (recursively)
+                if (level4Item.children) {
+                  for (const level5Item of level4Item.children) {
+                    if (level5Item.route && this.activeRoute.startsWith(level5Item.route)) {
+                      console.log('[Sidebar] Found Level 5 match:', {
+                        navItemId: navItem.id,
+                        level2Label: level2Item.label,
+                        level3Label: level3Item.label,
+                        level4Label: level4Item.label,
+                        level5Label: level5Item.label,
+                        route: level5Item.route,
+                        activeRoute: this.activeRoute
+                      });
+
+                      // For Admin: Set both Level 1 and Level 2
+                      if (navItem.id === 'admin') {
+                        // Always select Level 1 if not already selected (or if we just reset)
+                        if (!this.selectedNavigationItem || this.selectedNavigationItem.id !== navItem.id) {
+                          console.log('[Sidebar] Selecting Level 1 (Admin) from Level 5 match');
+                          this.selectNavigationItem(navItem.id);
+                        }
+                        // Always select Level 2 if not already selected (or if different)
+                        if (!this.selectedLevel2Item || this.selectedLevel2Item !== level2Item) {
+                          console.log('[Sidebar] Selecting Level 2 from Level 5 match:', level2Item.label);
+                          this.selectLevel2Item(level2Item, navItem);
+                        }
+                        // Now update Level 3-5 items
+                        this.updateSelectedItemsFromRoute(this.activeRoute);
+                        return;
+                      }
+                    }
                   }
                 }
               }
