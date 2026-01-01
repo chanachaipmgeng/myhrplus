@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -19,7 +19,7 @@ export interface BreadcrumbItem {
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.scss']
 })
-export class BreadcrumbsComponent implements OnInit {
+export class BreadcrumbsComponent implements OnInit, OnChanges {
   private translate = inject(TranslateService);
   @Input() items: BreadcrumbItem[] = [];
   @Input() separator: string = '/';
@@ -44,6 +44,15 @@ export class BreadcrumbsComponent implements OnInit {
         });
       this.generateBreadcrumbs();
     } else {
+      this.breadcrumbs = this.items;
+    }
+    
+    // Watch for items changes (when sidebar updates breadcrumbs)
+    // This ensures breadcrumb updates when items prop changes
+  }
+
+  ngOnChanges(): void {
+    if (!this.autoGenerate) {
       this.breadcrumbs = this.items;
     }
   }

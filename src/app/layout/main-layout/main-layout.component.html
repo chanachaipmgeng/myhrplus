@@ -43,14 +43,17 @@
         class="relative flex-1 min-h-0 p-4 md:p-6 lg:p-8 animate-fade-in [animation-delay:100ms] content-area content-area-with-header"
         [style.padding-bottom]="layout.hiddenHeader !== 'hidden' ? 'var(--header-height-md)' : '0'"
       >
-      <!-- Breadcrumb -->
-      <div class="breadcrumb-wrapper -mx-4 md:-mx-6 lg:-mx-8 px-4 md:px-6 lg:px-8 mb-4 md:mb-6"
-           *ngIf="layout.hiddenHeader !== 'hidden' && breadcrumbs.length > 0">
+      <!-- Breadcrumb - Standard Location -->
+      <!-- Use autoGenerate to update breadcrumb when URL changes directly -->
+      <!-- Fallback to sidebar breadcrumbs if available, otherwise use auto-generated from route -->
+      <div class="breadcrumb-wrapper -mx-4 md:-mx-6 lg:-mx-8 px-4 md:px-6 lg:px-8 mb-4 md:mb-6
+                  animate-fade-in [animation-delay:100ms]"
+           *ngIf="layout.hiddenHeader !== 'hidden'">
         <app-breadcrumbs
-          [items]="breadcrumbs"
+          [items]="breadcrumbs.length > 0 ? breadcrumbs : []"
           [separator]="'/'"
           [showHome]="false"
-          [autoGenerate]="false">
+          [autoGenerate]="breadcrumbs.length === 0">
         </app-breadcrumbs>
       </div>
         <div class="animate-slide-up [animation-delay:200ms]">

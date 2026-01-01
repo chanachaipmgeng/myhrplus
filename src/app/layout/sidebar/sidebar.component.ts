@@ -575,7 +575,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
     if (item.children && item.children.length > 0 && !item.route) {
       // If item has children but no route, it's a parent group
       // Toggle expansion is handled by accordion component
+      // Set selected Level 3 item for breadcrumb
+      this.selectedLevel3Item = item;
+      this.selectedLevel4Item = null;
       console.log('[Sidebar] Accordion item is a parent group, expansion handled by component');
+      // Update breadcrumbs
+      this.getBreadcrumbPath();
     } else if (item.route) {
       // Fallback: If route exists, navigate (shouldn't happen with routerLink, but keep for safety)
       this.navigateToRoute(item.route);
@@ -588,7 +593,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
    */
   onAccordionToggleExpand(event: { item: NavigationChild; expanded: boolean }): void {
     // Expanded state is already managed by expandedLevel3Items Set
-    // This method can be used for additional logic if needed
+    // If item is expanded and has no route, set as selected Level 3 for breadcrumb
+    if (event.expanded && !event.item.route && event.item.children && event.item.children.length > 0) {
+      this.selectedLevel3Item = event.item;
+      this.selectedLevel4Item = null;
+      // Update breadcrumbs
+      this.getBreadcrumbPath();
+    }
   }
 
   /**
