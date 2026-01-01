@@ -11,25 +11,29 @@
     <!-- First Page Button -->
     <button
       type="button"
-      class="pagination-button"
+      class="pagination-button min-h-[44px] min-w-[44px]"
       [class.disabled]="isFirstPage || disabled"
       [disabled]="isFirstPage || disabled"
       (click)="goToFirst()"
+      (keydown.enter)="goToFirst()"
+      (keydown.space)="goToFirst(); $event.preventDefault()"
       [attr.aria-label]="'Go to first page'"
       [attr.aria-disabled]="isFirstPage || disabled">
-      <app-icon name="first_page" size="sm"></app-icon>
+      <app-icon name="first_page" size="sm" [attr.aria-hidden]="true"></app-icon>
     </button>
 
     <!-- Previous Page Button -->
     <button
       type="button"
-      class="pagination-button"
+      class="pagination-button min-h-[44px] min-w-[44px]"
       [class.disabled]="isFirstPage || disabled"
       [disabled]="isFirstPage || disabled"
       (click)="goToPrevious()"
+      (keydown.enter)="goToPrevious()"
+      (keydown.space)="goToPrevious(); $event.preventDefault()"
       [attr.aria-label]="'Go to previous page'"
       [attr.aria-disabled]="isFirstPage || disabled">
-      <app-icon name="chevron_left" size="sm"></app-icon>
+      <app-icon name="chevron_left" size="sm" [attr.aria-hidden]="true"></app-icon>
     </button>
 
     <!-- Page Numbers -->
@@ -37,11 +41,13 @@
       <button
         *ngFor="let page of pages; trackBy: trackByPage"
         type="button"
-        class="pagination-page-button"
+        class="pagination-page-button min-h-[44px] min-w-[44px]"
         [class.active]="page === currentPage"
         [class.disabled]="disabled"
         [disabled]="disabled"
         (click)="goToPage(page)"
+        (keydown.enter)="goToPage(page)"
+        (keydown.space)="goToPage(page); $event.preventDefault()"
         [attr.aria-label]="'Go to page ' + page"
         [attr.aria-current]="page === currentPage ? 'page' : null">
         {{ page }}
@@ -51,25 +57,29 @@
     <!-- Next Page Button -->
     <button
       type="button"
-      class="pagination-button"
+      class="pagination-button min-h-[44px] min-w-[44px]"
       [class.disabled]="isLastPage || disabled"
       [disabled]="isLastPage || disabled"
       (click)="goToNext()"
+      (keydown.enter)="goToNext()"
+      (keydown.space)="goToNext(); $event.preventDefault()"
       [attr.aria-label]="'Go to next page'"
       [attr.aria-disabled]="isLastPage || disabled">
-      <app-icon name="chevron_right" size="sm"></app-icon>
+      <app-icon name="chevron_right" size="sm" [attr.aria-hidden]="true"></app-icon>
     </button>
 
     <!-- Last Page Button -->
     <button
       type="button"
-      class="pagination-button"
+      class="pagination-button min-h-[44px] min-w-[44px]"
       [class.disabled]="isLastPage || disabled"
       [disabled]="isLastPage || disabled"
       (click)="goToLast()"
+      (keydown.enter)="goToLast()"
+      (keydown.space)="goToLast(); $event.preventDefault()"
       [attr.aria-label]="'Go to last page'"
       [attr.aria-disabled]="isLastPage || disabled">
-      <app-icon name="last_page" size="sm"></app-icon>
+      <app-icon name="last_page" size="sm" [attr.aria-hidden]="true"></app-icon>
     </button>
   </div>
 

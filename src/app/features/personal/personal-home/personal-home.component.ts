@@ -11,6 +11,7 @@ import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 })
 export class PersonalHomeComponent implements OnInit, OnDestroy {
   currentUser: User | null = null;
+  loading = false;
   isDarkMode = false;
   private observer?: MutationObserver;
 

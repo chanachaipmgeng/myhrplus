@@ -28,6 +28,7 @@ import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
   styleUrls: ['./appraisal-home.component.scss']
 })
 export class AppraisalHomeComponent implements OnInit, OnDestroy {
+  loading = false;
   currentUser: User | null = null;
   isDarkMode = false;
   private observer?: MutationObserver;

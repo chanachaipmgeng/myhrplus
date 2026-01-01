@@ -125,12 +125,11 @@
               [label]="'features.auth.login.username' | translate"
               [placeholder]="'features.auth.login.username' | translate"
               type="text"
-              [(ngModel)]="username"
-              [ngModelOptions]="{standalone: true}"
-              (ngModelChange)="onUsernameChange($event)"
+              formControlName="username"
               [required]="true"
-              [errorMessage]="!username && loginForm.get('username')?.touched ? ('features.auth.login.error.usernameRequired' | translate) : ''"
+              [useFormValidationMessages]="true"
               [ariaLabel]="'features.auth.login.username' | translate">
+              <app-form-validation-messages [control]="loginForm.get('username')"></app-form-validation-messages>
             </app-glass-input>
           </div>
 
@@ -140,13 +139,12 @@
               [label]="'features.auth.login.password' | translate"
               [placeholder]="'features.auth.login.password' | translate"
               type="password"
-              [(ngModel)]="password"
-              [ngModelOptions]="{standalone: true}"
-              (ngModelChange)="onPasswordChange($event)"
+              formControlName="password"
               (keyup)="onPasswordKeyUp($event)"
               [required]="true"
-              [errorMessage]="!password && loginForm.get('password')?.touched ? ('features.auth.login.error.passwordRequired' | translate) : ''"
+              [useFormValidationMessages]="true"
               [ariaLabel]="'features.auth.login.password' | translate">
+              <app-form-validation-messages [control]="loginForm.get('password')"></app-form-validation-messages>
             </app-glass-input>
           </div>
 

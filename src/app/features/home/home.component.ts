@@ -158,6 +158,32 @@ export class HomeComponent implements OnInit, OnDestroy {
     return 'สวัสดีตอนเย็น';
   }
 
+  getUserInfo(): Array<{label: string, value: string, icon?: string, iconColor?: string}> {
+    if (!this.currentUser) return [];
+    
+    const userInfo: Array<{label: string, value: string, icon?: string, iconColor?: string}> = [];
+    
+    if (this.currentUser.employeeid || this.currentUser.uid) {
+      userInfo.push({
+        label: 'รหัส',
+        value: this.currentUser.employeeid || this.currentUser.uid || '',
+        icon: 'badge',
+        iconColor: 'text-indigo-600 dark:text-indigo-400'
+      });
+    }
+    
+    if (this.currentUser['emp_position']) {
+      userInfo.push({
+        label: '',
+        value: this.currentUser['emp_position'],
+        icon: 'work',
+        iconColor: 'text-indigo-600 dark:text-indigo-400'
+      });
+    }
+    
+    return userInfo;
+  }
+
   exportDashboard(): void {
     // Export dashboard data
     console.log('Exporting dashboard...');

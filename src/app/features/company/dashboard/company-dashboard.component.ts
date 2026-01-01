@@ -8,6 +8,7 @@ import { GlassCardComponent } from '@shared/components/glass-card/glass-card.com
 import { GlassButtonComponent } from '@shared/components/glass-button/glass-button.component';
 import { GlassSwitchComponent } from '@shared/components/glass-switch/glass-switch.component';
 import { IconComponent } from '@shared/components/icon/icon.component';
+import { EmptyStateComponent } from '@shared/components/empty-state/empty-state.component';
 import { SharedModule } from '@shared/shared.module';
 import { StaggerDirective } from '@shared/directives/stagger.directive';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -29,6 +30,7 @@ import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
     GlassButtonComponent,
     GlassSwitchComponent,
     IconComponent,
+    EmptyStateComponent,
     SharedModule,
     StaggerDirective,
     NgxEchartsModule
@@ -400,6 +402,26 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
     if (this.observer) {
       this.observer.disconnect();
     }
+  }
+
+  getCompanyUserInfo(): Array<{label: string, value: string, icon?: string, iconColor?: string}> {
+    return [{
+      label: '',
+      value: this.translate.instant('company.dashboard.welcome.companyInfo'),
+      icon: 'business',
+      iconColor: 'text-indigo-600 dark:text-indigo-400'
+    }];
+  }
+
+  getCompanyActions(): Array<{label: string, icon?: string, onClick?: () => void, disabled?: boolean}> {
+    return [{
+      label: this.translate.instant('company.dashboard.customize'),
+      icon: 'tune',
+      onClick: () => {
+        this.showCustomizationMenu = !this.showCustomizationMenu;
+      },
+      disabled: false
+    }];
   }
 
   private setupThemeObserver(): void {

@@ -28,6 +28,7 @@ import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
   styleUrls: ['./recruit-home.component.scss']
 })
 export class RecruitHomeComponent implements OnInit, OnDestroy {
+  loading = false;
   currentUser: User | null = null;
   isDarkMode = false;
   private observer?: MutationObserver;

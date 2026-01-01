@@ -331,6 +331,7 @@ export class ModelNameService {
 ## UX/UI Best Practices for HR System
 - **Skeleton Loading**: Use `<app-skeleton-loader>` for data tables and heavy lists instead of simple spinners. This improves perceived performance.
   - Pattern: `@if (service.loading()) { <app-skeleton-loader> } @else { content }`
+  - **Standardization**: Always use `app-skeleton-loader` for loading states in statistics cards and data tables
 - **Staggered Animations**: Use `appStagger` directive for automatic delay management.
   - Usage: `[appStagger]="i" [staggerDelay]="0.1"` (0.1s for cards, 0.05s for small items)
   - Standard: `animate-fade-in-up` class is applied automatically
@@ -340,21 +341,42 @@ export class ModelNameService {
 - **Page Header Standardization**: Always use `<app-page-header>` component instead of custom headers.
   - Usage: `<app-page-header [title]="..." [subtitle]="..." [showBreadcrumbs]="true">`
   - Supports translation: `[translateTitle]="true"` and `[translateSubtitle]="true"`
+  - Supports dynamic content: `[icon]`, `[iconGradient]`, `[userInfo]`, `[welcomeMessage]`, `[actions]`
+  - **Status**: ✅ Standardized across all 11 feature home components (2024-12-30)
 - **Container Padding Standardization**:
   - Main Layout: `p-4 md:p-6 lg:p-8` in content-area
   - Feature Components: Use `-mx-4 md:-mx-6 lg:-mx-8` to remove padding from main-layout
   - Content Sections: Use `px-4 md:px-6 lg:px-8` for content
   - **DO NOT** use container class names (e.g., `personal-home-container`) - use consistent pattern everywhere
+  - **Status**: ✅ Standardized (2024-12-30)
 - **Grid Patterns Standardization**:
   - Small cards: `grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6`
   - Medium cards: `grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6`
   - Large cards: `grid-cols-1 lg:grid-cols-2 gap-6`
   - **Workspace Grid**: `grid grid-cols-1 lg:grid-cols-4 gap-6` (Charts: `lg:col-span-3`, Quick Actions: `lg:col-span-1`)
+  - **Status**: ✅ Standardized across all 11 feature home components (2024-12-30)
+- **Loading States Standardization**:
+  - Always use `app-skeleton-loader` for statistics cards and data tables
+  - Add `loading` property to component TypeScript files
+  - Pattern: `@if (loading) { <app-skeleton-loader> } @else { content }`
+  - **Status**: ✅ Standardized across all 11 feature home components (2024-12-30)
+- **Empty States Standardization**:
+  - Always use `<app-empty-state>` component instead of custom empty states
+  - Supports both emoji/text (`icon`) and icon name (`iconName`) inputs
+  - Pattern: `<app-empty-state [iconName]="'inbox'" [title]="..." [description]="..." [iconSize]="'sm'">`
+  - **Status**: ✅ Standardized (2024-12-30)
+- **Error Messages Standardization**:
+  - Always use `<app-form-validation-messages>` component for form validation errors
+  - Use with `glass-input` component: `<app-glass-input [useFormValidationMessages]="true"> <app-form-validation-messages [control]="form.get('field')"></app-form-validation-messages> </app-glass-input>`
+  - Backward compatible: Still supports legacy `errorMessage` input
+  - **Status**: ✅ Standardized (2024-12-30)
 - **Mobile Optimization**:
   - Responsive text: `text-lg md:text-xl`, `text-xs md:text-sm`
   - Responsive icons: `text-3xl md:text-4xl`
   - Responsive padding: `p-4 md:p-6`
   - Touch feedback: `active:scale-95` for interactive elements
+  - **Touch Targets**: All buttons must have `min-h-[44px]` and `min-w-[44px]` for mobile accessibility
+  - **Status**: ✅ Standardized (2024-12-30)
 - **Accessibility**:
   - Add `[attr.aria-label]` to interactive elements
   - Add `[attr.role]="'button'"` and `[attr.tabindex]="0"` for clickable elements
@@ -363,6 +385,8 @@ export class ModelNameService {
   - Add `role="main"` to main content container
   - Add `role="img"` and `aria-label` to chart containers
   - Add `aria-labelledby` linking to heading IDs for sections
+  - All buttons must have `type="button"` (not just `<button>`)
+  - **Status**: ✅ Standardized (2024-12-30)
 - **Performance**:
   - Use lazy loading for images: `[appLazyImage]="imageUrl"` instead of `[src]`
   - Reduce animation intensity on mobile (use CSS media queries)
@@ -768,6 +792,13 @@ export class ComponentNameDemoComponent {
 - [ ] No solid backgrounds on page containers (Transparent/Glass only)
 - [ ] Dynamic primary color support (Use CSS variables, not hardcoded colors)
 - [ ] No hardcoded primary colors (`#3b82f6`, `rgba(59, 130, 246, ...)`, or Tailwind `primary-*` classes)
+- [ ] **Page Header**: Uses `<app-page-header>` component (not custom headers)
+- [ ] **Grid Patterns**: Uses standardized grid classes (`grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6`)
+- [ ] **Loading States**: Uses `app-skeleton-loader` for statistics cards and data tables
+- [ ] **Empty States**: Uses `<app-empty-state>` component (not custom empty states)
+- [ ] **Error Messages**: Uses `<app-form-validation-messages>` component (not custom error messages)
+- [ ] **Mobile Touch Targets**: All buttons have `min-h-[44px]` and `min-w-[44px]`
+- [ ] **Accessibility**: All buttons have `type="button"`, ARIA labels, and keyboard navigation
 
 ---
 
@@ -815,6 +846,26 @@ export class ComponentNameDemoComponent {
 - ✅ **Code Examples**: All use `app-code-viewer` component (no `<pre>` tags)
 - ✅ **API Reference**: All use `app-props-table` component with proper titles
 - ✅ **Language**: All demo components in English
+
+### Phase 1 & 2: UX/UI Standardization Complete (2024-12-30)
+- ✅ **Phase 1: Critical Fixes** - 27 files updated
+  - Layout Padding Fixes (12 files)
+  - Container Naming Standardization (0 files - no action needed)
+  - Form Validation Enhancement (3 files)
+  - Accessibility Audit & Fixes (6 files)
+  - Mobile Touch Targets (6 files)
+- ✅ **Phase 2: Consistency Improvements** - 47 files updated
+  - Page Header Standardization (15 files) - All use `<app-page-header>` component
+  - Grid Patterns Standardization (11 files) - Standardized responsive grid patterns
+  - Loading States Standardization (11 files) - All use `app-skeleton-loader`
+  - Empty States Standardization (6 files) - All use `<app-empty-state>` component
+  - Error Messages Standardization (4 files) - All use `<app-form-validation-messages>` component
+- ✅ **Documentation**: `PHASE_1_SUMMARY.md` and `PHASE_2_SUMMARY.md` created
+- ✅ **Impact**: 
+  - Consistency improved across all feature components
+  - Maintainability improved (single source of truth for UI patterns)
+  - UX improved (consistent user experience)
+  - Code quality improved (reduced duplication)
 
 ### SCSS to Tailwind Migration (2024-12-20)
 - ✅ **Completed**: Simple utility classes migrated to Tailwind

@@ -26,7 +26,8 @@ export class GlassInputComponent implements ControlValueAccessor {
   @Input() readonly: boolean = false;
   @Input() required: boolean = false;
   @Input() hint: string = '';
-  @Input() errorMessage: string = '';
+  @Input() errorMessage: string = ''; // Legacy - use app-form-validation-messages instead
+  @Input() useFormValidationMessages: boolean = false; // Use app-form-validation-messages component
   @Input() showSuccess: boolean = false;
   @Input() successMessage: string = '';
   @Input() fullWidth: boolean = true;

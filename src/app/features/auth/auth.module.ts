@@ -12,6 +12,7 @@ import { GlassButtonComponent } from '@shared/components/glass-button/glass-butt
 import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
 import { AlertComponent } from '@shared/components/alert/alert.component';
 import { ThemeToggleComponent } from '@shared/components/theme-toggle/theme-toggle.component';
+import { FormValidationMessagesComponent } from '@shared/components/form-validation-messages/form-validation-messages.component';
 
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
@@ -38,6 +39,7 @@ import { AuthRoutingModule } from './auth-routing.module';
     GlassCardComponent,
     AlertComponent,
     ThemeToggleComponent,
+    FormValidationMessagesComponent,
     ForgotPasswordComponent,
     UnauthorizedComponent,
     AuthRoutingModule

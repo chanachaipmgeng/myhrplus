@@ -30,6 +30,7 @@ import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
   styleUrls: ['./setting-home.component.scss']
 })
 export class SettingHomeComponent implements OnInit, OnDestroy {
+  loading = false;
   currentUser: User | null = null;
   isDarkMode = false;
   private observer?: MutationObserver;
