@@ -77,14 +77,14 @@
      /* Smooth scroll */
      scroll-behavior: smooth;
 
-     /* Header offset - when header is visible */
-     &.content-area-with-header {
-       margin-top: 50px; /* Fixed header height offset */
-       
-       @include respond-to-down('md') {
-         margin-top: 56px; /* Slightly taller on mobile */
-       }
-     }
+    /* Header offset - when header is visible */
+    &.content-area-with-header {
+      margin-top: var(--header-height-md); /* Fixed header height offset - Desktop */
+      
+      @include respond-to-down('md') {
+        margin-top: var(--header-height); /* Fixed header height offset - Mobile */
+      }
+    }
 
 
      /* Custom scrollbar */

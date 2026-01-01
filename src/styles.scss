@@ -36,6 +36,10 @@
   --theme-mode: 'light'; /* 'light' | 'dark' | 'auto' */
   --theme-color: 'blue'; /* Theme color name */
 
+  /* Header Height */
+  --header-height: 56px; /* Mobile header height (py-3 = 12px top + 12px bottom + content ~32px) */
+  --header-height-md: 64px; /* Desktop header height (py-4 = 16px top + 16px bottom + content ~32px) */
+
   /* Background Colors */
   --bg-base: #f5f1e8;
   --bg-gradient-start: #faf8f3;
