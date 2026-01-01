@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 import { take, takeUntil, filter } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -7,11 +7,13 @@ import { SidebarComponent as EjsSidebar } from '@syncfusion/ej2-angular-navigati
 import { LayoutService, BreadcrumbItem } from '@core/services';
 import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 import { getBreadcrumbPathFromNavigation, getBreadcrumbIcon } from '@core/utils/breadcrumb.util';
+import { routeFade } from '@core/animations/animations';
 
 @Component({
   selector: 'app-main-layout',
   templateUrl: './main-layout.component.html',
-  styleUrls: ['./main-layout.component.scss']
+  styleUrls: ['./main-layout.component.scss'],
+  animations: [routeFade]
 })
 export class MainLayoutComponent implements OnInit, OnDestroy {
   @ViewChild('sidebar') sidebar!: EjsSidebar;
@@ -27,6 +29,16 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   breadcrumbs: BreadcrumbItem[] = [];
 
   private destroy$ = new Subject<void>();
+
+  /**
+   * Prepare route animation data
+   * Returns outlet data for route animation
+   */
+  prepareRoute(outlet: RouterOutlet): string {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation']
+      ? outlet.activatedRouteData['animation']
+      : 'default';
+  }
 
   constructor(
     private layoutService: LayoutService,
@@ -55,7 +67,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
         if (event instanceof NavigationEnd) {
           const currentUrl = event.urlAfterRedirects || event.url;
           console.log('[MainLayout] NavigationEnd - URL:', currentUrl, 'urlAfterRedirects:', event.urlAfterRedirects);
-          
+
           // Generate breadcrumb path directly from navigation constants
           const breadcrumbPath = getBreadcrumbPathFromNavigation(currentUrl);
 

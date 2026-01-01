@@ -181,19 +181,29 @@ export const routeFade = trigger('routeFade', [
         position: 'absolute',
         top: 0,
         left: 0,
-        width: '100%'
+        width: '100%',
+        minHeight: '100%'
       })
     ], { optional: true }),
     query(':enter', [
-      style({ opacity: 0 })
+      style({ 
+        opacity: 0,
+        transform: 'translateY(10px)'
+      })
     ], { optional: true }),
     query(':leave', animateChild(), { optional: true }),
     group([
       query(':leave', [
-        animate('200ms ease-out', style({ opacity: 0 }))
+        animate('200ms ease-out', style({ 
+          opacity: 0,
+          transform: 'translateY(-10px)'
+        }))
       ], { optional: true }),
       query(':enter', [
-        animate('300ms 100ms ease-in', style({ opacity: 1 }))
+        animate('300ms 100ms ease-out', style({ 
+          opacity: 1,
+          transform: 'translateY(0)'
+        }))
       ], { optional: true })
     ]),
     query(':enter', animateChild(), { optional: true })

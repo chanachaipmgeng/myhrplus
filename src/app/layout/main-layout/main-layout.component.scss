@@ -80,7 +80,7 @@
     /* Header offset - when header is visible */
     &.content-area-with-header {
       margin-top: var(--header-height-md); /* Fixed header height offset - Desktop */
-      
+
       @include respond-to-down('md') {
         margin-top: var(--header-height); /* Fixed header height offset - Mobile */
       }
@@ -176,6 +176,26 @@
          backdrop-filter: blur(4px);
          transition: opacity 0.3s ease-in-out;
        }
+     }
+   }
+
+   /* Route Container */
+   .route-container {
+     position: relative;
+     width: 100%;
+     min-height: 1px; /* Ensure container has height for absolute positioning */
+     overflow: hidden; /* Prevent content overflow during animation */
+
+     > div {
+       position: relative;
+       width: 100%;
+       min-height: 1px;
+     }
+
+     /* Ensure router outlet content is properly positioned */
+     ::ng-deep router-outlet + * {
+       display: block;
+       width: 100%;
      }
    }
 

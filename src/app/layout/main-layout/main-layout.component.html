@@ -56,8 +56,10 @@
           [autoGenerate]="false">
         </app-breadcrumbs>
       </div>
-        <div class="animate-slide-up [animation-delay:200ms]">
-          <router-outlet></router-outlet>
+        <div class="route-container relative">
+          <div [@routeFade]="prepareRoute(outlet)">
+            <router-outlet #outlet="outlet"></router-outlet>
+          </div>
         </div>
       </div>
       <app-footer></app-footer>
