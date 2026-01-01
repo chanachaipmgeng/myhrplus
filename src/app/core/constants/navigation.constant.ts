@@ -74,7 +74,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
                   { label: "Bank's Company Information", route: '/company/human-resources/bank-company', icon: 'account_balance' },
                   { label: 'Company Assets Information', route: '/company/human-resources/company-asset', icon: 'inventory' },
                   { label: 'Company Papers Information', route: '/company/human-resources/company-paper', icon: 'description' },
-                  { label: 'Company Structure', route: '/company/hr/company-info/structure', icon: 'account_tree' }
+                  { label: 'Company Structure', route: '/company/human-resources/company-structure', icon: 'account_tree' }
                 ]
               },
               // 1.2 Branch and Business Unit
@@ -101,8 +101,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
                   { label: 'Work Area Location By Beacon', route: '/company/human-resources/workarea-beacon', icon: 'bluetooth_searching' },
                   { label: 'Brand Store Table (STORE)', route: '/company/human-resources/brand-store', icon: 'store' },
                   { label: 'Zone Type Table', route: '/company/human-resources/zone-type', icon: 'map' },
-                  { label: 'WorkArea', route: '/company/human-resources/workarea-store', icon: 'work' },
-                  { label: 'Brand Store Table (STORE)', route: '/company/hr/branch-business-unit/brand-store', icon: 'storefront' }
+                  { label: 'WorkArea', route: '/company/human-resources/workarea-store', icon: 'work' }
                 ]
               },
               // 1.3 Reporting Line

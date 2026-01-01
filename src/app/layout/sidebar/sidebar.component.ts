@@ -51,6 +51,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   selectedLevel2Item: NavigationChild | null = null; // Selected Level 2 item
   selectedLevel3Item: NavigationChild | null = null; // Selected Level 3 item
   selectedLevel4Item: NavigationChild | null = null; // Selected Level 4 item
+  selectedLevel5Item: NavigationChild | null = null; // Selected Level 5 item (deepest level)
   parentNavigationItem: NavigationItem | null = null; // Parent of selected Level 2 item
 
   // Expanded items tracking for accordion
@@ -137,8 +138,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.activeRoute = event.url;
         // Update selected module based on current route
         this.updateSelectedModuleFromRoute();
-        // Update breadcrumbs
-        this.getBreadcrumbPath();
+        // Breadcrumbs are now handled by main-layout component
       });
   }
 
@@ -288,9 +288,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     if (navItem.route && navItem.id === 'home') {
       this.navigateToRoute(navItem.route);
     }
-
-    // Update breadcrumbs
-    this.getBreadcrumbPath();
+    // Breadcrumbs are now handled by main-layout component
   }
 
   /**
@@ -320,9 +318,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.selectedModule = parentNavItem.id;
     }
 
-    // Clear Level 3-4 selections when switching Level 2
+    // Clear Level 3-5 selections when switching Level 2
     this.selectedLevel3Item = null;
     this.selectedLevel4Item = null;
+    this.selectedLevel5Item = null;
     this.expandedLevel3Items.clear();
 
     // Clear cache when switching items
@@ -337,9 +336,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     if (parentNavItem?.id === 'admin' && level2Item.route) {
       this.navigateToRoute(level2Item.route);
     }
-
-    // Update breadcrumbs
-    this.getBreadcrumbPath();
+    // Breadcrumbs are now handled by main-layout component
   }
 
   /**
@@ -473,68 +470,25 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   /**
    * Get breadcrumb path for current navigation
+   * DEPRECATED: Breadcrumbs are now handled by main-layout component using breadcrumb.util.ts
+   * This method is kept for backward compatibility but no longer sets breadcrumbs
+   * @deprecated Use getBreadcrumbPathFromNavigation() in breadcrumb.util.ts instead
    */
   getBreadcrumbPath(): Array<{ label: string; route?: string; level: number }> {
-    const path: Array<{ label: string; route?: string; level: number }> = [];
-
-    // Level 1
-    if (this.selectedNavigationItem) {
-      path.push({
-        label: this.translateLabel(this.selectedNavigationItem.label, this.selectedNavigationItem.id, 1),
-        route: this.selectedNavigationItem.route,
-        level: 1
-      });
-    }
-
-    // Level 2 (only for Admin)
-    if (this.selectedNavigationItem?.id === 'admin' && this.selectedLevel2Item) {
-      path.push({
-        label: this.translateLabel(this.selectedLevel2Item.label, this.selectedNavigationItem.id, 2),
-        route: this.selectedLevel2Item.route,
-        level: 2
-      });
-    }
-
-    // Level 3 (if active)
-    if (this.selectedLevel3Item) {
-      path.push({
-        label: this.translateLabel(this.selectedLevel3Item.label, this.selectedNavigationItem?.id, 3),
-        route: this.selectedLevel3Item.route,
-        level: 3
-      });
-    }
-
-    // Level 4 (if active)
-    if (this.selectedLevel4Item) {
-      path.push({
-        label: this.translateLabel(this.selectedLevel4Item.label, this.selectedNavigationItem?.id, 4),
-        route: this.selectedLevel4Item.route,
-        level: 4
-      });
-    }
-
-    // Update breadcrumbs in LayoutService
-    const breadcrumbItems: BreadcrumbItem[] = path.map(item => ({
-      label: item.label,
-      route: item.route,
-      icon: this.getBreadcrumbIcon(item.level)
-    }));
-    this.layoutService.setBreadcrumbs(breadcrumbItems);
-
-    return path;
+    // Breadcrumbs are now handled by main-layout component
+    // This method is kept for backward compatibility but does nothing
+    return [];
   }
 
   /**
    * Get icon for breadcrumb item based on level
+   * DEPRECATED: Breadcrumbs are now handled by main-layout component using breadcrumb.util.ts
+   * @deprecated Use getBreadcrumbIcon() in breadcrumb.util.ts instead
    */
   private getBreadcrumbIcon(level: number): string {
-    const iconMap: { [key: number]: string } = {
-      1: 'home',
-      2: 'business',
-      3: 'folder',
-      4: 'description'
-    };
-    return iconMap[level] || 'folder';
+    // Breadcrumbs are now handled by main-layout component
+    // This method is kept for backward compatibility but returns default icon
+    return 'folder';
   }
 
   /**
@@ -549,8 +503,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
     if (item.level === 2) {
       this.selectedLevel3Item = null;
       this.selectedLevel4Item = null;
+      this.selectedLevel5Item = null;
     } else if (item.level === 3) {
       this.selectedLevel4Item = null;
+      this.selectedLevel5Item = null;
+    } else if (item.level === 4) {
+      this.selectedLevel5Item = null;
     }
 
     // Navigate to route
@@ -578,9 +536,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
       // Set selected Level 3 item for breadcrumb
       this.selectedLevel3Item = item;
       this.selectedLevel4Item = null;
+      this.selectedLevel5Item = null;
       console.log('[Sidebar] Accordion item is a parent group, expansion handled by component');
-      // Update breadcrumbs
-      this.getBreadcrumbPath();
+      // Breadcrumbs are now handled by main-layout component
     } else if (item.route) {
       // Fallback: If route exists, navigate (shouldn't happen with routerLink, but keep for safety)
       this.navigateToRoute(item.route);
@@ -597,51 +555,158 @@ export class SidebarComponent implements OnInit, OnDestroy {
     if (event.expanded && !event.item.route && event.item.children && event.item.children.length > 0) {
       this.selectedLevel3Item = event.item;
       this.selectedLevel4Item = null;
-      // Update breadcrumbs
-      this.getBreadcrumbPath();
+      this.selectedLevel5Item = null;
+      // Breadcrumbs are now handled by main-layout component
     }
   }
 
   /**
    * Update selected items based on route
-   * For Admin: Find in Level 3 children (Level 4) - Admin requires Level 2 selection
+   * For Admin: Find in Level 3-5 children - Admin requires Level 2 selection
+   * Supports nested navigation up to 5 levels deep
    */
   private updateSelectedItemsFromRoute(route: string): void {
     console.log('[Sidebar] updateSelectedItemsFromRoute: Searching for route =', route);
 
-    // For Admin: Search in Level 3 items (selectedLevel2Item.children)
+    // For Admin: Search recursively in Level 3-5 items (selectedLevel2Item.children)
     // IMPORTANT: Only search within current selectedLevel2Item - don't change it
     if (this.selectedNavigationItem?.id === 'admin' && this.selectedLevel2Item && this.selectedLevel2Item.children) {
-      console.log('[Sidebar] Searching in Admin Level 3 items (current Level 2:', this.selectedLevel2Item.label + ')');
-      for (const level3Item of this.selectedLevel2Item.children) {
-        if (level3Item.route && route.startsWith(level3Item.route)) {
-          console.log('[Sidebar] Found Admin Level 3 match:', level3Item.label);
-          // Don't change selectedLevel2Item - only update Level 3-4
-          this.selectedLevel3Item = level3Item;
-          this.selectedLevel4Item = null;
-          // Update breadcrumbs
-          this.getBreadcrumbPath();
-          return;
-        }
+      console.log('[Sidebar] Searching in Admin Level 3-5 items (current Level 2:', this.selectedLevel2Item.label + ')');
 
-        // Check Level 4
-        if (level3Item.children) {
-          for (const level4Item of level3Item.children) {
-            if (level4Item.route && route.startsWith(level4Item.route)) {
-              console.log('[Sidebar] Found Admin Level 4 match:', {
-                level3Label: level3Item.label,
-                level4Label: level4Item.label
-              });
-              // Don't change selectedLevel2Item - only update Level 3-4
-              this.selectedLevel3Item = level3Item;
-              this.selectedLevel4Item = level4Item;
-              // Update breadcrumbs
-              this.getBreadcrumbPath();
-              return;
+      // Recursive search function to find route in nested children
+      // Search strategy: First check children (deepest level), then check current item
+      // This ensures we find the deepest matching route first
+      const findRouteInChildren = (
+        items: NavigationChild[],
+        level: number,
+        parentLevel3?: NavigationChild,
+        parentLevel4?: NavigationChild
+      ): boolean => {
+        for (const item of items) {
+          // Strategy: Check exact match first, then search in children, then prefix match
+          // This ensures we find the deepest matching route first
+
+          // 1. Check exact match first (for Level 5 items or exact routes)
+          const exactMatch = item.route && route === item.route;
+
+          if (exactMatch) {
+            console.log(`[Sidebar] Found Admin Level ${level} exact match:`, item.label, 'route:', item.route, 'activeRoute:', route);
+
+            // Set selected items based on level
+            if (level === 3) {
+              this.selectedLevel3Item = item;
+              this.selectedLevel4Item = null;
+              this.selectedLevel5Item = null;
+            } else if (level === 4) {
+              if (parentLevel3) {
+                this.selectedLevel3Item = parentLevel3;
+                console.log('[Sidebar] Set Level 3 parent from exact match:', parentLevel3.label);
+              }
+              this.selectedLevel4Item = item;
+              this.selectedLevel5Item = null;
+            } else if (level === 5) {
+              // For Level 5, set all parent levels
+              if (parentLevel3) {
+                this.selectedLevel3Item = parentLevel3;
+                console.log('[Sidebar] Set Level 3 parent from Level 5 exact match:', parentLevel3.label);
+              }
+              if (parentLevel4) {
+                this.selectedLevel4Item = parentLevel4;
+                console.log('[Sidebar] Set Level 4 parent from Level 5 exact match:', parentLevel4.label);
+              }
+              this.selectedLevel5Item = item;
+              console.log('[Sidebar] Set Level 5 item:', item.label);
+            }
+
+            // Breadcrumbs are now handled by main-layout component
+            return true;
+          }
+
+          // 2. Recursively search in children first (to find deeper matches before checking prefix)
+          // This ensures we find Level 5 items before matching parent routes
+          if (item.children && item.children.length > 0) {
+            // Track current item as parent for next level
+            const currentParentLevel3 = level === 3 ? item : parentLevel3;
+            const currentParentLevel4 = level === 4 ? item : parentLevel4;
+
+            const found = findRouteInChildren(
+              item.children,
+              level + 1,
+              currentParentLevel3,
+              currentParentLevel4
+            );
+
+            if (found) {
+              // If found in children, also set parent items for breadcrumb (even if no route)
+              // This ensures breadcrumb shows full path: Level 3 → Level 4 → Level 5
+              if (level === 3) {
+                // Set Level 3 parent (Human Resources) even if it has no route
+                this.selectedLevel3Item = item;
+                console.log('[Sidebar] Set Level 3 parent from children search:', item.label);
+              } else if (level === 4) {
+                // Set Level 3 and Level 4 parents
+                if (currentParentLevel3) {
+                  this.selectedLevel3Item = currentParentLevel3;
+                  console.log('[Sidebar] Set Level 3 parent from children search:', currentParentLevel3.label);
+                }
+                this.selectedLevel4Item = item;
+                console.log('[Sidebar] Set Level 4 parent from children search:', item.label);
+              }
+              return true;
             }
           }
+
+          // 3. Check prefix match only if no children AND route is not deeper than this item's route
+          // Skip prefix match if item has no children but route is deeper (e.g., /company/human-resources/company-type should not match /company)
+          // Only match prefix if this item has no children AND the route exactly matches or is a direct child
+          const prefixMatch = item.route && item.route.length > 0 && route.startsWith(item.route + '/');
+
+          // Don't match prefix if:
+          // 1. Item has children (should have been found in recursive search above)
+          // 2. Route is much deeper than item's route (e.g., /company/human-resources/company-type vs /company)
+          //    This means there's likely a sibling item that matches better
+          const routeDepth = route.split('/').filter(Boolean).length;
+          const itemRouteDepth = item.route ? item.route.split('/').filter(Boolean).length : 0;
+          const isRouteMuchDeeper = routeDepth > itemRouteDepth + 1; // More than 1 level deeper
+
+          if (prefixMatch && (!item.children || item.children.length === 0) && !isRouteMuchDeeper) {
+            console.log(`[Sidebar] Found Admin Level ${level} prefix match:`, item.label, 'route:', item.route, 'activeRoute:', route);
+
+            // Set selected items based on level (only for items without children)
+            if (level === 3) {
+              this.selectedLevel3Item = item;
+              this.selectedLevel4Item = null;
+              this.selectedLevel5Item = null;
+            } else if (level === 4) {
+              if (parentLevel3) {
+                this.selectedLevel3Item = parentLevel3;
+                console.log('[Sidebar] Set Level 3 parent from prefix match:', parentLevel3.label);
+              }
+              this.selectedLevel4Item = item;
+              this.selectedLevel5Item = null;
+            }
+
+            // Breadcrumbs are now handled by main-layout component
+            return true;
+          }
         }
+        return false;
+      };
+
+      // Start recursive search from Level 3
+      console.log('[Sidebar] Starting recursive search from Level 3, total items:', this.selectedLevel2Item.children.length);
+      const found = findRouteInChildren(this.selectedLevel2Item.children, 3);
+      if (found) {
+        console.log('[Sidebar] Route found via recursive search. Selected items:', {
+          level3: this.selectedLevel3Item?.label,
+          level4: this.selectedLevel4Item?.label,
+          level5: this.selectedLevel5Item?.label
+        });
+        return;
       }
+
+      console.log('[Sidebar] Route not found in recursive search');
+
       console.log('[Sidebar] No Admin match found for route:', route);
     }
 
@@ -654,24 +719,24 @@ export class SidebarComponent implements OnInit, OnDestroy {
           console.log('[Sidebar] Found Home Level 2 match:', level2Item.label);
           this.selectedLevel3Item = null;
           this.selectedLevel4Item = null;
-          // Update breadcrumbs
-          this.getBreadcrumbPath();
+          this.selectedLevel5Item = null;
+          // Breadcrumbs are now handled by main-layout component
           return;
         }
       }
     }
 
-    // Update breadcrumbs after route update
-    this.getBreadcrumbPath();
+    // Breadcrumbs are now handled by main-layout component
   }
 
   /**
    * Go back to Level 2 (from Level 3+)
-   * For Admin: Clear Level 3-4 selections (show Level 3 items of selected Level 2)
+   * For Admin: Clear Level 3-5 selections (show Level 3 items of selected Level 2)
    */
   goBackToLevel2(): void {
     this.selectedLevel3Item = null;
     this.selectedLevel4Item = null;
+    this.selectedLevel5Item = null;
     this.expandedLevel3Items.clear();
     this.searchQuery = '';
   }

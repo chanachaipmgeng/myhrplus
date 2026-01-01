@@ -50,10 +50,10 @@
                   animate-fade-in [animation-delay:100ms]"
            *ngIf="layout.hiddenHeader !== 'hidden'">
         <app-breadcrumbs
-          [items]="breadcrumbs.length > 0 ? breadcrumbs : []"
+          [items]="breadcrumbs"
           [separator]="'/'"
           [showHome]="false"
-          [autoGenerate]="breadcrumbs.length === 0">
+          [autoGenerate]="false">
         </app-breadcrumbs>
       </div>
         <div class="animate-slide-up [animation-delay:200ms]">

@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { SidebarComponent as EjsSidebar } from '@syncfusion/ej2-angular-navigations';
 import { LayoutService, BreadcrumbItem } from '@core/services';
 import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
+import { getBreadcrumbPathFromNavigation, getBreadcrumbIcon } from '@core/utils/breadcrumb.util';
 
 @Component({
   selector: 'app-main-layout',
@@ -19,7 +20,6 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   isHandset$: Observable<boolean>;
   sidebarOpen$: Observable<boolean>;
   hiddenHeader$: Observable<string | null>;
-  breadcrumbs$: Observable<BreadcrumbItem[]>;
 
   // UI State
   sidebarWidth: string = '368px'; // 88px icon bar + 280px menu
@@ -35,7 +35,6 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
     this.isHandset$ = this.layoutService.isHandset$;
     this.sidebarOpen$ = this.layoutService.sidebarOpen$;
     this.hiddenHeader$ = this.layoutService.hiddenHeader$;
-    this.breadcrumbs$ = this.layoutService.breadcrumbs$;
   }
 
   ngOnInit(): void {
@@ -44,24 +43,35 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
       this.sidebarType = isHandset ? 'Over' : 'Push';
     });
 
-    // Subscribe to breadcrumbs from LayoutService (set by sidebar)
-    this.breadcrumbs$.pipe(takeUntil(this.destroy$)).subscribe(breadcrumbs => {
-      this.breadcrumbs = breadcrumbs;
-    });
-
-    // Subscribe to route changes to ensure breadcrumb updates when URL changes directly
+    // Generate breadcrumbs from navigation constants when route changes
+    // Main-layout is the single source of truth for breadcrumbs
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
         takeUntil(this.destroy$)
       )
-      .subscribe((event) => {
-        // If breadcrumbs are empty or route changed, trigger sidebar to update breadcrumbs
-        // Sidebar's route change handler will update breadcrumbs via LayoutService
-        // This ensures breadcrumb updates even when navigating directly (not through sidebar)
-        if (this.breadcrumbs.length === 0) {
-          // If no breadcrumbs from sidebar, breadcrumb component will use autoGenerate
-          // This is handled in the template with [autoGenerate]="breadcrumbs.length === 0"
+      .subscribe(event => {
+        // Type guard: event is NavigationEnd after filter
+        if (event instanceof NavigationEnd) {
+          // Generate breadcrumb path directly from navigation constants
+          const breadcrumbPath = getBreadcrumbPathFromNavigation(event.urlAfterRedirects || event.url);
+
+          if (breadcrumbPath.length > 0) {
+            // Map to BreadcrumbItem format with icons
+            const breadcrumbItems: BreadcrumbItem[] = breadcrumbPath.map(item => ({
+              label: item.label,
+              route: item.route,
+              icon: item.icon || getBreadcrumbIcon(item.level || 1)
+            }));
+
+            this.breadcrumbs = breadcrumbItems;
+            // Also update LayoutService for consistency
+            this.layoutService.setBreadcrumbs(breadcrumbItems);
+          } else {
+            // If no breadcrumb found, clear breadcrumbs
+            this.breadcrumbs = [];
+            this.layoutService.setBreadcrumbs([]);
+          }
         }
       });
 
