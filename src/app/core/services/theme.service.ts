@@ -117,7 +117,7 @@ export class ThemeService {
     body.classList.remove('dark');
     html.removeAttribute('data-theme');
     body.removeAttribute('data-theme');
-    
+
     // Remove all theme color classes
     const themeColors: ThemeColor[] = ['blue', 'indigo', 'purple', 'green', 'orange', 'red', 'teal', 'pink', 'gemini'];
     themeColors.forEach(color => {

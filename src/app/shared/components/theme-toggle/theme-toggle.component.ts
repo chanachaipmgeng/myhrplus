@@ -16,14 +16,12 @@ export class ThemeToggleComponent implements OnInit {
   currentMode: ThemeMode = 'light';
   currentColor: ThemeColor = 'blue';
   currentModeIcon = 'light_mode';
-  showModeMenu = false;
-  showColorMenu = false;
+  showThemeMenu = false;
   showColorPicker = false;
   customPrimaryColor = '#3b82f6'; // Default blue
   hexColorInput = '#3b82f6';
 
-  @ViewChild('modeButton') modeButton?: ElementRef<HTMLButtonElement>;
-  @ViewChild('colorButton') colorButton?: ElementRef<HTMLButtonElement>;
+  @ViewChild('themeButton') themeButton?: ElementRef<HTMLButtonElement>;
   @ViewChild('colorPickerContainer') colorPickerContainer?: ElementRef<HTMLDivElement>;
 
   themeColors = [
@@ -50,15 +48,8 @@ export class ThemeToggleComponent implements OnInit {
     });
   }
 
-  toggleModeMenu(): void {
-    this.showModeMenu = !this.showModeMenu;
-    this.showColorMenu = false;
-    this.showColorPicker = false;
-  }
-
-  toggleColorMenu(): void {
-    this.showColorMenu = !this.showColorMenu;
-    this.showModeMenu = false;
+  toggleThemeMenu(): void {
+    this.showThemeMenu = !this.showThemeMenu;
     this.showColorPicker = false;
   }
 
@@ -67,24 +58,23 @@ export class ThemeToggleComponent implements OnInit {
       event.stopPropagation();
     }
     this.showColorPicker = !this.showColorPicker;
-    // Keep color menu open if closing picker, otherwise close it
+    // Keep theme menu open if closing picker, otherwise close it
     if (!this.showColorPicker) {
-      this.showColorMenu = true;
+      this.showThemeMenu = true;
     } else {
-      this.showColorMenu = false;
+      this.showThemeMenu = false;
     }
-    this.showModeMenu = false;
   }
 
   setMode(mode: ThemeMode): void {
     this.themeService.setMode(mode);
     this.updateModeIcon();
-    this.showModeMenu = false;
+    // Keep menu open after mode change
   }
 
   setColor(color: ThemeColor): void {
     this.themeService.setColor(color);
-    this.showColorMenu = false;
+    // Keep menu open after color change
   }
 
   onColorPickerChange(event: Event): void {
@@ -122,8 +112,7 @@ export class ThemeToggleComponent implements OnInit {
   resetTheme(): void {
     this.themeService.resetTheme();
     this.showColorPicker = false;
-    this.showColorMenu = false;
-    this.showModeMenu = false;
+    this.showThemeMenu = false;
   }
 
   private hexToRgb(hex: string): string | null {
@@ -168,8 +157,7 @@ export class ThemeToggleComponent implements OnInit {
     if (!target.closest('.theme-toggle-container')) {
       // Small delay to allow button click to register
       setTimeout(() => {
-        this.showModeMenu = false;
-        this.showColorMenu = false;
+        this.showThemeMenu = false;
         this.showColorPicker = false;
       }, 100);
     }
@@ -178,8 +166,7 @@ export class ThemeToggleComponent implements OnInit {
   @HostListener('keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent): void {
     if (event.key === 'Escape') {
-      this.showModeMenu = false;
-      this.showColorMenu = false;
+      this.showThemeMenu = false;
       this.showColorPicker = false;
     }
   }
