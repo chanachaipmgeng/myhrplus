@@ -40,6 +40,10 @@
   --header-height: 56px; /* Mobile header height (py-3 = 12px top + 12px bottom + content ~32px) */
   --header-height-md: 64px; /* Desktop header height (py-4 = 16px top + 16px bottom + content ~32px) */
 
+  /* Footer Height */
+  --footer-height: 48px; /* Mobile footer height */
+  --footer-height-md: 56px; /* Desktop footer height */
+
   /* Background Colors */
   --bg-base: #f5f1e8;
   --bg-gradient-start: #faf8f3;
@@ -1390,6 +1394,20 @@ code, pre, kbd, samp {
   }
   75% {
     transform: translateX(-10px) translateY(-5px);
+  }
+}
+
+/* ============================================
+   Pattern Animations
+   ============================================ */
+
+/* Pattern Shimmer - for pattern overlay backgrounds */
+@keyframes patternShimmer {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100px;
   }
 }
 

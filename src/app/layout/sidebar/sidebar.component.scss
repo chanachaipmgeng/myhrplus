@@ -292,37 +292,8 @@
     z-index: 1;
   }
 
-  /* Custom scrollbar */
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 3px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: rgba(var(--primary-rgb), 0.3);
-    border-radius: 3px;
-    transition: background 0.3s ease;
-
-    &:hover {
-      background: rgba(var(--primary-rgb), 0.5);
-    }
-  }
-
-  .dark &::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  .dark &::-webkit-scrollbar-thumb {
-    background: rgba(var(--primary-rgb), 0.4);
-
-    &:hover {
-      background: rgba(var(--primary-rgb), 0.6);
-    }
-  }
+  /* Custom scrollbar using mixin */
+  @include custom-scrollbar-primary(6px, 0.3);
 }
 
 /* Search Container */

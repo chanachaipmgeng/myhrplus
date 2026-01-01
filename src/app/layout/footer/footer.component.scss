@@ -1,17 +1,27 @@
-.footer {
+@import '../../../styles/mixins';
+
+footer {
+  /* Sticky position - ติดล่างหน้าจอเมื่อเลื่อน */
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  width: 100%;
+  min-height: var(--footer-height-md);
+
+  @media (max-width: 768px) {
+    min-height: var(--footer-height);
+  }
+
   /* Background - Using CSS Variables */
   background: linear-gradient(135deg,
     var(--footer-bg-start) 0%,
     var(--footer-bg-end) 100%
   );
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  @include backdrop-blur-saturate(20px, 180%);
   border-top: 1px solid var(--footer-border-color);
-  padding: 1rem;
-  margin-top: auto;
-  width: 100%;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
 
   /* Subtle gradient overlay - Using CSS Variables */
   &::before {
@@ -87,8 +97,7 @@ body.theme-gemini .gemini-footer {
     var(--footer-bg-start) 0%,
     var(--footer-bg-end) 100%
   ) !important;
-  backdrop-filter: blur(24px) saturate(200%) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
+  @include backdrop-blur-saturate(24px, 200%);
   border-top: 1px solid var(--footer-border-color) !important;
   box-shadow:
     0 -4px 20px 0 rgba(0, 0, 0, 0.6),

@@ -58,8 +58,7 @@
 .notification-dropdown,
 .user-dropdown {
   /* Enhanced backdrop */
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
+  @include backdrop-blur(20px);
 
   /* Smooth entrance */
   animation: dropdownSlideIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);

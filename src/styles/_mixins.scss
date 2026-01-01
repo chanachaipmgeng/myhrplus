@@ -357,26 +357,76 @@
 }
 
 /* ============================================
+   Backdrop Filter Mixins
+   ============================================ */
+
+@mixin backdrop-blur($amount: 20px) {
+  -webkit-backdrop-filter: blur($amount);
+  backdrop-filter: blur($amount);
+}
+
+@mixin backdrop-blur-saturate($blur: 20px, $saturate: 180%) {
+  -webkit-backdrop-filter: blur($blur) saturate($saturate);
+  backdrop-filter: blur($blur) saturate($saturate);
+}
+
+/* ============================================
    Scrollbar Styling
    ============================================ */
 
-@mixin custom-scrollbar($thumb-color: $gray-400, $track-color: $gray-200) {
+@mixin custom-scrollbar($thumb-color: $gray-400, $track-color: $gray-200, $width: 8px) {
   &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: $width;
+    height: $width;
   }
   
   &::-webkit-scrollbar-track {
     background: $track-color;
-    border-radius: $radius-full;
+    border-radius: 4px;
   }
   
   &::-webkit-scrollbar-thumb {
     background: $thumb-color;
-    border-radius: $radius-full;
+    border-radius: 4px;
+    transition: background 0.3s ease;
     
     &:hover {
       background: darken($thumb-color, 10%);
+    }
+  }
+}
+
+/* Custom Scrollbar with CSS Variables (for primary color) */
+@mixin custom-scrollbar-primary($width: 8px, $thumb-opacity: 0.2, $track-opacity: 0) {
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $width;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba(var(--primary-rgb), $thumb-opacity);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+    
+    &:hover {
+      background: rgba(var(--primary-rgb), $thumb-opacity + 0.2);
+    }
+  }
+
+  /* Dark mode scrollbar */
+  .dark &,
+  [data-theme='dark'] & {
+    &::-webkit-scrollbar-thumb {
+      background: rgba(var(--primary-rgb), $thumb-opacity + 0.1);
+      
+      &:hover {
+        background: rgba(var(--primary-rgb), $thumb-opacity + 0.3);
+      }
     }
   }
 }
