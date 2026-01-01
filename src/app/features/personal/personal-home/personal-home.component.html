@@ -1,40 +1,36 @@
 <div class="-mx-4 md:-mx-6 lg:-mx-8" role="main" [attr.aria-label]="'Personal Management'">
-  <div class="p-4 md:p-6 lg:p-8 min-h-screen transition-colors duration-300">
-    <!-- Simplified Page Header with Welcome Section -->
-    <app-glass-card padding="p-5 md:p-6" customClass="mb-6 md:mb-8" [animate]="'fade-in'">
-      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div class="flex-1">
-          <div class="flex items-center gap-3 mb-2">
-            <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-blue-500 to-cyan-600 dark:from-blue-600 dark:to-cyan-700 rounded-xl flex items-center justify-center shadow-lg">
-
-            </div>
-            <div>
-              <h1 class="text-xl md:text-2xl lg:text-3xl font-bold thai-text bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                Personal Management
-              </h1>
-              <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 thai-text mt-1">
-                จัดการข้อมูลพนักงาน
-              </p>
-            </div>
-          </div>
-          <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 thai-text mt-2">
-            จัดการข้อมูลส่วนบุคคลของพนักงานทั้งหมดในระบบ
-          </p>
-        </div>
-      </div>
-    </app-glass-card>
+  <div class="p-4 md:p-6 lg:p-8 transition-colors duration-300">
+    <!-- Page Header -->
+    <app-page-header
+      title="Personal Management"
+      subtitle="จัดการข้อมูลพนักงาน"
+      description="จัดการข้อมูลส่วนบุคคลของพนักงานทั้งหมดในระบบ"
+      icon="people"
+      iconGradient="from-blue-500 to-cyan-600"
+      titleGradient="from-blue-600 to-cyan-600"
+      [showBreadcrumbs]="false">
+    </app-page-header>
     <!-- Statistics Cards -->
     <section class="mb-8" [attr.aria-labelledby]="'statistics-title'">
       <h2 id="statistics-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">สถิติข้อมูลพนักงาน</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
+      
+      <!-- Loading State -->
+      <div *ngIf="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
+        <app-skeleton-loader *ngFor="let i of [0,1,2,3,4]" [type]="'card'" [animation]="'pulse'"></app-skeleton-loader>
+      </div>
+
+      <!-- Statistics Cards -->
+      <div *ngIf="!loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
         <div
           [appStagger]="0"
           [staggerDelay]="0.05"
-          class="cursor-pointer group"
+          class="cursor-pointer group min-h-[44px]"
           role="button"
           [attr.aria-label]="'พนักงานทั้งหมด: ' + statistics.totalEmployees"
           [attr.aria-describedby]="'total-employees-description'"
-          [attr.tabindex]="0">
+          [attr.tabindex]="0"
+          (keydown.enter)="navigateToRoute('/personal')"
+          (keydown.space)="navigateToRoute('/personal'); $event.preventDefault()">
           <app-glass-card
             padding="p-5"
             customClass="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white text-center hover:scale-105 transition-transform duration-300 focus-within:ring-2 focus-within:ring-indigo-400 focus-within:ring-offset-2">
@@ -45,11 +41,13 @@
         <div
           [appStagger]="1"
           [staggerDelay]="0.05"
-          class="cursor-pointer group"
+          class="cursor-pointer group min-h-[44px]"
           role="button"
           [attr.aria-label]="'พนักงานที่ทำงาน: ' + statistics.activeEmployees"
           [attr.aria-describedby]="'active-employees-description'"
-          [attr.tabindex]="0">
+          [attr.tabindex]="0"
+          (keydown.enter)="navigateToRoute('/personal')"
+          (keydown.space)="navigateToRoute('/personal'); $event.preventDefault()">
           <app-glass-card
             padding="p-5"
             customClass="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white text-center hover:scale-105 transition-transform duration-300 focus-within:ring-2 focus-within:ring-pink-400 focus-within:ring-offset-2">
@@ -60,11 +58,13 @@
         <div
           [appStagger]="2"
           [staggerDelay]="0.05"
-          class="cursor-pointer group"
+          class="cursor-pointer group min-h-[44px]"
           role="button"
           [attr.aria-label]="'พนักงานใหม่ (เดือนนี้): ' + statistics.newEmployees"
           [attr.aria-describedby]="'new-employees-description'"
-          [attr.tabindex]="0">
+          [attr.tabindex]="0"
+          (keydown.enter)="navigateToRoute('/personal')"
+          (keydown.space)="navigateToRoute('/personal'); $event.preventDefault()">
           <app-glass-card
             padding="p-5"
             customClass="bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500 text-white text-center hover:scale-105 transition-transform duration-300 focus-within:ring-2 focus-within:ring-blue-400 focus-within:ring-offset-2">
@@ -75,11 +75,13 @@
         <div
           [appStagger]="3"
           [staggerDelay]="0.05"
-          class="cursor-pointer group"
+          class="cursor-pointer group min-h-[44px]"
           role="button"
           [attr.aria-label]="'พนักงานที่ลาออก: ' + statistics.onLeave"
           [attr.aria-describedby]="'on-leave-description'"
-          [attr.tabindex]="0">
+          [attr.tabindex]="0"
+          (keydown.enter)="navigateToRoute('/personal')"
+          (keydown.space)="navigateToRoute('/personal'); $event.preventDefault()">
           <app-glass-card
             padding="p-5"
             customClass="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white text-center hover:scale-105 transition-transform duration-300 focus-within:ring-2 focus-within:ring-green-400 focus-within:ring-offset-2">
@@ -90,11 +92,13 @@
         <div
           [appStagger]="4"
           [staggerDelay]="0.05"
-          class="cursor-pointer group"
+          class="cursor-pointer group min-h-[44px]"
           role="button"
           [attr.aria-label]="'รออนุมัติ: ' + statistics.pendingApprovals"
           [attr.aria-describedby]="'pending-approvals-description'"
-          [attr.tabindex]="0">
+          [attr.tabindex]="0"
+          (keydown.enter)="navigateToRoute('/personal')"
+          (keydown.space)="navigateToRoute('/personal'); $event.preventDefault()">
           <app-glass-card
             padding="p-5"
             customClass="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white text-center hover:scale-105 transition-transform duration-300 focus-within:ring-2 focus-within:ring-yellow-400 focus-within:ring-offset-2">

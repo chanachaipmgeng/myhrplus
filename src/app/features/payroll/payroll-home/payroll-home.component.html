@@ -1,37 +1,28 @@
 <div class="-mx-4 md:-mx-6 lg:-mx-8">
-  <div class="p-4 md:p-6 lg:p-8 min-h-screen transition-colors duration-300" role="main">
-    <!-- Simplified Page Header with Welcome Section -->
-    <app-glass-card padding="p-5 md:p-6" customClass="mb-6 md:mb-8" [animate]="'fade-in'">
-      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div class="flex-1">
-          <div class="flex items-center gap-3 mb-2">
-            <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-green-500 to-emerald-600 dark:from-green-600 dark:to-emerald-700 rounded-xl flex items-center justify-center shadow-lg">
-              <app-icon name="attach_money" size="md" color="text-white"></app-icon>
-            </div>
-            <div>
-              <h1 class="text-xl md:text-2xl lg:text-3xl font-bold thai-text bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                Payroll Management
-              </h1>
-              <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 thai-text mt-1">
-                จัดการเงินเดือนและสวัสดิการ
-              </p>
-            </div>
-          </div>
-          <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 thai-text mt-2">
-            จัดการข้อมูลเงินเดือน สลิปเงินเดือน และสวัสดิการพนักงาน
-          </p>
-        </div>
-        <div class="flex items-center gap-2 px-3 md:px-4 py-2 bg-green-100/50 dark:bg-green-900/30 rounded-xl text-xs md:text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">
-          <app-icon name="calendar_today" size="sm" color="text-green-600 dark:text-green-400"></app-icon>
-          <span class="thai-text">รอบเงินเดือน: {{ currentPayrollPeriod }}</span>
-        </div>
-      </div>
-    </app-glass-card>
+  <div class="p-4 md:p-6 lg:p-8 transition-colors duration-300" role="main">
+    <!-- Page Header -->
+    <app-page-header
+      title="Payroll Management"
+      subtitle="จัดการเงินเดือนและสวัสดิการ"
+      description="จัดการข้อมูลเงินเดือน สลิปเงินเดือน และสวัสดิการพนักงาน"
+      icon="attach_money"
+      iconGradient="from-green-500 to-emerald-600"
+      titleGradient="from-green-600 to-emerald-600"
+      [showBreadcrumbs]="false"
+      [userInfo]="getPayrollUserInfo()">
+    </app-page-header>
 
     <!-- Statistics Cards -->
     <section class="mb-8" aria-labelledby="payroll-statistics-title">
       <h2 id="payroll-statistics-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">สถิติเงินเดือน</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
+      
+      <!-- Loading State -->
+      <div *ngIf="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
+        <app-skeleton-loader *ngFor="let i of [0,1,2,3,4]" [type]="'card'" [animation]="'pulse'"></app-skeleton-loader>
+      </div>
+
+      <!-- Statistics Cards -->
+      <div *ngIf="!loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
         <app-glass-card
           padding="p-5"
           customClass="bg-gradient-to-br from-green-500 to-emerald-600 dark:from-green-600 dark:to-emerald-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer focus-within:ring-2 focus-within:ring-green-400 focus-within:ring-offset-2"
@@ -155,7 +146,7 @@
       <!-- Charts Section: 3 columns (75%) -->
       <div class="lg:col-span-3">
         <h2 id="payroll-charts-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">กราฟและรายงาน</h2>
-        
+
         <!-- Charts Row 1: 2 columns -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
           <!-- Payroll Trend Chart -->
@@ -166,7 +157,7 @@
             </div>
             <div echarts [options]="payrollTrendChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟแนวโน้มเงินเดือน 6 เดือน'"></div>
           </app-glass-card>
-          
+
           <!-- Salary Distribution Chart -->
           <app-glass-card padding="p-5">
             <div class="flex items-center justify-between mb-5">
@@ -187,7 +178,7 @@
             </div>
             <div echarts [options]="departmentPayrollChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟเงินเดือนตามแผนก'"></div>
           </app-glass-card>
-          
+
           <!-- Benefits Chart -->
           <app-glass-card padding="p-5">
             <div class="flex items-center justify-between mb-5">
@@ -314,7 +305,7 @@
       <app-glass-card padding="p-6">
         <h3 id="payroll-activities-title" class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">กิจกรรมล่าสุด</h3>
         <ul class="space-y-4" role="list">
-          <li *ngFor="let activity of recentActivities; let i = index" 
+          <li *ngFor="let activity of recentActivities; let i = index"
                class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-200"
                [appStagger]="i"
                [staggerDelay]="0.05"
@@ -328,9 +319,13 @@
               <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ activity.time }}</p>
             </div>
           </li>
-          <li *ngIf="recentActivities.length === 0" class="text-center py-8 text-gray-400 dark:text-gray-500">
-            <app-icon name="inbox" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-            <p class="mt-2 text-sm thai-text">ไม่มีกิจกรรมล่าสุด</p>
+          <li *ngIf="recentActivities.length === 0" class="py-4">
+            <app-empty-state
+              iconName="inbox"
+              title="ไม่มีกิจกรรมล่าสุด"
+              description=""
+              iconSize="sm">
+            </app-empty-state>
           </li>
         </ul>
       </app-glass-card>
@@ -339,7 +334,7 @@
       <app-glass-card padding="p-6">
         <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">งานที่ต้องทำ</h3>
         <ul class="space-y-4" role="list">
-          <li *ngFor="let task of pendingTasks; let i = index" 
+          <li *ngFor="let task of pendingTasks; let i = index"
                class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400"
                [appStagger]="i"
                [staggerDelay]="0.05"
@@ -358,9 +353,13 @@
             </div>
             <app-icon name="arrow_forward" size="sm" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
           </li>
-          <li *ngIf="pendingTasks.length === 0" class="text-center py-8 text-gray-400 dark:text-gray-500">
-            <app-icon name="check_circle" size="xl" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
-            <p class="mt-2 text-sm thai-text">ไม่มีงานที่ต้องทำ</p>
+          <li *ngIf="pendingTasks.length === 0" class="py-4">
+            <app-empty-state
+              iconName="check_circle"
+              title="ไม่มีงานที่ต้องทำ"
+              description=""
+              iconSize="sm">
+            </app-empty-state>
           </li>
         </ul>
       </app-glass-card>

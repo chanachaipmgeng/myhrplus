@@ -1,32 +1,26 @@
 <div class="-mx-4 md:-mx-6 lg:-mx-8">
-  <div class="p-4 md:p-6 lg:p-8 min-h-screen transition-colors duration-300" role="main">
-    <!-- Simplified Page Header with Welcome Section -->
-    <app-glass-card padding="p-5 md:p-6" customClass="mb-6 md:mb-8" [animate]="'fade-in'">
-      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div class="flex-1">
-          <div class="flex items-center gap-3 mb-2">
-            <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-orange-500 to-red-600 dark:from-orange-600 dark:to-red-700 rounded-xl flex items-center justify-center shadow-lg">
-              <app-icon name="work" size="md" color="text-white"></app-icon>
-            </div>
-            <div>
-              <h1 class="text-xl md:text-2xl lg:text-3xl font-bold thai-text bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
-                Recruit Management
-              </h1>
-              <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 thai-text mt-1">
-                จัดการการรับสมัครงาน
-              </p>
-            </div>
-          </div>
-          <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 thai-text mt-2">
-            จัดการตำแหน่งงาน การสมัครงาน และการสัมภาษณ์
-          </p>
-        </div>
-      </div>
-    </app-glass-card>
+  <div class="p-4 md:p-6 lg:p-8 transition-colors duration-300" role="main">
+    <!-- Page Header -->
+    <app-page-header
+      title="Recruit Management"
+      subtitle="จัดการการรับสมัครงาน"
+      description="จัดการตำแหน่งงาน การสมัครงาน และการสัมภาษณ์"
+      icon="work"
+      iconGradient="from-orange-500 to-red-600"
+      titleGradient="from-orange-600 to-red-600"
+      [showBreadcrumbs]="false">
+    </app-page-header>
     <!-- Statistics Cards -->
     <section class="mb-8" aria-labelledby="recruit-statistics-title">
       <h2 id="recruit-statistics-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">สถิติการรับสมัคร</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+      
+      <!-- Loading State -->
+      <div *ngIf="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <app-skeleton-loader *ngFor="let i of [0,1,2,3]" [type]="'card'" [animation]="'pulse'"></app-skeleton-loader>
+      </div>
+
+      <!-- Statistics Cards -->
+      <div *ngIf="!loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         <app-glass-card
           padding="p-5"
           customClass="bg-gradient-to-br from-blue-500 to-cyan-600 dark:from-blue-600 dark:to-cyan-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer focus-within:ring-2 focus-within:ring-blue-400 focus-within:ring-offset-2"

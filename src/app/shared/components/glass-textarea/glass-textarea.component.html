@@ -24,34 +24,35 @@
       [ngClass]="{
         'border-red-500 dark:border-red-400 theme-gemini:border-red-400': hasError || isOverLimit,
         'border-green-500 dark:border-green-400 theme-gemini:border-green-400': isValid && showSuccess && !hasError,
-        'animate-shake': hasError || isOverLimit
-      }"
-      [style.box-shadow]="hasError || isOverLimit ? '0 0 0 2px rgba(239, 68, 68, 0.2)' : (isValid && showSuccess ? '0 0 0 2px rgba(34, 197, 94, 0.2)' : null)"
-      [style.min-height]="autoResize ? 'auto' : null">
+        'animate-shake': hasError || isOverLimit,
+        'ring-2 ring-red-500/20 dark:ring-red-400/20 theme-gemini:ring-red-400/20': hasError || isOverLimit,
+        'ring-2 ring-green-500/20 dark:ring-green-400/20 theme-gemini:ring-green-400/20': isValid && showSuccess && !hasError,
+        'min-h-auto': autoResize
+      }">
     </textarea>
 
     <!-- Success Icon -->
-    <div *ngIf="isValid && showSuccess && !hasError && value" 
+    <div *ngIf="isValid && showSuccess && !hasError && value"
          class="absolute right-3 top-3 pointer-events-none">
-      <app-icon name="check_circle" 
-                size="sm" 
+      <app-icon name="check_circle"
+                size="sm"
                 color="text-green-500 dark:text-green-400 theme-gemini:text-green-400"
                 class="animate-pulse-success">
       </app-icon>
     </div>
 
     <!-- Error Icon -->
-    <div *ngIf="(hasError || isOverLimit) && errorMessage" 
+    <div *ngIf="(hasError || isOverLimit) && errorMessage"
          class="absolute right-3 top-3 pointer-events-none">
-      <app-icon name="error" 
-                size="sm" 
+      <app-icon name="error"
+                size="sm"
                 color="text-red-500 dark:text-red-400 theme-gemini:text-red-400">
       </app-icon>
     </div>
   </div>
 
   <!-- Character Counter -->
-  <div *ngIf="showCounter && maxLength" 
+  <div *ngIf="showCounter && maxLength"
        [id]="textareaId + '-counter'"
        class="flex justify-between items-center mt-1 text-xs"
        [ngClass]="{
@@ -65,28 +66,28 @@
   </div>
 
   <!-- Error Message -->
-  <div *ngIf="(hasError || isOverLimit) && errorMessage" 
-       [id]="errorMessageId" 
-       role="alert" 
-       class="flex items-center gap-1.5 text-red-500 dark:text-red-400 theme-gemini:text-red-400 text-sm mt-1 animate-fade-in" 
+  <div *ngIf="(hasError || isOverLimit) && errorMessage"
+       [id]="errorMessageId"
+       role="alert"
+       class="flex items-center gap-1.5 text-red-500 dark:text-red-400 theme-gemini:text-red-400 text-sm mt-1 animate-fade-in"
        aria-live="polite">
     <app-icon name="error" size="xs" color="text-red-500 dark:text-red-400 theme-gemini:text-red-400"></app-icon>
     <span class="thai-text">{{ errorMessage }}</span>
   </div>
 
   <!-- Success Message -->
-  <div *ngIf="isValid && showSuccess && successMessage && !hasError" 
-       [id]="successMessageId" 
-       role="status" 
-       class="flex items-center gap-1.5 text-green-500 dark:text-green-400 theme-gemini:text-green-400 text-sm mt-1 animate-fade-in" 
+  <div *ngIf="isValid && showSuccess && successMessage && !hasError"
+       [id]="successMessageId"
+       role="status"
+       class="flex items-center gap-1.5 text-green-500 dark:text-green-400 theme-gemini:text-green-400 text-sm mt-1 animate-fade-in"
        aria-live="polite">
     <app-icon name="check_circle" size="xs" color="text-green-500 dark:text-green-400 theme-gemini:text-green-400"></app-icon>
     <span class="thai-text">{{ successMessage }}</span>
   </div>
 
   <!-- Hint Message -->
-  <div *ngIf="hint && !hasError && !isValid && !isOverLimit" 
-       [id]="hintId" 
+  <div *ngIf="hint && !hasError && !isValid && !isOverLimit"
+       [id]="hintId"
        class="text-gray-500 dark:text-gray-400 theme-gemini:text-white/60 text-sm mt-1">
     {{ hint }}
   </div>

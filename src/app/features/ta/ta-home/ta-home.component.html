@@ -1,32 +1,26 @@
 <div class="-mx-4 md:-mx-6 lg:-mx-8">
-  <div class="p-4 md:p-6 lg:p-8 min-h-screen transition-colors duration-300" role="main">
-    <!-- Simplified Page Header with Welcome Section -->
-    <app-glass-card padding="p-5 md:p-6" customClass="mb-6 md:mb-8" [animate]="'fade-in'">
-      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div class="flex-1">
-          <div class="flex items-center gap-3 mb-2">
-            <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-teal-500 to-cyan-600 dark:from-teal-600 dark:to-cyan-700 rounded-xl flex items-center justify-center shadow-lg">
-              <app-icon name="access_time" size="md" color="text-white"></app-icon>
-            </div>
-            <div>
-              <h1 class="text-xl md:text-2xl lg:text-3xl font-bold thai-text bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent">
-                Time Management
-              </h1>
-              <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 thai-text mt-1">
-                จัดการข้อมูลเวลาการทำงาน
-              </p>
-            </div>
-          </div>
-          <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 thai-text mt-2">
-            จัดการข้อมูลการลงเวลา การลา และตารางงานของพนักงาน
-          </p>
-        </div>
-      </div>
-    </app-glass-card>
+  <div class="p-4 md:p-6 lg:p-8 transition-colors duration-300" role="main">
+    <!-- Page Header -->
+    <app-page-header
+      title="Time Management"
+      subtitle="จัดการข้อมูลเวลาการทำงาน"
+      description="จัดการข้อมูลการลงเวลา การลา และตารางงานของพนักงาน"
+      icon="access_time"
+      iconGradient="from-teal-500 to-cyan-600"
+      titleGradient="from-teal-600 to-cyan-600"
+      [showBreadcrumbs]="false">
+    </app-page-header>
     <!-- Statistics Cards -->
     <section class="mb-8" aria-labelledby="ta-statistics-title">
       <h2 id="ta-statistics-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">สถิติการลงเวลา</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
+      
+      <!-- Loading State -->
+      <div *ngIf="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
+        <app-skeleton-loader *ngFor="let i of [0,1,2,3,4]" [type]="'card'" [animation]="'pulse'"></app-skeleton-loader>
+      </div>
+
+      <!-- Statistics Cards -->
+      <div *ngIf="!loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
         <app-glass-card
           padding="p-5"
           customClass="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white text-center hover:scale-105 transition-transform duration-300 cursor-pointer focus-within:ring-2 focus-within:ring-indigo-400 focus-within:ring-offset-2"
@@ -135,7 +129,7 @@
       <!-- Charts Section: 3 columns (75%) -->
       <div class="lg:col-span-3">
         <h2 id="ta-charts-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">กราฟและรายงาน</h2>
-        
+
         <!-- Charts Row 1: 2 columns -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
           <!-- Attendance Trend Chart -->
@@ -146,7 +140,7 @@
             </div>
             <div echarts [options]="attendanceTrendChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟแนวโน้มการลงเวลา 7 วัน'"></div>
           </app-glass-card>
-          
+
           <!-- Leave Requests Chart -->
           <app-glass-card padding="p-5" customClass="hover:shadow-lg transition-shadow duration-300">
             <div class="flex items-center justify-between mb-5">
@@ -167,7 +161,7 @@
             </div>
             <div echarts [options]="otRequestsChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟคำขอ OT เดือนนี้'"></div>
           </app-glass-card>
-          
+
           <!-- Attendance Rate Chart -->
           <app-glass-card padding="p-5" customClass="hover:shadow-lg transition-shadow duration-300">
             <div class="flex items-center justify-between mb-5">

@@ -1,43 +1,21 @@
 <div class="-mx-4 md:-mx-6 lg:-mx-8" role="main" [attr.aria-label]="'Dashboard'">
-  <div class="p-4 md:p-6 lg:p-8 min-h-screen transition-colors duration-300">
-    <!-- Simplified Page Header with Welcome Section -->
-    <app-glass-card padding="p-5 md:p-6" customClass="mb-6 md:mb-8" [animate]="'fade-in'">
-      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div class="flex-1">
-          <div class="flex items-center gap-3 mb-2">
-            <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 rounded-xl flex items-center justify-center shadow-lg">
-              <app-icon name="dashboard" size="md" color="text-white"></app-icon>
-            </div>
-            <div>
-              <h1 class="text-xl md:text-2xl lg:text-3xl font-bold thai-text bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                Dashboard
-              </h1>
-              <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400 thai-text mt-1">
-                ภาพรวมระบบ HR Management
-              </p>
-            </div>
-          </div>
-          <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 thai-text mt-2">
-            {{ getGreeting() }}, {{ currentUser?.fullname || currentUser?.name || 'ผู้ใช้งาน' }}! ยินดีต้อนรับสู่ระบบ HR Management - ภาพรวมข้อมูลสำคัญทั้งหมด
-          </p>
-        </div>
-        <div class="flex flex-wrap gap-2" *ngIf="currentUser">
-          <div class="flex items-center gap-2 px-3 md:px-4 py-2 bg-indigo-100/50 dark:bg-indigo-900/30 rounded-xl text-xs md:text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">
-            <app-icon name="badge" size="sm" color="text-indigo-600 dark:text-indigo-400"></app-icon>
-            <span class="thai-text">รหัส: {{ currentUser.employeeid || currentUser.uid }}</span>
-          </div>
-          <div class="flex items-center gap-2 px-3 md:px-4 py-2 bg-indigo-100/50 dark:bg-indigo-900/30 rounded-xl text-xs md:text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap" *ngIf="currentUser['emp_position']">
-            <app-icon name="work" size="sm" color="text-indigo-600 dark:text-indigo-400"></app-icon>
-            <span class="thai-text">{{ currentUser['emp_position'] }}</span>
-          </div>
-        </div>
-      </div>
-    </app-glass-card>
+  <div class="p-4 md:p-6 lg:p-8 transition-colors duration-300">
+    <!-- Page Header -->
+    <app-page-header
+      title="Dashboard"
+      subtitle="ภาพรวมระบบ HR Management"
+      [welcomeMessage]="getGreeting() + ', ' + (currentUser?.fullname || currentUser?.name || 'ผู้ใช้งาน') + '! ยินดีต้อนรับสู่ระบบ HR Management - ภาพรวมข้อมูลสำคัญทั้งหมด'"
+      icon="dashboard"
+      iconGradient="from-indigo-500 to-purple-600"
+      titleGradient="from-indigo-600 to-purple-600"
+      [showBreadcrumbs]="false"
+      [userInfo]="getUserInfo()">
+    </app-page-header>
 
     <!-- Statistics Cards -->
     <section class="mb-8" [attr.aria-labelledby]="'statistics-title'">
       <h2 id="statistics-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">สถิติภาพรวม</h2>
-      
+
       <!-- Loading State -->
       <div *ngIf="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
         <app-skeleton-loader *ngFor="let i of [0,1,2,3,4]" [type]="'card'" [animation]="'pulse'"></app-skeleton-loader>
@@ -167,13 +145,18 @@
             <div class="flex flex-wrap gap-2">
               <button
                 *ngFor="let action of quickActions; let i = index"
+                type="button"
                 [routerLink]="action.route ? [action.route] : null"
                 (click)="action.action === 'export' ? exportDashboard() : null"
                 [appStagger]="i"
                 [staggerDelay]="0.05"
-                class="flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all duration-300 hover:scale-105"
+                [attr.aria-label]="action.label"
+                [attr.tabindex]="0"
+                (keydown.enter)="action.action === 'export' ? exportDashboard() : (action.route ? navigateToRoute(action.route) : null)"
+                (keydown.space)="action.action === 'export' ? exportDashboard() : (action.route ? navigateToRoute(action.route) : null); $event.preventDefault()"
+                class="flex items-center gap-2 px-3 md:px-4 py-2 min-h-[44px] rounded-lg text-xs md:text-sm font-medium transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 [class]="'bg-' + action.color + '-100 dark:bg-' + action.color + '-900/30 text-' + action.color + '-700 dark:text-' + action.color + '-400 hover:bg-' + action.color + '-200 dark:hover:bg-' + action.color + '-800/50'">
-                <app-icon [name]="action.icon" size="sm"></app-icon>
+                <app-icon [name]="action.icon" size="sm" [attr.aria-hidden]="true"></app-icon>
                 <span class="thai-text">{{ action.label }}</span>
               </button>
             </div>
@@ -198,16 +181,22 @@
           <h2 id="charts-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">กราฟภาพรวม</h2>
           <div class="flex items-center gap-2">
             <button
+              type="button"
               (click)="exportCharts('pdf')"
-              class="flex items-center gap-1 px-3 py-1.5 text-xs md:text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded-md"
+              (keydown.enter)="exportCharts('pdf')"
+              (keydown.space)="exportCharts('pdf'); $event.preventDefault()"
+              class="flex items-center gap-1 px-3 py-1.5 min-h-[44px] text-xs md:text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded-md"
               [attr.aria-label]="'Export กราฟภาพรวม PDF'"
               [attr.tabindex]="0">
               <app-icon name="picture_as_pdf" size="sm" [attr.aria-hidden]="true"></app-icon>
               <span>PDF</span>
             </button>
             <button
+              type="button"
               (click)="exportCharts('excel')"
-              class="flex items-center gap-1 px-3 py-1.5 text-xs md:text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded-md"
+              (keydown.enter)="exportCharts('excel')"
+              (keydown.space)="exportCharts('excel'); $event.preventDefault()"
+              class="flex items-center gap-1 px-3 py-1.5 min-h-[44px] text-xs md:text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded-md"
               [attr.aria-label]="'Export กราฟภาพรวม Excel'"
               [attr.tabindex]="0">
               <app-icon name="table_chart" size="sm" [attr.aria-hidden]="true"></app-icon>
@@ -223,8 +212,11 @@
             <div class="flex items-center justify-between mb-4">
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การลงเวลาย้อนหลัง 7 วัน</h3>
               <button
+                type="button"
                 (click)="exportChart('attendance', 'pdf')"
-                class="p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                (keydown.enter)="exportChart('attendance', 'pdf')"
+                (keydown.space)="exportChart('attendance', 'pdf'); $event.preventDefault()"
+                class="p-1.5 min-h-[44px] min-w-[44px] rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 [attr.aria-label]="'Export การลงเวลาย้อนหลัง 7 วัน PDF'"
                 [attr.tabindex]="0">
                 <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400" [attr.aria-hidden]="true"></app-icon>
@@ -238,8 +230,11 @@
             <div class="flex items-center justify-between mb-4">
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การกระจายพนักงานตามแผนก</h3>
               <button
+                type="button"
                 (click)="exportChart('distribution', 'pdf')"
-                class="p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                (keydown.enter)="exportChart('distribution', 'pdf')"
+                (keydown.space)="exportChart('distribution', 'pdf'); $event.preventDefault()"
+                class="p-1.5 min-h-[44px] min-w-[44px] rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 [attr.aria-label]="'Export การกระจายพนักงานตามแผนก PDF'"
                 [attr.tabindex]="0">
                 <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400" [attr.aria-hidden]="true"></app-icon>
@@ -256,8 +251,11 @@
             <div class="flex items-center justify-between mb-4">
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">คำขอลาเดือนนี้</h3>
               <button
+                type="button"
                 (click)="exportChart('leave', 'pdf')"
-                class="p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                (keydown.enter)="exportChart('leave', 'pdf')"
+                (keydown.space)="exportChart('leave', 'pdf'); $event.preventDefault()"
+                class="p-1.5 min-h-[44px] min-w-[44px] rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 [attr.aria-label]="'Export คำขอลาเดือนนี้ PDF'"
                 [attr.tabindex]="0">
                 <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400" [attr.aria-hidden]="true"></app-icon>
@@ -271,8 +269,11 @@
             <div class="flex items-center justify-between mb-4">
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">เงินเดือน 6 เดือนล่าสุด</h3>
               <button
+                type="button"
                 (click)="exportChart('payroll', 'pdf')"
-                class="p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                (keydown.enter)="exportChart('payroll', 'pdf')"
+                (keydown.space)="exportChart('payroll', 'pdf'); $event.preventDefault()"
+                class="p-1.5 min-h-[44px] min-w-[44px] rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 [attr.aria-label]="'Export เงินเดือน 6 เดือนล่าสุด PDF'"
                 [attr.tabindex]="0">
                 <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400" [attr.aria-hidden]="true"></app-icon>
@@ -400,16 +401,22 @@
           <h3 id="activities-title" class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">กิจกรรมล่าสุด</h3>
           <div class="flex items-center gap-2">
             <button
+              type="button"
               (click)="viewAllActivities()"
-              class="flex items-center gap-1 px-3 py-1.5 text-xs md:text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded-md"
+              (keydown.enter)="viewAllActivities()"
+              (keydown.space)="viewAllActivities(); $event.preventDefault()"
+              class="flex items-center gap-1 px-3 py-1.5 min-h-[44px] text-xs md:text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded-md"
               [attr.aria-label]="'ดูทั้งหมด กิจกรรมล่าสุด'"
               [attr.tabindex]="0">
               <span>ดูทั้งหมด</span>
               <app-icon name="arrow_forward" size="xs" [attr.aria-hidden]="true"></app-icon>
             </button>
             <button
+              type="button"
               (click)="filterActivities()"
-              class="p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              (keydown.enter)="filterActivities()"
+              (keydown.space)="filterActivities(); $event.preventDefault()"
+              class="p-1.5 min-h-[44px] min-w-[44px] rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               [attr.aria-label]="'Filter กิจกรรมล่าสุด'"
               [attr.tabindex]="0">
               <app-icon name="filter_list" size="xs" color="text-gray-500 dark:text-gray-400" [attr.aria-hidden]="true"></app-icon>
@@ -429,10 +436,13 @@
               <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ activity.time }}</p>
             </div>
           </div>
-          <div *ngIf="recentActivities.length === 0" class="text-center py-8 text-gray-400 dark:text-gray-500">
-            <app-icon name="inbox" size="xl" color="text-gray-400 dark:text-gray-500"></app-icon>
-            <p class="mt-2 text-sm thai-text">ไม่มีกิจกรรมล่าสุด</p>
-          </div>
+          <app-empty-state
+            *ngIf="recentActivities.length === 0"
+            iconName="inbox"
+            title="ไม่มีกิจกรรมล่าสุด"
+            description="ยังไม่มีกิจกรรมที่ต้องแสดง"
+            iconSize="sm">
+          </app-empty-state>
         </div>
       </app-glass-card>
 
@@ -442,16 +452,22 @@
           <h3 id="approvals-title" class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">รออนุมัติ</h3>
           <div class="flex items-center gap-2">
             <button
+              type="button"
               (click)="viewAllApprovals()"
-              class="flex items-center gap-1 px-3 py-1.5 text-xs md:text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded-md"
+              (keydown.enter)="viewAllApprovals()"
+              (keydown.space)="viewAllApprovals(); $event.preventDefault()"
+              class="flex items-center gap-1 px-3 py-1.5 min-h-[44px] text-xs md:text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded-md"
               [attr.aria-label]="'ดูทั้งหมด รออนุมัติ'"
               [attr.tabindex]="0">
               <span>ดูทั้งหมด</span>
               <app-icon name="arrow_forward" size="xs" [attr.aria-hidden]="true"></app-icon>
             </button>
             <button
+              type="button"
               (click)="filterApprovals()"
-              class="p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              (keydown.enter)="filterApprovals()"
+              (keydown.space)="filterApprovals(); $event.preventDefault()"
+              class="p-1.5 min-h-[44px] min-w-[44px] rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               [attr.aria-label]="'Filter รออนุมัติ'"
               [attr.tabindex]="0">
               <app-icon name="filter_list" size="xs" color="text-gray-500 dark:text-gray-400" [attr.aria-hidden]="true"></app-icon>
@@ -473,10 +489,13 @@
             </div>
             <app-icon name="arrow_forward" size="sm" color="text-gray-400 dark:text-gray-500"></app-icon>
           </div>
-          <div *ngIf="pendingApprovals.length === 0" class="text-center py-8 text-gray-400 dark:text-gray-500">
-            <app-icon name="check_circle" size="xl" color="text-gray-400 dark:text-gray-500"></app-icon>
-            <p class="mt-2 text-sm thai-text">ไม่มีรายการรออนุมัติ</p>
-          </div>
+          <app-empty-state
+            *ngIf="pendingApprovals.length === 0"
+            iconName="check_circle"
+            title="ไม่มีรายการรออนุมัติ"
+            description="ไม่มีรายการที่รอการอนุมัติในขณะนี้"
+            iconSize="sm">
+          </app-empty-state>
         </div>
       </app-glass-card>
     </section>
