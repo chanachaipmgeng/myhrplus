@@ -94,14 +94,25 @@ $info-950: #172554;
 /* ============================================
    Colors - Theme Gradients
    ============================================ */
-$theme-gradient-blue: linear-gradient(135deg, #3b82f6, #2563eb);
-$theme-gradient-indigo: linear-gradient(135deg, #6366f1, #4f46e5);
-$theme-gradient-purple: linear-gradient(135deg, #a855f7, #9333ea);
-$theme-gradient-green: linear-gradient(135deg, #22c55e, #16a34a);
-$theme-gradient-orange: linear-gradient(135deg, #f97316, #ea580c);
-$theme-gradient-red: linear-gradient(135deg, #ef4444, #dc2626);
-$theme-gradient-teal: linear-gradient(135deg, #14b8a6, #0d9488);
-$theme-gradient-pink: linear-gradient(135deg, #ec4899, #db2777);
+/* Default Theme (Gemini) - Blue gradient สวยงาม */
+$theme-gradient-gemini: linear-gradient(135deg, #93c5fd, #60a5fa, #3b82f6);
+/* Color Themes - Same style as default but different colors */
+/* Blue - สีน้ำเงินสดใส */
+$theme-gradient-blue: linear-gradient(135deg, #bfdbfe, #93c5fd, #3b82f6);
+/* Indigo - สีครามเข้ม */
+$theme-gradient-indigo: linear-gradient(135deg, #c7d2fe, #a5b4fc, #6366f1);
+/* Purple - สีม่วงสวยงาม */
+$theme-gradient-purple: linear-gradient(135deg, #e9d5ff, #d8b4fe, #a855f7);
+/* Green - สีเขียวสดใส */
+$theme-gradient-green: linear-gradient(135deg, #bbf7d0, #86efac, #22c55e);
+/* Orange - สีส้มอบอุ่น */
+$theme-gradient-orange: linear-gradient(135deg, #fed7aa, #fdba74, #f97316);
+/* Red - สีแดงเข้ม */
+$theme-gradient-red: linear-gradient(135deg, #fecaca, #fca5a5, #ef4444);
+/* Teal - สีเทาเขียวสวยงาม */
+$theme-gradient-teal: linear-gradient(135deg, #99f6e4, #5eead4, #14b8a6);
+/* Pink - สีชมพูนุ่มนวล */
+$theme-gradient-pink: linear-gradient(135deg, #fbcfe8, #f9a8d4, #ec4899);
 
 /* ============================================
    Colors - Neutral (Gray Scale)

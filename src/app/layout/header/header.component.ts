@@ -228,12 +228,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   getNotificationIconColor(type: string): string {
     const colorMap: { [key: string]: string } = {
-      'info': 'text-blue-500',
+      'info': 'text-primary',
       'success': 'text-green-500',
       'warning': 'text-yellow-500',
       'error': 'text-red-500'
     };
-    return colorMap[type] || 'text-blue-500';
+    return colorMap[type] || 'text-primary';
   }
 
   getTimeAgo(date: Date): string {

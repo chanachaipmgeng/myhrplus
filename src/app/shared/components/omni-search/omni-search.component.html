@@ -60,12 +60,10 @@
             (mouseenter)="selectedIndex = i"
             [class.selected]="selectedIndex === i"
             [ngClass]="{
-              'bg-blue-500/10': selectedIndex === i,
-              'dark:bg-blue-500/20': selectedIndex === i,
-              'theme-gemini:bg-blue-500/20': selectedIndex === i,
-              'border-l-blue-500': selectedIndex === i,
-              'dark:border-l-blue-400': selectedIndex === i,
-              'theme-gemini:border-l-blue-400': selectedIndex === i
+              'bg-primary/10': selectedIndex === i,
+              'dark:bg-primary/20': selectedIndex === i,
+              'border-l-primary': selectedIndex === i,
+              'dark:border-l-primary': selectedIndex === i
             }"
             class="search-result-item px-4 py-3 cursor-pointer transition-colors
                    hover:bg-black/5 dark:hover:bg-white/10

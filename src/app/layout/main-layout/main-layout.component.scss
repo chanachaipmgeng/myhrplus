@@ -7,7 +7,12 @@
 
    /* Layout Background Pattern */
    .layout-background {
-     @apply bg-slate-50 dark:bg-slate-900;
+     /* Background - Using CSS Variables */
+     background: linear-gradient(
+       to bottom,
+       var(--main-layout-bg-start, rgba(255, 255, 255, 0.98)),
+       var(--main-layout-bg-end, rgba(255, 255, 255, 0.95))
+     );
      position: relative;
 
      /* Animated gradient overlay */

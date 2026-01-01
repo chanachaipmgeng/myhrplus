@@ -455,6 +455,14 @@ export class ModelNameService {
   - **Never hardcode**: Avoid `#3b82f6`, `#0ea5e9`, `rgba(59, 130, 246, ...)`, or Tailwind `primary-*` classes
   - **Pattern for SCSS**: `rgba(var(--primary-rgb), 0.2)` for backgrounds, `rgb(var(--primary-rgb))` for solid colors
   - **Pattern for HTML**: Use utility classes like `bg-primary`, `text-primary`, `border-primary`
+- **Theme System**: 
+  - **Theme Modes**: `light`, `dark`, `auto` (3 modes)
+  - **Theme Colors**: `gemini` (default), `blue`, `indigo`, `purple`, `green`, `orange`, `red`, `teal`, `pink` (9 colors)
+  - **Background Styles**: Sidebar, Header, Main-Layout สามารถเลือก style แยกกันได้
+    - **Available Styles**: `white`, `dark`, `primary`, `primary-gradient` (4 styles per component)
+    - **Usage**: `ThemeService.setSidebarStyle()`, `ThemeService.setHeaderStyle()`, `ThemeService.setMainLayoutStyle()`
+    - **CSS Variables**: ใช้ `--sidebar-bg-start`, `--sidebar-bg-end`, `--header-bg-start`, `--header-bg-end`, `--main-layout-bg-start`, `--main-layout-bg-end`
+    - **Implementation**: ThemeService ใช้ `!important` เพื่อ override CSS rules
 - **Typography**: Use font families from design tokens (Noto Sans, Poppins, Inter, Sarabun, Kanit)
 - **Spacing**: Use Tailwind spacing scale (0.25rem increments)
 - **Breakpoints**: Use standard breakpoints (xs: 0px, sm: 640px, md: 768px, lg: 1024px, xl: 1280px, 2xl: 1536px)
@@ -475,6 +483,13 @@ export class ModelNameService {
 - **Gradient Animations**: Use subtle gradient shifts (`gradientShift`) for Light/Dark mode backgrounds
 - **Theme Support**: Always support Light/Dark/Gemini themes with appropriate variants
 - **Dynamic Theming**: All components support dynamic primary color changes via `ThemeService`
+- **Background Style Options**: Sidebar, Header, และ Main-Layout รองรับ 4 background styles แยกกันได้
+  - **White Style**: สีขาว/ดำโปร่งใส (light/dark mode)
+  - **Dark Style**: สีดำโปร่งใส/ทึบ (light/dark mode)
+  - **Primary Style**: สีตามธีมแบบ solid (default)
+  - **Primary-Gradient Style**: สีตามธีมแบบ gradient
+  - **CSS Variables**: ใช้ `--sidebar-bg-start/end`, `--header-bg-start/end`, `--main-layout-bg-start/end`
+  - **Theme Toggle UI**: ใช้ accordion sections เพื่อลดความยาวของ menu
 
 ## Libraries & Dependencies
 
@@ -990,7 +1005,22 @@ export class ComponentNameDemoComponent {
 
 ---
 
-**Last Updated**: 2024-12-30
-**Status**: ✅ All Architecture Improvements Completed + Translation Complete + Code Fixes Complete
+### Theme System & Background Style Options Complete (2024-12-31)
+- ✅ **Background Style Options**: Sidebar, Header, Main-Layout รองรับ 4 styles แยกกันได้
+  - **Types**: `SidebarStyle`, `HeaderStyle`, `MainLayoutStyle` = `'white' | 'dark' | 'primary' | 'primary-gradient'`
+  - **ThemeService Methods**: `setSidebarStyle()`, `setHeaderStyle()`, `setMainLayoutStyle()`
+  - **CSS Variables**: Dynamic CSS variables set with `!important` to override static styles
+  - **Theme Toggle UI**: Compact accordion-based menu design
+- ✅ **Theme Toggle Component**: 
+  - Combined mode and color selection in single menu
+  - Accordion sections for background styles (Sidebar, Header, Main-Layout)
+  - Grid layout for theme mode (3 columns) and theme colors (3 columns)
+  - Scrollable menu with max-height for better UX
+- ✅ **Documentation**: `THEME_SYSTEM_ANALYSIS_AND_IMPROVEMENTS.md` updated with background style options guide
+
+---
+
+**Last Updated**: 2024-12-31
+**Status**: ✅ All Architecture Improvements Completed + Translation Complete + Code Fixes Complete + Background Style Options Complete
 **Angular Version**: 17.0.0+
 **TypeScript Version**: 5.2.2+

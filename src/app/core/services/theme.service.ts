@@ -4,11 +4,17 @@ import { StorageService } from './storage.service';
 
 export type ThemeMode = 'light' | 'dark' | 'auto';
 export type ThemeColor = 'blue' | 'indigo' | 'purple' | 'green' | 'orange' | 'red' | 'teal' | 'pink' | 'gemini';
+export type SidebarStyle = 'white' | 'dark' | 'primary' | 'primary-gradient';
+export type HeaderStyle = 'white' | 'dark' | 'primary' | 'primary-gradient';
+export type MainLayoutStyle = 'white' | 'dark' | 'primary' | 'primary-gradient';
 
 export interface ThemeConfig {
   mode: ThemeMode;
   color: ThemeColor;
   primaryColor: string; // RGB format: "59, 130, 246"
+  sidebarStyle?: SidebarStyle; // Optional for backward compatibility
+  headerStyle?: HeaderStyle; // Optional for backward compatibility
+  mainLayoutStyle?: MainLayoutStyle; // Optional for backward compatibility
 }
 
 @Injectable({
@@ -19,7 +25,10 @@ export class ThemeService {
   private readonly DEFAULT_THEME: ThemeConfig = {
     mode: 'dark',
     color: 'gemini',
-    primaryColor: '59, 130, 246' // Blue for Gemini theme
+    primaryColor: '59, 130, 246', // Blue for Gemini theme
+    sidebarStyle: 'primary', // Default: primary color
+    headerStyle: 'primary', // Default: primary color
+    mainLayoutStyle: 'primary' // Default: primary color
   };
 
   private themeSubject = new BehaviorSubject<ThemeConfig>(this.DEFAULT_THEME);
@@ -33,12 +42,54 @@ export class ThemeService {
   }
 
   /**
+   * Validate theme color
+   */
+  private isValidThemeColor(color: string): color is ThemeColor {
+    const validColors: ThemeColor[] = ['blue', 'indigo', 'purple', 'green', 'orange', 'red', 'teal', 'pink', 'gemini'];
+    return validColors.includes(color as ThemeColor);
+  }
+
+  /**
+   * Validate theme mode
+   */
+  private isValidThemeMode(mode: string): mode is ThemeMode {
+    const validModes: ThemeMode[] = ['light', 'dark', 'auto'];
+    return validModes.includes(mode as ThemeMode);
+  }
+
+  /**
+   * Validate sidebar style
+   */
+  private isValidSidebarStyle(style: string): style is SidebarStyle {
+    const validStyles: SidebarStyle[] = ['white', 'dark', 'primary', 'primary-gradient'];
+    return validStyles.includes(style as SidebarStyle);
+  }
+
+  /**
    * Load theme from storage or use default
    */
   private loadTheme(): void {
     const savedTheme = this.storage.getItem<ThemeConfig>(this.THEME_STORAGE_KEY);
-    const theme = savedTheme || this.DEFAULT_THEME;
-    this.applyTheme(theme);
+
+    // Validate saved theme
+    if (savedTheme) {
+      const isValid =
+        this.isValidThemeColor(savedTheme.color) &&
+        this.isValidThemeMode(savedTheme.mode) &&
+        savedTheme.primaryColor &&
+        typeof savedTheme.primaryColor === 'string' &&
+        (!savedTheme.sidebarStyle || this.isValidSidebarStyle(savedTheme.sidebarStyle)) &&
+        (!savedTheme.headerStyle || this.isValidHeaderStyle(savedTheme.headerStyle)) &&
+        (!savedTheme.mainLayoutStyle || this.isValidMainLayoutStyle(savedTheme.mainLayoutStyle));
+
+      if (isValid) {
+        this.applyTheme(savedTheme);
+        return;
+      }
+    }
+
+    // Use default theme if validation fails
+    this.applyTheme(this.DEFAULT_THEME);
   }
 
   /**
@@ -56,15 +107,24 @@ export class ThemeService {
    */
   setColor(color: ThemeColor): void {
     const colorMap: Record<ThemeColor, string> = {
+      // Blue - สีน้ำเงินสดใส
       blue: '59, 130, 246',
+      // Indigo - สีครามเข้ม
       indigo: '99, 102, 241',
+      // Purple - สีม่วงสวยงาม
       purple: '168, 85, 247',
+      // Green - สีเขียวสดใส
       green: '34, 197, 94',
+      // Orange - สีส้มอบอุ่น
       orange: '249, 115, 22',
+      // Red - สีแดงเข้ม
       red: '239, 68, 68',
+      // Teal - สีเทาเขียวสวยงาม
       teal: '20, 184, 166',
+      // Pink - สีชมพูนุ่มนวล
       pink: '236, 72, 153',
-      gemini: '59, 130, 246' // Blue for Gemini theme
+      // Gemini - สีน้ำเงินสวยงาม (default)
+      gemini: '59, 130, 246'
     };
 
     const currentTheme = this.themeSubject.value;
@@ -83,6 +143,36 @@ export class ThemeService {
   setPrimaryColor(rgb: string): void {
     const currentTheme = this.themeSubject.value;
     const newTheme: ThemeConfig = { ...currentTheme, primaryColor: rgb };
+    this.applyTheme(newTheme);
+    this.saveTheme(newTheme);
+  }
+
+  /**
+   * Set sidebar background style
+   */
+  setSidebarStyle(style: SidebarStyle): void {
+    const currentTheme = this.themeSubject.value;
+    const newTheme: ThemeConfig = { ...currentTheme, sidebarStyle: style };
+    this.applyTheme(newTheme);
+    this.saveTheme(newTheme);
+  }
+
+  /**
+   * Set header background style
+   */
+  setHeaderStyle(style: HeaderStyle): void {
+    const currentTheme = this.themeSubject.value;
+    const newTheme: ThemeConfig = { ...currentTheme, headerStyle: style };
+    this.applyTheme(newTheme);
+    this.saveTheme(newTheme);
+  }
+
+  /**
+   * Set main layout background style
+   */
+  setMainLayoutStyle(style: MainLayoutStyle): void {
+    const currentTheme = this.themeSubject.value;
+    const newTheme: ThemeConfig = { ...currentTheme, mainLayoutStyle: style };
     this.applyTheme(newTheme);
     this.saveTheme(newTheme);
   }
@@ -150,10 +240,182 @@ export class ThemeService {
     html.style.setProperty('--primary-rgb', theme.primaryColor);
     html.style.setProperty('--theme-color', theme.color);
     html.style.setProperty('--theme-mode', theme.mode);
+    html.style.setProperty('--sidebar-style', theme.sidebarStyle || 'primary');
+    html.style.setProperty('--header-style', theme.headerStyle || 'primary');
+    html.style.setProperty('--main-layout-style', theme.mainLayoutStyle || 'primary');
+
+    // Apply component styles
+    this.applySidebarStyle(theme.sidebarStyle || 'primary', isDark, theme.primaryColor);
+    this.applyHeaderStyle(theme.headerStyle || 'primary', isDark, theme.primaryColor);
+    this.applyMainLayoutStyle(theme.mainLayoutStyle || 'primary', isDark, theme.primaryColor);
 
     // Update subjects
     this.themeSubject.next(theme);
     this.isDarkModeSubject.next(isDark);
+  }
+
+  /**
+   * Apply sidebar background style
+   */
+  private applySidebarStyle(style: SidebarStyle, isDark: boolean, primaryColor: string): void {
+    const html = document.documentElement;
+    const body = document.body;
+    const rgb = primaryColor;
+
+    // Use setProperty with 'important' priority to override CSS rules
+    const setImportant = (prop: string, value: string) => {
+      html.style.setProperty(prop, value, 'important');
+      // Also set on body for better compatibility
+      body.style.setProperty(prop, value, 'important');
+    };
+
+    switch (style) {
+      case 'white':
+        // White background
+        setImportant('--sidebar-bg-start', isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.95)');
+        setImportant('--sidebar-bg-end', isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.9)');
+        setImportant('--sidebar-icon-bg-start', isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.1)');
+        setImportant('--sidebar-icon-bg-end', isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.05)');
+        setImportant('--sidebar-active-bg', isDark ? `rgba(${rgb}, 0.2)` : `rgba(${rgb}, 0.2)`);
+        setImportant('--sidebar-hover-bg', isDark ? `rgba(${rgb}, 0.12)` : `rgba(${rgb}, 0.08)`);
+        setImportant('--sidebar-indicator-color', `rgb(${rgb})`);
+        break;
+
+      case 'dark':
+        // Dark background
+        setImportant('--sidebar-bg-start', isDark ? 'rgba(0, 0, 0, 0.9)' : 'rgba(0, 0, 0, 0.2)');
+        setImportant('--sidebar-bg-end', isDark ? 'rgba(0, 0, 0, 0.85)' : 'rgba(0, 0, 0, 0.1)');
+        setImportant('--sidebar-icon-bg-start', isDark ? 'rgba(0, 0, 0, 0.2)' : 'rgba(0, 0, 0, 0.2)');
+        setImportant('--sidebar-icon-bg-end', isDark ? 'rgba(0, 0, 0, 0.1)' : 'rgba(0, 0, 0, 0.1)');
+        setImportant('--sidebar-active-bg', isDark ? `rgba(${rgb}, 0.2)` : `rgba(${rgb}, 0.2)`);
+        setImportant('--sidebar-hover-bg', isDark ? `rgba(${rgb}, 0.12)` : `rgba(${rgb}, 0.12)`);
+        setImportant('--sidebar-indicator-color', `rgb(${rgb})`);
+        break;
+
+      case 'primary':
+        // Primary color solid background
+        setImportant('--sidebar-bg-start', isDark ? `rgba(${rgb}, 0.9)` : `rgba(${rgb}, 0.95)`);
+        setImportant('--sidebar-bg-end', isDark ? `rgba(${rgb}, 0.85)` : `rgba(${rgb}, 0.9)`);
+        setImportant('--sidebar-icon-bg-start', isDark ? `rgba(${rgb}, 0.15)` : 'rgba(255, 255, 255, 0.2)');
+        setImportant('--sidebar-icon-bg-end', isDark ? `rgba(${rgb}, 0.1)` : 'rgba(255, 255, 255, 0.1)');
+        setImportant('--sidebar-active-bg', isDark ? `rgba(${rgb}, 0.25)` : 'rgba(255, 255, 255, 0.3)');
+        setImportant('--sidebar-hover-bg', isDark ? `rgba(${rgb}, 0.18)` : 'rgba(255, 255, 255, 0.15)');
+        setImportant('--sidebar-indicator-color', isDark ? `rgb(${rgb})` : '#ffffff');
+        break;
+
+      case 'primary-gradient':
+        // Primary color gradient background (more gradient difference - darker at bottom)
+        // Light mode: Start bright, end darker
+        // Dark mode: Start bright, end much darker
+        setImportant('--sidebar-bg-start', isDark ? `rgba(${rgb}, 0.95)` : `rgba(${rgb}, 1)`);
+        setImportant('--sidebar-bg-end', isDark ? `rgba(${rgb}, 0.6)` : `rgba(${rgb}, 0.75)`);
+        setImportant('--sidebar-icon-bg-start', isDark ? `rgba(${rgb}, 0.2)` : 'rgba(255, 255, 255, 0.25)');
+        setImportant('--sidebar-icon-bg-end', isDark ? `rgba(${rgb}, 0.12)` : 'rgba(255, 255, 255, 0.15)');
+        setImportant('--sidebar-active-bg', isDark ? `rgba(${rgb}, 0.3)` : 'rgba(255, 255, 255, 0.35)');
+        setImportant('--sidebar-hover-bg', isDark ? `rgba(${rgb}, 0.22)` : 'rgba(255, 255, 255, 0.2)');
+        setImportant('--sidebar-indicator-color', isDark ? `rgb(${rgb})` : '#ffffff');
+        break;
+    }
+  }
+
+  /**
+   * Apply header background style
+   */
+  private applyHeaderStyle(style: HeaderStyle, isDark: boolean, primaryColor: string): void {
+    const html = document.documentElement;
+    const body = document.body;
+    const rgb = primaryColor;
+
+    const setImportant = (prop: string, value: string) => {
+      html.style.setProperty(prop, value, 'important');
+      body.style.setProperty(prop, value, 'important');
+    };
+
+    switch (style) {
+      case 'white':
+        setImportant('--header-bg-start', isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.95)');
+        setImportant('--header-bg-end', isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.9)');
+        setImportant('--header-active-bg', isDark ? `rgba(${rgb}, 0.2)` : `rgba(${rgb}, 0.2)`);
+        setImportant('--header-unread-bg', isDark ? `rgba(${rgb}, 0.12)` : `rgba(${rgb}, 0.08)`);
+        setImportant('--header-border-color', isDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)');
+        break;
+
+      case 'dark':
+        setImportant('--header-bg-start', isDark ? 'rgba(0, 0, 0, 0.9)' : 'rgba(0, 0, 0, 0.2)');
+        setImportant('--header-bg-end', isDark ? 'rgba(0, 0, 0, 0.85)' : 'rgba(0, 0, 0, 0.1)');
+        setImportant('--header-active-bg', isDark ? `rgba(${rgb}, 0.2)` : `rgba(${rgb}, 0.2)`);
+        setImportant('--header-unread-bg', isDark ? `rgba(${rgb}, 0.12)` : `rgba(${rgb}, 0.12)`);
+        setImportant('--header-border-color', isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.1)');
+        break;
+
+      case 'primary':
+        setImportant('--header-bg-start', isDark ? `rgba(${rgb}, 0.9)` : `rgba(${rgb}, 0.95)`);
+        setImportant('--header-bg-end', isDark ? `rgba(${rgb}, 0.85)` : `rgba(${rgb}, 0.9)`);
+        setImportant('--header-active-bg', isDark ? `rgba(${rgb}, 0.25)` : 'rgba(255, 255, 255, 0.2)');
+        setImportant('--header-unread-bg', isDark ? `rgba(${rgb}, 0.18)` : 'rgba(255, 255, 255, 0.1)');
+        setImportant('--header-border-color', isDark ? `rgba(${rgb}, 0.3)` : 'rgba(255, 255, 255, 0.3)');
+        break;
+
+      case 'primary-gradient':
+        setImportant('--header-bg-start', isDark ? `rgba(${rgb}, 0.95)` : `rgba(${rgb}, 1)`);
+        setImportant('--header-bg-end', isDark ? `rgba(${rgb}, 0.6)` : `rgba(${rgb}, 0.75)`);
+        setImportant('--header-active-bg', isDark ? `rgba(${rgb}, 0.3)` : 'rgba(255, 255, 255, 0.25)');
+        setImportant('--header-unread-bg', isDark ? `rgba(${rgb}, 0.22)` : 'rgba(255, 255, 255, 0.15)');
+        setImportant('--header-border-color', isDark ? `rgba(${rgb}, 0.4)` : 'rgba(255, 255, 255, 0.4)');
+        break;
+    }
+  }
+
+  /**
+   * Apply main layout background style
+   */
+  private applyMainLayoutStyle(style: MainLayoutStyle, isDark: boolean, primaryColor: string): void {
+    const html = document.documentElement;
+    const body = document.body;
+    const rgb = primaryColor;
+
+    const setImportant = (prop: string, value: string) => {
+      html.style.setProperty(prop, value, 'important');
+      body.style.setProperty(prop, value, 'important');
+    };
+
+    switch (style) {
+      case 'white':
+        setImportant('--main-layout-bg-start', isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.98)');
+        setImportant('--main-layout-bg-end', isDark ? 'rgba(255, 255, 255, 0.02)' : 'rgba(255, 255, 255, 0.95)');
+        break;
+
+      case 'dark':
+        setImportant('--main-layout-bg-start', isDark ? 'rgba(0, 0, 0, 0.95)' : 'rgba(0, 0, 0, 0.1)');
+        setImportant('--main-layout-bg-end', isDark ? 'rgba(0, 0, 0, 0.9)' : 'rgba(0, 0, 0, 0.05)');
+        break;
+
+      case 'primary':
+        setImportant('--main-layout-bg-start', isDark ? `rgba(${rgb}, 0.15)` : `rgba(${rgb}, 0.1)`);
+        setImportant('--main-layout-bg-end', isDark ? `rgba(${rgb}, 0.1)` : `rgba(${rgb}, 0.05)`);
+        break;
+
+      case 'primary-gradient':
+        setImportant('--main-layout-bg-start', isDark ? `rgba(${rgb}, 0.2)` : `rgba(${rgb}, 0.15)`);
+        setImportant('--main-layout-bg-end', isDark ? `rgba(${rgb}, 0.05)` : `rgba(${rgb}, 0.02)`);
+        break;
+    }
+  }
+
+  /**
+   * Validate header style
+   */
+  private isValidHeaderStyle(style: string): style is HeaderStyle {
+    const validStyles: HeaderStyle[] = ['white', 'dark', 'primary', 'primary-gradient'];
+    return validStyles.includes(style as HeaderStyle);
+  }
+
+  /**
+   * Validate main layout style
+   */
+  private isValidMainLayoutStyle(style: string): style is MainLayoutStyle {
+    const validStyles: MainLayoutStyle[] = ['white', 'dark', 'primary', 'primary-gradient'];
+    return validStyles.includes(style as MainLayoutStyle);
   }
 
   /**
@@ -204,12 +466,29 @@ export class ThemeService {
    */
   watchSystemPreference(): void {
     if (window.matchMedia) {
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+      // Initial check for auto mode
+      const currentTheme = this.themeSubject.value;
+      if (currentTheme.mode === 'auto') {
+        this.applyTheme(currentTheme);
+      }
+
+      // Listen for system preference changes
+      const handleChange = (e: MediaQueryListEvent | MediaQueryList): void => {
         const currentTheme = this.themeSubject.value;
         if (currentTheme.mode === 'auto') {
           this.applyTheme(currentTheme);
         }
-      });
+      };
+
+      // Modern browsers support addEventListener
+      if (mediaQuery.addEventListener) {
+        mediaQuery.addEventListener('change', handleChange);
+      } else {
+        // Fallback for older browsers
+        mediaQuery.addListener(handleChange);
+      }
     }
   }
 }

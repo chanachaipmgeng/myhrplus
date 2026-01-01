@@ -14,8 +14,8 @@
         </button>
         <div class="flex items-center gap-3">
           <span class="text-2xl md:text-xl">🎨</span>
-          <h1 class="text-xl md:text-base font-semibold text-gray-900 dark:text-gray-100 
-                    theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary 
+          <h1 class="text-xl md:text-base font-semibold text-gray-900 dark:text-gray-100
+                    theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary
                     theme-gemini:bg-clip-text theme-gemini:text-transparent m-0">
             Component Demo Showcase
           </h1>
@@ -91,7 +91,7 @@
                         animate-fade-in">
               <div class="flex items-center justify-between mb-3">
                 <label class="block text-sm font-semibold text-gray-900 dark:text-gray-100
-                              theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary 
+                              theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary
                               theme-gemini:bg-clip-text theme-gemini:text-transparent">
                   Custom Primary Color
                 </label>
@@ -123,14 +123,14 @@
                            glass-weak dark:glass-dark-weak theme-gemini:glass-gemini-weak
                            text-gray-900 dark:text-gray-100 text-sm font-mono
                            focus:outline-none focus:ring-2 focus:ring-primary-500/20"
-                    placeholder="#3b82f6"
+                    [placeholder]="customPrimaryColor"
                     pattern="^#[0-9A-Fa-f]{6}$"
                     [attr.aria-label]="'Hex color input'">
                 </div>
               </div>
               <div class="flex items-center gap-2 mb-3">
                 <span class="text-xs text-gray-500 dark:text-gray-400 theme-gemini:text-white/60">สีปัจจุบัน:</span>
-                <span 
+                <span
                   class="w-8 h-8 rounded border-2 border-black/10 dark:border-white/10"
                   [style.background-color]="customPrimaryColor"
                   [attr.aria-label]="'สีที่เลือก: ' + customPrimaryColor">
@@ -174,8 +174,8 @@
                   glass-weak dark:glass-dark-weak theme-gemini:glass-gemini-weak backdrop-blur-sm">
           <div class="flex items-center gap-3">
             <span class="text-2xl">🎨</span>
-            <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 
-                      theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary 
+            <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100
+                      theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary
                       theme-gemini:bg-clip-text theme-gemini:text-transparent m-0">
               Components
             </h2>
@@ -215,8 +215,8 @@
                        glass-weak dark:glass-dark-weak theme-gemini:glass-gemini-weak
                        backdrop-blur-sm border-b border-black/5 dark:border-white/5">
               <span class="text-xl">{{ group.icon }}</span>
-              <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100 
-                         theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary 
+              <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100
+                         theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary
                          theme-gemini:bg-clip-text theme-gemini:text-transparent
                          m-0 uppercase tracking-wider">
                 {{ group.name }}

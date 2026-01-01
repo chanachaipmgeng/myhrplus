@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ThemeService, ThemeMode, ThemeColor } from '@core/services';
+import { ThemeService, ThemeMode, ThemeColor, SidebarStyle, HeaderStyle, MainLayoutStyle } from '@core/services';
 import { IconComponent } from '../icon/icon.component';
 import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
@@ -15,16 +15,46 @@ import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 export class ThemeToggleComponent implements OnInit {
   currentMode: ThemeMode = 'light';
   currentColor: ThemeColor = 'blue';
+  currentSidebarStyle: SidebarStyle = 'primary';
+  currentHeaderStyle: HeaderStyle = 'primary';
+  currentMainLayoutStyle: MainLayoutStyle = 'primary';
   currentModeIcon = 'light_mode';
   showThemeMenu = false;
   showColorPicker = false;
-  customPrimaryColor = '#3b82f6'; // Default blue
+  customPrimaryColor = '#3b82f6'; // Will be updated from theme
   hexColorInput = '#3b82f6';
+
+  // Accordion states
+  showSidebarAccordion = false;
+  showHeaderAccordion = false;
+  showMainLayoutAccordion = false;
+
+  sidebarStyles = [
+    { value: 'white' as SidebarStyle, name: 'สีขาว', icon: 'light_mode' },
+    { value: 'dark' as SidebarStyle, name: 'สีมืด', icon: 'dark_mode' },
+    { value: 'primary' as SidebarStyle, name: 'สีตามธีม', icon: 'palette' },
+    { value: 'primary-gradient' as SidebarStyle, name: 'สีตามธีม (Gradient)', icon: 'gradient' }
+  ];
+
+  headerStyles = [
+    { value: 'white' as HeaderStyle, name: 'สีขาว', icon: 'light_mode' },
+    { value: 'dark' as HeaderStyle, name: 'สีมืด', icon: 'dark_mode' },
+    { value: 'primary' as HeaderStyle, name: 'สีตามธีม', icon: 'palette' },
+    { value: 'primary-gradient' as HeaderStyle, name: 'สีตามธีม (Gradient)', icon: 'gradient' }
+  ];
+
+  mainLayoutStyles = [
+    { value: 'white' as MainLayoutStyle, name: 'สีขาว', icon: 'light_mode' },
+    { value: 'dark' as MainLayoutStyle, name: 'สีมืด', icon: 'dark_mode' },
+    { value: 'primary' as MainLayoutStyle, name: 'สีตามธีม', icon: 'palette' },
+    { value: 'primary-gradient' as MainLayoutStyle, name: 'สีตามธีม (Gradient)', icon: 'gradient' }
+  ];
 
   @ViewChild('themeButton') themeButton?: ElementRef<HTMLButtonElement>;
   @ViewChild('colorPickerContainer') colorPickerContainer?: ElementRef<HTMLDivElement>;
 
   themeColors = [
+    { value: 'gemini' as ThemeColor, name: 'ค่าเริ่มต้น', gradient: 'var(--theme-gradient-gemini)' },
     { value: 'blue' as ThemeColor, name: 'น้ำเงิน', gradient: 'var(--theme-gradient-blue)' },
     { value: 'indigo' as ThemeColor, name: 'คราม', gradient: 'var(--theme-gradient-indigo)' },
     { value: 'purple' as ThemeColor, name: 'ม่วง', gradient: 'var(--theme-gradient-purple)' },
@@ -41,6 +71,9 @@ export class ThemeToggleComponent implements OnInit {
     this.themeService.theme$.subscribe(theme => {
       this.currentMode = theme.mode;
       this.currentColor = theme.color;
+      this.currentSidebarStyle = theme.sidebarStyle || 'primary';
+      this.currentHeaderStyle = theme.headerStyle || 'primary';
+      this.currentMainLayoutStyle = theme.mainLayoutStyle || 'primary';
       this.updateModeIcon();
       // Update custom color from theme
       this.customPrimaryColor = this.rgbToHex(theme.primaryColor);
@@ -75,6 +108,21 @@ export class ThemeToggleComponent implements OnInit {
   setColor(color: ThemeColor): void {
     this.themeService.setColor(color);
     // Keep menu open after color change
+  }
+
+  setSidebarStyle(style: SidebarStyle): void {
+    this.themeService.setSidebarStyle(style);
+    // Keep menu open after style change
+  }
+
+  setHeaderStyle(style: HeaderStyle): void {
+    this.themeService.setHeaderStyle(style);
+    // Keep menu open after style change
+  }
+
+  setMainLayoutStyle(style: MainLayoutStyle): void {
+    this.themeService.setMainLayoutStyle(style);
+    // Keep menu open after style change
   }
 
   onColorPickerChange(event: Event): void {
@@ -134,7 +182,11 @@ export class ThemeToggleComponent implements OnInit {
       const b = parts[2].toString(16).padStart(2, '0');
       return `#${r}${g}${b}`;
     }
-    return '#3b82f6'; // Default blue
+    // Get default from CSS variable or fallback to blue
+    const defaultColor = getComputedStyle(document.documentElement)
+      .getPropertyValue('--primary-color')
+      .trim() || '#3b82f6';
+    return defaultColor;
   }
 
   private updateModeIcon(): void {
