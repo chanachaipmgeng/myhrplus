@@ -16,7 +16,7 @@ export interface MenuGroup {
   items: MenuItem[];
 }
 
-export type MenuContext = 'personal';
+export type MenuContext = 'personal' | 'admin';
 
 export interface SearchResult {
   name: string;
@@ -25,7 +25,7 @@ export interface SearchResult {
   breadcrumb: string; // e.g., "Employee Self Service > พนักงาน > รายงาน"
   context: MenuContext;
   groupName: string;
-  level: 1 | 2 | 3; // Menu level
+  level: 1 | 2 | 3 | 4 | 5; // Menu level (1-5)
 }
 
 

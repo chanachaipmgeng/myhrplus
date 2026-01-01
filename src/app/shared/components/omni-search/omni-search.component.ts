@@ -1,11 +1,13 @@
-import { Component, OnInit, OnDestroy, HostListener, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, ViewChild, ElementRef, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { MenuContextService } from '@core/services';
 import { MenuGroup, MenuItem, SearchResult, MenuContext } from '@core/models/menu.model';
+import { NAVIGATION_ITEMS, NavigationItem, NavigationChild } from '@core/constants';
 import { GlassCardComponent } from '../glass-card/glass-card.component';
 import { IconComponent } from '../icon/icon.component';
 import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
@@ -27,18 +29,7 @@ export class OmniSearchComponent implements OnInit, OnDestroy {
   searchResults: SearchResult[] = [];
   selectedIndex = -1;
   private destroy$ = new Subject<void>();
-
-  // Menu data structure
-  menuData: MenuGroup[] = [
-    {
-      groupName: 'Employee Self Service',
-      items: [
-        { name: 'การลงเวลา (Time Attendance)', icon: 'clock', route: '/ta' },
-        { name: 'การขอเอกสาร (Request)', icon: 'file-text', route: '/ta' },
-        { name: 'ข้อมูลลูกน้อง (My Team)', icon: 'users', route: '/home' }
-      ]
-    }
-  ];
+  private translate = inject(TranslateService);
 
   constructor(
     private router: Router,
@@ -130,62 +121,171 @@ export class OmniSearchComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Perform fuzzy search across all menu items
+   * Perform fuzzy search across all navigation items
+   * Searches in all levels (1-5) of NAVIGATION_ITEMS
    */
   private performSearch(query: string): void {
     const results: SearchResult[] = [];
     const lowerQuery = query.toLowerCase();
 
-    // Search in menu data
-    this.menuData.forEach(group => {
-      group.items.forEach(item => {
-        // Search in item name (Level 2)
-        if (this.fuzzyMatch(item.name, lowerQuery)) {
-          results.push({
-            name: item.name,
-            icon: item.icon,
-            route: item.route || '',
-            breadcrumb: `${group.groupName} > ${item.name}`,
-            context: 'personal',
-            groupName: group.groupName,
-            level: 2
-          });
-        }
+    // Search in all navigation items
+    NAVIGATION_ITEMS.forEach(navItem => {
+      // Search Level 1 (Navigation Item itself)
+      const level1Label = this.translateLabel(navItem.label, navItem.id);
+      const level1LabelMatch = level1Label.toLowerCase().includes(lowerQuery) || navItem.label.toLowerCase().includes(lowerQuery);
 
-        // Search in children (Level 3)
-        if (item.children) {
-          item.children.forEach(child => {
-            if (this.fuzzyMatch(child.name, lowerQuery)) {
-              results.push({
-                name: child.name,
-                icon: child.icon,
-                route: child.route || '',
-                breadcrumb: `${group.groupName} > ${item.name} > ${child.name}`,
-                context: 'personal',
-                groupName: group.groupName,
-                level: 3
-              });
-            }
-          });
-        }
-      });
+      if (level1LabelMatch && navItem.route) {
+        results.push({
+          name: level1Label,
+          icon: navItem.icon || 'folder',
+          route: navItem.route,
+          breadcrumb: level1Label,
+          context: 'admin',
+          groupName: navItem.label,
+          level: 1
+        });
+      }
+
+      // Search in children (Level 2-5) recursively
+      if (navItem.children) {
+        this.searchInChildren(navItem.children, navItem, level1Label, lowerQuery, results, 2);
+      }
     });
 
-    // Sort by relevance (exact match first, then fuzzy)
+    // Sort by relevance (exact match first, then by level, then alphabetically)
     this.searchResults = results.sort((a, b) => {
       const aExact = a.name.toLowerCase().startsWith(lowerQuery);
       const bExact = b.name.toLowerCase().startsWith(lowerQuery);
       if (aExact && !bExact) return -1;
       if (!aExact && bExact) return 1;
+      if (a.level !== b.level) return a.level - b.level; // Lower level first
       return a.name.localeCompare(b.name);
     });
   }
 
   /**
-   * Simple fuzzy match (contains)
+   * Recursively search in navigation children (Level 2-5)
    */
-  private fuzzyMatch(text: string, query: string): boolean {
-    return text.toLowerCase().includes(query);
+  private searchInChildren(
+    children: NavigationChild[],
+    parentNavItem: NavigationItem,
+    breadcrumbPath: string,
+    query: string,
+    results: SearchResult[],
+    level: number
+  ): void {
+    if (!children || children.length === 0) return;
+
+    children.forEach(child => {
+      // Translate label
+      const translatedLabel = this.translateLabel(child.label, parentNavItem.id, level);
+      const originalLabel = child.label.toLowerCase();
+      const translatedLabelLower = translatedLabel.toLowerCase();
+
+      // Check if matches
+      const labelMatch = originalLabel.includes(query) || translatedLabelLower.includes(query);
+      const routeMatch = child.route?.toLowerCase().includes(query) || false;
+
+      // Build breadcrumb path
+      const currentBreadcrumb = breadcrumbPath ? `${breadcrumbPath} > ${translatedLabel}` : translatedLabel;
+
+      if (labelMatch || routeMatch) {
+        // Ensure level is within valid range (1-5)
+        const validLevel = Math.min(Math.max(level, 1), 5) as 1 | 2 | 3 | 4 | 5;
+        results.push({
+          name: translatedLabel,
+          icon: child.icon || 'folder',
+          route: child.route || '',
+          breadcrumb: currentBreadcrumb,
+          context: 'admin',
+          groupName: parentNavItem.label,
+          level: validLevel
+        });
+      }
+
+      // Recursively search in children (next level)
+      if (child.children && child.children.length > 0) {
+        this.searchInChildren(child.children, parentNavItem, currentBreadcrumb, query, results, level + 1);
+      }
+    });
+  }
+
+  /**
+   * Translate navigation label
+   * Similar to sidebar component's translateLabel
+   */
+  private translateLabel(label: string, navId?: string, level?: number): string {
+    if (!label) return '';
+
+    // Try to find translation key
+    const labelKey = this.normalizeLabelToKey(label);
+    let translationKey = '';
+
+    if (navId && level) {
+      // Try with navigation id and level
+      translationKey = `navigation.${navId}.level${level}.${labelKey}`;
+      const translated = this.translate.instant(translationKey);
+      if (translated !== translationKey) return translated;
+    }
+
+    if (navId) {
+      // Try with navigation id only
+      translationKey = `navigation.${navId}.${labelKey}`;
+      const translated = this.translate.instant(translationKey);
+      if (translated !== translationKey) return translated;
+    }
+
+    // Try generic navigation key
+    translationKey = `navigation.${labelKey}`;
+    const translated = this.translate.instant(translationKey);
+    if (translated !== translationKey) return translated;
+
+    // If no translation found, return original label
+    return label;
+  }
+
+  /**
+   * Normalize label to translation key format
+   */
+  private normalizeLabelToKey(label: string): string {
+    if (!label) return '';
+
+    // Extract English text from parentheses if exists
+    const parenthesesMatch = label.match(/\(([^)]+)\)/);
+    if (parenthesesMatch && parenthesesMatch[1]) {
+      const englishText = parenthesesMatch[1].trim();
+      return englishText
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .split(' ')
+        .map((word, index) => {
+          if (index === 0) return word;
+          return word.charAt(0).toUpperCase() + word.slice(1);
+        })
+        .join('');
+    }
+
+    // If no parentheses, process the whole label
+    let key = label
+      .replace(/\([^)]*\)/g, '')
+      .trim();
+
+    // Convert to camelCase
+    key = key
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .split(' ')
+      .map((word, index) => {
+        if (index === 0) return word;
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      })
+      .join('');
+
+    return key;
   }
 
 

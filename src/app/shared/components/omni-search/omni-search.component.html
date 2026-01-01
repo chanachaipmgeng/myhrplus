@@ -88,7 +88,7 @@
               <div class="text-xs px-2 py-1 rounded
                           bg-gray-100 dark:bg-gray-800
                           text-gray-600 dark:text-gray-400">
-                {{ result.level === 3 ? 'Tab' : 'Page' }}
+                {{ result.level === 1 ? 'Module' : result.level === 2 ? 'Page' : result.level === 3 ? 'Tab' : 'Sub' }}
               </div>
             </div>
           </div>
