@@ -207,4 +207,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.omniSearch.open();
     }
   }
+
+  /**
+   * Get logo path based on current theme
+   */
+  getLogoPath(): string {
+    // Check if dark mode is active
+    const isDarkMode = document.documentElement.classList.contains('dark');
+    if (isDarkMode) {
+      return 'assets/images/logo/logo-myhr-dark.png';
+    }
+    return 'assets/images/logo/logo-myhr-light.png';
+  }
 }

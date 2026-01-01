@@ -1324,6 +1324,16 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Get logo path based on current theme
+   */
+  getLogoPath(): string {
+    if (this.isDarkMode) {
+      return 'assets/images/logo/logo-myhr-dark.png';
+    }
+    return 'assets/images/logo/logo-myhr-light.png';
+  }
+
+  /**
    * Get mock user data for testing
    * Remove this method when real authentication is implemented
    */

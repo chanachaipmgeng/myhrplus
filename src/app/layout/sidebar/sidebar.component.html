@@ -11,8 +11,9 @@
                 transition-all duration-300 ease-out
                 hover:scale-110 hover:shadow-xl hover:-translate-y-1
                 active:scale-95
-                bg-gradient-to-br from-blue-500 to-indigo-600
-                dark:from-blue-600 dark:to-indigo-700
+                bg-white/10 dark:bg-gray-900/20 theme-gemini:bg-gray-900/30
+                backdrop-blur-sm
+                border border-white/20 dark:border-gray-700/20 theme-gemini:border-primary/30
                 cursor-pointer
                 group relative overflow-hidden
                 animate-gemini-pulse">
@@ -20,8 +21,10 @@
         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent
                     -translate-x-full group-hover:translate-x-full
                     transition-transform duration-1000 ease-in-out"></div>
-        <span class="text-white text-xl font-bold relative z-10
-                      group-hover:scale-110 transition-transform duration-300">H</span>
+        <img [src]="getLogoPath()"
+             [alt]="'layout.sidebar.appLogo' | translate"
+             class="w-10 h-10 object-contain relative z-10
+                    group-hover:scale-110 transition-transform duration-300" />
       </a>
     </div>
 

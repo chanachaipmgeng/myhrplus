@@ -25,8 +25,9 @@
         <a routerLink="/home"
            [attr.aria-label]="'layout.header.goToHome' | translate"
            class="inline-flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] md:w-10 md:h-10 rounded-lg
-                    bg-gradient-to-br from-blue-500 to-indigo-600
-                    dark:from-blue-600 dark:to-indigo-700
+                    bg-white/10 dark:bg-gray-900/20 theme-gemini:bg-gray-900/30
+                    backdrop-blur-sm
+                    border border-white/20 dark:border-gray-700/20 theme-gemini:border-primary/30
                     shadow-lg flex-shrink-0 relative overflow-hidden
                     hover:scale-110 hover:shadow-xl
                     transition-all duration-300 ease-out
@@ -36,13 +37,10 @@
           <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent
                       -translate-x-full group-hover:translate-x-full
                       transition-transform duration-1000 ease-in-out"></div>
-          <app-icon
-            name="business_center"
-            size="sm"
-            color="text-white"
-            class="logo-icon w-4 h-4 md:w-5 md:h-5 relative z-10
-                   group-hover:rotate-12 transition-transform duration-300">
-          </app-icon>
+          <img [src]="getLogoPath()"
+               [alt]="'layout.header.appLogo' | translate"
+               class="w-8 h-8 md:w-9 md:h-9 object-contain relative z-10
+                      group-hover:scale-110 transition-transform duration-300" />
         </a>
         <div class="flex flex-col min-w-0 hidden sm:block">
           <span class="app-title thai-text font-semibold text-gray-800 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent text-sm md:text-lg leading-tight truncate">
