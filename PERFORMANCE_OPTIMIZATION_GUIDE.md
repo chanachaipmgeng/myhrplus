@@ -224,7 +224,7 @@ console.log(`Total Rules: ${totalRules}, Potentially Unused: ${potentiallyUnused
 }
 
 // ❌ Bad - Overly specific
-body.theme-gemini .main-content .glass-card:hover {
+body.theme-myhr .main-content .glass-card:hover {
   transform: translateY(-2px);
 }
 ```
@@ -252,7 +252,7 @@ body.theme-gemini .main-content .glass-card:hover {
 }
 
 // ❌ Bad - High specificity
-body.theme-gemini .main-content .sidebar .button {
+body.theme-myhr .main-content .sidebar .button {
   background: blue;
 }
 ```

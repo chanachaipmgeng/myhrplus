@@ -1,6 +1,6 @@
 /**
  * Tailwind CSS Plugin: Animation Utilities
- * 
+ *
  * Provides utility classes for smooth transitions and micro-interactions
  */
 
@@ -39,7 +39,7 @@ module.exports = plugin(function({ addUtilities, theme, addVariant }) {
         willChange: 'auto',
       },
     },
-    
+
     // Hover Lift Effects
     '.hover-lift': {
       transition: 'transform 0.2s ease',
@@ -59,7 +59,7 @@ module.exports = plugin(function({ addUtilities, theme, addVariant }) {
         transform: 'translateY(-4px)',
       },
     },
-    
+
     // Hover Scale Effects
     '.hover-scale': {
       transition: 'transform 0.2s ease',
@@ -79,7 +79,7 @@ module.exports = plugin(function({ addUtilities, theme, addVariant }) {
         transform: 'scale(1.1)',
       },
     },
-    
+
     // Active Scale Effects
     '.active-scale': {
       transition: 'transform 0.1s ease',
@@ -93,7 +93,7 @@ module.exports = plugin(function({ addUtilities, theme, addVariant }) {
         transform: 'scale(0.99)',
       },
     },
-    
+
     // Glow Effects
     '.glow-primary': {
       transition: 'box-shadow 0.3s ease',
@@ -113,7 +113,7 @@ module.exports = plugin(function({ addUtilities, theme, addVariant }) {
         boxShadow: '0 0 20px rgba(239, 68, 68, 0.3)',
       },
     },
-    
+
     // Reduced Motion Support
     '.motion-safe': {
       '@media (prefers-reduced-motion: reduce)': {
@@ -126,10 +126,10 @@ module.exports = plugin(function({ addUtilities, theme, addVariant }) {
 
   addUtilities(animationUtilities);
 
-  // Gemini theme variant
-  addVariant('theme-gemini', ({ modifySelectors, separator }) => {
+  // Myhr theme variant
+  addVariant('theme-myhr', ({ modifySelectors, separator }) => {
     modifySelectors(({ className }) => {
-      return `body.theme-gemini .${className}`;
+      return `body.theme-myhr .${className}`;
     });
   });
 });

@@ -1,20 +1,20 @@
 <div class="w-full py-12">
   <div class="mb-8">
-    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Signature Component Demo
     </h1>
-    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-myhr:text-white/80 leading-relaxed">
       A signature pad component for capturing digital signatures with undo/redo, save, and download capabilities.
     </p>
   </div>
 
   <!-- Live Demo -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Live Demo
     </h2>
-    
+
     <app-glass-card padding="p-6">
       <app-signature
         #signature
@@ -34,18 +34,18 @@
 
   <!-- Advanced Features -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Advanced Features
     </h2>
-    
+
     <app-glass-card padding="p-6">
       <!-- Settings -->
       <div class="mb-6">
-        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Settings</h3>
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Settings</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 mb-2">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 theme-myhr:text-white/90 mb-2">
               Stroke Color
             </label>
             <div class="flex gap-2">
@@ -53,16 +53,16 @@
                 type="color"
                 [value]="strokeColor"
                 (change)="onStrokeColorChange($event)"
-                class="w-16 h-10 rounded-lg border border-gray-300 dark:border-gray-600 theme-gemini:border-primary/30 cursor-pointer">
+                class="w-16 h-10 rounded-lg border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 cursor-pointer">
               <input
                 type="text"
                 [value]="strokeColor"
                 (change)="onStrokeColorChange($event)"
-                class="flex-1 px-4 py-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
+                class="flex-1 px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
             </div>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 mb-2">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 theme-myhr:text-white/90 mb-2">
               Background Color
             </label>
             <div class="flex gap-2">
@@ -70,12 +70,12 @@
                 type="color"
                 [value]="backgroundColor"
                 (change)="onBackgroundColorChange($event)"
-                class="w-16 h-10 rounded-lg border border-gray-300 dark:border-gray-600 theme-gemini:border-primary/30 cursor-pointer">
+                class="w-16 h-10 rounded-lg border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 cursor-pointer">
               <input
                 type="text"
                 [value]="backgroundColor"
                 (change)="onBackgroundColorChange($event)"
-                class="flex-1 px-4 py-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
+                class="flex-1 px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
             </div>
           </div>
         </div>
@@ -86,7 +86,7 @@
               [checked]="isReadOnly"
               (change)="toggleReadOnly()"
               class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
-            <span class="text-sm text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Read Only</span>
+            <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Read Only</span>
           </label>
           <label class="flex items-center gap-2 cursor-pointer">
             <input
@@ -94,14 +94,14 @@
               [checked]="saveWithBackground"
               (change)="saveWithBackground = !saveWithBackground"
               class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
-            <span class="text-sm text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Save with Background</span>
+            <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Save with Background</span>
           </label>
         </div>
       </div>
 
       <!-- Actions -->
       <div class="mb-6">
-        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Actions</h3>
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Actions</h3>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <button
             type="button"
@@ -111,13 +111,13 @@
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-myhr:bg-white/10 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-myhr:hover:bg-white/20 transition-colors"
             (click)="undo()">
             Undo
           </button>
           <button
             type="button"
-            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 transition-colors"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 theme-myhr:bg-white/10 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 theme-myhr:hover:bg-white/20 transition-colors"
             (click)="redo()">
             Redo
           </button>
@@ -152,11 +152,11 @@
 
   <!-- Basic Usage -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Basic Usage
     </h2>
-    
+
     <app-code-viewer
       title="Signature"
       language="html"

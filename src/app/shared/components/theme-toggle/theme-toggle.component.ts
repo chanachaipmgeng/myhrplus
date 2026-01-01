@@ -54,7 +54,7 @@ export class ThemeToggleComponent implements OnInit {
   @ViewChild('colorPickerContainer') colorPickerContainer?: ElementRef<HTMLDivElement>;
 
   themeColors = [
-    { value: 'gemini' as ThemeColor, name: 'ค่าเริ่มต้น', gradient: 'var(--theme-gradient-gemini)' },
+    { value: 'myhr' as ThemeColor, name: 'ค่าเริ่มต้น', gradient: 'var(--theme-gradient-myhr)' },
     { value: 'blue' as ThemeColor, name: 'น้ำเงิน', gradient: 'var(--theme-gradient-blue)' },
     { value: 'indigo' as ThemeColor, name: 'คราม', gradient: 'var(--theme-gradient-indigo)' },
     { value: 'purple' as ThemeColor, name: 'ม่วง', gradient: 'var(--theme-gradient-purple)' },

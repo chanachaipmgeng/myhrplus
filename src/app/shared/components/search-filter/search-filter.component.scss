@@ -23,11 +23,11 @@
 
 .filter-toggle {
   @apply relative transition-smooth min-w-[44px] min-h-[44px] flex items-center justify-center flex-shrink-0;
-  
+
   &.active {
     color: rgb(var(--primary-rgb)) !important;
   }
-  
+
   @media (min-width: 768px) {
     @apply min-w-0 min-h-0;
   }
@@ -42,11 +42,11 @@
   border-color: rgba(var(--primary-rgb), 0.3);
   color: rgb(var(--primary-rgb));
   @apply transition-smooth min-h-[32px] px-3 py-1 inline-flex items-center gap-1;
-  
+
   &:hover {
     background-color: rgba(var(--primary-rgb), 0.15);
   }
-  
+
   button {
     @apply min-w-6 min-h-6 p-0.5 flex items-center justify-center;
   }
@@ -54,7 +54,7 @@
 
 .clear-all-btn {
   @apply text-xs px-2 py-1 min-h-[32px] transition-colors;
-  
+
   &:hover {
     color: rgb(var(--primary-rgb));
   }
@@ -86,27 +86,27 @@
   .search-filter-header {
     @apply flex-col gap-2;
   }
-  
+
   .search-input-wrapper {
     @apply w-full;
   }
-  
+
   .filter-toggle {
     @apply self-end;
   }
-  
+
   .filters-grid {
     @apply grid-cols-1 gap-3;
   }
-  
+
   .filter-chips {
     @apply gap-1;
   }
-  
+
   .filter-chip {
     @apply text-xs px-2;
   }
-  
+
   .advanced-filters {
     @apply p-3;
   }
@@ -117,7 +117,7 @@
   .filters-grid {
     @apply grid-cols-2 gap-3;
   }
-  
+
   .search-filter-header {
     @apply gap-2;
   }
@@ -135,7 +135,7 @@ input[type="text"],
 input[type="date"],
 select {
   @apply min-h-[44px] px-3 py-2;
-  
+
   @media (min-width: 768px) {
     @apply min-h-0;
   }
@@ -143,22 +143,22 @@ select {
 
 button {
   @apply min-w-[44px] min-h-[44px];
-  
+
   @media (min-width: 768px) {
     @apply min-w-0 min-h-0;
   }
 }
 
-/* Gemini Theme */
-body.theme-gemini {
+/* MyHR Theme */
+body.theme-myhr {
   .search-filter-container {
-    @apply glass-gemini-weak;
+    @apply glass-myhr-weak;
   }
-  
+
   .advanced-filters {
-    @apply glass-gemini;
+    @apply glass-myhr;
   }
-  
+
   .filter-toggle.active {
     filter: drop-shadow(0 0 4px rgba(var(--primary-rgb), 0.4));
   }

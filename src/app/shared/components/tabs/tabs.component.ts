@@ -22,7 +22,7 @@ export class TabsComponent {
   @Input() activeTab: string = '';
   @Input() ariaLabel?: string;
   @Output() activeTabChange = new EventEmitter<string>();
-  
+
   @ViewChildren('tabButton') tabButtons!: QueryList<ElementRef<HTMLButtonElement>>;
 
   selectTab(tabId: string): void {
@@ -83,9 +83,9 @@ export class TabsComponent {
       }, 0);
     }
   }
-  
+
   getTabClasses(tabId: string): string {
-    const base = 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-300 hover-lift-sm transition-smooth theme-gemini:text-white/70';
+    const base = 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-300 hover-lift-sm transition-smooth theme-myhr:text-white/70';
     const active = 'border-primary text-primary relative';
     return this.activeTab === tabId ? active : base;
   }

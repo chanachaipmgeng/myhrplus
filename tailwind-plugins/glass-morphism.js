@@ -1,8 +1,8 @@
 /**
  * Tailwind CSS Plugin: Glass Morphism
- * 
+ *
  * Provides utility classes for glass morphism effects
- * Supports light, dark, and gemini themes
+ * Supports light, dark, and myhr themes
  */
 
 const plugin = require('tailwindcss/plugin');
@@ -32,7 +32,7 @@ module.exports = plugin(function({ addUtilities, theme, addVariant }) {
       WebkitBackdropFilter: 'blur(8px)',
       boxShadow: '0 4px 16px 0 rgba(31, 38, 135, 0.2)',
     },
-    
+
     // Dark Mode
     '.glass-dark': {
       background: 'rgba(15, 23, 42, 0.25)',
@@ -55,23 +55,23 @@ module.exports = plugin(function({ addUtilities, theme, addVariant }) {
       WebkitBackdropFilter: 'blur(8px)',
       boxShadow: '0 4px 16px 0 rgba(0, 0, 0, 0.3)',
     },
-    
-    // Gemini Theme
-    '.glass-gemini': {
+
+    // MyHR Theme
+    '.glass-myhr': {
       background: 'rgba(15, 23, 42, 0.3)',
       border: '1px solid rgba(59, 130, 246, 0.3)',
       backdropFilter: 'blur(32px)',
       WebkitBackdropFilter: 'blur(32px)',
       boxShadow: '0 8px 32px 0 rgba(59, 130, 246, 0.2)',
     },
-    '.glass-gemini-strong': {
+    '.glass-myhr-strong': {
       background: 'rgba(15, 23, 42, 0.4)',
       border: '1px solid rgba(59, 130, 246, 0.4)',
       backdropFilter: 'blur(40px)',
       WebkitBackdropFilter: 'blur(40px)',
       boxShadow: '0 12px 48px 0 rgba(59, 130, 246, 0.3)',
     },
-    '.glass-gemini-weak': {
+    '.glass-myhr-weak': {
       background: 'rgba(15, 23, 42, 0.2)',
       border: '1px solid rgba(59, 130, 246, 0.2)',
       backdropFilter: 'blur(16px)',
@@ -89,10 +89,10 @@ module.exports = plugin(function({ addUtilities, theme, addVariant }) {
     });
   });
 
-  // Gemini theme variant
-  addVariant('theme-gemini', ({ modifySelectors, separator }) => {
+  // MyHR theme variant
+  addVariant('theme-myhr', ({ modifySelectors, separator }) => {
     modifySelectors(({ className }) => {
-      return `body.theme-gemini .${className}`;
+      return `body.theme-myhr .${className}`;
     });
   });
 });

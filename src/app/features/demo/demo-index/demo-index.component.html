@@ -4,15 +4,15 @@
       <span class="text-5xl md:text-4xl sm:text-3xl animate-bounce">🎨</span>
       <h1 class="text-4xl md:text-3xl sm:text-2xl font-bold m-0
                 text-gray-900 dark:text-gray-100
-                theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary
-                theme-gemini:bg-clip-text theme-gemini:text-transparent">
+                theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary
+                theme-myhr:bg-clip-text theme-myhr:text-transparent">
         Component Demo Showcase
       </h1>
     </div>
-    <p class="text-lg text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 max-w-2xl mx-auto leading-relaxed">
+    <p class="text-lg text-gray-600 dark:text-gray-400 theme-myhr:text-white/80 max-w-2xl mx-auto leading-relaxed">
       ตัวอย่างการใช้งาน Components ทั้งหมดพร้อมโค้ดตัวอย่างและ API Documentation
     </p>
-    <div class="mt-6 flex items-center justify-center gap-4 text-sm text-gray-500 dark:text-gray-400 theme-gemini:text-white/60">
+    <div class="mt-6 flex items-center justify-center gap-4 text-sm text-gray-500 dark:text-gray-400 theme-myhr:text-white/60">
       <span class="flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
         <span>{{ components.length }} Components</span>
@@ -28,16 +28,16 @@
   <div class="flex flex-col gap-12">
     @for (category of categories; track category) {
       <section class="mb-8">
-        <div class="flex items-center justify-between mb-6 pb-3 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30">
+        <div class="flex items-center justify-between mb-6 pb-3 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30">
           <h2 class="text-2xl font-semibold m-0
                      text-gray-800 dark:text-gray-200
-                     theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary
-                     theme-gemini:bg-clip-text theme-gemini:text-transparent">
+                     theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary
+                     theme-myhr:bg-clip-text theme-myhr:text-transparent">
             {{ category }}
           </h2>
           <span class="text-sm font-medium px-3 py-1 rounded-full
-                      bg-gray-100 dark:bg-gray-800 theme-gemini:bg-primary/20
-                      text-gray-600 dark:text-gray-400 theme-gemini:text-primary">
+                      bg-gray-100 dark:bg-gray-800 theme-myhr:bg-primary/20
+                      text-gray-600 dark:text-gray-400 theme-myhr:text-primary">
             {{ getComponentsByCategory(category).length }} components
           </span>
         </div>
@@ -53,17 +53,17 @@
                   <div class="text-5xl mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">{{ component.icon }}</div>
                   <h3 class="text-xl font-semibold mb-2
                              text-gray-900 dark:text-gray-100
-                             theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary
-                             theme-gemini:bg-clip-text theme-gemini:text-transparent
+                             theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary
+                             theme-myhr:bg-clip-text theme-myhr:text-transparent
                              transition-colors duration-200 group-hover:text-primary-600 dark:group-hover:text-primary-400">
                     {{ component.name }}
                   </h3>
-                  <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mb-4 flex-1 leading-relaxed">
+                  <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4 flex-1 leading-relaxed">
                     {{ component.description }}
                   </p>
                   <span class="text-sm font-medium
                               text-primary-600 dark:text-primary-400
-                              theme-gemini:text-primary theme-gemini:drop-shadow-[0_0_8px_rgba(var(--primary-rgb),0.5)]
+                              theme-myhr:text-primary theme-myhr:drop-shadow-[0_0_8px_rgba(var(--primary-rgb),0.5)]
                               mt-auto inline-flex items-center gap-1
                               transition-all duration-200 group-hover:gap-2">
                     View Demo

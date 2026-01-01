@@ -1,27 +1,27 @@
 <div class="w-full py-12">
   <div class="mb-8">
-    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Bar Rating Component Demo
     </h1>
-    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-myhr:text-white/80 leading-relaxed">
       Star rating component with customizable themes and interactive/readonly modes.
     </p>
   </div>
 
   <!-- Live Demo Section -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Live Demo
     </h2>
 
     <app-glass-card padding="p-6">
       <div class="space-y-6">
-        <div class="p-4 bg-yellow-50 dark:bg-yellow-900/20 theme-gemini:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-800 theme-gemini:border-yellow-700 rounded-lg">
-          <p class="text-yellow-800 dark:text-yellow-200 theme-gemini:text-yellow-300">
+        <div class="p-4 bg-yellow-50 dark:bg-yellow-900/20 theme-myhr:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-800 theme-myhr:border-yellow-700 rounded-lg">
+          <p class="text-yellow-800 dark:text-yellow-200 theme-myhr:text-yellow-300">
             <strong>Note:</strong> ngx-bar-rating package is not installed. Please install it first:
           </p>
-          <code class="block mt-2 p-2 bg-gray-100 dark:bg-gray-800 theme-gemini:bg-gray-900/50 rounded text-sm">
+          <code class="block mt-2 p-2 bg-gray-100 dark:bg-gray-800 theme-myhr:bg-gray-900/50 rounded text-sm">
             npm install ngx-bar-rating
           </code>
         </div>
@@ -33,30 +33,30 @@
             [max]="5"
             (rateChange)="onRatingChange($event)">
           </bar-rating>
-          <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mt-2">
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mt-2">
             Current rating: {{ rating1 }}/5
           </p>
         </div>
 
         <div>
-          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Readonly Rating</h3>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Readonly Rating</h3>
           <bar-rating
             [(rate)]="rating2"
             [max]="5"
             [readOnly]="true">
           </bar-rating>
-          <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mt-2">
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mt-2">
             Rating: {{ rating2 }}/5 (Readonly)
           </p>
         </div>
 
         <div>
-          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Custom Max Rating (10)</h3>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Custom Max Rating (10)</h3>
           <bar-rating
             [(rate)]="rating3"
             [max]="10">
           </bar-rating>
-          <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mt-2">
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mt-2">
             Current rating: {{ rating3 }}/10
           </p>
         </div>
@@ -67,15 +67,15 @@
 
   <!-- Basic Usage -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Basic Usage
     </h2>
 
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Rating</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic Rating</h3>
     <app-code-viewer [code]="basicExample" language="html" title="Basic Rating"></app-code-viewer>
 
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Readonly Rating</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Readonly Rating</h3>
     <app-code-viewer [code]="readonlyExample" language="html" title="Readonly Rating"></app-code-viewer>
   </section>
 </div>

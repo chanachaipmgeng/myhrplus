@@ -1,20 +1,20 @@
 <div class="w-full py-12">
   <div class="mb-8">
-    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Data Grid Component Demo
     </h1>
-    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-myhr:text-white/80 leading-relaxed">
       A comprehensive data grid component for displaying tabular data with Syncfusion integration and Glass Morphism styling.
     </p>
   </div>
 
   <!-- Live Demo -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Live Demo
     </h2>
-    
+
     <app-glass-card padding="p-6">
       <app-data-grid
         [dataSource]="gridData"
@@ -42,14 +42,14 @@
 
   <!-- Variants -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Variants
     </h2>
-    
+
     <!-- Basic Grid -->
     <div class="mb-8">
-      <h3 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Grid</h3>
+      <h3 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic Grid</h3>
       <app-glass-card padding="p-6">
         <app-data-grid
           [dataSource]="basicData"
@@ -65,12 +65,12 @@
         </app-data-grid>
       </app-glass-card>
     </div>
-    
+
     <!-- With Skeleton Loading -->
     <div class="mb-8">
-      <h3 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">With Skeleton Loading</h3>
+      <h3 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">With Skeleton Loading</h3>
       <div class="mb-4">
-        <app-glass-button 
+        <app-glass-button
           variant="primary"
           (clicked)="toggleLoading()">
           {{ isLoading() ? 'Loading...' : 'Show Skeleton Loading' }}
@@ -94,7 +94,7 @@
         }
       </div>
       <div class="mt-4 p-4 glass-card rounded-lg">
-        <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
+        <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">
           <strong>Best Practice:</strong> Use Skeleton Loader instead of Spinner when loading table data to show users the structure of the data that will be displayed.
         </p>
       </div>
@@ -103,11 +103,11 @@
 
   <!-- Basic Usage -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Basic Usage
     </h2>
-    
+
     <app-code-viewer [code]="basicExample" language="html" title="Basic Data Grid"></app-code-viewer>
 
     <app-code-viewer [code]="skeletonLoadingExample" language="html" title="Data Grid with Skeleton Loading"></app-code-viewer>

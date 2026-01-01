@@ -62,7 +62,7 @@
 
     /* Quick Toolbar */
     .e-quick-toolbar {
-      @apply glass-strong dark:glass-dark-strong theme-gemini:glass-gemini rounded-md shadow-lg;
+      @apply glass-strong dark:glass-dark-strong theme-myhr:glass-myhr rounded-md shadow-lg;
 
       .e-toolbar-items {
         .e-toolbar-item {
@@ -85,13 +85,13 @@
       }
     }
 
-    body.theme-gemini & .e-quick-toolbar {
+    body.theme-myhr & .e-quick-toolbar {
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(var(--primary-rgb), 0.2), 0 0 40px rgba(var(--primary-rgb), 0.1);
     }
 
     /* Dialog */
     .e-dialog {
-      @apply glass-strong dark:glass-dark-strong theme-gemini:glass-gemini rounded-xl;
+      @apply glass-strong dark:glass-dark-strong theme-myhr:glass-myhr rounded-xl;
 
       .e-dlg-header {
         @apply glass-weak dark:glass-dark-weak border-b border-white/10 dark:border-slate-700/30 p-4;

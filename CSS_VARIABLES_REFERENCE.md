@@ -50,7 +50,7 @@ color: var(--primary-color);
 }
 
 [data-theme='gemini'],
-body.theme-gemini {
+body.theme-myhr {
   --bg-base: #000000;
   --bg-gradient-start: #000000;
   --bg-gradient-mid: #0a0a0f;
@@ -78,7 +78,7 @@ body.theme-gemini {
 }
 
 [data-theme='gemini'],
-body.theme-gemini {
+body.theme-myhr {
   --text-primary: #ffffff;
   --text-secondary: #93c5fd;
   --text-muted: #60a5fa;
@@ -117,7 +117,7 @@ body.theme-gemini {
 ### Gemini Theme
 ```scss
 [data-theme='gemini'],
-body.theme-gemini {
+body.theme-myhr {
   --glass-bg: rgba(15, 23, 42, 0.9);
   --glass-bg-strong: rgba(15, 23, 42, 0.95);
   --glass-bg-weak: rgba(15, 23, 42, 0.7);
@@ -149,7 +149,7 @@ body.theme-gemini {
 }
 
 [data-theme='gemini'],
-body.theme-gemini {
+body.theme-myhr {
   --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 40px rgba(59, 130, 246, 0.1);
 }
 ```
@@ -183,7 +183,7 @@ body.theme-gemini {
 }
 
 [data-theme='gemini'],
-body.theme-gemini {
+body.theme-myhr {
   --sidebar-bg-start: rgba(15, 23, 42, 0.9);
   --sidebar-bg-end: rgba(30, 41, 59, 0.85);
   --sidebar-pattern-color: rgba(255, 255, 255, 0.05);
@@ -212,7 +212,7 @@ body.theme-gemini {
 }
 
 [data-theme='gemini'],
-body.theme-gemini {
+body.theme-myhr {
   --header-dropdown-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(59, 130, 246, 0.3), 0 0 80px rgba(59, 130, 246, 0.1);
 }
 ```
@@ -239,7 +239,7 @@ body.theme-gemini {
 }
 
 [data-theme='gemini'],
-body.theme-gemini {
+body.theme-myhr {
   --footer-bg-start: rgba(15, 23, 42, 0.8);
   --footer-bg-end: rgba(30, 41, 59, 0.7);
   --footer-border-color: rgba(59, 130, 246, 0.2);
@@ -290,7 +290,7 @@ body.theme-gemini {
 }
 
 [data-theme='gemini'],
-body.theme-gemini {
+body.theme-myhr {
   --form-input-bg: rgba(15, 23, 42, 0.4);
   --form-input-border: rgba(59, 130, 246, 0.3);
   --form-input-focus-border: rgba(59, 130, 246, 0.6);
@@ -328,7 +328,7 @@ body.theme-gemini {
 }
 
 [data-theme='gemini'],
-body.theme-gemini {
+body.theme-myhr {
   --upload-area-bg: rgba(15, 23, 42, 0.3);
   --upload-area-border: rgba(59, 130, 246, 0.2);
   --preview-item-bg: rgba(15, 23, 42, 0.3);
@@ -370,7 +370,7 @@ body.theme-gemini {
 }
 
 [data-theme='gemini'],
-body.theme-gemini {
+body.theme-myhr {
   --menu-item-hover-bg: rgba(255, 255, 255, 0.05);
   --menu-item-active-bg: rgba(59, 130, 246, 0.15);
   --menu-item-active-border: rgb(96, 165, 250);
@@ -386,7 +386,7 @@ body.theme-gemini {
 ### Gemini Theme Gradients
 ```scss
 [data-theme='gemini'],
-body.theme-gemini {
+body.theme-myhr {
   --gradient-primary-start: #93c5fd;
   --gradient-primary-mid: #60a5fa;
   --gradient-primary-end: #3b82f6;
@@ -429,7 +429,7 @@ body.theme-gemini {
   }
   
   [data-theme='gemini'] &,
-  body.theme-gemini & {
+  body.theme-myhr & {
     /* Gemini theme styles handled by CSS variables */
   }
 }

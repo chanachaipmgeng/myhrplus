@@ -428,13 +428,13 @@ export class ModelNameService {
 - **Utility Classes**: Prefer Tailwind utility classes over custom CSS
 - **Custom Classes**: Use `@layer components` for custom component classes
 - **Dark Mode**: Use `dark:` prefix for dark mode styles
-- **Gemini Theme**: Use `theme-gemini:` prefix for Gemini theme styles
+- **MyHR Theme**: Use `theme-myhr:` prefix for MyHR theme styles
 - **Responsive**: Use responsive prefixes (`sm:`, `md:`, `lg:`, `xl:`, `2xl:`)
   - **Standard Pattern**: Use `md:` and `lg:` for most cases, avoid unnecessary `sm:` breakpoints
   - **Mobile-First**: Always start with mobile (`grid-cols-1`) then add breakpoints (`md:grid-cols-2 lg:grid-cols-3`)
 - **Glassmorphism**: Use `.glass-card`, `.glass-button`, `.glass-input` classes
 - **Color Palette**: Use `gray-*` instead of `slate-*` for consistency
-- **Theme Variants**: Always include `theme-gemini:` variants for text, background, border, and hover states
+- **Theme Variants**: Always include `theme-myhr:` variants for text, background, border, and hover states
 - **Dynamic Primary Color**: **ALWAYS** use CSS variables for primary colors, never hardcoded values
   - **HTML/Template**: Use utility classes like `bg-primary`, `text-primary`, `border-primary`, `bg-gradient-primary`
   - **SCSS**: Use `rgba(var(--primary-rgb), ...)` or `rgb(var(--primary-rgb))` instead of hardcoded colors
@@ -455,9 +455,9 @@ export class ModelNameService {
   - **Never hardcode**: Avoid `#3b82f6`, `#0ea5e9`, `rgba(59, 130, 246, ...)`, or Tailwind `primary-*` classes
   - **Pattern for SCSS**: `rgba(var(--primary-rgb), 0.2)` for backgrounds, `rgb(var(--primary-rgb))` for solid colors
   - **Pattern for HTML**: Use utility classes like `bg-primary`, `text-primary`, `border-primary`
-- **Theme System**: 
+- **Theme System**:
   - **Theme Modes**: `light`, `dark`, `auto` (3 modes)
-  - **Theme Colors**: `gemini` (default), `blue`, `indigo`, `purple`, `green`, `orange`, `red`, `teal`, `pink` (9 colors)
+  - **Theme Colors**: `myhr` (default), `blue`, `indigo`, `purple`, `green`, `orange`, `red`, `teal`, `pink` (9 colors)
   - **Background Styles**: Sidebar, Header, Main-Layout สามารถเลือก style แยกกันได้
     - **Available Styles**: `white`, `dark`, `primary`, `primary-gradient` (4 styles per component)
     - **Usage**: `ThemeService.setSidebarStyle()`, `ThemeService.setHeaderStyle()`, `ThemeService.setMainLayoutStyle()`
@@ -481,7 +481,7 @@ export class ModelNameService {
 - **Glassmorphism**: Follow glassmorphism design patterns with backdrop-filter and transparency
 - **Background Patterns**: Use pattern overlays with subtle animations (`patternShimmer`) for visual depth
 - **Gradient Animations**: Use subtle gradient shifts (`gradientShift`) for Light/Dark mode backgrounds
-- **Theme Support**: Always support Light/Dark/Gemini themes with appropriate variants
+- **Theme Support**: Always support Light/Dark/MyHR themes with appropriate variants
 - **Dynamic Theming**: All components support dynamic primary color changes via `ThemeService`
 - **Background Style Options**: Sidebar, Header, และ Main-Layout รองรับ 4 background styles แยกกันได้
   - **White Style**: สีขาว/ดำโปร่งใส (light/dark mode)
@@ -695,10 +695,10 @@ export class ModelNameService {
 - **Language**: All demo components must be in English
 - **Structure**: All sections wrapped in `<section class="mb-12">`
 - **Content**: All demo content wrapped in `<app-glass-card padding="p-6">`
-- **Color Usage**: **MUST** use `theme-gemini:from-primary` instead of `theme-gemini:from-blue-400` for gradient text
-  - ✅ **Correct**: `theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary`
-  - ❌ **Wrong**: `theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500`
-- **Borders**: Use `theme-gemini:border-primary/30` instead of `theme-gemini:border-blue-500/30`
+- **Color Usage**: **MUST** use `theme-myhr:from-primary` instead of `theme-myhr:from-blue-400` for gradient text
+  - ✅ **Correct**: `theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary`
+  - ❌ **Wrong**: `theme-myhr:bg-gradient-to-r theme-myhr:from-blue-400 theme-myhr:via-cyan-400 theme-myhr:to-blue-500`
+- **Borders**: Use `theme-myhr:border-primary/30` instead of `theme-myhr:border-blue-500/30`
 - **Backgrounds**: Use `bg-primary`, `bg-primary/10`, `bg-primary/20` instead of `bg-blue-500`, `bg-blue-50`, `bg-blue-100`
 - **Text Colors**: Use `text-primary` instead of `text-blue-600`, `text-blue-500`, `text-blue-400`
 - **Pattern**:
@@ -838,7 +838,7 @@ export class ComponentNameDemoComponent {
 - [ ] **Mobile Touch Targets**: All buttons have `min-h-[44px]` and `min-w-[44px]`
 - [ ] **Accessibility**: All buttons have `type="button"`, ARIA labels, and keyboard navigation
 - [ ] **Color Usage**: No hardcoded blue/indigo colors (`bg-blue-*`, `text-blue-*`, `border-blue-*`) - Use `bg-primary`, `text-primary`, `border-primary` instead
-- [ ] **Demo Components**: All demo components use `theme-gemini:from-primary` instead of `theme-gemini:from-blue-400` for gradient text
+- [ ] **Demo Components**: All demo components use `theme-myhr:from-primary` instead of `theme-myhr:from-blue-400` for gradient text
 - [ ] **Responsive Breakpoints**: Use `md:` and `lg:` breakpoints, avoid unnecessary `sm:` breakpoints
 - [ ] **Omni-Search**: Uses `NAVIGATION_ITEMS` from `navigation.constant.ts` (not hardcoded menu data)
 - [ ] **Error Pages**: All error pages (404, 403, 500) use consistent full-screen layout with 2-column design
@@ -848,7 +848,7 @@ export class ComponentNameDemoComponent {
 ## Recent Updates
 
 ### Omni-Search and Error Pages Implementation (2024-12-30)
-- ✅ **Omni-Search Enhancement**: 
+- ✅ **Omni-Search Enhancement**:
   - ค้นหาจาก NAVIGATION_ITEMS แทน hardcode menu (ค้นหาได้ทุกเมนูในทุกโมดูล)
   - ค้นหาได้ทุก level (1-5) แบบ recursive
   - รองรับการแปล label (ภาษาไทยและอังกฤษ)
@@ -942,7 +942,7 @@ export class ComponentNameDemoComponent {
 
 ### Color Consistency (2024-12-20)
 - ✅ **Standardized**: Use `gray-*` instead of `slate-*` for consistency
-- ✅ **Theme Support**: Full `theme-gemini:` variant support across all components
+- ✅ **Theme Support**: Full `theme-myhr:` variant support across all components
 
 ### Architecture Improvements Complete (2024-12-29)
 - ✅ **Path Aliases Migration**: All 350+ files migrated to use `@core/`, `@shared/`, `@features/`, `@env/`
@@ -1011,16 +1011,32 @@ export class ComponentNameDemoComponent {
   - **ThemeService Methods**: `setSidebarStyle()`, `setHeaderStyle()`, `setMainLayoutStyle()`
   - **CSS Variables**: Dynamic CSS variables set with `!important` to override static styles
   - **Theme Toggle UI**: Compact accordion-based menu design
-- ✅ **Theme Toggle Component**: 
+- ✅ **Theme Toggle Component**:
   - Combined mode and color selection in single menu
   - Accordion sections for background styles (Sidebar, Header, Main-Layout)
   - Grid layout for theme mode (3 columns) and theme colors (3 columns)
   - Scrollable menu with max-height for better UX
 - ✅ **Documentation**: `THEME_SYSTEM_ANALYSIS_AND_IMPROVEMENTS.md` updated with background style options guide
 
+### Theme Renamed to MyHR (2025-01-01)
+- ✅ **Theme Name Change**: Default theme renamed from `gemini` to `myhr` across entire codebase
+  - **TypeScript**: `ThemeColor` type updated, `DEFAULT_THEME` uses `'myhr'`
+  - **Services**: `ThemeService` updated to use `'myhr'` as default
+  - **Components**: All theme-toggle components updated
+  - **Styles**: All SCSS files updated (`theme-gemini:` → `theme-myhr:`, `glass-gemini` → `glass-myhr`, `shadow-gemini` → `shadow-myhr`)
+  - **Tailwind Config**: All gemini-related classes renamed to myhr
+  - **Tailwind Plugins**: `glass-morphism.js` updated with `.glass-myhr` class
+  - **Animations**: All keyframes renamed (`geminiGradient` → `myhrGradient`, etc.)
+  - **CSS Variables**: All `--theme-gradient-gemini` → `--theme-gradient-myhr`
+  - **Documentation**: `.cursorrules` and `THEME_SYSTEM_ANALYSIS_AND_IMPROVEMENTS.md` updated
+- ✅ **Impact**:
+  - Consistent theme naming throughout the application
+  - Better alignment with project branding (MyHR)
+  - All components and styles properly updated
+
 ---
 
-**Last Updated**: 2024-12-31
-**Status**: ✅ All Architecture Improvements Completed + Translation Complete + Code Fixes Complete + Background Style Options Complete
+**Last Updated**: 2025-01-01
+**Status**: ✅ All Architecture Improvements Completed + Translation Complete + Code Fixes Complete + Background Style Options Complete + Theme Renamed to MyHR
 **Angular Version**: 17.0.0+
 **TypeScript Version**: 5.2.2+

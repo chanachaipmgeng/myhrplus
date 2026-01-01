@@ -6,19 +6,19 @@
         *ngIf="useIconComponent"
         [name]="iconName || icon || 'inbox'"
         [size]="iconSize === 'sm' ? 'md' : iconSize === 'md' ? 'lg' : 'xl'"
-        color="text-gray-400 dark:text-gray-500 theme-gemini:text-white/60"
+        color="text-gray-400 dark:text-gray-500 theme-myhr:text-white/60"
         class="block">
       </app-icon>
       <span *ngIf="!useIconComponent">{{ icon || defaultIcon }}</span>
     </div>
 
     <!-- Title -->
-    <h3 class="text-xl font-bold mb-2 text-slate-800 dark:text-slate-200 theme-gemini:bg-gradient-gemini-text theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h3 class="text-xl font-bold mb-2 text-slate-800 dark:text-slate-200 theme-myhr:bg-gradient-myhr-text theme-myhr:bg-clip-text theme-myhr:text-transparent">
       {{ displayTitle }}
     </h3>
 
     <!-- Description -->
-    <p class="text-slate-600 dark:text-slate-400 theme-gemini:text-white/70 mb-6 max-w-md">
+    <p class="text-slate-600 dark:text-slate-400 theme-myhr:text-white/70 mb-6 max-w-md">
       {{ displayDescription }}
     </p>
 

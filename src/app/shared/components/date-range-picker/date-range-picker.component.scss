@@ -19,12 +19,12 @@
 
 .preset-btn {
   @apply transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center p-2 rounded-md cursor-pointer;
-  
+
   &:hover {
     color: rgb(var(--primary-rgb)) !important;
     background-color: rgba(var(--primary-rgb), 0.1);
   }
-  
+
   @media (min-width: 768px) {
     @apply min-w-0 min-h-0;
   }
@@ -40,20 +40,20 @@
 
 .date-field {
   @apply w-full;
-  
+
   label {
     @apply block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300;
   }
-  
+
   input[type="date"] {
     @apply w-full min-h-[44px] px-10 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-slate-900 dark:text-slate-100 transition-smooth;
-    
+
     &:focus {
       outline: none;
       border-color: rgb(var(--primary-rgb));
       box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
     }
-    
+
     @media (min-width: 768px) {
       @apply min-h-0;
     }
@@ -62,10 +62,10 @@
 
 .picker-actions {
   @apply flex justify-end gap-2 pt-2 border-t border-white/20 dark:border-slate-700/30;
-  
+
   button {
     @apply min-w-[44px] min-h-[44px] px-4 py-2 inline-flex items-center justify-center gap-2;
-    
+
     @media (min-width: 768px) {
       @apply min-w-0 min-h-0;
     }
@@ -75,10 +75,10 @@
 /* Preset Menu */
 .absolute {
   @apply glass-strong dark:glass-dark-strong rounded-lg shadow-lg z-50 overflow-hidden;
-  
+
   button {
     @apply w-full px-4 py-2 text-left min-h-[44px] transition-colors;
-    
+
     &:hover {
       background-color: rgba(var(--primary-rgb), 0.1);
     }
@@ -90,22 +90,22 @@
   .date-range-picker {
     @apply p-3;
   }
-  
+
   .picker-header {
     @apply flex-col items-start gap-2 mb-3;
-    
+
     h3 {
       @apply text-base;
     }
   }
-  
+
   .date-inputs {
     @apply gap-3;
   }
-  
+
   .picker-actions {
     @apply flex-col w-full;
-    
+
     button {
       @apply w-full justify-center;
     }
@@ -117,24 +117,24 @@
   .date-inputs {
     @apply gap-3;
   }
-  
+
   .picker-header {
     @apply mb-3;
   }
 }
 
-/* Gemini Theme */
-body.theme-gemini {
+/* Myhr Theme */
+body.theme-myhr {
   .date-range-picker {
-    @apply glass-gemini-weak;
+    @apply glass-myhr-weak;
   }
-  
+
   .preset-btn:hover {
     filter: drop-shadow(0 0 4px rgba(var(--primary-rgb), 0.4));
   }
-  
+
   .absolute {
-    @apply glass-gemini shadow-gemini;
+    @apply glass-myhr shadow-myhr;
     border-color: rgba(var(--primary-rgb), 0.3);
   }
 }

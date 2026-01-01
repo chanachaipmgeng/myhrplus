@@ -94,8 +94,8 @@ $info-950: #172554;
 /* ============================================
    Colors - Theme Gradients
    ============================================ */
-/* Default Theme (Gemini) - Blue gradient สวยงาม */
-$theme-gradient-gemini: linear-gradient(135deg, #93c5fd, #60a5fa, #3b82f6);
+/* Default Theme (MyHR) - Blue gradient สวยงาม */
+$theme-gradient-myhr: linear-gradient(135deg, #93c5fd, #60a5fa, #3b82f6);
 /* Color Themes - Same style as default but different colors */
 /* Blue - สีน้ำเงินสดใส */
 $theme-gradient-blue: linear-gradient(135deg, #bfdbfe, #93c5fd, #3b82f6);
@@ -149,11 +149,11 @@ $bg-dark-gradient-start: #000000;
 $bg-dark-gradient-mid: #0a0a0f;
 $bg-dark-gradient-end: #1e293b;
 
-/* Gemini Theme Backgrounds */
-$bg-gemini-base: #000000;
-$bg-gemini-gradient-start: #93c5fd;
-$bg-gemini-gradient-mid: #60a5fa;
-$bg-gemini-gradient-end: #3b82f6;
+/* Myhr Theme Backgrounds */
+$bg-myhr-base: #000000;
+$bg-myhr-gradient-start: #93c5fd;
+$bg-myhr-gradient-mid: #60a5fa;
+$bg-myhr-gradient-end: #3b82f6;
 
 /* ============================================
    Colors - Glass Morphism
@@ -175,10 +175,10 @@ $glass-border-dark: rgba(51, 65, 85, 0.3);
 $glass-border-dark-strong: rgba(51, 65, 85, 0.4);
 $glass-border-dark-weak: rgba(51, 65, 85, 0.2);
 
-/* Gemini Theme Glass */
-$glass-bg-gemini: rgba(15, 23, 42, 0.9);
-$glass-border-gemini: rgba(59, 130, 246, 0.3);
-$glass-glow-gemini: rgba(59, 130, 246, 0.2);
+/* MyHR Theme Glass */
+$glass-bg-myhr: rgba(15, 23, 42, 0.9);
+$glass-border-myhr: rgba(59, 130, 246, 0.3);
+$glass-glow-myhr: rgba(59, 130, 246, 0.2);
 
 /* ============================================
    Typography - Font Families
@@ -331,10 +331,10 @@ $shadow-glass-dark: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
 $shadow-glass-dark-sm: 0 4px 16px 0 rgba(0, 0, 0, 0.3);
 $shadow-glass-dark-lg: 0 12px 48px 0 rgba(0, 0, 0, 0.7);
 
-/* Gemini Theme Shadows */
-$shadow-gemini: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 40px rgba(59, 130, 246, 0.1);
-$shadow-gemini-sm: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 30px rgba(59, 130, 246, 0.1);
-$shadow-gemini-lg: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(59, 130, 246, 0.4), 0 0 60px rgba(59, 130, 246, 0.2);
+/* MyHR Theme Shadows */
+$shadow-myhr: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 40px rgba(59, 130, 246, 0.1);
+$shadow-myhr-sm: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 30px rgba(59, 130, 246, 0.1);
+$shadow-myhr-lg: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(59, 130, 246, 0.4), 0 0 60px rgba(59, 130, 246, 0.2);
 
 /* ============================================
    Backdrop Blur
@@ -420,15 +420,15 @@ $transition-transform: transform $duration-200 $ease-in-out;
 $transition-shadow: box-shadow $duration-200 $ease-in-out;
 
 /* ============================================
-   Gemini Theme Specific
+   MyHR Theme Specific
    ============================================ */
-$gemini-bg: #000000;
-$gemini-gradient-start: #93c5fd;
-$gemini-gradient-mid: #60a5fa;
-$gemini-gradient-end: #3b82f6;
-$gemini-glow: rgba(59, 130, 246, 0.3);
-$gemini-glow-strong: rgba(59, 130, 246, 0.5);
-$gemini-glow-weak: rgba(59, 130, 246, 0.2);
+$myhr-bg: #000000;
+$myhr-gradient-start: #93c5fd;
+$myhr-gradient-mid: #60a5fa;
+$myhr-gradient-end: #3b82f6;
+$myhr-glow: rgba(59, 130, 246, 0.3);
+$myhr-glow-strong: rgba(59, 130, 246, 0.5);
+$myhr-glow-weak: rgba(59, 130, 246, 0.2);
 
 /* ============================================
    Helper Functions

@@ -36,7 +36,7 @@
   <app-header></app-header>
   <div class="flex flex-1 overflow-hidden">
     <ejs-sidebar>...</ejs-sidebar>
-    <div class="flex-1 overflow-y-auto p-8 md:p-4 bg-gray-50 dark:bg-gray-900 theme-gemini:bg-black">
+    <div class="flex-1 overflow-y-auto p-8 md:p-4 bg-gray-50 dark:bg-gray-900 theme-myhr:bg-black">
       <router-outlet></router-outlet>
     </div>
   </div>
@@ -87,7 +87,7 @@
 | **Container** | `min-h-screen` | `h-screen overflow-hidden` | ✅ |
 | **Structure** | Complex with background layers | Simple flex layout | ✅ |
 | **Sidebar Position** | Outside main-wrapper | Inside flex container | ✅ |
-| **Content Background** | Transparent | `bg-gray-50 dark:bg-gray-900 theme-gemini:bg-black` | ✅ |
+| **Content Background** | Transparent | `bg-gray-50 dark:bg-gray-900 theme-myhr:bg-black` | ✅ |
 | **Content Padding** | `p-4 md:p-6 lg:p-8` | `p-8 md:p-4` | ✅ |
 | **SCSS Size** | 222 lines | 150 lines | ✅ |
 | **Tailwind Usage** | Low | High | ✅ |

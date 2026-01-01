@@ -42,11 +42,11 @@
 ---
 
 ### 4. ขาด Theme Gemini Support (3 components)
-- ❌ Spreadsheet Demo - ไม่มี `theme-gemini:` variants
-- ❌ PDF Viewer Demo - ไม่มี `theme-gemini:` variants
-- ❌ Diagrams Demo - ไม่มี `theme-gemini:` variants
+- ❌ Spreadsheet Demo - ไม่มี `theme-myhr:` variants
+- ❌ PDF Viewer Demo - ไม่มี `theme-myhr:` variants
+- ❌ Diagrams Demo - ไม่มี `theme-myhr:` variants
 
-**ปัญหา**: ควรเพิ่ม theme-gemini support สำหรับ heading, text, และ borders
+**ปัญหา**: ควรเพิ่ม theme-myhr support สำหรับ heading, text, และ borders
 
 ---
 
@@ -73,7 +73,7 @@
 
 **ปัญหา**: ควรใช้ standard heading pattern:
 ```html
-<h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">
+<h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-myhr:bg-gradient-to-r theme-myhr:from-blue-400 theme-myhr:via-cyan-400 theme-myhr:to-blue-500 theme-myhr:bg-clip-text theme-myhr:text-transparent">
 ```
 
 ---
@@ -84,7 +84,7 @@
 1. ✅ Migrate SCSS @apply → Tailwind classes (4 components)
 2. ✅ Remove background gradients from SCSS (3 components)
 3. ✅ Update structure to standard pattern (3 components)
-4. ✅ Add theme-gemini support (3 components)
+4. ✅ Add theme-myhr support (3 components)
 
 ### Priority 2: Important (ควรแก้ไข) ✅ COMPLETED
 5. ✅ Replace text-slate-* with text-gray-* (10+ components)
@@ -116,7 +116,7 @@ All standardization tasks have been completed:
 3. ✅ **Structure Standardization**: All components use standard pattern
 4. ✅ **Theme Gemini Support**: Added to all components
 5. ✅ **Color Consistency**: All text-slate-* replaced with text-gray-*
-6. ✅ **Heading Styles**: All headings use standard pattern with theme-gemini support
+6. ✅ **Heading Styles**: All headings use standard pattern with theme-myhr support
 
 **Result**: All demo components are now standardized and follow the same patterns!
 

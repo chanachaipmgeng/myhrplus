@@ -55,7 +55,7 @@
 
 **คำแนะนำ**:
 - ใช้ Tailwind `dark:` variant แทน `.dark` class selector
-- เพิ่ม `theme-gemini:` variant สำหรับ Gemini theme
+- เพิ่ม `theme-myhr:` variant สำหรับ Gemini theme
 - ทดสอบ dark mode ในทุก demo component
 
 ---
@@ -153,7 +153,7 @@
 
 2. **Improve Dark Mode Support**
    - [ ] ใช้ Tailwind `dark:` variant แทน `.dark` class selector
-   - [ ] เพิ่ม `theme-gemini:` variant
+   - [ ] เพิ่ม `theme-myhr:` variant
    - [ ] ทดสอบ dark mode ในทุก component
 
 ### Priority 2: Medium Priority (ทำในสัปดาห์นี้)
@@ -203,7 +203,7 @@
 **Recommendations**:
 - ✅ Migrate ไปใช้ Tailwind classes
 - ✅ ใช้ `dark:` variant แทน `.dark` class selector
-- ✅ ใช้ `theme-gemini:` variant แทน SCSS mixins
+- ✅ ใช้ `theme-myhr:` variant แทน SCSS mixins
 
 ---
 
@@ -302,7 +302,7 @@
 #### ❌ Non-Compliant Areas
 - Tailwind Usage: ยังใช้ SCSS mixins
 - Dark Mode: ใช้ `.dark` class selector แทน `dark:` variant
-- Gemini Theme: ใช้ SCSS mixins แทน `theme-gemini:` variant
+- Gemini Theme: ใช้ SCSS mixins แทน `theme-myhr:` variant
 - Spacing: ใช้ design tokens แทน Tailwind spacing
 - Typography: ใช้ design tokens แทน Tailwind typography
 
@@ -372,7 +372,7 @@
 - [ ] ปรับ color contrast
 
 ### Gemini Theme Support
-- [ ] ใช้ `theme-gemini:` variant
+- [ ] ใช้ `theme-myhr:` variant
 - [ ] ทดสอบ Gemini theme ในทุก component
 - [ ] ปรับ gradient effects
 

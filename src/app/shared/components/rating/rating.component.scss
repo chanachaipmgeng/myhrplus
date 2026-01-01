@@ -11,21 +11,21 @@
 /* Component uses Tailwind classes directly in HTML */
 /* All styles handled by Tailwind utilities and plugins */
 
-/* Gemini Theme */
+/* MyHR Theme */
 /* Using Tailwind color utilities - keeping only complex filter effects */
-[data-theme='gemini'],
-body.theme-gemini {
+[data-theme='myhr'],
+body.theme-myhr {
   .text-yellow-400 {
     @apply glow-primary;
     filter: drop-shadow(0 0 4px rgba(var(--primary-rgb), 0.4));
   }
-  
+
   .text-red-500 {
     /* Using CSS variable for red color - fallback to hardcoded if not defined */
     filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.4));
   }
-  
-  /* Text colors handled by Tailwind theme-gemini: variants in HTML */
+
+  /* Text colors handled by Tailwind theme-myhr: variants in HTML */
   .text-slate-600,
   .dark .text-slate-400 {
     @apply text-white/70;

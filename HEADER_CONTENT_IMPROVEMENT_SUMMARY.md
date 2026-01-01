@@ -21,7 +21,7 @@
 
 #### Before:
 ```html
-<div class="flex-1 overflow-y-auto p-8 md:p-4 bg-gray-50 dark:bg-gray-900 theme-gemini:bg-black transition-all duration-500">
+<div class="flex-1 overflow-y-auto p-8 md:p-4 bg-gray-50 dark:bg-gray-900 theme-myhr:bg-black transition-all duration-500">
   <div class="animate-fade-in">
     <router-outlet></router-outlet>
   </div>
@@ -30,7 +30,7 @@
 
 #### After:
 ```html
-<div class="flex-1 overflow-y-auto p-8 md:p-4 bg-gray-50 dark:bg-gray-900 theme-gemini:bg-black">
+<div class="flex-1 overflow-y-auto p-8 md:p-4 bg-gray-50 dark:bg-gray-900 theme-myhr:bg-black">
   <router-outlet></router-outlet>
 </div>
 ```
@@ -49,7 +49,7 @@
 | Aspect | Before | After | Demo Layout | Status |
 |--------|--------|-------|-------------|--------|
 | **Padding** | `p-8 md:p-4` | `p-8 md:p-4` | `p-8 md:p-4` | ✅ เหมือนกัน |
-| **Background** | `bg-gray-50 dark:bg-gray-900 theme-gemini:bg-black` | `bg-gray-50 dark:bg-gray-900 theme-gemini:bg-black` | `bg-gray-50 dark:bg-gray-900 theme-gemini:bg-black` | ✅ เหมือนกัน |
+| **Background** | `bg-gray-50 dark:bg-gray-900 theme-myhr:bg-black` | `bg-gray-50 dark:bg-gray-900 theme-myhr:bg-black` | `bg-gray-50 dark:bg-gray-900 theme-myhr:bg-black` | ✅ เหมือนกัน |
 | **Overflow** | `overflow-y-auto` | `overflow-y-auto` | `overflow-y-auto` | ✅ เหมือนกัน |
 | **Transition** | `transition-all duration-500` | ❌ ไม่มี | ❌ ไม่มี | ✅ เหมือนกัน |
 | **Animation Wrapper** | `<div class="animate-fade-in">` | ❌ ไม่มี | ❌ ไม่มี | ✅ เหมือนกัน |
@@ -61,7 +61,7 @@
 | **Component** | `<app-header>` (separate component) | `<header>` (inline element) | ⚠️ ต่างกัน (เก็บไว้) |
 | **Positioning** | `fixed top-0 left-0 right-0 z-50` | `sticky top-0 z-[100]` | ⚠️ ต่างกัน (เก็บไว้) |
 | **Features** | Advanced (notifications, user menu) | Simple (menu, language, theme) | ⚠️ ต่างกัน (เก็บไว้) |
-| **Styling** | `glass-nav` + custom styles | `glass dark:glass-dark theme-gemini:glass-gemini` | ⚠️ ต่างกัน (เก็บไว้) |
+| **Styling** | `glass-nav` + custom styles | `glass dark:glass-dark theme-myhr:glass-gemini` | ⚠️ ต่างกัน (เก็บไว้) |
 
 **หมายเหตุ**: Header เก็บ structure และ features ไว้ เพราะ:
 - Main layout ต้องการ advanced features (notifications, user menu)
@@ -74,7 +74,7 @@
 
 ### ✅ Content Area (เหมือน Demo Layout)
 - Padding: `p-8 md:p-4`
-- Background: `bg-gray-50 dark:bg-gray-900 theme-gemini:bg-black`
+- Background: `bg-gray-50 dark:bg-gray-900 theme-myhr:bg-black`
 - Overflow: `overflow-y-auto`
 - ไม่มี transition และ animation wrapper
 

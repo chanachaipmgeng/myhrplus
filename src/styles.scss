@@ -65,7 +65,7 @@
   --glass-border-weak: rgba(255, 255, 255, 0.2);
 
   /* Theme Gradients */
-  --theme-gradient-gemini: #{$theme-gradient-gemini};
+  --theme-gradient-myhr: #{$theme-gradient-myhr};
   --theme-gradient-blue: #{$theme-gradient-blue};
   --theme-gradient-indigo: #{$theme-gradient-indigo};
   --theme-gradient-purple: #{$theme-gradient-purple};
@@ -109,9 +109,9 @@
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
 }
 
-/* Gemini Theme CSS Variables - Light Mode */
-[data-theme='gemini']:not(.dark),
-body.theme-gemini:not(.dark) {
+/* Myhr Theme CSS Variables - Light Mode */
+[data-theme='myhr']:not(.dark),
+body.theme-myhr:not(.dark) {
   --bg-base: #eff6ff;
   --bg-gradient-start: #dbeafe;
   --bg-gradient-mid: #bfdbfe;
@@ -122,7 +122,7 @@ body.theme-gemini:not(.dark) {
   --text-secondary: #3b82f6;
   --text-muted: #60a5fa;
 
-  /* Glass Morphism Colors (Gemini Light) - Using dynamic primary color */
+  /* Glass Morphism Colors (Myhr Light) - Using dynamic primary color */
   --glass-bg: rgba(255, 255, 255, 0.7);
   --glass-bg-strong: rgba(255, 255, 255, 0.85);
   --glass-bg-weak: rgba(255, 255, 255, 0.5);
@@ -132,7 +132,7 @@ body.theme-gemini:not(.dark) {
 
   --shadow-glass: 0 8px 32px rgba(59, 130, 246, 0.2), 0 0 0 1px rgba(var(--primary-rgb), 0.2), 0 0 40px rgba(var(--primary-rgb), 0.1);
 
-  /* Sidebar-specific Colors (Gemini Light) - Using primary color as background */
+  /* Sidebar-specific Colors (Myhr Light) - Using primary color as background */
   --sidebar-bg-start: rgba(var(--primary-rgb), 0.95);
   --sidebar-bg-end: rgba(var(--primary-rgb), 0.9);
   --sidebar-pattern-color: rgba(255, 255, 255, 0.1);
@@ -142,7 +142,7 @@ body.theme-gemini:not(.dark) {
   --sidebar-hover-bg: rgba(255, 255, 255, 0.15);
   --sidebar-indicator-color: #ffffff;
 
-  /* Header-specific CSS Variables (Gemini Light) - Using primary color as background */
+  /* Header-specific CSS Variables (Myhr Light) - Using primary color as background */
   --header-bg-start: rgba(var(--primary-rgb), 0.95);
   --header-bg-end: rgba(var(--primary-rgb), 0.9);
   --header-dropdown-shadow: 0 20px 60px rgba(59, 130, 246, 0.3), 0 0 0 1px rgba(var(--primary-rgb), 0.3), 0 0 80px rgba(var(--primary-rgb), 0.15);
@@ -157,26 +157,26 @@ body.theme-gemini:not(.dark) {
   --gradient-primary-hover-mid: rgba(var(--primary-rgb), 1);
   --gradient-primary-hover-end: rgba(var(--primary-rgb), 0.95);
 
-  /* Footer-specific CSS Variables (Gemini Light) - Using primary color */
+  /* Footer-specific CSS Variables (Myhr Light) - Using primary color */
   --footer-bg-start: rgba(var(--primary-rgb), 0.9);
   --footer-bg-end: rgba(var(--primary-rgb), 0.85);
   --footer-border-color: rgba(255, 255, 255, 0.3);
   --footer-text-color: rgba(255, 255, 255, 0.9);
 
-  /* Menu-specific CSS Variables (Gemini Light) - Using dynamic primary color */
+  /* Menu-specific CSS Variables (Myhr Light) - Using dynamic primary color */
   --menu-item-hover-bg: rgba(255, 255, 255, 0.15);
   --menu-item-active-bg: rgba(255, 255, 255, 0.25);
   --menu-item-active-border: #ffffff;
   --menu-item-active-text: #ffffff;
   --menu-item-children-border: rgba(255, 255, 255, 0.2);
 
-  /* Form-specific CSS Variables (Gemini Light) - Using dynamic primary color */
+  /* Form-specific CSS Variables (Myhr Light) - Using dynamic primary color */
   --form-input-bg: rgba(255, 255, 255, 0.6);
   --form-input-border: rgba(var(--primary-rgb), 0.4);
   --form-input-focus-border: rgba(var(--primary-rgb), 0.7);
   --form-label-focus-color: rgba(var(--primary-rgb), 0.9);
 
-  /* Upload/Preview-specific CSS Variables (Gemini Light) - Using dynamic primary color */
+  /* Upload/Preview-specific CSS Variables (Myhr Light) - Using dynamic primary color */
   --upload-area-bg: rgba(255, 255, 255, 0.5);
   --upload-area-border: rgba(var(--primary-rgb), 0.3);
   --preview-item-bg: rgba(255, 255, 255, 0.5);
@@ -184,9 +184,9 @@ body.theme-gemini:not(.dark) {
   --preview-image-bg: #ffffff;
 }
 
-/* Gemini Theme CSS Variables - Dark Mode */
-[data-theme='gemini'].dark,
-.dark body.theme-gemini {
+/* Myhr Theme CSS Variables - Dark Mode */
+[data-theme='myhr'].dark,
+.dark body.theme-myhr {
   --bg-base: #000000;
   --bg-gradient-start: #000000;
   --bg-gradient-mid: #0a0a0f;
@@ -197,7 +197,7 @@ body.theme-gemini:not(.dark) {
   --text-secondary: #93c5fd;
   --text-muted: #60a5fa;
 
-  /* Glass Morphism Colors (Gemini Dark) - Using dynamic primary color */
+  /* Glass Morphism Colors (Myhr Dark) - Using dynamic primary color */
   --glass-bg: rgba(15, 23, 42, 0.9);
   --glass-bg-strong: rgba(15, 23, 42, 0.95);
   --glass-bg-weak: rgba(15, 23, 42, 0.7);
@@ -207,7 +207,7 @@ body.theme-gemini:not(.dark) {
 
   --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(var(--primary-rgb), 0.2), 0 0 40px rgba(var(--primary-rgb), 0.1);
 
-  /* Sidebar-specific Colors (Gemini Dark) - Using dynamic primary color */
+  /* Sidebar-specific Colors (Myhr Dark) - Using dynamic primary color */
   --sidebar-bg-start: rgba(15, 23, 42, 0.9);
   --sidebar-bg-end: rgba(30, 41, 59, 0.85);
   --sidebar-pattern-color: rgba(255, 255, 255, 0.05);
@@ -225,33 +225,33 @@ body.theme-gemini:not(.dark) {
   --gradient-primary-hover-mid: rgba(var(--primary-rgb), 1);
   --gradient-primary-hover-end: rgba(var(--primary-rgb), 1);
 
-  /* Header-specific CSS Variables (Gemini Dark) - Using dynamic primary color */
+  /* Header-specific CSS Variables (Myhr Dark) - Using dynamic primary color */
   --header-bg-start: rgba(15, 23, 42, 0.9);
   --header-bg-end: rgba(30, 41, 59, 0.85);
   --header-dropdown-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(var(--primary-rgb), 0.3), 0 0 80px rgba(var(--primary-rgb), 0.1);
   --header-active-bg: rgba(var(--primary-rgb), 0.15);
   --header-unread-bg: rgba(var(--primary-rgb), 0.08);
 
-  /* Footer-specific CSS Variables (Gemini Dark) - Using dynamic primary color */
+  /* Footer-specific CSS Variables (Myhr Dark) - Using dynamic primary color */
   --footer-bg-start: rgba(15, 23, 42, 0.8);
   --footer-bg-end: rgba(30, 41, 59, 0.7);
   --footer-border-color: rgba(var(--primary-rgb), 0.2);
   --footer-text-color: rgba(255, 255, 255, 0.7);
 
-  /* Menu-specific CSS Variables (Gemini Dark) - Using dynamic primary color */
+  /* Menu-specific CSS Variables (Myhr Dark) - Using dynamic primary color */
   --menu-item-hover-bg: rgba(255, 255, 255, 0.05);
   --menu-item-active-bg: rgba(var(--primary-rgb), 0.15);
   --menu-item-active-border: rgb(var(--primary-rgb));
   --menu-item-active-text: rgb(var(--primary-rgb));
   --menu-item-children-border: rgba(255, 255, 255, 0.1);
 
-  /* Form-specific CSS Variables (Gemini Dark) - Using dynamic primary color */
+  /* Form-specific CSS Variables (Myhr Dark) - Using dynamic primary color */
   --form-input-bg: rgba(15, 23, 42, 0.4);
   --form-input-border: rgba(var(--primary-rgb), 0.3);
   --form-input-focus-border: rgba(var(--primary-rgb), 0.6);
   --form-label-focus-color: rgba(var(--primary-rgb), 0.9);
 
-  /* Upload/Preview-specific CSS Variables (Gemini Dark) - Using dynamic primary color */
+  /* Upload/Preview-specific CSS Variables (Myhr Dark) - Using dynamic primary color */
   --upload-area-bg: rgba(15, 23, 42, 0.3);
   --upload-area-border: rgba(var(--primary-rgb), 0.2);
   --preview-item-bg: rgba(15, 23, 42, 0.3);
@@ -413,8 +413,8 @@ body {
   overflow-x: hidden;
 }
 
-/* Gemini Theme - Light Mode Background */
-body.theme-gemini:not(.dark) {
+/* Myhr Theme - Light Mode Background */
+body.theme-myhr:not(.dark) {
   background: var(--theme-bg-gradient);
   background-attachment: fixed;
   color: var(--text-primary);
@@ -422,8 +422,8 @@ body.theme-gemini:not(.dark) {
   overflow-x: hidden;
 }
 
-/* Gemini Theme - Dark Mode Background */
-body.theme-gemini.dark {
+/* Myhr Theme - Dark Mode Background */
+body.theme-myhr.dark {
   background-color: #000000; /* Almost black background */
   background:
     radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
@@ -436,8 +436,8 @@ body.theme-gemini.dark {
   overflow-x: hidden;
 }
 
-/* Gemini Vector Background Pattern */
-body.theme-gemini::before {
+/* Myhr Vector Background Pattern */
+body.theme-myhr::before {
   content: '';
   position: fixed;
   top: 0;
@@ -448,18 +448,18 @@ body.theme-gemini::before {
     linear-gradient(45deg, transparent 30%, rgba(59, 130, 246, 0.03) 50%, transparent 70%),
     linear-gradient(-45deg, transparent 30%, rgba(37, 99, 235, 0.03) 50%, transparent 70%);
   background-size: 100px 100px, 80px 80px;
-  animation: geminiPattern 20s linear infinite;
+  animation: myhrPattern 20s linear infinite;
   pointer-events: none;
   z-index: 0;
 }
 
-@keyframes geminiPattern {
+@keyframes myhrPattern {
   0% { transform: translate(0, 0); }
   100% { transform: translate(100px, 100px); }
 }
 
-/* Gemini Animated Particles */
-body.theme-gemini::after {
+/* MyHR Animated Particles */
+body.theme-myhr::after {
   content: '';
   position: fixed;
   top: 0;
@@ -475,12 +475,12 @@ body.theme-gemini::after {
     radial-gradient(1px 1px at 30% 80%, rgba(59, 130, 246, 0.2), transparent);
   background-size: 200% 200%, 150% 150%, 100% 100%, 120% 120%, 180% 180%, 160% 160%;
   background-position: 0% 0%, 50% 50%, 25% 25%, 75% 75%, 10% 90%, 90% 10%;
-  animation: geminiParticles 15s ease-in-out infinite;
+  animation: myhrParticles 15s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
 }
 
-@keyframes geminiParticles {
+@keyframes myhrParticles {
   0%, 100% {
     background-position: 0% 0%, 50% 50%, 25% 25%, 75% 75%, 10% 90%, 90% 10%;
     opacity: 0.5;
@@ -896,13 +896,13 @@ h5, h6 {
   color: #ffffff;
 }
 
-/* Gemini 1.5 Typography - Gradient Text Effect */
-body.theme-gemini h1,
-body.theme-gemini h2,
-body.theme-gemini h3,
-body.theme-gemini h4,
-body.theme-gemini h5,
-body.theme-gemini h6 {
+/* Myhr 1.5 Typography - Gradient Text Effect */
+body.theme-myhr h1,
+body.theme-myhr h2,
+body.theme-myhr h3,
+body.theme-myhr h4,
+body.theme-myhr h5,
+body.theme-myhr h6 {
   background: linear-gradient(135deg,
     #93c5fd 0%,      /* Light blue */
     #60a5fa 30%,     /* Medium blue */
@@ -913,11 +913,11 @@ body.theme-gemini h6 {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   background-size: 200% 200%;
-  animation: geminiGradient 3s ease infinite;
+  animation: myhrGradient 3s ease infinite;
   position: relative;
 }
 
-@keyframes geminiGradient {
+@keyframes myhrGradient {
   0%, 100% {
     background-position: 0% 50%;
   }
@@ -926,16 +926,16 @@ body.theme-gemini h6 {
   }
 }
 
-/* Gemini Text Glow Effect */
-body.theme-gemini .gemini-text-glow {
+/* MyHR Text Glow Effect */
+body.theme-myhr .myhr-text-glow {
   text-shadow:
     0 0 10px rgba(147, 197, 253, 0.5),
     0 0 20px rgba(96, 165, 250, 0.3),
     0 0 30px rgba(59, 130, 246, 0.2);
-  animation: geminiGlow 2s ease-in-out infinite alternate;
+  animation: myhrGlow 2s ease-in-out infinite alternate;
 }
 
-@keyframes geminiGlow {
+@keyframes myhrGlow {
   from {
     text-shadow:
       0 0 10px rgba(147, 197, 253, 0.5),
@@ -1088,6 +1088,23 @@ code, pre, kbd, samp {
     background-color: rgb(var(--primary-rgb));
   }
 
+  /* MyHR Theme Shadows */
+  .shadow-myhr {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 40px rgba(59, 130, 246, 0.1);
+  }
+
+  .shadow-myhr-sm {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 30px rgba(59, 130, 246, 0.1);
+  }
+
+  .shadow-myhr-lg {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(59, 130, 246, 0.4), 0 0 60px rgba(59, 130, 246, 0.2);
+  }
+
+  .hover\:shadow-myhr:hover {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 40px rgba(59, 130, 246, 0.1);
+  }
+
   /* Primary Color Gradient Variants */
   .bg-gradient-primary {
     background: linear-gradient(135deg,
@@ -1151,9 +1168,9 @@ code, pre, kbd, samp {
     }
   }
 
-  /* Gemini 1.5 Glass Card - Using CSS Variables */
-  [data-theme='gemini'] .glass-card,
-  body.theme-gemini .glass-card {
+  /* Myhr 1.5 Glass Card - Using CSS Variables */
+  [data-theme='myhr'] .glass-card,
+  body.theme-myhr .glass-card {
     background: var(--glass-bg);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
@@ -1181,7 +1198,7 @@ code, pre, kbd, samp {
       background-size: 400% 400%;
       border-radius: 16px;
       z-index: -1;
-      animation: geminiGradient 3s ease infinite;
+      animation: myhrGradient 3s ease infinite;
       opacity: 0;
       transition: opacity 0.3s ease;
     }
@@ -1216,8 +1233,8 @@ code, pre, kbd, samp {
     box-shadow: var(--shadow-glass-dark);
   }
 
-  [data-theme='gemini'] .glass-card-strong,
-  body.theme-gemini .glass-card-strong {
+  [data-theme='myhr'] .glass-card-strong,
+  body.theme-myhr .glass-card-strong {
     background: var(--glass-bg);
     border-color: var(--glass-border-strong);
     box-shadow: var(--shadow-glass);
@@ -1237,8 +1254,8 @@ code, pre, kbd, samp {
     box-shadow: var(--shadow-sm);
   }
 
-  [data-theme='gemini'] .glass-card-weak,
-  body.theme-gemini .glass-card-weak {
+  [data-theme='myhr'] .glass-card-weak,
+  body.theme-myhr .glass-card-weak {
     background: var(--glass-bg-weak);
     border-color: var(--glass-border-weak);
     box-shadow: var(--shadow-sm);
@@ -1448,7 +1465,7 @@ code, pre, kbd, samp {
   body.theme-red:not(.dark) .glass-nav,
   body.theme-teal:not(.dark) .glass-nav,
   body.theme-pink:not(.dark) .glass-nav,
-  body.theme-gemini:not(.dark) .glass-nav {
+  body.theme-myhr:not(.dark) .glass-nav {
     background: linear-gradient(
       to bottom,
       var(--header-bg-start, rgba(var(--primary-rgb), 0.95)),
@@ -1470,7 +1487,7 @@ code, pre, kbd, samp {
   body.theme-red.dark .glass-nav,
   body.theme-teal.dark .glass-nav,
   body.theme-pink.dark .glass-nav,
-  body.theme-gemini.dark .glass-nav {
+  body.theme-myhr.dark .glass-nav {
     background: linear-gradient(
       to bottom,
       var(--header-bg-start, rgba(var(--primary-rgb), 0.9)),
@@ -1775,8 +1792,8 @@ code, pre, kbd, samp {
   }
 }
 
-/* Gemini 1.5 Specific Animations */
-@keyframes geminiFloat {
+/* MyHR Specific Animations */
+@keyframes myhrFloat {
   0%, 100% {
     transform: translateY(0px) rotate(0deg);
   }
@@ -1785,7 +1802,7 @@ code, pre, kbd, samp {
   }
 }
 
-@keyframes geminiPulse {
+@keyframes myhrPulse {
   0%, 100% {
     opacity: 0.6;
     transform: scale(1);
@@ -1796,7 +1813,7 @@ code, pre, kbd, samp {
   }
 }
 
-@keyframes geminiShimmer {
+@keyframes myhrShimmer {
   0% {
     background-position: -1000px 0;
   }
@@ -1805,7 +1822,7 @@ code, pre, kbd, samp {
   }
 }
 
-@keyframes geminiWave {
+@keyframes myhrWave {
   0%, 100% {
     transform: translateX(0) translateY(0);
   }
@@ -1908,9 +1925,9 @@ code, pre, kbd, samp {
   }
 }
 
-/* Gemini 1.5 Animation Classes (Optimized) */
-.animate-gemini-float {
-  animation: geminiFloat 6s ease-in-out infinite;
+/* MyHR Animation Classes (Optimized) */
+.animate-myhr-float {
+  animation: myhrFloat 6s ease-in-out infinite;
   will-change: transform;
 
   @media (prefers-reduced-motion: reduce) {
@@ -1919,8 +1936,8 @@ code, pre, kbd, samp {
   }
 }
 
-.animate-gemini-pulse {
-  animation: geminiPulse 2s ease-in-out infinite;
+.animate-myhr-pulse {
+  animation: myhrPulse 2s ease-in-out infinite;
   will-change: transform, opacity;
 
   @media (prefers-reduced-motion: reduce) {
@@ -1929,7 +1946,7 @@ code, pre, kbd, samp {
   }
 }
 
-.animate-gemini-shimmer {
+.animate-myhr-shimmer {
   background: linear-gradient(
     90deg,
     transparent 0%,
@@ -1937,15 +1954,15 @@ code, pre, kbd, samp {
     transparent 100%
   );
   background-size: 200% 100%;
-  animation: geminiShimmer 3s infinite;
+  animation: myhrShimmer 3s infinite;
 }
 
-.animate-gemini-wave {
-  animation: geminiWave 4s ease-in-out infinite;
+.animate-myhr-wave {
+  animation: myhrWave 4s ease-in-out infinite;
 }
 
-/* Gemini Vector Element */
-.gemini-vector {
+/* MyHR Vector Element */
+.myhr-vector {
   position: relative;
   display: inline-block;
 
@@ -1963,12 +1980,12 @@ code, pre, kbd, samp {
     );
     border-radius: 50%;
     filter: blur(20px);
-    animation: geminiPulse 3s ease-in-out infinite;
+    animation: myhrPulse 3s ease-in-out infinite;
     z-index: -1;
   }
 }
 
-/* Component-specific Gemini theme styles moved to component SCSS files */
+/* Component-specific Myhr theme styles moved to component SCSS files */
 /* See: statistics-card.component.scss, empty-state.component.scss, glass-button.component.scss */
 /* This improves component encapsulation and maintainability */
 

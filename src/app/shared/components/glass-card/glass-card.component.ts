@@ -34,12 +34,12 @@ export class GlassCardComponent {
         ? 'glass-weak'
         : 'glass';
 
-      // Gemini theme support - use conditional classes
+      // Myhr theme support - use conditional classes
       geminiClasses = this.variant === 'strong'
-        ? 'theme-gemini:glass-gemini-strong theme-gemini:shadow-gemini-lg'
+        ? 'theme-myhr:glass-myhr-strong theme-myhr:shadow-myhr-lg'
         : this.variant === 'weak'
-        ? 'theme-gemini:glass-gemini-weak theme-gemini:shadow-gemini-sm'
-        : 'theme-gemini:glass-gemini theme-gemini:shadow-gemini';
+        ? 'theme-myhr:glass-myhr-weak theme-myhr:shadow-myhr-sm'
+        : 'theme-myhr:glass-myhr theme-myhr:shadow-myhr';
     }
 
     // Base classes with hover effect and transitions

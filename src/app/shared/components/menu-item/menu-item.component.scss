@@ -6,9 +6,9 @@
 
     &.active-item {
       @apply bg-blue-500/20 dark:bg-blue-500/30 border-l-2 border-blue-500;
-      
-      // Gemini theme variant (cannot use in @apply)
-      body.theme-gemini & {
+
+      // Myhr theme variant (cannot use in @apply)
+      body.theme-myhr & {
         @apply bg-blue-500/20;
       }
     }
@@ -32,9 +32,9 @@
 
   .nested-children {
     @apply ml-2 border-l border-gray-300/20 dark:border-gray-700/30;
-    
-    // Gemini theme variant
-    body.theme-gemini & {
+
+    // Myhr theme variant
+    body.theme-myhr & {
       @apply border-white/10;
     }
   }

@@ -35,7 +35,7 @@
       }
     }
 
-    body.theme-gemini & .e-de-toolbar {
+    body.theme-myhr & .e-de-toolbar {
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(var(--primary-rgb), 0.2), 0 0 30px rgba(var(--primary-rgb), 0.1);
     }
 
@@ -65,7 +65,7 @@
       @apply glass-weak dark:glass-dark-weak border-t border-white/10 dark:border-slate-700/30 p-2 text-gray-700 dark:text-gray-300;
     }
 
-    body.theme-gemini & .e-de-statusbar {
+    body.theme-myhr & .e-de-statusbar {
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(var(--primary-rgb), 0.2), 0 0 30px rgba(var(--primary-rgb), 0.1);
     }
 

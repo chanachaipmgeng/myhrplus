@@ -10,16 +10,16 @@
 :host ::ng-deep .cal-month-view,
 :host ::ng-deep .cal-week-view,
 :host ::ng-deep .cal-day-view {
-  @apply glass dark:glass-dark theme-gemini:glass-gemini rounded-xl;
+  @apply glass dark:glass-dark theme-myhr:glass-myhr rounded-xl;
   border-color: rgba(var(--primary-rgb), 0.2);
 }
 
-[data-theme='gemini'] :host ::ng-deep .cal-month-view,
-[data-theme='gemini'] :host ::ng-deep .cal-week-view,
-[data-theme='gemini'] :host ::ng-deep .cal-day-view,
-body.theme-gemini :host ::ng-deep .cal-month-view,
-body.theme-gemini :host ::ng-deep .cal-week-view,
-body.theme-gemini :host ::ng-deep .cal-day-view {
+[data-theme='myhr'] :host ::ng-deep .cal-month-view,
+[data-theme='myhr'] :host ::ng-deep .cal-week-view,
+[data-theme='myhr'] :host ::ng-deep .cal-day-view,
+body.theme-myhr :host ::ng-deep .cal-month-view,
+body.theme-myhr :host ::ng-deep .cal-week-view,
+body.theme-myhr :host ::ng-deep .cal-day-view {
   border-color: rgba(var(--primary-rgb), 0.3);
 }
 
@@ -27,8 +27,8 @@ body.theme-gemini :host ::ng-deep .cal-day-view {
   @apply bg-gray-700/80 dark:bg-gray-800/80 text-gray-100 dark:text-gray-200 p-3 border-b border-gray-600/50 dark:border-gray-700/50;
 }
 
-[data-theme='gemini'] :host ::ng-deep .cal-header,
-body.theme-gemini :host ::ng-deep .cal-header {
+[data-theme='myhr'] :host ::ng-deep .cal-header,
+body.theme-myhr :host ::ng-deep .cal-header {
   @apply bg-clip-text text-transparent;
   /* Using CSS Variables for gradient */
   background: linear-gradient(to right,
@@ -63,8 +63,8 @@ body.theme-gemini :host ::ng-deep .cal-header {
   @apply text-gray-300 dark:text-gray-300 font-medium;
 }
 
-[data-theme='gemini'] :host ::ng-deep .cal-day-number,
-body.theme-gemini :host ::ng-deep .cal-day-number {
+[data-theme='myhr'] :host ::ng-deep .cal-day-number,
+body.theme-myhr :host ::ng-deep .cal-day-number {
   @apply bg-clip-text text-transparent;
   /* Using CSS Variables for gradient */
   background: linear-gradient(to right,
@@ -80,9 +80,9 @@ body.theme-gemini :host ::ng-deep .cal-day-number {
   border: 2px solid rgb(var(--primary-rgb));
 }
 
-[data-theme='gemini'] :host ::ng-deep .cal-today,
-body.theme-gemini :host ::ng-deep .cal-today {
-  @apply shadow-gemini-sm;
+[data-theme='myhr'] :host ::ng-deep .cal-today,
+body.theme-myhr :host ::ng-deep .cal-today {
+  @apply shadow-myhr-sm;
   background-color: rgba(var(--primary-rgb), 0.3);
   border-color: var(--primary-color);
 }
@@ -94,15 +94,15 @@ body.theme-gemini :host ::ng-deep .cal-today {
 :host ::ng-deep .cal-event {
   background-color: rgb(var(--primary-rgb));
   @apply text-white rounded-md px-2 py-1 text-sm overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer transition-smooth hover:scale-105;
-  
+
   &:hover {
     background-color: rgba(var(--primary-rgb), 0.9);
   }
 }
 
-[data-theme='gemini'] :host ::ng-deep .cal-event,
-body.theme-gemini :host ::ng-deep .cal-event {
-  @apply shadow-gemini-sm hover:shadow-gemini;
+[data-theme='myhr'] :host ::ng-deep .cal-event,
+body.theme-myhr :host ::ng-deep .cal-event {
+  @apply shadow-myhr-sm hover:shadow-myhr;
   /* Using CSS Variables for gradient */
   background: linear-gradient(to bottom right,
     rgb(37, 99, 235),

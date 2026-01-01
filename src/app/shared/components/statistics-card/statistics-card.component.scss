@@ -11,10 +11,10 @@
 /* Component uses Tailwind classes directly in HTML */
 /* All styles handled by Tailwind utilities and plugins */
 
-/* Gemini 1.5 Theme - Statistics Card */
+/* Myhr 1.5 Theme - Statistics Card */
 /* Moved from global styles.scss to improve encapsulation */
-[data-theme='gemini'] :host,
-body.theme-gemini :host {
+[data-theme='myhr'] :host,
+body.theme-myhr :host {
   ::ng-deep .glass-card {
     border: 1px solid var(--glass-border) !important;
     box-shadow:

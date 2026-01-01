@@ -27,7 +27,7 @@
     </ejs-sidebar>
     
     <!-- Content Area: flex-1 overflow-y-auto with background -->
-    <div class="flex-1 overflow-y-auto p-8 md:p-4 bg-gray-50 dark:bg-gray-900 theme-gemini:bg-black">
+    <div class="flex-1 overflow-y-auto p-8 md:p-4 bg-gray-50 dark:bg-gray-900 theme-myhr:bg-black">
       <router-outlet></router-outlet>
     </div>
   </div>
@@ -68,7 +68,7 @@
 | **Container** | `flex flex-col h-screen overflow-hidden` | `w-full overflow-x-hidden relative min-h-screen` | ✅ ใช้ `h-screen overflow-hidden` |
 | **Header** | `sticky top-0 z-[100]` | `fixed` (ใน header component) | ✅ ใช้ `sticky` แทน `fixed` |
 | **Sidebar** | Width: `280px`, Always closed | Width: `368px`, Auto-open on desktop | ⚠️ เก็บ auto-open แต่ปรับ width |
-| **Content Area** | `bg-gray-50 dark:bg-gray-900 theme-gemini:bg-black` | `transparent` (inherits from body) | ✅ เพิ่ม background colors |
+| **Content Area** | `bg-gray-50 dark:bg-gray-900 theme-myhr:bg-black` | `transparent` (inherits from body) | ✅ เพิ่ม background colors |
 | **Styling** | Mostly Tailwind classes | Mostly SCSS | ✅ ใช้ Tailwind มากขึ้น |
 | **Structure** | Simple flex layout | Complex with background layers | ✅ ลดความซับซ้อน |
 
@@ -105,7 +105,7 @@
 - ไม่มี background color ที่ชัดเจน
 
 **แก้ไข**:
-- เพิ่ม `bg-gray-50 dark:bg-gray-900 theme-gemini:bg-black` เหมือน demo-layout
+- เพิ่ม `bg-gray-50 dark:bg-gray-900 theme-myhr:bg-black` เหมือน demo-layout
 - เก็บ transparent option สำหรับ ESS mode
 
 ### 4. ✅ ใช้ Tailwind Classes มากขึ้น
@@ -194,7 +194,7 @@
               class="sticky top-0 z-[100]"></app-header>
   <div class="flex flex-1 overflow-hidden">
     <ejs-sidebar>...</ejs-sidebar>
-    <div class="flex-1 overflow-y-auto p-8 md:p-4 bg-gray-50 dark:bg-gray-900 theme-gemini:bg-black">
+    <div class="flex-1 overflow-y-auto p-8 md:p-4 bg-gray-50 dark:bg-gray-900 theme-myhr:bg-black">
       <router-outlet></router-outlet>
     </div>
   </div>

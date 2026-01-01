@@ -38,7 +38,7 @@
       }
     }
 
-    /* Gemini theme handled by mixin */
+    /* Myhr theme handled by mixin */
 
     /* Grid Content */
     .e-gridcontent {
@@ -67,7 +67,7 @@
       }
     }
 
-    body.theme-gemini & .e-row.e-selected {
+    body.theme-myhr & .e-row.e-selected {
       box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.3);
     }
 
@@ -103,12 +103,12 @@
 
     /* Filter Dialog */
     .e-filter-popup {
-      @apply glass-strong dark:glass-dark-strong theme-gemini:glass-gemini rounded-md;
+      @apply glass-strong dark:glass-dark-strong theme-myhr:glass-myhr rounded-md;
     }
 
     /* Edit Dialog */
     .e-dialog {
-      @apply glass-strong dark:glass-dark-strong theme-gemini:glass-gemini rounded-xl;
+      @apply glass-strong dark:glass-dark-strong theme-myhr:glass-myhr rounded-xl;
     }
   }
 }

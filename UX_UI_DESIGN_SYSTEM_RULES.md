@@ -48,7 +48,7 @@
 ### 2. Glass Morphism
 - ✅ ใช้ Tailwind classes: `glass`, `glass-strong`, `glass-weak`, `glass-gemini`
 - ✅ ใช้ Dark Mode: `dark:glass-dark`, `dark:glass-dark-strong`, `dark:glass-dark-weak`
-- ✅ ใช้ Gemini Theme: `theme-gemini:glass-gemini`, `theme-gemini:glass-gemini-strong`
+- ✅ ใช้ Gemini Theme: `theme-myhr:glass-gemini`, `theme-myhr:glass-gemini-strong`
 - ✅ ใช้ Glass Components (`glass-card`, `glass-button`, `glass-input`)
 - ✅ รองรับ Dark Mode และ Gemini Theme
 
@@ -452,9 +452,9 @@ For complete guidelines, see `DASHBOARD_WORKSPACE_STANDARDIZATION.md`.
 #### Gray Scale (Preferred over Slate)
 ```html
 <!-- Text Colors - Use gray-* instead of slate-* for consistency -->
-<p class="text-gray-900 dark:text-gray-100 theme-gemini:text-white/90">Primary text</p>
-<p class="text-gray-700 dark:text-gray-300 theme-gemini:text-white/80">Secondary text</p>
-<p class="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70">Tertiary text</p>
+<p class="text-gray-900 dark:text-gray-100 theme-myhr:text-white/90">Primary text</p>
+<p class="text-gray-700 dark:text-gray-300 theme-myhr:text-white/80">Secondary text</p>
+<p class="text-gray-500 dark:text-gray-400 theme-myhr:text-white/70">Tertiary text</p>
 ```
 
 ### Typography (Tailwind Classes)
@@ -492,13 +492,13 @@ For complete guidelines, see `DASHBOARD_WORKSPACE_STANDARDIZATION.md`.
 #### Usage in HTML
 ```html
 <!-- Headings - Use gray-* instead of slate-* -->
-<h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100 theme-gemini:text-white/90">Heading 1</h1>
-<h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 theme-gemini:text-white/90">Heading 2</h2>
-<h3 class="text-xl font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/80">Heading 3</h3>
+<h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100 theme-myhr:text-white/90">Heading 1</h1>
+<h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 theme-myhr:text-white/90">Heading 2</h2>
+<h3 class="text-xl font-medium text-gray-700 dark:text-gray-300 theme-myhr:text-white/80">Heading 3</h3>
 
 <!-- Body Text -->
-<p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80">Body text</p>
-<p class="text-sm text-gray-500 dark:text-gray-500 theme-gemini:text-white/70">Small text</p>
+<p class="text-base text-gray-600 dark:text-gray-400 theme-myhr:text-white/80">Body text</p>
+<p class="text-sm text-gray-500 dark:text-gray-500 theme-myhr:text-white/70">Small text</p>
 ```
 
 ---
@@ -929,7 +929,7 @@ export class FeatureNameComponent implements OnInit {
 }
 
 /* Gemini Theme */
-body.theme-gemini .feature-content {
+body.theme-myhr .feature-content {
   @include glass-gemini('default');
 }
 ```

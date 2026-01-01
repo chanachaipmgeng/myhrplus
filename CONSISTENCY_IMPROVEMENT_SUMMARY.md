@@ -44,7 +44,7 @@
 ### 3. Theme Support
 - ✅ Light mode support
 - ✅ Dark mode support (`.dark`)
-- ✅ Gemini theme support (`body.theme-gemini`)
+- ✅ Gemini theme support (`body.theme-myhr`)
 
 ### 4. Responsive Design
 - ✅ ใช้ `@include respond-to()` และ `@include respond-to-down()`
@@ -105,7 +105,7 @@
 
 ```scss
 // statistics-grid.component.scss
-body.theme-gemini {
+body.theme-myhr {
   .statistics-grid {
     gap: $spacing-6;
     

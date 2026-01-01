@@ -1,7 +1,7 @@
 <div class="pagination-container" [class.disabled]="disabled">
   <!-- Total Items Display -->
   <div *ngIf="showTotalItems && totalItems > 0" class="pagination-info">
-    <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
+    <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">
       Showing {{ startItem }}-{{ endItem }} of {{ totalItems }}
     </span>
   </div>
@@ -85,7 +85,7 @@
 
   <!-- Page Size Selector -->
   <div *ngIf="showPageSizeSelector" class="pagination-page-size">
-    <label class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70 mr-2">
+    <label class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mr-2">
       Items per page:
     </label>
     <select

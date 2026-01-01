@@ -15,26 +15,26 @@
 - ✅ แทนที่ `text-slate-*` → `text-gray-*` (15+ instances)
 - ✅ แทนที่ `bg-slate-*` → `bg-gray-*` (10+ instances)
 - ✅ แทนที่ `border-slate-*` → `border-gray-*` (8+ instances)
-- ✅ เพิ่ม `theme-gemini:` variants สำหรับ:
-  - Text colors (`theme-gemini:text-white/90`, `theme-gemini:text-white/80`)
-  - Background colors (`theme-gemini:bg-gray-900/30`, `theme-gemini:bg-white/10`)
-  - Border colors (`theme-gemini:border-blue-500/30`)
-  - Hover states (`theme-gemini:hover:bg-white/20`)
-  - App title gradient (`theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400...`)
+- ✅ เพิ่ม `theme-myhr:` variants สำหรับ:
+  - Text colors (`theme-myhr:text-white/90`, `theme-myhr:text-white/80`)
+  - Background colors (`theme-myhr:bg-gray-900/30`, `theme-myhr:bg-white/10`)
+  - Border colors (`theme-myhr:border-blue-500/30`)
+  - Hover states (`theme-myhr:hover:bg-white/20`)
+  - App title gradient (`theme-myhr:bg-gradient-to-r theme-myhr:from-blue-400...`)
 
 #### 2. Footer Component
 - ✅ แทนที่ `text-slate-*` → `text-gray-*` (3 instances)
 - ✅ แทนที่ `bg-slate-*` → `bg-gray-*` (2 instances)
 - ✅ แทนที่ `border-slate-*` → `border-gray-*` (1 instance)
-- ✅ เพิ่ม `theme-gemini:` variants สำหรับ:
-  - Text colors (`theme-gemini:text-white/80`, `theme-gemini:text-white/70`)
-  - Background colors (`theme-gemini:bg-gray-900/30`)
-  - Border colors (`theme-gemini:border-blue-500/30`)
+- ✅ เพิ่ม `theme-myhr:` variants สำหรับ:
+  - Text colors (`theme-myhr:text-white/80`, `theme-myhr:text-white/70`)
+  - Background colors (`theme-myhr:bg-gray-900/30`)
+  - Border colors (`theme-myhr:border-blue-500/30`)
 
 #### 3. Sidebar Component
 - ✅ แทนที่ `text-slate-*` → `text-gray-*` (7 instances)
-- ✅ เพิ่ม `theme-gemini:` variants สำหรับ:
-  - Icon colors (`theme-gemini:text-white/70`, `theme-gemini:text-white/60`)
+- ✅ เพิ่ม `theme-myhr:` variants สำหรับ:
+  - Icon colors (`theme-myhr:text-white/70`, `theme-myhr:text-white/60`)
   - Empty state icons
 
 #### 4. Glass Nav Class
@@ -56,9 +56,9 @@
 
 **After**:
 ```html
-<span class="text-gray-800 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-blue-400 theme-gemini:via-cyan-400 theme-gemini:to-blue-500 theme-gemini:bg-clip-text theme-gemini:text-transparent">Title</span>
-<div class="bg-gray-50 dark:bg-gray-900 theme-gemini:bg-white/10">Content</div>
-<div class="border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30">Border</div>
+<span class="text-gray-800 dark:text-gray-100 theme-myhr:bg-gradient-to-r theme-myhr:from-blue-400 theme-myhr:via-cyan-400 theme-myhr:to-blue-500 theme-myhr:bg-clip-text theme-myhr:text-transparent">Title</span>
+<div class="bg-gray-50 dark:bg-gray-900 theme-myhr:bg-white/10">Content</div>
+<div class="border-gray-200 dark:border-gray-700 theme-myhr:border-blue-500/30">Border</div>
 ```
 
 ### Footer Component
@@ -70,8 +70,8 @@
 
 **After**:
 ```html
-<span class="text-gray-600 dark:text-gray-400 theme-gemini:text-white/80">Copyright</span>
-<footer class="... dark:!bg-gray-900/20 theme-gemini:bg-gray-900/30 ... dark:border-gray-700/30 theme-gemini:border-blue-500/30 ...">
+<span class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/80">Copyright</span>
+<footer class="... dark:!bg-gray-900/20 theme-myhr:bg-gray-900/30 ... dark:border-gray-700/30 theme-myhr:border-blue-500/30 ...">
 ```
 
 ### Sidebar Component
@@ -82,7 +82,7 @@
 
 **After**:
 ```html
-<app-icon name="search" color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70"></app-icon>
+<app-icon name="search" color="text-gray-500 dark:text-gray-400 theme-myhr:text-white/70"></app-icon>
 ```
 
 ---
@@ -93,17 +93,17 @@
 - ✅ แทนที่ `text-slate-*` → `text-gray-*` (15+ instances)
 - ✅ แทนที่ `bg-slate-*` → `bg-gray-*` (10+ instances)
 - ✅ แทนที่ `border-slate-*` → `border-gray-*` (8+ instances)
-- ✅ เพิ่ม `theme-gemini:` variants (20+ instances)
+- ✅ เพิ่ม `theme-myhr:` variants (20+ instances)
 
 ### 2. `src/app/layout/footer/footer.component.html`
 - ✅ แทนที่ `text-slate-*` → `text-gray-*` (3 instances)
 - ✅ แทนที่ `bg-slate-*` → `bg-gray-*` (2 instances)
 - ✅ แทนที่ `border-slate-*` → `border-gray-*` (1 instance)
-- ✅ เพิ่ม `theme-gemini:` variants (5 instances)
+- ✅ เพิ่ม `theme-myhr:` variants (5 instances)
 
 ### 3. `src/app/layout/sidebar/sidebar.component.html`
 - ✅ แทนที่ `text-slate-*` → `text-gray-*` (7 instances)
-- ✅ เพิ่ม `theme-gemini:` variants (7 instances)
+- ✅ เพิ่ม `theme-myhr:` variants (7 instances)
 
 ---
 
@@ -111,7 +111,7 @@
 
 ### ✅ Completed
 - **Color Consistency**: เปลี่ยน slate → gray ครบถ้วนแล้ว
-- **Theme Gemini Support**: เพิ่ม theme-gemini variants ครบถ้วนแล้ว
+- **Theme Gemini Support**: เพิ่ม theme-myhr variants ครบถ้วนแล้ว
 - **Standards Compliance**: ตรงตาม UX/UI Design System Rules แล้ว
 - **Glass Nav Class**: ตรวจสอบแล้ว มีใน styles.scss
 
@@ -132,13 +132,13 @@
 - [x] Replace `text-slate-*` with `text-gray-*` in Header
 - [x] Replace `bg-slate-*` with `bg-gray-*` in Header
 - [x] Replace `border-slate-*` with `border-gray-*` in Header
-- [x] Add `theme-gemini:` variants in Header
+- [x] Add `theme-myhr:` variants in Header
 - [x] Replace `text-slate-*` with `text-gray-*` in Footer
 - [x] Replace `bg-slate-*` with `bg-gray-*` in Footer
 - [x] Replace `border-slate-*` with `border-gray-*` in Footer
-- [x] Add `theme-gemini:` variants in Footer
+- [x] Add `theme-myhr:` variants in Footer
 - [x] Replace `text-slate-*` with `text-gray-*` in Sidebar
-- [x] Add `theme-gemini:` variants in Sidebar
+- [x] Add `theme-myhr:` variants in Sidebar
 - [x] Verify `glass-nav` class exists
 
 ---
@@ -148,12 +148,12 @@
 ### ✅ Color Palette
 - ✅ ใช้ `gray-*` แทน `slate-*` (ตามมาตรฐาน)
 - ✅ รองรับ Dark Mode (`dark:gray-*`)
-- ✅ รองรับ Gemini Theme (`theme-gemini:gray-*`, `theme-gemini:blue-*`)
+- ✅ รองรับ Gemini Theme (`theme-myhr:gray-*`, `theme-myhr:blue-*`)
 
 ### ✅ Theme Support
 - ✅ Light Mode: ใช้ `gray-*` colors
 - ✅ Dark Mode: ใช้ `dark:gray-*` colors
-- ✅ Gemini Theme: ใช้ `theme-gemini:` variants
+- ✅ Gemini Theme: ใช้ `theme-myhr:` variants
 
 ### ✅ Glass Morphism
 - ✅ ใช้ `glass-nav` class (มีใน styles.scss)
@@ -176,7 +176,7 @@ Layout components ตอนนี้:
 - ✅ **Color Consistent**: ใช้ gray palette แทน slate
 - ✅ **Theme Support**: รองรับ Light/Dark/Gemini themes ครบถ้วน
 - ✅ **Standards Compliant**: ตรงตาม UX/UI Design System Rules
-- ✅ **Modern Design**: ใช้ Tailwind classes และ theme-gemini variants
+- ✅ **Modern Design**: ใช้ Tailwind classes และ theme-myhr variants
 
 **Status**: ✅ **COMPLETED** - Layout components พร้อมใช้งานแล้ว
 

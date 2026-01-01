@@ -278,7 +278,7 @@ export class ComponentDemoComponent {
 }
 
 // Gemini theme
-body.theme-gemini {
+body.theme-myhr {
   // ...
 }
 ```

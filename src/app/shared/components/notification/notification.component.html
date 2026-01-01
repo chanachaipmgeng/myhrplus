@@ -1,23 +1,23 @@
-<div 
+<div
   role="alert"
   [attr.aria-live]="type === 'error' ? 'assertive' : 'polite'"
   [attr.aria-atomic]="true"
-  class="max-w-md w-full animate-slide-in-right motion-safe:animate-none glass-weak rounded-lg shadow-lg border p-4 flex items-start gap-3 theme-gemini:glass-gemini-weak theme-gemini:shadow-gemini-sm pointer-events-auto"
+  class="max-w-md w-full animate-slide-in-right motion-safe:animate-none glass-weak rounded-lg shadow-lg border p-4 flex items-start gap-3 theme-myhr:glass-myhr-weak theme-myhr:shadow-myhr-sm pointer-events-auto"
   [ngClass]="{
-    'bg-success-50/80 dark:bg-success-900/30 border-success-200 dark:border-success-800 theme-gemini:border-success-400/30': type === 'success',
-    'bg-error-50/80 dark:bg-error-900/30 border-error-200 dark:border-error-800 theme-gemini:border-error-400/30': type === 'error',
-    'bg-warning-50/80 dark:bg-warning-900/30 border-warning-200 dark:border-warning-800 theme-gemini:border-warning-400/30': type === 'warning',
-    'bg-info-50/80 dark:bg-info-900/30 border-info-200 dark:border-info-800 theme-gemini:border-info-400/30': type === 'info'
+    'bg-success-50/80 dark:bg-success-900/30 border-success-200 dark:border-success-800 theme-myhr:border-success-400/30': type === 'success',
+    'bg-error-50/80 dark:bg-error-900/30 border-error-200 dark:border-error-800 theme-myhr:border-error-400/30': type === 'error',
+    'bg-warning-50/80 dark:bg-warning-900/30 border-warning-200 dark:border-warning-800 theme-myhr:border-warning-400/30': type === 'warning',
+    'bg-info-50/80 dark:bg-info-900/30 border-info-200 dark:border-info-800 theme-myhr:border-info-400/30': type === 'info'
   }">
   <div class="flex-shrink-0" aria-hidden="true">
-    <app-icon 
-      [name]="iconName" 
+    <app-icon
+      [name]="iconName"
       size="md"
       [color]="iconColor">
     </app-icon>
   </div>
   <div class="flex-1 min-w-0">
-    <p 
+    <p
       class="text-sm font-medium thai-text"
       [ngClass]="{
         'text-green-800 dark:text-green-200': type === 'success',
@@ -28,7 +28,7 @@
       {{ message }}
     </p>
   </div>
-  <button 
+  <button
     (click)="close()"
     [attr.aria-label]="closeAriaLabel"
     class="flex-shrink-0 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">

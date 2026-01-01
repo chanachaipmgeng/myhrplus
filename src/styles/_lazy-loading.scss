@@ -50,8 +50,8 @@
   background-size: 200% 100%;
 }
 
-/* Gemini theme support */
-body.theme-gemini .lazy-image-loading {
+/* Myhr theme support */
+body.theme-myhr .lazy-image-loading {
   background: linear-gradient(
     90deg,
     rgba(59, 130, 246, 0.05) 0%,
@@ -67,7 +67,7 @@ body.theme-gemini .lazy-image-loading {
     animation: none;
     background: rgba(0, 0, 0, 0.05);
   }
-  
+
   .lazy-image-loaded,
   .lazy-image-loading {
     transition: none;

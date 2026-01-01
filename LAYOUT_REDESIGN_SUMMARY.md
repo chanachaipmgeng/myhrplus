@@ -15,7 +15,7 @@
 - ✅ รองรับ Dark Mode
 - ✅ มีอนิเมชั่นสวยงาม
 - ✅ ใช้ Tailwind เป็นหลัก
-- ✅ ใช้พื้นหลังหลักเดียวกับหน้า Index (theme-gemini)
+- ✅ ใช้พื้นหลังหลักเดียวกับหน้า Index (theme-myhr)
 
 ---
 
@@ -24,7 +24,7 @@
 ### 1. Main Layout (`main-layout.component`)
 
 #### HTML Changes
-- ✅ เพิ่ม background layer ที่ inherit จาก `body.theme-gemini`
+- ✅ เพิ่ม background layer ที่ inherit จาก `body.theme-myhr`
 - ✅ เปลี่ยน main-content เป็น transparent เพื่อแสดงพื้นหลังจาก body
 - ✅ เพิ่ม fade-in animation สำหรับ content
 - ✅ ปรับ transition duration เป็น 500ms สำหรับ smooth animation
@@ -37,7 +37,7 @@
 - ✅ รองรับ prefers-reduced-motion
 
 **Key Features**:
-- Main content เป็น transparent → แสดงพื้นหลังจาก `body.theme-gemini`
+- Main content เป็น transparent → แสดงพื้นหลังจาก `body.theme-myhr`
 - Sidebar มี glass morphism effect พร้อม animated border glow
 - Smooth transitions (500ms) สำหรับทุก interactions
 
@@ -95,7 +95,7 @@
 ## 🎨 Design Features
 
 ### Background Strategy
-- **Main Content**: Transparent → แสดงพื้นหลังจาก `body.theme-gemini`
+- **Main Content**: Transparent → แสดงพื้นหลังจาก `body.theme-myhr`
 - **Header/Footer**: Glass morphism (semi-transparent) → เข้ากับพื้นหลัง
 - **Sidebar**: Glass morphism (semi-transparent) → เข้ากับพื้นหลัง
 
@@ -135,7 +135,7 @@
 ## 🎯 Key Improvements
 
 ### 1. Background Consistency
-- ✅ ใช้พื้นหลังเดียวกับหน้า Index (theme-gemini)
+- ✅ ใช้พื้นหลังเดียวกับหน้า Index (theme-myhr)
 - ✅ ไม่มี background duplication
 - ✅ Transparent main-content แสดงพื้นหลังจาก body
 
@@ -176,7 +176,7 @@ Layout ใหม่มีลักษณะ:
 ## 📝 Notes
 
 ### Background Inheritance
-- Main content เป็น transparent → แสดงพื้นหลังจาก `body.theme-gemini` ใน `styles.scss`
+- Main content เป็น transparent → แสดงพื้นหลังจาก `body.theme-myhr` ใน `styles.scss`
 - Header/Footer/Sidebar ใช้ glass morphism → เข้ากับพื้นหลัง
 
 ### Animation Timing
@@ -194,7 +194,7 @@ Layout ใหม่มีลักษณะ:
 ## ✅ Testing Checklist
 
 - [x] Layout renders correctly
-- [x] Background shows from body.theme-gemini
+- [x] Background shows from body.theme-myhr
 - [x] Glass morphism effects work
 - [x] Animations are smooth
 - [x] Dark mode works

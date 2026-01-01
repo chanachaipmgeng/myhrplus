@@ -1,7 +1,7 @@
 <div [class]="containerClass" [id]="selectId" class="relative">
-  <label *ngIf="label" [for]="selectId" class="block text-sm font-medium text-gray-700 dark:text-gray-200 theme-gemini:text-white/90 mb-2">
+  <label *ngIf="label" [for]="selectId" class="block text-sm font-medium text-gray-700 dark:text-gray-200 theme-myhr:text-white/90 mb-2">
     {{ label }}
-    <span *ngIf="required" class="text-red-500 dark:text-red-400 theme-gemini:text-red-400 ml-1" aria-label="จำเป็น">*</span>
+    <span *ngIf="required" class="text-red-500 dark:text-red-400 theme-myhr:text-red-400 ml-1" aria-label="จำเป็น">*</span>
   </label>
 
   <div class="relative">
@@ -18,20 +18,20 @@
       [attr.aria-haspopup]="true"
       (click)="toggleDropdown()"
       (blur)="validate()"
-      class="glass rounded-md px-4 py-3 md:py-2.5 pr-10 text-base md:text-sm min-h-[44px] md:min-h-0 text-gray-900 dark:text-gray-100 theme-gemini:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 theme-gemini:placeholder:text-white/60 shadow-sm transition-all duration-300 focus:glass-strong focus:shadow-md focus:scale-[1.01] hover:shadow-md hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed dark:glass-dark dark:focus:glass-dark-strong theme-gemini:glass-gemini theme-gemini:focus:glass-gemini-strong w-full text-left flex items-center justify-between"
+      class="glass rounded-md px-4 py-3 md:py-2.5 pr-10 text-base md:text-sm min-h-[44px] md:min-h-0 text-gray-900 dark:text-gray-100 theme-myhr:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 theme-myhr:placeholder:text-white/60 shadow-sm transition-all duration-300 focus:glass-strong focus:shadow-md focus:scale-[1.01] hover:shadow-md hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed dark:glass-dark dark:focus:glass-dark-strong theme-myhr:glass-myhr theme-myhr:focus:glass-myhr-strong w-full text-left flex items-center justify-between"
       [ngClass]="{
-        'border-red-500 dark:border-red-400 theme-gemini:border-red-400': hasError,
-        'border-green-500 dark:border-green-400 theme-gemini:border-green-400': isValid && showSuccess && !hasError,
+        'border-red-500 dark:border-red-400 theme-myhr:border-red-400': hasError,
+        'border-green-500 dark:border-green-400 theme-myhr:border-green-400': isValid && showSuccess && !hasError,
         'animate-shake': hasError,
-        'text-gray-400 dark:text-gray-500 theme-gemini:text-white/60': isPlaceholder,
-        'ring-2 ring-red-500/20 dark:ring-red-400/20 theme-gemini:ring-red-400/20': hasError,
-        'ring-2 ring-green-500/20 dark:ring-green-400/20 theme-gemini:ring-green-400/20': isValid && showSuccess && !hasError
+        'text-gray-400 dark:text-gray-500 theme-myhr:text-white/60': isPlaceholder,
+        'ring-2 ring-red-500/20 dark:ring-red-400/20 theme-myhr:ring-red-400/20': hasError,
+        'ring-2 ring-green-500/20 dark:ring-green-400/20 theme-myhr:ring-green-400/20': isValid && showSuccess && !hasError
       }">
       <span class="truncate flex-1">{{ displayValue }}</span>
       <app-icon
         [name]="isOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
         size="sm"
-        color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70"
+        color="text-gray-500 dark:text-gray-400 theme-myhr:text-white/70"
         class="ml-2 transition-transform duration-200"
         [ngClass]="{'rotate-180': isOpen}">
       </app-icon>
@@ -42,12 +42,12 @@
       *ngIf="!isPlaceholder && !disabled && !multiple"
       type="button"
       (click)="clearSelection(); $event.stopPropagation()"
-      class="absolute right-8 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 theme-gemini:hover:bg-white/20 transition-colors"
+      class="absolute right-8 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 theme-myhr:hover:bg-white/20 transition-colors"
       [attr.aria-label]="'ล้างการเลือก'">
       <app-icon
         name="close"
         size="xs"
-        color="text-gray-400 dark:text-gray-500 theme-gemini:text-white/60">
+        color="text-gray-400 dark:text-gray-500 theme-myhr:text-white/60">
       </app-icon>
     </button>
 
@@ -56,7 +56,7 @@
          class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
       <app-icon name="check_circle"
                 size="sm"
-                color="text-green-500 dark:text-green-400 theme-gemini:text-green-400"
+                color="text-green-500 dark:text-green-400 theme-myhr:text-green-400"
                 class="animate-pulse-success">
       </app-icon>
     </div>
@@ -66,23 +66,23 @@
          class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
       <app-icon name="error"
                 size="sm"
-                color="text-red-500 dark:text-red-400 theme-gemini:text-red-400">
+                color="text-red-500 dark:text-red-400 theme-myhr:text-red-400">
       </app-icon>
     </div>
 
     <!-- Dropdown Menu -->
     <div *ngIf="isOpen"
-         class="absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 theme-gemini:bg-gray-900/95 backdrop-blur-xl rounded-md shadow-lg border border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30 max-h-60 overflow-auto animate-fade-in-down">
+         class="absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 theme-myhr:bg-gray-900/95 backdrop-blur-xl rounded-md shadow-lg border border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30 max-h-60 overflow-auto animate-fade-in-down">
       <!-- Search Input (if searchable) -->
       <div *ngIf="searchable && options.length > 5"
-           class="sticky top-0 p-2 bg-white dark:bg-gray-800 theme-gemini:bg-gray-900/95 border-b border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30">
+           class="sticky top-0 p-2 bg-white dark:bg-gray-800 theme-myhr:bg-gray-900/95 border-b border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30">
         <input
           type="text"
           [value]="searchTerm"
           (input)="onSearch($event)"
           (click)="$event.stopPropagation()"
           placeholder="ค้นหา..."
-          class="glass rounded-md px-3 py-2 text-sm w-full text-gray-900 dark:text-gray-100 theme-gemini:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 theme-gemini:placeholder:text-white/60 focus:glass-strong focus:outline-none dark:glass-dark theme-gemini:glass-gemini">
+          class="glass rounded-md px-3 py-2 text-sm w-full text-gray-900 dark:text-gray-100 theme-myhr:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 theme-myhr:placeholder:text-white/60 focus:glass-strong focus:outline-none dark:glass-dark theme-myhr:glass-myhr">
       </div>
 
       <!-- Options List -->
@@ -92,18 +92,18 @@
           type="button"
           [disabled]="option.disabled"
           (click)="selectOption(option)"
-          class="w-full text-left px-4 py-2 text-sm transition-colors flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-700 theme-gemini:hover:bg-primary/20 disabled:opacity-50 disabled:cursor-not-allowed"
+          class="w-full text-left px-4 py-2 text-sm transition-colors flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-700 theme-myhr:hover:bg-primary/20 disabled:opacity-50 disabled:cursor-not-allowed"
           [ngClass]="{
-            'bg-primary/10 dark:bg-primary/20 theme-gemini:bg-primary/30 text-primary dark:text-primary theme-gemini:text-primary': isSelected(option),
-            'text-gray-700 dark:text-gray-300 theme-gemini:text-white': !isSelected(option) && !option.disabled,
-            'text-gray-400 dark:text-gray-500 theme-gemini:text-white/40': option.disabled
+            'bg-primary/10 dark:bg-primary/20 theme-myhr:bg-primary/30 text-primary dark:text-primary theme-myhr:text-primary': isSelected(option),
+            'text-gray-700 dark:text-gray-300 theme-myhr:text-white': !isSelected(option) && !option.disabled,
+            'text-gray-400 dark:text-gray-500 theme-myhr:text-white/40': option.disabled
           }">
           <!-- Checkbox for multiple select -->
           <span *ngIf="multiple" class="flex-shrink-0">
             <app-icon
               [name]="isSelected(option) ? 'check_box' : 'check_box_outline_blank'"
               size="sm"
-              [color]="isSelected(option) ? 'text-primary' : 'text-gray-400 dark:text-gray-500 theme-gemini:text-white/60'">
+              [color]="isSelected(option) ? 'text-primary' : 'text-gray-400 dark:text-gray-500 theme-myhr:text-white/60'">
             </app-icon>
           </span>
           <!-- Radio for single select -->
@@ -111,7 +111,7 @@
             <app-icon
               [name]="isSelected(option) ? 'radio_button_checked' : 'radio_button_unchecked'"
               size="sm"
-              [color]="isSelected(option) ? 'text-primary' : 'text-gray-400 dark:text-gray-500 theme-gemini:text-white/60'">
+              [color]="isSelected(option) ? 'text-primary' : 'text-gray-400 dark:text-gray-500 theme-myhr:text-white/60'">
             </app-icon>
           </span>
           <span class="flex-1 truncate">{{ option.label }}</span>
@@ -119,7 +119,7 @@
 
         <!-- No Results -->
         <div *ngIf="filteredOptions.length === 0"
-             class="px-4 py-8 text-center text-gray-500 dark:text-gray-400 theme-gemini:text-white/60 text-sm">
+             class="px-4 py-8 text-center text-gray-500 dark:text-gray-400 theme-myhr:text-white/60 text-sm">
           ไม่พบผลลัพธ์
         </div>
       </div>
@@ -130,9 +130,9 @@
   <div *ngIf="hasError && errorMessage"
        [id]="errorMessageId"
        role="alert"
-       class="flex items-center gap-1.5 text-red-500 dark:text-red-400 theme-gemini:text-red-400 text-sm mt-1 animate-fade-in"
+       class="flex items-center gap-1.5 text-red-500 dark:text-red-400 theme-myhr:text-red-400 text-sm mt-1 animate-fade-in"
        aria-live="polite">
-    <app-icon name="error" size="xs" color="text-red-500 dark:text-red-400 theme-gemini:text-red-400"></app-icon>
+    <app-icon name="error" size="xs" color="text-red-500 dark:text-red-400 theme-myhr:text-red-400"></app-icon>
     <span class="thai-text">{{ errorMessage }}</span>
   </div>
 
@@ -140,16 +140,16 @@
   <div *ngIf="isValid && showSuccess && successMessage && !hasError"
        [id]="successMessageId"
        role="status"
-       class="flex items-center gap-1.5 text-green-500 dark:text-green-400 theme-gemini:text-green-400 text-sm mt-1 animate-fade-in"
+       class="flex items-center gap-1.5 text-green-500 dark:text-green-400 theme-myhr:text-green-400 text-sm mt-1 animate-fade-in"
        aria-live="polite">
-    <app-icon name="check_circle" size="xs" color="text-green-500 dark:text-green-400 theme-gemini:text-green-400"></app-icon>
+    <app-icon name="check_circle" size="xs" color="text-green-500 dark:text-green-400 theme-myhr:text-green-400"></app-icon>
     <span class="thai-text">{{ successMessage }}</span>
   </div>
 
   <!-- Hint Message -->
   <div *ngIf="hint && !hasError && !isValid"
        [id]="hintId"
-       class="text-gray-500 dark:text-gray-400 theme-gemini:text-white/60 text-sm mt-1">
+       class="text-gray-500 dark:text-gray-400 theme-myhr:text-white/60 text-sm mt-1">
     {{ hint }}
   </div>
 </div>

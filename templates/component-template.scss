@@ -45,12 +45,12 @@
   @include smooth-transition(background-color transform, 0.2s);
   border-radius: $radius-md;
   padding: $spacing-4;
-  
+
   &:hover {
     background-color: rgba($primary-500, 0.05);
     transform: translateX(4px);
   }
-  
+
   &:active {
     transform: translateX(0) scale(0.98);
   }
@@ -86,7 +86,7 @@
   .content-card {
     @include glass-morphism('default', 'dark');
   }
-  
+
   .list-item {
     &:hover {
       background-color: rgba($primary-400, 0.1);
@@ -95,22 +95,22 @@
 }
 
 /* ============================================
-   Gemini Theme
+   Myhr Theme
    ============================================ */
 
-body.theme-gemini {
+body.theme-myhr {
   .content-card {
-    @include glass-gemini('default');
-    @include gemini-border-glow();
-    
+    @include glass-myhr('default');
+    @include myhr-border-glow();
+
     &:hover {
-      @include gemini-glow('default');
+      @include myhr-glow('default');
     }
   }
-  
+
   .list-item {
     &:hover {
-      background-color: rgba($gemini-gradient-end, 0.1);
+      background-color: rgba($myhr-gradient-end, 0.1);
     }
   }
 }
@@ -124,14 +124,14 @@ body.theme-gemini {
     padding: $spacing-4;
     border-radius: $radius-md;
   }
-  
+
   .list-item {
     padding: $spacing-3;
   }
-  
+
   .form-actions {
     flex-direction: column;
-    
+
     app-glass-button {
       width: 100%;
     }

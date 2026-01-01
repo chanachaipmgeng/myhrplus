@@ -1,20 +1,20 @@
 <div class="w-full py-12">
   <div class="mb-8">
-    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Tabs Component
     </h1>
-    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-myhr:text-white/80 leading-relaxed">
       Tab navigation component with icons, badges, and disabled states.
     </p>
   </div>
 
   <!-- Live Demo Section -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Live Demo
     </h2>
-    
+
     <app-glass-card padding="p-6">
       <app-tabs
         [tabs]="tabs"
@@ -25,15 +25,15 @@
       <div class="min-h-[100px] mt-6">
         <div *ngIf="activeTab === 'tab1'" class="p-4 rounded-lg">
           <h3 class="text-lg font-semibold mb-2">Tab 1 Content</h3>
-          <p class="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">This is the content for Tab 1.</p>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">This is the content for Tab 1.</p>
         </div>
         <div *ngIf="activeTab === 'tab2'" class="p-4 rounded-lg">
           <h3 class="text-lg font-semibold mb-2">Tab 2 Content</h3>
-          <p class="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">This is the content for Tab 2 with badge.</p>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">This is the content for Tab 2 with badge.</p>
         </div>
         <div *ngIf="activeTab === 'tab3'" class="p-4 rounded-lg">
           <h3 class="text-lg font-semibold mb-2">Tab 3 Content</h3>
-          <p class="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">This is the content for Tab 3.</p>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">This is the content for Tab 3.</p>
         </div>
       </div>
     </app-glass-card>
@@ -41,11 +41,11 @@
 
   <!-- Basic Usage Section -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Basic Usage
     </h2>
-    
+
     <app-glass-card padding="p-6">
       <app-tabs
         [tabs]="tabs"
@@ -53,7 +53,7 @@
         (activeTabChange)="onTabChange($event)">
       </app-tabs>
       <div class="min-h-[100px] mt-6">
-        <p class="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Active tab: {{ activeTab }}</p>
+        <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">Active tab: {{ activeTab }}</p>
       </div>
     </app-glass-card>
     <app-code-viewer [code]="basicExample" language="html" title="Basic Usage"></app-code-viewer>
@@ -61,22 +61,22 @@
 
   <!-- Variants Section -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Variants
     </h2>
-    
+
     <div class="space-y-6">
       <!-- Tabs with Badges -->
       <app-glass-card padding="p-6">
-        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Tabs with Badges</h3>
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Tabs with Badges</h3>
         <app-tabs
           [tabs]="tabsWithBadges"
           [activeTab]="activeTab2"
           (activeTabChange)="activeTab2 = $event">
         </app-tabs>
         <div class="min-h-[100px] mt-4">
-          <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">
             Active tab: {{ activeTab2 }}
           </p>
         </div>
@@ -84,14 +84,14 @@
 
       <!-- Tabs with Disabled -->
       <app-glass-card padding="p-6">
-        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Tabs with Disabled State</h3>
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Tabs with Disabled State</h3>
         <app-tabs
           [tabs]="tabsWithDisabled"
           [activeTab]="activeTab"
           (activeTabChange)="activeTab = $event">
         </app-tabs>
         <div class="min-h-[100px] mt-4">
-          <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">
             The middle tab is disabled and cannot be clicked.
           </p>
         </div>
@@ -104,48 +104,48 @@
 
   <!-- API Reference -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       API Reference
     </h2>
-    
+
     <app-glass-card padding="p-6">
       <app-props-table [props]="props" title="Inputs"></app-props-table>
       <app-props-table [props]="outputs" title="Outputs"></app-props-table>
-      
-      <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Tab Interface</h3>
-      <div class="overflow-x-auto glass dark:glass-dark theme-gemini:glass-gemini rounded-lg p-2 shadow-glass mt-4">
+
+      <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Tab Interface</h3>
+      <div class="overflow-x-auto glass dark:glass-dark theme-myhr:glass-myhr rounded-lg p-2 shadow-glass mt-4">
       <table class="w-full border-collapse text-sm">
         <thead>
-          <tr class="bg-white/50 dark:bg-gray-800/50 theme-gemini:bg-primary/10">
-            <th class="px-3 py-3 text-left font-semibold text-gray-700 dark:text-gray-300 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30">Property</th>
-            <th class="px-3 py-3 text-left font-semibold text-gray-700 dark:text-gray-300 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30">Type</th>
-            <th class="px-3 py-3 text-left font-semibold text-gray-700 dark:text-gray-300 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30">Description</th>
+          <tr class="bg-white/50 dark:bg-gray-800/50 theme-myhr:bg-primary/10">
+            <th class="px-3 py-3 text-left font-semibold text-gray-700 dark:text-gray-300 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30">Property</th>
+            <th class="px-3 py-3 text-left font-semibold text-gray-700 dark:text-gray-300 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30">Type</th>
+            <th class="px-3 py-3 text-left font-semibold text-gray-700 dark:text-gray-300 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30">Description</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="border-b border-gray-200/50 dark:border-gray-700/50 hover:bg-white/50 dark:hover:bg-gray-800/30 theme-gemini:hover:bg-primary/5 transition-smooth">
-            <td class="px-3 py-3"><code class="font-mono text-sm text-primary-600 dark:text-primary-400 theme-gemini:text-primary bg-primary-500/10 dark:bg-primary-500/20 theme-gemini:bg-primary/20 px-1.5 py-0.5 rounded">id</code></td>
+          <tr class="border-b border-gray-200/50 dark:border-gray-700/50 hover:bg-white/50 dark:hover:bg-gray-800/30 theme-myhr:hover:bg-primary/5 transition-smooth">
+            <td class="px-3 py-3"><code class="font-mono text-sm text-primary-600 dark:text-primary-400 theme-myhr:text-primary bg-primary-500/10 dark:bg-primary-500/20 theme-myhr:bg-primary/20 px-1.5 py-0.5 rounded">id</code></td>
             <td class="px-3 py-3"><code class="font-mono text-sm text-warning-600 dark:text-warning-400 bg-warning-500/10 dark:bg-warning-500/20 px-1.5 py-0.5 rounded">string</code></td>
             <td class="px-3 py-3 text-gray-600 dark:text-gray-400">Unique identifier for the tab</td>
           </tr>
-          <tr class="border-b border-gray-200/50 dark:border-gray-700/50 hover:bg-white/50 dark:hover:bg-gray-800/30 theme-gemini:hover:bg-primary/5 transition-smooth">
-            <td class="px-3 py-3"><code class="font-mono text-sm text-primary-600 dark:text-primary-400 theme-gemini:text-primary bg-primary-500/10 dark:bg-primary-500/20 theme-gemini:bg-primary/20 px-1.5 py-0.5 rounded">label</code></td>
+          <tr class="border-b border-gray-200/50 dark:border-gray-700/50 hover:bg-white/50 dark:hover:bg-gray-800/30 theme-myhr:hover:bg-primary/5 transition-smooth">
+            <td class="px-3 py-3"><code class="font-mono text-sm text-primary-600 dark:text-primary-400 theme-myhr:text-primary bg-primary-500/10 dark:bg-primary-500/20 theme-myhr:bg-primary/20 px-1.5 py-0.5 rounded">label</code></td>
             <td class="px-3 py-3"><code class="font-mono text-sm text-warning-600 dark:text-warning-400 bg-warning-500/10 dark:bg-warning-500/20 px-1.5 py-0.5 rounded">string</code></td>
             <td class="px-3 py-3 text-gray-600 dark:text-gray-400">Tab label text</td>
           </tr>
-          <tr class="border-b border-gray-200/50 dark:border-gray-700/50 hover:bg-white/50 dark:hover:bg-gray-800/30 theme-gemini:hover:bg-primary/5 transition-smooth">
-            <td class="px-3 py-3"><code class="font-mono text-sm text-primary-600 dark:text-primary-400 theme-gemini:text-primary bg-primary-500/10 dark:bg-primary-500/20 theme-gemini:bg-primary/20 px-1.5 py-0.5 rounded">icon</code></td>
+          <tr class="border-b border-gray-200/50 dark:border-gray-700/50 hover:bg-white/50 dark:hover:bg-gray-800/30 theme-myhr:hover:bg-primary/5 transition-smooth">
+            <td class="px-3 py-3"><code class="font-mono text-sm text-primary-600 dark:text-primary-400 theme-myhr:text-primary bg-primary-500/10 dark:bg-primary-500/20 theme-myhr:bg-primary/20 px-1.5 py-0.5 rounded">icon</code></td>
             <td class="px-3 py-3"><code class="font-mono text-sm text-warning-600 dark:text-warning-400 bg-warning-500/10 dark:bg-warning-500/20 px-1.5 py-0.5 rounded">string</code></td>
             <td class="px-3 py-3 text-gray-600 dark:text-gray-400">Optional icon (emoji or text)</td>
           </tr>
-          <tr class="border-b border-gray-200/50 dark:border-gray-700/50 hover:bg-white/50 dark:hover:bg-gray-800/30 theme-gemini:hover:bg-primary/5 transition-smooth">
-            <td class="px-3 py-3"><code class="font-mono text-sm text-primary-600 dark:text-primary-400 theme-gemini:text-primary bg-primary-500/10 dark:bg-primary-500/20 theme-gemini:bg-primary/20 px-1.5 py-0.5 rounded">badge</code></td>
+          <tr class="border-b border-gray-200/50 dark:border-gray-700/50 hover:bg-white/50 dark:hover:bg-gray-800/30 theme-myhr:hover:bg-primary/5 transition-smooth">
+            <td class="px-3 py-3"><code class="font-mono text-sm text-primary-600 dark:text-primary-400 theme-myhr:text-primary bg-primary-500/10 dark:bg-primary-500/20 theme-myhr:bg-primary/20 px-1.5 py-0.5 rounded">badge</code></td>
             <td class="px-3 py-3"><code class="font-mono text-sm text-warning-600 dark:text-warning-400 bg-warning-500/10 dark:bg-warning-500/20 px-1.5 py-0.5 rounded">string | number</code></td>
             <td class="px-3 py-3 text-gray-600 dark:text-gray-400">Optional badge value</td>
           </tr>
-          <tr class="border-b border-gray-200/50 dark:border-gray-700/50 hover:bg-white/50 dark:hover:bg-gray-800/30 theme-gemini:hover:bg-primary/5 transition-smooth">
-            <td class="px-3 py-3"><code class="font-mono text-sm text-primary-600 dark:text-primary-400 theme-gemini:text-primary bg-primary-500/10 dark:bg-primary-500/20 theme-gemini:bg-primary/20 px-1.5 py-0.5 rounded">disabled</code></td>
+          <tr class="border-b border-gray-200/50 dark:border-gray-700/50 hover:bg-white/50 dark:hover:bg-gray-800/30 theme-myhr:hover:bg-primary/5 transition-smooth">
+            <td class="px-3 py-3"><code class="font-mono text-sm text-primary-600 dark:text-primary-400 theme-myhr:text-primary bg-primary-500/10 dark:bg-primary-500/20 theme-myhr:bg-primary/20 px-1.5 py-0.5 rounded">disabled</code></td>
             <td class="px-3 py-3"><code class="font-mono text-sm text-warning-600 dark:text-warning-400 bg-warning-500/10 dark:bg-warning-500/20 px-1.5 py-0.5 rounded">boolean</code></td>
             <td class="px-3 py-3 text-gray-600 dark:text-gray-400">Disable tab interaction</td>
           </tr>

@@ -14,19 +14,19 @@
   display: none;
 }
 
-/* Gemini Theme - Using CSS Variables */
-[data-theme='gemini'] :host,
-body.theme-gemini :host {
+/* MyHR Theme - Using CSS Variables */
+[data-theme='myhr'] :host,
+body.theme-myhr :host {
   .breadcrumb-link {
-    @apply glass-gemini-weak;
-    
+    @apply glass-myhr-weak;
+
     &:hover {
-      @apply glass-gemini;
+      @apply glass-myhr;
       filter: drop-shadow(0 0 4px rgba(var(--primary-rgb), 0.4));
     }
   }
-  
-  /* Breadcrumb current gradient handled by Tailwind theme-gemini: variants in HTML */
+
+  /* Breadcrumb current gradient handled by Tailwind theme-myhr: variants in HTML */
   .breadcrumb-current {
     /* Gradient text handled by Tailwind classes in HTML */
   }

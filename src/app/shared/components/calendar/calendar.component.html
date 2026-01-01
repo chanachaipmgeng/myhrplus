@@ -1,4 +1,4 @@
-<div class="calendar-container p-4 md:p-3 rounded-xl shadow-xl glass dark:glass-dark theme-gemini:glass-gemini">
+<div class="calendar-container p-4 md:p-3 rounded-xl shadow-xl glass dark:glass-dark theme-myhr:glass-myhr">
   <!-- Toolbar -->
   <div *ngIf="showToolbar" class="calendar-toolbar mb-4 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-4 flex-wrap">
     <div class="flex items-center space-x-2">
@@ -13,7 +13,7 @@
       </app-glass-button>
     </div>
 
-    <h2 class="text-lg md:text-xl font-bold text-slate-900 dark:text-slate-100 theme-gemini:bg-gradient-to-r theme-gemini:from-gemini-gradient-start theme-gemini:to-gemini-gradient-end theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-lg md:text-xl font-bold text-slate-900 dark:text-slate-100 theme-myhr:bg-gradient-to-r theme-myhr:from-myhr-gradient-start theme-myhr:to-myhr-gradient-end theme-myhr:bg-clip-text theme-myhr:text-transparent">
       {{ format(viewDate, view === CalendarView.Month ? 'MMMM yyyy' : view === CalendarView.Week ? 'MMM d, yyyy' : 'EEEE, MMM d, yyyy') }}
     </h2>
 

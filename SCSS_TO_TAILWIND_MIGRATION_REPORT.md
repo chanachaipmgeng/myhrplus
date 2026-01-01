@@ -137,7 +137,7 @@ The sidebar component has **intentionally complex SCSS** that should remain in S
 
 ### Fixed Issues:
 1. ✅ Replaced `hover:bg-slate-*` with `hover:bg-gray-*` (3 instances in header)
-2. ✅ Added `theme-gemini:` variants to all hover states
+2. ✅ Added `theme-myhr:` variants to all hover states
 3. ✅ Removed empty SCSS rulesets
 4. ✅ Fixed CSS property order (`-webkit-user-select` before `user-select`)
 5. ✅ Removed deprecated `-webkit-overflow-scrolling` property

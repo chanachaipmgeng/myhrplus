@@ -12,7 +12,7 @@
 - [x] สร้าง Glass Morphism Plugin
 - [x] สร้าง Animation Utilities Plugin
 - [x] อัปเดต Tailwind Config
-- [x] เพิ่ม theme-gemini variant
+- [x] เพิ่ม theme-myhr variant
 
 ### ✅ Phase 2: Migrate Design Tokens (Completed)
 - [x] Migrate Colors (primary, success, error, warning, info)
@@ -158,7 +158,7 @@
 ### Plugins
 - [x] Glass Morphism Plugin - Tested all utilities (glass, glass-strong, glass-weak, glass-gemini)
 - [x] Animation Plugin - Tested all utilities (hover-lift, hover-scale, transition-smooth)
-- [x] Theme Gemini Variant - Tested theme-gemini: prefix
+- [x] Theme Gemini Variant - Tested theme-myhr: prefix
 
 ### Features
 - [x] Dark Mode Support - Tested all components

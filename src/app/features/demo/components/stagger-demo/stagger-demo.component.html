@@ -1,20 +1,20 @@
 <div class="w-full py-12">
   <div class="mb-8">
-    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Stagger Directive Demo
     </h1>
-    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-myhr:text-white/80 leading-relaxed">
       Directive for automatically managing staggered animation delays for list items.
     </p>
   </div>
 
   <!-- Live Demo -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Live Demo
     </h2>
-    
+
     <app-glass-card padding="p-6">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
         @for (item of items; track item.id; let i = $index) {
@@ -33,7 +33,7 @@
       </div>
 
       <div class="p-4 glass-card rounded-lg">
-        <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
+        <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">
           <strong>Note:</strong> Items will appear with staggered animation (one by one) with 0.1s delay per item.
         </p>
       </div>
@@ -42,11 +42,11 @@
 
   <!-- Overview -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Overview
     </h2>
-    
+
     <app-glass-card padding="p-6">
       <p class="text-gray-600 dark:text-gray-300 mb-4">
         The `appStagger` directive makes it easy to add staggered animations to list items
@@ -56,18 +56,18 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
         <div class="p-4 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-100 dark:border-red-800">
           <h3 class="font-bold text-red-600 dark:text-red-400 mb-2">❌ Manual Way</h3>
-          <app-code-viewer 
-            [code]="manualExample" 
-            language="html" 
+          <app-code-viewer
+            [code]="manualExample"
+            language="html"
             title="Manual Way">
           </app-code-viewer>
         </div>
 
         <div class="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-800">
           <h3 class="font-bold text-green-600 dark:text-green-400 mb-2">✅ With appStagger</h3>
-          <app-code-viewer 
-            [code]="basicExample" 
-            language="html" 
+          <app-code-viewer
+            [code]="basicExample"
+            language="html"
             title="With appStagger">
           </app-code-viewer>
         </div>
@@ -77,30 +77,30 @@
 
   <!-- Basic Usage -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Basic Usage
     </h2>
 
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Basic Usage</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic Usage</h3>
     <app-code-viewer [code]="basicExample" language="html" title="Basic Stagger Usage"></app-code-viewer>
 
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Custom Delay</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Custom Delay</h3>
     <app-code-viewer [code]="customDelayExample" language="html" title="Custom Delay Interval"></app-code-viewer>
 
-    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Complete Example</h3>
+    <h3 class="text-xl font-semibold my-6 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Complete Example</h3>
     <app-code-viewer [code]="fullExample" language="html" title="Complete Example with Glass Card"></app-code-viewer>
   </section>
 
   <!-- Advanced Features -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Best Practices
     </h2>
-    
+
     <app-glass-card padding="p-6">
-      <ul class="space-y-2 text-gray-600 dark:text-gray-300 theme-gemini:text-white/90">
+      <ul class="space-y-2 text-gray-600 dark:text-gray-300 theme-myhr:text-white/90">
         <li class="flex items-start gap-2">
           <span class="text-green-500 mt-1">✓</span>
           <span>Use <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs">staggerDelay="0.1"</code> for general list items</span>
@@ -123,11 +123,11 @@
 
   <!-- API Reference -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       API Reference
     </h2>
-    
+
     <app-glass-card padding="p-6">
       <app-props-table [props]="props" title="Inputs"></app-props-table>
     </app-glass-card>

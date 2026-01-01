@@ -86,19 +86,19 @@
   }
 }
 
-/* Gemini Theme Glass */
-@mixin glass-gemini($variant: 'default') {
-  background: $glass-bg-gemini;
-  border: 1px solid $glass-border-gemini;
+/* MyHR Theme Glass */
+@mixin glass-myhr($variant: 'default') {
+  background: $glass-bg-myhr;
+  border: 1px solid $glass-border-myhr;
   backdrop-filter: blur($blur-2xl);
   -webkit-backdrop-filter: blur($blur-2xl);
-  
+
   @if $variant == 'strong' {
-    box-shadow: $shadow-gemini-lg;
+    box-shadow: $shadow-myhr-lg;
   } @else if $variant == 'weak' {
-    box-shadow: $shadow-gemini-sm;
+    box-shadow: $shadow-myhr-sm;
   } @else {
-    box-shadow: $shadow-gemini;
+    box-shadow: $shadow-myhr;
   }
 }
 
@@ -109,16 +109,16 @@
 @mixin focus-ring($color: $primary-500, $width: 2px) {
   outline: none;
   box-shadow: 0 0 0 $width $color;
-  
+
   &:focus-visible {
     box-shadow: 0 0 0 $width $color, 0 0 0 calc($width * 2) rgba($color, 0.2);
   }
 }
 
-@mixin focus-ring-gemini() {
+@mixin focus-ring-myhr() {
   outline: none;
-  box-shadow: 
-    0 0 0 2px $gemini-gradient-mid,
+  box-shadow:
+    0 0 0 2px $myhr-gradient-mid,
     0 0 0 4px rgba(96, 165, 250, 0.2),
     0 0 20px rgba(59, 130, 246, 0.3);
 }
@@ -129,7 +129,7 @@
 
 @mixin hover-lift($amount: 4px) {
   transition: transform $duration-200 $ease-out, box-shadow $duration-200 $ease-out;
-  
+
   &:hover:not(:disabled) {
     transform: translateY(-$amount);
   }
@@ -137,7 +137,7 @@
 
 @mixin hover-scale($amount: 1.05) {
   transition: transform $duration-200 $ease-out;
-  
+
   &:hover:not(:disabled) {
     transform: scale($amount);
   }
@@ -145,7 +145,7 @@
 
 @mixin hover-glow($color: $primary-500) {
   transition: box-shadow $duration-200 $ease-out;
-  
+
   &:hover:not(:disabled) {
     box-shadow: 0 0 20px rgba($color, 0.4);
   }
@@ -183,10 +183,10 @@
 /* Smooth Transition Mixin */
 @mixin smooth-transition($properties: all, $duration: 0.3s, $easing: cubic-bezier(0.4, 0, 0.2, 1)) {
   transition: $properties $duration $easing;
-  
+
   /* Optimize for performance */
   will-change: $properties;
-  
+
   /* Respect user preferences */
   @media (prefers-reduced-motion: reduce) {
     transition: none;
@@ -197,11 +197,11 @@
 /* Micro-interaction: Hover Lift */
 @mixin hover-lift($distance: 2px, $duration: 0.2s) {
   @include smooth-transition(transform, $duration);
-  
+
   &:hover:not(:disabled) {
     transform: translateY(-$distance);
   }
-  
+
   &:active:not(:disabled) {
     transform: translateY(0) scale(0.98);
   }
@@ -210,11 +210,11 @@
 /* Micro-interaction: Scale on Hover */
 @mixin hover-scale($scale: 1.05, $duration: 0.2s) {
   @include smooth-transition(transform, $duration);
-  
+
   &:hover:not(:disabled) {
     transform: scale($scale);
   }
-  
+
   &:active:not(:disabled) {
     transform: scale(0.95);
   }
@@ -223,11 +223,11 @@
 /* Micro-interaction: Glow Effect */
 @mixin glow-effect($color: $primary-500, $intensity: 0.3, $duration: 0.3s) {
   @include smooth-transition(box-shadow, $duration);
-  
+
   &:hover:not(:disabled) {
     box-shadow: 0 0 20px rgba($color, $intensity);
   }
-  
+
   &:focus {
     box-shadow: 0 0 0 3px rgba($color, $intensity * 0.5);
   }
@@ -236,7 +236,7 @@
 /* Loading State Animation */
 @mixin loading-pulse($color: $primary-500, $duration: 1.5s) {
   animation: loadingPulse $duration ease-in-out infinite;
-  
+
   @keyframes loadingPulse {
     0%, 100% {
       opacity: 1;
@@ -253,7 +253,7 @@
 @mixin shimmer-effect($duration: 1.5s, $color: rgba(255, 255, 255, 0.3)) {
   position: relative;
   overflow: hidden;
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -304,13 +304,13 @@
   background-clip: text;
 }
 
-@mixin gradient-text-gemini() {
-  background: linear-gradient(135deg, $gemini-gradient-start, $gemini-gradient-mid, $gemini-gradient-end);
+@mixin gradient-text-myhr() {
+  background: linear-gradient(135deg, $myhr-gradient-start, $myhr-gradient-mid, $myhr-gradient-end);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   background-size: 200% 200%;
-  animation: geminiGradient 3s ease infinite;
+  animation: myhrGradient 3s ease infinite;
 }
 
 /* ============================================
@@ -342,15 +342,15 @@
   display: grid;
   grid-template-columns: repeat($columns, 1fr);
   gap: $gap;
-  
+
   @include respond-to(sm) {
     grid-template-columns: repeat(min(2, $columns), 1fr);
   }
-  
+
   @include respond-to(md) {
     grid-template-columns: repeat(min(3, $columns), 1fr);
   }
-  
+
   @include respond-to(lg) {
     grid-template-columns: repeat($columns, 1fr);
   }
@@ -379,17 +379,17 @@
     width: $width;
     height: $width;
   }
-  
+
   &::-webkit-scrollbar-track {
     background: $track-color;
     border-radius: 4px;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background: $thumb-color;
     border-radius: 4px;
     transition: background 0.3s ease;
-    
+
     &:hover {
       background: darken($thumb-color, 10%);
     }
@@ -402,17 +402,17 @@
     width: $width;
     height: $width;
   }
-  
+
   &::-webkit-scrollbar-track {
     background: transparent;
     border-radius: 4px;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background: rgba(var(--primary-rgb), $thumb-opacity);
     border-radius: 4px;
     transition: background 0.3s ease;
-    
+
     &:hover {
       background: rgba(var(--primary-rgb), $thumb-opacity + 0.2);
     }
@@ -423,7 +423,7 @@
   [data-theme='dark'] & {
     &::-webkit-scrollbar-thumb {
       background: rgba(var(--primary-rgb), $thumb-opacity + 0.1);
-      
+
       &:hover {
         background: rgba(var(--primary-rgb), $thumb-opacity + 0.3);
       }
@@ -432,26 +432,26 @@
 }
 
 /* ============================================
-   Gemini Theme Mixins
+   MyHR Theme Mixins
    ============================================ */
 
-@mixin gemini-glow($intensity: 'default') {
+@mixin myhr-glow($intensity: 'default') {
   @if $intensity == 'strong' {
-    box-shadow: 
-      0 0 20px $gemini-glow-strong,
+    box-shadow:
+      0 0 20px $myhr-glow-strong,
       0 0 40px rgba(59, 130, 246, 0.3);
   } @else if $intensity == 'weak' {
-    box-shadow: 0 0 10px $gemini-glow-weak;
+    box-shadow: 0 0 10px $myhr-glow-weak;
   } @else {
-    box-shadow: 
-      0 0 15px $gemini-glow,
+    box-shadow:
+      0 0 15px $myhr-glow,
       0 0 30px rgba(59, 130, 246, 0.2);
   }
 }
 
-@mixin gemini-border-glow() {
+@mixin myhr-border-glow() {
   position: relative;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -467,7 +467,7 @@
       transparent 100%
     );
     background-size: 100% 200%;
-    animation: geminiGradient 3s ease infinite;
+    animation: myhrGradient 3s ease infinite;
     z-index: 1;
     pointer-events: none;
   }
@@ -493,16 +493,16 @@
   animation: scaleIn $duration $ease-out;
 }
 
-@mixin gemini-float() {
-  animation: geminiFloat 6s ease-in-out infinite;
+@mixin myhr-float() {
+  animation: myhrFloat 6s ease-in-out infinite;
 }
 
-@mixin gemini-pulse() {
-  animation: geminiPulse 2s ease-in-out infinite;
+@mixin myhr-pulse() {
+  animation: myhrPulse 2s ease-in-out infinite;
 }
 
-@mixin gemini-shimmer() {
-  animation: geminiShimmer 3s infinite;
+@mixin myhr-shimmer() {
+  animation: myhrShimmer 3s infinite;
 }
 
 /* ============================================

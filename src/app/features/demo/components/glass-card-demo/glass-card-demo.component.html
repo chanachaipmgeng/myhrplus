@@ -1,38 +1,38 @@
 <div class="w-full py-12">
   <div class="mb-8">
-    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Glass Card Component
     </h1>
-    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-myhr:text-white/80 leading-relaxed">
       Glass morphism card component with variants and animations. Perfect for displaying content with a modern, translucent effect.
     </p>
   </div>
 
   <!-- Live Demo Section -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Live Demo
     </h2>
-    
+
     <div class="flex gap-4 mb-6 flex-wrap">
       <div class="flex items-center gap-2">
-        <label class="font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Variant:</label>
-        <select [(ngModel)]="selectedVariant" 
+        <label class="font-medium text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Variant:</label>
+        <select [(ngModel)]="selectedVariant"
                 class="px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm cursor-pointer transition-smooth
-                       hover:border-primary-500 dark:hover:border-primary-400 theme-gemini:border-primary/30 theme-gemini:glass-gemini-weak theme-gemini:hover:glass-gemini
+                       hover:border-primary-500 dark:hover:border-primary-400 theme-myhr:border-primary/30 theme-myhr:glass-myhr-weak theme-myhr:hover:glass-myhr
                        focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20">
           <option value="default">Default</option>
           <option value="strong">Strong</option>
           <option value="weak">Weak</option>
         </select>
       </div>
-      
+
       <div class="flex items-center gap-2">
-        <label class="font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Animation:</label>
-        <select [(ngModel)]="selectedAnimation" 
+        <label class="font-medium text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Animation:</label>
+        <select [(ngModel)]="selectedAnimation"
                 class="px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm cursor-pointer transition-smooth
-                       hover:border-primary-500 dark:hover:border-primary-400 theme-gemini:border-primary/30 theme-gemini:glass-gemini-weak theme-gemini:hover:glass-gemini
+                       hover:border-primary-500 dark:hover:border-primary-400 theme-myhr:border-primary/30 theme-myhr:glass-myhr-weak theme-myhr:hover:glass-myhr
                        focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20">
           <option [ngValue]="null">None</option>
           <option value="fade-in">Fade In</option>
@@ -44,16 +44,16 @@
     </div>
 
     <div class="mb-6">
-      <app-glass-card 
+      <app-glass-card
         [variant]="selectedVariant"
         [animate]="selectedAnimation"
         padding="p-6">
         <h3 class="text-xl font-semibold mb-2">Glass Card Demo</h3>
-        <p class="text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
+        <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">
           This is a {{ selectedVariant }} glass card with {{ selectedAnimation || 'no' }} animation.
         </p>
-        <p class="text-sm text-gray-500 dark:text-gray-500 theme-gemini:text-white/60 mt-4">
-          Variant: <strong>{{ selectedVariant }}</strong> | 
+        <p class="text-sm text-gray-500 dark:text-gray-500 theme-myhr:text-white/60 mt-4">
+          Variant: <strong>{{ selectedVariant }}</strong> |
           Animation: <strong>{{ selectedAnimation || 'None' }}</strong>
         </p>
       </app-glass-card>
@@ -62,14 +62,14 @@
 
   <!-- Basic Usage Section -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Basic Usage
     </h2>
-    
+
     <app-glass-card padding="p-6">
       <h3 class="text-lg font-semibold mb-2">Basic Glass Card</h3>
-      <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
+      <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">
         Standard glass card with balanced blur effect.
       </p>
     </app-glass-card>
@@ -78,29 +78,29 @@
 
   <!-- Variants Section -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Variants
     </h2>
-    
+
     <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6">
       <app-glass-card variant="default" padding="p-6">
         <h3 class="text-lg font-semibold mb-2">Default</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
+        <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">
           Standard glass card with balanced blur effect.
         </p>
       </app-glass-card>
 
       <app-glass-card variant="strong" padding="p-6">
         <h3 class="text-lg font-semibold mb-2">Strong</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
+        <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">
           Stronger blur effect, more opaque and prominent.
         </p>
       </app-glass-card>
 
       <app-glass-card variant="weak" padding="p-6">
         <h3 class="text-lg font-semibold mb-2">Weak</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">
+        <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">
           Subtle blur effect, more transparent and lightweight.
         </p>
       </app-glass-card>
@@ -110,33 +110,33 @@
 
   <!-- Advanced Features Section -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Advanced Features
     </h2>
-    
+
     <div class="space-y-6">
       <div>
-        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Animations</h3>
+        <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Animations</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <app-glass-card variant="default" padding="p-6" animate="fade-in">
             <h4 class="text-md font-semibold mb-2">Fade In</h4>
-            <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Fade in animation</p>
+            <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">Fade in animation</p>
           </app-glass-card>
 
           <app-glass-card variant="default" padding="p-6" animate="slide-up">
             <h4 class="text-md font-semibold mb-2">Slide Up</h4>
-            <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Slide up animation</p>
+            <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">Slide up animation</p>
           </app-glass-card>
 
           <app-glass-card variant="default" padding="p-6" animate="slide-down">
             <h4 class="text-md font-semibold mb-2">Slide Down</h4>
-            <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Slide down animation</p>
+            <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">Slide down animation</p>
           </app-glass-card>
 
           <app-glass-card variant="default" padding="p-6" animate="scale-in">
             <h4 class="text-md font-semibold mb-2">Scale In</h4>
-            <p class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Scale in animation</p>
+            <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">Scale in animation</p>
           </app-glass-card>
         </div>
       </div>
@@ -147,11 +147,11 @@
 
   <!-- API Reference -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       API Reference
     </h2>
-    
+
     <app-glass-card padding="p-6">
       <app-props-table [props]="props"></app-props-table>
     </app-glass-card>

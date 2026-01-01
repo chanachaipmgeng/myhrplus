@@ -90,9 +90,9 @@ footer {
   max-width: 1400px;
 }
 
-/* Gemini 1.5 Theme - Footer - Using CSS Variables */
-[data-theme='gemini'] .gemini-footer,
-body.theme-gemini .gemini-footer {
+/* MyHR Theme - Footer - Using CSS Variables */
+[data-theme='myhr'] .myhr-footer,
+body.theme-myhr .myhr-footer {
   background: linear-gradient(135deg,
     var(--footer-bg-start) 0%,
     var(--footer-bg-end) 100%
@@ -121,7 +121,7 @@ body.theme-gemini .gemini-footer {
       transparent 100%
     );
     background-size: 200% 100%;
-    animation: geminiShimmer 4s ease-in-out infinite;
+    animation: myhrShimmer 4s ease-in-out infinite;
     z-index: 1;
   }
 
@@ -162,7 +162,7 @@ body.theme-gemini .gemini-footer {
         -webkit-text-fill-color: transparent;
         background-clip: text;
         background-size: 200% 200%;
-        animation: geminiGradient 3s ease infinite;
+        animation: myhrGradient 3s ease infinite;
       }
     }
   }
@@ -180,8 +180,8 @@ body.theme-gemini .gemini-footer {
   }
 }
 
-/* Gemini gradient animation for footer text */
-@keyframes geminiGradient {
+/* MyHR gradient animation for footer text */
+@keyframes myhrGradient {
   0%, 100% {
     background-position: 0% 50%;
   }

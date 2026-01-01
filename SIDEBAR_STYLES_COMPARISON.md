@@ -21,7 +21,7 @@
 | Aspect | Main Layout | Demo Layout | Status |
 |--------|-------------|-------------|--------|
 | **Method** | SCSS โดยตรง | Tailwind @apply | ⚠️ ไม่สอดคล้อง |
-| **Glass Utilities** | ไม่ใช้ | ใช้ `glass-strong dark:glass-dark-strong theme-gemini:glass-gemini-strong` | ⚠️ ไม่สอดคล้อง |
+| **Glass Utilities** | ไม่ใช้ | ใช้ `glass-strong dark:glass-dark-strong theme-myhr:glass-gemini-strong` | ⚠️ ไม่สอดคล้อง |
 
 ### 3. **Background & Blur**
 
@@ -79,7 +79,7 @@
 
 **การเปลี่ยนแปลง**:
 1. เปลี่ยน class จาก `.syncfusion-sidebar` เป็น `.e-sidebar`
-2. ใช้ Tailwind @apply: `glass-strong dark:glass-dark-strong theme-gemini:glass-gemini-strong`
+2. ใช้ Tailwind @apply: `glass-strong dark:glass-dark-strong theme-myhr:glass-gemini-strong`
 3. ลบ animations (หรือเก็บไว้เป็น optional)
 
 ### Option 2: ปรับ Demo Layout ให้เหมือน Main Layout
@@ -115,7 +115,7 @@
    - อัปเดต HTML: `class="syncfusion-sidebar"` → ลบ class (ใช้ default)
 
 2. **ใช้ Tailwind @apply**
-   - ใช้ `glass-strong dark:glass-dark-strong theme-gemini:glass-gemini-strong`
+   - ใช้ `glass-strong dark:glass-dark-strong theme-myhr:glass-gemini-strong`
    - ลบ SCSS ที่ซ้ำซ้อน
 
 3. **เก็บ Animations (Optional)**

@@ -12,7 +12,7 @@
 
 /* Component uses Tailwind classes directly in HTML */
 /* All glass morphism, hover effects, and animations handled by Tailwind utilities */
-/* Dark mode and Gemini theme handled via Tailwind dark: and theme-gemini: variants */
+/* Dark mode and Myhr theme handled via Tailwind dark: and theme-myhr: variants */
 
 .animate-slide-down {
   @include slide-down();

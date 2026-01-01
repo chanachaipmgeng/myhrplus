@@ -34,14 +34,14 @@
 | Issue | Severity | Description |
 |-------|----------|-------------|
 | **Color Inconsistency** | 🔴 High | ใช้ `text-slate-*`, `bg-slate-*`, `border-slate-*` ควรเปลี่ยนเป็น `text-gray-*`, `bg-gray-*`, `border-gray-*` |
-| **Missing theme-gemini Variants** | 🟡 Medium | ไม่มี `theme-gemini:` variants ใน HTML template (มีแค่ใน SCSS) |
+| **Missing theme-myhr Variants** | 🟡 Medium | ไม่มี `theme-myhr:` variants ใน HTML template (มีแค่ใน SCSS) |
 | **Glass Nav Class** | 🟡 Medium | ใช้ `glass-nav` class ที่อาจไม่มีใน Tailwind config |
 | **Inconsistent Hover States** | 🟢 Low | บางส่วนใช้ `hover:bg-slate-*` บางส่วนใช้ custom classes |
 
 **Details**:
 - ใช้ `text-slate-700`, `text-slate-800`, `bg-slate-900`, `border-slate-700` อยู่
-- ไม่มี `theme-gemini:text-white/90`, `theme-gemini:bg-blue-500/20` ใน HTML
-- ใช้ `gemini-header` class แต่ไม่มี `theme-gemini:` variants
+- ไม่มี `theme-myhr:text-white/90`, `theme-myhr:bg-blue-500/20` ใน HTML
+- ใช้ `gemini-header` class แต่ไม่มี `theme-myhr:` variants
 
 ---
 
@@ -59,13 +59,13 @@
 | Issue | Severity | Description |
 |-------|----------|-------------|
 | **Color Inconsistency** | 🔴 High | ใช้ `text-slate-*`, `bg-slate-*`, `border-slate-*` ควรเปลี่ยนเป็น `text-gray-*`, `bg-gray-*`, `border-gray-*` |
-| **Missing theme-gemini Variants** | 🟡 Medium | ไม่มี `theme-gemini:` variants ใน HTML template |
+| **Missing theme-myhr Variants** | 🟡 Medium | ไม่มี `theme-myhr:` variants ใน HTML template |
 | **Glass Nav Class** | 🟡 Medium | ใช้ `glass-nav` class ที่อาจไม่มีใน Tailwind config |
 
 **Details**:
 - ใช้ `text-slate-600`, `bg-slate-900`, `border-slate-700` อยู่
-- ไม่มี `theme-gemini:text-white/80`, `theme-gemini:bg-blue-500/20` ใน HTML
-- ใช้ `gemini-footer` class แต่ไม่มี `theme-gemini:` variants
+- ไม่มี `theme-myhr:text-white/80`, `theme-myhr:bg-blue-500/20` ใน HTML
+- ใช้ `gemini-footer` class แต่ไม่มี `theme-myhr:` variants
 
 ---
 
@@ -86,12 +86,12 @@
 | Issue | Severity | Description |
 |-------|----------|-------------|
 | **Color Inconsistency** | 🔴 High | ใช้ `text-slate-*` ใน HTML template ควรเปลี่ยนเป็น `text-gray-*` |
-| **Missing theme-gemini Variants** | 🟡 Medium | ไม่มี `theme-gemini:` variants ใน HTML template |
+| **Missing theme-myhr Variants** | 🟡 Medium | ไม่มี `theme-myhr:` variants ใน HTML template |
 | **SCSS Heavy** | 🟡 Medium | ใช้ SCSS custom styles มาก ควร migrate เป็น Tailwind classes |
 
 **Details**:
 - ใช้ `text-slate-500`, `text-slate-400`, `text-slate-600` อยู่
-- ไม่มี `theme-gemini:text-white/90`, `theme-gemini:bg-blue-500/20` ใน HTML
+- ไม่มี `theme-myhr:text-white/90`, `theme-myhr:bg-blue-500/20` ใน HTML
 - SCSS มี custom gradients และ animations มาก
 
 ---
@@ -110,12 +110,12 @@
 | Issue | Severity | Description |
 |-------|----------|-------------|
 | **SCSS Heavy** | 🟡 Medium | ใช้ SCSS custom styles มาก ควร migrate เป็น Tailwind classes |
-| **Missing theme-gemini Variants** | 🟡 Medium | ไม่มี `theme-gemini:` variants ใน HTML template |
+| **Missing theme-myhr Variants** | 🟡 Medium | ไม่มี `theme-myhr:` variants ใน HTML template |
 | **Custom Gradients** | 🟢 Low | ใช้ custom gradients ใน SCSS ควรใช้ Tailwind classes |
 
 **Details**:
 - SCSS มี custom gradients, animations, และ effects มาก
-- ไม่มี `theme-gemini:` variants ใน HTML
+- ไม่มี `theme-myhr:` variants ใน HTML
 - ใช้ `::ng-deep` สำหรับ Syncfusion overrides (จำเป็น)
 
 ---
@@ -150,12 +150,12 @@
 
 ### Priority 2: Important (ควรแก้ไข)
 
-#### 4. Add `theme-gemini:` Variants
+#### 4. Add `theme-myhr:` Variants
 **Files**:
-- `header.component.html` - เพิ่ม theme-gemini variants สำหรับ text, bg, borders
-- `footer.component.html` - เพิ่ม theme-gemini variants สำหรับ text, bg, borders
-- `sidebar.component.html` - เพิ่ม theme-gemini variants สำหรับ text, bg, borders
-- `main-layout.component.html` - เพิ่ม theme-gemini variants (ถ้ามี)
+- `header.component.html` - เพิ่ม theme-myhr variants สำหรับ text, bg, borders
+- `footer.component.html` - เพิ่ม theme-myhr variants สำหรับ text, bg, borders
+- `sidebar.component.html` - เพิ่ม theme-myhr variants สำหรับ text, bg, borders
+- `main-layout.component.html` - เพิ่ม theme-myhr variants (ถ้ามี)
 
 **Pattern**:
 ```html
@@ -163,7 +163,7 @@
 <span class="text-gray-700 dark:text-gray-300">Text</span>
 
 <!-- After -->
-<span class="text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Text</span>
+<span class="text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Text</span>
 ```
 
 #### 5. Verify `glass-nav` Class
@@ -189,7 +189,7 @@
 
 #### 7. Standardize Hover States
 **Action**: ใช้ Tailwind classes แทน custom hover states
-- `hover:bg-gray-100 dark:hover:bg-gray-800 theme-gemini:hover:bg-white/20`
+- `hover:bg-gray-100 dark:hover:bg-gray-800 theme-myhr:hover:bg-white/20`
 - `hover:scale-105` (แทน custom transform)
 
 #### 8. Add Micro-interactions
@@ -212,15 +212,15 @@
 <div class="border-slate-200 dark:border-slate-700">Border</div>
 
 <!-- After -->
-<span class="text-gray-800 dark:text-gray-100 theme-gemini:text-white/90">Title</span>
-<div class="bg-gray-50 dark:bg-gray-900 theme-gemini:bg-white/10">Content</div>
-<div class="border-gray-200 dark:border-gray-700 theme-gemini:border-blue-500/30">Border</div>
+<span class="text-gray-800 dark:text-gray-100 theme-myhr:text-white/90">Title</span>
+<div class="bg-gray-50 dark:bg-gray-900 theme-myhr:bg-white/10">Content</div>
+<div class="border-gray-200 dark:border-gray-700 theme-myhr:border-blue-500/30">Border</div>
 ```
 
 #### Theme Gemini Support
 ```html
-<!-- Add theme-gemini variants -->
-<header class="glass-nav bg-white/25 dark:bg-gray-900/25 theme-gemini:bg-gray-900/30 backdrop-blur-lg border-b border-white/30 dark:border-gray-700/30 theme-gemini:border-blue-500/30 ...">
+<!-- Add theme-myhr variants -->
+<header class="glass-nav bg-white/25 dark:bg-gray-900/25 theme-myhr:bg-gray-900/30 backdrop-blur-lg border-b border-white/30 dark:border-gray-700/30 theme-myhr:border-blue-500/30 ...">
 ```
 
 ### Footer Component
@@ -232,8 +232,8 @@
 <footer class="... dark:!bg-slate-900/20 ... dark:border-slate-700/30 ...">
 
 <!-- After -->
-<span class="text-gray-600 dark:text-gray-400 theme-gemini:text-white/80">Copyright</span>
-<footer class="... dark:!bg-gray-900/20 theme-gemini:bg-gray-900/30 ... dark:border-gray-700/30 theme-gemini:border-blue-500/30 ...">
+<span class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/80">Copyright</span>
+<footer class="... dark:!bg-gray-900/20 theme-myhr:bg-gray-900/30 ... dark:border-gray-700/30 theme-myhr:border-blue-500/30 ...">
 ```
 
 ### Sidebar Component
@@ -245,8 +245,8 @@
 <app-icon name="folder" color="text-slate-400 dark:text-slate-600"></app-icon>
 
 <!-- After -->
-<app-icon name="search" color="text-gray-500 dark:text-gray-400 theme-gemini:text-white/70"></app-icon>
-<app-icon name="folder" color="text-gray-400 dark:text-gray-600 theme-gemini:text-white/60"></app-icon>
+<app-icon name="search" color="text-gray-500 dark:text-gray-400 theme-myhr:text-white/70"></app-icon>
+<app-icon name="folder" color="text-gray-400 dark:text-gray-600 theme-myhr:text-white/60"></app-icon>
 ```
 
 ---
@@ -268,7 +268,7 @@
 | Category | Count | Priority |
 |----------|-------|----------|
 | Color Inconsistency (slate → gray) | 25+ | 🔴 High |
-| Missing theme-gemini Variants | 20+ | 🟡 Medium |
+| Missing theme-myhr Variants | 20+ | 🟡 Medium |
 | SCSS Heavy (Optional Migration) | 4 | 🟢 Low |
 | Glass Nav Class Verification | 2 | 🟡 Medium |
 
@@ -286,9 +286,9 @@
 - [ ] Replace `text-slate-*` with `text-gray-*` in Sidebar
 
 ### Priority 2: Important
-- [ ] Add `theme-gemini:` variants in Header
-- [ ] Add `theme-gemini:` variants in Footer
-- [ ] Add `theme-gemini:` variants in Sidebar
+- [ ] Add `theme-myhr:` variants in Header
+- [ ] Add `theme-myhr:` variants in Footer
+- [ ] Add `theme-myhr:` variants in Sidebar
 - [ ] Verify `glass-nav` class exists in Tailwind config
 - [ ] Standardize hover states
 
@@ -321,7 +321,7 @@
 
 Layout components มีโครงสร้างที่ดีและรองรับ Dark Mode แล้ว แต่ยังต้องปรับปรุง:
 1. **Color Consistency** - เปลี่ยน slate → gray
-2. **Theme Gemini Support** - เพิ่ม theme-gemini variants ใน HTML
+2. **Theme Gemini Support** - เพิ่ม theme-myhr variants ใน HTML
 3. **Standards Compliance** - ให้ตรงตาม Design System Rules
 
 **Estimated Effort**: 

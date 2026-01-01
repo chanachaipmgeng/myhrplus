@@ -8,12 +8,12 @@
   display: block;
 }
 
-/* Gemini Theme */
-[data-theme='gemini'],
-body.theme-gemini {
+/* MyHR Theme */
+[data-theme='myhr'],
+body.theme-myhr {
   .grid {
     position: relative;
-    
+
     &::before {
       content: '';
       position: absolute;
@@ -29,7 +29,7 @@ body.theme-gemini {
       transition: opacity 0.3s ease-in-out;
       pointer-events: none;
     }
-    
+
     &:hover::before {
       opacity: 1;
     }

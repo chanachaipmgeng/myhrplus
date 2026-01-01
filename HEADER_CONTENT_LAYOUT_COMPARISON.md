@@ -21,8 +21,8 @@
 
 | Aspect | Main Layout | Demo Layout | Status |
 |--------|-------------|-------------|--------|
-| **Glass Effect** | `glass-nav bg-white/20 dark:bg-gray-900/20 theme-gemini:bg-gray-900/25 backdrop-blur-xl` | `glass dark:glass-dark theme-gemini:glass-gemini` | ⚠️ ต่างกัน |
-| **Border** | `border-b border-white/20 dark:border-gray-700/20 theme-gemini:border-blue-500/30` | `border-b border-black/10 dark:border-white/10` | ⚠️ ต่างกัน |
+| **Glass Effect** | `glass-nav bg-white/20 dark:bg-gray-900/20 theme-myhr:bg-gray-900/25 backdrop-blur-xl` | `glass dark:glass-dark theme-myhr:glass-gemini` | ⚠️ ต่างกัน |
+| **Border** | `border-b border-white/20 dark:border-gray-700/20 theme-myhr:border-blue-500/30` | `border-b border-black/10 dark:border-white/10` | ⚠️ ต่างกัน |
 | **Shadow** | `shadow-2xl` | `shadow-sm` | ⚠️ ต่างกัน |
 | **Animation** | `animate-slide-down` | ไม่มี | ⚠️ ต่างกัน |
 | **Z-Index** | `z-50` | `z-[100]` | ⚠️ ต่างกัน |
@@ -47,7 +47,7 @@
 
 | Aspect | Main Layout | Demo Layout | Status |
 |--------|-------------|-------------|--------|
-| **Wrapper** | `<div class="flex-1 overflow-y-auto p-8 md:p-4 bg-gray-50 dark:bg-gray-900 theme-gemini:bg-black transition-all duration-500">` | `<div class="flex-1 overflow-y-auto p-8 md:p-4 bg-gray-50 dark:bg-gray-900 theme-gemini:bg-black">` | ⚠️ ต่างกัน |
+| **Wrapper** | `<div class="flex-1 overflow-y-auto p-8 md:p-4 bg-gray-50 dark:bg-gray-900 theme-myhr:bg-black transition-all duration-500">` | `<div class="flex-1 overflow-y-auto p-8 md:p-4 bg-gray-50 dark:bg-gray-900 theme-myhr:bg-black">` | ⚠️ ต่างกัน |
 | **Animation Wrapper** | ✅ มี (`<div class="animate-fade-in">`) | ❌ ไม่มี | ⚠️ ต่างกัน |
 | **Transition** | ✅ มี (`transition-all duration-500`) | ❌ ไม่มี | ⚠️ ต่างกัน |
 
@@ -56,7 +56,7 @@
 | Aspect | Main Layout | Demo Layout | Status |
 |--------|-------------|-------------|--------|
 | **Padding** | `p-8 md:p-4` | `p-8 md:p-4` | ✅ เหมือนกัน |
-| **Background** | `bg-gray-50 dark:bg-gray-900 theme-gemini:bg-black` | `bg-gray-50 dark:bg-gray-900 theme-gemini:bg-black` | ✅ เหมือนกัน |
+| **Background** | `bg-gray-50 dark:bg-gray-900 theme-myhr:bg-black` | `bg-gray-50 dark:bg-gray-900 theme-myhr:bg-black` | ✅ เหมือนกัน |
 | **Overflow** | `overflow-y-auto` | `overflow-y-auto` | ✅ เหมือนกัน |
 | **Transition** | `transition-all duration-500` | ไม่มี | ⚠️ ต่างกัน |
 | **Animation** | `animate-fade-in` | ไม่มี | ⚠️ ต่างกัน |
@@ -77,7 +77,7 @@
 
 ### 3. **Header Styling ไม่สอดคล้อง**
 - Main Layout: ใช้ `glass-nav` + custom styles
-- Demo Layout: ใช้ `glass dark:glass-dark theme-gemini:glass-gemini`
+- Demo Layout: ใช้ `glass dark:glass-dark theme-myhr:glass-gemini`
 - **ผลกระทบ**: ดูไม่เหมือนกัน
 
 ### 4. **Content Area Transition/Animation ไม่สอดคล้อง**
@@ -141,7 +141,7 @@
    - เปลี่ยนจาก `z-50` → `z-[100]` (เหมือน demo-layout)
 
 2. **ปรับ Styling** (ถ้าต้องการ)
-   - ใช้ `glass dark:glass-dark theme-gemini:glass-gemini` (เหมือน demo-layout)
+   - ใช้ `glass dark:glass-dark theme-myhr:glass-gemini` (เหมือน demo-layout)
    - หรือเก็บ `glass-nav` ไว้ (ถ้าต้องการ custom styling)
 
 3. **ปรับ Positioning** (ถ้าต้องการ)

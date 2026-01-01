@@ -14,25 +14,25 @@
   @apply dark:bg-primary/20 dark:text-primary;
 }
 
-/* Gemini Theme */
-[data-theme='gemini'],
-body.theme-gemini {
+/* Myhrheme */
+[data-theme='myhr'],
+body.theme-myhr {
   .p-2 {
-    @apply glass-gemini-weak;
-    
+    @apply glass-myhr-weak;
+
     &:hover {
       filter: drop-shadow(0 0 4px rgba(var(--primary-rgb), 0.4));
     }
   }
-  
+
   .bg-white\/90,
   .dark .bg-slate-900\/90 {
-    @apply glass-gemini shadow-gemini;
+    @apply glass-myhr shadow-myhr;
     border-color: rgba(var(--primary-rgb), 0.3);
   }
-  
+
   .active {
-    @apply glass-gemini;
+    @apply glass-myhr;
     background: linear-gradient(135deg,
       rgba(var(--primary-rgb), 0.2),
       rgba(var(--primary-rgb), 0.2)
@@ -40,15 +40,15 @@ body.theme-gemini {
     color: rgb(var(--primary-rgb));
     -webkit-background-clip: text;
   }
-  
+
   .w-10 {
     border-color: rgba(var(--primary-rgb), 0.3);
-    
+
     &:hover {
       filter: drop-shadow(0 0 8px rgba(var(--primary-rgb), 0.6));
     }
   }
-  
+
   .border-indigo-500 {
     border-color: var(--primary-color);
     filter: drop-shadow(0 0 8px rgba(var(--primary-rgb), 0.6));
@@ -60,11 +60,11 @@ body.theme-gemini {
   .w-48 {
     width: 10rem;
   }
-  
+
   .w-64 {
     width: 14rem;
   }
-  
+
   .grid-cols-4 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }

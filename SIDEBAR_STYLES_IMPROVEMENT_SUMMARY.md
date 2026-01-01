@@ -56,7 +56,7 @@
 ```scss
 :host ::ng-deep {
   .e-sidebar {
-    @apply glass-strong dark:glass-dark-strong theme-gemini:glass-gemini-strong border-r border-black/10 dark:border-white/10 shadow-md;
+    @apply glass-strong dark:glass-dark-strong theme-myhr:glass-gemini-strong border-r border-black/10 dark:border-white/10 shadow-md;
     
     background: rgba(255, 255, 255, 0.95) !important;
     -webkit-backdrop-filter: blur(10px) !important;
@@ -67,7 +67,7 @@
 ```
 
 **การเปลี่ยนแปลง**:
-- ✅ ใช้ Tailwind @apply: `glass-strong dark:glass-dark-strong theme-gemini:glass-gemini-strong`
+- ✅ ใช้ Tailwind @apply: `glass-strong dark:glass-dark-strong theme-myhr:glass-gemini-strong`
 - ✅ ใช้ `:host ::ng-deep` แทน `::ng-deep` (เหมือน demo-layout)
 - ✅ ใช้ `.e-sidebar` แทน `.syncfusion-sidebar`
 - ✅ ปรับ background opacity เป็น 0.95 (เหมือน demo-layout)
@@ -82,7 +82,7 @@
 |--------|--------|-------|--------|
 | **Class Name** | `.syncfusion-sidebar` (custom) | `.e-sidebar` (default) | ✅ |
 | **Styling Method** | SCSS โดยตรง | Tailwind @apply | ✅ |
-| **Glass Utilities** | ไม่ใช้ | ใช้ `glass-strong dark:glass-dark-strong theme-gemini:glass-gemini-strong` | ✅ |
+| **Glass Utilities** | ไม่ใช้ | ใช้ `glass-strong dark:glass-dark-strong theme-myhr:glass-gemini-strong` | ✅ |
 | **Background (Light)** | `rgba(255, 255, 255, 0.7)` | `rgba(255, 255, 255, 0.95)` | ✅ |
 | **Blur (Light)** | `20px` | `10px` | ✅ |
 | **Background (Dark)** | `rgba(15, 23, 42, 0.75)` | `rgba(15, 23, 42, 0.95)` | ✅ |
@@ -99,7 +99,7 @@
 ### ✅ Tailwind Utilities (เหมือน Demo Layout)
 - `glass-strong` - Light mode base styles
 - `dark:glass-dark-strong` - Dark mode base styles
-- `theme-gemini:glass-gemini-strong` - Gemini theme base styles
+- `theme-myhr:glass-gemini-strong` - Gemini theme base styles
 - `border-r border-black/10 dark:border-white/10` - Border styles
 - `shadow-md` - Shadow styles
 
@@ -147,7 +147,7 @@
 
 2. ✅ `src/app/layout/main-layout/main-layout.component.scss`
    - เปลี่ยน selector จาก `::ng-deep .syncfusion-sidebar` → `:host ::ng-deep .e-sidebar`
-   - ใช้ Tailwind @apply: `glass-strong dark:glass-dark-strong theme-gemini:glass-gemini-strong`
+   - ใช้ Tailwind @apply: `glass-strong dark:glass-dark-strong theme-myhr:glass-gemini-strong`
    - ปรับ background opacity และ blur ให้สอดคล้องกับ demo-layout
    - เก็บ animations ไว้สำหรับ Gemini theme
 

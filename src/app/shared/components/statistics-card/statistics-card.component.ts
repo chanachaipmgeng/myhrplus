@@ -23,12 +23,12 @@ export class StatisticsCardComponent {
 
   get iconColorClass(): string {
     if (this.iconColor) return this.iconColor;
-    
+
     // For gradient variant, use white text
     if (this.variant === 'gradient') {
       return 'text-white';
     }
-    
+
     // Extract color from iconBgClass if available
     if (this.iconBgClass.includes('indigo')) {
       return 'text-indigo-600 dark:text-indigo-400';
@@ -49,14 +49,14 @@ export class StatisticsCardComponent {
     } else if (this.iconBgClass.includes('teal')) {
       return 'text-teal-600 dark:text-teal-400';
     }
-    
+
     // Default color
     return 'text-blue-600 dark:text-blue-400';
   }
 
   get gradientClass(): string {
     if (this.variant !== 'gradient') return '';
-    
+
     // Extract color from iconBgClass and create gradient
     if (this.iconBgClass.includes('indigo')) {
       return 'bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700';
@@ -77,13 +77,13 @@ export class StatisticsCardComponent {
     } else if (this.iconBgClass.includes('teal')) {
       return 'bg-gradient-to-br from-teal-400 to-cyan-400 dark:from-teal-500 dark:to-cyan-500';
     }
-    
+
     // Default gradient
     return 'bg-gradient-to-br from-blue-400 to-cyan-400 dark:from-blue-500 dark:to-cyan-500';
   }
 
   get cardCustomClass(): string {
-    const baseClasses = this.variant === 'gradient' 
+    const baseClasses = this.variant === 'gradient'
       ? `${this.gradientClass} text-white hover:scale-105 transition-transform duration-300 cursor-pointer`
       : 'hover-lift transition-smooth';
     return baseClasses;
@@ -93,32 +93,32 @@ export class StatisticsCardComponent {
     if (this.variant === 'gradient') {
       return 'text-sm font-medium text-white/90';
     }
-    return 'text-sm font-medium text-slate-600 dark:text-slate-400 theme-gemini:text-white/70';
+    return 'text-sm font-medium text-slate-600 dark:text-slate-400 theme-myhr:text-white/70';
   }
 
   get valueClass(): string {
     if (this.variant === 'gradient') {
       return 'text-2xl font-bold text-white';
     }
-    return 'text-2xl font-bold text-slate-900 dark:text-slate-100 theme-gemini:bg-gradient-gemini-text theme-gemini:bg-clip-text theme-gemini:text-transparent';
+    return 'text-2xl font-bold text-slate-900 dark:text-slate-100 theme-myhr:bg-gradient-myhr-text theme-myhr:bg-clip-text theme-myhr:text-transparent';
   }
 
   get iconContainerClass(): string {
     if (this.variant === 'gradient') {
       return 'p-3 rounded-full bg-white/20 backdrop-blur-sm';
     }
-    return `p-3 rounded-full theme-gemini:glass-gemini-weak theme-gemini:bg-primary/20 theme-gemini:shadow-gemini-sm ${this.iconBgClass}`;
+    return `p-3 rounded-full theme-myhr:glass-myhr-weak theme-myhr:bg-primary/20 theme-myhr:shadow-myhr-sm ${this.iconBgClass}`;
   }
 
   get changeClass(): string {
     if (!this.change) return '';
     if (this.variant === 'gradient') {
-      return this.change > 0 
-        ? 'text-white/90' 
+      return this.change > 0
+        ? 'text-white/90'
         : 'text-white/80';
     }
-    return this.change > 0 
-      ? 'text-green-600 dark:text-green-400' 
+    return this.change > 0
+      ? 'text-green-600 dark:text-green-400'
       : 'text-red-600 dark:text-red-400';
   }
 }

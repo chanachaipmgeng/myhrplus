@@ -28,8 +28,8 @@
       }
     }
 
-    body.theme-gemini & .e-header-container {
-      @include syncfusion-gemini-shadow;
+    body.theme-myhr & .e-header-container {
+      @include syncfusion-myhr-shadow;
     }
 
     /* Content */
@@ -76,7 +76,7 @@
       }
     }
 
-    body.theme-gemini & .e-appointment {
+    body.theme-myhr & .e-appointment {
       box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.3);
     }
 
@@ -124,7 +124,7 @@
 
     /* Quick Popup */
     .e-quick-popup-wrapper {
-      @apply glass-strong dark:glass-dark-strong theme-gemini:glass-gemini rounded-xl;
+      @apply glass-strong dark:glass-dark-strong theme-myhr:glass-myhr rounded-xl;
 
       .e-popup-header {
         @apply glass-weak dark:glass-dark-weak border-b border-white/10 dark:border-slate-700/30;
@@ -147,7 +147,7 @@
 
     /* Event Editor */
     .e-event-popup {
-      @apply glass-strong dark:glass-dark-strong theme-gemini:glass-gemini rounded-xl;
+      @apply glass-strong dark:glass-dark-strong theme-myhr:glass-myhr rounded-xl;
 
       .e-popup-header {
         @apply glass-weak dark:glass-dark-weak;

@@ -31,7 +31,7 @@
 
 #### เพิ่มข้อมูลใหม่:
 - ✅ **Background Patterns & Animations**: Guidelines สำหรับ pattern overlays และ gradient animations
-- ✅ **Color Consistency**: ใช้ `gray-*` แทน `slate-*` พร้อม `theme-gemini:` variants
+- ✅ **Color Consistency**: ใช้ `gray-*` แทน `slate-*` พร้อม `theme-myhr:` variants
 - ✅ **Background Duplication Prevention**: Guidelines เพื่อหลีกเลี่ยง background duplication
 - ✅ **Performance Guidelines**: Mobile optimization และ reduced motion support
 
@@ -102,8 +102,8 @@
 ### 3. Color Consistency
 **Standard**:
 - Use `gray-*` instead of `slate-*` for consistency
-- Always include `theme-gemini:` variants
-- Pattern: `text-gray-700 dark:text-gray-300 theme-gemini:text-white/90`
+- Always include `theme-myhr:` variants
+- Pattern: `text-gray-700 dark:text-gray-300 theme-myhr:text-white/90`
 
 ### 4. Performance Optimizations
 **Guidelines**:

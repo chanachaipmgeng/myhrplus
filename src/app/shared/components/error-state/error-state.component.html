@@ -1,4 +1,4 @@
-<div class="flex items-center justify-center text-center p-6 rounded-lg border border-red-500/20 dark:border-red-500/30 glass-weak dark:glass-dark-weak theme-gemini:glass-gemini-weak transition-smooth">
+<div class="flex items-center justify-center text-center p-6 rounded-lg border border-red-500/20 dark:border-red-500/30 glass-weak dark:glass-dark-weak theme-myhr:glass-myhr-weak transition-smooth">
   <div class="max-w-[500px] w-full px-4 sm:px-0">
     <div class="mb-6 flex justify-center items-center">
       <app-icon [name]="errorIcon" size="xl" color="text-red-600 dark:text-red-400"></app-icon>
@@ -9,7 +9,7 @@
     <p class="text-sm sm:text-xs text-slate-600 dark:text-slate-400 mb-4 sm:mb-3 thai-text leading-relaxed">
       {{ message || defaultMessage }}
     </p>
-    <div class="text-xs sm:text-[10px] text-red-600 dark:text-red-400 font-mono mb-4 sm:mb-3 px-4 sm:px-3 py-2 rounded-md bg-red-500/10 dark:bg-red-500/15 border border-red-500/20 dark:border-red-500/30 theme-gemini:glass-gemini-weak theme-gemini:border-red-500/40 transition-smooth" *ngIf="errorCode">
+    <div class="text-xs sm:text-[10px] text-red-600 dark:text-red-400 font-mono mb-4 sm:mb-3 px-4 sm:px-3 py-2 rounded-md bg-red-500/10 dark:bg-red-500/15 border border-red-500/20 dark:border-red-500/30 theme-myhr:glass-myhr-weak theme-myhr:border-red-500/40 transition-smooth" *ngIf="errorCode">
       {{ TRANSLATION_KEYS.COMMON.LABELS.ERROR_CODE | translate }}: {{ errorCode }}
     </div>
     <div class="text-sm text-slate-600 dark:text-slate-400 mb-4 sm:mb-3 text-left" *ngIf="showDetails && details">

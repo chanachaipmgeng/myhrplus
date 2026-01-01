@@ -161,7 +161,7 @@ var(--menu-badge-bg)
 
 /* Gemini Theme */
 [data-theme='gemini'] .my-component,
-body.theme-gemini .my-component {
+body.theme-myhr .my-component {
   /* Handled by CSS variables */
 }
 ```
@@ -177,7 +177,7 @@ body.theme-gemini .my-component {
   }
   
   [data-theme='gemini'] &,
-  body.theme-gemini & {
+  body.theme-myhr & {
     /* Gemini theme handled by CSS variables */
   }
 }
@@ -264,7 +264,7 @@ color: var(--text-muted);        // Muted text
   }
   
   [data-theme='gemini'] &,
-  body.theme-gemini & {
+  body.theme-myhr & {
     /* Handled by CSS variables */
   }
 }

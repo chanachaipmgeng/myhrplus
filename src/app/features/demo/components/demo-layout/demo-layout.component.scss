@@ -7,7 +7,7 @@
 
 :host ::ng-deep {
   .e-sidebar {
-    @apply glass-strong dark:glass-dark-strong theme-gemini:glass-gemini-strong border-r border-black/10 dark:border-white/10 shadow-md;
+    @apply glass-strong dark:glass-dark-strong theme-myhr:glass-myhr-strong border-r border-black/10 dark:border-white/10 shadow-md;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -17,7 +17,7 @@
       background: rgba(15, 23, 42, 0.95);
     }
 
-    body.theme-gemini & {
+    body.theme-myhr & {
       background: rgba(15, 23, 42, 0.95);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
@@ -61,7 +61,7 @@
     }
   }
 
-  body.theme-gemini & {
+  body.theme-myhr & {
     scrollbar-color: rgba(var(--primary-rgb), 0.3) transparent;
 
     &::-webkit-scrollbar-thumb {

@@ -24,11 +24,11 @@
   @apply transition-smooth;
 }
 
-/* Gemini Theme */
-[data-theme='gemini'] .material-icons,
-body.theme-gemini .material-icons {
+/* MyHR Theme */
+[data-theme='myhr'] .material-icons,
+body.theme-myhr .material-icons {
   @apply glow-primary;
-  
+
   &:hover {
     filter: drop-shadow(0 0 8px rgba(var(--primary-rgb), 0.6));
   }
@@ -39,11 +39,11 @@ body.theme-gemini .material-icons {
   .text-4xl {
     font-size: 1.875rem; /* 30px */
   }
-  
+
   .w-10 {
     width: 2rem;
   }
-  
+
   .h-10 {
     height: 2rem;
   }

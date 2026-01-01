@@ -173,7 +173,7 @@
   }
   
   [data-theme='gemini'] &,
-  body.theme-gemini & {
+  body.theme-myhr & {
     border-color: var(--glass-border-strong);
   }
 }
@@ -238,7 +238,7 @@
 
 2. **Theme Support**
    - ✅ รองรับ `[data-theme='dark']` และ `.dark`
-   - ✅ รองรับ `[data-theme='gemini']` และ `body.theme-gemini`
+   - ✅ รองรับ `[data-theme='gemini']` และ `body.theme-myhr`
 
 3. **Component Encapsulation**
    - ✅ ไม่มี `::ng-deep` ใน global styles

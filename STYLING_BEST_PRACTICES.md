@@ -52,7 +52,7 @@ background: rgba(var(--primary-rgb), 0.2);
     background: rgba(15, 23, 42, 0.4);
   }
   
-  body.theme-gemini & {
+  body.theme-myhr & {
     background: rgba(15, 23, 42, 0.9);
   }
 }
@@ -176,7 +176,7 @@ background: rgba(var(--primary-rgb), 0.2);
 ```scss
 // ❌ Bad - ::ng-deep in global styles
 // styles.scss
-body.theme-gemini {
+body.theme-myhr {
   ::ng-deep app-my-component {
     .my-class {
       background: var(--glass-bg);
@@ -187,7 +187,7 @@ body.theme-gemini {
 // ✅ Good - Component-specific styles
 // my-component.component.scss
 [data-theme='gemini'] :host,
-body.theme-gemini :host {
+body.theme-myhr :host {
   .my-class {
     background: var(--glass-bg);
   }
@@ -207,7 +207,7 @@ body.theme-gemini :host {
   }
   
   [data-theme='gemini'] &,
-  body.theme-gemini & {
+  body.theme-myhr & {
     /* Gemini theme handled by CSS variables */
   }
 }
@@ -374,7 +374,7 @@ body.theme-gemini :host {
   }
   
   [data-theme='gemini'] &,
-  body.theme-gemini & {
+  body.theme-myhr & {
     /* Gemini theme handled by CSS variables */
   }
 }
@@ -449,7 +449,7 @@ body.theme-gemini :host {
 
 ### Theme Support
 - [ ] รองรับ `[data-theme='dark']` และ `.dark`
-- [ ] รองรับ `[data-theme='gemini']` และ `body.theme-gemini`
+- [ ] รองรับ `[data-theme='gemini']` และ `body.theme-myhr`
 - [ ] Maintain backward compatibility
 
 ### Accessibility

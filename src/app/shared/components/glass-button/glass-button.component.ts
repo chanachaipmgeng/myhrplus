@@ -41,7 +41,7 @@ export class GlassButtonComponent {
       if (hasGradient) {
         variantClasses = 'text-slate-700 shadow-sm hover:shadow-md hover-scale-sm dark:text-slate-200';
       } else {
-        variantClasses = 'glass text-slate-700 shadow-sm hover:glass-strong hover:shadow-md hover-scale-sm dark:glass-dark dark:text-slate-200 dark:hover:glass-dark-strong theme-gemini:glass-gemini theme-gemini:text-white theme-gemini:hover:glass-gemini-strong';
+        variantClasses = 'glass text-slate-700 shadow-sm hover:glass-strong hover:shadow-md hover-scale-sm dark:glass-dark dark:text-slate-200 dark:hover:glass-dark-strong theme-myhr:glass-myhr theme-myhr:text-white theme-myhr:hover:glass-myhr-strong';
       }
     }
 

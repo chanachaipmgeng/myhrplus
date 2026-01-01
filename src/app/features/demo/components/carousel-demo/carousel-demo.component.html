@@ -1,21 +1,21 @@
 <div class="w-full py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
   <app-glass-card padding="p-6">
     <div class="mb-8">
-      <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
         Syncfusion Carousel Component
       </h1>
-      <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+      <p class="text-base text-gray-600 dark:text-gray-400 theme-myhr:text-white/80 leading-relaxed">
         A responsive carousel component for displaying slides with navigation controls, indicators, and autoplay functionality.
       </p>
     </div>
 
     <!-- Live Demo -->
     <section class="mb-12">
-      <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-                 text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+                 text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
         Live Demo
       </h2>
-      
+
       <app-glass-card padding="p-6">
         <div class="rounded-lg overflow-hidden">
           <app-carousel
@@ -42,25 +42,25 @@
 
     <!-- Basic Usage -->
     <section class="mb-12">
-      <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-                 text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+                 text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
         Basic Usage
       </h2>
-      
+
       <app-code-viewer [code]="basicExample" language="html" title="Carousel Usage"></app-code-viewer>
     </section>
 
     <!-- Advanced Features -->
     <section class="mb-12">
-      <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-                 text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+      <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+                 text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
         Advanced Features
       </h2>
-      
+
       <app-glass-card padding="p-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6 mt-4">
-          <div class="p-4 bg-white/5 dark:bg-black/20 theme-gemini:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-gemini:border-primary/30">
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 mb-2">
+          <div class="p-4 bg-white/5 dark:bg-black/20 theme-myhr:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-myhr:border-primary/30">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 theme-myhr:text-white/90 mb-2">
               Navigation
             </label>
             <div class="flex gap-2">
@@ -76,28 +76,28 @@
               </button>
               <button
                 (click)="togglePlayPause()"
-                class="px-4 py-2 bg-gray-500 hover:bg-gray-600 theme-gemini:bg-white/20 theme-gemini:hover:bg-white/30 text-white rounded-lg transition-colors">
+                class="px-4 py-2 bg-gray-500 hover:bg-gray-600 theme-myhr:bg-white/20 theme-myhr:hover:bg-white/30 text-white rounded-lg transition-colors">
                 {{ carousel?.isPlaying() ? 'Pause' : 'Play' }}
               </button>
             </div>
           </div>
 
-          <div class="p-4 bg-white/5 dark:bg-black/20 theme-gemini:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-gemini:border-primary/30">
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 mb-2">
+          <div class="p-4 bg-white/5 dark:bg-black/20 theme-myhr:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-myhr:border-primary/30">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 theme-myhr:text-white/90 mb-2">
               Go to Slide
             </label>
             <div class="flex gap-2 flex-wrap">
               <button
                 *ngFor="let item of carouselItems; let i = index"
                 (click)="goTo(i)"
-                class="px-3 py-1 bg-gray-200 dark:bg-gray-700 theme-gemini:bg-white/10 hover:bg-gray-300 dark:hover:bg-gray-600 theme-gemini:hover:bg-white/20 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 rounded transition-colors">
+                class="px-3 py-1 bg-gray-200 dark:bg-gray-700 theme-myhr:bg-white/10 hover:bg-gray-300 dark:hover:bg-gray-600 theme-myhr:hover:bg-white/20 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90 rounded transition-colors">
                 {{ i + 1 }}
               </button>
             </div>
           </div>
 
-          <div class="p-4 bg-white/5 dark:bg-black/20 theme-gemini:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-gemini:border-primary/30">
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 mb-2">
+          <div class="p-4 bg-white/5 dark:bg-black/20 theme-myhr:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-myhr:border-primary/30">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 theme-myhr:text-white/90 mb-2">
               Interval (ms)
             </label>
             <input
@@ -107,11 +107,11 @@
               min="1000"
               max="10000"
               step="500"
-              class="px-4 py-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
+              class="px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
           </div>
 
-          <div class="p-4 bg-white/5 dark:bg-black/20 theme-gemini:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-gemini:border-primary/30">
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 mb-2">
+          <div class="p-4 bg-white/5 dark:bg-black/20 theme-myhr:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-myhr:border-primary/30">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 theme-myhr:text-white/90 mb-2">
               Settings
             </label>
             <div class="flex flex-col gap-2">
@@ -121,7 +121,7 @@
                   [checked]="autoPlay"
                   (change)="toggleAutoPlay()"
                   class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
-                <span class="text-sm text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Auto Play</span>
+                <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Auto Play</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
                 <input
@@ -129,7 +129,7 @@
                   [checked]="loop"
                   (change)="toggleLoop()"
                   class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
-                <span class="text-sm text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Loop</span>
+                <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Loop</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
                 <input
@@ -137,32 +137,32 @@
                   [checked]="showIndicators"
                   (change)="showIndicators = !showIndicators"
                   class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
-                <span class="text-sm text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Show Indicators</span>
+                <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Show Indicators</span>
               </label>
             </div>
           </div>
 
-          <div class="p-4 bg-white/5 dark:bg-black/20 theme-gemini:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-gemini:border-primary/30">
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 theme-gemini:text-white/90 mb-2">
+          <div class="p-4 bg-white/5 dark:bg-black/20 theme-myhr:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-myhr:border-primary/30">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 theme-myhr:text-white/90 mb-2">
               Animation Effect
             </label>
             <select
               [value]="animationEffect"
               (change)="onAnimationEffectChange($event)"
-              class="px-4 py-2 bg-white dark:bg-gray-800 theme-gemini:glass-gemini-weak border border-gray-300 dark:border-gray-600 theme-gemini:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-gemini:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
+              class="px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
               <option value="Slide">Slide</option>
               <option value="Fade">Fade</option>
               <option value="None">None</option>
             </select>
           </div>
         </div>
-        
-        <div class="flex flex-col gap-2 p-4 bg-white/5 dark:bg-black/20 theme-gemini:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-gemini:border-primary/30 mt-6">
-          <p class="text-gray-600 dark:text-gray-400 theme-gemini:text-white/80">
-            Current Slide: <strong class="text-gray-800 dark:text-gray-200 theme-gemini:text-white">{{ getCurrentIndex() + 1 }}</strong> of <strong class="text-gray-800 dark:text-gray-200 theme-gemini:text-white">{{ getTotalSlides() }}</strong>
+
+        <div class="flex flex-col gap-2 p-4 bg-white/5 dark:bg-black/20 theme-myhr:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-myhr:border-primary/30 mt-6">
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/80">
+            Current Slide: <strong class="text-gray-800 dark:text-gray-200 theme-myhr:text-white">{{ getCurrentIndex() + 1 }}</strong> of <strong class="text-gray-800 dark:text-gray-200 theme-myhr:text-white">{{ getTotalSlides() }}</strong>
           </p>
-          <p class="text-gray-600 dark:text-gray-400 theme-gemini:text-white/80">
-            Status: <strong class="text-gray-800 dark:text-gray-200 theme-gemini:text-white">{{ carousel?.isPlaying() ? 'Playing' : 'Paused' }}</strong>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/80">
+            Status: <strong class="text-gray-800 dark:text-gray-200 theme-myhr:text-white">{{ carousel?.isPlaying() ? 'Playing' : 'Paused' }}</strong>
           </p>
         </div>
       </app-glass-card>

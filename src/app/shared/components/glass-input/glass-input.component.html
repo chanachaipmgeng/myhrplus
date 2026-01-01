@@ -20,13 +20,13 @@
       (input)="onInput($event)"
       (blur)="onBlur()"
       (focus)="onFocus()"
-      class="glass rounded-md px-4 py-3 md:py-2.5 pr-10 text-base md:text-sm min-h-[44px] md:min-h-0 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 shadow-sm transition-all duration-300 focus:glass-strong focus:shadow-md focus:scale-[1.01] hover:shadow-md hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed dark:glass-dark dark:focus:glass-dark-strong theme-gemini:glass-gemini theme-gemini:focus:glass-gemini-strong w-full"
+      class="glass rounded-md px-4 py-3 md:py-2.5 pr-10 text-base md:text-sm min-h-[44px] md:min-h-0 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 shadow-sm transition-all duration-300 focus:glass-strong focus:shadow-md focus:scale-[1.01] hover:shadow-md hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed dark:glass-dark dark:focus:glass-dark-strong theme-myhr:glass-myhr theme-myhr:focus:glass-myhr-strong w-full"
       [ngClass]="{
-        'border-red-500 dark:border-red-400 theme-gemini:border-red-400': hasError,
-        'border-green-500 dark:border-green-400 theme-gemini:border-green-400': isValid && showSuccess && !hasError,
+        'border-red-500 dark:border-red-400 theme-myhr:border-red-400': hasError,
+        'border-green-500 dark:border-green-400 theme-myhr:border-green-400': isValid && showSuccess && !hasError,
         'animate-shake': hasError,
-        'ring-2 ring-red-500/20 dark:ring-red-400/20 theme-gemini:ring-red-400/20': hasError,
-        'ring-2 ring-green-500/20 dark:ring-green-400/20 theme-gemini:ring-green-400/20': isValid && showSuccess && !hasError
+        'ring-2 ring-red-500/20 dark:ring-red-400/20 theme-myhr:ring-red-400/20': hasError,
+        'ring-2 ring-green-500/20 dark:ring-green-400/20 theme-myhr:ring-green-400/20': isValid && showSuccess && !hasError
       }"
     />
     <!-- Success Icon -->
@@ -34,7 +34,7 @@
          class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
       <app-icon name="check_circle"
                 size="sm"
-                color="text-green-500 dark:text-green-400 theme-gemini:text-green-400"
+                color="text-green-500 dark:text-green-400 theme-myhr:text-green-400"
                 class="animate-pulse-success">
       </app-icon>
     </div>
@@ -43,7 +43,7 @@
          class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
       <app-icon name="error"
                 size="sm"
-                color="text-red-500 dark:text-red-400 theme-gemini:text-red-400">
+                color="text-red-500 dark:text-red-400 theme-myhr:text-red-400">
       </app-icon>
     </div>
   </div>
@@ -51,9 +51,9 @@
   <div *ngIf="hasError && errorMessage && !useFormValidationMessages"
        [id]="errorMessageId"
        role="alert"
-       class="flex items-center gap-1.5 text-red-500 dark:text-red-400 theme-gemini:text-red-400 text-sm mt-1 animate-fade-in"
+       class="flex items-center gap-1.5 text-red-500 dark:text-red-400 theme-myhr:text-red-400 text-sm mt-1 animate-fade-in"
        aria-live="polite">
-    <app-icon name="error" size="xs" color="text-red-500 dark:text-red-400 theme-gemini:text-red-400"></app-icon>
+    <app-icon name="error" size="xs" color="text-red-500 dark:text-red-400 theme-myhr:text-red-400"></app-icon>
     <span class="thai-text">{{ errorMessage }}</span>
   </div>
   <!-- Form Validation Messages Component (Recommended) -->
@@ -62,15 +62,15 @@
   <div *ngIf="isValid && showSuccess && successMessage && !hasError"
        [id]="successMessageId"
        role="status"
-       class="flex items-center gap-1.5 text-green-500 dark:text-green-400 theme-gemini:text-green-400 text-sm mt-1 animate-fade-in"
+       class="flex items-center gap-1.5 text-green-500 dark:text-green-400 theme-myhr:text-green-400 text-sm mt-1 animate-fade-in"
        aria-live="polite">
-    <app-icon name="check_circle" size="xs" color="text-green-500 dark:text-green-400 theme-gemini:text-green-400"></app-icon>
+    <app-icon name="check_circle" size="xs" color="text-green-500 dark:text-green-400 theme-myhr:text-green-400"></app-icon>
     <span class="thai-text">{{ successMessage }}</span>
   </div>
   <!-- Hint Message -->
   <div *ngIf="hint && !hasError && !isValid"
        [id]="hintId"
-       class="text-slate-500 dark:text-slate-400 theme-gemini:text-white/60 text-sm mt-1">
+       class="text-slate-500 dark:text-slate-400 theme-myhr:text-white/60 text-sm mt-1">
     {{ hint }}
   </div>
 </div>

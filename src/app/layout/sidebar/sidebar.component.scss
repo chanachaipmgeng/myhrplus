@@ -63,8 +63,8 @@
     }
   }
 
-  [data-theme='gemini'] &,
-  [class*='theme-gemini'] & {
+  [data-theme='myhr'] &,
+  [class*='theme-myhr'] & {
     &::before {
       opacity: 0.4;
     }
@@ -127,8 +127,8 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
     }
 
-    [data-theme='gemini'] &,
-    [class*='theme-gemini'] & {
+    [data-theme='myhr'] &,
+    [class*='theme-myhr'] & {
       box-shadow:
         0 2px 8px rgba(var(--primary-rgb), 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.1),
@@ -160,8 +160,8 @@
       box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.25);
     }
 
-    [data-theme='gemini'] &,
-    [class*='theme-gemini'] & {
+    [data-theme='myhr'] &,
+    [class*='theme-myhr'] & {
       box-shadow:
         0 4px 12px rgba(var(--primary-rgb), 0.3),
         0 0 16px rgba(var(--primary-rgb), 0.2);
@@ -266,7 +266,7 @@
     }
   }
 
-  [class*='theme-gemini'] & {
+  [class*='theme-myhr'] & {
     background: linear-gradient(
       to bottom,
       rgba(var(--primary-rgb), 0.15) 0%,
@@ -366,7 +366,7 @@
       background: rgba(var(--primary-rgb), 0.08);
     }
 
-    [class*='theme-gemini'] & {
+    [class*='theme-myhr'] & {
       background: rgba(var(--primary-rgb), 0.1);
     }
   }
@@ -502,7 +502,7 @@
     }
   }
 
-  [class*='theme-gemini'] & {
+  [class*='theme-myhr'] & {
     background: rgba(0, 0, 0, 0.8);
     box-shadow:
       0 10px 40px rgba(0, 0, 0, 0.5),
@@ -656,7 +656,7 @@
     }
   }
 
-  [class*='theme-gemini'] & {
+  [class*='theme-myhr'] & {
     border-bottom-color: rgba(255, 255, 255, 0.1);
 
     &::after {

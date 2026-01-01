@@ -350,7 +350,7 @@
 
 ### 2. Theme Support
 - ✅ รองรับ `[data-theme='dark']` และ `.dark`
-- ✅ รองรับ `[data-theme='gemini']` และ `body.theme-gemini`
+- ✅ รองรับ `[data-theme='gemini']` และ `body.theme-myhr`
 - ✅ Maintain backward compatibility
 
 ### 3. Component Encapsulation

@@ -1,12 +1,12 @@
-<div 
+<div
   class="progressive-disclosure w-full transition-smooth"
   [ngClass]="{
     'variant-default border-b border-gray-200 dark:border-gray-700': variant === 'default',
-    'variant-accordion glass-weak dark:glass-dark-weak theme-gemini:glass-gemini-weak rounded-md mb-2 overflow-hidden': variant === 'accordion',
-    'variant-card glass dark:glass-dark theme-gemini:glass-gemini theme-gemini:shadow-gemini rounded-xl p-4 shadow-md': variant === 'card',
+    'variant-accordion glass-weak dark:glass-dark-weak theme-myhr:glass-myhr-weak rounded-md mb-2 overflow-hidden': variant === 'accordion',
+    'variant-card glass dark:glass-dark theme-myhr:glass-myhr theme-myhr:shadow-myhr rounded-xl p-4 shadow-md': variant === 'card',
     'is-expanded': isExpanded
   }">
-  
+
   <!-- Header -->
   <button
     (click)="toggle()"
@@ -20,7 +20,7 @@
       'p-0 mb-4': variant === 'card'
     }">
     <div class="header-content flex items-center justify-between w-full gap-2">
-      <h3 *ngIf="title" class="disclosure-title thai-text text-base md:text-base font-semibold text-gray-900 dark:text-gray-100 m-0 transition-colors hover:text-primary theme-gemini:hover:text-primary">{{ title }}</h3>
+      <h3 *ngIf="title" class="disclosure-title thai-text text-base md:text-base font-semibold text-gray-900 dark:text-gray-100 m-0 transition-colors hover:text-primary theme-myhr:hover:text-primary">{{ title }}</h3>
       <app-icon
         *ngIf="showIcon"
         [name]="currentIcon"
@@ -31,7 +31,7 @@
       </app-icon>
     </div>
   </button>
-  
+
   <!-- Content -->
   <div
     [id]="'content-' + _uniqueId"

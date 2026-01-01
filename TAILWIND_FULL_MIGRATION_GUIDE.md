@@ -498,7 +498,7 @@ addUtilities({
 - [x] สร้าง Animation Utilities plugin
 - [x] อัปเดต Tailwind config
 - [x] Test plugins
-- [x] เพิ่ม theme-gemini variant
+- [x] เพิ่ม theme-myhr variant
 
 ### ✅ Phase 2: Design Tokens (Completed)
 - [x] Migrate colors (primary, success, error, warning, info, glass)

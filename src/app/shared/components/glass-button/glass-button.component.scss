@@ -30,11 +30,11 @@ button:focus-visible {
   animation: spin 0.6s linear infinite;
 }
 
-/* Gemini 1.5 Theme - Glass Button */
+/* Myhr 1.5 Theme - Glass Button */
 /* Moved from global styles.scss to improve encapsulation */
 /* Updated to use dynamic primary color from CSS variables */
-[data-theme='gemini'] :host,
-body.theme-gemini :host {
+[data-theme='myhr'] :host,
+body.theme-myhr :host {
   ::ng-deep .glass-button-primary {
     background: linear-gradient(135deg,
       rgba(var(--primary-rgb), 0.8) 0%,

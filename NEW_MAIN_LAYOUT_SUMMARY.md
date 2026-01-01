@@ -83,7 +83,7 @@
 ### 2. **Content Area**
 - Full width (ไม่มี margin-left)
 - Responsive padding (p-4 md:p-6 lg:p-8)
-- Background colors (gray-50, dark:gray-900, theme-gemini:black)
+- Background colors (gray-50, dark:gray-900, theme-myhr:black)
 
 ### 3. **Swipe Gestures**
 - Swipe right to open (mobile)

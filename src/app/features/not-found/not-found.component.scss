@@ -86,7 +86,7 @@
     color: rgb(var(--gray-100));
   }
 
-  [data-theme='gemini'] & {
+  [data-theme='myhr'] & {
     color: rgb(255, 255, 255);
   }
 
@@ -105,7 +105,7 @@
     color: rgb(var(--gray-400));
   }
 
-  [data-theme='gemini'] & {
+  [data-theme='myhr'] & {
     color: rgba(255, 255, 255, 0.7);
   }
 
@@ -172,7 +172,7 @@
     color: rgb(var(--gray-100));
   }
 
-  [data-theme='gemini'] & {
+  [data-theme='myhr'] & {
     background: rgba(var(--gray-800), 0.3);
     border-color: rgba(var(--primary-rgb), 0.3);
     color: rgb(255, 255, 255);
@@ -187,7 +187,7 @@
       background: rgba(var(--gray-800), 0.7);
     }
 
-    [data-theme='gemini'] & {
+    [data-theme='myhr'] & {
       background: rgba(var(--gray-800), 0.5);
     }
   }

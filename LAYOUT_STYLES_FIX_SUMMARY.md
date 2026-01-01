@@ -19,7 +19,7 @@
 #### การแก้ไข:
 ```scss
 // Before:
-@apply glass-strong dark:glass-dark-strong theme-gemini:glass-gemini-strong ...;
+@apply glass-strong dark:glass-dark-strong theme-myhr:glass-gemini-strong ...;
 background: rgba(255, 255, 255, 0.95) !important;  // ⚠️ Override หลัง @apply
 -webkit-backdrop-filter: blur(10px) !important;
 backdrop-filter: blur(10px) !important;
@@ -31,7 +31,7 @@ backdrop-filter: blur(10px) !important;
 }
 
 // After:
-@apply glass-strong dark:glass-dark-strong theme-gemini:glass-gemini-strong ...;
+@apply glass-strong dark:glass-dark-strong theme-myhr:glass-gemini-strong ...;
 // ✅ ใช้ @apply อย่างเดียว, ไม่ override
 ```
 

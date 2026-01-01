@@ -38,10 +38,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.themeService.theme$.subscribe(theme => {
       const body = document.body;
       // Remove all theme classes
-      body.classList.remove('theme-blue', 'theme-indigo', 'theme-purple', 'theme-green', 'theme-orange', 'theme-red', 'theme-teal', 'theme-pink', 'theme-gemini');
-      // Ensure gemini theme is applied when color is 'gemini'
-      if (theme.color === 'gemini') {
-        body.classList.add('theme-gemini');
+      body.classList.remove('theme-blue', 'theme-indigo', 'theme-purple', 'theme-green', 'theme-orange', 'theme-red', 'theme-teal', 'theme-pink', 'theme-myhr');
+      // Ensure myhr theme is applied when color is 'myhr'
+      if (theme.color === 'myhr') {
+        body.classList.add('theme-myhr');
       }
       // Add current theme class
       body.classList.add(`theme-${theme.color}`);
@@ -50,16 +50,16 @@ export class AppComponent implements OnInit, AfterViewInit {
     // Initialize language from storage
     const savedLang = this.storageService.getItem<Language>(STORAGE_KEYS.LANGUAGE);
     const currentLang = (savedLang && isSupportedLanguage(savedLang)) ? savedLang : DEFAULT_LANGUAGE;
-    
+
     // Set default language for TranslateService
     this.translateService.setDefaultLang(DEFAULT_LANGUAGE);
     // Add all supported languages
     this.translateService.addLangs(SUPPORTED_LANGUAGES);
     this.translateService.use(currentLang);
-    
+
     // Update document language attribute
     document.documentElement.setAttribute('lang', currentLang);
-    
+
     // Subscribe to language changes
     this.translateService.onLangChange.subscribe(event => {
       const lang = event.lang as Language;

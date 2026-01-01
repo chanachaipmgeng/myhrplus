@@ -41,7 +41,7 @@
       }
     }
 
-    body.theme-gemini & .e-toolbar {
+    body.theme-myhr & .e-toolbar {
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(var(--primary-rgb), 0.2), 0 0 30px rgba(var(--primary-rgb), 0.1);
     }
 
@@ -70,7 +70,7 @@
       }
     }
 
-    body.theme-gemini & .e-grouping-bar {
+    body.theme-myhr & .e-grouping-bar {
       background: rgba(var(--primary-rgb), 0.1);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -106,7 +106,7 @@
       }
     }
 
-    body.theme-gemini & .e-grid {
+    body.theme-myhr & .e-grid {
       background: rgba(var(--primary-rgb), 0.05);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);

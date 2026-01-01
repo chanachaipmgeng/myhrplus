@@ -1059,7 +1059,7 @@ export class ModelNameService {
 - **Utility Classes**: Prefer Tailwind utility classes
 - **Custom Classes**: Use `@layer components` for custom classes
 - **Dark Mode**: Use `dark:` prefix
-- **Gemini Theme**: Use `theme-gemini:` prefix
+- **Gemini Theme**: Use `theme-myhr:` prefix
 - **Responsive**: Use responsive prefixes (`sm:`, `md:`, `lg:`, `xl:`, `2xl:`)
 
 #### SCSS

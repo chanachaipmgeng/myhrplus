@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { StorageService } from './storage.service';
 
 export type ThemeMode = 'light' | 'dark' | 'auto';
-export type ThemeColor = 'blue' | 'indigo' | 'purple' | 'green' | 'orange' | 'red' | 'teal' | 'pink' | 'gemini';
+export type ThemeColor = 'blue' | 'indigo' | 'purple' | 'green' | 'orange' | 'red' | 'teal' | 'pink' | 'myhr';
 export type SidebarStyle = 'white' | 'dark' | 'primary' | 'primary-gradient';
 export type HeaderStyle = 'white' | 'dark' | 'primary' | 'primary-gradient';
 export type MainLayoutStyle = 'white' | 'dark' | 'primary' | 'primary-gradient';
@@ -24,8 +24,8 @@ export class ThemeService {
   private readonly THEME_STORAGE_KEY = 'hr-theme-config';
   private readonly DEFAULT_THEME: ThemeConfig = {
     mode: 'dark',
-    color: 'gemini',
-    primaryColor: '59, 130, 246', // Blue for Gemini theme
+    color: 'myhr',
+    primaryColor: '59, 130, 246', // Blue for MyHR theme
     sidebarStyle: 'primary', // Default: primary color
     headerStyle: 'primary', // Default: primary color
     mainLayoutStyle: 'primary' // Default: primary color
@@ -45,7 +45,7 @@ export class ThemeService {
    * Validate theme color
    */
   private isValidThemeColor(color: string): color is ThemeColor {
-    const validColors: ThemeColor[] = ['blue', 'indigo', 'purple', 'green', 'orange', 'red', 'teal', 'pink', 'gemini'];
+    const validColors: ThemeColor[] = ['blue', 'indigo', 'purple', 'green', 'orange', 'red', 'teal', 'pink', 'myhr'];
     return validColors.includes(color as ThemeColor);
   }
 
@@ -123,8 +123,8 @@ export class ThemeService {
       teal: '20, 184, 166',
       // Pink - สีชมพูนุ่มนวล
       pink: '236, 72, 153',
-      // Gemini - สีน้ำเงินสวยงาม (default)
-      gemini: '59, 130, 246'
+      // MyHR - สีน้ำเงินสวยงาม (default)
+      myhr: '59, 130, 246'
     };
 
     const currentTheme = this.themeSubject.value;
@@ -209,19 +209,19 @@ export class ThemeService {
     body.removeAttribute('data-theme');
 
     // Remove all theme color classes
-    const themeColors: ThemeColor[] = ['blue', 'indigo', 'purple', 'green', 'orange', 'red', 'teal', 'pink', 'gemini'];
+    const themeColors: ThemeColor[] = ['blue', 'indigo', 'purple', 'green', 'orange', 'red', 'teal', 'pink', 'myhr'];
     themeColors.forEach(color => {
       body.classList.remove(`theme-${color}`);
     });
 
     // Apply theme using data-theme attribute (preferred method)
     // Also keep class-based for backward compatibility
-    if (theme.color === 'gemini') {
-      html.setAttribute('data-theme', 'gemini');
-      body.setAttribute('data-theme', 'gemini');
-      body.classList.add('theme-gemini');
+    if (theme.color === 'myhr') {
+      html.setAttribute('data-theme', 'myhr');
+      body.setAttribute('data-theme', 'myhr');
+      body.classList.add('theme-myhr');
     } else {
-      // For non-gemini themes, use mode-based data-theme
+      // For non-myhr themes, use mode-based data-theme
       html.setAttribute('data-theme', isDark ? 'dark' : 'light');
       body.setAttribute('data-theme', isDark ? 'dark' : 'light');
       body.classList.add(`theme-${theme.color}`);

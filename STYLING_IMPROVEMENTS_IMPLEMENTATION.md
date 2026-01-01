@@ -95,7 +95,7 @@ This document summarizes the implementation of three major styling system improv
 
 #### A. Updated Theme Service to Use `data-theme` Attribute
 - **Location**: `src/app/core/services/theme.service.ts`
-- **Changed from**: Class-based switching (`.dark`, `.theme-gemini`)
+- **Changed from**: Class-based switching (`.dark`, `.theme-myhr`)
 - **Changed to**: Attribute-based switching (`data-theme="dark"`, `data-theme="gemini"`)
 - **Maintained backward compatibility** with class-based approach
 
@@ -103,12 +103,12 @@ This document summarizes the implementation of three major styling system improv
 ```typescript
 // Before: Only class-based
 html.classList.add('dark');
-body.classList.add('theme-gemini');
+body.classList.add('theme-myhr');
 
 // After: Attribute-based (preferred) + class-based (backward compatibility)
 html.setAttribute('data-theme', isDark ? 'dark' : 'light');
 body.setAttribute('data-theme', 'gemini');
-body.classList.add('theme-gemini'); // For backward compatibility
+body.classList.add('theme-myhr'); // For backward compatibility
 ```
 
 #### B. Extended CSS Variables for All Theme Styles
@@ -142,7 +142,7 @@ body.classList.add('theme-gemini'); // For backward compatibility
 
 **Before** (in `styles.scss`):
 ```scss
-body.theme-gemini {
+body.theme-myhr {
   ::ng-deep app-statistics-card {
     .glass-card {
       border: 1px solid rgba(59, 130, 246, 0.3) !important;
@@ -155,7 +155,7 @@ body.theme-gemini {
 **After** (in `statistics-card.component.scss`):
 ```scss
 [data-theme='gemini'] :host,
-body.theme-gemini :host {
+body.theme-myhr :host {
   ::ng-deep .glass-card {
     border: 1px solid var(--glass-border) !important;
     // ...

@@ -15,7 +15,7 @@
 ```scss
 :host ::ng-deep {
   .e-sidebar {
-    @apply glass-strong dark:glass-dark-strong theme-gemini:glass-gemini-strong border-r border-black/10 dark:border-white/10 shadow-md;
+    @apply glass-strong dark:glass-dark-strong theme-myhr:glass-gemini-strong border-r border-black/10 dark:border-white/10 shadow-md;
     
     background: rgba(255, 255, 255, 0.95) !important;  // ⚠️ Override หลัง @apply
     -webkit-backdrop-filter: blur(10px) !important;
@@ -29,7 +29,7 @@
 ```scss
 :host ::ng-deep {
   .e-sidebar {
-    @apply glass-strong dark:glass-dark-strong theme-gemini:glass-gemini-strong border-r border-black/10 dark:border-white/10 shadow-md;
+    @apply glass-strong dark:glass-dark-strong theme-myhr:glass-gemini-strong border-r border-black/10 dark:border-white/10 shadow-md;
     background: rgba(255, 255, 255, 0.95);  // ⚠️ ซ้ำซ้อน
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -80,7 +80,7 @@
 
 #### Main Layout Sidebar:
 ```scss
-@apply glass-strong dark:glass-dark-strong theme-gemini:glass-gemini-strong ...;
+@apply glass-strong dark:glass-dark-strong theme-myhr:glass-gemini-strong ...;
 background: rgba(255, 255, 255, 0.95) !important;  // ⚠️ Override หลัง @apply
 ```
 

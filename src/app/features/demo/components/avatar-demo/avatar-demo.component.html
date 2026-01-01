@@ -1,34 +1,34 @@
 <div class="w-full py-12">
   <div class="mb-8">
-    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Avatar Component
     </h1>
-    <p class="text-base text-gray-600 dark:text-gray-400 theme-gemini:text-white/80 leading-relaxed">
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-myhr:text-white/80 leading-relaxed">
       Avatar component with image support, initials fallback, status indicators, and badges.
     </p>
   </div>
 
   <!-- Live Demo Section -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Live Demo
     </h2>
-    
+
     <app-glass-card padding="p-6">
       <div class="mb-6">
         <div class="flex gap-6 items-center flex-wrap">
           <div class="flex flex-col items-center gap-2">
             <app-avatar name="John Doe" status="online"></app-avatar>
-            <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">With Name</span>
+            <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">With Name</span>
           </div>
           <div class="flex flex-col items-center gap-2">
             <app-avatar name="Jane Smith" status="away" [badge]="3"></app-avatar>
-            <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">With Badge</span>
+            <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">With Badge</span>
           </div>
           <div class="flex flex-col items-center gap-2">
             <app-avatar name="Bob Wilson" status="busy" badge="dot"></app-avatar>
-            <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Dot Badge</span>
+            <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">Dot Badge</span>
           </div>
         </div>
       </div>
@@ -37,11 +37,11 @@
 
   <!-- Basic Usage Section -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Basic Usage
     </h2>
-    
+
     <app-glass-card padding="p-6">
       <app-avatar name="John Doe"></app-avatar>
     </app-glass-card>
@@ -50,27 +50,27 @@
 
   <!-- Variants Section -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Variants
     </h2>
-    
+
     <app-glass-card padding="p-6">
       <div class="space-y-6">
         <div>
-          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Shapes</h3>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Shapes</h3>
           <div class="flex gap-8 items-center flex-wrap">
             <div class="flex flex-col items-center gap-2">
               <app-avatar name="User" shape="circle"></app-avatar>
-              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Circle</span>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">Circle</span>
             </div>
             <div class="flex flex-col items-center gap-2">
               <app-avatar name="User" shape="rounded"></app-avatar>
-              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Rounded</span>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">Rounded</span>
             </div>
             <div class="flex flex-col items-center gap-2">
               <app-avatar name="User" shape="square"></app-avatar>
-              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Square</span>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">Square</span>
             </div>
           </div>
         </div>
@@ -81,73 +81,73 @@
 
   <!-- States Section -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       States
     </h2>
-    
+
     <app-glass-card padding="p-6">
       <div class="space-y-6">
         <div>
-          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Sizes</h3>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Sizes</h3>
           <div class="flex gap-8 items-center flex-wrap">
             <div class="flex flex-col items-center gap-2">
               <app-avatar name="User" size="xs"></app-avatar>
-              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">xs</span>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">xs</span>
             </div>
             <div class="flex flex-col items-center gap-2">
               <app-avatar name="User" size="sm"></app-avatar>
-              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">sm</span>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">sm</span>
             </div>
             <div class="flex flex-col items-center gap-2">
               <app-avatar name="User" size="md"></app-avatar>
-              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">md</span>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">md</span>
             </div>
             <div class="flex flex-col items-center gap-2">
               <app-avatar name="User" size="lg"></app-avatar>
-              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">lg</span>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">lg</span>
             </div>
             <div class="flex flex-col items-center gap-2">
               <app-avatar name="User" size="xl"></app-avatar>
-              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">xl</span>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">xl</span>
             </div>
           </div>
         </div>
         <div>
-          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Status Indicators</h3>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Status Indicators</h3>
           <div class="flex gap-8 items-center flex-wrap">
             <div class="flex flex-col items-center gap-2">
               <app-avatar name="User" status="online"></app-avatar>
-              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Online</span>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">Online</span>
             </div>
             <div class="flex flex-col items-center gap-2">
               <app-avatar name="User" status="offline"></app-avatar>
-              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Offline</span>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">Offline</span>
             </div>
             <div class="flex flex-col items-center gap-2">
               <app-avatar name="User" status="away"></app-avatar>
-              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Away</span>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">Away</span>
             </div>
             <div class="flex flex-col items-center gap-2">
               <app-avatar name="User" status="busy"></app-avatar>
-              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Busy</span>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">Busy</span>
             </div>
           </div>
         </div>
         <div>
-          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-gemini:text-white/90">Badges</h3>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Badges</h3>
           <div class="flex gap-8 items-center flex-wrap">
             <div class="flex flex-col items-center gap-2">
               <app-avatar name="User" [badge]="5"></app-avatar>
-              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Number Badge</span>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">Number Badge</span>
             </div>
             <div class="flex flex-col items-center gap-2">
               <app-avatar name="User" badge="dot"></app-avatar>
-              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">Dot Badge</span>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">Dot Badge</span>
             </div>
             <div class="flex flex-col items-center gap-2">
               <app-avatar name="User" [badge]="99"></app-avatar>
-              <span class="text-sm text-gray-600 dark:text-gray-400 theme-gemini:text-white/70">99+ Badge</span>
+              <span class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">99+ Badge</span>
             </div>
           </div>
         </div>
@@ -160,11 +160,11 @@
 
   <!-- API Reference -->
   <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-gemini:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-gemini:bg-gradient-to-r theme-gemini:from-primary theme-gemini:via-primary theme-gemini:to-primary theme-gemini:bg-clip-text theme-gemini:text-transparent">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       API Reference
     </h2>
-    
+
     <app-glass-card padding="p-6">
       <app-props-table [props]="props"></app-props-table>
     </app-glass-card>
