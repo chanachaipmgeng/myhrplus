@@ -39,7 +39,6 @@ import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   @ViewChild('listview') listview!: ListViewComponent;
-  @ViewChild('userMenuContainer', { static: false }) userMenuContainer!: ElementRef;
 
   private translate = inject(TranslateService);
   menuItems: MenuItem[] = [];
@@ -85,9 +84,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
   filteredMenuItems: NestedMenuItem[] = [];
   isLoading: boolean = false;
 
-  // User menu
-  showUserMenu: boolean = false;
-  avatarImageLoaded: boolean = false;
 
   constructor(
     private router: Router,
@@ -843,126 +839,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     });
   }
 
-  // User Avatar Methods
-  toggleUserMenu(): void {
-    this.showUserMenu = !this.showUserMenu;
-  }
-
-  getInitials(): string {
-    if (!this.currentUser) return 'U';
-
-    const name = this.currentUser.fullname || this.currentUser.name || this.currentUser.username || '';
-    if (!name) return 'U';
-
-    const parts = name.trim().split(/\s+/);
-    if (parts.length >= 2) {
-      // First letter of first name + first letter of last name
-      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
-    } else if (parts.length === 1) {
-      // First two letters of name
-      return name.substring(0, 2).toUpperCase();
-    }
-
-    return 'U';
-  }
-
-  getAvatarUrl(): string | null {
-    if (!this.currentUser) return null;
-    // Check if user has avatar/photo property
-    return this.currentUser.avatar || this.currentUser.photo || this.currentUser.profileImage || null;
-  }
-
-  getAvatarColor(): string {
-    if (!this.currentUser) return '#6366f1';
-
-    const name = this.currentUser.fullname || this.currentUser.name || this.currentUser.username || 'User';
-    // Generate consistent color based on name
-    const colors = [
-      'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-      'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-      'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-      'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-      'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
-      'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
-      'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
-      'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
-      'linear-gradient(135deg, #ff6e7f 0%, #bfe9ff 100%)'
-    ];
-
-    // Simple hash function to get consistent color
-    let hash = 0;
-    for (let i = 0; i < name.length; i++) {
-      hash = name.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    return colors[Math.abs(hash) % colors.length];
-  }
-
-  getUserDisplayName(): string {
-    if (!this.currentUser) return this.translate.instant('layout.sidebar.user');
-    return this.currentUser.fullname || this.currentUser.name || this.currentUser.username || this.translate.instant('layout.sidebar.user');
-  }
-
-  getUserRole(): string {
-    if (!this.currentUser) return '';
-
-    // Try different role properties
-    if (this.currentUser.emp_position) {
-      return this.currentUser.emp_position;
-    }
-    if (this.currentUser.job) {
-      return this.currentUser.job;
-    }
-    if (this.currentUser.user_role) {
-      return this.currentUser.user_role;
-    }
-    if (this.currentUser.roles && this.currentUser.roles.length > 0) {
-      return this.currentUser.roles[0];
-    }
-
-    return '';
-  }
-
-  navigateToProfile(): void {
-    this.showUserMenu = false;
-    this.router.navigate(['/home']).catch(() => {
-      this.router.navigate(['/']).catch(() => {});
-    });
-  }
-
-  navigateToSettings(): void {
-    this.showUserMenu = false;
-    this.router.navigate(['/setting']).catch(() => {
-      this.router.navigate(['/home']).catch(() => {});
-    });
-  }
-
-  logout(): void {
-    this.showUserMenu = false;
-    this.authService.logout();
-  }
-
-  onAvatarImageError(event: Event): void {
-    const img = event.target as HTMLImageElement;
-    if (img) {
-      img.style.display = 'none';
-      this.avatarImageLoaded = false;
-    }
-  }
-
-  onAvatarImageLoad(): void {
-    this.avatarImageLoaded = true;
-  }
-
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent): void {
-    if (this.userMenuContainer && this.showUserMenu) {
-      const clickedInside = this.userMenuContainer.nativeElement.contains(event.target);
-      if (!clickedInside) {
-        this.showUserMenu = false;
-      }
-    }
-  }
 
   private updateSelectedModuleFromRoute(): void {
     if (!this.activeRoute) {

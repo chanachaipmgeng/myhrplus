@@ -31,6 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   notifications: Notification[] = [];
   unreadCount = 0;
+  currentUser: any = null;
 
   constructor(
     public authService: AuthService,
@@ -51,6 +52,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // Get current user
+    this.currentUser = this.authService.getCurrentUser();
+
+    // Subscribe to current user changes
+    this.authService.currentUser$.pipe(takeUntil(this.destroy$)).subscribe(user => {
+      this.currentUser = user;
+    });
+
     // Initialize languages
     this.updateLanguages();
 
@@ -107,8 +116,47 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onPreferences(): void {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/setting']);
     this.showUserMenu = false;
+  }
+
+  /**
+   * Get avatar URL from current user
+   */
+  getAvatarUrl(): string | null {
+    if (!this.currentUser) return null;
+    return this.currentUser.avatar || this.currentUser.photo || this.currentUser.profileImage || null;
+  }
+
+  /**
+   * Get user display name
+   */
+  getUserDisplayName(): string {
+    if (!this.currentUser) return this.translate.instant('layout.header.user');
+    return this.currentUser.fullname || this.currentUser.name || this.currentUser.username || this.translate.instant('layout.header.user');
+  }
+
+  /**
+   * Get user role
+   */
+  getUserRole(): string {
+    if (!this.currentUser) return '';
+
+    // Try different role properties
+    if (this.currentUser.emp_position) {
+      return this.currentUser.emp_position;
+    }
+    if (this.currentUser.job) {
+      return this.currentUser.job;
+    }
+    if (this.currentUser.user_role) {
+      return this.currentUser.user_role;
+    }
+    if (this.currentUser.roles && this.currentUser.roles.length > 0) {
+      return this.currentUser.roles[0];
+    }
+
+    return '';
   }
 
   /**
