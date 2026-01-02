@@ -199,6 +199,7 @@ export class DataGridComponent implements OnInit, OnDestroy, OnChanges {
   @Output() dataBound = new EventEmitter<any>();
   @Output() actionBegin = new EventEmitter<any>();
   @Output() actionComplete = new EventEmitter<any>();
+  @Output() commandClick = new EventEmitter<any>();
 
   ngOnInit(): void {
     this.setupLocalization();
@@ -553,6 +554,10 @@ export class DataGridComponent implements OnInit, OnDestroy, OnChanges {
 
   onActionComplete(args: any): void {
     this.actionComplete.emit(args);
+  }
+
+  onCommandClick(args: any): void {
+    this.commandClick.emit(args);
   }
 }
 

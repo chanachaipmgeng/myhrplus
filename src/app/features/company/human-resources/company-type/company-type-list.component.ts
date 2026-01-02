@@ -15,6 +15,7 @@ import { CompanyType } from '../../models/company-type.model';
 import { CompanyTypeFormComponent } from './company-type-form.component';
 import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 import { Subject, takeUntil, debounceTime, distinctUntilChanged, switchMap, startWith } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-company-type-list',
@@ -138,7 +139,15 @@ export class CompanyTypeListComponent implements OnInit, OnDestroy {
       { field: 'codeid', headerText: this.translate.instant('company.companyType.column.codeId'), width: '100px', isPrimaryKey: true },
       { field: 'tdesc', headerText: this.translate.instant('company.companyType.column.tdesc'), width: '250px' },
       { field: 'edesc', headerText: this.translate.instant('company.companyType.column.edesc'), width: '250px' },
-      { field: 'edit_date', headerText: this.translate.instant('company.companyType.column.editDate'), type: 'date' as const, width: '150px', format: 'dd/MM/yyyy' }
+      { field: 'edit_date', headerText: this.translate.instant('company.companyType.column.editDate'), type: 'date' as const, width: '150px', format: 'dd/MM/yyyy' },
+      {
+        headerText: this.translate.instant('common.columns.actions'),
+        width: '120px',
+        commands: [
+          { type: 'Edit', buttonOption: { iconCss: 'e-icons e-edit', cssClass: 'e-flat' } },
+          { type: 'Delete', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat e-danger' } }
+        ]
+      }
     ];
   }
 
@@ -162,6 +171,59 @@ export class CompanyTypeListComponent implements OnInit, OnDestroy {
     this.showModal = false;
     this.onRefresh();
   }
+
+  async onCommandClicked(args: any) {
+    const command = args.commandColumn;
+    const row = args.rowData;
+
+    if (command.type === 'Edit') {
+      this.onEdit(row);
+    } else if (command.type === 'Delete') {
+      await this.onDelete(row);
+    }
+  }
+
+  async onDelete(row: CompanyType) {
+    const result = await Swal.fire({
+      title: this.translate.instant('common.dialog.confirmDeleteTitle'),
+      text: this.translate.instant('common.dialog.confirmDeleteMessage', { item: row.tdesc }),
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: this.translate.instant('common.actions.delete'),
+      cancelButtonText: this.translate.instant('common.actions.cancel'),
+      customClass: {
+        popup: 'glass-modal',
+        confirmButton: 'app-btn-danger',
+        cancelButton: 'app-btn-secondary'
+      }
+    });
+
+    if (result.isConfirmed) {
+      this.service.loading.set(true);
+      this.service.delete(row.codeid).pipe(takeUntil(this.destroy$)).subscribe({
+        next: () => {
+          Swal.fire({
+            title: this.translate.instant('common.dialog.successTitle'),
+            text: this.translate.instant('common.dialog.deleteSuccess'),
+            icon: 'success',
+            timer: 1500,
+            showConfirmButton: false,
+            customClass: { popup: 'glass-modal' }
+          });
+          this.onRefresh();
+          this.service.loading.set(false);
+        },
+        error: (err) => {
+          console.error(err);
+          Swal.fire({
+            title: this.translate.instant('common.dialog.errorTitle'),
+            text: this.translate.instant('common.dialog.deleteError'),
+            icon: 'error',
+            customClass: { popup: 'glass-modal' }
+          });
+          this.service.loading.set(false);
+        }
+      });
+    }
+  }
 }
-
-
