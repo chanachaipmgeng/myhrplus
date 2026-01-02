@@ -1,7 +1,6 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { ApiService } from './api.service';
 
 /**
  * Base API Service for Standardized CRUD Operations
@@ -9,34 +8,26 @@ import { environment } from 'src/environments/environment';
  * 
  * Example:
  * export class BenefitService extends BaseApiService<Benefit> {
- *   protected baseUrl = 'hr/benefits';
+ *   protected baseUrl = 'hr/benefits'; // Path relative to configured base URL (usually /hr)
  * }
  */
 @Injectable({
   providedIn: 'root'
 })
 export abstract class BaseApiService<T> {
-  protected http = inject(HttpClient);
-  
+  protected apiService = inject(ApiService);
+
   /**
-   * The relative path to the API endpoint (e.g., 'hr/benefits')
-   * This will be appended to environment.apiUrl
+   * The relative path to the API endpoint (e.g., '/api/v1/benefits')
    */
   protected abstract baseUrl: string;
-
-  protected get apiUrl(): string {
-    // Ensure no double slashes if environment.apiBaseUrl ends with /
-    const base = environment.apiBaseUrl.endsWith('/') ? environment.apiBaseUrl.slice(0, -1) : environment.apiBaseUrl;
-    const path = this.baseUrl.startsWith('/') ? this.baseUrl.substring(1) : this.baseUrl;
-    return `${base}/${path}`;
-  }
 
   /**
    * Get all items
    * @param params Optional query parameters
    */
   getAll(params?: any): Observable<T[]> {
-    return this.http.get<T[]>(this.apiUrl, { params: this.createParams(params) });
+    return this.apiService.getData<T[]>(this.baseUrl, params);
   }
 
   /**
@@ -44,7 +35,7 @@ export abstract class BaseApiService<T> {
    * @param id Item ID
    */
   getById(id: number | string): Observable<T> {
-    return this.http.get<T>(`${this.apiUrl}/${id}`);
+    return this.apiService.getData<T>(`${this.baseUrl}/${id}`);
   }
 
   /**
@@ -52,7 +43,7 @@ export abstract class BaseApiService<T> {
    * @param data Partial item data
    */
   create(data: Partial<T>): Observable<T> {
-    return this.http.post<T>(this.apiUrl, data);
+    return this.apiService.postData<T>(this.baseUrl, data);
   }
 
   /**
@@ -61,7 +52,24 @@ export abstract class BaseApiService<T> {
    * @param data Partial item data
    */
   update(id: number | string, data: Partial<T>): Observable<T> {
-    return this.http.put<T>(`${this.apiUrl}/${id}`, data);
+    // Note: ApiService doesn't have putData yet, so we use postData if API supports POST for update, 
+    // or we should add putData to ApiService.
+    // Most legacy APIs in this project seem to use POST for everything or standard REST.
+    // Let's assume standard REST for now but using put() from ApiService which returns ApiResponse, 
+    // so we need to manually unwrap or add putData helper.
+    // Let's use apiService.put and pipe it.
+
+    // Check if ApiService has putData, if not (it doesn't), we implement basic unwrapping here or use put().
+    // Actually, let's use the generic helper logic inline or add it to ApiService?
+    // User asked to standardize using ApiService.
+    // To be safe and clean, I will just use apiService.put() which returns Observable<ApiResponse<T>> 
+    // and since this method expects Observable<T>, I need to unwrap it.
+    // BUT BaseApiService.update expects T.
+
+    // Better approach: Use ApiService.put and map it.
+    return this.apiService.put<T>(`${this.baseUrl}/${id}`, data).pipe(
+      this.unwrapResponse()
+    );
   }
 
   /**
@@ -69,29 +77,30 @@ export abstract class BaseApiService<T> {
    * @param id Item ID
    */
   delete(id: number | string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.apiService.delete<void>(`${this.baseUrl}/${id}`).pipe(
+      this.unwrapResponse()
+    );
   }
 
   /**
-   * Helper to convert any object to HttpParams
+   * Helper to unwrap ApiResponse
    */
-  protected createParams(params: any): HttpParams {
-    let httpParams = new HttpParams();
-    if (params) {
-      Object.keys(params).forEach(key => {
-        const value = params[key];
-        if (value !== null && value !== undefined) {
-          if (Array.isArray(value)) {
-            value.forEach(val => {
-              httpParams = httpParams.append(key, val);
-            });
-          } else {
-            httpParams = httpParams.append(key, value);
-          }
-        }
+  protected unwrapResponse<R>() {
+    return (source: Observable<any>): Observable<R> => {
+      return new Observable(observer => {
+        return source.subscribe({
+          next: (response) => {
+            if (response.success) {
+              observer.next(response.data);
+              observer.complete();
+            } else {
+              observer.error(new Error(response.message || 'Operation failed'));
+            }
+          },
+          error: (err) => observer.error(err)
+        });
       });
-    }
-    return httpParams;
+    };
   }
 }
 

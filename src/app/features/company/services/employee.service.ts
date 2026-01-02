@@ -10,7 +10,7 @@ export class EmployeeService extends BaseApiService<Employee> {
 
   // Helper to get dropdown options specifically
   getOptions() {
-    return this.http.get<Partial<Employee>[]>(`${this.apiUrl}/options`);
+    return this.apiService.getData<Partial<Employee>[]>(`${this.baseUrl}/options`);
   }
 }
 

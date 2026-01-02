@@ -36,7 +36,8 @@ export class CompanyTypeFormComponent implements OnChanges {
     this.form = this.fb.group({
       codeid: ['', [Validators.required, Validators.maxLength(3)]],
       tdesc: ['', Validators.required],
-      edesc: ['']
+      edesc: ['', Validators.required],
+      active: ['1']
     });
   }
 

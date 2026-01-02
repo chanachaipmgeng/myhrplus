@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, timer } from 'rxjs';
-import { retry, retryWhen, delayWhen, take, concatMap } from 'rxjs/operators';
+import { retry, retryWhen, delayWhen, take, concatMap, map } from 'rxjs/operators';
 import { environment } from '@env/environment';
 import { CacheService } from './cache.service';
 
@@ -33,7 +33,7 @@ export class ApiService {
     const httpParams = this.buildParams(params);
     // Check if endpoint is already a full URL
     const url = endpoint.startsWith('http') ? endpoint : `${this.baseUrl}${endpoint}`;
-    
+
     const request = this.http.get<ApiResponse<T>>(url, { params: httpParams });
 
     if (useCache && cacheKey) {
@@ -75,7 +75,7 @@ export class ApiService {
   uploadFile(endpoint: string, file: File, additionalData?: any): Observable<ApiResponse<any>> {
     const formData = new FormData();
     formData.append('file', file);
-    
+
     if (additionalData) {
       Object.keys(additionalData).forEach(key => {
         formData.append(key, additionalData[key]);
@@ -89,6 +89,36 @@ export class ApiService {
       formData
     );
     return this.retryRequest(request);
+  }
+
+  /**
+   * Helper to get data and automatically unwrap the ApiResponse
+   * Throws error if success is false
+   */
+  getData<T>(endpoint: string, params?: any, useCache: boolean = false, cacheKey?: string): Observable<T> {
+    return this.get<T>(endpoint, params, useCache, cacheKey).pipe(
+      map((response: ApiResponse<T>) => {
+        if (response.success && response.data !== undefined) {
+          return response.data;
+        }
+        throw new Error(response.message || 'API request failed');
+      })
+    );
+  }
+
+  /**
+   * Helper to post data and automatically unwrap the ApiResponse
+   * Throws error if success is false
+   */
+  postData<T>(endpoint: string, body: any): Observable<T> {
+    return this.post<T>(endpoint, body).pipe(
+      map((response: ApiResponse<T>) => {
+        if (response.success && response.data !== undefined) {
+          return response.data;
+        }
+        throw new Error(response.message || 'API request failed');
+      })
+    );
   }
 
   downloadFile(endpoint: string, params?: any): Observable<Blob> {

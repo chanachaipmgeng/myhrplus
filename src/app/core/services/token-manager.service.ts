@@ -34,6 +34,7 @@ export interface TokenRefreshResponse {
 })
 export class TokenManagerService {
   private readonly TOKEN_KEY = 'auth_token';
+  private readonly REFRESH_TOKEN_KEY = 'refresh_token';
   private readonly TOKEN_EXPIRY_KEY = 'token_expiry';
   private readonly SESSION_TOKEN_KEY = 'userToken'; // For backward compatibility
 
@@ -51,7 +52,7 @@ export class TokenManagerService {
   constructor(
     private storage: StorageService,
     private apiService: ApiService
-  ) {}
+  ) { }
 
   /**
    * Get token from storage
@@ -75,10 +76,17 @@ export class TokenManagerService {
   }
 
   /**
+   * Get refresh token from storage
+   */
+  getRefreshToken(): string | null {
+    return this.storage.getItem<string>(this.REFRESH_TOKEN_KEY);
+  }
+
+  /**
    * Set token in storage
    * Stores in both localStorage (via StorageService) and sessionStorage (for backward compatibility)
    */
-  setToken(token: string, expiresIn?: number): void {
+  setToken(token: string, refreshToken?: string, expiresIn?: number): void {
     // Store in localStorage (primary)
     this.storage.setItem(this.TOKEN_KEY, token);
 
@@ -92,6 +100,11 @@ export class TokenManagerService {
       const expiryTime = Date.now() + (expiresIn * 1000);
       this.storage.setItem(this.TOKEN_EXPIRY_KEY, expiryTime.toString());
     }
+
+    // Store refresh token if provided
+    if (refreshToken) {
+      this.storage.setItem(this.REFRESH_TOKEN_KEY, refreshToken);
+    }
   }
 
   /**
@@ -100,6 +113,7 @@ export class TokenManagerService {
   clearToken(): void {
     this.storage.removeItem(this.TOKEN_KEY);
     this.storage.removeItem(this.TOKEN_EXPIRY_KEY);
+    this.storage.removeItem(this.REFRESH_TOKEN_KEY);
     this.tokenValidationCache.clear();
 
     // Also clear sessionStorage

@@ -1,6 +1,7 @@
-import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { NgModule, Optional, SkipSelf, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { GlobalErrorHandler } from './handlers/global-error-handler';
 
 import { HasRoleDirective } from './directives/has-role.directive';
 import { HasPermissionDirective } from './directives/has-permission.directive';
@@ -25,8 +26,10 @@ import { HasPermissionDirective } from './directives/has-permission.directive';
   exports: [
     HasRoleDirective,
     HasPermissionDirective
+  ],
+  providers: [
+    { provide: ErrorHandler, useClass: GlobalErrorHandler }
   ]
-  // ✅ Removed providers array - all services use providedIn: 'root'
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

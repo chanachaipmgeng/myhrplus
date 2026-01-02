@@ -11,12 +11,13 @@ export class BankCompanyService extends BaseApiService<BankCompany> {
   loading = signal<boolean>(false);
 
   // Helper methods to get Dropdown Options
+  // Helper methods to get Dropdown Options
   getBankOptions() {
-    return this.http.get<any[]>('hr/master/banks'); // Assumption: Master API exists
+    return this.apiService.getData<any[]>('hr/master/banks'); // Assumption: Master API exists
   }
 
   getBranchOptions() {
-    return this.http.get<any[]>('hr/master/branches'); // Assumption
+    return this.apiService.getData<any[]>('hr/master/branches'); // Assumption
   }
 }
 

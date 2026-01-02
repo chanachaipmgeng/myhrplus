@@ -1,24 +1,43 @@
-<app-page-header 
-  [title]="'company.companyType.titleFull' | translate" 
-  [showBreadcrumbs]="true"
-  [actions]="headerActions">
-</app-page-header>
+<div class="-mx-4 md:-mx-6 lg:-mx-8">
+  <div class="p-4 md:p-6 lg:p-8 transition-colors duration-300">
 
-<div class="-mx-4 md:-mx-6 lg:-mx-8 px-4 md:px-6 lg:px-8 transition-colors duration-300">
-  @if (service.loading()) {
-    <app-skeleton-loader type="table" [rows]="10" [columns]="columns.length || 5"></app-skeleton-loader>
-  } @else {
-    <app-data-grid
-      [dataSource]="(data$ | async) || []"
-      [columns]="columns"
-      (rowSelected)="onEdit($event)">
-    </app-data-grid>
-  }
+    <!-- Page Header with Gradient -->
+    <app-page-header [title]="'company.companyType.titleFull' | translate"
+      [subtitle]="'company.companyType.subtitle' | translate"
+      [description]="'company.companyType.description' | translate" titleGradient="from-indigo-600 to-purple-600"
+      icon="domain" iconGradient="from-indigo-500 to-purple-600" [showBreadcrumbs]="true" [actions]="headerActions">
+    </app-page-header>
+
+
+    <!-- Main Content Glass Card -->
+    <app-glass-card padding="p-0">
+      <div class="p-6 border-b border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100 flex items-center gap-2">
+          <app-icon name="list" size="sm" class="text-primary-500"></app-icon>
+          {{ 'company.companyType.listTitle' | translate }}
+        </h2>
+
+        <!-- Search Bar -->
+        <div class="w-full sm:w-72">
+          <app-glass-input [formControl]="searchControl" [placeholder]="'common.search' | translate" type="search"
+            [fullWidth]="true" icon="search">
+          </app-glass-input>
+        </div>
+      </div>
+
+      <!-- Data Grid Container (Glass styles applied internally) -->
+      <div class="p-4">
+        @if (service.loading()) {
+        <app-skeleton-loader type="table" [rows]="10" [columns]="columns.length || 5"></app-skeleton-loader>
+        } @else {
+        <app-data-grid [dataSource]="data" [columns]="columns" (rowSelected)="onEdit($event)">
+        </app-data-grid>
+        }
+      </div>
+    </app-glass-card>
+
+  </div>
 </div>
 
-<app-company-type-form
-  [isOpen]="showModal"
-  [data]="selectedItem"
-  (close)="showModal = false"
-  (save)="onSaveSuccess()">
+<app-company-type-form [isOpen]="showModal" [data]="selectedItem" (close)="showModal = false" (save)="onSaveSuccess()">
 </app-company-type-form>
