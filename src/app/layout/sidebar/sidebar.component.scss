@@ -277,7 +277,7 @@
     );
 
     /* Pattern overlay for dark mode */
-    @include pattern-overlay(var(--pattern-overlay-primary), 0.2, 4px, 0deg);
+    @include pattern-overlay(var(--pattern-color), 0.2, 4px, 0deg);
   }
 
   [class*='theme-myhr'] & {
@@ -288,7 +288,7 @@
     );
 
     /* Pattern overlay for myhr theme */
-    @include pattern-overlay(var(--pattern-overlay-light), 0.3, 4px, 0deg);
+    @include pattern-overlay(var(--pattern-color-subtle), 0.3, 4px, 0deg);
   }
 
   /* Ensure content is above pattern */
@@ -333,6 +333,9 @@
     }
   }
 
+  /* Myhr Theme - Scrollbar styling */
+  /* Standard Pattern 2: Component Overrides using CSS Variables */
+  [data-theme='myhr'] &,
   body.theme-myhr & {
     scrollbar-color: rgba(var(--primary-rgb), 0.3) transparent;
 
@@ -542,8 +545,8 @@
           45deg,
           transparent,
           transparent 2px,
-          var(--pattern-overlay-primary) 2px,
-          var(--pattern-overlay-primary) 4px
+          var(--pattern-color) 2px,
+          var(--pattern-color) 4px
         );
       opacity: 0.2;
     }
@@ -563,8 +566,8 @@
           45deg,
           transparent,
           transparent 2px,
-          var(--pattern-overlay-light) 2px,
-          var(--pattern-overlay-light) 4px
+          var(--pattern-color-subtle) 2px,
+          var(--pattern-color-subtle) 4px
         );
       opacity: 0.25;
     }

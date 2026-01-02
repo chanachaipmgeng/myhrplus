@@ -98,20 +98,29 @@
    Myhr Theme
    ============================================ */
 
-body.theme-myhr {
-  .content-card {
-    @include glass-myhr('default');
-    @include myhr-border-glow();
+/* Note: Use Tailwind classes in HTML template instead */
+/* Example: class="glass theme-myhr:glass-myhr" */
+/* Or use CSS variables for dynamic theming */
+
+.content-card {
+  /* Myhr theme styles - using CSS variables for dynamic theming */
+  [data-theme='myhr'] &,
+  body.theme-myhr & {
+    background: var(--glass-bg);
+    border-color: var(--glass-border-strong);
+    box-shadow: var(--shadow-glass);
 
     &:hover {
-      @include myhr-glow('default');
+      box-shadow: var(--shadow-glass), 0 0 20px rgba(var(--primary-rgb), 0.3);
     }
   }
+}
 
-  .list-item {
-    &:hover {
-      background-color: rgba($myhr-gradient-end, 0.1);
-    }
+.list-item {
+  /* Myhr theme styles - using CSS variables */
+  [data-theme='myhr'] &:hover,
+  body.theme-myhr &:hover {
+    background-color: rgba(var(--primary-rgb), 0.1);
   }
 }
 

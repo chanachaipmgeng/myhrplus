@@ -67,8 +67,13 @@
       }
     }
 
-    body.theme-myhr & .e-row.e-selected {
-      box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.3);
+    /* Myhr Theme - Selected row styling */
+    /* Standard Pattern 4: Syncfusion Overrides using CSS Variables */
+    [data-theme='myhr'] &,
+    body.theme-myhr & {
+      .e-row.e-selected {
+        box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.3);
+      }
     }
 
     /* Pager */

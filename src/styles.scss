@@ -237,9 +237,9 @@ body.theme-myhr:not(.dark) {
   /* Sidebar-specific Colors (Myhr Light) - Using primary color as background */
   --sidebar-bg-start: rgba(var(--primary-rgb), 0.95);
   --sidebar-bg-end: rgba(var(--primary-rgb), 0.9);
-  --sidebar-pattern-color: rgba(255, 255, 255, 0.1);
-  --sidebar-icon-bg-start: rgba(var(--primary-rgb), 0.98);
-  --sidebar-icon-bg-end: rgba(var(--primary-rgb), 0.95);
+  --sidebar-pattern-color: rgba(255, 255, 255, 0.05);
+  --sidebar-icon-bg-start: rgba(255, 255, 255, 0.2);
+  --sidebar-icon-bg-end: rgba(255, 255, 255, 0.1);
   --sidebar-active-bg: rgba(255, 255, 255, 0.3);
   --sidebar-hover-bg: rgba(255, 255, 255, 0.15);
   --sidebar-indicator-color: #ffffff;
@@ -250,6 +250,7 @@ body.theme-myhr:not(.dark) {
   --header-dropdown-shadow: 0 20px 60px rgba(var(--primary-rgb), 0.3), 0 0 0 1px rgba(255, 255, 255, 0.2), 0 0 80px rgba(var(--primary-rgb), 0.15);
   --header-active-bg: rgba(255, 255, 255, 0.2);
   --header-unread-bg: rgba(255, 255, 255, 0.1);
+  --header-shimmer-color: rgba(255, 255, 255, 0.2);
 
   /* Gradient Colors for Buttons/Components - Using dynamic primary color */
   --gradient-primary-start: rgba(var(--primary-rgb), 0.9);
@@ -260,8 +261,8 @@ body.theme-myhr:not(.dark) {
   --gradient-primary-hover-end: rgba(var(--primary-rgb), 0.95);
 
   /* Footer-specific CSS Variables (Myhr Light) - Using primary color */
-  --footer-bg-start: rgba(var(--primary-rgb), 0.95);
-  --footer-bg-end: rgba(var(--primary-rgb), 0.9);
+  --footer-bg-start: rgba(var(--primary-rgb), 0.9);
+  --footer-bg-end: rgba(var(--primary-rgb), 0.85);
   --footer-border-color: rgba(255, 255, 255, 0.3);
   --footer-text-color: rgba(255, 255, 255, 0.9);
 
@@ -276,10 +277,12 @@ body.theme-myhr:not(.dark) {
   --divider-color: rgba(255, 255, 255, 0.1);
   --divider-color-dark: rgba(255, 255, 255, 0.15);
 
-  /* Pattern Overlay Colors (Myhr Light) */
-  --pattern-overlay-light: rgba(255, 255, 255, 0.05);
-  --pattern-overlay-primary: rgba(var(--primary-rgb), 0.02);
-  --pattern-overlay-primary-dark: rgba(var(--primary-rgb), 0.03);
+  /* Pattern Colors (Myhr Light) - Standardized naming */
+  --pattern-color: rgba(255, 255, 255, 0.05);
+  --pattern-color-subtle: rgba(255, 255, 255, 0.02);
+  --pattern-color-light: rgba(255, 255, 255, 0.08);
+  --pattern-color-medium: rgba(255, 255, 255, 0.15);
+  --shimmer-color: rgba(255, 255, 255, 0.2);
 
   /* Border Colors (Myhr Light) */
   --border-light: rgba(255, 255, 255, 0.1);
@@ -346,10 +349,11 @@ body.theme-myhr:not(.dark) {
   --header-dropdown-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.2), 0 0 80px rgba(var(--primary-rgb), 0.2);
   --header-active-bg: rgba(255, 255, 255, 0.15);
   --header-unread-bg: rgba(255, 255, 255, 0.08);
+  --header-shimmer-color: rgba(255, 255, 255, 0.1);
 
   /* Footer-specific CSS Variables (Myhr Dark) - Using dynamic primary color */
-  --footer-bg-start: rgba(var(--primary-rgb), 0.9);
-  --footer-bg-end: rgba(var(--primary-rgb), 0.85);
+  --footer-bg-start: rgba(15, 23, 42, 0.8);
+  --footer-bg-end: rgba(30, 41, 59, 0.7);
   --footer-border-color: rgba(255, 255, 255, 0.2);
   --footer-text-color: rgba(255, 255, 255, 0.9);
 
@@ -372,6 +376,13 @@ body.theme-myhr:not(.dark) {
   --preview-item-bg: rgba(255, 255, 255, 0.05);
   --preview-item-border: rgba(255, 255, 255, 0.2);
   --preview-image-bg: rgba(var(--primary-rgb), 0.3);
+
+  /* Pattern Colors (Myhr Dark) - Standardized naming */
+  --pattern-color: rgba(var(--primary-rgb), 0.05);
+  --pattern-color-subtle: rgba(var(--primary-rgb), 0.02);
+  --pattern-color-light: rgba(var(--primary-rgb), 0.08);
+  --pattern-color-medium: rgba(var(--primary-rgb), 0.15);
+  --shimmer-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Sidebar-specific CSS Variables (Light Mode) */
@@ -416,10 +427,12 @@ body.theme-myhr:not(.dark) {
   --divider-color: rgba(0, 0, 0, 0.1);
   --divider-color-dark: rgba(255, 255, 255, 0.1);
 
-  /* Pattern Overlay Colors */
-  --pattern-overlay-light: rgba(255, 255, 255, 0.05);
-  --pattern-overlay-primary: rgba(var(--primary-rgb), 0.02);
-  --pattern-overlay-primary-dark: rgba(var(--primary-rgb), 0.03);
+  /* Pattern Colors - Standardized naming */
+  --pattern-color: rgba(var(--primary-rgb), 0.03);
+  --pattern-color-subtle: rgba(var(--primary-rgb), 0.02);
+  --pattern-color-light: rgba(var(--primary-rgb), 0.05);
+  --pattern-color-medium: rgba(var(--primary-rgb), 0.1);
+  --shimmer-color: rgba(255, 255, 255, 0.2);
 
   /* Border Colors */
   --border-light: rgba(255, 255, 255, 0.1);
@@ -548,6 +561,11 @@ body.theme-myhr:not(.dark) {
   color: var(--text-primary);
   position: relative;
   overflow-x: hidden;
+
+  /* Mobile performance optimization - use scroll instead of fixed */
+  @media (max-width: 768px) {
+    background-attachment: scroll;
+  }
 }
 
 /* Myhr Theme - Dark Mode Background */
@@ -562,24 +580,14 @@ body.theme-myhr.dark {
   color: #ffffff;
   position: relative;
   overflow-x: hidden;
+
+  /* Mobile performance optimization - use scroll instead of fixed */
+  @media (max-width: 768px) {
+    background-attachment: scroll;
+  }
 }
 
-/* Myhr Vector Background Pattern */
-body.theme-myhr::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image:
-    linear-gradient(45deg, transparent 30%, rgba(var(--primary-rgb), 0.03) 50%, transparent 70%),
-    linear-gradient(-45deg, transparent 30%, rgba(var(--primary-rgb), 0.03) 50%, transparent 70%);
-  background-size: 100px 100px, 80px 80px;
-  animation: myhrPattern 20s linear infinite;
-  pointer-events: none;
-  z-index: 0;
-}
+
 
 @keyframes myhrPattern {
   0% { transform: translate(0, 0); }
@@ -1024,7 +1032,14 @@ h5, h6 {
   color: #ffffff;
 }
 
-/* Myhr 1.5 Typography - Gradient Text Effect */
+/* Myhr Typography - Gradient Text Effect */
+/* Standard Pattern 2: Component Overrides using CSS Variables */
+[data-theme='myhr'] h1,
+[data-theme='myhr'] h2,
+[data-theme='myhr'] h3,
+[data-theme='myhr'] h4,
+[data-theme='myhr'] h5,
+[data-theme='myhr'] h6,
 body.theme-myhr h1,
 body.theme-myhr h2,
 body.theme-myhr h3,
@@ -1055,6 +1070,8 @@ body.theme-myhr h6 {
 }
 
 /* MyHR Text Glow Effect */
+/* Standard Pattern 2: Component Overrides using CSS Variables */
+[data-theme='myhr'] .myhr-text-glow,
 body.theme-myhr .myhr-text-glow {
   text-shadow:
     0 0 10px rgba(var(--primary-rgb), 0.5),

@@ -14,6 +14,9 @@
 /* MyHR Theme */
 /* Using Tailwind color utilities - keeping only complex filter effects */
 [data-theme='myhr'],
+/* Myhr Theme - Rating glow effect */
+/* Standard Pattern 2: Component Overrides using CSS Variables */
+[data-theme='myhr'],
 body.theme-myhr {
   .text-yellow-400 {
     @apply glow-primary;

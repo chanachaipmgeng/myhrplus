@@ -253,6 +253,9 @@
     }
   }
 
+  /* Myhr Theme - Scrollbar styling */
+  /* Standard Pattern 2: Component Overrides using CSS Variables */
+  [data-theme='myhr'] &,
   body.theme-myhr & {
     scrollbar-color: rgba(var(--primary-rgb), 0.3) transparent;
 
@@ -477,6 +480,9 @@
     }
   }
 
+  /* Myhr Theme - Scrollbar styling */
+  /* Standard Pattern 2: Component Overrides using CSS Variables */
+  [data-theme='myhr'] &,
   body.theme-myhr & {
     scrollbar-color: rgba(var(--primary-rgb), 0.3) transparent;
 

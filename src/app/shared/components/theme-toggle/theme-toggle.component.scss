@@ -40,31 +40,22 @@
   @apply dark:bg-primary/20 dark:text-primary;
 }
 
-/* Myhrheme */
+/* Myhr Theme */
+/* Note: Simple styles moved to HTML using Tailwind theme-myhr: variant */
+/* This section kept for complex styles that cannot be handled by Tailwind */
+
 [data-theme='myhr'],
 body.theme-myhr {
-  .p-2 {
-    @apply glass-myhr-weak;
-
-    &:hover {
-      filter: drop-shadow(0 0 4px rgba(var(--primary-rgb), 0.4));
-    }
-  }
-
-  .bg-white\/90,
-  .dark .bg-slate-900\/90 {
-    @apply glass-myhr shadow-myhr;
-    border-color: rgba(var(--primary-rgb), 0.3);
-  }
-
+  /* Complex styles only - simple styles use Tailwind variant in HTML */
   .active {
-    @apply glass-myhr;
+    /* Gradient text effect - requires CSS */
     background: linear-gradient(135deg,
       rgba(var(--primary-rgb), 0.2),
       rgba(var(--primary-rgb), 0.2)
     ) !important;
     color: rgb(var(--primary-rgb));
     -webkit-background-clip: text;
+    background-clip: text;
   }
 
   .w-10 {

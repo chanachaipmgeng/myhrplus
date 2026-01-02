@@ -49,6 +49,9 @@
 @mixin syncfusion-glass-toolbar {
   @apply glass-weak dark:glass-dark-weak rounded-md p-2 mb-4 border border-white/20 dark:border-slate-700/30;
 
+  /* Myhr Theme - Syncfusion shadow */
+  /* Standard Pattern 4: Syncfusion Overrides using Mixins */
+  [data-theme='myhr'] &,
   body.theme-myhr & {
     @include syncfusion-myhr-shadow;
   }

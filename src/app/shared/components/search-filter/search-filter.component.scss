@@ -150,18 +150,7 @@ button {
 }
 
 /* MyHR Theme */
-body.theme-myhr {
-  .search-filter-container {
-    @apply glass-myhr-weak;
-  }
-
-  .advanced-filters {
-    @apply glass-myhr;
-  }
-
-  .filter-toggle.active {
-    filter: drop-shadow(0 0 4px rgba(var(--primary-rgb), 0.4));
-  }
-}
+/* Note: Styles moved to HTML using Tailwind theme-myhr: variant */
+/* Complex styles only - simple styles use Tailwind variant in HTML */
 
 

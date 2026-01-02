@@ -92,6 +92,9 @@ footer {
 
 /* MyHR Theme - Footer - Using CSS Variables */
 [data-theme='myhr'] .myhr-footer,
+/* Myhr Theme - Footer background */
+/* Standard Pattern 2: Component Overrides using CSS Variables */
+[data-theme='myhr'] .myhr-footer,
 body.theme-myhr .myhr-footer {
   background: linear-gradient(135deg,
     var(--footer-bg-start) 0%,

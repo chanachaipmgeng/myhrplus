@@ -124,19 +124,7 @@
 }
 
 /* Myhr Theme */
-body.theme-myhr {
-  .date-range-picker {
-    @apply glass-myhr-weak;
-  }
-
-  .preset-btn:hover {
-    filter: drop-shadow(0 0 4px rgba(var(--primary-rgb), 0.4));
-  }
-
-  .absolute {
-    @apply glass-myhr shadow-myhr;
-    border-color: rgba(var(--primary-rgb), 0.3);
-  }
-}
+/* Note: Styles moved to HTML using Tailwind theme-myhr: variant */
+/* This section kept for any complex styles that cannot be handled by Tailwind */
 
 

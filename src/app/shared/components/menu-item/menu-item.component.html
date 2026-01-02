@@ -1,6 +1,6 @@
 <div class="menu-item-container" [class.active]="isActive" [class.has-children]="hasChildren()">
   <!-- Menu Item -->
-  <div class="menu-item flex items-center gap-2 py-2 px-3 rounded-lg list-item-micro transition-all duration-200 ease-out hover:bg-white/10 dark:hover:bg-gray-800/20 theme-myhr:hover:bg-white/10 cursor-pointer"
+  <div class="menu-item flex items-center gap-2 py-2 px-3 rounded-lg list-item-micro transition-all duration-200 ease-out hover:bg-white/10 dark:hover:bg-gray-800/20 theme-myhr:hover:bg-white/10 cursor-pointer theme-myhr:[&.active-item]:bg-primary/20"
        [ngClass]="getPaddingClass()"
        [class.font-bold]="level === 2"
        [class.text-sm]="level > 2"
@@ -43,7 +43,7 @@
 
   <!-- Nested Children (Accordion) -->
   <div *ngIf="hasChildren() && isExpanded"
-       class="nested-children fade-in transition-all duration-200 ease-out">
+       class="nested-children fade-in transition-all duration-200 ease-out theme-myhr:border-white/10">
     <app-menu-item
       *ngFor="let child of item.children"
       [item]="child"

@@ -51,6 +51,9 @@
 }
 
 /* Myhr theme support */
+/* Myhr Theme - Lazy loading background */
+/* Standard Pattern 2: Component Overrides using CSS Variables */
+[data-theme='myhr'] .lazy-image-loading,
 body.theme-myhr .lazy-image-loading {
   background: linear-gradient(
     90deg,

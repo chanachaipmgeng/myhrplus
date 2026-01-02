@@ -7,7 +7,7 @@
         <a
           *ngIf="!isLast(i) && item.route"
           (click)="navigate(item.route!)"
-          class="thai-text flex items-center gap-1.5 text-slate-600 dark:text-slate-400 no-underline transition-colors cursor-pointer px-2 py-1 rounded-md min-h-[32px] sm:min-h-[28px] hover:text-primary hover:bg-primary/5 dark:hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary/20 font-sarabun">
+          class="thai-text flex items-center gap-1.5 text-slate-600 dark:text-slate-400 no-underline transition-colors cursor-pointer px-2 py-1 rounded-md min-h-[32px] sm:min-h-[28px] hover:text-primary hover:bg-primary/5 dark:hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary/20 font-sarabun theme-myhr:glass-myhr-weak theme-myhr:hover:glass-myhr theme-myhr:hover:drop-shadow-[0_0_4px_rgba(var(--primary-rgb),0.4)]">
           <app-icon *ngIf="item.icon" [name]="item.icon" size="sm" class="flex-shrink-0"></app-icon>
           <span class="sm:hidden md:inline">{{ item.label | translate }}</span>
         </a>

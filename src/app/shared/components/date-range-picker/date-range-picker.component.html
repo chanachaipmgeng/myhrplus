@@ -1,4 +1,4 @@
-<div class="date-range-picker glass-card-weak p-4">
+<div class="date-range-picker glass-card-weak theme-myhr:glass-myhr-weak p-4">
   <div class="picker-header flex items-center justify-between mb-4">
     <h3 class="thai-text font-semibold text-slate-800 dark:text-slate-100">
       เลือกช่วงวันที่
@@ -6,12 +6,12 @@
     <div class="relative" *ngIf="showPresets">
       <button
         (click)="togglePresetMenu()"
-        class="preset-btn text-slate-600 dark:text-slate-400 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+        class="preset-btn text-slate-600 dark:text-slate-400 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors theme-myhr:hover:drop-shadow-[0_0_4px_rgba(var(--primary-rgb),0.4)]">
         <app-icon name="event" size="sm"></app-icon>
       </button>
       <div 
         *ngIf="showPresetMenu"
-        class="absolute right-0 mt-2 w-48 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
+        class="absolute right-0 mt-2 w-48 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50 theme-myhr:glass-myhr theme-myhr:shadow-myhr theme-myhr:border-primary/30">
         <button
           *ngFor="let preset of getPresets()"
           (click)="onPresetSelect(preset)"

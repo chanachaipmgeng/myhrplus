@@ -1,4 +1,4 @@
-<div class="search-filter-container glass-card-weak p-4">
+<div class="search-filter-container glass-card-weak theme-myhr:glass-myhr-weak p-4">
   <div class="search-filter-header flex items-center gap-3">
     <!-- Search Input -->
     <div class="search-input-wrapper flex-1">
@@ -28,7 +28,7 @@
       *ngIf="showAdvanced && filters.length > 0"
       (click)="onToggleAdvanced()"
       [class.active]="isAdvancedOpen || getActiveFilterCount() > 0"
-      class="filter-toggle text-slate-600 dark:text-slate-400 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors relative">
+      class="filter-toggle text-slate-600 dark:text-slate-400 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors relative theme-myhr:[&.active]:drop-shadow-[0_0_4px_rgba(var(--primary-rgb),0.4)]">
       <app-icon name="filter_list" size="sm"></app-icon>
       <span *ngIf="getActiveFilterCount() > 0" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
         {{ getActiveFilterCount() }}

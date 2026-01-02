@@ -30,12 +30,14 @@ button:focus-visible {
   animation: spin 0.6s linear infinite;
 }
 
-/* Myhr 1.5 Theme - Glass Button */
-/* Moved from global styles.scss to improve encapsulation */
-/* Updated to use dynamic primary color from CSS variables */
+/* Myhr Theme - Glass Button */
+/* Standard Pattern 2: Component Overrides using CSS Variables */
+/* Uses ::ng-deep to override nested component styles */
+/* Supports both [data-theme='myhr'] and body.theme-myhr for compatibility */
 [data-theme='myhr'] :host,
 body.theme-myhr :host {
   ::ng-deep .glass-button-primary {
+    /* Primary button gradient - using CSS variables for dynamic theming */
     background: linear-gradient(135deg,
       rgba(var(--primary-rgb), 0.8) 0%,
       rgba(var(--primary-rgb), 0.9) 50%,
@@ -60,6 +62,7 @@ body.theme-myhr :host {
   }
 
   ::ng-deep .glass-button {
+    /* Default glass button - using CSS variables */
     border: 1px solid var(--glass-border) !important;
 
     &:hover:not(:disabled) {

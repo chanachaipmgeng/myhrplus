@@ -28,8 +28,13 @@
       }
     }
 
-    body.theme-myhr & .e-header-container {
-      @include syncfusion-myhr-shadow;
+    /* Myhr Theme - Syncfusion Override */
+    /* Standard Pattern 4: Syncfusion Overrides using Mixins/CSS Variables */
+    [data-theme='myhr'] &,
+    body.theme-myhr & {
+      .e-header-container {
+        @include syncfusion-myhr-shadow;
+      }
     }
 
     /* Content */
@@ -76,8 +81,12 @@
       }
     }
 
-    body.theme-myhr & .e-appointment {
-      box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.3);
+    /* Myhr Theme - Appointment styling */
+    [data-theme='myhr'] &,
+    body.theme-myhr & {
+      .e-appointment {
+        box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.3);
+      }
     }
 
     /* Work Cells */

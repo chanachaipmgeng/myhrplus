@@ -12,11 +12,14 @@
 /* Responsive text sizes handled via Tailwind responsive classes */
 /* Myhr theme handled via Tailwind theme-myhr classes */
 
-/* Myhr 1.5 Theme - Empty State */
-/* Moved from global styles.scss to improve encapsulation */
+/* Myhr Theme - Empty State */
+/* Standard Pattern 2: Component Overrides using CSS Variables */
+/* Uses ::ng-deep to override nested component styles */
+/* Supports both [data-theme='myhr'] and body.theme-myhr for compatibility */
 [data-theme='myhr'] :host,
 body.theme-myhr :host {
   ::ng-deep .glass-card {
+    /* Glass card styling - using CSS variables */
     border: 1px solid var(--glass-border) !important;
     box-shadow:
       0 8px 32px rgba(0, 0, 0, 0.5),
@@ -25,6 +28,7 @@ body.theme-myhr :host {
   }
 
   ::ng-deep h3 {
+    /* Gradient text effect - requires CSS (cannot use Tailwind) */
     background: linear-gradient(135deg,
       rgba(var(--primary-rgb), 0.6) 0%,
       rgba(var(--primary-rgb), 0.8) 50%,
