@@ -22,7 +22,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   sidebarOpen$: Observable<boolean>;
 
   // UI State
-  sidebarWidth: string = '368px'; // 88px icon bar + 280px menu
+  sidebarWidth: string = '368px'; // 88px icon bar + 280px menu panel
   sidebarType: 'Over' | 'Push' | 'Slide' = 'Over';
   breadcrumbs: BreadcrumbItem[] = [];
 

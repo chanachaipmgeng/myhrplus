@@ -27,9 +27,9 @@
 /* Icon Bar */
 .icon-bar {
   position: relative;
-  width: 80px;
-  min-width: 80px;
-  max-width: 80px;
+  width: 88px;
+  min-width: 88px;
+  max-width: 88px;
 
   /* Background gradient with pattern overlay - Using CSS Variables */
   background: linear-gradient(
@@ -262,9 +262,54 @@
     position: relative;
     z-index: 1;
   }
+}
 
-  /* Custom scrollbar using mixin */
-  @include custom-scrollbar-primary(6px, 0.3);
+/* Custom scrollbar for sidebar */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(156, 163, 175, 0.5);
+    border-radius: var(--radius-sm);
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: rgba(156, 163, 175, 0.7);
+    }
+  }
+
+  .dark & {
+    scrollbar-color: rgba(156, 163, 175, 0.3) transparent;
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(156, 163, 175, 0.3);
+
+      &:hover {
+        background: rgba(156, 163, 175, 0.5);
+      }
+    }
+  }
+
+  body.theme-myhr & {
+    scrollbar-color: rgba(var(--primary-rgb), 0.3) transparent;
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(var(--primary-rgb), 0.3);
+
+      &:hover {
+        background: rgba(var(--primary-rgb), 0.5);
+      }
+    }
+  }
 }
 
 /* Search Container */

@@ -29,7 +29,7 @@
        z-index: 0;
      }
 
-     /* Pattern overlay - Using standardized mixin and animation */
+     /* Pattern overlay */
      &::after {
        content: '';
        position: absolute;
@@ -55,16 +55,16 @@
      }
 
      /* Myhr theme adjustments */
-    [data-theme='myhr'] &::before,
-    [class*='theme-myhr'] &::before {
+     [data-theme='myhr'] &::before,
+     [class*='theme-myhr'] &::before {
        background:
          radial-gradient(circle at 20% 30%, rgba(var(--primary-rgb), 0.15) 0%, transparent 50%),
          radial-gradient(circle at 80% 70%, rgba(var(--primary-rgb), 0.15) 0%, transparent 50%);
        opacity: 0.6;
      }
 
-    [data-theme='myhr'] &::after,
-    [class*='theme-myhr'] &::after {
+     [data-theme='myhr'] &::after,
+     [class*='theme-myhr'] &::after {
        background-image:
          repeating-linear-gradient(
            0deg,
@@ -105,12 +105,12 @@
    /* Content Container */
    .content-container {
      position: relative;
-     min-height: calc(100vh - var(--header-height-md) - var(--footer-height-md));
+     min-height: calc(100vh - var(--header-height-md));
      display: flex;
      flex-direction: column;
 
      @include respond-to-down('md') {
-       min-height: calc(100vh - var(--header-height) - var(--footer-height));
+       min-height: calc(100vh - var(--header-height));
      }
    }
 
@@ -124,9 +124,9 @@
        rgba(255, 255, 255, 0.03) 50%,
        transparent 100%
      );
-    @include backdrop-blur(8px);
-    border-bottom: 1px solid rgba(var(--primary-rgb), 0.1);
-    @include smooth-transition(all, 0.3s);
+     @include backdrop-blur(8px);
+     border-bottom: 1px solid rgba(var(--primary-rgb), 0.1);
+     @include smooth-transition(all, 0.3s);
 
      .dark &,
      [data-theme='dark'] & {
@@ -139,8 +139,8 @@
        border-bottom-color: rgba(var(--primary-rgb), 0.15);
      }
 
-    [data-theme='myhr'] &,
-    [class*='theme-myhr'] & {
+     [data-theme='myhr'] &,
+     [class*='theme-myhr'] & {
        background: linear-gradient(
          to bottom,
          rgba(0, 0, 0, 0.2) 0%,
@@ -156,7 +156,18 @@
      position: relative;
      flex: 1;
      z-index: 1;
-     @include fade-in(0.4s);
+     animation: fadeInUp 0.4s ease-out;
+
+     @keyframes fadeInUp {
+       from {
+         opacity: 0;
+         transform: translateY(10px);
+       }
+       to {
+         opacity: 1;
+         transform: translateY(0);
+       }
+     }
    }
 
    /* Sticky Footer Wrapper */
@@ -266,8 +277,15 @@
      }
    }
 
-   /* Animations - Using standardized animations from _mixins.scss */
-   /* Note: gradientShift and patternShimmer keyframes are defined in _mixins.scss */
+   /* Animations */
+   @keyframes gradientShift {
+     0%, 100% {
+       background-position: 0% 50%;
+     }
+     50% {
+       background-position: 100% 50%;
+     }
+   }
 
    /* Responsive Design */
    @include respond-to-down('md') {

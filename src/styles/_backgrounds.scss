@@ -1,0 +1,436 @@
+/* ============================================
+   Background System
+   ============================================
+   Standardized background patterns, gradients, and effects
+   Last Updated: 2025-01-02
+   ============================================ */
+
+@import './design-tokens';
+
+/* ============================================
+   Background CSS Variables
+   ============================================ */
+
+:root {
+  /* Base Background */
+  --bg-base: #f5f1e8;
+  --bg-gradient-start: #faf8f3;
+  --bg-gradient-mid: #f5f1e8;
+  --bg-gradient-end: #ede8d8;
+  --theme-bg-gradient: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%);
+
+  /* Layout Backgrounds - Backward compatible naming */
+  --sidebar-bg-start: rgba(var(--primary-rgb), 0.95);
+  --sidebar-bg-end: rgba(var(--primary-rgb), 0.9);
+  --sidebar-icon-bg-start: rgba(255, 255, 255, 0.2);
+  --sidebar-icon-bg-end: rgba(255, 255, 255, 0.1);
+  --sidebar-active-bg: rgba(255, 255, 255, 0.3);
+  --sidebar-hover-bg: rgba(255, 255, 255, 0.15);
+  --sidebar-pattern-color: rgba(255, 255, 255, 0.1);
+
+  --header-bg-start: rgba(var(--primary-rgb), 0.95);
+  --header-bg-end: rgba(var(--primary-rgb), 0.9);
+  --header-active-bg: rgba(255, 255, 255, 0.2);
+  --header-unread-bg: rgba(255, 255, 255, 0.1);
+  --header-shimmer-color: rgba(255, 255, 255, 0.2);
+
+  --main-layout-bg-start: rgba(255, 255, 255, 0.98);
+  --main-layout-bg-end: rgba(255, 255, 255, 0.95);
+
+  --footer-bg-start: rgba(var(--primary-rgb), 0.9);
+  --footer-bg-end: rgba(var(--primary-rgb), 0.85);
+  --footer-border-color: rgba(255, 255, 255, 0.3);
+  --footer-text-color: rgba(255, 255, 255, 0.9);
+
+  /* Pattern Variables - Standardized */
+  --pattern-color: rgba(var(--primary-rgb), 0.03);
+  --pattern-opacity: 0.4;
+  --pattern-size: 4px;
+  --pattern-direction: 0deg;
+
+  /* Pattern Variants */
+  --pattern-color-subtle: rgba(var(--primary-rgb), 0.02);
+  --pattern-color-light: rgba(var(--primary-rgb), 0.05);
+  --pattern-color-medium: rgba(var(--primary-rgb), 0.1);
+  --pattern-size-sm: 2px;
+  --pattern-size-md: 4px;
+  --pattern-size-lg: 20px;
+
+  /* Overlay Variables - Standardized */
+  --overlay-opacity-subtle: 0.1;
+  --overlay-opacity-light: 0.2;
+  --overlay-opacity-medium: 0.4;
+  --overlay-opacity-strong: 0.6;
+
+  /* Animation Durations - Standardized */
+  --anim-duration-fast: 8s;
+  --anim-duration-base: 12s;
+  --anim-duration-slow: 20s;
+
+  /* Shimmer Variables */
+  --shimmer-color: rgba(255, 255, 255, 0.2);
+  --shimmer-duration: var(--anim-duration-base);
+}
+
+/* Dark Mode Background Variables */
+[data-theme='dark'],
+.dark {
+  --bg-base: #000000;
+  --bg-gradient-start: #000000;
+  --bg-gradient-mid: #0a0a0f;
+  --bg-gradient-end: #1e293b;
+  --theme-bg-gradient: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%);
+
+  --sidebar-bg-start: rgba(15, 23, 42, 0.9);
+  --sidebar-bg-end: rgba(30, 41, 59, 0.85);
+  --sidebar-icon-bg-start: rgba(var(--primary-rgb), 0.1);
+  --sidebar-icon-bg-end: rgba(var(--primary-rgb), 0.05);
+  --sidebar-active-bg: rgba(var(--primary-rgb), 0.2);
+  --sidebar-hover-bg: rgba(var(--primary-rgb), 0.12);
+  --sidebar-pattern-color: rgba(255, 255, 255, 0.05);
+
+  --header-bg-start: rgba(15, 23, 42, 0.9);
+  --header-bg-end: rgba(30, 41, 59, 0.85);
+  --header-active-bg: rgba(var(--primary-rgb), 0.15);
+  --header-unread-bg: rgba(var(--primary-rgb), 0.08);
+  --header-shimmer-color: rgba(255, 255, 255, 0.1);
+
+  --main-layout-bg-start: rgba(0, 0, 0, 0.98);
+  --main-layout-bg-end: rgba(0, 0, 0, 0.95);
+
+  --footer-bg-start: rgba(15, 23, 42, 0.8);
+  --footer-bg-end: rgba(30, 41, 59, 0.7);
+  --footer-border-color: rgba(var(--primary-rgb), 0.2);
+  --footer-text-color: rgba(255, 255, 255, 0.8);
+
+  --pattern-color: rgba(var(--primary-rgb), 0.05);
+  --pattern-color-subtle: rgba(var(--primary-rgb), 0.02);
+  --pattern-color-light: rgba(var(--primary-rgb), 0.08);
+  --pattern-color-medium: rgba(var(--primary-rgb), 0.15);
+
+  --overlay-opacity-subtle: 0.05;
+  --overlay-opacity-light: 0.1;
+  --overlay-opacity-medium: 0.2;
+  --overlay-opacity-strong: 0.3;
+
+  --shimmer-color: rgba(255, 255, 255, 0.1);
+}
+
+/* MyHR Theme Background Variables */
+[data-theme='myhr']:not(.dark),
+body.theme-myhr:not(.dark) {
+  --bg-base: #eff6ff;
+  --bg-gradient-start: #dbeafe;
+  --bg-gradient-mid: #bfdbfe;
+  --bg-gradient-end: #93c5fd;
+  --theme-bg-gradient: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 30%, #93c5fd 70%, #60a5fa 100%);
+
+  --sidebar-bg-start: rgba(var(--primary-rgb), 0.95);
+  --sidebar-bg-end: rgba(var(--primary-rgb), 0.9);
+  --sidebar-icon-bg-start: rgba(255, 255, 255, 0.2);
+  --sidebar-icon-bg-end: rgba(255, 255, 255, 0.1);
+  --sidebar-active-bg: rgba(255, 255, 255, 0.3);
+  --sidebar-hover-bg: rgba(255, 255, 255, 0.15);
+  --sidebar-pattern-color: rgba(255, 255, 255, 0.05);
+
+  --header-bg-start: rgba(var(--primary-rgb), 0.95);
+  --header-bg-end: rgba(var(--primary-rgb), 0.9);
+  --header-active-bg: rgba(255, 255, 255, 0.2);
+  --header-unread-bg: rgba(255, 255, 255, 0.1);
+  --header-shimmer-color: rgba(255, 255, 255, 0.2);
+
+  --main-layout-bg-start: rgba(255, 255, 255, 0.98);
+  --main-layout-bg-end: rgba(255, 255, 255, 0.95);
+
+  --footer-bg-start: rgba(var(--primary-rgb), 0.9);
+  --footer-bg-end: rgba(var(--primary-rgb), 0.85);
+  --footer-border-color: rgba(255, 255, 255, 0.3);
+  --footer-text-color: rgba(255, 255, 255, 0.9);
+
+  --pattern-color: rgba(255, 255, 255, 0.05);
+  --pattern-color-subtle: rgba(255, 255, 255, 0.02);
+  --pattern-color-light: rgba(255, 255, 255, 0.08);
+  --pattern-color-medium: rgba(255, 255, 255, 0.15);
+
+  --shimmer-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme='myhr'].dark,
+.dark body.theme-myhr {
+  --bg-base: #000000;
+  --bg-gradient-start: #000000;
+  --bg-gradient-mid: #0a0a0f;
+  --bg-gradient-end: #000000;
+  --theme-bg-gradient: linear-gradient(135deg, #000000 0%, #0a0a0f 50%, #000000 100%);
+
+  --sidebar-bg-start: rgba(15, 23, 42, 0.9);
+  --sidebar-bg-end: rgba(30, 41, 59, 0.85);
+  --sidebar-icon-bg-start: rgba(var(--primary-rgb), 0.1);
+  --sidebar-icon-bg-end: rgba(var(--primary-rgb), 0.05);
+  --sidebar-active-bg: rgba(var(--primary-rgb), 0.2);
+  --sidebar-hover-bg: rgba(var(--primary-rgb), 0.12);
+  --sidebar-pattern-color: rgba(255, 255, 255, 0.05);
+
+  --header-bg-start: rgba(15, 23, 42, 0.9);
+  --header-bg-end: rgba(30, 41, 59, 0.85);
+  --header-active-bg: rgba(var(--primary-rgb), 0.15);
+  --header-unread-bg: rgba(var(--primary-rgb), 0.08);
+  --header-shimmer-color: rgba(255, 255, 255, 0.1);
+
+  --main-layout-bg-start: rgba(0, 0, 0, 0.98);
+  --main-layout-bg-end: rgba(0, 0, 0, 0.95);
+
+  --footer-bg-start: rgba(15, 23, 42, 0.8);
+  --footer-bg-end: rgba(30, 41, 59, 0.7);
+  --footer-border-color: rgba(var(--primary-rgb), 0.2);
+  --footer-text-color: rgba(255, 255, 255, 0.8);
+
+  --pattern-color: rgba(var(--primary-rgb), 0.05);
+  --pattern-color-subtle: rgba(var(--primary-rgb), 0.02);
+  --pattern-color-light: rgba(var(--primary-rgb), 0.08);
+  --pattern-color-medium: rgba(var(--primary-rgb), 0.15);
+
+  --shimmer-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================
+   Background Mixins
+   ============================================ */
+
+/* Base Background */
+@mixin background-base() {
+  background: var(--theme-bg-gradient);
+  background-attachment: fixed;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Gradient Background */
+@mixin background-gradient($start: var(--bg-gradient-start), $mid: var(--bg-gradient-mid), $end: var(--bg-gradient-end), $direction: 135deg) {
+  background: linear-gradient($direction, $start 0%, $mid 50%, $end 100%);
+}
+
+/* Layout Background */
+@mixin background-layout($type: 'sidebar', $direction: 'to bottom') {
+  @if $type == 'sidebar' {
+    background: linear-gradient($direction, var(--sidebar-bg-start) 0%, var(--sidebar-bg-end) 100%);
+  } @else if $type == 'header' {
+    background: linear-gradient($direction, var(--header-bg-start) 0%, var(--header-bg-end) 100%);
+  } @else if $type == 'main' {
+    background: linear-gradient($direction, var(--main-layout-bg-start) 0%, var(--main-layout-bg-end) 100%);
+  } @else if $type == 'footer' {
+    background: linear-gradient($direction, var(--footer-bg-start) 0%, var(--footer-bg-end) 100%);
+  }
+}
+
+/* Pattern Overlay - Enhanced with standardized variables */
+/* Note: $size must be a SCSS value (e.g., 4px), not a CSS variable */
+/* For CSS variables, pass the numeric value that matches the CSS variable */
+@mixin background-pattern($color: var(--pattern-color), $opacity: var(--pattern-opacity), $size: 4px, $direction: 0deg) {
+  $half-size: $size * 0.5;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        $direction,
+        transparent,
+        transparent $half-size,
+        $color $half-size,
+        $color $size
+      );
+    opacity: $opacity;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* Radial Overlay */
+/* Note: $intensity must be a SCSS value (e.g., 0.2), not a CSS variable */
+@mixin background-overlay-radial($intensity: 0.2, $positions: (20% 30%, 80% 70%)) {
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    $gradients: ();
+    @each $pos in $positions {
+      $gradients: append($gradients, radial-gradient(circle at $pos, rgba(var(--primary-rgb), $intensity) 0%, transparent 50%), comma);
+    }
+    background: $gradients;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* Shimmer Effect */
+@mixin background-shimmer($duration: var(--anim-duration-base), $color: var(--shimmer-color)) {
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      $color 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: shimmer $duration ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* Combined Background System */
+@mixin background-system($type: 'base', $pattern: true, $overlay: false, $shimmer: false) {
+  @if $type == 'base' {
+    @include background-base();
+  } @else {
+    @include background-layout($type);
+  }
+
+  @if $pattern {
+    @include background-pattern();
+  }
+
+  @if $overlay {
+    @include background-overlay-radial();
+  }
+
+  @if $shimmer {
+    @include background-shimmer();
+  }
+}
+
+/* ============================================
+   Background Utility Classes
+   ============================================ */
+
+.bg-base {
+  @include background-base();
+}
+
+.bg-gradient {
+  @include background-gradient();
+}
+
+.bg-pattern {
+  @include background-pattern();
+}
+
+.bg-pattern-subtle {
+  @include background-pattern(var(--pattern-color-subtle), 0.3, 2px);
+}
+
+.bg-pattern-light {
+  @include background-pattern(var(--pattern-color-light), 0.5, 4px);
+}
+
+.bg-pattern-medium {
+  @include background-pattern(var(--pattern-color-medium), 0.6, 20px);
+}
+
+.bg-overlay-radial {
+  @include background-overlay-radial();
+}
+
+.bg-overlay-subtle {
+  @include background-overlay-radial(0.1);
+}
+
+.bg-overlay-light {
+  @include background-overlay-radial(0.2);
+}
+
+.bg-overlay-medium {
+  @include background-overlay-radial(0.4);
+}
+
+.bg-overlay-strong {
+  @include background-overlay-radial(0.6);
+}
+
+.bg-shimmer {
+  @include background-shimmer();
+}
+
+.bg-shimmer-fast {
+  @include background-shimmer(8s);
+}
+
+.bg-shimmer-slow {
+  @include background-shimmer(20s);
+}
+
+/* Layout Background Utilities */
+.bg-layout-sidebar {
+  @include background-layout('sidebar');
+}
+
+.bg-layout-header {
+  @include background-layout('header');
+}
+
+.bg-layout-main {
+  @include background-layout('main');
+}
+
+.bg-layout-footer {
+  @include background-layout('footer');
+}
+
+/* ============================================
+   Shimmer Keyframes
+   ============================================ */
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* ============================================
+   Reduced Motion Support
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-pattern,
+  .bg-pattern-subtle,
+  .bg-pattern-light,
+  .bg-pattern-medium,
+  .bg-overlay-radial,
+  .bg-overlay-subtle,
+  .bg-overlay-light,
+  .bg-overlay-medium,
+  .bg-overlay-strong,
+  .bg-shimmer,
+  .bg-shimmer-fast,
+  .bg-shimmer-slow {
+    &::before,
+    &::after {
+      animation: none !important;
+    }
+  }
+}
+
