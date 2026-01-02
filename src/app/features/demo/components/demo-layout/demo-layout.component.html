@@ -258,16 +258,6 @@
                   </h1>
                 </div>
               </div>
-
-              <!-- Breadcrumbs -->
-              <div class="hidden md:flex items-center ml-4 pl-4 border-l border-gray-200/50 dark:border-gray-700/50 theme-myhr:border-white/20">
-                <app-breadcrumbs
-                  [items]="breadcrumbItems"
-                  [separator]="'/'"
-                  [showHome]="false"
-                  [maxItems]="4">
-                </app-breadcrumbs>
-              </div>
             </div>
 
             <div class="flex items-center gap-2 md:gap-3 flex-shrink-0">
@@ -338,9 +328,21 @@
         <!-- Content Container -->
         <div class="content-container flex-1 relative">
           <!-- Route Content -->
-          <div class="route-content-wrapper p-4 md:p-6 lg:p-8">
-            <div class="route-container relative">
-              <router-outlet></router-outlet>
+          <div class="route-content-wrapper">
+            <div class="route-container relative px-4 md:px-6 lg:px-8 pt-4 md:pt-6 lg:pt-8 pb-4 md:pb-6 lg:pb-8">
+              <!-- Breadcrumbs (Centered above router-outlet) -->
+              <div class="flex items-center justify-center mb-6 md:mb-8 fade-in">
+                <app-breadcrumbs
+                  [items]="breadcrumbItems"
+                  [separator]="'/'"
+                  [showHome]="false"
+                  [maxItems]="4">
+                </app-breadcrumbs>
+              </div>
+              <!-- Router Outlet Content -->
+              <div class="router-outlet-wrapper">
+                <router-outlet></router-outlet>
+              </div>
             </div>
           </div>
         </div>

@@ -28,9 +28,11 @@
       [class.main-wrapper-mobile]="layout.isHandset">
       <!-- Header (Sticky - ติดบนหน้าจอตลอด) -->
       <div class="sticky-header-wrapper">
-        <app-header
-          (toggleSidenav)="toggleSidebar()"
-        ></app-header>
+        <header class="glass-nav backdrop-blur-xl border-b border-white/20 dark:border-gray-700/20 theme-myhr:border-primary/30 shadow-2xl transition-all duration-500 ease-in-out px-3 sm:px-4 md:px-6 fade-in hover:shadow-3xl">
+          <app-header
+            (toggleSidenav)="toggleSidebar()"
+          ></app-header>
+        </header>
       </div>
 
       <!-- Scrollable Content Area -->
