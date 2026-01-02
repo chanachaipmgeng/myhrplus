@@ -42,14 +42,14 @@ import { STORAGE_KEYS } from '@core/constants/storage-keys.constant';
 })
 export class ForgotPasswordComponent implements OnInit {
   private translate = inject(TranslateService);
-  
+
   forgotPasswordForm: FormGroup;
   loading = false;
   dbList: DatabaseModel[] = [];
   dbSelected: string = '';
   errorMessage: string = '';
   successMessage: string = '';
-  
+
   // For reusable components
   username: string = '';
   email: string = '';
@@ -209,7 +209,7 @@ export class ForgotPasswordComponent implements OnInit {
       )
         .then((result: any) => {
           console.log('Forgot password result:', result);
-          
+
           if (result.status) {
             this.successMessage = this.translate.instant('auth.forgotPassword.successMessage');
             this.notificationService.showSuccess(this.successMessage);
@@ -217,7 +217,7 @@ export class ForgotPasswordComponent implements OnInit {
             this.forgotPasswordForm.reset();
             this.username = '';
             this.email = '';
-            
+
             // Auto redirect to login after 3 seconds
             setTimeout(() => {
               this.router.navigate(['/auth/login']);
@@ -228,13 +228,13 @@ export class ForgotPasswordComponent implements OnInit {
             if (result.msgEmail) errorMessages.push(result.msgEmail);
             if (result.msgEmployeeid) errorMessages.push(result.msgEmployeeid);
             if (result.msgUsername) errorMessages.push(result.msgUsername);
-            
-            this.errorMessage = errorMessages.length > 0 
-              ? errorMessages.join('\n') 
+
+            this.errorMessage = errorMessages.length > 0
+              ? errorMessages.join('\n')
               : this.translate.instant('auth.forgotPassword.error.sendFailed');
             this.notificationService.showError(this.errorMessage);
           }
-          
+
           this.loading = false;
         })
         .catch((error: HttpErrorResponse) => {

@@ -253,3 +253,4 @@
 **Status**: ✅ Complete - MyHR theme now uses primary color (#07399C) throughout
 
 
+
