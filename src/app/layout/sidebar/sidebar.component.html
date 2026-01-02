@@ -8,7 +8,6 @@
     <div class="mb-6">
       <a routerLink="/home"
          class="logo-container w-12 h-12 rounded-xl flex items-center justify-center shadow-lg
-                transition-all duration-300 ease-out
                 hover-lift-lg
                 micro-active-scale
                 bg-white/10 dark:bg-gray-900/20 theme-myhr:bg-gray-900/30
@@ -20,17 +19,19 @@
         <!-- Shimmer Effect -->
         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent
                     -translate-x-full group-hover:translate-x-full
-                    transition-transform duration-1000 ease-in-out"></div>
+                    transition-transform duration-1000 ease-in-out
+                    pointer-events-none"></div>
         <!-- Glow Effect on Hover -->
         <div class="absolute inset-0 rounded-xl
                     bg-gradient-to-br from-primary/0 to-primary/0
                     group-hover:from-primary/20 group-hover:to-primary/20
                     transition-all duration-300
-                    blur-sm opacity-0 group-hover:opacity-100"></div>
+                    blur-sm opacity-0 group-hover:opacity-100
+                    pointer-events-none"></div>
         <img [src]="getLogoPath()"
              [alt]="'layout.sidebar.appLogo' | translate"
              class="w-10 h-10 object-contain relative z-10
-                    group-hover:scale-110 transition-transform duration-300" />
+                    icon-micro" />
       </a>
     </div>
 
@@ -48,7 +49,6 @@
                 [attr.title]="translateLabel(level2Item.label, 'admin', 2)"
                 [style.animation-delay.ms]="i * 50"
                 class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl
-                       transition-all duration-300 ease-out
                 hover-lift
                 micro-active-scale
                        relative group
@@ -61,7 +61,7 @@
                       group-hover:from-primary/10 group-hover:to-primary/10
                       transition-all duration-300"></div>
           <!-- Icon -->
-          <span class="material-icons text-xl transition-all duration-300 relative z-10
+          <span class="material-icons text-xl relative z-10
                        icon-micro group-hover:rotate-6 group-hover:scale-110
                        text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">
             {{ level2Item.icon || 'folder' }}
@@ -97,7 +97,6 @@
            [attr.title]="module.name"
            [style.animation-delay.ms]="i * 50"
            class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl
-                  transition-all duration-300 ease-out
                 hover-lift
                 micro-active-scale
                   relative group
@@ -109,11 +108,11 @@
                       transition-all duration-300"></div>
           <span *ngIf="module.iconCss"
                 [class]="module.iconCss"
-                class="text-xl transition-all duration-300 relative z-10
+                class="text-xl relative z-10
                        icon-micro group-hover:rotate-6 group-hover:scale-110
                        text-gray-700 dark:text-gray-300 theme-myhr:text-white/90"></span>
           <span *ngIf="!module.iconCss"
-                class="text-xl transition-all duration-300 relative z-10
+                class="text-xl relative z-10
                        icon-micro group-hover:rotate-6 group-hover:scale-110
                        text-gray-700 dark:text-gray-300 theme-myhr:text-white/90
                        e-icons e-folder"></span>
@@ -144,7 +143,7 @@
         <div class="mb-4" *ngIf="selectedLevel2Item || selectedNavigationItem">
           <h2 class="module-title text-xl font-bold thai-text
                      text-gray-800 dark:text-gray-100 theme-myhr:text-white
-                     mb-1 transition-colors duration-300">
+                     mb-1">
             {{ translateLabel((selectedLevel2Item ? selectedLevel2Item.label : (selectedNavigationItem ? selectedNavigationItem.label : '')) || '', 'admin', selectedLevel2Item ? 2 : 1) || ('layout.sidebar.menu' | translate) }}
           </h2>
           <p class="text-xs text-gray-500 dark:text-gray-400 theme-myhr:text-white/70" *ngIf="selectedNavigationItem">
@@ -156,7 +155,6 @@
         <div class="mb-4" *ngIf="selectedNavigationItem?.id === 'admin' && selectedLevel3Item">
           <button (click)="goBackToLevel2()"
                   class="back-button flex items-center gap-2 px-4 py-2 rounded-lg
-                         transition-all duration-200 ease-out
                          bg-white/20 dark:bg-gray-800/30 theme-myhr:bg-white/10
                          hover:bg-white/30 dark:hover:bg-gray-700/40 theme-myhr:hover:bg-white/20
                          hover-lift-sm micro-active-scale
@@ -185,14 +183,13 @@
                 class="absolute right-2 top-1/2 -translate-y-1/2
                        w-8 h-8 flex items-center justify-center rounded-lg
                        hover:bg-gray-200/50 dark:hover:bg-gray-700/50 theme-myhr:hover:bg-white/20
-                       hover:scale-110 active:scale-95
-                       transition-all duration-200 ease-out"
+                       hover:scale-110 active:scale-95"
                 [attr.aria-label]="'layout.sidebar.clearSearch' | translate"
                 type="button">
                 <app-icon name="close" size="sm"
                           color="text-gray-500 dark:text-gray-400 theme-myhr:text-white/70
                                  hover:text-red-500 dark:hover:text-red-400
-                                 transition-colors duration-200"></app-icon>
+                                 icon-micro"></app-icon>
               </button>
             </ng-container>
           </app-glass-input>

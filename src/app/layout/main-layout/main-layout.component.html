@@ -3,7 +3,7 @@
   sidebarOpen: sidebarOpen$ | async
 } as layout">
   <div
-    class="w-full overflow-x-hidden relative min-h-screen transition-all duration-300 layout-background"
+    class="w-full overflow-x-hidden relative min-h-screen layout-background"
     appSwipe
     (swipeRight)="onSwipeRight()"
     (swipeLeft)="onSwipeLeft()"
@@ -24,7 +24,7 @@
 
     <!-- Main Content -->
     <div
-      class="main-wrapper flex-1 min-h-screen flex flex-col transition-all duration-300 relative"
+      class="main-wrapper flex-1 min-h-screen flex flex-col relative"
       [class.main-wrapper-sidebar-open]="layout.sidebarOpen && !layout.isHandset"
       [class.main-wrapper-sidebar-closed]="!layout.sidebarOpen && !layout.isHandset"
       [class.main-wrapper-mobile]="layout.isHandset"
@@ -42,7 +42,8 @@
         <div class="content-container flex-1 relative">
           <!-- Breadcrumb Section -->
           <div class="breadcrumb-section -mx-4 md:-mx-6 lg:-mx-8 px-4 md:px-6 lg:px-8 pt-4 md:pt-6 pb-2 md:pb-4
-                      animate-fade-in [animation-delay:100ms]">
+                      fade-in"
+                      [style.animation-delay.ms]="100">
             <app-breadcrumbs
               [items]="breadcrumbs"
               [separator]="'/'"

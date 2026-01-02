@@ -71,19 +71,26 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "poll": 2000
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "poll": 2000,
+            "host": "localhost",
+            "port": 4200
+          },
           "configurations": {
             "production": {
               "buildTarget": "hr-angular-app:build:production"
             },
             "development": {
-              "buildTarget": "hr-angular-app:build:development"
+              "buildTarget": "hr-angular-app:build:development",
+              "poll": 2000
             }
           },
           "defaultConfiguration": "development"

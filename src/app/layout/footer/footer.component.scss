@@ -21,7 +21,7 @@ footer {
   );
   @include backdrop-blur-saturate(20px, 180%);
   border-top: 1px solid var(--footer-border-color);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  @include smooth-transition(all, 0.5s, cubic-bezier(0.4, 0, 0.2, 1));
 
   /* Subtle gradient overlay - Using CSS Variables */
   &::before {
@@ -39,7 +39,7 @@ footer {
     pointer-events: none;
   }
 
-  /* Pattern overlay for Light mode */
+  /* Pattern overlay for Light mode - Using standardized animation */
   &::after {
     content: '';
     position: absolute;
@@ -150,7 +150,7 @@ body.theme-myhr .myhr-footer {
   .footer-content {
     span {
       color: rgba(203, 213, 225, 0.9) !important;
-      transition: all 0.3s ease;
+      @include smooth-transition(all, 0.3s);
 
       &:first-child {
         background: linear-gradient(135deg,
@@ -168,17 +168,8 @@ body.theme-myhr .myhr-footer {
   }
 }
 
-/* Pattern shimmer animation for footer */
-@keyframes patternShimmer {
-  0%, 100% {
-    opacity: 0.3;
-    transform: translate(0, 0);
-  }
-  50% {
-    opacity: 0.5;
-    transform: translate(1px, 1px);
-  }
-}
+/* Pattern shimmer animation - Using standardized animation from _mixins.scss */
+/* Note: patternShimmer keyframes are defined in _mixins.scss */
 
 /* MyHR gradient animation for footer text */
 @keyframes myhrGradient {

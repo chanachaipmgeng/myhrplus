@@ -458,6 +458,15 @@ export class ModelNameService {
 - **Pattern Animations**: Use `patternShimmer` keyframes for subtle pattern animations
 - **Gradient Animations**: Use `gradientShift` keyframes for subtle gradient animations
 - **Accessibility**: Always add `@media (prefers-reduced-motion: reduce)` to disable animations
+- **Class Duplication Prevention**: Avoid redundant CSS classes in HTML templates
+  - **Utility Classes**: Use standardized utility classes (`.hover-lift`, `.icon-micro`, `.fade-in`) instead of inline transitions
+  - **Transition Classes**: Avoid `transition-all duration-300` when utility classes already include transitions
+  - **Animation Classes**: Use standard utility classes (`.fade-in`, `.fade-in-up`) instead of custom classes (`animate-fade-in`)
+  - **Hover Effects**: Use utility classes (`.hover-lift`, `.hover-scale`, `.hover-glow`) instead of inline hover effects
+  - **Pointer Events**: Add `pointer-events-none` to overlay effects (shimmer, glow, gradients) to prevent blocking interactions
+  - **Angular Bindings**: Use proper Angular property binding syntax (`[style.animation-delay.ms]="100"` instead of `[animation-delay:100ms]`)
+  - **Consistent Timing**: Use `duration-300` (300ms) as standard, avoid conflicting durations (`duration-500` vs `duration-300`)
+  - **Documentation**: See `LAYOUT_CLASS_DUPLICATION_COMPLETE.md` for complete guidelines
 
 ### Tailwind CSS
 - **Utility Classes**: Prefer Tailwind utility classes over custom CSS
@@ -927,6 +936,14 @@ export class ComponentNameDemoComponent {
 - [ ] **Responsive Breakpoints**: Use `md:` and `lg:` breakpoints, avoid unnecessary `sm:` breakpoints
 - [ ] **Omni-Search**: Uses `NAVIGATION_ITEMS` from `navigation.constant.ts` (not hardcoded menu data)
 - [ ] **Error Pages**: All error pages (404, 403, 500) use consistent full-screen layout with 2-column design
+- [ ] **Class Duplication**: No redundant CSS classes in HTML templates
+  - [ ] Uses utility classes (`.hover-lift`, `.icon-micro`, `.fade-in`) instead of inline transitions
+  - [ ] No `transition-all duration-300` when utility classes already include transitions
+  - [ ] Uses standard animation classes (`.fade-in`, `.fade-in-up`) instead of custom classes (`animate-fade-in`)
+  - [ ] Uses utility classes for hover effects (`.hover-lift`, `.hover-scale`, `.hover-glow`)
+  - [ ] Overlay effects have `pointer-events-none` to prevent blocking interactions
+  - [ ] Uses proper Angular property binding syntax (`[style.animation-delay.ms]="100"`)
+  - [ ] Consistent transition timing (`duration-300` as standard)
 
 ---
 
@@ -1293,7 +1310,20 @@ export class ComponentNameDemoComponent {
 
 ---
 
-**Last Updated**: 2025-01-01 (Demo Layout Improvements)
-**Status**: ✅ All Architecture Improvements Completed + Translation Complete + Code Fixes Complete + Background Style Options Complete + Theme Renamed to MyHR + Assets SCSS Standardization Complete + Component Improvements Complete (Phase 1-3) + Demo Components Cleanup Complete + Demo Components Phase 1 Improvements Complete + Syncfusion Reorganization Phase 1-4 Complete + Demo Components Audit Complete (Phase 1-3) + Demo API Documentation Complete + Demo Layout Improvements Complete + Demo Layout Improvements Complete
+### Layout Components Class Duplication Fix Complete (2025-01-01)
+- ✅ **Header Component**: Fixed 15+ class duplication issues (transitions, hover effects, shadow classes)
+- ✅ **Sidebar Component**: Fixed 11+ class duplication issues (transitions, icon animations, overlay effects)
+- ✅ **Main Layout Component**: Fixed 3 class duplication issues (unnecessary transitions, animation classes)
+- ✅ **Total**: 29+ issues fixed across 3 layout components
+- ✅ **Documentation**: `LAYOUT_CLASS_DUPLICATION_COMPLETE.md`, `HEADER_CLASS_DUPLICATION_FIX.md`, `SIDEBAR_CLASS_DUPLICATION_FIX.md`, `MAIN_LAYOUT_CLASS_DUPLICATION_FIX.md` created
+- ✅ **Impact**:
+  - Reduced redundant CSS transitions
+  - Standardized utility classes usage
+  - Consistent transition timing
+  - Better performance and maintainability
+  - Zero linter errors
+
+**Last Updated**: 2025-01-01 (Layout Components Class Duplication Fix)
+**Status**: ✅ All Architecture Improvements Completed + Translation Complete + Code Fixes Complete + Background Style Options Complete + Theme Renamed to MyHR + Assets SCSS Standardization Complete + Component Improvements Complete (Phase 1-3) + Demo Components Cleanup Complete + Demo Components Phase 1 Improvements Complete + Syncfusion Reorganization Phase 1-4 Complete + Demo Components Audit Complete (Phase 1-3) + Demo API Documentation Complete + Demo Layout Improvements Complete + Layout Components Class Duplication Fix Complete
 **Angular Version**: 17.0.0+
 **TypeScript Version**: 5.2.2+

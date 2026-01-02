@@ -1,6 +1,6 @@
-<header class="glass-nav backdrop-blur-xl border-b border-white/20 dark:border-gray-700/20 theme-myhr:border-primary/30 shadow-2xl transition-all duration-500 ease-in-out sticky top-0 left-0 right-0 z-50 myhr-header px-3 sm:px-4 md:px-6
+<header class="glass-nav backdrop-blur-xl border-b border-white/20 dark:border-gray-700/20 theme-myhr:border-primary/30 shadow-2xl transition-all duration-300 ease-in-out sticky top-0 left-0 right-0 z-50 myhr-header px-3 sm:px-4 md:px-6
             fade-in
-            hover:shadow-3xl">
+            hover:shadow-2xl">
   <div class="flex items-center justify-between py-3 md:py-4">
     <div class="flex items-center gap-2 md:gap-4 flex-1 min-w-0">
       <!-- Menu Toggle Button -->
@@ -12,11 +12,10 @@
         [title]="'layout.header.menu' | translate"
         customClass="w-11 h-11 min-w-[44px] min-h-[44px] p-0 rounded-lg
                      hover-lift micro-active-scale
-                     hover:shadow-lg hover:-translate-y-0.5
                      group relative overflow-hidden"
         (clicked)="toggleSidenav.emit()">
         <app-icon name="menu" size="md" color="text-gray-700 dark:text-gray-300 theme-myhr:text-white/90
-                   icon-micro transition-transform duration-300"></app-icon>
+                   icon-micro"></app-icon>
       </app-glass-button>
 
       <!-- Logo Section -->
@@ -29,17 +28,17 @@
                     border border-white/20 dark:border-gray-700/20 theme-myhr:border-primary/30
                     shadow-lg flex-shrink-0 relative overflow-hidden
                     hover-lift-lg
-                    transition-all duration-300 ease-out
                     group cursor-pointer
                     animate-myhr-pulse">
           <!-- Shimmer Effect -->
           <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent
                       -translate-x-full group-hover:translate-x-full
-                      transition-transform duration-1000 ease-in-out"></div>
+                      transition-transform duration-1000 ease-in-out
+                      pointer-events-none"></div>
           <img [src]="getLogoPath()"
                [alt]="'layout.header.appLogo' | translate"
                class="w-8 h-8 md:w-9 md:h-9 object-contain relative z-10
-                      icon-micro transition-transform duration-300" />
+                      icon-micro" />
         </a>
         <div class="flex flex-col min-w-0 hidden sm:block">
           <span class="app-title thai-text font-semibold text-gray-800 dark:text-gray-100 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent text-sm md:text-lg leading-tight truncate">
@@ -63,7 +62,7 @@
                border border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
                text-left flex items-center gap-3
                hover:bg-white/70 dark:hover:bg-gray-800/70 theme-myhr:hover:bg-gray-800/50
-               hover:scale-[1.02] hover:shadow-lg hover:-translate-y-0.5
+               hover:scale-[1.02] hover:shadow-lg
                active:scale-[0.98]
                transition-all duration-300 ease-out
                focus:outline-none focus:ring-2 focus:ring-blue-500/20
@@ -71,13 +70,13 @@
         <!-- Hover Glow Effect -->
         <div class="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0
                     opacity-0 group-hover:opacity-100
-                    transition-opacity duration-300"></div>
+                    transition-opacity duration-300
+                    pointer-events-none"></div>
         <app-icon name="search" size="sm" color="text-gray-500 dark:text-gray-400 theme-myhr:text-white/70
                    group-hover:scale-110 group-hover:text-primary dark:group-hover:text-primary
-                   transition-all duration-300 relative z-10"></app-icon>
+                   relative z-10"></app-icon>
         <span class="flex-1 text-sm text-gray-500 dark:text-gray-400 theme-myhr:text-white/70 relative z-10
-                     group-hover:text-gray-700 dark:group-hover:text-gray-300
-                     transition-colors duration-300">
+                     group-hover:text-gray-700 dark:group-hover:text-gray-300">
           {{ 'layout.header.searchMenuPlaceholder' | translate }}
         </span>
         <kbd class="hidden lg:inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold
@@ -105,7 +104,7 @@
         (clicked)="openOmniSearch()">
         <app-icon name="search" size="md" color="text-gray-700 dark:text-gray-300 theme-myhr:text-white/90
                    group-hover:scale-110 group-hover:text-primary dark:group-hover:text-primary
-                   transition-all duration-300 relative z-10"></app-icon>
+                   relative z-10"></app-icon>
       </app-glass-button>
 
       <!-- Language Switcher -->
@@ -125,7 +124,7 @@
           (clicked)="toggleLanguageMenu()">
           <app-icon name="language" size="md" color="text-gray-700 dark:text-gray-300 theme-myhr:text-white/90
                      group-hover:scale-110 group-hover:rotate-12
-                     transition-all duration-300 relative z-10"></app-icon>
+                     icon-micro relative z-10"></app-icon>
         </app-glass-button>
 
         <!-- Language Dropdown -->
@@ -154,7 +153,6 @@
                      hover:bg-gray-50 dark:hover:bg-gray-700 theme-myhr:hover:bg-white/20
                      hover:translate-x-1 hover:scale-[1.02]
                      active:scale-[0.98]
-                     transition-all duration-200 ease-out
                      fade-in">
               <img [src]="lang.flagPath" [alt]="lang.label" class="w-5 h-5 rounded-sm object-cover" />
               <span class="flex-1 thai-text text-sm font-medium text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">{{ lang.label }}</span>
@@ -184,7 +182,7 @@
           (clicked)="toggleNotificationMenu()">
           <app-icon name="notifications" size="md" color="text-gray-700 dark:text-gray-300 theme-myhr:text-white/90
                      group-hover:scale-110 group-hover:animate-bounce
-                     transition-all duration-300 relative z-10"></app-icon>
+                     icon-micro relative z-10"></app-icon>
           <span *ngIf="unreadCount > 0"
                 [attr.aria-label]="unreadCount + ' ' + ('layout.header.newItems' | translate)"
                 class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 dark:bg-red-400 rounded-full
@@ -218,7 +216,7 @@
               role="menuitem"
               (click)="markAllAsRead()"
               [attr.aria-label]="'layout.header.markAllAsRead' | translate"
-              class="text-xs text-primary dark:text-primary hover:text-primary/80 dark:hover:text-primary/80 transition-colors">
+              class="text-xs text-primary dark:text-primary hover:text-primary/80 dark:hover:text-primary/80">
               {{ 'layout.header.markAllAsRead' | translate }}
             </button>
           </div>
@@ -282,7 +280,7 @@
               type="button"
               role="menuitem"
               [attr.aria-label]="'layout.header.viewAll' | translate"
-              class="text-xs text-primary dark:text-primary hover:text-primary/80 dark:hover:text-primary/80 transition-colors">
+              class="text-xs text-primary dark:text-primary hover:text-primary/80 dark:hover:text-primary/80">
               {{ 'layout.header.viewAll' | translate }}
             </button>
           </div>
@@ -304,12 +302,10 @@
                  hover:bg-white/20 dark:hover:bg-gray-800/30 theme-myhr:hover:bg-gray-800/50
                  hover:scale-[1.02] hover:shadow-lg
                  active:scale-[0.98]
-                 transition-all duration-300 ease-out
                  group relative overflow-hidden
                  backdrop-blur-sm">
           <!-- Avatar -->
-          <div class="flex-shrink-0 group-hover:scale-110 group-hover:ring-2 group-hover:ring-primary/50
-                      transition-all duration-300 ease-out">
+          <div class="flex-shrink-0 group-hover:scale-110 group-hover:ring-2 group-hover:ring-primary/50">
             <app-avatar
               [src]="getAvatarUrl() || ''"
               [name]="getUserDisplayName()"
@@ -329,12 +325,12 @@
           </div>
 
           <!-- Dropdown Icon -->
-          <div class="flex-shrink-0 transition-transform duration-300 ease-out
+          <div class="flex-shrink-0
                        group-hover:scale-110"
                [class.rotate-180]="showUserMenu">
             <app-icon name="expand_more" size="sm" color="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70
                        group-hover:text-primary dark:group-hover:text-primary
-                       transition-colors duration-300"></app-icon>
+                       icon-micro"></app-icon>
           </div>
         </button>
 
@@ -391,7 +387,7 @@
                        [animation-delay:50ms]">
                 <app-icon name="person" size="sm" color="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70
                            group-hover:text-primary dark:group-hover:text-primary
-                           transition-colors duration-200"></app-icon>
+                           icon-micro"></app-icon>
                 <span class="thai-text text-sm font-medium text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">{{ 'layout.header.profile' | translate }}</span>
               </button>
               <button
@@ -408,7 +404,7 @@
                        [animation-delay:100ms]">
                 <app-icon name="settings" size="sm" color="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70
                            group-hover:text-primary dark:group-hover:text-primary
-                           transition-colors duration-200"></app-icon>
+                           icon-micro"></app-icon>
                 <span class="thai-text text-sm font-medium text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">{{ 'layout.header.settings' | translate }}</span>
               </button>
               <div class="border-t border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30 my-1"></div>
@@ -426,7 +422,7 @@
                        fade-in
                        [animation-delay:150ms]">
                 <app-icon name="logout" size="sm" color="text-red-600 dark:text-red-400
-                           group-hover:scale-110 transition-transform duration-200"></app-icon>
+                           icon-micro"></app-icon>
                 <span class="thai-text text-sm font-medium">{{ 'layout.header.logout' | translate }}</span>
               </button>
             </div>

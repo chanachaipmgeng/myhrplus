@@ -29,7 +29,7 @@
        z-index: 0;
      }
 
-     /* Pattern overlay */
+     /* Pattern overlay - Using standardized mixin and animation */
      &::after {
        content: '';
        position: absolute;
@@ -124,9 +124,9 @@
        rgba(255, 255, 255, 0.03) 50%,
        transparent 100%
      );
-     @include backdrop-blur(8px);
-     border-bottom: 1px solid rgba(var(--primary-rgb), 0.1);
-     transition: all 0.3s ease;
+    @include backdrop-blur(8px);
+    border-bottom: 1px solid rgba(var(--primary-rgb), 0.1);
+    @include smooth-transition(all, 0.3s);
 
      .dark &,
      [data-theme='dark'] & {
@@ -156,18 +156,7 @@
      position: relative;
      flex: 1;
      z-index: 1;
-     animation: fadeInUp 0.4s ease-out;
-
-     @keyframes fadeInUp {
-       from {
-         opacity: 0;
-         transform: translateY(10px);
-       }
-       to {
-         opacity: 1;
-         transform: translateY(0);
-       }
-     }
+     @include fade-in(0.4s);
    }
 
    /* Sticky Footer Wrapper */
@@ -180,9 +169,9 @@
        rgba(255, 255, 255, 0.05) 0%,
        transparent 100%
      );
-     @include backdrop-blur(4px);
-     margin-top: auto;
-     transition: all 0.3s ease;
+    @include backdrop-blur(4px);
+    margin-top: auto;
+    @include smooth-transition(all, 0.3s);
 
      .dark &,
      [data-theme='dark'] & {
@@ -250,9 +239,9 @@
 
        /* Overlay */
        &.e-sidebar-overlay {
-         background: var(--glass-bg-strong);
-         @include backdrop-blur(4px);
-         transition: opacity 0.3s ease-in-out;
+        background: var(--glass-bg-strong);
+        @include backdrop-blur(4px);
+        @include smooth-transition(opacity, 0.3s, ease-in-out);
        }
      }
    }
@@ -277,17 +266,8 @@
      }
    }
 
-   /* Animations */
-   @keyframes gradientShift {
-     0%, 100% {
-       background-position: 0% 50%;
-     }
-     50% {
-       background-position: 100% 50%;
-     }
-   }
-
-   /* patternShimmer animation moved to styles.scss */
+   /* Animations - Using standardized animations from _mixins.scss */
+   /* Note: gradientShift and patternShimmer keyframes are defined in _mixins.scss */
 
    /* Responsive Design */
    @include respond-to-down('md') {
