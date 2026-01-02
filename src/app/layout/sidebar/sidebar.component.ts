@@ -63,6 +63,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   activeRoute: string = '';
   private destroy$ = new Subject<void>();
   isDarkMode: boolean = false;
+  currentTheme: any = null; // Store current theme config
 
   currentUser: any = null;
 
@@ -101,6 +102,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
 
     // Subscribe to theme changes
+    this.themeService.theme$.pipe(takeUntil(this.destroy$)).subscribe(theme => {
+      this.currentTheme = theme;
+      // ThemeService already applies styles via CSS variables, no additional action needed
+    });
+
     this.themeService.isDarkMode$.pipe(takeUntil(this.destroy$)).subscribe(isDark => {
       this.isDarkMode = isDark;
     });

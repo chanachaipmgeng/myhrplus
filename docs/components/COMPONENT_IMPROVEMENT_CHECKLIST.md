@@ -158,7 +158,7 @@ class="rounded-xl shadow-md"
 
 **ไฟล์ที่ต้องแก้**:
 - `src/app/shared/components/theme-toggle/theme-toggle.component.ts`
-  - Line 24, 25, 188: `#3b82f6` → ใช้ `var(--primary-color)` หรือ `rgb(var(--primary-rgb))`
+  - Line 24, 25, 188: `#07399C` → ใช้ `var(--primary-color)` หรือ `rgb(var(--primary-rgb))`
 - `src/app/features/demo/shared/props-table/props-table.component.ts`
   - Line 23-27: `bg-blue-500/10`, `from-blue-400`, `via-cyan-400`, `to-blue-500`, `border-blue-500/30` → ใช้ `bg-primary/10`, `from-primary`, `via-primary`, `to-primary`, `border-primary/30`
   - Line 33: `text-blue-400`, `bg-blue-500/20` → ใช้ `text-primary`, `bg-primary/20`
@@ -176,7 +176,7 @@ class="rounded-xl shadow-md"
 **แนวทางแก้ไข**:
 ```typescript
 // ❌ Before
-customPrimaryColor = '#3b82f6';
+customPrimaryColor = '#07399C';
 bg-blue-500/10
 
 // ✅ After

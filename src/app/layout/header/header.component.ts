@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
-import { AuthService } from '@core/services';
+import { AuthService, ThemeService } from '@core/services';
 import { StorageService } from '@core/services';
 import { NotificationService, Notification } from '@core/services';
 import { OmniSearchComponent } from '@shared/components/omni-search/omni-search.component';
@@ -32,12 +32,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   notifications: Notification[] = [];
   unreadCount = 0;
   currentUser: any = null;
+  currentTheme: any = null; // Store current theme config
 
   constructor(
     public authService: AuthService,
     private router: Router,
     private storageService: StorageService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private themeService: ThemeService
   ) {
     // Initialize current language
     this.currentLanguage = (this.translate.currentLang as Language) || 'th';
@@ -54,6 +56,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // Get current user
     this.currentUser = this.authService.getCurrentUser();
+
+    // Subscribe to theme changes
+    this.themeService.theme$.pipe(takeUntil(this.destroy$)).subscribe(theme => {
+      this.currentTheme = theme;
+      // ThemeService already applies styles via CSS variables, no additional action needed
+    });
 
     // Subscribe to current user changes
     this.authService.currentUser$.pipe(takeUntil(this.destroy$)).subscribe(user => {

@@ -115,7 +115,7 @@ export class PersonalHomeComponent implements OnInit, OnDestroy {
    */
   private getPrimaryColor(): string {
     if (typeof window === 'undefined' || typeof document === 'undefined') {
-      return '#3b82f6'; // Fallback
+      return '#07399C'; // Fallback
     }
     const style = getComputedStyle(document.documentElement);
     const primaryRgb = style.getPropertyValue('--primary-rgb').trim();
@@ -123,7 +123,7 @@ export class PersonalHomeComponent implements OnInit, OnDestroy {
       const [r, g, b] = primaryRgb.split(',').map(v => parseInt(v.trim(), 10));
       return `rgb(${r}, ${g}, ${b})`;
     }
-    return '#3b82f6'; // Fallback
+    return '#07399C'; // Fallback
   }
 
   /**
@@ -131,14 +131,14 @@ export class PersonalHomeComponent implements OnInit, OnDestroy {
    */
   private getPrimaryColorHex(): string {
     if (typeof window === 'undefined' || typeof document === 'undefined') {
-      return '#3b82f6'; // Fallback
+      return '#07399C'; // Fallback
     }
     const style = getComputedStyle(document.documentElement);
     const primaryColor = style.getPropertyValue('--primary-color').trim();
     if (primaryColor) {
       return primaryColor;
     }
-    return '#3b82f6'; // Fallback
+    return '#07399C'; // Fallback
   }
 
   /**

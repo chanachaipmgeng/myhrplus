@@ -58,7 +58,7 @@
 - ✅ **0 Linter Errors**
 
 **ไฟล์ที่แก้ไข**:
-1. `theme-toggle.component.ts` - Hardcoded `#3b82f6` → CSS variables
+1. `theme-toggle.component.ts` - Hardcoded `#07399C` → CSS variables
 2. `props-table.component.ts` - `bg-blue-*`, `from-blue-*` → `bg-primary`, `from-primary`
 3. `statistics-card.component.ts` - `bg-blue-*`, `text-blue-*` → `bg-primary/10`, `text-primary`
 4. `code-viewer.component.ts` - `bg-blue-*`, `border-blue-*` → `bg-primary/10`, `border-primary/30`

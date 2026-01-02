@@ -5,6 +5,18 @@
 
 @import '../../../styles/mixins';
 
+/* Header Background - Using CSS Variables from ThemeService */
+.glass-nav {
+  /* Background gradient - Using CSS Variables */
+  background: linear-gradient(
+    to bottom,
+    var(--header-bg-start) 0%,
+    var(--header-bg-end) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
 /* Header Icon Buttons */
 .header-icon-btn {
   position: relative;

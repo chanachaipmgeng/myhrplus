@@ -22,7 +22,7 @@
 - Use SCSS: `rgba(var(--primary-rgb), 0.2)`
 
 **❌ DON'T:**
-- Hardcoded hex: `#3b82f6`, `#0ea5e9`
+- Hardcoded hex: `#07399C`, `#0ea5e9`
 - Hardcoded RGB: `rgba(59, 130, 246, 0.2)`, `rgb(59, 130, 246)`
 - Tailwind color classes: `bg-blue-500`, `text-indigo-600`
 
@@ -54,7 +54,7 @@
 
 <!-- ❌ Bad -->
 <div class="bg-blue-500">Content</div>
-<div style="background-color: #3b82f6;">Content</div>
+<div style="background-color: #07399C;">Content</div>
 ```
 
 #### Text Colors
@@ -65,7 +65,7 @@
 
 <!-- ❌ Bad -->
 <p class="text-blue-500">Primary text</p>
-<p style="color: #3b82f6;">Primary text</p>
+<p style="color: #07399C;">Primary text</p>
 ```
 
 #### Border Colors
@@ -77,7 +77,7 @@
 
 <!-- ❌ Bad -->
 <div class="border-blue-500">Border</div>
-<div style="border-color: #3b82f6;">Border</div>
+<div style="border-color: #07399C;">Border</div>
 ```
 
 #### Gradients
@@ -116,7 +116,7 @@
 // ❌ Bad
 .my-component {
   background: rgba(59, 130, 246, 0.2);
-  border-color: #3b82f6;
+  border-color: #07399C;
   box-shadow: 0 4px 16px rgba(59, 130, 246, 0.1);
 }
 ```
@@ -131,7 +131,7 @@
 
 // ❌ Bad
 .my-component {
-  color: #3b82f6;
+  color: #07399C;
   background: rgb(59, 130, 246);
 }
 ```
@@ -251,7 +251,7 @@ export class MyComponent {
 - [ ] ใช้ utility classes สำหรับ opacity (`bg-primary/20`)
 
 ### SCSS
-- [ ] ไม่มี hardcoded hex colors (`#3b82f6`, `#0ea5e9`)
+- [ ] ไม่มี hardcoded hex colors (`#07399C`, `#0ea5e9`)
 - [ ] ไม่มี hardcoded RGB (`rgba(59, 130, 246, ...)`)
 - [ ] ใช้ `var(--primary-rgb)` สำหรับ rgba()
 - [ ] ใช้ `var(--primary-color)` สำหรับ solid colors
@@ -338,7 +338,7 @@ const option: EChartsOption = {
 // ❌ Bad
 .my-component {
   background: rgba(59, 130, 246, 0.2);
-  color: #3b82f6;
+  color: #07399C;
 }
 
 // ✅ Good
@@ -352,9 +352,9 @@ const option: EChartsOption = {
 ```typescript
 // ❌ Bad
 const option: EChartsOption = {
-  color: ['#3b82f6'],
+  color: ['#07399C'],
   series: [{
-    itemStyle: { color: '#3b82f6' }
+    itemStyle: { color: '#07399C' }
   }]
 };
 

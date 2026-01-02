@@ -25,7 +25,7 @@ export class ThemeService {
   private readonly DEFAULT_THEME: ThemeConfig = {
     mode: 'dark',
     color: 'myhr',
-    primaryColor: '59, 130, 246', // Blue for MyHR theme
+    primaryColor: '7, 57, 156', // MyHR Brand Color #07399C
     sidebarStyle: 'primary', // Default: primary color
     headerStyle: 'primary', // Default: primary color
     mainLayoutStyle: 'primary' // Default: primary color

@@ -186,15 +186,15 @@ textarea:focus-visible,
 /* Voice Over Mode */
 .voice-over {
   .glass-card {
-    border: 2px solid #3b82f6 !important;
+    border: 2px solid #07399C !important;
   }
 
   button, input, select, textarea, a {
-    border: 1px solid #3b82f6 !important;
+    border: 1px solid #07399C !important;
   }
 
   .focus-visible {
-    outline: 3px solid #3b82f6 !important;
+    outline: 3px solid #07399C !important;
     outline-offset: 3px !important;
   }
 }
@@ -209,21 +209,21 @@ textarea:focus-visible,
 /* Focus Indicators */
 .focus-indicator-default {
   .focus-visible {
-    outline: 2px solid #3b82f6;
+    outline: 2px solid #07399C;
     outline-offset: 2px;
   }
 }
 
 .focus-indicator-high {
   .focus-visible {
-    outline: 3px solid #3b82f6;
+    outline: 3px solid #07399C;
     outline-offset: 3px;
   }
 }
 
 .focus-indicator-extra-high {
   .focus-visible {
-    outline: 4px solid #3b82f6;
+    outline: 4px solid #07399C;
     outline-offset: 4px;
     box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.3);
   }
@@ -295,7 +295,7 @@ textarea:focus-visible,
   textarea:focus,
   a:focus,
   [tabindex]:focus {
-    outline: 2px solid #3b82f6;
+    outline: 2px solid #07399C;
     outline-offset: 2px;
   }
 
@@ -305,7 +305,7 @@ textarea:focus-visible,
   textarea:focus-visible,
   a:focus-visible,
   [tabindex]:focus-visible {
-    outline: 2px solid #3b82f6;
+    outline: 2px solid #07399C;
     outline-offset: 2px;
   }
 }
@@ -780,7 +780,7 @@ table {
     width: 20px;
     height: 20px;
     margin: -10px 0 0 -10px;
-    border: 2px solid #3b82f6;
+    border: 2px solid #07399C;
     border-top: 2px solid transparent;
     border-radius: 50%;
     animation: spin 1s linear infinite;

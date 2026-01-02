@@ -86,7 +86,7 @@ private rgbToHex(rgb: string): string {
     const b = parts[2].toString(16).padStart(2, '0');
     return `#${r}${g}${b}`;
   }
-  return '#3b82f6'; // Default blue
+  return '#07399C'; // Default blue
 }
 ```
 
@@ -184,7 +184,7 @@ onCustomColorChange(event: Event): void {
 
 ### 2. Hex Format
 - ใช้ format: `#RRGGBB` (6 digits)
-- ตัวอย่าง: `#3b82f6`, `#22c55e`, `#a855f7`
+- ตัวอย่าง: `#07399C`, `#22c55e`, `#a855f7`
 - ไม่รองรับ shorthand format (`#3bf`)
 
 ### 3. Color Validation

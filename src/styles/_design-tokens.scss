@@ -84,7 +84,7 @@ $info-100: #dbeafe;
 $info-200: #bfdbfe;
 $info-300: #93c5fd;
 $info-400: #60a5fa;
-$info-500: #3b82f6;
+$info-500: #07399C;
 $info-600: #2563eb;
 $info-700: #1d4ed8;
 $info-800: #1e40af;
@@ -95,10 +95,10 @@ $info-950: #172554;
    Colors - Theme Gradients
    ============================================ */
 /* Default Theme (MyHR) - Blue gradient สวยงาม */
-$theme-gradient-myhr: linear-gradient(135deg, #93c5fd, #60a5fa, #3b82f6);
+$theme-gradient-myhr: linear-gradient(135deg, #93c5fd, #60a5fa, #07399C);
 /* Color Themes - Same style as default but different colors */
 /* Blue - สีน้ำเงินสดใส */
-$theme-gradient-blue: linear-gradient(135deg, #bfdbfe, #93c5fd, #3b82f6);
+$theme-gradient-blue: linear-gradient(135deg, #bfdbfe, #93c5fd, #07399C);
 /* Indigo - สีครามเข้ม */
 $theme-gradient-indigo: linear-gradient(135deg, #c7d2fe, #a5b4fc, #6366f1);
 /* Purple - สีม่วงสวยงาม */
@@ -153,7 +153,7 @@ $bg-dark-gradient-end: #1e293b;
 $bg-myhr-base: #000000;
 $bg-myhr-gradient-start: #93c5fd;
 $bg-myhr-gradient-mid: #60a5fa;
-$bg-myhr-gradient-end: #3b82f6;
+$bg-myhr-gradient-end: #07399C;
 
 /* ============================================
    Colors - Glass Morphism
@@ -425,7 +425,7 @@ $transition-shadow: box-shadow $duration-200 $ease-in-out;
 $myhr-bg: #000000;
 $myhr-gradient-start: #93c5fd;
 $myhr-gradient-mid: #60a5fa;
-$myhr-gradient-end: #3b82f6;
+$myhr-gradient-end: #07399C;
 $myhr-glow: rgba(59, 130, 246, 0.3);
 $myhr-glow-strong: rgba(59, 130, 246, 0.5);
 $myhr-glow-weak: rgba(59, 130, 246, 0.2);

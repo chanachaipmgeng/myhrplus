@@ -51,7 +51,7 @@
 ### ✅ ปัญหาที่แก้ไขแล้ว
 
 1. **Hardcoded Colors** ✅ FIXED
-   - ✅ แก้ไข `#3b82f6` ใน theme-toggle component
+   - ✅ แก้ไข `#07399C` ใน theme-toggle component
    - ✅ แก้ไข `text-blue-500`, `bg-blue-500` ใน header, omni-search, footer, demo components
    - ✅ แก้ไข `border-blue-500` ใน footer และ demo components
    - ✅ แก้ไข `theme-myhr:bg-blue-500/20` ใน omni-search
@@ -82,7 +82,7 @@
 - `src/app/shared/components/theme-toggle/theme-toggle.component.html`
 
 **Changes**:
-- Replace `#3b82f6` with CSS variable or dynamic color
+- Replace `#07399C` with CSS variable or dynamic color
 - Use `bg-primary` instead of hardcoded colors
 
 #### 1.2 Header Component
@@ -156,7 +156,7 @@ body {
 [data-theme='blue'],
 body.theme-blue {
   --theme-text-primary: #1e3a8a;
-  --theme-text-secondary: #3b82f6;
+  --theme-text-secondary: #07399C;
 }
 
 .dark body.theme-blue {
@@ -336,7 +336,7 @@ export class ThemeUtilsService {
 ### 1. Color Usage
 - ✅ **ALWAYS** use CSS variables: `var(--primary-rgb)`, `var(--primary-color)`
 - ✅ **ALWAYS** use utility classes: `bg-primary`, `text-primary`, `border-primary`
-- ❌ **NEVER** use hardcoded colors: `#3b82f6`, `rgba(59, 130, 246, ...)`
+- ❌ **NEVER** use hardcoded colors: `#07399C`, `rgba(59, 130, 246, ...)`
 - ❌ **NEVER** use Tailwind color classes: `bg-blue-500`, `text-indigo-600`
 
 ### 2. Theme Mode Support

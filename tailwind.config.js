@@ -98,13 +98,13 @@ module.exports = {
           200: '#bfdbfe',
           300: '#93c5fd',
           400: '#60a5fa',
-          500: '#3b82f6',
+          500: '#07399C',
           600: '#2563eb',
           700: '#1d4ed8',
           800: '#1e40af',
           900: '#1e3a8a',
           950: '#172554',
-          DEFAULT: '#3b82f6',
+          DEFAULT: '#07399C',
         },
         glass: {
           white: 'rgba(255, 255, 255, 0.25)',
@@ -173,8 +173,8 @@ module.exports = {
         'gradient-pink-light': 'linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%)',
         'gradient-pink-dark': 'linear-gradient(135deg, #831843 0%, #9f1239 50%, #ec4899 100%)',
         // MyHR Gradients
-        'gradient-myhr': 'linear-gradient(135deg, #93c5fd 0%, #60a5fa 30%, #3b82f6 60%, #2563eb 100%)',
-        'gradient-myhr-text': 'linear-gradient(135deg, #bfdbfe 0%, #93c5fd 25%, #60a5fa 50%, #3b82f6 75%, #2563eb 100%)',
+        'gradient-myhr': 'linear-gradient(135deg, #93c5fd 0%, #60a5fa 30%, #07399C 60%, #2563eb 100%)',
+        'gradient-myhr-text': 'linear-gradient(135deg, #bfdbfe 0%, #93c5fd 25%, #60a5fa 50%, #07399C 75%, #2563eb 100%)',
         'gradient-myhr-glow': 'radial-gradient(circle, rgba(147, 197, 253, 0.3) 0%, transparent 70%)',
       },
       borderRadius: {

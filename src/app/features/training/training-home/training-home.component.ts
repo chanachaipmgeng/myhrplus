@@ -378,14 +378,14 @@ export class TrainingHomeComponent implements OnInit, OnDestroy {
    */
   private getPrimaryColor(): string {
     if (typeof window === 'undefined' || typeof document === 'undefined') {
-      return '#3b82f6'; // Fallback
+      return '#07399C'; // Fallback
     }
     const style = getComputedStyle(document.documentElement);
     const primaryColor = style.getPropertyValue('--primary-color').trim();
     if (primaryColor) {
       return primaryColor;
     }
-    return '#3b82f6'; // Fallback
+    return '#07399C'; // Fallback
   }
 
   /**

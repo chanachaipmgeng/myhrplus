@@ -87,7 +87,7 @@
 
 ### ✅ เสร็จสมบูรณ์
 - ✅ Components ที่ใช้ `primary-500`, `primary-600` classes - แก้ไขแล้ว
-- ✅ Components ที่ใช้ hardcoded colors (`#3b82f6`, `#0ea5e9`, etc.) - แก้ไขแล้ว
+- ✅ Components ที่ใช้ hardcoded colors (`#07399C`, `#0ea5e9`, etc.) - แก้ไขแล้ว
 
 ### 📋 รายการ Components ที่ต้องตรวจสอบ
 
@@ -141,7 +141,7 @@
 
 **Before:**
 ```html
-<div style="background-color: #3b82f6;">Content</div>
+<div style="background-color: #07399C;">Content</div>
 ```
 
 **After:**
@@ -155,7 +155,7 @@
 ```scss
 .my-component {
   background: rgba(59, 130, 246, 0.2);
-  border-color: #3b82f6;
+  border-color: #07399C;
 }
 ```
 
@@ -185,7 +185,7 @@
 
 ### 1. ตรวจสอบ Hardcoded Colors
 ```bash
-grep -r "#3b82f6\|#0ea5e9\|#2563eb" src/app/shared/components
+grep -r "#07399C\|#0ea5e9\|#2563eb" src/app/shared/components
 ```
 
 ### 2. ตรวจสอบ Tailwind Primary Classes
@@ -287,7 +287,7 @@ grep -r "rgba(59, 130, 246\|rgb(59, 130, 246" src/app/shared/components
 
 ### การเปลี่ยนแปลงหลัก
 1. ✅ แทนที่ `primary-500`, `primary-600`, `primary-400`, `primary-700` ด้วย utility classes ใหม่
-2. ✅ แทนที่ hardcoded colors (`#3b82f6`, `#0ea5e9`, etc.) ด้วย CSS variables
+2. ✅ แทนที่ hardcoded colors (`#07399C`, `#0ea5e9`, etc.) ด้วย CSS variables
 3. ✅ อัพเดท SCSS files ให้ใช้ `rgba(var(--primary-rgb), ...)` และ `rgb(var(--primary-rgb))`
 4. ✅ เพิ่ม utility classes สำหรับ primary colors ใน `@layer utilities`
 5. ✅ แก้ไข hardcoded primary colors ใน SCSS files ทั้งหมด (accordion, alert, chip, pagination, timeline, file-manager, query-builder, date-range-picker, divider, statistics-card, empty-state, chart)

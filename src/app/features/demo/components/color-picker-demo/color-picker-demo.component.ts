@@ -22,10 +22,10 @@ import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
   styleUrls: ['./color-picker-demo.component.scss']
 })
 export class ColorPickerDemoComponent {
-  selectedColor: string = '#3b82f6';
-  paletteColor: string = '#3b82f6';
-  pickerColor: string = '#3b82f6';
-  inlineColor: string = '#3b82f6';
+  selectedColor: string = '#07399C';
+  paletteColor: string = '#07399C';
+  pickerColor: string = '#07399C';
+  inlineColor: string = '#07399C';
 
   mode: 'Picker' | 'Palette' = 'Picker';
   showButtons: boolean = true;
@@ -36,7 +36,7 @@ export class ColorPickerDemoComponent {
     {
       name: 'value',
       type: 'string',
-      default: "'#3b82f6'",
+      default: "'#07399C'",
       description: 'Selected color value (hex)',
       required: false
     },

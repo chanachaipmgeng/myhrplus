@@ -33,13 +33,13 @@ Phase 2: High Priority Issues เสร็จสมบูรณ์แล้ว �
 #### theme-toggle.component.ts
 ```typescript
 // ❌ Before
-customPrimaryColor = '#3b82f6';
-hexColorInput = '#3b82f6';
-const defaultColor = ... || '#3b82f6';
+customPrimaryColor = '#07399C';
+hexColorInput = '#07399C';
+const defaultColor = ... || '#07399C';
 
 // ✅ After
 customPrimaryColor = 'rgb(59, 130, 246)';
-hexColorInput = '#3b82f6'; // Keep for input display
+hexColorInput = '#07399C'; // Keep for input display
 const defaultColor = ... || 'rgb(59, 130, 246)';
 ```
 

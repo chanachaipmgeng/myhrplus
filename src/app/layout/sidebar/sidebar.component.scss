@@ -66,6 +66,19 @@
 .logo-container {
   position: relative;
 
+  /* Background - Using CSS Variables */
+  background: var(--sidebar-icon-bg-start);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  .dark & {
+    background: var(--sidebar-icon-bg-start);
+  }
+
+  [class*='theme-myhr'] & {
+    background: var(--sidebar-icon-bg-start);
+  }
+
   /* Glow effect - Using CSS Variables */
   &::after {
     content: '';
@@ -117,20 +130,20 @@
     background: var(--sidebar-active-bg);
     box-shadow:
       0 2px 8px rgba(var(--primary-rgb), 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      inset 0 1px 0 var(--glass-border-weak);
 
     [data-theme='dark'] &,
     .dark & {
       box-shadow:
         0 2px 8px rgba(var(--primary-rgb), 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        inset 0 1px 0 var(--glass-border-weak);
     }
 
     [data-theme='myhr'] &,
     [class*='theme-myhr'] & {
       box-shadow:
         0 2px 8px rgba(var(--primary-rgb), 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 var(--glass-border-weak),
         0 0 12px rgba(var(--primary-rgb), 0.2);
     }
 
@@ -179,8 +192,8 @@
     top: 50%;
     transform: translateY(-50%) translateX(-10px);
     padding: var(--spacing-sm) var(--spacing-md);
-    background: rgba(0, 0, 0, 0.9);
-    color: white;
+    background: var(--glass-bg-strong);
+    color: var(--text-primary);
     font-size: var(--font-size-xs);
     white-space: nowrap;
     border-radius: var(--radius-lg);
@@ -188,6 +201,9 @@
     pointer-events: none;
     @include smooth-transition(opacity transform, var(--transition-base));
     z-index: 1000;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
 
     &::before {
       content: '';
@@ -196,7 +212,25 @@
       top: 50%;
       transform: translateY(-50%);
       border: 6px solid transparent;
-      border-right-color: rgba(0, 0, 0, 0.9);
+      border-right-color: var(--glass-bg-strong);
+    }
+
+    .dark & {
+      background: var(--glass-bg-strong);
+      border-right-color: var(--glass-bg-strong);
+
+      &::before {
+        border-right-color: var(--glass-bg-strong);
+      }
+    }
+
+    [class*='theme-myhr'] & {
+      background: var(--glass-bg-strong);
+      border-right-color: var(--glass-bg-strong);
+
+      &::before {
+        border-right-color: var(--glass-bg-strong);
+      }
     }
   }
 
@@ -225,25 +259,25 @@
   min-width: 320px;
   max-width: 400px;
 
-  /* Background gradient with subtle pattern */
+  /* Background gradient with subtle pattern - Using CSS Variables */
   background: linear-gradient(
     to bottom,
-    rgba(255, 255, 255, 0.15) 0%,
-    rgba(255, 255, 255, 0.05) 100%
+    var(--glass-bg) 0%,
+    var(--glass-bg-weak) 100%
   );
 
   /* Subtle pattern overlay - Using standardized mixin */
-  @include pattern-overlay(rgba(var(--primary-rgb), 0.02), 0.4, 4px, 0deg);
+  @include pattern-overlay(var(--sidebar-pattern-color), 0.4, 4px, 0deg);
 
   .dark & {
     background: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.3) 0%,
-      rgba(0, 0, 0, 0.1) 100%
+      var(--glass-bg) 0%,
+      var(--glass-bg-weak) 100%
     );
 
     /* Pattern overlay for dark mode */
-    @include pattern-overlay(rgba(var(--primary-rgb), 0.03), 0.2, 4px, 0deg);
+    @include pattern-overlay(var(--pattern-overlay-primary), 0.2, 4px, 0deg);
   }
 
   [class*='theme-myhr'] & {
@@ -254,7 +288,7 @@
     );
 
     /* Pattern overlay for myhr theme */
-    @include pattern-overlay(rgba(255, 255, 255, 0.05), 0.3, 4px, 0deg);
+    @include pattern-overlay(var(--pattern-overlay-light), 0.3, 4px, 0deg);
   }
 
   /* Ensure content is above pattern */
@@ -267,7 +301,7 @@
 /* Custom scrollbar for sidebar */
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+  scrollbar-color: rgba(var(--color-primary-rgb-value), 0.2) transparent;
 
   &::-webkit-scrollbar {
     width: 6px;
@@ -278,23 +312,23 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background: rgba(156, 163, 175, 0.5);
+    background: rgba(var(--color-primary-rgb-value), 0.2);
     border-radius: var(--radius-sm);
     transition: background 0.2s ease;
 
     &:hover {
-      background: rgba(156, 163, 175, 0.7);
+      background: rgba(var(--color-primary-rgb-value), 0.4);
     }
   }
 
   .dark & {
-    scrollbar-color: rgba(156, 163, 175, 0.3) transparent;
+    scrollbar-color: rgba(var(--color-primary-rgb-value), 0.3) transparent;
 
     &::-webkit-scrollbar-thumb {
-      background: rgba(156, 163, 175, 0.3);
+      background: rgba(var(--color-primary-rgb-value), 0.3);
 
       &:hover {
-        background: rgba(156, 163, 175, 0.5);
+        background: rgba(var(--color-primary-rgb-value), 0.5);
       }
     }
   }
@@ -349,7 +383,7 @@
 
     &:hover {
       transform: scale(1.1) rotate(90deg);
-      background: rgba(239, 68, 68, 0.1);
+      background: rgba(var(--color-danger-rgb-value), 0.1);
     }
 
     &:active {
@@ -441,14 +475,13 @@
   height: 12px;
   /* Using semantic success color */
   background: rgb(var(--color-success-rgb-value));
-  border: 2px solid white;
+  border: 2px solid var(--card-background);
   border-radius: 50%;
   box-shadow: 0 0 0 2px rgba(var(--color-success-rgb-value), 0.3);
   animation: statusPulse 2s ease-in-out infinite;
 
   .dark & {
-    /* Using Tailwind gray-800 */
-    border-color: rgb(31, 41, 55); /* gray-800 */
+    border-color: var(--bg-base);
   }
 }
 
@@ -465,12 +498,12 @@
 .user-menu-dropdown {
   margin-top: var(--spacing-sm);
   padding: var(--spacing-sm);
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--glass-bg-strong);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lg);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--glass-border);
 
   /* Subtle pattern overlay */
   &::before {
@@ -497,11 +530,11 @@
   }
 
   .dark & {
-    background: rgba(17, 24, 39, 0.95);
+    background: var(--glass-bg-strong);
     box-shadow:
       0 10px 40px rgba(0, 0, 0, 0.3),
-      0 0 0 1px rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.1);
+      0 0 0 1px var(--glass-border-weak);
+    border-color: var(--glass-border-weak);
 
     &::before {
       background-image:
@@ -509,20 +542,20 @@
           45deg,
           transparent,
           transparent 2px,
-          rgba(var(--primary-rgb), 0.03) 2px,
-          rgba(var(--primary-rgb), 0.03) 4px
+          var(--pattern-overlay-primary) 2px,
+          var(--pattern-overlay-primary) 4px
         );
       opacity: 0.2;
     }
   }
 
   [class*='theme-myhr'] & {
-    background: rgba(0, 0, 0, 0.8);
+    background: var(--glass-bg-strong);
     box-shadow:
       0 10px 40px rgba(0, 0, 0, 0.5),
-      0 0 0 1px rgba(var(--primary-rgb), 0.3),
+      0 0 0 1px var(--glass-border-strong),
       0 0 30px rgba(var(--primary-rgb), 0.15);
-    border-color: rgba(var(--primary-rgb), 0.3);
+    border-color: var(--glass-border-strong);
 
     &::before {
       background-image:
@@ -530,8 +563,8 @@
           45deg,
           transparent,
           transparent 2px,
-          rgba(255, 255, 255, 0.05) 2px,
-          rgba(255, 255, 255, 0.05) 4px
+          var(--pattern-overlay-light) 2px,
+          var(--pattern-overlay-light) 4px
         );
       opacity: 0.25;
     }
@@ -559,7 +592,7 @@
   background: linear-gradient(
     to right,
     transparent,
-    rgba(0, 0, 0, 0.1),
+    var(--divider-color),
     transparent
   );
   margin: var(--spacing-sm) 0;
@@ -568,7 +601,7 @@
     background: linear-gradient(
       to right,
       transparent,
-      rgba(255, 255, 255, 0.1),
+      var(--divider-color-dark),
       transparent
     );
   }
@@ -628,7 +661,7 @@
 /* Breadcrumb Container */
 .breadcrumb-container {
   padding: var(--spacing-sm) 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-light);
   position: relative;
 
   /* Subtle gradient border */
@@ -649,7 +682,7 @@
   }
 
   .dark & {
-    border-bottom-color: rgba(255, 255, 255, 0.05);
+    border-bottom-color: var(--border-light-subtle);
 
     &::after {
       background: linear-gradient(
@@ -662,7 +695,7 @@
   }
 
   [class*='theme-myhr'] & {
-    border-bottom-color: rgba(255, 255, 255, 0.1);
+    border-bottom-color: var(--border-light);
 
     &::after {
       background: linear-gradient(

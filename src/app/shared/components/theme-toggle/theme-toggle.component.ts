@@ -22,7 +22,7 @@ export class ThemeToggleComponent implements OnInit {
   showThemeMenu = false;
   showColorPicker = false;
   customPrimaryColor = 'rgb(59, 130, 246)'; // Will be updated from theme
-  hexColorInput = '#3b82f6';
+  hexColorInput = '#07399C';
 
   // Accordion states
   showSidebarAccordion = false;

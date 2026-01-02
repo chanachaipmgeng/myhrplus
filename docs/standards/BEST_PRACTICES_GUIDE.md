@@ -214,7 +214,7 @@ ngOnDestroy(): void {
 .button {
   padding: 1rem;
   border-radius: 0.5rem;
-  color: #3b82f6;
+  color: #07399C;
   transition: all 0.3s ease;
 }
 ```

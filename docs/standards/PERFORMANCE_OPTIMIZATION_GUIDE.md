@@ -239,7 +239,7 @@ body.theme-myhr .main-content .glass-card:hover {
 
 // ❌ Bad - Hardcoded values
 .element {
-  color: #3b82f6;
+  color: #07399C;
   transition: color 0.3s ease;
 }
 ```

@@ -34,7 +34,7 @@
             "scripts": [
               "src/assets/balkanapp/orgchart.js"
             ],
-            "poll": 2000
+            "poll": 3000
           },
           "configurations": {
             "production": {
@@ -73,7 +73,7 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
-              "poll": 2000
+              "poll": 3000
             }
           },
           "defaultConfiguration": "production"
@@ -81,7 +81,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "poll": 2000,
+            "poll": 3000,
             "host": "localhost",
             "port": 4200
           },
@@ -91,7 +91,7 @@
             },
             "development": {
               "buildTarget": "hr-angular-app:build:development",
-              "poll": 2000
+              "poll": 3000
             }
           },
           "defaultConfiguration": "development"

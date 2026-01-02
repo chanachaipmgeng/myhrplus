@@ -389,9 +389,9 @@ body.theme-myhr {
 body.theme-myhr {
   --gradient-primary-start: #93c5fd;
   --gradient-primary-mid: #60a5fa;
-  --gradient-primary-end: #3b82f6;
+  --gradient-primary-end: #07399C;
   --gradient-primary-hover-start: #60a5fa;
-  --gradient-primary-hover-mid: #3b82f6;
+  --gradient-primary-hover-mid: #07399C;
   --gradient-primary-hover-end: #2563eb;
 }
 ```

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { take, takeUntil, filter } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { SidebarComponent as EjsSidebar } from '@syncfusion/ej2-angular-navigations';
-import { LayoutService, BreadcrumbItem } from '@core/services';
+import { LayoutService, BreadcrumbItem, ThemeService } from '@core/services';
 import { getBreadcrumbPathFromNavigation, getBreadcrumbIcon } from '@core/utils/breadcrumb.util';
 import { routeFade } from '@core/animations/animations';
 
@@ -25,6 +25,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   sidebarWidth: string = '368px'; // 88px icon bar + 280px menu panel
   sidebarType: 'Over' | 'Push' | 'Slide' = 'Over';
   breadcrumbs: BreadcrumbItem[] = [];
+  currentTheme: any = null; // Store current theme config
 
   private destroy$ = new Subject<void>();
 
@@ -34,13 +35,20 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
 
   constructor(
     private layoutService: LayoutService,
-    private router: Router
+    private router: Router,
+    private themeService: ThemeService
   ) {
     this.isHandset$ = this.layoutService.isHandset$;
     this.sidebarOpen$ = this.layoutService.sidebarOpen$;
   }
 
   ngOnInit(): void {
+    // Subscribe to theme changes
+    this.themeService.theme$.pipe(takeUntil(this.destroy$)).subscribe(theme => {
+      this.currentTheme = theme;
+      // ThemeService already applies styles via CSS variables, no additional action needed
+    });
+
     this.isHandset$.subscribe(isHandset => {
       this.sidebarType = isHandset ? 'Over' : 'Push';
     });

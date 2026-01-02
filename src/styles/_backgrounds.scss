@@ -119,11 +119,16 @@
 /* MyHR Theme Background Variables */
 [data-theme='myhr']:not(.dark),
 body.theme-myhr:not(.dark) {
-  --bg-base: #eff6ff;
-  --bg-gradient-start: #dbeafe;
-  --bg-gradient-mid: #bfdbfe;
-  --bg-gradient-end: #93c5fd;
-  --theme-bg-gradient: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 30%, #93c5fd 70%, #60a5fa 100%);
+  /* Primary Color - MyHR Brand Color */
+  --primary-rgb: 7, 57, 156; /* #07399C */
+  --primary-color: #07399c;
+  --primary-hover: #3960f0;
+
+  --bg-base: #f3f7fb;
+  --bg-gradient-start: #f3f7fb;
+  --bg-gradient-mid: #e9f2f8;
+  --bg-gradient-end: #dbeafe;
+  --theme-bg-gradient: linear-gradient(135deg, #f3f7fb 0%, #e9f2f8 50%, #dbeafe 100%);
 
   --sidebar-bg-start: rgba(var(--primary-rgb), 0.95);
   --sidebar-bg-end: rgba(var(--primary-rgb), 0.9);
@@ -157,6 +162,11 @@ body.theme-myhr:not(.dark) {
 
 [data-theme='myhr'].dark,
 .dark body.theme-myhr {
+  /* Primary Color - MyHR Brand Color */
+  --primary-rgb: 7, 57, 156; /* #07399C */
+  --primary-color: #07399c;
+  --primary-hover: #3960f0;
+
   --bg-base: #000000;
   --bg-gradient-start: #000000;
   --bg-gradient-mid: #0a0a0f;
