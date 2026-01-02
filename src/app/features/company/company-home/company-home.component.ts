@@ -41,7 +41,7 @@ export class CompanyHomeComponent implements OnInit, OnDestroy {
       description: 'จัดการข้อมูลบริษัท',
       icon: 'e-icons e-briefcase',
       route: '/company',
-      color: 'bg-blue-500'
+      color: 'bg-primary'
     },
     {
       title: 'โครงสร้างองค์กร',

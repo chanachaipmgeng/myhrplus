@@ -58,7 +58,7 @@ export class AppraisalHomeComponent implements OnInit, OnDestroy {
       description: 'จัดการการประเมินผลการทำงาน',
       icon: 'assessment',
       route: '/appraisal',
-      color: 'bg-blue-500'
+      color: 'bg-primary'
     },
     {
       title: 'รายงาน',

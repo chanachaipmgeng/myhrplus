@@ -7,18 +7,18 @@
       (click)="switchContext(context.value)"
       [class.active]="currentContext === context.value"
       [ngClass]="{
-        'bg-blue-500/10': currentContext === context.value,
-        'dark:bg-blue-500/20': currentContext === context.value,
-        'theme-myhr:bg-blue-500/20': currentContext === context.value,
-        'text-blue-700': currentContext === context.value,
-        'dark:text-blue-400': currentContext === context.value,
-        'theme-myhr:text-blue-300': currentContext === context.value,
+        'bg-primary/10': currentContext === context.value,
+        'dark:bg-primary/20': currentContext === context.value,
+        'theme-myhr:bg-primary/20': currentContext === context.value,
+        'text-primary': currentContext === context.value,
+        'dark:text-primary/90': currentContext === context.value,
+        'theme-myhr:text-primary/90': currentContext === context.value,
         'font-semibold': currentContext === context.value,
         'font-medium': currentContext !== context.value
       }"
       class="context-tab flex-1 px-4 py-2 rounded-md transition-all duration-300 text-sm
              text-gray-700 dark:text-gray-300 theme-myhr:text-white/80
-             hover:bg-black/5 dark:hover:bg-white/10 theme-myhr:hover:bg-blue-500/10
+             hover:bg-black/5 dark:hover:bg-white/10 theme-myhr:hover:bg-primary/10
              focus:outline-none focus:ring-2 focus:ring-primary/20"
       [attr.aria-label]="context.label"
       [attr.aria-pressed]="currentContext === context.value">

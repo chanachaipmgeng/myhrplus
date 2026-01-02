@@ -60,7 +60,7 @@ export class SettingHomeComponent implements OnInit, OnDestroy {
       description: 'จัดการตั้งค่าระบบ',
       icon: 'settings',
       route: '/setting',
-      color: 'bg-blue-500'
+      color: 'bg-primary'
     },
     {
       title: 'ตั้งค่าผู้ใช้',

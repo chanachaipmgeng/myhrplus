@@ -58,7 +58,7 @@ export class RecruitHomeComponent implements OnInit, OnDestroy {
       description: 'จัดการประกาศรับสมัครงาน',
       icon: 'description',
       route: '/recruit',
-      color: 'bg-blue-500'
+      color: 'bg-primary'
     },
     {
       title: 'จัดการผู้สมัคร',

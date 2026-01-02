@@ -59,7 +59,7 @@ export class TrainingHomeComponent implements OnInit, OnDestroy {
       description: 'จัดการหลักสูตรการฝึกอบรม',
       icon: 'menu_book',
       route: '/training',
-      color: 'bg-blue-500'
+      color: 'bg-primary'
     },
     {
       title: 'ลงทะเบียนอบรม',
@@ -378,7 +378,7 @@ export class TrainingHomeComponent implements OnInit, OnDestroy {
    */
   private getPrimaryColor(): string {
     if (typeof window === 'undefined' || typeof document === 'undefined') {
-      return '#07399C'; // Fallback
+      return 'rgb(7, 57, 156)'; // Fallback: MyHR Brand Color
     }
     const style = getComputedStyle(document.documentElement);
     const primaryColor = style.getPropertyValue('--primary-color').trim();
