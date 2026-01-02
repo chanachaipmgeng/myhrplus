@@ -58,6 +58,24 @@ export class ChatUiDemoComponent {
   (messageSend)="onMessageSent($event)">
 </div>`;
 
+  messageHandlingExample = `onMessageSent(args: any): void {
+  console.log('Message sent:', args);
+  // Process message, send to server, or display in chat history
+}`;
+
+  placeholderExample = `<div
+  ejs-chatui
+  [placeholder]="'Enter your message here...'"
+  (messageSend)="onMessageSent($event)">
+</div>`;
+
+  responsiveExample = `<div
+  ejs-chatui
+  [height]="'400px'"
+  [width]="'100%'"
+  class="w-full md:h-[600px]">
+</div>`;
+
   onMessageSent(args: any): void {
     console.log('Message sent:', args);
   }

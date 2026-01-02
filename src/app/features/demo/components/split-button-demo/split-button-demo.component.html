@@ -62,6 +62,34 @@
     </app-glass-card>
   </section>
 
+  <!-- Variants Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Variants
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic Split Button</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Split button with primary action and dropdown menu.
+          </p>
+          <app-code-viewer [code]="basicExample" language="html" title="Basic"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">With Icon</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Split button with icon for better visual recognition.
+          </p>
+          <app-code-viewer [code]="withIconExample" language="html" title="With Icon"></app-code-viewer>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
   <!-- API Reference Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30

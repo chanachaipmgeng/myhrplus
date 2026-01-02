@@ -129,6 +129,29 @@ export class KanbanDemoComponent {
   [allowDragAndDrop]="true">
 </ejs-kanban>`;
 
+  dragDropExample = `<ejs-kanban
+  [dataSource]="kanbanData"
+  [columns]="columns"
+  [cardSettings]="cardSettings"
+  [allowDragAndDrop]="true"
+  (actionComplete)="onActionComplete($event)">
+</ejs-kanban>`;
+
+  columnCustomizationExample = `columns: any[] = [
+  { headerText: 'To Do', keyField: 'Open' },
+  { headerText: 'In Progress', keyField: 'InProgress' },
+  { headerText: 'Testing', keyField: 'Testing' },
+  { headerText: 'Done', keyField: 'Close' }
+];`;
+
+  cardTemplateExample = `cardSettings: any = {
+  contentField: 'Summary',
+  headerField: 'Id',
+  tagsField: 'Tags',
+  grabberField: 'Type',
+  footerField: 'Assignee'
+};`;
+
   onActionComplete(args: any): void {
     console.log('Kanban action completed:', args);
   }

@@ -87,6 +87,14 @@ export class OtpInputDemoComponent {
   (valueChange)="onOtpChange($event)">
 </div>`;
 
+  length8Example = `<div
+  ejs-otpinput
+  [(value)]="otpValue"
+  [length]="8"
+  [separator]="'-'"
+  (valueChange)="onOtpChange($event)">
+</div>`;
+
   onOtpChange(args: any): void {
     console.log('OTP changed:', args.value);
   }

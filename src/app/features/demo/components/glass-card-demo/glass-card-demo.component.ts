@@ -85,5 +85,74 @@ export class GlassCardDemoComponent {
   customClass="text-center">
   Custom padding and classes
 </app-glass-card>`;
+
+  // Advanced Usage Examples
+  advancedExample = `<!-- Dynamic Cards with Data -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <app-glass-card 
+    *ngFor="let item of items; trackBy: trackByFn" 
+    padding="p-6"
+    animate="fade-in-up">
+    <h3 class="text-lg font-semibold mb-2">{{ item.title }}</h3>
+    <p class="text-gray-600 dark:text-gray-400">{{ item.description }}</p>
+  </app-glass-card>
+</div>
+
+<!-- Card with Loading State -->
+@if (isLoading) {
+  <app-skeleton-loader></app-skeleton-loader>
+} @else {
+  <app-glass-card padding="p-6">
+    <h3>Content</h3>
+  </app-glass-card>
+}
+
+<!-- Card with Conditional Rendering -->
+<app-glass-card padding="p-6">
+  @if (hasData) {
+    <div>Data available</div>
+  } @else {
+    <app-empty-state 
+      iconName="inbox"
+      title="No data"
+      description="No data available">
+    </app-empty-state>
+  }
+</app-glass-card>`;
+
+  integrationExample = `<!-- Integration with Services -->
+@Component({
+  selector: 'app-dashboard',
+  template: \`
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <app-glass-card 
+        *ngFor="let stat of statistics$ | async" 
+        padding="p-6"
+        animate="fade-in-up">
+        <h3 class="text-lg font-semibold mb-2">{{ stat.title }}</h3>
+        <p class="text-3xl font-bold text-primary">{{ stat.value }}</p>
+      </app-glass-card>
+    </div>
+  \`
+})
+export class DashboardComponent {
+  statistics$ = this.apiService.get<Statistic[]>('/api/statistics')
+    .pipe(
+      map(response => response.data || []),
+      catchError(error => {
+        this.notificationService.showError('Failed to load statistics');
+        return of([]);
+      })
+    );
+
+  constructor(
+    private apiService: ApiService,
+    private notificationService: NotificationService
+  ) {}
+}`;
+
+  trackByFn(index: number, item: any): any {
+    return item.id || index;
+  }
 }
 

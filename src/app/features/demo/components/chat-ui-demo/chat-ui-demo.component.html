@@ -19,12 +19,16 @@
       <div class="space-y-6">
         <div>
           <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic Chat UI</h3>
-          <div
-            ejs-chatui
-            [height]="height"
-            [width]="width"
-            [placeholder]="placeholder"
-            (messageSend)="onMessageSent($event)">
+          <div class="w-full overflow-x-auto">
+            <div class="min-w-[320px] md:min-w-full">
+              <div
+                ejs-chatui
+                [height]="height"
+                [width]="width"
+                [placeholder]="placeholder"
+                (messageSend)="onMessageSent($event)">
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -43,6 +47,42 @@
         <div>
           <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic Chat UI</h3>
           <app-code-viewer [code]="basicExample" language="html" title="Basic Chat UI"></app-code-viewer>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Advanced Features Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Advanced Features
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Message Handling</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Handle message events with the `(messageSend)` event. You can process messages, send to server, or display in chat history.
+          </p>
+          <app-code-viewer [code]="messageHandlingExample" language="typescript" title="Message Event Handler"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Custom Placeholder</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Customize the input placeholder text to guide users.
+          </p>
+          <app-code-viewer [code]="placeholderExample" language="html" title="Custom Placeholder"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Responsive Design</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Chat UI component is responsive by default. Use responsive height and width for mobile devices.
+          </p>
+          <app-code-viewer [code]="responsiveExample" language="html" title="Responsive Configuration"></app-code-viewer>
         </div>
       </div>
     </app-glass-card>

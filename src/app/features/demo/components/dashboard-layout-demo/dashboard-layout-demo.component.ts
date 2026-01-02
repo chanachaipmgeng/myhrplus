@@ -121,6 +121,52 @@ export class DashboardLayoutDemoComponent {
   [allowDragging]="true">
 </ejs-dashboardlayout>`;
 
+  panelConfigExample = `panels: any[] = [
+  {
+    id: 'panel0',
+    sizeX: 1,
+    sizeY: 1,
+    row: 0,
+    col: 0,
+    header: '<div>Card 1</div>',
+    content: '<div class="content">Content Area</div>'
+  },
+  {
+    id: 'panel1',
+    sizeX: 2,
+    sizeY: 1,
+    row: 0,
+    col: 1,
+    header: '<div>Card 2</div>',
+    content: '<div class="content">Content Area</div>'
+  }
+];`;
+
+  dragDropExample = `<ejs-dashboardlayout
+  [panels]="panels"
+  [allowDragging]="true"
+  (drag)="onDrag($event)">
+</ejs-dashboardlayout>`;
+
+  resizeFloatingExample = `<ejs-dashboardlayout
+  [panels]="panels"
+  [allowResizing]="true"
+  [allowFloating]="true"
+  (resize)="onResize($event)">
+</ejs-dashboardlayout>`;
+
+  responsiveExample = `<div class="w-full overflow-x-auto">
+  <div class="min-w-[600px]">
+    <div class="h-[400px] md:h-[500px]">
+      <ejs-dashboardlayout
+        [panels]="panels"
+        [allowResizing]="true"
+        [allowDragging]="true">
+      </ejs-dashboardlayout>
+    </div>
+  </div>
+</div>`;
+
   onResize(args: any): void {
     console.log('Panel resized:', args);
   }

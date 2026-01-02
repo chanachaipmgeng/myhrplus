@@ -19,11 +19,13 @@
       <div class="space-y-6">
         <div>
           <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Horizontal Splitter</h3>
-          <ejs-splitter
-            [height]="height"
-            [width]="width"
-            [orientation]="'Horizontal'"
-            [separatorSize]="separatorSize">
+          <div class="w-full overflow-x-auto">
+            <div class="min-w-[400px]">
+              <ejs-splitter
+                [height]="height"
+                [width]="width"
+                [orientation]="'Horizontal'"
+                [separatorSize]="separatorSize">
             <e-panes>
               <e-pane [size]="'30%'">
                 <ng-template #content>
@@ -42,16 +44,20 @@
                 </ng-template>
               </e-pane>
             </e-panes>
-          </ejs-splitter>
+              </ejs-splitter>
+            </div>
+          </div>
         </div>
 
         <div>
           <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Vertical Splitter</h3>
-          <ejs-splitter
-            [height]="height"
-            [width]="width"
-            [orientation]="'Vertical'"
-            [separatorSize]="separatorSize">
+          <div class="w-full overflow-x-auto">
+            <div class="min-w-[400px]">
+              <ejs-splitter
+                [height]="height"
+                [width]="width"
+                [orientation]="'Vertical'"
+                [separatorSize]="separatorSize">
             <e-panes>
               <e-pane [size]="'30%'">
                 <ng-template #content>
@@ -70,7 +76,9 @@
                 </ng-template>
               </e-pane>
             </e-panes>
-          </ejs-splitter>
+              </ejs-splitter>
+            </div>
+          </div>
         </div>
       </div>
     </app-glass-card>
@@ -93,6 +101,34 @@
         <div>
           <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Vertical Splitter</h3>
           <app-code-viewer [code]="verticalExample" language="html" title="Vertical Splitter"></app-code-viewer>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Variants Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Variants
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Horizontal Splitter</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Split container horizontally into resizable panes (left and right).
+          </p>
+          <app-code-viewer [code]="basicExample" language="html" title="Horizontal Orientation"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Vertical Splitter</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Split container vertically into resizable panes (top and bottom).
+          </p>
+          <app-code-viewer [code]="verticalExample" language="html" title="Vertical Orientation"></app-code-viewer>
         </div>
       </div>
     </app-glass-card>

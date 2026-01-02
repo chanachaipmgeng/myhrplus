@@ -93,6 +93,58 @@
     </app-glass-card>
   </section>
 
+  <!-- Variants Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Variants
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Success Message</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Display success messages with green styling and checkmark icon.
+          </p>
+          <app-code-viewer [code]="basicExample" language="html" title="Success"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Info Message</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Display informational messages with blue styling and info icon.
+          </p>
+          <app-code-viewer [code]="severityExample" language="html" title="Info"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Warning Message</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Display warning messages with yellow/orange styling and warning icon.
+          </p>
+          <app-code-viewer [code]="severityExample" language="html" title="Warning"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Error Message</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Display error messages with red styling and error icon.
+          </p>
+          <app-code-viewer [code]="severityExample" language="html" title="Error"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">With Close Icon</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Message with close icon for user dismissal.
+          </p>
+          <app-code-viewer [code]="withCloseIconExample" language="html" title="With Close Icon"></app-code-viewer>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
   <!-- API Reference Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30

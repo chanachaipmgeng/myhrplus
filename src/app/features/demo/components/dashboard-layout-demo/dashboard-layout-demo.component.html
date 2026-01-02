@@ -19,15 +19,19 @@
       <div class="space-y-6">
         <div>
           <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic Dashboard Layout</h3>
-          <div style="height: 500px;">
-            <ejs-dashboardlayout
-              [panels]="panels"
-              [cellSpacing]="cellSpacing"
-              [allowResizing]="allowResizing"
-              [allowFloating]="allowFloating"
-              [allowDragging]="allowDragging"
-              (resize)="onResize($event)">
-            </ejs-dashboardlayout>
+          <div class="w-full overflow-x-auto">
+            <div class="min-w-[600px]">
+              <div class="h-[400px] md:h-[500px]">
+                <ejs-dashboardlayout
+                  [panels]="panels"
+                  [cellSpacing]="cellSpacing"
+                  [allowResizing]="allowResizing"
+                  [allowFloating]="allowFloating"
+                  [allowDragging]="allowDragging"
+                  (resize)="onResize($event)">
+                </ejs-dashboardlayout>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -46,6 +50,50 @@
         <div>
           <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic Dashboard Layout</h3>
           <app-code-viewer [code]="basicExample" language="html" title="Basic Dashboard Layout"></app-code-viewer>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Advanced Features Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Advanced Features
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Panel Configuration</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Configure panels with size (sizeX, sizeY), position (row, col), header, and content.
+          </p>
+          <app-code-viewer [code]="panelConfigExample" language="typescript" title="Panel Configuration"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Drag and Drop</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Enable drag and drop functionality to rearrange panels in the dashboard.
+          </p>
+          <app-code-viewer [code]="dragDropExample" language="html" title="Drag and Drop"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Resizing and Floating</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Enable panel resizing and floating for customizable dashboard layouts.
+          </p>
+          <app-code-viewer [code]="resizeFloatingExample" language="html" title="Resizing and Floating"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Responsive Design</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Dashboard layout is responsive. Use responsive height and overflow handling for mobile devices.
+          </p>
+          <app-code-viewer [code]="responsiveExample" language="html" title="Responsive Configuration"></app-code-viewer>
         </div>
       </div>
     </app-glass-card>

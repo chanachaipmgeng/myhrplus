@@ -121,6 +121,14 @@ export class SliderDemoComponent {
   [max]="100">
 </ejs-slider>`;
 
+  verticalExample = `<ejs-slider
+  [(value)]="value"
+  [orientation]="'Vertical'"
+  [min]="0"
+  [max]="100"
+  [step]="1">
+</ejs-slider>`;
+
   onValueChange(args: any): void {
     console.log('Value changed:', args.value);
   }

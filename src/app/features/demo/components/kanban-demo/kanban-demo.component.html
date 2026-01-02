@@ -19,14 +19,18 @@
       <div class="space-y-6">
         <div>
           <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic Kanban Board</h3>
-          <ejs-kanban
-            [dataSource]="kanbanData"
-            [columns]="columns"
-            [cardSettings]="cardSettings"
-            [allowDragAndDrop]="true"
-            (actionComplete)="onActionComplete($event)"
-            [height]="'400px'">
-          </ejs-kanban>
+          <div class="w-full overflow-x-auto">
+            <div class="min-w-[600px]">
+              <ejs-kanban
+                [dataSource]="kanbanData"
+                [columns]="columns"
+                [cardSettings]="cardSettings"
+                [allowDragAndDrop]="true"
+                (actionComplete)="onActionComplete($event)"
+                [height]="'400px'">
+              </ejs-kanban>
+            </div>
+          </div>
         </div>
       </div>
     </app-glass-card>
@@ -44,6 +48,42 @@
         <div>
           <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic Kanban Board</h3>
           <app-code-viewer [code]="basicExample" language="html" title="Basic Kanban Board"></app-code-viewer>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Advanced Features Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Advanced Features
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Drag and Drop</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Kanban board supports drag and drop functionality. Cards can be moved between columns by dragging.
+          </p>
+          <app-code-viewer [code]="dragDropExample" language="html" title="Drag and Drop"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Column Customization</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Customize columns with header text, key fields, and additional settings.
+          </p>
+          <app-code-viewer [code]="columnCustomizationExample" language="typescript" title="Column Configuration"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Card Templates</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Customize card display with content, header, tags, grabber, and footer fields.
+          </p>
+          <app-code-viewer [code]="cardTemplateExample" language="typescript" title="Card Settings"></app-code-viewer>
         </div>
       </div>
     </app-glass-card>

@@ -86,6 +86,42 @@
     </app-glass-card>
   </section>
 
+  <!-- Variants Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Variants
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic ComboBox</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            ComboBox with filtering and custom value support.
+          </p>
+          <app-code-viewer [code]="basicExample" language="html" title="Basic"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Readonly</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Readonly ComboBox that displays the selected value but prevents editing.
+          </p>
+          <app-code-viewer [code]="readonlyExample" language="html" title="Readonly"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Disabled</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Disabled ComboBox that cannot be interacted with.
+          </p>
+          <app-code-viewer [code]="disabledExample" language="html" title="Disabled"></app-code-viewer>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
   <!-- API Reference Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30

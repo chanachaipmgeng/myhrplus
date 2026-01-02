@@ -1,7 +1,7 @@
 # 🎬 Demo System Guide
 
-**อัปเดตล่าสุด**: 2024-12-20  
-**เวอร์ชัน**: 2.1.0
+**อัปเดตล่าสุด**: 2025-01-01  
+**เวอร์ชัน**: 2.2.0
 
 ---
 
@@ -13,7 +13,10 @@ Demo System เป็นระบบแสดงตัวอย่างกา�
 - ✅ API Documentation (Props tables)
 - ✅ Multiple Usage Examples
 - ✅ Responsive Design
-- ✅ Dark Mode & Gemini Theme Support
+- ✅ Dark Mode & MyHR Theme Support
+- ✅ Semantic Colors (Dynamic Theming)
+- ✅ Complete Variants/States/Advanced Features Sections
+- ✅ Full Responsive Design
 
 ---
 
@@ -208,35 +211,51 @@ export class ComponentDemoComponent {
 
 ### Template Structure
 ```html
-<div class="demo-page">
+<div class="w-full py-12">
   <!-- Header -->
-  <div class="demo-header">
-    <h1 class="demo-title">Component Name</h1>
-    <p class="demo-description">Description</p>
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2">Component Name</h1>
+    <p class="text-base text-gray-600 dark:text-gray-400">Description</p>
   </div>
 
   <!-- Live Demo -->
-  <section class="demo-section">
-    <h2 class="section-title">Live Demo</h2>
-    <!-- Demo content -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2">Live Demo</h2>
+    <app-glass-card padding="p-6">
+      <!-- Demo content -->
+    </app-glass-card>
   </section>
 
-  <!-- Examples -->
-  <section class="demo-section">
-    <h2 class="section-title">Examples</h2>
-    <!-- Multiple examples -->
+  <!-- Basic Usage -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2">Basic Usage</h2>
+    <app-glass-card padding="p-6">
+      <app-code-viewer [code]="basicExample" language="html" title="Basic"></app-code-viewer>
+    </app-glass-card>
   </section>
 
-  <!-- Code Examples -->
-  <section class="demo-section">
-    <h2 class="section-title">Code Examples</h2>
-    <app-code-viewer [code]="basicExample" ...></app-code-viewer>
+  <!-- Variants (Optional) -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2">Variants</h2>
+    <app-glass-card padding="p-6">
+      <!-- Variants examples -->
+    </app-glass-card>
   </section>
 
-  <!-- API Documentation -->
-  <section class="demo-section">
-    <h2 class="section-title">API Documentation</h2>
-    <app-props-table [props]="props"></app-props-table>
+  <!-- Advanced Features (Optional) -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2">Advanced Features</h2>
+    <app-glass-card padding="p-6">
+      <!-- Advanced examples -->
+    </app-glass-card>
+  </section>
+
+  <!-- API Reference -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2">API Reference</h2>
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props" title="Inputs"></app-props-table>
+    </app-glass-card>
   </section>
 </div>
 ```
@@ -247,10 +266,12 @@ export class ComponentDemoComponent {
 
 ### Demo Page Styles
 ทุก demo component ใช้ styles ที่สอดคล้องกัน:
-- Responsive design
+- Responsive design (mobile-first approach)
 - Dark mode support
-- Gemini theme support
+- MyHR theme support
+- Semantic colors (dynamic theming)
 - Consistent spacing และ typography
+- CSS variables จาก design tokens
 
 ### SCSS Structure
 ```scss
@@ -277,7 +298,7 @@ export class ComponentDemoComponent {
   // ...
 }
 
-// Gemini theme
+// MyHR theme
 body.theme-myhr {
   // ...
 }
@@ -299,18 +320,46 @@ body.theme-myhr {
 - [ ] สร้าง component files (ts, html, scss)
 - [ ] เพิ่ม route ใน demo-routing.module.ts
 - [ ] เพิ่ม live demo section
-- [ ] เพิ่ม multiple examples
-- [ ] เพิ่ม code examples
-- [ ] เพิ่ม API documentation (props table)
+- [ ] เพิ่ม Basic Usage section
+- [ ] เพิ่ม Variants section (ถ้ามี variants)
+- [ ] เพิ่ม States section (ถ้ามี states)
+- [ ] เพิ่ม Advanced Features section (ถ้ามี advanced features)
+- [ ] เพิ่ม API Reference section (props table)
+- [ ] ใช้ semantic colors (`bg-primary`, `text-primary`, etc.)
 - [ ] ทดสอบ responsive design
 - [ ] ทดสอบ dark mode
-- [ ] ทดสอบ Gemini theme
+- [ ] ทดสอบ MyHR theme
 - [ ] อัพเดท demo-index component
+
+### Standards Compliance
+ทุก demo component ต้อง:
+- ✅ ใช้ semantic colors (รองรับ dynamic theming)
+- ✅ มี Variants/States/Advanced Features sections ครบถ้วน
+- ✅ รองรับ responsive design
+- ✅ ใช้ชื่อ section ตามมาตรฐาน (Live Demo, Basic Usage, Variants, States, Advanced Features, API Reference)
 
 ---
 
 **Maintainer**: Development Team  
-**Last Updated**: 2024-12-20  
-**Version**: 2.1.0
+**Last Updated**: 2025-01-01  
+**Version**: 2.2.0
+
+---
+
+## 📋 Recent Updates (2025-01-01)
+
+### ✅ Demo Components Audit Complete
+- **Phase 1**: Fixed hardcoded colors in 40+ files
+- **Phase 2**: Added missing sections to 23 components
+- **Phase 2**: Fixed responsive issues in 5 components
+- **Phase 3**: Verified section naming (all correct)
+
+### ✅ Improvements
+- All components now use semantic colors (support dynamic theming)
+- All components have complete Variants/States/Advanced Features sections
+- All components support responsive design
+- All components follow standard section naming
+
+**See**: `DEMO_COMPONENTS_AUDIT_IMPLEMENTATION_SUMMARY.md` for details
 
 

@@ -118,6 +118,42 @@
     </app-glass-card>
   </section>
 
+  <!-- Variants Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Variants
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic Dialog</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Standard modal dialog with header, content, and footer templates.
+          </p>
+          <app-code-viewer [code]="basicExample" language="html" title="Basic"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Alert Dialog</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Alert dialog for displaying informational messages with OK button.
+          </p>
+          <app-code-viewer [code]="alertExample" language="html" title="Alert"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Confirm Dialog</h3>
+          <p class="text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+            Confirmation dialog with Yes/No buttons for user confirmation.
+          </p>
+          <app-code-viewer [code]="confirmExample" language="html" title="Confirm"></app-code-viewer>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
   <!-- API Reference Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
