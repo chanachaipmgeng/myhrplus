@@ -2,15 +2,24 @@ import { Component, OnInit, OnDestroy, ViewChild, HostListener } from '@angular/
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
-import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
+import { SidebarComponent as EjsSidebar } from '@syncfusion/ej2-angular-navigations';
 import { SyncfusionModule } from '@shared/syncfusion/syncfusion.module';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { ThemeService, ThemeMode, ThemeColor } from '@core/services';
+import { ThemeService, ThemeMode, ThemeColor, LayoutService, StorageService } from '@core/services';
 import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
 import { GlassButtonComponent } from '@shared/components/glass-button/glass-button.component';
-import { filter } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
+import { IconComponent } from '@shared/components/icon/icon.component';
+import { ThemeToggleComponent } from '@shared/components/theme-toggle/theme-toggle.component';
+import { EmptyStateComponent } from '@shared/components/empty-state/empty-state.component';
+import { BreadcrumbsComponent, BreadcrumbItem } from '@shared/components/breadcrumbs/breadcrumbs.component';
+import { SwipeDirective } from '@shared/directives/swipe.directive';
+import { ClickOutsideDirective } from '@shared/directives/click-outside.directive';
+import { filter, take, takeUntil } from 'rxjs/operators';
+import { Subject, Subscription, Observable } from 'rxjs';
 import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
+import { STORAGE_KEYS } from '@core/constants/storage-keys.constant';
+import { Language, isSupportedLanguage, getFlagPath } from '@core/types/language.type';
 
 interface ComponentGroup {
   name: string;
@@ -35,49 +44,43 @@ interface ComponentInfo {
     SyncfusionModule,
     TranslateModule,
     GlassCardComponent,
-    GlassButtonComponent
+    GlassButtonComponent,
+    GlassInputComponent,
+    IconComponent,
+    ThemeToggleComponent,
+    EmptyStateComponent,
+    BreadcrumbsComponent,
+    SwipeDirective,
+    ClickOutsideDirective
   ],
   templateUrl: './demo-layout.component.html',
   styleUrls: ['./demo-layout.component.scss']
 })
 export class DemoLayoutComponent implements OnInit, OnDestroy {
-  @ViewChild('sidebar') sidebar!: SidebarComponent;
+  @ViewChild('sidebar') sidebar!: EjsSidebar;
 
-  // Sidebar state
-  sidebarOpen = false;
+  // Observables from LayoutService
+  isHandset$: Observable<boolean>;
+  sidebarOpen$: Observable<boolean>;
+
+  // UI State
+  sidebarWidth: string = '368px'; // 88px icon bar + 280px menu panel
+  sidebarType: 'Over' | 'Push' | 'Slide' = 'Over';
   currentRoute = '';
+  
+  // Selected group and search
+  selectedGroup: ComponentGroup | null = null;
+  searchQuery: string = '';
+  
+  // Breadcrumbs
+  breadcrumbItems: BreadcrumbItem[] = [];
 
   // Language
-  currentLang = 'th';
-  availableLangs = [
-    { code: 'th', name: 'ไทย', flag: '🇹🇭' },
-    { code: 'en', name: 'English', flag: '🇬🇧' },
-    { code: 'lo', name: 'ລາວ', flag: '🇱🇦' },
-    { code: 'my', name: 'မြန်မာ', flag: '🇲🇲' },
-    { code: 'vi', name: 'Tiếng Việt', flag: '🇻🇳' },
-    { code: 'zh', name: '中文', flag: '🇨🇳' }
-  ];
+  currentLanguage: Language = 'th';
+  showLanguageMenu = false;
+  languages: { value: Language; label: string; flagPath: string }[] = [];
 
-  // Theme
-  currentTheme: { mode: ThemeMode; color: ThemeColor; primaryColor: string } = { mode: 'light', color: 'blue', primaryColor: '#3b82f6' };
-  showColorPicker = false;
-  customPrimaryColor = '#3b82f6';
-  hexColorInput = '#3b82f6';
-  themeModes: { value: ThemeMode; label: string; icon: string }[] = [
-    { value: 'light', label: 'Light', icon: '☀️' },
-    { value: 'dark', label: 'Dark', icon: '🌙' },
-    { value: 'auto', label: 'Auto', icon: '🔄' }
-  ];
-  themeColors: { value: ThemeColor; label: string; color: string }[] = [
-    { value: 'blue', label: 'Blue', color: '#3b82f6' },
-    { value: 'indigo', label: 'Indigo', color: '#6366f1' },
-    { value: 'purple', label: 'Purple', color: '#a855f7' },
-    { value: 'green', label: 'Green', color: '#22c55e' },
-    { value: 'orange', label: 'Orange', color: '#f97316' },
-    { value: 'red', label: 'Red', color: '#ef4444' },
-    { value: 'teal', label: 'Teal', color: '#14b8a6' },
-    { value: 'pink', label: 'Pink', color: '#ec4899' }
-  ];
+  private destroy$ = new Subject<void>();
 
   // Component groups (organized by Syncfusion structure)
   componentGroups: ComponentGroup[] = [
@@ -283,23 +286,34 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private translate: TranslateService,
-    public themeService: ThemeService
-  ) {}
+    public themeService: ThemeService,
+    private layoutService: LayoutService,
+    private storageService: StorageService
+  ) {
+    this.isHandset$ = this.layoutService.isHandset$;
+    this.sidebarOpen$ = this.layoutService.sidebarOpen$;
+    
+    // Initialize current language
+    this.currentLanguage = (this.translate.currentLang as Language) || 'th';
+
+    // Subscribe to language changes
+    this.translate.onLangChange.pipe(takeUntil(this.destroy$)).subscribe(event => {
+      const lang = event.lang as Language;
+      if (isSupportedLanguage(lang)) {
+        this.currentLanguage = lang;
+        this.updateLanguages();
+      }
+    });
+  }
 
   ngOnInit(): void {
-    // Get current language
-    this.currentLang = this.translate.currentLang || 'th';
+    // Initialize languages
+    this.updateLanguages();
 
-    // Subscribe to theme changes
+    // Subscribe to responsive breakpoints
     this.subscriptions.push(
-      this.themeService.theme$.subscribe(theme => {
-        this.currentTheme = { 
-          mode: theme.mode, 
-          color: theme.color,
-          primaryColor: this.rgbToHex(theme.primaryColor)
-        };
-        this.customPrimaryColor = this.rgbToHex(theme.primaryColor);
-        this.hexColorInput = this.customPrimaryColor;
+      this.isHandset$.subscribe(isHandset => {
+        this.sidebarType = isHandset ? 'Over' : 'Push';
       })
     );
 
@@ -311,9 +325,14 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
           const url = event.urlAfterRedirects;
           if (url === '/demo' || url === '/demo/') {
             this.currentRoute = '';
+            this.selectedGroup = null;
           } else {
             this.currentRoute = url.replace('/demo/', '');
+            // Auto-select group based on current route
+            this.updateSelectedGroupFromRoute();
           }
+          // Update breadcrumbs
+          this.updateBreadcrumbs();
         })
     );
 
@@ -321,154 +340,111 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
     const initialUrl = this.router.url;
     if (initialUrl === '/demo' || initialUrl === '/demo/') {
       this.currentRoute = '';
+      this.selectedGroup = null;
     } else {
       this.currentRoute = initialUrl.replace('/demo/', '');
+      // Auto-select group based on current route
+      this.updateSelectedGroupFromRoute();
     }
+    
+    // Initialize breadcrumbs
+    this.updateBreadcrumbs();
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   // Sidebar methods
   toggleSidebar(): void {
-    this.sidebarOpen = !this.sidebarOpen;
-    if (this.sidebar) {
-      if (this.sidebarOpen) {
-        this.sidebar.show();
-      } else {
-        this.sidebar.hide();
-      }
-    }
+    this.layoutService.toggleSidebar();
   }
 
-  closeSidebar(): void {
-    this.sidebarOpen = false;
-    if (this.sidebar) {
-      this.sidebar.hide();
-    }
+  onSidebarClose(): void {
+    this.layoutService.setSidebarState(false);
+  }
+
+  // Swipe Handlers
+  onSwipeRight(): void {
+    this.isHandset$.pipe(take(1)).subscribe(isHandset => {
+      if (isHandset) {
+        this.layoutService.setSidebarState(true);
+      }
+    });
+  }
+
+  onSwipeLeft(): void {
+    this.isHandset$.pipe(take(1)).subscribe(isHandset => {
+      if (isHandset) {
+        this.layoutService.setSidebarState(false);
+      }
+    });
   }
 
   // Language methods
-  changeLanguage(lang: string): void {
-    this.currentLang = lang;
-    this.translate.use(lang);
-    if (typeof window !== 'undefined' && window.localStorage) {
-      localStorage.setItem('lang', lang);
-    }
+  toggleLanguageMenu(): void {
+    this.showLanguageMenu = !this.showLanguageMenu;
   }
 
-  // Theme methods
-  changeThemeMode(mode: ThemeMode): void {
-    this.themeService.setMode(mode);
+  closeLanguageMenu(): void {
+    this.showLanguageMenu = false;
   }
 
-  changeThemeColor(color: ThemeColor): void {
-    this.themeService.setColor(color);
-    // Update custom color to match selected theme color
-    const selectedColor = this.themeColors.find(c => c.value === color);
-    if (selectedColor) {
-      this.customPrimaryColor = selectedColor.color;
+  changeLanguage(language: Language): void {
+    // Validate language
+    if (!isSupportedLanguage(language)) {
+      console.warn(`Language ${language} is not supported.`);
+      return;
     }
+
+    // Change language
+    this.translate.use(language);
+
+    // Save to storage
+    this.storageService.setItem(STORAGE_KEYS.LANGUAGE, language);
+
+    // Update document language attribute
+    document.documentElement.setAttribute('lang', language);
+
+    this.showLanguageMenu = false;
   }
 
-  toggleThemeMode(): void {
-    this.themeService.toggleMode();
-  }
-
-  // Color picker methods
-  toggleColorPicker(event?: Event): void {
-    if (event) {
-      event.stopPropagation();
-    }
-    this.showColorPicker = !this.showColorPicker;
-  }
-
-  onCustomColorChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    let hexColor = input.value.trim();
-    
-    // Ensure hex color starts with #
-    if (!hexColor.startsWith('#')) {
-      hexColor = '#' + hexColor;
-    }
-    
-    // Validate hex color format
-    if (/^#[0-9A-Fa-f]{6}$/.test(hexColor)) {
-      this.customPrimaryColor = hexColor;
-      this.hexColorInput = hexColor;
-      const rgb = this.hexToRgb(hexColor);
-      if (rgb) {
-        this.themeService.setPrimaryColor(rgb);
-      }
-    } else if (input.type === 'color') {
-      // Color picker always returns valid hex
-      this.customPrimaryColor = hexColor;
-      this.hexColorInput = hexColor;
-      const rgb = this.hexToRgb(hexColor);
-      if (rgb) {
-        this.themeService.setPrimaryColor(rgb);
-      }
-    }
-  }
-
-  onHexInputChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    let hexColor = input.value.trim();
-    
-    // Ensure hex color starts with #
-    if (!hexColor.startsWith('#')) {
-      hexColor = '#' + hexColor;
-    }
-    
-    this.hexColorInput = hexColor;
-    
-    // Validate and apply
-    if (/^#[0-9A-Fa-f]{6}$/.test(hexColor)) {
-      this.customPrimaryColor = hexColor;
-      const rgb = this.hexToRgb(hexColor);
-      if (rgb) {
-        this.themeService.setPrimaryColor(rgb);
-      }
-    }
-  }
-
-  // Convert hex color to RGB format (for ThemeService)
-  private hexToRgb(hex: string): string | null {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    if (result) {
-      const r = parseInt(result[1], 16);
-      const g = parseInt(result[2], 16);
-      const b = parseInt(result[3], 16);
-      return `${r}, ${g}, ${b}`;
-    }
-    return null;
-  }
-
-  // Convert RGB format to hex color (for display)
-  private rgbToHex(rgb: string): string {
-    const parts = rgb.split(',').map(p => parseInt(p.trim(), 10));
-    if (parts.length === 3) {
-      const r = parts[0].toString(16).padStart(2, '0');
-      const g = parts[1].toString(16).padStart(2, '0');
-      const b = parts[2].toString(16).padStart(2, '0');
-      return `#${r}${g}${b}`;
-    }
-    return '#3b82f6'; // Default blue
+  /**
+   * Update languages list with translations
+   */
+  private updateLanguages(): void {
+    this.languages = [
+      { value: 'th', label: this.translate.instant('common.languages.thai'), flagPath: getFlagPath('th') },
+      { value: 'en', label: this.translate.instant('common.languages.english'), flagPath: getFlagPath('en') },
+      { value: 'lo', label: this.translate.instant('common.languages.lao'), flagPath: getFlagPath('lo') },
+      { value: 'my', label: this.translate.instant('common.languages.myanmar'), flagPath: getFlagPath('my') },
+      { value: 'vi', label: this.translate.instant('common.languages.vietnamese'), flagPath: getFlagPath('vi') },
+      { value: 'zh', label: this.translate.instant('common.languages.chinese'), flagPath: getFlagPath('zh') }
+    ];
   }
 
   // Navigation
   navigateToComponent(route: string): void {
     if (route === '') {
       this.router.navigate(['/demo']);
+      this.selectedGroup = null;
+      this.currentRoute = '';
     } else {
       this.router.navigate(['/demo', route]);
+      this.currentRoute = route;
     }
+    // Update breadcrumbs
+    this.updateBreadcrumbs();
     // Don't close sidebar when navigating
   }
 
   navigateToHome(): void {
     this.router.navigate(['/demo']);
+    this.selectedGroup = null;
+    this.currentRoute = '';
+    this.updateBreadcrumbs();
     // Don't close sidebar when navigating
   }
 
@@ -479,17 +455,175 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
     return this.currentRoute === route || this.currentRoute.startsWith(route + '/');
   }
 
-  // Close color picker when clicking outside
-  @HostListener('document:click', ['$event'])
-  handleDocumentClick(event: MouseEvent): void {
-    const target = event.target as HTMLElement;
-    // Don't close if clicking inside color picker container
-    if (this.showColorPicker && !target.closest('.color-picker-container')) {
-      // Small delay to allow button click to register
-      setTimeout(() => {
-        this.showColorPicker = false;
-      }, 100);
+  // Group selection
+  selectGroup(group: ComponentGroup): void {
+    this.selectedGroup = group;
+    this.searchQuery = ''; // Clear search when selecting new group
+  }
+
+  // Update selected group based on current route
+  private updateSelectedGroupFromRoute(): void {
+    if (!this.currentRoute) {
+      this.selectedGroup = null;
+      return;
+    }
+
+    // Find group that contains the current route
+    for (const group of this.componentGroups) {
+      const hasComponent = group.components.some(comp => 
+        comp.route === this.currentRoute || this.currentRoute.startsWith(comp.route + '/')
+      );
+      if (hasComponent) {
+        this.selectedGroup = group;
+        return;
+      }
+    }
+    
+    // If no group found, select first group
+    if (this.componentGroups.length > 0) {
+      this.selectedGroup = this.componentGroups[0];
     }
   }
+
+  // Search functionality
+  onSearchChange(): void {
+    // Filtering is handled in getFilteredComponents() getter
+  }
+
+  clearSearch(): void {
+    this.searchQuery = '';
+  }
+
+  shouldShowSearchBox(): boolean {
+    // Show search box if:
+    // 1. User is currently searching (has searchQuery)
+    // 2. Selected group has more than 5 components
+    if (this.searchQuery && this.searchQuery.trim()) {
+      return true;
+    }
+    
+    if (this.selectedGroup) {
+      return this.selectedGroup.components.length > 5;
+    }
+    
+    return false;
+  }
+
+  // Get filtered components based on search query
+  get filteredComponents(): ComponentInfo[] {
+    if (!this.selectedGroup) {
+      return [];
+    }
+
+    if (!this.searchQuery || !this.searchQuery.trim()) {
+      return this.selectedGroup.components;
+    }
+
+    const query = this.searchQuery.trim().toLowerCase();
+    return this.selectedGroup.components.filter(component =>
+      component.name.toLowerCase().includes(query) ||
+      component.description.toLowerCase().includes(query) ||
+      component.route.toLowerCase().includes(query)
+    );
+  }
+
+  // Update breadcrumbs based on current route
+  private updateBreadcrumbs(): void {
+    const items: BreadcrumbItem[] = [
+      {
+        label: 'Demo',
+        route: '/demo',
+        icon: 'home'
+      }
+    ];
+
+    if (this.currentRoute) {
+      // Add group to breadcrumb if selected
+      if (this.selectedGroup) {
+        items.push({
+          label: this.selectedGroup.name,
+          // route is undefined for non-clickable items
+          icon: this.selectedGroup.icon
+        });
+      }
+
+      // Find current component
+      let currentComponent: ComponentInfo | null = null;
+      if (this.selectedGroup) {
+        currentComponent = this.selectedGroup.components.find(
+          comp => comp.route === this.currentRoute || this.currentRoute.startsWith(comp.route + '/')
+        ) || null;
+      }
+
+      // If not found in selected group, search all groups
+      if (!currentComponent) {
+        for (const group of this.componentGroups) {
+          currentComponent = group.components.find(
+            comp => comp.route === this.currentRoute || this.currentRoute.startsWith(comp.route + '/')
+          ) || null;
+          if (currentComponent) {
+            // Add group if not already added
+            if (!this.selectedGroup || this.selectedGroup.name !== group.name) {
+              items.push({
+                label: group.name,
+                // route is undefined for non-clickable items
+                icon: group.icon
+              });
+            }
+            break;
+          }
+        }
+      }
+
+      // Add current component to breadcrumb
+      if (currentComponent) {
+        items.push({
+          label: currentComponent.name,
+          // route is undefined for current page (non-clickable)
+          icon: currentComponent.icon
+        });
+      } else {
+        // Fallback: use route name
+        const routeName = this.currentRoute.split('/')[0];
+        items.push({
+          label: routeName.charAt(0).toUpperCase() + routeName.slice(1),
+          // route is undefined for non-clickable items
+          icon: 'component'
+        });
+      }
+    }
+
+    this.breadcrumbItems = items;
+  }
+
+  // Get current component info
+  get currentComponent(): ComponentInfo | null {
+    if (!this.currentRoute) {
+      return null;
+    }
+
+    // Search in selected group first
+    if (this.selectedGroup) {
+      const component = this.selectedGroup.components.find(
+        comp => comp.route === this.currentRoute || this.currentRoute.startsWith(comp.route + '/')
+      );
+      if (component) {
+        return component;
+      }
+    }
+
+    // Search all groups
+    for (const group of this.componentGroups) {
+      const component = group.components.find(
+        comp => comp.route === this.currentRoute || this.currentRoute.startsWith(comp.route + '/')
+      );
+      if (component) {
+        return component;
+      }
+    }
+
+    return null;
+  }
 }
+
 

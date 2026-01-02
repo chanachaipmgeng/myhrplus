@@ -11,7 +11,7 @@ import { SkeletonLoaderComponent } from './components/skeleton-loader/skeleton-l
 // Standalone Components used by legacy components
 import { IconComponent } from './components/icon/icon.component';
 
-// Directives (Non-Standalone)
+// Directives (Standalone)
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 
 // Pipes
@@ -35,9 +35,7 @@ const LEGACY_COMPONENTS = [
   SkeletonLoaderComponent
 ];
 
-const DIRECTIVES = [
-  ClickOutsideDirective
-];
+// ClickOutsideDirective is now standalone, import it instead of declaring
 
 const PIPES = [
   SafeHtmlPipe,
@@ -47,7 +45,6 @@ const PIPES = [
 @NgModule({
   declarations: [
     ...LEGACY_COMPONENTS,
-    ...DIRECTIVES,
     ...PIPES
   ],
   imports: [
@@ -56,7 +53,9 @@ const PIPES = [
     FormsModule,
     RouterModule,
     // Standalone components used by legacy components
-    IconComponent
+    IconComponent,
+    // Standalone directives
+    ClickOutsideDirective
   ],
   exports: [
     CommonModule,
@@ -64,10 +63,11 @@ const PIPES = [
     FormsModule,
     RouterModule,
     ...LEGACY_COMPONENTS,
-    ...DIRECTIVES,
     ...PIPES,
     // Export standalone components for use in legacy components
-    IconComponent
+    IconComponent,
+    // Export standalone directives
+    ClickOutsideDirective
   ]
 })
 export class SharedModule { }

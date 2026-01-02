@@ -1,257 +1,350 @@
-<div class="flex flex-col h-screen overflow-hidden">
-  <!-- Header -->
-  <header class="sticky top-0 z-[100] px-4 md:px-6 py-4 glass dark:glass-dark theme-myhr:glass-myhr border-b border-black/10 dark:border-white/10 shadow-sm">
-    <div class="flex justify-between items-center gap-4">
-      <div class="flex items-center gap-4">
-        <button
-          type="button"
-          class="flex items-center justify-center w-10 h-10 border-none bg-transparent rounded-lg cursor-pointer transition-smooth
-                 hover:bg-black/5 dark:hover:bg-white/10 theme-myhr:hover:bg-primary/10
-                 focus:outline-none focus:ring-2 focus:ring-primary/20"
-          (click)="toggleSidebar()"
-          [attr.aria-label]="'Toggle sidebar'">
-          <span class="material-icons text-2xl text-gray-900 dark:text-gray-100">menu</span>
-        </button>
-        <div class="flex items-center gap-3">
-          <span class="text-2xl md:text-xl">🎨</span>
-          <h1 class="text-xl md:text-base font-semibold text-gray-900 dark:text-gray-100
-                    theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary
-                    theme-myhr:bg-clip-text theme-myhr:text-transparent m-0">
-            Component Demo Showcase
-          </h1>
-        </div>
-      </div>
-      <div class="flex items-center gap-4">
-        <!-- Language Switcher -->
-        <div class="flex items-center gap-2">
-          <select
-            [value]="currentLang"
-            (change)="changeLanguage($any($event.target).value)"
-            class="px-3 py-2 border border-black/10 dark:border-white/10 rounded-md
-                   glass-weak dark:glass-dark-weak theme-myhr:glass-myhr-weak
-                   text-gray-900 dark:text-gray-100 text-sm cursor-pointer transition-smooth
-                   hover:glass dark:hover:glass-dark theme-myhr:hover:glass-myhr
-                   focus:outline-none focus:ring-2 focus:ring-primary/20">
-            <option *ngFor="let lang of availableLangs" [value]="lang.code">
-              {{ lang.flag }} {{ lang.name }}
-            </option>
-          </select>
-        </div>
-
-        <!-- Theme Mode Switcher -->
-        <div class="flex items-center gap-2 md:flex-col md:gap-1">
-          <select
-            [value]="currentTheme.mode"
-            (change)="changeThemeMode($any($event.target).value)"
-            class="px-3 py-2 md:px-2 md:py-1.5 md:text-xs border border-black/10 dark:border-white/10 rounded-md
-                   glass-weak dark:glass-dark-weak theme-myhr:glass-myhr-weak
-                   text-gray-900 dark:text-gray-100 text-sm cursor-pointer transition-smooth
-                   hover:glass dark:hover:glass-dark theme-myhr:hover:glass-myhr
-                   focus:outline-none focus:ring-2 focus:ring-primary/20">
-            <option *ngFor="let mode of themeModes" [value]="mode.value">
-              {{ mode.icon }} {{ mode.label }}
-            </option>
-          </select>
-
-          <select
-            [value]="currentTheme.color"
-            (change)="changeThemeColor($any($event.target).value)"
-            class="px-3 py-2 md:px-2 md:py-1.5 md:text-xs border border-black/10 dark:border-white/10 rounded-md
-                   glass-weak dark:glass-dark-weak theme-myhr:glass-myhr-weak
-                   text-gray-900 dark:text-gray-100 text-sm cursor-pointer transition-smooth
-                   hover:glass dark:hover:glass-dark theme-myhr:hover:glass-myhr
-                   focus:outline-none focus:ring-2 focus:ring-primary/20">
-            <option *ngFor="let color of themeColors" [value]="color.value">
-              {{ color.label }}
-            </option>
-          </select>
-
-          <!-- Custom Color Picker -->
-          <div class="relative color-picker-container">
-            <button
-              type="button"
-              (click)="toggleColorPicker($event)"
-              class="px-3 py-2 md:px-2 md:py-1.5 md:text-xs border border-black/10 dark:border-white/10 rounded-md
-                     glass-weak dark:glass-dark-weak theme-myhr:glass-myhr-weak
-                     text-gray-900 dark:text-gray-100 text-sm cursor-pointer transition-smooth
-                     hover:glass dark:hover:glass-dark theme-myhr:hover:glass-myhr
-                     focus:outline-none focus:ring-2 focus:ring-primary-500/20
-                     flex items-center gap-2"
-              [attr.aria-label]="'Custom color picker'"
-              [attr.aria-expanded]="showColorPicker">
-              <span class="w-4 h-4 rounded border border-black/20 dark:border-white/20 shadow-sm"
-                    [style.background-color]="customPrimaryColor"></span>
-              <span class="hidden md:inline text-xs">Custom</span>
-            </button>
-            <div *ngIf="showColorPicker"
-                 (click)="$event.stopPropagation()"
-                 class="absolute right-0 mt-2 p-4 rounded-lg shadow-xl z-[100] min-w-[240px]
-                        glass dark:glass-dark theme-myhr:glass-myhr
-                        border border-black/10 dark:border-white/10
-                        animate-fade-in">
-              <div class="flex items-center justify-between mb-3">
-                <label class="block text-sm font-semibold text-gray-900 dark:text-gray-100
-                              theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary
-                              theme-myhr:bg-clip-text theme-myhr:text-transparent">
-                  Custom Primary Color
-                </label>
-                <button
-                  type="button"
-                  (click)="showColorPicker = false; $event.stopPropagation()"
-                  class="w-6 h-6 flex items-center justify-center rounded hover:bg-black/5 dark:hover:bg-white/10
-                         text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200
-                         transition-colors"
-                  [attr.aria-label]="'Close color picker'">
-                  <span class="material-icons text-sm">close</span>
-                </button>
-              </div>
-              <div class="flex items-center gap-3 mb-3">
-                <input
-                  type="color"
-                  [value]="customPrimaryColor"
-                  (input)="onCustomColorChange($event)"
-                  class="w-16 h-12 rounded-lg border-2 border-black/10 dark:border-white/10 cursor-pointer
-                         focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all
-                         hover:scale-105"
-                  [attr.aria-label]="'Color picker'">
-                <div class="flex-1">
-                  <input
-                    type="text"
-                    [(ngModel)]="hexColorInput"
-                    (input)="onHexInputChange($event)"
-                    class="w-full px-3 py-2 rounded-md border border-black/10 dark:border-white/10
-                           glass-weak dark:glass-dark-weak theme-myhr:glass-myhr-weak
-                           text-gray-900 dark:text-gray-100 text-sm font-mono
-                           focus:outline-none focus:ring-2 focus:ring-primary/20"
-                    [placeholder]="customPrimaryColor"
-                    pattern="^#[0-9A-Fa-f]{6}$"
-                    [attr.aria-label]="'Hex color input'">
-                </div>
-              </div>
-              <div class="flex items-center gap-2 mb-3">
-                <span class="text-xs text-gray-500 dark:text-gray-400 theme-myhr:text-white/60">สีปัจจุบัน:</span>
-                <span
-                  class="w-8 h-8 rounded border-2 border-black/10 dark:border-white/10"
-                  [style.background-color]="customPrimaryColor"
-                  [attr.aria-label]="'สีที่เลือก: ' + customPrimaryColor">
-                </span>
-                <span class="text-xs font-mono text-gray-700 dark:text-gray-300">{{ customPrimaryColor }}</span>
-              </div>
-              <div class="flex gap-2">
-                <button
-                  type="button"
-                  (click)="themeService.resetTheme(); showColorPicker = false; $event.stopPropagation()"
-                  class="flex-1 px-4 py-2 text-sm text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-all duration-200 flex items-center justify-center gap-2">
-                  <span class="material-icons text-sm">refresh</span>
-                  <span>รีเซ็ต</span>
-                </button>
-                <button
-                  type="button"
-                  (click)="showColorPicker = false; $event.stopPropagation()"
-                  class="flex-1 px-4 py-2 text-sm text-white bg-primary hover:bg-primary/90 rounded-lg transition-all duration-200">
-                  <span>ปิด</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Main Content -->
-  <div class="flex flex-1 overflow-hidden">
-    <!-- Sidebar -->
+<ng-container *ngIf="{
+  isHandset: isHandset$ | async,
+  sidebarOpen: sidebarOpen$ | async
+} as layout">
+  <div
+    class="w-full overflow-x-hidden relative min-h-screen transition-all duration-300 layout-background"
+    appSwipe
+    (swipeRight)="onSwipeRight()"
+    (swipeLeft)="onSwipeLeft()">
+    <!-- Syncfusion Sidebar -->
     <ejs-sidebar
       #sidebar
-      [width]="'280px'"
+      [width]="sidebarWidth"
+      [isOpen]="layout.sidebarOpen"
+      [type]="sidebarType"
       [position]="'Left'"
-      [isOpen]="false"
-      [closeOnDocumentClick]="false"
-      (close)="closeSidebar()">
-      <div class="flex flex-col h-full">
-        <div class="flex justify-between items-center px-6 py-4 border-b border-black/10 dark:border-white/10
-                  glass-weak dark:glass-dark-weak theme-myhr:glass-myhr-weak backdrop-blur-sm">
-          <div class="flex items-center gap-3">
-            <span class="text-2xl">🎨</span>
-            <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100
-                      theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary
-                      theme-myhr:bg-clip-text theme-myhr:text-transparent m-0">
-              Components
-            </h2>
-          </div>
-          <button
-            type="button"
-            class="flex items-center justify-center w-8 h-8 border-none bg-transparent rounded-md cursor-pointer transition-all duration-200
-                   hover:bg-black/5 dark:hover:bg-white/10 theme-myhr:hover:bg-primary/10 hover:scale-110
-                   focus:outline-none focus:ring-2 focus:ring-primary-500/20 active:scale-95"
-            (click)="closeSidebar()"
-            aria-label="Close sidebar">
-            <span class="material-icons text-xl text-gray-900 dark:text-gray-100">close</span>
-          </button>
-        </div>
-
-        <div class="flex-1 overflow-y-auto py-4 custom-scrollbar">
-          <!-- Home Link -->
-          <div class="mb-4 px-6">
-            <a
-              (click)="navigateToHome()"
-              class="flex items-center gap-3 px-4 py-3 text-gray-900 dark:text-gray-100 no-underline transition-all duration-200 cursor-pointer
-                     border-l-[3px] border-transparent rounded-lg
-                     hover:bg-black/5 dark:hover:bg-white/5 hover:border-primary hover:translate-x-1
-                     theme-myhr:hover:bg-primary/10 theme-myhr:hover:border-primary
-                     focus:outline-none focus:ring-2 focus:ring-primary/20"
-              [ngClass]="{
-                'bg-primary/10 dark:bg-primary/20 border-primary font-medium shadow-sm': currentRoute === '',
-                'theme-myhr:bg-primary/20 theme-myhr:border-primary theme-myhr:shadow-[0_0_8px_rgba(var(--primary-rgb),0.3)]': currentRoute === ''
-              }">
-              <span class="text-lg flex-shrink-0">🏠</span>
-              <span class="text-sm flex-1 font-medium">Demo Home</span>
+      [closeOnDocumentClick]="layout.isHandset"
+      (close)="onSidebarClose()"
+      class="modern-sidebar">
+      <div class="two-layer-sidebar h-full flex fade-in">
+        <!-- Left Icon Bar - Component Group Icons -->
+        <div class="icon-bar flex flex-col items-center py-4 border-r
+                    transition-all duration-300 ease-in-out
+                    bg-white/5 dark:bg-gray-900/20 theme-myhr:bg-gray-900/30
+                    backdrop-blur-sm">
+          <!-- Logo -->
+          <div class="mb-6">
+            <a (click)="navigateToHome()"
+               class="logo-container w-12 h-12 rounded-xl flex items-center justify-center shadow-lg
+                      transition-all duration-300 ease-out
+                      hover-lift-lg
+                      micro-active-scale
+                      bg-white/10 dark:bg-gray-900/20 theme-myhr:bg-gray-900/30
+                      backdrop-blur-sm
+                      border border-white/20 dark:border-gray-700/20 theme-myhr:border-primary/30
+                      cursor-pointer
+                      group relative overflow-hidden
+                      pulse">
+              <!-- Shimmer Effect -->
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent
+                          -translate-x-full group-hover:translate-x-full
+                          transition-transform duration-1000 ease-in-out"></div>
+              <span class="text-2xl relative z-10 group-hover:scale-110 transition-transform duration-300">🎨</span>
             </a>
           </div>
 
-          <div *ngFor="let group of componentGroups" class="mb-6 last:mb-0">
-            <div class="flex items-center gap-2 px-6 py-3 mb-2 sticky top-0 z-10
-                       glass-weak dark:glass-dark-weak theme-myhr:glass-myhr-weak
-                       backdrop-blur-sm border-b border-black/5 dark:border-white/5">
-              <span class="text-xl">{{ group.icon }}</span>
-              <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100
-                         theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary
-                         theme-myhr:bg-clip-text theme-myhr:text-transparent
-                         m-0 uppercase tracking-wider">
-                {{ group.name }}
-              </h3>
-              <span class="ml-auto text-xs text-gray-500 dark:text-gray-400 theme-myhr:text-white/50">
-                {{ group.components.length }}
+          <!-- Component Group Icons (Rail) -->
+          <div class="flex flex-col gap-3 flex-1 w-full px-2">
+            <button *ngFor="let group of componentGroups; let i = index"
+                    (click)="selectGroup(group)"
+                    [class.active]="selectedGroup === group"
+                    [attr.aria-label]="group.name"
+                    [attr.aria-current]="selectedGroup === group ? 'true' : 'false'"
+                    [attr.title]="group.name"
+                    [style.animation-delay.ms]="i * 50"
+                    class="module-icon-btn w-full h-12 flex items-center justify-center rounded-xl
+                           transition-all duration-300 ease-out
+                           hover-lift
+                           micro-active-scale
+                           relative group
+                           fade-in
+                           cursor-pointer
+                           border-0 bg-transparent">
+              <!-- Hover Background -->
+              <div class="absolute inset-0 rounded-xl
+                          bg-gradient-to-br from-primary/0 to-primary/0
+                          group-hover:from-primary/10 group-hover:to-primary/10
+                          transition-all duration-300"></div>
+              <!-- Icon -->
+              <span class="text-xl transition-all duration-300 relative z-10
+                           icon-micro group-hover:rotate-6
+                           text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">
+                {{ group.icon }}
               </span>
+              <!-- Active Indicator -->
+              <span *ngIf="selectedGroup === group"
+                    class="active-indicator
+                           pulse"></span>
+              <!-- Badge -->
+              <span *ngIf="group.components.length > 0"
+                    class="absolute top-0 right-0 w-5 h-5 rounded-full
+                           flex items-center justify-center text-xs font-bold
+                           bg-primary text-white
+                           transform translate-x-1 -translate-y-1
+                           z-20">{{ group.components.length }}</span>
+              <!-- Tooltip -->
+              <span class="module-tooltip
+                           fade-in
+                           [animation-delay:100ms]">{{ group.name }}</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Menu Panel - Component List -->
+        <div class="menu-panel flex-1 flex flex-col overflow-hidden
+                    transition-all duration-300 ease-in-out
+                    bg-gradient-to-br from-white/5 via-white/10 to-white/5
+                    dark:from-gray-900/20 dark:via-gray-900/30 dark:to-gray-900/20
+                    theme-myhr:from-gray-900/30 theme-myhr:via-gray-900/40 theme-myhr:to-gray-900/30
+                    backdrop-blur-md border-l border-white/10 dark:border-gray-800/30 theme-myhr:border-white/20">
+          <div class="p-6 flex-1 overflow-y-auto custom-scrollbar">
+            <!-- Header Section -->
+            <div class="mb-6">
+              <!-- Group Title -->
+              <div class="mb-4" *ngIf="selectedGroup">
+                <h2 class="module-title text-xl font-bold thai-text
+                           text-gray-800 dark:text-gray-100 theme-myhr:text-white
+                           mb-1 transition-colors duration-300">
+                  {{ selectedGroup.name }}
+                </h2>
+                <p class="text-xs text-gray-500 dark:text-gray-400 theme-myhr:text-white/70">
+                  {{ selectedGroup.components.length }} components
+                </p>
+              </div>
+
+              <!-- Home Link (when no group selected) -->
+              <div class="mb-4" *ngIf="!selectedGroup">
+                <h2 class="module-title text-xl font-bold thai-text
+                           text-gray-800 dark:text-gray-100 theme-myhr:text-white
+                           mb-1 transition-colors duration-300">
+                  Demo Components
+                </h2>
+                <p class="text-xs text-gray-500 dark:text-gray-400 theme-myhr:text-white/70">
+                  Select a category to browse components
+                </p>
+              </div>
+
+              <!-- Search Box -->
+              <div class="search-container mb-4 relative fade-in" *ngIf="shouldShowSearchBox()">
+                <app-glass-input
+                  type="text"
+                  [(ngModel)]="searchQuery"
+                  (input)="onSearchChange()"
+                  placeholder="Search components..."
+                  [ariaLabel]="'Search components'"
+                  customClass="w-full pr-11">
+                  <ng-container *ngIf="searchQuery">
+                    <button
+                      (click)="clearSearch()"
+                      class="absolute right-2 top-1/2 -translate-y-1/2
+                             w-8 h-8 flex items-center justify-center rounded-lg
+                             hover:bg-gray-200/50 dark:hover:bg-gray-700/50 theme-myhr:hover:bg-white/20
+                             hover:scale-110 active:scale-95
+                             transition-all duration-200 ease-out"
+                      [attr.aria-label]="'Clear search'"
+                      type="button">
+                      <app-icon name="close" size="sm"
+                                color="text-gray-500 dark:text-gray-400 theme-myhr:text-white/70
+                                       hover:text-red-500 dark:hover:text-red-400
+                                       transition-colors duration-200"></app-icon>
+                    </button>
+                  </ng-container>
+                </app-glass-input>
+              </div>
             </div>
-            <ul class="list-none p-0 m-0">
-              <li *ngFor="let component of group.components" class="my-1">
-                <a
-                  (click)="navigateToComponent(component.route)"
-                  class="flex items-center gap-3 px-6 py-3 text-gray-900 dark:text-gray-100 no-underline transition-all duration-200 cursor-pointer
-                         border-l-[3px] border-transparent
-                         hover:bg-black/5 dark:hover:bg-white/5 hover:border-primary hover:translate-x-1
-                         theme-myhr:hover:bg-primary/10 theme-myhr:hover:border-primary
-                         focus:outline-none focus:ring-2 focus:ring-primary/20"
-                  [ngClass]="{
-                    'bg-primary/10 dark:bg-primary/20 border-primary font-medium shadow-sm': isActiveRoute(component.route),
-                    'theme-myhr:bg-primary/20 theme-myhr:border-primary theme-myhr:shadow-[0_0_8px_rgba(var(--primary-rgb),0.3)]': isActiveRoute(component.route)
-                  }">
-                  <span class="text-lg flex-shrink-0">{{ component.icon }}</span>
-                  <span class="text-sm flex-1 truncate">{{ component.name }}</span>
-                </a>
-              </li>
-            </ul>
+
+            <!-- Component List -->
+            <div *ngIf="selectedGroup && filteredComponents.length > 0" class="space-y-1">
+              <a *ngFor="let component of filteredComponents"
+                 (click)="navigateToComponent(component.route)"
+                 class="flex items-center gap-3 px-4 py-3 text-gray-900 dark:text-gray-100 no-underline transition-all duration-200 cursor-pointer
+                        border-l-[3px] border-transparent rounded-lg relative
+                        hover:bg-black/5 dark:hover:bg-white/5 hover:border-primary hover:translate-x-1
+                        theme-myhr:hover:bg-primary/10 theme-myhr:hover:border-primary
+                        focus:outline-none focus:ring-2 focus:ring-primary/20
+                        list-item-micro"
+                 [ngClass]="{
+                   'bg-primary/10 dark:bg-primary/20 border-primary font-medium shadow-sm': isActiveRoute(component.route),
+                   'theme-myhr:bg-primary/20 theme-myhr:border-primary theme-myhr:shadow-[0_0_8px_rgba(var(--primary-rgb),0.3)]': isActiveRoute(component.route)
+                 }">
+                <!-- Active Indicator -->
+                <span *ngIf="isActiveRoute(component.route)"
+                      class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 rounded-r-full
+                             bg-primary
+                             shadow-[0_0_8px_rgba(var(--primary-rgb),0.6)]"></span>
+                <span class="text-lg flex-shrink-0 relative z-10">{{ component.icon }}</span>
+                <div class="flex-1 min-w-0 relative z-10">
+                  <div class="text-sm font-medium truncate"
+                       [ngClass]="{
+                         'text-primary dark:text-primary-light theme-myhr:text-primary': isActiveRoute(component.route)
+                       }">
+                    {{ component.name }}
+                  </div>
+                  <div class="text-xs text-gray-500 dark:text-gray-400 theme-myhr:text-white/60 truncate">
+                    {{ component.description }}
+                  </div>
+                </div>
+                <!-- Active Checkmark -->
+                <span *ngIf="isActiveRoute(component.route)"
+                      class="flex-shrink-0 text-primary relative z-10">
+                  <app-icon name="check_circle" size="sm"
+                            color="text-primary"></app-icon>
+                </span>
+              </a>
+            </div>
+
+            <!-- Search No Results -->
+            <app-empty-state
+              *ngIf="selectedGroup && searchQuery && filteredComponents.length === 0"
+              [iconName]="'search_off'"
+              [title]="'No results found'"
+              [description]="'Try a different search term'">
+              <app-glass-button
+                variant="secondary"
+                size="sm"
+                [ariaLabel]="'Clear search'"
+                (clicked)="clearSearch()">
+                Clear Search
+              </app-glass-button>
+            </app-empty-state>
+
+            <!-- Empty State - No Group Selected -->
+            <app-empty-state
+              *ngIf="!selectedGroup"
+              [iconName]="'folder_open'"
+              [title]="'Select a category'"
+              [description]="'Choose a category from the left to browse components'">
+            </app-empty-state>
           </div>
         </div>
       </div>
     </ejs-sidebar>
 
-    <!-- Content Area -->
-    <div class="flex-1 overflow-y-auto p-8 md:p-4">
-      <router-outlet></router-outlet>
+    <!-- Main Content -->
+    <div
+      class="main-wrapper flex-1 min-h-screen flex flex-col transition-all duration-300 relative"
+      [class.main-wrapper-sidebar-open]="layout.sidebarOpen && !layout.isHandset"
+      [class.main-wrapper-sidebar-closed]="!layout.sidebarOpen && !layout.isHandset"
+      [class.main-wrapper-mobile]="layout.isHandset">
+      <!-- Header (Sticky - ติดบนหน้าจอตลอด) -->
+      <div class="sticky-header-wrapper">
+        <header class="glass-nav backdrop-blur-xl border-b border-white/20 dark:border-gray-700/20 theme-myhr:border-primary/30 shadow-2xl transition-all duration-500 ease-in-out px-3 sm:px-4 md:px-6 fade-in hover:shadow-3xl">
+          <div class="flex items-center justify-between py-3 md:py-4">
+            <div class="flex items-center gap-2 md:gap-4 flex-1 min-w-0">
+              <!-- Menu Toggle Button -->
+              <app-glass-button
+                type="button"
+                variant="secondary"
+                size="sm"
+                [title]="'Toggle sidebar'"
+                customClass="w-11 h-11 min-w-[44px] min-h-[44px] p-0 rounded-lg
+                             hover-lift micro-active-scale
+                             hover:shadow-lg hover:-translate-y-0.5
+                             group relative overflow-hidden"
+                (clicked)="toggleSidebar()">
+                <app-icon name="menu" size="md" color="text-gray-700 dark:text-gray-300 theme-myhr:text-white/90
+                           icon-micro transition-transform duration-300"></app-icon>
+              </app-glass-button>
+
+              <!-- Logo Section -->
+              <div class="flex items-center gap-2 md:gap-3 flex-shrink-0 min-w-0">
+                <div class="flex items-center gap-3">
+                  <span class="text-2xl md:text-xl">🎨</span>
+                  <h1 class="text-xl md:text-base font-semibold text-gray-900 dark:text-gray-100
+                            theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary
+                            theme-myhr:bg-clip-text theme-myhr:text-transparent m-0">
+                    Component Demo Showcase
+                  </h1>
+                </div>
+              </div>
+
+              <!-- Breadcrumbs -->
+              <div class="hidden md:flex items-center ml-4 pl-4 border-l border-gray-200/50 dark:border-gray-700/50 theme-myhr:border-white/20">
+                <app-breadcrumbs
+                  [items]="breadcrumbItems"
+                  [separator]="'/'"
+                  [showHome]="false"
+                  [maxItems]="4">
+                </app-breadcrumbs>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 md:gap-3 flex-shrink-0">
+              <!-- Language Switcher -->
+              <div class="relative" appClickOutside (appClickOutside)="closeLanguageMenu()">
+                <app-glass-button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  [title]="'Change language' | translate"
+                  [attr.aria-expanded]="showLanguageMenu"
+                  [attr.aria-controls]="'language-menu'"
+                  customClass="w-11 h-11 min-w-[44px] min-h-[44px] md:w-10 md:h-10 p-0 rounded-lg
+                               hover-lift micro-active-scale
+                               hover:shadow-lg hover:-translate-y-0.5
+                               group overflow-hidden"
+                  (clicked)="toggleLanguageMenu()">
+                  <app-icon name="language" size="md" color="text-gray-700 dark:text-gray-300 theme-myhr:text-white/90
+                             group-hover:scale-110 group-hover:rotate-12
+                             transition-all duration-300 relative z-10"></app-icon>
+                </app-glass-button>
+
+                <!-- Language Dropdown -->
+                <app-glass-card
+                  *ngIf="showLanguageMenu"
+                  variant="strong"
+                  padding="p-0"
+                  customClass="language-dropdown absolute right-0 top-full mt-2 w-48
+                               rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+                               z-50 overflow-hidden
+                               backdrop-blur-xl
+                               scale-in
+                               [animation-duration:200ms]
+                               origin-top-right">
+                  <div id="language-menu" role="menu" [attr.aria-label]="'Language menu' | translate" class="py-1">
+                    <button
+                      *ngFor="let lang of languages; let i = index"
+                      type="button"
+                      role="menuitem"
+                      (click)="changeLanguage(lang.value)"
+                      [class.active]="currentLanguage === lang.value"
+                      [attr.aria-label]="('Change language to' | translate) + ' ' + lang.label"
+                      [attr.aria-current]="currentLanguage === lang.value ? 'true' : 'false'"
+                      [style.--animation-delay]="(i * 50) + 'ms'"
+                      class="language-item w-full px-4 py-2.5 text-left flex items-center gap-3
+                             hover:bg-gray-50 dark:hover:bg-gray-700 theme-myhr:hover:bg-white/20
+                             hover:translate-x-1 hover:scale-[1.02]
+                             active:scale-[0.98]
+                             transition-all duration-200 ease-out
+                             fade-in">
+                      <img [src]="lang.flagPath" [alt]="lang.label" class="w-5 h-5 rounded-sm object-cover" />
+                      <span class="flex-1 thai-text text-sm font-medium text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">{{ lang.label }}</span>
+                      <app-icon *ngIf="currentLanguage === lang.value" name="check" size="sm" color="text-primary theme-myhr:text-primary"></app-icon>
+                    </button>
+                  </div>
+                </app-glass-card>
+              </div>
+
+              <!-- Theme Toggle -->
+              <app-theme-toggle></app-theme-toggle>
+            </div>
+          </div>
+        </header>
+      </div>
+
+      <!-- Scrollable Content Area -->
+      <div class="main-content-wrapper flex-1 flex flex-col min-h-0 overflow-y-auto">
+        <!-- Content Container -->
+        <div class="content-container flex-1 relative">
+          <!-- Route Content -->
+          <div class="route-content-wrapper p-4 md:p-6 lg:p-8">
+            <div class="route-container relative">
+              <router-outlet></router-outlet>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-
+</ng-container>
