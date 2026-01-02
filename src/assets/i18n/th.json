@@ -2450,6 +2450,8 @@
   "layout.sidebar.menu": "เมนู",
   "layout.sidebar.noMenuInMode": "ไม่มีเมนูในโหมดนี้",
   "layout.sidebar.noSearchResults": "ไม่พบเมนูที่ค้นหา",
+  "layout.sidebar.selectModule": "เลือกโมดูล",
+  "layout.sidebar.clickToOpen": "คลิกเพื่อเปิดโมดูล",
   "layout.sidebar.profile": "โปรไฟล์",
   "layout.sidebar.searchMenu": "ค้นหาเมนู",
   "layout.sidebar.searchMenuPlaceholder": "ค้นหาเมนู...",

@@ -144,22 +144,7 @@
           </p>
         </div>
 
-        <!-- Back Button (when in Level 3+) -->
-        <div class="mb-4" *ngIf="selectedNavigationItem?.id === 'admin' && selectedLevel3Item">
-          <button (click)="goBackToLevel2()"
-                  class="back-button flex items-center gap-2 px-4 py-2 rounded-lg
-                         bg-white/20 dark:bg-gray-800/30 theme-myhr:bg-white/10
-                         hover:bg-white/30 dark:hover:bg-gray-700/40 theme-myhr:hover:bg-white/20
-                         hover-lift-sm micro-active-scale
-                         text-sm font-medium
-                         text-gray-700 dark:text-gray-300 theme-myhr:text-white/90
-                         cursor-pointer border-0
-                         backdrop-blur-sm
-                         border border-white/30 dark:border-gray-700/30 theme-myhr:border-white/20">
-            <span class="material-icons text-base">arrow_back</span>
-            <span class="thai-text">{{ 'layout.sidebar.back' | translate }}</span>
-          </button>
-        </div>
+
 
         <!-- Search Box -->
         <div class="search-container mb-4 relative fade-in" *ngIf="shouldShowSearchBox()">
@@ -231,9 +216,78 @@
         </app-glass-button>
       </app-empty-state>
 
-      <!-- Empty State - No Menu Items -->
+      <!-- Module Cards - Show when at /home with no menu items -->
+      <div *ngIf="!isLoadingNavigation && !searchQuery && navigationChildren.length === 0 && isHomeRoute()"
+           class="module-cards-container space-y-3 fade-in">
+        <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 theme-myhr:text-white/90 mb-4 thai-text">
+          {{ 'layout.sidebar.selectModule' | translate }}
+        </h3>
+        <div class="grid grid-cols-1 gap-3">
+          <a *ngFor="let module of getAvailableModules(); let i = index"
+             [routerLink]="module.route"
+             [attr.aria-label]="module.label"
+             [style.animation-delay.ms]="i * 50"
+             class="module-card group relative overflow-hidden
+                    bg-white/10 dark:bg-gray-800/20 theme-myhr:bg-gray-800/30
+                    backdrop-blur-sm rounded-xl
+                    border border-white/20 dark:border-gray-700/20 theme-myhr:border-primary/30
+                    p-4 flex items-center gap-4
+                    hover:bg-white/20 dark:hover:bg-gray-800/30 theme-myhr:hover:bg-gray-800/50
+                    hover:border-primary/50 dark:hover:border-primary/50 theme-myhr:hover:border-primary
+                    hover:scale-[1.02] hover:shadow-lg
+                    active:scale-[0.98]
+                    transition-all duration-300 ease-out
+                    cursor-pointer
+                    fade-in">
+            <!-- Hover Glow Effect -->
+            <div class="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0
+                        opacity-0 group-hover:opacity-100
+                        transition-opacity duration-300
+                        pointer-events-none"></div>
+            <!-- Icon -->
+            <div class="flex-shrink-0 w-12 h-12 rounded-lg
+                        bg-primary/10 dark:bg-primary/20 theme-myhr:bg-primary/20
+                        flex items-center justify-center
+                        group-hover:bg-primary/20 dark:group-hover:bg-primary/30 theme-myhr:group-hover:bg-primary/30
+                        group-hover:scale-110 group-hover:rotate-6
+                        transition-all duration-300
+                        relative z-10">
+              <span class="material-icons text-2xl
+                           text-primary dark:text-primary-light theme-myhr:text-primary
+                           relative z-10">
+                {{ module.icon || 'folder' }}
+              </span>
+            </div>
+            <!-- Content -->
+            <div class="flex-1 min-w-0 relative z-10">
+              <h4 class="text-base font-semibold thai-text
+                         text-gray-800 dark:text-gray-100 theme-myhr:text-white/90
+                         mb-1 truncate
+                         group-hover:text-primary dark:group-hover:text-primary-light theme-myhr:group-hover:text-primary
+                         transition-colors duration-300">
+                {{ translateLabel(module.label, 'admin', 2) }}
+              </h4>
+              <p class="text-xs text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 truncate">
+                {{ 'layout.sidebar.clickToOpen' | translate }}
+              </p>
+            </div>
+            <!-- Arrow Icon -->
+            <div class="flex-shrink-0 relative z-10
+                        group-hover:translate-x-1
+                        transition-transform duration-300">
+              <span class="material-icons text-lg
+                           text-gray-400 dark:text-gray-500 theme-myhr:text-white/60
+                           group-hover:text-primary dark:group-hover:text-primary-light theme-myhr:group-hover:text-primary">
+                arrow_forward
+              </span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Empty State - No Menu Items (for other routes) -->
       <app-empty-state
-        *ngIf="!isLoadingNavigation && !searchQuery && navigationChildren.length === 0"
+        *ngIf="!isLoadingNavigation && !searchQuery && navigationChildren.length === 0 && !isHomeRoute()"
         [icon]="'folder_open'"
         [title]="'layout.sidebar.noMenuInMode' | translate">
       </app-empty-state>

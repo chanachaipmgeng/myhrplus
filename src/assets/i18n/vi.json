@@ -2467,6 +2467,8 @@
   "layout.sidebar.menu": "Menu",
   "layout.sidebar.noMenuInMode": "No menu available in this mode",
   "layout.sidebar.noSearchResults": "No search results found",
+  "layout.sidebar.selectModule": "Select Module",
+  "layout.sidebar.clickToOpen": "Click to open module",
   "layout.sidebar.profile": "Profile",
   "layout.sidebar.searchMenu": "Search Menu",
   "layout.sidebar.searchMenuPlaceholder": "Search menu...",

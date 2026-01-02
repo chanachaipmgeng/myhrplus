@@ -1312,4 +1312,24 @@ export class SidebarComponent implements OnInit, OnDestroy {
     };
   }
 
+  /**
+   * Check if current route is home route
+   */
+  isHomeRoute(): boolean {
+    return this.activeRoute === '/home' || this.activeRoute === '/' || this.activeRoute.startsWith('/home');
+  }
+
+  /**
+   * Get available modules to display as cards when at home
+   */
+  getAvailableModules(): NavigationChild[] {
+    // Get Level 2 items from admin navigation item
+    const adminItem = this.navigationItems.find(item => item.id === 'admin');
+    if (adminItem && adminItem.children && adminItem.children.length > 0) {
+      // Filter out Home module itself and return other modules
+      return adminItem.children.filter(item => item.route !== '/home' && item.route);
+    }
+    return [];
+  }
+
 }
