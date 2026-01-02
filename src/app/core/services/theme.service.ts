@@ -23,10 +23,10 @@ export interface ThemeConfig {
 export class ThemeService {
   private readonly THEME_STORAGE_KEY = 'hr-theme-config';
   private readonly DEFAULT_THEME: ThemeConfig = {
-    mode: 'dark',
+    mode: 'light',
     color: 'myhr',
     primaryColor: '7, 57, 156', // MyHR Brand Color #07399C
-    sidebarStyle: 'primary', // Default: primary color
+    sidebarStyle: 'white', // Default: primary color
     headerStyle: 'primary', // Default: primary color
     mainLayoutStyle: 'primary' // Default: primary color
   };
@@ -244,10 +244,16 @@ export class ThemeService {
     html.style.setProperty('--header-style', theme.headerStyle || 'primary');
     html.style.setProperty('--main-layout-style', theme.mainLayoutStyle || 'primary');
 
-    // Apply component styles
+    // Apply component styles first
     this.applySidebarStyle(theme.sidebarStyle || 'primary', isDark, theme.primaryColor);
     this.applyHeaderStyle(theme.headerStyle || 'primary', isDark, theme.primaryColor);
     this.applyMainLayoutStyle(theme.mainLayoutStyle || 'primary', isDark, theme.primaryColor);
+
+    // Apply body background based on main layout style
+    // Use setTimeout to ensure CSS rules are applied first, then override with inline styles
+    setTimeout(() => {
+      this.applyBodyBackground(theme.color, isDark, theme.primaryColor, theme.mainLayoutStyle || 'primary');
+    }, 0);
 
     // Update subjects
     this.themeSubject.next(theme);
@@ -364,6 +370,133 @@ export class ThemeService {
         setImportant('--header-border-color', isDark ? `rgba(${rgb}, 0.4)` : 'rgba(255, 255, 255, 0.4)');
         break;
     }
+  }
+
+  /**
+   * Apply body background gradient based on theme color and main layout style
+   */
+  private applyBodyBackground(color: ThemeColor, isDark: boolean, primaryColor: string, mainLayoutStyle: MainLayoutStyle = 'primary'): void {
+    const body = document.body;
+    const rgb = primaryColor.split(',').map(v => parseInt(v.trim()));
+    const [r, g, b] = rgb;
+
+    // Helper to convert RGB to hex
+    const rgbToHex = (r: number, g: number, b: number): string => {
+      return '#' + [r, g, b].map(x => {
+        const hex = x.toString(16);
+        return hex.length === 1 ? '0' + hex : hex;
+      }).join('');
+    };
+
+    // Generate lighter shades for light mode
+    const lighten = (amount: number): string => {
+      const factor = 1 - amount;
+      const newR = Math.min(255, Math.round(r + (255 - r) * amount));
+      const newG = Math.min(255, Math.round(g + (255 - g) * amount));
+      const newB = Math.min(255, Math.round(b + (255 - b) * amount));
+      return rgbToHex(newR, newG, newB);
+    };
+
+    // Generate darker shades for dark mode
+    const darken = (amount: number): string => {
+      const newR = Math.max(0, Math.round(r * (1 - amount)));
+      const newG = Math.max(0, Math.round(g * (1 - amount)));
+      const newB = Math.max(0, Math.round(b * (1 - amount)));
+      return rgbToHex(newR, newG, newB);
+    };
+
+    let gradient: string;
+
+    // Use main layout style to determine body background
+    if (mainLayoutStyle === 'white') {
+      // White background
+      if (isDark) {
+        gradient = 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)';
+      } else {
+        gradient = 'linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%)';
+      }
+    } else if (mainLayoutStyle === 'dark') {
+      // Dark background
+      if (isDark) {
+        gradient = 'linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.9) 100%)';
+      } else {
+        gradient = 'linear-gradient(135deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.05) 100%)';
+      }
+    } else if (mainLayoutStyle === 'primary' || mainLayoutStyle === 'primary-gradient') {
+      // Primary color background - use theme color gradient
+      if (color === 'myhr') {
+        // MyHR theme uses specific gradients from styles.scss
+        if (isDark) {
+          gradient = 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 30%, #2563eb 70%, #07399C 100%)';
+        } else {
+          gradient = 'linear-gradient(135deg, #f3f7fb 0%, #e9f2f8 50%, #dbeafe 100%)';
+        }
+      } else {
+        // Generate gradient from primary color
+        if (isDark) {
+          // Dark mode: darker shades of primary color
+          const dark1 = darken(0.4); // Darkest
+          const dark2 = darken(0.25); // Medium dark
+          const dark3 = darken(0.1); // Slightly dark
+          const primary = rgbToHex(r, g, b); // Primary color
+          gradient = `linear-gradient(135deg, ${dark1} 0%, ${dark2} 30%, ${dark3} 70%, ${primary} 100%)`;
+        } else {
+          // Light mode: lighter shades of primary color
+          const light1 = lighten(0.95); // Lightest
+          const light2 = lighten(0.85); // Medium light
+          const light3 = lighten(0.75); // Slightly light
+          const light4 = lighten(0.65); // Base light
+          gradient = `linear-gradient(135deg, ${light1} 0%, ${light2} 30%, ${light3} 70%, ${light4} 100%)`;
+        }
+      }
+    } else {
+      // Fallback to primary color gradient
+      if (color === 'myhr') {
+        if (isDark) {
+          gradient = 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 30%, #2563eb 70%, #07399C 100%)';
+        } else {
+          gradient = 'linear-gradient(135deg, #f3f7fb 0%, #e9f2f8 50%, #dbeafe 100%)';
+        }
+      } else {
+        if (isDark) {
+          const dark1 = darken(0.4);
+          const dark2 = darken(0.25);
+          const dark3 = darken(0.1);
+          const primary = rgbToHex(r, g, b);
+          gradient = `linear-gradient(135deg, ${dark1} 0%, ${dark2} 30%, ${dark3} 70%, ${primary} 100%)`;
+        } else {
+          const light1 = lighten(0.95);
+          const light2 = lighten(0.85);
+          const light3 = lighten(0.75);
+          const light4 = lighten(0.65);
+          gradient = `linear-gradient(135deg, ${light1} 0%, ${light2} 30%, ${light3} 70%, ${light4} 100%)`;
+        }
+      }
+    }
+
+    // Set with !important to override CSS rules
+    // Set CSS variable first
+    body.style.setProperty('--theme-bg-gradient', gradient, 'important');
+
+    // Remove any existing background-image to avoid conflicts
+    body.style.removeProperty('background-image');
+
+    // Set background directly (not using var() to avoid CSS specificity issues)
+    // Use background-image instead of background to override CSS rules more effectively
+    body.style.setProperty('background-image', gradient, 'important');
+    body.style.setProperty('background', gradient, 'important');
+
+    // Set background-attachment for mobile performance
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    body.style.setProperty('background-attachment', isMobile ? 'scroll' : 'fixed', 'important');
+
+    // Ensure background-size and background-position
+    body.style.setProperty('background-size', 'cover', 'important');
+    body.style.setProperty('background-position', 'center', 'important');
+    body.style.setProperty('background-repeat', 'no-repeat', 'important');
+
+    // Force reflow to ensure styles are applied
+    void body.offsetHeight;
   }
 
   /**

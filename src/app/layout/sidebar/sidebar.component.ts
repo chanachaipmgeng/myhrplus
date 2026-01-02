@@ -1283,7 +1283,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
    * Get logo path based on current theme
    */
   getLogoPath(): string {
-    if (this.isDarkMode) {
+    if (!this.isDarkMode) {
       return 'assets/images/logo/logo-myhr-dark.png';
     }
     return 'assets/images/logo/logo-myhr-light.png';
