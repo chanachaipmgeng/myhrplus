@@ -192,197 +192,51 @@ body {
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
 }
 
-/* Myhr Theme CSS Variables - Light Mode */
-[data-theme='myhr']:not(.dark),
-body.theme-myhr:not(.dark) {
+/* Myhr Theme - สีน้ำเงิน MyHR Brand */
+body.theme-myhr {
   /* Primary Color - MyHR Brand Color */
   --primary-rgb: 7, 57, 156; /* #07399C */
   --primary-color: #07399c;
-  --primary-hover: #3960f0;
 
-  /* Background Colors */
-  --bg-base: #f3f7fb;
-  --bg-gradient-start: #f3f7fb;
-  --bg-gradient-mid: #e9f2f8;
-  --bg-gradient-end: #dbeafe;
   --theme-bg-gradient: linear-gradient(135deg, #f3f7fb 0%, #e9f2f8 50%, #dbeafe 100%);
-  --background-light: #f3f7fb;
-  --card-background: #ffffff;
+  background: var(--theme-bg-gradient);
 
-  /* Text Colors */
-  --text-primary: #07399c;
-  --text-secondary: #3960f0;
-  --text-muted: #6c757d;
-
-  /* Border & UI Colors */
-  --border-color: #94a3b8;
-  --light-gray: #e9ecef;
-
-  /* Semantic Colors */
-  --warning-color: #ffc107;
-  --info-color: #17a2b8;
-  --danger-color: #dc3545;
-  --success-color: #28a745;
-
-  /* Glass Morphism Colors (Myhr Light) - Using dynamic primary color */
-  --glass-bg: rgba(var(--primary-rgb), 0.7);
-  --glass-bg-strong: rgba(var(--primary-rgb), 0.85);
-  --glass-bg-weak: rgba(var(--primary-rgb), 0.5);
-  --glass-border: rgba(255, 255, 255, 0.3);
-  --glass-border-strong: rgba(255, 255, 255, 0.4);
-  --glass-border-weak: rgba(255, 255, 255, 0.2);
-
-  --shadow-glass: 0 8px 32px rgba(var(--primary-rgb), 0.2), 0 0 0 1px rgba(var(--primary-rgb), 0.2), 0 0 40px rgba(var(--primary-rgb), 0.1);
-
-  /* Sidebar-specific Colors (Myhr Light) - Using primary color as background */
+  /* Sidebar & Header - Using primary color as background */
+  /* Note: Sidebar background variables are now managed by ThemeService */
+  /* These are fallback values only - ThemeService will override them with !important */
   --sidebar-bg-start: rgba(var(--primary-rgb), 0.95);
   --sidebar-bg-end: rgba(var(--primary-rgb), 0.9);
-  --sidebar-pattern-color: rgba(255, 255, 255, 0.05);
   --sidebar-icon-bg-start: rgba(255, 255, 255, 0.2);
   --sidebar-icon-bg-end: rgba(255, 255, 255, 0.1);
   --sidebar-active-bg: rgba(255, 255, 255, 0.3);
   --sidebar-hover-bg: rgba(255, 255, 255, 0.15);
   --sidebar-indicator-color: #ffffff;
-
-  /* Header-specific CSS Variables (Myhr Light) - Using primary color as background */
   --header-bg-start: rgba(var(--primary-rgb), 0.95);
   --header-bg-end: rgba(var(--primary-rgb), 0.9);
-  --header-dropdown-shadow: 0 20px 60px rgba(var(--primary-rgb), 0.3), 0 0 0 1px rgba(255, 255, 255, 0.2), 0 0 80px rgba(var(--primary-rgb), 0.15);
   --header-active-bg: rgba(255, 255, 255, 0.2);
   --header-unread-bg: rgba(255, 255, 255, 0.1);
-  --header-shimmer-color: rgba(255, 255, 255, 0.2);
-
-  /* Gradient Colors for Buttons/Components - Using dynamic primary color */
-  --gradient-primary-start: rgba(var(--primary-rgb), 0.9);
-  --gradient-primary-mid: rgba(var(--primary-rgb), 0.95);
-  --gradient-primary-end: rgba(var(--primary-rgb), 1);
-  --gradient-primary-hover-start: rgba(var(--primary-rgb), 1);
-  --gradient-primary-hover-mid: rgba(var(--primary-rgb), 1);
-  --gradient-primary-hover-end: rgba(var(--primary-rgb), 0.95);
-
-  /* Footer-specific CSS Variables (Myhr Light) - Using primary color */
-  --footer-bg-start: rgba(var(--primary-rgb), 0.9);
-  --footer-bg-end: rgba(var(--primary-rgb), 0.85);
-  --footer-border-color: rgba(255, 255, 255, 0.3);
-  --footer-text-color: rgba(255, 255, 255, 0.9);
-
-  /* Menu-specific CSS Variables (Myhr Light) - Using dynamic primary color */
-  --menu-item-hover-bg: rgba(255, 255, 255, 0.2);
-  --menu-item-active-bg: rgba(255, 255, 255, 0.3);
-  --menu-item-active-border: #ffffff;
-  --menu-item-active-text: #ffffff;
-  --menu-item-children-border: rgba(255, 255, 255, 0.25);
-
-  /* Divider Colors (Myhr Light) */
-  --divider-color: rgba(255, 255, 255, 0.1);
-  --divider-color-dark: rgba(255, 255, 255, 0.15);
-
-  /* Pattern Colors (Myhr Light) - Standardized naming */
-  --pattern-color: rgba(255, 255, 255, 0.05);
-  --pattern-color-subtle: rgba(255, 255, 255, 0.02);
-  --pattern-color-light: rgba(255, 255, 255, 0.08);
-  --pattern-color-medium: rgba(255, 255, 255, 0.15);
-  --shimmer-color: rgba(255, 255, 255, 0.2);
-
-  /* Border Colors (Myhr Light) */
-  --border-light: rgba(255, 255, 255, 0.1);
-  --border-light-subtle: rgba(255, 255, 255, 0.05);
-
-  /* Form-specific CSS Variables (Myhr Light) - Using dynamic primary color */
-  --form-input-bg: rgba(255, 255, 255, 0.6);
-  --form-input-border: rgba(var(--primary-rgb), 0.4);
-  --form-input-focus-border: rgba(var(--primary-rgb), 0.7);
-  --form-label-focus-color: rgba(var(--primary-rgb), 0.9);
-
-  /* Upload/Preview-specific CSS Variables (Myhr Light) - Using dynamic primary color */
-  --upload-area-bg: rgba(255, 255, 255, 0.5);
-  --upload-area-border: rgba(var(--primary-rgb), 0.3);
-  --preview-item-bg: rgba(255, 255, 255, 0.5);
-  --preview-item-border: rgba(var(--primary-rgb), 0.3);
-  --preview-image-bg: #ffffff;
+  --header-dropdown-shadow: 0 20px 60px rgba(var(--primary-rgb), 0.3), 0 0 0 1px rgba(var(--primary-rgb), 0.3), 0 0 80px rgba(var(--primary-rgb), 0.15);
 }
 
-/* Myhr Theme CSS Variables - Dark Mode */
-[data-theme='myhr'].dark,
 .dark body.theme-myhr {
-  --bg-base: #000000;
-  --bg-gradient-start: #000000;
-  --bg-gradient-mid: #0a0a0f;
-  --bg-gradient-end: #000000;
-  --theme-bg-gradient: linear-gradient(135deg, #000000 0%, #0a0a0f 50%, #000000 100%);
+  --theme-bg-gradient: linear-gradient(135deg, #1e3a8a 0%, #1e40af 30%, #2563eb 70%, #07399C 100%);
+  background: var(--theme-bg-gradient);
 
-  --text-primary: #ffffff;
-  --text-secondary: #93c5fd;
-  --text-muted: #60a5fa;
-
-  /* Glass Morphism Colors (Myhr Dark) - Using dynamic primary color */
-  --glass-bg: rgba(var(--primary-rgb), 0.9);
-  --glass-bg-strong: rgba(var(--primary-rgb), 0.95);
-  --glass-bg-weak: rgba(var(--primary-rgb), 0.7);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --glass-border-strong: rgba(255, 255, 255, 0.3);
-  --glass-border-weak: rgba(255, 255, 255, 0.1);
-
-  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(var(--primary-rgb), 0.2), 0 0 40px rgba(var(--primary-rgb), 0.1);
-
-  /* Sidebar-specific Colors (Myhr Dark) - Using dynamic primary color */
-  --sidebar-bg-start: rgba(var(--primary-rgb), 0.95);
-  --sidebar-bg-end: rgba(var(--primary-rgb), 0.9);
-  --sidebar-pattern-color: rgba(255, 255, 255, 0.05);
-  --sidebar-icon-bg-start: rgba(var(--primary-rgb), 0.85);
-  --sidebar-icon-bg-end: rgba(var(--primary-rgb), 0.8);
-  --sidebar-active-bg: rgba(255, 255, 255, 0.2);
-  --sidebar-hover-bg: rgba(255, 255, 255, 0.1);
-  --sidebar-indicator-color: #ffffff;
-
-  /* Gradient Colors for Buttons/Components - Using dynamic primary color */
-  --gradient-primary-start: rgba(var(--primary-rgb), 0.8);
-  --gradient-primary-mid: rgba(var(--primary-rgb), 0.9);
-  --gradient-primary-end: rgba(var(--primary-rgb), 1);
-  --gradient-primary-hover-start: rgba(var(--primary-rgb), 0.9);
-  --gradient-primary-hover-mid: rgba(var(--primary-rgb), 1);
-  --gradient-primary-hover-end: rgba(var(--primary-rgb), 1);
-
-  /* Header-specific CSS Variables (Myhr Dark) - Using dynamic primary color */
-  --header-bg-start: rgba(var(--primary-rgb), 0.95);
-  --header-bg-end: rgba(var(--primary-rgb), 0.9);
-  --header-dropdown-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.2), 0 0 80px rgba(var(--primary-rgb), 0.2);
-  --header-active-bg: rgba(255, 255, 255, 0.15);
-  --header-unread-bg: rgba(255, 255, 255, 0.08);
-  --header-shimmer-color: rgba(255, 255, 255, 0.1);
-
-  /* Footer-specific CSS Variables (Myhr Dark) - Using dynamic primary color */
-  --footer-bg-start: rgba(15, 23, 42, 0.8);
-  --footer-bg-end: rgba(30, 41, 59, 0.7);
-  --footer-border-color: rgba(255, 255, 255, 0.2);
-  --footer-text-color: rgba(255, 255, 255, 0.9);
-
-  /* Menu-specific CSS Variables (Myhr Dark) - Using dynamic primary color */
-  --menu-item-hover-bg: rgba(255, 255, 255, 0.1);
-  --menu-item-active-bg: rgba(255, 255, 255, 0.2);
-  --menu-item-active-border: #ffffff;
-  --menu-item-active-text: #ffffff;
-  --menu-item-children-border: rgba(255, 255, 255, 0.15);
-
-  /* Form-specific CSS Variables (Myhr Dark) - Using dynamic primary color */
-  --form-input-bg: rgba(255, 255, 255, 0.1);
-  --form-input-border: rgba(255, 255, 255, 0.2);
-  --form-input-focus-border: rgba(255, 255, 255, 0.4);
-  --form-label-focus-color: rgba(255, 255, 255, 0.9);
-
-  /* Upload/Preview-specific CSS Variables (Myhr Dark) - Using dynamic primary color */
-  --upload-area-bg: rgba(255, 255, 255, 0.05);
-  --upload-area-border: rgba(255, 255, 255, 0.2);
-  --preview-item-bg: rgba(255, 255, 255, 0.05);
-  --preview-item-border: rgba(255, 255, 255, 0.2);
-  --preview-image-bg: rgba(var(--primary-rgb), 0.3);
-
-  /* Pattern Colors (Myhr Dark) - Standardized naming */
-  --pattern-color: rgba(var(--primary-rgb), 0.05);
-  --pattern-color-subtle: rgba(var(--primary-rgb), 0.02);
-  --pattern-color-light: rgba(var(--primary-rgb), 0.08);
-  --pattern-color-medium: rgba(var(--primary-rgb), 0.15);
-  --shimmer-color: rgba(255, 255, 255, 0.1);
+  /* Sidebar & Header - Using primary color as background */
+  /* Note: Sidebar background variables are now managed by ThemeService */
+  /* These are fallback values only - ThemeService will override them with !important */
+  --sidebar-bg-start: rgba(var(--primary-rgb), 0.9);
+  --sidebar-bg-end: rgba(var(--primary-rgb), 0.85);
+  --sidebar-icon-bg-start: rgba(var(--primary-rgb), 0.15);
+  --sidebar-icon-bg-end: rgba(var(--primary-rgb), 0.1);
+  --sidebar-active-bg: rgba(var(--primary-rgb), 0.25);
+  --sidebar-hover-bg: rgba(var(--primary-rgb), 0.18);
+  --sidebar-indicator-color: rgb(var(--primary-rgb));
+  --header-bg-start: rgba(var(--primary-rgb), 0.9);
+  --header-bg-end: rgba(var(--primary-rgb), 0.85);
+  --header-active-bg: rgba(var(--primary-rgb), 0.2);
+  --header-unread-bg: rgba(var(--primary-rgb), 0.12);
+  --header-dropdown-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(var(--primary-rgb), 0.3), 0 0 80px rgba(var(--primary-rgb), 0.1);
 }
 
 /* Sidebar-specific CSS Variables (Light Mode) */
@@ -559,8 +413,6 @@ body.theme-myhr:not(.dark) {
   background: var(--theme-bg-gradient);
   background-attachment: fixed;
   color: var(--text-primary);
-  position: relative;
-  overflow-x: hidden;
 
   /* Mobile performance optimization - use scroll instead of fixed */
   @media (max-width: 768px) {
@@ -578,8 +430,6 @@ body.theme-myhr.dark {
     linear-gradient(180deg, #000000 0%, #0a0a0f 50%, #000000 100%);
   background-attachment: fixed;
   color: #ffffff;
-  position: relative;
-  overflow-x: hidden;
 
   /* Mobile performance optimization - use scroll instead of fixed */
   @media (max-width: 768px) {
@@ -587,45 +437,9 @@ body.theme-myhr.dark {
   }
 }
 
-
-
-@keyframes myhrPattern {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(100px, 100px); }
-}
-
-/* MyHR Animated Particles */
-body.theme-myhr::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image:
-    radial-gradient(2px 2px at 20% 30%, rgba(var(--primary-rgb), 0.3), transparent),
-    radial-gradient(2px 2px at 60% 70%, rgba(var(--primary-rgb), 0.2), transparent),
-    radial-gradient(1px 1px at 50% 50%, rgba(var(--primary-rgb), 0.3), transparent),
-    radial-gradient(1px 1px at 80% 10%, rgba(var(--primary-rgb), 0.2), transparent),
-    radial-gradient(2px 2px at 90% 60%, rgba(var(--primary-rgb), 0.25), transparent),
-    radial-gradient(1px 1px at 30% 80%, rgba(var(--primary-rgb), 0.2), transparent);
-  background-size: 200% 200%, 150% 150%, 100% 100%, 120% 120%, 180% 180%, 160% 160%;
-  background-position: 0% 0%, 50% 50%, 25% 25%, 75% 75%, 10% 90%, 90% 10%;
-  animation: myhrParticles 15s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 0;
-}
-
-@keyframes myhrParticles {
-  0%, 100% {
-    background-position: 0% 0%, 50% 50%, 25% 25%, 75% 75%, 10% 90%, 90% 10%;
-    opacity: 0.5;
-  }
-  50% {
-    background-position: 100% 100%, 0% 0%, 75% 75%, 25% 25%, 90% 10%, 10% 90%;
-    opacity: 0.8;
-  }
-}
+/* Note: Removed body.theme-myhr::before and ::after pseudo-elements */
+/* These were causing duplication and inconsistency with other themes */
+/* Background patterns are now handled by CSS variables and main-layout if needed */
 
 /* Dark Mode Base - Transparent background - main content handles its own background */
 .dark body {

@@ -1,4 +1,5 @@
-@import '../../../../../styles.scss';
+/* Note: styles.scss is already imported globally in angular.json */
+/* No need to import it here to avoid EMFILE errors */
 
 :host {
   display: block;
