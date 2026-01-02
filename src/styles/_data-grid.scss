@@ -1,0 +1,147 @@
+/* ============================================
+   Data Grid Global Component Styles
+   ============================================ */
+
+@import 'syncfusion-mixins';
+
+/* Target the host component tag directly */
+app-data-grid {
+    @apply block w-full;
+
+    /* Syncfusion Grid customization */
+    .e-grid {
+        @include syncfusion-glass-container;
+
+        /* Toolbar */
+        .e-toolbar {
+            @include syncfusion-glass-toolbar;
+
+            .e-toolbar-items {
+                .e-toolbar-item {
+                    .e-btn {
+                        @include syncfusion-glass-button;
+                    }
+                }
+            }
+        }
+
+        /* Grid Header */
+        .e-gridheader {
+            @include syncfusion-glass-header;
+            @apply bg-white/5 dark:bg-slate-800/30 backdrop-blur-sm;
+
+            .e-headercell {
+                @apply bg-transparent border-b border-white/20 dark:border-white/10 text-slate-700 dark:text-slate-200 font-bold p-4 text-sm tracking-wide transition-all duration-300;
+
+                /* Interactive Header */
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.1);
+                    @apply text-primary-600 dark:text-primary-400;
+                }
+            }
+        }
+
+        /* Grid Content */
+        .e-gridcontent {
+            .e-row {
+                @apply bg-transparent border-b border-white/5 dark:border-white/5 transition-all duration-200;
+
+                /* Modern Hover Effect */
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.1) !important;
+                    @apply backdrop-blur-md shadow-sm transform scale-[1.002] z-10 relative;
+
+                    .e-rowcell {
+                        @apply text-slate-900 dark:text-white;
+                    }
+                }
+
+                &.e-selected {
+                    background-color: rgba(var(--primary-rgb), 0.15) !important;
+                    @apply border-l-2 border-l-primary-500;
+                }
+
+                .e-rowcell {
+                    @apply bg-transparent text-slate-600 dark:text-slate-300 p-3 text-sm border-r-0;
+                }
+            }
+
+            /* Alternating rows for readability but keeping glass feel */
+            .e-row:nth-child(even) {
+                background: rgba(255, 255, 255, 0.01);
+
+                .dark & {
+                    background: rgba(255, 255, 255, 0.02);
+                }
+            }
+        }
+
+        /* Myhr Theme - Selected row styling */
+        [data-theme='myhr'] &,
+        body.theme-myhr & {
+            .e-row.e-selected {
+                box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.3);
+            }
+        }
+
+        /* Pager */
+        .e-pager {
+            @apply glass-weak dark:glass-dark-weak border-t border-white/10 dark:border-slate-700/30 p-2;
+
+            .e-pagercontainer .e-pagercontainer {
+
+                .e-numericitem,
+                .e-prevpagedisabled,
+                .e-prevpage,
+                .e-nextpage,
+                .e-nextpagedisabled,
+                .e-lastpagedisabled,
+                .e-lastpage,
+                .e-firstpagedisabled,
+                .e-firstpage {
+                    @apply bg-transparent border border-white/10 dark:border-slate-700/30 text-gray-700 dark:text-gray-300 min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 transition-smooth;
+
+                    &:hover {
+                        background-color: rgba(var(--primary-rgb), 0.1);
+                        border-color: rgba(var(--primary-rgb), 0.3);
+                        color: rgb(var(--primary-rgb));
+                    }
+
+                    &.e-active {
+                        background-color: rgb(var(--primary-rgb));
+                        border-color: rgb(var(--primary-rgb));
+                        @apply text-white;
+                    }
+                }
+            }
+        }
+
+        /* Filter Dialog */
+        .e-filter-popup {
+            @apply glass-strong dark:glass-dark-strong theme-myhr:glass-myhr rounded-md;
+        }
+
+        /* Edit Dialog */
+        .e-dialog {
+            @apply glass-strong dark:glass-dark-strong theme-myhr:glass-myhr rounded-xl;
+        }
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+        .e-grid {
+            .e-toolbar {
+                @apply p-1;
+
+                .e-toolbar-items .e-toolbar-item .e-btn {
+                    @apply px-2 py-1 text-xs;
+                }
+            }
+
+            .e-headercell,
+            .e-rowcell {
+                @apply p-2 text-xs;
+            }
+        }
+    }
+}
