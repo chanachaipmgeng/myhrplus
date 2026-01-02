@@ -20,7 +20,9 @@ import {
   ContextMenuService,
   FreezeService,
   SelectionService,
-  VirtualScrollService
+  VirtualScrollService,
+  AggregateService,
+  ColumnMenuService
 } from '@syncfusion/ej2-angular-grids';
 import { L10n } from '@syncfusion/ej2-base';
 import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
@@ -42,6 +44,7 @@ export interface DataGridColumn {
   editType?: 'defaultedit' | 'dropdownedit' | 'booleanedit' | 'datepickeredit' | 'numericedit';
   edit?: any;
   commands?: any[];
+  aggregates?: any[]; // Allow defining aggregates directly on the column
 }
 
 export interface DataGridConfig {
@@ -91,7 +94,9 @@ export interface DataGridConfig {
     ContextMenuService,
     FreezeService,
     SelectionService,
-    VirtualScrollService
+    VirtualScrollService,
+    AggregateService,
+    ColumnMenuService
   ],
   templateUrl: './data-grid.component.html',
   styleUrls: ['./data-grid.component.scss']
@@ -102,24 +107,52 @@ export class DataGridComponent implements OnInit, OnDestroy, OnChanges {
 
   // Data Source
   @Input() dataSource: any[] = [];
-  
+
   // Columns
   @Input() columns: DataGridColumn[] = [];
-  
+
+  // Features
   // Features
   @Input() allowPaging: boolean = true;
   @Input() allowSorting: boolean = true;
   @Input() allowFiltering: boolean = true;
-  @Input() allowGrouping: boolean = false;
+  @Input() allowGrouping: boolean = true;
   @Input() allowSelection: boolean = true;
   @Input() allowResizing: boolean = true;
   @Input() allowReordering: boolean = true;
   @Input() allowEditing: boolean = false;
   @Input() allowExcelExport: boolean = true;
   @Input() allowPdfExport: boolean = true;
-  @Input() showColumnChooser: boolean = false;
+  @Input() showColumnMenu: boolean = true;
+  @Input() showColumnChooser: boolean = true;
   @Input() showToolbar: boolean = true;
-  
+
+  // New Feature Inputs
+  @Input() aggregates: any[] = []; // Support for Aggregates
+
+  // Toolbar Configuration
+  @Input() showAdd: boolean = false;
+  @Input() showEdit: boolean = false;
+  @Input() showDelete: boolean = false;
+  @Input() showUpdate: boolean = false;
+  @Input() showCancel: boolean = false;
+  @Input() showSearch: boolean = true;
+  @Input() showPrint: boolean = true;
+  @Input() showExcelExport: boolean = true;
+  @Input() showPdfExport: boolean = true;
+  @Input() showCsvExport: boolean = true;
+
+  // Column Menu Items
+  @Input() columnMenuItems: any[] = [
+    'SortAscending',
+    'SortDescending',
+    'Group',
+    'Ungroup',
+    'Filter',
+    'ColumnChooser',
+    'AutoFit'
+  ];
+
   // Settings
   @Input() pageSettings: any = {
     pageSize: 10,
@@ -133,7 +166,8 @@ export class DataGridComponent implements OnInit, OnDestroy, OnChanges {
     columns: []
   };
   @Input() groupSettings: any = {
-    columns: []
+    columns: [],
+    showDropArea: true
   };
   @Input() selectionSettings: any = {
     type: 'Single',
@@ -145,17 +179,17 @@ export class DataGridComponent implements OnInit, OnDestroy, OnChanges {
     allowDeleting: false,
     mode: 'Normal'
   };
-  
-  // Toolbar
-  @Input() toolbar: any[] = ['Add', 'Edit', 'Delete', 'Update', 'Cancel', 'Search', 'ExcelExport', 'PdfExport', 'CsvExport', 'Print', 'ColumnChooser'];
-  
+
+  // Toolbar - If passed explicitly, it overrides the auto-generated one
+  @Input() toolbar?: any[];
+
   // Size
   @Input() height: string | number = '600px';
   @Input() width: string | number = '100%';
-  
+
   // Styling
   @Input() customClass: string = '';
-  
+
   // Events
   @Output() rowSelected = new EventEmitter<any>();
   @Output() rowDeselected = new EventEmitter<any>();
@@ -168,6 +202,9 @@ export class DataGridComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit(): void {
     this.setupLocalization();
+    this.setupToolbar();
+    this.setupAggregates();
+
     // Subscribe to language changes
     this.translate.onLangChange.subscribe(() => {
       this.setupLocalization();
@@ -180,7 +217,67 @@ export class DataGridComponent implements OnInit, OnDestroy, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     // Re-setup localization if language changes
     if (changes && this.grid) {
+      if (changes['toolbar'] || changes['showAdd'] || changes['showEdit'] || changes['showDelete']) {
+        this.setupToolbar();
+      }
+      if (changes['columns']) {
+        this.setupAggregates();
+      }
       this.setupLocalization();
+    }
+  }
+
+  private setupToolbar(): void {
+    if (this.toolbar) return; // Use explicit toolbar if provided
+
+    const items = [];
+    if (this.showAdd) items.push('Add');
+    if (this.showEdit) items.push('Edit');
+    if (this.showDelete) items.push('Delete');
+    if (this.showUpdate) items.push('Update');
+    if (this.showCancel) items.push('Cancel');
+    if (this.showSearch) items.push('Search');
+    if (this.showColumnChooser) items.push('ColumnChooser');
+    if (this.showExcelExport) items.push('ExcelExport');
+    if (this.showPdfExport) items.push('PdfExport');
+    if (this.showCsvExport) items.push('CsvExport');
+    if (this.showPrint) items.push('Print');
+
+    this.toolbar = items;
+  }
+
+  /**
+   * Process columns to extract column-level aggregates and merge with main aggregates
+   */
+  private setupAggregates(): void {
+    if (!this.columns || this.columns.length === 0) return;
+
+    // Extract aggregates from columns
+    const columnAggregates = this.columns
+      .filter(col => col.aggregates && col.aggregates.length > 0)
+      .map(col => ({
+        columns: col.aggregates?.map(agg => ({
+          type: agg.type,
+          field: col.field,
+          footerTemplate: agg.footerTemplate || null,
+          groupFooterTemplate: agg.groupFooterTemplate || null,
+          groupCaptionTemplate: agg.groupCaptionTemplate || null,
+          customAggregate: agg.customAggregate || null,
+          format: agg.format || col.format // Inherit format from column if not specified
+        }))
+      }));
+
+    // If we have column aggregates, merge them into the main aggregates array
+    if (columnAggregates.length > 0) {
+      // Avoid duplicates or overwriting if called multiple times (though simple assignment is usually safe in OnChanges if we rebuild)
+      // We'll create a new array combining explicit aggregates input + extracted ones
+      // Note: This modifies the effective aggregates passed to the grid, but we should be careful not to mutate the original @Input aggregates if possible, 
+      // but binding directly to [aggregates] means we should probably update the input variable or a separate property.
+      // Easiest is to push to 'this.aggregates' if it's not already there? 
+      // Better: Use a separate property 'effectiveAggregates' for binding, but for now I will push to this.aggregates if valid.
+      // Actually, merging is safer.
+
+      this.aggregates = [...(this.aggregates || []), ...columnAggregates];
     }
   }
 

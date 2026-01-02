@@ -1,35 +1,16 @@
-<div class="data-grid-container w-full glass-weak dark:glass-dark-weak theme-myhr:glass-myhr-weak rounded-xl p-4 overflow-hidden" [ngClass]="customClass">
-  <ejs-grid
-    #grid
-    [dataSource]="dataSource"
-    [columns]="columns"
-    [allowPaging]="allowPaging"
-    [allowSorting]="allowSorting"
-    [allowFiltering]="allowFiltering"
-    [allowGrouping]="allowGrouping"
-    [allowSelection]="allowSelection"
-    [allowResizing]="allowResizing"
-    [allowReordering]="allowReordering"
-    [allowExcelExport]="allowExcelExport"
-    [allowPdfExport]="allowPdfExport"
-    [showColumnChooser]="showColumnChooser"
-    [toolbar]="showToolbar ? toolbar : []"
-    [pageSettings]="pageSettings"
-    [filterSettings]="filterSettings"
-    [sortSettings]="sortSettings"
-    [groupSettings]="groupSettings"
-    [selectionSettings]="selectionSettings"
-    [editSettings]="allowEditing ? editSettings : null"
-    [height]="height"
-    [width]="width"
-    (rowSelected)="onRowSelected($event)"
-    (rowDeselected)="onRowDeselected($event)"
-    (cellSave)="onCellSave($event)"
-    (rowAdded)="onRowAdded($event)"
-    (rowDeleted)="onRowDeleted($event)"
-    (dataBound)="onDataBound($event)"
-    (actionBegin)="onActionBegin($event)"
-    (actionComplete)="onActionComplete($event)">
+<div
+  class="data-grid-container w-full glass-weak dark:glass-dark-weak theme-myhr:glass-myhr-weak rounded-xl p-4 overflow-hidden"
+  [ngClass]="customClass">
+  <ejs-grid #grid [dataSource]="dataSource" [columns]="columns" [allowPaging]="allowPaging"
+    [allowSorting]="allowSorting" [allowFiltering]="allowFiltering" [allowGrouping]="allowGrouping"
+    [allowSelection]="allowSelection" [allowResizing]="allowResizing" [allowReordering]="allowReordering"
+    [allowExcelExport]="allowExcelExport" [allowPdfExport]="allowPdfExport" [showColumnMenu]="showColumnMenu"
+    [showColumnChooser]="showColumnChooser" [columnMenuItems]="columnMenuItems" [toolbar]="showToolbar ? toolbar : []"
+    [pageSettings]="pageSettings" [filterSettings]="filterSettings" [sortSettings]="sortSettings"
+    [groupSettings]="groupSettings" [selectionSettings]="selectionSettings"
+    [editSettings]="allowEditing ? editSettings : null" [aggregates]="aggregates" [height]="height" [width]="width"
+    (rowSelected)="onRowSelected($event)" (rowDeselected)="onRowDeselected($event)" (cellSave)="onCellSave($event)"
+    (rowAdded)="onRowAdded($event)" (rowDeleted)="onRowDeleted($event)" (dataBound)="onDataBound($event)"
+    (actionBegin)="onActionBegin($event)" (actionComplete)="onActionComplete($event)">
   </ejs-grid>
 </div>
-
