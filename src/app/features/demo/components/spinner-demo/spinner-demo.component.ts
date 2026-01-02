@@ -25,7 +25,7 @@ export class SpinnerDemoComponent {
     {
       name: 'color',
       type: 'string',
-      default: "'text-primary-600'",
+      default: "'text-primary'",
       description: 'Spinner color CSS class',
       required: false
     },

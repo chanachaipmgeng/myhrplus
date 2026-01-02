@@ -51,7 +51,7 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
           <button
             type="button"
-            class="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+            class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
             (click)="loadSamplePdf()">
             Load Sample PDF
           </button>
@@ -131,11 +131,11 @@
             type="text"
             #searchInput
             placeholder="Search text..."
-            class="flex-1 px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+            class="flex-1 px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary"
             (keyup.enter)="search(searchInput.value)">
           <button
             type="button"
-            class="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+            class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
             (click)="search(searchInput.value)">
             Search
           </button>

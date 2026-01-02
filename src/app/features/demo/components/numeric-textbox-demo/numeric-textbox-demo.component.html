@@ -1,0 +1,127 @@
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Numeric TextBox Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-myhr:text-white/80 leading-relaxed">
+      Numeric TextBox component for entering numeric values with spinner buttons, min/max validation, step increment, and number formatting (Syncfusion).
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Live Demo
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic Numeric TextBox</h3>
+          <ejs-numerictextbox
+            [(value)]="basicValue"
+            [placeholder]="'Enter number'">
+          </ejs-numerictextbox>
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mt-2">
+            Value: {{ basicValue !== null ? basicValue : 'Empty' }}
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">With Min/Max (0-100)</h3>
+          <ejs-numerictextbox
+            [(value)]="minMaxValue"
+            [min]="min"
+            [max]="max"
+            [placeholder]="'Enter number (0-100)'">
+          </ejs-numerictextbox>
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mt-2">
+            Value: {{ minMaxValue !== null ? minMaxValue : 'Empty' }}
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">With Step (5)</h3>
+          <ejs-numerictextbox
+            [(value)]="stepValue"
+            [step]="step"
+            [placeholder]="'Enter number (step: 5)'">
+          </ejs-numerictextbox>
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mt-2">
+            Value: {{ stepValue !== null ? stepValue : 'Empty' }}
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Currency Format (c2)</h3>
+          <ejs-numerictextbox
+            [(value)]="currencyValue"
+            [format]="'c2'"
+            [placeholder]="'Enter currency'">
+          </ejs-numerictextbox>
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mt-2">
+            Value: {{ currencyValue !== null ? currencyValue : 'Empty' }}
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Percentage Format (p2)</h3>
+          <ejs-numerictextbox
+            [(value)]="percentageValue"
+            [format]="'p2'"
+            [placeholder]="'Enter percentage'">
+          </ejs-numerictextbox>
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mt-2">
+            Value: {{ percentageValue !== null ? percentageValue : 'Empty' }}
+          </p>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Basic Usage Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Basic Usage
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic Numeric TextBox</h3>
+          <app-code-viewer [code]="basicExample" language="html" title="Basic Numeric TextBox"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">With Min/Max</h3>
+          <app-code-viewer [code]="minMaxExample" language="html" title="With Min/Max"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">With Step</h3>
+          <app-code-viewer [code]="stepExample" language="html" title="With Step"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">With Format</h3>
+          <app-code-viewer [code]="formatExample" language="html" title="With Format"></app-code-viewer>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- API Reference Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      API Reference
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props" title="Inputs"></app-props-table>
+    </app-glass-card>
+  </section>
+</div>
+

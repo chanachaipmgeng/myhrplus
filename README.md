@@ -83,7 +83,7 @@ this.themeService.setTheme({ color: 'gemini', mode: 'dark' });
 
 ระบบ Demo ที่ครบถ้วนสำหรับแสดงตัวอย่างการใช้งาน components:
 
-- **35+ Demo Components** - ทุก component มี demo page
+- **96 Demo Components** - ทุก component มี demo page
 - **Live Interactive Demos** - ทดสอบได้จริง
 - **Code Examples** - พร้อม syntax highlighting
 - **API Documentation** - Props tables ครบถ้วน

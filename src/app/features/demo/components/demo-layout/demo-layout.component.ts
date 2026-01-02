@@ -79,7 +79,7 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
     { value: 'pink', label: 'Pink', color: '#ec4899' }
   ];
 
-  // Component groups
+  // Component groups (organized by Syncfusion structure)
   componentGroups: ComponentGroup[] = [
     {
       name: 'Glass Components',
@@ -96,68 +96,142 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
       ]
     },
     {
+      name: 'Smart Components',
+      icon: '🤖',
+      components: [
+        { name: 'Smart TextArea', route: 'smart-textarea', description: 'Intelligent textarea component with AI-powered suggestions and customizable features (Syncfusion)', icon: '💬' }
+      ]
+    },
+    {
+      name: 'Grids',
+      icon: '📊',
+      components: [
+        { name: 'Data Grid', route: 'data-grid', description: 'Enterprise data grid with advanced features (Syncfusion)', icon: '📊' },
+        { name: 'Pivot Table', route: 'pivot-table', description: 'Pivot table for data analysis (Syncfusion)', icon: '📊' },
+        { name: 'Tree Grid', route: 'tree-grid', description: 'Hierarchical tree grid component with expand/collapse (Syncfusion)', icon: '🌳' }
+      ]
+    },
+    {
+      name: 'Interactive Chat',
+      icon: '💬',
+      components: [
+        { name: 'AI Assist View', route: 'ai-assist-view', description: 'AI-powered assistant interface component with suggestions, prompt handling, and interactive chat features (Syncfusion)', icon: '🤖' },
+        { name: 'Chat UI', route: 'chat-ui', description: 'Chat UI component for building interactive chat interfaces with message history and file attachments (Syncfusion)', icon: '💬' }
+      ]
+    },
+    {
+      name: 'File Viewers & Editors',
+      icon: '📄',
+      components: [
+        { name: 'Rich Text Editor', route: 'rich-text-editor', description: 'Rich text editor component (Syncfusion)', icon: '✏️' },
+        { name: 'Image Editor', route: 'image-editor', description: 'Image editing component with crop, filter, transform (Syncfusion)', icon: '🖼️' },
+        { name: 'Document Editor', route: 'document-editor', description: 'Word-like document editor component (Syncfusion)', icon: '📄' },
+        { name: 'PDF Viewer', route: 'pdf-viewer', description: 'PDF viewer component with annotation, form filling, and text search (Syncfusion)', icon: '📄' }
+      ]
+    },
+    {
       name: 'Layout',
       icon: '📐',
       components: [
-        { name: 'Page Layout', route: 'page-layout', description: 'Standard page layout with header, breadcrumb, and actions', icon: '📄' },
-        { name: 'Page Header', route: 'page-header', description: 'Page header with title, subtitle, breadcrumbs, and actions', icon: '📋' },
+        { name: 'ListView', route: 'listview', description: 'ListView component for displaying a list of items with selection support (Syncfusion)', icon: '📋' },
+        { name: 'Splitter', route: 'splitter', description: 'Splitter component for dividing container into resizable panes (Syncfusion)', icon: '📐' },
+        { name: 'TreeView', route: 'treeview', description: 'TreeView component for displaying hierarchical data in a tree structure (Syncfusion)', icon: '🌳' },
+        { name: 'Toolbar', route: 'toolbar', description: 'Toolbar component for displaying action buttons and controls (Syncfusion)', icon: '🔧' },
+        { name: 'Context Menu', route: 'context-menu', description: 'Context menu component for displaying menu on right-click (Syncfusion)', icon: '📋' },
+        { name: 'Menu Bar', route: 'menu-bar', description: 'Menu bar component for displaying horizontal or vertical menu bars (Syncfusion)', icon: '📋' },
+        { name: 'Avatar', route: 'avatar', description: 'Avatar component with status', icon: '👤' },
         { name: 'Tabs', route: 'tabs', description: 'Tab navigation component', icon: '📑' },
         { name: 'Breadcrumbs', route: 'breadcrumbs', description: 'Breadcrumb navigation', icon: '🍞' },
         { name: 'Stepper', route: 'stepper', description: 'Step-by-step navigation component', icon: '👣' },
+        { name: 'Accordion', route: 'accordion', description: 'Accordion component for collapsible content sections', icon: '📑' },
+        { name: 'Carousel', route: 'carousel', description: 'Carousel component for displaying slides with navigation and autoplay (Syncfusion)', icon: '🎠' },
+        { name: 'Timeline', route: 'timeline', description: 'Timeline component for displaying events', icon: '⏱️' },
+        { name: 'File Manager', route: 'file-manager', description: 'File management component for browsing, uploading, downloading, and managing files and folders (Syncfusion)', icon: '📁' },
+        { name: 'Tooltip', route: 'tooltip', description: 'Tooltip component', icon: '💡' },
+        { name: 'Page Layout', route: 'page-layout', description: 'Standard page layout with header, breadcrumb, and actions', icon: '📄' },
+        { name: 'Page Header', route: 'page-header', description: 'Page header with title, subtitle, breadcrumbs, and actions', icon: '📋' },
         { name: 'Progressive Disclosure', route: 'progressive-disclosure', description: 'Expand/collapse component with animations', icon: '📖' },
         { name: 'Context Switcher', route: 'context-switcher', description: 'Context switcher for switching between menu contexts', icon: '🔄' },
         { name: 'Nested Menu Accordion', route: 'nested-menu-accordion', description: 'Nested menu accordion with expand/collapse functionality', icon: '📋' },
-        { name: 'Accordion', route: 'accordion', description: 'Accordion component for collapsible content sections', icon: '📑' },
         { name: 'Divider', route: 'divider', description: 'Divider component for separating content sections', icon: '➖' }
       ]
     },
     {
-      name: 'Data Display',
-      icon: '📊',
+      name: 'Data Visualization',
+      icon: '📈',
       components: [
+        { name: 'Chart', route: 'chart', description: 'Chart component for data visualization (Syncfusion)', icon: '📈' },
+        { name: 'Diagrams', route: 'diagrams', description: 'Diagram component for flowcharts, organizational charts, and network diagrams (Syncfusion)', icon: '📊' },
         { name: 'Statistics Card', route: 'statistics-card', description: 'Card for displaying statistics with icons', icon: '📊' },
         { name: 'Statistics Grid', route: 'statistics-grid', description: 'Grid layout for statistics cards', icon: '📈' },
-        { name: 'Data Grid', route: 'data-grid', description: 'Enterprise data grid with advanced features (Syncfusion)', icon: '📊' },
-        { name: 'Pivot Table', route: 'pivot-table', description: 'Pivot table for data analysis (Syncfusion)', icon: '📊' },
-        { name: 'Timeline', route: 'timeline', description: 'Timeline component for displaying events', icon: '⏱️' },
-        { name: 'Calendar', route: 'calendar', description: 'Calendar component with events management', icon: '📅' },
-        { name: 'Scheduler', route: 'scheduler', description: 'Scheduler component for calendar and events (Syncfusion)', icon: '📆' },
-        { name: 'Chart', route: 'chart', description: 'Chart component for data visualization (Syncfusion)', icon: '📈' },
-        { name: 'Tree Grid', route: 'tree-grid', description: 'Hierarchical tree grid component with expand/collapse (Syncfusion)', icon: '🌳' },
-        { name: 'Spreadsheet', route: 'spreadsheet', description: 'Excel-like spreadsheet component with formulas, charts, and formatting (Syncfusion)', icon: '📊' },
-        { name: 'PDF Viewer', route: 'pdf-viewer', description: 'PDF viewer component with annotation, form filling, and text search (Syncfusion)', icon: '📄' },
-        { name: 'Diagrams', route: 'diagrams', description: 'Diagram component for flowcharts, organizational charts, and network diagrams (Syncfusion)', icon: '📊' },
-        { name: 'Carousel', route: 'carousel', description: 'Carousel component for displaying slides with navigation and autoplay (Syncfusion)', icon: '🎠' },
-        { name: 'Gantt Chart', route: 'gantt', description: 'Project management Gantt chart component with timeline, dependencies, and progress tracking (Syncfusion)', icon: '📊' },
-        { name: 'File Manager', route: 'file-manager', description: 'File management component for browsing, uploading, downloading, and managing files and folders (Syncfusion)', icon: '📁' },
         { name: 'Pagination', route: 'pagination', description: 'Pagination component for navigating through large datasets', icon: '📄' }
       ]
     },
     {
-      name: 'Form & Input',
+      name: 'Buttons',
+      icon: '🔘',
+      components: [
+        { name: 'Chip', route: 'chip', description: 'Chip component for displaying tags and removable items', icon: '🏷️' },
+        { name: 'Split Button', route: 'split-button', description: 'Split button component combining primary button with dropdown menu (Syncfusion)', icon: '🔀' }
+      ]
+    },
+    {
+      name: 'Calendars',
+      icon: '📅',
+      components: [
+        { name: 'Scheduler', route: 'scheduler', description: 'Scheduler component for calendar and events (Syncfusion)', icon: '📆' },
+        { name: 'Calendar', route: 'calendar', description: 'Calendar component with events management', icon: '📅' },
+        { name: 'Date Range Picker', route: 'date-range-picker', description: 'Date range picker component', icon: '📅' },
+        { name: 'DatePicker', route: 'datepicker', description: 'Date picker component for selecting dates (Syncfusion)', icon: '📅' },
+        { name: 'DateTime Picker', route: 'datetime-picker', description: 'Date and time picker component (Syncfusion)', icon: '📅' },
+        { name: 'TimePicker', route: 'timepicker', description: 'Time picker component for selecting time (Syncfusion)', icon: '⏰' }
+      ]
+    },
+    {
+      name: 'Inputs',
       icon: '📝',
       components: [
-        { name: 'Progress Bar', route: 'progress-bar', description: 'Progress bar with variants', icon: '📊' },
-        { name: 'Rating', route: 'rating', description: 'Star and heart rating component', icon: '⭐' },
-        { name: 'Date Range Picker', route: 'date-range-picker', description: 'Date range picker component', icon: '📅' },
-        { name: 'Rich Text Editor', route: 'rich-text-editor', description: 'Rich text editor component (Syncfusion)', icon: '✏️' },
-        { name: 'Query Builder', route: 'query-builder', description: 'Query builder component for creating filter conditions (Syncfusion)', icon: '🔍' },
-        { name: 'Document Editor', route: 'document-editor', description: 'Word-like document editor component (Syncfusion)', icon: '📄' },
-        { name: 'Speech to Text', route: 'speech-to-text', description: 'Speech to text conversion component (Syncfusion)', icon: '🎤' },
-        { name: 'Image Editor', route: 'image-editor', description: 'Image editing component with crop, filter, transform (Syncfusion)', icon: '🖼️' },
         { name: 'Signature', route: 'signature', description: 'Digital signature pad component for capturing signatures (Syncfusion)', icon: '✍️' },
-        { name: 'Syncfusion Uploader', route: 'syncfusion-uploader', description: 'File upload component with drag & drop, progress tracking, pause/resume, and multiple file support (Syncfusion)', icon: '📤' },
-        { name: 'Autocomplete', route: 'autocomplete', description: 'Autocomplete input component with filtering, highlighting, and customizable suggestions (Syncfusion)', icon: '🔍' },
-        { name: 'Smart TextArea', route: 'smart-textarea', description: 'Intelligent textarea component with AI-powered suggestions and customizable features (Syncfusion)', icon: '💬' },
-        { name: 'AI Assist View', route: 'ai-assist-view', description: 'AI-powered assistant interface component with suggestions, prompt handling, and interactive chat features (Syncfusion)', icon: '🤖' },
-        { name: 'Search Filter', route: 'search-filter', description: 'Search and filter component', icon: '🔍' },
+        { name: 'Speech to Text', route: 'speech-to-text', description: 'Speech to text conversion component (Syncfusion)', icon: '🎤' },
+        { name: 'Rating', route: 'rating', description: 'Star and heart rating component', icon: '⭐' },
+        { name: 'Input Mask', route: 'input-mask', description: 'Input mask component for formatting input with predefined patterns (Syncfusion)', icon: '🎭' },
+        { name: 'Numeric TextBox', route: 'numeric-textbox', description: 'Numeric textbox component with spinner buttons and number formatting (Syncfusion)', icon: '🔢' },
+        { name: 'Color Picker', route: 'color-picker', description: 'Color picker component with Picker and Palette modes (Syncfusion)', icon: '🎨' },
+        { name: 'Slider', route: 'slider', description: 'Slider component for selecting numeric values by dragging (Syncfusion)', icon: '🎚️' },
+        { name: 'OTP Input', route: 'otp-input', description: 'OTP input component for entering one-time passwords (Syncfusion)', icon: '🔐' },
         { name: 'File Upload', route: 'file-upload', description: 'File upload component', icon: '📁' },
         { name: 'Image Upload', route: 'image-upload', description: 'Image upload component', icon: '🖼️' },
-        { name: 'Form Validation Messages', route: 'form-validation-messages', description: 'Form validation messages component', icon: '✅' },
-        { name: 'Mask Toggle', route: 'mask-toggle', description: 'Toggle masked/unmasked display of sensitive data (PDPA/GDPR compliance)', icon: '👁️' },
-        { name: 'Contextual Help', route: 'contextual-help', description: 'Contextual help component with tooltips', icon: '❓' },
-        { name: 'NgSelect', route: 'ng-select', description: 'NgSelect dropdown component with search, multi-select, and custom templates', icon: '🔽' },
-        { name: 'Chip', route: 'chip', description: 'Chip component for displaying tags and removable items', icon: '🏷️' }
+        { name: 'Syncfusion Uploader', route: 'syncfusion-uploader', description: 'File upload component with drag & drop, progress tracking, pause/resume, and multiple file support (Syncfusion)', icon: '📤' },
+        { name: 'Search Filter', route: 'search-filter', description: 'Search and filter component', icon: '🔍' },
+        { name: 'Mask Toggle', route: 'mask-toggle', description: 'Toggle masked/unmasked display of sensitive data (PDPA/GDPR compliance)', icon: '👁️' }
+      ]
+    },
+    {
+      name: 'Forms',
+      icon: '📋',
+      components: [
+        { name: 'Query Builder', route: 'query-builder', description: 'Query builder component for creating filter conditions (Syncfusion)', icon: '🔍' },
+        { name: 'Form Validation Messages', route: 'form-validation-messages', description: 'Form validation messages component', icon: '✅' }
+      ]
+    },
+    {
+      name: 'Dropdowns',
+      icon: '🔽',
+      components: [
+        { name: 'Autocomplete', route: 'autocomplete', description: 'Autocomplete input component with filtering, highlighting, and customizable suggestions (Syncfusion)', icon: '🔍' },
+        { name: 'ComboBox', route: 'combobox', description: 'ComboBox component combining text box and dropdown list with custom value support (Syncfusion)', icon: '🔽' },
+        { name: 'Dropdown List', route: 'dropdown-list', description: 'Dropdown list component for selecting a single value (Syncfusion)', icon: '🔽' },
+        { name: 'MultiSelect Dropdown', route: 'multiselect-dropdown', description: 'MultiSelect dropdown component for selecting multiple values (Syncfusion)', icon: '🔽' },
+        { name: 'NgSelect', route: 'ng-select', description: 'NgSelect dropdown component with search, multi-select, and custom templates', icon: '🔽' }
+      ]
+    },
+    {
+      name: 'Notifications',
+      icon: '🔔',
+      components: [
+        { name: 'Progress Bar', route: 'progress-bar', description: 'Progress bar with variants', icon: '📊' },
+        { name: 'Skeleton Loader', route: 'skeleton-loader', description: 'Skeleton loading placeholder', icon: '💀' },
+        { name: 'Message', route: 'message', description: 'Message component for displaying inline messages with severity types (Syncfusion)', icon: '💬' }
       ]
     },
     {
@@ -165,8 +239,8 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
       icon: '💬',
       components: [
         { name: 'Modal', route: 'modal', description: 'Modal dialog component', icon: '🪟' },
+        { name: 'Dialog', route: 'dialog', description: 'Dialog component for modal dialogs, alerts, and confirmations (Syncfusion)', icon: '🪟' },
         { name: 'Notification', route: 'notification', description: 'Toast notification component', icon: '🔔' },
-        { name: 'Tooltip', route: 'tooltip', description: 'Tooltip component', icon: '💡' },
         { name: 'Confirm Dialog', route: 'confirm-dialog', description: 'Confirmation dialog component', icon: '❓' },
         { name: 'Alert', route: 'alert', description: 'Inline alert component for displaying important messages', icon: '⚠️' },
         { name: 'SweetAlert2', route: 'sweetalert2', description: 'SweetAlert2 integration for beautiful alert dialogs', icon: '🎨' }
@@ -186,8 +260,7 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
       icon: '⏳',
       components: [
         { name: 'Loading', route: 'loading', description: 'Complete guide to all loading components (Local, Global, Spinner, Skeleton)', icon: '⏳' },
-        { name: 'Spinner', route: 'spinner', description: 'Spinner component with sizes', icon: '🌀' },
-        { name: 'Skeleton Loader', route: 'skeleton-loader', description: 'Skeleton loading placeholder', icon: '💀' }
+        { name: 'Spinner', route: 'spinner', description: 'Spinner component with sizes', icon: '🌀' }
       ]
     },
     {
@@ -195,11 +268,11 @@ export class DemoLayoutComponent implements OnInit, OnDestroy {
       icon: '🎨',
       components: [
         { name: 'Icon', route: 'icon', description: 'Material Icons wrapper component', icon: '🎨' },
-        { name: 'Avatar', route: 'avatar', description: 'Avatar component with status', icon: '👤' },
         { name: 'Theme Toggle', route: 'theme-toggle', description: 'Theme mode and color toggle', icon: '🎨' },
         { name: 'Back to Top', route: 'back-to-top', description: 'Back to top button component with smooth scroll', icon: '⬆️' },
         { name: 'Fullscreen', route: 'fullscreen', description: 'Fullscreen API component for entering/exiting fullscreen mode', icon: '⛶' },
         { name: 'Omni Search', route: 'omni-search', description: 'Universal search component for searching across menus and routes', icon: '🔍' },
+        { name: 'Contextual Help', route: 'contextual-help', description: 'Contextual help component with tooltips', icon: '❓' },
         { name: 'Migration Guide', route: 'migration-guide', description: 'JSP to Angular migration guide with component mapping and best practices', icon: '📚' }
       ]
     }

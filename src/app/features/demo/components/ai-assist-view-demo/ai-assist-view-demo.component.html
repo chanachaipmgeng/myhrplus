@@ -49,7 +49,7 @@
             <div class="flex gap-2 flex-wrap">
               <button
                 (click)="refresh()"
-                class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors">
+                class="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg transition-colors">
                 Refresh
               </button>
               <button
@@ -80,7 +80,7 @@
                   type="checkbox"
                   [checked]="enableSuggestions"
                   (change)="enableSuggestions = !enableSuggestions"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Enable Suggestions</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -88,7 +88,7 @@
                   type="checkbox"
                   [checked]="showSuggestions"
                   (change)="showSuggestions = !showSuggestions"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Show Suggestions</span>
               </label>
             </div>

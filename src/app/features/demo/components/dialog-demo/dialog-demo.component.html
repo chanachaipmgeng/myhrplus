@@ -1,0 +1,133 @@
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Dialog Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-myhr:text-white/80 leading-relaxed">
+      Dialog component for displaying modal dialogs, alerts, confirmations, and custom dialogs. Supports various customization options including header, footer, and content templates (Syncfusion).
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Live Demo
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic Dialog</h3>
+          <app-glass-button (click)="openDialog()" variant="primary">Open Dialog</app-glass-button>
+          <ejs-dialog
+            #dialog
+            [(visible)]="dialogVisible"
+            [header]="dialogHeader"
+            [width]="dialogWidth"
+            [height]="dialogHeight"
+            [showCloseIcon]="showCloseIcon"
+            [isModal]="isModal"
+            [closeOnEscape]="closeOnEscape"
+            (close)="onDialogClose()">
+            <ng-template #content>
+              <div class="p-4">
+                <p class="text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">{{ dialogContent }}</p>
+              </div>
+            </ng-template>
+            <ng-template #footerTemplate>
+              <div class="flex justify-end gap-2 p-4">
+                <app-glass-button (click)="closeDialog()" variant="primary">Close</app-glass-button>
+              </div>
+            </ng-template>
+          </ejs-dialog>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Alert Dialog</h3>
+          <app-glass-button (click)="openAlert()" variant="primary">Open Alert</app-glass-button>
+          <ejs-dialog
+            #alertDialog
+            [(visible)]="alertDialogVisible"
+            [header]="'Alert'"
+            [width]="'350px'"
+            [isModal]="true">
+            <ng-template #content>
+              <div class="p-4">
+                <p class="text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">This is an alert message.</p>
+              </div>
+            </ng-template>
+            <ng-template #footerTemplate>
+              <div class="flex justify-end gap-2 p-4">
+                <app-glass-button (click)="alertDialogVisible = false" variant="primary">OK</app-glass-button>
+              </div>
+            </ng-template>
+          </ejs-dialog>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Confirm Dialog</h3>
+          <app-glass-button (click)="openConfirm()" variant="primary">Open Confirm</app-glass-button>
+          <ejs-dialog
+            #confirmDialog
+            [(visible)]="confirmDialogVisible"
+            [header]="'Confirm'"
+            [width]="'350px'"
+            [isModal]="true">
+            <ng-template #content>
+              <div class="p-4">
+                <p class="text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Are you sure you want to proceed?</p>
+              </div>
+            </ng-template>
+            <ng-template #footerTemplate>
+              <div class="flex justify-end gap-2 p-4">
+                <app-glass-button (click)="onConfirm()" variant="primary">Yes</app-glass-button>
+                <app-glass-button (click)="confirmDialogVisible = false" variant="secondary">No</app-glass-button>
+              </div>
+            </ng-template>
+          </ejs-dialog>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Basic Usage Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Basic Usage
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic Dialog</h3>
+          <app-code-viewer [code]="basicExample" language="html" title="Basic Dialog"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Alert Dialog</h3>
+          <app-code-viewer [code]="alertExample" language="html" title="Alert Dialog"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Confirm Dialog</h3>
+          <app-code-viewer [code]="confirmExample" language="html" title="Confirm Dialog"></app-code-viewer>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- API Reference Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      API Reference
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props" title="Inputs"></app-props-table>
+    </app-glass-card>
+  </section>
+</div>
+

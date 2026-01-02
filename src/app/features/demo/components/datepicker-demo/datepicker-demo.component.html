@@ -1,0 +1,110 @@
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      DatePicker Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-myhr:text-white/80 leading-relaxed">
+      DatePicker component for selecting dates with calendar popup. Supports date formatting, min/max dates, and various customization options (Syncfusion).
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Live Demo
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic DatePicker</h3>
+          <ejs-datepicker
+            [(value)]="selectedDate"
+            [placeholder]="placeholder"
+            [format]="format"
+            [showClearButton]="showClearButton"
+            (change)="onDateChange($event)">
+          </ejs-datepicker>
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mt-2">
+            Selected date: {{ selectedDate ? (selectedDate | date:'dd/MM/yyyy') : 'None' }}
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">With Min/Max Dates</h3>
+          <ejs-datepicker
+            [(value)]="selectedDate"
+            [min]="minDate"
+            [max]="maxDate"
+            [placeholder]="'Select date (2020-2030)'"
+            [format]="format">
+          </ejs-datepicker>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Readonly DatePicker</h3>
+          <ejs-datepicker
+            [(value)]="selectedDate"
+            [readonly]="true"
+            [placeholder]="'Readonly date picker'">
+          </ejs-datepicker>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Disabled DatePicker</h3>
+          <ejs-datepicker
+            [(value)]="selectedDate"
+            [enabled]="false"
+            [placeholder]="'Disabled date picker'">
+          </ejs-datepicker>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Basic Usage Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Basic Usage
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic DatePicker</h3>
+          <app-code-viewer [code]="basicExample" language="html" title="Basic DatePicker"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">With Min/Max Dates</h3>
+          <app-code-viewer [code]="withMinMaxExample" language="html" title="With Min/Max Dates"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Readonly</h3>
+          <app-code-viewer [code]="readonlyExample" language="html" title="Readonly"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Disabled</h3>
+          <app-code-viewer [code]="disabledExample" language="html" title="Disabled"></app-code-viewer>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- API Reference Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      API Reference
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props" title="Inputs"></app-props-table>
+    </app-glass-card>
+  </section>
+</div>
+

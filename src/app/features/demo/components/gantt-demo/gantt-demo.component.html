@@ -82,12 +82,12 @@
             <div class="flex gap-2 flex-wrap">
               <button
                 (click)="expandAll()"
-                class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors">
+                class="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg transition-colors">
                 Expand All
               </button>
               <button
                 (click)="collapseAll()"
-                class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors">
+                class="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg transition-colors">
                 Collapse All
               </button>
               <button
@@ -113,7 +113,7 @@
                   type="checkbox"
                   [checked]="allowSelection"
                   (change)="allowSelection = !allowSelection"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Allow Selection</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -121,7 +121,7 @@
                   type="checkbox"
                   [checked]="allowSorting"
                   (change)="allowSorting = !allowSorting"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Allow Sorting</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -129,7 +129,7 @@
                   type="checkbox"
                   [checked]="allowFiltering"
                   (change)="allowFiltering = !allowFiltering"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Allow Filtering</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -137,7 +137,7 @@
                   type="checkbox"
                   [checked]="allowEditing"
                   (change)="allowEditing = !allowEditing"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Allow Editing</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -145,7 +145,7 @@
                   type="checkbox"
                   [checked]="enableToolbar"
                   (change)="enableToolbar = !enableToolbar"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Enable Toolbar</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -153,7 +153,7 @@
                   type="checkbox"
                   [checked]="enableCriticalPath"
                   (change)="enableCriticalPath = !enableCriticalPath"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Enable Critical Path</span>
               </label>
             </div>

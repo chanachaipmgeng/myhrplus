@@ -66,12 +66,12 @@
             <div class="flex gap-2">
               <button
                 (click)="previous()"
-                class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors">
+                class="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg transition-colors">
                 Previous
               </button>
               <button
                 (click)="next()"
-                class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors">
+                class="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg transition-colors">
                 Next
               </button>
               <button
@@ -107,7 +107,7 @@
               min="1000"
               max="10000"
               step="500"
-              class="px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
+              class="px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary">
           </div>
 
           <div class="p-4 bg-white/5 dark:bg-black/20 theme-myhr:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-myhr:border-primary/30">
@@ -120,7 +120,7 @@
                   type="checkbox"
                   [checked]="autoPlay"
                   (change)="toggleAutoPlay()"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Auto Play</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -128,7 +128,7 @@
                   type="checkbox"
                   [checked]="loop"
                   (change)="toggleLoop()"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Loop</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -136,7 +136,7 @@
                   type="checkbox"
                   [checked]="showIndicators"
                   (change)="showIndicators = !showIndicators"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Show Indicators</span>
               </label>
             </div>
@@ -149,7 +149,7 @@
             <select
               [value]="animationEffect"
               (change)="onAnimationEffectChange($event)"
-              class="px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
+              class="px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary">
               <option value="Slide">Slide</option>
               <option value="Fade">Fade</option>
               <option value="None">None</option>

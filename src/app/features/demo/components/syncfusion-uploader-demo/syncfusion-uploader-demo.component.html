@@ -58,7 +58,7 @@
             <div class="flex gap-2 flex-wrap">
               <button
                 (click)="upload()"
-                class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors">
+                class="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg transition-colors">
                 Upload
               </button>
               <button
@@ -122,7 +122,7 @@
                   type="checkbox"
                   [checked]="autoUpload"
                   (change)="toggleAutoUpload()"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Auto Upload</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -130,7 +130,7 @@
                   type="checkbox"
                   [checked]="multiple"
                   (change)="toggleMultiple()"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Multiple Files</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -138,7 +138,7 @@
                   type="checkbox"
                   [checked]="showFileList"
                   (change)="showFileList = !showFileList"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Show File List</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -146,7 +146,7 @@
                   type="checkbox"
                   [checked]="sequentialUpload"
                   (change)="sequentialUpload = !sequentialUpload"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Sequential Upload</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -154,7 +154,7 @@
                   type="checkbox"
                   [checked]="directoryUpload"
                   (change)="directoryUpload = !directoryUpload"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Directory Upload</span>
               </label>
             </div>
@@ -171,7 +171,7 @@
               min="1"
               max="100"
               step="1"
-              class="px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
+              class="px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary">
           </div>
 
           <div class="p-4 bg-white/5 dark:bg-black/20 theme-myhr:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-myhr:border-primary/30 flex flex-col gap-2">

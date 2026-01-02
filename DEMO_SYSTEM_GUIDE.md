@@ -7,7 +7,7 @@
 
 ## 📋 ภาพรวม
 
-Demo System เป็นระบบแสดงตัวอย่างการใช้งาน components ทั้งหมด (32 components) พร้อม:
+Demo System เป็นระบบแสดงตัวอย่างการใช้งาน components ทั้งหมด (96 unique components) พร้อม:
 - ✅ Live Interactive Demos
 - ✅ Code Examples พร้อม syntax highlighting
 - ✅ API Documentation (Props tables)
@@ -49,7 +49,7 @@ src/app/features/demo/
 │   ├── glass-input-demo/
 │   ├── icon-demo/
 │   ├── avatar-demo/
-│   └── ... (32 demo components)
+│   └── ... (96 demo components)
 └── shared/
     ├── code-viewer/
     │   ├── code-viewer.component.ts

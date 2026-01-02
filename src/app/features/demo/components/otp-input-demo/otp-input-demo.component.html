@@ -1,0 +1,99 @@
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      OTP Input Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-myhr:text-white/80 leading-relaxed">
+      OTP Input component for entering one-time passwords. Supports configurable length, separators, and auto-focus between fields (Syncfusion).
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Live Demo
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic OTP (6 digits)</h3>
+          <div
+            ejs-otpinput
+            [(value)]="otpValue"
+            [length]="6"
+            [separator]="'-'"
+            (valueChange)="onOtpChange($event)">
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mt-2">
+            Value: {{ otpValue || 'Empty' }}
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">4 Digits OTP</h3>
+          <div
+            ejs-otpinput
+            [(value)]="otp4Value"
+            [length]="4"
+            [separator]="''"
+            (valueChange)="onOtpChange($event)">
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mt-2">
+            Value: {{ otp4Value || 'Empty' }}
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">8 Digits OTP</h3>
+          <div
+            ejs-otpinput
+            [(value)]="otp8Value"
+            [length]="8"
+            [separator]="'-'"
+            (valueChange)="onOtpChange($event)">
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mt-2">
+            Value: {{ otp8Value || 'Empty' }}
+          </p>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Basic Usage Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Basic Usage
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic OTP (6 digits)</h3>
+          <app-code-viewer [code]="basicExample" language="html" title="Basic OTP"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">4 Digits OTP</h3>
+          <app-code-viewer [code]="lengthExample" language="html" title="4 Digits OTP"></app-code-viewer>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- API Reference Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      API Reference
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props" title="Inputs"></app-props-table>
+    </app-glass-card>
+  </section>
+</div>
+

@@ -63,7 +63,7 @@
             <div class="flex gap-2 flex-wrap">
               <button
                 (click)="getValue()"
-                class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors">
+                class="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg transition-colors">
                 Get Value
               </button>
               <button
@@ -96,21 +96,21 @@
             <div class="flex gap-2 flex-wrap">
               <button
                 (click)="toggleFloatLabelType('Auto')"
-                [class.bg-primary-500]="floatLabelType === 'Auto'"
+                [class.bg-primary]="floatLabelType === 'Auto'"
                 [class.bg-gray-500]="floatLabelType !== 'Auto'"
                 class="px-4 py-2 text-white rounded-lg transition-colors">
                 Auto
               </button>
               <button
                 (click)="toggleFloatLabelType('Always')"
-                [class.bg-primary-500]="floatLabelType === 'Always'"
+                [class.bg-primary]="floatLabelType === 'Always'"
                 [class.bg-gray-500]="floatLabelType !== 'Always'"
                 class="px-4 py-2 text-white rounded-lg transition-colors">
                 Always
               </button>
               <button
                 (click)="toggleFloatLabelType('Never')"
-                [class.bg-primary-500]="floatLabelType === 'Never'"
+                [class.bg-primary]="floatLabelType === 'Never'"
                 [class.bg-gray-500]="floatLabelType !== 'Never'"
                 class="px-4 py-2 text-white rounded-lg transition-colors">
                 Never
@@ -125,28 +125,28 @@
             <div class="flex gap-2 flex-wrap">
               <button
                 (click)="toggleResizeMode('None')"
-                [class.bg-primary-500]="resizeMode === 'None'"
+                [class.bg-primary]="resizeMode === 'None'"
                 [class.bg-gray-500]="resizeMode !== 'None'"
                 class="px-4 py-2 text-white rounded-lg transition-colors">
                 None
               </button>
               <button
                 (click)="toggleResizeMode('Both')"
-                [class.bg-primary-500]="resizeMode === 'Both'"
+                [class.bg-primary]="resizeMode === 'Both'"
                 [class.bg-gray-500]="resizeMode !== 'Both'"
                 class="px-4 py-2 text-white rounded-lg transition-colors">
                 Both
               </button>
               <button
                 (click)="toggleResizeMode('Horizontal')"
-                [class.bg-primary-500]="resizeMode === 'Horizontal'"
+                [class.bg-primary]="resizeMode === 'Horizontal'"
                 [class.bg-gray-500]="resizeMode !== 'Horizontal'"
                 class="px-4 py-2 text-white rounded-lg transition-colors">
                 Horizontal
               </button>
               <button
                 (click)="toggleResizeMode('Vertical')"
-                [class.bg-primary-500]="resizeMode === 'Vertical'"
+                [class.bg-primary]="resizeMode === 'Vertical'"
                 [class.bg-gray-500]="resizeMode !== 'Vertical'"
                 class="px-4 py-2 text-white rounded-lg transition-colors">
                 Vertical
@@ -165,7 +165,7 @@
               min="1"
               max="20"
               step="1"
-              class="px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
+              class="px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary">
           </div>
 
           <div class="p-4 bg-white/5 dark:bg-black/20 theme-myhr:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-myhr:border-primary/30 flex flex-col gap-2">
@@ -179,7 +179,7 @@
               min="10"
               max="100"
               step="5"
-              class="px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
+              class="px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary">
           </div>
 
           <div class="p-4 bg-white/5 dark:bg-black/20 theme-myhr:bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 dark:border-white/5 theme-myhr:border-primary/30 flex flex-col gap-2">
@@ -192,7 +192,7 @@
                   type="checkbox"
                   [checked]="enabled"
                   (change)="enabled = !enabled"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Enabled</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -200,7 +200,7 @@
                   type="checkbox"
                   [checked]="readonly"
                   (change)="readonly = !readonly"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Readonly</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -208,7 +208,7 @@
                   type="checkbox"
                   [checked]="enableAI"
                   (change)="enableAI = !enableAI"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Enable AI Suggestions</span>
               </label>
             </div>

@@ -361,12 +361,13 @@ angular-hr-migration/
 
 **Purpose**: แสดงตัวอย่างการใช้งาน components ทั้งหมด
 
-**Demo Components**: 75+ demo components
-- Glass Morphism Components (3)
-- UI Components (30+)
-- Syncfusion Components (20+)
-- Form Components (10+)
-- Data Display Components (10+)
+**Demo Components**: 96 unique demo components
+- Glass Morphism Components (8)
+- UI Components (33)
+- Syncfusion Components (38)
+- Form Components (7)
+- Data Display Components (6)
+- Advanced Components (14)
 
 **Features**:
 - Live interactive demos

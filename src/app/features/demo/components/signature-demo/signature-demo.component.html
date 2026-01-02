@@ -58,7 +58,7 @@
                 type="text"
                 [value]="strokeColor"
                 (change)="onStrokeColorChange($event)"
-                class="flex-1 px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
+                class="flex-1 px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary">
             </div>
           </div>
           <div>
@@ -75,7 +75,7 @@
                 type="text"
                 [value]="backgroundColor"
                 (change)="onBackgroundColorChange($event)"
-                class="flex-1 px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
+                class="flex-1 px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary">
             </div>
           </div>
         </div>
@@ -85,7 +85,7 @@
               type="checkbox"
               [checked]="isReadOnly"
               (change)="toggleReadOnly()"
-              class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+              class="w-4 h-4 text-primary rounded focus:ring-primary">
             <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Read Only</span>
           </label>
           <label class="flex items-center gap-2 cursor-pointer">
@@ -93,7 +93,7 @@
               type="checkbox"
               [checked]="saveWithBackground"
               (change)="saveWithBackground = !saveWithBackground"
-              class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+              class="w-4 h-4 text-primary rounded focus:ring-primary">
             <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Save with Background</span>
           </label>
         </div>
@@ -105,7 +105,7 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <button
             type="button"
-            class="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+            class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
             (click)="clear()">
             Clear
           </button>

@@ -60,7 +60,7 @@
             <div class="flex gap-2 flex-wrap">
               <button
                 (click)="refresh()"
-                class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors">
+                class="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg transition-colors">
                 Refresh
               </button>
               <button
@@ -96,7 +96,7 @@
                   type="checkbox"
                   [checked]="allowMultiSelection"
                   (change)="allowMultiSelection = !allowMultiSelection"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Allow Multi Selection</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -104,7 +104,7 @@
                   type="checkbox"
                   [checked]="showFileExtension"
                   (change)="showFileExtension = !showFileExtension"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Show File Extension</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -112,7 +112,7 @@
                   type="checkbox"
                   [checked]="showHiddenItems"
                   (change)="showHiddenItems = !showHiddenItems"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Show Hidden Items</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -120,7 +120,7 @@
                   type="checkbox"
                   [checked]="showThumbnail"
                   (change)="showThumbnail = !showThumbnail"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Show Thumbnail</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -128,7 +128,7 @@
                   type="checkbox"
                   [checked]="enablePersistence"
                   (change)="enablePersistence = !enablePersistence"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Enable Persistence</span>
               </label>
             </div>

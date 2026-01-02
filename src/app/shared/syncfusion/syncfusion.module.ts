@@ -22,6 +22,7 @@ import { BreadcrumbModule } from '@syncfusion/ej2-angular-navigations';
 import { MenuModule } from '@syncfusion/ej2-angular-navigations';
 import { SidebarModule } from '@syncfusion/ej2-angular-navigations';
 import { CarouselModule } from '@syncfusion/ej2-angular-navigations';
+import { TreeViewModule } from '@syncfusion/ej2-angular-navigations';
 
 // Syncfusion Layouts
 import { DashboardLayoutModule } from '@syncfusion/ej2-angular-layouts';
@@ -115,6 +116,7 @@ import { FileManagerModule } from '@syncfusion/ej2-angular-filemanager';
     MenuModule,
     SidebarModule,
     CarouselModule,
+    TreeViewModule,
 
     // Layouts
     DashboardLayoutModule,
@@ -200,6 +202,7 @@ import { FileManagerModule } from '@syncfusion/ej2-angular-filemanager';
     MenuModule,
     SidebarModule,
     CarouselModule,
+    TreeViewModule,
 
     // Layouts
     DashboardLayoutModule,

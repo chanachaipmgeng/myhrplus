@@ -1,0 +1,108 @@
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Message Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-myhr:text-white/80 leading-relaxed">
+      Message component for displaying inline messages with different severity types (Success, Info, Warning, Error). Supports icons and close functionality (Syncfusion).
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Live Demo
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Success Message</h3>
+          <ejs-message
+            [severity]="'Success'"
+            [content]="'Operation completed successfully!'"
+            [showIcon]="true">
+          </ejs-message>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Info Message</h3>
+          <ejs-message
+            [severity]="'Info'"
+            [content]="'This is an informational message.'"
+            [showIcon]="true">
+          </ejs-message>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Warning Message</h3>
+          <ejs-message
+            [severity]="'Warning'"
+            [content]="'This is a warning message. Please review your actions.'"
+            [showIcon]="true">
+          </ejs-message>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Error Message</h3>
+          <ejs-message
+            [severity]="'Error'"
+            [content]="'An error occurred. Please try again.'"
+            [showIcon]="true">
+          </ejs-message>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Message with Close Icon</h3>
+          <ejs-message
+            [severity]="'Warning'"
+            [content]="'This message can be closed.'"
+            [showIcon]="true"
+            [showCloseIcon]="true">
+          </ejs-message>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Basic Usage Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Basic Usage
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Success Message</h3>
+          <app-code-viewer [code]="basicExample" language="html" title="Success Message"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Error Message</h3>
+          <app-code-viewer [code]="severityExample" language="html" title="Error Message"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">With Close Icon</h3>
+          <app-code-viewer [code]="withCloseIconExample" language="html" title="With Close Icon"></app-code-viewer>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- API Reference Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      API Reference
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props" title="Inputs"></app-props-table>
+    </app-glass-card>
+  </section>
+</div>
+

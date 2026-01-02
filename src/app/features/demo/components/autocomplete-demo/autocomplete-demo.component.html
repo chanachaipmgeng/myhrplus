@@ -67,7 +67,7 @@
             <div class="flex gap-2 flex-wrap">
               <button
                 (click)="getValue()"
-                class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors">
+                class="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg transition-colors">
                 Get Value
               </button>
               <button
@@ -123,21 +123,21 @@
             <div class="flex gap-2 flex-wrap">
               <button
                 (click)="toggleFilterType('Contains')"
-                [class.bg-primary-500]="filterType === 'Contains'"
+                [class.bg-primary]="filterType === 'Contains'"
                 [class.bg-gray-500]="filterType !== 'Contains'"
                 class="px-4 py-2 text-white rounded-lg transition-colors">
                 Contains
               </button>
               <button
                 (click)="toggleFilterType('StartsWith')"
-                [class.bg-primary-500]="filterType === 'StartsWith'"
+                [class.bg-primary]="filterType === 'StartsWith'"
                 [class.bg-gray-500]="filterType !== 'StartsWith'"
                 class="px-4 py-2 text-white rounded-lg transition-colors">
                 Starts With
               </button>
               <button
                 (click)="toggleFilterType('EndsWith')"
-                [class.bg-primary-500]="filterType === 'EndsWith'"
+                [class.bg-primary]="filterType === 'EndsWith'"
                 [class.bg-gray-500]="filterType !== 'EndsWith'"
                 class="px-4 py-2 text-white rounded-lg transition-colors">
                 Ends With
@@ -152,21 +152,21 @@
             <div class="flex gap-2 flex-wrap">
               <button
                 (click)="toggleSortOrder('None')"
-                [class.bg-primary-500]="sortOrder === 'None'"
+                [class.bg-primary]="sortOrder === 'None'"
                 [class.bg-gray-500]="sortOrder !== 'None'"
                 class="px-4 py-2 text-white rounded-lg transition-colors">
                 None
               </button>
               <button
                 (click)="toggleSortOrder('Ascending')"
-                [class.bg-primary-500]="sortOrder === 'Ascending'"
+                [class.bg-primary]="sortOrder === 'Ascending'"
                 [class.bg-gray-500]="sortOrder !== 'Ascending'"
                 class="px-4 py-2 text-white rounded-lg transition-colors">
                 Ascending
               </button>
               <button
                 (click)="toggleSortOrder('Descending')"
-                [class.bg-primary-500]="sortOrder === 'Descending'"
+                [class.bg-primary]="sortOrder === 'Descending'"
                 [class.bg-gray-500]="sortOrder !== 'Descending'"
                 class="px-4 py-2 text-white rounded-lg transition-colors">
                 Descending
@@ -184,7 +184,7 @@
                   type="checkbox"
                   [checked]="allowFiltering"
                   (change)="allowFiltering = !allowFiltering"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Allow Filtering</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -192,7 +192,7 @@
                   type="checkbox"
                   [checked]="caseSensitive"
                   (change)="caseSensitive = !caseSensitive"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Case Sensitive</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -200,7 +200,7 @@
                   type="checkbox"
                   [checked]="showClearButton"
                   (change)="showClearButton = !showClearButton"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Show Clear Button</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -208,7 +208,7 @@
                   type="checkbox"
                   [checked]="highlight"
                   (change)="highlight = !highlight"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Highlight</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -216,7 +216,7 @@
                   type="checkbox"
                   [checked]="enabled"
                   (change)="enabled = !enabled"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Enabled</span>
               </label>
               <label class="flex items-center gap-2 cursor-pointer">
@@ -224,7 +224,7 @@
                   type="checkbox"
                   [checked]="readonly"
                   (change)="readonly = !readonly"
-                  class="w-4 h-4 text-primary-500 rounded focus:ring-primary-500">
+                  class="w-4 h-4 text-primary rounded focus:ring-primary">
                 <span class="text-sm text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Readonly</span>
               </label>
             </div>
@@ -241,7 +241,7 @@
               min="0"
               max="10"
               step="1"
-              class="px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
+              class="px-4 py-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-700 dark:text-gray-300 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary">
           </div>
       </div>
     </app-glass-card>

@@ -7,7 +7,7 @@
           type="button"
           class="flex items-center justify-center w-10 h-10 border-none bg-transparent rounded-lg cursor-pointer transition-smooth
                  hover:bg-black/5 dark:hover:bg-white/10 theme-myhr:hover:bg-primary/10
-                 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
+                 focus:outline-none focus:ring-2 focus:ring-primary/20"
           (click)="toggleSidebar()"
           [attr.aria-label]="'Toggle sidebar'">
           <span class="material-icons text-2xl text-gray-900 dark:text-gray-100">menu</span>
@@ -31,7 +31,7 @@
                    glass-weak dark:glass-dark-weak theme-myhr:glass-myhr-weak
                    text-gray-900 dark:text-gray-100 text-sm cursor-pointer transition-smooth
                    hover:glass dark:hover:glass-dark theme-myhr:hover:glass-myhr
-                   focus:outline-none focus:ring-2 focus:ring-primary-500/20">
+                   focus:outline-none focus:ring-2 focus:ring-primary/20">
             <option *ngFor="let lang of availableLangs" [value]="lang.code">
               {{ lang.flag }} {{ lang.name }}
             </option>
@@ -47,7 +47,7 @@
                    glass-weak dark:glass-dark-weak theme-myhr:glass-myhr-weak
                    text-gray-900 dark:text-gray-100 text-sm cursor-pointer transition-smooth
                    hover:glass dark:hover:glass-dark theme-myhr:hover:glass-myhr
-                   focus:outline-none focus:ring-2 focus:ring-primary-500/20">
+                   focus:outline-none focus:ring-2 focus:ring-primary/20">
             <option *ngFor="let mode of themeModes" [value]="mode.value">
               {{ mode.icon }} {{ mode.label }}
             </option>
@@ -60,7 +60,7 @@
                    glass-weak dark:glass-dark-weak theme-myhr:glass-myhr-weak
                    text-gray-900 dark:text-gray-100 text-sm cursor-pointer transition-smooth
                    hover:glass dark:hover:glass-dark theme-myhr:hover:glass-myhr
-                   focus:outline-none focus:ring-2 focus:ring-primary-500/20">
+                   focus:outline-none focus:ring-2 focus:ring-primary/20">
             <option *ngFor="let color of themeColors" [value]="color.value">
               {{ color.label }}
             </option>
@@ -122,7 +122,7 @@
                     class="w-full px-3 py-2 rounded-md border border-black/10 dark:border-white/10
                            glass-weak dark:glass-dark-weak theme-myhr:glass-myhr-weak
                            text-gray-900 dark:text-gray-100 text-sm font-mono
-                           focus:outline-none focus:ring-2 focus:ring-primary-500/20"
+                           focus:outline-none focus:ring-2 focus:ring-primary/20"
                     [placeholder]="customPrimaryColor"
                     pattern="^#[0-9A-Fa-f]{6}$"
                     [attr.aria-label]="'Hex color input'">
@@ -198,11 +198,11 @@
               (click)="navigateToHome()"
               class="flex items-center gap-3 px-4 py-3 text-gray-900 dark:text-gray-100 no-underline transition-all duration-200 cursor-pointer
                      border-l-[3px] border-transparent rounded-lg
-                     hover:bg-black/5 dark:hover:bg-white/5 hover:border-primary-500 hover:translate-x-1
+                     hover:bg-black/5 dark:hover:bg-white/5 hover:border-primary hover:translate-x-1
                      theme-myhr:hover:bg-primary/10 theme-myhr:hover:border-primary
-                     focus:outline-none focus:ring-2 focus:ring-primary-500/20"
+                     focus:outline-none focus:ring-2 focus:ring-primary/20"
               [ngClass]="{
-                'bg-primary/10 dark:bg-primary/20 border-primary-500 font-medium shadow-sm': currentRoute === '',
+                'bg-primary/10 dark:bg-primary/20 border-primary font-medium shadow-sm': currentRoute === '',
                 'theme-myhr:bg-primary/20 theme-myhr:border-primary theme-myhr:shadow-[0_0_8px_rgba(var(--primary-rgb),0.3)]': currentRoute === ''
               }">
               <span class="text-lg flex-shrink-0">🏠</span>
@@ -231,11 +231,11 @@
                   (click)="navigateToComponent(component.route)"
                   class="flex items-center gap-3 px-6 py-3 text-gray-900 dark:text-gray-100 no-underline transition-all duration-200 cursor-pointer
                          border-l-[3px] border-transparent
-                         hover:bg-black/5 dark:hover:bg-white/5 hover:border-primary-500 hover:translate-x-1
+                         hover:bg-black/5 dark:hover:bg-white/5 hover:border-primary hover:translate-x-1
                          theme-myhr:hover:bg-primary/10 theme-myhr:hover:border-primary
-                         focus:outline-none focus:ring-2 focus:ring-primary-500/20"
+                         focus:outline-none focus:ring-2 focus:ring-primary/20"
                   [ngClass]="{
-                    'bg-primary/10 dark:bg-primary/20 border-primary-500 font-medium shadow-sm': isActiveRoute(component.route),
+                    'bg-primary/10 dark:bg-primary/20 border-primary font-medium shadow-sm': isActiveRoute(component.route),
                     'theme-myhr:bg-primary/20 theme-myhr:border-primary theme-myhr:shadow-[0_0_8px_rgba(var(--primary-rgb),0.3)]': isActiveRoute(component.route)
                   }">
                   <span class="text-lg flex-shrink-0">{{ component.icon }}</span>

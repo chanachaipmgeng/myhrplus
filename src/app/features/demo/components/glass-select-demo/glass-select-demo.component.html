@@ -24,7 +24,7 @@
           hint="เลือกตัวเลือกจากรายการ">
         </app-glass-select>
 
-        <div *ngIf="singleValue" class="p-4 bg-primary-50/50 dark:bg-primary-900/30 theme-myhr:glass-myhr-weak rounded-md border border-primary-200/50 dark:border-primary-700/50 theme-myhr:border-primary/30">
+        <div *ngIf="singleValue" class="p-4 bg-primary/10 dark:bg-primary/20 theme-myhr:glass-myhr-weak rounded-md border border-primary/20 dark:border-primary/30 theme-myhr:border-primary/30">
           <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">Selected value:</p>
           <p class="font-mono text-gray-800 dark:text-gray-200 theme-myhr:text-white/90">{{ singleValue }}</p>
         </div>
@@ -76,10 +76,10 @@
           hint="สามารถเลือกได้หลายตัวเลือก">
         </app-glass-select>
 
-        <div *ngIf="multiValue && multiValue.length > 0" class="p-4 bg-primary-50/50 dark:bg-primary-900/30 theme-myhr:glass-myhr-weak rounded-md border border-primary-200/50 dark:border-primary-700/50 theme-myhr:border-primary/30">
-          <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-2">Selected values:</p>
-          <div class="flex flex-wrap gap-2">
-            <span *ngFor="let val of multiValue" class="px-2 py-1 bg-primary-100 dark:bg-primary-800 theme-myhr:bg-primary/30 text-primary-700 dark:text-primary-300 theme-myhr:text-primary rounded text-sm">
+        <div *ngIf="multiValue && multiValue.length > 0" class="p-4 bg-primary/10 dark:bg-primary/20 theme-myhr:glass-myhr-weak rounded-md border border-primary/20 dark:border-primary/30 theme-myhr:border-primary/30">
+            <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-2">Selected values:</p>
+            <div class="flex flex-wrap gap-2">
+            <span *ngFor="let val of multiValue" class="px-2 py-1 bg-primary/20 dark:bg-primary/30 theme-myhr:bg-primary/30 text-primary dark:text-primary theme-myhr:text-primary rounded text-sm">
               {{ val }}
             </span>
           </div>

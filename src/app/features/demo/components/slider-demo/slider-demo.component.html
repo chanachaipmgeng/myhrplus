@@ -1,0 +1,139 @@
+<div class="w-full py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Slider Component
+    </h1>
+    <p class="text-base text-gray-600 dark:text-gray-400 theme-myhr:text-white/80 leading-relaxed">
+      Slider component for selecting numeric values by dragging. Supports single value, range, min/max, step, ticks, and vertical orientation (Syncfusion).
+    </p>
+  </div>
+
+  <!-- Live Demo Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Live Demo
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic Slider</h3>
+          <ejs-slider
+            [(value)]="basicValue"
+            [min]="min"
+            [max]="max"
+            [step]="step"
+            (change)="onValueChange($event)">
+          </ejs-slider>
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mt-2">
+            Value: {{ basicValue }}
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">With Min/Max (0-100)</h3>
+          <ejs-slider
+            [(value)]="minMaxValue"
+            [min]="min"
+            [max]="max"
+            [step]="step"
+            (change)="onValueChange($event)">
+          </ejs-slider>
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mt-2">
+            Value: {{ minMaxValue }}
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">With Step (10)</h3>
+          <ejs-slider
+            [(value)]="stepValue"
+            [min]="min"
+            [max]="max"
+            [step]="10">
+          </ejs-slider>
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mt-2">
+            Value: {{ stepValue }}
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Range Slider</h3>
+          <ejs-slider
+            [(value)]="rangeValue"
+            [type]="'Range'"
+            [min]="min"
+            [max]="max">
+          </ejs-slider>
+          <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mt-2">
+            Range: {{ rangeValue[0] }} - {{ rangeValue[1] }}
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Vertical Slider</h3>
+          <div class="flex items-center gap-4">
+            <div class="h-64">
+              <ejs-slider
+                [(value)]="verticalValue"
+                [orientation]="'Vertical'"
+                [min]="min"
+                [max]="max"
+                [step]="step">
+              </ejs-slider>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70">
+              Value: {{ verticalValue }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- Basic Usage Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      Basic Usage
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Basic Slider</h3>
+          <app-code-viewer [code]="basicExample" language="html" title="Basic Slider"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">With Min/Max</h3>
+          <app-code-viewer [code]="minMaxExample" language="html" title="With Min/Max"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">With Step</h3>
+          <app-code-viewer [code]="stepExample" language="html" title="With Step"></app-code-viewer>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">Range Slider</h3>
+          <app-code-viewer [code]="rangeExample" language="html" title="Range Slider"></app-code-viewer>
+        </div>
+      </div>
+    </app-glass-card>
+  </section>
+
+  <!-- API Reference Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
+               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
+      API Reference
+    </h2>
+
+    <app-glass-card padding="p-6">
+      <app-props-table [props]="props" title="Inputs"></app-props-table>
+    </app-glass-card>
+  </section>
+</div>
+

@@ -28,7 +28,7 @@
         <button
           *ngIf="!showAlert"
           (click)="showAlert = true"
-          class="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600">
+          class="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 dark:hover:bg-primary/80 theme-myhr:bg-primary theme-myhr:hover:bg-primary/90">
           Show Alert Again
         </button>
       </div>
@@ -113,11 +113,11 @@
     </app-glass-card>
   </section>
 
-  <!-- Usage Example -->
+  <!-- Advanced Features -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
                text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
-      Usage Example
+      Advanced Features
     </h2>
     <app-code-viewer [code]="usageExample" language="typescript" title="Event Handling"></app-code-viewer>
   </section>

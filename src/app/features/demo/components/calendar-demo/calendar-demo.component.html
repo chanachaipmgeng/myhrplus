@@ -44,7 +44,7 @@
         <button
           *ngFor="let tab of tabs"
           (click)="selectTab(tab)"
-          [class]="'px-4 py-2 rounded-lg font-medium transition-all ' + (activeTab() === tab ? 'bg-primary-600 dark:bg-primary-500 text-white' : 'text-gray-400 dark:text-gray-500 hover:text-white hover:bg-gray-700 dark:hover:bg-gray-600')"
+          [class]="'px-4 py-2 rounded-lg font-medium transition-all ' + (activeTab() === tab ? 'bg-primary dark:bg-primary text-white' : 'text-gray-400 dark:text-gray-500 hover:text-white hover:bg-gray-700 dark:hover:bg-gray-600')"
         >
           <i [class]="'mr-2 ' + (tab === 'calendar' ? 'fas fa-calendar-alt' : tab === 'events' ? 'fas fa-list-alt' : tab === 'stats' ? 'fas fa-chart-bar' : 'fas fa-cog')"></i>
           {{ tab | titlecase }}
@@ -153,7 +153,7 @@
           <select
             [ngModel]="view()"
             (ngModelChange)="onViewChange($event)"
-            class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+            class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary"
           >
             <option [value]="CalendarView.Month">Month</option>
             <option [value]="CalendarView.Week">Week</option>
@@ -166,7 +166,7 @@
           <select
             [ngModel]="weekStartsOn()"
             (ngModelChange)="weekStartsOn.set($event)"
-            class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+            class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary"
           >
             <option [value]="0">Sunday</option>
             <option [value]="1">Monday</option>
@@ -181,7 +181,7 @@
             (ngModelChange)="dayStartHour.set($event)"
             min="0"
             max="23"
-            class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+            class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary"
           >
         </app-glass-card>
 
@@ -193,7 +193,7 @@
             (ngModelChange)="dayEndHour.set($event)"
             min="0"
             max="23"
-            class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+            class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary"
           >
         </app-glass-card>
       </div>
@@ -213,7 +213,7 @@
             [(ngModel)]="selectedEvent()!.title"
             name="title"
             required
-            class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+            class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary"
           >
         </div>
         <div>
@@ -222,7 +222,7 @@
             [(ngModel)]="selectedEvent()!.meta!.description"
             name="description"
             rows="3"
-            class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+            class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary"
           ></textarea>
         </div>
 
@@ -234,7 +234,7 @@
               [ngModel]="selectedEvent()!.start | date:'yyyy-MM-dd'"
               (ngModelChange)="updateEventDate('start', $event)"
               name="startDate"
-              class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+              class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary"
             >
           </div>
           <div>
@@ -244,7 +244,7 @@
               [ngModel]="selectedEvent()!.start | date:'HH:mm'"
               (ngModelChange)="updateEventTime('start', $event)"
               name="startTime"
-              class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+              class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary"
             >
           </div>
         </div>
@@ -257,7 +257,7 @@
               [ngModel]="selectedEvent()!.end | date:'yyyy-MM-dd'"
               (ngModelChange)="updateEventDate('end', $event)"
               name="endDate"
-              class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+              class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary"
             >
           </div>
           <div>
@@ -267,7 +267,7 @@
               [ngModel]="selectedEvent()!.end | date:'HH:mm'"
               (ngModelChange)="updateEventTime('end', $event)"
               name="endTime"
-              class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+              class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary"
             >
           </div>
         </div>
@@ -277,7 +277,7 @@
           <select
             [(ngModel)]="selectedEvent()!.meta!.category"
             name="category"
-            class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+            class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary"
           >
             <option value="General">General</option>
             <option value="Meeting">Meeting</option>
@@ -291,7 +291,7 @@
           <select
             [(ngModel)]="selectedEvent()!.meta!.priority"
             name="priority"
-            class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+            class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary"
           >
             <option value="low">Low</option>
             <option value="medium">Medium</option>
@@ -303,7 +303,7 @@
           <select
             [(ngModel)]="selectedEvent()!.meta!.status"
             name="status"
-            class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+            class="w-full p-2 bg-white dark:bg-gray-800 theme-myhr:glass-myhr-weak border border-gray-300 dark:border-gray-600 theme-myhr:border-primary/30 rounded-lg text-gray-900 dark:text-gray-100 theme-myhr:text-white focus:outline-none focus:ring-2 focus:ring-primary"
           >
             <option value="scheduled">Scheduled</option>
             <option value="in-progress">In Progress</option>
