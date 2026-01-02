@@ -355,7 +355,7 @@ export class ImageUploadComponent implements OnInit, ControlValueAccessor {
   getQualityIconColor(quality: 'excellent' | 'good' | 'fair' | 'poor'): string {
     const colors: Record<string, string> = {
       'excellent': 'text-green-600 dark:text-green-400',
-      'good': 'text-blue-600 dark:text-blue-400',
+      'good': 'text-info dark:text-info/90',
       'fair': 'text-yellow-600 dark:text-yellow-400',
       'poor': 'text-red-600 dark:text-red-400'
     };

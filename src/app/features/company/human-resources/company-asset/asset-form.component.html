@@ -66,7 +66,7 @@
     <!-- Status -->
     <div class="col-span-2 md:col-span-1">
       <label class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1 transition-colors duration-300">{{ 'company.companyAsset.status' | translate }}</label>
-      <select formControlName="status" class="w-full rounded-md border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors duration-300">
+      <select formControlName="status" class="w-full rounded-md border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 shadow-sm focus:border-primary focus:ring-primary transition-colors duration-300">
         <option value="1">ปกติ (Active)</option>
         <option value="2">ชำรุด (Damaged)</option>
         <option value="3">สูญหาย (Lost)</option>
@@ -77,13 +77,13 @@
     <!-- Remarks -->
     <div class="col-span-2">
       <label class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1 transition-colors duration-300">หมายเหตุ</label>
-      <textarea formControlName="remarks" rows="3" class="w-full rounded-md border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors duration-300"></textarea>
+      <textarea formControlName="remarks" rows="3" class="w-full rounded-md border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 shadow-sm focus:border-primary focus:ring-primary transition-colors duration-300"></textarea>
     </div>
 
     <!-- Reservation -->
     <div class="col-span-2">
       <label class="flex items-center space-x-2 cursor-pointer">
-        <input type="checkbox" formControlName="reservation" class="form-checkbox h-5 w-5 text-blue-600">
+        <input type="checkbox" formControlName="reservation" class="form-checkbox h-5 w-5 text-primary">
         <span class="text-gray-700 dark:text-slate-300 transition-colors duration-300">ใช้ระบบการจอง (Reservation System)</span>
       </label>
     </div>

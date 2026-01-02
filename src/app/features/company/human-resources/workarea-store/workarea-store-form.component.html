@@ -62,7 +62,7 @@
           </label>
           <select 
             formControlName="zonetypeid"
-            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-smooth">
+            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth">
             <option value="">{{ TRANSLATION_KEYS.COMMON.ACTIONS.SELECT | translate }}</option>
             <option *ngFor="let zoneType of (zoneTypes$ | async)" [value]="zoneType.zonetypeid">
               {{ zoneType.tdesc }} ({{ zoneType.zonetypeid }})
@@ -78,7 +78,7 @@
           </label>
           <select 
             formControlName="worktypeid"
-            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-smooth">
+            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth">
             <option value="">{{ TRANSLATION_KEYS.COMMON.ACTIONS.SELECT | translate }}</option>
             <option *ngFor="let workType of (workingAreaTypes$ | async)" [value]="workType.worktypeid">
               {{ workType.tdesc }} ({{ workType.worktypeid }})
@@ -92,7 +92,7 @@
           </label>
           <select 
             formControlName="brand_support"
-            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-smooth">
+            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth">
             <option value="">{{ TRANSLATION_KEYS.COMMON.ACTIONS.SELECT | translate }}</option>
             <option *ngFor="let brandStore of (brandStores$ | async)" [value]="brandStore.brandstoreid">
               {{ brandStore.tdesc }} ({{ brandStore.brandstoreid }})
@@ -172,7 +172,7 @@
           </label>
           <select 
             formControlName="work_status"
-            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-smooth">
+            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth">
             <option value="Y">{{ TRANSLATION_KEYS.COMMON.ACTIONS.YES | translate }}</option>
             <option value="N">{{ TRANSLATION_KEYS.COMMON.ACTIONS.NO | translate }}</option>
           </select>
@@ -199,7 +199,7 @@
         <textarea 
           formControlName="objective"
           rows="3"
-          class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-smooth"
+          class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth"
           maxlength="4000">
         </textarea>
       </div>
@@ -211,7 +211,7 @@
         <textarea 
           formControlName="remarks"
           rows="3"
-          class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-smooth"
+          class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent transition-smooth"
           maxlength="4000">
         </textarea>
       </div>

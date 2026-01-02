@@ -44,9 +44,9 @@ export class NotificationComponent implements OnInit, OnDestroy {
       success: 'text-green-600 dark:text-green-400',
       error: 'text-red-600 dark:text-red-400',
       warning: 'text-yellow-600 dark:text-yellow-400',
-      info: 'text-blue-600 dark:text-blue-400'
+      info: 'text-info dark:text-info/90'
     };
-    return colorMap[this.type] || 'text-blue-600 dark:text-blue-400';
+    return colorMap[this.type] || 'text-info dark:text-info/90';
   }
 
   ngOnInit(): void {
