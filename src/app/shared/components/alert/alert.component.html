@@ -14,8 +14,8 @@
   
   <!-- Content -->
   <div class="alert-content">
-    <div *ngIf="title" class="alert-title">{{ title }}</div>
-    <div *ngIf="message" class="alert-message">{{ message }}</div>
+    <div *ngIf="title" class="alert-title">{{ title | translate }}</div>
+    <div *ngIf="message" class="alert-message">{{ message | translate }}</div>
     <ng-content></ng-content>
   </div>
   

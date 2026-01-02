@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, HostListener, QueryList, ViewChildren, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
 export interface Tab {
@@ -13,7 +14,7 @@ export interface Tab {
 @Component({
   selector: 'app-tabs',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss']
 })

@@ -1,6 +1,7 @@
 import { Component, Input, forwardRef, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { IconComponent } from '../icon/icon.component';
 import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
@@ -14,7 +15,7 @@ export interface SelectOption {
 @Component({
   selector: 'app-glass-select',
   standalone: true,
-  imports: [CommonModule, FormsModule, IconComponent],
+  imports: [CommonModule, FormsModule, TranslateModule, IconComponent],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -98,12 +99,14 @@ export class GlassSelectComponent implements ControlValueAccessor {
           .join(', ');
         return selectedLabels;
       }
+      // Placeholder will be translated in template
       return this.placeholder;
     } else {
       if (this.value !== null && this.value !== undefined) {
         const option = this.options.find(opt => opt.value === this.value);
         return option ? option.label : String(this.value);
       }
+      // Placeholder will be translated in template
       return this.placeholder;
     }
   }

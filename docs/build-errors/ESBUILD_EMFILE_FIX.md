@@ -90,6 +90,6 @@ ulimit -n 4096
 
 ---
 
-**Last Updated**: 2025-01-01  
-**Status**: ✅ Fixed
+**Last Updated**: 2025-01-02  
+**Status**: ✅ Fixed - Added polling in build.options (top level)
 

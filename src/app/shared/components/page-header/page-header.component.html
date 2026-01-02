@@ -69,7 +69,7 @@
             size="sm" 
             [color]="info.iconColor || 'text-primary dark:text-primary'">
           </app-icon>
-          <span class="thai-text">{{ info.label }}: {{ info.value }}</span>
+          <span class="thai-text">{{ info.label | translate }}: {{ info.value }}</span>
         </div>
       </div>
 
@@ -84,7 +84,7 @@
           [disabled]="action.disabled || false"
           (clicked)="action.onClick?.()">
           <app-icon *ngIf="action.icon" [name]="action.icon" size="sm" class="mr-2"></app-icon>
-          {{ action.label }}
+          {{ action.label | translate }}
         </app-glass-button>
       </div>
     </div>

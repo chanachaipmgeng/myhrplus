@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { IconComponent } from '../icon/icon.component';
 import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 
@@ -13,7 +14,7 @@ export interface PaginationConfig {
 @Component({
   selector: 'app-pagination',
   standalone: true,
-  imports: [CommonModule, IconComponent],
+  imports: [CommonModule, TranslateModule, IconComponent],
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss']
 })

@@ -50,11 +50,11 @@
                 [ngClass]="{
                   'text-primary font-bold': getStepStatus(i) === 'active'
                 }">
-            {{ step.label }}
+            {{ step.label | translate }}
             <span *ngIf="step.optional" class="text-xs text-slate-500 dark:text-slate-400 font-normal"> ({{ TRANSLATION_KEYS.COMMON.ACTIONS.OPTIONAL | translate }})</span>
           </span>
           <span *ngIf="step.description" class="text-sm text-slate-600 dark:text-slate-400 transition-colors thai-text">
-            {{ step.description }}
+            {{ step.description | translate }}
           </span>
         </div>
       </div>

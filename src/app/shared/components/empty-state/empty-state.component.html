@@ -28,7 +28,7 @@
       [variant]="action.variant || 'primary'"
       (clicked)="action.onClick()">
       <span *ngIf="action.icon" class="mr-2">{{ action.icon }}</span>
-      {{ action.label }}
+      {{ action.label | translate }}
     </app-glass-button>
   </div>
 </app-glass-card>

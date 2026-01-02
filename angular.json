@@ -33,7 +33,8 @@
             ],
             "scripts": [
               "src/assets/balkanapp/orgchart.js"
-            ]
+            ],
+            "poll": 2000
           },
           "configurations": {
             "production": {

@@ -1,13 +1,13 @@
 <div [class]="containerClass">
   <label *ngIf="label" [for]="textareaId" class="block text-sm font-medium text-gray-700 dark:text-gray-200 theme-myhr:text-white/90 mb-2">
-    {{ label }}
+    {{ label | translate }}
     <span *ngIf="required" class="text-red-500 dark:text-red-400 theme-myhr:text-red-400 ml-1" aria-label="จำเป็น">*</span>
   </label>
   <div class="relative">
     <textarea
       [id]="textareaId"
       [rows]="rows"
-      [placeholder]="placeholder"
+      [placeholder]="placeholder | translate"
       [disabled]="disabled"
       [readonly]="readonly"
       [value]="value"
@@ -72,7 +72,7 @@
        class="flex items-center gap-1.5 text-red-500 dark:text-red-400 theme-myhr:text-red-400 text-sm mt-1 fade-in"
        aria-live="polite">
     <app-icon name="error" size="xs" color="text-red-500 dark:text-red-400 theme-myhr:text-red-400"></app-icon>
-    <span class="thai-text">{{ errorMessage }}</span>
+    <span class="thai-text">{{ errorMessage | translate }}</span>
   </div>
 
   <!-- Success Message -->
@@ -82,14 +82,14 @@
        class="flex items-center gap-1.5 text-green-500 dark:text-green-400 theme-myhr:text-green-400 text-sm mt-1 fade-in"
        aria-live="polite">
     <app-icon name="check_circle" size="xs" color="text-green-500 dark:text-green-400 theme-myhr:text-green-400"></app-icon>
-    <span class="thai-text">{{ successMessage }}</span>
+    <span class="thai-text">{{ successMessage | translate }}</span>
   </div>
 
   <!-- Hint Message -->
   <div *ngIf="hint && !hasError && !isValid && !isOverLimit"
        [id]="hintId"
        class="text-gray-500 dark:text-gray-400 theme-myhr:text-white/60 text-sm mt-1">
-    {{ hint }}
+    {{ hint | translate }}
   </div>
 </div>
 
