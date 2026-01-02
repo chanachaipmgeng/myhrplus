@@ -135,28 +135,22 @@
     <app-code-viewer [code]="statesExample" language="html" title="States Example"></app-code-viewer>
   </section>
 
-  <!-- States Section -->
-  <section class="mb-12">
-    <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
-               text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
-      States
-    </h2>
-    <app-glass-card padding="p-6">
-      <div class="flex flex-wrap gap-4">
-        <app-glass-button variant="primary">Normal</app-glass-button>
-        <app-glass-button variant="primary" [disabled]="true">Disabled</app-glass-button>
-        <app-glass-button variant="primary" [loading]="true">Loading</app-glass-button>
-      </div>
-    </app-glass-card>
-  </section>
-
   <!-- Advanced Features Section -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 theme-myhr:border-primary/30
                text-gray-800 dark:text-gray-200 theme-myhr:bg-gradient-to-r theme-myhr:from-primary theme-myhr:via-primary theme-myhr:to-primary theme-myhr:bg-clip-text theme-myhr:text-transparent">
       Advanced Features
     </h2>
+    
+    <app-glass-card padding="p-6">
+      <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+        Advanced usage examples including API integration, button groups, and conditional rendering.
+      </p>
+    </app-glass-card>
+    
     <app-code-viewer [code]="eventExample" language="html" title="Event Handling"></app-code-viewer>
+    <app-code-viewer [code]="advancedExample" language="html" title="Advanced Usage Examples"></app-code-viewer>
+    <app-code-viewer [code]="integrationExample" language="typescript" title="Service Integration Example"></app-code-viewer>
   </section>
 
   <!-- API Reference -->

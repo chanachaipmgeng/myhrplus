@@ -71,7 +71,15 @@
       Advanced Features
     </h2>
 
-    <app-code-viewer [code]="customMessagesExample" language="html" title="Advanced Features Example"></app-code-viewer>
+    <app-glass-card padding="p-6">
+      <p class="text-sm text-gray-600 dark:text-gray-400 theme-myhr:text-white/70 mb-4">
+        Advanced usage examples including complete form integration, custom messages, and reactive forms.
+      </p>
+    </app-glass-card>
+
+    <app-code-viewer [code]="customMessagesExample" language="html" title="Custom Messages Example"></app-code-viewer>
+    <app-code-viewer [code]="advancedExample" language="html" title="Advanced Usage Examples"></app-code-viewer>
+    <app-code-viewer [code]="integrationExample" language="typescript" title="Complete Form Integration Example"></app-code-viewer>
   </section>
 
   <!-- API Reference -->

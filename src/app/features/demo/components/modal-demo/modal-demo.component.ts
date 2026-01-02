@@ -172,4 +172,108 @@ export class ModalDemoComponent {
     alert('Danger action confirmed!');
     this.showDangerModal = false;
   }
+
+  // Advanced Usage Examples
+  advancedExample = `<!-- Modal with Form -->
+<app-modal
+  [show]="showFormModal"
+  title="Create Employee"
+  size="lg"
+  (confirmEvent)="handleFormSubmit()"
+  (closeEvent)="showFormModal = false">
+  <form [formGroup]="form">
+    <app-glass-input
+      label="Name"
+      formControlName="name">
+    </app-glass-input>
+  </form>
+</app-modal>
+
+<!-- Confirmation Modal -->
+<app-modal
+  [show]="showConfirmModal"
+  title="Confirm Action"
+  confirmVariant="danger"
+  (confirmEvent)="handleConfirm()"
+  (closeEvent)="showConfirmModal = false">
+  <p>Are you sure you want to delete this item?</p>
+</app-modal>
+
+<!-- Modal with Loading State -->
+<app-modal
+  [show]="showLoadingModal"
+  title="Processing"
+  [showFooter]="false">
+  <div class="flex items-center justify-center p-8">
+    <app-spinner></app-spinner>
+    <p class="ml-4">Please wait...</p>
+  </div>
+</app-modal>`;
+
+  integrationExample = `// Modal with Service Integration
+@Component({
+  selector: 'app-employee-modal',
+  template: \`
+    <app-modal
+      [show]="isVisible"
+      [title]="isEditing ? 'Edit Employee' : 'Create Employee'"
+      size="lg"
+      (confirmEvent)="handleSave()"
+      (closeEvent)="handleClose()">
+      <form [formGroup]="employeeForm">
+        <app-glass-input
+          label="Name"
+          formControlName="name"
+          [useFormValidationMessages]="true">
+          <app-form-validation-messages [control]="name"></app-form-validation-messages>
+        </app-glass-input>
+      </form>
+    </app-modal>
+  \`
+})
+export class EmployeeModalComponent {
+  @Input() isVisible = false;
+  @Input() isEditing = false;
+  @Input() employee?: Employee;
+  @Output() saved = new EventEmitter<Employee>();
+  @Output() closed = new EventEmitter<void>();
+
+  employeeForm = this.fb.group({
+    name: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]]
+  });
+
+  constructor(
+    private fb: FormBuilder,
+    private apiService: ApiService,
+    private notificationService: NotificationService
+  ) {}
+
+  handleSave(): void {
+    if (this.employeeForm.invalid) {
+      this.employeeForm.markAllAsTouched();
+      return;
+    }
+
+    const request = this.isEditing
+      ? this.apiService.put(\`/api/employees/\${this.employee?.id}\`, this.employeeForm.value)
+      : this.apiService.post('/api/employees', this.employeeForm.value);
+
+    request.subscribe({
+      next: (response) => {
+        if (response.success) {
+          this.notificationService.showSuccess('Saved successfully');
+          this.saved.emit(response.data);
+          this.handleClose();
+        }
+      }
+    });
+  }
+
+  handleClose(): void {
+    this.isVisible = false;
+    this.employeeForm.reset();
+    this.closed.emit();
+  }
+}`;
 }

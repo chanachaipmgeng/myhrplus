@@ -308,9 +308,16 @@ body.theme-myhr {
 
 ## 📚 Related Documentation
 
+### API & Integration Documentation
+- **[DEMO_API_DOCUMENTATION.md](./DEMO_API_DOCUMENTATION.md)** - Complete API documentation for services and components
+- **[DEMO_INTEGRATION_GUIDE.md](./DEMO_INTEGRATION_GUIDE.md)** - Step-by-step integration guides
+- **[DEMO_BEST_PRACTICES.md](./DEMO_BEST_PRACTICES.md)** - Best practices for components and services
+
+### Component Documentation
 - [COMPONENTS_INDEX.md](./COMPONENTS_INDEX.md) - Components reference
 - [TEMPLATE_AND_COMPONENTS_GUIDE.md](./TEMPLATE_AND_COMPONENTS_GUIDE.md) - Components guide
 - [DEMO_SCREENSHOTS_GUIDE.md](./DEMO_SCREENSHOTS_GUIDE.md) - Screenshots guide
+- [DEMO_COMPONENT_TEMPLATE.md](./src/app/features/demo/DEMO_COMPONENT_TEMPLATE.md) - Standard component template
 
 ---
 
@@ -361,5 +368,13 @@ body.theme-myhr {
 - All components follow standard section naming
 
 **See**: `DEMO_COMPONENTS_AUDIT_IMPLEMENTATION_SUMMARY.md` for details
+
+### ✅ API Documentation Complete (2025-01-01)
+- **DEMO_API_DOCUMENTATION.md**: Complete API documentation for all core services and components
+- **DEMO_INTEGRATION_GUIDE.md**: Step-by-step integration guides with real-world examples
+- **DEMO_BEST_PRACTICES.md**: Comprehensive best practices guide
+- **Advanced Usage Examples**: Added to key demo components (glass-card, glass-button, glass-input, modal, form-validation-messages)
+
+**See**: `DEMO_DOCUMENTATION_ENHANCEMENT_SUMMARY.md` for details
 
 

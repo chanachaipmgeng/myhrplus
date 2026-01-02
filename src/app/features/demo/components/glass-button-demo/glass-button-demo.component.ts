@@ -112,6 +112,82 @@ export class GlassButtonDemoComponent {
       this.buttonLoading = false;
     }, 2000);
   }
+
+  // Advanced Usage Examples
+  advancedExample = `<!-- Button with API Call -->
+<app-glass-button 
+  variant="primary"
+  [loading]="isSaving"
+  [disabled]="!isValid"
+  (clicked)="handleSave()">
+  Save
+</app-glass-button>
+
+<!-- Button Group -->
+<div class="flex gap-4">
+  <app-glass-button variant="primary" (clicked)="handleSave()">
+    Save
+  </app-glass-button>
+  <app-glass-button variant="secondary" (clicked)="handleCancel()">
+    Cancel
+  </app-glass-button>
+  <app-glass-button variant="danger" (clicked)="handleDelete()">
+    Delete
+  </app-glass-button>
+</div>
+
+<!-- Conditional Button -->
+<app-glass-button 
+  variant="primary"
+  [disabled]="!hasChanges"
+  (clicked)="handleSubmit()">
+  {{ isEditing ? 'Update' : 'Create' }}
+</app-glass-button>`;
+
+  integrationExample = `// Component with Button Integration
+@Component({
+  selector: 'app-action-buttons',
+  template: \`
+    <div class="flex gap-4">
+      <app-glass-button 
+        variant="primary"
+        [loading]="isSaving"
+        (clicked)="handleSave()">
+        Save
+      </app-glass-button>
+      
+      <app-glass-button 
+        variant="secondary"
+        [disabled]="!hasChanges"
+        (clicked)="handleCancel()">
+        Cancel
+      </app-glass-button>
+    </div>
+  \`
+})
+export class ActionButtonsComponent {
+  isSaving = false;
+  hasChanges = false;
+
+  constructor(
+    private apiService: ApiService,
+    private notificationService: NotificationService
+  ) {}
+
+  handleSave(): void {
+    this.isSaving = true;
+    this.apiService.post('/api/save', this.data)
+      .pipe(finalize(() => this.isSaving = false))
+      .subscribe({
+        next: (response) => {
+          if (response.success) {
+            this.notificationService.showSuccess('Saved successfully');
+            this.hasChanges = false;
+          }
+        }
+      });
+  }
+}`;
 }
 
 

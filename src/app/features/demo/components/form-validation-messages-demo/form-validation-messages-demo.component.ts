@@ -74,4 +74,86 @@ export class FormValidationMessagesDemoComponent {
     email: 'รูปแบบอีเมลไม่ถูกต้อง'
   }">
 </app-form-validation-messages>`;
+
+  // Advanced Usage Examples
+  advancedExample = `<!-- Complete Form with Validation -->
+<form [formGroup]="form">
+  <app-glass-input
+    label="Email"
+    formControlName="email"
+    [useFormValidationMessages]="true">
+    <app-form-validation-messages [control]="form.get('email')"></app-form-validation-messages>
+  </app-glass-input>
+
+  <app-glass-input
+    label="Password"
+    type="password"
+    formControlName="password"
+    [useFormValidationMessages]="true">
+    <app-form-validation-messages [control]="form.get('password')"></app-form-validation-messages>
+  </app-glass-input>
+</form>
+
+<!-- Custom Messages -->
+<app-form-validation-messages
+  [control]="control"
+  [customMessages]="{
+    required: 'This field is required',
+    minlength: 'Minimum length is 8 characters',
+    pattern: 'Invalid format'
+  }">
+</app-form-validation-messages>`;
+
+  integrationExample = `// Complete Form Integration
+@Component({
+  selector: 'app-registration-form',
+  template: \`
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <app-glass-card padding="p-6">
+        <div class="space-y-4">
+          <app-glass-input
+            label="Email"
+            type="email"
+            formControlName="email"
+            [useFormValidationMessages]="true">
+            <app-form-validation-messages [control]="email"></app-form-validation-messages>
+          </app-glass-input>
+
+          <app-glass-input
+            label="Password"
+            type="password"
+            formControlName="password"
+            [useFormValidationMessages]="true">
+            <app-form-validation-messages [control]="password"></app-form-validation-messages>
+          </app-glass-input>
+
+          <app-glass-button
+            type="submit"
+            [disabled]="registrationForm.invalid">
+            Register
+          </app-glass-button>
+        </div>
+      </app-glass-card>
+    </form>
+  \`
+})
+export class RegistrationFormComponent {
+  registrationForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(8)]]
+  });
+
+  constructor(private fb: FormBuilder) {}
+
+  get email() { return this.registrationForm.get('email'); }
+  get password() { return this.registrationForm.get('password'); }
+
+  onSubmit(): void {
+    if (this.registrationForm.invalid) {
+      this.registrationForm.markAllAsTouched();
+      return;
+    }
+    // Handle form submission
+  }
+}`;
 }

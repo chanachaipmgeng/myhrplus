@@ -147,6 +147,78 @@ form = this.fb.group({
 <app-glass-input
   label="Username"
   formControlName="username"
-  [errorMessage]="getErrorMessage('username')">
+  [useFormValidationMessages]="true">
+  <app-form-validation-messages [control]="form.get('username')"></app-form-validation-messages>
 </app-glass-input>`;
+
+  // Advanced Usage Examples
+  advancedExample = `<!-- Input with Form Validation Messages -->
+<app-glass-input
+  label="Email"
+  type="email"
+  formControlName="email"
+  [useFormValidationMessages]="true">
+  <app-form-validation-messages [control]="form.get('email')"></app-form-validation-messages>
+</app-glass-input>
+
+<!-- Input with Dynamic Validation -->
+<app-glass-input
+  label="Password"
+  type="password"
+  formControlName="password"
+  [hint]="getPasswordHint()"
+  [useFormValidationMessages]="true">
+  <app-form-validation-messages [control]="form.get('password')"></app-form-validation-messages>
+</app-glass-input>
+
+<!-- Input with Conditional Disable -->
+<app-glass-input
+  label="Field"
+  [disabled]="isReadonly"
+  [(ngModel)]="value">
+</app-glass-input>`;
+
+  integrationExample = `// Complete Form Integration
+@Component({
+  selector: 'app-employee-form',
+  template: \`
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+      <app-glass-card padding="p-6">
+        <div class="space-y-4">
+          <app-glass-input
+            label="Name"
+            formControlName="name"
+            [useFormValidationMessages]="true">
+            <app-form-validation-messages [control]="name"></app-form-validation-messages>
+          </app-glass-input>
+
+          <app-glass-input
+            label="Email"
+            type="email"
+            formControlName="email"
+            [useFormValidationMessages]="true">
+            <app-form-validation-messages [control]="email"></app-form-validation-messages>
+          </app-glass-input>
+
+          <div class="flex justify-end gap-4">
+            <app-glass-button type="submit" [disabled]="employeeForm.invalid">
+              Submit
+            </app-glass-button>
+          </div>
+        </div>
+      </app-glass-card>
+    </form>
+  \`
+})
+export class EmployeeFormComponent {
+  employeeForm = this.fb.group({
+    name: ['', [Validators.required, Validators.minLength(3)]],
+    email: ['', [Validators.required, Validators.email]]
+  });
+
+  constructor(private fb: FormBuilder) {}
+
+  get name() { return this.employeeForm.get('name'); }
+  get email() { return this.employeeForm.get('email'); }
+}`;
 }
