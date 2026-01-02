@@ -97,6 +97,20 @@
   &:hover::after {
     opacity: 0.5;
   }
+
+  /* Enhanced hover glow */
+  &:hover {
+    box-shadow:
+      0 4px 20px rgba(var(--primary-rgb), 0.3),
+      0 0 30px rgba(var(--primary-rgb), 0.2);
+  }
+
+  [data-theme='myhr'] &:hover,
+  [class*='theme-myhr'] &:hover {
+    box-shadow:
+      0 4px 20px rgba(var(--primary-rgb), 0.4),
+      0 0 40px rgba(var(--primary-rgb), 0.3);
+  }
 }
 
 /* Module Icon Button */
@@ -152,7 +166,7 @@
   /* Enhanced hover state - Using CSS Variables */
   &:hover:not(.active) {
     background: var(--sidebar-hover-bg);
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.02);
     box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.15);
 
     [data-theme='dark'] &,
@@ -165,6 +179,12 @@
       box-shadow:
         0 4px 12px rgba(var(--primary-rgb), 0.3),
         0 0 16px rgba(var(--primary-rgb), 0.2);
+    }
+
+    /* Icon animation on hover */
+    .material-icons,
+    span[class*='e-icons'] {
+      transform: rotate(6deg) scale(1.1);
     }
   }
 

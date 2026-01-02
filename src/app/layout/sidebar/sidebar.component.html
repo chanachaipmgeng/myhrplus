@@ -16,11 +16,17 @@
                 border border-white/20 dark:border-gray-700/20 theme-myhr:border-primary/30
                 cursor-pointer
                 group relative overflow-hidden
-                animate-myhr-pulse">
+                pulse">
         <!-- Shimmer Effect -->
         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent
                     -translate-x-full group-hover:translate-x-full
                     transition-transform duration-1000 ease-in-out"></div>
+        <!-- Glow Effect on Hover -->
+        <div class="absolute inset-0 rounded-xl
+                    bg-gradient-to-br from-primary/0 to-primary/0
+                    group-hover:from-primary/20 group-hover:to-primary/20
+                    transition-all duration-300
+                    blur-sm opacity-0 group-hover:opacity-100"></div>
         <img [src]="getLogoPath()"
              [alt]="'layout.sidebar.appLogo' | translate"
              class="w-10 h-10 object-contain relative z-10
@@ -51,12 +57,12 @@
                        border-0 bg-transparent">
           <!-- Hover Background -->
           <div class="absolute inset-0 rounded-xl
-                      bg-gradient-to-br from-blue-500/0 to-indigo-500/0
-                      group-hover:from-blue-500/10 group-hover:to-indigo-500/10
+                      bg-gradient-to-br from-primary/0 to-primary/0
+                      group-hover:from-primary/10 group-hover:to-primary/10
                       transition-all duration-300"></div>
           <!-- Icon -->
           <span class="material-icons text-xl transition-all duration-300 relative z-10
-                       icon-micro group-hover:rotate-6
+                       icon-micro group-hover:rotate-6 group-hover:scale-110
                        text-gray-700 dark:text-gray-300 theme-myhr:text-white/90">
             {{ level2Item.icon || 'folder' }}
           </span>
@@ -98,17 +104,17 @@
                   fade-in">
           <!-- Hover Background -->
           <div class="absolute inset-0 rounded-xl
-                      bg-gradient-to-br from-blue-500/0 to-indigo-500/0
-                      group-hover:from-blue-500/10 group-hover:to-indigo-500/10
+                      bg-gradient-to-br from-primary/0 to-primary/0
+                      group-hover:from-primary/10 group-hover:to-primary/10
                       transition-all duration-300"></div>
           <span *ngIf="module.iconCss"
                 [class]="module.iconCss"
                 class="text-xl transition-all duration-300 relative z-10
-                       icon-micro group-hover:rotate-6
+                       icon-micro group-hover:rotate-6 group-hover:scale-110
                        text-gray-700 dark:text-gray-300 theme-myhr:text-white/90"></span>
           <span *ngIf="!module.iconCss"
                 class="text-xl transition-all duration-300 relative z-10
-                       icon-micro group-hover:rotate-6
+                       icon-micro group-hover:rotate-6 group-hover:scale-110
                        text-gray-700 dark:text-gray-300 theme-myhr:text-white/90
                        e-icons e-folder"></span>
           <!-- Active Indicator -->
