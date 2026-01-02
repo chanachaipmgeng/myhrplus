@@ -93,7 +93,7 @@
           <app-glass-card
             padding="p-4 md:p-5"
             customClass="bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 text-white text-center hover:scale-105 hover:shadow-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-indigo-400 focus-within:ring-offset-2">
-            <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2" [attr.aria-hidden]="true">{{ statistics.branches.value }}</div>
+            <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2"  >{{ statistics.branches.value }}</div>
             <div class="text-xs md:text-sm opacity-90 mb-2" id="branches-card-description">{{ 'company.dashboard.statistics.branches' | translate }}</div>
             <!-- Comparison View -->
             <div *ngIf="comparisonMode" class="text-xs opacity-70 mb-1">
@@ -124,7 +124,7 @@
           <app-glass-card
             padding="p-4 md:p-5"
             customClass="bg-gradient-to-br from-pink-500 to-red-500 dark:from-pink-600 dark:to-red-600 text-white text-center hover:scale-105 hover:shadow-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-pink-400 focus-within:ring-offset-2">
-            <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2" [attr.aria-hidden]="true">{{ statistics.divisions.value }}</div>
+            <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2"  >{{ statistics.divisions.value }}</div>
             <div class="text-xs md:text-sm opacity-90 mb-2" id="divisions-card-description">{{ 'company.dashboard.statistics.divisions' | translate }}</div>
             <!-- Comparison View -->
             <div *ngIf="comparisonMode" class="text-xs opacity-70 mb-1">
@@ -155,14 +155,14 @@
           <app-glass-card
             padding="p-4 md:p-5"
             customClass="bg-gradient-to-br from-primary to-primary dark:from-primary dark:to-primary text-white text-center hover:scale-105 hover:shadow-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2">
-            <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2" [attr.aria-hidden]="true">{{ statistics.departments.value }}</div>
+            <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2"  >{{ statistics.departments.value }}</div>
             <div class="text-xs md:text-sm opacity-90 mb-2" id="departments-card-description">{{ 'company.dashboard.statistics.departments' | translate }}</div>
             <!-- Comparison View -->
             <div *ngIf="comparisonMode" class="text-xs opacity-70 mb-1">
               <span>{{ 'company.dashboard.comparison.previous' | translate }}: {{ previousPeriodStatistics.departments }}</span>
             </div>
             <div class="flex items-center justify-center gap-1 text-xs opacity-80" [attr.aria-label]="(statistics.departments.change >= 0 ? '+' : '') + statistics.departments.change + ' ' + ('company.dashboard.statistics.trend' | translate) + (comparisonMode ? ', ' + (getComparisonPercentage(statistics.departments.value, previousPeriodStatistics.departments) >= 0 ? '+' : '') + getComparisonPercentage(statistics.departments.value, previousPeriodStatistics.departments) + '%' : '')">
-              <app-icon [name]="statistics.departments.change >= 0 ? 'trending_up' : 'trending_down'" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
+              <app-icon [name]="statistics.departments.change >= 0 ? 'trending_up' : 'trending_down'" size="xs" color="text-white"  ></app-icon>
               <span>{{ statistics.departments.change >= 0 ? '+' : '' }}{{ statistics.departments.change }} {{ 'company.dashboard.statistics.trend' | translate }}</span>
               <span *ngIf="comparisonMode" class="ml-1" [attr.aria-label]="'company.dashboard.comparison.percentageChange' | translate">
                 ({{ getComparisonPercentage(statistics.departments.value, previousPeriodStatistics.departments) >= 0 ? '+' : '' }}{{ getComparisonPercentage(statistics.departments.value, previousPeriodStatistics.departments) }}%)
@@ -186,14 +186,14 @@
           <app-glass-card
             padding="p-4 md:p-5"
             customClass="bg-gradient-to-br from-green-400 to-teal-400 dark:from-green-500 dark:to-teal-500 text-white text-center hover:scale-105 hover:shadow-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-green-400 focus-within:ring-offset-2">
-            <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2" [attr.aria-hidden]="true">{{ statistics.positions.value }}</div>
+            <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2"  >{{ statistics.positions.value }}</div>
             <div class="text-xs md:text-sm opacity-90 mb-2" id="positions-card-description">{{ 'company.dashboard.statistics.positions' | translate }}</div>
             <!-- Comparison View -->
             <div *ngIf="comparisonMode" class="text-xs opacity-70 mb-1">
               <span>{{ 'company.dashboard.comparison.previous' | translate }}: {{ previousPeriodStatistics.positions }}</span>
             </div>
             <div class="flex items-center justify-center gap-1 text-xs opacity-80" [attr.aria-label]="(statistics.positions.change >= 0 ? '+' : '') + statistics.positions.change + ' ' + ('company.dashboard.statistics.trend' | translate) + (comparisonMode ? ', ' + (getComparisonPercentage(statistics.positions.value, previousPeriodStatistics.positions) >= 0 ? '+' : '') + getComparisonPercentage(statistics.positions.value, previousPeriodStatistics.positions) + '%' : '')">
-              <app-icon [name]="statistics.positions.change >= 0 ? 'trending_up' : 'trending_down'" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
+              <app-icon [name]="statistics.positions.change >= 0 ? 'trending_up' : 'trending_down'" size="xs" color="text-white"  ></app-icon>
               <span>{{ statistics.positions.change >= 0 ? '+' : '' }}{{ statistics.positions.change }} {{ 'company.dashboard.statistics.trend' | translate }}</span>
               <span *ngIf="comparisonMode" class="ml-1" [attr.aria-label]="'company.dashboard.comparison.percentageChange' | translate">
                 ({{ getComparisonPercentage(statistics.positions.value, previousPeriodStatistics.positions) >= 0 ? '+' : '' }}{{ getComparisonPercentage(statistics.positions.value, previousPeriodStatistics.positions) }}%)
@@ -217,14 +217,14 @@
           <app-glass-card
             padding="p-4 md:p-5"
             customClass="bg-gradient-to-br from-yellow-400 to-orange-400 dark:from-yellow-500 dark:to-orange-500 text-white text-center hover:scale-105 hover:shadow-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-yellow-400 focus-within:ring-offset-2">
-            <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2" [attr.aria-hidden]="true">{{ statistics.locations.value }}</div>
+            <div class="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2"  >{{ statistics.locations.value }}</div>
             <div class="text-xs md:text-sm opacity-90 mb-2" id="locations-card-description">{{ 'company.dashboard.statistics.locations' | translate }}</div>
             <!-- Comparison View -->
             <div *ngIf="comparisonMode" class="text-xs opacity-70 mb-1">
               <span>{{ 'company.dashboard.comparison.previous' | translate }}: {{ previousPeriodStatistics.locations }}</span>
             </div>
             <div class="flex items-center justify-center gap-1 text-xs opacity-80" [attr.aria-label]="(statistics.locations.change >= 0 ? '+' : '') + statistics.locations.change + ' ' + ('company.dashboard.statistics.trend' | translate) + (comparisonMode ? ', ' + (getComparisonPercentage(statistics.locations.value, previousPeriodStatistics.locations) >= 0 ? '+' : '') + getComparisonPercentage(statistics.locations.value, previousPeriodStatistics.locations) + '%' : '')">
-              <app-icon [name]="statistics.locations.change >= 0 ? 'trending_up' : 'trending_down'" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
+              <app-icon [name]="statistics.locations.change >= 0 ? 'trending_up' : 'trending_down'" size="xs" color="text-white"  ></app-icon>
               <span>{{ statistics.locations.change >= 0 ? '+' : '' }}{{ statistics.locations.change }} {{ 'company.dashboard.statistics.trend' | translate }}</span>
               <span *ngIf="comparisonMode" class="ml-1" [attr.aria-label]="'company.dashboard.comparison.percentageChange' | translate">
                 ({{ getComparisonPercentage(statistics.locations.value, previousPeriodStatistics.locations) >= 0 ? '+' : '' }}{{ getComparisonPercentage(statistics.locations.value, previousPeriodStatistics.locations) }}%)
@@ -319,7 +319,7 @@
                   class="p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   [attr.aria-label]="('Export' | translate) + ' ' + ('company.dashboard.charts.divisionStructure' | translate) + ' PDF'"
                   [attr.tabindex]="0">
-                  <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400" [attr.aria-hidden]="true"></app-icon>
+                  <app-icon name="download" size="xs" color="text-gray-500 dark:text-gray-400"  ></app-icon>
                 </button>
               </div>
               <div echarts [options]="divisionPieChartOption" class="w-full h-[280px] min-h-[280px] md:h-[300px]"></div>

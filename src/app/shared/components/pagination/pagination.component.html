@@ -19,7 +19,7 @@
       (keydown.space)="goToFirst(); $event.preventDefault()"
       [attr.aria-label]="'Go to first page'"
       [attr.aria-disabled]="isFirstPage || disabled">
-      <app-icon name="first_page" size="sm" [attr.aria-hidden]="true"></app-icon>
+      <app-icon name="first_page" size="sm"  ></app-icon>
     </button>
 
     <!-- Previous Page Button -->
@@ -33,7 +33,7 @@
       (keydown.space)="goToPrevious(); $event.preventDefault()"
       [attr.aria-label]="'Go to previous page'"
       [attr.aria-disabled]="isFirstPage || disabled">
-      <app-icon name="chevron_left" size="sm" [attr.aria-hidden]="true"></app-icon>
+      <app-icon name="chevron_left" size="sm"  ></app-icon>
     </button>
 
     <!-- Page Numbers -->
@@ -65,7 +65,7 @@
       (keydown.space)="goToNext(); $event.preventDefault()"
       [attr.aria-label]="'Go to next page'"
       [attr.aria-disabled]="isLastPage || disabled">
-      <app-icon name="chevron_right" size="sm" [attr.aria-hidden]="true"></app-icon>
+      <app-icon name="chevron_right" size="sm"  ></app-icon>
     </button>
 
     <!-- Last Page Button -->
@@ -79,7 +79,7 @@
       (keydown.space)="goToLast(); $event.preventDefault()"
       [attr.aria-label]="'Go to last page'"
       [attr.aria-disabled]="isLastPage || disabled">
-      <app-icon name="last_page" size="sm" [attr.aria-hidden]="true"></app-icon>
+      <app-icon name="last_page" size="sm"  ></app-icon>
     </button>
   </div>
 

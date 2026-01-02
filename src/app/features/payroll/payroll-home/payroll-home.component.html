@@ -15,7 +15,7 @@
     <!-- Statistics Cards -->
     <section class="mb-8" aria-labelledby="payroll-statistics-title">
       <h2 id="payroll-statistics-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">สถิติเงินเดือน</h2>
-      
+
       <!-- Loading State -->
       <div *ngIf="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
         <app-skeleton-loader *ngFor="let i of [0,1,2,3,4]" [type]="'card'" [animation]="'pulse'"></app-skeleton-loader>
@@ -38,7 +38,7 @@
           <div class="text-4xl font-bold mb-2">{{ statistics.totalPayroll }}</div>
           <div class="text-sm opacity-90" id="payroll-stat-desc-0">เงินเดือนทั้งหมด</div>
           <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
-            <app-icon name="attach_money" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
+            <app-icon name="attach_money" size="xs" color="text-white"  ></app-icon>
             <span>บาท</span>
           </div>
         </app-glass-card>
@@ -57,7 +57,7 @@
           <div class="text-4xl font-bold mb-2">{{ statistics.totalEmployees }}</div>
           <div class="text-sm opacity-90" id="payroll-stat-desc-1">พนักงานที่จ่าย</div>
           <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
-            <app-icon name="people" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
+            <app-icon name="people" size="xs" color="text-white"  ></app-icon>
             <span>คน</span>
           </div>
         </app-glass-card>
@@ -76,7 +76,7 @@
           <div class="text-4xl font-bold mb-2">{{ statistics.pendingPayroll }}</div>
           <div class="text-sm opacity-90" id="payroll-stat-desc-2">รอจ่าย</div>
           <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
-            <app-icon name="pending" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
+            <app-icon name="pending" size="xs" color="text-white"  ></app-icon>
             <span>รายการ</span>
           </div>
         </app-glass-card>
@@ -95,7 +95,7 @@
           <div class="text-4xl font-bold mb-2">{{ statistics.completedPayroll }}</div>
           <div class="text-sm opacity-90" id="payroll-stat-desc-3">จ่ายแล้ว</div>
           <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
-            <app-icon name="check_circle" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
+            <app-icon name="check_circle" size="xs" color="text-white"  ></app-icon>
             <span>รายการ</span>
           </div>
         </app-glass-card>
@@ -114,7 +114,7 @@
           <div class="text-4xl font-bold mb-2">{{ statistics.averageSalary }}</div>
           <div class="text-sm opacity-90" id="payroll-stat-desc-4">เงินเดือนเฉลี่ย</div>
           <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
-            <app-icon name="trending_up" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
+            <app-icon name="trending_up" size="xs" color="text-white"  ></app-icon>
             <span>บาท/คน</span>
           </div>
         </app-glass-card>
@@ -210,12 +210,12 @@
                 padding="p-6"
                 customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 focus-within:ring-2 focus-within:ring-green-400 focus-within:ring-offset-2">
                 <div class="w-12 h-12 bg-green-50 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4 text-green-600 dark:text-green-400 transition-colors duration-300 group-hover:scale-110">
-                  <app-icon name="payments" size="lg" color="text-green-600 dark:text-green-400" [attr.aria-hidden]="true"></app-icon>
+                  <app-icon name="payments" size="lg" color="text-green-600 dark:text-green-400"  ></app-icon>
                 </div>
                 <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">จัดการเงินเดือน</h4>
                 <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">จัดการข้อมูลเงินเดือนพนักงาน</p>
                 <div class="flex items-center text-green-600 dark:text-green-400 text-sm font-medium transition-colors duration-300">
-                  เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-green-600 dark:text-green-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300" [attr.aria-hidden]="true"></app-icon>
+                  เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-green-600 dark:text-green-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"  ></app-icon>
                 </div>
               </app-glass-card>
             </div>
@@ -235,12 +235,12 @@
                 padding="p-6"
                 customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2">
                 <div class="w-12 h-12 bg-primary/10 dark:bg-primary/10 rounded-lg flex items-center justify-center mb-4 text-primary dark:text-primary transition-colors duration-300 group-hover:scale-110">
-                  <app-icon name="receipt" size="lg" color="text-primary dark:text-primary" [attr.aria-hidden]="true"></app-icon>
+                  <app-icon name="receipt" size="lg" color="text-primary dark:text-primary"  ></app-icon>
                 </div>
                 <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">สลิปเงินเดือน</h4>
                 <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">ดูและจัดการสลิปเงินเดือน</p>
                 <div class="flex items-center text-primary dark:text-primary text-sm font-medium transition-colors duration-300">
-                  เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-primary dark:text-primary" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300" [attr.aria-hidden]="true"></app-icon>
+                  เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-primary dark:text-primary" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"  ></app-icon>
                 </div>
               </app-glass-card>
             </div>
@@ -260,12 +260,12 @@
                 padding="p-6"
                 customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 focus-within:ring-2 focus-within:ring-purple-400 focus-within:ring-offset-2">
                 <div class="w-12 h-12 bg-purple-50 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4 text-purple-600 dark:text-purple-400 transition-colors duration-300 group-hover:scale-110">
-                  <app-icon name="assessment" size="lg" color="text-purple-600 dark:text-purple-400" [attr.aria-hidden]="true"></app-icon>
+                  <app-icon name="assessment" size="lg" color="text-purple-600 dark:text-purple-400"  ></app-icon>
                 </div>
                 <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">รายงาน</h4>
                 <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">รายงานเงินเดือนและสวัสดิการ</p>
                 <div class="flex items-center text-purple-600 dark:text-purple-400 text-sm font-medium transition-colors duration-300">
-                  เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-purple-600 dark:text-purple-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300" [attr.aria-hidden]="true"></app-icon>
+                  เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-purple-600 dark:text-purple-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"  ></app-icon>
                 </div>
               </app-glass-card>
             </div>
@@ -285,12 +285,12 @@
                 padding="p-6"
                 customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 focus-within:ring-2 focus-within:ring-orange-400 focus-within:ring-offset-2">
                 <div class="w-12 h-12 bg-orange-50 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mb-4 text-orange-600 dark:text-orange-400 transition-colors duration-300 group-hover:scale-110">
-                  <app-icon name="savings" size="lg" color="text-orange-600 dark:text-orange-400" [attr.aria-hidden]="true"></app-icon>
+                  <app-icon name="savings" size="lg" color="text-orange-600 dark:text-orange-400"  ></app-icon>
                 </div>
                 <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">สวัสดิการ</h4>
                 <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">จัดการสวัสดิการพนักงาน</p>
                 <div class="flex items-center text-orange-600 dark:text-orange-400 text-sm font-medium transition-colors duration-300">
-                  เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-orange-600 dark:text-orange-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300" [attr.aria-hidden]="true"></app-icon>
+                  เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-orange-600 dark:text-orange-400" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"  ></app-icon>
                 </div>
               </app-glass-card>
             </div>
@@ -312,7 +312,7 @@
                role="listitem"
                [attr.aria-label]="activity.title + ', ' + activity.time">
             <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center flex-shrink-0">
-              <app-icon [name]="activity.icon" size="sm" color="text-green-600 dark:text-green-400" [attr.aria-hidden]="true"></app-icon>
+              <app-icon [name]="activity.icon" size="sm" color="text-green-600 dark:text-green-400"  ></app-icon>
             </div>
             <div class="flex-1 min-w-0">
               <p class="text-sm font-medium text-gray-800 dark:text-gray-100 thai-text">{{ activity.title }}</p>
@@ -345,13 +345,13 @@
                (keydown.enter)="navigateToRoute(task.route)"
                (keydown.space)="navigateToRoute(task.route); $event.preventDefault()">
             <div class="w-10 h-10 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center flex-shrink-0">
-              <app-icon [name]="task.icon" size="sm" color="text-yellow-600 dark:text-yellow-400" [attr.aria-hidden]="true"></app-icon>
+              <app-icon [name]="task.icon" size="sm" color="text-yellow-600 dark:text-yellow-400"  ></app-icon>
             </div>
             <div class="flex-1 min-w-0">
               <p class="text-sm font-medium text-gray-800 dark:text-gray-100 thai-text">{{ task.title }}</p>
               <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ task.count }} รายการ</p>
             </div>
-            <app-icon name="arrow_forward" size="sm" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
+            <app-icon name="arrow_forward" size="sm" color="text-gray-400 dark:text-gray-500"  ></app-icon>
           </li>
           <li *ngIf="pendingTasks.length === 0" class="py-4">
             <app-empty-state

@@ -13,7 +13,7 @@
     <!-- Statistics Cards -->
     <section class="mb-8" aria-labelledby="training-statistics-title">
       <h2 id="training-statistics-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">สถิติการฝึกอบรม</h2>
-      
+
       <!-- Loading State -->
       <div *ngIf="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
         <app-skeleton-loader *ngFor="let i of [0,1,2,3,4]" [type]="'card'" [animation]="'pulse'"></app-skeleton-loader>
@@ -36,7 +36,7 @@
           <div class="text-4xl font-bold mb-2">{{ statistics.totalCourses }}</div>
           <div class="text-sm opacity-90" id="training-stat-desc-0">หลักสูตรทั้งหมด</div>
           <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
-            <app-icon name="menu_book" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
+            <app-icon name="menu_book" size="xs" color="text-white"  ></app-icon>
             <span>หลักสูตร</span>
           </div>
         </app-glass-card>
@@ -55,7 +55,7 @@
           <div class="text-4xl font-bold mb-2">{{ statistics.activeCourses }}</div>
           <div class="text-sm opacity-90" id="training-stat-desc-1">หลักสูตรที่เปิด</div>
           <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
-            <app-icon name="check_circle" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
+            <app-icon name="check_circle" size="xs" color="text-white"  ></app-icon>
             <span>หลักสูตร</span>
           </div>
         </app-glass-card>
@@ -74,7 +74,7 @@
           <div class="text-4xl font-bold mb-2">{{ statistics.enrolled }}</div>
           <div class="text-sm opacity-90" id="training-stat-desc-2">ผู้ลงทะเบียน</div>
           <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
-            <app-icon name="people" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
+            <app-icon name="people" size="xs" color="text-white"  ></app-icon>
             <span>คน</span>
           </div>
         </app-glass-card>
@@ -93,7 +93,7 @@
           <div class="text-4xl font-bold mb-2">{{ statistics.completed }}</div>
           <div class="text-sm opacity-90" id="training-stat-desc-3">อบรมเสร็จสิ้น</div>
           <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
-            <app-icon name="done_all" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
+            <app-icon name="done_all" size="xs" color="text-white"  ></app-icon>
             <span>รายการ</span>
           </div>
         </app-glass-card>
@@ -112,7 +112,7 @@
           <div class="text-4xl font-bold mb-2">{{ statistics.certificates }}</div>
           <div class="text-sm opacity-90" id="training-stat-desc-4">ใบรับรอง</div>
           <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
-            <app-icon name="description" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
+            <app-icon name="description" size="xs" color="text-white"  ></app-icon>
             <span>ใบ</span>
           </div>
         </app-glass-card>
@@ -144,23 +144,23 @@
       <!-- Charts Section: 3 columns (75%) -->
       <div class="lg:col-span-3">
         <h2 id="training-charts-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">กราฟและรายงาน</h2>
-        
+
         <!-- Charts Row 1: 2 columns -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
           <!-- Course Enrollment Chart -->
           <app-glass-card padding="p-5" customClass="hover:shadow-lg transition-shadow duration-300">
             <div class="flex items-center justify-between mb-5">
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การลงทะเบียนอบรม 6 เดือน</h3>
-              <app-icon name="bar_chart" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
+              <app-icon name="bar_chart" size="md" color="text-gray-400 dark:text-gray-500"  ></app-icon>
             </div>
             <div echarts [options]="enrollmentChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟการลงทะเบียนอบรม 6 เดือน'"></div>
           </app-glass-card>
-          
+
           <!-- Course Completion Chart -->
           <app-glass-card padding="p-5" customClass="hover:shadow-lg transition-shadow duration-300">
             <div class="flex items-center justify-between mb-5">
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">อัตราการสำเร็จการอบรม</h3>
-              <app-icon name="pie_chart" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
+              <app-icon name="pie_chart" size="md" color="text-gray-400 dark:text-gray-500"  ></app-icon>
             </div>
             <div echarts [options]="completionChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟอัตราการสำเร็จการอบรม'"></div>
           </app-glass-card>
@@ -172,16 +172,16 @@
           <app-glass-card padding="p-5" customClass="hover:shadow-lg transition-shadow duration-300">
             <div class="flex items-center justify-between mb-5">
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การอบรมตามแผนก</h3>
-              <app-icon name="account_tree" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
+              <app-icon name="account_tree" size="md" color="text-gray-400 dark:text-gray-500"  ></app-icon>
             </div>
             <div echarts [options]="departmentTrainingChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟการอบรมตามแผนก'"></div>
           </app-glass-card>
-          
+
           <!-- Certificate Issuance Chart -->
           <app-glass-card padding="p-5" customClass="hover:shadow-lg transition-shadow duration-300">
             <div class="flex items-center justify-between mb-5">
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การออกใบรับรอง</h3>
-              <app-icon name="description" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
+              <app-icon name="description" size="md" color="text-gray-400 dark:text-gray-500"  ></app-icon>
             </div>
             <div echarts [options]="certificateChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟการออกใบรับรอง'"></div>
           </app-glass-card>
@@ -208,12 +208,12 @@
                 padding="p-6"
                 customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2">
                 <div class="w-12 h-12 bg-primary/10 dark:bg-primary/10 rounded-lg flex items-center justify-center mb-4 text-primary dark:text-primary transition-colors duration-300 group-hover:scale-110">
-                  <app-icon [name]="item.icon" size="lg" color="text-primary dark:text-primary" [attr.aria-hidden]="true"></app-icon>
+                  <app-icon [name]="item.icon" size="lg" color="text-primary dark:text-primary"  ></app-icon>
                 </div>
                 <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ item.title }}</h4>
                 <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ item.description }}</p>
                 <div class="flex items-center text-primary dark:text-primary text-sm font-medium transition-colors duration-300">
-                  เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-primary dark:text-primary" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300" [attr.aria-hidden]="true"></app-icon>
+                  เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-primary dark:text-primary" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"  ></app-icon>
                 </div>
               </app-glass-card>
             </div>

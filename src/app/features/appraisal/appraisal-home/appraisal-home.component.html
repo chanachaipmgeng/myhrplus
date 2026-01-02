@@ -13,7 +13,7 @@
     <!-- Statistics Cards -->
     <section class="mb-8" aria-labelledby="appraisal-statistics-title">
       <h2 id="appraisal-statistics-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">สถิติการประเมินผล</h2>
-      
+
       <!-- Loading State -->
       <div *ngIf="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         <app-skeleton-loader *ngFor="let i of [0,1,2,3]" [type]="'card'" [animation]="'pulse'"></app-skeleton-loader>
@@ -36,7 +36,7 @@
           <div class="text-4xl font-bold mb-2">{{ statistics.totalAppraisals }}</div>
           <div class="text-sm opacity-90" id="appraisal-stat-desc-0">การประเมินทั้งหมด</div>
           <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
-            <app-icon name="assessment" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
+            <app-icon name="assessment" size="xs" color="text-white"  ></app-icon>
             <span>รายการ</span>
           </div>
         </app-glass-card>
@@ -55,7 +55,7 @@
           <div class="text-4xl font-bold mb-2">{{ statistics.inProgress }}</div>
           <div class="text-sm opacity-90" id="appraisal-stat-desc-1">กำลังประเมิน</div>
           <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
-            <app-icon name="pending" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
+            <app-icon name="pending" size="xs" color="text-white"  ></app-icon>
             <span>รายการ</span>
           </div>
         </app-glass-card>
@@ -74,7 +74,7 @@
           <div class="text-4xl font-bold mb-2">{{ statistics.completed }}</div>
           <div class="text-sm opacity-90" id="appraisal-stat-desc-2">ประเมินเสร็จสิ้น</div>
           <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
-            <app-icon name="check_circle" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
+            <app-icon name="check_circle" size="xs" color="text-white"  ></app-icon>
             <span>รายการ</span>
           </div>
         </app-glass-card>
@@ -93,7 +93,7 @@
           <div class="text-4xl font-bold mb-2">{{ statistics.averageScore }}</div>
           <div class="text-sm opacity-90" id="appraisal-stat-desc-3">คะแนนเฉลี่ย</div>
           <div class="mt-2 text-xs opacity-75 flex items-center justify-center gap-1">
-            <app-icon name="star" size="xs" color="text-white" [attr.aria-hidden]="true"></app-icon>
+            <app-icon name="star" size="xs" color="text-white"  ></app-icon>
             <span>คะแนน</span>
           </div>
         </app-glass-card>
@@ -125,23 +125,23 @@
       <!-- Charts Section: 3 columns (75%) -->
       <div class="lg:col-span-3">
         <h2 id="appraisal-charts-title" class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-300">กราฟและรายงาน</h2>
-        
+
         <!-- Charts Row 1: 2 columns -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
           <!-- Appraisal Progress Chart -->
           <app-glass-card padding="p-5" customClass="hover:shadow-lg transition-shadow duration-300">
             <div class="flex items-center justify-between mb-5">
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">ความคืบหน้าการประเมินผล</h3>
-              <app-icon name="assessment" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
+              <app-icon name="assessment" size="md" color="text-gray-400 dark:text-gray-500"  ></app-icon>
             </div>
             <div echarts [options]="progressChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟความคืบหน้าการประเมินผล'"></div>
           </app-glass-card>
-          
+
           <!-- Score Distribution Chart -->
           <app-glass-card padding="p-5" customClass="hover:shadow-lg transition-shadow duration-300">
             <div class="flex items-center justify-between mb-5">
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">การกระจายคะแนน</h3>
-              <app-icon name="pie_chart" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
+              <app-icon name="pie_chart" size="md" color="text-gray-400 dark:text-gray-500"  ></app-icon>
             </div>
             <div echarts [options]="scoreDistributionChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟการกระจายคะแนน'"></div>
           </app-glass-card>
@@ -153,16 +153,16 @@
           <app-glass-card padding="p-5" customClass="hover:shadow-lg transition-shadow duration-300">
             <div class="flex items-center justify-between mb-5">
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">ผลการดำเนินงาน KPI</h3>
-              <app-icon name="trending_up" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
+              <app-icon name="trending_up" size="md" color="text-gray-400 dark:text-gray-500"  ></app-icon>
             </div>
             <div echarts [options]="kpiPerformanceChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟผลการดำเนินงาน KPI'"></div>
           </app-glass-card>
-          
+
           <!-- Department Comparison Chart -->
           <app-glass-card padding="p-5" customClass="hover:shadow-lg transition-shadow duration-300">
             <div class="flex items-center justify-between mb-5">
               <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">เปรียบเทียบตามแผนก</h3>
-              <app-icon name="account_tree" size="md" color="text-gray-400 dark:text-gray-500" [attr.aria-hidden]="true"></app-icon>
+              <app-icon name="account_tree" size="md" color="text-gray-400 dark:text-gray-500"  ></app-icon>
             </div>
             <div echarts [options]="departmentComparisonChartOption" class="h-64" role="img" [attr.aria-label]="'กราฟเปรียบเทียบตามแผนก'"></div>
           </app-glass-card>
@@ -189,12 +189,12 @@
                 padding="p-6"
                 customClass="hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2">
                 <div class="w-12 h-12 bg-primary/10 dark:bg-primary/10 rounded-lg flex items-center justify-center mb-4 text-primary dark:text-primary transition-colors duration-300 group-hover:scale-110">
-                  <app-icon [name]="item.icon" size="lg" color="text-primary dark:text-primary" [attr.aria-hidden]="true"></app-icon>
+                  <app-icon [name]="item.icon" size="lg" color="text-primary dark:text-primary"  ></app-icon>
                 </div>
                 <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-300">{{ item.title }}</h4>
                 <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 transition-colors duration-300">{{ item.description }}</p>
                 <div class="flex items-center text-primary dark:text-primary text-sm font-medium transition-colors duration-300">
-                  เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-primary dark:text-primary" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300" [attr.aria-hidden]="true"></app-icon>
+                  เข้าสู่เมนู <app-icon name="arrow_forward" size="sm" color="text-primary dark:text-primary" customClass="ml-2 group-hover:translate-x-1 transition-transform duration-300"  ></app-icon>
                 </div>
               </app-glass-card>
             </div>

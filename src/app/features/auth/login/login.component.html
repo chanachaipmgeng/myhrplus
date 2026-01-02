@@ -15,7 +15,6 @@
           [attr.aria-controls]="'language-menu'"
           customClass="control-button language-button">
           <img [src]="currentLanguage.flagPath" [alt]="currentLanguage.name" class="control-icon w-5 h-5 rounded-sm object-cover" />
-          <span class="control-text">{{ currentLanguage.name }}</span>
         </app-glass-button>
 
         <!-- Language Dropdown -->
@@ -107,18 +106,22 @@
         <!-- Logo Section -->
         <div class="login-logo-section animated-logo-right">
           <div class="login-logo">
-            <img src="assets/images/logo/logo-myhr-dark.png" alt="myHR Logo" class="login-logo-img" />
+            <img
+              src="assets/images/logo/logo-myhr-dark.png"
+              alt="myHR Logo"
+              class="login-logo-img"
+              [attr.aria-label]="'myHR Logo'" />
           </div>
         </div>
 
         <!-- Login Title -->
         <div class="login-title-section animated-title">
-          <h2 class="login-title thai-text">เข้าสู่ระบบ</h2>
-          <p class="login-subtitle thai-text">กรุณาเข้าสู่ระบบเพื่อใช้งานระบบ HR</p>
+          <h2 class="login-title thai-text">{{ 'features.auth.login.title' | translate }}</h2>
+          <p class="login-subtitle thai-text">{{ 'features.auth.login.subtitle' | translate }}</p>
         </div>
 
         <!-- Login Form -->
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form" [attr.aria-label]="'features.auth.login.formAriaLabel' | translate">
           <!-- Username Field -->
           <div class="form-field">
             <app-glass-input
@@ -159,6 +162,8 @@
               (ngModelChange)="onDbChangeSelect($event)"
               [ariaLabel]="'features.auth.login.selectDatabase' | translate">
             </app-glass-select>
+
+
           </div>
 
           <!-- Remember Me & Forgot Password -->
@@ -169,14 +174,13 @@
               [ngModelOptions]="{standalone: true}"
               [ariaLabel]="'features.auth.login.rememberMe' | translate">
             </app-glass-checkbox>
-            <a
-              href="javascript:void(0);"
+            <button
+              type="button"
               (click)="onForgotPassword()"
               class="forgot-password-link thai-text"
-              [attr.aria-label]="'features.auth.login.forgotPassword' | translate"
-              role="link">
+              [attr.aria-label]="'features.auth.login.forgotPassword' | translate">
               {{ 'features.auth.login.forgotPassword' | translate }}
-            </a>
+            </button>
           </div>
 
           <!-- Error Message -->
