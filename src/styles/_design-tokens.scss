@@ -98,7 +98,7 @@ $info-950: #172554;
 $theme-gradient-myhr: linear-gradient(135deg, #93c5fd, #60a5fa, #07399C);
 /* Color Themes - Same style as default but different colors */
 /* Blue - สีน้ำเงินสดใส */
-$theme-gradient-blue: linear-gradient(135deg, #bfdbfe, #93c5fd, #07399C);
+$theme-gradient-blue: linear-gradient(135deg, #bfdbfe, #93c5fd, #3b82f6);
 /* Indigo - สีครามเข้ม */
 $theme-gradient-indigo: linear-gradient(135deg, #c7d2fe, #a5b4fc, #6366f1);
 /* Purple - สีม่วงสวยงาม */
@@ -177,8 +177,8 @@ $glass-border-dark-weak: rgba(51, 65, 85, 0.2);
 
 /* MyHR Theme Glass */
 $glass-bg-myhr: rgba(15, 23, 42, 0.9);
-$glass-border-myhr: rgba(59, 130, 246, 0.3);
-$glass-glow-myhr: rgba(59, 130, 246, 0.2);
+$glass-border-myhr: rgba(7, 57, 156, 0.3); // MyHR Brand Color #07399C
+$glass-glow-myhr: rgba(7, 57, 156, 0.2); // MyHR Brand Color #07399C
 
 /* ============================================
    Typography - Font Families
@@ -332,9 +332,9 @@ $shadow-glass-dark-sm: 0 4px 16px 0 rgba(0, 0, 0, 0.3);
 $shadow-glass-dark-lg: 0 12px 48px 0 rgba(0, 0, 0, 0.7);
 
 /* MyHR Theme Shadows */
-$shadow-myhr: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 40px rgba(59, 130, 246, 0.1);
-$shadow-myhr-sm: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.2), 0 0 30px rgba(59, 130, 246, 0.1);
-$shadow-myhr-lg: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(59, 130, 246, 0.4), 0 0 60px rgba(59, 130, 246, 0.2);
+$shadow-myhr: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(7, 57, 156, 0.2), 0 0 40px rgba(7, 57, 156, 0.1); // MyHR Brand Color #07399C
+$shadow-myhr-sm: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(7, 57, 156, 0.2), 0 0 30px rgba(7, 57, 156, 0.1); // MyHR Brand Color #07399C
+$shadow-myhr-lg: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(7, 57, 156, 0.4), 0 0 60px rgba(7, 57, 156, 0.2); // MyHR Brand Color #07399C
 
 /* ============================================
    Backdrop Blur
@@ -425,10 +425,10 @@ $transition-shadow: box-shadow $duration-200 $ease-in-out;
 $myhr-bg: #000000;
 $myhr-gradient-start: #93c5fd;
 $myhr-gradient-mid: #60a5fa;
-$myhr-gradient-end: #07399C;
-$myhr-glow: rgba(59, 130, 246, 0.3);
-$myhr-glow-strong: rgba(59, 130, 246, 0.5);
-$myhr-glow-weak: rgba(59, 130, 246, 0.2);
+$myhr-gradient-end: #07399C; // MyHR Brand Color
+$myhr-glow: rgba(7, 57, 156, 0.3); // MyHR Brand Color #07399C
+$myhr-glow-strong: rgba(7, 57, 156, 0.5); // MyHR Brand Color #07399C
+$myhr-glow-weak: rgba(7, 57, 156, 0.2); // MyHR Brand Color #07399C
 
 /* ============================================
    Helper Functions

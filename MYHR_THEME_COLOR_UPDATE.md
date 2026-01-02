@@ -217,3 +217,4 @@ primaryColor: '7, 57, 156', // MyHR Brand Color #07399C
 **Status**: ✅ Complete - MyHR theme colors updated to #07399C
 
 
+

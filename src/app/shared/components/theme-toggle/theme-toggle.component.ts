@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener, ElementRef, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ThemeService, ThemeMode, ThemeColor, SidebarStyle, HeaderStyle, MainLayoutStyle } from '@core/services';
 import { IconComponent } from '../icon/icon.component';
@@ -8,7 +8,7 @@ import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 @Component({
   selector: 'app-theme-toggle',
   standalone: true,
-  imports: [CommonModule, FormsModule, IconComponent],
+  imports: [CommonModule, FormsModule, NgClass, IconComponent],
   templateUrl: './theme-toggle.component.html',
   styleUrls: ['./theme-toggle.component.scss']
 })
@@ -54,15 +54,60 @@ export class ThemeToggleComponent implements OnInit {
   @ViewChild('colorPickerContainer') colorPickerContainer?: ElementRef<HTMLDivElement>;
 
   themeColors = [
-    { value: 'myhr' as ThemeColor, name: 'ค่าเริ่มต้น', gradient: 'var(--theme-gradient-myhr)' },
-    { value: 'blue' as ThemeColor, name: 'น้ำเงิน', gradient: 'var(--theme-gradient-blue)' },
-    { value: 'indigo' as ThemeColor, name: 'คราม', gradient: 'var(--theme-gradient-indigo)' },
-    { value: 'purple' as ThemeColor, name: 'ม่วง', gradient: 'var(--theme-gradient-purple)' },
-    { value: 'green' as ThemeColor, name: 'เขียว', gradient: 'var(--theme-gradient-green)' },
-    { value: 'orange' as ThemeColor, name: 'ส้ม', gradient: 'var(--theme-gradient-orange)' },
-    { value: 'red' as ThemeColor, name: 'แดง', gradient: 'var(--theme-gradient-red)' },
-    { value: 'teal' as ThemeColor, name: 'เทาเขียว', gradient: 'var(--theme-gradient-teal)' },
-    { value: 'pink' as ThemeColor, name: 'ชมพู', gradient: 'var(--theme-gradient-pink)' }
+    {
+      value: 'myhr' as ThemeColor,
+      name: 'ค่าเริ่มต้น',
+      gradient: 'linear-gradient(135deg, #07399C 0%, #052d7a 100%)',
+      preview: '#07399C'
+    },
+    {
+      value: 'blue' as ThemeColor,
+      name: 'น้ำเงิน',
+      gradient: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+      preview: '#3b82f6'
+    },
+    {
+      value: 'indigo' as ThemeColor,
+      name: 'คราม',
+      gradient: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+      preview: '#6366f1'
+    },
+    {
+      value: 'purple' as ThemeColor,
+      name: 'ม่วง',
+      gradient: 'linear-gradient(135deg, #a855f7 0%, #9333ea 100%)',
+      preview: '#a855f7'
+    },
+    {
+      value: 'green' as ThemeColor,
+      name: 'เขียว',
+      gradient: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)',
+      preview: '#22c55e'
+    },
+    {
+      value: 'orange' as ThemeColor,
+      name: 'ส้ม',
+      gradient: 'linear-gradient(135deg, #f97316 0%, #ea580c 100%)',
+      preview: '#f97316'
+    },
+    {
+      value: 'red' as ThemeColor,
+      name: 'แดง',
+      gradient: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+      preview: '#ef4444'
+    },
+    {
+      value: 'teal' as ThemeColor,
+      name: 'เทาเขียว',
+      gradient: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
+      preview: '#14b8a6'
+    },
+    {
+      value: 'pink' as ThemeColor,
+      name: 'ชมพู',
+      gradient: 'linear-gradient(135deg, #ec4899 0%, #db2777 100%)',
+      preview: '#ec4899'
+    }
   ];
 
   constructor(public themeService: ThemeService) {}
@@ -220,6 +265,55 @@ export class ThemeToggleComponent implements OnInit {
     if (event.key === 'Escape') {
       this.showThemeMenu = false;
       this.showColorPicker = false;
+    }
+  }
+
+  /**
+   * Get style preview background for sidebar, header, or main-layout
+   */
+  getStylePreview(style: SidebarStyle | HeaderStyle | MainLayoutStyle, component: 'sidebar' | 'header' | 'main-layout'): string {
+    const isDark = this.themeService.isDarkMode();
+    const rgb = this.themeService.getCurrentTheme().primaryColor;
+
+    switch (style) {
+      case 'white':
+        return isDark
+          ? 'linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))'
+          : 'linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9))';
+
+      case 'dark':
+        return isDark
+          ? 'linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.85))'
+          : 'linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1))';
+
+      case 'primary':
+        return isDark
+          ? `linear-gradient(to bottom, rgba(${rgb}, 0.9), rgba(${rgb}, 0.85))`
+          : `linear-gradient(to bottom, rgba(${rgb}, 0.95), rgba(${rgb}, 0.9))`;
+
+      case 'primary-gradient':
+        return isDark
+          ? `linear-gradient(to bottom, rgba(${rgb}, 0.95), rgba(${rgb}, 0.6))`
+          : `linear-gradient(to bottom, rgba(${rgb}, 1), rgba(${rgb}, 0.75))`;
+
+      default:
+        return 'transparent';
+    }
+  }
+
+  /**
+   * Get mode preview background
+   */
+  getModePreview(mode: ThemeMode): string {
+    switch (mode) {
+      case 'light':
+        return 'linear-gradient(to bottom, #fef3c7, #fde68a)';
+      case 'dark':
+        return 'linear-gradient(to bottom, #1e293b, #0f172a)';
+      case 'auto':
+        return 'linear-gradient(to bottom, #fef3c7 0%, #cbd5e1 50%, #1e293b 100%)';
+      default:
+        return 'transparent';
     }
   }
 }

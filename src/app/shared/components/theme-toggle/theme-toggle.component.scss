@@ -8,6 +8,32 @@
   display: inline-block;
 }
 
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Theme Menu */
+.theme-menu {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Color Picker Popup */
+.color-picker-popup {
+  animation: fadeIn 0.2s ease-out;
+}
+
 /* Active State */
 .active {
   @apply bg-primary/10 text-primary;
@@ -55,6 +81,107 @@ body.theme-myhr {
   }
 }
 
+/* Theme Color Button */
+.theme-color-btn {
+  position: relative;
+  
+  /* Tooltip on hover */
+  &:hover .theme-color-tooltip {
+    opacity: 1;
+  }
+  
+  /* Active state glow and ring */
+  &.active {
+    box-shadow: 
+      0 0 0 2px rgba(var(--primary-rgb), 0.5),
+      0 0 0 4px rgba(var(--primary-rgb), 0.3),
+      0 4px 12px rgba(var(--primary-rgb), 0.3),
+      0 0 20px rgba(var(--primary-rgb), 0.2);
+  }
+  
+  /* Focus ring */
+  &:focus {
+    outline: none;
+    box-shadow: 
+      0 0 0 2px rgba(var(--primary-rgb), 0.3),
+      0 0 0 4px rgba(var(--primary-rgb), 0.1);
+  }
+}
+
+/* Theme Mode Button */
+.theme-mode-btn {
+  position: relative;
+  
+  .preview-thumbnail {
+    transition: transform 0.2s ease;
+  }
+  
+  &:hover .preview-thumbnail {
+    transform: scale(1.05);
+  }
+  
+  &.active {
+    .preview-thumbnail {
+      box-shadow: 0 0 8px rgba(var(--primary-rgb), 0.3);
+    }
+  }
+}
+
+/* Style Option Button */
+.style-option-btn {
+  position: relative;
+  
+  .preview-thumbnail {
+    transition: transform 0.2s ease;
+  }
+  
+  &:hover .preview-thumbnail {
+    transform: scale(1.05);
+  }
+  
+  &.active {
+    .preview-thumbnail {
+      box-shadow: 0 0 8px rgba(var(--primary-rgb), 0.3);
+    }
+  }
+}
+
+/* Preview Thumbnail */
+.preview-thumbnail {
+  transition: all 0.2s ease;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Theme Color Tooltip */
+.theme-color-tooltip {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-top-color: rgb(15, 23, 42);
+  }
+  
+  .dark &::after {
+    border-top-color: rgb(30, 41, 59);
+  }
+}
+
+/* Smooth Transitions for Theme Changes */
+:host {
+  /* Add transition to CSS variables for smooth theme changes */
+  * {
+    transition: 
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+}
+
 /* Responsive */
 @media (max-width: 640px) {
   .w-48 {
@@ -67,6 +194,29 @@ body.theme-myhr {
 
   .grid-cols-4 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  
+  /* Smaller preview thumbnails on mobile */
+  .preview-thumbnail {
+    height: 2rem !important;
+  }
+  
+  .theme-mode-btn .preview-thumbnail {
+    height: 2.5rem !important;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .theme-menu,
+  .color-picker-popup,
+  .theme-color-btn,
+  .theme-mode-btn,
+  .style-option-btn,
+  .preview-thumbnail {
+    animation: none !important;
+    transition: none !important;
   }
 }
 

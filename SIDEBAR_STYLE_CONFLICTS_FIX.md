@@ -87,3 +87,4 @@ These classes are **NOT** redundant and should be kept:
 
 All style conflicts have been resolved. The sidebar component now uses SCSS/CSS variables exclusively for backgrounds, ensuring consistent theming and no conflicts.
 
+

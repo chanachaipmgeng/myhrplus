@@ -58,7 +58,7 @@
    Focus States
    ============================================ */
 *:focus-visible {
-  outline: 2px solid var(--primary-color, rgb(var(--primary-rgb, 59, 130, 246)));
+  outline: 2px solid var(--primary-color, rgb(var(--primary-rgb, 7, 57, 156)));
   outline-offset: 2px;
   border-radius: var(--radius-sm, 0.25rem);
 }
@@ -70,9 +70,9 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid var(--primary-color, rgb(var(--primary-rgb, 59, 130, 246)));
+  outline: 2px solid var(--primary-color, rgb(var(--primary-rgb, 7, 57, 156)));
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px rgba(var(--primary-rgb, 59, 130, 246), 0.1);
+  box-shadow: 0 0 0 4px rgba(var(--primary-rgb, 7, 57, 156), 0.1);
 }
 
 /* Remove default focus for mouse users */
@@ -81,7 +81,7 @@ textarea:focus-visible,
 }
 
 .focus-visible {
-  outline: 2px solid var(--primary-color, rgb(var(--primary-rgb, 59, 130, 246)));
+  outline: 2px solid var(--primary-color, rgb(var(--primary-rgb, 7, 57, 156)));
   outline-offset: 2px;
 }
 
@@ -223,9 +223,9 @@ textarea:focus-visible,
 
 .focus-indicator-extra-high {
   .focus-visible {
-    outline: 4px solid #07399C;
+    outline: 4px solid var(--primary-color, #07399C);
     outline-offset: 4px;
-    box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 0 0 6px rgba(var(--primary-rgb), 0.3);
   }
 }
 
@@ -530,7 +530,7 @@ textarea {
   }
 
   &[aria-required="true"] {
-    border-left: 3px solid var(--primary-color, rgb(var(--primary-rgb, 59, 130, 246)));
+    border-left: 3px solid var(--primary-color, rgb(var(--primary-rgb, 7, 57, 156)));
   }
 }
 
@@ -643,7 +643,7 @@ table {
    ============================================ */
 .keyboard-nav-active {
   *:focus-visible {
-    outline: 3px solid var(--primary-color, rgb(var(--primary-rgb, 59, 130, 246)));
+    outline: 3px solid var(--primary-color, rgb(var(--primary-rgb, 7, 57, 156)));
     outline-offset: 3px;
   }
 }

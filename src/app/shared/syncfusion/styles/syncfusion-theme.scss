@@ -5,12 +5,12 @@
 
 /* CSS Variables for Syncfusion Components */
 :root {
-  --sf-primary: 59, 130, 246;        /* blue-500 */
+  --sf-primary: var(--primary-rgb, 7, 57, 156);        /* Use primary-rgb (MyHR default) */
   --sf-secondary: 99, 102, 241;     /* indigo-500 */
   --sf-success: 34, 197, 94;         /* green-500 */
   --sf-danger: 239, 68, 68;         /* red-500 */
   --sf-warning: 245, 158, 11;       /* amber-500 */
-  --sf-info: 59, 130, 246;           /* blue-500 */
+  --sf-info: var(--primary-rgb, 7, 57, 156);           /* Use primary-rgb (MyHR default) */
   
   --sf-background: rgba(255, 255, 255, 0.25);
   --sf-border: rgba(255, 255, 255, 0.3);

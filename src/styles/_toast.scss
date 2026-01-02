@@ -69,7 +69,7 @@
   
   /* Info Toast */
   &.toast-info {
-    background-color: var(--primary-color, rgb(var(--primary-rgb, 59, 130, 246)));
+    background-color: var(--primary-color, rgb(var(--primary-rgb, 7, 57, 156)));
     color: white;
     border-left: 4px solid rgba(255, 255, 255, 0.3);
     
@@ -235,7 +235,7 @@
     }
     
     &.toast-info {
-      background-color: rgba(var(--primary-rgb, 59, 130, 246), 0.9);
+      background-color: rgba(var(--primary-rgb, 7, 57, 156), 0.9);
     }
     
     &.toast-warning {

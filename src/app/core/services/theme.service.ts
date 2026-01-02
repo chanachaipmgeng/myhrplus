@@ -107,24 +107,24 @@ export class ThemeService {
    */
   setColor(color: ThemeColor): void {
     const colorMap: Record<ThemeColor, string> = {
+      // MyHR - สีน้ำเงิน MyHR Brand Color (default)
+      myhr: '7, 57, 156', // #07399C
       // Blue - สีน้ำเงินสดใส
-      blue: '59, 130, 246',
+      blue: '59, 130, 246', // #3b82f6
       // Indigo - สีครามเข้ม
-      indigo: '99, 102, 241',
+      indigo: '99, 102, 241', // #6366f1
       // Purple - สีม่วงสวยงาม
-      purple: '168, 85, 247',
+      purple: '168, 85, 247', // #a855f7
       // Green - สีเขียวสดใส
-      green: '34, 197, 94',
+      green: '34, 197, 94', // #22c55e
       // Orange - สีส้มอบอุ่น
-      orange: '249, 115, 22',
+      orange: '249, 115, 22', // #f97316
       // Red - สีแดงเข้ม
-      red: '239, 68, 68',
+      red: '239, 68, 68', // #ef4444
       // Teal - สีเทาเขียวสวยงาม
-      teal: '20, 184, 166',
+      teal: '20, 184, 166', // #14b8a6
       // Pink - สีชมพูนุ่มนวล
-      pink: '236, 72, 153',
-      // MyHR - สีน้ำเงินสวยงาม (default)
-      myhr: '59, 130, 246'
+      pink: '236, 72, 153' // #ec4899
     };
 
     const currentTheme = this.themeSubject.value;
