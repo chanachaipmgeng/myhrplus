@@ -33,12 +33,12 @@ export class AuthGuard implements CanActivate {
     if (token) {
       // Validate token using TokenManagerService
       const validation = this.tokenManager.validateToken(token);
-      
+
       if (validation.isValid && !validation.isExpired) {
         // Token is valid, try to restore session
         if (typeof window !== 'undefined' && window.sessionStorage) {
           const sessionUser = sessionStorage.getItem('currentUser');
-          
+
           if (sessionUser) {
             try {
               const user = JSON.parse(sessionUser);

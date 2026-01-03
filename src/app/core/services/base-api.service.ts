@@ -1,8 +1,8 @@
 /**
- * Base API Service สำหรับ Angular
+ * Base API Service สำหรับ IVAP Service API
  *
  * Usage:
- * import { BaseApiService } from './base-api.service';
+ * import { BaseApiService } from '@core/services/base-api.service';
  *
  * export class CompanyService extends BaseApiService {
  *   constructor(http: HttpClient) {
@@ -19,10 +19,8 @@ import { environment } from '@env/environment';
 import {
   PaginatedResponse,
   QueryParams,
-  ErrorResponse,
-  SuccessResponse,
-  ApiResponse
-} from '@core/models/common.models';
+  ErrorResponse
+} from '@core/models/ivap/ivap-models';
 
 @Injectable({
   providedIn: 'root'
@@ -64,23 +62,36 @@ export class BaseApiService {
   }
 
   /**
-   * Get JWT token from localStorage
+   * Get JWT token from localStorage or sessionStorage
    */
   protected getToken(): string | null {
-    return localStorage.getItem('access_token');
+    // Try sessionStorage first (for backward compatibility)
+    const sessionToken = sessionStorage.getItem('userToken') || sessionStorage.getItem('access_token');
+    if (sessionToken) {
+      return sessionToken;
+    }
+
+    // Fallback to localStorage
+    return localStorage.getItem('access_token') || localStorage.getItem('userToken');
   }
 
   /**
-   * Set JWT token to localStorage
+   * Set JWT token to storage
    */
-  setToken(token: string): void {
+  setToken(token: string, useSessionStorage: boolean = true): void {
+    if (useSessionStorage) {
+      sessionStorage.setItem('userToken', token);
+      sessionStorage.setItem('access_token', token);
+    }
     localStorage.setItem('access_token', token);
   }
 
   /**
-   * Remove JWT token from localStorage
+   * Remove JWT token from storage
    */
   removeToken(): void {
+    sessionStorage.removeItem('userToken');
+    sessionStorage.removeItem('access_token');
     localStorage.removeItem('access_token');
   }
 
@@ -265,3 +276,4 @@ export class BaseApiService {
       );
   }
 }
+

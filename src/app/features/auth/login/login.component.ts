@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService, LoginRequest, DatabaseModel } from '@core/services';
 import { NotificationService } from '@core/services';
 import { MenuService } from '@core/services';
-// Removed EmployeeService and SetCharacter - not needed for IVAP
+import { EmployeeService, SetCharacter } from '@core/services';
 import { SwaplangCodeService } from '@core/services';
 import { StorageService } from '@core/services';
 import { TranslateService } from '@ngx-translate/core';
@@ -15,6 +14,9 @@ import jwt_decode from 'jwt-decode';
 import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 import { STORAGE_KEYS } from '@core/constants/storage-keys.constant';
 import { Language, isSupportedLanguage, DEFAULT_LANGUAGE, getFlagPath } from '@core/types/language.type';
+// IVAP Services
+import { IvapAuthService } from '@core/services/ivap';
+import { LoginRequest, Token } from '@core/models/ivap';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +27,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
   returnUrl: string = '';
-  dbList: DatabaseModel[] = [];
+  dbList: any[] = []; // DatabaseModel from legacy system - keep for backward compatibility
   dbSelected: string = '';
   errorMessage: string = '';
   rememberMe: boolean = false;
@@ -53,12 +55,12 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
+    private authService: IvapAuthService,
     private router: Router,
     private route: ActivatedRoute,
     private notificationService: NotificationService,
     private menuService: MenuService,
-    // Removed employeeService - not needed for IVAP
+    private employeeService: EmployeeService,
     private swapLangService: SwaplangCodeService,
     private translate: TranslateService,
     private storageService: StorageService,
@@ -117,26 +119,11 @@ export class LoginComponent implements OnInit {
   }
 
   loadDatabases(): void {
-    this.authService.getDatabase().subscribe({
-      next: (result) => {
-        this.dbList = result;
-        // Prepare data for Glass Select
-        this.dbSelectOptions = result.map(db => ({
-          value: db.db,
-          label: db.dbDisplay || db.dbName || db.db,
-          disabled: false
-        }));
-
-        if (result && result.length > 0) {
-          this.dbSelected = result[0].db;
-          this.loginForm.patchValue({ dbName: result[0].db });
-        }
-      },
-      error: (error: HttpErrorResponse) => {
-        console.warn('Failed to load databases:', error);
-        this.errorMessage = error.message || 'Failed to load database list';
-      }
-    });
+    // Note: IVAP API doesn't have getDatabase endpoint
+    // This is legacy functionality - keep empty or implement if needed
+    // For now, we'll skip database selection for IVAP API
+    this.dbList = [];
+    this.dbSelectOptions = [];
   }
 
   onDbChangeSelect(value: string): void {
@@ -226,64 +213,72 @@ export class LoginComponent implements OnInit {
 
       const credentials: LoginRequest = {
         username: username,
-        password: password,
-        dbName: dbName,
-        dbcomp: '100',
-        lang: 'th'
+        password: password
       };
 
-      this.authService.login(credentials)
-        .then((result: any) => {
-          console.log('Login successful. Result:', result);
+      this.authService.login(credentials).subscribe({
+        next: (token: Token) => {
+          console.log('Login successful. Token:', token);
+          console.log('User (Member):', token.user);
 
-          if (result && result.accessToken) {
-            // Save userName to sessionStorage
-            sessionStorage.setItem('userName', username);
-
-            // Save credentials if Remember Me is checked
-            if (this.rememberMe) {
-              localStorage.setItem('savedUsername', username);
-              localStorage.setItem('savedPassword', password);
-              localStorage.setItem('rememberMe', 'true');
-            } else {
-              localStorage.removeItem('savedUsername');
-              localStorage.removeItem('savedPassword');
-              localStorage.removeItem('rememberMe');
-            }
-
-            // Wait for token to be set in TokenManagerService before calling API
-            // Use Promise to ensure token is available in interceptor
-            Promise.resolve().then(() => {
-              // Verify token is set before calling API
-              const token = this.authService.getToken();
-              if (!token) {
-                console.error('Token not set after login');
-                this.loading = false;
-                this.errorMessage = 'Failed to set authentication token';
-                this.notificationService.showError(this.errorMessage);
-                return;
-              }
-
-              // Double check token is available in sessionStorage (for interceptor fallback)
-              const sessionToken = sessionStorage.getItem('userToken');
-              if (!sessionToken) {
-                console.warn('Token not in sessionStorage, waiting...');
-                setTimeout(() => {
-                  this.callGetSetPass(result);
-                }, 50);
-                return;
-              }
-
-              // Token is ready, call API
-              this.callGetSetPass(result);
-            });
+          // Token is automatically saved by IvapAuthService
+          // Save Member information to sessionStorage
+          const member = token.user;
+          if (member) {
+            sessionStorage.setItem('userName', member.username || username);
+            sessionStorage.setItem('memberId', member.member_id);
+            sessionStorage.setItem('memberEmail', member.email);
+            sessionStorage.setItem('memberName', `${member.first_name || ''} ${member.last_name || ''}`.trim());
+            sessionStorage.setItem('memberType', member.member_type || '');
+            sessionStorage.setItem('actorType', member.actor_type);
+            sessionStorage.setItem('currentUser', JSON.stringify(member));
           } else {
-            this.loading = false;
-            this.errorMessage = 'Login failed: No access token received';
-            this.notificationService.showError(this.errorMessage);
+            // Fallback to username if member is not available
+            sessionStorage.setItem('userName', username);
           }
-        })
-        .catch((error: HttpErrorResponse) => {
+
+          // Save credentials if Remember Me is checked
+          if (this.rememberMe) {
+            localStorage.setItem('savedUsername', username);
+            localStorage.setItem('savedPassword', password);
+            localStorage.setItem('rememberMe', 'true');
+          } else {
+            localStorage.removeItem('savedUsername');
+            localStorage.removeItem('savedPassword');
+            localStorage.removeItem('rememberMe');
+          }
+
+          // Verify token is set
+          const savedToken = this.authService.getToken();
+          if (!savedToken) {
+            console.error('Token not set after login');
+            this.loading = false;
+            this.errorMessage = 'Failed to set authentication token';
+            this.notificationService.showError(this.errorMessage);
+            return;
+          }
+
+          // For IVAP API, we can directly navigate after successful login
+          // Use Member information from token.user
+          this.swapLangService.getList().subscribe({
+            next: (swapResult) => {
+              this.swapLangService.saveSwaplang(swapResult);
+              this.notificationService.showSuccess('Login successful');
+              this.menuService.clearCache();
+              this.router.navigate([this.returnUrl]);
+              this.loading = false;
+            },
+            error: (error) => {
+              console.error('Error loading swap language:', error);
+              // Proceed anyway
+              this.notificationService.showSuccess('Login successful');
+              this.menuService.clearCache();
+              this.router.navigate([this.returnUrl]);
+              this.loading = false;
+            }
+          });
+        },
+        error: (error: any) => {
           console.error('Login failed. Reason:', error);
           this.loading = false;
 
@@ -291,83 +286,26 @@ export class LoginComponent implements OnInit {
             this.errorMessage = 'Invalid Username or Password';
             this.notificationService.showError(this.errorMessage);
           } else {
-            this.errorMessage = error.message || 'Login failed. Please try again.';
+            this.errorMessage = error.message || error.error?.message || 'Login failed. Please try again.';
             this.notificationService.showError(this.errorMessage);
           }
 
           this.loginForm.patchValue({ password: '' });
-        });
+        }
+      });
     } else {
       this.notificationService.showWarning('Please fill in all required fields');
     }
   }
 
   /**
-   * Handle post-login actions after token is verified
-   * IVAP version - simplified without legacy getSetPass
+   * Call getSetPass API after token is verified
+   * Note: This method is kept for backward compatibility but may not be needed for IVAP API
+   * Legacy logic for JSP redirect and accountactive check
    */
   private callGetSetPass(result: any): void {
-    // Decode token to check accountactive using jwt_decode
-    try {
-      const decodedToken = jwt_decode<any>(result.accessToken);
-      const accountActive = decodedToken.accountactive;
-
-      if (accountActive) {
-        if (accountActive === 'true') {
-          // Account is active - load swap language and navigate
-          this.swapLangService.getList().subscribe(swapResult => {
-            this.swapLangService.saveSwaplang(swapResult);
-            this.notificationService.showSuccess('Login successful');
-            this.menuService.clearCache();
-            this.router.navigate(['/ivap/dashboard']);
-          }, (error) => {
-            console.error('Error loading swap language:', error);
-            // Proceed anyway
-            this.notificationService.showSuccess('Login successful');
-            this.menuService.clearCache();
-            this.router.navigate(['/ivap/dashboard']);
-          });
-        } else if (accountActive === 'waiting') {
-          this.loading = false;
-          this.loginForm.patchValue({ password: '' });
-          this.errorMessage = 'Please wait for a moment to log in again.';
-          this.notificationService.showWarning(this.errorMessage);
-        } else {
-          this.loading = false;
-          this.loginForm.patchValue({ password: '' });
-          this.errorMessage = 'Your account is not active. Please contact administrator.';
-          this.notificationService.showError(this.errorMessage);
-        }
-      } else {
-        // No accountactive field - proceed with login
-        this.swapLangService.getList().subscribe(swapResult => {
-          this.swapLangService.saveSwaplang(swapResult);
-          this.notificationService.showSuccess('Login successful');
-          this.menuService.clearCache();
-          this.router.navigate(['/ivap/dashboard']);
-        }, (error) => {
-          console.error('Error loading swap language:', error);
-          // Proceed anyway
-          this.notificationService.showSuccess('Login successful');
-          this.menuService.clearCache();
-          this.router.navigate(['/ivap/dashboard']);
-        });
-      }
-    } catch (error) {
-      console.error('Error decoding token:', error);
-      // Proceed with login anyway
-      this.swapLangService.getList().subscribe(swapResult => {
-        this.swapLangService.saveSwaplang(swapResult);
-        this.notificationService.showSuccess('Login successful');
-        this.menuService.clearCache();
-        this.router.navigate(['/ivap/dashboard']);
-      }, (error) => {
-        console.error('Error loading swap language:', error);
-        // Proceed anyway
-        this.notificationService.showSuccess('Login successful');
-        this.menuService.clearCache();
-        this.router.navigate(['/ivap/dashboard']);
-      });
-    }
+    // For IVAP API, this method is not needed as we handle navigation directly in login success
+    // Keeping this method for potential legacy system integration
+    console.warn('callGetSetPass called but not needed for IVAP API');
   }
 }

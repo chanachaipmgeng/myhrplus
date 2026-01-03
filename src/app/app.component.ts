@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { AuthService } from './core/services/auth.service';
 import { ThemeService } from './core/services/theme.service';
 import { StorageService } from './core/services/storage.service';
 import { SyncfusionThemeService } from './shared/syncfusion/syncfusion-theme.service';
-import { NotificationService } from './core/services/notification.service';
 import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
 import { STORAGE_KEYS } from '@core/constants/storage-keys.constant';
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES, isSupportedLanguage, Language } from '@core/types/language.type';
@@ -22,11 +20,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService,
     private themeService: ThemeService,
     private storageService: StorageService,
     private syncfusionThemeService: SyncfusionThemeService,
-    private notificationService: NotificationService,
     private translateService: TranslateService
   ) {}
 
@@ -86,8 +82,5 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     // Initialize notification container after view is initialized
-    if (this.notificationContainer) {
-      this.notificationService.setContainer(this.notificationContainer);
-    }
   }
 }
