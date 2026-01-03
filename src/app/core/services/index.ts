@@ -2,7 +2,7 @@
  * Core Services - Public API
  *
  * This file exports all core services for cleaner imports.
- * Use this file instead of importing from individual service files.
+ * IVAP Services - Cleaned up to only include essential core services
  *
  * @example
  * ```typescript
@@ -22,13 +22,7 @@ export * from './base-api.service';
 // Auth Services
 export * from './auth.service';
 export * from './token-manager.service';
-
-// Business Services
-export * from './company.service';
-export * from './employee.service';
-export * from './time.service';
-export * from './calendar.service';
-export * from './shift-plan.service';
+export * from './user-context.service';
 
 // IVAP Services
 export * from './ivap-company.service';
