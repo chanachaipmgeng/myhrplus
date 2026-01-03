@@ -1,0 +1,46 @@
+<div class="-mx-4 md:-mx-6 lg:-mx-8">
+  <div class="p-4 md:p-6 lg:p-8">
+    <app-page-header
+      [title]="'Devices'"
+      [subtitle]="'Manage system devices'"
+      [showBreadcrumbs]="true">
+      <ng-container actions>
+        <a routerLink="/ivap/devices/add">
+          <app-glass-button type="button" variant="primary" size="md">
+            <app-icon name="add" class="mr-2"></app-icon>
+            Add Device
+          </app-glass-button>
+        </a>
+      </ng-container>
+    </app-page-header>
+
+    <app-glass-card padding="p-0">
+      <div class="p-6 border-b border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100 flex items-center gap-2">
+          <app-icon name="devices" size="sm" class="text-primary"></app-icon>
+          Device List
+        </h2>
+        <div class="w-full sm:w-72">
+          <app-glass-input
+            [formControl]="searchControl"
+            placeholder="Search devices..."
+            type="search"
+            [fullWidth]="true"
+            icon="search">
+          </app-glass-input>
+        </div>
+      </div>
+      <div class="p-4">
+        @if (loading) {
+          <app-skeleton-loader type="table" [rows]="10" [columns]="columns.length"></app-skeleton-loader>
+        } @else {
+          <app-data-grid
+            [dataSource]="data"
+            [columns]="columns">
+          </app-data-grid>
+        }
+      </div>
+    </app-glass-card>
+  </div>
+</div>
+

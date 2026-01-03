@@ -1,0 +1,53 @@
+<div class="-mx-4 md:-mx-6 lg:-mx-8">
+  <div class="p-4 md:p-6 lg:p-8">
+    <!-- Page Header -->
+    <app-page-header
+      [title]="'Visitors'"
+      [subtitle]="'Manage and track visitor access'"
+      [showBreadcrumbs]="true">
+      <ng-container actions>
+        <a routerLink="/ivap/visitors/register">
+          <app-glass-button type="button" variant="primary" size="md">
+            <app-icon name="person_add" class="mr-2"></app-icon>
+            Register Visitor
+          </app-glass-button>
+        </a>
+      </ng-container>
+    </app-page-header>
+
+    <!-- Main Content -->
+    <app-glass-card padding="p-0">
+      <div class="p-6 border-b border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100 flex items-center gap-2">
+          <app-icon name="list" size="sm" class="text-primary"></app-icon>
+          Visitor List
+        </h2>
+
+        <!-- Search Bar -->
+        <div class="w-full sm:w-72">
+          <app-glass-input
+            [formControl]="searchControl"
+            placeholder="Search visitors..."
+            type="search"
+            [fullWidth]="true"
+            icon="search">
+          </app-glass-input>
+        </div>
+      </div>
+
+      <!-- Data Grid -->
+      <div class="p-4">
+        @if (loading) {
+          <app-skeleton-loader type="table" [rows]="10" [columns]="columns.length"></app-skeleton-loader>
+        } @else {
+          <app-data-grid
+            [dataSource]="data"
+            [columns]="columns"
+            (rowSelected)="onEdit($event)">
+          </app-data-grid>
+        }
+      </div>
+    </app-glass-card>
+  </div>
+</div>
+

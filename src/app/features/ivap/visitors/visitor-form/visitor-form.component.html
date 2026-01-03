@@ -1,0 +1,86 @@
+<div class="-mx-4 md:-mx-6 lg:-mx-8">
+  <div class="p-4 md:p-6 lg:p-8">
+    <!-- Page Header -->
+    <app-page-header
+      [title]="'Register Visitor'"
+      [subtitle]="'Register a new visitor'"
+      [showBreadcrumbs]="true">
+    </app-page-header>
+
+    <!-- Form Card -->
+    <app-glass-card padding="p-6">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- First Name -->
+          <app-glass-input
+            formControlName="first_name"
+            label="First Name"
+            [required]="true"
+            [fullWidth]="true">
+          </app-glass-input>
+
+          <!-- Last Name -->
+          <app-glass-input
+            formControlName="last_name"
+            label="Last Name"
+            [required]="true"
+            [fullWidth]="true">
+          </app-glass-input>
+
+          <!-- Email -->
+          <app-glass-input
+            formControlName="email"
+            label="Email"
+            type="email"
+            [fullWidth]="true">
+          </app-glass-input>
+
+          <!-- Phone Number -->
+          <app-glass-input
+            formControlName="phone_number"
+            label="Phone Number"
+            type="tel"
+            [fullWidth]="true">
+          </app-glass-input>
+
+          <!-- Company Name -->
+          <app-glass-input
+            formControlName="company_name"
+            label="Company Name"
+            [fullWidth]="true">
+          </app-glass-input>
+
+          <!-- Purpose -->
+          <app-glass-input
+            formControlName="purpose"
+            label="Purpose"
+            [required]="true"
+            [fullWidth]="true">
+          </app-glass-input>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex justify-end gap-4 pt-4">
+          <app-glass-button
+            type="button"
+            variant="outline"
+            (click)="onCancel()">
+            Cancel
+          </app-glass-button>
+          <app-glass-button
+            type="submit"
+            variant="primary"
+            [disabled]="form.invalid || loading">
+            @if (loading) {
+              <app-icon name="hourglass_empty" class="mr-2 animate-spin"></app-icon>
+              Registering...
+            } @else {
+              Register Visitor
+            }
+          </app-glass-button>
+        </div>
+      </form>
+    </app-glass-card>
+  </div>
+</div>
+

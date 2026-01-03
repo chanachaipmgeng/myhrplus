@@ -1,0 +1,65 @@
+<div class="-mx-4 md:-mx-6 lg:-mx-8">
+  <div class="p-4 md:p-6 lg:p-8">
+    <app-page-header
+      [title]="'Register Guest'"
+      [subtitle]="'Register a new guest'"
+      [showBreadcrumbs]="true">
+    </app-page-header>
+
+    <app-glass-card padding="p-6">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <app-glass-input
+            formControlName="first_name"
+            label="First Name"
+            [required]="true"
+            [fullWidth]="true">
+          </app-glass-input>
+          <app-glass-input
+            formControlName="last_name"
+            label="Last Name"
+            [required]="true"
+            [fullWidth]="true">
+          </app-glass-input>
+          <app-glass-input
+            formControlName="email"
+            label="Email"
+            type="email"
+            [fullWidth]="true">
+          </app-glass-input>
+          <app-glass-input
+            formControlName="phone_number"
+            label="Phone Number"
+            type="tel"
+            [fullWidth]="true">
+          </app-glass-input>
+          <app-glass-input
+            formControlName="event_id"
+            label="Event ID"
+            [fullWidth]="true">
+          </app-glass-input>
+          <app-glass-input
+            formControlName="registration_type"
+            label="Registration Type"
+            [required]="true"
+            [fullWidth]="true">
+          </app-glass-input>
+        </div>
+        <div class="flex justify-end gap-4 pt-4">
+          <app-glass-button type="button" variant="outline" (click)="onCancel()">
+            Cancel
+          </app-glass-button>
+          <app-glass-button type="submit" variant="primary" [disabled]="form.invalid || loading">
+            @if (loading) {
+              <app-icon name="hourglass_empty" class="mr-2 animate-spin"></app-icon>
+              Registering...
+            } @else {
+              Register Guest
+            }
+          </app-glass-button>
+        </div>
+      </form>
+    </app-glass-card>
+  </div>
+</div>
+

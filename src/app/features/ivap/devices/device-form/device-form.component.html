@@ -1,0 +1,67 @@
+<div class="-mx-4 md:-mx-6 lg:-mx-8">
+  <div class="p-4 md:p-6 lg:p-8">
+    <app-page-header
+      [title]="'Add Device'"
+      [subtitle]="'Add a new device to the system'"
+      [showBreadcrumbs]="true">
+    </app-page-header>
+
+    <app-glass-card padding="p-6">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <app-glass-input
+            formControlName="device_name"
+            label="Device Name"
+            [required]="true"
+            [fullWidth]="true">
+          </app-glass-input>
+          <app-glass-input
+            formControlName="device_type"
+            label="Device Type"
+            [required]="true"
+            [fullWidth]="true">
+          </app-glass-input>
+          <app-glass-input
+            formControlName="device_model"
+            label="Model"
+            [fullWidth]="true">
+          </app-glass-input>
+          <app-glass-input
+            formControlName="serial_number"
+            label="Serial Number"
+            [fullWidth]="true">
+          </app-glass-input>
+          <app-glass-input
+            formControlName="ip_address"
+            label="IP Address"
+            [fullWidth]="true">
+          </app-glass-input>
+          <app-glass-input
+            formControlName="mac_address"
+            label="MAC Address"
+            [fullWidth]="true">
+          </app-glass-input>
+          <app-glass-input
+            formControlName="location"
+            label="Location"
+            [fullWidth]="true">
+          </app-glass-input>
+        </div>
+        <div class="flex justify-end gap-4 pt-4">
+          <app-glass-button type="button" variant="outline" (click)="onCancel()">
+            Cancel
+          </app-glass-button>
+          <app-glass-button type="submit" variant="primary" [disabled]="form.invalid || loading">
+            @if (loading) {
+              <app-icon name="hourglass_empty" class="mr-2 animate-spin"></app-icon>
+              Adding...
+            } @else {
+              Add Device
+            }
+          </app-glass-button>
+        </div>
+      </form>
+    </app-glass-card>
+  </div>
+</div>
+

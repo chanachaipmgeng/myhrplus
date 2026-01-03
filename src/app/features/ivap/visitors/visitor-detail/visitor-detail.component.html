@@ -1,0 +1,91 @@
+<div class="-mx-4 md:-mx-6 lg:-mx-8">
+  <div class="p-4 md:p-6 lg:p-8">
+    <!-- Page Header -->
+    <app-page-header
+      [title]="'Visitor Details'"
+      [subtitle]="visitor ? (visitor.first_name + ' ' + visitor.last_name) : ''"
+      [showBreadcrumbs]="true">
+      <ng-container actions>
+        <app-glass-button type="button" variant="outline" (click)="onBack()">
+          <app-icon name="arrow_back" class="mr-2"></app-icon>
+          Back
+        </app-glass-button>
+      </ng-container>
+    </app-page-header>
+
+    @if (loading) {
+      <app-skeleton-loader type="card" [count]="3"></app-skeleton-loader>
+    } @else if (visitor) {
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Visitor Information -->
+        <div class="lg:col-span-2">
+          <app-glass-card padding="p-6">
+            <h3 class="text-xl font-semibold mb-4">Visitor Information</h3>
+            <div class="space-y-4">
+              <div>
+                <label class="text-sm font-medium text-gray-600 dark:text-gray-400">Name</label>
+                <p class="text-lg">{{ visitor.first_name }} {{ visitor.last_name }}</p>
+              </div>
+              @if (visitor.email) {
+                <div>
+                  <label class="text-sm font-medium text-gray-600 dark:text-gray-400">Email</label>
+                  <p class="text-lg">{{ visitor.email }}</p>
+                </div>
+              }
+              @if (visitor.phone_number) {
+                <div>
+                  <label class="text-sm font-medium text-gray-600 dark:text-gray-400">Phone</label>
+                  <p class="text-lg">{{ visitor.phone_number }}</p>
+                </div>
+              }
+              <div>
+                <label class="text-sm font-medium text-gray-600 dark:text-gray-400">Purpose</label>
+                <p class="text-lg">{{ visitor.purpose }}</p>
+              </div>
+              <div>
+                <label class="text-sm font-medium text-gray-600 dark:text-gray-400">Status</label>
+                <span class="inline-block px-3 py-1 rounded-full text-sm font-medium"
+                  [class.bg-green-100]="visitor.status === 'CHECKED_IN'"
+                  [class.text-green-800]="visitor.status === 'CHECKED_IN'"
+                  [class.bg-gray-100]="visitor.status === 'PENDING'"
+                  [class.text-gray-800]="visitor.status === 'PENDING'">
+                  {{ visitor.status }}
+                </span>
+              </div>
+            </div>
+          </app-glass-card>
+        </div>
+
+        <!-- Actions -->
+        <div>
+          <app-glass-card padding="p-6">
+            <h3 class="text-xl font-semibold mb-4">Actions</h3>
+            <div class="space-y-3">
+              @if (visitor.status === 'PENDING' || visitor.status === 'CHECKED_OUT') {
+                <app-glass-button
+                  type="button"
+                  variant="primary"
+                  [fullWidth]="true"
+                  (click)="onCheckIn()">
+                  <app-icon name="login" class="mr-2"></app-icon>
+                  Check In
+                </app-glass-button>
+              }
+              @if (visitor.status === 'CHECKED_IN') {
+                <app-glass-button
+                  type="button"
+                  variant="outline"
+                  [fullWidth]="true"
+                  (click)="onCheckOut()">
+                  <app-icon name="logout" class="mr-2"></app-icon>
+                  Check Out
+                </app-glass-button>
+              }
+            </div>
+          </app-glass-card>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+

@@ -1,0 +1,74 @@
+<div class="-mx-4 md:-mx-6 lg:-mx-8">
+  <div class="p-4 md:p-6 lg:p-8">
+    <app-page-header
+      [title]="'Create Event'"
+      [subtitle]="'Create a new event'"
+      [showBreadcrumbs]="true">
+    </app-page-header>
+
+    <app-glass-card padding="p-6">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <app-glass-input
+            formControlName="event_name"
+            label="Event Name"
+            [required]="true"
+            [fullWidth]="true">
+          </app-glass-input>
+          <app-glass-input
+            formControlName="event_type"
+            label="Event Type"
+            [required]="true"
+            [fullWidth]="true">
+          </app-glass-input>
+          <app-glass-input
+            formControlName="start_date"
+            label="Start Date"
+            type="datetime-local"
+            [required]="true"
+            [fullWidth]="true">
+          </app-glass-input>
+          <app-glass-input
+            formControlName="end_date"
+            label="End Date"
+            type="datetime-local"
+            [required]="true"
+            [fullWidth]="true">
+          </app-glass-input>
+          <app-glass-input
+            formControlName="location"
+            label="Location"
+            [fullWidth]="true">
+          </app-glass-input>
+          <app-glass-input
+            formControlName="max_attendees"
+            label="Max Attendees"
+            type="number"
+            [required]="true"
+            [fullWidth]="true">
+          </app-glass-input>
+        </div>
+        <app-glass-input
+          formControlName="event_description"
+          label="Description"
+          type="textarea"
+          [fullWidth]="true">
+        </app-glass-input>
+        <div class="flex justify-end gap-4 pt-4">
+          <app-glass-button type="button" variant="outline" (click)="onCancel()">
+            Cancel
+          </app-glass-button>
+          <app-glass-button type="submit" variant="primary" [disabled]="form.invalid || loading">
+            @if (loading) {
+              <app-icon name="hourglass_empty" class="mr-2 animate-spin"></app-icon>
+              Creating...
+            } @else {
+              Create Event
+            }
+          </app-glass-button>
+        </div>
+      </form>
+    </app-glass-card>
+  </div>
+</div>
+
