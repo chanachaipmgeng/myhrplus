@@ -36,12 +36,8 @@ const routes: Routes = [
         loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)
       },
       {
-        path: 'company',
-        loadChildren: () => import('./features/company/company.module').then(m => m.CompanyModule)
-      },
-      {
-        path: 'setting',
-        loadChildren: () => import('./features/setting/setting.module').then(m => m.SettingModule)
+        path: 'ivap',
+        loadChildren: () => import('./features/ivap/ivap.module').then(m => m.IvapModule)
       },
       // 404 Not Found Page (inside main layout)
       {

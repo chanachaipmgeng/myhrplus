@@ -1,0 +1,78 @@
+<div class="ivap-dashboard">
+  <!-- Page Header -->
+  <app-page-header
+    [title]="'IVAP Dashboard'"
+    [subtitle]="'Intelligent Visitor Access Platform - Overview'"
+    [showBreadcrumbs]="true">
+  </app-page-header>
+
+  <!-- Statistics Cards -->
+  <section class="mb-8">
+    @if (loading) {
+      <app-skeleton-loader [count]="4" [type]="'card'"></app-skeleton-loader>
+    } @else {
+      <app-statistics-grid>
+        @for (card of statisticsCards; track card.title; let i = $index) {
+          <app-statistics-card
+            [appStagger]="i"
+            [staggerDelay]="0.1"
+            [title]="card.title"
+            [value]="card.value"
+            [icon]="card.icon"
+            [color]="card.color"
+            [trend]="card.trend">
+          </app-statistics-card>
+        }
+      </app-statistics-grid>
+    }
+  </section>
+
+  <!-- Workspace Grid -->
+  <section class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+    <!-- Charts Section (75%) -->
+    <div class="lg:col-span-3">
+      <app-glass-card padding="p-6">
+        <h3 class="text-xl font-semibold mb-4">Analytics Overview</h3>
+        <div class="text-gray-500">
+          <p>Charts and analytics will be displayed here.</p>
+          <p class="mt-2 text-sm">Placeholder for future implementation.</p>
+        </div>
+      </app-glass-card>
+    </div>
+
+    <!-- Quick Actions (25%) -->
+    <div class="lg:col-span-1">
+      <app-glass-card padding="p-6" class="sticky top-6">
+        <h3 class="text-xl font-semibold mb-4">Quick Actions</h3>
+        <div class="space-y-3">
+          <button
+            type="button"
+            class="w-full p-3 text-left rounded-lg hover:bg-primary/10 transition-colors">
+            <app-icon name="person_add" class="mr-2"></app-icon>
+            Register Visitor
+          </button>
+          <button
+            type="button"
+            class="w-full p-3 text-left rounded-lg hover:bg-primary/10 transition-colors">
+            <app-icon name="event" class="mr-2"></app-icon>
+            Create Event
+          </button>
+          <button
+            type="button"
+            class="w-full p-3 text-left rounded-lg hover:bg-primary/10 transition-colors">
+            <app-icon name="directions_car" class="mr-2"></app-icon>
+            Register Vehicle
+          </button>
+          <button
+            type="button"
+            class="w-full p-3 text-left rounded-lg hover:bg-primary/10 transition-colors">
+            <app-icon name="settings" class="mr-2"></app-icon>
+            Manage Devices
+          </button>
+        </div>
+      </app-glass-card>
+    </div>
+  </section>
+</div>
+
+

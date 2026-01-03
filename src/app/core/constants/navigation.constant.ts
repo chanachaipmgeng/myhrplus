@@ -347,6 +347,186 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
             ]
           }
         ]
+      },
+      // Level 2: IVAP (Intelligent Visitor Access Platform)
+      {
+        label: 'IVAP',
+        icon: 'security',
+        route: '/ivap', // Dashboard route - หน้าแรกของโมดูล
+        children: [ // Level 3
+          // 0. Dashboard (หน้าแรก)
+          {
+            label: 'Dashboard',
+            route: '/ivap/dashboard',
+            icon: 'dashboard'
+          },
+          // 1. Visitor Management
+          {
+            label: 'Visitor Management',
+            icon: 'person',
+            route: '/ivap/visitors',
+            children: [ // Level 4
+              { label: 'Visitor List', route: '/ivap/visitors', icon: 'list' },
+              { label: 'Register Visitor', route: '/ivap/visitors/register', icon: 'person_add' }
+            ]
+          },
+          // 2. Guest Management
+          {
+            label: 'Guest Management',
+            icon: 'people',
+            route: '/ivap/guests',
+            children: [ // Level 4
+              { label: 'Guest List', route: '/ivap/guests', icon: 'list' },
+              { label: 'Register Guest', route: '/ivap/guests/register', icon: 'person_add' }
+            ]
+          },
+          // 3. Event Management
+          {
+            label: 'Event Management',
+            icon: 'event',
+            route: '/ivap/events',
+            children: [ // Level 4
+              { label: 'Event List', route: '/ivap/events', icon: 'list' },
+              { label: 'Create Event', route: '/ivap/events/create', icon: 'add' }
+            ]
+          },
+          // 4. Vehicle Management
+          {
+            label: 'Vehicle Management',
+            icon: 'directions_car',
+            route: '/ivap/vehicles',
+            children: [ // Level 4
+              { label: 'Vehicle List', route: '/ivap/vehicles', icon: 'list' },
+              { label: 'Register Vehicle', route: '/ivap/vehicles/register', icon: 'add' }
+            ]
+          },
+          // 5. Parking Management
+          {
+            label: 'Parking Management',
+            icon: 'local_parking',
+            route: '/ivap/parking',
+            children: [ // Level 4
+              { label: 'Parking Records', route: '/ivap/parking', icon: 'list' },
+              { label: 'Parking Slots', route: '/ivap/parking/slots', icon: 'view_list' }
+            ]
+          },
+          // 6. Device Management
+          {
+            label: 'Device Management',
+            icon: 'devices',
+            route: '/ivap/devices',
+            children: [ // Level 4
+              { label: 'Device List', route: '/ivap/devices', icon: 'list' },
+              { label: 'Add Device', route: '/ivap/devices/add', icon: 'add' }
+            ]
+          },
+          // 7. Access Control
+          {
+            label: 'Access Control',
+            icon: 'lock',
+            route: '/ivap/access-control',
+            children: [ // Level 4
+              { label: 'Door Management', route: '/ivap/access-control/doors', icon: 'door_front' },
+              { label: 'Access Rules', route: '/ivap/access-control/rules', icon: 'rule' }
+            ]
+          },
+          // 8. Organization Management
+          {
+            label: 'Organization',
+            icon: 'business',
+            route: '/ivap/organization',
+            children: [ // Level 4
+              { label: 'Companies', route: '/ivap/organization/companies', icon: 'business' },
+              { label: 'Departments', route: '/ivap/organization/departments', icon: 'corporate_fare' },
+              { label: 'Positions', route: '/ivap/organization/positions', icon: 'work' },
+              { label: 'Employees', route: '/ivap/organization/employees', icon: 'people' },
+              { label: 'Members', route: '/ivap/organization/members', icon: 'person' }
+            ]
+          },
+          // 9. Time & Attendance
+          {
+            label: 'Time & Attendance',
+            icon: 'access_time',
+            route: '/ivap/time-attendance',
+            children: [ // Level 4
+              { label: 'Timestamps', route: '/ivap/time-attendance/timestamps', icon: 'schedule' },
+              { label: 'Shifts', route: '/ivap/time-attendance/shifts', icon: 'schedule' },
+              { label: 'Leave Requests', route: '/ivap/time-attendance/leaves', icon: 'event_available' }
+            ]
+          },
+          // 10. Verification
+          {
+            label: 'Verification',
+            icon: 'verified',
+            route: '/ivap/verification',
+            children: [ // Level 4
+              { label: 'Sessions', route: '/ivap/verification/sessions', icon: 'session' },
+              { label: 'Templates', route: '/ivap/verification/templates', icon: 'description' },
+              { label: 'Configuration', route: '/ivap/verification/config', icon: 'settings' }
+            ]
+          },
+          // 11. Biometric
+          {
+            label: 'Biometric',
+            icon: 'face',
+            route: '/ivap/biometric',
+            children: [ // Level 4
+              { label: 'Face Enrollment', route: '/ivap/biometric/face-enrollment', icon: 'face' },
+              { label: 'Biometric Data', route: '/ivap/biometric/biometric-data', icon: 'fingerprint' }
+            ]
+          },
+          // 12. QR Code & RFID
+          {
+            label: 'QR & RFID',
+            icon: 'qr_code',
+            route: '/ivap/qr-rfid',
+            children: [ // Level 4
+              { label: 'QR Codes', route: '/ivap/qr-rfid/qr-codes', icon: 'qr_code' },
+              { label: 'RFID Cards', route: '/ivap/qr-rfid/rfid-cards', icon: 'credit_card' }
+            ]
+          },
+          // 13. Notifications
+          {
+            label: 'Notifications',
+            icon: 'notifications',
+            route: '/ivap/notifications',
+            children: [ // Level 4
+              { label: 'Notifications', route: '/ivap/notifications/notifications', icon: 'notifications' },
+              { label: 'Alerts', route: '/ivap/notifications/alerts', icon: 'warning' }
+            ]
+          },
+          // 14. Analytics
+          {
+            label: 'Analytics',
+            icon: 'analytics',
+            route: '/ivap/analytics',
+            children: [ // Level 4
+              { label: 'Reports', route: '/ivap/analytics/reports', icon: 'assessment' },
+              { label: 'Monitoring', route: '/ivap/analytics/monitoring', icon: 'monitor' }
+            ]
+          },
+          // 15. Video Analytics & AI
+          {
+            label: 'Video & AI',
+            icon: 'videocam',
+            route: '/ivap/video-ai',
+            children: [ // Level 4
+              { label: 'Video Analytics', route: '/ivap/video-ai/video-analytics', icon: 'videocam' },
+              { label: 'AI Models', route: '/ivap/video-ai/ai-models', icon: 'smart_toy' }
+            ]
+          },
+          // 16. System Administration
+          {
+            label: 'System',
+            icon: 'settings',
+            route: '/ivap/system',
+            children: [ // Level 4
+              { label: 'Settings', route: '/ivap/system/settings', icon: 'settings' },
+              { label: 'Logs', route: '/ivap/system/logs', icon: 'description' },
+              { label: 'Safety Dashboard', route: '/ivap/system/safety', icon: 'security' }
+            ]
+          }
+        ]
       }
     ]
   }
