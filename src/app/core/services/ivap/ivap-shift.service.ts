@@ -1,41 +1,32 @@
 /**
  * IVAP Shift Service
  * Service สำหรับจัดการข้อมูล Shift
+ * Updated to use new BaseApiService
  */
 
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { BaseApiService } from '../base-api.service';
-import { ApiService, ApiResponse } from '../api.service';
 import { environment } from '@env/environment';
 import {
   Shift,
   PaginatedResponse,
   QueryParams
-} from '@core/models/ivap';
+} from '@core/models';
 
 @Injectable({
   providedIn: 'root'
 })
-export class IvapShiftService extends BaseApiService<Shift> {
-  protected baseUrl = `${environment.apiEndpoints.shifts}`;
-
-  constructor(private apiService: ApiService) {
-    super();
+export class IvapShiftService extends BaseApiService {
+  constructor(http: HttpClient) {
+    super(http, environment.apiEndpoints.shifts);
   }
 
   /**
    * Get all shifts (paginated)
    */
   getAllPaginated(params?: QueryParams): Observable<PaginatedResponse<Shift>> {
-    return this.apiService.get<PaginatedResponse<Shift>>(this.baseUrl, params).pipe(
-      map((response: ApiResponse<PaginatedResponse<Shift>>) => {
-        if (response.success && response.data) {
-          return response.data;
-        }
-        return (response as unknown as PaginatedResponse<Shift>);
-      })
-    );
+    return this.getPaginated<Shift>('', params);
   }
 }
-

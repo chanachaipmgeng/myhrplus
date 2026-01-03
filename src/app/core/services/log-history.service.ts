@@ -49,7 +49,7 @@ export interface ErrorLogRequest {
   providedIn: 'root'
 })
 export class LogHistoryService {
-  private readonly baseUrl = `${environment.jbossUrl}${environment.apiEndpoints.unsecure}`;
+  private readonly baseUrl = `${environment.baseUrl}${environment.apiVersion}`;
 
   // In-memory log buffer
   private logBuffer: LogEntry[] = [];
@@ -76,7 +76,7 @@ export class LogHistoryService {
   postActionLog(body: ActionLogRequest): Observable<ApiResponse<unknown>> {
     // ApiService already handles baseUrl (environment.jbossUrl), so only pass the endpoint path
     return this.apiService.post<unknown>(
-      `${environment.apiEndpoints.unsecure}/action-log`,
+      `${environment.apiVersion}/action-log`,
       body
     );
   }
@@ -271,7 +271,7 @@ export class LogHistoryService {
   private postErrorLog(body: ErrorLogRequest): Observable<ApiResponse<unknown>> {
     // ApiService already handles baseUrl (environment.jbossUrl), so only pass the endpoint path
     return this.apiService.post<unknown>(
-      `${environment.apiEndpoints.unsecure}/error-log`,
+      `${environment.apiVersion}/error-log`,
       body
     );
   }
@@ -350,7 +350,7 @@ export class LogHistoryService {
    */
   private sendLogToServer(entry: LogEntry): Observable<ApiResponse<unknown>> {
     return this.apiService.post<unknown>(
-      `${environment.apiEndpoints.unsecure}/log`,
+      `${environment.apiVersion}/log`,
       {
         level: entry.level,
         message: entry.message,

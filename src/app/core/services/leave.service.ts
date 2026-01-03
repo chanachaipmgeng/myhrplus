@@ -1,14 +1,12 @@
 /**
- * IVAP Leave Service
- * Service สำหรับจัดการข้อมูล Leave Request
- * Updated to use new BaseApiService
+ * Leave Service
+ * Service for leave request management
  */
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { BaseApiService } from '../base-api.service';
-import { environment } from '@env/environment';
+import { BaseApiService } from './base-api.service';
 import {
   LeaveRequest,
   PaginatedResponse,
@@ -18,16 +16,37 @@ import {
 @Injectable({
   providedIn: 'root'
 })
-export class IvapLeaveService extends BaseApiService {
+export class LeaveService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, environment.apiEndpoints.leaves);
+    super(http, '/leaves');
   }
 
   /**
    * Get all leave requests (paginated)
    */
-  getAllPaginated(params?: QueryParams): Observable<PaginatedResponse<LeaveRequest>> {
+  getAll(params?: QueryParams): Observable<PaginatedResponse<LeaveRequest>> {
     return this.getPaginated<LeaveRequest>('', params);
+  }
+
+  /**
+   * Get leave request by ID
+   */
+  getById(leaveId: string): Observable<LeaveRequest> {
+    return this.get<LeaveRequest>(`/${leaveId}`);
+  }
+
+  /**
+   * Create leave request
+   */
+  create(data: Partial<LeaveRequest>): Observable<LeaveRequest> {
+    return this.post<LeaveRequest>('', data);
+  }
+
+  /**
+   * Update leave request
+   */
+  update(leaveId: string, data: Partial<LeaveRequest>): Observable<LeaveRequest> {
+    return this.put<LeaveRequest>(`/${leaveId}`, data);
   }
 
   /**
@@ -51,3 +70,4 @@ export class IvapLeaveService extends BaseApiService {
     return this.post<LeaveRequest>(`/${leaveId}/cancel`, {});
   }
 }
+

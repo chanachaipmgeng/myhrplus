@@ -1,0 +1,59 @@
+/**
+ * Vehicle Service
+ * Service for vehicle management
+ */
+
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { BaseApiService } from './base-api.service';
+import {
+  Vehicle,
+  PaginatedResponse,
+  QueryParams
+} from '@core/models';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class VehicleService extends BaseApiService {
+  constructor(http: HttpClient) {
+    super(http, '/vehicles');
+  }
+
+  /**
+   * Get all vehicles (paginated)
+   */
+  getAll(params?: QueryParams): Observable<PaginatedResponse<Vehicle>> {
+    return this.getPaginated<Vehicle>('', params);
+  }
+
+  /**
+   * Get vehicle by ID
+   */
+  getById(vehicleId: string): Observable<Vehicle> {
+    return this.get<Vehicle>(`/${vehicleId}`);
+  }
+
+  /**
+   * Create vehicle
+   */
+  create(data: Partial<Vehicle>): Observable<Vehicle> {
+    return this.post<Vehicle>('', data);
+  }
+
+  /**
+   * Update vehicle
+   */
+  update(vehicleId: string, data: Partial<Vehicle>): Observable<Vehicle> {
+    return this.put<Vehicle>(`/${vehicleId}`, data);
+  }
+
+  /**
+   * Delete vehicle
+   */
+  delete(vehicleId: string): Observable<void> {
+    return this.delete(`/${vehicleId}`);
+  }
+}
+

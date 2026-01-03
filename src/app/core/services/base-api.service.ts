@@ -1,107 +1,267 @@
-import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ApiService } from './api.service';
-
 /**
- * Base API Service for Standardized CRUD Operations
- * Extend this class in your feature services to inherit common methods.
- * 
- * Example:
- * export class BenefitService extends BaseApiService<Benefit> {
- *   protected baseUrl = 'hr/benefits'; // Path relative to configured base URL (usually /hr)
+ * Base API Service สำหรับ Angular
+ *
+ * Usage:
+ * import { BaseApiService } from './base-api.service';
+ *
+ * export class CompanyService extends BaseApiService {
+ *   constructor(http: HttpClient) {
+ *     super(http, '/companies');
+ *   }
  * }
  */
+
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { environment } from '@env/environment';
+import {
+  PaginatedResponse,
+  QueryParams,
+  ErrorResponse,
+  SuccessResponse,
+  ApiResponse
+} from '@core/models/common.models';
+
 @Injectable({
   providedIn: 'root'
 })
-export abstract class BaseApiService<T> {
-  protected apiService = inject(ApiService);
+export class BaseApiService {
+  protected baseUrl: string = environment.baseUrl;
+  protected apiVersion: string = environment.apiVersion;
+
+  constructor(
+    protected http: HttpClient,
+    protected endpoint: string
+  ) {}
 
   /**
-   * The relative path to the API endpoint (e.g., '/api/v1/benefits')
+   * Get full API URL
    */
-  protected abstract baseUrl: string;
-
-  /**
-   * Get all items
-   * @param params Optional query parameters
-   */
-  getAll(params?: any): Observable<T[]> {
-    return this.apiService.getData<T[]>(this.baseUrl, params);
+  protected getUrl(path: string = ''): string {
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+    return `${this.baseUrl}${this.apiVersion}${this.endpoint}${cleanPath}`;
   }
 
   /**
-   * Get item by ID
-   * @param id Item ID
+   * Get default headers with authentication
    */
-  getById(id: number | string): Observable<T> {
-    return this.apiService.getData<T>(`${this.baseUrl}/${id}`);
+  protected getHeaders(includeAuth: boolean = true): HttpHeaders {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+
+    if (includeAuth) {
+      const token = this.getToken();
+      if (token) {
+        headers = headers.set('Authorization', `Bearer ${token}`);
+      }
+    }
+
+    return headers;
   }
 
   /**
-   * Create new item
-   * @param data Partial item data
+   * Get JWT token from localStorage
    */
-  create(data: Partial<T>): Observable<T> {
-    return this.apiService.postData<T>(this.baseUrl, data);
+  protected getToken(): string | null {
+    return localStorage.getItem('access_token');
   }
 
   /**
-   * Update existing item
-   * @param id Item ID
-   * @param data Partial item data
+   * Set JWT token to localStorage
    */
-  update(id: number | string, data: Partial<T>): Observable<T> {
-    // Note: ApiService doesn't have putData yet, so we use postData if API supports POST for update, 
-    // or we should add putData to ApiService.
-    // Most legacy APIs in this project seem to use POST for everything or standard REST.
-    // Let's assume standard REST for now but using put() from ApiService which returns ApiResponse, 
-    // so we need to manually unwrap or add putData helper.
-    // Let's use apiService.put and pipe it.
-
-    // Check if ApiService has putData, if not (it doesn't), we implement basic unwrapping here or use put().
-    // Actually, let's use the generic helper logic inline or add it to ApiService?
-    // User asked to standardize using ApiService.
-    // To be safe and clean, I will just use apiService.put() which returns Observable<ApiResponse<T>> 
-    // and since this method expects Observable<T>, I need to unwrap it.
-    // BUT BaseApiService.update expects T.
-
-    // Better approach: Use ApiService.put and map it.
-    return this.apiService.put<T>(`${this.baseUrl}/${id}`, data).pipe(
-      this.unwrapResponse()
-    );
+  setToken(token: string): void {
+    localStorage.setItem('access_token', token);
   }
 
   /**
-   * Delete item
-   * @param id Item ID
+   * Remove JWT token from localStorage
    */
-  delete(id: number | string): Observable<void> {
-    return this.apiService.delete<void>(`${this.baseUrl}/${id}`).pipe(
-      this.unwrapResponse()
-    );
+  removeToken(): void {
+    localStorage.removeItem('access_token');
   }
 
   /**
-   * Helper to unwrap ApiResponse
+   * Build query parameters from QueryParams object
    */
-  protected unwrapResponse<R>() {
-    return (source: Observable<any>): Observable<R> => {
-      return new Observable(observer => {
-        return source.subscribe({
-          next: (response) => {
-            if (response.success) {
-              observer.next(response.data);
-              observer.complete();
-            } else {
-              observer.error(new Error(response.message || 'Operation failed'));
-            }
-          },
-          error: (err) => observer.error(err)
-        });
+  protected buildParams(params?: QueryParams): HttpParams {
+    let httpParams = new HttpParams();
+
+    if (params) {
+      Object.keys(params).forEach(key => {
+        const value = params[key];
+        if (value !== null && value !== undefined && value !== '') {
+          if (Array.isArray(value)) {
+            value.forEach(item => {
+              httpParams = httpParams.append(key, item.toString());
+            });
+          } else {
+            httpParams = httpParams.set(key, value.toString());
+          }
+        }
       });
-    };
+    }
+
+    return httpParams;
+  }
+
+  /**
+   * Handle HTTP errors
+   */
+  protected handleError(error: HttpErrorResponse): Observable<never> {
+    let errorMessage = 'An unknown error occurred';
+    let errorResponse: ErrorResponse | null = null;
+
+    if (error.error instanceof ErrorEvent) {
+      // Client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // Server-side error
+      if (error.error && typeof error.error === 'object') {
+        // Try to parse as ErrorResponse
+        if ('error' in error.error || 'success' in error.error) {
+          errorResponse = error.error as ErrorResponse;
+          errorMessage = errorResponse.error?.message || errorMessage;
+        } else {
+          errorMessage = error.error.message || errorMessage;
+        }
+      } else {
+        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      }
+    }
+
+    console.error('API Error:', {
+      status: error.status,
+      message: errorMessage,
+      error: errorResponse || error.error
+    });
+
+    return throwError(() => ({
+      status: error.status,
+      message: errorMessage,
+      error: errorResponse || error.error,
+      originalError: error
+    }));
+  }
+
+  /**
+   * GET request - returns single item
+   */
+  protected get<T>(path: string = '', params?: QueryParams): Observable<T> {
+    const url = this.getUrl(path);
+    const headers = this.getHeaders();
+    const httpParams = this.buildParams(params);
+
+    return this.http.get<T>(url, { headers, params: httpParams })
+      .pipe(
+        catchError(this.handleError.bind(this))
+      );
+  }
+
+  /**
+   * GET request - returns paginated response
+   */
+  protected getPaginated<T>(path: string = '', params?: QueryParams): Observable<PaginatedResponse<T>> {
+    const url = this.getUrl(path);
+    const headers = this.getHeaders();
+    const httpParams = this.buildParams(params);
+
+    return this.http.get<PaginatedResponse<T>>(url, { headers, params: httpParams })
+      .pipe(
+        catchError(this.handleError.bind(this))
+      );
+  }
+
+  /**
+   * POST request
+   */
+  protected post<T>(path: string = '', body: any): Observable<T> {
+    const url = this.getUrl(path);
+    const headers = this.getHeaders();
+
+    return this.http.post<T>(url, body, { headers })
+      .pipe(
+        catchError(this.handleError.bind(this))
+      );
+  }
+
+  /**
+   * PUT request
+   */
+  protected put<T>(path: string = '', body: any): Observable<T> {
+    const url = this.getUrl(path);
+    const headers = this.getHeaders();
+
+    return this.http.put<T>(url, body, { headers })
+      .pipe(
+        catchError(this.handleError.bind(this))
+      );
+  }
+
+  /**
+   * PATCH request
+   */
+  protected patch<T>(path: string = '', body: any): Observable<T> {
+    const url = this.getUrl(path);
+    const headers = this.getHeaders();
+
+    return this.http.patch<T>(url, body, { headers })
+      .pipe(
+        catchError(this.handleError.bind(this))
+      );
+  }
+
+  /**
+   * DELETE request
+   */
+  protected delete(path: string = '', params?: QueryParams): Observable<void> {
+    const url = this.getUrl(path);
+    const headers = this.getHeaders();
+    const httpParams = this.buildParams(params);
+
+    return this.http.delete<void>(url, { headers, params: httpParams })
+      .pipe(
+        catchError(this.handleError.bind(this))
+      );
+  }
+
+  /**
+   * POST request with FormData (for file uploads)
+   */
+  protected postFormData<T>(path: string = '', formData: FormData): Observable<T> {
+    const url = this.getUrl(path);
+    let headers = new HttpHeaders();
+
+    // Don't set Content-Type for FormData - browser will set it with boundary
+    const token = this.getToken();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+
+    return this.http.post<T>(url, formData, { headers })
+      .pipe(
+        catchError(this.handleError.bind(this))
+      );
+  }
+
+  /**
+   * GET request for file download
+   */
+  protected downloadFile(path: string = '', params?: QueryParams): Observable<Blob> {
+    const url = this.getUrl(path);
+    const headers = this.getHeaders();
+    const httpParams = this.buildParams(params);
+
+    return this.http.get(url, {
+      headers,
+      params: httpParams,
+      responseType: 'blob'
+    })
+      .pipe(
+        catchError(this.handleError.bind(this))
+      );
   }
 }
-
-

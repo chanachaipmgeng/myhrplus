@@ -1,14 +1,12 @@
 /**
- * IVAP Company Service
- * Service สำหรับจัดการข้อมูล Company/Organization
- * Updated to use new BaseApiService
+ * Company Service
+ * Service for company/organization management
  */
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { BaseApiService } from '../base-api.service';
-import { environment } from '@env/environment';
+import { BaseApiService } from './base-api.service';
 import {
   Company,
   CompanyBase,
@@ -23,30 +21,44 @@ import {
 @Injectable({
   providedIn: 'root'
 })
-export class IvapCompanyService extends BaseApiService {
+export class CompanyService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, environment.apiEndpoints.companies);
+    super(http, '/companies');
   }
 
   /**
    * Get all companies (paginated)
    */
-  getAllPaginated(params?: QueryParams): Observable<PaginatedResponse<Company>> {
+  getAll(params?: QueryParams): Observable<PaginatedResponse<Company>> {
     return this.getPaginated<Company>('', params);
+  }
+
+  /**
+   * Get company by ID
+   */
+  getById(companyId: string): Observable<Company> {
+    return this.get<Company>(`/${companyId}`);
   }
 
   /**
    * Create new company
    */
-  createCompany(data: CompanyBase): Observable<Company> {
+  create(data: CompanyBase): Observable<Company> {
     return this.post<Company>('', data);
   }
 
   /**
    * Update company
    */
-  updateCompany(companyId: string, data: CompanyUpdate): Observable<Company> {
+  update(companyId: string, data: CompanyUpdate): Observable<Company> {
     return this.put<Company>(`/${companyId}`, data);
+  }
+
+  /**
+   * Delete company
+   */
+  delete(companyId: string): Observable<void> {
+    return this.delete(`/${companyId}`);
   }
 
   /**
@@ -98,3 +110,4 @@ export class IvapCompanyService extends BaseApiService {
     return this.downloadFile('/export', params);
   }
 }
+

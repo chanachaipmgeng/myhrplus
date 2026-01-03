@@ -1,29 +1,47 @@
 /**
  * Models Index
  * Central export for all models
- * 
- * IVAP Models - Cleaned up to only include essential core models
+ *
+ * IVAP Models - Recreated from doc-backend/angular-models.ts
  */
 
-// Core models
-export * from './user.model';
-export * from './auth.model';
-export * from './auth-user.model';
-export * from './api-response.model';
-export * from './error.model';
-
-// Base models
-export * from './base.model';
-export * from './base-code-description.model';
+// Common models (types, pagination, errors)
+export * from './common.models';
 
 // Authentication models
-// Note: login.model.ts removed - using IVAP models instead
+export * from './authentication.models';
 
-// Common models
+// Company models
+export * from './company.models';
+
+// Employee models
+export * from './employee.models';
+
+// Time & Attendance models
+export * from './time-attendance.models';
+
+// Device & Door models
+export * from './device-door.models';
+
+// Verification models
+export * from './verification.models';
+
+// Visitor & Guest models
+export * from './visitor-guest.models';
+
+// Event models
+export * from './event.models';
+
+// Vehicle & Parking models
+export * from './vehicle-parking.models';
+
+// Analytics & Monitoring models
+export * from './analytics.models';
+
+// Legacy models (kept for backward compatibility)
+export * from './swaplangCode.model';
 export * from './menu.model';
-export * from './message.model';
-export * from './pdpa.model';
-export * from './certificate-template.model';
 
-// IVAP Models
-export * from './ivap';
+// IVAP Models (from previous structure - deprecated, use root models instead)
+// Note: These are kept for backward compatibility but should be migrated to root models
+// export * from './ivap'; // Commented out to avoid duplicate exports

@@ -14,14 +14,14 @@ import { AlertComponent } from '@shared/components/alert/alert.component';
 import { ThemeToggleComponent } from '@shared/components/theme-toggle/theme-toggle.component';
 import { FormValidationMessagesComponent } from '@shared/components/form-validation-messages/form-validation-messages.component';
 
-import { LoginComponent } from './login/login.component';
+// LoginComponent is now standalone - import in routing instead
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { AuthRoutingModule } from './auth-routing.module';
 
 @NgModule({
   declarations: [
-    LoginComponent
+    // LoginComponent is now standalone - removed from declarations
     // ForgotPasswordComponent and UnauthorizedComponent are now standalone
   ],
   imports: [

@@ -1,14 +1,12 @@
 /**
- * IVAP Employee Service
- * Service สำหรับจัดการข้อมูล Employee
- * Updated to use new BaseApiService
+ * Employee Service
+ * Service for employee management
  */
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { BaseApiService } from '../base-api.service';
-import { environment } from '@env/environment';
+import { BaseApiService } from './base-api.service';
 import {
   CompanyEmployee,
   CompanyEmployeePost,
@@ -20,30 +18,46 @@ import {
 @Injectable({
   providedIn: 'root'
 })
-export class IvapEmployeeService extends BaseApiService {
+export class EmployeeService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, environment.apiEndpoints.employees);
+    super(http, '/employees');
   }
 
   /**
    * Get all employees (paginated)
    */
-  getAllPaginated(params?: QueryParams): Observable<PaginatedResponse<CompanyEmployee>> {
+  getAll(params?: QueryParams): Observable<PaginatedResponse<CompanyEmployee>> {
     return this.getPaginated<CompanyEmployee>('', params);
+  }
+
+  /**
+   * Get employee by ID
+   */
+  getById(employeeId: string): Observable<CompanyEmployee> {
+    return this.get<CompanyEmployee>(`/${employeeId}`);
   }
 
   /**
    * Create new employee
    */
-  createEmployee(data: CompanyEmployeePost): Observable<CompanyEmployee> {
+  create(data: CompanyEmployeePost): Observable<CompanyEmployee> {
     return this.post<CompanyEmployee>('', data);
   }
 
   /**
    * Update employee
    */
-  updateEmployee(employeeId: string, data: CompanyEmployeeUpdate): Observable<CompanyEmployee> {
+  update(employeeId: string, data: CompanyEmployeeUpdate): Observable<CompanyEmployee> {
+    // Ensure company_employee_id matches path parameter
+    data.company_employee_id = employeeId as any;
     return this.put<CompanyEmployee>(`/${employeeId}`, data);
+  }
+
+  /**
+   * Delete employee
+   */
+  delete(employeeId: string): Observable<void> {
+    return this.delete(`/${employeeId}`);
   }
 
   /**
@@ -53,3 +67,4 @@ export class IvapEmployeeService extends BaseApiService {
     return this.getPaginated<CompanyEmployee>(`/${employeeId}/subordinates`, params);
   }
 }
+

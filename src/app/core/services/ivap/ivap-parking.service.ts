@@ -1,55 +1,39 @@
 /**
  * IVAP Parking Service
  * Service สำหรับจัดการข้อมูล Parking
+ * Updated to use new BaseApiService
  */
 
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { BaseApiService } from '../base-api.service';
-import { ApiService, ApiResponse } from '../api.service';
 import { environment } from '@env/environment';
 import {
   ParkingRecord,
   PaginatedResponse,
   QueryParams
-} from '@core/models/ivap';
+} from '@core/models';
 
 @Injectable({
   providedIn: 'root'
 })
-export class IvapParkingService extends BaseApiService<ParkingRecord> {
-  protected baseUrl = `${environment.apiEndpoints.parking}`;
-
-  constructor(private apiService: ApiService) {
-    super();
+export class IvapParkingService extends BaseApiService {
+  constructor(http: HttpClient) {
+    super(http, environment.apiEndpoints.parking);
   }
 
   /**
    * Get all parking records (paginated)
    */
   getAllPaginated(params?: QueryParams): Observable<PaginatedResponse<ParkingRecord>> {
-    return this.apiService.get<PaginatedResponse<ParkingRecord>>(this.baseUrl, params).pipe(
-      map((response: ApiResponse<PaginatedResponse<ParkingRecord>>) => {
-        if (response.success && response.data) {
-          return response.data;
-        }
-        return (response as unknown as PaginatedResponse<ParkingRecord>);
-      })
-    );
+    return this.getPaginated<ParkingRecord>('', params);
   }
 
   /**
    * Exit parking (check out)
    */
   exit(parkingId: string): Observable<ParkingRecord> {
-    return this.apiService.post<ParkingRecord>(`${this.baseUrl}/${parkingId}/exit`, {}).pipe(
-      map((response: ApiResponse<ParkingRecord>) => {
-        if (response.success && response.data) {
-          return response.data;
-        }
-        throw new Error(response.message || 'Failed to exit parking');
-      })
-    );
+    return this.post<ParkingRecord>(`/${parkingId}/exit`, {});
   }
 }
-

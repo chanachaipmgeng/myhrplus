@@ -1,41 +1,32 @@
 /**
  * IVAP Device Service
  * Service สำหรับจัดการข้อมูล Device
+ * Updated to use new BaseApiService
  */
 
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { BaseApiService } from '../base-api.service';
-import { ApiService, ApiResponse } from '../api.service';
 import { environment } from '@env/environment';
 import {
   Device,
   PaginatedResponse,
   QueryParams
-} from '@core/models/ivap';
+} from '@core/models';
 
 @Injectable({
   providedIn: 'root'
 })
-export class IvapDeviceService extends BaseApiService<Device> {
-  protected baseUrl = `${environment.apiEndpoints.devices}`;
-
-  constructor(private apiService: ApiService) {
-    super();
+export class IvapDeviceService extends BaseApiService {
+  constructor(http: HttpClient) {
+    super(http, environment.apiEndpoints.devices);
   }
 
   /**
    * Get all devices (paginated)
    */
   getAllPaginated(params?: QueryParams): Observable<PaginatedResponse<Device>> {
-    return this.apiService.get<PaginatedResponse<Device>>(this.baseUrl, params).pipe(
-      map((response: ApiResponse<PaginatedResponse<Device>>) => {
-        if (response.success && response.data) {
-          return response.data;
-        }
-        return (response as unknown as PaginatedResponse<Device>);
-      })
-    );
+    return this.getPaginated<Device>('', params);
   }
 }
-

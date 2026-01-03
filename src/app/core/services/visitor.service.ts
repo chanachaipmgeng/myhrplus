@@ -1,14 +1,12 @@
 /**
- * IVAP Visitor Service
- * Service สำหรับจัดการข้อมูล Visitor
- * Updated to use new BaseApiService
+ * Visitor Service
+ * Service for visitor management
  */
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { BaseApiService } from '../base-api.service';
-import { environment } from '@env/environment';
+import { BaseApiService } from './base-api.service';
 import {
   Visitor,
   PaginatedResponse,
@@ -18,16 +16,37 @@ import {
 @Injectable({
   providedIn: 'root'
 })
-export class IvapVisitorService extends BaseApiService {
+export class VisitorService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, environment.apiEndpoints.visitors);
+    super(http, '/visitors');
   }
 
   /**
    * Get all visitors (paginated)
    */
-  getAllPaginated(params?: QueryParams): Observable<PaginatedResponse<Visitor>> {
+  getAll(params?: QueryParams): Observable<PaginatedResponse<Visitor>> {
     return this.getPaginated<Visitor>('', params);
+  }
+
+  /**
+   * Get visitor by ID
+   */
+  getById(visitorId: string): Observable<Visitor> {
+    return this.get<Visitor>(`/${visitorId}`);
+  }
+
+  /**
+   * Create visitor
+   */
+  create(data: Partial<Visitor>): Observable<Visitor> {
+    return this.post<Visitor>('', data);
+  }
+
+  /**
+   * Update visitor
+   */
+  update(visitorId: string, data: Partial<Visitor>): Observable<Visitor> {
+    return this.put<Visitor>(`/${visitorId}`, data);
   }
 
   /**
@@ -44,3 +63,4 @@ export class IvapVisitorService extends BaseApiService {
     return this.post<Visitor>(`/${visitorId}/check-out`, {});
   }
 }
+

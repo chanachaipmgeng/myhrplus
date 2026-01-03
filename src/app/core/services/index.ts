@@ -24,8 +24,22 @@ export * from './auth.service';
 export * from './token-manager.service';
 export * from './user-context.service';
 
-// IVAP Services
+// IVAP Services (legacy - to be migrated)
 export * from './ivap';
+
+// New Services (from doc-backend)
+export * from './company.service';
+export * from './employee.service';
+export * from './timestamp.service';
+export * from './shift.service';
+export * from './leave.service';
+export * from './device.service';
+export * from './door.service';
+export * from './visitor.service';
+export * from './guest.service';
+export * from './event.service';
+export * from './vehicle.service';
+export * from './parking.service';
 
 // UI Services
 export * from './notification.service';

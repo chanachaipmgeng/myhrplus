@@ -1,14 +1,12 @@
 /**
- * IVAP Guest Service
- * Service สำหรับจัดการข้อมูล Guest
- * Updated to use new BaseApiService
+ * Guest Service
+ * Service for guest management
  */
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { BaseApiService } from '../base-api.service';
-import { environment } from '@env/environment';
+import { BaseApiService } from './base-api.service';
 import {
   Guest,
   PaginatedResponse,
@@ -18,16 +16,37 @@ import {
 @Injectable({
   providedIn: 'root'
 })
-export class IvapGuestService extends BaseApiService {
+export class GuestService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, environment.apiEndpoints.guests);
+    super(http, '/guests');
   }
 
   /**
    * Get all guests (paginated)
    */
-  getAllPaginated(params?: QueryParams): Observable<PaginatedResponse<Guest>> {
+  getAll(params?: QueryParams): Observable<PaginatedResponse<Guest>> {
     return this.getPaginated<Guest>('', params);
+  }
+
+  /**
+   * Get guest by ID
+   */
+  getById(guestId: string): Observable<Guest> {
+    return this.get<Guest>(`/${guestId}`);
+  }
+
+  /**
+   * Create guest
+   */
+  create(data: Partial<Guest>): Observable<Guest> {
+    return this.post<Guest>('', data);
+  }
+
+  /**
+   * Update guest
+   */
+  update(guestId: string, data: Partial<Guest>): Observable<Guest> {
+    return this.put<Guest>(`/${guestId}`, data);
   }
 
   /**
@@ -44,3 +63,4 @@ export class IvapGuestService extends BaseApiService {
     return this.post<Guest>(`/${guestId}/check-out`, {});
   }
 }
+

@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService, LoginRequest, DatabaseModel } from '@core/services';
 import { NotificationService } from '@core/services';
 import { MenuService } from '@core/services';
-import { EmployeeService, SetCharacter } from '@core/services';
+// Removed EmployeeService and SetCharacter - not needed for IVAP
 import { SwaplangCodeService } from '@core/services';
 import { StorageService } from '@core/services';
 import { TranslateService } from '@ngx-translate/core';
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private notificationService: NotificationService,
     private menuService: MenuService,
-    private employeeService: EmployeeService,
+    // Removed employeeService - not needed for IVAP
     private swapLangService: SwaplangCodeService,
     private translate: TranslateService,
     private storageService: StorageService,
@@ -303,102 +303,71 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   * Call getSetPass API after token is verified
+   * Handle post-login actions after token is verified
+   * IVAP version - simplified without legacy getSetPass
    */
   private callGetSetPass(result: any): void {
-    // Check getSetPass for defaultpage and accountactive
-    this.employeeService.getSetPass()
-              .subscribe({
-                next: (manageResult: SetCharacter) => {
-                  // If defaultpage is '1', redirect to JSP page (legacy behavior)
-                  if (manageResult.defaultpage === '1') {
-                    const userToken = result.accessToken;
-                    const lang = this.translate.currentLang === 'th' ? 'tha' : 'eng';
-                    const urlHr = environment.jbossUrl;
-                    window.location.href = `${urlHr}/TOKENVERFY.jsp?t=${userToken}&lang=${lang}`;
-                    return;
-                  }
+    // Decode token to check accountactive using jwt_decode
+    try {
+      const decodedToken = jwt_decode<any>(result.accessToken);
+      const accountActive = decodedToken.accountactive;
 
-                  // Decode token to check accountactive using jwt_decode
-                  try {
-                    const decodedToken = jwt_decode<any>(result.accessToken);
-                    const accountActive = decodedToken.accountactive;
-console.log(decodedToken); console.log(accountActive);
-                    if (accountActive) {
-                      if (accountActive === 'true') {
-                        // Account is active - load swap language and navigate
-                        this.swapLangService.getList().subscribe(swapResult => {
-                          this.swapLangService.saveSwaplang(swapResult);
-                          this.notificationService.showSuccess('Login successful');
-                          this.menuService.clearCache();
-                          this.router.navigate(['/home']);
-                        }, (error) => {
-                          console.error('Error loading swap language:', error);
-                          // Proceed anyway
-                          this.notificationService.showSuccess('Login successful');
-                          this.menuService.clearCache();
-                          this.router.navigate(['/home']);
-                        });
-                      } else if (accountActive === 'waiting') {
-                        this.loading = false;
-                        this.loginForm.patchValue({ password: '' });
-                        this.errorMessage = 'Please wait for a moment to log in again.';
-                        this.notificationService.showWarning(this.errorMessage);
-                      } else {
-                        this.loading = false;
-                        this.loginForm.patchValue({ password: '' });
-                        this.errorMessage = 'Please contact Admin';
-                        this.notificationService.showError(this.errorMessage);
-                      }
-                    } else {
-                      // No accountactive field - load swap language and navigate to company profile
-                      this.swapLangService.getList().subscribe(swapResult => {
-                        this.swapLangService.saveSwaplang(swapResult);
-                        this.notificationService.showSuccess('Login successful');
-                        this.menuService.clearCache();
-                        // Navigate to company module as per backend management system
-                        this.router.navigate(['/company']);
-                      }, (error) => {
-                        console.error('Error loading swap language:', error);
-                        // Proceed anyway
-                        this.notificationService.showSuccess('Login successful');
-                        this.menuService.clearCache();
-                        this.router.navigate(['/company']);
-                      });
-                    }
-                  } catch (error) {
-                    console.error('Error decoding token:', error);
-                    // Proceed anyway - load swap language and navigate
-                    this.swapLangService.getList().subscribe(swapResult => {
-                      this.swapLangService.saveSwaplang(swapResult);
-                      this.notificationService.showSuccess('Login successful');
-                      this.menuService.clearCache();
-                      this.router.navigate(['/home']);
-                    }, (error) => {
-                      console.error('Error loading swap language:', error);
-                      // Proceed anyway
-                      this.notificationService.showSuccess('Login successful');
-                      this.menuService.clearCache();
-                      this.router.navigate(['/home']);
-                    });
-                  }
-                },
-                error: (error: unknown) => {
-                  console.error('Error getting setPass:', error);
-                  // Proceed anyway if getSetPass fails - load swap language and navigate
-                  this.swapLangService.getList().subscribe(swapResult => {
-                    this.swapLangService.saveSwaplang(swapResult);
-                    this.notificationService.showSuccess('Login successful');
-                    this.menuService.clearCache();
-                    this.router.navigate(['/home']);
-                  }, (error) => {
-                    console.error('Error loading swap language:', error);
-                    // Proceed anyway
-                    this.notificationService.showSuccess('Login successful');
-                    this.menuService.clearCache();
-                    this.router.navigate(['/home']);
-                  });
-                }
-              });
+      if (accountActive) {
+        if (accountActive === 'true') {
+          // Account is active - load swap language and navigate
+          this.swapLangService.getList().subscribe(swapResult => {
+            this.swapLangService.saveSwaplang(swapResult);
+            this.notificationService.showSuccess('Login successful');
+            this.menuService.clearCache();
+            this.router.navigate(['/ivap/dashboard']);
+          }, (error) => {
+            console.error('Error loading swap language:', error);
+            // Proceed anyway
+            this.notificationService.showSuccess('Login successful');
+            this.menuService.clearCache();
+            this.router.navigate(['/ivap/dashboard']);
+          });
+        } else if (accountActive === 'waiting') {
+          this.loading = false;
+          this.loginForm.patchValue({ password: '' });
+          this.errorMessage = 'Please wait for a moment to log in again.';
+          this.notificationService.showWarning(this.errorMessage);
+        } else {
+          this.loading = false;
+          this.loginForm.patchValue({ password: '' });
+          this.errorMessage = 'Your account is not active. Please contact administrator.';
+          this.notificationService.showError(this.errorMessage);
+        }
+      } else {
+        // No accountactive field - proceed with login
+        this.swapLangService.getList().subscribe(swapResult => {
+          this.swapLangService.saveSwaplang(swapResult);
+          this.notificationService.showSuccess('Login successful');
+          this.menuService.clearCache();
+          this.router.navigate(['/ivap/dashboard']);
+        }, (error) => {
+          console.error('Error loading swap language:', error);
+          // Proceed anyway
+          this.notificationService.showSuccess('Login successful');
+          this.menuService.clearCache();
+          this.router.navigate(['/ivap/dashboard']);
+        });
+      }
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      // Proceed with login anyway
+      this.swapLangService.getList().subscribe(swapResult => {
+        this.swapLangService.saveSwaplang(swapResult);
+        this.notificationService.showSuccess('Login successful');
+        this.menuService.clearCache();
+        this.router.navigate(['/ivap/dashboard']);
+      }, (error) => {
+        console.error('Error loading swap language:', error);
+        // Proceed anyway
+        this.notificationService.showSuccess('Login successful');
+        this.menuService.clearCache();
+        this.router.navigate(['/ivap/dashboard']);
+      });
+    }
   }
 }

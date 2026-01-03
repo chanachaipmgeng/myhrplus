@@ -31,7 +31,7 @@ export class MenuService {
   private menuConfig: MenuConfig | null = null;
   private menuCache: MenuItem[] = [];
 
-  private readonly baseUrl = `${environment.jbossUrl}${environment.apiEndpoints.unsecure}`;
+  private readonly baseUrl = `${environment.baseUrl}${environment.apiVersion}`;
 
   constructor(
     private http: HttpClient, // Keep for static JSON file loading
@@ -54,7 +54,7 @@ export class MenuService {
       catchError(() => {
         // Fallback to API
         // ApiService already handles baseUrl (environment.jbossUrl), so only pass the endpoint path
-        return this.apiService.get<MenuConfig>(`${environment.apiEndpoints.unsecure}/menu`).pipe(
+        return this.apiService.get<MenuConfig>(`${environment.apiVersion}/menu`).pipe(
           map((response: ApiResponse<MenuConfig>) => {
             const config = response.data || (response as unknown as MenuConfig);
             this.menuConfig = config;
