@@ -36,34 +36,6 @@ const routes: Routes = [
         loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)
       },
       {
-        path: 'personal',
-        loadChildren: () => import('./features/personal/personal.module').then(m => m.PersonalModule)
-      },
-      {
-        path: 'ta',
-        loadChildren: () => import('./features/ta/ta.module').then(m => m.TaModule)
-      },
-      {
-        path: 'payroll',
-        loadChildren: () => import('./features/payroll/payroll.module').then(m => m.PayrollModule)
-      },
-      {
-        path: 'training',
-        loadChildren: () => import('./features/training/training.module').then(m => m.TrainingModule)
-      },
-      {
-        path: 'appraisal',
-        loadChildren: () => import('./features/appraisal/appraisal.module').then(m => m.AppraisalModule)
-      },
-      {
-        path: 'recruit',
-        loadChildren: () => import('./features/recruit/recruit.module').then(m => m.RecruitModule)
-      },
-      {
-        path: 'welfare',
-        loadChildren: () => import('./features/welfare/welfare.module').then(m => m.WelfareModule)
-      },
-      {
         path: 'company',
         loadChildren: () => import('./features/company/company.module').then(m => m.CompanyModule)
       },
