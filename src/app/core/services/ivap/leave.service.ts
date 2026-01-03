@@ -10,15 +10,14 @@ import {
   LeaveRequest,
   PaginatedResponse,
   QueryParams
-} from '@core/models/ivap';
+} from '@core/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IvapLeaveService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http);
-    this.setEndpoint('/leaves');
+    super(http, '/leaves');
   }
 
   /**

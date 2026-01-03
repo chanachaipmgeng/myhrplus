@@ -8,15 +8,14 @@ import { Observable } from 'rxjs';
 import { BaseApiService } from '../base-api.service';
 import {
   FaceEnrollment
-} from '@core/models/ivap';
+} from '@core/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IvapFaceService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http);
-    this.setEndpoint('/face');
+    super(http, '/verification/face');
   }
 
   /**

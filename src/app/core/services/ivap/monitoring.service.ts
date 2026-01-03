@@ -8,15 +8,14 @@ import { Observable } from 'rxjs';
 import { BaseApiService } from '../base-api.service';
 import {
   SystemHealth
-} from '@core/models/ivap';
+} from '@core/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IvapMonitoringService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http);
-    this.setEndpoint('/monitoring');
+    super(http, '/monitoring');
   }
 
   /**

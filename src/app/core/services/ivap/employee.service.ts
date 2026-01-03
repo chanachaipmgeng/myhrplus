@@ -12,15 +12,14 @@ import {
   CompanyEmployeeUpdate,
   PaginatedResponse,
   QueryParams
-} from '@core/models/ivap';
+} from '@core/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IvapEmployeeService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http);
-    this.setEndpoint('/employees');
+    super(http, '/employees');
   }
 
   /**

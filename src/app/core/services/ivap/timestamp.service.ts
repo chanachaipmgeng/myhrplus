@@ -10,15 +10,14 @@ import {
   EmployeeTimestamp,
   PaginatedResponse,
   QueryParams
-} from '@core/models/ivap';
+} from '@core/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IvapTimestampService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http);
-    this.setEndpoint('/timestamps');
+    super(http, '/timestamps');
   }
 
   /**

@@ -12,8 +12,7 @@ import { BaseApiService } from '../base-api.service';
 })
 export class IvapSystemService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http);
-    this.setEndpoint('/system');
+    super(http, '/system');
   }
 
   /**

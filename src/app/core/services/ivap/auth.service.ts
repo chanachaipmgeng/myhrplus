@@ -16,15 +16,14 @@ import {
   ForgotPasswordResponse,
   ResetPasswordRequest,
   ResetPasswordResponse
-} from '@core/models/ivap';
+} from '@core/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IvapAuthService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http);
-    this.setEndpoint('/auth');
+    super(http, '/auth');
   }
 
   /**
@@ -35,7 +34,7 @@ export class IvapAuthService extends BaseApiService {
       map(token => {
         // Auto-save token on successful login
         if (token.access_token) {
-          this.setToken(token.access_token, true);
+          this.setToken(token.access_token);
         }
         return token;
       })

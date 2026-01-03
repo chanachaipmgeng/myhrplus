@@ -10,15 +10,14 @@ import {
   ParkingRecord,
   PaginatedResponse,
   QueryParams
-} from '@core/models/ivap';
+} from '@core/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IvapParkingService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http);
-    this.setEndpoint('/parking');
+    super(http, '/parking');
   }
 
   /**

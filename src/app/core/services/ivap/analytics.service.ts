@@ -9,15 +9,14 @@ import { BaseApiService } from '../base-api.service';
 import {
   AnalyticsResponse,
   QueryParams
-} from '@core/models/ivap';
+} from '@core/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IvapAnalyticsService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http);
-    this.setEndpoint('/analytics');
+    super(http, '/analytics');
   }
 
   /**

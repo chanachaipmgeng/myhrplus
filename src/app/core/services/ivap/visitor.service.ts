@@ -10,15 +10,14 @@ import {
   Visitor,
   PaginatedResponse,
   QueryParams
-} from '@core/models/ivap';
+} from '@core/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IvapVisitorService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http);
-    this.setEndpoint('/visitors');
+    super(http, '/visitors');
   }
 
   /**

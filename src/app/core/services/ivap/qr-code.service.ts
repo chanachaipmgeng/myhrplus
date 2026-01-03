@@ -9,15 +9,14 @@ import { BaseApiService } from '../base-api.service';
 import {
   QRCode,
   QRCodeGenerateRequest
-} from '@core/models/ivap';
+} from '@core/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IvapQrCodeService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http);
-    this.setEndpoint('/qr-codes');
+    super(http, '/verification/qr-code');
   }
 
   /**

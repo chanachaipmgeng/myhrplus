@@ -10,15 +10,14 @@ import {
   Door,
   PaginatedResponse,
   QueryParams
-} from '@core/models/ivap';
+} from '@core/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IvapDoorService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http);
-    this.setEndpoint('/doors');
+    super(http, '/doors');
   }
 
   /**

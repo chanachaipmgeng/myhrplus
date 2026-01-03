@@ -20,7 +20,7 @@ import {
   PaginatedResponse,
   QueryParams,
   ErrorResponse
-} from '@core/models/ivap/ivap-models';
+} from '@core/models';
 
 @Injectable({
   providedIn: 'root'
@@ -28,18 +28,11 @@ import {
 export class BaseApiService {
   protected baseUrl: string = environment.baseUrl;
   protected apiVersion: string = environment.apiVersion;
-  protected endpoint: string = '';
 
   constructor(
-    protected http: HttpClient
+    protected http: HttpClient,
+    protected endpoint: string
   ) {}
-
-  /**
-   * Set endpoint (called by child services in constructor)
-   */
-  protected setEndpoint(endpoint: string): void {
-    this.endpoint = endpoint;
-  }
 
   /**
    * Get full API URL
@@ -69,36 +62,23 @@ export class BaseApiService {
   }
 
   /**
-   * Get JWT token from localStorage or sessionStorage
+   * Get JWT token from localStorage
    */
   protected getToken(): string | null {
-    // Try sessionStorage first (for backward compatibility)
-    const sessionToken = sessionStorage.getItem('userToken') || sessionStorage.getItem('access_token');
-    if (sessionToken) {
-      return sessionToken;
-    }
-
-    // Fallback to localStorage
-    return localStorage.getItem('access_token') || localStorage.getItem('userToken');
+    return localStorage.getItem('access_token');
   }
 
   /**
-   * Set JWT token to storage
+   * Set JWT token to localStorage
    */
-  setToken(token: string, useSessionStorage: boolean = true): void {
-    if (useSessionStorage) {
-      sessionStorage.setItem('userToken', token);
-      sessionStorage.setItem('access_token', token);
-    }
+  setToken(token: string): void {
     localStorage.setItem('access_token', token);
   }
 
   /**
-   * Remove JWT token from storage
+   * Remove JWT token from localStorage
    */
   removeToken(): void {
-    sessionStorage.removeItem('userToken');
-    sessionStorage.removeItem('access_token');
     localStorage.removeItem('access_token');
   }
 

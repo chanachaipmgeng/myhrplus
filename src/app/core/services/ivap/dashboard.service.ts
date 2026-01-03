@@ -8,15 +8,14 @@ import { Observable } from 'rxjs';
 import { BaseApiService } from '../base-api.service';
 import {
   DashboardResponse
-} from '@core/models/ivap';
+} from '@core/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IvapDashboardService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http);
-    this.setEndpoint('/dashboard');
+    super(http, '/dashboard');
   }
 
   /**

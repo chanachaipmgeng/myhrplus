@@ -10,15 +10,14 @@ import {
   Shift,
   PaginatedResponse,
   QueryParams
-} from '@core/models/ivap';
+} from '@core/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IvapShiftService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http);
-    this.setEndpoint('/shifts');
+    super(http, '/shifts');
   }
 
   /**
