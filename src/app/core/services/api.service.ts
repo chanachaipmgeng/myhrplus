@@ -19,8 +19,8 @@ export interface ApiResponse<T> {
   providedIn: 'root'
 })
 export class ApiService {
-  // Use jbossUrl for /hr endpoints (same as hrplus-std-rd)
-  private baseUrl = environment.jbossUrl;
+  // IVAP API base URL with version
+  private baseUrl = `${environment.baseUrl}${environment.apiVersion}`;
   private maxRetries = 3;
   private retryDelay = 1000; // 1 second
 

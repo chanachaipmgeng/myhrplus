@@ -112,9 +112,9 @@ export class AuthService {
 
   private tokenRefreshTimer: Subscription | null = null;
 
-  private readonly baseUrl = `${environment.jbossUrl}${environment.apiEndpoints.unsecure}`;
-  private readonly authBaseUrl = `${environment.jbossUrl}${environment.apiEndpoints.auth}`;
-  private readonly empViewBaseUrl = `${environment.jbossUrl}${environment.apiEndpoints.employeeView}`;
+  // IVAP API endpoints
+  private readonly baseUrl = `${environment.baseUrl}${environment.apiVersion}`;
+  private readonly authBaseUrl = `${environment.baseUrl}${environment.apiVersion}${environment.apiEndpoints.auth}`;
 
   constructor(
     private http: HttpClient, // Keep for login/forgot-password that need direct access
@@ -136,9 +136,9 @@ export class AuthService {
         lang: credentials.lang || 'th'
       };
 
-      // Use jbossUrl for /hr endpoints (same as hrplus-std-rd)
+      // IVAP API authentication endpoint
       this.http.post<any>(
-        `${environment.jbossUrl}${environment.apiEndpoints.unsecure}/authen`,
+        `${this.authBaseUrl}/login`,
         body
       ).subscribe({
         next: (response) => {
@@ -221,9 +221,9 @@ export class AuthService {
   }
 
   getDatabase(): Observable<DatabaseModel[]> {
-    // ApiService already handles baseUrl (environment.jbossUrl), so only pass the endpoint path
+    // IVAP API - get organizations/companies list
     return this.apiService.get<DatabaseModel[]>(
-      `${environment.apiEndpoints.unsecure}/system/get-db-list`
+      `${environment.apiEndpoints.companies}`
     ).pipe(
       map((response: ApiResponse<DatabaseModel[]>) => {
         const data = response.data || (response as unknown as DatabaseModel[]);
@@ -241,7 +241,7 @@ export class AuthService {
       };
 
       this.http.post<any>(
-        `${environment.jbossUrl}${environment.apiEndpoints.unsecure}/authen/forgot-password`,
+        `${this.authBaseUrl}/forgot-password`,
         body
       ).subscribe({
         next: (response) => {
@@ -257,8 +257,7 @@ export class AuthService {
   }
 
   logout(): void {
-    // Call logout API if needed
-    // ApiService already handles baseUrl (environment.jbossUrl), so only pass the endpoint path
+    // IVAP API logout endpoint
     this.apiService.post<unknown>(`${environment.apiEndpoints.auth}/logout`, {})
       .subscribe({
         next: () => {},
@@ -280,7 +279,7 @@ export class AuthService {
       return throwError(() => new Error('No refresh token'));
     }
 
-    // ApiService already handles baseUrl (environment.jbossUrl), so only pass the endpoint path
+    // IVAP API token refresh
     return this.apiService.post<LoginResponse>(
       `${environment.apiEndpoints.auth}/refresh`,
       { refreshToken }
@@ -473,7 +472,7 @@ export class AuthService {
         };
 
         this.http
-          .post<any>(`${environment.jbossUrl}${environment.apiEndpoints.employeeView}/user/change-password`, body)
+          .post<any>(`${this.baseUrl}${environment.apiEndpoints.auth}/change-password`, body)
           .subscribe({
             next: (response) => {
               resolve(response);
@@ -631,9 +630,9 @@ export class AuthService {
    * @returns Observable with employee consent and PDPA data
    */
   getPdpa(employeeId: string): Observable<{ employeeConsent: unknown; pdpa: unknown }> {
-    // ApiService already handles baseUrl (environment.jbossUrl), so only pass the endpoint path
+    // IVAP API - get employee consent (if applicable)
     return this.apiService.get<{ employeeConsent: unknown; pdpa: unknown }>(
-      `${environment.apiEndpoints.employeeView}/pdpa/employee-consent/${employeeId}`
+      `${environment.apiEndpoints.employees}/${employeeId}/consent`
     ).pipe(
       map((response: ApiResponse<{ employeeConsent: unknown; pdpa: unknown }>) => {
         return response.data || (response as unknown as { employeeConsent: unknown; pdpa: unknown });
@@ -651,9 +650,9 @@ export class AuthService {
    * @returns Promise with response
    */
   savePdpa(body: { model: { version: number; employeeId: string } }): Observable<ApiResponse<unknown>> {
-    // ApiService already handles baseUrl (environment.jbossUrl), so only pass the endpoint path
+    // IVAP API - save employee consent
     return this.apiService.post<unknown>(
-      `${environment.apiEndpoints.employeeView}/pdpa/employee-consent`,
+      `${environment.apiEndpoints.employees}/${body.model.employeeId}/consent`,
       body
     );
   }

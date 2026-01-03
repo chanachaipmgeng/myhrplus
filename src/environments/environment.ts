@@ -1,25 +1,36 @@
 export const environment = {
   production: false,
-  // Base URLs - following hrplus-std-rd pattern
-  baseUrl: 'https://hrplus-std.myhr.co.th/plus',  // For /plus endpoints
-  jbossUrl: 'https://hrplus-std.myhr.co.th/hr',   // For /hr endpoints (main API)
-  rootUrl: 'https://hrplus-std.myhr.co.th',       // Root URL without path
-  // Legacy support - keep for backward compatibility
-  apiBaseUrl: 'https://hrplus-std.myhr.co.th/hr', // Alias for jbossUrl
+  // IVAP API Base URLs
+  baseUrl: 'http://localhost:8000',              // IVAP API base URL (development)
+  apiVersion: '/api/v1',                          // API version path
+  rootUrl: 'http://localhost:8000',               // Root URL without path
+
+  // Legacy support - keep for backward compatibility (if needed)
+  apiBaseUrl: 'http://localhost:8000/api/v1',    // Full API base URL
+
+  // IVAP API Endpoints
   apiEndpoints: {
-    auth: '/restauthen',
-    core: '/capi',
-    workflow: '/wapi',
-    timeAttendance: '/taapi',
-    training: '/trapi',
-    employeeView: '/emvapi',
-    appraisal: '/apsapi',
-    payroll: '/prapi',
-    welfare: '/welapi',
-    recruit: '/reapi',
-    unsecure: '/usapi'
+    auth: '/auth',
+    companies: '/companies',
+    employees: '/employees',
+    visitors: '/visitors',
+    guests: '/guests',
+    events: '/events',
+    vehicles: '/vehicles',
+    parking: '/parking',
+    devices: '/devices',
+    doors: '/doors',
+    timestamps: '/timestamps',
+    shifts: '/shifts',
+    leaves: '/leaves',
+    accessControl: '/access-control',
+    verification: '/verification',
+    analytics: '/analytics',
+    monitoring: '/monitoring',
+    alerts: '/alerts',
+    system: '/system'
   },
-  appName: 'HR System',
+  appName: 'IVAP Frontend',
   version: '1.0.0'
 };
 
