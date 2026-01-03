@@ -132,6 +132,14 @@ export interface Member {
   created_at: string;
   updated_at: string;
   last_login_at?: string;
+  // Backward compatibility properties (legacy HR system)
+  user_level?: string;
+  user_role?: string;
+  employeeid?: string;
+  fullname?: string;
+  name?: string;
+  firstlogin?: string;
+  uid?: string; // Alias for member_id
 }
 
 export interface Token {
@@ -663,6 +671,12 @@ export interface Notification {
   is_read: boolean;
   read_at?: string;
   created_at: string;
+  // Legacy compatibility properties
+  id?: string; // Alias for notification_id
+  type?: NotificationType; // Alias for notification_type
+  read?: boolean; // Alias for is_read
+  timestamp?: string; // Alias for created_at
+  route?: string; // Optional route for navigation
 }
 
 // ============================================================================

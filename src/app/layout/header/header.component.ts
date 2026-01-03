@@ -79,7 +79,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // Subscribe to notifications
     this.notificationService.notifications$.pipe(takeUntil(this.destroy$)).subscribe(notifications => {
       this.notifications = notifications;
-      this.unreadCount = notifications.filter(n => !n.read).length;
+      this.unreadCount = notifications.filter(n => !n.is_read && !n.read).length;
     });
   }
 
@@ -107,7 +107,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   handleNotificationClick(notification: Notification): void {
-    this.notificationService.markAsRead(notification.id);
+    const notificationId = notification.id || notification.notification_id;
+    this.notificationService.markAsRead(notificationId);
     if (notification.route) {
       this.router.navigate([notification.route]);
       this.showNotificationMenu = false;
@@ -244,7 +245,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return colorMap[type] || 'text-primary';
   }
 
-  getTimeAgo(date: Date): string {
+  getTimeAgo(date: string | Date | undefined): string {
+    if (!date) return '';
     const now = new Date();
     const diff = now.getTime() - new Date(date).getTime();
     const minutes = Math.floor(diff / 60000);

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { StorageService } from './storage.service';
-import { AuthUser } from '../models/auth-user.model';
+import { Member } from '@core/models';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserContextService {
     private readonly USER_KEY = 'user_data';
-    private currentUserSubject = new BehaviorSubject<AuthUser | null>(null);
+    private currentUserSubject = new BehaviorSubject<Member | null>(null);
     public currentUser$ = this.currentUserSubject.asObservable();
 
     constructor(private storage: StorageService) {
@@ -20,7 +20,7 @@ export class UserContextService {
      * Load user from storage and emit to subject
      * specific migration logic for sessionStorage is handled here
      */
-    public loadUser(): AuthUser | null {
+    public loadUser(): Member | null {
         // Check localStorage first
         let userData = this.storage.getItem(this.USER_KEY);
 
@@ -40,7 +40,7 @@ export class UserContextService {
 
         if (userData) {
             try {
-                const user: AuthUser = typeof userData === 'string' ? JSON.parse(userData) : userData;
+                const user: Member = typeof userData === 'string' ? JSON.parse(userData) : userData;
                 this.currentUserSubject.next(user);
                 return user;
             } catch (error) {
@@ -53,7 +53,7 @@ export class UserContextService {
         return null;
     }
 
-    public setUser(user: AuthUser): void {
+    public setUser(user: Member): void {
         this.storage.setItem(this.USER_KEY, JSON.stringify(user));
         this.currentUserSubject.next(user);
 
@@ -74,7 +74,7 @@ export class UserContextService {
         }
     }
 
-    public getCurrentUser(): AuthUser | null {
+    public getCurrentUser(): Member | null {
         return this.currentUserSubject.value;
     }
 

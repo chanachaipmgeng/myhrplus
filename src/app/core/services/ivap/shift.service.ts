@@ -17,7 +17,8 @@ import {
 })
 export class IvapShiftService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/shifts');
+    super(http);
+    this.endpoint = '/shifts';
   }
 
   /**

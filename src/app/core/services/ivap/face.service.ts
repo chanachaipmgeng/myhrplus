@@ -15,7 +15,8 @@ import {
 })
 export class IvapFaceService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/verification/face');
+    super(http);
+    this.endpoint = '/verification/face';
   }
 
   /**

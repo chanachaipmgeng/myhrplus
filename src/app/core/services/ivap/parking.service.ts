@@ -17,7 +17,8 @@ import {
 })
 export class IvapParkingService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/parking');
+    super(http);
+    this.endpoint = '/parking';
   }
 
   /**

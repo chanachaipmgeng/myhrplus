@@ -17,7 +17,8 @@ import {
 })
 export class IvapEventService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/events');
+    super(http);
+    this.endpoint = '/events';
   }
 
   /**

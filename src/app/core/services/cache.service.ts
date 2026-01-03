@@ -1,86 +1,170 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
-interface CacheItem<T> {
+interface CacheEntry<T> {
   data: T;
-  expiresAt: number;
+  expiry: number;
+  accessedAt: number; // For LRU tracking
 }
 
 /**
- * Cache Service
- * 
- * In-memory caching with TTL (Time To Live) support
+ * CacheService with LRU (Least Recently Used) strategy
+ * Automatically evicts least recently used entries when cache is full
  */
 @Injectable({
   providedIn: 'root'
 })
 export class CacheService {
-  private cache = new Map<string, CacheItem<any>>();
+  private cache = new Map<string, CacheEntry<any>>();
+  private defaultTTL = 5 * 60 * 1000; // 5 minutes
+  private maxSize = 100; // Maximum cache entries
 
-  /**
-   * Get cached data
-   * @param key Cache key
-   * @returns Cached data or null if not found/expired
-   */
   get<T>(key: string): T | null {
-    const item = this.cache.get(key);
+    const entry = this.cache.get(key);
     
-    if (!item) {
+    if (!entry) {
       return null;
     }
 
-    // Check if expired
-    if (Date.now() > item.expiresAt) {
+    const now = Date.now();
+    if (now > entry.expiry) {
+      // Expired, remove from cache
       this.cache.delete(key);
       return null;
     }
 
-    return item.data as T;
+    // Update access time for LRU (move to end)
+    this.updateAccessOrder(key, entry);
+
+    return entry.data as T;
   }
 
-  /**
-   * Set cached data
-   * @param key Cache key
-   * @param data Data to cache
-   * @param ttl Time to live in milliseconds (default: 5 minutes)
-   */
-  set<T>(key: string, data: T, ttl: number = 5 * 60 * 1000): void {
-    const expiresAt = Date.now() + ttl;
-    this.cache.set(key, { data, expiresAt });
+  set<T>(key: string, data: T, ttl?: number): void {
+    const now = Date.now();
+    const expiry = now + (ttl || this.defaultTTL);
+
+    // Remove expired entries first
+    this.cleanExpiredEntries();
+
+    // If cache is full and key doesn't exist, evict least recently used
+    if (this.cache.size >= this.maxSize && !this.cache.has(key)) {
+      this.evictLRU();
+    }
+
+    // Update or add entry (will be at the end for LRU)
+    const existingEntry = this.cache.get(key);
+    if (existingEntry) {
+      // Update existing entry
+      existingEntry.data = data;
+      existingEntry.expiry = expiry;
+      existingEntry.accessedAt = now;
+      // Move to end (remove and re-add)
+      this.cache.delete(key);
+      this.cache.set(key, existingEntry);
+    } else {
+      // Add new entry
+      this.cache.set(key, {
+        data,
+        expiry,
+        accessedAt: now
+      });
+    }
   }
 
-  /**
-   * Remove cached data
-   * @param key Cache key
-   */
-  remove(key: string): void {
+  delete(key: string): void {
     this.cache.delete(key);
   }
 
-  /**
-   * Clear all cached data
-   */
   clear(): void {
     this.cache.clear();
   }
 
+  // Helper method to cache Observable results
+  cacheObservable<T>(
+    key: string,
+    observable: Observable<T>,
+    ttl?: number
+  ): Observable<T> {
+    const cached = this.get<T>(key);
+    
+    if (cached !== null) {
+      return of(cached);
+    }
+
+    return observable.pipe(
+      tap(data => this.set(key, data, ttl))
+    );
+  }
+
   /**
-   * Clear expired cache entries
+   * Update access order for LRU (move to end)
    */
-  clearExpired(): void {
-    const now = Date.now();
-    for (const [key, item] of this.cache.entries()) {
-      if (now > item.expiresAt) {
-        this.cache.delete(key);
+  private updateAccessOrder(key: string, entry: CacheEntry<any>): void {
+    entry.accessedAt = Date.now();
+    // Move to end (remove and re-add)
+    this.cache.delete(key);
+    this.cache.set(key, entry);
+  }
+
+  /**
+   * Evict least recently used entry (first in Map)
+   */
+  private evictLRU(): void {
+    if (this.cache.size === 0) return;
+
+    // Find least recently used (oldest accessedAt)
+    let lruKey: string | null = null;
+    let oldestAccess = Infinity;
+
+    for (const [key, entry] of this.cache.entries()) {
+      if (entry.accessedAt < oldestAccess) {
+        oldestAccess = entry.accessedAt;
+        lruKey = key;
       }
+    }
+
+    if (lruKey) {
+      this.cache.delete(lruKey);
     }
   }
 
   /**
-   * Get cache size
+   * Clean expired entries
    */
-  get size(): number {
-    return this.cache.size;
+  private cleanExpiredEntries(): void {
+    const now = Date.now();
+    const keysToDelete: string[] = [];
+
+    for (const [key, entry] of this.cache.entries()) {
+      if (now > entry.expiry) {
+        keysToDelete.push(key);
+      }
+    }
+
+    keysToDelete.forEach(key => this.cache.delete(key));
+  }
+
+  /**
+   * Get cache statistics
+   */
+  getStats(): { size: number; maxSize: number; usage: number } {
+    return {
+      size: this.cache.size,
+      maxSize: this.maxSize,
+      usage: Math.round((this.cache.size / this.maxSize) * 100)
+    };
+  }
+
+  /**
+   * Set maximum cache size
+   */
+  setMaxSize(maxSize: number): void {
+    this.maxSize = maxSize;
+    // If current size exceeds new max, evict entries
+    while (this.cache.size > this.maxSize) {
+      this.evictLRU();
+    }
   }
 }
-
 

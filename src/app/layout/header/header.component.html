@@ -233,8 +233,8 @@
                  (click)="handleNotificationClick(notification)"
                  (keydown.enter)="handleNotificationClick(notification)"
                  (keydown.space)="handleNotificationClick(notification); $event.preventDefault()"
-                 [class.unread]="!notification.read"
-                 [attr.aria-label]="notification.title + (notification.read ? '' : ' (' + ('layout.header.unread' | translate) + ')')"
+                 [class.unread]="!(notification.is_read || notification.read)"
+                 [attr.aria-label]="notification.title + ((notification.is_read || notification.read) ? '' : ' (' + ('layout.header.unread' | translate) + ')')"
                  [style.--animation-delay]="(i * 30) + 'ms'"
                  class="notification-item px-4 py-3 border-b border-gray-100 dark:border-gray-700 theme-myhr:border-primary/20
                         cursor-pointer
@@ -246,9 +246,9 @@
               <div class="flex items-start gap-3">
                 <div class="flex-shrink-0 mt-1">
                   <app-icon
-                    [name]="getNotificationIconName(notification.type)"
+                    [name]="getNotificationIconName(notification.notification_type || notification.type)"
                     size="md"
-                    [color]="getNotificationIconColor(notification.type)"
+                    [color]="getNotificationIconColor(notification.notification_type || notification.type)"
                     class="notification-icon">
                   </app-icon>
                 </div>
@@ -257,14 +257,14 @@
                     <h4 class="font-semibold text-sm text-gray-800 dark:text-gray-200 theme-myhr:text-white/90 thai-text truncate">
                       {{ notification.title }}
                     </h4>
-                    <span *ngIf="!notification.read"
+                    <span *ngIf="!(notification.is_read || notification.read)"
                           class="flex-shrink-0 w-2 h-2 bg-primary theme-myhr:bg-primary rounded-full mt-1"></span>
                   </div>
                   <p class="text-xs text-gray-600 dark:text-gray-400 theme-myhr:text-white/80 thai-text line-clamp-2 mb-1">
                     {{ notification.message }}
                   </p>
                   <span class="text-xs text-gray-400 dark:text-gray-500 theme-myhr:text-white/60">
-                    {{ getTimeAgo(notification.timestamp) }}
+                    {{ getTimeAgo(notification.created_at || notification.timestamp) }}
                   </span>
                 </div>
               </div>

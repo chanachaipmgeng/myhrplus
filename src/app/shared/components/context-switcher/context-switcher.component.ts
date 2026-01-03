@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuContextService } from '@core/services';
-import { MenuContext } from '@core/models/menu.model';
+import { MenuContextId } from '@core/models/menu.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { IconComponent } from '../icon/icon.component';
@@ -15,10 +15,10 @@ import { TRANSLATION_KEYS } from '@core/constants/translation-keys.constant';
   styleUrls: ['./context-switcher.component.scss']
 })
 export class ContextSwitcherComponent implements OnInit, OnDestroy {
-  currentContext: MenuContext = 'personal';
+  currentContext: MenuContextId = 'personal';
   private destroy$ = new Subject<void>();
 
-  contexts: { value: MenuContext; label: string; icon: string; description: string }[] = [
+  contexts: { value: MenuContextId; label: string; icon: string; description: string }[] = [
     {
       value: 'personal',
       label: 'Personal',
@@ -42,7 +42,7 @@ export class ContextSwitcherComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  switchContext(context: MenuContext): void {
+  switchContext(context: MenuContextId): void {
     this.menuContextService.setContext(context);
   }
 

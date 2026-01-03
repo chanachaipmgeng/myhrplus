@@ -18,7 +18,7 @@ export class MenuService {
    * Clear menu cache
    */
   clearCache(): void {
-    this.cacheService.remove(this.CACHE_KEY);
+    this.cacheService.delete(this.CACHE_KEY);
   }
 
   /**

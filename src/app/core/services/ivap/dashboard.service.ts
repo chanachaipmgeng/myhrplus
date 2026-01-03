@@ -15,7 +15,8 @@ import {
 })
 export class IvapDashboardService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/dashboard');
+    super(http);
+    this.endpoint = '/dashboard';
   }
 
   /**

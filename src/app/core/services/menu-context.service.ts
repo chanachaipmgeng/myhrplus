@@ -1,31 +1,31 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { MenuContext } from '../models/menu.model';
+import { MenuContext, MenuContextId } from '../models/menu.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MenuContextService {
-  private currentContext$ = new BehaviorSubject<MenuContext>('personal');
+  private currentContext$ = new BehaviorSubject<MenuContextId>('personal');
   private readonly STORAGE_KEY = 'menuContext';
 
   constructor() {
     // Load saved context from localStorage
-    const savedContext = localStorage.getItem(this.STORAGE_KEY) as MenuContext;
+    const savedContext = localStorage.getItem(this.STORAGE_KEY);
     if (savedContext && savedContext === 'personal') {
       this.currentContext$.next(savedContext);
     }
   }
 
-  getCurrentContext(): Observable<MenuContext> {
+  getCurrentContext(): Observable<MenuContextId> {
     return this.currentContext$.asObservable();
   }
 
-  getCurrentContextValue(): MenuContext {
+  getCurrentContextValue(): MenuContextId {
     return this.currentContext$.value;
   }
 
-  setContext(context: MenuContext): void {
+  setContext(context: MenuContextId): void {
     this.currentContext$.next(context);
     localStorage.setItem(this.STORAGE_KEY, context);
   }

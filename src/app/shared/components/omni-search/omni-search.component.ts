@@ -136,6 +136,8 @@ export class OmniSearchComponent implements OnInit, OnDestroy {
 
       if (level1LabelMatch && navItem.route) {
         results.push({
+          id: navItem.id || `nav-${navItem.label}`,
+          label: level1Label,
           name: level1Label,
           icon: navItem.icon || 'folder',
           route: navItem.route,
@@ -154,12 +156,16 @@ export class OmniSearchComponent implements OnInit, OnDestroy {
 
     // Sort by relevance (exact match first, then by level, then alphabetically)
     this.searchResults = results.sort((a, b) => {
-      const aExact = a.name.toLowerCase().startsWith(lowerQuery);
-      const bExact = b.name.toLowerCase().startsWith(lowerQuery);
+      const aName = (a.name || a.label || '').toLowerCase();
+      const bName = (b.name || b.label || '').toLowerCase();
+      const aExact = aName.startsWith(lowerQuery);
+      const bExact = bName.startsWith(lowerQuery);
       if (aExact && !bExact) return -1;
       if (!aExact && bExact) return 1;
-      if (a.level !== b.level) return a.level - b.level; // Lower level first
-      return a.name.localeCompare(b.name);
+      const aLevel = a.level || 999;
+      const bLevel = b.level || 999;
+      if (aLevel !== bLevel) return aLevel - bLevel; // Lower level first
+      return aName.localeCompare(bName);
     });
   }
 
@@ -196,6 +202,8 @@ export class OmniSearchComponent implements OnInit, OnDestroy {
         // Ensure level is within valid range (1-5)
         const validLevel = Math.min(Math.max(level, 1), 5) as 1 | 2 | 3 | 4 | 5;
         results.push({
+          id: child.route || `child-${translatedLabel}-${level}`,
+          label: translatedLabel,
           name: translatedLabel,
           icon: child.icon || 'folder',
           route: availableRoute,
@@ -342,7 +350,7 @@ export class OmniSearchComponent implements OnInit, OnDestroy {
     } else {
       // If no route available, just close the search
       // The item will still be visible in sidebar but won't navigate
-      console.log('[OmniSearch] Selected item has no route:', result.name);
+      console.log('[OmniSearch] Selected item has no route:', result.name || result.label);
       this.close();
     }
   }

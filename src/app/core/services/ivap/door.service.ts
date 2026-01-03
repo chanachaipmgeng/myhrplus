@@ -17,7 +17,8 @@ import {
 })
 export class IvapDoorService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/doors');
+    super(http);
+    this.endpoint = '/doors';
   }
 
   /**

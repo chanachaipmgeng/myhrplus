@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of, throwError, BehaviorSubject } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { IvapAuthService } from './ivap/auth.service';
+import { UserContextService } from './user-context.service';
 import { DatabaseModel } from '@core/models/database.model';
+import { Member } from '@core/models';
 
 /**
  * Auth Service (Legacy Wrapper)
- * 
+ *
  * Wrapper service for backward compatibility with legacy code
  * Uses IvapAuthService for actual authentication
  */
@@ -13,7 +16,16 @@ import { DatabaseModel } from '@core/models/database.model';
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private ivapAuthService: IvapAuthService) {}
+  private currentUserSubject = new BehaviorSubject<Member | null>(null);
+  public currentUser$ = this.currentUserSubject.asObservable();
+
+  constructor(
+    private ivapAuthService: IvapAuthService,
+    private userContextService: UserContextService
+  ) {
+    // Load user from storage on init
+    this.loadUserFromStorage();
+  }
 
   /**
    * Check if user is authenticated
@@ -23,10 +35,46 @@ export class AuthService {
   }
 
   /**
+   * Get current user (synchronous)
+   */
+  getCurrentUser(): Member | null {
+    return this.currentUserSubject.value;
+  }
+
+  /**
+   * Load user from storage
+   */
+  private loadUserFromStorage(): void {
+    const storedUser = this.userContextService.getCurrentUser();
+    if (storedUser) {
+      // Member is already compatible, use directly
+      this.currentUserSubject.next(storedUser);
+    }
+  }
+
+  /**
+   * Fetch current user from API
+   */
+  fetchCurrentUser(): Observable<Member> {
+    return this.ivapAuthService.getCurrentUser().pipe(
+      map(user => {
+        this.currentUserSubject.next(user);
+        return user;
+      }),
+      catchError(error => {
+        this.currentUserSubject.next(null);
+        throw error;
+      })
+    );
+  }
+
+  /**
    * Logout user
    */
   logout(): void {
     this.ivapAuthService.logout();
+    this.currentUserSubject.next(null);
+    this.userContextService.clearUser();
   }
 
   /**
@@ -61,7 +109,6 @@ export class AuthService {
   ): Promise<any> {
     return new Promise((resolve, reject) => {
       this.ivapAuthService.forgotPassword({
-        username,
         email
       }).subscribe({
         next: (response) => {
@@ -74,6 +121,27 @@ export class AuthService {
           reject(error);
         }
       });
+    });
+  }
+
+  /**
+   * Save password (legacy method - not available in IVAP API)
+   * Returns rejected promise for now
+   */
+  savePassword(
+    oldPassword: string,
+    newPassword: string,
+    lang: string,
+    maxChars: string,
+    minChars: string,
+    numChars: string,
+    specialChars: string
+  ): Promise<any> {
+    // IVAP API doesn't have this endpoint yet
+    // Return rejected promise for backward compatibility
+    return Promise.reject({
+      success: false,
+      message: 'Password change not available in IVAP API'
     });
   }
 }

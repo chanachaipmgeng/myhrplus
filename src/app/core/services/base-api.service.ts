@@ -28,10 +28,10 @@ import {
 export class BaseApiService {
   protected baseUrl: string = environment.baseUrl;
   protected apiVersion: string = environment.apiVersion;
+  protected endpoint: string = '';
 
   constructor(
-    protected http: HttpClient,
-    protected endpoint: string
+    protected http: HttpClient
   ) {}
 
   /**

@@ -1,6 +1,8 @@
 import { Injectable, ViewContainerRef, ComponentRef } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { NotificationComponent, NotificationType } from '@shared/components/notification/notification.component';
 import { IvapNotificationService } from './ivap/notification.service';
+import { Notification } from '@core/models';
 
 /**
  * Notification Service
@@ -14,8 +16,13 @@ import { IvapNotificationService } from './ivap/notification.service';
 export class NotificationService {
   private container?: ViewContainerRef;
   private notifications: ComponentRef<NotificationComponent>[] = [];
+  private apiNotificationsSubject = new BehaviorSubject<Notification[]>([]);
+  public notifications$ = this.apiNotificationsSubject.asObservable();
 
-  constructor(private ivapNotificationService: IvapNotificationService) {}
+  constructor(private ivapNotificationService: IvapNotificationService) {
+    // Load notifications on init
+    this.loadNotifications();
+  }
 
   /**
    * Set container for dynamic notifications
@@ -104,6 +111,79 @@ export class NotificationService {
   clearAll(): void {
     this.notifications.forEach(ref => ref.destroy());
     this.notifications = [];
+  }
+
+  /**
+   * Load notifications from API
+   */
+  loadNotifications(): void {
+    this.ivapNotificationService.getAll({ page: 1, page_size: 50 }).subscribe({
+      next: (response) => {
+        // Map API response to include legacy compatibility properties
+        const notifications = response.items.map(n => ({
+          ...n,
+          id: n.notification_id,
+          type: n.notification_type,
+          read: n.is_read,
+          timestamp: n.created_at
+        }));
+        this.apiNotificationsSubject.next(notifications);
+      },
+      error: (error) => {
+        console.error('Error loading notifications:', error);
+      }
+    });
+  }
+
+  /**
+   * Mark notification as read
+   */
+  markAsRead(notificationId: string): void {
+    // Support both notification_id and id
+    const id = notificationId.startsWith('notif_') ? notificationId : `notif_${notificationId}`;
+    this.ivapNotificationService.markAsRead(id).subscribe({
+      next: (notification) => {
+        // Update local state with legacy compatibility
+        const current = this.apiNotificationsSubject.value;
+        const updated = current.map(n => {
+          if (n.notification_id === id || n.id === notificationId) {
+            return {
+              ...notification,
+              id: notification.notification_id,
+              type: notification.notification_type,
+              read: notification.is_read,
+              timestamp: notification.created_at
+            };
+          }
+          return n;
+        });
+        this.apiNotificationsSubject.next(updated);
+      },
+      error: (error) => {
+        console.error('Error marking notification as read:', error);
+      }
+    });
+  }
+
+  /**
+   * Mark all notifications as read
+   */
+  markAllAsRead(): void {
+    this.ivapNotificationService.markAllAsRead().subscribe({
+      next: () => {
+        // Update local state with legacy compatibility
+        const current = this.apiNotificationsSubject.value;
+        const updated = current.map(n => ({
+          ...n,
+          is_read: true,
+          read: true
+        }));
+        this.apiNotificationsSubject.next(updated);
+      },
+      error: (error) => {
+        console.error('Error marking all notifications as read:', error);
+      }
+    });
   }
 
   /**

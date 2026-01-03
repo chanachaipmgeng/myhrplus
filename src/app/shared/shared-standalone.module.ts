@@ -29,7 +29,7 @@ import { GlassSwitchComponent } from './components/glass-switch/glass-switch.com
 // Layout Components
 import { PageLayoutComponent } from './components/page-layout/page-layout.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
-import { ContentLayoutComponent } from './components/content-layout/content-layout.component';
+// Note: ContentLayoutComponent is not standalone - it's in SharedModule
 import { TabsComponent } from './components/tabs/tabs.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { StepperComponent } from './components/stepper/stepper.component';
@@ -99,7 +99,7 @@ const STANDALONE_COMPONENTS = [
   // Layout Components
   PageLayoutComponent,
   PageHeaderComponent,
-  ContentLayoutComponent,
+  // ContentLayoutComponent - not standalone, use from SharedModule
   TabsComponent,
   BreadcrumbsComponent,
   StepperComponent,

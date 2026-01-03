@@ -17,7 +17,8 @@ import {
 })
 export class IvapDeviceService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/devices');
+    super(http);
+    this.endpoint = '/devices';
   }
 
   /**

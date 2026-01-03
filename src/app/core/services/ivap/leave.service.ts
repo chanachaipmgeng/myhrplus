@@ -17,7 +17,8 @@ import {
 })
 export class IvapLeaveService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/leaves');
+    super(http);
+    this.endpoint = '/leaves';
   }
 
   /**

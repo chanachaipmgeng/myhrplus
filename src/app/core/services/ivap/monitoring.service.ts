@@ -15,7 +15,8 @@ import {
 })
 export class IvapMonitoringService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/monitoring');
+    super(http);
+    this.endpoint = '/monitoring';
   }
 
   /**

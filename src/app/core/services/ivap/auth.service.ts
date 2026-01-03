@@ -23,7 +23,8 @@ import {
 })
 export class IvapAuthService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/auth');
+    super(http);
+    this.endpoint = '/auth';
   }
 
   /**
