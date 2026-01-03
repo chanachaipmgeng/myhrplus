@@ -8,9 +8,8 @@ import {
 } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { AuthService } from '../services/auth.service';
-import { TokenManagerService } from '../services/token-manager.service';
-import { CacheService } from '../services/cache.service';
+import { TokenManagerService } from '@core/services';
+import { CacheService } from '@core/services';
 import { environment } from '@env/environment';
 
 /**

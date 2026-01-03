@@ -17,7 +17,8 @@ import {
 })
 export class IvapNotificationService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/notifications');
+    super(http);
+    this.setEndpoint('/notifications');
   }
 
   /**

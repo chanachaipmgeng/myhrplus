@@ -16,7 +16,8 @@ import {
 })
 export class IvapQrCodeService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/qr-codes');
+    super(http);
+    this.setEndpoint('/qr-codes');
   }
 
   /**

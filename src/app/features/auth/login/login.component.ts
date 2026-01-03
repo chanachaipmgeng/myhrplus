@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { NotificationService } from '@core/services';
-import { MenuService } from '@core/services';
-import { EmployeeService, SetCharacter } from '@core/services';
-import { SwaplangCodeService } from '@core/services';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, ActivatedRoute, RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { NotificationService, MenuService, SwaplangCodeService } from '@core/services';
 import { StorageService } from '@core/services';
-import { TranslateService } from '@ngx-translate/core';
 import { ThemeService } from '@core/services';
 import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from '@env/environment';
@@ -17,9 +15,36 @@ import { Language, isSupportedLanguage, DEFAULT_LANGUAGE, getFlagPath } from '@c
 // IVAP Services
 import { IvapAuthService } from '@core/services/ivap';
 import { LoginRequest, Token } from '@core/models/ivap';
+// Shared Components
+import { IconComponent } from '@shared/components/icon/icon.component';
+import { GlassInputComponent } from '@shared/components/glass-input/glass-input.component';
+import { GlassSelectComponent } from '@shared/components/glass-select/glass-select.component';
+import { GlassCheckboxComponent } from '@shared/components/glass-checkbox/glass-checkbox.component';
+import { GlassButtonComponent } from '@shared/components/glass-button/glass-button.component';
+import { GlassCardComponent } from '@shared/components/glass-card/glass-card.component';
+import { AlertComponent } from '@shared/components/alert/alert.component';
+import { ThemeToggleComponent } from '@shared/components/theme-toggle/theme-toggle.component';
+import { FormValidationMessagesComponent } from '@shared/components/form-validation-messages/form-validation-messages.component';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    RouterModule,
+    TranslateModule,
+    IconComponent,
+    GlassInputComponent,
+    GlassSelectComponent,
+    GlassCheckboxComponent,
+    GlassButtonComponent,
+    GlassCardComponent,
+    AlertComponent,
+    ThemeToggleComponent,
+    FormValidationMessagesComponent
+  ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
@@ -60,7 +85,6 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private notificationService: NotificationService,
     private menuService: MenuService,
-    private employeeService: EmployeeService,
     private swapLangService: SwaplangCodeService,
     private translate: TranslateService,
     private storageService: StorageService,
@@ -249,7 +273,7 @@ export class LoginComponent implements OnInit {
           }
 
           // Verify token is set
-          const savedToken = this.authService.getToken();
+          const savedToken = this.authService.getCurrentToken();
           if (!savedToken) {
             console.error('Token not set after login');
             this.loading = false;

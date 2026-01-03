@@ -17,7 +17,8 @@ import {
 })
 export class IvapVisitorService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/visitors');
+    super(http);
+    this.setEndpoint('/visitors');
   }
 
   /**

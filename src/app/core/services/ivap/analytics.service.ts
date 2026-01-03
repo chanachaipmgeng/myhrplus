@@ -16,7 +16,8 @@ import {
 })
 export class IvapAnalyticsService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/analytics');
+    super(http);
+    this.setEndpoint('/analytics');
   }
 
   /**

@@ -17,7 +17,8 @@ import {
 })
 export class IvapTimestampService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/timestamps');
+    super(http);
+    this.setEndpoint('/timestamps');
   }
 
   /**

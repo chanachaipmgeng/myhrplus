@@ -23,7 +23,8 @@ import {
 })
 export class IvapAuthService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/auth');
+    super(http);
+    this.setEndpoint('/auth');
   }
 
   /**
@@ -81,6 +82,13 @@ export class IvapAuthService extends BaseApiService {
    */
   isAuthenticated(): boolean {
     return !!this.getToken();
+  }
+
+  /**
+   * Get current token (public method for components)
+   */
+  getCurrentToken(): string | null {
+    return this.getToken();
   }
 }
 

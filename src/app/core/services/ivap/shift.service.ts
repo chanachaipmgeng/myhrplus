@@ -17,7 +17,8 @@ import {
 })
 export class IvapShiftService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/shifts');
+    super(http);
+    this.setEndpoint('/shifts');
   }
 
   /**
@@ -51,8 +52,8 @@ export class IvapShiftService extends BaseApiService {
   /**
    * Delete shift
    */
-  delete(shiftId: string): Observable<void> {
-    return this.delete(`/${shiftId}`);
+  override delete(shiftId: string): Observable<void> {
+    return super.delete(`/${shiftId}`);
   }
 }
 

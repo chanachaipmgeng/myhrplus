@@ -17,7 +17,8 @@ import {
 })
 export class IvapDeviceService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/devices');
+    super(http);
+    this.setEndpoint('/devices');
   }
 
   /**
@@ -51,8 +52,8 @@ export class IvapDeviceService extends BaseApiService {
   /**
    * Delete device
    */
-  delete(deviceId: string): Observable<void> {
-    return this.delete(`/${deviceId}`);
+  override delete(deviceId: string): Observable<void> {
+    return super.delete(`/${deviceId}`);
   }
 }
 

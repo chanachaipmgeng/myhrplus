@@ -15,7 +15,8 @@ import {
 })
 export class IvapFaceService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/face');
+    super(http);
+    this.setEndpoint('/face');
   }
 
   /**

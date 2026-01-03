@@ -22,7 +22,8 @@ import {
 })
 export class IvapCompanyService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/companies');
+    super(http);
+    this.setEndpoint('/companies');
   }
 
   /**

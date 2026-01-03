@@ -17,7 +17,8 @@ import {
 })
 export class IvapDoorService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/doors');
+    super(http);
+    this.setEndpoint('/doors');
   }
 
   /**
@@ -51,8 +52,8 @@ export class IvapDoorService extends BaseApiService {
   /**
    * Delete door
    */
-  delete(doorId: string): Observable<void> {
-    return this.delete(`/${doorId}`);
+  override delete(doorId: string): Observable<void> {
+    return super.delete(`/${doorId}`);
   }
 }
 

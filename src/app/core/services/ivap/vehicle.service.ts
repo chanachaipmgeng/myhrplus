@@ -17,7 +17,8 @@ import {
 })
 export class IvapVehicleService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/vehicles');
+    super(http);
+    this.setEndpoint('/vehicles');
   }
 
   /**
@@ -51,8 +52,8 @@ export class IvapVehicleService extends BaseApiService {
   /**
    * Delete vehicle
    */
-  delete(vehicleId: string): Observable<void> {
-    return this.delete(`/${vehicleId}`);
+  override delete(vehicleId: string): Observable<void> {
+    return super.delete(`/${vehicleId}`);
   }
 }
 

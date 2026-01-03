@@ -9,9 +9,9 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { ErrorService, StructuredError } from '../services/error.service';
-import { NotificationService } from '../services/notification.service';
-import { AuthService } from '../services/auth.service';
+import { ErrorService, StructuredError } from '@core/services';
+import { NotificationService } from '@core/services';
+import { AuthService } from '@core/services';
 import { ErrorCode } from '../constants/error-codes.constant';
 
 @Injectable()

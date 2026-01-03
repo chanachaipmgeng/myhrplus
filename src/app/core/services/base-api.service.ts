@@ -28,11 +28,18 @@ import {
 export class BaseApiService {
   protected baseUrl: string = environment.baseUrl;
   protected apiVersion: string = environment.apiVersion;
+  protected endpoint: string = '';
 
   constructor(
-    protected http: HttpClient,
-    protected endpoint: string
+    protected http: HttpClient
   ) {}
+
+  /**
+   * Set endpoint (called by child services in constructor)
+   */
+  protected setEndpoint(endpoint: string): void {
+    this.endpoint = endpoint;
+  }
 
   /**
    * Get full API URL

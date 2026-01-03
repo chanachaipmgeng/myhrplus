@@ -17,7 +17,8 @@ import {
 })
 export class IvapEventService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/events');
+    super(http);
+    this.setEndpoint('/events');
   }
 
   /**
@@ -51,8 +52,8 @@ export class IvapEventService extends BaseApiService {
   /**
    * Delete event
    */
-  delete(eventId: string): Observable<void> {
-    return this.delete(`/${eventId}`);
+  override delete(eventId: string): Observable<void> {
+    return super.delete(`/${eventId}`);
   }
 }
 

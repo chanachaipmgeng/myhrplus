@@ -21,8 +21,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 
 @NgModule({
   declarations: [
-    LoginComponent
-    // ForgotPasswordComponent and UnauthorizedComponent are now standalone
+    // All components are now standalone
   ],
   imports: [
     CommonModule,
@@ -31,6 +30,10 @@ import { AuthRoutingModule } from './auth-routing.module';
     RouterModule,
     TranslateModule,
     SharedModule,
+    // Standalone components
+    LoginComponent,
+    ForgotPasswordComponent,
+    UnauthorizedComponent,
     IconComponent,
     GlassInputComponent,
     GlassSelectComponent,
@@ -40,8 +43,6 @@ import { AuthRoutingModule } from './auth-routing.module';
     AlertComponent,
     ThemeToggleComponent,
     FormValidationMessagesComponent,
-    ForgotPasswordComponent,
-    UnauthorizedComponent,
     AuthRoutingModule
   ]
 })

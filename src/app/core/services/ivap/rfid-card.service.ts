@@ -17,7 +17,8 @@ import {
 })
 export class IvapRfidCardService extends BaseApiService {
   constructor(http: HttpClient) {
-    super(http, '/rfid-cards');
+    super(http);
+    this.setEndpoint('/rfid-cards');
   }
 
   /**
